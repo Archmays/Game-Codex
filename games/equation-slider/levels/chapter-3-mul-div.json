@@ -1,0 +1,7715 @@
+[
+  {
+    "schemaVersion": 1,
+    "id": "es-3-01",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-1",
+    "levelNumber": 1,
+    "unitLevelNumber": 1,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-01-r1",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-01-r1-t1",
+            "kind": "number",
+            "value": 5
+          },
+          {
+            "id": "es-3-01-r1-t2",
+            "kind": "number",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "id": "es-3-01-r2",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-01-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-01-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-01-r3",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-01-r3-t1",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-01-r3-t2",
+            "kind": "number",
+            "value": 4
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用 2、5 或 10 的相同分组得到 20；找到结果为 20 的不同表达式并点亮全部方块。",
+      "primarySkill": "times-2-5-10",
+      "skillTags": [
+        "multiplication-groups",
+        "times-2-5-10"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "unequal-groups"
+      ],
+      "scaffoldLevel": "guided",
+      "reviewOf": [
+        "repeated-addition",
+        "addition"
+      ],
+      "reflectionText": "5 × 4 可以读作若干组相同的数量。",
+      "recommendedAgeBand": "约 7–9 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-01:0",
+      "familyId": "3-1-target-r3-t2-×-nmid-even-distinct-v3",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "想一想有几组，每组有几个。",
+    "mode": "target",
+    "target": 20,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 8,
+        "validArrangementCount": 4,
+        "invalidArrangementRatio": 0.5,
+        "minimumCorrectExpressions": 2,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 10,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 2,
+        "operatorComplexity": 3,
+        "numericMagnitude": 10,
+        "recommendedHintDepth": 2,
+        "compositeDifficulty": 21.963
+      },
+      "structureSignature": "target|target:20|2,5|×,×|10,4",
+      "topologySignature": "target|2.2.2|0.0.1:0,0.1.1:0,1.0.0:0,1.1.0:0|2"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-02",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-1",
+    "levelNumber": 2,
+    "unitLevelNumber": 2,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-02-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-02-r1-t1",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-02-r1-t2",
+            "kind": "number",
+            "value": 5
+          },
+          {
+            "id": "es-3-02-r1-t3",
+            "kind": "number",
+            "value": 4
+          }
+        ]
+      },
+      {
+        "id": "es-3-02-r2",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-02-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-02-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-02-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-02-r3",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-02-r3-t1",
+            "kind": "number",
+            "value": 5
+          },
+          {
+            "id": "es-3-02-r3-t2",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-02-r3-t3",
+            "kind": "number",
+            "value": 4
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用 2、5 或 10 的相同分组得到 20；找到结果为 20 的不同表达式并点亮全部方块。",
+      "primarySkill": "times-2-5-10",
+      "skillTags": [
+        "multiplication-groups",
+        "times-2-5-10"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "unequal-groups"
+      ],
+      "scaffoldLevel": "guided",
+      "reviewOf": [
+        "repeated-addition",
+        "addition"
+      ],
+      "reflectionText": "10 × 2 可以读作若干组相同的数量。",
+      "recommendedAgeBand": "约 7–9 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-02:0",
+      "familyId": "3-1-target-r3-t3-×-nmid-mix-repeat-v3",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "想一想有几组，每组有几个。",
+    "mode": "target",
+    "target": 20,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 3,
+        "numericMagnitude": 10,
+        "recommendedHintDepth": 2,
+        "compositeDifficulty": 27.957
+      },
+      "structureSignature": "target|target:20|10,4,5|×,×,×|2,4,5",
+      "topologySignature": "target|3.3.3|0.0.1:0,0.1.1:0,0.2.1:0,1.0.2:0,1.1.2:0,1.2.2:0,2.0.0:0,2.1.0:0,2.2.0:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-03",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-1",
+    "levelNumber": 3,
+    "unitLevelNumber": 3,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-03-r1",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-03-r1-t1",
+            "kind": "number",
+            "value": 8
+          },
+          {
+            "id": "es-3-03-r1-t2",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-03-r1-t3",
+            "kind": "number",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": "es-3-03-r2",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-03-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-03-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-03-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-03-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-03-r3-t1",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-03-r3-t2",
+            "kind": "number",
+            "value": 8
+          },
+          {
+            "id": "es-3-03-r3-t3",
+            "kind": "number",
+            "value": 5
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用 2、5 或 10 的相同分组得到 40；找到结果为 40 的不同表达式并点亮全部方块。",
+      "primarySkill": "times-2-5-10",
+      "skillTags": [
+        "multiplication-groups",
+        "times-2-5-10"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "unequal-groups"
+      ],
+      "scaffoldLevel": "supported",
+      "reviewOf": [
+        "repeated-addition",
+        "addition"
+      ],
+      "reflectionText": "8 × 5 可以读作若干组相同的数量。",
+      "recommendedAgeBand": "约 7–9 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-03:0",
+      "familyId": "3-1-target-r3-t3-×-nmid-mix-repeat-v4",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "想一想有几组，每组有几个。",
+    "mode": "target",
+    "target": 40,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          2,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 3,
+        "numericMagnitude": 10,
+        "recommendedHintDepth": 3,
+        "compositeDifficulty": 28.457
+      },
+      "structureSignature": "target|target:40|10,5,8|×,×,×|4,5,8",
+      "topologySignature": "target|3.3.3|0.0.2:0,0.1.2:0,0.2.2:0,1.0.0:0,1.1.0:0,1.2.0:0,2.0.1:0,2.1.1:0,2.2.1:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-04",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-1",
+    "levelNumber": 4,
+    "unitLevelNumber": 4,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-04-r1",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-04-r1-t1",
+            "kind": "number",
+            "value": 1
+          },
+          {
+            "id": "es-3-04-r1-t2",
+            "kind": "number",
+            "value": 5
+          },
+          {
+            "id": "es-3-04-r1-t3",
+            "kind": "number",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "id": "es-3-04-r2",
+        "kind": "operator",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-04-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-04-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-04-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-04-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-04-r3-t1",
+            "kind": "number",
+            "value": 5
+          },
+          {
+            "id": "es-3-04-r3-t2",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-04-r3-t3",
+            "kind": "number",
+            "value": 10
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用 2、5 或 10 的相同分组得到 10；找到结果为 10 的不同表达式并点亮全部方块。",
+      "primarySkill": "times-2-5-10",
+      "skillTags": [
+        "multiplication-groups",
+        "times-2-5-10"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "unequal-groups"
+      ],
+      "scaffoldLevel": "supported",
+      "reviewOf": [
+        "repeated-addition",
+        "addition"
+      ],
+      "reflectionText": "1 × 10 可以读作若干组相同的数量。",
+      "recommendedAgeBand": "约 7–9 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-04:1",
+      "familyId": "3-1-target-r3-t3-×-nmid-mix-repeat-v2",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "想一想有几组，每组有几个。",
+    "mode": "target",
+    "target": 10,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          2,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 3,
+        "numericMagnitude": 10,
+        "recommendedHintDepth": 3,
+        "compositeDifficulty": 28.457
+      },
+      "structureSignature": "target|target:10|1,2,5|×,×,×|10,2,5",
+      "topologySignature": "target|3.3.3|0.0.2:0,0.1.2:0,0.2.2:0,1.0.1:0,1.1.1:0,1.2.1:0,2.0.0:0,2.1.0:0,2.2.0:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-05",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-1",
+    "levelNumber": 5,
+    "unitLevelNumber": 5,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-05-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-05-r1-t1",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-05-r1-t2",
+            "kind": "number",
+            "value": 5
+          },
+          {
+            "id": "es-3-05-r1-t3",
+            "kind": "number",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "id": "es-3-05-r2",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-05-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-05-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-05-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-05-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-05-r3-t1",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-05-r3-t2",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-05-r3-t3",
+            "kind": "number",
+            "value": 1
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用 2、5 或 10 的相同分组得到 10；找到结果为 10 的不同表达式并点亮全部方块。",
+      "primarySkill": "times-2-5-10",
+      "skillTags": [
+        "multiplication-groups",
+        "times-2-5-10"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "unequal-groups"
+      ],
+      "scaffoldLevel": "independent",
+      "reviewOf": [
+        "repeated-addition",
+        "addition"
+      ],
+      "reflectionText": "10 × 1 可以读作若干组相同的数量。",
+      "recommendedAgeBand": "约 7–9 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-05:0",
+      "familyId": "3-1-target-r3-t3-×-nmid-mix-repeat-v2",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "想一想有几组，每组有几个。",
+    "mode": "target",
+    "target": 10,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          2,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 3,
+        "numericMagnitude": 10,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 28.957
+      },
+      "structureSignature": "target|target:10|1,10,5|×,×,×|1,10,2",
+      "topologySignature": "target|3.3.3|0.0.2:0,0.1.2:0,0.2.2:0,1.0.0:0,1.1.0:0,1.2.0:0,2.0.1:0,2.1.1:0,2.2.1:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-06",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-1",
+    "levelNumber": 6,
+    "unitLevelNumber": 6,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-06-r1",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-06-r1-t1",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-06-r1-t2",
+            "kind": "number",
+            "value": 5
+          },
+          {
+            "id": "es-3-06-r1-t3",
+            "kind": "number",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "id": "es-3-06-r2",
+        "kind": "operator",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-06-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-06-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-06-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-06-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-06-r3-t1",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-06-r3-t2",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-06-r3-t3",
+            "kind": "number",
+            "value": 5
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用 2、5 或 10 的相同分组得到 20；找到结果为 20 的不同表达式并点亮全部方块。",
+      "primarySkill": "times-2-5-10",
+      "skillTags": [
+        "multiplication-groups",
+        "times-2-5-10"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "unequal-groups"
+      ],
+      "scaffoldLevel": "independent",
+      "reviewOf": [
+        "repeated-addition",
+        "addition"
+      ],
+      "reflectionText": "4 × 5 可以读作若干组相同的数量。",
+      "recommendedAgeBand": "约 7–9 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-06:0",
+      "familyId": "3-1-target-r3-t3-×-nmid-mix-repeat-v3",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "想一想有几组，每组有几个。",
+    "mode": "target",
+    "target": 20,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          2,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 3,
+        "numericMagnitude": 10,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 28.957
+      },
+      "structureSignature": "target|target:20|2,4,5|×,×,×|10,4,5",
+      "topologySignature": "target|3.3.3|0.0.2:0,0.1.2:0,0.2.2:0,1.0.0:0,1.1.0:0,1.2.0:0,2.0.1:0,2.1.1:0,2.2.1:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-07",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-1",
+    "levelNumber": 7,
+    "unitLevelNumber": 7,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-07-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-07-r1-t1",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-07-r1-t2",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-07-r1-t3",
+            "kind": "number",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": "es-3-07-r2",
+        "kind": "operator",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-07-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-07-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-07-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-07-r3",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-07-r3-t1",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-07-r3-t2",
+            "kind": "number",
+            "value": 8
+          },
+          {
+            "id": "es-3-07-r3-t3",
+            "kind": "number",
+            "value": 4
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用 2、5 或 10 的相同分组得到 40；找到结果为 40 的不同表达式并点亮全部方块。",
+      "primarySkill": "times-2-5-10",
+      "skillTags": [
+        "multiplication-groups",
+        "times-2-5-10"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "unequal-groups"
+      ],
+      "scaffoldLevel": "transfer",
+      "reviewOf": [
+        "repeated-addition",
+        "addition"
+      ],
+      "reflectionText": "4 × 10 可以读作若干组相同的数量。",
+      "recommendedAgeBand": "约 7–9 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-07:8",
+      "familyId": "3-1-target-r3-t3-×-nmid-even-repeat-v4",
+      "repetitionPurpose": "representation-transfer"
+    },
+    "conceptHint": "想一想有几组，每组有几个。",
+    "mode": "target",
+    "target": 40,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 3,
+        "numericMagnitude": 10,
+        "recommendedHintDepth": 5,
+        "compositeDifficulty": 29.457
+      },
+      "structureSignature": "target|target:40|10,4,5|×,×,×|10,4,8",
+      "topologySignature": "target|3.3.3|0.0.0:0,0.1.0:0,0.2.0:0,1.0.2:0,1.1.2:0,1.2.2:0,2.0.1:0,2.1.1:0,2.2.1:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-08",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-1",
+    "levelNumber": 8,
+    "unitLevelNumber": 8,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-08-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-08-r1-t1",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-08-r1-t2",
+            "kind": "number",
+            "value": 5
+          },
+          {
+            "id": "es-3-08-r1-t3",
+            "kind": "number",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "id": "es-3-08-r2",
+        "kind": "operator",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-08-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-08-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-08-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-08-r3",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-08-r3-t1",
+            "kind": "number",
+            "value": 5
+          },
+          {
+            "id": "es-3-08-r3-t2",
+            "kind": "number",
+            "value": 1
+          },
+          {
+            "id": "es-3-08-r3-t3",
+            "kind": "number",
+            "value": 2
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用 2、5 或 10 的相同分组得到 10；找到结果为 10 的不同表达式并点亮全部方块。",
+      "primarySkill": "times-2-5-10",
+      "skillTags": [
+        "multiplication-groups",
+        "times-2-5-10"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "unequal-groups"
+      ],
+      "scaffoldLevel": "transfer",
+      "reviewOf": [
+        "repeated-addition",
+        "addition"
+      ],
+      "reflectionText": "10 × 1 可以读作若干组相同的数量。",
+      "recommendedAgeBand": "约 7–9 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-08:1",
+      "familyId": "3-1-target-r3-t3-×-nmid-mix-repeat-v2",
+      "repetitionPurpose": "representation-transfer"
+    },
+    "conceptHint": "想一想有几组，每组有几个。",
+    "mode": "target",
+    "target": 10,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 3,
+        "numericMagnitude": 10,
+        "recommendedHintDepth": 5,
+        "compositeDifficulty": 29.457
+      },
+      "structureSignature": "target|target:10|10,2,5|×,×,×|1,2,5",
+      "topologySignature": "target|3.3.3|0.0.1:0,0.1.1:0,0.2.1:0,1.0.2:0,1.1.2:0,1.2.2:0,2.0.0:0,2.1.0:0,2.2.0:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-09",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-1",
+    "levelNumber": 9,
+    "unitLevelNumber": 9,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-09-r1",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-09-r1-t1",
+            "kind": "number",
+            "value": 5
+          },
+          {
+            "id": "es-3-09-r1-t2",
+            "kind": "number",
+            "value": 8
+          },
+          {
+            "id": "es-3-09-r1-t3",
+            "kind": "number",
+            "value": 4
+          }
+        ]
+      },
+      {
+        "id": "es-3-09-r2",
+        "kind": "operator",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-09-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-09-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-09-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-09-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-09-r3-t1",
+            "kind": "number",
+            "value": 8
+          },
+          {
+            "id": "es-3-09-r3-t2",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-09-r3-t3",
+            "kind": "number",
+            "value": 5
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用 2、5 或 10 的相同分组得到 40；找到结果为 40 的不同表达式并点亮全部方块。",
+      "primarySkill": "times-2-5-10",
+      "skillTags": [
+        "multiplication-groups",
+        "times-2-5-10"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "unequal-groups"
+      ],
+      "scaffoldLevel": "review",
+      "reviewOf": [
+        "repeated-addition",
+        "addition",
+        "multiplication-groups",
+        "times-2-5-10",
+        "make-ten",
+        "subtraction"
+      ],
+      "reflectionText": "5 × 8 可以读作若干组相同的数量。",
+      "recommendedAgeBand": "约 7–9 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-09:2",
+      "familyId": "3-1-target-r3-t3-×-nmid-mix-repeat-v4",
+      "repetitionPurpose": "spaced-review"
+    },
+    "conceptHint": "想一想有几组，每组有几个。",
+    "mode": "target",
+    "target": 40,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 3,
+        "numericMagnitude": 10,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 28.957
+      },
+      "structureSignature": "target|target:40|4,5,8|×,×,×|10,5,8",
+      "topologySignature": "target|3.3.3|0.0.0:0,0.1.0:0,0.2.0:0,1.0.2:0,1.1.2:0,1.2.2:0,2.0.1:0,2.1.1:0,2.2.1:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-10",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-1",
+    "levelNumber": 10,
+    "unitLevelNumber": 10,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-10-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-10-r1-t1",
+            "kind": "number",
+            "value": 1
+          },
+          {
+            "id": "es-3-10-r1-t2",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-10-r1-t3",
+            "kind": "number",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "id": "es-3-10-r2",
+        "kind": "operator",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-10-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-10-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-10-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-10-r3",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-10-r3-t1",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-10-r3-t2",
+            "kind": "number",
+            "value": 5
+          },
+          {
+            "id": "es-3-10-r3-t3",
+            "kind": "number",
+            "value": 1
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用 2、5 或 10 的相同分组得到 10；找到结果为 10 的不同表达式并点亮全部方块。",
+      "primarySkill": "times-2-5-10",
+      "skillTags": [
+        "multiplication-groups",
+        "times-2-5-10"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "unequal-groups"
+      ],
+      "scaffoldLevel": "review",
+      "reviewOf": [
+        "repeated-addition",
+        "addition",
+        "multiplication-groups",
+        "times-2-5-10",
+        "make-ten",
+        "subtraction"
+      ],
+      "reflectionText": "1 × 10 可以读作若干组相同的数量。",
+      "recommendedAgeBand": "约 7–9 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-10:7",
+      "familyId": "3-1-target-r3-t3-×-nmid-mix-repeat-v2",
+      "repetitionPurpose": "spaced-review"
+    },
+    "conceptHint": "想一想有几组，每组有几个。",
+    "mode": "target",
+    "target": 10,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 3,
+        "numericMagnitude": 10,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 28.957
+      },
+      "structureSignature": "target|target:10|1,10,2|×,×,×|1,10,5",
+      "topologySignature": "target|3.3.3|0.0.0:0,0.1.0:0,0.2.0:0,1.0.2:0,1.1.2:0,1.2.2:0,2.0.1:0,2.1.1:0,2.2.1:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-11",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-2",
+    "levelNumber": 11,
+    "unitLevelNumber": 1,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-11-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-11-r1-t1",
+            "kind": "number",
+            "value": 3
+          },
+          {
+            "id": "es-3-11-r1-t2",
+            "kind": "number",
+            "value": 7
+          }
+        ]
+      },
+      {
+        "id": "es-3-11-r2",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-11-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-11-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-11-r3",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-11-r3-t1",
+            "kind": "number",
+            "value": 3
+          },
+          {
+            "id": "es-3-11-r3-t2",
+            "kind": "number",
+            "value": 7
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "利用 3、4 或 6 的乘法事实得到 21；找到结果为 21 的不同表达式并点亮全部方块。",
+      "primarySkill": "multiplication-facts",
+      "skillTags": [
+        "multiplication-facts",
+        "doubling"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "addition-order-matters"
+      ],
+      "scaffoldLevel": "guided",
+      "reviewOf": [
+        "times-2-5-10",
+        "multiplication-groups"
+      ],
+      "reflectionText": "3 × 7 是一个乘法事实，可以联系已知的倍数关系。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-11:0",
+      "familyId": "3-2-target-r3-t2-×-ntight-odd-repeat-v3",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "能不能用一个已经知道的乘法事实来推一推？",
+    "mode": "target",
+    "target": 21,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 8,
+        "validArrangementCount": 4,
+        "invalidArrangementRatio": 0.5,
+        "minimumCorrectExpressions": 2,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 10,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 2,
+        "operatorComplexity": 3,
+        "numericMagnitude": 7,
+        "recommendedHintDepth": 2,
+        "compositeDifficulty": 21.32
+      },
+      "structureSignature": "target|target:21|3,7|×,×|3,7",
+      "topologySignature": "target|2.2.2|0.0.1:0,0.1.1:0,1.0.0:0,1.1.0:0|2"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-12",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-2",
+    "levelNumber": 12,
+    "unitLevelNumber": 2,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-12-r1",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-12-r1-t1",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-12-r1-t2",
+            "kind": "number",
+            "value": 3
+          },
+          {
+            "id": "es-3-12-r1-t3",
+            "kind": "number",
+            "value": 6
+          }
+        ]
+      },
+      {
+        "id": "es-3-12-r2",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-12-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-12-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-12-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-12-r3",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-12-r3-t1",
+            "kind": "number",
+            "value": 8
+          },
+          {
+            "id": "es-3-12-r3-t2",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-12-r3-t3",
+            "kind": "number",
+            "value": 6
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "利用 3、4 或 6 的乘法事实得到 24；找到结果为 24 的不同表达式并点亮全部方块。",
+      "primarySkill": "multiplication-facts",
+      "skillTags": [
+        "multiplication-facts",
+        "doubling"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "addition-order-matters"
+      ],
+      "scaffoldLevel": "guided",
+      "reviewOf": [
+        "times-2-5-10",
+        "multiplication-groups"
+      ],
+      "reflectionText": "4 × 6 是一个乘法事实，可以联系已知的倍数关系。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-12:0",
+      "familyId": "3-2-target-r3-t3-×-ntight-even-repeat-v3",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "能不能用一个已经知道的乘法事实来推一推？",
+    "mode": "target",
+    "target": 24,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          2,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 3,
+        "numericMagnitude": 8,
+        "recommendedHintDepth": 2,
+        "compositeDifficulty": 27.551
+      },
+      "structureSignature": "target|target:24|3,4,6|×,×,×|4,6,8",
+      "topologySignature": "target|3.3.3|0.0.2:0,0.1.2:0,0.2.2:0,1.0.0:0,1.1.0:0,1.2.0:0,2.0.1:0,2.1.1:0,2.2.1:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-13",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-2",
+    "levelNumber": 13,
+    "unitLevelNumber": 3,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-13-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-13-r1-t1",
+            "kind": "number",
+            "value": 9
+          },
+          {
+            "id": "es-3-13-r1-t2",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-13-r1-t3",
+            "kind": "number",
+            "value": 4
+          }
+        ]
+      },
+      {
+        "id": "es-3-13-r2",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-13-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-13-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-13-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-13-r3",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-13-r3-t1",
+            "kind": "number",
+            "value": 9
+          },
+          {
+            "id": "es-3-13-r3-t2",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-13-r3-t3",
+            "kind": "number",
+            "value": 6
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "利用 3、4 或 6 的乘法事实得到 36；找到结果为 36 的不同表达式并点亮全部方块。",
+      "primarySkill": "multiplication-facts",
+      "skillTags": [
+        "multiplication-facts",
+        "doubling"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "addition-order-matters"
+      ],
+      "scaffoldLevel": "supported",
+      "reviewOf": [
+        "times-2-5-10",
+        "multiplication-groups"
+      ],
+      "reflectionText": "9 × 4 是一个乘法事实，可以联系已知的倍数关系。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-13:0",
+      "familyId": "3-2-target-r3-t3-×-ntight-mix-repeat-v4",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "能不能用一个已经知道的乘法事实来推一推？",
+    "mode": "target",
+    "target": 36,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 3,
+        "numericMagnitude": 9,
+        "recommendedHintDepth": 3,
+        "compositeDifficulty": 28.264
+      },
+      "structureSignature": "target|target:36|4,6,9|×,×,×|4,6,9",
+      "topologySignature": "target|3.3.3|0.0.1:0,0.1.1:0,0.2.1:0,1.0.2:0,1.1.2:0,1.2.2:0,2.0.0:0,2.1.0:0,2.2.0:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-14",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-2",
+    "levelNumber": 14,
+    "unitLevelNumber": 4,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-14-r1",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-14-r1-t1",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-14-r1-t2",
+            "kind": "number",
+            "value": 3
+          },
+          {
+            "id": "es-3-14-r1-t3",
+            "kind": "number",
+            "value": 8
+          }
+        ]
+      },
+      {
+        "id": "es-3-14-r2",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-14-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-14-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-14-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-14-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-14-r3-t1",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-14-r3-t2",
+            "kind": "number",
+            "value": 3
+          },
+          {
+            "id": "es-3-14-r3-t3",
+            "kind": "number",
+            "value": 8
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "利用 3、4 或 6 的乘法事实得到 24；找到结果为 24 的不同表达式并点亮全部方块。",
+      "primarySkill": "multiplication-facts",
+      "skillTags": [
+        "multiplication-facts",
+        "doubling"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "addition-order-matters"
+      ],
+      "scaffoldLevel": "supported",
+      "reviewOf": [
+        "times-2-5-10",
+        "multiplication-groups"
+      ],
+      "reflectionText": "6 × 4 是一个乘法事实，可以联系已知的倍数关系。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-14:2",
+      "familyId": "3-2-target-r3-t3-×-ntight-mix-repeat-v3",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "能不能用一个已经知道的乘法事实来推一推？",
+    "mode": "target",
+    "target": 24,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 3,
+        "numericMagnitude": 8,
+        "recommendedHintDepth": 3,
+        "compositeDifficulty": 28.051
+      },
+      "structureSignature": "target|target:24|3,6,8|×,×,×|3,4,8",
+      "topologySignature": "target|3.3.3|0.0.0:0,0.1.0:0,0.2.0:0,1.0.2:0,1.1.2:0,1.2.2:0,2.0.1:0,2.1.1:0,2.2.1:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-15",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-2",
+    "levelNumber": 15,
+    "unitLevelNumber": 5,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-15-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-15-r1-t1",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-15-r1-t2",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-15-r1-t3",
+            "kind": "number",
+            "value": 3
+          }
+        ]
+      },
+      {
+        "id": "es-3-15-r2",
+        "kind": "operator",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-15-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-15-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-15-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-15-r3",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-15-r3-t1",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-15-r3-t2",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-15-r3-t3",
+            "kind": "number",
+            "value": 3
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "利用 3、4 或 6 的乘法事实得到 12；找到结果为 12 的不同表达式并点亮全部方块。",
+      "primarySkill": "multiplication-facts",
+      "skillTags": [
+        "multiplication-facts",
+        "doubling"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "addition-order-matters"
+      ],
+      "scaffoldLevel": "independent",
+      "reviewOf": [
+        "times-2-5-10",
+        "multiplication-groups"
+      ],
+      "reflectionText": "2 × 6 是一个乘法事实，可以联系已知的倍数关系。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-15:11",
+      "familyId": "3-2-target-r3-t3-×-ntight-mix-repeat-v3",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "能不能用一个已经知道的乘法事实来推一推？",
+    "mode": "target",
+    "target": 12,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 3,
+        "numericMagnitude": 6,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 28.044
+      },
+      "structureSignature": "target|target:12|2,3,4|×,×,×|3,4,6",
+      "topologySignature": "target|3.3.3|0.0.1:0,0.1.1:0,0.2.1:0,1.0.2:0,1.1.2:0,1.2.2:0,2.0.0:0,2.1.0:0,2.2.0:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-16",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-2",
+    "levelNumber": 16,
+    "unitLevelNumber": 6,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-16-r1",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-16-r1-t1",
+            "kind": "number",
+            "value": 3
+          },
+          {
+            "id": "es-3-16-r1-t2",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-16-r1-t3",
+            "kind": "number",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "id": "es-3-16-r2",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-16-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-16-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-16-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-16-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-16-r3-t1",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-16-r3-t2",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-16-r3-t3",
+            "kind": "number",
+            "value": 2
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "利用 3、4 或 6 的乘法事实得到 12；找到结果为 12 的不同表达式并点亮全部方块。",
+      "primarySkill": "multiplication-facts",
+      "skillTags": [
+        "multiplication-facts",
+        "doubling"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "addition-order-matters"
+      ],
+      "scaffoldLevel": "independent",
+      "reviewOf": [
+        "times-2-5-10",
+        "multiplication-groups"
+      ],
+      "reflectionText": "3 × 4 是一个乘法事实，可以联系已知的倍数关系。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-16:10",
+      "familyId": "3-2-target-r3-t3-×-ntight-even-repeat-v3",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "能不能用一个已经知道的乘法事实来推一推？",
+    "mode": "target",
+    "target": 12,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 3,
+        "numericMagnitude": 6,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 28.044
+      },
+      "structureSignature": "target|target:12|2,3,6|×,×,×|2,4,6",
+      "topologySignature": "target|3.3.3|0.0.1:0,0.1.1:0,0.2.1:0,1.0.2:0,1.1.2:0,1.2.2:0,2.0.0:0,2.1.0:0,2.2.0:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-17",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-2",
+    "levelNumber": 17,
+    "unitLevelNumber": 7,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-17-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-17-r1-t1",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-17-r1-t2",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-17-r1-t3",
+            "kind": "number",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "id": "es-3-17-r2",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-17-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-17-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-17-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-17-r3",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-17-r3-t1",
+            "kind": "number",
+            "value": 3
+          },
+          {
+            "id": "es-3-17-r3-t2",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-17-r3-t3",
+            "kind": "number",
+            "value": 6
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "利用 3、4 或 6 的乘法事实得到 12；找到结果为 12 的不同表达式并点亮全部方块。",
+      "primarySkill": "multiplication-facts",
+      "skillTags": [
+        "multiplication-facts",
+        "doubling"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "addition-order-matters"
+      ],
+      "scaffoldLevel": "transfer",
+      "reviewOf": [
+        "times-2-5-10",
+        "multiplication-groups"
+      ],
+      "reflectionText": "6 × 2 是一个乘法事实，可以联系已知的倍数关系。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-17:1",
+      "familyId": "3-2-target-r3-t3-×-ntight-even-repeat-v3",
+      "repetitionPurpose": "representation-transfer"
+    },
+    "conceptHint": "能不能用一个已经知道的乘法事实来推一推？",
+    "mode": "target",
+    "target": 12,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 3,
+        "numericMagnitude": 6,
+        "recommendedHintDepth": 5,
+        "compositeDifficulty": 28.544
+      },
+      "structureSignature": "target|target:12|2,4,6|×,×,×|2,3,6",
+      "topologySignature": "target|3.3.3|0.0.1:0,0.1.1:0,0.2.1:0,1.0.0:0,1.1.0:0,1.2.0:0,2.0.2:0,2.1.2:0,2.2.2:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-18",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-2",
+    "levelNumber": 18,
+    "unitLevelNumber": 8,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-18-r1",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-18-r1-t1",
+            "kind": "number",
+            "value": 8
+          },
+          {
+            "id": "es-3-18-r1-t2",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-18-r1-t3",
+            "kind": "number",
+            "value": 3
+          }
+        ]
+      },
+      {
+        "id": "es-3-18-r2",
+        "kind": "operator",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-18-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-18-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-18-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-18-r3",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-18-r3-t1",
+            "kind": "number",
+            "value": 3
+          },
+          {
+            "id": "es-3-18-r3-t2",
+            "kind": "number",
+            "value": 8
+          },
+          {
+            "id": "es-3-18-r3-t3",
+            "kind": "number",
+            "value": 6
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "利用 3、4 或 6 的乘法事实得到 24；找到结果为 24 的不同表达式并点亮全部方块。",
+      "primarySkill": "multiplication-facts",
+      "skillTags": [
+        "multiplication-facts",
+        "doubling"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "addition-order-matters"
+      ],
+      "scaffoldLevel": "transfer",
+      "reviewOf": [
+        "times-2-5-10",
+        "multiplication-groups"
+      ],
+      "reflectionText": "8 × 3 是一个乘法事实，可以联系已知的倍数关系。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-18:2",
+      "familyId": "3-2-target-r3-t3-×-ntight-mix-repeat-v3",
+      "repetitionPurpose": "representation-transfer"
+    },
+    "conceptHint": "能不能用一个已经知道的乘法事实来推一推？",
+    "mode": "target",
+    "target": 24,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 3,
+        "numericMagnitude": 8,
+        "recommendedHintDepth": 5,
+        "compositeDifficulty": 29.051
+      },
+      "structureSignature": "target|target:24|3,4,8|×,×,×|3,6,8",
+      "topologySignature": "target|3.3.3|0.0.0:0,0.1.0:0,0.2.0:0,1.0.2:0,1.1.2:0,1.2.2:0,2.0.1:0,2.1.1:0,2.2.1:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-19",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-2",
+    "levelNumber": 19,
+    "unitLevelNumber": 9,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-19-r1",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-19-r1-t1",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-19-r1-t2",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-19-r1-t3",
+            "kind": "number",
+            "value": 8
+          }
+        ]
+      },
+      {
+        "id": "es-3-19-r2",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-19-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-19-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-19-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-19-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-19-r3-t1",
+            "kind": "number",
+            "value": 3
+          },
+          {
+            "id": "es-3-19-r3-t2",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-19-r3-t3",
+            "kind": "number",
+            "value": 4
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "利用 3、4 或 6 的乘法事实得到 24；找到结果为 24 的不同表达式并点亮全部方块。",
+      "primarySkill": "multiplication-facts",
+      "skillTags": [
+        "multiplication-facts",
+        "doubling"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "addition-order-matters"
+      ],
+      "scaffoldLevel": "review",
+      "reviewOf": [
+        "times-2-5-10",
+        "multiplication-groups",
+        "multiplication-facts",
+        "doubling",
+        "make-ten",
+        "addition",
+        "subtraction"
+      ],
+      "reflectionText": "4 × 6 是一个乘法事实，可以联系已知的倍数关系。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-19:9",
+      "familyId": "3-2-target-r3-t3-×-ntight-even-repeat-v3",
+      "repetitionPurpose": "spaced-review"
+    },
+    "conceptHint": "能不能用一个已经知道的乘法事实来推一推？",
+    "mode": "target",
+    "target": 24,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 3,
+        "numericMagnitude": 8,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 28.551
+      },
+      "structureSignature": "target|target:24|4,6,8|×,×,×|3,4,6",
+      "topologySignature": "target|3.3.3|0.0.1:0,0.1.1:0,0.2.1:0,1.0.2:0,1.1.2:0,1.2.2:0,2.0.0:0,2.1.0:0,2.2.0:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-20",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-2",
+    "levelNumber": 20,
+    "unitLevelNumber": 10,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-20-r1",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-20-r1-t1",
+            "kind": "number",
+            "value": 3
+          },
+          {
+            "id": "es-3-20-r1-t2",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-20-r1-t3",
+            "kind": "number",
+            "value": 4
+          }
+        ]
+      },
+      {
+        "id": "es-3-20-r2",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-20-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-20-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-20-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-20-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-20-r3-t1",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-20-r3-t2",
+            "kind": "number",
+            "value": 3
+          },
+          {
+            "id": "es-3-20-r3-t3",
+            "kind": "number",
+            "value": 4
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "利用 3、4 或 6 的乘法事实得到 12；找到结果为 12 的不同表达式并点亮全部方块。",
+      "primarySkill": "multiplication-facts",
+      "skillTags": [
+        "multiplication-facts",
+        "doubling"
+      ],
+      "misconceptionTags": [
+        "multiplication-as-addition",
+        "addition-order-matters"
+      ],
+      "scaffoldLevel": "review",
+      "reviewOf": [
+        "times-2-5-10",
+        "multiplication-groups",
+        "multiplication-facts",
+        "doubling",
+        "make-ten",
+        "addition",
+        "subtraction"
+      ],
+      "reflectionText": "3 × 4 是一个乘法事实，可以联系已知的倍数关系。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-20:2",
+      "familyId": "3-2-target-r3-t3-×-ntight-mix-repeat-v3",
+      "repetitionPurpose": "spaced-review"
+    },
+    "conceptHint": "能不能用一个已经知道的乘法事实来推一推？",
+    "mode": "target",
+    "target": 12,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          2,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 3,
+        "numericMagnitude": 6,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 28.044
+      },
+      "structureSignature": "target|target:12|3,4,6|×,×,×|2,3,4",
+      "topologySignature": "target|3.3.3|0.0.2:0,0.1.2:0,0.2.2:0,1.0.0:0,1.1.0:0,1.2.0:0,2.0.1:0,2.1.1:0,2.2.1:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-21",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-3",
+    "levelNumber": 21,
+    "unitLevelNumber": 1,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-21-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-21-r1-t1",
+            "kind": "number",
+            "value": 20
+          },
+          {
+            "id": "es-3-21-r1-t2",
+            "kind": "number",
+            "value": 15
+          }
+        ]
+      },
+      {
+        "id": "es-3-21-r2",
+        "kind": "operator",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-21-r2-t1",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-21-r2-t2",
+            "kind": "operator",
+            "value": "÷"
+          }
+        ]
+      },
+      {
+        "id": "es-3-21-r3",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-21-r3-t1",
+            "kind": "number",
+            "value": 3
+          },
+          {
+            "id": "es-3-21-r3-t2",
+            "kind": "number",
+            "value": 4
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "把总量平均分成整数份并得到 5；找到结果为 5 的不同表达式并点亮全部方块。",
+      "primarySkill": "exact-division",
+      "skillTags": [
+        "exact-division",
+        "equal-sharing"
+      ],
+      "misconceptionTags": [
+        "division-order",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "guided",
+      "reviewOf": [
+        "multiplication-facts",
+        "multiplication-groups",
+        "make-ten"
+      ],
+      "reflectionText": "20 ÷ 4 能整除，表示每份都是完整的整数数量。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-21:0",
+      "familyId": "3-3-target-r3-t2-÷-nwide-mix-distinct-v1",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "先看总数能不能平均分成整数份。",
+    "mode": "target",
+    "target": 5,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 8,
+        "validArrangementCount": 4,
+        "invalidArrangementRatio": 0.5,
+        "minimumCorrectExpressions": 2,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 10,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 2,
+        "operatorComplexity": 4,
+        "numericMagnitude": 20,
+        "recommendedHintDepth": 2,
+        "compositeDifficulty": 24.269
+      },
+      "structureSignature": "target|target:5|15,20|÷,÷|3,4",
+      "topologySignature": "target|2.2.2|0.0.1:0,0.1.1:0,1.0.0:0,1.1.0:0|2"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-22",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-3",
+    "levelNumber": 22,
+    "unitLevelNumber": 2,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-22-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-22-r1-t1",
+            "kind": "number",
+            "value": 54
+          },
+          {
+            "id": "es-3-22-r1-t2",
+            "kind": "number",
+            "value": 18
+          },
+          {
+            "id": "es-3-22-r1-t3",
+            "kind": "number",
+            "value": 27
+          }
+        ]
+      },
+      {
+        "id": "es-3-22-r2",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-22-r2-t1",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-22-r2-t2",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-22-r2-t3",
+            "kind": "operator",
+            "value": "÷"
+          }
+        ]
+      },
+      {
+        "id": "es-3-22-r3",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-22-r3-t1",
+            "kind": "number",
+            "value": 3
+          },
+          {
+            "id": "es-3-22-r3-t2",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-22-r3-t3",
+            "kind": "number",
+            "value": 6
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "把总量平均分成整数份并得到 9；找到结果为 9 的不同表达式并点亮全部方块。",
+      "primarySkill": "exact-division",
+      "skillTags": [
+        "exact-division",
+        "equal-sharing"
+      ],
+      "misconceptionTags": [
+        "division-order",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "guided",
+      "reviewOf": [
+        "multiplication-facts",
+        "multiplication-groups",
+        "make-ten"
+      ],
+      "reflectionText": "54 ÷ 6 能整除，表示每份都是完整的整数数量。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-22:0",
+      "familyId": "3-3-target-r3-t3-÷-nwide-mix-distinct-v2",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "先看总数能不能平均分成整数份。",
+    "mode": "target",
+    "target": 9,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          2,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 4,
+        "numericMagnitude": 54,
+        "recommendedHintDepth": 2,
+        "compositeDifficulty": 32.207
+      },
+      "structureSignature": "target|target:9|18,27,54|÷,÷,÷|2,3,6",
+      "topologySignature": "target|3.3.3|0.0.2:0,0.1.2:0,0.2.2:0,1.0.1:0,1.1.1:0,1.2.1:0,2.0.0:0,2.1.0:0,2.2.0:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-23",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-3",
+    "levelNumber": 23,
+    "unitLevelNumber": 3,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-23-r1",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-23-r1-t1",
+            "kind": "number",
+            "value": 48
+          },
+          {
+            "id": "es-3-23-r1-t2",
+            "kind": "number",
+            "value": 60
+          },
+          {
+            "id": "es-3-23-r1-t3",
+            "kind": "number",
+            "value": 36
+          }
+        ]
+      },
+      {
+        "id": "es-3-23-r2",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-23-r2-t1",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-23-r2-t2",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-23-r2-t3",
+            "kind": "operator",
+            "value": "÷"
+          }
+        ]
+      },
+      {
+        "id": "es-3-23-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-23-r3-t1",
+            "kind": "number",
+            "value": 5
+          },
+          {
+            "id": "es-3-23-r3-t2",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-23-r3-t3",
+            "kind": "number",
+            "value": 3
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "把总量平均分成整数份并得到 12；找到结果为 12 的不同表达式并点亮全部方块。",
+      "primarySkill": "exact-division",
+      "skillTags": [
+        "exact-division",
+        "equal-sharing"
+      ],
+      "misconceptionTags": [
+        "division-order",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "supported",
+      "reviewOf": [
+        "multiplication-facts",
+        "multiplication-groups",
+        "make-ten"
+      ],
+      "reflectionText": "48 ÷ 4 能整除，表示每份都是完整的整数数量。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-23:0",
+      "familyId": "3-3-target-r3-t3-÷-nwide-mix-distinct-v3",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "先看总数能不能平均分成整数份。",
+    "mode": "target",
+    "target": 12,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 4,
+        "numericMagnitude": 60,
+        "recommendedHintDepth": 3,
+        "compositeDifficulty": 32.916
+      },
+      "structureSignature": "target|target:12|36,48,60|÷,÷,÷|3,4,5",
+      "topologySignature": "target|3.3.3|0.0.1:0,0.1.1:0,0.2.1:0,1.0.0:0,1.1.0:0,1.2.0:0,2.0.2:0,2.1.2:0,2.2.2:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-24",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-3",
+    "levelNumber": 24,
+    "unitLevelNumber": 4,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-24-r1",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-24-r1-t1",
+            "kind": "number",
+            "value": 12
+          },
+          {
+            "id": "es-3-24-r1-t2",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-24-r1-t3",
+            "kind": "number",
+            "value": 18
+          }
+        ]
+      },
+      {
+        "id": "es-3-24-r2",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-24-r2-t1",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-24-r2-t2",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-24-r2-t3",
+            "kind": "operator",
+            "value": "÷"
+          }
+        ]
+      },
+      {
+        "id": "es-3-24-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-24-r3-t1",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-24-r3-t2",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-24-r3-t3",
+            "kind": "number",
+            "value": 2
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "把总量平均分成整数份并得到 3；找到结果为 3 的不同表达式并点亮全部方块。",
+      "primarySkill": "exact-division",
+      "skillTags": [
+        "exact-division",
+        "equal-sharing"
+      ],
+      "misconceptionTags": [
+        "division-order",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "supported",
+      "reviewOf": [
+        "multiplication-facts",
+        "multiplication-groups",
+        "make-ten"
+      ],
+      "reflectionText": "12 ÷ 4 能整除，表示每份都是完整的整数数量。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-24:0",
+      "familyId": "3-3-target-r3-t3-÷-nwide-even-repeat-v1",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "先看总数能不能平均分成整数份。",
+    "mode": "target",
+    "target": 3,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 4,
+        "numericMagnitude": 18,
+        "recommendedHintDepth": 3,
+        "compositeDifficulty": 30.56
+      },
+      "structureSignature": "target|target:3|12,18,6|÷,÷,÷|2,4,6",
+      "topologySignature": "target|3.3.3|0.0.0:0,0.1.0:0,0.2.0:0,1.0.2:0,1.1.2:0,1.2.2:0,2.0.1:0,2.1.1:0,2.2.1:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-25",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-3",
+    "levelNumber": 25,
+    "unitLevelNumber": 5,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-25-r1",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-25-r1-t1",
+            "kind": "number",
+            "value": 40
+          },
+          {
+            "id": "es-3-25-r1-t2",
+            "kind": "number",
+            "value": 16
+          },
+          {
+            "id": "es-3-25-r1-t3",
+            "kind": "number",
+            "value": 36
+          }
+        ]
+      },
+      {
+        "id": "es-3-25-r2",
+        "kind": "operator",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-25-r2-t1",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-25-r2-t2",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-25-r2-t3",
+            "kind": "operator",
+            "value": "÷"
+          }
+        ]
+      },
+      {
+        "id": "es-3-25-r3",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-25-r3-t1",
+            "kind": "number",
+            "value": 9
+          },
+          {
+            "id": "es-3-25-r3-t2",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-25-r3-t3",
+            "kind": "number",
+            "value": 10
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "把总量平均分成整数份并得到 4；找到结果为 4 的不同表达式并点亮全部方块。",
+      "primarySkill": "exact-division",
+      "skillTags": [
+        "exact-division",
+        "equal-sharing"
+      ],
+      "misconceptionTags": [
+        "division-order",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "independent",
+      "reviewOf": [
+        "multiplication-facts",
+        "multiplication-groups",
+        "make-ten"
+      ],
+      "reflectionText": "40 ÷ 10 能整除，表示每份都是完整的整数数量。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-25:0",
+      "familyId": "3-3-target-r3-t3-÷-nwide-even-distinct-v1",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "先看总数能不能平均分成整数份。",
+    "mode": "target",
+    "target": 4,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          2,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 4,
+        "numericMagnitude": 40,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 32.614
+      },
+      "structureSignature": "target|target:4|16,36,40|÷,÷,÷|10,4,9",
+      "topologySignature": "target|3.3.3|0.0.2:0,0.1.2:0,0.2.2:0,1.0.1:0,1.1.1:0,1.2.1:0,2.0.0:0,2.1.0:0,2.2.0:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-26",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-3",
+    "levelNumber": 26,
+    "unitLevelNumber": 6,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-26-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-26-r1-t1",
+            "kind": "number",
+            "value": 32
+          },
+          {
+            "id": "es-3-26-r1-t2",
+            "kind": "number",
+            "value": 24
+          },
+          {
+            "id": "es-3-26-r1-t3",
+            "kind": "number",
+            "value": 48
+          }
+        ]
+      },
+      {
+        "id": "es-3-26-r2",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-26-r2-t1",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-26-r2-t2",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-26-r2-t3",
+            "kind": "operator",
+            "value": "÷"
+          }
+        ]
+      },
+      {
+        "id": "es-3-26-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-26-r3-t1",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-26-r3-t2",
+            "kind": "number",
+            "value": 3
+          },
+          {
+            "id": "es-3-26-r3-t3",
+            "kind": "number",
+            "value": 4
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "把总量平均分成整数份并得到 8；找到结果为 8 的不同表达式并点亮全部方块。",
+      "primarySkill": "exact-division",
+      "skillTags": [
+        "exact-division",
+        "equal-sharing"
+      ],
+      "misconceptionTags": [
+        "division-order",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "independent",
+      "reviewOf": [
+        "multiplication-facts",
+        "multiplication-groups",
+        "make-ten"
+      ],
+      "reflectionText": "32 ÷ 4 能整除，表示每份都是完整的整数数量。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-26:0",
+      "familyId": "3-3-target-r3-t3-÷-nwide-even-distinct-v2",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "先看总数能不能平均分成整数份。",
+    "mode": "target",
+    "target": 8,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          2,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 4,
+        "numericMagnitude": 48,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 32.974
+      },
+      "structureSignature": "target|target:8|24,32,48|÷,÷,÷|3,4,6",
+      "topologySignature": "target|3.3.3|0.0.2:0,0.1.2:0,0.2.2:0,1.0.1:0,1.1.1:0,1.2.1:0,2.0.0:0,2.1.0:0,2.2.0:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-27",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-3",
+    "levelNumber": 27,
+    "unitLevelNumber": 7,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-27-r1",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-27-r1-t1",
+            "kind": "number",
+            "value": 60
+          },
+          {
+            "id": "es-3-27-r1-t2",
+            "kind": "number",
+            "value": 24
+          },
+          {
+            "id": "es-3-27-r1-t3",
+            "kind": "number",
+            "value": 36
+          }
+        ]
+      },
+      {
+        "id": "es-3-27-r2",
+        "kind": "operator",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-27-r2-t1",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-27-r2-t2",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-27-r2-t3",
+            "kind": "operator",
+            "value": "÷"
+          }
+        ]
+      },
+      {
+        "id": "es-3-27-r3",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-27-r3-t1",
+            "kind": "number",
+            "value": 3
+          },
+          {
+            "id": "es-3-27-r3-t2",
+            "kind": "number",
+            "value": 5
+          },
+          {
+            "id": "es-3-27-r3-t3",
+            "kind": "number",
+            "value": 2
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "把总量平均分成整数份并得到 12；找到结果为 12 的不同表达式并点亮全部方块。",
+      "primarySkill": "exact-division",
+      "skillTags": [
+        "exact-division",
+        "equal-sharing"
+      ],
+      "misconceptionTags": [
+        "division-order",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "transfer",
+      "reviewOf": [
+        "multiplication-facts",
+        "multiplication-groups",
+        "make-ten"
+      ],
+      "reflectionText": "60 ÷ 5 能整除，表示每份都是完整的整数数量。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-27:0",
+      "familyId": "3-3-target-r3-t3-÷-nwide-mix-distinct-v3",
+      "repetitionPurpose": "representation-transfer"
+    },
+    "conceptHint": "先看总数能不能平均分成整数份。",
+    "mode": "target",
+    "target": 12,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 4,
+        "numericMagnitude": 60,
+        "recommendedHintDepth": 5,
+        "compositeDifficulty": 33.916
+      },
+      "structureSignature": "target|target:12|24,36,60|÷,÷,÷|2,3,5",
+      "topologySignature": "target|3.3.3|0.0.1:0,0.1.1:0,0.2.1:0,1.0.2:0,1.1.2:0,1.2.2:0,2.0.0:0,2.1.0:0,2.2.0:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-28",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-3",
+    "levelNumber": 28,
+    "unitLevelNumber": 8,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-28-r1",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-28-r1-t1",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-28-r1-t2",
+            "kind": "number",
+            "value": 8
+          },
+          {
+            "id": "es-3-28-r1-t3",
+            "kind": "number",
+            "value": 16
+          }
+        ]
+      },
+      {
+        "id": "es-3-28-r2",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-28-r2-t1",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-28-r2-t2",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-28-r2-t3",
+            "kind": "operator",
+            "value": "÷"
+          }
+        ]
+      },
+      {
+        "id": "es-3-28-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-28-r3-t1",
+            "kind": "number",
+            "value": 8
+          },
+          {
+            "id": "es-3-28-r3-t2",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-28-r3-t3",
+            "kind": "number",
+            "value": 4
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "把总量平均分成整数份并得到 2；找到结果为 2 的不同表达式并点亮全部方块。",
+      "primarySkill": "exact-division",
+      "skillTags": [
+        "exact-division",
+        "equal-sharing"
+      ],
+      "misconceptionTags": [
+        "division-order",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "transfer",
+      "reviewOf": [
+        "multiplication-facts",
+        "multiplication-groups",
+        "make-ten"
+      ],
+      "reflectionText": "4 ÷ 2 能整除，表示每份都是完整的整数数量。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-28:0",
+      "familyId": "3-3-target-r3-t3-÷-nwide-even-repeat-v1",
+      "repetitionPurpose": "representation-transfer"
+    },
+    "conceptHint": "先看总数能不能平均分成整数份。",
+    "mode": "target",
+    "target": 2,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 4,
+        "numericMagnitude": 16,
+        "recommendedHintDepth": 5,
+        "compositeDifficulty": 31.336
+      },
+      "structureSignature": "target|target:2|16,4,8|÷,÷,÷|2,4,8",
+      "topologySignature": "target|3.3.3|0.0.1:0,0.1.1:0,0.2.1:0,1.0.2:0,1.1.2:0,1.2.2:0,2.0.0:0,2.1.0:0,2.2.0:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-29",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-3",
+    "levelNumber": 29,
+    "unitLevelNumber": 9,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-29-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-29-r1-t1",
+            "kind": "number",
+            "value": 48
+          },
+          {
+            "id": "es-3-29-r1-t2",
+            "kind": "number",
+            "value": 36
+          },
+          {
+            "id": "es-3-29-r1-t3",
+            "kind": "number",
+            "value": 6
+          }
+        ]
+      },
+      {
+        "id": "es-3-29-r2",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-29-r2-t1",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-29-r2-t2",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-29-r2-t3",
+            "kind": "operator",
+            "value": "÷"
+          }
+        ]
+      },
+      {
+        "id": "es-3-29-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-29-r3-t1",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-29-r3-t2",
+            "kind": "number",
+            "value": 1
+          },
+          {
+            "id": "es-3-29-r3-t3",
+            "kind": "number",
+            "value": 8
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "把总量平均分成整数份并得到 6；找到结果为 6 的不同表达式并点亮全部方块。",
+      "primarySkill": "exact-division",
+      "skillTags": [
+        "exact-division",
+        "equal-sharing"
+      ],
+      "misconceptionTags": [
+        "division-order",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "review",
+      "reviewOf": [
+        "multiplication-facts",
+        "multiplication-groups",
+        "exact-division",
+        "equal-sharing",
+        "make-ten",
+        "addition",
+        "subtraction"
+      ],
+      "reflectionText": "48 ÷ 8 能整除，表示每份都是完整的整数数量。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-29:0",
+      "familyId": "3-3-target-r3-t3-÷-nwide-even-repeat-v2",
+      "repetitionPurpose": "spaced-review"
+    },
+    "conceptHint": "先看总数能不能平均分成整数份。",
+    "mode": "target",
+    "target": 6,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          2
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          2,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 4,
+        "numericMagnitude": 48,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 32.974
+      },
+      "structureSignature": "target|target:6|36,48,6|÷,÷,÷|1,6,8",
+      "topologySignature": "target|3.3.3|0.0.2:0,0.1.2:0,0.2.2:0,1.0.0:0,1.1.0:0,1.2.0:0,2.0.1:0,2.1.1:0,2.2.1:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-30",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-3",
+    "levelNumber": 30,
+    "unitLevelNumber": 10,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-30-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-30-r1-t1",
+            "kind": "number",
+            "value": 14
+          },
+          {
+            "id": "es-3-30-r1-t2",
+            "kind": "number",
+            "value": 21
+          },
+          {
+            "id": "es-3-30-r1-t3",
+            "kind": "number",
+            "value": 42
+          }
+        ]
+      },
+      {
+        "id": "es-3-30-r2",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-30-r2-t1",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-30-r2-t2",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-30-r2-t3",
+            "kind": "operator",
+            "value": "÷"
+          }
+        ]
+      },
+      {
+        "id": "es-3-30-r3",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-30-r3-t1",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-30-r3-t2",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-30-r3-t3",
+            "kind": "number",
+            "value": 3
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "把总量平均分成整数份并得到 7；找到结果为 7 的不同表达式并点亮全部方块。",
+      "primarySkill": "exact-division",
+      "skillTags": [
+        "exact-division",
+        "equal-sharing"
+      ],
+      "misconceptionTags": [
+        "division-order",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "review",
+      "reviewOf": [
+        "multiplication-facts",
+        "multiplication-groups",
+        "exact-division",
+        "equal-sharing",
+        "make-ten",
+        "addition",
+        "subtraction"
+      ],
+      "reflectionText": "14 ÷ 2 能整除，表示每份都是完整的整数数量。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-30:0",
+      "familyId": "3-3-target-r3-t3-÷-nwide-mix-distinct-v2",
+      "repetitionPurpose": "spaced-review"
+    },
+    "conceptHint": "先看总数能不能平均分成整数份。",
+    "mode": "target",
+    "target": 7,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 9,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 50,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3,
+        "operatorComplexity": 4,
+        "numericMagnitude": 42,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 32.71
+      },
+      "structureSignature": "target|target:7|14,21,42|÷,÷,÷|2,3,6",
+      "topologySignature": "target|3.3.3|0.0.0:0,0.1.0:0,0.2.0:0,1.0.2:0,1.1.2:0,1.2.2:0,2.0.1:0,2.1.1:0,2.2.1:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-31",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-4",
+    "levelNumber": 31,
+    "unitLevelNumber": 1,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-31-r1",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-31-r1-t1",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-31-r1-t2",
+            "kind": "number",
+            "value": 12
+          }
+        ]
+      },
+      {
+        "id": "es-3-31-r2",
+        "kind": "operator",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-31-r2-t1",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-31-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-31-r3",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-31-r3-t1",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-31-r3-t2",
+            "kind": "number",
+            "value": 6
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用同一组数连接相关的乘法与除法事实；分别命中目标 12、2，再规划不同成立算式来点亮全部方块。",
+      "primarySkill": "multiply-divide-inverse",
+      "skillTags": [
+        "multiply-divide-inverse",
+        "inverse-operations",
+        "multi-target"
+      ],
+      "misconceptionTags": [
+        "inverse-operation-disconnection",
+        "division-order"
+      ],
+      "scaffoldLevel": "guided",
+      "reviewOf": [
+        "exact-division",
+        "multiplication-facts",
+        "addition",
+        "subtraction",
+        "make-ten"
+      ],
+      "reflectionText": "2 × 6 与 12 ÷ 6 使用同一组数，乘法和除法可以互相检查。 目标 12、2 要分别命中，目标灯和方块灯都要检查。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-31:0",
+      "familyId": "3-4-multi-target-r3-t2-×÷-nmid-even-repeat-v3",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "哪个乘法事实能帮你检查这个除法？",
+    "mode": "multi-target",
+    "targets": [
+      12,
+      2
+    ],
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 8,
+        "validArrangementCount": 4,
+        "invalidArrangementRatio": 0.5,
+        "minimumCorrectExpressions": 2,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 10,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 2,
+        "operatorComplexity": 9,
+        "numericMagnitude": 12,
+        "recommendedHintDepth": 2,
+        "compositeDifficulty": 28.301
+      },
+      "structureSignature": "multi-target|targets:2,12|12,2|×,÷|6,6",
+      "topologySignature": "multi-target|2.2.2|0.1.0:1,0.1.1:1,1.0.0:2,1.0.1:2|2"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-32",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-4",
+    "levelNumber": 32,
+    "unitLevelNumber": 2,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-32-r1",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-32-r1-t1",
+            "kind": "number",
+            "value": 8
+          },
+          {
+            "id": "es-3-32-r1-t2",
+            "kind": "number",
+            "value": 16
+          }
+        ]
+      },
+      {
+        "id": "es-3-32-r2",
+        "kind": "operator",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-32-r2-t1",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-32-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-32-r3",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-32-r3-t1",
+            "kind": "number",
+            "value": 8
+          },
+          {
+            "id": "es-3-32-r3-t2",
+            "kind": "number",
+            "value": 2
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用同一组数连接相关的乘法与除法事实；分别命中目标 16、2，再规划不同成立算式来点亮全部方块。",
+      "primarySkill": "multiply-divide-inverse",
+      "skillTags": [
+        "multiply-divide-inverse",
+        "inverse-operations",
+        "multi-target"
+      ],
+      "misconceptionTags": [
+        "inverse-operation-disconnection",
+        "division-order"
+      ],
+      "scaffoldLevel": "guided",
+      "reviewOf": [
+        "exact-division",
+        "multiplication-facts",
+        "addition",
+        "subtraction",
+        "make-ten"
+      ],
+      "reflectionText": "8 × 2 与 16 ÷ 8 使用同一组数，乘法和除法可以互相检查。 目标 16、2 要分别命中，目标灯和方块灯都要检查。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-32:0",
+      "familyId": "3-4-multi-target-r3-t2-×÷-nwide-even-repeat-v3",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "哪个乘法事实能帮你检查这个除法？",
+    "mode": "multi-target",
+    "targets": [
+      16,
+      2
+    ],
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 8,
+        "validArrangementCount": 2,
+        "invalidArrangementRatio": 0.75,
+        "minimumCorrectExpressions": 2,
+        "minimumCoverSetCountCapped": 1,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 4,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 1,
+        "operatorComplexity": 9,
+        "numericMagnitude": 16,
+        "recommendedHintDepth": 2,
+        "compositeDifficulty": 30.442
+      },
+      "structureSignature": "multi-target|targets:2,16|16,8|×,÷|2,8",
+      "topologySignature": "multi-target|2.2.2|0.1.1:1,1.0.0:2|2"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-33",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-4",
+    "levelNumber": 33,
+    "unitLevelNumber": 3,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-33-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-33-r1-t1",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-33-r1-t2",
+            "kind": "number",
+            "value": 20
+          }
+        ]
+      },
+      {
+        "id": "es-3-33-r2",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-33-r2-t1",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-33-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-33-r3",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-33-r3-t1",
+            "kind": "number",
+            "value": 5
+          },
+          {
+            "id": "es-3-33-r3-t2",
+            "kind": "number",
+            "value": 5
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用同一组数连接相关的乘法与除法事实；分别命中目标 20、4，再规划不同成立算式来点亮全部方块。",
+      "primarySkill": "multiply-divide-inverse",
+      "skillTags": [
+        "multiply-divide-inverse",
+        "inverse-operations",
+        "multi-target"
+      ],
+      "misconceptionTags": [
+        "inverse-operation-disconnection",
+        "division-order"
+      ],
+      "scaffoldLevel": "supported",
+      "reviewOf": [
+        "exact-division",
+        "multiplication-facts",
+        "addition",
+        "subtraction",
+        "make-ten"
+      ],
+      "reflectionText": "4 × 5 与 20 ÷ 5 使用同一组数，乘法和除法可以互相检查。 目标 20、4 要分别命中，目标灯和方块灯都要检查。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-33:0",
+      "familyId": "3-4-multi-target-r3-t2-×÷-nwide-mix-repeat-v3",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "哪个乘法事实能帮你检查这个除法？",
+    "mode": "multi-target",
+    "targets": [
+      20,
+      4
+    ],
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 8,
+        "validArrangementCount": 4,
+        "invalidArrangementRatio": 0.5,
+        "minimumCorrectExpressions": 2,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 10,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 2,
+        "operatorComplexity": 9,
+        "numericMagnitude": 20,
+        "recommendedHintDepth": 3,
+        "compositeDifficulty": 29.769
+      },
+      "structureSignature": "multi-target|targets:4,20|20,4|×,÷|5,5",
+      "topologySignature": "multi-target|2.2.2|0.1.0:1,0.1.1:1,1.0.0:2,1.0.1:2|2"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-34",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-4",
+    "levelNumber": 34,
+    "unitLevelNumber": 4,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-34-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-34-r1-t1",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-34-r1-t2",
+            "kind": "number",
+            "value": 8
+          }
+        ]
+      },
+      {
+        "id": "es-3-34-r2",
+        "kind": "operator",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-34-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-34-r2-t2",
+            "kind": "operator",
+            "value": "÷"
+          }
+        ]
+      },
+      {
+        "id": "es-3-34-r3",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-34-r3-t1",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-34-r3-t2",
+            "kind": "number",
+            "value": 4
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用同一组数连接相关的乘法与除法事实；分别命中目标 8、4，再规划不同成立算式来点亮全部方块。",
+      "primarySkill": "multiply-divide-inverse",
+      "skillTags": [
+        "multiply-divide-inverse",
+        "inverse-operations",
+        "multi-target"
+      ],
+      "misconceptionTags": [
+        "inverse-operation-disconnection",
+        "division-order"
+      ],
+      "scaffoldLevel": "supported",
+      "reviewOf": [
+        "exact-division",
+        "multiplication-facts",
+        "addition",
+        "subtraction",
+        "make-ten"
+      ],
+      "reflectionText": "2 × 4 与 8 ÷ 2 使用同一组数，乘法和除法可以互相检查。 目标 8、4 要分别命中，目标灯和方块灯都要检查。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-34:0",
+      "familyId": "3-4-multi-target-r3-t2-×÷-nmid-even-repeat-v2",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "哪个乘法事实能帮你检查这个除法？",
+    "mode": "multi-target",
+    "targets": [
+      8,
+      4
+    ],
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 8,
+        "validArrangementCount": 3,
+        "invalidArrangementRatio": 0.625,
+        "minimumCorrectExpressions": 2,
+        "minimumCoverSetCountCapped": 1,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 7,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 1.5,
+        "operatorComplexity": 9,
+        "numericMagnitude": 8,
+        "recommendedHintDepth": 3,
+        "compositeDifficulty": 28.858
+      },
+      "structureSignature": "multi-target|targets:4,8|2,8|×,÷|2,4",
+      "topologySignature": "multi-target|2.2.2|0.0.0:2,0.0.1:1,1.1.0:2|2"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-35",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-4",
+    "levelNumber": 35,
+    "unitLevelNumber": 5,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-35-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-35-r1-t1",
+            "kind": "number",
+            "value": 12
+          },
+          {
+            "id": "es-3-35-r1-t2",
+            "kind": "number",
+            "value": 12
+          },
+          {
+            "id": "es-3-35-r1-t3",
+            "kind": "number",
+            "value": 6
+          }
+        ]
+      },
+      {
+        "id": "es-3-35-r2",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-35-r2-t1",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-35-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-35-r2-t3",
+            "kind": "operator",
+            "value": "÷"
+          }
+        ]
+      },
+      {
+        "id": "es-3-35-r3",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-35-r3-t1",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-35-r3-t2",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-35-r3-t3",
+            "kind": "number",
+            "value": 6
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用同一组数连接相关的乘法与除法事实；分别命中目标 2、6、12，再规划不同成立算式来点亮全部方块。",
+      "primarySkill": "multiply-divide-inverse",
+      "skillTags": [
+        "multiply-divide-inverse",
+        "inverse-operations",
+        "multi-target"
+      ],
+      "misconceptionTags": [
+        "inverse-operation-disconnection",
+        "division-order"
+      ],
+      "scaffoldLevel": "independent",
+      "reviewOf": [
+        "exact-division",
+        "multiplication-facts",
+        "addition",
+        "subtraction",
+        "make-ten"
+      ],
+      "reflectionText": "6 × 2 与 12 ÷ 2 使用同一组数，乘法和除法可以互相检查。 目标 2、6、12 要分别命中，目标灯和方块灯都要检查。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-35:0",
+      "familyId": "3-4-multi-target-r3-t3-×÷-nmid-even-repeat-v3",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "哪个乘法事实能帮你检查这个除法？",
+    "mode": "multi-target",
+    "targets": [
+      2,
+      6,
+      12
+    ],
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          2
+        ],
+        [
+          2,
+          1,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 14,
+        "invalidArrangementRatio": 0.481,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 143,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 4.667,
+        "operatorComplexity": 9,
+        "numericMagnitude": 12,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 34.479
+      },
+      "structureSignature": "multi-target|targets:2,6,12|12,12,6|×,÷,÷|2,2,6",
+      "topologySignature": "multi-target|3.3.3|0.0.0:2,0.0.1:2,0.0.2:1,0.2.0:2,0.2.1:2,0.2.2:1,1.0.0:2,1.0.1:2,1.0.2:1,1.2.0:2,1.2.1:2,1.2.2:1,2.1.0:4,2.1.1:4|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-36",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-4",
+    "levelNumber": 36,
+    "unitLevelNumber": 6,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-36-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-36-r1-t1",
+            "kind": "number",
+            "value": 20
+          },
+          {
+            "id": "es-3-36-r1-t2",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-36-r1-t3",
+            "kind": "number",
+            "value": 20
+          }
+        ]
+      },
+      {
+        "id": "es-3-36-r2",
+        "kind": "operator",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-36-r2-t1",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-36-r2-t2",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-36-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-36-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-36-r3-t1",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-36-r3-t2",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-36-r3-t3",
+            "kind": "number",
+            "value": 2
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用同一组数连接相关的乘法与除法事实；分别命中目标 2、10、20，再规划不同成立算式来点亮全部方块。",
+      "primarySkill": "multiply-divide-inverse",
+      "skillTags": [
+        "multiply-divide-inverse",
+        "inverse-operations",
+        "multi-target"
+      ],
+      "misconceptionTags": [
+        "inverse-operation-disconnection",
+        "division-order"
+      ],
+      "scaffoldLevel": "independent",
+      "reviewOf": [
+        "exact-division",
+        "multiplication-facts",
+        "addition",
+        "subtraction",
+        "make-ten"
+      ],
+      "reflectionText": "2 × 10 与 20 ÷ 10 使用同一组数，乘法和除法可以互相检查。 目标 2、10、20 要分别命中，目标灯和方块灯都要检查。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-36:1",
+      "familyId": "3-4-multi-target-r3-t3-×÷-nwide-even-repeat-v3",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "哪个乘法事实能帮你检查这个除法？",
+    "mode": "multi-target",
+    "targets": [
+      2,
+      10,
+      20
+    ],
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          1
+        ],
+        [
+          2,
+          1,
+          2
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 14,
+        "invalidArrangementRatio": 0.481,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 143,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 4.667,
+        "operatorComplexity": 9,
+        "numericMagnitude": 20,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 35.448
+      },
+      "structureSignature": "multi-target|targets:2,10,20|2,20,20|×,÷,÷|10,10,2",
+      "topologySignature": "multi-target|3.3.3|0.0.0:1,0.0.1:1,0.0.2:2,0.1.0:1,0.1.1:1,0.1.2:2,1.2.0:4,1.2.1:4,2.0.0:1,2.0.1:1,2.0.2:2,2.1.0:1,2.1.1:1,2.1.2:2|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-37",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-4",
+    "levelNumber": 37,
+    "unitLevelNumber": 7,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-37-r1",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-37-r1-t1",
+            "kind": "number",
+            "value": 20
+          },
+          {
+            "id": "es-3-37-r1-t2",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-37-r1-t3",
+            "kind": "number",
+            "value": 20
+          }
+        ]
+      },
+      {
+        "id": "es-3-37-r2",
+        "kind": "operator",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-37-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-37-r2-t2",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-37-r2-t3",
+            "kind": "operator",
+            "value": "÷"
+          }
+        ]
+      },
+      {
+        "id": "es-3-37-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-37-r3-t1",
+            "kind": "number",
+            "value": 5
+          },
+          {
+            "id": "es-3-37-r3-t2",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-37-r3-t3",
+            "kind": "number",
+            "value": 5
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用同一组数连接相关的乘法与除法事实；分别命中目标 4、5、20，再规划不同成立算式来点亮全部方块。",
+      "primarySkill": "multiply-divide-inverse",
+      "skillTags": [
+        "multiply-divide-inverse",
+        "inverse-operations",
+        "multi-target"
+      ],
+      "misconceptionTags": [
+        "inverse-operation-disconnection",
+        "division-order"
+      ],
+      "scaffoldLevel": "transfer",
+      "reviewOf": [
+        "exact-division",
+        "multiplication-facts",
+        "addition",
+        "subtraction",
+        "make-ten"
+      ],
+      "reflectionText": "4 × 5 与 20 ÷ 5 使用同一组数，乘法和除法可以互相检查。 目标 4、5、20 要分别命中，目标灯和方块灯都要检查。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-37:0",
+      "familyId": "3-4-multi-target-r3-t3-×÷-nwide-mix-repeat-v3",
+      "repetitionPurpose": "representation-transfer"
+    },
+    "conceptHint": "哪个乘法事实能帮你检查这个除法？",
+    "mode": "multi-target",
+    "targets": [
+      4,
+      5,
+      20
+    ],
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          2
+        ],
+        [
+          2,
+          2,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 14,
+        "invalidArrangementRatio": 0.481,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 143,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 4.667,
+        "operatorComplexity": 9,
+        "numericMagnitude": 20,
+        "recommendedHintDepth": 5,
+        "compositeDifficulty": 35.948
+      },
+      "structureSignature": "multi-target|targets:4,5,20|20,20,4|×,÷,÷|4,5,5",
+      "topologySignature": "multi-target|3.3.3|0.1.0:1,0.1.1:2,0.1.2:1,0.2.0:1,0.2.1:2,0.2.2:1,1.0.0:4,1.0.2:4,2.1.0:1,2.1.1:2,2.1.2:1,2.2.0:1,2.2.1:2,2.2.2:1|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-38",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-4",
+    "levelNumber": 38,
+    "unitLevelNumber": 8,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-38-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-38-r1-t1",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-38-r1-t2",
+            "kind": "number",
+            "value": 12
+          },
+          {
+            "id": "es-3-38-r1-t3",
+            "kind": "number",
+            "value": 12
+          }
+        ]
+      },
+      {
+        "id": "es-3-38-r2",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-38-r2-t1",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-38-r2-t2",
+            "kind": "operator",
+            "value": "÷"
+          },
+          {
+            "id": "es-3-38-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-38-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-38-r3-t1",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-38-r3-t2",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-38-r3-t3",
+            "kind": "number",
+            "value": 6
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用同一组数连接相关的乘法与除法事实；分别命中目标 2、6、12，再规划不同成立算式来点亮全部方块。",
+      "primarySkill": "multiply-divide-inverse",
+      "skillTags": [
+        "multiply-divide-inverse",
+        "inverse-operations",
+        "multi-target"
+      ],
+      "misconceptionTags": [
+        "inverse-operation-disconnection",
+        "division-order"
+      ],
+      "scaffoldLevel": "transfer",
+      "reviewOf": [
+        "exact-division",
+        "multiplication-facts",
+        "addition",
+        "subtraction",
+        "make-ten"
+      ],
+      "reflectionText": "2 × 6 与 12 ÷ 2 使用同一组数，乘法和除法可以互相检查。 目标 2、6、12 要分别命中，目标灯和方块灯都要检查。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-38:1",
+      "familyId": "3-4-multi-target-r3-t3-×÷-nmid-even-repeat-v3",
+      "repetitionPurpose": "representation-transfer"
+    },
+    "conceptHint": "哪个乘法事实能帮你检查这个除法？",
+    "mode": "multi-target",
+    "targets": [
+      2,
+      6,
+      12
+    ],
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          2
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 14,
+        "invalidArrangementRatio": 0.481,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 148,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 4.667,
+        "operatorComplexity": 9,
+        "numericMagnitude": 12,
+        "recommendedHintDepth": 5,
+        "compositeDifficulty": 34.979
+      },
+      "structureSignature": "multi-target|targets:2,6,12|12,12,2|×,÷,÷|2,6,6",
+      "topologySignature": "multi-target|3.3.3|0.2.1:4,0.2.2:4,1.0.0:2,1.0.1:1,1.0.2:1,1.1.0:2,1.1.1:1,1.1.2:1,2.0.0:2,2.0.1:1,2.0.2:1,2.1.0:2,2.1.1:1,2.1.2:1|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-39",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-4",
+    "levelNumber": 39,
+    "unitLevelNumber": 9,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-39-r1",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-39-r1-t1",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-39-r1-t2",
+            "kind": "number",
+            "value": 16
+          },
+          {
+            "id": "es-3-39-r1-t3",
+            "kind": "number",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "id": "es-3-39-r2",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-39-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-39-r2-t2",
+            "kind": "operator",
+            "value": "+"
+          },
+          {
+            "id": "es-3-39-r2-t3",
+            "kind": "operator",
+            "value": "÷"
+          }
+        ]
+      },
+      {
+        "id": "es-3-39-r3",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-39-r3-t1",
+            "kind": "number",
+            "value": 8
+          },
+          {
+            "id": "es-3-39-r3-t2",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-39-r3-t3",
+            "kind": "number",
+            "value": 1
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用同一组数连接相关的乘法与除法事实；分别命中目标 2、8、16，再规划不同成立算式来点亮全部方块。",
+      "primarySkill": "multiply-divide-inverse",
+      "skillTags": [
+        "multiply-divide-inverse",
+        "inverse-operations",
+        "multi-target"
+      ],
+      "misconceptionTags": [
+        "inverse-operation-disconnection",
+        "division-order"
+      ],
+      "scaffoldLevel": "review",
+      "reviewOf": [
+        "exact-division",
+        "multiplication-facts",
+        "addition",
+        "subtraction",
+        "multiply-divide-inverse",
+        "inverse-operations",
+        "make-ten"
+      ],
+      "reflectionText": "2 × 8 与 16 ÷ 2 使用同一组数，乘法和除法可以互相检查。 目标 2、8、16 要分别命中，目标灯和方块灯都要检查。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-39:1",
+      "familyId": "3-4-multi-target-r3-t3-+×÷-nwide-mix-repeat-v3",
+      "repetitionPurpose": "spaced-review"
+    },
+    "conceptHint": "哪个乘法事实能帮你检查这个除法？",
+    "mode": "multi-target",
+    "targets": [
+      2,
+      8,
+      16
+    ],
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          1
+        ],
+        [
+          2,
+          1,
+          2
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 10,
+        "invalidArrangementRatio": 0.63,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 1,
+        "initialToFirstValidMoves": 2,
+        "reachableCoverageStates": 141,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 3.333,
+        "operatorComplexity": 10,
+        "numericMagnitude": 16,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 37.673
+      },
+      "structureSignature": "multi-target|targets:2,8,16|1,16,2|+,×,÷|1,2,8",
+      "topologySignature": "multi-target|3.3.3|0.0.0:4,0.0.2:1,0.2.2:1,1.0.2:4,1.2.0:1,1.2.1:2,1.2.2:4,2.0.0:2,2.0.1:1,2.1.2:1|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-40",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-4",
+    "levelNumber": 40,
+    "unitLevelNumber": 10,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-40-r1",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-40-r1-t1",
+            "kind": "number",
+            "value": 8
+          },
+          {
+            "id": "es-3-40-r1-t2",
+            "kind": "number",
+            "value": 16
+          },
+          {
+            "id": "es-3-40-r1-t3",
+            "kind": "number",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "id": "es-3-40-r2",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-40-r2-t1",
+            "kind": "operator",
+            "value": "+"
+          },
+          {
+            "id": "es-3-40-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-40-r2-t3",
+            "kind": "operator",
+            "value": "÷"
+          }
+        ]
+      },
+      {
+        "id": "es-3-40-r3",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-40-r3-t1",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-40-r3-t2",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-40-r3-t3",
+            "kind": "number",
+            "value": 8
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "用同一组数连接相关的乘法与除法事实；分别命中目标 2、8、16，再规划不同成立算式来点亮全部方块。",
+      "primarySkill": "multiply-divide-inverse",
+      "skillTags": [
+        "multiply-divide-inverse",
+        "inverse-operations",
+        "multi-target"
+      ],
+      "misconceptionTags": [
+        "inverse-operation-disconnection",
+        "division-order"
+      ],
+      "scaffoldLevel": "review",
+      "reviewOf": [
+        "exact-division",
+        "multiplication-facts",
+        "addition",
+        "subtraction",
+        "multiply-divide-inverse",
+        "inverse-operations",
+        "make-ten"
+      ],
+      "reflectionText": "8 × 2 与 16 ÷ 8 使用同一组数，乘法和除法可以互相检查。 目标 2、8、16 要分别命中，目标灯和方块灯都要检查。",
+      "recommendedAgeBand": "约 7–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-40:0",
+      "familyId": "3-4-multi-target-r3-t3-+×÷-nwide-even-repeat-v3",
+      "repetitionPurpose": "spaced-review"
+    },
+    "conceptHint": "哪个乘法事实能帮你检查这个除法？",
+    "mode": "multi-target",
+    "targets": [
+      2,
+      8,
+      16
+    ],
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          2
+        ],
+        [
+          2,
+          0,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 27,
+        "validArrangementCount": 6,
+        "invalidArrangementRatio": 0.778,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 1,
+        "initialToFirstValidMoves": 2,
+        "reachableCoverageStates": 48,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 2,
+        "operatorComplexity": 10,
+        "numericMagnitude": 16,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 38.325
+      },
+      "structureSignature": "multi-target|targets:2,8,16|16,2,8|+,×,÷|2,6,8",
+      "topologySignature": "multi-target|3.3.3|0.0.2:4,0.1.1:4,1.2.1:2,1.2.2:1,2.0.0:2,2.1.2:4|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-41",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-5",
+    "levelNumber": 41,
+    "unitLevelNumber": 1,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-41-r1",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-41-r1-t1",
+            "kind": "number",
+            "value": 7
+          },
+          {
+            "id": "es-3-41-r1-t2",
+            "kind": "number",
+            "value": 8
+          }
+        ]
+      },
+      {
+        "id": "es-3-41-r2",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-41-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-41-r2-t2",
+            "kind": "operator",
+            "value": "+"
+          }
+        ]
+      },
+      {
+        "id": "es-3-41-r3",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-41-r3-t1",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-41-r3-t2",
+            "kind": "number",
+            "value": 6
+          }
+        ]
+      },
+      {
+        "id": "es-3-41-r4",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-41-r4-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-41-r4-t2",
+            "kind": "operator",
+            "value": "−"
+          }
+        ]
+      },
+      {
+        "id": "es-3-41-r5",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-41-r5-t1",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-41-r5-t2",
+            "kind": "number",
+            "value": 7
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "在混合算式中先算乘除、再算加减并得到 36；找到结果为 36 的不同表达式并点亮全部方块。",
+      "primarySkill": "order-of-operations",
+      "skillTags": [
+        "order-of-operations",
+        "mixed-operations"
+      ],
+      "misconceptionTags": [
+        "order-of-operations",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "guided",
+      "reviewOf": [
+        "multiply-divide-inverse",
+        "make-ten",
+        "left-to-right-add-sub",
+        "addition",
+        "subtraction"
+      ],
+      "reflectionText": "7 × 6 − 6 同时有加减和乘除，要先完成乘除。",
+      "recommendedAgeBand": "约 8–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-41:1",
+      "familyId": "3-5-target-r5-t2-+×−-ntight-mix-repeat-v4",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "加减和乘除在一起时，先找乘除。",
+    "mode": "target",
+    "target": 36,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 32,
+        "validArrangementCount": 2,
+        "invalidArrangementRatio": 0.938,
+        "minimumCorrectExpressions": 2,
+        "minimumCoverSetCountCapped": 1,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 4,
+        "meanNovelTilesOnCanonicalPlan": 5,
+        "solutionBranchingScore": 1,
+        "operatorComplexity": 7,
+        "numericMagnitude": 8,
+        "recommendedHintDepth": 2,
+        "compositeDifficulty": 29.618
+      },
+      "structureSignature": "target|target:36|7,8|+,×|4,6|×,−|6,7",
+      "topologySignature": "target|2.2.2.2.2|0.0.1.1.0:0,1.1.0.0.1:0|2"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-42",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-5",
+    "levelNumber": 42,
+    "unitLevelNumber": 2,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-42-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-42-r1-t1",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-42-r1-t2",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-42-r1-t3",
+            "kind": "number",
+            "value": 12
+          }
+        ]
+      },
+      {
+        "id": "es-3-42-r2",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-42-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-42-r2-t2",
+            "kind": "operator",
+            "value": "+"
+          },
+          {
+            "id": "es-3-42-r2-t3",
+            "kind": "operator",
+            "value": "+"
+          }
+        ]
+      },
+      {
+        "id": "es-3-42-r3",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-42-r3-t1",
+            "kind": "number",
+            "value": 12
+          },
+          {
+            "id": "es-3-42-r3-t2",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-42-r3-t3",
+            "kind": "number",
+            "value": 9
+          }
+        ]
+      },
+      {
+        "id": "es-3-42-r4",
+        "kind": "operator",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-42-r4-t1",
+            "kind": "operator",
+            "value": "−"
+          },
+          {
+            "id": "es-3-42-r4-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-42-r4-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-42-r5",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-42-r5-t1",
+            "kind": "number",
+            "value": 12
+          },
+          {
+            "id": "es-3-42-r5-t2",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-42-r5-t3",
+            "kind": "number",
+            "value": 12
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "在混合算式中先算乘除、再算加减并得到 60；找到结果为 60 的不同表达式并点亮全部方块。",
+      "primarySkill": "order-of-operations",
+      "skillTags": [
+        "order-of-operations",
+        "mixed-operations"
+      ],
+      "misconceptionTags": [
+        "order-of-operations",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "guided",
+      "reviewOf": [
+        "multiply-divide-inverse",
+        "make-ten",
+        "left-to-right-add-sub",
+        "addition",
+        "subtraction"
+      ],
+      "reflectionText": "6 × 12 − 12 同时有加减和乘除，要先完成乘除。",
+      "recommendedAgeBand": "约 8–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-42:1",
+      "familyId": "3-5-target-r5-t3-+×−-nmid-even-repeat-v4",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "加减和乘除在一起时，先找乘除。",
+    "mode": "target",
+    "target": 60,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1
+        ],
+        [
+          2,
+          2,
+          1,
+          2,
+          2
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 243,
+        "validArrangementCount": 20,
+        "invalidArrangementRatio": 0.918,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 1,
+        "reachableCoverageStates": 369,
+        "meanNovelTilesOnCanonicalPlan": 5,
+        "solutionBranchingScore": 6.667,
+        "operatorComplexity": 7,
+        "numericMagnitude": 12,
+        "recommendedHintDepth": 2,
+        "compositeDifficulty": 44.409
+      },
+      "structureSignature": "target|target:60|12,6,6|+,+,×|12,4,9|×,×,−|12,12,6",
+      "topologySignature": "target|3.3.3.3.3|0.0.0.0.0:0,0.0.0.0.2:0,0.1.2.1.1:0,0.1.2.2.1:0,0.2.2.1.1:0,0.2.2.2.1:0,1.0.0.0.0:0,1.0.0.0.2:0,1.1.2.1.1:0,1.1.2.2.1:0,1.2.2.1.1:0,1.2.2.2.1:0,2.1.1.1.0:0,2.1.1.1.2:0,2.1.1.2.0:0,2.1.1.2.2:0,2.2.1.1.0:0,2.2.1.1.2:0,2.2.1.2.0:0,2.2.1.2.2:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-43",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-5",
+    "levelNumber": 43,
+    "unitLevelNumber": 3,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-43-r1",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-43-r1-t1",
+            "kind": "number",
+            "value": 1
+          },
+          {
+            "id": "es-3-43-r1-t2",
+            "kind": "number",
+            "value": 8
+          },
+          {
+            "id": "es-3-43-r1-t3",
+            "kind": "number",
+            "value": 7
+          }
+        ]
+      },
+      {
+        "id": "es-3-43-r2",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-43-r2-t1",
+            "kind": "operator",
+            "value": "+"
+          },
+          {
+            "id": "es-3-43-r2-t2",
+            "kind": "operator",
+            "value": "+"
+          },
+          {
+            "id": "es-3-43-r2-t3",
+            "kind": "operator",
+            "value": "+"
+          }
+        ]
+      },
+      {
+        "id": "es-3-43-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-43-r3-t1",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-43-r3-t2",
+            "kind": "number",
+            "value": 7
+          },
+          {
+            "id": "es-3-43-r3-t3",
+            "kind": "number",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": "es-3-43-r4",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-43-r4-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-43-r4-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-43-r4-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-43-r5",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-43-r5-t1",
+            "kind": "number",
+            "value": 11
+          },
+          {
+            "id": "es-3-43-r5-t2",
+            "kind": "number",
+            "value": 8
+          },
+          {
+            "id": "es-3-43-r5-t3",
+            "kind": "number",
+            "value": 7
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "在混合算式中先算乘除、再算加减并得到 56；找到结果为 56 的不同表达式并点亮全部方块。",
+      "primarySkill": "order-of-operations",
+      "skillTags": [
+        "order-of-operations",
+        "mixed-operations"
+      ],
+      "misconceptionTags": [
+        "order-of-operations",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "supported",
+      "reviewOf": [
+        "multiply-divide-inverse",
+        "make-ten",
+        "left-to-right-add-sub",
+        "addition",
+        "subtraction"
+      ],
+      "reflectionText": "1 + 5 × 11 同时有加减和乘除，要先完成乘除。",
+      "recommendedAgeBand": "约 8–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-43:0",
+      "familyId": "3-5-target-r5-t3-+×-nmid-odd-repeat-v4",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "加减和乘除在一起时，先找乘除。",
+    "mode": "target",
+    "target": 56,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1
+        ],
+        [
+          2,
+          2,
+          1,
+          2,
+          2
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 243,
+        "validArrangementCount": 27,
+        "invalidArrangementRatio": 0.889,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 2,
+        "reachableCoverageStates": 344,
+        "meanNovelTilesOnCanonicalPlan": 5,
+        "solutionBranchingScore": 9,
+        "operatorComplexity": 6,
+        "numericMagnitude": 11,
+        "recommendedHintDepth": 3,
+        "compositeDifficulty": 45.45
+      },
+      "structureSignature": "target|target:56|1,7,8|+,+,+|5,6,7|×,×,×|11,7,8",
+      "topologySignature": "target|3.3.3.3.3|0.0.2.0.0:0,0.0.2.1.0:0,0.0.2.2.0:0,0.1.2.0.0:0,0.1.2.1.0:0,0.1.2.2.0:0,0.2.2.0.0:0,0.2.2.1.0:0,0.2.2.2.0:0,1.0.0.0.1:0,1.0.0.1.1:0,1.0.0.2.1:0,1.1.0.0.1:0,1.1.0.1.1:0,1.1.0.2.1:0,1.2.0.0.1:0,1.2.0.1.1:0,1.2.0.2.1:0,2.0.1.0.2:0,2.0.1.1.2:0,2.0.1.2.2:0,2.1.1.0.2:0,2.1.1.1.2:0,2.1.1.2.2:0,2.2.1.0.2:0,2.2.1.1.2:0,2.2.1.2.2:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-44",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-5",
+    "levelNumber": 44,
+    "unitLevelNumber": 4,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-44-r1",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-44-r1-t1",
+            "kind": "number",
+            "value": 9
+          },
+          {
+            "id": "es-3-44-r1-t2",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-44-r1-t3",
+            "kind": "number",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "id": "es-3-44-r2",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-44-r2-t1",
+            "kind": "operator",
+            "value": "+"
+          },
+          {
+            "id": "es-3-44-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-44-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-44-r3",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-44-r3-t1",
+            "kind": "number",
+            "value": 5
+          },
+          {
+            "id": "es-3-44-r3-t2",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-44-r3-t3",
+            "kind": "number",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": "es-3-44-r4",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-44-r4-t1",
+            "kind": "operator",
+            "value": "−"
+          },
+          {
+            "id": "es-3-44-r4-t2",
+            "kind": "operator",
+            "value": "−"
+          },
+          {
+            "id": "es-3-44-r4-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-44-r5",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-44-r5-t1",
+            "kind": "number",
+            "value": 7
+          },
+          {
+            "id": "es-3-44-r5-t2",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-44-r5-t3",
+            "kind": "number",
+            "value": 7
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "在混合算式中先算乘除、再算加减并得到 43；找到结果为 43 的不同表达式并点亮全部方块。",
+      "primarySkill": "order-of-operations",
+      "skillTags": [
+        "order-of-operations",
+        "mixed-operations"
+      ],
+      "misconceptionTags": [
+        "order-of-operations",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "supported",
+      "reviewOf": [
+        "multiply-divide-inverse",
+        "make-ten",
+        "left-to-right-add-sub",
+        "addition",
+        "subtraction"
+      ],
+      "reflectionText": "9 × 5 − 2 同时有加减和乘除，要先完成乘除。",
+      "recommendedAgeBand": "约 8–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-44:2",
+      "familyId": "3-5-target-r5-t3-+×−-nmid-odd-repeat-v4",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "加减和乘除在一起时，先找乘除。",
+    "mode": "target",
+    "target": 43,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          1,
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          2,
+          2,
+          1,
+          0
+        ],
+        [
+          2,
+          0,
+          1,
+          2,
+          2
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 243,
+        "validArrangementCount": 26,
+        "invalidArrangementRatio": 0.893,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 2,
+        "reachableCoverageStates": 424,
+        "meanNovelTilesOnCanonicalPlan": 5,
+        "solutionBranchingScore": 8.667,
+        "operatorComplexity": 7,
+        "numericMagnitude": 10,
+        "recommendedHintDepth": 3,
+        "compositeDifficulty": 46.174
+      },
+      "structureSignature": "target|target:43|1,10,9|+,×,×|5,5,6|×,−,−|2,7,7",
+      "topologySignature": "target|3.3.3.3.3|0.1.0.0.1:0,0.1.0.1.1:0,0.1.2.0.1:0,0.1.2.1.1:0,0.2.0.0.1:0,0.2.0.1.1:0,0.2.2.0.1:0,0.2.2.1.1:0,1.1.0.0.0:0,1.1.0.0.2:0,1.1.0.1.0:0,1.1.0.1.2:0,1.1.2.0.0:0,1.1.2.0.2:0,1.1.2.1.0:0,1.1.2.1.2:0,1.2.0.0.0:0,1.2.0.0.2:0,1.2.0.1.0:0,1.2.0.1.2:0,1.2.2.0.0:0,1.2.2.0.2:0,1.2.2.1.0:0,1.2.2.1.2:0,2.0.1.2.0:0,2.0.1.2.2:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-45",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-5",
+    "levelNumber": 45,
+    "unitLevelNumber": 5,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-45-r1",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-45-r1-t1",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-45-r1-t2",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-45-r1-t3",
+            "kind": "number",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "id": "es-3-45-r2",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-45-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-45-r2-t2",
+            "kind": "operator",
+            "value": "+"
+          },
+          {
+            "id": "es-3-45-r2-t3",
+            "kind": "operator",
+            "value": "+"
+          }
+        ]
+      },
+      {
+        "id": "es-3-45-r3",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-45-r3-t1",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-45-r3-t2",
+            "kind": "number",
+            "value": 12
+          },
+          {
+            "id": "es-3-45-r3-t3",
+            "kind": "number",
+            "value": 3
+          }
+        ]
+      },
+      {
+        "id": "es-3-45-r4",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-45-r4-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-45-r4-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-45-r4-t3",
+            "kind": "operator",
+            "value": "+"
+          }
+        ]
+      },
+      {
+        "id": "es-3-45-r5",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-45-r5-t1",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-45-r5-t2",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-45-r5-t3",
+            "kind": "number",
+            "value": 8
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "在混合算式中先算乘除、再算加减并得到 34；找到结果为 34 的不同表达式并点亮全部方块。",
+      "primarySkill": "order-of-operations",
+      "skillTags": [
+        "order-of-operations",
+        "mixed-operations"
+      ],
+      "misconceptionTags": [
+        "order-of-operations",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "independent",
+      "reviewOf": [
+        "multiply-divide-inverse",
+        "make-ten",
+        "left-to-right-add-sub",
+        "addition",
+        "subtraction"
+      ],
+      "reflectionText": "10 + 6 × 4 同时有加减和乘除，要先完成乘除。",
+      "recommendedAgeBand": "约 8–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-45:1",
+      "familyId": "3-5-target-r5-t3-+×-nmid-even-repeat-v4",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "加减和乘除在一起时，先找乘除。",
+    "mode": "target",
+    "target": 34,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          1,
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          2,
+          2,
+          1,
+          2
+        ],
+        [
+          2,
+          0,
+          1,
+          2,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 243,
+        "validArrangementCount": 19,
+        "invalidArrangementRatio": 0.922,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 2,
+        "reachableCoverageStates": 295,
+        "meanNovelTilesOnCanonicalPlan": 5,
+        "solutionBranchingScore": 6.333,
+        "operatorComplexity": 6,
+        "numericMagnitude": 12,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 45.308
+      },
+      "structureSignature": "target|target:34|10,10,2|+,+,×|12,3,6|+,×,×|10,4,8",
+      "topologySignature": "target|3.3.3.3.3|0.0.2.2.1:0,0.1.0.0.1:0,0.1.0.1.1:0,0.1.2.0.2:0,0.1.2.1.2:0,0.2.0.0.1:0,0.2.0.1.1:0,0.2.2.0.2:0,0.2.2.1.2:0,1.0.2.2.1:0,1.1.0.0.1:0,1.1.0.1.1:0,1.1.2.0.2:0,1.1.2.1.2:0,1.2.0.0.1:0,1.2.0.1.1:0,1.2.2.0.2:0,1.2.2.1.2:0,2.0.1.2.0:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-46",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-5",
+    "levelNumber": 46,
+    "unitLevelNumber": 6,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-46-r1",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-46-r1-t1",
+            "kind": "number",
+            "value": 11
+          },
+          {
+            "id": "es-3-46-r1-t2",
+            "kind": "number",
+            "value": 12
+          },
+          {
+            "id": "es-3-46-r1-t3",
+            "kind": "number",
+            "value": 10
+          }
+        ]
+      },
+      {
+        "id": "es-3-46-r2",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-46-r2-t1",
+            "kind": "operator",
+            "value": "+"
+          },
+          {
+            "id": "es-3-46-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-46-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-46-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-46-r3-t1",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-46-r3-t2",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-46-r3-t3",
+            "kind": "number",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "id": "es-3-46-r4",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-46-r4-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-46-r4-t2",
+            "kind": "operator",
+            "value": "−"
+          },
+          {
+            "id": "es-3-46-r4-t3",
+            "kind": "operator",
+            "value": "+"
+          }
+        ]
+      },
+      {
+        "id": "es-3-46-r5",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-46-r5-t1",
+            "kind": "number",
+            "value": 8
+          },
+          {
+            "id": "es-3-46-r5-t2",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-46-r5-t3",
+            "kind": "number",
+            "value": 10
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "在混合算式中先算乘除、再算加减并得到 32；找到结果为 32 的不同表达式并点亮全部方块。",
+      "primarySkill": "order-of-operations",
+      "skillTags": [
+        "order-of-operations",
+        "mixed-operations"
+      ],
+      "misconceptionTags": [
+        "order-of-operations",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "independent",
+      "reviewOf": [
+        "multiply-divide-inverse",
+        "make-ten",
+        "left-to-right-add-sub",
+        "addition",
+        "subtraction"
+      ],
+      "reflectionText": "11 × 2 + 10 同时有加减和乘除，要先完成乘除。",
+      "recommendedAgeBand": "约 8–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-46:4",
+      "familyId": "3-5-target-r5-t3-+×−-nmid-even-repeat-v4",
+      "repetitionPurpose": "scaffold-fade"
+    },
+    "conceptHint": "加减和乘除在一起时，先找乘除。",
+    "mode": "target",
+    "target": 32,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          0,
+          2,
+          0,
+          2
+        ],
+        [
+          2,
+          2,
+          1,
+          1,
+          0
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 243,
+        "validArrangementCount": 18,
+        "invalidArrangementRatio": 0.926,
+        "minimumCorrectExpressions": 3,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 2,
+        "reachableCoverageStates": 279,
+        "meanNovelTilesOnCanonicalPlan": 5,
+        "solutionBranchingScore": 6,
+        "operatorComplexity": 7,
+        "numericMagnitude": 12,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 46.208
+      },
+      "structureSignature": "target|target:32|10,11,12|+,×,×|2,2,4|+,×,−|10,10,8",
+      "topologySignature": "target|3.3.3.3.3|0.1.0.2.1:0,0.1.0.2.2:0,0.1.2.2.1:0,0.1.2.2.2:0,0.2.0.2.1:0,0.2.0.2.2:0,0.2.2.2.1:0,0.2.2.2.2:0,1.0.0.0.1:0,1.0.0.0.2:0,1.0.2.0.1:0,1.0.2.0.2:0,1.1.0.2.0:0,1.1.2.2.0:0,1.2.0.2.0:0,1.2.2.2.0:0,2.1.1.1.0:0,2.2.1.1.0:0|3"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-47",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-5",
+    "levelNumber": 47,
+    "unitLevelNumber": 7,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-47-r1",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-47-r1-t1",
+            "kind": "number",
+            "value": 9
+          },
+          {
+            "id": "es-3-47-r1-t2",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-47-r1-t3",
+            "kind": "number",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": "es-3-47-r2",
+        "kind": "operator",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-47-r2-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-47-r2-t2",
+            "kind": "operator",
+            "value": "+"
+          },
+          {
+            "id": "es-3-47-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-47-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-47-r3-t1",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-47-r3-t2",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-47-r3-t3",
+            "kind": "number",
+            "value": 7
+          }
+        ]
+      },
+      {
+        "id": "es-3-47-r4",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-47-r4-t1",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-47-r4-t2",
+            "kind": "operator",
+            "value": "+"
+          },
+          {
+            "id": "es-3-47-r4-t3",
+            "kind": "operator",
+            "value": "−"
+          }
+        ]
+      },
+      {
+        "id": "es-3-47-r5",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-47-r5-t1",
+            "kind": "number",
+            "value": 8
+          },
+          {
+            "id": "es-3-47-r5-t2",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-47-r5-t3",
+            "kind": "number",
+            "value": 3
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "在混合算式中先算乘除、再算加减并得到 26；找到结果为 26 的不同表达式并点亮全部方块。",
+      "primarySkill": "order-of-operations",
+      "skillTags": [
+        "order-of-operations",
+        "mixed-operations"
+      ],
+      "misconceptionTags": [
+        "order-of-operations",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "transfer",
+      "reviewOf": [
+        "multiply-divide-inverse",
+        "make-ten",
+        "left-to-right-add-sub",
+        "addition",
+        "subtraction"
+      ],
+      "reflectionText": "9 × 4 − 10 同时有加减和乘除，要先完成乘除。",
+      "recommendedAgeBand": "约 8–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-47:6",
+      "familyId": "3-5-target-r5-t3-+×−-nmid-mix-repeat-v4",
+      "repetitionPurpose": "representation-transfer"
+    },
+    "conceptHint": "加减和乘除在一起时，先找乘除。",
+    "mode": "target",
+    "target": 26,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          0,
+          1,
+          1
+        ],
+        [
+          2,
+          1,
+          2,
+          0,
+          2
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 243,
+        "validArrangementCount": 8,
+        "invalidArrangementRatio": 0.967,
+        "minimumCorrectExpressions": 4,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 3,
+        "reachableCoverageStates": 76,
+        "meanNovelTilesOnCanonicalPlan": 3.75,
+        "solutionBranchingScore": 2,
+        "operatorComplexity": 7,
+        "numericMagnitude": 10,
+        "recommendedHintDepth": 5,
+        "compositeDifficulty": 49.6
+      },
+      "structureSignature": "target|target:26|4,5,9|+,×,×|2,4,7|+,×,−|10,3,8",
+      "topologySignature": "target|3.3.3.3.3|0.0.0.2.1:0,0.0.1.1.0:0,0.1.2.1.1:0,0.2.0.2.1:0,0.2.1.1.0:0,1.0.0.1.1:0,1.2.0.1.1:0,2.1.2.0.2:0|4"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-48",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-5",
+    "levelNumber": 48,
+    "unitLevelNumber": 8,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-48-r1",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-48-r1-t1",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-48-r1-t2",
+            "kind": "number",
+            "value": 3
+          },
+          {
+            "id": "es-3-48-r1-t3",
+            "kind": "number",
+            "value": 9
+          }
+        ]
+      },
+      {
+        "id": "es-3-48-r2",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-48-r2-t1",
+            "kind": "operator",
+            "value": "+"
+          },
+          {
+            "id": "es-3-48-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-48-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-48-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-48-r3-t1",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-48-r3-t2",
+            "kind": "number",
+            "value": 9
+          },
+          {
+            "id": "es-3-48-r3-t3",
+            "kind": "number",
+            "value": 6
+          }
+        ]
+      },
+      {
+        "id": "es-3-48-r4",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-48-r4-t1",
+            "kind": "operator",
+            "value": "+"
+          },
+          {
+            "id": "es-3-48-r4-t2",
+            "kind": "operator",
+            "value": "+"
+          },
+          {
+            "id": "es-3-48-r4-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-48-r5",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-48-r5-t1",
+            "kind": "number",
+            "value": 6
+          },
+          {
+            "id": "es-3-48-r5-t2",
+            "kind": "number",
+            "value": 12
+          },
+          {
+            "id": "es-3-48-r5-t3",
+            "kind": "number",
+            "value": 3
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "在混合算式中先算乘除、再算加减并得到 39；找到结果为 39 的不同表达式并点亮全部方块。",
+      "primarySkill": "order-of-operations",
+      "skillTags": [
+        "order-of-operations",
+        "mixed-operations"
+      ],
+      "misconceptionTags": [
+        "order-of-operations",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "transfer",
+      "reviewOf": [
+        "multiply-divide-inverse",
+        "make-ten",
+        "left-to-right-add-sub",
+        "addition",
+        "subtraction"
+      ],
+      "reflectionText": "4 × 9 + 3 同时有加减和乘除，要先完成乘除。",
+      "recommendedAgeBand": "约 8–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-48:94",
+      "familyId": "3-5-target-r5-t3-+×-nmid-mix-repeat-v4",
+      "repetitionPurpose": "representation-transfer"
+    },
+    "conceptHint": "加减和乘除在一起时，先找乘除。",
+    "mode": "target",
+    "target": 39,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          1,
+          1,
+          0,
+          2
+        ],
+        [
+          1,
+          0,
+          2,
+          2,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          0,
+          1
+        ],
+        [
+          2,
+          2,
+          0,
+          1,
+          2
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 243,
+        "validArrangementCount": 13,
+        "invalidArrangementRatio": 0.947,
+        "minimumCorrectExpressions": 4,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 2,
+        "reachableCoverageStates": 128,
+        "meanNovelTilesOnCanonicalPlan": 3.75,
+        "solutionBranchingScore": 3.25,
+        "operatorComplexity": 6,
+        "numericMagnitude": 12,
+        "recommendedHintDepth": 5,
+        "compositeDifficulty": 48.273
+      },
+      "structureSignature": "target|target:39|3,4,9|+,×,×|4,6,9|+,+,×|12,3,6",
+      "topologySignature": "target|3.3.3.3.3|0.1.1.0.2:0,0.1.1.1.2:0,0.2.1.0.2:0,0.2.1.1.2:0,1.0.2.2.0:0,1.1.1.0.1:0,1.1.1.1.1:0,1.2.1.0.1:0,1.2.1.1.1:0,2.1.0.0.2:0,2.1.0.1.2:0,2.2.0.0.2:0,2.2.0.1.2:0|4"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-49",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-5",
+    "levelNumber": 49,
+    "unitLevelNumber": 9,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-49-r1",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-49-r1-t1",
+            "kind": "number",
+            "value": 7
+          },
+          {
+            "id": "es-3-49-r1-t2",
+            "kind": "number",
+            "value": 11
+          },
+          {
+            "id": "es-3-49-r1-t3",
+            "kind": "number",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": "es-3-49-r2",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-49-r2-t1",
+            "kind": "operator",
+            "value": "+"
+          },
+          {
+            "id": "es-3-49-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-49-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-49-r3",
+        "kind": "number",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-49-r3-t1",
+            "kind": "number",
+            "value": 2
+          },
+          {
+            "id": "es-3-49-r3-t2",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-49-r3-t3",
+            "kind": "number",
+            "value": 4
+          }
+        ]
+      },
+      {
+        "id": "es-3-49-r4",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-49-r4-t1",
+            "kind": "operator",
+            "value": "+"
+          },
+          {
+            "id": "es-3-49-r4-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-49-r4-t3",
+            "kind": "operator",
+            "value": "−"
+          }
+        ]
+      },
+      {
+        "id": "es-3-49-r5",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-49-r5-t1",
+            "kind": "number",
+            "value": 3
+          },
+          {
+            "id": "es-3-49-r5-t2",
+            "kind": "number",
+            "value": 10
+          },
+          {
+            "id": "es-3-49-r5-t3",
+            "kind": "number",
+            "value": 9
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "在混合算式中先算乘除、再算加减并得到 25；找到结果为 25 的不同表达式并点亮全部方块。",
+      "primarySkill": "order-of-operations",
+      "skillTags": [
+        "order-of-operations",
+        "mixed-operations"
+      ],
+      "misconceptionTags": [
+        "order-of-operations",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "review",
+      "reviewOf": [
+        "multiply-divide-inverse",
+        "make-ten",
+        "left-to-right-add-sub",
+        "order-of-operations",
+        "mixed-operations",
+        "addition",
+        "subtraction"
+      ],
+      "reflectionText": "7 + 2 × 9 同时有加减和乘除，要先完成乘除。",
+      "recommendedAgeBand": "约 8–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-49:64",
+      "familyId": "3-5-target-r5-t3-+×−-nmid-mix-repeat-v4",
+      "repetitionPurpose": "spaced-review"
+    },
+    "conceptHint": "加减和乘除在一起时，先找乘除。",
+    "mode": "target",
+    "target": 25,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          0,
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          1,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          2,
+          2,
+          0
+        ],
+        [
+          1,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          1,
+          1
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 243,
+        "validArrangementCount": 10,
+        "invalidArrangementRatio": 0.959,
+        "minimumCorrectExpressions": 5,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 3,
+        "reachableCoverageStates": 162,
+        "meanNovelTilesOnCanonicalPlan": 3,
+        "solutionBranchingScore": 2,
+        "operatorComplexity": 7,
+        "numericMagnitude": 11,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 52.71
+      },
+      "structureSignature": "target|target:25|11,5,7|+,×,×|2,4,4|+,×,−|10,3,9",
+      "topologySignature": "target|3.3.3.3.3|0.0.0.1.2:0,0.1.1.2.0:0,0.1.2.2.0:0,0.2.1.2.0:0,0.2.2.2.0:0,1.0.1.0.1:0,1.0.2.0.1:0,1.1.0.0.0:0,1.2.0.0.0:0,2.0.0.1.1:0|5"
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "es-3-50",
+    "chapterId": "chapter-3",
+    "unitId": "chapter-3-unit-5",
+    "levelNumber": 50,
+    "unitLevelNumber": 10,
+    "challenge": "standard",
+    "reels": [
+      {
+        "id": "es-3-50-r1",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-50-r1-t1",
+            "kind": "number",
+            "value": 12
+          },
+          {
+            "id": "es-3-50-r1-t2",
+            "kind": "number",
+            "value": 7
+          },
+          {
+            "id": "es-3-50-r1-t3",
+            "kind": "number",
+            "value": 4
+          }
+        ]
+      },
+      {
+        "id": "es-3-50-r2",
+        "kind": "operator",
+        "initialIndex": 1,
+        "tiles": [
+          {
+            "id": "es-3-50-r2-t1",
+            "kind": "operator",
+            "value": "+"
+          },
+          {
+            "id": "es-3-50-r2-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-50-r2-t3",
+            "kind": "operator",
+            "value": "×"
+          }
+        ]
+      },
+      {
+        "id": "es-3-50-r3",
+        "kind": "number",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-50-r3-t1",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-50-r3-t2",
+            "kind": "number",
+            "value": 4
+          },
+          {
+            "id": "es-3-50-r3-t3",
+            "kind": "number",
+            "value": 3
+          }
+        ]
+      },
+      {
+        "id": "es-3-50-r4",
+        "kind": "operator",
+        "initialIndex": 2,
+        "tiles": [
+          {
+            "id": "es-3-50-r4-t1",
+            "kind": "operator",
+            "value": "−"
+          },
+          {
+            "id": "es-3-50-r4-t2",
+            "kind": "operator",
+            "value": "×"
+          },
+          {
+            "id": "es-3-50-r4-t3",
+            "kind": "operator",
+            "value": "+"
+          }
+        ]
+      },
+      {
+        "id": "es-3-50-r5",
+        "kind": "number",
+        "initialIndex": 0,
+        "tiles": [
+          {
+            "id": "es-3-50-r5-t1",
+            "kind": "number",
+            "value": 9
+          },
+          {
+            "id": "es-3-50-r5-t2",
+            "kind": "number",
+            "value": 1
+          },
+          {
+            "id": "es-3-50-r5-t3",
+            "kind": "number",
+            "value": 11
+          }
+        ]
+      }
+    ],
+    "learning": {
+      "learningObjective": "在混合算式中先算乘除、再算加减并得到 37；找到结果为 37 的不同表达式并点亮全部方块。",
+      "primarySkill": "order-of-operations",
+      "skillTags": [
+        "order-of-operations",
+        "mixed-operations"
+      ],
+      "misconceptionTags": [
+        "order-of-operations",
+        "division-must-be-exact"
+      ],
+      "scaffoldLevel": "review",
+      "reviewOf": [
+        "multiply-divide-inverse",
+        "make-ten",
+        "left-to-right-add-sub",
+        "order-of-operations",
+        "mixed-operations",
+        "addition",
+        "subtraction"
+      ],
+      "reflectionText": "12 × 4 − 11 同时有加减和乘除，要先完成乘除。",
+      "recommendedAgeBand": "约 8–10 岁"
+    },
+    "provenance": {
+      "generatorVersion": "1.2.0",
+      "seed": "es-3-50:52",
+      "familyId": "3-5-target-r5-t3-+×−-nmid-mix-repeat-v4",
+      "repetitionPurpose": "spaced-review"
+    },
+    "conceptHint": "加减和乘除在一起时，先找乘除。",
+    "mode": "target",
+    "target": 37,
+    "analysis": {
+      "solverVersion": "1.0.0",
+      "solvable": true,
+      "orphanTileIds": [],
+      "canonicalPlan": [
+        [
+          0,
+          1,
+          0,
+          0,
+          2
+        ],
+        [
+          0,
+          1,
+          2,
+          2,
+          1
+        ],
+        [
+          1,
+          2,
+          1,
+          2,
+          0
+        ],
+        [
+          2,
+          0,
+          2,
+          1,
+          2
+        ]
+      ],
+      "difficultyMetrics": {
+        "arrangementCount": 243,
+        "validArrangementCount": 11,
+        "invalidArrangementRatio": 0.955,
+        "minimumCorrectExpressions": 4,
+        "minimumCoverSetCountCapped": 2,
+        "initialToFirstValidMoves": 2,
+        "reachableCoverageStates": 116,
+        "meanNovelTilesOnCanonicalPlan": 3.75,
+        "solutionBranchingScore": 2.75,
+        "operatorComplexity": 7,
+        "numericMagnitude": 12,
+        "recommendedHintDepth": 4,
+        "compositeDifficulty": 48.638
+      },
+      "structureSignature": "target|target:37|12,4,7|+,×,×|3,4,4|+,×,−|1,11,9",
+      "topologySignature": "target|3.3.3.3.3|0.1.0.0.2:0,0.1.1.0.2:0,0.1.2.2.1:0,0.2.0.0.2:0,0.2.1.0.2:0,0.2.2.2.1:0,1.1.0.2.0:0,1.1.1.2.0:0,1.2.0.2.0:0,1.2.1.2.0:0,2.0.2.1.2:0|4"
+    }
+  }
+]

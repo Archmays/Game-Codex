@@ -5,7 +5,7 @@
 项目已经整理为一个可长期维护的浏览器游戏集合：
 
 - 统一入口：`index.html` -> `src/main.ts` -> `apps/hub/`。
-- 游戏目录：9 个现有游戏都在 `games/` 下通过 `GameDefinition` 接入大厅。
+- 游戏目录：10 个现有游戏都在 `games/` 下通过 `GameDefinition` 接入大厅。
 - 共享能力：`packages/game-core/`、`packages/ui/`、`packages/data/` 分别承载挂载接口、共享 UI 和共享数据。
 - 运行资源：`public/` 保存发布时需要复制的静态资源。
 - 维护资料：`docs/` 和 `source/` 保存说明、课程资料和素材来源。

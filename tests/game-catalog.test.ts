@@ -13,6 +13,9 @@ describe("game catalog", () => {
     expect(source).toContain("makeTargetGame");
     expect(source).toContain("pinyinMagicBattleGame");
     expect(source).toContain("hanziRadicalBattleGame");
+    expect(source).toContain('import { equationSliderGame } from "../../games/equation-slider"');
+    expect(source).toMatch(/\[[\s\S]*equationSliderGame[\s\S]*\]/);
+    expect(source.match(/\bequationSliderGame\b/g)).toHaveLength(2);
   });
 
   it("has shared learning data for the migrated games", () => {
@@ -27,7 +30,7 @@ describe("game catalog", () => {
       .filter((entry) => entry.isDirectory())
       .map((entry) => entry.name);
 
-    expect(gameDirs).toHaveLength(9);
+    expect(gameDirs).toHaveLength(10);
 
     for (const gameDir of gameDirs) {
       const source = readFileSync(`games/${gameDir}/index.ts`, "utf8");
@@ -41,6 +44,15 @@ describe("game catalog", () => {
         expect(readme, `${gameDir} ${heading}`).toContain(heading);
       }
     }
+
+    const equationSliderSource = readFileSync("games/equation-slider/index.ts", "utf8");
+    const equationSliderReadme = readFileSync("games/equation-slider/README.md", "utf8");
+    expect(equationSliderSource).toContain('id: "equation-slider"');
+    expect(equationSliderSource).toContain('title: "算式滑轨"');
+    expect(equationSliderReadme).toContain("200 个固定关卡");
+    const rootReadme = readFileSync("README.md", "utf8");
+    expect(rootReadme).toContain("当前收录 10 个游戏");
+    expect(rootReadme.match(/\| 算式滑轨 \|/g)).toHaveLength(1);
   });
 
   it("keeps memory card grade sets aligned with hanzi wheel grades", () => {

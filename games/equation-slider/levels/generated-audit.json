@@ -1,0 +1,327 @@
+{
+  "generatedOn": "2026-07-23",
+  "generatorVersion": "1.2.0",
+  "solverVersion": "1.0.0",
+  "totalLevels": 200,
+  "levelsPerChapter": {
+    "chapter-1": 50,
+    "chapter-2": 50,
+    "chapter-3": 50,
+    "chapter-4": 50
+  },
+  "scaffoldLevels": {
+    "guided": 40,
+    "supported": 40,
+    "independent": 40,
+    "transfer": 40,
+    "review": 40
+  },
+  "modes": {
+    "target": 140,
+    "multi-target": 40,
+    "equality": 20
+  },
+  "targetValues": {
+    "0": 6,
+    "1": 7,
+    "2": 16,
+    "3": 9,
+    "4": 10,
+    "5": 6,
+    "6": 13,
+    "7": 12,
+    "8": 14,
+    "9": 11,
+    "10": 25,
+    "11": 7,
+    "12": 18,
+    "13": 4,
+    "14": 5,
+    "15": 6,
+    "16": 9,
+    "17": 7,
+    "18": 5,
+    "19": 6,
+    "20": 14,
+    "21": 3,
+    "22": 3,
+    "23": 1,
+    "24": 9,
+    "25": 1,
+    "26": 2,
+    "29": 1,
+    "30": 2,
+    "32": 1,
+    "33": 1,
+    "34": 1,
+    "36": 4,
+    "37": 2,
+    "38": 1,
+    "39": 1,
+    "40": 3,
+    "41": 1,
+    "43": 3,
+    "45": 1,
+    "48": 1,
+    "49": 1,
+    "52": 3,
+    "53": 1,
+    "55": 1,
+    "56": 1,
+    "59": 1,
+    "60": 1,
+    "70": 1
+  },
+  "operatorOccurrences": {
+    "+": 372,
+    "−": 188,
+    "×": 184,
+    "÷": 69
+  },
+  "difficultyBands": {
+    "foundational": 14,
+    "developing": 97,
+    "advanced": 59,
+    "strategic": 30
+  },
+  "minimumSolutionSteps": {
+    "2": 35,
+    "3": 127,
+    "4": 33,
+    "5": 5
+  },
+  "averageCompositeDifficulty": 35.736,
+  "perChapter": {
+    "chapter-1": {
+      "modes": {
+        "target": 50
+      },
+      "targetValues": {
+        "2": 1,
+        "3": 2,
+        "4": 1,
+        "6": 3,
+        "7": 2,
+        "8": 2,
+        "9": 2,
+        "10": 12,
+        "11": 2,
+        "12": 4,
+        "13": 2,
+        "14": 1,
+        "16": 3,
+        "17": 2,
+        "18": 2,
+        "19": 3,
+        "20": 1,
+        "21": 1,
+        "22": 1,
+        "23": 1,
+        "24": 1,
+        "26": 1
+      },
+      "operatorOccurrences": {
+        "+": 198
+      },
+      "difficultyBands": {
+        "foundational": 7,
+        "developing": 25,
+        "advanced": 12,
+        "strategic": 6
+      },
+      "minimumSolutionSteps": {
+        "2": 6,
+        "3": 32,
+        "4": 12
+      },
+      "averageCompositeDifficulty": 32.189
+    },
+    "chapter-2": {
+      "modes": {
+        "target": 40,
+        "multi-target": 10
+      },
+      "targetValues": {
+        "0": 3,
+        "1": 5,
+        "2": 4,
+        "3": 4,
+        "4": 1,
+        "5": 4,
+        "6": 4,
+        "7": 5,
+        "8": 5,
+        "9": 6,
+        "10": 6,
+        "11": 1,
+        "12": 2,
+        "13": 1,
+        "14": 4,
+        "15": 4,
+        "17": 2,
+        "18": 2,
+        "19": 1,
+        "21": 1,
+        "24": 1
+      },
+      "operatorOccurrences": {
+        "−": 126,
+        "+": 66
+      },
+      "difficultyBands": {
+        "foundational": 4,
+        "developing": 30,
+        "strategic": 7,
+        "advanced": 9
+      },
+      "minimumSolutionSteps": {
+        "2": 10,
+        "3": 34,
+        "4": 5,
+        "5": 1
+      },
+      "averageCompositeDifficulty": 33.014
+    },
+    "chapter-3": {
+      "modes": {
+        "target": 40,
+        "multi-target": 10
+      },
+      "targetValues": {
+        "2": 8,
+        "3": 1,
+        "4": 4,
+        "5": 2,
+        "6": 3,
+        "7": 1,
+        "8": 4,
+        "9": 1,
+        "10": 5,
+        "12": 9,
+        "16": 3,
+        "20": 6,
+        "21": 1,
+        "24": 4,
+        "25": 1,
+        "26": 1,
+        "32": 1,
+        "34": 1,
+        "36": 2,
+        "37": 1,
+        "39": 1,
+        "40": 3,
+        "43": 1,
+        "56": 1,
+        "60": 1
+      },
+      "operatorOccurrences": {
+        "×": 97,
+        "÷": 43,
+        "+": 23,
+        "−": 8
+      },
+      "difficultyBands": {
+        "foundational": 2,
+        "developing": 33,
+        "strategic": 6,
+        "advanced": 9
+      },
+      "minimumSolutionSteps": {
+        "2": 8,
+        "3": 38,
+        "4": 3,
+        "5": 1
+      },
+      "averageCompositeDifficulty": 33.283
+    },
+    "chapter-4": {
+      "modes": {
+        "multi-target": 20,
+        "equality": 20,
+        "target": 10
+      },
+      "targetValues": {
+        "0": 3,
+        "1": 2,
+        "2": 3,
+        "3": 2,
+        "4": 4,
+        "6": 3,
+        "7": 4,
+        "8": 3,
+        "9": 2,
+        "10": 2,
+        "11": 4,
+        "12": 3,
+        "13": 1,
+        "15": 2,
+        "16": 3,
+        "17": 3,
+        "18": 1,
+        "19": 2,
+        "20": 7,
+        "22": 2,
+        "24": 3,
+        "29": 1,
+        "30": 2,
+        "33": 1,
+        "36": 2,
+        "37": 1,
+        "38": 1,
+        "41": 1,
+        "43": 2,
+        "45": 1,
+        "48": 1,
+        "49": 1,
+        "52": 3,
+        "53": 1,
+        "55": 1,
+        "59": 1,
+        "70": 1
+      },
+      "operatorOccurrences": {
+        "×": 87,
+        "+": 85,
+        "÷": 26,
+        "−": 54
+      },
+      "difficultyBands": {
+        "developing": 9,
+        "strategic": 11,
+        "advanced": 29,
+        "foundational": 1
+      },
+      "minimumSolutionSteps": {
+        "2": 11,
+        "3": 23,
+        "4": 13,
+        "5": 3
+      },
+      "averageCompositeDifficulty": 44.459
+    }
+  },
+  "uniqueChallenges": 14,
+  "solverValidated": 200,
+  "orphanTiles": 0,
+  "unsolvableLevels": 0,
+  "exactDuplicateStructures": 0,
+  "maximumTopologyReusePerChapter": 8,
+  "threeReelTwoTileCohort": 26,
+  "threeReelTwoTilePlanCounts": {
+    "0.0.1>1.1.0": 16,
+    "0.1.0>1.0.1": 7,
+    "0.1.1>1.0.0": 3
+  },
+  "maximumThreeReelTwoTilePlanReuse": 16,
+  "maximumThreeReelTwoTileTopologyReusePerChapter": 6,
+  "maximumConsecutiveCanonicalPlanReuse": 2,
+  "openingPlanDiversityMinimum": 2,
+  "initialDistanceDistribution": {
+    "1": 118,
+    "2": 68,
+    "3": 14
+  },
+  "trivialAlignedCompleteCovers": 0,
+  "nonTrivialCoverageLevels": 38,
+  "maximumGenerationAttempt": 202
+}

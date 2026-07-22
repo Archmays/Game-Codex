@@ -1,5 +1,6 @@
 import type { GameDefinition } from "../game-core";
 import { clockReaderGame } from "../../games/clock-reader";
+import { equationSliderGame } from "../../games/equation-slider";
 import { englishSpellBattleGame } from "../../games/english-spell-battle";
 import { hanziRadicalBattleGame } from "../../games/hanzi-radical-battle";
 import { hanziWheelGame } from "../../games/hanzi-wheel";
@@ -18,5 +19,6 @@ export const gameCatalog: GameDefinition[] = [
   englishSpellBattleGame,
   clockReaderGame,
   makeTargetGame,
+  equationSliderGame,
   pinyinMagicBattleGame
 ];
