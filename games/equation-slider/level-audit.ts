@@ -1,508 +1,440 @@
-import {
-  canonicalStructureSignature,
-  getRequiredTileIds,
-  solveLevel,
-  solutionTopologySignature,
-  validateLevelDefinition
-} from "./solver";
-import type {
-  ArithmeticOperator,
-  ArithmeticToken,
-  PublishedEquationSliderLevel,
-  ScaffoldLevel,
-  ValidArrangement
-} from "./types";
+import { solveLevel, validatePublishedLevel } from "./solver";
+import type { PublishedEquationSliderLevel, QualitySignatures } from "./types";
 
-export interface LevelAuditSummary {
+export interface NearDuplicateFinding {
+  readonly leftId: string;
+  readonly rightId: string;
+  readonly stationId: string;
+  readonly sharedSignals: readonly (keyof QualitySignatures)[];
+}
+
+export interface AdjacentRepetitionFinding {
+  readonly leftId: string;
+  readonly rightId: string;
+  readonly reason: "number-multiset" | "canonical-action";
+}
+
+export interface StationDiversityAudit {
+  readonly levelCount: number;
+  readonly structureFamilies: number;
+  readonly firstFourActionFamilies: number;
+  readonly passesStructureMinimum: boolean;
+  readonly passesFirstFourActionMinimum: boolean;
+}
+
+export interface EquationSliderLevelAudit {
+  readonly schemaVersion: 3;
+  readonly generatedAt: string;
   readonly totalLevels: number;
-  readonly chapters: Readonly<Record<string, number>>;
-  readonly units: Readonly<Record<string, number>>;
-  readonly modes: Readonly<Record<string, number>>;
-  readonly scaffolds: Readonly<Record<ScaffoldLevel, number>>;
-  readonly uniqueChallenges: number;
-  readonly solverValidated: number;
-  readonly orphanTiles: number;
-  readonly unsolvableLevels: number;
-  readonly exactDuplicateStructures: number;
-  readonly maximumFamilyReusePerUnit: number;
-  readonly maximumTopologyReusePerChapter: number;
-  readonly maximumConsecutiveTopologyReuse: number;
-  readonly threeReelTwoTileCohort: number;
-  readonly threeReelTwoTilePlanCounts: Readonly<Record<string, number>>;
-  readonly maximumThreeReelTwoTilePlanReuse: number;
-  readonly maximumThreeReelTwoTileTopologyReusePerChapter: number;
-  readonly maximumConsecutiveCanonicalPlanReuse: number;
-  readonly openingPlanDiversityMinimum: number;
-  readonly crossChapterReviewCount: number;
-  readonly advancedUniqueChallenges: number;
-  readonly initialDistanceDistribution: Readonly<Record<string, number>>;
-  readonly trivialAlignedCompleteCovers: number;
-  readonly nonTrivialCoverageLevels: number;
-  readonly maximumGenerationAttempt: number;
+  readonly chapterCounts: Readonly<Record<string, number>>;
+  readonly stationCounts: Readonly<Record<string, number>>;
+  readonly goldCount: number;
+  readonly generatedCount: number;
+  readonly modeDistribution: Readonly<Record<string, number>>;
+  readonly movableReelCountDistribution: Readonly<Record<string, number>>;
+  readonly fixedOperatorDistribution: Readonly<Record<string, number>>;
+  readonly movableOperatorDistribution: Readonly<Record<string, number>>;
+  readonly repeatedValueReelCount: number;
+  readonly repeatedValueLevelCount: number;
+  readonly repeatedValueReelKindDistribution: Readonly<Record<string, number>>;
+  readonly repeatedValueTileCount: number;
+  readonly coverableRepeatedValueTileCount: number;
+  readonly uncoverableRepeatedValueTiles: Readonly<Record<string, readonly string[]>>;
+  readonly numberTileValueDistribution: Readonly<Record<string, number>>;
+  readonly chapterNumberTileValueDistribution: Readonly<Record<string, Readonly<Record<string, number>>>>;
+  readonly stationNumberTileValueDistribution: Readonly<Record<string, Readonly<Record<string, number>>>>;
+  readonly targetDistribution: Readonly<Record<string, number>>;
+  readonly numberTileRange: { readonly minimum: number; readonly maximum: number };
+  readonly zeroCount: number;
+  readonly oneCount: number;
+  readonly zeroRatio: number;
+  readonly oneRatio: number;
+  readonly firstTenZeroCountByChapter: Readonly<Record<string, number>>;
+  readonly minimumMovesDistribution: Readonly<Record<string, number>>;
+  readonly minimumCorrectArrangementsDistribution: Readonly<Record<string, number>>;
+  readonly validArrangementCountDistribution: Readonly<Record<string, number>>;
+  readonly exactDuplicateGroups: readonly (readonly string[])[];
+  readonly nearDuplicates: readonly NearDuplicateFinding[];
+  readonly adjacentRepetitions: readonly AdjacentRepetitionFinding[];
+  readonly canonicalActionPatternReuse: Readonly<Record<string, readonly string[]>>;
+  readonly overusedCanonicalActionPatterns: Readonly<Record<string, readonly string[]>>;
+  readonly stationDiversity: Readonly<Record<string, StationDiversityAudit>>;
+  readonly invalidPublishedLevels: Readonly<Record<string, readonly string[]>>;
+  readonly unsolvedLevelIds: readonly string[];
+  readonly orphanTiles: Readonly<Record<string, readonly string[]>>;
+  readonly missingTargets: Readonly<Record<string, readonly string[]>>;
+  readonly generationRetryCount: number;
+  readonly rejectedCandidateReasons: Readonly<Record<string, number>>;
+  readonly deterministicHash: string;
+  readonly passes: boolean;
 }
 
-export interface LevelSetAudit {
-  readonly errors: readonly string[];
-  readonly summary: LevelAuditSummary;
-}
-
-const EXPECTED_SCAFFOLD: readonly ScaffoldLevel[] = [
-  "guided",
-  "guided",
-  "supported",
-  "supported",
-  "independent",
-  "independent",
-  "transfer",
-  "transfer",
-  "review",
-  "review"
+const NEAR_DUPLICATE_SIGNALS: readonly (keyof QualitySignatures)[] = [
+  "slotStructure",
+  "rotationNormalized",
+  "operatorPattern",
+  "validArrangements",
+  "canonicalCoverage",
+  "firstSuccessAction",
+  "numberMultiset",
+  "learningBand"
 ];
 
-export function auditLevelSet(levels: readonly PublishedEquationSliderLevel[]): LevelSetAudit {
-  const errors: string[] = [];
-  const levelIds = new Set<string>();
-  const structureCounts = new Map<string, number>();
-  const chapterCounts = countBy(levels, (level) => level.chapterId);
-  const unitCounts = countBy(levels, (level) => level.unitId);
-  const modeCounts = countBy(levels, (level) => level.mode);
-  const scaffoldCounts = countBy(levels, (level) => level.learning.scaffoldLevel) as Record<ScaffoldLevel, number>;
-  let solverValidated = 0;
-  let orphanTiles = 0;
-  let unsolvableLevels = 0;
-  let trivialAlignedCompleteCovers = 0;
-  let nonTrivialCoverageLevels = 0;
+export function auditEquationSliderLevels(
+  levels: readonly PublishedEquationSliderLevel[],
+  generatedAt = "deterministic-build"
+): EquationSliderLevelAudit {
+  const chapterCounts: Record<string, number> = {};
+  const stationCounts: Record<string, number> = {};
+  const modeDistribution: Record<string, number> = {};
+  const movableReelCountDistribution: Record<string, number> = {};
+  const fixedOperatorDistribution: Record<string, number> = {};
+  const movableOperatorDistribution: Record<string, number> = {};
+  const repeatedValueReelKindDistribution: Record<string, number> = {};
+  const repeatedValueLevelIds = new Set<string>();
+  const uncoverableRepeatedValueTiles: Record<string, string[]> = {};
+  const numberTileValueDistribution: Record<string, number> = {};
+  const chapterNumberTileValueDistribution: Record<string, Record<string, number>> = {};
+  const stationNumberTileValueDistribution: Record<string, Record<string, number>> = {};
+  const targetDistribution: Record<string, number> = {};
+  const firstTenZeroCountByChapter: Record<string, number> = {};
+  const minimumMovesDistribution: Record<string, number> = {};
+  const minimumCorrectArrangementsDistribution: Record<string, number> = {};
+  const validArrangementCountDistribution: Record<string, number> = {};
+  const invalidPublishedLevels: Record<string, readonly string[]> = {};
+  const orphanTiles: Record<string, readonly string[]> = {};
+  const missingTargets: Record<string, readonly string[]> = {};
+  const unsolvedLevelIds: string[] = [];
+  const numberValues: number[] = [];
+  let goldCount = 0;
+  let repeatedValueReelCount = 0;
+  let repeatedValueTileCount = 0;
+  let coverableRepeatedValueTileCount = 0;
 
   for (const level of levels) {
-    if (levelIds.has(level.id)) {
-      errors.push(`${level.id}: duplicate level ID`);
+    increment(chapterCounts, level.chapterId);
+    increment(stationCounts, level.stationId);
+    increment(modeDistribution, level.mode);
+    const movableSlots = level.slots.filter((slot) => slot.kind === "movable-reel");
+    increment(movableReelCountDistribution, String(movableSlots.length));
+    if (level.provenance.kind === "hand-authored-gold") goldCount += 1;
+
+    for (const target of level.targets) {
+      increment(targetDistribution, target.kind === "value" ? String(target.value) : `=${target.rightExpression.join(" ")}`);
     }
-    levelIds.add(level.id);
-    const definitionErrors = validateLevelDefinition(level);
-    errors.push(...definitionErrors.map((error) => `${level.id}: ${error}`));
-    const requiredIds = getRequiredTileIds(level);
-    if (new Set(requiredIds).size !== requiredIds.length) {
-      errors.push(`${level.id}: duplicate tile IDs`);
-    }
-    if (level.reels.length > 5) {
-      errors.push(`${level.id}: more than five movable reels`);
-    }
-    if (level.learning.scaffoldLevel !== EXPECTED_SCAFFOLD[level.unitLevelNumber - 1]) {
-      errors.push(`${level.id}: scaffold does not match its station position`);
-    }
-    if (level.learning.reviewOf.length === 0) {
-      errors.push(`${level.id}: reviewOf must name at least one real skill source`);
-    }
-    if (level.mode === "multi-target" && !level.learning.reflectionText.includes("目标")) {
-      errors.push(`${level.id}: multi-target reflection must mention the target relationship`);
-    }
-    if (level.mode === "equality" && !level.learning.reflectionText.includes("等号")) {
-      errors.push(`${level.id}: equality reflection must mention equality`);
-    }
-    if (level.unitId === "chapter-2-unit-3" && !hasAddSubFactFamily(level)) {
-      errors.push(`${level.id}: fact-family station must contain related addition and subtraction facts`);
-    }
-    if (level.unitId === "chapter-3-unit-4" && !hasMultiplyDivideFactFamily(level)) {
-      errors.push(`${level.id}: inverse station must contain related multiplication and division facts`);
-    }
-    if (
-      level.unitId === "chapter-3-unit-4"
-      && level.unitLevelNumber >= 9
-      && !levelOperators(level).some((operator) => operator === "+" || operator === "−")
-    ) {
-      errors.push(`${level.id}: inverse review must include real addition or subtraction content`);
-    }
-    if (level.unitId === "chapter-3-unit-1" && !planUsesFactorFamily(level, [2, 5, 10])) {
-      errors.push(`${level.id}: 2/5/10 station plan leaves its factor family`);
-    }
-    if (level.unitId === "chapter-3-unit-2" && !planUsesFactorFamily(level, [3, 4, 6])) {
-      errors.push(`${level.id}: 3/4/6 station plan leaves its factor family`);
-    }
-    if (level.unitId === "chapter-3-unit-5" && !planUsesMixedOperationOrder(level)) {
-      errors.push(`${level.id}: order-of-operations station plan must retain both operation tiers`);
+    const coverableTileIds = new Set(
+      level.analysis.validArrangements.flatMap((arrangement) => arrangement.selectedTileIds)
+    );
+    for (const slot of level.slots) {
+      if (slot.kind === "fixed-token") {
+        if (typeof slot.token === "string") increment(fixedOperatorDistribution, slot.token);
+        continue;
+      }
+      if (slot.reel.kind === "operator") {
+        for (const tile of slot.reel.tiles) increment(movableOperatorDistribution, String(tile.value));
+      } else {
+        for (const tile of slot.reel.tiles) {
+          const value = Number(tile.value);
+          numberValues.push(value);
+          increment(numberTileValueDistribution, String(value));
+          chapterNumberTileValueDistribution[level.chapterId] ??= {};
+          stationNumberTileValueDistribution[level.stationId] ??= {};
+          increment(chapterNumberTileValueDistribution[level.chapterId], String(value));
+          increment(stationNumberTileValueDistribution[level.stationId], String(value));
+          if (level.order <= 10 && value === 0) increment(firstTenZeroCountByChapter, level.chapterId);
+        }
+      }
+
+      const valueCounts = new Map<string, number>();
+      for (const tile of slot.reel.tiles) {
+        const key = String(tile.value);
+        valueCounts.set(key, (valueCounts.get(key) ?? 0) + 1);
+      }
+      const repeatedTiles = slot.reel.tiles.filter(
+        (tile) => (valueCounts.get(String(tile.value)) ?? 0) > 1
+      );
+      if (repeatedTiles.length > 0) {
+        repeatedValueReelCount += 1;
+        repeatedValueLevelIds.add(level.id);
+        increment(repeatedValueReelKindDistribution, slot.reel.kind);
+        repeatedValueTileCount += repeatedTiles.length;
+        for (const tile of repeatedTiles) {
+          if (coverableTileIds.has(tile.id)) {
+            coverableRepeatedValueTileCount += 1;
+          } else {
+            (uncoverableRepeatedValueTiles[level.id] ??= []).push(tile.id);
+          }
+        }
+      }
     }
 
+    increment(minimumMovesDistribution, String(level.analysis.minimumMovesToFirstSuccess));
+    increment(minimumCorrectArrangementsDistribution, String(level.analysis.minimumCorrectArrangements));
+    increment(validArrangementCountDistribution, String(level.analysis.validArrangements.length));
+    const validationErrors = validatePublishedLevel(level);
+    if (validationErrors.length > 0) invalidPublishedLevels[level.id] = validationErrors;
     const solved = solveLevel(level);
-    orphanTiles += solved.orphanTileIds.length;
-    if (solved.orphanTileIds.length > 0) {
-      errors.push(`${level.id}: orphan tiles ${solved.orphanTileIds.join(", ")}`);
-    }
-    if (solved.status !== "solved" || !solved.difficultyMetrics) {
-      unsolvableLevels += 1;
-      errors.push(`${level.id}: solver status ${solved.status}: ${solved.errors.join("; ")}`);
-      continue;
-    }
-    solverValidated += 1;
-    if (hasTrivialAlignedCompleteCover(level, solved.validArrangements)) {
-      trivialAlignedCompleteCovers += 1;
-      errors.push(`${level.id}: aligned tile indexes form a mechanical complete cover`);
-    }
-    if (solved.minimumCorrectExpressions! > level.reels[0].tiles.length) {
-      nonTrivialCoverageLevels += 1;
-    }
-    const initialKey = level.reels.map((reel) => reel.initialIndex).join(".");
-    if (solved.validArrangements.some((arrangement) => arrangement.key === initialKey)) {
-      errors.push(`${level.id}: initial arrangement is already valid`);
-    }
-    if (level.challenge === "unique-minimum-cover") {
-      if (solved.minimumCoverSetCountCapped !== 1 || (solved.minimumCorrectExpressions ?? 0) < 2) {
-        errors.push(`${level.id}: unique challenge is not a unique multi-expression minimum cover`);
-      }
-    }
-    const canonicalPlan = solved.canonicalPlan.map((step) => [...step.indexes]);
-    if (JSON.stringify(canonicalPlan) !== JSON.stringify(level.analysis.canonicalPlan)) {
-      errors.push(`${level.id}: published canonical plan is stale`);
-    }
-    if (JSON.stringify(solved.difficultyMetrics) !== JSON.stringify(level.analysis.difficultyMetrics)) {
-      errors.push(`${level.id}: published difficulty metrics are stale`);
-    }
-    const structure = canonicalStructureSignature(level);
-    const topology = solutionTopologySignature(level, solved);
-    if (structure !== level.analysis.structureSignature || topology !== level.analysis.topologySignature) {
-      errors.push(`${level.id}: published signatures are stale`);
-    }
-    structureCounts.set(structure, (structureCounts.get(structure) ?? 0) + 1);
+    if (solved.status !== "solved") unsolvedLevelIds.push(level.id);
+    if (solved.orphanTileIds.length > 0) orphanTiles[level.id] = solved.orphanTileIds;
+    if (solved.missingTargetIds.length > 0) missingTargets[level.id] = solved.missingTargetIds;
   }
 
-  for (const chapterNumber of [1, 2, 3, 4]) {
-    const chapterId = `chapter-${chapterNumber}`;
-    const chapterLevels = levels.filter((level) => level.chapterId === chapterId);
-    if (chapterLevels.length < 50) {
-      errors.push(`${chapterId}: expected at least 50 levels, found ${chapterLevels.length}`);
-    }
-    const reviewOrTransfer = chapterLevels.filter((level) => ["review", "transfer"].includes(level.learning.scaffoldLevel));
-    if (reviewOrTransfer.length < 10) {
-      errors.push(`${chapterId}: expected at least 10 review or transfer levels`);
-    }
-    const explicitReview = chapterLevels.filter((level) => level.learning.reviewOf.length > 0);
-    if (explicitReview.length < 5) {
-      errors.push(`${chapterId}: expected at least five explicit review levels`);
-    }
-    for (const reviewLevelNumber of [10, 20, 30, 40, 50]) {
-      const reviewLevel = chapterLevels.find((level) => level.levelNumber === reviewLevelNumber);
-      if (reviewLevel?.learning.scaffoldLevel !== "review") {
-        errors.push(`${chapterId}: level ${reviewLevelNumber} must be a review station`);
-      }
-    }
-    const firstUnitAverage = averageDifficulty(chapterLevels.filter((level) => level.levelNumber <= 10));
-    const finalUnitAverage = averageDifficulty(chapterLevels.filter((level) => level.levelNumber > 40));
-    if (finalUnitAverage < firstUnitAverage) {
-      errors.push(`${chapterId}: final unit average difficulty must not be below the first unit`);
-    }
+  for (const chapter of ["chapter-1", "chapter-2", "chapter-3", "chapter-4"]) {
+    firstTenZeroCountByChapter[chapter] ??= 0;
   }
-
-  for (const [unitId, count] of Object.entries(unitCounts)) {
-    if (count < 10) {
-      errors.push(`${unitId}: expected at least 10 levels, found ${count}`);
-    }
-    const familyCounts = countBy(levels.filter((level) => level.unitId === unitId), (level) => level.provenance.familyId);
-    if (Object.keys(familyCounts).length < 3) {
-      errors.push(`${unitId}: expected at least three level families`);
-    }
-    if (Math.max(...Object.values(familyCounts)) > 4) {
-      errors.push(`${unitId}: one level family is over-concentrated`);
-    }
-  }
-
-  const exactDuplicateStructures = [...structureCounts.values()].filter((count) => count > 1).length;
-  if (exactDuplicateStructures > 0) {
-    errors.push(`found ${exactDuplicateStructures} exact duplicate structures`);
-  }
-  const chapterFourUniqueStation = levels.filter((level) => level.unitId === "chapter-4-unit-4");
-  if (chapterFourUniqueStation.length !== 10 || chapterFourUniqueStation.some((level) => level.challenge !== "unique-minimum-cover")) {
-    errors.push("chapter 4 unit 4 must contain ten solver-verified unique challenges");
-  }
-  const earlyUniqueAverage = averageDifficulty(chapterFourUniqueStation.slice(0, 4));
-  const lateUniqueAverage = averageDifficulty(chapterFourUniqueStation.slice(6));
-  if (lateUniqueAverage < earlyUniqueAverage + 10) {
-    errors.push("chapter 4 unique-route station must materially increase late-stage reasoning complexity");
-  }
-  const finalStation = levels.filter((level) => level.unitId === "chapter-4-unit-5");
-  if (finalStation.filter((level) => level.mode === "multi-target").length < 2
-    || finalStation.filter((level) => level.mode === "equality").length < 2
-    || finalStation.filter((level) => level.challenge === "unique-minimum-cover").length < 2
-    || finalStation.filter((level) => level.learning.scaffoldLevel === "transfer").length < 2) {
-    errors.push("chapter 4 final station does not meet its mode and transfer mix");
-  }
-
-  const firstOperatorLevels = new Map<string, PublishedEquationSliderLevel>();
-  for (const level of levels) {
-    for (const operator of level.reels.filter((reel) => reel.kind === "operator").flatMap((reel) => reel.tiles.map((tile) => String(tile.value)))) {
-      if (!firstOperatorLevels.has(operator)) {
-        firstOperatorLevels.set(operator, level);
-      }
-    }
-  }
-  for (const operator of ["−", "×", "÷"]) {
-    if (firstOperatorLevels.get(operator)?.learning.scaffoldLevel !== "guided") {
-      errors.push(`${operator}: first operator appearance must be guided`);
-    }
-  }
-  const firstMulti = levels.find((level) => level.mode === "multi-target");
-  const firstEquality = levels.find((level) => level.mode === "equality");
-  if (firstMulti?.learning.scaffoldLevel !== "guided" || firstEquality?.learning.scaffoldLevel !== "guided") {
-    errors.push("new multi-target and equality modes must first appear in guided levels");
-  }
-
-  const familyReuse = maximumGroupedReuse(levels, (level) => level.unitId, (level) => level.provenance.familyId);
-  const topologyReuse = maximumGroupedReuse(levels, (level) => level.chapterId, (level) => level.analysis.topologySignature);
-  const maximumConsecutiveTopologyReuse = maximumConsecutiveReuse(
-    levels,
-    (level) => level.chapterId,
-    (level) => level.analysis.topologySignature
-  );
-  const threeReelTwoTileLevels = levels.filter(isThreeReelTwoTileCohort);
-  const threeReelTwoTilePlanCounts = countBy(threeReelTwoTileLevels, canonicalPlanSignature);
-  const maximumThreeReelTwoTilePlanReuse = Math.max(0, ...Object.values(threeReelTwoTilePlanCounts));
-  const maximumThreeReelTwoTileTopologyReusePerChapter = maximumGroupedReuse(
-    threeReelTwoTileLevels,
-    (level) => level.chapterId,
-    (level) => level.analysis.topologySignature
-  );
-  const maximumConsecutiveCanonicalPlanReuse = maximumConsecutiveReuse(
-    levels,
-    (level) => level.unitId,
-    canonicalPlanSignature
-  );
-  const openingPlanDiversityMinimum = Math.min(
-    ...[...new Set(levels.map((level) => level.unitId))].map((unitId) => {
-      const opening = levels.filter((level) => level.unitId === unitId).slice(0, 4);
-      return new Set(opening.map(canonicalPlanSignature)).size;
+  const exactDuplicateGroups = groupExactDuplicates(levels);
+  const nearDuplicates = findNearDuplicates(levels);
+  const adjacentRepetitions = findAdjacentRepetitions(levels);
+  const canonicalActionPatternReuse = groupCanonicalActions(levels);
+  const levelById = new Map(levels.map((level) => [level.id, level]));
+  const overusedCanonicalActionPatterns = Object.fromEntries(
+    Object.entries(canonicalActionPatternReuse).filter(([, ids]) => {
+      if (ids.length < 16) return false;
+      const unexplained = ids.filter((id) => {
+        const level = levelById.get(id);
+        return level
+          ? level.learning.reviewOf.length === 0
+            && level.learning.scaffold !== "review"
+            && level.learning.scaffold !== "transfer"
+          : true;
+      });
+      return unexplained.length >= 16;
     })
   );
-  if (threeReelTwoTileLevels.length > 30) {
-    errors.push(`three-reel two-tile introductions are overused: ${threeReelTwoTileLevels.length}`);
-  }
-  if (maximumThreeReelTwoTilePlanReuse > 18) {
-    errors.push(`one introductory canonical plan is overused ${maximumThreeReelTwoTilePlanReuse} times`);
-  }
-  if (maximumThreeReelTwoTileTopologyReusePerChapter > 6) {
-    errors.push(`one introductory topology is overused within a chapter: ${maximumThreeReelTwoTileTopologyReusePerChapter}`);
-  }
-  if (maximumConsecutiveCanonicalPlanReuse > 2) {
-    errors.push(`one canonical plan repeats ${maximumConsecutiveCanonicalPlanReuse} times in sequence within a station`);
-  }
-  if (openingPlanDiversityMinimum < 2) {
-    errors.push("every station's opening four levels must use at least two canonical plans");
-  }
-  const crossChapterReviewCount = levels.filter((level) => {
-    const operators = levelOperators(level);
-    if (level.chapterId === "chapter-3") {
-      return level.learning.reviewOf.some((tag) => ["addition", "subtraction", "make-ten"].includes(tag))
-        && operators.some((operator) => operator === "+" || operator === "−");
-    }
-    if (level.chapterId === "chapter-4") {
-      return level.learning.reviewOf.some((tag) => ["make-ten", "addition", "subtraction", "inverse-operations"].includes(tag))
-        && operators.length > 0;
-    }
-    return false;
-  }).length;
-  const initialDistanceDistribution = countBy(
-    levels,
-    (level) => String(level.analysis.difficultyMetrics.initialToFirstValidMoves)
+  const stationDiversity = auditStationDiversity(levels);
+  const totalNumberTiles = numberValues.length;
+  const zeroCount = numberTileValueDistribution["0"] ?? 0;
+  const oneCount = numberTileValueDistribution["1"] ?? 0;
+  const structuralCountsPass = ["chapter-1", "chapter-2", "chapter-3", "chapter-4"]
+    .every((chapterId) => chapterCounts[chapterId] === 50)
+    && Object.values(stationCounts).length === 20
+    && Object.values(stationCounts).every((count) => count === 10);
+  const stationDiversityPass = Object.values(stationDiversity).every(
+    (station) => station.passesStructureMinimum && station.passesFirstFourActionMinimum
   );
-  if (nonTrivialCoverageLevels < 30) {
-    errors.push(`expected at least 30 non-trivial coverage levels, found ${nonTrivialCoverageLevels}`);
-  }
-  if ((initialDistanceDistribution["2"] ?? 0) + (initialDistanceDistribution["3"] ?? 0) < 50) {
-    errors.push("initial arrangements are over-concentrated one move from a valid expression");
-  }
-  if ((initialDistanceDistribution["3"] ?? 0) < 10) {
-    errors.push("expected at least ten levels to start three moves from the nearest valid expression");
-  }
-  const maximumGenerationAttempt = Math.max(
-    0,
-    ...levels.map((level) => Number(level.provenance.seed.split(":").at(-1) ?? Number.POSITIVE_INFINITY))
-  );
-  if (!Number.isFinite(maximumGenerationAttempt) || maximumGenerationAttempt > 1000) {
-    errors.push(`generation retry budget is unhealthy: ${maximumGenerationAttempt}`);
-  }
+  const passes = levels.length === 200
+    && goldCount === 40
+    && structuralCountsPass
+    && (firstTenZeroCountByChapter["chapter-1"] ?? 0) === 0
+    && exactDuplicateGroups.length === 0
+    && adjacentRepetitions.length === 0
+    && Object.keys(overusedCanonicalActionPatterns).length === 0
+    && Object.keys(invalidPublishedLevels).length === 0
+    && unsolvedLevelIds.length === 0
+    && Object.keys(orphanTiles).length === 0
+    && Object.keys(missingTargets).length === 0
+    && Object.keys(uncoverableRepeatedValueTiles).length === 0
+    && stationDiversityPass;
 
   return {
-    errors,
-    summary: {
-      totalLevels: levels.length,
-      chapters: chapterCounts,
-      units: unitCounts,
-      modes: modeCounts,
-      scaffolds: scaffoldCounts,
-      uniqueChallenges: levels.filter((level) => level.challenge === "unique-minimum-cover").length,
-      solverValidated,
-      orphanTiles,
-      unsolvableLevels,
-      exactDuplicateStructures,
-      maximumFamilyReusePerUnit: familyReuse,
-      maximumTopologyReusePerChapter: topologyReuse,
-      maximumConsecutiveTopologyReuse,
-      threeReelTwoTileCohort: threeReelTwoTileLevels.length,
-      threeReelTwoTilePlanCounts,
-      maximumThreeReelTwoTilePlanReuse,
-      maximumThreeReelTwoTileTopologyReusePerChapter,
-      maximumConsecutiveCanonicalPlanReuse,
-      openingPlanDiversityMinimum,
-      crossChapterReviewCount,
-      advancedUniqueChallenges: levels.filter((level) => {
-        return level.challenge === "unique-minimum-cover"
-          && level.analysis.difficultyMetrics.minimumCorrectExpressions >= 3
-          && level.analysis.difficultyMetrics.validArrangementCount > level.analysis.difficultyMetrics.minimumCorrectExpressions;
-      }).length,
-      initialDistanceDistribution,
-      trivialAlignedCompleteCovers,
-      nonTrivialCoverageLevels,
-      maximumGenerationAttempt
-    }
+    schemaVersion: 3,
+    generatedAt,
+    totalLevels: levels.length,
+    chapterCounts: sortRecord(chapterCounts),
+    stationCounts: sortRecord(stationCounts),
+    goldCount,
+    generatedCount: levels.length - goldCount,
+    modeDistribution: sortRecord(modeDistribution),
+    movableReelCountDistribution: sortRecord(movableReelCountDistribution),
+    fixedOperatorDistribution: sortRecord(fixedOperatorDistribution),
+    movableOperatorDistribution: sortRecord(movableOperatorDistribution),
+    repeatedValueReelCount,
+    repeatedValueLevelCount: repeatedValueLevelIds.size,
+    repeatedValueReelKindDistribution: sortRecord(repeatedValueReelKindDistribution),
+    repeatedValueTileCount,
+    coverableRepeatedValueTileCount,
+    uncoverableRepeatedValueTiles: sortNestedStringRecords(uncoverableRepeatedValueTiles),
+    numberTileValueDistribution: sortNumericRecord(numberTileValueDistribution),
+    chapterNumberTileValueDistribution: sortNestedRecords(chapterNumberTileValueDistribution),
+    stationNumberTileValueDistribution: sortNestedRecords(stationNumberTileValueDistribution),
+    targetDistribution: sortNumericRecord(targetDistribution),
+    numberTileRange: {
+      minimum: numberValues.length ? Math.min(...numberValues) : 0,
+      maximum: numberValues.length ? Math.max(...numberValues) : 0
+    },
+    zeroCount,
+    oneCount,
+    zeroRatio: ratio(zeroCount, totalNumberTiles),
+    oneRatio: ratio(oneCount, totalNumberTiles),
+    firstTenZeroCountByChapter: sortRecord(firstTenZeroCountByChapter),
+    minimumMovesDistribution: sortNumericRecord(minimumMovesDistribution),
+    minimumCorrectArrangementsDistribution: sortNumericRecord(minimumCorrectArrangementsDistribution),
+    validArrangementCountDistribution: sortNumericRecord(validArrangementCountDistribution),
+    exactDuplicateGroups,
+    nearDuplicates,
+    adjacentRepetitions,
+    canonicalActionPatternReuse,
+    overusedCanonicalActionPatterns,
+    stationDiversity,
+    invalidPublishedLevels,
+    unsolvedLevelIds,
+    orphanTiles,
+    missingTargets,
+    generationRetryCount: 0,
+    rejectedCandidateReasons: {},
+    deterministicHash: hashLevels(levels),
+    passes
   };
 }
 
-function isThreeReelTwoTileCohort(level: PublishedEquationSliderLevel): boolean {
-  return level.reels.length === 3
-    && level.reels.every((reel) => reel.tiles.length === 2)
-    && level.analysis.difficultyMetrics.minimumCorrectExpressions === 2;
-}
-
-function canonicalPlanSignature(level: PublishedEquationSliderLevel): string {
-  return level.analysis.canonicalPlan.map((indexes) => indexes.join(".")).join(">");
-}
-
-function hasTrivialAlignedCompleteCover(
-  level: PublishedEquationSliderLevel,
-  validArrangements: readonly ValidArrangement[]
-): boolean {
-  const tileCount = level.reels[0]?.tiles.length ?? 0;
-  if (tileCount < 2 || level.reels.some((reel) => reel.tiles.length !== tileCount)) {
-    return false;
+function groupExactDuplicates(levels: readonly PublishedEquationSliderLevel[]): readonly (readonly string[])[] {
+  const groups = new Map<string, string[]>();
+  for (const level of levels) {
+    const signature = exactSignature(level);
+    const ids = groups.get(signature) ?? [];
+    ids.push(level.id);
+    groups.set(signature, ids);
   }
-  const validByKey = new Map(validArrangements.map((arrangement) => [arrangement.key, arrangement]));
-  let targetMask = 0;
-  for (let tileIndex = 0; tileIndex < tileCount; tileIndex += 1) {
-    const key = new Array(level.reels.length).fill(tileIndex).join(".");
-    const arrangement = validByKey.get(key);
-    if (!arrangement) {
-      return false;
-    }
-    targetMask |= arrangement.targetMask;
-  }
-  return level.mode !== "multi-target" || targetMask === (1 << level.targets.length) - 1;
+  return [...groups.values()].filter((ids) => ids.length > 1).sort((a, b) => a[0].localeCompare(b[0]));
 }
 
-function countBy<T>(items: readonly T[], key: (item: T) => string): Record<string, number> {
-  const counts: Record<string, number> = {};
-  for (const item of items) {
-    const value = key(item);
-    counts[value] = (counts[value] ?? 0) + 1;
-  }
-  return counts;
-}
-
-function averageDifficulty(levels: readonly PublishedEquationSliderLevel[]): number {
-  if (levels.length === 0) {
-    return 0;
-  }
-  return levels.reduce((total, level) => total + level.analysis.difficultyMetrics.compositeDifficulty, 0) / levels.length;
-}
-
-function maximumGroupedReuse<T>(
-  items: readonly T[],
-  groupKey: (item: T) => string,
-  valueKey: (item: T) => string
-): number {
-  let maximum = 0;
-  for (const group of new Set(items.map(groupKey))) {
-    const counts = countBy(items.filter((item) => groupKey(item) === group), valueKey);
-    maximum = Math.max(maximum, ...Object.values(counts));
-  }
-  return maximum;
-}
-
-function maximumConsecutiveReuse<T>(
-  items: readonly T[],
-  groupKey: (item: T) => string,
-  valueKey: (item: T) => string
-): number {
-  let maximum = 0;
-  for (const group of new Set(items.map(groupKey))) {
-    let currentValue = "";
-    let currentCount = 0;
-    for (const item of items.filter((candidate) => groupKey(candidate) === group)) {
-      const value = valueKey(item);
-      if (value === currentValue) {
-        currentCount += 1;
-      } else {
-        currentValue = value;
-        currentCount = 1;
+function findNearDuplicates(levels: readonly PublishedEquationSliderLevel[]): readonly NearDuplicateFinding[] {
+  const findings: NearDuplicateFinding[] = [];
+  const byStation = groupByStation(levels);
+  for (const [stationId, stationLevels] of byStation) {
+    for (let leftIndex = 0; leftIndex < stationLevels.length; leftIndex += 1) {
+      for (let rightIndex = leftIndex + 1; rightIndex < stationLevels.length; rightIndex += 1) {
+        const left = stationLevels[leftIndex];
+        const right = stationLevels[rightIndex];
+        const sharedSignals = NEAR_DUPLICATE_SIGNALS.filter(
+          (signal) => left.analysis.signatures[signal] === right.analysis.signatures[signal]
+        );
+        if (sharedSignals.length >= 5) {
+          findings.push({ leftId: left.id, rightId: right.id, stationId, sharedSignals });
+        }
       }
-      maximum = Math.max(maximum, currentCount);
     }
   }
-  return maximum;
+  return findings;
 }
 
-function levelOperators(level: PublishedEquationSliderLevel): readonly ArithmeticOperator[] {
-  return [...new Set(level.reels
-    .filter((reel) => reel.kind === "operator")
-    .flatMap((reel) => reel.tiles.map((tile) => tile.value as ArithmeticOperator)))];
-}
-
-function planExpressions(level: PublishedEquationSliderLevel): readonly (readonly ArithmeticToken[])[] {
-  return level.analysis.canonicalPlan.map((indexes) => {
-    return level.reels.map((reel, reelIndex) => reel.tiles[indexes[reelIndex]].value);
-  });
-}
-
-function hasAddSubFactFamily(level: PublishedEquationSliderLevel): boolean {
-  const expressions = planExpressions(level);
-  const additions = expressions.filter((tokens) => tokens.length === 3 && tokens[1] === "+");
-  const subtractions = expressions.filter((tokens) => tokens.length === 3 && tokens[1] === "−");
-  return additions.some((addition) => subtractions.some((subtraction) => {
-    if (
-      typeof addition[0] !== "number"
-      || typeof addition[2] !== "number"
-      || typeof subtraction[0] !== "number"
-      || typeof subtraction[2] !== "number"
-    ) {
-      return false;
+function findAdjacentRepetitions(
+  levels: readonly PublishedEquationSliderLevel[]
+): readonly AdjacentRepetitionFinding[] {
+  const findings: AdjacentRepetitionFinding[] = [];
+  const byStation = groupByStation(levels);
+  for (const stationLevels of byStation.values()) {
+    const ordered = [...stationLevels].sort((a, b) => a.stationOrder - b.stationOrder);
+    for (let index = 1; index < ordered.length; index += 1) {
+      const left = ordered[index - 1];
+      const right = ordered[index];
+      if (left.analysis.signatures.numberMultiset === right.analysis.signatures.numberMultiset) {
+        findings.push({ leftId: left.id, rightId: right.id, reason: "number-multiset" });
+      }
+      if (left.analysis.signatures.firstSuccessAction === right.analysis.signatures.firstSuccessAction) {
+        findings.push({ leftId: left.id, rightId: right.id, reason: "canonical-action" });
+      }
     }
-    const additionFamily = [addition[0], addition[2], addition[0] + addition[2]].sort((a, b) => a - b);
-    const subtractionFamily = [subtraction[0], subtraction[2], subtraction[0] - subtraction[2]].sort((a, b) => a - b);
-    return additionFamily.join(",") === subtractionFamily.join(",");
+  }
+  return findings;
+}
+
+function groupCanonicalActions(
+  levels: readonly PublishedEquationSliderLevel[]
+): Readonly<Record<string, readonly string[]>> {
+  const groups: Record<string, string[]> = {};
+  for (const level of levels) {
+    const key = level.analysis.signatures.firstSuccessAction;
+    (groups[key] ??= []).push(level.id);
+  }
+  return Object.fromEntries(Object.entries(groups).sort(([left], [right]) => left.localeCompare(right)));
+}
+
+function auditStationDiversity(
+  levels: readonly PublishedEquationSliderLevel[]
+): Readonly<Record<string, StationDiversityAudit>> {
+  const audit: Record<string, StationDiversityAudit> = {};
+  for (const [stationId, stationLevels] of groupByStation(levels)) {
+    const ordered = [...stationLevels].sort((a, b) => a.stationOrder - b.stationOrder);
+    const structureFamilies = new Set(ordered.map((level) =>
+      `${level.analysis.signatures.slotStructure}|${level.analysis.signatures.operatorPattern}|${level.mode}`)).size;
+    const firstFourActionFamilies = new Set(
+      ordered.slice(0, 4).map((level) => level.analysis.signatures.firstSuccessAction)
+    ).size;
+    audit[stationId] = {
+      levelCount: ordered.length,
+      structureFamilies,
+      firstFourActionFamilies,
+      passesStructureMinimum: structureFamilies >= 4,
+      passesFirstFourActionMinimum: firstFourActionFamilies >= 3
+    };
+  }
+  return sortRecord(audit);
+}
+
+function exactSignature(level: PublishedEquationSliderLevel): string {
+  const signatures = level.analysis.signatures;
+  return [
+    level.mode,
+    signatures.valueStructure,
+    signatures.rotationNormalized,
+    signatures.validArrangements,
+    signatures.canonicalCoverage,
+    signatures.firstSuccessAction,
+    signatures.learningBand
+  ].join("||");
+}
+
+function groupByStation(
+  levels: readonly PublishedEquationSliderLevel[]
+): ReadonlyMap<string, readonly PublishedEquationSliderLevel[]> {
+  const groups = new Map<string, PublishedEquationSliderLevel[]>();
+  for (const level of levels) {
+    const stationLevels = groups.get(level.stationId) ?? [];
+    stationLevels.push(level);
+    groups.set(level.stationId, stationLevels);
+  }
+  return groups;
+}
+
+function hashLevels(levels: readonly PublishedEquationSliderLevel[]): string {
+  const source = JSON.stringify(levels);
+  let hash = 0x811c9dc5;
+  for (let index = 0; index < source.length; index += 1) {
+    hash ^= source.charCodeAt(index);
+    hash = Math.imul(hash, 0x01000193);
+  }
+  return `fnv1a32-${(hash >>> 0).toString(16).padStart(8, "0")}`;
+}
+
+function increment(record: Record<string, number>, key: string): void {
+  record[key] = (record[key] ?? 0) + 1;
+}
+
+function ratio(value: number, total: number): number {
+  return total === 0 ? 0 : Math.round((value / total) * 100_000) / 100_000;
+}
+
+function sortRecord<T>(record: Record<string, T>): Record<string, T> {
+  return Object.fromEntries(Object.entries(record).sort(([left], [right]) => left.localeCompare(right)));
+}
+
+function sortNumericRecord(record: Record<string, number>): Record<string, number> {
+  return Object.fromEntries(Object.entries(record).sort(([left], [right]) => {
+    const leftNumber = Number(left);
+    const rightNumber = Number(right);
+    return Number.isNaN(leftNumber) || Number.isNaN(rightNumber)
+      ? left.localeCompare(right)
+      : leftNumber - rightNumber;
   }));
 }
 
-function hasMultiplyDivideFactFamily(level: PublishedEquationSliderLevel): boolean {
-  const expressions = planExpressions(level);
-  const multiplications = expressions.filter((tokens) => tokens.length === 3 && tokens[1] === "×");
-  const divisions = expressions.filter((tokens) => tokens.length === 3 && tokens[1] === "÷");
-  return multiplications.some((multiplication) => divisions.some((division) => {
-    if (
-      typeof multiplication[0] !== "number"
-      || typeof multiplication[2] !== "number"
-      || typeof division[0] !== "number"
-      || typeof division[2] !== "number"
-    ) {
-      return false;
-    }
-    const multiplicationFamily = [
-      multiplication[0],
-      multiplication[2],
-      multiplication[0] * multiplication[2]
-    ].sort((a, b) => a - b);
-    const divisionFamily = [division[0], division[2], division[0] / division[2]].sort((a, b) => a - b);
-    return multiplicationFamily.join(",") === divisionFamily.join(",");
-  }));
+function sortNestedRecords(
+  record: Record<string, Record<string, number>>
+): Record<string, Readonly<Record<string, number>>> {
+  return Object.fromEntries(
+    Object.entries(record)
+      .sort(([left], [right]) => left.localeCompare(right))
+      .map(([key, value]) => [key, sortNumericRecord(value)])
+  );
 }
 
-function planUsesFactorFamily(level: PublishedEquationSliderLevel, factors: readonly number[]): boolean {
-  return planExpressions(level).every((tokens) => {
-    return tokens.length === 3
-      && tokens[1] === "×"
-      && [tokens[0], tokens[2]].some((token) => typeof token === "number" && factors.includes(token));
-  });
-}
-
-function planUsesMixedOperationOrder(level: PublishedEquationSliderLevel): boolean {
-  return planExpressions(level).every((tokens) => {
-    const operators = tokens.filter((token): token is ArithmeticOperator => typeof token === "string");
-    return operators.some((operator) => operator === "+" || operator === "−")
-      && operators.some((operator) => operator === "×" || operator === "÷");
-  });
+function sortNestedStringRecords(
+  record: Record<string, string[]>
+): Record<string, readonly string[]> {
+  return Object.fromEntries(
+    Object.entries(record)
+      .sort(([left], [right]) => left.localeCompare(right))
+      .map(([key, value]) => [key, [...value].sort()])
+  );
 }

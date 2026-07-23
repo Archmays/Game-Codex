@@ -49,7 +49,8 @@ describe("game catalog", () => {
     const equationSliderReadme = readFileSync("games/equation-slider/README.md", "utf8");
     expect(equationSliderSource).toContain('id: "equation-slider"');
     expect(equationSliderSource).toContain('title: "算式滑轨"');
-    expect(equationSliderReadme).toContain("200 个固定关卡");
+    expect(equationSliderReadme).toContain("200 份 V3 schema 关卡");
+    expect(equationSliderReadme).toContain("40 个手工金标准");
     const rootReadme = readFileSync("README.md", "utf8");
     expect(rootReadme).toContain("当前收录 10 个游戏");
     expect(rootReadme.match(/\| 算式滑轨 \|/g)).toHaveLength(1);

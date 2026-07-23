@@ -1,51 +1,32 @@
-export const EQUATION_SLIDER_SAVE_VERSION = 1;
+import {
+  EQUATION_SLIDER_SAVE_VERSION,
+  type CheckpointLevelDescriptor,
+  type CompletionCheckpoint,
+  type EquationSliderBadge,
+  type EquationSliderProgress,
+  type LegacyProgressArchive,
+  type LevelMapState,
+  type LevelProgressRecord,
+  type LoadedEquationSliderProgress
+} from "./types";
 
-export type EquationSliderBadge = "independent" | "all-new" | "review-complete" | "try-again";
-
-export interface LevelProgressRecord {
-  readonly startedCount: number;
-  readonly completed: boolean;
-  readonly independent: boolean;
-  readonly hintCount: number;
-  readonly badges: readonly EquationSliderBadge[];
-  readonly bestMoves?: number;
-}
-
-export interface EquationSliderProgress {
-  readonly saveVersion: 1;
-  readonly tutorialCompleted: boolean;
-  readonly soundEnabled: boolean;
-  readonly lastLevelId?: string;
-  readonly levels: Readonly<Record<string, LevelProgressRecord>>;
-  readonly seenCheckpoints: readonly string[];
-}
-
-export interface LoadedEquationSliderProgress {
-  readonly progress: EquationSliderProgress;
-  readonly canPersist: boolean;
-  readonly migrated: boolean;
-}
-
-export type LevelMapState = "unstarted" | "in-progress" | "completed" | "review-suggested";
-
-export type EquationSliderCheckpointKind = "normal" | "rest" | "station-review" | "chapter-review";
-
-export interface CheckpointLevelDescriptor {
-  readonly id: string;
-  readonly chapterId: string;
-  readonly unitId: string;
-  readonly unitLevelNumber: number;
-}
-
-export interface CompletionCheckpoint {
-  readonly kind: EquationSliderCheckpointKind;
-  readonly checkpointId?: string;
-}
+export {
+  EQUATION_SLIDER_SAVE_VERSION,
+  type CheckpointLevelDescriptor,
+  type CompletionCheckpoint,
+  type EquationSliderBadge,
+  type EquationSliderProgress,
+  type LegacyProgressArchive,
+  type LevelMapState,
+  type LevelProgressRecord,
+  type LoadedEquationSliderProgress
+} from "./types";
 
 export function createDefaultProgress(): EquationSliderProgress {
   return {
     saveVersion: EQUATION_SLIDER_SAVE_VERSION,
     tutorialCompleted: false,
+    upgradeNoticeSeen: false,
     soundEnabled: true,
     levels: {},
     seenCheckpoints: []
@@ -56,27 +37,29 @@ export function loadEquationSliderProgress(value: unknown): LoadedEquationSlider
   if (!isRecord(value)) {
     return { progress: createDefaultProgress(), canPersist: true, migrated: false };
   }
-  if (typeof value.saveVersion === "number" && value.saveVersion > EQUATION_SLIDER_SAVE_VERSION) {
+
+  const sourceVersion = value.saveVersion;
+  if (
+    typeof sourceVersion === "number"
+    && sourceVersion > EQUATION_SLIDER_SAVE_VERSION
+  ) {
     return { progress: createDefaultProgress(), canPersist: false, migrated: false };
   }
-  if (value.saveVersion === 0 || value.saveVersion === undefined) {
-    return { progress: migrateLegacyProgress(value), canPersist: true, migrated: true };
+
+  if (sourceVersion === 0 || sourceVersion === 1 || sourceVersion === undefined) {
+    return {
+      progress: migrateLegacyProgress(value, sourceVersion === 1 ? 1 : 0),
+      canPersist: true,
+      migrated: true
+    };
   }
-  if (value.saveVersion !== EQUATION_SLIDER_SAVE_VERSION) {
+
+  if (sourceVersion !== EQUATION_SLIDER_SAVE_VERSION) {
     return { progress: createDefaultProgress(), canPersist: true, migrated: false };
   }
-  const levels = sanitizeLevelRecords(value.levels);
+
   return {
-    progress: {
-      saveVersion: EQUATION_SLIDER_SAVE_VERSION,
-      tutorialCompleted: value.tutorialCompleted === true,
-      soundEnabled: value.soundEnabled !== false,
-      ...(typeof value.lastLevelId === "string" && isPublishedLevelId(value.lastLevelId)
-        ? { lastLevelId: value.lastLevelId }
-        : {}),
-      levels,
-      seenCheckpoints: sanitizeStringArray(value.seenCheckpoints)
-    },
+    progress: sanitizeCurrentProgress(value),
     canPersist: true,
     migrated: false
   };
@@ -84,6 +67,10 @@ export function loadEquationSliderProgress(value: unknown): LoadedEquationSlider
 
 export function markTutorialCompleted(progress: EquationSliderProgress): EquationSliderProgress {
   return { ...progress, tutorialCompleted: true };
+}
+
+export function markUpgradeNoticeSeen(progress: EquationSliderProgress): EquationSliderProgress {
+  return { ...progress, upgradeNoticeSeen: true };
 }
 
 export function setSoundEnabled(progress: EquationSliderProgress, soundEnabled: boolean): EquationSliderProgress {
@@ -128,6 +115,7 @@ export function completeLevelProgress(
       ? result.moves
       : Math.min(current.bestMoves, result.moves)
     : current.bestMoves;
+
   return {
     ...updateLevel(progress, levelId, {
       ...current,
@@ -147,31 +135,50 @@ export function markCheckpointSeen(progress: EquationSliderProgress, checkpointI
   return { ...progress, seenCheckpoints: [...progress.seenCheckpoints, checkpointId] };
 }
 
+export function markCompletionCheckpointSeen(
+  progress: EquationSliderProgress,
+  checkpoint: CompletionCheckpoint,
+  level: CheckpointLevelDescriptor
+): EquationSliderProgress {
+  let next = progress;
+  if (checkpoint.checkpointId) {
+    next = markCheckpointSeen(next, checkpoint.checkpointId);
+  }
+  // A chapter-ending level also closes its final station. The chapter card is
+  // the stronger message, but both checkpoints must become durable so replay
+  // cannot surface the weaker station review afterward.
+  if (checkpoint.kind === "chapter-review") {
+    next = markCheckpointSeen(next, `${level.stationId}-review`);
+  }
+  return next;
+}
+
 export function resolveCompletionCheckpoint(
   progress: EquationSliderProgress,
   level: CheckpointLevelDescriptor,
   chapterLevels: readonly CheckpointLevelDescriptor[]
 ): CompletionCheckpoint {
-  const unitLevels = chapterLevels.filter((candidate) => candidate.unitId === level.unitId);
+  const stationLevels = chapterLevels.filter((candidate) => candidate.stationId === level.stationId);
   const chapterComplete = chapterLevels.length === 50
     && chapterLevels.every((candidate) => progress.levels[candidate.id]?.completed);
-  const unitComplete = unitLevels.length === 10
-    && unitLevels.every((candidate) => progress.levels[candidate.id]?.completed);
+  const stationComplete = stationLevels.length === 10
+    && stationLevels.every((candidate) => progress.levels[candidate.id]?.completed);
+
   const chapterCheckpointId = `${level.chapterId}-review`;
   if (chapterComplete && !progress.seenCheckpoints.includes(chapterCheckpointId)) {
     return { kind: "chapter-review", checkpointId: chapterCheckpointId };
   }
-  const unitCheckpointId = `${level.unitId}-review`;
-  if (unitComplete && !progress.seenCheckpoints.includes(unitCheckpointId)) {
-    return { kind: "station-review", checkpointId: unitCheckpointId };
+
+  const stationCheckpointId = `${level.stationId}-review`;
+  if (stationComplete && !progress.seenCheckpoints.includes(stationCheckpointId)) {
+    return { kind: "station-review", checkpointId: stationCheckpointId };
   }
+
   const restCheckpointId = `${level.id}-rest`;
-  if (
-    level.unitLevelNumber === 5
-    && !progress.seenCheckpoints.includes(restCheckpointId)
-  ) {
+  if (level.stationOrder === 5 && !progress.seenCheckpoints.includes(restCheckpointId)) {
     return { kind: "rest", checkpointId: restCheckpointId };
   }
+
   return { kind: "normal" };
 }
 
@@ -186,29 +193,77 @@ export function sanitizeLastLevelId(
   return safe;
 }
 
-function migrateLegacyProgress(value: Record<string, unknown>): EquationSliderProgress {
-  const completedLevels = sanitizeStringArray(value.completedLevels);
-  const hints = isRecord(value.hints) ? value.hints : {};
-  const levels: Record<string, LevelProgressRecord> = {};
-  for (const levelId of new Set([...completedLevels, ...Object.keys(hints)])) {
-    if (!isPublishedLevelId(levelId)) {
-      continue;
-    }
-    const hintCount = toNonNegativeInteger(hints[levelId]);
-    levels[levelId] = {
-      startedCount: 1,
-      completed: completedLevels.includes(levelId),
-      independent: completedLevels.includes(levelId) && hintCount === 0,
-      hintCount,
-      badges: completedLevels.includes(levelId) && hintCount === 0 ? ["independent"] : []
-    };
-  }
+function migrateLegacyProgress(
+  value: Record<string, unknown>,
+  sourceSaveVersion: 0 | 1
+): EquationSliderProgress {
+  const completedLevelIds = sourceSaveVersion === 1
+    ? completedIdsFromVersionOne(value.levels)
+    : sanitizePublishedLevelIds(value.completedLevels);
+  const lastLevelId = typeof value.lastLevelId === "string" && isPublishedLevelId(value.lastLevelId)
+    ? value.lastLevelId
+    : undefined;
+  const legacy: LegacyProgressArchive = {
+    sourceSaveVersion,
+    completedLevelIds,
+    ...(lastLevelId === undefined ? {} : { lastLevelId })
+  };
+
+  return {
+    ...createDefaultProgress(),
+    soundEnabled: readLegacySoundPreference(value),
+    legacy
+  };
+}
+
+function sanitizeCurrentProgress(value: Record<string, unknown>): EquationSliderProgress {
+  const lastLevelId = typeof value.lastLevelId === "string" && isPublishedLevelId(value.lastLevelId)
+    ? value.lastLevelId
+    : undefined;
+  const legacy = sanitizeLegacyArchive(value.legacy);
+
   return {
     saveVersion: EQUATION_SLIDER_SAVE_VERSION,
-    tutorialCompleted: value.tutorialDone === true || value.tutorialCompleted === true,
-    soundEnabled: value.muted !== true && value.soundEnabled !== false,
-    levels,
-    seenCheckpoints: []
+    tutorialCompleted: value.tutorialCompleted === true,
+    upgradeNoticeSeen: value.upgradeNoticeSeen === true,
+    soundEnabled: value.soundEnabled !== false,
+    ...(lastLevelId === undefined ? {} : { lastLevelId }),
+    levels: sanitizeLevelRecords(value.levels),
+    seenCheckpoints: sanitizeStringArray(value.seenCheckpoints),
+    ...(legacy === undefined ? {} : { legacy })
+  };
+}
+
+function completedIdsFromVersionOne(value: unknown): string[] {
+  if (!isRecord(value)) {
+    return [];
+  }
+  return Object.entries(value)
+    .filter(([levelId, record]) => isPublishedLevelId(levelId) && isRecord(record) && record.completed === true)
+    .map(([levelId]) => levelId);
+}
+
+function readLegacySoundPreference(value: Record<string, unknown>): boolean {
+  if (typeof value.soundEnabled === "boolean") {
+    return value.soundEnabled;
+  }
+  if (typeof value.muted === "boolean") {
+    return !value.muted;
+  }
+  return true;
+}
+
+function sanitizeLegacyArchive(value: unknown): LegacyProgressArchive | undefined {
+  if (!isRecord(value) || (value.sourceSaveVersion !== 0 && value.sourceSaveVersion !== 1)) {
+    return undefined;
+  }
+  const lastLevelId = typeof value.lastLevelId === "string" && isPublishedLevelId(value.lastLevelId)
+    ? value.lastLevelId
+    : undefined;
+  return {
+    sourceSaveVersion: value.sourceSaveVersion,
+    completedLevelIds: sanitizePublishedLevelIds(value.completedLevelIds),
+    ...(lastLevelId === undefined ? {} : { lastLevelId })
   };
 }
 
@@ -264,6 +319,10 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 function isPublishedLevelId(value: string): boolean {
   return /^es-[1-4]-(?:0[1-9]|[1-4]\d|50)$/.test(value);
+}
+
+function sanitizePublishedLevelIds(value: unknown): string[] {
+  return sanitizeStringArray(value).filter(isPublishedLevelId);
 }
 
 function sanitizeStringArray(value: unknown): string[] {

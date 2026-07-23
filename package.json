@@ -6,15 +6,27 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
+    "preview": "vite preview --host 127.0.0.1",
     "build": "tsc --noEmit && vite build",
     "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:e2e:equation-slider": "playwright test tests/e2e/equation-slider.spec.ts",
+    "test:e2e:equation-slider:gate-a": "playwright test tests/e2e/equation-slider.spec.ts --grep @gate-a",
+    "test:e2e:equation-slider:gate-c": "playwright test tests/e2e/equation-slider.spec.ts --grep @gate-c",
+    "test:e2e:equation-slider:release": "playwright test tests/e2e/equation-slider-release.spec.ts",
+    "test:e2e:equation-slider:visual": "playwright test tests/e2e/equation-slider-visual.spec.ts",
+    "test:e2e:equation-slider:playtest": "playwright test tests/e2e/equation-slider-agent-playtest.spec.ts",
+    "levels:generate": "tsx games/equation-slider/tools/generate-levels.ts",
+    "levels:check": "tsx games/equation-slider/tools/generate-levels.ts --check",
     "validate:content": "vitest run tests/content-validation.test.ts"
   },
   "dependencies": {
     "phaser": "^3.90.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "@types/node": "^22.15.3",
+    "tsx": "^4.23.1",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
     "vitest": "^3.2.4"

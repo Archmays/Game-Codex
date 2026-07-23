@@ -1,327 +1,1148 @@
 {
-  "generatedOn": "2026-07-23",
-  "generatorVersion": "1.2.0",
-  "solverVersion": "1.0.0",
+  "schemaVersion": 3,
+  "generatedAt": "equation-slider-v3.0.0",
   "totalLevels": 200,
-  "levelsPerChapter": {
+  "chapterCounts": {
     "chapter-1": 50,
     "chapter-2": 50,
     "chapter-3": 50,
     "chapter-4": 50
   },
-  "scaffoldLevels": {
-    "guided": 40,
-    "supported": 40,
-    "independent": 40,
-    "transfer": 40,
-    "review": 40
+  "stationCounts": {
+    "chapter-1-station-1": 10,
+    "chapter-1-station-2": 10,
+    "chapter-1-station-3": 10,
+    "chapter-1-station-4": 10,
+    "chapter-1-station-5": 10,
+    "chapter-2-station-1": 10,
+    "chapter-2-station-2": 10,
+    "chapter-2-station-3": 10,
+    "chapter-2-station-4": 10,
+    "chapter-2-station-5": 10,
+    "chapter-3-station-1": 10,
+    "chapter-3-station-2": 10,
+    "chapter-3-station-3": 10,
+    "chapter-3-station-4": 10,
+    "chapter-3-station-5": 10,
+    "chapter-4-station-1": 10,
+    "chapter-4-station-2": 10,
+    "chapter-4-station-3": 10,
+    "chapter-4-station-4": 10,
+    "chapter-4-station-5": 10
   },
-  "modes": {
-    "target": 140,
-    "multi-target": 40,
-    "equality": 20
+  "goldCount": 40,
+  "generatedCount": 160,
+  "modeDistribution": {
+    "equality": 40,
+    "multi-target": 30,
+    "target": 130
   },
-  "targetValues": {
-    "0": 6,
-    "1": 7,
-    "2": 16,
-    "3": 9,
-    "4": 10,
-    "5": 6,
-    "6": 13,
-    "7": 12,
-    "8": 14,
-    "9": 11,
-    "10": 25,
-    "11": 7,
-    "12": 18,
-    "13": 4,
-    "14": 5,
-    "15": 6,
-    "16": 9,
-    "17": 7,
-    "18": 5,
+  "movableReelCountDistribution": {
+    "2": 60,
+    "3": 100,
+    "4": 25,
+    "5": 15
+  },
+  "fixedOperatorDistribution": {
+    "+": 165,
+    "÷": 15,
+    "×": 40,
+    "−": 25
+  },
+  "movableOperatorDistribution": {
+    "+": 120,
+    "×": 40,
+    "−": 80
+  },
+  "repeatedValueReelCount": 108,
+  "repeatedValueLevelCount": 82,
+  "repeatedValueReelKindDistribution": {
+    "number": 68,
+    "operator": 40
+  },
+  "repeatedValueTileCount": 216,
+  "coverableRepeatedValueTileCount": 216,
+  "uncoverableRepeatedValueTiles": {},
+  "numberTileValueDistribution": {
+    "1": 28,
+    "2": 136,
+    "3": 205,
+    "4": 200,
+    "5": 198,
+    "6": 183,
+    "7": 128,
+    "8": 114,
+    "9": 76,
+    "10": 50,
+    "11": 33,
+    "12": 44,
+    "13": 25,
+    "14": 19,
+    "15": 24,
+    "16": 18,
+    "17": 9,
+    "18": 11,
     "19": 6,
-    "20": 14,
+    "20": 10,
     "21": 3,
     "22": 3,
     "23": 1,
-    "24": 9,
-    "25": 1,
-    "26": 2,
+    "24": 4,
+    "25": 3,
+    "26": 1,
+    "27": 1,
+    "28": 3,
     "29": 1,
-    "30": 2,
+    "30": 3,
+    "31": 1,
     "32": 1,
     "33": 1,
     "34": 1,
-    "36": 4,
-    "37": 2,
-    "38": 1,
-    "39": 1,
-    "40": 3,
-    "41": 1,
-    "43": 3,
-    "45": 1,
-    "48": 1,
-    "49": 1,
-    "52": 3,
-    "53": 1,
-    "55": 1,
-    "56": 1,
-    "59": 1,
-    "60": 1,
-    "70": 1
+    "36": 1
   },
-  "operatorOccurrences": {
-    "+": 372,
-    "−": 188,
-    "×": 184,
-    "÷": 69
-  },
-  "difficultyBands": {
-    "foundational": 14,
-    "developing": 97,
-    "advanced": 59,
-    "strategic": 30
-  },
-  "minimumSolutionSteps": {
-    "2": 35,
-    "3": 127,
-    "4": 33,
-    "5": 5
-  },
-  "averageCompositeDifficulty": 35.736,
-  "perChapter": {
+  "chapterNumberTileValueDistribution": {
     "chapter-1": {
-      "modes": {
-        "target": 50
-      },
-      "targetValues": {
-        "2": 1,
-        "3": 2,
-        "4": 1,
-        "6": 3,
-        "7": 2,
-        "8": 2,
-        "9": 2,
-        "10": 12,
-        "11": 2,
-        "12": 4,
-        "13": 2,
-        "14": 1,
-        "16": 3,
-        "17": 2,
-        "18": 2,
-        "19": 3,
-        "20": 1,
-        "21": 1,
-        "22": 1,
-        "23": 1,
-        "24": 1,
-        "26": 1
-      },
-      "operatorOccurrences": {
-        "+": 198
-      },
-      "difficultyBands": {
-        "foundational": 7,
-        "developing": 25,
-        "advanced": 12,
-        "strategic": 6
-      },
-      "minimumSolutionSteps": {
-        "2": 6,
-        "3": 32,
-        "4": 12
-      },
-      "averageCompositeDifficulty": 32.189
+      "1": 12,
+      "2": 34,
+      "3": 65,
+      "4": 64,
+      "5": 55,
+      "6": 52,
+      "7": 44,
+      "8": 31,
+      "9": 18,
+      "10": 9,
+      "11": 4,
+      "12": 1,
+      "13": 1
     },
     "chapter-2": {
-      "modes": {
-        "target": 40,
-        "multi-target": 10
-      },
-      "targetValues": {
-        "0": 3,
-        "1": 5,
-        "2": 4,
-        "3": 4,
-        "4": 1,
-        "5": 4,
-        "6": 4,
-        "7": 5,
-        "8": 5,
-        "9": 6,
-        "10": 6,
-        "11": 1,
-        "12": 2,
-        "13": 1,
-        "14": 4,
-        "15": 4,
-        "17": 2,
-        "18": 2,
-        "19": 1,
-        "21": 1,
-        "24": 1
-      },
-      "operatorOccurrences": {
-        "−": 126,
-        "+": 66
-      },
-      "difficultyBands": {
-        "foundational": 4,
-        "developing": 30,
-        "strategic": 7,
-        "advanced": 9
-      },
-      "minimumSolutionSteps": {
-        "2": 10,
-        "3": 34,
-        "4": 5,
-        "5": 1
-      },
-      "averageCompositeDifficulty": 33.014
+      "1": 6,
+      "2": 17,
+      "3": 31,
+      "4": 44,
+      "5": 45,
+      "6": 39,
+      "7": 35,
+      "8": 26,
+      "9": 22,
+      "10": 17,
+      "11": 17,
+      "12": 13,
+      "13": 13,
+      "14": 7,
+      "15": 7,
+      "16": 6,
+      "17": 3,
+      "18": 2,
+      "19": 2,
+      "20": 1,
+      "22": 1,
+      "23": 1,
+      "25": 1,
+      "26": 1,
+      "28": 1,
+      "29": 1,
+      "32": 1
     },
     "chapter-3": {
-      "modes": {
-        "target": 40,
-        "multi-target": 10
-      },
-      "targetValues": {
-        "2": 8,
-        "3": 1,
-        "4": 4,
-        "5": 2,
-        "6": 3,
-        "7": 1,
-        "8": 4,
-        "9": 1,
-        "10": 5,
-        "12": 9,
-        "16": 3,
-        "20": 6,
-        "21": 1,
-        "24": 4,
-        "25": 1,
-        "26": 1,
-        "32": 1,
-        "34": 1,
-        "36": 2,
-        "37": 1,
-        "39": 1,
-        "40": 3,
-        "43": 1,
-        "56": 1,
-        "60": 1
-      },
-      "operatorOccurrences": {
-        "×": 97,
-        "÷": 43,
-        "+": 23,
-        "−": 8
-      },
-      "difficultyBands": {
-        "foundational": 2,
-        "developing": 33,
-        "strategic": 6,
-        "advanced": 9
-      },
-      "minimumSolutionSteps": {
-        "2": 8,
-        "3": 38,
-        "4": 3,
-        "5": 1
-      },
-      "averageCompositeDifficulty": 33.283
+      "1": 8,
+      "2": 58,
+      "3": 71,
+      "4": 53,
+      "5": 47,
+      "6": 39,
+      "7": 8,
+      "8": 25,
+      "9": 12,
+      "10": 9,
+      "11": 2,
+      "12": 20,
+      "13": 1,
+      "14": 3,
+      "15": 11,
+      "16": 6,
+      "18": 3,
+      "20": 6,
+      "21": 1,
+      "24": 3,
+      "25": 1,
+      "28": 1,
+      "30": 2
     },
     "chapter-4": {
-      "modes": {
-        "multi-target": 20,
-        "equality": 20,
-        "target": 10
-      },
-      "targetValues": {
-        "0": 3,
-        "1": 2,
-        "2": 3,
-        "3": 2,
-        "4": 4,
-        "6": 3,
-        "7": 4,
-        "8": 3,
-        "9": 2,
-        "10": 2,
-        "11": 4,
-        "12": 3,
-        "13": 1,
-        "15": 2,
-        "16": 3,
-        "17": 3,
-        "18": 1,
-        "19": 2,
-        "20": 7,
-        "22": 2,
-        "24": 3,
-        "29": 1,
-        "30": 2,
-        "33": 1,
-        "36": 2,
-        "37": 1,
-        "38": 1,
-        "41": 1,
-        "43": 2,
-        "45": 1,
-        "48": 1,
-        "49": 1,
-        "52": 3,
-        "53": 1,
-        "55": 1,
-        "59": 1,
-        "70": 1
-      },
-      "operatorOccurrences": {
-        "×": 87,
-        "+": 85,
-        "÷": 26,
-        "−": 54
-      },
-      "difficultyBands": {
-        "developing": 9,
-        "strategic": 11,
-        "advanced": 29,
-        "foundational": 1
-      },
-      "minimumSolutionSteps": {
-        "2": 11,
-        "3": 23,
-        "4": 13,
-        "5": 3
-      },
-      "averageCompositeDifficulty": 44.459
+      "1": 2,
+      "2": 27,
+      "3": 38,
+      "4": 39,
+      "5": 51,
+      "6": 53,
+      "7": 41,
+      "8": 32,
+      "9": 24,
+      "10": 15,
+      "11": 10,
+      "12": 10,
+      "13": 10,
+      "14": 9,
+      "15": 6,
+      "16": 6,
+      "17": 6,
+      "18": 6,
+      "19": 4,
+      "20": 3,
+      "21": 2,
+      "22": 2,
+      "24": 1,
+      "25": 1,
+      "27": 1,
+      "28": 1,
+      "30": 1,
+      "31": 1,
+      "33": 1,
+      "34": 1,
+      "36": 1
     }
   },
-  "uniqueChallenges": 14,
-  "solverValidated": 200,
-  "orphanTiles": 0,
-  "unsolvableLevels": 0,
-  "exactDuplicateStructures": 0,
-  "maximumTopologyReusePerChapter": 8,
-  "threeReelTwoTileCohort": 26,
-  "threeReelTwoTilePlanCounts": {
-    "0.0.1>1.1.0": 16,
-    "0.1.0>1.0.1": 7,
-    "0.1.1>1.0.0": 3
+  "stationNumberTileValueDistribution": {
+    "chapter-1-station-1": {
+      "1": 8,
+      "2": 13,
+      "3": 17,
+      "4": 11,
+      "5": 8,
+      "6": 11,
+      "7": 7,
+      "8": 2,
+      "9": 1
+    },
+    "chapter-1-station-2": {
+      "2": 11,
+      "3": 17,
+      "4": 16,
+      "5": 10,
+      "6": 9,
+      "7": 9,
+      "8": 5,
+      "10": 1
+    },
+    "chapter-1-station-3": {
+      "1": 4,
+      "2": 5,
+      "3": 14,
+      "4": 11,
+      "5": 11,
+      "6": 10,
+      "7": 8,
+      "8": 9,
+      "9": 5,
+      "11": 1
+    },
+    "chapter-1-station-4": {
+      "2": 4,
+      "3": 10,
+      "4": 14,
+      "5": 12,
+      "6": 11,
+      "7": 9,
+      "8": 7,
+      "9": 7,
+      "10": 3,
+      "12": 1
+    },
+    "chapter-1-station-5": {
+      "2": 1,
+      "3": 7,
+      "4": 12,
+      "5": 14,
+      "6": 11,
+      "7": 11,
+      "8": 8,
+      "9": 5,
+      "10": 5,
+      "11": 3,
+      "13": 1
+    },
+    "chapter-2-station-1": {
+      "1": 6,
+      "2": 10,
+      "3": 12,
+      "4": 11,
+      "5": 4,
+      "6": 3,
+      "7": 7,
+      "8": 2,
+      "9": 7,
+      "10": 1,
+      "11": 2,
+      "12": 2,
+      "13": 1,
+      "14": 1,
+      "15": 1,
+      "16": 1,
+      "20": 1
+    },
+    "chapter-2-station-2": {
+      "2": 6,
+      "3": 11,
+      "4": 12,
+      "5": 11,
+      "6": 4,
+      "7": 3,
+      "8": 7,
+      "9": 1,
+      "10": 7,
+      "11": 1,
+      "12": 2,
+      "13": 2,
+      "14": 1,
+      "15": 1,
+      "16": 1,
+      "19": 1,
+      "23": 1
+    },
+    "chapter-2-station-3": {
+      "2": 1,
+      "3": 7,
+      "4": 11,
+      "5": 11,
+      "6": 10,
+      "7": 4,
+      "8": 3,
+      "9": 7,
+      "10": 1,
+      "11": 7,
+      "12": 1,
+      "13": 2,
+      "14": 2,
+      "15": 1,
+      "16": 1,
+      "17": 1,
+      "22": 1,
+      "26": 1
+    },
+    "chapter-2-station-4": {
+      "3": 1,
+      "4": 8,
+      "5": 11,
+      "6": 11,
+      "7": 10,
+      "8": 4,
+      "9": 3,
+      "10": 6,
+      "11": 1,
+      "12": 7,
+      "13": 1,
+      "14": 2,
+      "15": 2,
+      "16": 1,
+      "17": 1,
+      "18": 1,
+      "25": 1,
+      "29": 1
+    },
+    "chapter-2-station-5": {
+      "4": 2,
+      "5": 8,
+      "6": 11,
+      "7": 11,
+      "8": 10,
+      "9": 4,
+      "10": 2,
+      "11": 6,
+      "12": 1,
+      "13": 7,
+      "14": 1,
+      "15": 2,
+      "16": 2,
+      "17": 1,
+      "18": 1,
+      "19": 1,
+      "28": 1,
+      "32": 1
+    },
+    "chapter-3-station-1": {
+      "1": 4,
+      "2": 19,
+      "3": 18,
+      "4": 13,
+      "5": 8,
+      "6": 6,
+      "7": 1,
+      "8": 3,
+      "9": 2,
+      "10": 1,
+      "12": 2,
+      "15": 1
+    },
+    "chapter-3-station-2": {
+      "1": 1,
+      "2": 12,
+      "3": 17,
+      "4": 13,
+      "5": 9,
+      "6": 8,
+      "8": 8,
+      "9": 1,
+      "10": 2,
+      "11": 1,
+      "12": 4,
+      "15": 1,
+      "16": 1
+    },
+    "chapter-3-station-3": {
+      "1": 1,
+      "2": 9,
+      "3": 14,
+      "4": 12,
+      "5": 9,
+      "6": 10,
+      "7": 1,
+      "8": 2,
+      "9": 6,
+      "10": 1,
+      "12": 7,
+      "15": 3,
+      "18": 2,
+      "20": 1
+    },
+    "chapter-3-station-4": {
+      "1": 1,
+      "2": 9,
+      "3": 11,
+      "4": 9,
+      "5": 12,
+      "6": 6,
+      "7": 3,
+      "8": 7,
+      "9": 1,
+      "10": 1,
+      "12": 6,
+      "13": 1,
+      "14": 1,
+      "15": 1,
+      "16": 4,
+      "18": 1,
+      "20": 1,
+      "24": 3
+    },
+    "chapter-3-station-5": {
+      "1": 1,
+      "2": 9,
+      "3": 11,
+      "4": 6,
+      "5": 9,
+      "6": 9,
+      "7": 3,
+      "8": 5,
+      "9": 2,
+      "10": 4,
+      "11": 1,
+      "12": 1,
+      "14": 2,
+      "15": 5,
+      "16": 1,
+      "20": 4,
+      "21": 1,
+      "25": 1,
+      "28": 1,
+      "30": 2
+    },
+    "chapter-4-station-1": {
+      "1": 2,
+      "2": 15,
+      "3": 12,
+      "4": 11,
+      "5": 7,
+      "6": 4,
+      "7": 5,
+      "8": 5,
+      "9": 5,
+      "10": 2,
+      "11": 2,
+      "12": 2,
+      "13": 1,
+      "14": 2,
+      "15": 1,
+      "16": 1,
+      "17": 1,
+      "18": 1,
+      "22": 1,
+      "24": 1
+    },
+    "chapter-4-station-2": {
+      "2": 4,
+      "3": 15,
+      "4": 10,
+      "5": 13,
+      "6": 9,
+      "7": 3,
+      "8": 6,
+      "9": 3,
+      "10": 3,
+      "11": 3,
+      "12": 2,
+      "13": 2,
+      "15": 2,
+      "16": 1,
+      "17": 1,
+      "18": 1,
+      "19": 1,
+      "25": 1,
+      "27": 1
+    },
+    "chapter-4-station-3": {
+      "2": 4,
+      "3": 5,
+      "4": 13,
+      "5": 13,
+      "6": 11,
+      "7": 6,
+      "8": 3,
+      "9": 5,
+      "10": 3,
+      "11": 2,
+      "12": 3,
+      "13": 3,
+      "14": 2,
+      "16": 2,
+      "17": 1,
+      "18": 1,
+      "19": 1,
+      "20": 1,
+      "28": 1,
+      "30": 1
+    },
+    "chapter-4-station-4": {
+      "2": 2,
+      "3": 4,
+      "4": 3,
+      "5": 14,
+      "6": 14,
+      "7": 12,
+      "8": 6,
+      "9": 4,
+      "10": 4,
+      "11": 1,
+      "12": 2,
+      "13": 2,
+      "14": 3,
+      "15": 2,
+      "17": 2,
+      "18": 1,
+      "19": 1,
+      "20": 1,
+      "21": 1,
+      "31": 1,
+      "33": 1
+    },
+    "chapter-4-station-5": {
+      "2": 2,
+      "3": 2,
+      "4": 2,
+      "5": 4,
+      "6": 15,
+      "7": 15,
+      "8": 12,
+      "9": 7,
+      "10": 3,
+      "11": 2,
+      "12": 1,
+      "13": 2,
+      "14": 2,
+      "15": 1,
+      "16": 2,
+      "17": 1,
+      "18": 2,
+      "19": 1,
+      "20": 1,
+      "21": 1,
+      "22": 1,
+      "34": 1,
+      "36": 1
+    }
   },
-  "maximumThreeReelTwoTilePlanReuse": 16,
-  "maximumThreeReelTwoTileTopologyReusePerChapter": 6,
-  "maximumConsecutiveCanonicalPlanReuse": 2,
-  "openingPlanDiversityMinimum": 2,
-  "initialDistanceDistribution": {
-    "1": 118,
-    "2": 68,
-    "3": 14
+  "targetDistribution": {
+    "3": 1,
+    "4": 7,
+    "5": 22,
+    "6": 3,
+    "7": 15,
+    "8": 5,
+    "9": 9,
+    "10": 9,
+    "11": 7,
+    "12": 13,
+    "13": 9,
+    "14": 15,
+    "15": 12,
+    "16": 15,
+    "17": 9,
+    "18": 12,
+    "19": 5,
+    "20": 5,
+    "21": 2,
+    "23": 3,
+    "24": 5,
+    "25": 2,
+    "26": 3,
+    "27": 2,
+    "28": 2,
+    "29": 1,
+    "30": 1,
+    "32": 1,
+    "36": 4,
+    "39": 1,
+    "40": 1,
+    "48": 2,
+    "49": 1,
+    "54": 2,
+    "56": 1,
+    "60": 1,
+    "64": 1,
+    "72": 3,
+    "75": 1,
+    "90": 1,
+    "96": 2,
+    "108": 1,
+    "120": 1,
+    "144": 1,
+    "180": 1,
+    "=10": 2,
+    "=10 ÷ 2": 1,
+    "=100": 1,
+    "=11": 1,
+    "=11 + 11": 1,
+    "=12": 2,
+    "=13": 1,
+    "=14": 1,
+    "=15": 1,
+    "=19": 1,
+    "=2 × 4": 1,
+    "=20": 1,
+    "=21": 2,
+    "=22": 2,
+    "=23": 1,
+    "=24": 1,
+    "=25": 1,
+    "=28": 1,
+    "=3 + 3": 1,
+    "=31": 1,
+    "=34": 1,
+    "=4 × 5": 2,
+    "=40": 1,
+    "=5 + 6": 1,
+    "=6": 1,
+    "=60": 1,
+    "=7": 2,
+    "=8": 2,
+    "=80": 1,
+    "=9": 3,
+    "=9 + 9": 1
   },
-  "trivialAlignedCompleteCovers": 0,
-  "nonTrivialCoverageLevels": 38,
-  "maximumGenerationAttempt": 202
+  "numberTileRange": {
+    "minimum": 1,
+    "maximum": 36
+  },
+  "zeroCount": 0,
+  "oneCount": 28,
+  "zeroRatio": 0,
+  "oneRatio": 0.01812,
+  "firstTenZeroCountByChapter": {
+    "chapter-1": 0,
+    "chapter-2": 0,
+    "chapter-3": 0,
+    "chapter-4": 0
+  },
+  "minimumMovesDistribution": {
+    "1": 130,
+    "2": 70
+  },
+  "minimumCorrectArrangementsDistribution": {
+    "3": 200
+  },
+  "validArrangementCountDistribution": {
+    "3": 71,
+    "4": 27,
+    "5": 36,
+    "6": 12,
+    "7": 11,
+    "8": 17,
+    "9": 5,
+    "10": 2,
+    "11": 1,
+    "12": 4,
+    "14": 3,
+    "15": 6,
+    "16": 1,
+    "20": 4
+  },
+  "exactDuplicateGroups": [],
+  "nearDuplicates": [],
+  "adjacentRepetitions": [],
+  "canonicalActionPatternReuse": {
+    "down.down.stay.stay": [
+      "es-4-12"
+    ],
+    "down.down.stay.stay.stay": [
+      "es-4-30"
+    ],
+    "down.stay": [
+      "es-1-01",
+      "es-1-05",
+      "es-1-14",
+      "es-1-23",
+      "es-1-32",
+      "es-1-41",
+      "es-1-45",
+      "es-2-12",
+      "es-2-23",
+      "es-2-42",
+      "es-3-01",
+      "es-3-12",
+      "es-3-23",
+      "es-3-41",
+      "es-4-14"
+    ],
+    "down.stay.down.stay": [
+      "es-4-02"
+    ],
+    "down.stay.down.stay.stay": [
+      "es-4-33"
+    ],
+    "down.stay.stay": [
+      "es-1-06",
+      "es-1-29",
+      "es-2-01",
+      "es-2-28",
+      "es-2-48",
+      "es-3-24",
+      "es-3-44",
+      "es-4-11",
+      "es-4-41"
+    ],
+    "down.stay.stay.down": [
+      "es-4-29"
+    ],
+    "down.stay.stay.down.stay": [
+      "es-4-40"
+    ],
+    "down.stay.stay.stay": [
+      "es-1-10"
+    ],
+    "down.stay.stay.stay.down": [
+      "es-4-43"
+    ],
+    "down.stay.stay.stay.stay": [
+      "es-3-09"
+    ],
+    "down.stay.stay.stay.up": [
+      "es-4-50"
+    ],
+    "down.stay.stay.up": [
+      "es-2-20"
+    ],
+    "down.stay.up": [
+      "es-2-06",
+      "es-2-09",
+      "es-2-26",
+      "es-2-46",
+      "es-3-25",
+      "es-3-45",
+      "es-4-07",
+      "es-4-36"
+    ],
+    "down.stay.up.stay": [
+      "es-2-27"
+    ],
+    "down.up.stay": [
+      "es-1-18",
+      "es-1-47",
+      "es-2-21",
+      "es-3-05",
+      "es-3-26",
+      "es-3-46",
+      "es-4-08",
+      "es-4-31"
+    ],
+    "down.up.stay.stay": [
+      "es-2-30"
+    ],
+    "stay.down": [
+      "es-1-02",
+      "es-1-11",
+      "es-1-15",
+      "es-1-24",
+      "es-1-33",
+      "es-1-42",
+      "es-2-02",
+      "es-2-13",
+      "es-2-32",
+      "es-2-43",
+      "es-3-02",
+      "es-3-13",
+      "es-3-31",
+      "es-3-42",
+      "es-4-24"
+    ],
+    "stay.down.down.stay": [
+      "es-4-09"
+    ],
+    "stay.down.stay": [
+      "es-1-07",
+      "es-1-36",
+      "es-2-08",
+      "es-2-29",
+      "es-3-10",
+      "es-3-28",
+      "es-3-48",
+      "es-4-21",
+      "es-4-46"
+    ],
+    "stay.down.stay.down": [
+      "es-4-19"
+    ],
+    "stay.down.stay.stay": [
+      "es-1-20"
+    ],
+    "stay.down.stay.stay.stay": [
+      "es-3-19"
+    ],
+    "stay.down.stay.up": [
+      "es-2-37"
+    ],
+    "stay.down.up": [
+      "es-1-27",
+      "es-1-48",
+      "es-2-24",
+      "es-2-49",
+      "es-3-35",
+      "es-4-05",
+      "es-4-15",
+      "es-4-35"
+    ],
+    "stay.down.up.stay": [
+      "es-2-40"
+    ],
+    "stay.stay.down": [
+      "es-1-08",
+      "es-1-37",
+      "es-2-11",
+      "es-2-36",
+      "es-3-07",
+      "es-3-27",
+      "es-3-47",
+      "es-4-25",
+      "es-4-47"
+    ],
+    "stay.stay.down.down": [
+      "es-4-22"
+    ],
+    "stay.stay.down.stay": [
+      "es-1-30"
+    ],
+    "stay.stay.down.stay.stay": [
+      "es-3-29"
+    ],
+    "stay.stay.down.up": [
+      "es-2-47"
+    ],
+    "stay.stay.stay.down": [
+      "es-1-40"
+    ],
+    "stay.stay.stay.down.stay": [
+      "es-3-39"
+    ],
+    "stay.stay.stay.stay.down": [
+      "es-3-49"
+    ],
+    "stay.stay.stay.stay.up": [
+      "es-4-03"
+    ],
+    "stay.stay.stay.up": [
+      "es-1-50"
+    ],
+    "stay.stay.stay.up.stay": [
+      "es-4-10"
+    ],
+    "stay.stay.up": [
+      "es-1-09",
+      "es-1-38",
+      "es-2-16",
+      "es-2-38",
+      "es-3-15",
+      "es-3-30",
+      "es-3-50",
+      "es-4-26",
+      "es-4-48"
+    ],
+    "stay.stay.up.down": [
+      "es-2-50"
+    ],
+    "stay.stay.up.stay": [
+      "es-2-07"
+    ],
+    "stay.stay.up.stay.stay": [
+      "es-4-13"
+    ],
+    "stay.stay.up.up": [
+      "es-4-32"
+    ],
+    "stay.up": [
+      "es-1-03",
+      "es-1-12",
+      "es-1-21",
+      "es-1-25",
+      "es-1-34",
+      "es-1-43",
+      "es-2-03",
+      "es-2-15",
+      "es-2-25",
+      "es-2-35",
+      "es-3-03",
+      "es-3-21",
+      "es-3-32",
+      "es-3-43",
+      "es-4-34"
+    ],
+    "stay.up.down": [
+      "es-1-19",
+      "es-1-49",
+      "es-2-31",
+      "es-3-04",
+      "es-3-17",
+      "es-3-37",
+      "es-4-16",
+      "es-4-37"
+    ],
+    "stay.up.down.stay": [
+      "es-4-39"
+    ],
+    "stay.up.stay": [
+      "es-1-16",
+      "es-1-39",
+      "es-2-18",
+      "es-2-39",
+      "es-3-14",
+      "es-3-34",
+      "es-4-01",
+      "es-4-27"
+    ],
+    "stay.up.stay.down": [
+      "es-4-42"
+    ],
+    "stay.up.stay.stay": [
+      "es-2-10"
+    ],
+    "stay.up.stay.stay.stay": [
+      "es-4-20"
+    ],
+    "stay.up.stay.up": [
+      "es-4-49"
+    ],
+    "up.down.stay": [
+      "es-1-26",
+      "es-2-04",
+      "es-2-34",
+      "es-3-06",
+      "es-3-20",
+      "es-3-40",
+      "es-4-17",
+      "es-4-38"
+    ],
+    "up.stay": [
+      "es-1-04",
+      "es-1-13",
+      "es-1-22",
+      "es-1-31",
+      "es-1-35",
+      "es-1-44",
+      "es-2-05",
+      "es-2-22",
+      "es-2-33",
+      "es-2-45",
+      "es-3-11",
+      "es-3-22",
+      "es-3-33",
+      "es-4-04",
+      "es-4-44"
+    ],
+    "up.stay.down": [
+      "es-1-28",
+      "es-2-14",
+      "es-2-44",
+      "es-3-08",
+      "es-3-18",
+      "es-3-38",
+      "es-4-18",
+      "es-4-45"
+    ],
+    "up.stay.stay": [
+      "es-1-17",
+      "es-1-46",
+      "es-2-19",
+      "es-2-41",
+      "es-3-16",
+      "es-3-36",
+      "es-4-06",
+      "es-4-28"
+    ],
+    "up.stay.stay.stay": [
+      "es-2-17"
+    ],
+    "up.stay.stay.stay.stay": [
+      "es-4-23"
+    ]
+  },
+  "overusedCanonicalActionPatterns": {},
+  "stationDiversity": {
+    "chapter-1-station-1": {
+      "levelCount": 10,
+      "structureFamilies": 4,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-1-station-2": {
+      "levelCount": 10,
+      "structureFamilies": 4,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-1-station-3": {
+      "levelCount": 10,
+      "structureFamilies": 4,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-1-station-4": {
+      "levelCount": 10,
+      "structureFamilies": 4,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-1-station-5": {
+      "levelCount": 10,
+      "structureFamilies": 4,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-2-station-1": {
+      "levelCount": 10,
+      "structureFamilies": 7,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-2-station-2": {
+      "levelCount": 10,
+      "structureFamilies": 7,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-2-station-3": {
+      "levelCount": 10,
+      "structureFamilies": 7,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-2-station-4": {
+      "levelCount": 10,
+      "structureFamilies": 7,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-2-station-5": {
+      "levelCount": 10,
+      "structureFamilies": 7,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-3-station-1": {
+      "levelCount": 10,
+      "structureFamilies": 8,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-3-station-2": {
+      "levelCount": 10,
+      "structureFamilies": 8,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-3-station-3": {
+      "levelCount": 10,
+      "structureFamilies": 8,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-3-station-4": {
+      "levelCount": 10,
+      "structureFamilies": 8,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-3-station-5": {
+      "levelCount": 10,
+      "structureFamilies": 8,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-4-station-1": {
+      "levelCount": 10,
+      "structureFamilies": 8,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-4-station-2": {
+      "levelCount": 10,
+      "structureFamilies": 8,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-4-station-3": {
+      "levelCount": 10,
+      "structureFamilies": 8,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-4-station-4": {
+      "levelCount": 10,
+      "structureFamilies": 8,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    },
+    "chapter-4-station-5": {
+      "levelCount": 10,
+      "structureFamilies": 8,
+      "firstFourActionFamilies": 4,
+      "passesStructureMinimum": true,
+      "passesFirstFourActionMinimum": true
+    }
+  },
+  "invalidPublishedLevels": {},
+  "unsolvedLevelIds": [],
+  "orphanTiles": {},
+  "missingTargets": {},
+  "generationRetryCount": 0,
+  "rejectedCandidateReasons": {},
+  "deterministicHash": "fnv1a32-2b6c450b",
+  "passes": true
 }

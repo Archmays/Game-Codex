@@ -1,211 +1,306 @@
+import { auditEquationSliderLevels } from "../games/equation-slider/level-audit";
+import { EQUATION_SLIDER_V3_LEVELS } from "../games/equation-slider/levels/v3/catalog";
+import { FIRST_GOLD_LEVEL } from "../games/equation-slider/levels/v3/gold-levels";
 import {
   canonicalStructureSignature,
   enumerateArrangements,
+  evaluateArrangementOutcome,
+  getArrangementTokens,
+  getLevelTargetIds,
+  getMovableReels,
   getRequiredTileIds,
-  solveLevel,
+  publishLevel,
   solutionTopologySignature,
-  validateLevelDefinition
+  solveLevel,
+  validateLevelDefinition,
+  validatePublishedLevel
 } from "../games/equation-slider/solver";
-import type { ArithmeticOperator, EquationSliderLevelDefinition, EquationTile, LearningMetadata } from "../games/equation-slider/types";
+import type {
+  EquationSliderLevelDefinition,
+  EquationTile,
+  PublishedEquationSliderLevel
+} from "../games/equation-slider/types";
 
-const learning: LearningMetadata = {
-  learningObjective: "找到两条结果为 5 的算式，并覆盖每个独立方块。",
-  primarySkill: "fact-family",
-  skillTags: ["fact-family", "difference"],
-  misconceptionTags: ["value-vs-tile-identity"],
-  scaffoldLevel: "independent",
-  reviewOf: ["addition", "subtraction"],
-  reflectionText: "1 加 4 和 8 减 3 都等于 5。",
-  recommendedAgeBand: "6-8 岁"
-};
+describe("equation slider V3 solver", () => {
+  it("enumerates only movable reels and keeps the fixed operator in the expression", () => {
+    const arrangements = enumerateArrangements(FIRST_GOLD_LEVEL);
+    const fixedPlus = FIRST_GOLD_LEVEL.slots.find((slot) => slot.kind === "fixed-token");
 
-describe("equation slider solver", () => {
-  it("enumerates the full cartesian product", () => {
-    expect(enumerateArrangements(createUniqueFixture())).toHaveLength(8);
+    expect(getMovableReels(FIRST_GOLD_LEVEL)).toHaveLength(2);
+    expect(arrangements).toHaveLength(3 ** 2);
+    expect(getArrangementTokens(FIRST_GOLD_LEVEL, { indexes: [0, 0] })).toEqual([1, "+", 5]);
+    expect(fixedPlus).toMatchObject({ token: "+", ariaLabel: expect.any(String) });
+    expect(getRequiredTileIds(FIRST_GOLD_LEVEL)).toHaveLength(6);
+    expect(getRequiredTileIds(FIRST_GOLD_LEVEL)).not.toContain(fixedPlus?.id);
   });
 
-  it("finds a deterministic shortest complete cover", () => {
-    const analysis = solveLevel(createUniqueFixture());
+  it("solves the authored unique minimum cover by tile identity and explicit target ID", () => {
+    const analysis = solveLevel(FIRST_GOLD_LEVEL);
+    const targetIds = getLevelTargetIds(FIRST_GOLD_LEVEL);
+    const selectedAcrossPlan = new Set(
+      analysis.canonicalPlan.flatMap((step) =>
+        getMovableReels(FIRST_GOLD_LEVEL).map(
+          (reel, reelIndex) => reel.tiles[step.indexes[reelIndex]].id
+        )
+      )
+    );
 
-    expect(analysis.status).toBe("solved");
-    expect(analysis.orphanTileIds).toEqual([]);
-    expect(analysis.minimumCorrectExpressions).toBe(2);
-    expect(analysis.canonicalPlan.map((step) => step.indexes.join("."))).toEqual(["0.0.0", "1.1.1"]);
-    expect(analysis.minimumCoverSetCountCapped).toBe(1);
-  });
-
-  it("counts minimum cover sets without treating execution order as another solution", () => {
-    const analysis = solveLevel(createUniqueFixture());
-
-    expect(analysis.minimumCorrectExpressions).toBe(2);
-    expect(analysis.minimumCoverSetCountCapped).toBe(1);
-  });
-
-  it("caps non-unique minimum cover sets at two", () => {
-    const analysis = solveLevel(createDuplicateValueFixture());
-
-    expect(analysis.status).toBe("solved");
-    expect(analysis.minimumCorrectExpressions).toBe(2);
-    expect(analysis.minimumCoverSetCountCapped).toBe(2);
-  });
-
-  it("keeps duplicate values as distinct tile coverage bits", () => {
-    const level = createDuplicateValueFixture();
-    const analysis = solveLevel(level);
-    const masks = new Set(analysis.validArrangements.map((arrangement) => arrangement.tileMask));
-
-    expect(getRequiredTileIds(level)).toHaveLength(6);
-    expect(analysis.validArrangements).toHaveLength(8);
-    expect(masks.size).toBe(8);
-  });
-
-  it("detects orphan tiles", () => {
-    const base = createUniqueFixture();
-    const level: EquationSliderLevelDefinition = {
-      ...base,
-      reels: base.reels.map((reel, index) => index === 0
-        ? { ...reel, tiles: [reel.tiles[0], numberTile("n1-orphan", 99)] }
-        : reel)
-    };
-    const analysis = solveLevel(level);
-
-    expect(analysis.status).toBe("unsolvable");
-    expect(analysis.orphanTileIds).toContain("n1-orphan");
-    expect(analysis.errors.join(" ")).toContain("orphan tiles");
-  });
-
-  it("requires both target coverage and tile coverage in multi-target mode", () => {
-    const base = createUniqueFixture();
-    const level: EquationSliderLevelDefinition = {
-      ...base,
-      mode: "multi-target",
-      targets: [5, 12]
-    };
-    const analysis = solveLevel(level);
-
-    expect(analysis.status).toBe("solved");
-    expect(analysis.minimumCorrectExpressions).toBe(3);
-    expect(new Set(analysis.validArrangements.map((arrangement) => arrangement.targetMask))).toEqual(new Set([1, 2]));
-  });
-
-  it("continues solving from partial tile and target coverage", () => {
-    const base = createUniqueFixture();
-    const level: EquationSliderLevelDefinition = {
-      ...base,
-      mode: "multi-target",
-      targets: [5, 12]
-    };
-    const first = solveLevel(level).validArrangements.find((arrangement) => arrangement.key === "0.0.0");
-    expect(first).toBeTruthy();
-
-    const continued = solveLevel(level, {
-      coveredTileIds: first!.selectedTileIds,
-      completedTargetIndexes: [0]
+    expect(analysis).toMatchObject({
+      status: "solved",
+      orphanTileIds: [],
+      missingTargetIds: [],
+      minimumCorrectArrangements: 3,
+      minimumCoverSetCountCapped: 1
     });
-    expect(continued.status).toBe("solved");
-    expect(continued.minimumCorrectExpressions).toBe(2);
+    expect(targetIds).toEqual(["es-1-01-target-6"]);
+    expect(
+      analysis.validArrangements.every(
+        (arrangement) =>
+          arrangement.satisfiedTargetIds.length === 1
+          && arrangement.satisfiedTargetIds[0] === targetIds[0]
+      )
+    ).toBe(true);
+    expect(selectedAcrossPlan).toEqual(new Set(FIRST_GOLD_LEVEL.requiredTileIds));
   });
 
-  it("evaluates both sides in equality mode", () => {
-    const base = createUniqueFixture();
-    const level: EquationSliderLevelDefinition = {
-      ...base,
-      mode: "equality",
-      rightExpression: [2, "+", 3]
-    };
+  it("continues from partial coverage using target IDs rather than target indexes", () => {
+    const first = FIRST_GOLD_LEVEL.analysis.validArrangements[0];
+    const continued = solveLevel(FIRST_GOLD_LEVEL, {
+      coveredTileIds: first.selectedTileIds,
+      completedTargetIds: first.satisfiedTargetIds
+    });
+
+    expect(continued.status).toBe("solved");
+    expect(continued.minimumCorrectArrangements).toBe(2);
+    expect(
+      continued.canonicalPlan.some(
+        (step) => step.indexes.join(".") === first.indexes.join(".")
+      )
+    ).toBe(false);
+  });
+
+  it("tracks every explicit target in multi-target mode", () => {
+    const level = findPublishedMode("multi-target");
+    if (level.mode !== "multi-target") {
+      throw new Error("Expected a multi-target V3 level");
+    }
     const analysis = solveLevel(level);
+    const satisfiedTargetIds = new Set(
+      analysis.validArrangements.flatMap((arrangement) => arrangement.satisfiedTargetIds)
+    );
+    const firstTarget = level.targets[0].id;
+    const continued = solveLevel(level, { completedTargetIds: [firstTarget] });
 
     expect(analysis.status).toBe("solved");
-    expect(analysis.validArrangements.every((arrangement) => arrangement.result === arrangement.rightResult)).toBe(true);
+    expect(satisfiedTargetIds).toEqual(new Set(level.targets.map((target) => target.id)));
+    expect(continued.status).toBe("solved");
+    expect(continued.minimumCorrectArrangements).toBeLessThanOrEqual(
+      analysis.minimumCorrectArrangements!
+    );
   });
 
-  it("fails closed when the arrangement limit is exceeded", () => {
-    const analysis = solveLevel(createUniqueFixture(), {}, {
-      maxArrangements: 1,
-      maxCoverageStates: 8192,
-      maxMinimumCoverSearchNodes: 100_000
+  it("evaluates both sides and reports the equality target ID", () => {
+    const level = findPublishedMode("equality");
+    if (level.mode !== "equality") {
+      throw new Error("Expected an equality V3 level");
+    }
+    const valid = level.analysis.validArrangements[0];
+    const outcome = evaluateArrangementOutcome(level, valid.indexes);
+
+    expect(outcome).toMatchObject({
+      valid: true,
+      satisfiedTargetIds: [level.targets[0].id],
+      equalityDifference: 0
+    });
+    expect(outcome.result).toBe(outcome.rightResult);
+    expect(outcome.expressionText).toContain("=");
+  });
+
+  it("fails closed for schema, reel-limit, and exact-coverage violations", () => {
+    const wrongSchema = mutateFirstLevel((definition) => {
+      (definition as unknown as { schemaVersion: number }).schemaVersion = 1;
+    });
+    const tooManyReels = mutateFirstLevel((definition) => {
+      const firstMovable = definition.slots.find((slot) => slot.kind === "movable-reel");
+      if (!firstMovable || firstMovable.kind !== "movable-reel") {
+        throw new Error("Missing fixture reel");
+      }
+      const extraSlots = Array.from({ length: 4 }, (_, index) => ({
+        kind: "movable-reel" as const,
+        reel: {
+          ...structuredClone(firstMovable.reel),
+          id: `extra-reel-${index}`,
+          tiles: firstMovable.reel.tiles.map((tile, tileIndex) => ({
+            ...tile,
+            id: `extra-reel-${index}-tile-${tileIndex}`
+          }))
+        }
+      }));
+      (definition as unknown as { slots: unknown[] }).slots = [
+        ...definition.slots,
+        ...extraSlots
+      ];
+      (definition as unknown as { initialIndexes: number[] }).initialIndexes = [
+        ...definition.initialIndexes,
+        0,
+        0,
+        0,
+        0
+      ];
+      (definition as unknown as { requiredTileIds: string[] }).requiredTileIds = [
+        ...definition.requiredTileIds,
+        ...extraSlots.flatMap((slot) => slot.reel.tiles.map((tile) => tile.id))
+      ];
+    });
+    const incompleteCoverage = mutateFirstLevel((definition) => {
+      (definition as unknown as { requiredTileIds: string[] }).requiredTileIds =
+        definition.requiredTileIds.slice(1);
+    });
+
+    expect(validateLevelDefinition(wrongSchema)).toContain("schemaVersion must be 3");
+    expect(solveLevel(wrongSchema).status).toBe("invalid-level");
+    expect(validateLevelDefinition(tooManyReels)).toContain(
+      "levels must contain between 2 and 5 movable reels"
+    );
+    expect(validateLevelDefinition(incompleteCoverage)).toContain(
+      "requiredTileIds must contain every movable tile exactly once"
+    );
+  });
+
+  it("fails closed when the configured arrangement limit is exceeded", () => {
+    const analysis = solveLevel(FIRST_GOLD_LEVEL, {}, {
+      maxArrangements: 8,
+      maxCoverageStates: 65_536,
+      maxMinimumCoverSearchNodes: 250_000
     });
 
     expect(analysis.status).toBe("limit-exceeded");
-    expect(analysis.errors).toContain("arrangement limit exceeded: 8");
+    expect(analysis.arrangementCount).toBe(9);
+    expect(analysis.errors).toEqual(["arrangement limit exceeded: 9"]);
   });
 
-  it("validates reel shape, IDs, math conditions, and learning metadata", () => {
-    expect(validateLevelDefinition(createUniqueFixture())).toEqual([]);
-    const invalid = { ...createUniqueFixture(), reels: createUniqueFixture().reels.slice(0, 2) } as EquationSliderLevelDefinition;
-    expect(validateLevelDefinition(invalid)).toContain("levels must contain 3 or 5 movable reels");
+  it("reports orphan tile identities when valid expressions cannot cover them", () => {
+    const orphaned = mutateFirstLevel((definition) => {
+      const slot = definition.slots[0];
+      if (slot.kind !== "movable-reel") {
+        throw new Error("Missing fixture reel");
+      }
+      (slot.reel.tiles[0] as unknown as { value: number }).value = 99;
+    });
+    const analysis = solveLevel(orphaned);
+
+    expect(analysis.status).toBe("unsolvable");
+    expect(analysis.orphanTileIds).toContain("es-1-01-left-1");
+    expect(analysis.errors.join(" ")).toContain("orphan tiles");
   });
 
-  it("fails closed for unknown runtime enum values", () => {
-    const malformed = {
-      ...createUniqueFixture(),
-      mode: "bogus",
-      challenge: "mystery",
-      learning: { ...learning, scaffoldLevel: "mystery" }
-    } as unknown as EquationSliderLevelDefinition;
+  it("enforces unique-minimum-cover against duplicate-value tile identities", () => {
+    const standard = createDuplicateIdentityFixture("standard");
+    const standardAnalysis = solveLevel(standard);
+    const unique = createDuplicateIdentityFixture("unique-minimum-cover");
+    const uniqueAnalysis = solveLevel(unique);
 
-    expect(validateLevelDefinition(malformed)).toEqual(expect.arrayContaining([
-      "mode must be target, multi-target, or equality",
-      "challenge must be standard or unique-minimum-cover",
-      "scaffoldLevel is invalid"
-    ]));
-    expect(() => solveLevel(malformed)).not.toThrow();
-    expect(solveLevel(malformed).status).toBe("invalid-level");
+    expect(standardAnalysis).toMatchObject({
+      status: "solved",
+      minimumCorrectArrangements: 3,
+      minimumCoverSetCountCapped: 2
+    });
+    expect(new Set(standardAnalysis.validArrangements.map((item) => item.tileMask)).size)
+      .toBe(standardAnalysis.validArrangements.length);
+    expect(uniqueAnalysis).toMatchObject({
+      status: "unsolvable",
+      minimumCoverSetCountCapped: 2
+    });
+    expect(uniqueAnalysis.errors).toContain(
+      "unique-minimum-cover challenge requires exactly one minimum coverage set"
+    );
   });
 
-  it("produces deterministic structure and solution topology signatures", () => {
-    const level = createUniqueFixture();
-    const analysis = solveLevel(level);
-    const rotated: EquationSliderLevelDefinition = {
-      ...level,
-      id: "rotated",
-      reels: level.reels.map((reel) => ({ ...reel, tiles: [reel.tiles[1], reel.tiles[0]] }))
-    };
+  it("publishes current solver output, detects stale analysis, and deeply freezes it", () => {
+    const definition = definitionFromPublished(FIRST_GOLD_LEVEL);
+    const republished = publishLevel(definition);
+    const stale = structuredClone(republished) as unknown as MutablePublishedLevel;
+    stale.analysis.canonicalPlan = [...stale.analysis.canonicalPlan].reverse();
 
-    expect(canonicalStructureSignature(rotated)).toBe(canonicalStructureSignature(level));
-    expect(solutionTopologySignature(level, analysis)).toBe(solutionTopologySignature(level, solveLevel(level)));
+    expect(validatePublishedLevel(republished)).toEqual([]);
+    expect(republished.analysis).toEqual(FIRST_GOLD_LEVEL.analysis);
+    expect(validatePublishedLevel(stale as unknown as PublishedEquationSliderLevel)).toContain(
+      "published canonicalPlan does not match current solver"
+    );
+    expect(Object.isFrozen(republished)).toBe(true);
+    expect(Object.isFrozen(republished.slots)).toBe(true);
+    expect(Object.isFrozen(republished.analysis)).toBe(true);
+    expect(Object.isFrozen(republished.analysis.validArrangements)).toBe(true);
+    const movable = republished.slots.find((slot) => slot.kind === "movable-reel");
+    expect(movable?.kind).toBe("movable-reel");
+    if (movable?.kind === "movable-reel") {
+      expect(Object.isFrozen(movable.reel)).toBe(true);
+      expect(Object.isFrozen(movable.reel.tiles[0])).toBe(true);
+    }
+  });
+
+  it("keeps topology signatures and the catalog audit hash deterministic", () => {
+    const solved = solveLevel(FIRST_GOLD_LEVEL);
+    const republished = publishLevel(definitionFromPublished(FIRST_GOLD_LEVEL));
+    const firstAudit = auditEquationSliderLevels(EQUATION_SLIDER_V3_LEVELS);
+    const secondAudit = auditEquationSliderLevels(EQUATION_SLIDER_V3_LEVELS);
+
+    expect(canonicalStructureSignature(republished))
+      .toBe(canonicalStructureSignature(FIRST_GOLD_LEVEL));
+    expect(solutionTopologySignature(FIRST_GOLD_LEVEL, solved))
+      .toBe(solutionTopologySignature(republished, solveLevel(republished)));
+    expect(firstAudit.deterministicHash).toBe(secondAudit.deterministicHash);
+    expect(firstAudit.deterministicHash).toMatch(/^fnv1a32-[0-9a-f]{8}$/);
   });
 });
 
-function createUniqueFixture(): EquationSliderLevelDefinition {
-  return {
-    schemaVersion: 1,
-    id: "fixture-unique",
-    chapterId: "chapter-2",
-    unitId: "chapter-2-unit-5",
-    levelNumber: 48,
-    unitLevelNumber: 8,
-    mode: "target",
-    target: 5,
-    challenge: "unique-minimum-cover",
-    reels: [
-      { id: "r1", kind: "number", initialIndex: 0, tiles: [numberTile("n1-a", 1), numberTile("n1-b", 8)] },
-      { id: "r2", kind: "operator", initialIndex: 1, tiles: [operatorTile("op-a", "+"), operatorTile("op-b", "−")] },
-      { id: "r3", kind: "number", initialIndex: 0, tiles: [numberTile("n2-a", 4), numberTile("n2-b", 3)] }
-    ],
-    learning,
-    provenance: { generatorVersion: "test", seed: "fixture", familyId: "unique-two-expression" },
-    conceptHint: "一条加法和一条减法都能得到 5。"
+function findPublishedMode(
+  mode: PublishedEquationSliderLevel["mode"]
+): PublishedEquationSliderLevel {
+  const level = EQUATION_SLIDER_V3_LEVELS.find((candidate) => candidate.mode === mode);
+  if (!level) {
+    throw new Error(`Missing published ${mode} fixture`);
+  }
+  return level;
+}
+
+function mutateFirstLevel(
+  mutation: (definition: EquationSliderLevelDefinition) => void
+): EquationSliderLevelDefinition {
+  const definition = definitionFromPublished(FIRST_GOLD_LEVEL);
+  mutation(definition);
+  return definition;
+}
+
+function definitionFromPublished(
+  level: PublishedEquationSliderLevel
+): EquationSliderLevelDefinition {
+  const { analysis: _analysis, ...definition } = structuredClone(level);
+  return definition as EquationSliderLevelDefinition;
+}
+
+function createDuplicateIdentityFixture(
+  challenge: EquationSliderLevelDefinition["challenge"]
+): EquationSliderLevelDefinition {
+  return mutateFirstLevel((definition) => {
+    (definition as unknown as { challenge: EquationSliderLevelDefinition["challenge"] })
+      .challenge = challenge;
+    const movable = definition.slots.filter(
+      (slot): slot is Extract<typeof slot, { kind: "movable-reel" }> =>
+        slot.kind === "movable-reel"
+    );
+    (movable[0].reel.tiles[1] as unknown as MutableTile).value = 1;
+    (movable[1].reel.tiles[1] as unknown as MutableTile).value = 5;
+  });
+}
+
+type MutableTile = {
+  -readonly [Key in keyof EquationTile]: EquationTile[Key];
+};
+
+type MutablePublishedLevel = Omit<PublishedEquationSliderLevel, "analysis"> & {
+  analysis: {
+    -readonly [Key in keyof PublishedEquationSliderLevel["analysis"]]:
+      PublishedEquationSliderLevel["analysis"][Key];
   };
-}
-
-function createDuplicateValueFixture(): EquationSliderLevelDefinition {
-  return {
-    ...createUniqueFixture(),
-    id: "fixture-duplicate-values",
-    challenge: "standard",
-    reels: [
-      { id: "r1", kind: "number", initialIndex: 0, tiles: [numberTile("n1-a", 1), numberTile("n1-b", 1)] },
-      { id: "r2", kind: "operator", initialIndex: 0, tiles: [operatorTile("op-a", "+"), operatorTile("op-b", "+")] },
-      { id: "r3", kind: "number", initialIndex: 1, tiles: [numberTile("n2-a", 4), numberTile("n2-b", 4)] }
-    ]
-  };
-}
-
-function numberTile(id: string, value: number): EquationTile {
-  return { id, kind: "number", value };
-}
-
-function operatorTile(id: string, value: ArithmeticOperator): EquationTile {
-  return { id, kind: "operator", value };
-}
+};

@@ -1,4 +1,5 @@
 import type { ChapterManifestEntry, PublishedEquationSliderLevel } from "../types";
+import { parsePublishedChapter } from "../schema";
 
 export const equationSliderChapterManifest: readonly ChapterManifestEntry[] = [
   {
@@ -11,11 +12,11 @@ export const equationSliderChapterManifest: readonly ChapterManifestEntry[] = [
     color: "coral",
     levelCount: 50,
     units: [
-      { id: "chapter-1-unit-1", name: "小数合成站", shortGoal: "认识中央线与部分—整体", skillTags: ["part-whole", "addition"], levelCount: 10 },
-      { id: "chapter-1-unit-2", name: "组成 10 站", shortGoal: "找到组成 10 的数对", skillTags: ["make-ten", "commutative-addition"], levelCount: 10 },
-      { id: "chapter-1-unit-3", name: "跨十桥站", shortGoal: "完成 20 以内与两步加法", skillTags: ["within-20-addition", "make-ten"], levelCount: 10 },
-      { id: "chapter-1-unit-4", name: "灵活凑整站", shortGoal: "比较不同凑整与覆盖路线", skillTags: ["compensation", "coverage-strategy"], levelCount: 10 },
-      { id: "chapter-1-unit-5", name: "加法总站", shortGoal: "迁移并复习加法关系", skillTags: ["addition-transfer", "coverage-strategy"], levelCount: 10 }
+      { id: "chapter-1-station-1", name: "小数合成站", shortGoal: "认识中央线与部分—整体", skillTags: ["part-whole", "addition"], levelCount: 10 },
+      { id: "chapter-1-station-2", name: "组成 10 站", shortGoal: "找到组成 10 的数对", skillTags: ["make-ten", "commutative-addition"], levelCount: 10 },
+      { id: "chapter-1-station-3", name: "跨十桥站", shortGoal: "完成 20 以内与两步加法", skillTags: ["within-20-addition", "make-ten"], levelCount: 10 },
+      { id: "chapter-1-station-4", name: "灵活凑整站", shortGoal: "比较不同凑整与覆盖路线", skillTags: ["compensation", "coverage-strategy"], levelCount: 10 },
+      { id: "chapter-1-station-5", name: "加法总站", shortGoal: "迁移并复习加法关系", skillTags: ["addition-transfer", "coverage-strategy"], levelCount: 10 }
     ]
   },
   {
@@ -28,11 +29,11 @@ export const equationSliderChapterManifest: readonly ChapterManifestEntry[] = [
     color: "teal",
     levelCount: 50,
     units: [
-      { id: "chapter-2-unit-1", name: "拿走站", shortGoal: "理解减法表示还剩多少", skillTags: ["take-away", "subtraction"], levelCount: 10 },
-      { id: "chapter-2-unit-2", name: "相差站", shortGoal: "用减法比较相差多少", skillTags: ["difference", "subtraction"], levelCount: 10 },
-      { id: "chapter-2-unit-3", name: "算式家族站", shortGoal: "联系加法与减法", skillTags: ["fact-family", "inverse-operations"], levelCount: 10 },
-      { id: "chapter-2-unit-4", name: "两步换轨站", shortGoal: "按从左到右完成两步加减", skillTags: ["left-to-right-add-sub", "two-step"], levelCount: 10 },
-      { id: "chapter-2-unit-5", name: "加减总站", shortGoal: "交错使用加减与覆盖策略", skillTags: ["add-sub-transfer", "coverage-strategy"], levelCount: 10 }
+      { id: "chapter-2-station-1", name: "拿走站", shortGoal: "理解减法表示还剩多少", skillTags: ["take-away", "subtraction"], levelCount: 10 },
+      { id: "chapter-2-station-2", name: "相差站", shortGoal: "用减法比较相差多少", skillTags: ["difference", "subtraction"], levelCount: 10 },
+      { id: "chapter-2-station-3", name: "算式家族站", shortGoal: "联系加法与减法", skillTags: ["fact-family", "inverse-operations"], levelCount: 10 },
+      { id: "chapter-2-station-4", name: "两步换轨站", shortGoal: "按从左到右完成两步加减", skillTags: ["left-to-right-add-sub", "two-step"], levelCount: 10 },
+      { id: "chapter-2-station-5", name: "加减总站", shortGoal: "交错使用加减与覆盖策略", skillTags: ["add-sub-transfer", "coverage-strategy"], levelCount: 10 }
     ]
   },
   {
@@ -45,11 +46,11 @@ export const equationSliderChapterManifest: readonly ChapterManifestEntry[] = [
     color: "gold",
     levelCount: 50,
     units: [
-      { id: "chapter-3-unit-1", name: "二五十工坊", shortGoal: "观察 2、5、10 的乘法规律", skillTags: ["multiplication-groups", "times-2-5-10"], levelCount: 10 },
-      { id: "chapter-3-unit-2", name: "三四六工坊", shortGoal: "组合 3、4、6 的乘法事实", skillTags: ["multiplication-facts", "doubling"], levelCount: 10 },
-      { id: "chapter-3-unit-3", name: "平均分站", shortGoal: "理解整除与平均分", skillTags: ["exact-division", "equal-sharing"], levelCount: 10 },
-      { id: "chapter-3-unit-4", name: "乘除互逆站", shortGoal: "用乘法检查除法", skillTags: ["multiply-divide-inverse", "inverse-operations"], levelCount: 10 },
-      { id: "chapter-3-unit-5", name: "顺序工坊", shortGoal: "先乘除、后加减", skillTags: ["order-of-operations", "mixed-operations"], levelCount: 10 }
+      { id: "chapter-3-station-1", name: "二五十工坊", shortGoal: "观察 2、5、10 的乘法规律", skillTags: ["multiplication-groups", "times-2-5-10"], levelCount: 10 },
+      { id: "chapter-3-station-2", name: "三四六工坊", shortGoal: "组合 3、4、6 的乘法事实", skillTags: ["multiplication-facts", "doubling"], levelCount: 10 },
+      { id: "chapter-3-station-3", name: "平均分站", shortGoal: "理解整除与平均分", skillTags: ["exact-division", "equal-sharing"], levelCount: 10 },
+      { id: "chapter-3-station-4", name: "乘除互逆站", shortGoal: "用乘法检查除法", skillTags: ["multiply-divide-inverse", "inverse-operations"], levelCount: 10 },
+      { id: "chapter-3-station-5", name: "顺序工坊", shortGoal: "先乘除、后加减", skillTags: ["order-of-operations", "mixed-operations"], levelCount: 10 }
     ]
   },
   {
@@ -62,11 +63,11 @@ export const equationSliderChapterManifest: readonly ChapterManifestEntry[] = [
     color: "lilac",
     levelCount: 50,
     units: [
-      { id: "chapter-4-unit-1", name: "多目标站", shortGoal: "规划 2–3 个目标与 tile 覆盖", skillTags: ["multi-target", "coverage-planning"], levelCount: 10 },
-      { id: "chapter-4-unit-2", name: "等式平衡站", shortGoal: "理解等号表示两边同值", skillTags: ["equal-sign", "balance"], levelCount: 10 },
-      { id: "chapter-4-unit-3", name: "综合策略站", shortGoal: "比较四则运算的覆盖路线", skillTags: ["mixed-operations", "coverage-strategy"], levelCount: 10 },
-      { id: "chapter-4-unit-4", name: "唯一路线站", shortGoal: "排除分支，找到唯一最小覆盖集合", skillTags: ["unique-route", "deductive-reasoning"], levelCount: 10 },
-      { id: "chapter-4-unit-5", name: "全线路总站", shortGoal: "迁移四章关系并自由复习", skillTags: ["cross-chapter-transfer", "equation-reasoning"], levelCount: 10 }
+      { id: "chapter-4-station-1", name: "多目标站", shortGoal: "规划 2–3 个目标与 tile 覆盖", skillTags: ["multi-target", "coverage-planning"], levelCount: 10 },
+      { id: "chapter-4-station-2", name: "等式平衡站", shortGoal: "理解等号表示两边同值", skillTags: ["equal-sign", "balance"], levelCount: 10 },
+      { id: "chapter-4-station-3", name: "综合策略站", shortGoal: "比较四则运算的覆盖路线", skillTags: ["mixed-operations", "coverage-strategy"], levelCount: 10 },
+      { id: "chapter-4-station-4", name: "唯一路线站", shortGoal: "排除分支，找到唯一最小覆盖集合", skillTags: ["unique-route", "deductive-reasoning"], levelCount: 10 },
+      { id: "chapter-4-station-5", name: "全线路总站", shortGoal: "迁移四章关系并自由复习", skillTags: ["cross-chapter-transfer", "equation-reasoning"], levelCount: 10 }
     ]
   }
 ];
@@ -74,19 +75,19 @@ export const equationSliderChapterManifest: readonly ChapterManifestEntry[] = [
 export async function loadEquationSliderChapter(chapterId: string): Promise<readonly PublishedEquationSliderLevel[]> {
   if (chapterId === "chapter-1") {
     const chapter = await import("./chapter-1-addition.json");
-    return chapter.default as unknown as readonly PublishedEquationSliderLevel[];
+    return parsePublishedChapter(chapter.default, chapterId);
   }
   if (chapterId === "chapter-2") {
     const chapter = await import("./chapter-2-add-sub.json");
-    return chapter.default as unknown as readonly PublishedEquationSliderLevel[];
+    return parsePublishedChapter(chapter.default, chapterId);
   }
   if (chapterId === "chapter-3") {
     const chapter = await import("./chapter-3-mul-div.json");
-    return chapter.default as unknown as readonly PublishedEquationSliderLevel[];
+    return parsePublishedChapter(chapter.default, chapterId);
   }
   if (chapterId === "chapter-4") {
     const chapter = await import("./chapter-4-reasoning.json");
-    return chapter.default as unknown as readonly PublishedEquationSliderLevel[];
+    return parsePublishedChapter(chapter.default, chapterId);
   }
   throw new Error(`Unknown equation slider chapter: ${chapterId}`);
 }

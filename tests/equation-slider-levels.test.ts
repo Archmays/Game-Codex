@@ -1,183 +1,269 @@
-import chapter1 from "../games/equation-slider/levels/chapter-1-addition.json";
-import chapter2 from "../games/equation-slider/levels/chapter-2-add-sub.json";
-import chapter3 from "../games/equation-slider/levels/chapter-3-mul-div.json";
-import chapter4 from "../games/equation-slider/levels/chapter-4-reasoning.json";
-import generatedAudit from "../games/equation-slider/levels/generated-audit.json";
-import { formatExpression } from "../games/equation-slider/evaluator";
-import { auditLevelSet } from "../games/equation-slider/level-audit";
-import { solveLevel } from "../games/equation-slider/solver";
-import type { PublishedEquationSliderLevel } from "../games/equation-slider/types";
+import { auditEquationSliderLevels } from "../games/equation-slider/level-audit";
+import {
+  EQUATION_SLIDER_V3_LEVELS,
+  GENERATED_V3_LEVELS,
+  HAND_AUTHORED_GOLD_TEMPLATES,
+  HAND_AUTHORED_V3_GOLD_LEVELS
+} from "../games/equation-slider/levels/v3/catalog";
+import {
+  getMovableReels,
+  solveLevel,
+  validatePublishedLevel
+} from "../games/equation-slider/solver";
+import type {
+  ArithmeticOperator,
+  EquationTile,
+  PublishedEquationSliderLevel,
+  ReelDefinition
+} from "../games/equation-slider/types";
 
-const levels = [...chapter1, ...chapter2, ...chapter3, ...chapter4] as unknown as PublishedEquationSliderLevel[];
+const CHAPTER_IDS = [
+  "chapter-1",
+  "chapter-2",
+  "chapter-3",
+  "chapter-4"
+] as const;
 
-describe("equation slider formal levels", () => {
-  const audit = auditLevelSet(levels);
+describe("equation slider V3 formal levels", () => {
+  it("publishes 200 levels as four 50-level chapters with five 10-level stations each", () => {
+    expect(EQUATION_SLIDER_V3_LEVELS).toHaveLength(200);
+    expect(HAND_AUTHORED_GOLD_TEMPLATES).toHaveLength(40);
+    expect(HAND_AUTHORED_V3_GOLD_LEVELS).toHaveLength(40);
+    expect(GENERATED_V3_LEVELS).toHaveLength(160);
 
-  it("publishes exactly 200 fixed levels across four complete chapters", () => {
-    expect(levels).toHaveLength(200);
-    expect(audit.summary.chapters).toEqual({
-      "chapter-1": 50,
-      "chapter-2": 50,
-      "chapter-3": 50,
-      "chapter-4": 50
-    });
-    expect(Object.keys(audit.summary.units)).toHaveLength(20);
-    expect(Object.values(audit.summary.units).every((count) => count === 10)).toBe(true);
+    for (const chapterId of CHAPTER_IDS) {
+      const chapterLevels = levelsInChapter(chapterId);
+      expect(chapterLevels).toHaveLength(50);
+      expect(chapterLevels.map((level) => level.order)).toEqual(sequence(1, 50));
+      expect(chapterLevels.filter((level) => level.provenance.kind === "hand-authored-gold"))
+        .toHaveLength(10);
+      expect(chapterLevels.filter((level) => level.provenance.kind === "generated-from-gold"))
+        .toHaveLength(40);
+
+      for (let station = 1; station <= 5; station += 1) {
+        const stationLevels = chapterLevels.filter(
+          (level) => level.stationId === `${chapterId}-station-${station}`
+        );
+        expect(stationLevels, `${chapterId} station ${station}`).toHaveLength(10);
+        expect(stationLevels.map((level) => level.stationOrder)).toEqual(sequence(1, 10));
+      }
+    }
   });
 
-  it("passes the full solver, metadata, progression, uniqueness, and diversity audit", () => {
-    expect(audit.errors).toEqual([]);
-    expect(audit.summary.solverValidated).toBe(200);
-    expect(audit.summary.unsolvableLevels).toBe(0);
-    expect(audit.summary.orphanTiles).toBe(0);
-    expect(audit.summary.exactDuplicateStructures).toBe(0);
-    expect(audit.summary.maximumFamilyReusePerUnit).toBeLessThanOrEqual(4);
-    expect(audit.summary.maximumTopologyReusePerChapter).toBeLessThanOrEqual(8);
-    expect(audit.summary.maximumConsecutiveTopologyReuse).toBeLessThanOrEqual(6);
-    expect(audit.summary.threeReelTwoTileCohort).toBe(26);
-    expect(audit.summary.threeReelTwoTilePlanCounts).toEqual({
-      "0.0.1>1.1.0": 16,
-      "0.1.0>1.0.1": 7,
-      "0.1.1>1.0.0": 3
-    });
-    expect(audit.summary.maximumThreeReelTwoTilePlanReuse).toBeLessThanOrEqual(18);
-    expect(audit.summary.maximumThreeReelTwoTileTopologyReusePerChapter).toBeLessThanOrEqual(6);
-    expect(audit.summary.maximumConsecutiveCanonicalPlanReuse).toBeLessThanOrEqual(2);
-    expect(audit.summary.openingPlanDiversityMinimum).toBeGreaterThanOrEqual(2);
-    expect(audit.summary.advancedUniqueChallenges).toBeGreaterThanOrEqual(5);
-    expect(audit.summary.trivialAlignedCompleteCovers).toBe(0);
-    expect(audit.summary.nonTrivialCoverageLevels).toBeGreaterThanOrEqual(30);
-    expect(audit.summary.initialDistanceDistribution).toEqual({ "1": 118, "2": 68, "3": 14 });
-    expect(audit.summary.maximumGenerationAttempt).toBeLessThanOrEqual(1000);
-  });
+  it("publishes every level through the strict V3 schema and solver gates", () => {
+    const globallyUniqueIds: string[] = [];
 
-  it("contains all three modes and enough verified unique challenges", () => {
-    expect(audit.summary.modes).toEqual({ target: 140, "multi-target": 40, equality: 20 });
-    expect(audit.summary.uniqueChallenges).toBe(14);
-  });
+    for (const level of EQUATION_SLIDER_V3_LEVELS) {
+      const reels = getMovableReels(level);
+      const solved = solveLevel(level);
 
-  it("uses the planned scaffold cycle in every station", () => {
-    expect(audit.summary.scaffolds).toEqual({
-      guided: 40,
-      supported: 40,
-      independent: 40,
-      transfer: 40,
-      review: 40
-    });
-    expect(audit.summary.crossChapterReviewCount).toBeGreaterThanOrEqual(10);
-  });
-
-  it("materializes real relation families and a rising chapter difficulty curve", () => {
-    const chapterAverages = ["chapter-1", "chapter-2", "chapter-3", "chapter-4"].map((chapterId) => {
-      const chapterLevels = levels.filter((level) => level.chapterId === chapterId);
-      return chapterLevels.reduce((total, level) => total + level.analysis.difficultyMetrics.compositeDifficulty, 0)
-        / chapterLevels.length;
-    });
-    expect(chapterAverages[1]).toBeGreaterThan(chapterAverages[0]);
-    expect(chapterAverages[2]).toBeGreaterThan(chapterAverages[1]);
-    expect(chapterAverages[3]).toBeGreaterThan(chapterAverages[2]);
-
-    const advancedUnique = levels.filter((level) => {
-      return level.challenge === "unique-minimum-cover"
-        && level.analysis.difficultyMetrics.minimumCorrectExpressions >= 3
-        && level.analysis.difficultyMetrics.validArrangementCount > level.analysis.difficultyMetrics.minimumCorrectExpressions;
-    });
-    expect(advancedUnique.length).toBeGreaterThanOrEqual(5);
-    expect(levels.filter((level) => level.unitId === "chapter-2-unit-3").every((level) => level.mode === "multi-target")).toBe(true);
-    expect(levels.filter((level) => level.unitId === "chapter-3-unit-4").every((level) => level.mode === "multi-target")).toBe(true);
-  });
-
-  it("removes the aligned-row shortcut and keeps reflection examples on the published reels", () => {
-    for (const level of levels) {
+      expect(level.schemaVersion, level.id).toBe(3);
+      expect(validatePublishedLevel(level), level.id).toEqual([]);
+      expect(solved.status, level.id).toBe("solved");
+      expect(solved.orphanTileIds, level.id).toEqual([]);
+      expect(solved.missingTargetIds, level.id).toEqual([]);
+      expect(reels.length, level.id).toBeGreaterThanOrEqual(2);
+      expect(reels.length, level.id).toBeLessThanOrEqual(5);
+      expect(level.initialIndexes, level.id).toHaveLength(reels.length);
       expect(
-        level.analysis.canonicalPlan.every((indexes) => new Set(indexes).size === 1),
-        `${level.id} should not use an all-aligned canonical plan`
-      ).toBe(false);
-      if (["multi-target", "unique-route"].includes(level.learning.primarySkill)) {
-        continue;
-      }
-      const firstPlan = level.analysis.canonicalPlan[0];
-      const expression = formatExpression(level.reels.map((reel, reelIndex) => reel.tiles[firstPlan[reelIndex]].value));
-      expect(level.learning.reflectionText, level.id).toContain(expression);
-    }
-  });
+        level.initialIndexes.every((index) => index === 0 || index === 1 || index === 2),
+        level.id
+      ).toBe(true);
 
-  it("shows both inverse operations in relation-family reflections", () => {
-    for (const level of levels) {
-      const requiredOperators = level.learning.primarySkill === "fact-family"
-        ? (["+", "−"] as const)
-        : level.learning.primarySkill === "multiply-divide-inverse"
-          ? (["×", "÷"] as const)
-          : null;
-      if (!requiredOperators) {
-        continue;
-      }
-      const expressions = level.analysis.canonicalPlan.map((indexes) => {
-        return formatExpression(level.reels.map((reel, reelIndex) => reel.tiles[indexes[reelIndex]].value));
-      });
-      for (const operator of requiredOperators) {
-        const example = expressions.find((expression) => expression.includes(operator));
-        expect(example, `${level.id} should solve with ${operator}`).toBeDefined();
-        expect(level.learning.reflectionText, level.id).toContain(example);
+      const movableTileIds = reels.flatMap((reel) => reel.tiles.map((tile) => tile.id));
+      expect(new Set(level.requiredTileIds), level.id).toEqual(new Set(movableTileIds));
+      expect(level.requiredTileIds, level.id).toHaveLength(movableTileIds.length);
+
+      globallyUniqueIds.push(level.id, ...level.targets.map((target) => target.id));
+      for (const slot of level.slots) {
+        if (slot.kind === "fixed-token") {
+          expect(level.requiredTileIds, level.id).not.toContain(slot.id);
+          globallyUniqueIds.push(slot.id);
+          continue;
+        }
+        assertMovableReelContract(level, slot.reel);
+        globallyUniqueIds.push(slot.reel.id, ...slot.reel.tiles.map((tile) => tile.id));
       }
     }
-  });
 
-  it("keeps every published hint plan completable from reachable partial progress", () => {
-    for (const level of levels) {
-      const full = solveLevel(level);
-      expect(full.status, level.id).toBe("solved");
-      const prefix = full.canonicalPlan.slice(0, Math.max(1, full.canonicalPlan.length - 1));
-      const arrangements = new Map(full.validArrangements.map((arrangement) => [arrangement.key, arrangement]));
-      const covered = new Set<string>();
-      const completedTargets = new Set<number>();
-      for (const step of prefix) {
-        const effect = arrangements.get(step.indexes.join("."));
-        effect?.selectedTileIds.forEach((id) => covered.add(id));
-        if (effect && effect.targetMask > 0) {
-          for (let index = 0; index < 3; index += 1) {
-            if ((effect.targetMask & (1 << index)) !== 0) {
-              completedTargets.add(index);
-            }
+    expect(new Set(globallyUniqueIds).size).toBe(globallyUniqueIds.length);
+  }, 120_000);
+
+  it("keeps number values and fixed or movable operators inside the release contract", () => {
+    const observedOperators = new Set<ArithmeticOperator>();
+
+    for (const level of EQUATION_SLIDER_V3_LEVELS) {
+      for (const target of level.targets) {
+        if (target.kind === "value") {
+          assertSafeArithmeticNumber(level.id, target.value);
+          continue;
+        }
+        for (const token of target.rightExpression) {
+          if (typeof token === "number") {
+            assertSafeArithmeticNumber(level.id, token);
+          } else {
+            expect(["+", "−", "×", "÷"], level.id).toContain(token);
+            observedOperators.add(token);
           }
         }
       }
-      const continued = solveLevel(level, {
-        coveredTileIds: [...covered],
-        completedTargetIndexes: [...completedTargets]
-      });
-      expect(continued.status, level.id).toBe("solved");
+
+      for (const slot of level.slots) {
+        if (slot.kind === "fixed-token") {
+          if (typeof slot.token === "string") {
+            expect(["+", "−", "×", "÷"], level.id).toContain(slot.token);
+            observedOperators.add(slot.token);
+          } else {
+            assertSafeArithmeticNumber(level.id, slot.token);
+          }
+          continue;
+        }
+
+        for (const tile of slot.reel.tiles) {
+          if (tile.kind === "number") {
+            assertSafeNumberTileValue(level.id, tile.value);
+          } else {
+            expect(["+", "−", "×", "÷"], level.id).toContain(tile.value);
+            observedOperators.add(tile.value as ArithmeticOperator);
+          }
+        }
+      }
     }
+
+    expect(observedOperators).toEqual(new Set<ArithmeticOperator>(["+", "−", "×", "÷"]));
   });
 
-  it("matches the checked-in compact generation audit", () => {
-    expect(generatedAudit).toMatchObject({
-      totalLevels: 200,
-      solverValidated: 200,
-      orphanTiles: 0,
-      unsolvableLevels: 0,
-      exactDuplicateStructures: 0,
-      uniqueChallenges: 14
-    });
-    expect(Object.values(generatedAudit.targetValues).reduce((sum, count) => sum + count, 0)).toBeGreaterThan(200);
-    expect(Object.values(generatedAudit.operatorOccurrences).reduce((sum, count) => sum + count, 0)).toBeGreaterThan(0);
-    expect(Object.values(generatedAudit.difficultyBands).reduce((sum, count) => sum + count, 0)).toBe(200);
-    expect(generatedAudit.minimumSolutionSteps).toEqual({ "2": 35, "3": 127, "4": 33, "5": 5 });
-    expect(Object.keys(generatedAudit.perChapter)).toEqual(["chapter-1", "chapter-2", "chapter-3", "chapter-4"]);
-    expect(Object.values(generatedAudit.perChapter).map((chapter) => chapter.averageCompositeDifficulty)).toEqual([
-      32.189,
-      33.014,
-      33.283,
-      44.459
-    ]);
-    expect(generatedAudit.trivialAlignedCompleteCovers).toBe(0);
-    expect(generatedAudit.nonTrivialCoverageLevels).toBe(38);
-    expect(generatedAudit.initialDistanceDistribution).toEqual({ "1": 118, "2": 68, "3": 14 });
-    expect(generatedAudit.threeReelTwoTileCohort).toBe(26);
-    expect(generatedAudit.maximumThreeReelTwoTilePlanReuse).toBe(16);
-    expect(generatedAudit.maximumThreeReelTwoTileTopologyReusePerChapter).toBe(6);
-    expect(generatedAudit.maximumConsecutiveCanonicalPlanReuse).toBe(2);
-    expect(generatedAudit.openingPlanDiversityMinimum).toBe(2);
-    expect(generatedAudit.maximumGenerationAttempt).toBe(202);
+  it("enforces the chapter-specific learning progression contracts", () => {
+    const chapter1 = levelsInChapter("chapter-1");
+    expect(chapter1.some(hasMovableOperatorReel)).toBe(false);
+    expect(numberTiles(chapter1.filter((level) => level.order <= 10)).filter(
+      (tile) => tile.value === 0
+    )).toHaveLength(0);
+    expect(
+      chapter1
+        .filter((level) => level.order <= 10)
+        .every((level) =>
+          level.targets.every((target) => target.kind !== "value" || target.value <= 20)
+        )
+    ).toBe(true);
+
+    const chapter2 = levelsInChapter("chapter-2");
+    expect(chapter2.flatMap(levelOperators)).not.toContain("×");
+    expect(chapter2.flatMap(levelOperators)).not.toContain("÷");
+
+    const chapter3 = levelsInChapter("chapter-3");
+    const addSubtractReviewCount = chapter3.filter((level) =>
+      levelOperators(level).some((operator) => operator === "+" || operator === "−")
+    ).length;
+    expect(addSubtractReviewCount).toBeGreaterThanOrEqual(Math.ceil(chapter3.length * 0.2));
+
+    const chapter4 = levelsInChapter("chapter-4");
+    expect(chapter4.some((level) => level.mode === "multi-target")).toBe(true);
+    expect(chapter4.some((level) => level.mode === "equality")).toBe(true);
+    expect(chapter4.some((level) => getMovableReels(level).length === 5)).toBe(true);
   });
+
+  it("passes the deterministic 200-level release audit", () => {
+    const audit = auditEquationSliderLevels(EQUATION_SLIDER_V3_LEVELS);
+
+    expect(audit).toMatchObject({
+      schemaVersion: 3,
+      totalLevels: 200,
+      chapterCounts: {
+        "chapter-1": 50,
+        "chapter-2": 50,
+        "chapter-3": 50,
+        "chapter-4": 50
+      },
+      goldCount: 40,
+      generatedCount: 160,
+      exactDuplicateGroups: [],
+      adjacentRepetitions: [],
+      overusedCanonicalActionPatterns: {},
+      invalidPublishedLevels: {},
+      unsolvedLevelIds: [],
+      orphanTiles: {},
+      missingTargets: {},
+      passes: true
+    });
+    expect(Object.keys(audit.stationCounts)).toHaveLength(20);
+    expect(Object.values(audit.stationCounts).every((count) => count === 10)).toBe(true);
+    expect(audit.firstTenZeroCountByChapter["chapter-1"]).toBe(0);
+    expect(audit.deterministicHash).toMatch(/^fnv1a32-[0-9a-f]{8}$/);
+  }, 120_000);
 });
+
+function levelsInChapter(
+  chapterId: typeof CHAPTER_IDS[number]
+): readonly PublishedEquationSliderLevel[] {
+  return EQUATION_SLIDER_V3_LEVELS.filter((level) => level.chapterId === chapterId);
+}
+
+function sequence(first: number, last: number): number[] {
+  return Array.from({ length: last - first + 1 }, (_, index) => first + index);
+}
+
+function assertMovableReelContract(
+  level: PublishedEquationSliderLevel,
+  reel: ReelDefinition
+): void {
+  expect(reel.tiles, reel.id).toHaveLength(3);
+  expect(new Set(reel.tiles.map((tile) => tile.id)).size, reel.id).toBe(3);
+  expect(reel.tiles.every((tile) => tile.kind === reel.kind), reel.id).toBe(true);
+  expect(new Set(reel.tiles.map((tile) => tile.value)).size, reel.id).toBeGreaterThanOrEqual(2);
+
+  if (reel.kind === "operator") {
+    expect(
+      reel.tiles.every((tile) => ["+", "−", "×", "÷"].includes(String(tile.value))),
+      level.id
+    ).toBe(true);
+  } else {
+    expect(
+      reel.tiles.every((tile) =>
+        typeof tile.value === "number"
+          && Number.isSafeInteger(tile.value)
+          && tile.value >= 0
+          && tile.value <= 100
+      ),
+      level.id
+    ).toBe(true);
+  }
+}
+
+function assertSafeNumberTileValue(levelId: string, value: unknown): void {
+  assertSafeArithmeticNumber(levelId, value);
+  expect(value as number, levelId).toBeLessThanOrEqual(100);
+}
+
+function assertSafeArithmeticNumber(levelId: string, value: unknown): void {
+  expect(typeof value, levelId).toBe("number");
+  expect(Number.isSafeInteger(value), levelId).toBe(true);
+  expect(value as number, levelId).toBeGreaterThanOrEqual(0);
+}
+
+function hasMovableOperatorReel(level: PublishedEquationSliderLevel): boolean {
+  return level.slots.some(
+    (slot) => slot.kind === "movable-reel" && slot.reel.kind === "operator"
+  );
+}
+
+function numberTiles(
+  levels: readonly PublishedEquationSliderLevel[]
+): readonly EquationTile[] {
+  return levels.flatMap((level) =>
+    getMovableReels(level).flatMap((reel) =>
+      reel.kind === "number" ? [...reel.tiles] : []
+    )
+  );
+}
+
+function levelOperators(level: PublishedEquationSliderLevel): readonly ArithmeticOperator[] {
+  return level.slots.flatMap((slot) => {
+    if (slot.kind === "fixed-token") {
+      return typeof slot.token === "string" ? [slot.token] : [];
+    }
+    return slot.reel.kind === "operator"
+      ? slot.reel.tiles.map((tile) => tile.value as ArithmeticOperator)
+      : [];
+  });
+}

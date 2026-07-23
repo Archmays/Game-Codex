@@ -1,11 +1,11 @@
 # 算式滑轨
 
-> **当前状态：BLOCKED / 修复中。**  
-> 现有仓库包含 200 份 solver 验证关卡数据，但浏览器版本存在已确认的 P0 缺陷：教程不能操作真实棋盘；真实拖动 preview 会把上下按钮改写成 tile 容器，使每列由 3 个视觉 tile 膨胀为 9 个；2-tile reel 又会在未移动时重复显示同一 tile。当前版本不得作为正式儿童可玩版本。权威重构交接见 `../../docs/equation-slider/rebuild-v3/`。
+> **当前状态：PLAYABLE / V3。**
+> 4 章共 200 关已按 V3 schema 重建；正式棋盘教程、统一 board state、稳定三格 reel、40 个手工金标准、160 个确定性生成关、真实浏览器 E2E 与 25 关 UI-only agent 试玩均已完成。完整证据见 `../../docs/equation-slider/rebuild-v3/`。
 
 ## 游戏目标
 
-通过移动数字和运算符相关的滑轨，让中央表达式形成目标数学关系，并用不同组合点亮本关要求的方块。V3 将保留数感、四则运算、等式理解和组合推理目标，但会重构早期固定运算符、真实教程、reel schema、关卡内容与浏览器验收。
+通过移动数字和运算符相关的滑轨，让中央表达式形成目标数学关系，并用不同组合点亮本关要求的方块。V3 覆盖数感、四则运算、等式理解和组合推理；早期关使用固定运算符，后续再引入真实的运算选择。
 
 ## 适合对象
 
@@ -14,18 +14,18 @@
 - 单关目标时长：约 1-4 分钟。
 - 不以速度、最少步数、排行榜或连续登录评价儿童。
 
-以上是 V3 产品目标，不代表当前失败版本已经达到。
+自动化验收不等于真人儿童验证；真实儿童观察仍按 `10-child-playtest-checklist.md` 后续执行。
 
-## 已确认的旧版问题
+## 已根治的旧版问题
 
-1. `appendTutorial()` 把正式棋盘设为 `inert`，再显示不可交互的静态 diagram。
-2. `refreshBoardPreview()` 查询全部 `[data-reel-index]`，会同时命中上按钮、window 和下按钮。
-3. `updateReelWindow()` 把每个命中元素替换成 3 个 tile，因此拖动后每列出现 9 个 tile。
-4. 第一关每列只有 2 个实际 tile，但 renderer 强制显示 previous/current/next，同一 tile 被重复渲染。
-5. 第一关数据为 `[0,4] / [+,+] / [0,4]`，operator reel 移动不改变数学意义。
-6. 当前没有 Playwright 或真实浏览器 E2E，Node/Vitest 无法发现 pointer、modal 和 DOM 问题。
+1. 教程已改为直接操作正式 `es-1-01` 棋盘，不再 `inert`，也没有静态“下一步”替代。
+2. pointer preview 只更新渲染预览，不替换 control 或正式 tile DOM。
+3. 每条 movable reel 恰好 3 个唯一 tile ID；任一 tile 在 DOM 正好出现一次。
+4. 旧 2-tile 重复投影已移除，生产 manifest 只加载 V3 三格关卡。
+5. Chapter 1 使用 fixed `+`；operator reel 只在运算选择本身有学习意义时出现。
+6. Playwright 已覆盖真实 mouse/touch pointer、click、箭头、keyboard、取消、滚动、响应式和长期 DOM 稳定性。
 
-## V3 玩法方向
+## 玩法说明
 
 - 单一运算的早期关使用 fixed operator，例如固定 `+`；
 - fixed token 不参与 coverage；
@@ -45,21 +45,28 @@
 
 ## 内容要求
 
-最终发布仍须达到：
+当前发布内容：
 
 - 4 章；
-- 每章至少 50 关；
-- 总计至少 200 关；
-- 先完成 1 个首关金标准；
-- 再完成每章 10 个手工金标准，共至少 40 个；
-- 其余关从金标准模板确定性生成；
-- 全部通过 solver、内容审计、Playwright 和 agent/browser playtest。
+- 每章 50 关；
+- 总计 200 关；
+- 首关为独立金标准；
+- 每章 10 个手工金标准，共 40 个；
+- 其余 160 关从金标准模板确定性生成；
+- 全部纳入 solver、内容审计、Playwright 和 agent/browser playtest。
 
-现有 200 关可作为证据和候选池，但允许整体重建，不得因为已有投入而保留错误结构。
+机器可读质量证据见 `levels/generated-audit.json`，人工与浏览器证据见 V3 报告目录。
 
-## 设备与无障碍目标
+## 涉及知识点
 
-V3 必须验证：
+- 20 以内加法与数的组成；
+- 减法、相差与加减互逆；
+- 乘法分组、整除与乘除互逆；
+- 四则运算顺序、等式平衡、多目标与覆盖规划。
+
+## 设备适配
+
+V3 已纳入自动化验证：
 
 - 鼠标；
 - touch pointer；
@@ -73,29 +80,28 @@ V3 必须验证：
 
 ## 当前完成度
 
-`BLOCKED_FOR_RUNTIME_REBUILD`
+`PLAYABLE_V3`
 
-已经存在：
+已经完成：
 
 - 原创主题；
 - evaluator；
 - solver；
-- 4 章 manifest；
-- 200 份旧 schema 关卡；
+- 4 章 V3 manifest；
+- 200 份 V3 schema 关卡；
 - localStorage 进度；
-- GitHub Pages 接入。
+- 真实浏览器交互、响应式和 Pages 发布接入；
+- 25 关 UI-only agent 试玩。
 
-尚未达到：
+尚未执行：
 
-- 可操作教程；
-- 稳定 DOM；
-- 真实浏览器测试；
-- 合格首关；
-- V3 关卡质量合同；
-- 25 关 agent/browser playtest；
 - 真人儿童验证。
 
-## 接入位置
+## 后续改进建议
+
+按 `10-child-playtest-checklist.md` 做去身份化真人儿童观察，重点确认重复值 tile identity、一级提示理解、窄屏触控和 5–10 分钟持续兴趣；结果不得由 agent 试玩代替。
+
+## 接入方式
 
 - 导出：`equationSliderGame`
 - 注册：`packages/data/gameCatalog.ts`
