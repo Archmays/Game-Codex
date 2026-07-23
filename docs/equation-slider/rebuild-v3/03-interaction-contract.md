@@ -125,7 +125,7 @@ interface BoardState {
 
 ## 教程合同
 
-### 禁歊
+### 禁止
 
 - 全屏 modal 阻挡棋盘；
 - 把正式棋盘设为 `inert` 后声称可以拖动；
