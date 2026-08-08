@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "initiative_id": "hanzi-radical-battle-v2",
+  "initiative_name": "黄小越的游戏世界：汉字魔法战——墨迹森林",
+  "target_player": {
+    "name": "黄小越",
+    "stage": "约6岁，刚进入小学阶段",
+    "experience_goal": "主动觉得自己是来冒险和玩的，而不是被要求练习"
+  },
+  "north_star": "让孩子因为想成为更厉害的汉字魔法师、修复自己的游戏世界而主动回来玩。",
+  "core_learning_mechanic": "部件进入正确结构位置并组成完整汉字，这个动作本身就是施法。",
+  "runtime_lock": {
+    "engine": "Phaser 3",
+    "language": "TypeScript",
+    "build": "Vite",
+    "text_heavy_ui": "DOM overlay",
+    "persistence": "localStorage",
+    "distribution": "GitHub Pages"
+  },
+  "golden_slice": {
+    "duration_minutes_min": 3,
+    "duration_minutes_max": 5,
+    "heroes": 1,
+    "companion_characters": 1,
+    "playable_characters_max": 12,
+    "normal_monster_types": 2,
+    "bosses": 1,
+    "upgrade_choices": 1,
+    "upgrade_options": 3,
+    "camp_repairs": 1,
+    "persistent_spellbook": true
+  },
+  "required_experience": [
+    "两次点击以内进入冒险",
+    "首次成功施法尽量在60秒内发生",
+    "不阅读长规则页也能开始",
+    "合字动画明确表现真实结构",
+    "至少一次有意义的三选一",
+    "结束时看见永久世界变化",
+    "失败或撤退不羞辱儿童",
+    "存档只保存在本地"
+  ],
+  "prohibited_mechanics": [
+    "Godot migration",
+    "backend account",
+    "cloud child tracking",
+    "daily login reward",
+    "streak pressure",
+    "leaderboard",
+    "loot box",
+    "FOMO timer",
+    "punitive progress loss",
+    "shaming failure language"
+  ],
+  "non_goals": [
+    "完整开放世界",
+    "同时重做其余游戏",
+    "多货币经济",
+    "复杂装备系统",
+    "大型宠物收集",
+    "数百项能力",
+    "未经儿童验证即扩建完整墨迹森林"
+  ],
+  "promotion_gates": [
+    "自动测试通过",
+    "真实浏览器和代表性设备可用",
+    "关键视觉状态有截图证据",
+    "黄小越能完成第一次合字",
+    "黄小越能理解一次选择",
+    "黄小越注意到营地永久变化",
+    "试玩观察支持继续扩建"
+  ],
+  "pre_implementation_questions": [
+    "它是否让黄小越更像是在玩，而不是做练习？",
+    "它是否让合字本身仍然是核心动作，而不是被奖励系统遮住？",
+    "它是否能在少量家长解释下被孩子理解？",
+    "它是否避免焦虑、操纵、羞辱和强迫性留存？"
+  ],
+  "drift_alerts": [
+    "黄金样板超过12个汉字",
+    "新增第二种局外货币",
+    "新增每日任务、连续登录、排行榜或抽卡",
+    "引入Godot、后端、账号或云端儿童追踪",
+    "同时重写其他游戏",
+    "儿童试玩前扩建完整墨迹森林",
+    "核心合字体验验证前批量生产角色或场景素材",
+    "儿童首屏重新出现学习目标、正确率或适合年龄",
+    "新功能没有traceability行",
+    "失败文案出现败北、你还需要练习、做错了等羞辱性判断"
+  ],
+  "status": "FOUNDATION_ONLY"
+}

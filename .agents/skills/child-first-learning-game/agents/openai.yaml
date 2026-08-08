@@ -1,0 +1,4 @@
+interface:
+  display_name: "Child-First Learning Game"
+  short_description: "Guard child-first learning-game design and playtest decisions"
+  default_prompt: "Use $child-first-learning-game to keep this learning-game task child-first, healthy, and playtestable."

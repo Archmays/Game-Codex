@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hanzi Structure Quality"
+  short_description: "Validate child-fit simplified Hanzi structure and content"
+  default_prompt: "Use $hanzi-structure-quality to validate Hanzi structure, labels, and child-fit content."

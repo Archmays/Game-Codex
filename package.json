@@ -18,7 +18,8 @@
     "test:e2e:equation-slider:playtest": "playwright test tests/e2e/equation-slider-agent-playtest.spec.ts",
     "levels:generate": "tsx games/equation-slider/tools/generate-levels.ts",
     "levels:check": "tsx games/equation-slider/tools/generate-levels.ts --check",
-    "validate:content": "vitest run tests/content-validation.test.ts"
+    "validate:content": "vitest run tests/content-validation.test.ts",
+    "validate:hanzi-v2-foundation": "vitest run tests/hanzi-radical-battle-v2-foundation.test.ts"
   },
   "dependencies": {
     "phaser": "^3.90.0"

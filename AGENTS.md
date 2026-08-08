@@ -55,16 +55,16 @@
 
 ## Skill usage audit
 
-Before starting any non-trivial task, Codex must inspect `skill/SKILL_INDEX.md` and decide whether any project skill applies.
+Before starting any non-trivial learning-game or product task, Codex must inspect `.agents/skills/SKILL_INDEX.md` and decide whether its routed global skill applies. Ordinary Git/status/stash/branch/commit/push operations do not trigger a learning-game skill unless the request also asks to change or assess gameplay, learning design, child usability, parent co-play, or game UI.
 
 At the start of the response, include a short section:
 
 ### Skill usage
 - Selected skill(s): `<skill-id>` or `none`
-- Skill path(s): `skill/<skill-id>/SKILL.md` or `none`
+- Skill path(s): the canonical path recorded in `.agents/skills/SKILL_INDEX.md` or `none`
 - Reason: one short sentence explaining why the skill applies or why no skill is needed.
 
-If a task uses a skill, Codex must read the relevant `skill/<skill-id>/SKILL.md` before planning or editing files.
+If a task uses a skill, Codex must resolve and read the canonical path recorded in `.agents/skills/SKILL_INDEX.md` before planning or editing files. Do not invent a local copy when the routed global skill is unavailable.
 
 At the end of the response, include:
 
@@ -75,3 +75,22 @@ At the end of the response, include:
 - Any skill that looked relevant but was not used, with reason:
 
 Do not reveal private chain-of-thought. Provide only an audit summary of selected skills, files read, and rules followed.
+
+## Hanzi Radical Battle V2 guardrail
+
+Before any non-trivial work under `games/hanzi-radical-battle/` or the
+`hanzi-radical-battle-v2` initiative, read:
+
+- `.agents/skills/SKILL_INDEX.md`
+- `docs/hanzi-radical-battle-v2/00-NORTH-STAR.md`
+- `docs/hanzi-radical-battle-v2/00-NORTH-STAR.json`
+- `docs/hanzi-radical-battle-v2/03-TRACEABILITY-MATRIX.md`
+- `docs/hanzi-radical-battle-v2/04-DECISION-LOG.md`
+
+A new feature may not be implemented unless it maps to the north star,
+states its child value, states its hanzi-learning value, and has an
+automatic or child-playtest validation path.
+
+Do not introduce Godot migration, backend accounts, cloud child tracking,
+daily-login rewards, streak pressure, leaderboards, loot boxes, FOMO timers,
+punitive progress loss, or shaming failure language.
