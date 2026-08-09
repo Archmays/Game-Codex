@@ -315,13 +315,56 @@
 }
 
 .review-pilot-frame {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  justify-content: center;
   margin: 0 auto;
-  transition: width 180ms ease;
 }
 
-.review-pilot-frame--desktop { width: 100%; }
-.review-pilot-frame--tablet { width: min(100%, 820px); }
-.review-pilot-frame--mobile { width: min(100%, 430px); }
+.review-pilot-frame--desktop { width: min(100%, 1180px); }
+.review-pilot-frame--tablet { width: min(100%, 768px); }
+.review-pilot-frame--mobile { width: min(100%, 390px); }
+
+.review-pilot-viewport {
+  position: relative;
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+
+.review-pilot-surface {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1180px;
+  transform-origin: top left;
+}
+
+.review-pilot-frame:not(.is-responsive) .review-pilot-surface .pilot-shell {
+  width: 1180px;
+  max-width: none;
+}
+
+.review-pilot-frame:not(.is-responsive) .review-pilot-surface .pilot-stage {
+  aspect-ratio: 16 / 9;
+  min-height: 0;
+}
+
+.review-pilot-frame.is-responsive {
+  width: 100%;
+}
+
+.review-pilot-frame.is-responsive .review-pilot-viewport {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.review-pilot-frame.is-responsive .review-pilot-surface {
+  position: relative;
+  width: 100%;
+  transform: none;
+}
 
 .pilot-review-evidence {
   display: grid;

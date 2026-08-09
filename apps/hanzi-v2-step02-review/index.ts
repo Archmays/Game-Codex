@@ -111,10 +111,14 @@ export function mountHanziV2Step02Review(root: HTMLElement): void {
         <div class="panel-heading"><div><span class="review-kicker">PLAY FIRST</span><h2>同一块世界里完成核心法术</h2><p>从本页开始，两次点按内进入五牌结构操作。点牌再点槽位，或直接拖放。</p></div><div class="identity-chip">锚点：明 = 日 + 月</div></div>
         <div class="pilot-review-controls" aria-label="成人 Pilot 控制">
           <label>结构预览<select data-scenario-select>${PILOT_SCENARIOS.map((scenario) => `<option value="${scenario.id}">${scenario.id === "pilot-ming-left-right" ? "儿童主 Pilot · 明（左右）" : scenario.id.includes("hua") ? "成人预览 · 花（上下）" : "成人预览 · 风（半包围）"}</option>`).join("")}</select></label>
-          <div class="segmented" aria-label="预览宽度"><button type="button" data-viewport="desktop" aria-pressed="true">桌面</button><button type="button" data-viewport="tablet" aria-pressed="false">平板</button><button type="button" data-viewport="mobile" aria-pressed="false">手机</button></div>
+          <div class="segmented" aria-label="等比预览尺寸"><button type="button" data-viewport="desktop" aria-pressed="true">桌面</button><button type="button" data-viewport="tablet" aria-pressed="false">平板</button><button type="button" data-viewport="mobile" aria-pressed="false">手机</button></div>
           <button type="button" class="review-secondary" data-pilot-reset>重置本次闭环</button>
         </div>
-        <div class="review-pilot-frame review-pilot-frame--desktop" data-pilot-frame><div data-pilot-mount></div></div>
+        <div class="review-pilot-frame review-pilot-frame--desktop" data-pilot-frame data-preview-viewport="desktop">
+          <div class="review-pilot-viewport" data-pilot-preview-viewport="desktop">
+            <div class="review-pilot-surface" data-pilot-preview-surface><div data-pilot-mount></div></div>
+          </div>
+        </div>
         <div class="pilot-review-evidence">
           <article><span>当前阶段</span><strong data-live-phase>camp_intro</strong></article>
           <article><span>事件顺序</span><ol data-live-events><li>pilot_opened</li></ol></article>
@@ -153,17 +157,55 @@ export function mountHanziV2Step02Review(root: HTMLElement): void {
   </main>`;
 
   const pilotMount = root.querySelector<HTMLElement>("[data-pilot-mount]");
-  if (!pilotMount) throw new Error("Missing STEP 02 pilot mount in review app");
+  const pilotFrame = root.querySelector<HTMLElement>("[data-pilot-frame]");
+  const pilotViewport = root.querySelector<HTMLElement>("[data-pilot-preview-viewport]");
+  const pilotSurface = root.querySelector<HTMLElement>("[data-pilot-preview-surface]");
+  if (!pilotMount || !pilotFrame || !pilotViewport || !pilotSurface) {
+    throw new Error("Missing STEP 02 pilot preview mount in review app");
+  }
+  const previewFrame = pilotFrame;
+  const previewViewport = pilotViewport;
+  const previewSurface = pilotSurface;
+  const minScaledPreviewHostWidth = 1280;
+
+  function layoutPilotPreview(): void {
+    const useResponsiveLayout = window.innerWidth < minScaledPreviewHostWidth;
+    previewFrame.classList.toggle("is-responsive", useResponsiveLayout);
+    if (useResponsiveLayout) {
+      previewSurface.style.removeProperty("transform");
+      previewViewport.style.removeProperty("width");
+      previewViewport.style.removeProperty("height");
+      previewViewport.dataset.previewScale = "1.000000";
+      previewViewport.dataset.previewNaturalWidth = String(previewSurface.offsetWidth);
+      previewViewport.dataset.previewNaturalHeight = String(previewSurface.offsetHeight);
+      return;
+    }
+    const naturalWidth = previewSurface.offsetWidth;
+    const naturalHeight = previewSurface.offsetHeight;
+    if (!naturalWidth || !naturalHeight || !previewFrame.clientWidth) return;
+    const scale = Math.min(1, previewFrame.clientWidth / naturalWidth);
+    previewSurface.style.transform = `scale(${scale})`;
+    previewViewport.style.width = `${naturalWidth * scale}px`;
+    previewViewport.style.height = `${naturalHeight * scale}px`;
+    previewViewport.dataset.previewScale = scale.toFixed(6);
+    previewViewport.dataset.previewNaturalWidth = String(naturalWidth);
+    previewViewport.dataset.previewNaturalHeight = String(naturalHeight);
+  }
+
   const pilot = mountHanziV2CoreSpellPilot(pilotMount, {
     onStateChange: (state) => updatePilotEvidence(state),
   });
+  const pilotPreviewObserver = new ResizeObserver(() => layoutPilotPreview());
+  pilotPreviewObserver.observe(previewSurface);
+  window.addEventListener("resize", layoutPilotPreview);
+  window.requestAnimationFrame(layoutPilotPreview);
 
   function saveDraft(): void {
     window.localStorage.setItem(REVIEW_DRAFT_KEY, JSON.stringify(draft));
     updateSummary();
   }
 
-  function showTab(tabId: ReviewTab): void {
+  function showTab(tabId: ReviewTab, resetScroll = false): void {
     activeTab = tabId;
     root.querySelectorAll<HTMLElement>("[data-review-panel]").forEach((panel) => {
       panel.hidden = panel.dataset.reviewPanel !== activeTab;
@@ -173,6 +215,13 @@ export function mountHanziV2Step02Review(root: HTMLElement): void {
       else button.removeAttribute("aria-current");
     });
     if (activeTab === "summary") updateSummary();
+    if (activeTab === "pilot") window.requestAnimationFrame(layoutPilotPreview);
+    if (resetScroll) {
+      window.requestAnimationFrame(() => {
+        const header = root.querySelector<HTMLElement>(".review-header");
+        if (header) window.scrollTo({ top: header.offsetHeight, behavior: "auto" });
+      });
+    }
   }
 
   function updatePilotEvidence(state: PilotState): void {
@@ -341,9 +390,9 @@ export function mountHanziV2Step02Review(root: HTMLElement): void {
   }
 
   root.querySelectorAll<HTMLElement>("[data-review-tab]").forEach((button) => {
-    button.addEventListener("click", () => showTab(button.dataset.reviewTab as ReviewTab));
+    button.addEventListener("click", () => showTab(button.dataset.reviewTab as ReviewTab, true));
   });
-  root.querySelector<HTMLElement>("[data-jump-summary]")?.addEventListener("click", () => showTab("summary"));
+  root.querySelector<HTMLElement>("[data-jump-summary]")?.addEventListener("click", () => showTab("summary", true));
   root.querySelector<HTMLSelectElement>("[data-scenario-select]")?.addEventListener("change", (event) => {
     pilot.resetScenario((event.currentTarget as HTMLSelectElement).value);
   });
@@ -354,8 +403,10 @@ export function mountHanziV2Step02Review(root: HTMLElement): void {
   root.querySelectorAll<HTMLElement>("[data-viewport]").forEach((button) => {
     button.addEventListener("click", () => {
       const viewport = button.dataset.viewport ?? "desktop";
-      const frame = root.querySelector<HTMLElement>("[data-pilot-frame]");
-      if (frame) frame.className = `review-pilot-frame review-pilot-frame--${viewport}`;
+      previewFrame.className = `review-pilot-frame review-pilot-frame--${viewport}`;
+      previewFrame.dataset.previewViewport = viewport;
+      previewViewport.dataset.pilotPreviewViewport = viewport;
+      layoutPilotPreview();
       root.querySelectorAll<HTMLElement>("[data-viewport]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
     });
   });

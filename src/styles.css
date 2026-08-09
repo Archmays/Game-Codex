@@ -1656,6 +1656,22 @@ body {
     #f6f3e7;
 }
 
+html.step02-review-page,
+body.step02-review-page {
+  height: auto;
+  min-height: 100%;
+}
+
+body.step02-review-page {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body.step02-review-page #app {
+  height: auto;
+  min-height: 100vh;
+}
+
 canvas {
   display: block;
   touch-action: none;
