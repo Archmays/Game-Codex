@@ -21,6 +21,8 @@ $rawEvidencePath = Join-Path $repositoryRoot "artifacts\hanzi-radical-battle-v2\
 $returnPackagePath = Join-Path $repositoryRoot "artifacts\hanzi-radical-battle-v2\step-04\STEP-04_CHILD_FIRST_USE_RETURN_TO_CHATGPT.zip"
 $freezeTestPath = Join-Path $repositoryRoot "tests\hanzi-radical-battle-v2-step05-freeze.test.ts"
 
+Write-Host "STEP 05: checking repository, evidence, and frozen identity. Please wait..."
+
 foreach ($requiredFile in @($contractTool, $rawEvidencePath, $returnPackagePath, $freezeTestPath)) {
   if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
     throw "DENY: required STEP 05 input is missing at $requiredFile. No browser was opened."
@@ -42,9 +44,6 @@ if ($FixtureMode) {
   $readinessPath = Join-Path $fixtureDirectory "STEP-05-REVIEW-READINESS.json"
   $sessionStatePath = Join-Path $fixtureDirectory "review-session.json"
 } else {
-  if (Test-Path -LiteralPath $taskPaths.ActiveSessionPath -PathType Leaf) {
-    throw "DENY: an active real STEP 05 review session exists. Run FINISH or resolve it before starting another."
-  }
   $scopedStatus = Get-Step05ScopedStatus -RepositoryRoot $repositoryRoot
   if ($scopedStatus.Count -gt 0) {
     throw "DENY: STEP 05 reviewed paths are uncommitted, so the commit cannot identify the exact candidate. No browser was opened.`n$($scopedStatus -join "`n")"
@@ -79,6 +78,51 @@ $encodedEvidence = [System.Uri]::EscapeDataString([string]$readiness.identity.ev
 $encodedRevision = [System.Uri]::EscapeDataString([string]$readiness.identity.candidateRevision)
 $fixtureQuery = if ($FixtureMode) { "&fixture=1" } else { "" }
 $reviewUrl = "http://127.0.0.1:$Port/?review=hanzi-v2-step05&commit=$encodedCommit&evidence=$encodedEvidence&revision=$encodedRevision$fixtureQuery"
+
+if (-not $FixtureMode -and (Test-Path -LiteralPath $taskPaths.ActiveSessionPath -PathType Leaf)) {
+  try {
+    $activeSession = Get-Content -LiteralPath $taskPaths.ActiveSessionPath -Raw | ConvertFrom-Json
+  } catch {
+    throw "DENY: the active STEP 05 review session cannot be read. Nothing was overwritten. Resolve the session file at $($taskPaths.ActiveSessionPath) before retrying."
+  }
+
+  $sameContract = `
+    $activeSession.schemaVersion -eq 1 -and `
+    [string]$activeSession.initiativeId -ceq "hanzi-radical-battle-v2" -and `
+    [string]$activeSession.step -ceq "05" -and `
+    [bool]$activeSession.fixture -eq $false -and `
+    [string]$activeSession.sessionToken -match '^s05-review-[a-f0-9]{32}$' -and `
+    [int]$activeSession.port -eq $Port -and `
+    [string]$activeSession.reviewUrl -ceq $reviewUrl -and `
+    [string]$activeSession.identity.candidateCommit -ceq [string]$readiness.identity.candidateCommit -and `
+    [string]$activeSession.identity.evidenceSha256 -ceq [string]$readiness.identity.evidenceSha256 -and `
+    [string]$activeSession.identity.candidateRevision -ceq [string]$readiness.identity.candidateRevision -and `
+    [string]$activeSession.evidenceIdentity.rawEvidenceSha256 -ceq [string]$readiness.evidenceIdentity.rawEvidenceSha256 -and `
+    [string]$activeSession.evidenceIdentity.childReturnPackageSha256 -ceq [string]$readiness.evidenceIdentity.childReturnPackageSha256 -and `
+    [string]$activeSession.evidenceIdentity.observedBuildCommit -ceq [string]$readiness.evidenceIdentity.observedBuildCommit -and `
+    [string]$activeSession.sourceSnapshots.encounters -ceq [string]$readiness.sourceSnapshots.encounters -and `
+    [string]$activeSession.sourceSnapshots.abilities -ceq [string]$readiness.sourceSnapshots.abilities -and `
+    [string]$activeSession.sourceSnapshots.boss -ceq [string]$readiness.sourceSnapshots.boss -and `
+    [string]$activeSession.sourceSnapshots.themeC -ceq [string]$readiness.sourceSnapshots.themeC -and `
+    [string]$activeSession.sourceSnapshots.manifest -ceq [string]$readiness.sourceSnapshots.manifest
+
+  if (-not $sameContract) {
+    throw "DENY: the active STEP 05 review session does not match the current commit/evidence/revision contract. Nothing was overwritten. Resolve or finish that session before retrying."
+  }
+
+  Start-Step05RecordedServer -RepositoryRoot $repositoryRoot -TaskPaths $taskPaths -Runtime $runtime
+  Wait-Step05Server -Url $reviewUrl -TaskPaths $taskPaths
+  if ($NoBrowser) {
+    Write-Host "The matching active review is ready; no browser was opened by request."
+  } else {
+    Write-Host "Reopening the matching active STEP 05 review in the default browser..."
+    Start-Process -FilePath $reviewUrl
+  }
+  Write-Host "Review URL: $reviewUrl"
+  Write-Host "No parent decision or authorization was preselected or inferred."
+  return
+}
+
 $sessionState = [ordered]@{
   schemaVersion = 1
   initiativeId = "hanzi-radical-battle-v2"
@@ -102,7 +146,8 @@ if (-not $SkipServer) {
 if ($NoBrowser) {
   Write-Host "No browser was opened by request."
 } else {
-  Start-Process $reviewUrl
+  Write-Host "Opening the STEP 05 review in the default browser..."
+  Start-Process -FilePath $reviewUrl
 }
 
 Write-Host "STEP 05 changed-only parent review is ready."
