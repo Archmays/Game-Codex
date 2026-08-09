@@ -1,6 +1,6 @@
 # Traceability Matrix
 
-状态：STEP 02 家长决定已由 identity-bound JSON 正式吸收；STEP 03 技术候选已实现并停在家长终审。`STEP02_ACCEPTED_CARRIED_FORWARD` 只表示对应 STEP 02 项获家长接受；`STEP03_CANDIDATE_READY_FOR_PARENT_REVIEW` 不是 STEP 03 家长接受，更不是儿童理解或接受。每个新功能必须说明儿童价值、汉字学习价值，以及自动与真人验证路径。
+状态：STEP 03 identity-bound 家长决定已正式吸收；全部 accepted gameplay/content 冻结，唯一 audio changed item 已按家长要求修订。STEP 04 只到 `AUTHORIZED_CHILD_FIRST_USE_READY`；没有执行真实儿童 session，也没有儿童理解、接受、学习或推广结论。每个新功能仍必须说明儿童价值、汉字学习价值，以及自动与真人验证路径。
 
 | 功能 | 对应北极星原则 | 参考案例 | 儿童价值 | 汉字学习价值 | 自动验证 | 真人试玩观察 | 当前状态 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -21,8 +21,10 @@
 | 第二战“花”迁移 | 教一个结构后换结构迁移 | Pin it、level-design、正字法研究 | 花开并让道路恢复，避免重复感 | 从“明”的左右结构迁移到“花”的上下结构；不提前泄题 | 5 牌唯一解、首次提示只指上下、分层提示、完成后呼吸段 | 是否主动改变放置策略；是否把花开归因于“花” | `STEP02_ACCEPTED_STORYBOARD / STEP03_CANDIDATE_READY_FOR_PARENT_REVIEW` |
 | 节奏与呼吸 | 3–5 分钟完成一条短冒险 | level-design、PBS KIDS playtest | 施法快、转场可跳、世界变化有观察时间 | 每次结构/词义有停留，不被下一层 UI 立即遮住 | 强制等待预算、首 spell 最短路径≤60s、无倒计时 | 实际局长、停看位置、是否因转场失去兴趣 | `STEP03_CANDIDATE_READY_FOR_PARENT_REVIEW` |
 | 本地最小试玩事件 | 最少匿名记录只辅助观察 | UNICEF RITEC、child-first Skill | 不建立儿童画像或远程追踪 | 只记录流程卡点，不称成绩 | 精确 schema、localStorage only、家长导出/清除、无 remote request | 观察者把事实与解释分开，不从事件推断学习效果 | `STEP03_CANDIDATE_READY_FOR_PARENT_REVIEW` |
-| 家长 STEP 03 终审 | 技术 PASS 与人类接受分离 | project review contract | 成人可按新/受影响项作清楚决定 | final 12、结构/词义/音画可逐项核验 | schema/identity/changed-only/FINISH zip | 家长完成全部必填并明确 child-first-use YES/NO/NOT_YET | `STEP03_CANDIDATE_READY_FOR_PARENT_REVIEW / PARENT_DECISION_PENDING` |
-| 儿童首次使用门禁 | 未经家长 YES 不启动真实观察 | PBS KIDS、child-first Skill | 保护隐私、安全和成人观察边界 | 只观察真实结构使用，不模拟儿童结果 | guarded launcher 默认拒绝；无录音录像上传；固定本地 JSON | 仅在家长 YES 后由真实孩子与观察者完成 | `PREP_ONLY / NOT_AUTHORIZED_FOR_USE` |
+| 家长 STEP 03 终审 | 技术 PASS 与人类接受分离 | project review contract | 成人可按新/受影响项作清楚决定 | final 12、结构/词义/音画可逐项核验 | feedback/review identity SHA、changed-only freeze | 家长已完成全部必填；唯一 audio `REVISE`；child-first-use `YES` | `STEP03_PARENT_ACCEPTED / AUDIO_REVISED` |
+| 拼音显示与 TTS 分离 | 声音可选且不承担规则 | audio-design、家长 changed-only feedback | 拼音仍看得见；静音也可完整操作 | 朗读只连接字形与 accepted 熟悉词，不把拼音当口语内容 | 四句 exact、12 字无 Latin、同一数据源、mute/silent fallback | 家长每次 session 在实际设备试听或合法选择静音 | `STEP04_IMPLEMENTED / DEVICE_PREFLIGHT_REQUIRED_PER_SESSION` |
+| 儿童首次使用门禁 | 未经家长 READY 不启动真实观察 | PBS KIDS、child-first-use-observation | 保护隐私、安全、第一次接触与随时停止 | 只观察真实结构使用，不模拟儿童结果 | session token、source freeze、preflight、schema、PII denylist、START/FINISH | 仅在家长现场授权后由真实孩子与观察者完成 | `AUTHORIZED_CHILD_FIRST_USE_READY / REAL_OBSERVATION_NOT_RUN` |
+| 同源家长观察器 | 技术事件与人类解释分层 | game-playtest、save-systems | 成人只提供技术支持，不看到答案或 solver | 观察内置机制是否被看见，不写“学会” | BroadcastChannel + storage fallback、sequence/dedupe/reconnect、stop、local export | 家长记录中文 enum、介入代码、well-being 与可拒绝选择 | `STEP04_IMPLEMENTED / HUMAN_EVIDENCE_PENDING` |
 
 ## 新功能准入模板
 

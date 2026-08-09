@@ -20,7 +20,7 @@ export function spellbookOverlayMarkup(activeId: string, replayMode: "formation"
       <article class="golden-spellbook__page" data-testid="spellbook-page-${active.id}">
         <div class="golden-spellbook__glyph" lang="zh-Hans">${active.glyph}</div>
         <div class="golden-spellbook__facts">
-          <h3>${active.pinyin} · ${active.familiarWord}</h3>
+          <h3>${active.visualPinyin} · ${active.familiarWord}</h3>
           <p>${active.shortMeaning}</p>
           <dl>
             <div><dt>结构</dt><dd>${STRUCTURE_LABELS[active.structure]}</dd></div>

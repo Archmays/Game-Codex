@@ -8,12 +8,60 @@ window.addEventListener("load", async () => {
     throw new Error("Missing #app container.");
   }
 
-  const reviewMode = new URLSearchParams(window.location.search).get("review");
-  const playMode = new URLSearchParams(window.location.search).get("play");
-  const goldenSliceMode = new URLSearchParams(window.location.search).get("mode");
+  const search = new URLSearchParams(window.location.search);
+  const reviewMode = search.get("review");
+  const playMode = search.get("play");
+  const observeMode = search.get("observe");
+  const goldenSliceMode = search.get("mode");
   if (playMode === "hanzi-v2-golden-slice") {
     document.documentElement.classList.add("hanzi-v2-golden-slice-page");
     document.body.classList.add("hanzi-v2-golden-slice-page");
+    if (goldenSliceMode === "child-first-use") {
+      const session = await import(
+        "../games/hanzi-radical-battle/v2/golden-slice/first-use/session"
+      );
+      const authorization = session.validateChildFirstUseSessionRoute(search, window.localStorage);
+      if (!authorization.ok) {
+        root.innerHTML = `<main role="alert" data-testid="child-first-use-denied"><h1>这次冒险还没有准备好</h1><p>请回到家长准备页完成声音检查和 READY 确认。</p></main>`;
+        return;
+      }
+      const [{ mountHanziV2GoldenSlice }, { createChildFirstUseEventBridge }] = await Promise.all([
+        import("../games/hanzi-radical-battle/v2/golden-slice"),
+        import("../games/hanzi-radical-battle/v2/golden-slice/first-use/event-bridge"),
+      ]);
+      let childHandle: ReturnType<typeof mountHanziV2GoldenSlice> | null = null;
+      let pendingStop: import("../games/hanzi-radical-battle/v2/golden-slice/first-use/event-types").FirstUseStopCode | null = null;
+      const bridge = createChildFirstUseEventBridge({
+        mode: goldenSliceMode,
+        sessionId: authorization.grant.sessionId,
+        storage: window.localStorage,
+        onStop(stopCode) {
+          session.markFirstUseSessionStopped(window.localStorage, authorization.grant.sessionId, stopCode);
+          if (childHandle) childHandle.stopFirstUse(stopCode);
+          else pendingStop = stopCode;
+        },
+      });
+      try {
+        childHandle = mountHanziV2GoldenSlice(root, {
+          mode: "play",
+          seed: authorization.grant.runSeed,
+          childFirstUse: true,
+          technicalFixture: authorization.grant.fixture,
+          initialMuted: session.firstUseSessionStartsMuted(authorization.grant),
+          onFirstUseEvent: (eventType, safeMetadata) => {
+            bridge.emit(eventType, safeMetadata);
+          },
+        });
+        if (pendingStop) childHandle.stopFirstUse(pendingStop);
+      } catch {
+        bridge.emit("technical_error", { errorCode: "RENDER_ERROR", recoverable: false });
+        bridge.close();
+        root.innerHTML = `<main role="alert" data-testid="child-first-use-error"><h1>冒险暂时没有打开</h1><p>请让家长在观察页选择“立即停止”。</p></main>`;
+        return;
+      }
+      window.addEventListener("pagehide", () => bridge.close(), { once: true });
+      return;
+    }
     const { mountHanziV2GoldenSlice } = await import(
       "../games/hanzi-radical-battle/v2/golden-slice"
     );
@@ -40,6 +88,14 @@ window.addEventListener("load", async () => {
         }, window.location.origin);
       });
     }
+    return;
+  }
+
+  if (observeMode === "hanzi-v2-step04") {
+    document.documentElement.classList.add("step04-observer-page");
+    document.body.classList.add("step04-observer-page");
+    const { mountHanziV2Step04Observer } = await import("../apps/hanzi-v2-step04-observer");
+    mountHanziV2Step04Observer(root);
     return;
   }
 

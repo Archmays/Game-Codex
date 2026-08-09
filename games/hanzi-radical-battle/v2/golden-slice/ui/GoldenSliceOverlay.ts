@@ -37,6 +37,7 @@ import { parentDebugOverlayMarkup } from "./ParentDebugOverlay";
 import { settingsOverlayMarkup } from "./SettingsOverlay";
 import { spellbookOverlayMarkup } from "./SpellbookOverlay";
 import { goldenStructureBoardMarkup } from "./StructureBoard";
+import type { FirstUseActionKind, FirstUseEventType, FirstUseSafeMetadata, FirstUseStopCode } from "../first-use/event-types";
 
 const AUDIO_SETTINGS_KEY = "family-games/hanzi-radical-battle-v2/golden-slice/audio-settings";
 const FIRST_RUN_IDS = [...FIRST_RUN_CHARACTER_IDS];
@@ -46,6 +47,10 @@ export interface GoldenSliceOverlayOptions {
   mode?: GoldenSliceMode;
   seed?: string;
   onStateChange?: (state: GoldenSliceState) => void;
+  childFirstUse?: boolean;
+  technicalFixture?: boolean;
+  initialMuted?: boolean;
+  onFirstUseEvent?: (eventType: FirstUseEventType, safeMetadata?: FirstUseSafeMetadata) => void;
 }
 
 export interface GoldenSliceOverlayHandle {
@@ -55,6 +60,7 @@ export interface GoldenSliceOverlayHandle {
   setReducedMotion(reducedMotion: boolean): void;
   resetRun(): void;
   resetLocalProgress(): void;
+  stopFirstUse(stopCode: FirstUseStopCode): void;
   destroy(): void;
 }
 
@@ -151,6 +157,12 @@ const FORMATION_PHASES = new Set<GoldenSlicePhase>([
   "boss_phase_2_forming",
   "boss_cleared",
 ]);
+const AUTO_SPEECH_PHASES = new Set<GoldenSlicePhase>([
+  "battle_1_casting",
+  "battle_2_casting",
+  "boss_phase_1_forming",
+  "boss_phase_2_forming",
+]);
 
 function zeroRecord<T extends string>(keys: readonly T[]): Record<T, number> {
   return Object.fromEntries(keys.map((key) => [key, 0])) as Record<T, number>;
@@ -232,6 +244,9 @@ export function mountGoldenSliceOverlay(
   root: HTMLElement,
   options: GoldenSliceOverlayOptions = {},
 ): GoldenSliceOverlayHandle {
+  if (options.technicalFixture && !options.childFirstUse) {
+    throw new Error("STEP 04 technical fixture chrome is only valid on the guarded child-first-use route");
+  }
   let saveRead: GoldenSliceSaveReadResult = readGoldenSliceSave(window.localStorage);
   let save = saveRead.state;
   if (
@@ -243,7 +258,11 @@ export function mountGoldenSliceOverlay(
   const seed = options.seed?.trim() || save.lastRunSeed;
   let state = createGoldenSliceState({ seed, mode: options.mode ?? "play" });
   let audioSettings = readAudioSettings(window.localStorage);
-  audioSettings = { ...audioSettings, muted: save.settings.muted };
+  const initialMuted = options.childFirstUse && typeof options.initialMuted === "boolean"
+    ? options.initialMuted
+    : save.settings.muted;
+  audioSettings = { ...audioSettings, muted: initialMuted };
+  if (options.childFirstUse) save = { ...save, settings: { ...save.settings, muted: initialMuted } };
   const audio = new AudioDirector(audioSettings);
   let world: GoldenSliceWorldHandle;
   let destroyed = false;
@@ -258,13 +277,16 @@ export function mountGoldenSliceOverlay(
   let spellbookReplayMode: "formation" | "magic" | null = null;
   let resetArmed = false;
   let completionPersisted = false;
+  let firstUseStopped = false;
+  let firstUseActionEmitted = false;
 
   root.classList.add("golden-slice-mount");
-  root.innerHTML = `<main class="golden-shell" data-testid="hanzi-v2-golden-slice" data-visual-state-id="boot">
+  root.innerHTML = `<main class="golden-shell" data-testid="hanzi-v2-golden-slice" data-visual-state-id="boot" data-child-first-use="${String(Boolean(options.childFirstUse))}">
     <header class="golden-topbar">
       <div class="golden-world-name"><i class="golden-world-name__lamp" aria-hidden="true"></i><span>汉字魔法战 · 墨迹森林</span></div>
-      <div class="golden-topbar__actions"><span class="golden-seed"></span><button class="golden-icon-button" type="button" data-settings-open>声音与画面</button></div>
+      <div class="golden-topbar__actions"><span class="golden-seed" ${options.childFirstUse ? "hidden" : ""}></span><button class="golden-icon-button" type="button" data-settings-open>声音与画面</button></div>
     </header>
+    ${options.technicalFixture ? `<aside class="golden-fixture-banner" data-testid="child-first-use-fixture-banner">SYNTHETIC_TOOLING_TEST_ONLY · NO CHILD DATA</aside>` : ""}
     <section class="golden-stage">
       <div class="golden-world-canvas" data-world-canvas aria-hidden="true"></div>
       <div class="golden-vignette" aria-hidden="true"></div>
@@ -386,8 +408,19 @@ export function mountGoldenSliceOverlay(
 
   function updateHintLevel(level: number, slotId: string | null): void {
     const encounterId = state.currentEncounterId;
+    const priorLevel = session.maxHintLevelByEncounter[encounterId];
     session.maxHintLevelByEncounter[encounterId] = Math.max(session.maxHintLevelByEncounter[encounterId], level);
     uiHintSlotId = slotId;
+    if (level > priorLevel) emitFirstUseEvent("built_in_hint_shown", { hintLevel: level, encounterId });
+  }
+
+  function emitFirstUseEvent(eventType: FirstUseEventType, safeMetadata?: FirstUseSafeMetadata): void {
+    if (!options.childFirstUse) return;
+    try {
+      options.onFirstUseEvent?.(eventType, safeMetadata);
+    } catch {
+      // The local observer bridge is evidence-only and must never change game rules.
+    }
   }
 
   function scheduleIdleHint(): void {
@@ -427,11 +460,15 @@ export function mountGoldenSliceOverlay(
     }
   }
 
-  function dispatchInternal(action: GoldenSliceAction, userInitiated = false): void {
-    if (destroyed) return;
+  function dispatchInternal(action: GoldenSliceAction, userInitiated = false, actionKind: FirstUseActionKind = "pointer"): void {
+    if (destroyed || firstUseStopped) return;
     const previous = state;
     if (userInitiated) {
       if (session.firstActionMs === null) session.firstActionMs = elapsedMs();
+      if (!firstUseActionEmitted) {
+        firstUseActionEmitted = true;
+        emitFirstUseEvent("first_action", { actionKind });
+      }
       uiHintSlotId = null;
       echoVisible = false;
     }
@@ -442,6 +479,7 @@ export function mountGoldenSliceOverlay(
 
     if (action.type === "place-card" && state.phase === "invalid_feedback") {
       session.invalidPlacementCountByEncounter[state.currentEncounterId] += 1;
+      emitFirstUseEvent("invalid_placement", { encounterId: state.currentEncounterId });
       if (session.invalidPlacementCountByEncounter[state.currentEncounterId] >= 2) {
         const encounter = getGoldenEncounter(state.currentEncounterId);
         updateHintLevel(2, state.hintSlotId ?? encounter.slots.find((slot) => !state.board.placements[slot.id])?.id ?? null);
@@ -450,6 +488,7 @@ export function mountGoldenSliceOverlay(
     if (state.phase === "battle_1_casting" && session.firstSpellMs === null) session.firstSpellMs = elapsedMs();
     if (action.type === "choose-ability") {
       session.chosenAbilityId = action.abilityId;
+      emitFirstUseEvent("ability_selected", { abilityId: action.abilityId });
       audio.playSfx("choice");
     }
     if (action.type === "safe-retry" && (previous.currentEncounterId === "boss-lin" || previous.currentEncounterId === "boss-xing")) {
@@ -461,12 +500,32 @@ export function mountGoldenSliceOverlay(
     }
     if (action.type === "replay") {
       session.replayClicked = true;
+      emitFirstUseEvent("replay_selected", { origin: "spontaneous", replayIndex: 1 });
       flushSession();
       completionPersisted = false;
       session = createSession(state.seed, save.settings);
+      emitFirstUseEvent("session_opened", { muted: save.settings.muted, replayIndex: state.replayCount });
     }
     if (state.phase.includes("forming")) audio.playSfx("form");
     if (state.phase.includes("casting") || state.phase === "boss_cleared") audio.playSfx("magic");
+
+    if (state.phase !== previous.phase) {
+      emitFirstUseEvent("phase_entered", { phase: state.phase });
+      if (FORMATION_PHASES.has(state.phase) && state.phase.includes("forming")) {
+        emitFirstUseEvent("spell_formed", { characterId: currentCharacter().id, encounterId: state.currentEncounterId });
+      }
+      if (["battle_1_cleared", "battle_2_cleared", "boss_phase_1_cleared", "boss_cleared"].includes(state.phase)) {
+        emitFirstUseEvent("meaning_magic_completed", { characterId: currentCharacter().id, encounterId: state.currentEncounterId });
+      }
+      if (state.phase === "boss_intro") emitFirstUseEvent("boss_intent_shown", { bossPhase: "lin" });
+      if (state.phase === "boss_phase_2_placing") emitFirstUseEvent("boss_intent_shown", { bossPhase: "xing" });
+      if (state.phase === "boss_phase_1_cleared") emitFirstUseEvent("boss_phase_completed", { bossPhase: "lin" });
+      if (state.phase === "boss_cleared") emitFirstUseEvent("boss_phase_completed", { bossPhase: "xing" });
+      if (state.phase === "camp_repair") emitFirstUseEvent("camp_repaired");
+      if (state.phase === "spellbook_review") emitFirstUseEvent("spellbook_opened");
+      if (state.phase === "run_complete") emitFirstUseEvent("run_completed", { replayIndex: state.replayCount });
+      if (AUTO_SPEECH_PHASES.has(state.phase)) void speakCurrentCharacter();
+    }
 
     persistPermanentState();
     if (state.phase === "run_complete") flushSession(true);
@@ -481,13 +540,16 @@ export function mountGoldenSliceOverlay(
 
   async function speakCurrentCharacter(): Promise<void> {
     const character = currentCharacter();
-    await audio.speak(`${character.glyph}，${character.pinyin}，${character.familiarWord}的${character.glyph}。`);
+    await audio.speak(character.spokenPhrase);
   }
 
   function storyMarkup(): string {
+    const character = currentCharacter();
     const text = state.phase === "invalid_feedback" && state.currentEncounterId.startsWith("boss-")
       ? "墨印还在，换个方法再试"
-      : STORY_BY_PHASE[state.phase] ?? "墨点在这里陪你。";
+      : state.phase === "battle_1_casting" || state.phase === "battle_2_casting"
+        ? `${character.glyph}，${character.visualPinyin}，${character.familiarWord}的${character.glyph}。`
+        : STORY_BY_PHASE[state.phase] ?? "墨点在这里陪你。";
     return `<i class="golden-story__companion" aria-hidden="true"></i><p>${text}</p><button class="golden-story__voice" type="button" data-replay-voice aria-label="重听当前汉字和熟悉词">重听</button>`;
   }
 
@@ -498,7 +560,7 @@ export function mountGoldenSliceOverlay(
     const showWord = state.phase.includes("casting") || state.phase.includes("cleared") || state.phase === "boss_cleared";
     return `<div class="golden-formed-character" data-testid="formed-character-${character.id}">
       <div class="golden-formed-character__glyph" lang="zh-Hans">${glyph}</div>
-      ${showWord ? `<strong>${character.pinyin} · ${character.familiarWord}</strong><span>${character.shortMeaning}</span>` : ""}
+      ${showWord ? `<strong>${character.visualPinyin} · ${character.familiarWord}</strong><span>${character.shortMeaning}</span>` : ""}
     </div>`;
   }
 
@@ -531,6 +593,12 @@ export function mountGoldenSliceOverlay(
   function completeMarkup(): string {
     if (state.phase !== "run_complete") return "";
     const remaining = GOLDEN_ABILITIES.filter((ability) => ability.id !== state.selectedAbilityId);
+    if (options.childFirstUse) {
+      return `<section class="golden-complete-card" data-testid="run-complete">
+        <h2>四道字光留在了营地</h2><p>这次冒险到这里。你可以停下来；如果你自己还想走一次，也可以选另一道光。</p>
+        ${state.replayCount < 1 ? `<div class="golden-replay-abilities">${remaining.map((ability) => `<button type="button" data-replay-ability="${ability.id}">${ability.name}</button>`).join("")}</div>` : "<p>正式观察的两次短路已经结束。</p>"}
+      </section>`;
+    }
     return `<section class="golden-complete-card" data-testid="run-complete">
       <h2>四道字光留在了营地</h2><p>想换一道能力，再走一次相同的短路吗？</p>
       <div class="golden-replay-abilities">${remaining.map((ability) => `<button type="button" data-replay-ability="${ability.id}">${ability.name}再冒险</button>`).join("")}</div>
@@ -538,8 +606,13 @@ export function mountGoldenSliceOverlay(
   }
 
   function overlayMarkup(): string {
+    if (firstUseStopped) {
+      return `<section class="golden-complete-card" role="status" data-testid="child-first-use-stopped">
+        <h2>先回营地休息，找到的汉字都还在。</h2><p>不需要完成，可以关闭这个窗口。</p>
+      </section>`;
+    }
     if (state.phase === "ability_choice") return abilityChoiceOverlayMarkup();
-    if (state.phase === "settings_open") return settingsOverlayMarkup({ open: true, reducedMotion: save.settings.reducedMotion, audio: audio.getSettings() });
+    if (state.phase === "settings_open") return settingsOverlayMarkup({ open: true, reducedMotion: save.settings.reducedMotion, audio: audio.getSettings(), childFirstUse: options.childFirstUse });
     if (state.phase === "spellbook_review") return spellbookOverlayMarkup(activeSpellbookId, spellbookReplayMode);
     return completeMarkup();
   }
@@ -566,7 +639,7 @@ export function mountGoldenSliceOverlay(
       suppressClick = true;
       const target = document.elementFromPoint(event.clientX, event.clientY)?.closest<HTMLElement>("[data-slot-id]");
       if (target) {
-        dispatchInternal({ type: "place-card", cardId: card.dataset.cardId ?? "", slotId: target.dataset.slotId ?? "" }, true);
+        dispatchInternal({ type: "place-card", cardId: card.dataset.cardId ?? "", slotId: target.dataset.slotId ?? "" }, true, "drag");
       }
     });
     card.addEventListener("click", () => {
@@ -588,7 +661,7 @@ export function mountGoldenSliceOverlay(
       slot.addEventListener("dragover", (event) => event.preventDefault());
       slot.addEventListener("drop", (event) => {
         event.preventDefault();
-        dispatchInternal({ type: "place-card", cardId: event.dataTransfer?.getData("text/plain") ?? "", slotId: slot.dataset.slotId ?? "" }, true);
+        dispatchInternal({ type: "place-card", cardId: event.dataTransfer?.getData("text/plain") ?? "", slotId: slot.dataset.slotId ?? "" }, true, "drag");
       });
       slot.addEventListener("click", () => {
         const slotId = slot.dataset.slotId ?? "";
@@ -618,7 +691,7 @@ export function mountGoldenSliceOverlay(
     root.querySelectorAll<HTMLElement>("[data-read-character]").forEach((button) => {
       button.addEventListener("click", () => {
         const character = getGoldenCharacter(button.dataset.readCharacter as typeof FIRST_RUN_CHARACTER_IDS[number]);
-        void audio.speak(`${character.glyph}，${character.pinyin}，${character.familiarWord}的${character.glyph}。`);
+        void audio.speak(character.spokenPhrase);
       });
     });
     root.querySelectorAll<HTMLElement>("[data-replay-formation], [data-replay-magic]").forEach((button) => {
@@ -696,16 +769,16 @@ export function mountGoldenSliceOverlay(
     shell.dataset.reducedMotion = String(save.settings.reducedMotion);
     shell.dataset.encounterId = state.currentEncounterId;
     shell.dataset.selectedAbilityId = state.selectedAbilityId ?? "none";
-    if (seedLabel) seedLabel.textContent = state.seed;
+    if (seedLabel) seedLabel.textContent = options.childFirstUse ? "" : state.seed;
     story.innerHTML = storyMarkup();
-    story.hidden = state.phase === "ability_choice" || state.phase === "settings_open" || state.phase === "spellbook_review" || state.phase === "run_complete";
-    formed.innerHTML = formedMarkup();
-    intent.innerHTML = intentMarkup();
-    board.innerHTML = boardMarkup();
-    action.innerHTML = actionMarkup();
+    story.hidden = firstUseStopped || state.phase === "ability_choice" || state.phase === "settings_open" || state.phase === "spellbook_review" || state.phase === "run_complete";
+    formed.innerHTML = firstUseStopped ? "" : formedMarkup();
+    intent.innerHTML = firstUseStopped ? "" : intentMarkup();
+    board.innerHTML = firstUseStopped ? "" : boardMarkup();
+    action.innerHTML = firstUseStopped ? "" : actionMarkup();
     overlay.innerHTML = overlayMarkup();
     debug.innerHTML = state.mode === "review" ? parentDebugOverlayMarkup(state) : "";
-    world.setInputEnabled(!["settings_open", "paused", "ability_choice", "spellbook_review", "run_complete"].includes(state.phase));
+    world.setInputEnabled(!firstUseStopped && !["settings_open", "paused", "ability_choice", "spellbook_review", "run_complete"].includes(state.phase));
     world.setView(worldView());
     bindDynamicControls();
   }
@@ -716,9 +789,9 @@ export function mountGoldenSliceOverlay(
 
   const onKeyDown = (event: KeyboardEvent) => {
     if (event.key !== "Escape") return;
-    if (state.phase === "settings_open") dispatchInternal({ type: "close-settings" }, true);
-    else if (state.board.selectedCardId && BOARD_PHASES.has(state.phase)) dispatchInternal({ type: "cancel-placement" }, true);
-    else if (getLegalGoldenSliceActions(state).includes("pause")) dispatchInternal({ type: "pause" }, true);
+    if (state.phase === "settings_open") dispatchInternal({ type: "close-settings" }, true, "keyboard");
+    else if (state.board.selectedCardId && BOARD_PHASES.has(state.phase)) dispatchInternal({ type: "cancel-placement" }, true, "keyboard");
+    else if (getLegalGoldenSliceActions(state).includes("pause")) dispatchInternal({ type: "pause" }, true, "keyboard");
   };
   const onVisibility = () => {
     if (document.hidden && getLegalGoldenSliceActions(state).includes("pause")) dispatchInternal({ type: "pause" });
@@ -734,11 +807,14 @@ export function mountGoldenSliceOverlay(
   render();
   schedulePhaseWork();
   options.onStateChange?.(state);
+  emitFirstUseEvent("session_opened", { muted: save.settings.muted, replayIndex: 0 });
+  emitFirstUseEvent("child_route_ready", { muted: save.settings.muted });
+  emitFirstUseEvent("phase_entered", { phase: state.phase });
 
   return {
     getState: () => state,
     dispatch(action) {
-      dispatchInternal(action, true);
+      dispatchInternal(action, true, "other");
     },
     setMuted(muted) {
       save = { ...save, settings: { ...save.settings, muted } };
@@ -779,6 +855,20 @@ export function mountGoldenSliceOverlay(
       persistAudioSettings();
       render();
       schedulePhaseWork();
+      options.onStateChange?.(state);
+    },
+    stopFirstUse(stopCode) {
+      if (!options.childFirstUse || firstUseStopped) return;
+      firstUseStopped = true;
+      clearTimers();
+      audio.stopAll();
+      if (getLegalGoldenSliceActions(state).includes("pause")) {
+        const paused = stepGoldenSlice(state, { type: "pause" });
+        if (paused !== state) state = paused;
+      }
+      flushSession(false);
+      emitFirstUseEvent("session_stopped", { stopCode });
+      render();
       options.onStateChange?.(state);
     },
     destroy() {

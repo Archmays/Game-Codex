@@ -6,6 +6,10 @@ coverage/
 .cache/
 test-results/
 playwright-report/
+artifacts/hanzi-radical-battle-v2/step-04/observation/
+artifacts/hanzi-radical-battle-v2/step-04/observation-inbox/
+artifacts/hanzi-radical-battle-v2/step-04/STEP-04_CHILD_FIRST_USE_RETURN_TO_CHATGPT.zip
+artifacts/hanzi-radical-battle-v2/step-04/STEP-04_CHILD_FIRST_USE_RETURN_TO_CHATGPT.zip.sha256
 .env
 .env.*
 *.log

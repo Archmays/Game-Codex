@@ -46,6 +46,26 @@
   background: linear-gradient(180deg, rgba(4, 20, 29, 0.88), transparent);
 }
 
+.golden-fixture-banner {
+  position: absolute;
+  z-index: 40;
+  top: max(64px, calc(env(safe-area-inset-top) + 56px));
+  left: 50%;
+  width: max-content;
+  max-width: calc(100% - 24px);
+  transform: translateX(-50%);
+  padding: 7px 12px;
+  border: 2px solid #ff9b82;
+  border-radius: 999px;
+  color: #5d1f13;
+  background: #fff7df;
+  font-size: clamp(0.65rem, 1.8vw, 0.78rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-align: center;
+  pointer-events: none;
+}
+
 .golden-world-name,
 .golden-topbar__actions {
   display: flex;

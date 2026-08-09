@@ -40,6 +40,8 @@ export interface GoldenCharacter {
   readonly status: ContentAcceptanceStatus;
   readonly reviewStatus: ContentAcceptanceStatus;
   readonly pinyin: string;
+  readonly visualPinyin: string;
+  readonly spokenPhrase: string;
   readonly familiarWord: string;
   readonly shortMeaning: string;
   readonly structure: GoldenStructure;

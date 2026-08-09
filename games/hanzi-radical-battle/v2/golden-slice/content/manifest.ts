@@ -72,7 +72,12 @@ function toFinalCharacter(id: GoldenCharacterId): GoldenCharacter {
     sourceMapping: toSourceMapping(id),
     etymologyClaim: null,
   };
-  return { ...payload, revisionHash: createRevisionHash(GOLDEN_SLICE_MANIFEST_VERSION, payload) };
+  return {
+    ...payload,
+    visualPinyin: candidate.pinyin,
+    spokenPhrase: `${candidate.glyph}，${candidate.familiarWord}的${candidate.glyph}。`,
+    revisionHash: createRevisionHash(GOLDEN_SLICE_MANIFEST_VERSION, payload),
+  };
 }
 
 function toDeferredCharacter(id: (typeof DEFERRED_CHARACTER_IDS)[number]): DeferredCharacter {
@@ -98,7 +103,7 @@ function toDeferredCharacter(id: (typeof DEFERRED_CHARACTER_IDS)[number]): Defer
 export const FINAL_GOLDEN_MANIFEST: readonly GoldenCharacter[] = FINAL_GOLDEN_CHARACTER_IDS.map(toFinalCharacter);
 export const ACCEPTED_DEFERRED_CHARACTERS: readonly DeferredCharacter[] = DEFERRED_CHARACTER_IDS.map(toDeferredCharacter);
 export const GOLDEN_SLICE_MANIFEST_REVISION_HASH = createRevisionHash(GOLDEN_SLICE_MANIFEST_VERSION, {
-  final: FINAL_GOLDEN_MANIFEST.map(({ revisionHash, ...entry }) => entry),
+  final: FINAL_GOLDEN_MANIFEST.map(({ revisionHash, visualPinyin, spokenPhrase, ...entry }) => entry),
   deferred: ACCEPTED_DEFERRED_CHARACTERS.map(({ revisionHash, ...entry }) => entry),
 });
 

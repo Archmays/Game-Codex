@@ -1,0 +1,624 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "family-games/hanzi-radical-battle-v2/step-04/child-first-use-observation.schema.json",
+  "title": "STEP 04 Authorized Child First-Use Observation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "initiativeId",
+    "step",
+    "evidenceKind",
+    "sessionIdentity",
+    "buildIdentity",
+    "parentAuthorization",
+    "audioPreflight",
+    "technicalEvents",
+    "observations",
+    "interventions",
+    "wellbeing",
+    "optionalChildChoices",
+    "completion",
+    "privacyConfirmed",
+    "observerNotes"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "initiativeId": { "const": "hanzi-radical-battle-v2" },
+    "step": { "const": "04" },
+    "evidenceKind": {
+      "enum": ["REAL_CHILD_OBSERVATION", "SYNTHETIC_TOOLING_TEST_ONLY"]
+    },
+    "sessionIdentity": { "$ref": "#/$defs/sessionIdentity" },
+    "buildIdentity": { "$ref": "#/$defs/buildIdentity" },
+    "parentAuthorization": { "$ref": "#/$defs/parentAuthorization" },
+    "audioPreflight": { "$ref": "#/$defs/audioPreflight" },
+    "technicalEvents": {
+      "type": "array",
+      "maxItems": 500,
+      "items": { "$ref": "#/$defs/technicalEvent" }
+    },
+    "observations": { "$ref": "#/$defs/observations" },
+    "interventions": {
+      "type": "array",
+      "maxItems": 50,
+      "items": { "$ref": "#/$defs/intervention" }
+    },
+    "wellbeing": { "$ref": "#/$defs/wellbeing" },
+    "optionalChildChoices": { "$ref": "#/$defs/optionalChildChoices" },
+    "completion": { "$ref": "#/$defs/completion" },
+    "privacyConfirmed": { "const": true },
+    "observerNotes": { "type": "string", "maxLength": 1000 }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[A-F0-9]{64}$"
+    },
+    "sessionId": {
+      "type": "string",
+      "pattern": "^s04-[a-f0-9]{32}$"
+    },
+    "runSeed": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{16}$"
+    },
+    "sessionMode": {
+      "enum": ["LIVE_DASHBOARD", "COMPACT_AFTER_SESSION"]
+    },
+    "sessionIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sessionId", "runSeed", "sessionMode", "startedAtUtc", "runCount"],
+      "properties": {
+        "sessionId": { "$ref": "#/$defs/sessionId" },
+        "runSeed": { "$ref": "#/$defs/runSeed" },
+        "sessionMode": { "$ref": "#/$defs/sessionMode" },
+        "startedAtUtc": { "type": "string", "format": "date-time" },
+        "runCount": { "type": "integer", "minimum": 1, "maximum": 2 }
+      }
+    },
+    "sourceSnapshots": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["encounters", "abilities", "boss", "themeC", "manifest"],
+      "properties": {
+        "encounters": { "const": "fnv1a:d805357d" },
+        "abilities": { "const": "fnv1a:2d361817" },
+        "boss": { "const": "fnv1a:ee5df70f" },
+        "themeC": { "const": "fnv1a:15133968" },
+        "manifest": { "const": "fnv1a:67ad1fe2" }
+      }
+    },
+    "buildIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "initiativeId",
+        "step",
+        "technicalState",
+        "runtimeVersion",
+        "audioContractVersion",
+        "parentFeedbackSha256",
+        "acceptedReviewIdentitySha256",
+        "acceptedSourceSnapshots",
+        "commitSha",
+        "generatedAtUtc",
+        "buildIdentitySha256"
+      ],
+      "properties": {
+        "schemaVersion": { "const": 1 },
+        "initiativeId": { "const": "hanzi-radical-battle-v2" },
+        "step": { "const": "04" },
+        "technicalState": { "const": "AUTHORIZED_CHILD_FIRST_USE_READY" },
+        "runtimeVersion": { "const": "hanzi-v2-step04-runtime-v1" },
+        "audioContractVersion": { "const": "hanzi-v2-step04-spoken-phrase-v1" },
+        "parentFeedbackSha256": {
+          "const": "3F0BFAC4C6D318AC197AFA95764ACFB3A9E7FE9CE47BF6FA18C1514879EA417C"
+        },
+        "acceptedReviewIdentitySha256": {
+          "const": "DBA281F9954DFB591E2F3D7498B1B8F09F6C050BFBFA2436C9961B0513D73D3E"
+        },
+        "acceptedSourceSnapshots": { "$ref": "#/$defs/sourceSnapshots" },
+        "commitSha": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "generatedAtUtc": { "type": "string", "format": "date-time" },
+        "buildIdentitySha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "parentAuthorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "initiativeId",
+        "step",
+        "authorized",
+        "authorizeChildFirstUse",
+        "audioDecision",
+        "parentFeedbackSha256",
+        "acceptedReviewIdentitySha256",
+        "checkedAtUtc"
+      ],
+      "properties": {
+        "schemaVersion": { "const": 1 },
+        "initiativeId": { "const": "hanzi-radical-battle-v2" },
+        "step": { "const": "04" },
+        "authorized": { "const": true },
+        "authorizeChildFirstUse": { "const": "YES" },
+        "audioDecision": { "const": "REVISE" },
+        "parentFeedbackSha256": {
+          "const": "3F0BFAC4C6D318AC197AFA95764ACFB3A9E7FE9CE47BF6FA18C1514879EA417C"
+        },
+        "acceptedReviewIdentitySha256": {
+          "const": "DBA281F9954DFB591E2F3D7498B1B8F09F6C050BFBFA2436C9961B0513D73D3E"
+        },
+        "checkedAtUtc": { "type": "string", "format": "date-time" }
+      }
+    },
+    "phraseCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["visualPinyin", "spokenPhrase", "result"],
+      "properties": {
+        "visualPinyin": { "type": "string", "minLength": 1, "maxLength": 16 },
+        "spokenPhrase": { "type": "string", "minLength": 5, "maxLength": 24 },
+        "result": { "enum": ["HEARD_OK", "DISPLAY_ONLY_MUTED_OR_UNAVAILABLE"] }
+      }
+    },
+    "audioPreflight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision",
+        "lang",
+        "adapterStatus",
+        "voiceCategory",
+        "visualPinyinConfirmed",
+        "phraseChecks"
+      ],
+      "properties": {
+        "decision": { "enum": ["SOUND_OK", "START_MUTED"] },
+        "lang": { "const": "zh-CN" },
+        "adapterStatus": { "enum": ["SPEECH_SYNTHESIS", "UNAVAILABLE"] },
+        "voiceCategory": {
+          "enum": ["ZH_CN_DEVICE_VOICE", "ZH_DEVICE_VOICE", "DEFAULT_DEVICE_VOICE", "NONE"]
+        },
+        "visualPinyinConfirmed": { "const": true },
+        "phraseChecks": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "prefixItems": [
+            {
+              "allOf": [
+                { "$ref": "#/$defs/phraseCheck" },
+                {
+                  "type": "object",
+                  "properties": {
+                    "visualPinyin": { "const": "míng" },
+                    "spokenPhrase": { "const": "明，明亮的明。" }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                { "$ref": "#/$defs/phraseCheck" },
+                {
+                  "type": "object",
+                  "properties": {
+                    "visualPinyin": { "const": "huā" },
+                    "spokenPhrase": { "const": "花，花朵的花。" }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                { "$ref": "#/$defs/phraseCheck" },
+                {
+                  "type": "object",
+                  "properties": {
+                    "visualPinyin": { "const": "lín" },
+                    "spokenPhrase": { "const": "林，树林的林。" }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                { "$ref": "#/$defs/phraseCheck" },
+                {
+                  "type": "object",
+                  "properties": {
+                    "visualPinyin": { "const": "xīng" },
+                    "spokenPhrase": { "const": "星，星星的星。" }
+                  }
+                }
+              ]
+            }
+          ],
+          "items": false
+        }
+      }
+    },
+    "eventType": {
+      "enum": [
+        "session_opened",
+        "child_route_ready",
+        "first_action",
+        "phase_entered",
+        "invalid_placement",
+        "built_in_hint_shown",
+        "spell_formed",
+        "meaning_magic_completed",
+        "ability_selected",
+        "boss_intent_shown",
+        "boss_phase_completed",
+        "camp_repaired",
+        "spellbook_opened",
+        "run_completed",
+        "replay_selected",
+        "session_stopped",
+        "technical_error"
+      ]
+    },
+    "phase": {
+      "enum": [
+        "boot",
+        "camp_intro",
+        "camp_objective",
+        "travel_to_battle_1",
+        "battle_1_intro",
+        "battle_1_placing",
+        "battle_1_forming",
+        "battle_1_casting",
+        "battle_1_cleared",
+        "breather_1",
+        "travel_to_battle_2",
+        "battle_2_intro",
+        "battle_2_placing",
+        "battle_2_forming",
+        "battle_2_casting",
+        "battle_2_cleared",
+        "ability_choice",
+        "travel_to_boss",
+        "boss_intro",
+        "boss_phase_1_placing",
+        "boss_phase_1_forming",
+        "boss_phase_1_cleared",
+        "boss_phase_2_placing",
+        "boss_phase_2_forming",
+        "boss_cleared",
+        "return_to_camp",
+        "camp_repair",
+        "spellbook_review",
+        "run_complete",
+        "invalid_feedback",
+        "boss_interference",
+        "paused",
+        "settings_open",
+        "safe_retry"
+      ]
+    },
+    "stopCode": {
+      "enum": [
+        "CHILD_REQUEST",
+        "DISTRESS",
+        "SENSORY_DISCOMFORT",
+        "TECHNICAL",
+        "PRIVACY",
+        "IDENTITY",
+        "ADULT_ANSWER_REQUIRED",
+        "OTHER"
+      ]
+    },
+    "safeMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "phase": { "$ref": "#/$defs/phase" },
+        "muted": { "type": "boolean" },
+        "replayIndex": { "type": "integer", "minimum": 0, "maximum": 1 },
+        "actionKind": { "enum": ["pointer", "drag", "keyboard", "other"] },
+        "encounterId": { "enum": ["encounter-ming", "encounter-hua", "boss-lin", "boss-xing"] },
+        "hintLevel": { "enum": [1, 2] },
+        "characterId": { "enum": ["ming", "hua", "lin", "xing"] },
+        "abilityId": { "enum": ["guardian-light", "star-path", "ink-echo"] },
+        "bossPhase": { "enum": ["lin", "xing"] },
+        "origin": { "enum": ["spontaneous", "prompted"] },
+        "stopCode": { "$ref": "#/$defs/stopCode" },
+        "errorCode": { "enum": ["BRIDGE_UNAVAILABLE", "SESSION_INVALID", "RENDER_ERROR", "AUDIO_UNAVAILABLE", "LOCAL_STORAGE_UNAVAILABLE", "UNKNOWN_LOCAL_ERROR"] },
+        "recoverable": { "type": "boolean" }
+      }
+    },
+    "metadataSessionOpened": {
+      "type": "object", "additionalProperties": false, "required": ["muted", "replayIndex"],
+      "properties": { "muted": { "type": "boolean" }, "replayIndex": { "enum": [0, 1] } }
+    },
+    "metadataChildReady": {
+      "type": "object", "additionalProperties": false, "required": ["muted"],
+      "properties": { "muted": { "type": "boolean" } }
+    },
+    "metadataFirstAction": {
+      "type": "object", "additionalProperties": false, "required": ["actionKind"],
+      "properties": { "actionKind": { "enum": ["pointer", "drag", "keyboard", "other"] } }
+    },
+    "metadataPhase": {
+      "type": "object", "additionalProperties": false, "required": ["phase"],
+      "properties": { "phase": { "$ref": "#/$defs/phase" } }
+    },
+    "metadataEncounter": {
+      "type": "object", "additionalProperties": false, "required": ["encounterId"],
+      "properties": { "encounterId": { "enum": ["encounter-ming", "encounter-hua", "boss-lin", "boss-xing"] } }
+    },
+    "metadataHint": {
+      "type": "object", "additionalProperties": false, "required": ["encounterId", "hintLevel"],
+      "properties": {
+        "encounterId": { "enum": ["encounter-ming", "encounter-hua", "boss-lin", "boss-xing"] },
+        "hintLevel": { "enum": [1, 2] }
+      }
+    },
+    "metadataCharacterEncounter": {
+      "type": "object", "additionalProperties": false, "required": ["characterId", "encounterId"],
+      "properties": {
+        "characterId": { "enum": ["ming", "hua", "lin", "xing"] },
+        "encounterId": { "enum": ["encounter-ming", "encounter-hua", "boss-lin", "boss-xing"] }
+      }
+    },
+    "metadataAbility": {
+      "type": "object", "additionalProperties": false, "required": ["abilityId"],
+      "properties": { "abilityId": { "enum": ["guardian-light", "star-path", "ink-echo"] } }
+    },
+    "metadataBossPhase": {
+      "type": "object", "additionalProperties": false, "required": ["bossPhase"],
+      "properties": { "bossPhase": { "enum": ["lin", "xing"] } }
+    },
+    "metadataEmpty": { "type": "object", "additionalProperties": false, "maxProperties": 0 },
+    "metadataReplayIndex": {
+      "type": "object", "additionalProperties": false, "required": ["replayIndex"],
+      "properties": { "replayIndex": { "enum": [0, 1] } }
+    },
+    "metadataReplaySelected": {
+      "type": "object", "additionalProperties": false, "required": ["origin", "replayIndex"],
+      "properties": { "origin": { "enum": ["spontaneous", "prompted"] }, "replayIndex": { "const": 1 } }
+    },
+    "metadataStopped": {
+      "type": "object", "additionalProperties": false, "required": ["stopCode"],
+      "properties": { "stopCode": { "$ref": "#/$defs/stopCode" } }
+    },
+    "metadataTechnicalError": {
+      "type": "object", "additionalProperties": false, "required": ["errorCode", "recoverable"],
+      "properties": {
+        "errorCode": { "enum": ["BRIDGE_UNAVAILABLE", "SESSION_INVALID", "RENDER_ERROR", "AUDIO_UNAVAILABLE", "LOCAL_STORAGE_UNAVAILABLE", "UNKNOWN_LOCAL_ERROR"] },
+        "recoverable": { "type": "boolean" }
+      }
+    },
+    "technicalEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "sessionId", "sequence", "relativeMs", "eventType", "safeMetadata"],
+      "properties": {
+        "schemaVersion": { "const": 1 },
+        "sessionId": { "$ref": "#/$defs/sessionId" },
+        "sequence": { "type": "integer", "minimum": 1, "maximum": 100000 },
+        "relativeMs": { "type": "integer", "minimum": 0, "maximum": 3600000 },
+        "eventType": { "$ref": "#/$defs/eventType" },
+        "safeMetadata": { "$ref": "#/$defs/safeMetadata" }
+      },
+      "allOf": [
+        { "if": { "properties": { "eventType": { "const": "session_opened" } } }, "then": { "properties": { "safeMetadata": { "$ref": "#/$defs/metadataSessionOpened" } } } },
+        { "if": { "properties": { "eventType": { "const": "child_route_ready" } } }, "then": { "properties": { "safeMetadata": { "$ref": "#/$defs/metadataChildReady" } } } },
+        { "if": { "properties": { "eventType": { "const": "first_action" } } }, "then": { "properties": { "safeMetadata": { "$ref": "#/$defs/metadataFirstAction" } } } },
+        { "if": { "properties": { "eventType": { "const": "phase_entered" } } }, "then": { "properties": { "safeMetadata": { "$ref": "#/$defs/metadataPhase" } } } },
+        { "if": { "properties": { "eventType": { "const": "invalid_placement" } } }, "then": { "properties": { "safeMetadata": { "$ref": "#/$defs/metadataEncounter" } } } },
+        { "if": { "properties": { "eventType": { "const": "built_in_hint_shown" } } }, "then": { "properties": { "safeMetadata": { "$ref": "#/$defs/metadataHint" } } } },
+        { "if": { "properties": { "eventType": { "const": "spell_formed" } } }, "then": { "properties": { "safeMetadata": { "$ref": "#/$defs/metadataCharacterEncounter" } } } },
+        { "if": { "properties": { "eventType": { "const": "meaning_magic_completed" } } }, "then": { "properties": { "safeMetadata": { "$ref": "#/$defs/metadataCharacterEncounter" } } } },
+        { "if": { "properties": { "eventType": { "const": "ability_selected" } } }, "then": { "properties": { "safeMetadata": { "$ref": "#/$defs/metadataAbility" } } } },
+        { "if": { "properties": { "eventType": { "const": "boss_intent_shown" } } }, "then": { "properties": { "safeMetadata": { "$ref": "#/$defs/metadataBossPhase" } } } },
+        { "if": { "properties": { "eventType": { "const": "boss_phase_completed" } } }, "then": { "properties": { "safeMetadata": { "$ref": "#/$defs/metadataBossPhase" } } } },
+        { "if": { "properties": { "eventType": { "enum": ["camp_repaired", "spellbook_opened"] } } }, "then": { "properties": { "safeMetadata": { "$ref": "#/$defs/metadataEmpty" } } } },
+        { "if": { "properties": { "eventType": { "const": "run_completed" } } }, "then": { "properties": { "safeMetadata": { "$ref": "#/$defs/metadataReplayIndex" } } } },
+        { "if": { "properties": { "eventType": { "const": "replay_selected" } } }, "then": { "properties": { "safeMetadata": { "$ref": "#/$defs/metadataReplaySelected" } } } },
+        { "if": { "properties": { "eventType": { "const": "session_stopped" } } }, "then": { "properties": { "safeMetadata": { "$ref": "#/$defs/metadataStopped" } } } },
+        { "if": { "properties": { "eventType": { "const": "technical_error" } } }, "then": { "properties": { "safeMetadata": { "$ref": "#/$defs/metadataTechnicalError" } } } }
+      ]
+    },
+    "observationValue": {
+      "enum": [
+        "NOT_REACHED",
+        "NOTICED_WITHOUT_PROMPT",
+        "NOTICED_AFTER_BUILT_IN_SUPPORT",
+        "NOTICED_AFTER_REGION_ONLY_PROMPT",
+        "ADULT_ANSWER_REQUIRED",
+        "STOPPED"
+      ]
+    },
+    "checkpointObservations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "firstScreen",
+        "firstSpell",
+        "secondStructure",
+        "abilityChoice",
+        "bossIntent",
+        "safeFailure",
+        "campRepair",
+        "spellbook"
+      ],
+      "properties": {
+        "firstScreen": { "$ref": "#/$defs/observationValue" },
+        "firstSpell": { "$ref": "#/$defs/observationValue" },
+        "secondStructure": { "$ref": "#/$defs/observationValue" },
+        "abilityChoice": { "$ref": "#/$defs/observationValue" },
+        "bossIntent": { "$ref": "#/$defs/observationValue" },
+        "safeFailure": { "$ref": "#/$defs/observationValue" },
+        "campRepair": { "$ref": "#/$defs/observationValue" },
+        "spellbook": { "$ref": "#/$defs/observationValue" }
+      }
+    },
+    "usabilityObservations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "firstAction",
+        "boardCardSlotDistinction",
+        "clickOrDrag",
+        "abilityChoice",
+        "bossIntent",
+        "spellbookNavigation"
+      ],
+      "properties": {
+        "firstAction": { "$ref": "#/$defs/observationValue" },
+        "boardCardSlotDistinction": { "$ref": "#/$defs/observationValue" },
+        "clickOrDrag": { "$ref": "#/$defs/observationValue" },
+        "abilityChoice": { "$ref": "#/$defs/observationValue" },
+        "bossIntent": { "$ref": "#/$defs/observationValue" },
+        "spellbookNavigation": { "$ref": "#/$defs/observationValue" }
+      }
+    },
+    "engagementObservations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["voluntarilyContinued", "noticedWorldChange", "replayedAudio", "spontaneousReplay"],
+      "properties": {
+        "voluntarilyContinued": { "$ref": "#/$defs/observationValue" },
+        "noticedWorldChange": { "$ref": "#/$defs/observationValue" },
+        "replayedAudio": { "$ref": "#/$defs/observationValue" },
+        "spontaneousReplay": { "$ref": "#/$defs/observationValue" }
+      }
+    },
+    "learningMechanismObservations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "noticedMingComposition",
+        "noticedStructureChange",
+        "noticedMeaningChangedWorld",
+        "connectedAbilityToBossSupport"
+      ],
+      "properties": {
+        "noticedMingComposition": { "$ref": "#/$defs/observationValue" },
+        "noticedStructureChange": { "$ref": "#/$defs/observationValue" },
+        "noticedMeaningChangedWorld": { "$ref": "#/$defs/observationValue" },
+        "connectedAbilityToBossSupport": { "$ref": "#/$defs/observationValue" }
+      }
+    },
+    "observations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checkpoints", "usability", "engagement", "learningMechanismVisibility"],
+      "properties": {
+        "checkpoints": { "$ref": "#/$defs/checkpointObservations" },
+        "usability": { "$ref": "#/$defs/usabilityObservations" },
+        "engagement": { "$ref": "#/$defs/engagementObservations" },
+        "learningMechanismVisibility": { "$ref": "#/$defs/learningMechanismObservations" }
+      }
+    },
+    "intervention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checkpointId", "code", "region", "relativeMs"],
+      "properties": {
+        "checkpointId": {
+          "enum": ["firstScreen", "firstSpell", "secondStructure", "abilityChoice", "bossIntent", "safeFailure", "campRepair", "spellbook"]
+        },
+        "code": {
+          "enum": [
+            "NONE",
+            "REPEAT_VISIBLE_COPY",
+            "POINT_TO_REGION_ONLY",
+            "TECHNICAL_ASSIST",
+            "ADULT_ANSWER_REQUIRED",
+            "STOPPED"
+          ]
+        },
+        "region": {
+          "oneOf": [
+            { "type": "null" },
+            { "enum": ["WORLD", "BOARD", "HAND"] }
+          ]
+        },
+        "relativeMs": { "type": "integer", "minimum": 0, "maximum": 3600000 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "code": { "const": "POINT_TO_REGION_ONLY" } }, "required": ["code"] },
+          "then": { "properties": { "region": { "enum": ["WORLD", "BOARD", "HAND"] } } },
+          "else": { "properties": { "region": { "type": "null" } } }
+        }
+      ]
+    },
+    "wellbeingValue": {
+      "enum": ["OBSERVED", "NOT_OBSERVED", "UNKNOWN"]
+    },
+    "wellbeing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "comfortable",
+        "briefConfusionRecovered",
+        "sustainedFrustration",
+        "sensoryDiscomfort",
+        "childInitiatedStop",
+        "feltForced",
+        "stopCode"
+      ],
+      "properties": {
+        "comfortable": { "$ref": "#/$defs/wellbeingValue" },
+        "briefConfusionRecovered": { "$ref": "#/$defs/wellbeingValue" },
+        "sustainedFrustration": { "$ref": "#/$defs/wellbeingValue" },
+        "sensoryDiscomfort": { "$ref": "#/$defs/wellbeingValue" },
+        "childInitiatedStop": { "$ref": "#/$defs/wellbeingValue" },
+        "feltForced": { "$ref": "#/$defs/wellbeingValue" },
+        "stopCode": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/stopCode" }
+          ]
+        }
+      }
+    },
+    "optionalChildChoices": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "againAgain",
+        "favoriteMoment",
+        "spontaneousReplay",
+        "promptedReplay",
+        "optionalQuestionsAsked"
+      ],
+      "properties": {
+        "againAgain": { "enum": ["AGAIN_NOW", "MAYBE_LATER", "STOP", "DECLINED", "NOT_ASKED"] },
+        "favoriteMoment": {
+          "enum": ["CAMP", "HANZI_MAGIC", "THREE_CHOICE", "BOSS", "SPELLBOOK", "NO_SELECTION", "NOT_ASKED"]
+        },
+        "spontaneousReplay": { "type": "boolean" },
+        "promptedReplay": { "type": "boolean" },
+        "optionalQuestionsAsked": { "type": "boolean" }
+      }
+    },
+    "completion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["childRouteLoaded", "runCompleted", "sessionStopped", "relativeDurationMs", "runCount", "stopCode"],
+      "properties": {
+        "childRouteLoaded": { "type": "boolean" },
+        "runCompleted": { "type": "boolean" },
+        "sessionStopped": { "type": "boolean" },
+        "relativeDurationMs": { "type": "integer", "minimum": 0, "maximum": 3600000 },
+        "runCount": { "type": "integer", "minimum": 1, "maximum": 2 },
+        "stopCode": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/stopCode" }
+          ]
+        }
+      }
+    }
+  }
+}

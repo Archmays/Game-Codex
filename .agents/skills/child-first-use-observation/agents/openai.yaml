@@ -1,0 +1,4 @@
+interface:
+  display_name: "Child First-Use Observation"
+  short_description: "Guard private, local child first-use evidence"
+  default_prompt: "Use $child-first-use-observation to prepare or interpret a guarded local first-use observation without claiming child acceptance."

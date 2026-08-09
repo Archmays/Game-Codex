@@ -64,7 +64,7 @@ export class SpeechSynthesisAdapter implements VoiceAdapter {
       null;
     return new Promise((resolve, reject) => {
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = voice?.lang ?? lang;
+      utterance.lang = lang;
       utterance.voice = voice;
       utterance.rate = 0.9;
       utterance.pitch = 1.02;
@@ -243,6 +243,18 @@ export class AudioDirector {
     this.duckMusic(false);
   }
 
+  stopAll(): void {
+    this.stopVoice();
+    for (const source of this.activeSources) {
+      try {
+        source.stop();
+      } catch {
+        // A source that already ended is already silent.
+      }
+    }
+    this.activeSources.clear();
+  }
+
   private duckMusic(ducked: boolean): void {
     const context = this.context;
     const music = this.gains.get("music");
@@ -253,15 +265,7 @@ export class AudioDirector {
   }
 
   destroy(): void {
-    this.stopVoice();
-    for (const source of this.activeSources) {
-      try {
-        source.stop();
-      } catch {
-        // Already stopped sources are harmless.
-      }
-    }
-    this.activeSources.clear();
+    this.stopAll();
     const context = this.context;
     this.context = null;
     this.gains.clear();

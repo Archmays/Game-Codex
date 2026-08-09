@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>STEP 04 紧凑观察表</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: system-ui, "Microsoft YaHei", sans-serif;
+        background: #0b252c;
+        color: #f4fbf8;
+        --panel: #123940;
+        --line: #5e8c8e;
+        --mint: #85ead4;
+        --danger: #ffb7a8;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0 auto; max-width: 920px; padding: 16px; line-height: 1.5; }
+      h1 { font-size: clamp(1.45rem, 5vw, 2rem); margin: 0 0 12px; }
+      h2 { font-size: 1.15rem; }
+      .notice, fieldset { border: 1px solid var(--line); border-radius: 14px; background: var(--panel); padding: 14px; margin: 14px 0; }
+      .notice { border-width: 2px; border-color: var(--mint); }
+      .stopbar { position: sticky; top: 0; z-index: 3; display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 10px; background: #071a20ee; border-radius: 0 0 12px 12px; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px 16px; }
+      label { display: grid; gap: 6px; }
+      button, input, select, textarea { min-height: 44px; border: 1px solid #86aeb0; border-radius: 9px; padding: 8px 10px; font: inherit; }
+      input, select, textarea { width: 100%; background: #f6fffb; color: #102c32; }
+      button { background: var(--mint); color: #0b2b31; font-weight: 800; cursor: pointer; }
+      button.danger { background: var(--danger); }
+      .choices { display: flex; flex-wrap: wrap; gap: 8px; }
+      .choices label { display: flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; }
+      .choices input { width: auto; min-height: auto; }
+      .thumb { display: inline-grid; place-items: center; width: 52px; height: 36px; border-radius: 10px; background: radial-gradient(circle at 50% 45%, #e8d899, #33565d 55%, #152f39); }
+      .status { color: #ffe3a2; font-weight: 700; white-space: pre-wrap; }
+      small { color: #c8dcda; }
+      @media print {
+        :root { color-scheme: light; background: white; color: black; }
+        body { max-width: none; padding: 0; font-size: 10pt; }
+        .stopbar, button, input[type="file"] { display: none !important; }
+        .notice, fieldset { background: white; color: black; break-inside: avoid; padding: 8px; margin: 8px 0; }
+        select, textarea { border-color: #555; color: black; background: white; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stopbar">
+      <select id="stop-code" aria-label="停止代码">
+        <option value="">选择停止原因</option>
+        <option>CHILD_REQUEST</option><option>DISTRESS</option><option>SENSORY_DISCOMFORT</option>
+        <option>TECHNICAL</option><option>PRIVACY</option><option>IDENTITY</option>
+        <option>ADULT_ANSWER_REQUIRED</option><option>OTHER</option>
+      </select>
+      <button type="button" class="danger" id="stop-now">立即停止</button>
+    </div>
+
+    <h1>STEP 04 紧凑观察表</h1>
+    <p class="notice">适用于没有第二屏或不想实时操作 dashboard 的家长。先完成或停止本地 session，再导入该 session 的 technical export。本页不录音、不录像、不上传，不收集身份；观察不是成绩。</p>
+
+    <form id="sheet">
+      <fieldset>
+        <legend>1. 导入同一 session 的技术导出</legend>
+        <label>Technical event export（JSON）<input id="technical-file" type="file" accept="application/json,.json" required /></label>
+        <p id="identity" class="status">尚未导入。</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>2. 快速观察</legend>
+        <p><small>按钮显示中文；导出时保存稳定 enum。`需要成人给答案` 是核心可用性风险。</small></p>
+        <div id="checkpoints" class="grid"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>3. 四类证据</legend>
+        <h2>可用性</h2><div id="usability" class="grid"></div>
+        <h2>投入行为</h2><div id="engagement" class="grid"></div>
+        <h2>学习机制是否可见（不写“学会”）</h2><div id="learning" class="grid"></div>
+        <h2>舒适与停止</h2><div id="wellbeing" class="grid"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>4. 成人介入</legend>
+        <p><small>只勾真实发生过的介入；技术帮助与答案帮助必须分开。</small></p>
+        <div id="interventions" class="choices"></div>
+        <label>介入时最接近的观察节点
+          <select id="intervention-checkpoint">
+            <option value="firstScreen">首屏</option><option value="firstSpell">首次施法</option><option value="secondStructure">第二结构</option>
+            <option value="abilityChoice">能力选择</option><option value="bossIntent">Boss intent</option><option value="safeFailure">安全失败</option>
+            <option value="campRepair">营地修复</option><option value="spellbook">魔法书</option>
+          </select>
+        </label>
+        <label>仅 `POINT_TO_REGION_ONLY` 记录所指大区
+          <select id="intervention-region"><option value="">未指区域</option><option value="WORLD">世界</option><option value="BOARD">board</option><option value="HAND">手牌</option></select>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>5. 可选儿童选择（只在完成或停止后）</legend>
+        <label>Again-Again
+          <select id="again"><option value="NOT_ASKED">未询问</option><option value="AGAIN_NOW">还想马上再玩</option><option value="MAYBE_LATER">下次再玩</option><option value="STOP">先不玩了</option><option value="DECLINED">不想回答</option></select>
+        </label>
+        <p>最想再看哪一段（可以不选）</p>
+        <div id="favorites" class="choices"></div>
+        <div class="choices">
+          <label><input type="checkbox" id="spontaneous-replay" /> 儿童自己选择重玩</label>
+          <label><input type="checkbox" id="prompted-replay" /> 家长提出重玩</label>
+          <label><input type="checkbox" id="questions-asked" /> 问过两条可选结束问题</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>6. 家长备注与隐私</legend>
+        <label>非身份性观察备注（最多 1000 字）<textarea id="notes" maxlength="1000" rows="5" placeholder="只写具体可观察行为；不写姓名、年龄、学校、联系方式、原话或媒体路径。"></textarea></label>
+        <label class="choices"><span><input type="checkbox" id="privacy" required /> 已检查：无身份、原话、分数、照片、录音、录像、voice name、路径或浏览器存储</span></label>
+      </fieldset>
+
+      <button type="submit">导出 STEP-04_CHILD_FIRST_USE_OBSERVATION.json</button>
+      <p class="status" id="status" role="status"></p>
+    </form>
+
+    <script>
+      const observationValues = [
+        ["NOT_REACHED", "未到达"],
+        ["NOTICED_WITHOUT_PROMPT", "无成人提示注意到"],
+        ["NOTICED_AFTER_BUILT_IN_SUPPORT", "内置支持后注意到"],
+        ["NOTICED_AFTER_REGION_ONLY_PROMPT", "只指区域后注意到"],
+        ["ADULT_ANSWER_REQUIRED", "需要成人给答案"],
+        ["STOPPED", "已停止"]
+      ];
+      const groups = {
+        checkpoints: [["firstScreen", "首屏"], ["firstSpell", "首次施法"], ["secondStructure", "第二结构"], ["abilityChoice", "能力选择"], ["bossIntent", "Boss intent"], ["safeFailure", "安全失败"], ["campRepair", "营地修复"], ["spellbook", "魔法书"]],
+        usability: [["firstAction", "首次行动"], ["boardCardSlotDistinction", "board / 卡 / 槽区分"], ["clickOrDrag", "点击或拖动"], ["abilityChoice", "能力选择"], ["bossIntent", "Boss intent"], ["spellbookNavigation", "魔法书导航"]],
+        engagement: [["voluntarilyContinued", "主动继续"], ["noticedWorldChange", "注意世界变化"], ["replayedAudio", "主动重听"], ["spontaneousReplay", "自发重玩"]],
+        learning: [["noticedMingComposition", "注意到第一次合字关系"], ["noticedStructureChange", "注意到第二种结构变化"], ["noticedMeaningChangedWorld", "看到字义改变世界"], ["connectedAbilityToBossSupport", "能力与 Boss 支持相连"]]
+      };
+      const wellbeingItems = [["comfortable", "舒适"], ["briefConfusionRecovered", "短暂困惑后恢复"], ["sustainedFrustration", "持续挫败"], ["sensoryDiscomfort", "感官不适"], ["childInitiatedStop", "主动停止"], ["feltForced", "感到被强迫"]];
+      const interventionCodes = ["NONE", "REPEAT_VISIBLE_COPY", "POINT_TO_REGION_ONLY", "TECHNICAL_ASSIST", "ADULT_ANSWER_REQUIRED", "STOPPED"];
+      const favoriteChoices = [["CAMP", "营地", "营"], ["HANZI_MAGIC", "汉字魔法", "字"], ["THREE_CHOICE", "三选一", "选"], ["BOSS", "Boss", "守"], ["SPELLBOOK", "魔法书", "书"], ["NO_SELECTION", "不选择", "—"]];
+      let imported = null;
+
+      function addObservationSelect(hostId, key, labelText) {
+        const label = document.createElement("label");
+        label.textContent = labelText;
+        const select = document.createElement("select");
+        select.dataset.key = key;
+        for (const [value, text] of observationValues) {
+          const option = document.createElement("option"); option.value = value; option.textContent = text; select.append(option);
+        }
+        label.append(select); document.getElementById(hostId).append(label);
+      }
+      for (const [host, items] of Object.entries(groups)) for (const [key, label] of items) addObservationSelect(host, key, label);
+      for (const [key, text] of wellbeingItems) {
+        const label = document.createElement("label"); label.textContent = text;
+        const select = document.createElement("select"); select.dataset.key = key;
+        for (const [value, labelText] of [["UNKNOWN", "不确定"], ["OBSERVED", "观察到"], ["NOT_OBSERVED", "未观察到"]]) {
+          const option = document.createElement("option"); option.value = value; option.textContent = labelText; select.append(option);
+        }
+        label.append(select); document.getElementById("wellbeing").append(label);
+      }
+      for (const code of interventionCodes) {
+        const label = document.createElement("label");
+        label.innerHTML = `<input type="checkbox" value="${code}" /> ${code}`;
+        document.getElementById("interventions").append(label);
+      }
+      for (const [value, text, mark] of favoriteChoices) {
+        const label = document.createElement("label");
+        label.innerHTML = `<input type="radio" name="favorite" value="${value}" /><span class="thumb">${mark}</span>${text}`;
+        document.getElementById("favorites").append(label);
+      }
+
+      function groupValue(hostId) {
+        return Object.fromEntries([...document.querySelectorAll(`#${hostId} select`)].map((select) => [select.dataset.key, select.value]));
+      }
+      function stopCode() { return document.getElementById("stop-code").value || null; }
+      function setStatus(message) { document.getElementById("status").textContent = message; }
+      function assertImport(value) {
+        const keys = ["schemaVersion", "initiativeId", "step", "evidenceKind", "sessionIdentity", "buildIdentity", "parentAuthorization", "audioPreflight", "technicalEvents", "completion"];
+        if (!value || typeof value !== "object" || keys.some((key) => !(key in value))) throw new Error("导入文件缺少 STEP 04 technical envelope。请从同一 observer session 导出。");
+        if (value.schemaVersion !== 1 || value.initiativeId !== "hanzi-radical-battle-v2" || value.step !== "04") throw new Error("导入文件不是 STEP 04 schema v1。");
+        if (!/^s04-[a-f0-9]{32}$/.test(value.sessionIdentity?.sessionId || "")) throw new Error("session identity 无效。");
+        if (!/^[A-F0-9]{64}$/.test(value.buildIdentity?.buildIdentitySha256 || "")) throw new Error("build identity 无效。");
+        if (!Array.isArray(value.technicalEvents)) throw new Error("technicalEvents 必须是数组。");
+      }
+      document.getElementById("technical-file").addEventListener("change", async (event) => {
+        try {
+          const file = event.target.files?.[0]; if (!file) return;
+          const value = JSON.parse(await file.text()); assertImport(value); imported = value;
+          document.getElementById("identity").textContent = `Session: ${value.sessionIdentity.sessionId}\nBuild: ${value.buildIdentity.buildIdentitySha256}\nEvents: ${value.technicalEvents.length}`;
+          setStatus("已导入。请按实际观察完成结构化选择；不要补写儿童原话。");
+        } catch (error) { imported = null; setStatus(`拒绝导入：${error.message}`); }
+      });
+
+      document.getElementById("stop-now").addEventListener("click", () => {
+        if (!stopCode()) { setStatus("请先选择停止原因，再点立即停止。"); return; }
+        const sessionId = imported?.sessionIdentity?.sessionId;
+        if (sessionId) {
+          const signal = { kind: "stop", schemaVersion: 1, sessionId, stopCode: stopCode() };
+          try { localStorage.setItem(`family-games/hanzi-v2-step04/signal:${sessionId}`, JSON.stringify(signal)); } catch { /* A compact after-session sheet may not share storage. */ }
+        }
+        setStatus("已记录停止。先回营地休息，找到的汉字都还在。可以关闭窗口；不要求完成。");
+      });
+
+      const privacyDenylist = /(黄小越|姓名|名字|年龄|学校|班级|生日|出生|电话|手机|微信|邮箱|地址|name|age|school|birthday|phone|email|address|contact|voice\s*name|user\s*agent|截图|照片|录音|录像|transcript|score|分数|[A-Z]:\\|file:\/\/|https?:\/\/|\b1[3-9]\d{9}\b|\b\d{1,3}(?:\.\d{1,3}){3}\b)/iu;
+      document.getElementById("sheet").addEventListener("submit", (event) => {
+        event.preventDefault();
+        try {
+          if (!imported) throw new Error("请先导入同一 session 的 technical export。");
+          if (!document.getElementById("privacy").checked) throw new Error("请完成隐私确认。");
+          const notes = document.getElementById("notes").value.trim();
+          if (privacyDenylist.test(notes)) throw new Error("备注命中隐私 denylist；请删除身份、媒体、设备、分数、路径或联系方式。");
+          const duration = Number(imported.completion?.relativeDurationMs || 0);
+          const checkpointId = document.getElementById("intervention-checkpoint").value;
+          const selectedRegion = document.getElementById("intervention-region").value || null;
+          const codes = [...document.querySelectorAll("#interventions input:checked")].map((input) => input.value);
+          if (codes.includes("POINT_TO_REGION_ONLY") !== Boolean(selectedRegion)) throw new Error("只有 POINT_TO_REGION_ONLY 必须选择 WORLD / BOARD / HAND；其他介入不记录区域。");
+          const favorite = document.querySelector("input[name=favorite]:checked")?.value || "NOT_ASKED";
+          const chosenStop = stopCode();
+          const payload = {
+            schemaVersion: 1,
+            initiativeId: "hanzi-radical-battle-v2",
+            step: "04",
+            evidenceKind: imported.evidenceKind,
+            sessionIdentity: imported.sessionIdentity,
+            buildIdentity: imported.buildIdentity,
+            parentAuthorization: imported.parentAuthorization,
+            audioPreflight: imported.audioPreflight,
+            technicalEvents: imported.technicalEvents,
+            observations: {
+              checkpoints: groupValue("checkpoints"), usability: groupValue("usability"), engagement: groupValue("engagement"), learningMechanismVisibility: groupValue("learning")
+            },
+            interventions: (codes.length ? codes : ["NONE"]).map((code) => ({ checkpointId, code, region: code === "POINT_TO_REGION_ONLY" ? selectedRegion : null, relativeMs: duration })),
+            wellbeing: { ...groupValue("wellbeing"), stopCode: chosenStop },
+            optionalChildChoices: {
+              againAgain: document.getElementById("again").value,
+              favoriteMoment: favorite,
+              spontaneousReplay: document.getElementById("spontaneous-replay").checked,
+              promptedReplay: document.getElementById("prompted-replay").checked,
+              optionalQuestionsAsked: document.getElementById("questions-asked").checked
+            },
+            completion: { ...imported.completion, sessionStopped: Boolean(chosenStop) || imported.completion.sessionStopped, stopCode: chosenStop || imported.completion.stopCode },
+            privacyConfirmed: true,
+            observerNotes: notes
+          };
+          const blob = new Blob([JSON.stringify(payload, null, 2) + "\n"], { type: "application/json" });
+          const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = "STEP-04_CHILD_FIRST_USE_OBSERVATION.json"; link.click();
+          setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+          setStatus("已在本机导出。请先人工复查隐私，再运行 FINISH；本页不上传或判定 PASS/FAIL。");
+        } catch (error) { setStatus(`无法导出：${error.message}`); }
+      });
+    </script>
+  </body>
+</html>

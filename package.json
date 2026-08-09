@@ -29,7 +29,13 @@
     "test:hanzi-v2:step03": "vitest run tests/hanzi-radical-battle-v2-step03-manifest.test.ts tests/hanzi-radical-battle-v2-step03-hands.test.ts tests/hanzi-radical-battle-v2-step03-machine.test.ts tests/hanzi-radical-battle-v2-step03-abilities.test.ts tests/hanzi-radical-battle-v2-step03-boss.test.ts tests/hanzi-radical-battle-v2-step03-save.test.ts tests/hanzi-radical-battle-v2-step03-copy.test.ts tests/hanzi-radical-battle-v2-step03-review.test.ts tests/hanzi-radical-battle-v2-step03-guardrail.test.ts",
     "test:e2e:hanzi-v2:step03": "playwright test tests/e2e/hanzi-radical-battle-v2-step03.spec.ts",
     "validate:hanzi-v2:step03": "pnpm run validate:hanzi-v2-foundation && pnpm run test:hanzi-v2:step03 && tsc --noEmit",
-    "capture:hanzi-v2:step03": "tsx tools/hanzi-v2-step03/capture-step03.ts"
+    "capture:hanzi-v2:step03": "tsx tools/hanzi-v2-step03/capture-step03.ts",
+    "observe:hanzi-v2:step04": "vite --host 127.0.0.1 --port 5175 --strictPort",
+    "test:hanzi-v2:step04": "vitest run tests/hanzi-radical-battle-v2-step04-audio.test.ts tests/hanzi-radical-battle-v2-step04-freeze.test.ts tests/hanzi-radical-battle-v2-step04-observer-schema.test.ts tests/hanzi-radical-battle-v2-step04-event-bridge.test.ts tests/hanzi-radical-battle-v2-step04-privacy.test.ts tests/hanzi-radical-battle-v2-step04-gate.test.ts tests/hanzi-radical-battle-v2-step04-copy.test.ts",
+    "test:e2e:hanzi-v2:step04": "playwright test tests/e2e/hanzi-radical-battle-v2-step04.spec.ts",
+    "validate:hanzi-v2:step04": "pnpm run validate:hanzi-v2-foundation && pnpm run test:hanzi-v2:step04 && tsc --noEmit",
+    "capture:hanzi-v2:step04": "tsx tools/hanzi-v2-step04/capture-step04-readiness.ts",
+    "package:hanzi-v2:step04-readiness": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File tools/hanzi-v2-step04/PACKAGE_STEP_04_READINESS.ps1"
   },
   "dependencies": {
     "phaser": "^3.90.0"

@@ -1,7 +1,7 @@
 # Hanzi Radical Battle V2 Status
 
-Current phase: GOLDEN_SLICE_CANDIDATE_READY_FOR_PARENT_REVIEW
-Completed: STEP 01 foundation; STEP 02 accepted core-spell pilot; STEP 03 complete 3–5 minute Golden Slice candidate, final 12-character manifest, three-choice, two-phase boss, Theme C production candidate, local save/events, parent final review tooling, and child first-use preparation
-Not started: Parent STEP 03 acceptance, authorized real child first-use observation, production seed-frame approval/full sprite strips, formal core promotion, full Ink Forest expansion, new world hub
-Next allowed task: Run STEP 03 parent review; then changed-only revision or explicitly authorized child first-use
-Not allowed yet: Claiming child acceptance, promoting V2 into default hub, full Ink Forest expansion
+Current phase: AUTHORIZED_CHILD_FIRST_USE_READY
+Completed: STEP 01 foundation; STEP 02 accepted core-spell pilot; STEP 03 parent acceptance carried forward; exact parent-directed audio revision; first-use observation Skill; guarded local observer; START/FINISH tooling; readiness evidence
+Not started: Real child first-use observation, observation interpretation, default-world promotion, production sprite pipeline, full Ink Forest expansion
+Next allowed task: Parent runs one authorized local child-first-use session and returns `STEP-04_CHILD_FIRST_USE_RETURN_TO_CHATGPT.zip`
+Not allowed yet: Claiming child acceptance or learning validation, promoting V2 into the default hub, full Ink Forest expansion

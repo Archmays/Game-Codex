@@ -181,3 +181,23 @@
 影响范围：三张原图保留在 artifacts，家长 review 只加载压缩 preview；所有 seed 均为 `GENERATED_PENDING_PARENT`、`reviewOnly = true`、`runtimeIncluded = false`。
 明确没有做什么：没有把概念表当透明 sprite，没有逐帧生成，没有制作最终 strip，没有复制第三方角色或让原图进入儿童 bundle。
 何时重新评估：家长在 STEP 03 资产终审中对单项 seed 给出决定，且后续任务另行授权 sprite-strip 生产时。
+
+## D-019 STEP 03 家长决定按唯一 changed-only 音频修订吸收
+
+日期：2026-08-09
+决定：以 SHA-256 `3F0BFAC4C6D318AC197AFA95764ACFB3A9E7FE9CE47BF6FA18C1514879EA417C` 的 canonical feedback 为真源，带入 Golden Slice、12 字 Manifest、三能力、Boss 与全部资产 `ACCEPT`；唯一 changed item 是 `audioDecision = REVISE`，并带入 `authorizeChildFirstUse = YES`。
+为什么：家长要求保留可见拼音，但 TTS 只朗读“汉字 + 熟悉词”，其余已接受身份不得因音频修订被重新生成或扩写。
+依据：review identity SHA-256 `DBA281F9954DFB591E2F3D7498B1B8F09F6C050BFBFA2436C9961B0513D73D3E` 与五项 source snapshot freeze。
+影响范围：为全部 12 字分离 `visualPinyin` 与 `spokenPhrase`；运行时、魔法书、STEP 03 review 和 STEP 04 preflight 只把 `spokenPhrase` 送入本地 TTS。
+明确没有做什么：没有改变字表、熟悉词、结构、遭遇、能力、Boss、Theme C、存档语义、失败语言或默认大厅。
+何时重新评估：仅当实际设备 preflight 发现技术问题时作音频层修订；不得借此重开已接受内容。
+
+## D-020 技术状态只到授权儿童首次使用就绪
+
+日期：2026-08-09
+决定：建立受 parent READY、每次 audio preflight、短期本地 session token、同源事件桥、常驻 stop 与隐私 schema 约束的首次使用系统；技术完成状态为 `AUTHORIZED_CHILD_FIRST_USE_READY`。
+为什么：自动化可以证明路由、事件、隐私、停止和导出工具可用，但不能代替真实儿童第一次接触，也不能给出学习、接受或推广结论。
+依据：`child-first-use-observation` Skill、STEP 04 observation schema、BroadcastChannel/localStorage bridge 与 START/FINISH fail-closed gate。
+影响范围：只新增隐藏的 parent observer 与 guarded child route；正式 observation 最多一局加一次自发 replay，真人数据不进入 Git、不上传、不录音录像。
+明确没有做什么：没有执行真实儿童 session，没有生成儿童结果，没有自动 PASS/FAIL/PROMOTE，没有加入默认大厅或扩建完整墨迹森林。
+何时重新评估：家长返回 identity-bound 的真实 `STEP-04_CHILD_FIRST_USE_RETURN_TO_CHATGPT.zip` 后，另行做人类解释与三态决定。
