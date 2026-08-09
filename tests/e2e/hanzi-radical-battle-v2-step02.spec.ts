@@ -176,8 +176,8 @@ test.describe("Hanzi Radical Battle V2 STEP 02", () => {
     }
   });
 
-  test("leaves the default ten-game hub and existing enter/return flow unchanged", async ({ page }) => {
-    await page.goto("/");
+  test("keeps the explicit ten-game classic hub and existing enter/return flow unchanged", async ({ page }) => {
+    await page.goto("/?hub=classic");
     await expect(page.getByRole("heading", { name: "儿童学习游戏大厅" })).toBeVisible();
     await expect(page.locator(".game-card")).toHaveCount(10);
     const firstTitle = await page.locator(".game-card h2").first().textContent();

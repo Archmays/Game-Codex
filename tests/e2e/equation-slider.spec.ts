@@ -11,7 +11,7 @@ const MOVE_COUNT_SELECTOR = "[data-move-count]";
 const LIVE_COACH_SELECTOR = ".equation-slider__coach[data-tutorial-step='move-target']";
 
 async function openFreshSlider(page: Page): Promise<void> {
-  await page.goto("/");
+  await page.goto("/?hub=classic");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await page.getByRole("button", { name: "进入轨道站" }).click();

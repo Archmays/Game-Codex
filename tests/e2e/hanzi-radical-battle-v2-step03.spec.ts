@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 
-const HUB_URL = "/";
+const HUB_URL = "/?hub=classic";
 const GOLDEN_SLICE_URL = "/?play=hanzi-v2-golden-slice";
 const REVIEW_URL = "/?review=hanzi-v2-step03";
 const GOLDEN_SAVE_KEY = "family-games/hanzi-radical-battle-v2/golden-slice/state";

@@ -39,7 +39,13 @@
     "review:hanzi-v2:step05": "vite --host 127.0.0.1 --port 5176 --strictPort",
     "test:hanzi-v2:step05": "vitest run tests/hanzi-radical-battle-v2-step05-voice-context.test.ts tests/hanzi-radical-battle-v2-step05-observation-migration.test.ts tests/hanzi-radical-battle-v2-step05-evidence-reconciliation.test.ts tests/hanzi-radical-battle-v2-step05-world-state.test.ts tests/hanzi-radical-battle-v2-step05-world-copy.test.ts tests/hanzi-radical-battle-v2-step05-navigation.test.ts tests/hanzi-radical-battle-v2-step05-freeze.test.ts tests/hanzi-radical-battle-v2-step05-privacy.test.ts tests/hanzi-radical-battle-v2-step05-review.test.ts",
     "test:e2e:hanzi-v2:step05": "playwright test tests/e2e/hanzi-radical-battle-v2-step05.spec.ts",
-    "validate:hanzi-v2:step05": "pnpm run validate:hanzi-v2-foundation && pnpm run test:hanzi-v2:step05 && tsc --noEmit"
+    "validate:hanzi-v2:step05": "pnpm run validate:hanzi-v2-foundation && pnpm run test:hanzi-v2:step05 && tsc --noEmit",
+    "play:my-game-world": "vite --host 127.0.0.1 --port 5175 --strictPort",
+    "observe:hanzi-v2:step06": "vite --host 127.0.0.1 --port 5175 --strictPort",
+    "test:hanzi-v2:step06": "vitest run tests/hanzi-radical-battle-v2-step06-parent-auth.test.ts tests/hanzi-radical-battle-v2-step06-default-route.test.ts tests/hanzi-radical-battle-v2-step06-route-compatibility.test.ts tests/hanzi-radical-battle-v2-step06-origin-continuity.test.ts tests/hanzi-radical-battle-v2-step06-progress-gate.test.ts tests/hanzi-radical-battle-v2-step06-observer-schema.test.ts tests/hanzi-radical-battle-v2-step06-event-bridge.test.ts tests/hanzi-radical-battle-v2-step06-privacy.test.ts tests/hanzi-radical-battle-v2-step06-freeze.test.ts",
+    "test:e2e:hanzi-v2:step06": "playwright test tests/e2e/hanzi-radical-battle-v2-step06.spec.ts --config playwright.step06.config.ts",
+    "validate:hanzi-v2:step06": "pnpm run validate:hanzi-v2-foundation && pnpm run test:hanzi-v2:step06 && tsc --noEmit",
+    "capture:hanzi-v2:step06": "playwright test tests/e2e/hanzi-radical-battle-v2-step06.spec.ts --config playwright.step06.config.ts --grep @capture"
   },
   "dependencies": {
     "phaser": "^3.90.0"

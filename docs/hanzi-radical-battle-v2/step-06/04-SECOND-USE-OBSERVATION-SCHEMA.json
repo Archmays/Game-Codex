@@ -1,0 +1,437 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "family-games/hanzi-radical-battle-v2/step-06/second-use-observation.schema.json",
+  "title": "STEP 06 Guarded Child Second-use Observation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "initiativeId",
+    "step",
+    "evidenceKind",
+    "sessionIdentity",
+    "buildIdentity",
+    "parentAuthorization",
+    "intervalBucket",
+    "progressContinuity",
+    "technicalEvents",
+    "derivedActions",
+    "observations",
+    "interventions",
+    "wellbeing",
+    "completion",
+    "privacyConfirmed",
+    "observerNotes"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "initiativeId": { "const": "hanzi-radical-battle-v2" },
+    "step": { "const": "06" },
+    "evidenceKind": {
+      "enum": ["REAL_CHILD_SECOND_USE", "SYNTHETIC_TOOLING_TEST_ONLY"]
+    },
+    "sessionIdentity": { "$ref": "#/$defs/sessionIdentity" },
+    "buildIdentity": { "$ref": "#/$defs/buildIdentity" },
+    "parentAuthorization": { "$ref": "#/$defs/parentAuthorization" },
+    "intervalBucket": { "$ref": "#/$defs/intervalBucket" },
+    "progressContinuity": { "$ref": "#/$defs/progressContinuity" },
+    "technicalEvents": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 500,
+      "items": { "$ref": "#/$defs/technicalEvent" }
+    },
+    "derivedActions": { "$ref": "#/$defs/derivedActions" },
+    "observations": { "$ref": "#/$defs/observations" },
+    "interventions": {
+      "type": "array",
+      "maxItems": 50,
+      "items": { "$ref": "#/$defs/intervention" }
+    },
+    "wellbeing": { "$ref": "#/$defs/wellbeing" },
+    "completion": { "$ref": "#/$defs/completion" },
+    "privacyConfirmed": { "const": true },
+    "observerNotes": { "type": "string", "maxLength": 1000 }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[A-F0-9]{64}$"
+    },
+    "sessionId": {
+      "type": "string",
+      "pattern": "^s06-[a-z0-9-]{8,64}$"
+    },
+    "intervalBucket": {
+      "enum": [
+        "SAME_DAY_SEPARATE_SESSION",
+        "ONE_TO_THREE_DAYS",
+        "FOUR_TO_SEVEN_DAYS",
+        "MORE_THAN_SEVEN_DAYS"
+      ]
+    },
+    "sessionIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sessionId", "canonicalOrigin", "startedAtUtc"],
+      "properties": {
+        "sessionId": { "$ref": "#/$defs/sessionId" },
+        "canonicalOrigin": { "const": "http://127.0.0.1:5175" },
+        "startedAtUtc": { "type": "string", "format": "date-time" }
+      }
+    },
+    "buildIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["commitSha", "technicalState"],
+      "properties": {
+        "commitSha": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "technicalState": { "const": "DEFAULT_WORLD_ENTRY_PROMOTED_SECOND_USE_READY" }
+      }
+    },
+    "parentAuthorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "feedbackSha256",
+        "candidateCommit",
+        "evidenceSha256",
+        "candidateRevision",
+        "authorizeDefaultWorldEntry",
+        "authorizeSecondUseCheck"
+      ],
+      "properties": {
+        "feedbackSha256": {
+          "const": "AF3878C88F68344E2EF649774FCE24C46D2312824D91AD274628B85C8A6E0800"
+        },
+        "candidateCommit": {
+          "const": "c46e660396257767692e94d61263b4662a11ccfb"
+        },
+        "evidenceSha256": {
+          "const": "EC04FECD4B04F294E7ED62139EBEE386F6B27B3FBC198EBCF3F6CD98341A86D8"
+        },
+        "candidateRevision": { "const": "fnv1a:c9271099" },
+        "authorizeDefaultWorldEntry": { "const": "YES" },
+        "authorizeSecondUseCheck": { "const": "YES" }
+      }
+    },
+    "campRepairFlags": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lamp", "flowers", "guardianTrees", "starPath"],
+      "properties": {
+        "lamp": { "const": true },
+        "flowers": { "const": true },
+        "guardianTrees": { "const": true },
+        "starPath": { "const": true }
+      }
+    },
+    "progressContinuity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "originMatched",
+        "canonicalSavePresent",
+        "completedAndComplete",
+        "discoveredCharacterIds",
+        "campRepairFlags",
+        "recoveredFromCorruption"
+      ],
+      "properties": {
+        "originMatched": { "const": true },
+        "canonicalSavePresent": { "const": true },
+        "completedAndComplete": { "const": true },
+        "discoveredCharacterIds": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": { "enum": ["ming", "hua", "lin", "xing"] },
+          "allOf": [
+            { "contains": { "const": "ming" } },
+            { "contains": { "const": "hua" } },
+            { "contains": { "const": "lin" } },
+            { "contains": { "const": "xing" } }
+          ]
+        },
+        "campRepairFlags": { "$ref": "#/$defs/campRepairFlags" },
+        "recoveredFromCorruption": { "const": false }
+      }
+    },
+    "destinationId": {
+      "enum": ["FOREST", "SPELLBOOK", "TREASURE_BOX"]
+    },
+    "phase": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,40}$"
+    },
+    "abilityId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,40}$"
+    },
+    "errorCode": {
+      "type": "string",
+      "pattern": "^[A-Z0-9_]{1,48}$"
+    },
+    "safeMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "destinationId": { "$ref": "#/$defs/destinationId" },
+        "phase": { "$ref": "#/$defs/phase" },
+        "abilityId": { "$ref": "#/$defs/abilityId" },
+        "worldReturned": { "type": "boolean" },
+        "completed": { "type": "boolean" },
+        "errorCode": { "$ref": "#/$defs/errorCode" },
+        "recoverable": { "type": "boolean" }
+      }
+    },
+    "eventType": {
+      "enum": [
+        "session_opened",
+        "world_ready",
+        "progress_continuity_verified",
+        "world_first_action",
+        "world_destination_opened",
+        "world_spellbook_opened",
+        "classic_hub_opened",
+        "settings_opened",
+        "forest_entered",
+        "golden_phase_entered",
+        "ability_selected",
+        "golden_run_completed",
+        "returned_to_world",
+        "session_stopped",
+        "technical_error"
+      ]
+    },
+    "technicalEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "sessionId",
+        "sequence",
+        "relativeMs",
+        "eventType",
+        "safeMetadata"
+      ],
+      "properties": {
+        "schemaVersion": { "const": 1 },
+        "sessionId": { "$ref": "#/$defs/sessionId" },
+        "sequence": { "type": "integer", "minimum": 1, "maximum": 100000 },
+        "relativeMs": { "type": "integer", "minimum": 0, "maximum": 1800000 },
+        "eventType": { "$ref": "#/$defs/eventType" },
+        "safeMetadata": { "$ref": "#/$defs/safeMetadata" }
+      }
+    },
+    "nullableRelativeMs": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "integer", "minimum": 0, "maximum": 1800000 }
+      ]
+    },
+    "nullableDestination": {
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/destinationId" }
+      ]
+    },
+    "derivedActions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "firstWorldActionMs",
+        "firstDestination",
+        "forestEntered",
+        "worldSpellbookOpened",
+        "classicHubOpened",
+        "goldenRunCompleted",
+        "returnedToWorld",
+        "worldLoopCompleted"
+      ],
+      "properties": {
+        "firstWorldActionMs": { "$ref": "#/$defs/nullableRelativeMs" },
+        "firstDestination": { "$ref": "#/$defs/nullableDestination" },
+        "forestEntered": { "type": "boolean" },
+        "worldSpellbookOpened": { "type": "boolean" },
+        "classicHubOpened": { "type": "boolean" },
+        "goldenRunCompleted": { "type": "boolean" },
+        "returnedToWorld": { "type": "boolean" },
+        "worldLoopCompleted": { "type": "boolean" }
+      }
+    },
+    "observationValue": {
+      "enum": [
+        "UNRECORDED",
+        "NOTICED_WITHOUT_PROMPT",
+        "NOTICED_AFTER_BUILT_IN_SUPPORT",
+        "NOTICED_AFTER_REGION_ONLY_PROMPT",
+        "ADULT_ANSWER_REQUIRED",
+        "STOPPED"
+      ]
+    },
+    "worldRecognition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recognizedWorld",
+        "noticedPersistentRepairs",
+        "selectedDestination",
+        "understoodForestPortal",
+        "understoodSpellbook",
+        "understoodTreasureBox",
+        "returnedToWorld"
+      ],
+      "properties": {
+        "recognizedWorld": { "$ref": "#/$defs/observationValue" },
+        "noticedPersistentRepairs": { "$ref": "#/$defs/observationValue" },
+        "selectedDestination": { "$ref": "#/$defs/observationValue" },
+        "understoodForestPortal": { "$ref": "#/$defs/observationValue" },
+        "understoodSpellbook": { "$ref": "#/$defs/observationValue" },
+        "understoodTreasureBox": { "$ref": "#/$defs/observationValue" },
+        "returnedToWorld": { "$ref": "#/$defs/observationValue" }
+      }
+    },
+    "familiarization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rememberedCorePlacement",
+        "usedBuiltInHintsOnly",
+        "neededAdultAnswer",
+        "showedBoredomWithRepeatedRoute"
+      ],
+      "properties": {
+        "rememberedCorePlacement": { "$ref": "#/$defs/observationValue" },
+        "usedBuiltInHintsOnly": { "$ref": "#/$defs/observationValue" },
+        "neededAdultAnswer": { "$ref": "#/$defs/observationValue" },
+        "showedBoredomWithRepeatedRoute": { "$ref": "#/$defs/observationValue" }
+      }
+    },
+    "engagement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "voluntarilyContinued",
+        "exploredAnotherWorldObject",
+        "askedForMoreAfterOfficialCheck"
+      ],
+      "properties": {
+        "voluntarilyContinued": { "$ref": "#/$defs/observationValue" },
+        "exploredAnotherWorldObject": { "$ref": "#/$defs/observationValue" },
+        "askedForMoreAfterOfficialCheck": { "$ref": "#/$defs/observationValue" }
+      }
+    },
+    "observations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["worldRecognition", "familiarization", "engagement"],
+      "properties": {
+        "worldRecognition": { "$ref": "#/$defs/worldRecognition" },
+        "familiarization": { "$ref": "#/$defs/familiarization" },
+        "engagement": { "$ref": "#/$defs/engagement" }
+      }
+    },
+    "interventionCode": {
+      "enum": [
+        "NONE",
+        "REPEAT_VISIBLE_COPY",
+        "POINT_TO_REGION_ONLY",
+        "TECHNICAL_ASSIST",
+        "ADULT_ANSWER_REQUIRED",
+        "STOPPED"
+      ]
+    },
+    "pointableRegion": {
+      "enum": ["WORLD", "WORLD_OBJECTS", "FOREST_PLAYFIELD", "BOARD", "HAND"]
+    },
+    "intervention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checkpointId", "code", "region", "relativeMs"],
+      "properties": {
+        "checkpointId": {
+          "enum": [
+            "recognizedWorld",
+            "noticedPersistentRepairs",
+            "selectedDestination",
+            "understoodForestPortal",
+            "understoodSpellbook",
+            "understoodTreasureBox",
+            "returnedToWorld",
+            "rememberedCorePlacement",
+            "usedBuiltInHintsOnly",
+            "neededAdultAnswer",
+            "showedBoredomWithRepeatedRoute",
+            "voluntarilyContinued",
+            "exploredAnotherWorldObject",
+            "askedForMoreAfterOfficialCheck"
+          ]
+        },
+        "code": { "$ref": "#/$defs/interventionCode" },
+        "region": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/pointableRegion" }
+          ]
+        },
+        "relativeMs": { "type": "integer", "minimum": 0, "maximum": 1800000 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "code": { "const": "POINT_TO_REGION_ONLY" } }, "required": ["code"] },
+          "then": { "properties": { "region": { "$ref": "#/$defs/pointableRegion" } } },
+          "else": { "properties": { "region": { "type": "null" } } }
+        }
+      ]
+    },
+    "wellbeingValue": {
+      "enum": ["OBSERVED", "NOT_OBSERVED", "UNKNOWN"]
+    },
+    "stopCode": {
+      "enum": [
+        "CHILD_REQUEST",
+        "DISTRESS",
+        "SENSORY_DISCOMFORT",
+        "TECHNICAL",
+        "PRIVACY",
+        "PROGRESS_CONTINUITY",
+        "ADULT_ANSWER_REQUIRED",
+        "NATURAL_END",
+        "OTHER"
+      ]
+    },
+    "wellbeing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "comfortable",
+        "briefConfusionRecovered",
+        "sustainedFrustration",
+        "sensoryDiscomfort",
+        "childInitiatedStop",
+        "feltForced"
+      ],
+      "properties": {
+        "comfortable": { "$ref": "#/$defs/wellbeingValue" },
+        "briefConfusionRecovered": { "$ref": "#/$defs/wellbeingValue" },
+        "sustainedFrustration": { "$ref": "#/$defs/wellbeingValue" },
+        "sensoryDiscomfort": { "$ref": "#/$defs/wellbeingValue" },
+        "childInitiatedStop": { "$ref": "#/$defs/wellbeingValue" },
+        "feltForced": { "$ref": "#/$defs/wellbeingValue" }
+      }
+    },
+    "completion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["childRouteLoaded", "sessionStopped", "relativeDurationMs", "stopCode"],
+      "properties": {
+        "childRouteLoaded": { "type": "boolean" },
+        "sessionStopped": { "const": true },
+        "relativeDurationMs": { "type": "integer", "minimum": 0, "maximum": 1800000 },
+        "stopCode": { "$ref": "#/$defs/stopCode" }
+      }
+    }
+  }
+}

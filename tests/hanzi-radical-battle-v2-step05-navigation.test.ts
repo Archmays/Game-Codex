@@ -15,13 +15,15 @@ describe("Hanzi V2 STEP 05 navigation contract", () => {
     expect(CLASSIC_HUB_FROM_WORLD_ROUTE).toBe("?hub=classic&from=world");
   });
 
-  it("keeps default hub last and gates return context to ordinary world-launched play", () => {
+  it("promotes the default world while keeping explicit classic and ordinary return context", () => {
     const main = readFileSync(resolve(root, "src/main.ts"), "utf8");
-    expect(main).toContain('reviewMode === "hanzi-v2-step05"');
-    expect(main).toContain('worldMode === "my-game-world"');
-    expect(main).toContain('hubMode === "classic" && fromMode === "world"');
+    const routing = readFileSync(resolve(root, "src/app-route.ts"), "utf8");
+    expect(routing).toContain('search.get("review") === "hanzi-v2-step05"');
+    expect(routing).toContain('search.get("hub") === "classic"');
+    expect(routing).toContain('search.get("world") === "my-game-world"');
+    expect(routing).toContain('return { kind: "world", explicit: false }');
     expect(main).toContain('mode === "play" && fromMode === "world" ? "?world=my-game-world" : undefined');
-    expect(main.lastIndexOf("mountHub(root)")).toBeGreaterThan(main.indexOf('worldMode === "my-game-world"'));
+    expect(main).toContain("mountMyGameWorld(root)");
   });
 
   it("mounts the unchanged classic hub inside a wrapper that owns the world-return link", () => {

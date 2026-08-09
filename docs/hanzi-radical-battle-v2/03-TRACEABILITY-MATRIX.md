@@ -30,6 +30,9 @@
 | 私人游戏世界候选 | 第一眼是世界与冒险；经典目录次级 | child-first-learning-game、game-ui-frontend | 营地变化可持续看见，三对象即可理解 | 四字收藏与修复状态直接投影既有进度，不造第二套成绩 | no/partial/repaired/corrupt save、copy/privacy、三 viewport、no network | 家长 changed-only 审核；默认入口须另行授权 | `PRIVATE_WORLD_ENTRY_CANDIDATE_READY_FOR_PARENT_REVIEW` |
 | 世界导航与经典百宝箱 | 两次点击内开始；既有游戏不受损 | game-ui-frontend、save-systems | 可在世界、森林、魔法书、经典游戏间返回 | 导航不改变合字规则或永久进度语义 | exact routes、10-game regression、complete→world、context gate | 家长核验三条导航链 | `STEP05_IMPLEMENTED / DEFAULT_ROUTE_UNCHANGED` |
 | STEP 05 changed-only 家长门禁 | 技术 PASS 与人类授权分离 | child-first-learning-game、child-first-use-observation | 成人可只看真实使用后变更，不重审全部儿童流程 | 冻结合字内容；仅音频、世界壳与依赖导航可决定 | fixed export、identity/schema/PII validation、Round 2 carry-forward test | 四项决定与两个授权均需真实家长填写 | `PARENT_REVIEW_REQUIRED` |
+| 默认世界入口 | 儿童第一屏是已建立的世界，经典目录仍可达 | child-first-learning-game、game-ui-frontend | 回来先看到营地修复与三个可选物件，不出现教师目录 | 明花林星与营地变化继续投影唯一 canonical save | `/`、world alias、classic query、priority、title/theme、Pages 子路径 E2E | 家长已明确授权默认入口；实际 second-use 尚未进行 | `DEFAULT_WORLD_ENTRY_PROMOTED` |
+| 固定家庭本地 origin | 同一浏览器同一 origin 才能延续真实进度 | save-systems、child-first-use-observation | 上次修复不会因换 host/port 看似消失 | 只读验证 schema v3 存档，不迁移、不补造 | `127.0.0.1:5175` launcher、PID/root/port 验证、missing/corrupt/private-mode fail closed | 家长按固定 START/STOP 使用原 profile | `CANONICAL_ORIGIN_ESTABLISHED` |
+| 第二次进入 / 返回世界观察 | 不指定正确去向，观察认出世界与返回循环 | child-first-use-observation、game-playtest | 孩子可自由选择森林、字灵书或百宝箱；随时结束 | 只记录流程与相对状态，不把选择解释为学习效果 | 短期 identity-bound grant、跨页 event bridge、只读 derived actions、stop/privacy、synthetic fixture | 只允许下一次自然独立时段；真人结果尚不存在 | `SECOND_USE_READY / REAL_SESSION_NOT_RUN` |
 
 ## 新功能准入模板
 

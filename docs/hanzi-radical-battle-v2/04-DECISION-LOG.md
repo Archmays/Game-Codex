@@ -231,3 +231,23 @@
 影响范围：新 world/review apps、查询路由与 Golden Slice 完成返回链接；STEP 02 partial migration 只显示实际已有条目。
 明确没有做什么：没有建立账户、儿童姓名、远程追踪、第二存档、生产素材、默认世界或完整森林。
 何时重新评估：只有家长在 STEP 05 明确 `authorizeDefaultWorldEntry = YES` 后，另开有限默认路由任务。
+
+## D-024 STEP 05 精确授权后晋升默认世界，并固定家庭 origin
+
+日期：2026-08-09
+决定：以 SHA-256 `AF3878C88F68344E2EF649774FCE24C46D2312824D91AD274628B85C8A6E0800` 的 STEP 05 feedback 为唯一授权输入；四项均 `ACCEPT`，`authorizeDefaultWorldEntry = YES` 与 `authorizeSecondUseCheck = YES`。因此 `/` 晋升为“我的游戏世界”，`?world=my-game-world` 保留为别名，原十游戏通过 `?hub=classic` 保留；正式家庭 origin 固定为 `http://127.0.0.1:5175/`。
+为什么：真实 first-use 后建立的世界持续性需要成为儿童默认入口，而 localStorage 进度严格受 origin 与浏览器 profile 约束。
+依据：STEP 05 candidate commit `c46e660396257767692e94d61263b4662a11ccfb`、evidence SHA-256 `EC04FECD4B04F294E7ED62139EBEE386F6B27B3FBC198EBCF3F6CD98341A86D8`、revision `fnv1a:c9271099` 与精确家长反馈。
+影响范围：root dispatch、query-only navigation、browser title/theme、classic wrapper、固定 START/STOP launcher 与既有 E2E 显式 classic route。
+明确没有做什么：没有复制 catalog、重建存档、修改合字内容、加入新美术、扩剩余八字或建立联网能力。
+何时重新评估：只有新的 identity-bound 家长决定才可撤销该授权；origin 变更必须先处理存档连续性迁移风险。
+
+## D-025 second-use 只验证自然返回与世界循环，不给正确目的地
+
+日期：2026-08-09
+决定：建立一次短时、本地、identity-bound 的 second-use observer；START 只打开家长 preflight，READY 后才打开与普通 `/` 相同的儿童界面。continuity 必须读取 `127.0.0.1:5175` 下既有完整 canonical save；不满足即 `SECOND_USE_PROGRESS_CONTINUITY_BLOCKED`。第一次去向与返回循环只从 allowlisted 技术事件推导。
+为什么：第二次使用的问题是孩子能否认出持续世界、自己选择去向并返回，而不是能否遵从成人指定的森林路径。
+依据：child-first-use-observation 的 re-entry 边界、save-systems 的 canonical-state 原则、BroadcastChannel + scoped storage fallback、严格 observation schema。
+影响范围：第二次进入 grant、world/classic/forest adapter、parent observer、START/FINISH、synthetic tooling fixture 与本地导出。
+明确没有做什么：没有执行真实 second-use，没有给 solver/正确目的地/正确卡牌，没有保存 PII、媒体、原始输入或完整 localStorage，没有自动 PASS/FAIL。
+何时重新评估：家长在下一次自然、独立时段返回 `STEP-06_SECOND_USE_RETURN_TO_CHATGPT.zip` 后，只解释该次证据；不得推断长期投入、学习效果、保持度或剩余八字准备度。

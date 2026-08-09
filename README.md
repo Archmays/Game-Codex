@@ -6,7 +6,7 @@
 
 ## 当前游戏
 
-统一入口是游戏大厅，当前收录 10 个游戏：
+经典大厅当前收录 10 个游戏。默认入口 `/` 现在是儿童侧的“我的游戏世界”；世界中的“游戏百宝箱”，或显式地址 `?hub=classic`，继续展示这 10 个游戏目录：
 
 | 游戏 | 学科 | 适合年龄 | 当前状态 |
 | --- | --- | --- | --- |
@@ -31,13 +31,31 @@
 pnpm install
 ```
 
-启动游戏大厅：
+家庭长期使用请运行固定启动器（它会保持与既有进度相同的 origin）：
 
 ```powershell
-pnpm dev
+.\tools\my-game-world\START_MY_GAME_WORLD.cmd
 ```
 
-然后打开终端显示的本地地址，通常是 `http://127.0.0.1:5173/`。
+固定地址必须是 `http://127.0.0.1:5175/`。结束本地服务时运行：
+
+```powershell
+.\tools\my-game-world\STOP_MY_GAME_WORLD.cmd
+```
+
+也可以在开发时启动默认入口：
+
+```powershell
+pnpm run play:my-game-world
+```
+
+进度与 origin 和浏览器 profile 绑定。家庭连续使用时不要改用 `localhost`、其他端口或其他浏览器 profile，也不要使用无痕模式保存长期进度。普通 `pnpm dev` 仍保留给旧开发工作流，不改变其默认端口。
+
+路由约定：
+
+- `/` 或 `?world=my-game-world`：我的游戏世界；
+- `?hub=classic`：原 10 游戏经典大厅；
+- 世界、森林与经典大厅之间使用 query-only 返回链接，兼容 GitHub Pages 项目子路径。
 
 ## 测试和构建
 

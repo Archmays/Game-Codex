@@ -1,7 +1,7 @@
 import { expect, test, type BrowserContext, type Page } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 
-const HUB_URL = "/";
+const HUB_URL = "/?hub=classic";
 const REVIEW_URL = "/?review=hanzi-v2-step03";
 const SESSION_STORAGE_PREFIX = "family-games/hanzi-v2-step04/session:";
 const EVENT_STORAGE_PREFIX = "family-games/hanzi-v2-step04/events:";

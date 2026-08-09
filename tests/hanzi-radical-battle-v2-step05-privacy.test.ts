@@ -37,7 +37,9 @@ describe("Hanzi V2 STEP 05 privacy and local-only boundary", () => {
 
   it("has no network, account, login, payment, ad, or tracking implementation in the child world", () => {
     const world = filesUnder("apps/my-game-world").map((path) => readFileSync(path, "utf8")).join("\n");
-    expect(world).not.toMatch(/https?:\/\/|fetch\s*\(|XMLHttpRequest|WebSocket|sendBeacon/iu);
+    const canonicalLocalOrigin = "http://127.0.0.1:5175";
+    expect(world).toContain(canonicalLocalOrigin);
+    expect(world.replaceAll(canonicalLocalOrigin, "")).not.toMatch(/https?:\/\/|fetch\s*\(|XMLHttpRequest|WebSocket|sendBeacon/iu);
     expect(world).not.toMatch(/login|sign.?in|payment|checkout|advert|analytics|tracker/iu);
   });
 });

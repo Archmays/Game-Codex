@@ -260,7 +260,7 @@ export function mountGoldenSliceOverlay(
   const seed = options.seed?.trim() || save.lastRunSeed;
   let state = createGoldenSliceState({ seed, mode: options.mode ?? "play" });
   let audioSettings = readAudioSettings(window.localStorage);
-  const initialMuted = options.childFirstUse && typeof options.initialMuted === "boolean"
+  const initialMuted = typeof options.initialMuted === "boolean"
     ? options.initialMuted
     : save.settings.muted;
   audioSettings = { ...audioSettings, muted: initialMuted };

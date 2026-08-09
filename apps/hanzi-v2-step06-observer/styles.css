@@ -1,0 +1,25 @@
+.step06-observer-page { background: #eef3f4; color: #17292f; }
+.step06-observer-mount { min-height: 100vh; }
+.step06-observer { box-sizing: border-box; max-width: 1080px; margin: 0 auto; padding: 28px 18px 64px; font-family: system-ui, sans-serif; }
+.step06-observer header { padding: 24px; border-radius: 20px; color: #f4fbfa; background: #123a42; }
+.step06-observer h1, .step06-observer h2, .step06-observer h3 { margin-top: 0; }
+.step06-kicker { letter-spacing: .12em; font-weight: 800; }
+.fixture-label { display: inline-block; padding: 8px 12px; border-radius: 999px; color: #4b2d00; background: #ffd77a; }
+.step06-card { margin-top: 18px; padding: 22px; border: 1px solid #c7d5d7; border-radius: 18px; background: #fff; box-shadow: 0 8px 24px rgb(16 55 63 / 8%); }
+.step06-card dl { display: grid; grid-template-columns: minmax(150px, .55fr) 1.45fr; gap: 8px 16px; }
+.step06-card dt { font-weight: 800; }
+.step06-card dd { margin: 0; overflow-wrap: anywhere; }
+.step06-card label { display: grid; gap: 6px; margin: 12px 0; font-weight: 700; }
+.step06-card select, .step06-card textarea, .step06-card button { min-height: 44px; font: inherit; }
+.step06-card textarea { min-height: 90px; padding: 10px; }
+.step06-card button { margin: 6px 8px 6px 0; padding: 8px 15px; border: 0; border-radius: 11px; color: white; background: #126273; font-weight: 800; cursor: pointer; }
+.step06-card button.stop { background: #8a2f3d; }
+.continuity { padding: 14px; border-radius: 12px; }
+.continuity.is-pass { background: #e4f6eb; color: #145733; }
+.continuity.is-blocked { background: #fff0ef; color: #7a2430; }
+.neutral-prompt { padding: 18px; border-left: 5px solid #3d7f89; background: #edf8f8; font-size: 1.1rem; }
+.privacy { grid-template-columns: 24px 1fr !important; align-items: start; }
+.privacy input { width: 20px; height: 20px; }
+.step06-summary { margin-top: 18px; padding: 18px; border-radius: 14px; background: #f0f6f6; }
+.step06-route-denied { max-width: 650px; margin: 12vh auto; padding: 28px; font-family: system-ui, sans-serif; }
+@media (max-width: 680px) { .step06-observer { padding: 12px 10px 40px; } .step06-card { padding: 16px; } .step06-card dl { grid-template-columns: 1fr; } }

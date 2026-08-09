@@ -1,6 +1,6 @@
 ---
 name: child-first-use-observation
-description: Guard low-interference, local first-use observation for young children in family learning games. Use when preparing, running, validating, packaging, or interpreting an authorized child acceptance gate, a first-use changed-only revision, a parent observer surface, an observation schema, or a private local playtest return package.
+description: Guard low-interference, local first-use and second-use/re-entry observation for young children in family learning games. Use when preparing, running, validating, packaging, or interpreting an authorized child acceptance gate, a changed-only revision, a parent observer surface, an observation schema, or a private local playtest return package.
 ---
 
 # Child First-Use Observation
@@ -32,7 +32,17 @@ Preserve the child's genuine first encounter. Treat technical events, observed b
 
 Use only these intervention codes: `NONE`, `REPEAT_VISIBLE_COPY`, `POINT_TO_REGION_ONLY`, `TECHNICAL_ASSIST`, `ADULT_ANSWER_REQUIRED`, `STOPPED`.
 
-Use only these stop codes: `CHILD_REQUEST`, `DISTRESS`, `SENSORY_DISCOMFORT`, `TECHNICAL`, `PRIVACY`, `IDENTITY`, `ADULT_ANSWER_REQUIRED`, `OTHER`.
+For a first-use package, use only these stop codes: `CHILD_REQUEST`, `DISTRESS`, `SENSORY_DISCOMFORT`, `TECHNICAL`, `PRIVACY`, `IDENTITY`, `ADULT_ANSWER_REQUIRED`, `OTHER`.
+
+## Second-use / re-entry
+
+- Keep first-use and second-use evidence separate. A first encounter asks whether the child can enter the accepted experience; a later re-entry asks whether the child recognizes the world, chooses a destination, and can complete a destination-to-world return loop.
+- Run re-entry only in a natural, separate session and record a coarse interval bucket. Never join it to the first session or infer long-term retention from one revisit.
+- Require the canonical local origin, the same browser profile, an identity-bound short-lived grant, and an existing canonical completed save. Fail closed on a wrong origin, missing or partial save, unavailable storage, or corruption; never reconstruct progress from earlier evidence.
+- Give no correct destination. Use the neutral prompt `你想去哪里都可以。` and allow region-only pointing to `WORLD`, `WORLD_OBJECTS`, `FOREST_PLAYFIELD`, `BOARD`, or `HAND`, never to a particular world object, card, slot, or answer.
+- Derive first action, first destination, route entry, and return-loop facts only from ordered technical events. Keep stated intent and parent observation separate from actual action.
+- Use the second-use contract's declared stop set. It may distinguish `PROGRESS_CONTINUITY` and `NATURAL_END` from the first-use identity and interruption boundary, but must never turn a stop into child-visible failure.
+- End the formal observation before any requested free play continues. Exclude later free play from the evidence and do not infer long-term engagement, learning effectiveness, retention, or broader content readiness.
 
 ## Evidence and privacy boundary
 

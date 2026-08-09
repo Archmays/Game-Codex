@@ -134,7 +134,7 @@ test.describe("@gate-d @agent-playtest equation slider UI-only agent playtest", 
 });
 
 async function completeFormalBoardTutorial(page: Page): Promise<TutorialResult> {
-  await page.goto("/");
+  await page.goto("/?hub=classic");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await page.getByRole("button", { name: "进入轨道站" }).click();

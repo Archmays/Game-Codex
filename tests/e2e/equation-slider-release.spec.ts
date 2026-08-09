@@ -10,7 +10,7 @@ const PROGRESS_V3_KEY = "family-games/equation-slider/progress-v3";
 const LEGACY_PROGRESS_KEY = "family-games/equation-slider/progress";
 
 async function enterSlider(page: Page, clearStorage = true): Promise<void> {
-  await page.goto("/");
+  await page.goto("/?hub=classic");
   if (clearStorage) {
     await page.evaluate(() => localStorage.clear());
     await page.reload();
@@ -178,7 +178,7 @@ test.describe("@release equation slider browser-only release gaps", () => {
   });
 
   test("Tab, Enter, and arrow keys complete, replay, advance, and return without pointer input", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/?hub=classic");
     await page.evaluate(() => localStorage.clear());
     await page.reload();
     await activateWithKeyboard(page, page.getByRole("button", { name: "进入轨道站" }));
@@ -220,7 +220,7 @@ test.describe("@release equation slider browser-only release gaps", () => {
   test("completion UI exposes rest, station, and chapter checkpoints", async ({ page }) => {
     test.setTimeout(180_000);
     const startWithCompleted = async (levelIds: readonly string[]): Promise<void> => {
-      await page.goto("/");
+      await page.goto("/?hub=classic");
       await page.evaluate(
         ({ key, ids, record }) => {
           localStorage.clear();
@@ -294,7 +294,7 @@ test.describe("@release equation slider browser-only release gaps", () => {
     }
   ] as const) {
     test(`legacy ${legacyCase.name} storage keeps sound only in active V3 progress and shows the upgrade notice`, async ({ page }) => {
-      await page.goto("/");
+      await page.goto("/?hub=classic");
       await page.evaluate(
         ({ key, value }) => {
           localStorage.clear();

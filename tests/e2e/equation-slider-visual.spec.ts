@@ -13,7 +13,7 @@ const VIEWPORTS = [
 ] as const;
 
 async function openFreshSlider(page: Page): Promise<void> {
-  await page.goto("/");
+  await page.goto("/?hub=classic");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await page.getByRole("button", { name: "进入轨道站" }).click();

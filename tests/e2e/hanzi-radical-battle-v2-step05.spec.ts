@@ -191,7 +191,7 @@ function completedSave(overrides: Record<string, unknown> = {}) {
 }
 
 async function setGoldenSave(page: Page, save: unknown): Promise<void> {
-  await page.goto("/");
+  await page.goto("/?hub=classic");
   await page.evaluate(
     ([key, value]) => window.localStorage.setItem(key, JSON.stringify(value)),
     [GOLDEN_SLICE_SAVE_KEY, save] as const,
@@ -199,7 +199,7 @@ async function setGoldenSave(page: Page, save: unknown): Promise<void> {
 }
 
 async function clearGoldenSave(page: Page): Promise<void> {
-  await page.goto("/");
+  await page.goto("/?hub=classic");
   await page.evaluate((key) => window.localStorage.removeItem(key), GOLDEN_SLICE_SAVE_KEY);
 }
 
@@ -288,6 +288,8 @@ test.describe.serial("Hanzi Radical Battle V2 STEP 05", () => {
     const diagnostics = observeDiagnostics(page);
 
     await page.goto("/");
+    await expect(page.getByTestId("my-game-world")).toBeVisible();
+    await page.goto("/?hub=classic");
     await expect(page.locator(".game-card")).toHaveCount(10);
 
     await clearGoldenSave(page);
@@ -397,7 +399,7 @@ test.describe.serial("Hanzi Radical Battle V2 STEP 05", () => {
     page,
   }) => {
     const diagnostics = observeDiagnostics(page);
-    await page.goto("/");
+    await page.goto("/?hub=classic");
     await page.evaluate((key) => window.localStorage.removeItem(key), STEP05_REVIEW_DRAFT_KEY);
     await page.goto(REVIEW_URL);
 
