@@ -75,10 +75,21 @@ function Copy-ReadinessFile {
     Copy-Item -LiteralPath $Source -Destination $destination
 }
 
+function Get-ReadinessRelativePath {
+    param([Parameter(Mandatory)][string]$BasePath, [Parameter(Mandatory)][string]$FullPath)
+    $resolvedBase = [System.IO.Path]::GetFullPath($BasePath).TrimEnd([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
+    $resolvedPath = [System.IO.Path]::GetFullPath($FullPath)
+    $basePrefix = $resolvedBase + [System.IO.Path]::DirectorySeparatorChar
+    if (-not $resolvedPath.StartsWith($basePrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "Readiness file is outside its expected root: $resolvedPath"
+    }
+    return $resolvedPath.Substring($basePrefix.Length)
+}
+
 function Copy-ReadinessTree {
     param([Parameter(Mandatory)][string]$SourceRoot, [Parameter(Mandatory)][string]$RelativeRoot)
     Get-ChildItem -LiteralPath $SourceRoot -Recurse -File | ForEach-Object {
-        $relative = [System.IO.Path]::GetRelativePath($SourceRoot, $_.FullName)
+        $relative = Get-ReadinessRelativePath -BasePath $SourceRoot -FullPath $_.FullName
         Copy-ReadinessFile -Source $_.FullName -RelativePath (Join-Path $RelativeRoot $relative)
     }
 }
@@ -101,7 +112,7 @@ try {
     }
 
     $forbidden = Get-ChildItem -LiteralPath $staging -Recurse -File | Where-Object {
-        $relative = [System.IO.Path]::GetRelativePath($staging, $_.FullName)
+        $relative = Get-ReadinessRelativePath -BasePath $staging -FullPath $_.FullName
         $relative -match "(?i)(downloads|observation-inbox|STEP-04_CHILD_FIRST_USE_OBSERVATION|storage[-_ ]?dump|playwright-report|trace\.zip)" -or
         $_.Extension -match "(?i)^\.(mp3|wav|m4a|aac|mp4|webm|mov|avi)$"
     }
