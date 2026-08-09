@@ -45,7 +45,14 @@ function Write-Step06Utf8NoBom {
 
 function Get-Step06Sha256 {
   param([Parameter(Mandatory = $true)][string]$Path)
-  return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToUpperInvariant()
+  $stream = [System.IO.File]::OpenRead([System.IO.Path]::GetFullPath($Path))
+  $sha256 = [System.Security.Cryptography.SHA256]::Create()
+  try {
+    return [System.BitConverter]::ToString($sha256.ComputeHash($stream)).Replace("-", "")
+  } finally {
+    $sha256.Dispose()
+    $stream.Dispose()
+  }
 }
 
 function Get-Step06ParentAuthorization {
