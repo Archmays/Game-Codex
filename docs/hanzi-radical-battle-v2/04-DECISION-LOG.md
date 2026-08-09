@@ -121,3 +121,63 @@
 影响范围：程序化画面可作为技术 Pilot 证据，不得作为最终 sprite/品牌或视觉接受结论。
 明确没有做什么：没有生产 spritesheet、没有批量生成图、没有为候选字创建新联想插图。
 何时重新评估：家长在视觉方向决定中选择 A/B/C/MIX/REDO 后，且另行授权生产资产时。
+
+## D-013 增加 level-design 与 puzzle 两个限域 Skill
+
+日期：2026-08-09
+决定：在既有固定上游 commit `2bea8297d9f09d90d6720c0334221417f7c9a928` 下，只增加 `level-design`、`puzzle` 及各自唯一直接 reference，并把它们加入唯一 Skill 索引。
+为什么：STEP 03 需要可审计的 3–5 分钟节奏/关键路径规则，以及结构槽合法性、可撤回、可解性和输入锁规则；现有四个 vendor Skill 不覆盖这两个边界。
+依据：六文件安全审查、Apache-2.0、逐文件 Git blob 与 SHA-256 核验、`01-SKILL-VETTING.md`。
+影响范围：仅 `.agents/skills/vendor/gamedev-skills/level-design/**`、`.agents/skills/vendor/gamedev-skills/puzzle/**` 与 `.agents/skills/SKILL_INDEX.md`；保留既有 `LICENSE`/`NOTICE`。
+明确没有做什么：没有安装完整上游仓库，没有改动既有四个 vendor Skill，没有引入 Godot、Unity、程序化关卡或新运行时依赖。
+何时重新评估：只有明确任务需要另一个独立 discipline/genre Skill 时，再逐文件审查并单独决定。
+
+## D-014 两个新 Skill 只做儿童汉字样板的有界转译
+
+日期：2026-08-09
+决定：`level-design` 只用于安全介绍—练习—轻微迁移—小首领的关键路径、节奏和可读引导；`puzzle` 只用于纯规则结构槽、合法性、撤回、可解性、确定性和动画期间输入锁。
+为什么：通用 Skill 中的空间跳跃指标、Godot/Unity 示例、match-3 计分、时间限制和高压测试不适合 Phaser 3 的约 6 岁汉字合字核心，机械照搬会偏离北极星。
+依据：北极星、`child-first-learning-game`、`hanzi-structure-quality`、两 Skill 原文及 `step-03/01-MULTI-SOURCE-DESIGN-SYNTHESIS.md`。
+影响范围：未来 STEP 03 设计合同；核心动作仍是部件进入真实结构位置即施法，失败可撤回且不羞辱。
+明确没有做什么：没有授权 match-3、倒计时、分数压力、复杂迷宫、程序化生成、Godot 示例代码或儿童试玩前扩建。
+何时重新评估：只在黄金样板自动验证与真实儿童观察暴露具体问题时，对相应有界规则作小幅修订；不因此扩大范围。
+
+## D-015 吸收 STEP 02 家长 ACCEPT 并把 STEP 03 停在家长终审
+
+日期：2026-08-09
+决定：按 identity-bound `STEP-02_PARENT_REVIEW_FEEDBACK.json` 正式带入 `corePilot = ACCEPT`、`visualDirection = C`、15/15 字候选 ACCEPT、7/7 storyboard ACCEPT 与 `authorizeStep03 = YES`；STEP 03 技术完成后的唯一状态为 `GOLDEN_SLICE_CANDIDATE_READY_FOR_PARENT_REVIEW`。
+为什么：家长已授权实现 STEP 03，不应要求重审未变的 STEP 02 项；同时技术候选、家长终审和真实儿童首次使用仍是三个独立门禁。
+依据：Canonical feedback SHA-256 `4236AAF0E81F4FE94F48B5CF8EEB89F44900DD52473E91ABA8CC4DB0E7EC3C6B`、STEP 03 指令与 `00-STEP-02-PARENT-ACCEPTANCE-INGEST.md`。
+影响范围：STEP 02 unchanged accepted 项以 stable ID/hash carried forward；STEP 03 Round 1 只审核新建和受影响项；child observer 必须等待新 feedback 中顶层 `authorizeChildFirstUse = YES`。
+明确没有做什么：没有宣称家长已接受 STEP 03，没有宣称 `CHILD_PLAYTEST_READY`或儿童接受，没有把 V2 推广到默认大厅。
+何时重新评估：家长返回完整、identity-matched 的 STEP 03 feedback 后。本决定取代 D-008 中“技术状态最高到 `CHILD_PLAYTEST_READY`”的旧用词，不改变其“不得以自动证据代替真实观察”原则。
+
+## D-016 正式 12 字与首次 run 四字锁定
+
+日期：2026-08-09
+决定：正式 Manifest 固定为明、林、花、草、星、看、园、回、包、风、猫、跑；清、晴、松保留 accepted-deferred；首次 run 只使用明、花、林、星。
+为什么：12 字以 4/4/2/2 分布覆盖左右、上下、全包围和半包围，同时首次 3–5 分钟短局只需两种已教结构，不让成年储备渗入儿童首局。
+依据：STEP 02 15/15 家长 ACCEPT、`hanzi-structure-quality`、固定手牌求解 audit 与 STEP 03 范围。
+影响范围：运行时只读明/花/林/星 encounter；家长 Manifest 可查看 12+3 的来源、风险和 revision identity。
+明确没有做什么：没有否定延后三字，没有从 382+ 母库随机添加字，没有实现另外八字的儿童关卡。
+何时重新评估：家长 STEP 03 Manifest 决定或未来另行授权的内容扩展时。
+
+## D-017 simulation 保持规则真源，视觉和音频只消费状态
+
+日期：2026-08-09
+决定：Golden Slice 的合法动作、board、能力、Boss、恢复和事件由确定性 simulation 唯一决定；Phaser 只画世界和播放反馈，DOM 负责结构 board、文字、设置和魔法书。
+为什么：动画、音频或 pointer 结束事件不应决定汉字合法性；同一 action 边界才能保证 click/drag/keyboard、reduced motion、安全重试和给定 seed 可复现。
+依据：`web-game-foundations`、`phaser-2d-game`、`puzzle`、STEP 02 structure board 与 STEP 03 状态机测试。
+影响范围：`golden-slice/simulation/**`是规则真源，`content/**`是显式数据，`phaser/**` 与 `ui/**` 只发出 action 并渲染 state。
+明确没有做什么：没有复制 STEP 02 成第二套不一致求解器，没有把 tween/audio 回调变成规则。
+何时重新评估：只有新交互无法用现有 action/state 合同表达时，且必须先扩展 simulation 和测试。
+
+## D-018 主题 C 以程序化候选完成，ImageGen 只做终审 seed audition
+
+日期：2026-08-09
+决定：唯一生产方向为 C：夜光墨林。儿童 route 只加载原创 Phaser Graphics/DOM 图形与稳定 asset key；使用官方 ImageGen 生成的角色、营地和三能力三张候选表只供家长比较。
+为什么：程序化版可稳定验证桌面/平板/手机和无网络边界；seed 可提高风格判断品质，但在家长批准单帧前不应扩展成 strips。
+依据：STEP 02 `visualDirection = C`、`sprite-pipeline`、项目 Level 3 精细美术边界与 `05-IMAGEGEN-THEME-C-SEED-PROMPTS.md`。
+影响范围：三张原图保留在 artifacts，家长 review 只加载压缩 preview；所有 seed 均为 `GENERATED_PENDING_PARENT`、`reviewOnly = true`、`runtimeIncluded = false`。
+明确没有做什么：没有把概念表当透明 sprite，没有逐帧生成，没有制作最终 strip，没有复制第三方角色或让原图进入儿童 bundle。
+何时重新评估：家长在 STEP 03 资产终审中对单项 seed 给出决定，且后续任务另行授权 sprite-strip 生产时。

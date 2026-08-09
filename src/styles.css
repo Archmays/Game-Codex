@@ -1657,19 +1657,35 @@ body {
 }
 
 html.step02-review-page,
-body.step02-review-page {
+body.step02-review-page,
+html.step03-review-page,
+body.step03-review-page {
   height: auto;
   min-height: 100%;
 }
 
-body.step02-review-page {
+body.step02-review-page,
+body.step03-review-page {
   overflow-x: hidden;
   overflow-y: auto;
 }
 
-body.step02-review-page #app {
+body.step02-review-page #app,
+body.step03-review-page #app {
   height: auto;
   min-height: 100vh;
+}
+
+html.hanzi-v2-golden-slice-page,
+body.hanzi-v2-golden-slice-page,
+body.hanzi-v2-golden-slice-page #app {
+  min-height: 100%;
+  height: 100%;
+}
+
+body.hanzi-v2-golden-slice-page {
+  overflow: hidden;
+  background: #071c26;
 }
 
 canvas {

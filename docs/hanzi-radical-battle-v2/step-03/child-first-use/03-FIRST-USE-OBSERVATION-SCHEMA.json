@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "family-games/hanzi-radical-battle-v2/step-03/child-first-use-observation.schema.json",
+  "title": "STEP 03 Child First-Use Observation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "reviewIdentity",
+    "sessionId",
+    "runSeed",
+    "startedAt",
+    "completed",
+    "stopCode",
+    "observations",
+    "interventions",
+    "childQuestionsAsked",
+    "privacyConfirmed",
+    "observerNotes"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "reviewIdentity": { "type": "string", "minLength": 12, "maxLength": 128 },
+    "sessionId": { "type": "string", "pattern": "^local-[a-z0-9-]{8,64}$" },
+    "runSeed": { "type": "string", "minLength": 4, "maxLength": 64 },
+    "startedAt": { "type": "string", "format": "date-time" },
+    "completed": { "type": "boolean" },
+    "stopCode": {
+      "type": ["string", "null"],
+      "enum": [null, "CHILD_REQUEST", "DISTRESS", "SENSORY_DISCOMFORT", "TECHNICAL", "PRIVACY", "IDENTITY", "ADULT_ANSWER_REQUIRED", "OTHER"]
+    },
+    "observations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["firstScreen", "firstSpell", "secondStructure", "ability", "bossIntent", "failureLanguage", "campRepair", "spellbook"],
+      "properties": {
+        "firstScreen": { "$ref": "#/$defs/observation" },
+        "firstSpell": { "$ref": "#/$defs/observation" },
+        "secondStructure": { "$ref": "#/$defs/observation" },
+        "ability": { "$ref": "#/$defs/observation" },
+        "bossIntent": { "$ref": "#/$defs/observation" },
+        "failureLanguage": { "$ref": "#/$defs/observation" },
+        "campRepair": { "$ref": "#/$defs/observation" },
+        "spellbook": { "$ref": "#/$defs/observation" }
+      }
+    },
+    "interventions": {
+      "type": "array",
+      "maxItems": 20,
+      "items": { "enum": ["NONE", "REPEAT_VISIBLE_COPY", "POINT_TO_REGION_ONLY", "STOPPED"] }
+    },
+    "childQuestionsAsked": { "type": "boolean" },
+    "privacyConfirmed": { "const": true },
+    "observerNotes": { "type": "string", "maxLength": 1000 }
+  },
+  "$defs": {
+    "observation": {
+      "type": "string",
+      "enum": ["NOT_REACHED", "NOTICED_WITHOUT_PROMPT", "NOTICED_AFTER_BUILT_IN_SUPPORT", "ADULT_REGION_PROMPT", "STOPPED"]
+    }
+  }
+}
