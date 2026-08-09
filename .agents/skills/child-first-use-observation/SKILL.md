@@ -51,4 +51,11 @@ Offer picture cards, Again-Again choices, a region-only prompt, a same-origin ob
 
 Report route loading, ordered events, errors, relative time, hints, invalid placements, chosen ability, camp/spellbook activity, completion, and replay as technical facts. Report observer enums and intervention codes as human observations. Preserve parent notes only after privacy validation. Explicitly withhold conclusions about learning effectiveness, generalized usability, child acceptance, promotion, comparative preference, and long-term retention.
 
+For post-session reconciliation:
+
+- Derive checkpoint reach only from technical events; keep parent-entered checkpoint notice as a separate field whose default is `UNRECORDED`.
+- Keep replay intent, a parent-observed replay request, and an actual replay action separate. Only a technical `replay_selected` event may establish the actual action.
+- Treat the raw exported observation as immutable. Migrate through a pure derived copy and never write repaired fields back into the original evidence.
+- List evidence-consistency warnings explicitly whenever technical events and human fields differ; do not silently repair or collapse the layers.
+
 Agent or Playwright activity can validate tooling only. It cannot replace a child, generate child acceptance, or authorize promotion.

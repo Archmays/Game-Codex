@@ -1,0 +1,182 @@
+.my-game-world-page,
+.classic-hub-from-world-page {
+  min-height: 100%;
+  height: 100%;
+}
+
+.my-game-world-page body,
+body.my-game-world-page,
+.classic-hub-from-world-page body,
+body.classic-hub-from-world-page {
+  overflow: hidden;
+  background: #071c2a;
+}
+
+.my-game-world-mount,
+.classic-hub-from-world-mount {
+  width: 100%;
+  height: 100%;
+}
+
+.my-game-world,
+.my-game-world * {
+  box-sizing: border-box;
+}
+
+.my-game-world {
+  --world-night: #071c2a;
+  --world-deep: #123d43;
+  --world-paper: #fff7df;
+  --world-mint: #7ee8c7;
+  --world-violet: #a7a6ff;
+  --world-coral: #ff9b82;
+  --world-gold: #ffd483;
+  position: relative;
+  display: grid;
+  height: 100%;
+  min-height: 560px;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
+  color: var(--world-paper);
+  background: var(--world-night);
+  font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+}
+
+.world-header {
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px clamp(18px, 4vw, 54px) 14px;
+  background: linear-gradient(180deg, rgba(5, 24, 35, 0.98), rgba(5, 24, 35, 0.76));
+}
+
+.world-header h1 { margin: 2px 0 0; font-size: clamp(28px, 4.2vw, 48px); line-height: 1; }
+.world-header p { margin: 8px 0 0; color: var(--world-mint); font-size: clamp(16px, 2vw, 21px); font-weight: 800; }
+.world-kicker { color: var(--world-gold); font-size: 11px; font-weight: 900; letter-spacing: .12em; }
+
+.world-icon-button,
+.world-object button,
+.world-object a,
+.world-secondary-button,
+.world-spellbook__tabs button,
+.world-spellbook__page button {
+  min-height: 44px;
+  border: 2px solid rgba(255, 247, 223, 0.28);
+  border-radius: 14px;
+  padding: 9px 15px;
+  color: var(--world-paper);
+  background: rgba(7, 28, 42, 0.76);
+  font: inherit;
+  font-weight: 900;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.world-stage { position: relative; min-height: 0; overflow: hidden; }
+.world-canvas { position: absolute; inset: 0; }
+.world-canvas canvas { width: 100% !important; height: 100% !important; object-fit: contain; }
+.world-vignette { position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 110px rgba(2, 15, 24, 0.58); }
+
+.world-object {
+  position: absolute;
+  z-index: 4;
+  display: grid;
+  min-width: 178px;
+  gap: 7px;
+  justify-items: center;
+  border: 1px solid rgba(255, 247, 223, 0.18);
+  border-radius: 22px;
+  padding: 14px;
+  background: rgba(7, 28, 42, 0.72);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+.world-object h2 { margin: 0; font-size: 19px; }
+.world-object p { margin: 0; color: rgba(255, 247, 223, 0.72); font-size: 12px; }
+.world-object--spellbook { top: 5%; left: 4%; }
+.world-object--forest { top: 36%; left: 50%; transform: translate(-50%, -50%); }
+.world-object--treasure { top: 16%; right: 4%; }
+.world-object.is-active { border-color: rgba(126, 232, 199, 0.58); box-shadow: 0 0 0 3px rgba(126, 232, 199, 0.08), 0 22px 58px rgba(0, 0, 0, 0.25); }
+.world-primary-link { border-color: var(--world-mint) !important; color: #0b2c31 !important; background: var(--world-mint) !important; }
+.world-secondary-link { color: var(--world-gold) !important; }
+
+.world-object__mark { display: block; width: 44px; height: 44px; position: relative; }
+.world-object__mark--forest { border: 4px solid var(--world-mint); border-radius: 50% 50% 46% 46%; box-shadow: inset 0 0 0 8px rgba(126, 232, 199, 0.12); }
+.world-object__mark--book { border: 3px solid var(--world-violet); border-radius: 7px; background: linear-gradient(90deg, transparent 48%, var(--world-violet) 49% 52%, transparent 53%); }
+.world-object__mark--treasure { height: 34px; margin-top: 8px; border: 3px solid var(--world-gold); border-radius: 8px; background: linear-gradient(180deg, var(--world-coral) 0 46%, transparent 47% 54%, var(--world-coral) 55%); }
+
+.world-repair-signals {
+  position: absolute;
+  z-index: 3;
+  bottom: 16px;
+  left: 50%;
+  display: flex;
+  gap: 7px;
+  transform: translateX(-50%);
+}
+.world-repair-signals span { border-radius: 999px; padding: 6px 10px; color: rgba(255, 247, 223, 0.56); background: rgba(7, 28, 42, 0.72); font-size: 11px; font-weight: 800; }
+.world-repair-signals span[data-ready="true"] { color: #092c31; background: var(--world-gold); }
+
+.world-modal-layer:empty { display: none; }
+.world-modal { position: fixed; z-index: 40; inset: 0; display: grid; place-items: center; overflow: auto; padding: 18px; background: rgba(3, 16, 25, 0.8); }
+.world-modal__panel { display: grid; width: min(760px, 100%); max-height: calc(100vh - 36px); overflow: auto; gap: 16px; border: 2px solid rgba(126, 232, 199, 0.42); border-radius: 24px; padding: clamp(18px, 4vw, 34px); color: var(--world-paper); background: linear-gradient(145deg, #0b2b35, #143f43); box-shadow: 0 24px 80px rgba(0,0,0,.44); }
+.world-modal__panel h2 { margin: 0; font-size: clamp(27px, 4vw, 40px); }
+.world-spellbook__tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.world-spellbook__tabs button { min-width: 58px; font-size: 23px; }
+.world-spellbook__tabs button[aria-current="page"] { color: #092c31; background: var(--world-gold); }
+.world-spellbook__page { display: grid; grid-template-columns: 150px minmax(0,1fr); gap: 20px; align-items: center; }
+.world-spellbook__glyph { display: grid; aspect-ratio: 1; place-items: center; border-radius: 22px; color: #142e45; background: var(--world-paper); font-family: "STKaiti", "KaiTi", serif; font-size: 86px; }
+.world-spellbook__page h3 { margin: 0; font-size: 24px; }
+.world-spellbook__page p { color: rgba(255,247,223,.76); line-height: 1.55; }
+.world-empty-spellbook { min-height: 160px; display: grid; place-items: center; color: var(--world-mint); font-size: 18px; }
+.world-settings label { display: flex; align-items: center; gap: 12px; min-height: 48px; font-size: 17px; font-weight: 900; }
+.world-settings input { width: 24px; height: 24px; }
+
+.classic-hub-from-world { display: grid; width: 100%; height: 100%; grid-template-rows: auto minmax(0,1fr); background: #f6f3e7; }
+.classic-hub-world-nav { z-index: 20; padding: 10px 18px; background: #123d43; box-shadow: 0 3px 12px rgba(0,0,0,.16); }
+.classic-hub-world-nav a { display: inline-flex; min-height: 44px; align-items: center; border: 2px solid rgba(255,247,223,.34); border-radius: 12px; padding: 8px 14px; color: #fff7df; font-weight: 900; text-decoration: none; }
+.classic-hub-world-inner { min-height: 0; overflow: hidden; }
+.classic-hub-world-inner.app-shell { height: 100%; min-height: 0; }
+.classic-hub-world-inner.game-runner { height: 100%; }
+
+.my-game-world button:focus-visible,
+.my-game-world a:focus-visible,
+.classic-hub-from-world a:focus-visible { outline: 4px solid rgba(255,212,131,.72); outline-offset: 3px; }
+
+@media (max-width: 800px) {
+  .world-header { align-items: flex-start; }
+  .world-object { min-width: 156px; padding: 11px; }
+  .world-object--spellbook { top: 4%; left: 3%; }
+  .world-object--treasure { top: 4%; right: 3%; }
+  .world-object--forest { top: 52%; }
+}
+
+@media (max-width: 520px) {
+  .my-game-world { min-height: 520px; }
+  .world-header { padding: 13px 14px 10px; }
+  .world-header h1 { font-size: 29px; }
+  .world-header p { margin-top: 5px; font-size: 16px; }
+  .world-icon-button { padding: 7px 10px; font-size: 12px; }
+  .world-stage { padding-bottom: 208px; }
+  .world-canvas { bottom: 178px; }
+  .world-object { position: absolute; top: auto; bottom: 8px; min-width: 0; width: calc(33.333% - 10px); min-height: 166px; transform: none; padding: 9px 6px; border-radius: 16px; }
+  .world-object h2 { font-size: 15px; }
+  .world-object p { display: none; }
+  .world-object a, .world-object button { width: 100%; padding: 7px 5px; font-size: 12px; }
+  .world-object--spellbook { left: 5px; }
+  .world-object--forest { left: calc(33.333% + 2px); }
+  .world-object--treasure { right: 5px; }
+  .world-object__mark { width: 34px; height: 34px; }
+  .world-repair-signals { bottom: 184px; width: calc(100% - 18px); justify-content: center; flex-wrap: wrap; }
+  .world-repair-signals span { padding: 4px 7px; font-size: 9px; }
+  .world-spellbook__page { grid-template-columns: 1fr; }
+  .world-spellbook__glyph { width: 126px; justify-self: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .my-game-world *, .my-game-world *::before, .my-game-world *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}

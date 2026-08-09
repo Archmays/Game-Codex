@@ -1,7 +1,7 @@
 # Hanzi Radical Battle V2 Status
 
-Current phase: AUTHORIZED_CHILD_FIRST_USE_READY
-Completed: STEP 01 foundation; STEP 02 accepted core-spell pilot; STEP 03 parent acceptance carried forward; exact parent-directed audio revision; first-use observation Skill; guarded local observer; START/FINISH tooling; readiness evidence
-Not started: Real child first-use observation, observation interpretation, default-world promotion, production sprite pipeline, full Ink Forest expansion
-Next allowed task: Parent runs one authorized local child-first-use session and returns `STEP-04_CHILD_FIRST_USE_RETURN_TO_CHATGPT.zip`
-Not allowed yet: Claiming child acceptance or learning validation, promoting V2 into the default hub, full Ink Forest expansion
+Current phase: PRIVATE_WORLD_ENTRY_CANDIDATE_READY_FOR_PARENT_REVIEW
+Completed: STEP 01 foundation; STEP 02 accepted core-spell pilot; STEP 03 parent acceptance carried forward; STEP 04 real first-use observation returned and hash-locked; immutable evidence reconciliation; observer schema v2 with v1 migration; changed-only voice-context repair; opt-in private world candidate; classic-hub secondary wrapper; return-to-world navigation; STEP 05 changed-only parent-review tooling and technical evidence
+Pending human decision: STEP 05 parent review, including four changed-only decisions plus `authorizeDefaultWorldEntry` and `authorizeSecondUseCheck`
+Next allowed task: Parent runs `START_STEP_05_REVIEW`, returns identity-bound `STEP-05_PARENT_REVIEW_FEEDBACK.json`, then `FINISH_STEP_05_REVIEW` validates and packages it
+Not allowed yet: `DEFAULT_WORLD_PROMOTED`, `FULL_INK_FOREST_AUTHORIZED`, `LEARNING_VALIDATED`, `REMAINING_8_CHARACTERS_VALIDATED`, production-art validation

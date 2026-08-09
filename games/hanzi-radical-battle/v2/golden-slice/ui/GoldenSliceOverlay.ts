@@ -1,7 +1,7 @@
 import { GOLDEN_ABILITIES } from "../content/abilities";
 import { getGoldenEncounter } from "../content/encounters";
 import { FINAL_GOLDEN_MANIFEST, FIRST_RUN_CHARACTER_IDS, getGoldenCharacter } from "../content/manifest";
-import type { AbilityId, GoldenEncounterId } from "../content/types";
+import type { AbilityId, GoldenCharacterId, GoldenEncounterId } from "../content/types";
 import { AudioDirector, DEFAULT_AUDIO_SETTINGS, type AudioBusId, type GoldenSliceAudioSettings } from "../phaser/AudioDirector";
 import { createGoldenSliceGame, type GoldenSliceWorldHandle } from "../phaser/create-golden-slice-game";
 import type { GoldenSliceWorldViewModel } from "../phaser/WorldView";
@@ -37,6 +37,7 @@ import { parentDebugOverlayMarkup } from "./ParentDebugOverlay";
 import { settingsOverlayMarkup } from "./SettingsOverlay";
 import { spellbookOverlayMarkup } from "./SpellbookOverlay";
 import { goldenStructureBoardMarkup } from "./StructureBoard";
+import { getGoldenVoiceContext, type GoldenVoiceUiContext } from "./voice-context";
 import type { FirstUseActionKind, FirstUseEventType, FirstUseSafeMetadata, FirstUseStopCode } from "../first-use/event-types";
 
 const AUDIO_SETTINGS_KEY = "family-games/hanzi-radical-battle-v2/golden-slice/audio-settings";
@@ -50,6 +51,7 @@ export interface GoldenSliceOverlayOptions {
   childFirstUse?: boolean;
   technicalFixture?: boolean;
   initialMuted?: boolean;
+  returnToWorldHref?: string;
   onFirstUseEvent?: (eventType: FirstUseEventType, safeMetadata?: FirstUseSafeMetadata) => void;
 }
 
@@ -273,7 +275,7 @@ export function mountGoldenSliceOverlay(
   let session = createSession(seed, save.settings);
   let uiHintSlotId: string | null = null;
   let echoVisible = false;
-  let activeSpellbookId = "ming";
+  let activeSpellbookId: GoldenCharacterId = "ming";
   let spellbookReplayMode: "formation" | "magic" | null = null;
   let resetArmed = false;
   let completionPersisted = false;
@@ -496,7 +498,7 @@ export function mountGoldenSliceOverlay(
     }
     if (action.type === "use-ability" && previous.selectedAbilityId === "ink-echo") {
       echoVisible = true;
-      void speakCurrentCharacter();
+      void speakInkEchoTarget(previous);
     }
     if (action.type === "replay") {
       session.replayClicked = true;
@@ -524,7 +526,7 @@ export function mountGoldenSliceOverlay(
       if (state.phase === "camp_repair") emitFirstUseEvent("camp_repaired");
       if (state.phase === "spellbook_review") emitFirstUseEvent("spellbook_opened");
       if (state.phase === "run_complete") emitFirstUseEvent("run_completed", { replayIndex: state.replayCount });
-      if (AUTO_SPEECH_PHASES.has(state.phase)) void speakCurrentCharacter();
+      if (AUTO_SPEECH_PHASES.has(state.phase)) void speakVoiceContext({ surface: "narrative" });
     }
 
     persistPermanentState();
@@ -538,19 +540,35 @@ export function mountGoldenSliceOverlay(
     return getGoldenCharacter(getGoldenEncounter(state.currentEncounterId).characterId);
   }
 
-  async function speakCurrentCharacter(): Promise<void> {
-    const character = currentCharacter();
+  async function speakVoiceContext(
+    uiContext: GoldenVoiceUiContext,
+    voiceState: GoldenSliceState = state,
+  ): Promise<void> {
+    const voiceContext = getGoldenVoiceContext(voiceState, uiContext);
+    if (!voiceContext.characterId) return;
+    const character = getGoldenCharacter(voiceContext.characterId);
     await audio.speak(character.spokenPhrase);
+  }
+
+  async function speakInkEchoTarget(voiceState: GoldenSliceState = state): Promise<void> {
+    await speakVoiceContext({ surface: "ink-echo" }, voiceState);
   }
 
   function storyMarkup(): string {
     const character = currentCharacter();
+    const narrativeVoice = getGoldenVoiceContext(state, { surface: "narrative" });
+    const inkEchoVoice = getGoldenVoiceContext(state, { surface: "ink-echo" });
     const text = state.phase === "invalid_feedback" && state.currentEncounterId.startsWith("boss-")
       ? "墨印还在，换个方法再试"
       : state.phase === "battle_1_casting" || state.phase === "battle_2_casting"
         ? `${character.glyph}，${character.visualPinyin}，${character.familiarWord}的${character.glyph}。`
         : STORY_BY_PHASE[state.phase] ?? "墨点在这里陪你。";
-    return `<i class="golden-story__companion" aria-hidden="true"></i><p>${text}</p><button class="golden-story__voice" type="button" data-replay-voice aria-label="重听当前汉字和熟悉词">重听</button>`;
+    const voiceButton = narrativeVoice.characterId
+      ? `<button class="golden-story__voice" type="button" data-replay-voice aria-label="重听当前汉字和熟悉词">重听</button>`
+      : inkEchoVoice.characterId
+        ? `<button class="golden-story__voice" type="button" data-ink-echo-voice aria-label="让墨点回声读出当前首领汉字">墨点回声</button>`
+        : "";
+    return `<i class="golden-story__companion" aria-hidden="true"></i><p>${text}</p>${voiceButton}`;
   }
 
   function formedMarkup(): string {
@@ -602,6 +620,7 @@ export function mountGoldenSliceOverlay(
     return `<section class="golden-complete-card" data-testid="run-complete">
       <h2>四道字光留在了营地</h2><p>想换一道能力，再走一次相同的短路吗？</p>
       <div class="golden-replay-abilities">${remaining.map((ability) => `<button type="button" data-replay-ability="${ability.id}">${ability.name}再冒险</button>`).join("")}</div>
+      ${options.returnToWorldHref ? `<a class="golden-primary" data-return-to-world href="${options.returnToWorldHref}">回我的游戏世界</a>` : ""}
     </section>`;
   }
 
@@ -678,26 +697,28 @@ export function mountGoldenSliceOverlay(
       button.addEventListener("click", () => dispatchInternal({ type: "replay", abilityId: button.dataset.replayAbility as AbilityId }, true));
     });
     root.querySelector<HTMLElement>("[data-replay-voice]")?.addEventListener("click", () => {
-      if (state.selectedAbilityId === "ink-echo" && state.phase === "boss_interference") dispatchInternal({ type: "use-ability" }, true);
-      else void speakCurrentCharacter();
+      void speakVoiceContext({ surface: "narrative" });
+    });
+    root.querySelector<HTMLElement>("[data-ink-echo-voice]")?.addEventListener("click", () => {
+      dispatchInternal({ type: "use-ability" }, true);
     });
     root.querySelectorAll<HTMLElement>("[data-spellbook-id]").forEach((button) => {
       button.addEventListener("click", () => {
-        activeSpellbookId = button.dataset.spellbookId ?? "ming";
+        activeSpellbookId = (button.dataset.spellbookId as GoldenCharacterId | undefined) ?? "ming";
         spellbookReplayMode = null;
         render();
       });
     });
     root.querySelectorAll<HTMLElement>("[data-read-character]").forEach((button) => {
       button.addEventListener("click", () => {
-        const character = getGoldenCharacter(button.dataset.readCharacter as typeof FIRST_RUN_CHARACTER_IDS[number]);
-        void audio.speak(character.spokenPhrase);
+        const characterId = button.dataset.readCharacter as GoldenCharacterId;
+        void speakVoiceContext({ surface: "spellbook", characterId });
       });
     });
     root.querySelectorAll<HTMLElement>("[data-replay-formation], [data-replay-magic]").forEach((button) => {
       button.addEventListener("click", () => {
         const id = button.dataset.replayFormation ?? button.dataset.replayMagic ?? "ming";
-        activeSpellbookId = id;
+        activeSpellbookId = id as GoldenCharacterId;
         spellbookReplayMode = button.hasAttribute("data-replay-magic") ? "magic" : "formation";
         audio.playSfx(button.hasAttribute("data-replay-magic") ? "magic" : "form");
         render();

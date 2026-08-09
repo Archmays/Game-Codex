@@ -301,7 +301,7 @@ test.describe("Hanzi Radical Battle V2 STEP 04", () => {
     await page.goto(launch.childUrl);
     await clickPrimary(page, "走进墨林");
     await expect(observer.getByTestId("step04-live-region")).toContainText("camp_intro");
-    await page.getByRole("button", { name: "重听当前汉字和熟悉词" }).click();
+    await expect(page.getByRole("button", { name: "重听当前汉字和熟悉词" })).toHaveCount(0);
     const cancelCountBeforeStop = await page.evaluate(() => (window as Window & { __step04SpeechCancelCount?: number }).__step04SpeechCancelCount ?? 0);
     await observer.locator("[data-stop-code]").selectOption("CHILD_REQUEST");
     await observer.locator("[data-stop-now]").click();

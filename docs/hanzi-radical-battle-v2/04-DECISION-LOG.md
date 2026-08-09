@@ -201,3 +201,33 @@
 影响范围：只新增隐藏的 parent observer 与 guarded child route；正式 observation 最多一局加一次自发 replay，真人数据不进入 Git、不上传、不录音录像。
 明确没有做什么：没有执行真实儿童 session，没有生成儿童结果，没有自动 PASS/FAIL/PROMOTE，没有加入默认大厅或扩建完整墨迹森林。
 何时重新评估：家长返回 identity-bound 的真实 `STEP-04_CHILD_FIRST_USE_RETURN_TO_CHATGPT.zip` 后，另行做人类解释与三态决定。
+
+## D-021 真实 first-use 支持 changed-only 后进入私人世界候选
+
+日期：2026-08-09
+决定：以 raw observation SHA-256 `EC04FECD4B04F294E7ED62139EBEE386F6B27B3FBC198EBCF3F6CD98341A86D8` 和 child return package SHA-256 `FEE13257ECF3402CDB85D6153D08FCF9A3082CD208EE88B10BABA8978E1F6612` 锁定真实证据，作出 provisional decision `PROMOTE_TO_PRIVATE_WORLD_ENTRY_AFTER_CHANGED_ONLY_FIX`。
+为什么：一局完成、舒适观察、无成人介入与立即再玩请求支持把核心汉字魔法作为私人世界第一个入口候选；家长同时指出必须先修的语音上下文缺陷。
+依据：56 个连续技术事件、独立 human observation、显式 evidence consistency warning。
+影响范围：只允许证据语义纠偏、语音修复、私人 world shell、依赖导航与 changed-only 家长门禁。
+明确没有做什么：没有把再玩意图写成实际重玩；没有宣称学习、保持、普适可用、剩余八字、完整墨迹森林、美术或默认入口已验证。
+何时重新评估：家长完成 STEP 05 identity-bound changed-only review 后。
+
+## D-022 语音目标必须来自当前显式 UI 上下文
+
+日期：2026-08-09
+决定：普通故事区仅在 phase whitelist 已形成字符时提供 replay；魔法书只读显式页 ID；Ink Echo 使用专用 Boss target；不再以 `currentEncounterId` 推断可朗读字。
+为什么：状态机在非战斗阶段预置下一遭遇，隐式读取会提前泄漏答案，正是实际 first-use 家长报告的问题。
+依据：parent note、phase/currentEncounter mismatch regression、accepted `spokenPhrase` contract。
+影响范围：仅 Golden Slice UI voice context 与对应测试；可见拼音、自动朗读白名单、内容、simulation 与 save 不变。
+明确没有做什么：没有改动 encounters、abilities、boss、Theme C、manifest 或加入新语音素材。
+何时重新评估：仅在 changed-only 家长试听发现同一上下文修复仍不清楚时。
+
+## D-023 私人世界只投影既有永久进度，经典大厅保持次级且默认不变
+
+日期：2026-08-09
+决定：新增 opt-in `?world=my-game-world`，以既有 Golden Slice schema v3/key 投影营地与四字；经典十游戏通过 `?hub=classic&from=world` inner wrapper 保留；默认 `/` 继续直接挂载原 hub。
+为什么：世界持续变化是首次 run 的长期反馈，而成人式目录不应成为儿童首屏；同时不得复制进度或破坏其他游戏。
+依据：north star、真实 first-use provisional decision、save-systems、game-ui-frontend。
+影响范围：新 world/review apps、查询路由与 Golden Slice 完成返回链接；STEP 02 partial migration 只显示实际已有条目。
+明确没有做什么：没有建立账户、儿童姓名、远程追踪、第二存档、生产素材、默认世界或完整森林。
+何时重新评估：只有家长在 STEP 05 明确 `authorizeDefaultWorldEntry = YES` 后，另开有限默认路由任务。

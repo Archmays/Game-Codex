@@ -553,6 +553,13 @@
   color: #f3fff3;
 }
 
+.step04-derived-reach {
+  margin: 0 0 10px;
+  color: var(--step04-mint);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
 .step04-checkpoint > div {
   display: flex;
   flex-wrap: wrap;
@@ -703,6 +710,20 @@
   gap: 10px;
   min-height: 44px;
   color: var(--step04-paper);
+}
+
+.step04-consistency-warnings {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 217, 128, 0.28);
+  border-radius: 12px;
+  color: #fff0bd;
+  background: rgba(75, 52, 14, 0.38);
+}
+
+.step04-consistency-warnings ul {
+  margin: 8px 0 0;
+  padding-left: 20px;
 }
 
 .step04-export-section > button {

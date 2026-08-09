@@ -1,4 +1,6 @@
 import {
+  CHECKPOINT_NOTICE_VALUE_LABELS,
+  CHECKPOINT_REACH_VALUE_LABELS,
   FIRST_USE_CHECKPOINT_LABELS,
   OBSERVATION_VALUE_LABELS,
   interventionCreatesCoreUsabilityRisk,
@@ -7,6 +9,7 @@ import {
 } from "./observation-model";
 import { assertValidFirstUseObservation, validateFirstUseObservation } from "./observation-schema";
 import { validateObserverNotes } from "../../games/hanzi-radical-battle/v2/golden-slice/first-use/privacy";
+import { deriveFirstUseTechnicalTimeline } from "./evidence-reconciliation";
 
 export const FIRST_USE_OBSERVATION_FILE_NAME = "STEP-04_CHILD_FIRST_USE_OBSERVATION.json";
 export const FIRST_USE_SUMMARY_FILE_NAME = "STEP-04-CHILD-FIRST-USE-SUMMARY.md";
@@ -32,6 +35,7 @@ export function serializeFirstUseObservation(packageValue: FirstUseObservationPa
 
 export function buildFirstUseSummaryMarkdown(packageValue: FirstUseObservationPackage): string {
   assertValidFirstUseObservation(packageValue);
+  const timeline = deriveFirstUseTechnicalTimeline(packageValue.technicalEvents);
   const lastRelativeMs = packageValue.technicalEvents.at(-1)?.relativeMs ?? packageValue.completion.relativeDurationMs;
   const technicalErrors = packageValue.technicalEvents.filter((event) => event.eventType === "technical_error")
     .map((event) => String(event.safeMetadata.errorCode));
@@ -55,12 +59,18 @@ ${fixtureWarning}## Technical facts
 - Camp repaired event: ${eventCount(packageValue, "camp_repaired") > 0 ? "received" : "not received"}
 - Spellbook event: ${eventCount(packageValue, "spellbook_opened") > 0 ? "received" : "not received"}
 - Replay signal: ${eventCount(packageValue, "replay_selected") > 0 ? lastMetadata(packageValue, "replay_selected", "origin") : "not received"}
+- First action: ${timeline.firstActionMs ?? "not received"} ms
+- First spell: ${timeline.firstSpellMs ?? "not received"} ms
 
 ## Human observations
 
-### Checkpoints
+### Checkpoint reach (technical-derived, read-only)
 
-${observationLines(packageValue.observations.checkpoints, FIRST_USE_CHECKPOINT_LABELS).join("\n")}
+${Object.entries(packageValue.observations.checkpointReach).map(([key, value]) => `- ${FIRST_USE_CHECKPOINT_LABELS[key as keyof typeof FIRST_USE_CHECKPOINT_LABELS] ?? key}: ${CHECKPOINT_REACH_VALUE_LABELS[value]}`).join("\n")}
+
+### Checkpoint notice (human observation)
+
+${Object.entries(packageValue.observations.checkpointNotice).map(([key, value]) => `- ${FIRST_USE_CHECKPOINT_LABELS[key as keyof typeof FIRST_USE_CHECKPOINT_LABELS] ?? key}: ${CHECKPOINT_NOTICE_VALUE_LABELS[value]}`).join("\n")}
 
 ### Usability
 
@@ -81,6 +91,17 @@ ${observationLines(packageValue.observations.learningMechanismVisibility).join("
 - Wellbeing: ${JSON.stringify(packageValue.wellbeing)}
 - Again-Again: ${packageValue.optionalChildChoices.againAgain}
 - Favorite moment: ${packageValue.optionalChildChoices.favoriteMoment}
+
+## Replay reconciliation
+
+- replayIntent: ${packageValue.replay.replayIntent}
+- parentObservedReplayRequest: ${packageValue.replay.parentObservedReplayRequest}
+- actualReplayAction: ${packageValue.replay.actualReplayAction}
+- runCount: ${packageValue.completion.runCount}
+
+## Evidence consistency warnings
+
+${packageValue.evidenceConsistencyWarnings.length ? packageValue.evidenceConsistencyWarnings.map((warning) => `- ${warning}`).join("\n") : "- none"}
 
 ## Parent notes
 

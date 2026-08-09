@@ -66,7 +66,7 @@
 
       <fieldset>
         <legend>2. 快速观察</legend>
-        <p><small>按钮显示中文；导出时保存稳定 enum。`需要成人给答案` 是核心可用性风险。</small></p>
+        <p><small>到达状态由 technical events 自动推导且只读；家长只记录是否注意到。`需要成人给答案` 是核心可用性风险。</small></p>
         <div id="checkpoints" class="grid"></div>
       </fieldset>
 
@@ -101,11 +101,11 @@
         </label>
         <p>最想再看哪一段（可以不选）</p>
         <div id="favorites" class="choices"></div>
-        <div class="choices">
-          <label><input type="checkbox" id="spontaneous-replay" /> 儿童自己选择重玩</label>
-          <label><input type="checkbox" id="prompted-replay" /> 家长提出重玩</label>
-          <label><input type="checkbox" id="questions-asked" /> 问过两条可选结束问题</label>
-        </div>
+        <label>家长观察到重玩请求
+          <select id="parent-replay-request"><option value="UNRECORDED">未记录</option><option value="OBSERVED">观察到</option><option value="NOT_OBSERVED">未观察到</option></select>
+        </label>
+        <p id="actual-replay-action" class="status">Actual replay action：等待 technical events（只读）</p>
+        <label class="choices"><span><input type="checkbox" id="questions-asked" /> 问过两条可选结束问题</span></label>
       </fieldset>
 
       <fieldset>
@@ -120,12 +120,16 @@
 
     <script>
       const observationValues = [
-        ["NOT_REACHED", "未到达"],
+        ["NOT_REACHED", "未到达 / 未记录"],
         ["NOTICED_WITHOUT_PROMPT", "无成人提示注意到"],
         ["NOTICED_AFTER_BUILT_IN_SUPPORT", "内置支持后注意到"],
         ["NOTICED_AFTER_REGION_ONLY_PROMPT", "只指区域后注意到"],
         ["ADULT_ANSWER_REQUIRED", "需要成人给答案"],
         ["STOPPED", "已停止"]
+      ];
+      const checkpointNoticeValues = [
+        ["UNRECORDED", "未记录是否注意到"],
+        ...observationValues.slice(1)
       ];
       const groups = {
         checkpoints: [["firstScreen", "首屏"], ["firstSpell", "首次施法"], ["secondStructure", "第二结构"], ["abilityChoice", "能力选择"], ["bossIntent", "Boss intent"], ["safeFailure", "安全失败"], ["campRepair", "营地修复"], ["spellbook", "魔法书"]],
@@ -141,9 +145,15 @@
       function addObservationSelect(hostId, key, labelText) {
         const label = document.createElement("label");
         label.textContent = labelText;
+        if (hostId === "checkpoints") {
+          const reach = document.createElement("output");
+          reach.dataset.reachKey = key;
+          reach.textContent = "技术事件未到达 · 只读";
+          label.append(reach);
+        }
         const select = document.createElement("select");
         select.dataset.key = key;
-        for (const [value, text] of observationValues) {
+        for (const [value, text] of hostId === "checkpoints" ? checkpointNoticeValues : observationValues) {
           const option = document.createElement("option"); option.value = value; option.textContent = text; select.append(option);
         }
         label.append(select); document.getElementById(hostId).append(label);
@@ -173,10 +183,71 @@
       }
       function stopCode() { return document.getElementById("stop-code").value || null; }
       function setStatus(message) { document.getElementById("status").textContent = message; }
+      function technicalReach(events, stopped = false) {
+        const has = (type, predicate = () => true) => events.some((event) => event.eventType === type && predicate(event));
+        const phase = (value) => has("phase_entered", (event) => event.safeMetadata?.phase === value);
+        const reached = {
+          firstScreen: has("child_route_ready") || has("first_action"),
+          firstSpell: has("spell_formed", (event) => event.safeMetadata?.characterId === "ming") || phase("battle_1_forming"),
+          secondStructure: has("spell_formed", (event) => event.safeMetadata?.characterId === "hua") || phase("battle_2_forming"),
+          abilityChoice: has("ability_selected") || phase("ability_choice"),
+          bossIntent: has("boss_intent_shown"),
+          safeFailure: phase("safe_retry"),
+          campRepair: has("camp_repaired") || phase("camp_repair"),
+          spellbook: has("spellbook_opened") || phase("spellbook_review")
+        };
+        return Object.fromEntries(Object.entries(reached).map(([key, value]) => [key, value ? "REACHED" : stopped ? "STOPPED_BEFORE" : "NOT_REACHED"]));
+      }
+      function actualReplayAction(events) { return events.some((event) => event.eventType === "replay_selected"); }
+      function evidenceWarnings(replayIntent, parentObserved, actual, runCount) {
+        const warnings = [];
+        if (replayIntent === "AGAIN_NOW" && !actual) warnings.push("Human replay intent recorded, but no replay_selected event.");
+        if (parentObserved === "OBSERVED" && !actual) warnings.push("Parent-observed replay request recorded, but no replay_selected event.");
+        if (actual && runCount === 1) warnings.push("A replay_selected event exists, but the recorded run count is still 1.");
+        if (!actual && runCount === 2) warnings.push("The recorded run count is 2, but no replay_selected event exists.");
+        return warnings;
+      }
+      function renderDerivedEvidence() {
+        if (!imported) return;
+        const reach = technicalReach(imported.technicalEvents, Boolean(imported.completion?.sessionStopped));
+        for (const output of document.querySelectorAll("[data-reach-key]")) {
+          const value = reach[output.dataset.reachKey];
+          output.textContent = `${value} · technical-derived · 只读`;
+        }
+        document.getElementById("actual-replay-action").textContent = `Actual replay action：${actualReplayAction(imported.technicalEvents) ? "已收到 replay_selected" : "未收到 replay_selected"}（只读）`;
+      }
+      function restoreHumanFields(value) {
+        const checkpointNotice = value.observations?.checkpointNotice || value.observations?.checkpoints || {};
+        for (const select of document.querySelectorAll("#checkpoints select")) {
+          const legacy = checkpointNotice[select.dataset.key];
+          select.value = legacy === "NOT_REACHED" || !legacy ? "UNRECORDED" : legacy;
+        }
+        for (const [host, source] of [
+          ["usability", value.observations?.usability],
+          ["engagement", value.observations?.engagement],
+          ["learning", value.observations?.learningMechanismVisibility],
+        ]) {
+          for (const select of document.querySelectorAll(`#${host} select`)) {
+            if (source?.[select.dataset.key]) select.value = source[select.dataset.key];
+          }
+        }
+        for (const select of document.querySelectorAll("#wellbeing select")) {
+          if (value.wellbeing?.[select.dataset.key]) select.value = value.wellbeing[select.dataset.key];
+        }
+        if (value.optionalChildChoices?.againAgain) document.getElementById("again").value = value.optionalChildChoices.againAgain;
+        const favorite = value.optionalChildChoices?.favoriteMoment;
+        if (favorite) document.querySelector(`input[name=favorite][value="${favorite}"]`)?.setAttribute("checked", "checked");
+        document.getElementById("questions-asked").checked = Boolean(value.optionalChildChoices?.optionalQuestionsAsked);
+        if (typeof value.observerNotes === "string") document.getElementById("notes").value = value.observerNotes;
+        const legacyReplayNotice = value.observations?.engagement?.spontaneousReplay;
+        const parentReplay = value.replay?.parentObservedReplayRequest ||
+          (value.optionalChildChoices?.spontaneousReplay || value.optionalChildChoices?.promptedReplay || (legacyReplayNotice && legacyReplayNotice !== "NOT_REACHED") ? "OBSERVED" : "UNRECORDED");
+        document.getElementById("parent-replay-request").value = parentReplay;
+      }
       function assertImport(value) {
         const keys = ["schemaVersion", "initiativeId", "step", "evidenceKind", "sessionIdentity", "buildIdentity", "parentAuthorization", "audioPreflight", "technicalEvents", "completion"];
         if (!value || typeof value !== "object" || keys.some((key) => !(key in value))) throw new Error("导入文件缺少 STEP 04 technical envelope。请从同一 observer session 导出。");
-        if (value.schemaVersion !== 1 || value.initiativeId !== "hanzi-radical-battle-v2" || value.step !== "04") throw new Error("导入文件不是 STEP 04 schema v1。");
+        if (![1, 2].includes(value.schemaVersion) || value.initiativeId !== "hanzi-radical-battle-v2" || value.step !== "04") throw new Error("导入文件不是受支持的 STEP 04 schema v1/v2。");
         if (!/^s04-[a-f0-9]{32}$/.test(value.sessionIdentity?.sessionId || "")) throw new Error("session identity 无效。");
         if (!/^[A-F0-9]{64}$/.test(value.buildIdentity?.buildIdentitySha256 || "")) throw new Error("build identity 无效。");
         if (!Array.isArray(value.technicalEvents)) throw new Error("technicalEvents 必须是数组。");
@@ -186,6 +257,8 @@
           const file = event.target.files?.[0]; if (!file) return;
           const value = JSON.parse(await file.text()); assertImport(value); imported = value;
           document.getElementById("identity").textContent = `Session: ${value.sessionIdentity.sessionId}\nBuild: ${value.buildIdentity.buildIdentitySha256}\nEvents: ${value.technicalEvents.length}`;
+          restoreHumanFields(value);
+          renderDerivedEvidence();
           setStatus("已导入。请按实际观察完成结构化选择；不要补写儿童原话。");
         } catch (error) { imported = null; setStatus(`拒绝导入：${error.message}`); }
       });
@@ -213,33 +286,40 @@
           const selectedRegion = document.getElementById("intervention-region").value || null;
           const codes = [...document.querySelectorAll("#interventions input:checked")].map((input) => input.value);
           if (codes.includes("POINT_TO_REGION_ONLY") !== Boolean(selectedRegion)) throw new Error("只有 POINT_TO_REGION_ONLY 必须选择 WORLD / BOARD / HAND；其他介入不记录区域。");
-          const favorite = document.querySelector("input[name=favorite]:checked")?.value || "NOT_ASKED";
+          const favorite = document.querySelector("input[name=favorite]:checked")?.value || imported.optionalChildChoices?.favoriteMoment || "NOT_ASKED";
           const chosenStop = stopCode();
+          const replayIntent = document.getElementById("again").value;
+          const parentObservedReplayRequest = document.getElementById("parent-replay-request").value;
+          const actualReplay = actualReplayAction(imported.technicalEvents);
+          const runCount = Number(imported.completion?.runCount || 1);
           const payload = {
-            schemaVersion: 1,
+            schemaVersion: 2,
             initiativeId: "hanzi-radical-battle-v2",
             step: "04",
             evidenceKind: imported.evidenceKind,
+            fixtureLabel: imported.evidenceKind === "SYNTHETIC_TOOLING_TEST_ONLY" ? "SYNTHETIC_FROM_SCHEMA_ONLY" : null,
             sessionIdentity: imported.sessionIdentity,
             buildIdentity: imported.buildIdentity,
             parentAuthorization: imported.parentAuthorization,
             audioPreflight: imported.audioPreflight,
             technicalEvents: imported.technicalEvents,
             observations: {
-              checkpoints: groupValue("checkpoints"), usability: groupValue("usability"), engagement: groupValue("engagement"), learningMechanismVisibility: groupValue("learning")
+              checkpointReach: technicalReach(imported.technicalEvents, Boolean(chosenStop) || imported.completion.sessionStopped), checkpointNotice: groupValue("checkpoints"), usability: groupValue("usability"), engagement: groupValue("engagement"), learningMechanismVisibility: groupValue("learning")
             },
             interventions: (codes.length ? codes : ["NONE"]).map((code) => ({ checkpointId, code, region: code === "POINT_TO_REGION_ONLY" ? selectedRegion : null, relativeMs: duration })),
-            wellbeing: { ...groupValue("wellbeing"), stopCode: chosenStop },
+            wellbeing: { ...groupValue("wellbeing"), stopCode: chosenStop || imported.wellbeing?.stopCode || imported.completion.stopCode },
             optionalChildChoices: {
-              againAgain: document.getElementById("again").value,
+              againAgain: replayIntent,
               favoriteMoment: favorite,
-              spontaneousReplay: document.getElementById("spontaneous-replay").checked,
-              promptedReplay: document.getElementById("prompted-replay").checked,
+              spontaneousReplay: Boolean(imported.optionalChildChoices?.spontaneousReplay),
+              promptedReplay: Boolean(imported.optionalChildChoices?.promptedReplay),
               optionalQuestionsAsked: document.getElementById("questions-asked").checked
             },
+            replay: { replayIntent, parentObservedReplayRequest, actualReplayAction: actualReplay },
             completion: { ...imported.completion, sessionStopped: Boolean(chosenStop) || imported.completion.sessionStopped, stopCode: chosenStop || imported.completion.stopCode },
             privacyConfirmed: true,
-            observerNotes: notes
+            observerNotes: notes,
+            evidenceConsistencyWarnings: evidenceWarnings(replayIntent, parentObservedReplayRequest, actualReplay, runCount)
           };
           const blob = new Blob([JSON.stringify(payload, null, 2) + "\n"], { type: "application/json" });
           const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = "STEP-04_CHILD_FIRST_USE_OBSERVATION.json"; link.click();

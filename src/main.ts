@@ -12,6 +12,9 @@ window.addEventListener("load", async () => {
   const reviewMode = search.get("review");
   const playMode = search.get("play");
   const observeMode = search.get("observe");
+  const worldMode = search.get("world");
+  const hubMode = search.get("hub");
+  const fromMode = search.get("from");
   const goldenSliceMode = search.get("mode");
   if (playMode === "hanzi-v2-golden-slice") {
     document.documentElement.classList.add("hanzi-v2-golden-slice-page");
@@ -66,7 +69,10 @@ window.addEventListener("load", async () => {
       "../games/hanzi-radical-battle/v2/golden-slice"
     );
     const mode = goldenSliceMode === "review" ? "review" : "play";
-    const handle = mountHanziV2GoldenSlice(root, { mode });
+    const handle = mountHanziV2GoldenSlice(root, {
+      mode,
+      returnToWorldHref: mode === "play" && fromMode === "world" ? "?world=my-game-world" : undefined,
+    });
     if (mode === "review") {
       window.addEventListener("message", (event: MessageEvent<unknown>) => {
         if (event.origin !== window.location.origin || event.source !== window.parent) return;
@@ -99,6 +105,14 @@ window.addEventListener("load", async () => {
     return;
   }
 
+  if (reviewMode === "hanzi-v2-step05") {
+    document.documentElement.classList.add("step05-review-page");
+    document.body.classList.add("step05-review-page");
+    const { mountHanziV2Step05Review } = await import("../apps/hanzi-v2-step05-review");
+    mountHanziV2Step05Review(root);
+    return;
+  }
+
   if (reviewMode === "hanzi-v2-step03") {
     document.documentElement.classList.add("step03-review-page");
     document.body.classList.add("step03-review-page");
@@ -112,6 +126,20 @@ window.addEventListener("load", async () => {
     document.body.classList.add("step02-review-page");
     const { mountHanziV2Step02Review } = await import("../apps/hanzi-v2-step02-review");
     mountHanziV2Step02Review(root);
+    return;
+  }
+
+  if (worldMode === "my-game-world") {
+    document.documentElement.classList.add("my-game-world-page");
+    document.body.classList.add("my-game-world-page");
+    const { mountMyGameWorld } = await import("../apps/my-game-world");
+    mountMyGameWorld(root);
+    return;
+  }
+
+  if (hubMode === "classic" && fromMode === "world") {
+    const { mountClassicHubFromWorld } = await import("../apps/my-game-world");
+    mountClassicHubFromWorld(root);
     return;
   }
 

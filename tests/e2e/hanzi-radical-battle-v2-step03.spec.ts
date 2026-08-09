@@ -108,7 +108,7 @@ async function finishBossAndReturnToCamp(page: Page, abilityId: AbilityId): Prom
   await expectPhase(page, "boss_interference");
   await expect(page.getByTestId("boss-interference-mask")).toBeVisible();
   if (abilityId === "ink-echo") {
-    await page.getByRole("button", { name: "重听当前汉字和熟悉词" }).click();
+    await page.getByRole("button", { name: "让墨点回声读出当前首领汉字" }).click();
     await expectPhase(page, "boss_interference");
   }
   await expectPhase(page, "boss_phase_1_placing", 5_000);

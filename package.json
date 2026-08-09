@@ -35,7 +35,11 @@
     "test:e2e:hanzi-v2:step04": "playwright test tests/e2e/hanzi-radical-battle-v2-step04.spec.ts",
     "validate:hanzi-v2:step04": "pnpm run validate:hanzi-v2-foundation && pnpm run test:hanzi-v2:step04 && tsc --noEmit",
     "capture:hanzi-v2:step04": "tsx tools/hanzi-v2-step04/capture-step04-readiness.ts",
-    "package:hanzi-v2:step04-readiness": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File tools/hanzi-v2-step04/PACKAGE_STEP_04_READINESS.ps1"
+    "package:hanzi-v2:step04-readiness": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File tools/hanzi-v2-step04/PACKAGE_STEP_04_READINESS.ps1",
+    "review:hanzi-v2:step05": "vite --host 127.0.0.1 --port 5176 --strictPort",
+    "test:hanzi-v2:step05": "vitest run tests/hanzi-radical-battle-v2-step05-voice-context.test.ts tests/hanzi-radical-battle-v2-step05-observation-migration.test.ts tests/hanzi-radical-battle-v2-step05-evidence-reconciliation.test.ts tests/hanzi-radical-battle-v2-step05-world-state.test.ts tests/hanzi-radical-battle-v2-step05-world-copy.test.ts tests/hanzi-radical-battle-v2-step05-navigation.test.ts tests/hanzi-radical-battle-v2-step05-freeze.test.ts tests/hanzi-radical-battle-v2-step05-privacy.test.ts tests/hanzi-radical-battle-v2-step05-review.test.ts",
+    "test:e2e:hanzi-v2:step05": "playwright test tests/e2e/hanzi-radical-battle-v2-step05.spec.ts",
+    "validate:hanzi-v2:step05": "pnpm run validate:hanzi-v2-foundation && pnpm run test:hanzi-v2:step05 && tsc --noEmit"
   },
   "dependencies": {
     "phaser": "^3.90.0"

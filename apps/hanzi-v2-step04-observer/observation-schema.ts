@@ -1,11 +1,14 @@
 import {
   AGAIN_AGAIN_VALUES,
+  CHECKPOINT_NOTICE_VALUES,
+  CHECKPOINT_REACH_VALUES,
   ENGAGEMENT_OBSERVATION_IDS,
   FAVORITE_MOMENT_VALUES,
   FIRST_USE_CHECKPOINTS,
   INTERVENTION_CODES,
   LEARNING_VISIBILITY_OBSERVATION_IDS,
   OBSERVATION_VALUES,
+  PARENT_OBSERVED_REPLAY_VALUES,
   POINTABLE_REGIONS,
   STEP04_ACCEPTED_SOURCE_SNAPSHOTS,
   STEP04_AUDIO_CONTRACT_VERSION,
@@ -14,6 +17,8 @@ import {
   USABILITY_OBSERVATION_IDS,
   WELLBEING_VALUES,
   type FirstUseObservationPackage,
+  type FirstUseObservationPackageV1,
+  type FirstUseObservationPackageV2,
 } from "./observation-model";
 import {
   FIRST_USE_ACCEPTED_REVIEW_IDENTITY_SHA256,
@@ -25,6 +30,8 @@ import {
 } from "../../games/hanzi-radical-battle/v2/golden-slice/first-use/session";
 import { FIRST_USE_STOP_CODES, isFirstUseTechnicalEvent } from "../../games/hanzi-radical-battle/v2/golden-slice/first-use/event-types";
 import { validateFirstUsePrivacy, validateObserverNotes } from "../../games/hanzi-radical-battle/v2/golden-slice/first-use/privacy";
+import { deriveCheckpointReach, evidenceConsistencyWarnings } from "./evidence-reconciliation";
+import { migrateFirstUseObservationV1ToV2 } from "./observation-migration";
 
 export interface ObservationSchemaValidationResult {
   readonly ok: boolean;
@@ -64,7 +71,7 @@ function validateObservationRecord(value: unknown, ids: readonly string[], path:
   for (const id of ids) if (!isOneOf(value[id], OBSERVATION_VALUES)) errors.push(`${path}.${id} has an invalid observation value`);
 }
 
-export function validateFirstUseObservation(value: unknown): ObservationSchemaValidationResult {
+export function validateFirstUseObservationV1(value: unknown): ObservationSchemaValidationResult {
   const errors: string[] = [];
   const topKeys = [
     "schemaVersion", "initiativeId", "step", "evidenceKind", "sessionIdentity", "buildIdentity",
@@ -198,7 +205,133 @@ export function validateFirstUseObservation(value: unknown): ObservationSchemaVa
   return { ok: errors.length === 0, errors: [...new Set(errors)] };
 }
 
+function legacyProjection(value: FirstUseObservationPackageV2): FirstUseObservationPackageV1 {
+  return {
+    schemaVersion: 1,
+    initiativeId: value.initiativeId,
+    step: value.step,
+    evidenceKind: value.evidenceKind,
+    sessionIdentity: value.sessionIdentity,
+    buildIdentity: value.buildIdentity,
+    parentAuthorization: value.parentAuthorization,
+    audioPreflight: value.audioPreflight,
+    technicalEvents: value.technicalEvents,
+    observations: {
+      checkpoints: Object.fromEntries(FIRST_USE_CHECKPOINTS.map((checkpointId) => [
+        checkpointId,
+        value.observations.checkpointNotice[checkpointId] === "UNRECORDED"
+          ? "NOT_REACHED"
+          : value.observations.checkpointNotice[checkpointId],
+      ])) as FirstUseObservationPackageV1["observations"]["checkpoints"],
+      usability: value.observations.usability,
+      engagement: value.observations.engagement,
+      learningMechanismVisibility: value.observations.learningMechanismVisibility,
+    },
+    interventions: value.interventions,
+    wellbeing: value.wellbeing,
+    optionalChildChoices: value.optionalChildChoices,
+    completion: value.completion,
+    privacyConfirmed: value.privacyConfirmed,
+    observerNotes: value.observerNotes,
+  };
+}
+
+export function validateFirstUseObservationV2(value: unknown): ObservationSchemaValidationResult {
+  const errors: string[] = [];
+  const topKeys = [
+    "schemaVersion", "initiativeId", "step", "evidenceKind", "fixtureLabel", "sessionIdentity",
+    "buildIdentity", "parentAuthorization", "audioPreflight", "technicalEvents", "observations",
+    "interventions", "wellbeing", "optionalChildChoices", "replay", "completion", "privacyConfirmed",
+    "observerNotes", "evidenceConsistencyWarnings",
+  ];
+  if (!hasExactKeys(value, topKeys)) {
+    return { ok: false, errors: ["Observation v2 package has missing or additional top-level properties"] };
+  }
+  const record = value;
+  if (record.schemaVersion !== 2 || record.initiativeId !== "hanzi-radical-battle-v2" || record.step !== "04") {
+    errors.push("Observation v2 identity/version is invalid");
+  }
+  if (record.evidenceKind !== "REAL_CHILD_OBSERVATION" && record.evidenceKind !== "SYNTHETIC_TOOLING_TEST_ONLY") {
+    errors.push("evidenceKind is invalid");
+  }
+  if (record.evidenceKind === "SYNTHETIC_TOOLING_TEST_ONLY") {
+    if (record.fixtureLabel !== "SYNTHETIC_FROM_SCHEMA_ONLY") errors.push("Synthetic v2 evidence requires the exact schema-only fixture label");
+  } else if (record.fixtureLabel !== null) {
+    errors.push("Real child evidence must not carry a fixture label");
+  }
+
+  if (!hasExactKeys(record.observations, ["checkpointReach", "checkpointNotice", "usability", "engagement", "learningMechanismVisibility"])) {
+    errors.push("observations has missing or additional v2 properties");
+  } else {
+    const observations = record.observations;
+    if (!hasExactKeys(observations.checkpointReach, FIRST_USE_CHECKPOINTS)) errors.push("observations.checkpointReach must contain exactly the stable checkpoint IDs");
+    else for (const checkpointId of FIRST_USE_CHECKPOINTS) {
+      if (!isOneOf(observations.checkpointReach[checkpointId], CHECKPOINT_REACH_VALUES)) errors.push(`observations.checkpointReach.${checkpointId} is invalid`);
+    }
+    if (!hasExactKeys(observations.checkpointNotice, FIRST_USE_CHECKPOINTS)) errors.push("observations.checkpointNotice must contain exactly the stable checkpoint IDs");
+    else for (const checkpointId of FIRST_USE_CHECKPOINTS) {
+      if (!isOneOf(observations.checkpointNotice[checkpointId], CHECKPOINT_NOTICE_VALUES)) errors.push(`observations.checkpointNotice.${checkpointId} is invalid`);
+    }
+    validateObservationRecord(observations.usability, USABILITY_OBSERVATION_IDS, "observations.usability", errors);
+    validateObservationRecord(observations.engagement, ENGAGEMENT_OBSERVATION_IDS, "observations.engagement", errors);
+    validateObservationRecord(observations.learningMechanismVisibility, LEARNING_VISIBILITY_OBSERVATION_IDS, "observations.learningMechanismVisibility", errors);
+  }
+
+  if (!hasExactKeys(record.replay, ["replayIntent", "parentObservedReplayRequest", "actualReplayAction"])) {
+    errors.push("replay has missing or additional properties");
+  } else {
+    if (!isOneOf(record.replay.replayIntent, AGAIN_AGAIN_VALUES)) errors.push("replay.replayIntent is invalid");
+    if (!isOneOf(record.replay.parentObservedReplayRequest, PARENT_OBSERVED_REPLAY_VALUES)) errors.push("replay.parentObservedReplayRequest is invalid");
+    if (typeof record.replay.actualReplayAction !== "boolean") errors.push("replay.actualReplayAction must be boolean");
+  }
+  if (!Array.isArray(record.evidenceConsistencyWarnings) || record.evidenceConsistencyWarnings.some((warning) => typeof warning !== "string")) {
+    errors.push("evidenceConsistencyWarnings must be an array of strings");
+  }
+
+  if (errors.length === 0) {
+    const candidate = record as unknown as FirstUseObservationPackageV2;
+    const legacyValidation = validateFirstUseObservationV1(legacyProjection(candidate));
+    errors.push(...legacyValidation.errors.map((error) => `Shared v1 contract: ${error}`));
+    const expectedReach = deriveCheckpointReach(candidate.technicalEvents, candidate.completion.sessionStopped);
+    for (const checkpointId of FIRST_USE_CHECKPOINTS) {
+      if (candidate.observations.checkpointReach[checkpointId] !== expectedReach[checkpointId]) {
+        errors.push(`observations.checkpointReach.${checkpointId} must be derived from technical events`);
+      }
+    }
+    const actualReplayAction = candidate.technicalEvents.some((event) => event.eventType === "replay_selected");
+    if (candidate.replay.actualReplayAction !== actualReplayAction) errors.push("replay.actualReplayAction must be derived from replay_selected events");
+    const requiredWarnings = evidenceConsistencyWarnings(candidate);
+    for (const warning of requiredWarnings) {
+      if (!candidate.evidenceConsistencyWarnings.includes(warning)) errors.push(`Missing evidence consistency warning: ${warning}`);
+    }
+  }
+  errors.push(...validateFirstUsePrivacy(record).issues);
+  return { ok: errors.length === 0, errors: [...new Set(errors)] };
+}
+
+export function validateFirstUseObservation(value: unknown): ObservationSchemaValidationResult {
+  return validateFirstUseObservationV2(value);
+}
+
+export function normalizeFirstUseObservation(value: unknown): {
+  readonly value: FirstUseObservationPackage;
+  readonly migrated: boolean;
+  readonly warnings: readonly string[];
+} {
+  const v2 = validateFirstUseObservationV2(value);
+  if (v2.ok) {
+    const observation = value as FirstUseObservationPackageV2;
+    return { value: observation, migrated: false, warnings: observation.evidenceConsistencyWarnings };
+  }
+  const v1 = validateFirstUseObservationV1(value);
+  if (!v1.ok) throw new Error(`Invalid STEP 04 observation package: ${[...v1.errors, ...v2.errors].join("; ")}`);
+  const migrated = migrateFirstUseObservationV1ToV2(value as FirstUseObservationPackageV1);
+  const migratedValidation = validateFirstUseObservationV2(migrated.value);
+  if (!migratedValidation.ok) throw new Error(`Migrated STEP 04 observation v2 is invalid: ${migratedValidation.errors.join("; ")}`);
+  return { value: migrated.value, migrated: true, warnings: migrated.warnings };
+}
+
 export function assertValidFirstUseObservation(value: unknown): asserts value is FirstUseObservationPackage {
-  const result = validateFirstUseObservation(value);
+  const result = validateFirstUseObservationV2(value);
   if (!result.ok) throw new Error(`Invalid STEP 04 observation package: ${result.errors.join("; ")}`);
 }

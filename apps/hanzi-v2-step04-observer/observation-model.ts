@@ -31,6 +31,42 @@ export const OBSERVATION_VALUES = [
   "STOPPED",
 ] as const;
 
+export const CHECKPOINT_REACH_VALUES = ["REACHED", "NOT_REACHED", "STOPPED_BEFORE"] as const;
+
+export const CHECKPOINT_NOTICE_VALUES = [
+  "UNRECORDED",
+  "NOTICED_WITHOUT_PROMPT",
+  "NOTICED_AFTER_BUILT_IN_SUPPORT",
+  "NOTICED_AFTER_REGION_ONLY_PROMPT",
+  "ADULT_ANSWER_REQUIRED",
+  "STOPPED",
+] as const;
+
+export const PARENT_OBSERVED_REPLAY_VALUES = ["UNRECORDED", "OBSERVED", "NOT_OBSERVED"] as const;
+
+export const SYNTHETIC_SCHEMA_FIXTURE_LABEL = "SYNTHETIC_FROM_SCHEMA_ONLY" as const;
+
+export const CHECKPOINT_REACH_VALUE_LABELS: Readonly<Record<CheckpointReachValue, string>> = {
+  REACHED: "技术事件已到达",
+  NOT_REACHED: "技术事件未到达",
+  STOPPED_BEFORE: "停止前未到达",
+};
+
+export const CHECKPOINT_NOTICE_VALUE_LABELS: Readonly<Record<CheckpointNoticeValue, string>> = {
+  UNRECORDED: "未记录是否注意到",
+  NOTICED_WITHOUT_PROMPT: "无成人提示注意到",
+  NOTICED_AFTER_BUILT_IN_SUPPORT: "内置支持后注意到",
+  NOTICED_AFTER_REGION_ONLY_PROMPT: "只指区域后注意到",
+  ADULT_ANSWER_REQUIRED: "需要成人给答案",
+  STOPPED: "已停止",
+};
+
+export const PARENT_OBSERVED_REPLAY_LABELS: Readonly<Record<ParentObservedReplayValue, string>> = {
+  UNRECORDED: "未记录",
+  OBSERVED: "家长观察到重玩请求",
+  NOT_OBSERVED: "家长未观察到重玩请求",
+};
+
 export const OBSERVATION_VALUE_LABELS: Readonly<Record<ObservationValue, string>> = {
   NOT_REACHED: "未到达",
   NOTICED_WITHOUT_PROMPT: "无成人提示注意到",
@@ -101,6 +137,9 @@ export const FAVORITE_MOMENT_VALUES = ["CAMP", "HANZI_MAGIC", "THREE_CHOICE", "B
 export const COMPLETION_STATUSES = ["NOT_STARTED", "RUNNING", "COMPLETED", "STOPPED", "TECHNICAL_END"] as const;
 
 export type ObservationValue = (typeof OBSERVATION_VALUES)[number];
+export type CheckpointReachValue = (typeof CHECKPOINT_REACH_VALUES)[number];
+export type CheckpointNoticeValue = (typeof CHECKPOINT_NOTICE_VALUES)[number];
+export type ParentObservedReplayValue = (typeof PARENT_OBSERVED_REPLAY_VALUES)[number];
 export type FirstUseCheckpointId = (typeof FIRST_USE_CHECKPOINTS)[number];
 export type UsabilityObservationId = (typeof USABILITY_OBSERVATION_IDS)[number];
 export type EngagementObservationId = (typeof ENGAGEMENT_OBSERVATION_IDS)[number];
@@ -134,7 +173,7 @@ export interface FirstUseIntervention {
   readonly relativeMs: number;
 }
 
-export interface FirstUseObservationPackage {
+export interface FirstUseObservationPackageV1 {
   readonly schemaVersion: 1;
   readonly initiativeId: "hanzi-radical-battle-v2";
   readonly step: "04";
@@ -206,8 +245,52 @@ export interface FirstUseObservationPackage {
   observerNotes: string;
 }
 
+export interface FirstUseObservationPackageV2 {
+  readonly schemaVersion: 2;
+  readonly initiativeId: "hanzi-radical-battle-v2";
+  readonly step: "04";
+  readonly evidenceKind: "REAL_CHILD_OBSERVATION" | "SYNTHETIC_TOOLING_TEST_ONLY";
+  readonly fixtureLabel: typeof SYNTHETIC_SCHEMA_FIXTURE_LABEL | null;
+  sessionIdentity: FirstUseObservationPackageV1["sessionIdentity"];
+  buildIdentity: FirstUseBuildIdentity;
+  parentAuthorization: FirstUseObservationPackageV1["parentAuthorization"];
+  audioPreflight: FirstUseObservationPackageV1["audioPreflight"];
+  technicalEvents: FirstUseTechnicalEvent[];
+  observations: {
+    checkpointReach: Record<FirstUseCheckpointId, CheckpointReachValue>;
+    checkpointNotice: Record<FirstUseCheckpointId, CheckpointNoticeValue>;
+    usability: Record<UsabilityObservationId, ObservationValue>;
+    engagement: Record<EngagementObservationId, ObservationValue>;
+    learningMechanismVisibility: Record<LearningVisibilityObservationId, ObservationValue>;
+  };
+  interventions: FirstUseIntervention[];
+  wellbeing: FirstUseObservationPackageV1["wellbeing"];
+  optionalChildChoices: FirstUseObservationPackageV1["optionalChildChoices"];
+  replay: {
+    replayIntent: AgainAgainValue;
+    parentObservedReplayRequest: ParentObservedReplayValue;
+    actualReplayAction: boolean;
+  };
+  completion: FirstUseObservationPackageV1["completion"];
+  privacyConfirmed: true;
+  observerNotes: string;
+  evidenceConsistencyWarnings: string[];
+}
+
+export type FirstUseObservationPackage = FirstUseObservationPackageV2;
+
+export type FirstUseObservationPackageAnyVersion = FirstUseObservationPackageV1 | FirstUseObservationPackageV2;
+
 function enumRecord<T extends readonly string[]>(keys: T): Record<T[number], ObservationValue> {
   return Object.fromEntries(keys.map((key) => [key, "NOT_REACHED"])) as Record<T[number], ObservationValue>;
+}
+
+function checkpointReachRecord(): Record<FirstUseCheckpointId, CheckpointReachValue> {
+  return Object.fromEntries(FIRST_USE_CHECKPOINTS.map((key) => [key, "NOT_REACHED"])) as Record<FirstUseCheckpointId, CheckpointReachValue>;
+}
+
+function checkpointNoticeRecord(): Record<FirstUseCheckpointId, CheckpointNoticeValue> {
+  return Object.fromEntries(FIRST_USE_CHECKPOINTS.map((key) => [key, "UNRECORDED"])) as Record<FirstUseCheckpointId, CheckpointNoticeValue>;
 }
 
 export function createFirstUseBuildIdentity(
@@ -249,10 +332,11 @@ export function createFirstUseObservationPackage(
   }
   if (audio.decision !== grant.audioChoice) throw new Error("Audio preflight does not match the authorized grant");
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     initiativeId: "hanzi-radical-battle-v2",
     step: "04",
     evidenceKind: grant.fixture ? "SYNTHETIC_TOOLING_TEST_ONLY" : "REAL_CHILD_OBSERVATION",
+    fixtureLabel: grant.fixture ? SYNTHETIC_SCHEMA_FIXTURE_LABEL : null,
     sessionIdentity: {
       sessionId: grant.sessionId,
       runSeed: grant.runSeed,
@@ -287,7 +371,8 @@ export function createFirstUseObservationPackage(
     },
     technicalEvents: [],
     observations: {
-      checkpoints: enumRecord(FIRST_USE_CHECKPOINTS),
+      checkpointReach: checkpointReachRecord(),
+      checkpointNotice: checkpointNoticeRecord(),
       usability: enumRecord(USABILITY_OBSERVATION_IDS),
       engagement: enumRecord(ENGAGEMENT_OBSERVATION_IDS),
       learningMechanismVisibility: enumRecord(LEARNING_VISIBILITY_OBSERVATION_IDS),
@@ -309,9 +394,15 @@ export function createFirstUseObservationPackage(
       promptedReplay: false,
       optionalQuestionsAsked: false,
     },
+    replay: {
+      replayIntent: "NOT_ASKED",
+      parentObservedReplayRequest: "UNRECORDED",
+      actualReplayAction: false,
+    },
     completion: { childRouteLoaded: false, runCompleted: false, sessionStopped: false, relativeDurationMs: 0, runCount: 1, stopCode: null },
     privacyConfirmed: true,
     observerNotes: "",
+    evidenceConsistencyWarnings: [],
   };
 }
 

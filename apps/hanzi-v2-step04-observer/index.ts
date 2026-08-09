@@ -20,6 +20,9 @@ import { validateObserverNotes } from "../../games/hanzi-radical-battle/v2/golde
 import { mountAudioPreflight, type AudioPreflightHandle, type AudioPreflightState } from "./audio-preflight";
 import { downloadFirstUseObservation } from "./export";
 import {
+  CHECKPOINT_NOTICE_VALUES,
+  CHECKPOINT_NOTICE_VALUE_LABELS,
+  CHECKPOINT_REACH_VALUE_LABELS,
   ENGAGEMENT_OBSERVATION_IDS,
   FIRST_USE_CHECKPOINTS,
   FIRST_USE_CHECKPOINT_LABELS,
@@ -27,6 +30,8 @@ import {
   LEARNING_VISIBILITY_OBSERVATION_IDS,
   OBSERVATION_VALUES,
   OBSERVATION_VALUE_LABELS,
+  PARENT_OBSERVED_REPLAY_LABELS,
+  PARENT_OBSERVED_REPLAY_VALUES,
   POINTABLE_REGIONS,
   STEP04_ACCEPTED_SOURCE_SNAPSHOTS,
   USABILITY_OBSERVATION_IDS,
@@ -42,7 +47,8 @@ import {
   type PointableRegion,
   type WellbeingValue,
 } from "./observation-model";
-import { validateFirstUseObservation } from "./observation-schema";
+import { normalizeFirstUseObservation } from "./observation-schema";
+import { reconcileFirstUseEvidence } from "./evidence-reconciliation";
 import {
   AGAIN_AGAIN_OPTIONS,
   FAVORITE_MOMENT_OPTIONS,
@@ -152,7 +158,7 @@ function loadObservation(storage: Storage, sessionId: string): FirstUseObservati
   if (!raw) return null;
   try {
     const value: unknown = JSON.parse(raw);
-    return validateFirstUseObservation(value).ok ? value as FirstUseObservationPackage : null;
+    return normalizeFirstUseObservation(value).value;
   } catch {
     return null;
   }
@@ -254,10 +260,6 @@ export function mountHanziV2Step04Observer(root: HTMLElement, options: Step04Obs
     if (event.eventType === "phase_entered" && typeof event.safeMetadata.phase === "string") currentPhase = event.safeMetadata.phase;
     if (event.eventType === "built_in_hint_shown") builtInHintReceived = true;
     if (event.eventType === "child_route_ready") observation.completion.childRouteLoaded = true;
-    if (event.eventType === "replay_selected") {
-      observation.optionalChildChoices.spontaneousReplay = event.safeMetadata.origin === "spontaneous";
-      observation.optionalChildChoices.promptedReplay = event.safeMetadata.origin === "prompted";
-    }
     if (event.eventType === "run_completed") {
       const runCount = Math.min(2, Math.max(1, Number(event.safeMetadata.replayIndex) + 1)) as 1 | 2;
       observation.sessionIdentity.runCount = runCount;
@@ -277,6 +279,7 @@ export function mountHanziV2Step04Observer(root: HTMLElement, options: Step04Obs
       observation.wellbeing.stopCode = stopCode;
       markFirstUseSessionStopped(storage, grant.sessionId, stopCode);
     }
+    observation = reconcileFirstUseEvidence(observation);
     persist();
     renderDashboard();
   };
@@ -402,8 +405,11 @@ export function mountHanziV2Step04Observer(root: HTMLElement, options: Step04Obs
 
   const checkpointMarkup = (): string => {
     if (!observation) return "";
+    const currentObservation = observation;
     return FIRST_USE_CHECKPOINTS.map((checkpoint) => `<article class="step04-checkpoint">
-      <h3>${FIRST_USE_CHECKPOINT_LABELS[checkpoint]}</h3><div>${OBSERVATION_VALUES.map((value) => `<button type="button" data-checkpoint="${checkpoint}" data-observation-value="${value}" aria-pressed="${observation?.observations.checkpoints[checkpoint] === value}">${OBSERVATION_VALUE_LABELS[value]}</button>`).join("")}</div>
+      <h3>${FIRST_USE_CHECKPOINT_LABELS[checkpoint]}</h3>
+      <p class="step04-derived-reach" data-checkpoint-reach="${checkpoint}">${CHECKPOINT_REACH_VALUE_LABELS[currentObservation.observations.checkpointReach[checkpoint]]} · 只读</p>
+      <div>${CHECKPOINT_NOTICE_VALUES.map((value) => `<button type="button" data-checkpoint="${checkpoint}" data-checkpoint-notice="${value}" aria-pressed="${currentObservation.observations.checkpointNotice[checkpoint] === value}">${CHECKPOINT_NOTICE_VALUE_LABELS[value]}</button>`).join("")}</div>
     </article>`).join("");
   };
 
@@ -419,7 +425,7 @@ export function mountHanziV2Step04Observer(root: HTMLElement, options: Step04Obs
         <div><span class="step04-kicker">STEP 04 · LOCAL PARENT OBSERVER</span><h1>观察事实，不替孩子作答</h1><p>${escapeHtml(SESSION_MODE_LABELS[grant.sessionMode as FirstUseSessionMode])} · ${observation.audioPreflight.decision === "START_MUTED" ? "静音 session" : "声音 session"}</p></div>
         <div class="step04-live-status ${statusClass(currentCompletionStatus)}"><i></i><span>${escapeHtml(currentCompletionStatus)}</span></div>
       </header>
-      ${observation.evidenceKind === "SYNTHETIC_TOOLING_TEST_ONLY" ? `<aside class="step04-fixture-banner">SYNTHETIC_TOOLING_TEST_ONLY · 不得作为真人儿童结果</aside>` : ""}
+      ${observation.evidenceKind === "SYNTHETIC_TOOLING_TEST_ONLY" ? `<aside class="step04-fixture-banner">${escapeHtml(observation.fixtureLabel)} · SYNTHETIC_TOOLING_TEST_ONLY · 不得作为真人儿童结果</aside>` : ""}
       ${currentCompletionStatus === "STOPPED" ? `<aside class="step04-rest-message">先回营地休息，找到的汉字都还在。</aside>` : ""}
       <section class="step04-live-grid" data-testid="step04-live-region">
         <article><span>当前 phase</span><strong>${escapeHtml(currentPhase)}</strong></article>
@@ -459,10 +465,12 @@ export function mountHanziV2Step04Observer(root: HTMLElement, options: Step04Obs
         ${Object.entries(WELLBEING_FIELD_LABELS).map(([key, label]) => `<label>${label}<select data-wellbeing-field="${key}">${selectedOptions(WELLBEING_VALUES, WELLBEING_VALUE_LABELS, observation?.wellbeing[key as keyof typeof WELLBEING_FIELD_LABELS] as (typeof WELLBEING_VALUES)[number])}</select></label>`).join("")}
       </section>
       ${ended ? optionalCardsMarkup(observation.optionalChildChoices) : `<section class="step04-optional-locked"><strong>可选卡片尚未显示</strong><span>只在 run 结束或停止后，由家长判断是否展示。</span></section>`}
-      ${ended ? `<section class="step04-observation-section"><div class="step04-section-heading"><div><span>可选补充</span><h2>Replay 与结束问题</h2></div></div>
-        <label class="step04-inline-check"><input type="checkbox" data-replay-kind="spontaneous" ${observation.optionalChildChoices.spontaneousReplay ? "checked" : ""}>孩子自己选择重玩</label>
-        <label class="step04-inline-check"><input type="checkbox" data-replay-kind="prompted" ${observation.optionalChildChoices.promptedReplay ? "checked" : ""}>家长提出重玩</label>
+      ${ended ? `<section class="step04-observation-section"><div class="step04-section-heading"><div><span>可选补充</span><h2>Replay 意图、观察与实际行动分开</h2></div></div>
+        <p><strong>Replay intent：</strong>${escapeHtml(observation.replay.replayIntent)}</p>
+        <label>家长观察到的重玩请求<select data-parent-replay-request>${selectedOptions(PARENT_OBSERVED_REPLAY_VALUES, PARENT_OBSERVED_REPLAY_LABELS, observation.replay.parentObservedReplayRequest)}</select></label>
+        <p data-actual-replay-action><strong>Actual replay action（技术事件，只读）：</strong>${observation.replay.actualReplayAction ? "已收到 replay_selected" : "未收到 replay_selected"}</p>
         <label class="step04-inline-check"><input type="checkbox" data-questions-offered ${observation.optionalChildChoices.optionalQuestionsAsked ? "checked" : ""}>只提供了两条可选结束问题（孩子可以拒绝）</label>
+        <div class="step04-consistency-warnings"><strong>Evidence consistency warnings</strong><ul>${observation.evidenceConsistencyWarnings.length ? observation.evidenceConsistencyWarnings.map((warning) => `<li>${escapeHtml(warning)}</li>`).join("") : "<li>none</li>"}</ul></div>
       </section>` : ""}
       <section class="step04-export-section">
         <div class="step04-section-heading"><div><span>本地导出</span><h2>保存最小证据</h2></div><strong>${notesPrivacy.ok ? "隐私检查就绪" : "请先修正隐私问题"}</strong></div>
@@ -491,15 +499,16 @@ export function mountHanziV2Step04Observer(root: HTMLElement, options: Step04Obs
       };
       observation.wellbeing.stopCode = selectedStopCode;
       markFirstUseSessionStopped(storage, grant.sessionId, selectedStopCode);
+      observation = reconcileFirstUseEvidence(observation);
       persist();
       renderDashboard();
     });
     root.querySelectorAll<HTMLButtonElement>("[data-checkpoint]").forEach((button) => button.addEventListener("click", () => {
       if (!observation) return;
       const checkpoint = button.dataset.checkpoint as FirstUseCheckpointId;
-      const value = button.dataset.observationValue as ObservationValue;
-      if (!FIRST_USE_CHECKPOINTS.includes(checkpoint) || !OBSERVATION_VALUES.includes(value)) return;
-      observation.observations.checkpoints[checkpoint] = value;
+      const value = button.dataset.checkpointNotice as FirstUseObservationPackage["observations"]["checkpointNotice"][FirstUseCheckpointId];
+      if (!FIRST_USE_CHECKPOINTS.includes(checkpoint) || !CHECKPOINT_NOTICE_VALUES.includes(value)) return;
+      observation.observations.checkpointNotice[checkpoint] = value;
       persist();
       renderDashboard();
     }));
@@ -532,7 +541,7 @@ export function mountHanziV2Step04Observer(root: HTMLElement, options: Step04Obs
         relativeMs: relativeNow(),
       }];
       if (selectedIntervention === "ADULT_ANSWER_REQUIRED") {
-        observation.observations.checkpoints[selectedInterventionCheckpoint] = "ADULT_ANSWER_REQUIRED";
+        observation.observations.checkpointNotice[selectedInterventionCheckpoint] = "ADULT_ANSWER_REQUIRED";
         receiver?.sendStop("ADULT_ANSWER_REQUIRED");
         observation.completion = {
           ...observation.completion,
@@ -543,7 +552,8 @@ export function mountHanziV2Step04Observer(root: HTMLElement, options: Step04Obs
         observation.wellbeing.stopCode = "ADULT_ANSWER_REQUIRED";
         markFirstUseSessionStopped(storage, grant.sessionId, "ADULT_ANSWER_REQUIRED");
       }
-      if (selectedIntervention === "STOPPED") observation.observations.checkpoints[selectedInterventionCheckpoint] = "STOPPED";
+      if (selectedIntervention === "STOPPED") observation.observations.checkpointNotice[selectedInterventionCheckpoint] = "STOPPED";
+      observation = reconcileFirstUseEvidence(observation);
       persist();
       renderDashboard();
     });
@@ -558,6 +568,8 @@ export function mountHanziV2Step04Observer(root: HTMLElement, options: Step04Obs
     root.querySelectorAll<HTMLButtonElement>("[data-again-again]").forEach((button) => button.addEventListener("click", () => {
       if (!observation || !isAgainAgainValue(button.dataset.againAgain)) return;
       observation.optionalChildChoices.againAgain = button.dataset.againAgain;
+      observation.replay.replayIntent = button.dataset.againAgain;
+      observation = reconcileFirstUseEvidence(observation);
       persist();
       renderDashboard();
     }));
@@ -567,18 +579,15 @@ export function mountHanziV2Step04Observer(root: HTMLElement, options: Step04Obs
       persist();
       renderDashboard();
     }));
-    root.querySelectorAll<HTMLInputElement>("[data-replay-kind]").forEach((input) => input.addEventListener("change", () => {
+    root.querySelector<HTMLSelectElement>("[data-parent-replay-request]")?.addEventListener("change", (event) => {
       if (!observation) return;
-      const spontaneous = input.dataset.replayKind === "spontaneous";
-      observation.optionalChildChoices.spontaneousReplay = spontaneous && input.checked;
-      observation.optionalChildChoices.promptedReplay = !spontaneous && input.checked;
-      if (input.checked) {
-        if (spontaneous) observation.optionalChildChoices.promptedReplay = false;
-        else observation.optionalChildChoices.spontaneousReplay = false;
-      }
+      const value = (event.currentTarget as HTMLSelectElement).value as FirstUseObservationPackage["replay"]["parentObservedReplayRequest"];
+      if (!PARENT_OBSERVED_REPLAY_VALUES.includes(value)) return;
+      observation.replay.parentObservedReplayRequest = value;
+      observation = reconcileFirstUseEvidence(observation);
       persist();
       renderDashboard();
-    }));
+    });
     root.querySelector<HTMLInputElement>("[data-questions-offered]")?.addEventListener("change", (event) => {
       if (!observation) return;
       observation.optionalChildChoices.optionalQuestionsAsked = (event.currentTarget as HTMLInputElement).checked;

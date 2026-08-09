@@ -1,6 +1,6 @@
 # Traceability Matrix
 
-状态：STEP 03 identity-bound 家长决定已正式吸收；全部 accepted gameplay/content 冻结，唯一 audio changed item 已按家长要求修订。STEP 04 只到 `AUTHORIZED_CHILD_FIRST_USE_READY`；没有执行真实儿童 session，也没有儿童理解、接受、学习或推广结论。每个新功能仍必须说明儿童价值、汉字学习价值，以及自动与真人验证路径。
+状态：STEP 03 identity-bound 家长决定已正式吸收；全部 accepted gameplay/content 冻结。STEP 04 的一次真实儿童 first-use evidence 已按原始 hash 锁定并完成语义对账；它支持 `PROMOTE_TO_PRIVATE_WORLD_ENTRY_AFTER_CHANGED_ONLY_FIX`，但不构成学习或默认入口结论。STEP 05 只到 `PRIVATE_WORLD_ENTRY_CANDIDATE_READY_FOR_PARENT_REVIEW`。每个新功能仍必须说明儿童价值、汉字学习价值，以及自动与真人验证路径。
 
 | 功能 | 对应北极星原则 | 参考案例 | 儿童价值 | 汉字学习价值 | 自动验证 | 真人试玩观察 | 当前状态 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -25,6 +25,11 @@
 | 拼音显示与 TTS 分离 | 声音可选且不承担规则 | audio-design、家长 changed-only feedback | 拼音仍看得见；静音也可完整操作 | 朗读只连接字形与 accepted 熟悉词，不把拼音当口语内容 | 四句 exact、12 字无 Latin、同一数据源、mute/silent fallback | 家长每次 session 在实际设备试听或合法选择静音 | `STEP04_IMPLEMENTED / DEVICE_PREFLIGHT_REQUIRED_PER_SESSION` |
 | 儿童首次使用门禁 | 未经家长 READY 不启动真实观察 | PBS KIDS、child-first-use-observation | 保护隐私、安全、第一次接触与随时停止 | 只观察真实结构使用，不模拟儿童结果 | session token、source freeze、preflight、schema、PII denylist、START/FINISH | 仅在家长现场授权后由真实孩子与观察者完成 | `AUTHORIZED_CHILD_FIRST_USE_READY / REAL_OBSERVATION_NOT_RUN` |
 | 同源家长观察器 | 技术事件与人类解释分层 | game-playtest、save-systems | 成人只提供技术支持，不看到答案或 solver | 观察内置机制是否被看见，不写“学会” | BroadcastChannel + storage fallback、sequence/dedupe/reconnect、stop、local export | 家长记录中文 enum、介入代码、well-being 与可拒绝选择 | `STEP04_IMPLEMENTED / HUMAN_EVIDENCE_PENDING` |
+| 真实 first-use 证据对账 | 真实儿童证据先于产品晋升；事实与解释分开 | child-first-use-observation、game-playtest | 一次真实使用的舒适度与继续意愿可被诚实保留 | 只记录实际进入四次合字流程，不推断掌握或保持 | raw SHA 锁定、事件时间线、reach/replay 纯推导、v1→v2 warning | 家长观察与技术事件分栏；无成人介入；立即再玩请求不等于实际重玩 | `REAL_EVIDENCE_RECONCILED / NO_LEARNING_CLAIM` |
+| 显式语音上下文 | 声音可选且不泄漏答案 | audio-design、child-first-learning-game | 非战斗阶段不会意外提前说出下一字 | 只朗读已明确形成/发现的字；Ink Echo 仍为显式 Boss 支持 | phase whitelist、mismatch、spellbook、Ink Echo、pinyin-free utterance 测试 | STEP 05 changed-only 家长试听 | `CHANGED_ONLY_FIX_IMPLEMENTED / PARENT_REVIEW_PENDING` |
+| 私人游戏世界候选 | 第一眼是世界与冒险；经典目录次级 | child-first-learning-game、game-ui-frontend | 营地变化可持续看见，三对象即可理解 | 四字收藏与修复状态直接投影既有进度，不造第二套成绩 | no/partial/repaired/corrupt save、copy/privacy、三 viewport、no network | 家长 changed-only 审核；默认入口须另行授权 | `PRIVATE_WORLD_ENTRY_CANDIDATE_READY_FOR_PARENT_REVIEW` |
+| 世界导航与经典百宝箱 | 两次点击内开始；既有游戏不受损 | game-ui-frontend、save-systems | 可在世界、森林、魔法书、经典游戏间返回 | 导航不改变合字规则或永久进度语义 | exact routes、10-game regression、complete→world、context gate | 家长核验三条导航链 | `STEP05_IMPLEMENTED / DEFAULT_ROUTE_UNCHANGED` |
+| STEP 05 changed-only 家长门禁 | 技术 PASS 与人类授权分离 | child-first-learning-game、child-first-use-observation | 成人可只看真实使用后变更，不重审全部儿童流程 | 冻结合字内容；仅音频、世界壳与依赖导航可决定 | fixed export、identity/schema/PII validation、Round 2 carry-forward test | 四项决定与两个授权均需真实家长填写 | `PARENT_REVIEW_REQUIRED` |
 
 ## 新功能准入模板
 

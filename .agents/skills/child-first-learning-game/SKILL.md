@@ -40,3 +40,11 @@ Keep the child's felt experience, healthy agency, and observable comprehension a
 ## Promotion boundary
 
 Automated tests may establish constraint, persistence, and runtime correctness. Browser checks may establish that the interaction renders and responds. Only observed child behavior can establish whether the child understood, cared, noticed the world change, and wanted another try. Use `PROMOTE`, `REVISE`, or `STOP_AND_RETHINK` only under the initiative playtest gate.
+
+## From validated game to private world entry
+
+- Require real child evidence before proposing a game as a private-world entry.
+- Let the classic catalog become a secondary treasure-box route rather than copying it into the child world home.
+- Read the accepted game's existing local progress so permanent world change remains visible; do not create a competing progress record.
+- Never place a real child name, school, photograph, or other identity data in the public repository or review screenshots.
+- After real use, repair only the evidenced defect and its dependency-affected surfaces; keep accepted gameplay and content frozen until a new gate authorizes expansion.
