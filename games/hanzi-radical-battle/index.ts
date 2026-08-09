@@ -454,9 +454,9 @@ function mountHanziRadicalBattle(context: MountGameContext): MountedGame {
     const overlay = document.createElement("div");
     overlay.className = "hanzi-radical-game-over";
     const title = document.createElement("h3");
-    title.textContent = "败北";
+    title.textContent = "先回营地休息一下";
     const text = document.createElement("p");
-    text.textContent = "还需要多加练习书法...";
+    text.textContent = "这次发现的汉字都还在。换个方法再试一次。";
     const actions = document.createElement("div");
     actions.append(
       createButton("再来一局", () => {
@@ -763,7 +763,7 @@ function mountHanziRadicalBattle(context: MountGameContext): MountedGame {
       monsterAttacking = false;
       if (playerHp <= 0) {
         gameStatus = "lost";
-        addLog("你的生命值归零，战斗失败。", "enemy");
+        addLog("先回营地休息一下，发现的汉字都还在。", "enemy");
         playBattleSound("attack_normal", soundEnabled);
       } else {
         turn = "player";
