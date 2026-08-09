@@ -237,8 +237,22 @@ test.describe("Hanzi Radical Battle V2 STEP 04", () => {
 
   test("runs fixture-only parent preflight, CANCEL, stop, optional cards, privacy check, and synthetic export", async ({ page, context }) => {
     const cancelLaunch = testLaunch("2", true);
+    await page.setViewportSize({ width: 1200, height: 720 });
     await page.goto(cancelLaunch.observerUrl);
     await expect(page.getByTestId("step04-observer-preparation")).toContainText("SYNTHETIC_TOOLING_TEST_ONLY");
+    await expect(page.getByTestId("step04-observer-preparation")).toContainText("START 先打开家长准备页");
+    const scrollMetrics = await page.evaluate(() => ({
+      overflowY: getComputedStyle(document.body).overflowY,
+      scrollHeight: document.scrollingElement?.scrollHeight ?? 0,
+      clientHeight: document.scrollingElement?.clientHeight ?? 0,
+    }));
+    expect(scrollMetrics.overflowY).toBe("auto");
+    expect(scrollMetrics.scrollHeight).toBeGreaterThan(scrollMetrics.clientHeight);
+    await page.mouse.wheel(0, 700);
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.getByRole("link", { name: /继续完成音频预检/u }).click();
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
     await page.getByRole("button", { name: "取消本次" }).click();
     await expect(page.getByText("本次 session 已取消")).toBeVisible();
 

@@ -1659,19 +1659,23 @@ body {
 html.step02-review-page,
 body.step02-review-page,
 html.step03-review-page,
-body.step03-review-page {
+body.step03-review-page,
+html.step04-observer-page,
+body.step04-observer-page {
   height: auto;
   min-height: 100%;
 }
 
 body.step02-review-page,
-body.step03-review-page {
+body.step03-review-page,
+body.step04-observer-page {
   overflow-x: hidden;
   overflow-y: auto;
 }
 
 body.step02-review-page #app,
-body.step03-review-page #app {
+body.step03-review-page #app,
+body.step04-observer-page #app {
   height: auto;
   min-height: 100vh;
 }

@@ -290,8 +290,11 @@ export function mountHanziV2Step04Observer(root: HTMLElement, options: Step04Obs
   const renderPreparation = (): void => {
     root.innerHTML = `<main class="step04-observer-shell" data-testid="step04-observer-preparation">
       <header class="step04-hero">
-        <div><span class="step04-kicker">STEP 04 · PARENT-DIRECTED FIRST USE</span><h1>儿童首次使用 · 本地观察台</h1><p>先完成设备和音频检查；家长 READY 前不会打开儿童路线。</p></div>
-        ${controller.context.fixture ? `<strong class="step04-fixture">SYNTHETIC_TOOLING_TEST_ONLY</strong>` : `<strong class="step04-state">AUTHORIZED_CHILD_FIRST_USE_READY</strong>`}
+        <div><span class="step04-kicker">STEP 04 · PARENT-DIRECTED FIRST USE</span><h1>儿童首次使用 · 本地观察台</h1><p>START 先打开家长准备页；向下完成音频预检、选择观察方式并勾选 READY 后，才会另开儿童游戏窗口。</p></div>
+        <div class="step04-hero-actions">
+          ${controller.context.fixture ? `<strong class="step04-fixture">SYNTHETIC_TOOLING_TEST_ONLY</strong>` : `<strong class="step04-state">AUTHORIZED_CHILD_FIRST_USE_READY</strong>`}
+          <a class="step04-next-link" href="#step04-audio-preflight">继续完成音频预检 ↓</a>
+        </div>
       </header>
       <section class="step04-identity" data-testid="step04-build-identity">
         <div class="step04-section-heading"><div><span>精确构建身份</span><h2>Accepted build freeze</h2></div><strong>${escapeHtml(controller.context.buildIdentitySha256.slice(0, 12))}…</strong></div>
@@ -302,7 +305,7 @@ export function mountHanziV2Step04Observer(root: HTMLElement, options: Step04Obs
         <ul class="step04-checklist"><li>使用孩子熟悉的设备</li><li>亮度舒适</li><li>关闭通知</li><li>孩子可以随时停止</li><li>家长只提供技术支持；内置提示优先</li></ul>
         <blockquote>这里有一段小冒险，你可以自己看看。想停随时可以停。</blockquote>
       </section>
-      <div data-audio-preflight-host></div>
+      <div id="step04-audio-preflight" data-audio-preflight-host></div>
       <section class="step04-launch" data-testid="step04-launch-gate">
         <div class="step04-section-heading"><div><span>最后门禁</span><h2>选择观察方式</h2></div></div>
         <div class="step04-mode-row">${(["LIVE_DASHBOARD", "COMPACT_AFTER_SESSION"] as const).map((mode) => `<button type="button" data-session-mode="${mode}" aria-pressed="${sessionMode === mode}">${SESSION_MODE_LABELS[mode]}</button>`).join("")}<button type="button" data-cancel-session>取消</button></div>
