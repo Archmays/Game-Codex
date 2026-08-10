@@ -15,6 +15,19 @@ export const STEP07_FIXTURE_MARKER = "SYNTHETIC_TOOLING_TEST_ONLY";
 export const STEP07_RUNTIME_GRANT_URL = "/step07-runtime-grant.json";
 export const STEP07_OBSERVER_SESSION_QUERY = "observerSession";
 
+export type Step07ObserverBuildIdentity =
+  | { readonly ok: true; readonly buildCommit: string }
+  | { readonly ok: false; readonly reason: "MISSING_BUILD" | "DUPLICATE_BUILD" | "INVALID_BUILD" };
+
+export function parseStep07ObserverBuildIdentity(search: URLSearchParams): Step07ObserverBuildIdentity {
+  const values = search.getAll("build");
+  if (values.length === 0) return { ok: false, reason: "MISSING_BUILD" };
+  if (values.length !== 1) return { ok: false, reason: "DUPLICATE_BUILD" };
+  const value = values[0] ?? "";
+  if (!/^[a-f0-9]{40}$/i.test(value)) return { ok: false, reason: "INVALID_BUILD" };
+  return { ok: true, buildCommit: value.toLowerCase() };
+}
+
 type Step07RouteDenialReason = Extract<Step07RouteValidation, { readonly ok: false }>["reason"];
 
 export type Step07ObserverSessionRecovery =

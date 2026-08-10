@@ -1,7 +1,7 @@
 {
   "schemaVersion": "game-codex-step07-scroll-matrix-project-v1",
-  "generatedAtUtc": "2026-08-10T05:10:26.106Z",
-  "sourceTreeSha256": "B6C2AFD041D4BCA65261B04DD0D46455A15A6F4793AE39435C8D7B8C0ED9CB63",
+  "generatedAtUtc": "2026-08-10T12:19:44.314Z",
+  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
   "project": "desktop-chromium",
   "rows": [
     {
@@ -33,12 +33,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 449,
+          "after": 462,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 486,
+          "before": 462,
           "after": 0,
           "passed": true
         },
@@ -125,12 +125,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 395,
+          "after": 406,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 395,
+          "before": 406,
           "after": 0,
           "passed": true
         },
@@ -217,12 +217,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 395,
+          "after": 412,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 456,
+          "before": 412,
           "after": 0,
           "passed": true
         },
@@ -309,12 +309,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 429,
+          "after": 391,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 429,
+          "before": 391,
           "after": 0,
           "passed": true
         },
@@ -401,12 +401,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 436,
+          "after": 433,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 436,
+          "before": 433,
           "after": 0,
           "passed": true
         },
@@ -493,12 +493,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 422,
+          "after": 430,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 422,
+          "before": 430,
           "after": 0,
           "passed": true
         },
@@ -585,12 +585,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 414,
+          "after": 388,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 414,
+          "before": 388,
           "after": 0,
           "passed": true
         },
@@ -623,12 +623,12 @@
           "http://127.0.0.1:5175/?observe=hanzi-v2-step07&fixture=SYNTHETIC_TOOLING_TEST_ONLY&build=8e00aa61d796578f7e593243caa514da5a307189",
           "http://127.0.0.1:5175/@vite/client",
           "http://127.0.0.1:5175/src/main.ts",
+          "http://127.0.0.1:5175/node_modules/.pnpm/vite@6.4.3_@types+node@22.19.19_tsx@4.23.1/node_modules/vite/dist/client/env.mjs",
           "http://127.0.0.1:5175/src/styles.css",
           "http://127.0.0.1:5175/src/page-mode.css",
           "http://127.0.0.1:5175/src/app-route.ts",
           "http://127.0.0.1:5175/src/observation-context.ts",
           "http://127.0.0.1:5175/src/page-mode.ts",
-          "http://127.0.0.1:5175/node_modules/.pnpm/vite@6.4.3_@types+node@22.19.19_tsx@4.23.1/node_modules/vite/dist/client/env.mjs",
           "http://127.0.0.1:5175/apps/my-game-world/second-use/event-types.ts",
           "http://127.0.0.1:5175/apps/hanzi-v2-step07-observer/index.ts",
           "http://127.0.0.1:5175/apps/hanzi-v2-step07-observer/styles.css"
@@ -677,12 +677,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 686,
+          "after": 617,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 730,
+          "before": 695,
           "after": 0,
           "passed": true
         },
@@ -769,12 +769,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 1,
+          "after": 576,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 1,
+          "before": 576,
           "after": 0,
           "passed": true
         },
@@ -861,12 +861,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 662,
+          "after": 611,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 662,
+          "before": 611,
           "after": 0,
           "passed": true
         },
@@ -953,12 +953,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 590,
+          "after": 563,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 678,
+          "before": 660,
           "after": 0,
           "passed": true
         },
@@ -1045,12 +1045,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 622,
+          "after": 637,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 622,
+          "before": 637,
           "after": 0,
           "passed": true
         },
@@ -1137,12 +1137,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 638,
+          "after": 541,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 638,
+          "before": 541,
           "after": 0,
           "passed": true
         },
@@ -1229,12 +1229,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 647,
+          "after": 558,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 647,
+          "before": 558,
           "after": 0,
           "passed": true
         },
@@ -1321,12 +1321,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 823,
+          "after": 846,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 882,
+          "before": 846,
           "after": 0,
           "passed": true
         },
@@ -1413,12 +1413,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 734,
+          "after": 645,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 834,
+          "before": 775,
           "after": 0,
           "passed": true
         },
@@ -1505,12 +1505,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 659,
+          "after": 793,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 659,
+          "before": 793,
           "after": 0,
           "passed": true
         },
@@ -1597,12 +1597,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 754,
+          "after": 627,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 754,
+          "before": 627,
           "after": 0,
           "passed": true
         },
@@ -1689,12 +1689,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 822,
+          "after": 701,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 822,
+          "before": 814,
           "after": 0,
           "passed": true
         },
@@ -1781,12 +1781,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 702,
+          "after": 709,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 702,
+          "before": 709,
           "after": 0,
           "passed": true
         },
@@ -1873,12 +1873,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 757,
+          "after": 786,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 848,
+          "before": 786,
           "after": 0,
           "passed": true
         },
@@ -1965,12 +1965,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 734,
+          "after": 688,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 779,
+          "before": 758,
           "after": 0,
           "passed": true
         },
@@ -2057,12 +2057,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 677,
+          "after": 653,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 677,
+          "before": 738,
           "after": 0,
           "passed": true
         },
@@ -2149,12 +2149,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 732,
+          "after": 543,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 732,
+          "before": 543,
           "after": 0,
           "passed": true
         },
@@ -2241,12 +2241,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 686,
+          "after": 652,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 686,
+          "before": 652,
           "after": 0,
           "passed": true
         },
@@ -2333,12 +2333,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 730,
+          "after": 672,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 730,
+          "before": 672,
           "after": 0,
           "passed": true
         },
@@ -2425,12 +2425,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 627,
+          "after": 656,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 627,
+          "before": 656,
           "after": 0,
           "passed": true
         },
@@ -2463,12 +2463,12 @@
           "http://127.0.0.1:5175/?report=game-machine-review",
           "http://127.0.0.1:5175/@vite/client",
           "http://127.0.0.1:5175/src/main.ts",
-          "http://127.0.0.1:5175/node_modules/.pnpm/vite@6.4.3_@types+node@22.19.19_tsx@4.23.1/node_modules/vite/dist/client/env.mjs",
           "http://127.0.0.1:5175/src/styles.css",
           "http://127.0.0.1:5175/src/page-mode.css",
           "http://127.0.0.1:5175/src/app-route.ts",
           "http://127.0.0.1:5175/src/observation-context.ts",
           "http://127.0.0.1:5175/src/page-mode.ts",
+          "http://127.0.0.1:5175/node_modules/.pnpm/vite@6.4.3_@types+node@22.19.19_tsx@4.23.1/node_modules/vite/dist/client/env.mjs",
           "http://127.0.0.1:5175/apps/my-game-world/second-use/event-types.ts",
           "http://127.0.0.1:5175/apps/game-machine-review-report/index.ts",
           "http://127.0.0.1:5175/apps/game-machine-review-report/styles.css"
@@ -2517,12 +2517,12 @@
         {
           "input": "PageDown",
           "before": 0,
-          "after": 660,
+          "after": 673,
           "passed": true
         },
         {
           "input": "Home",
-          "before": 660,
+          "before": 673,
           "after": 0,
           "passed": true
         },

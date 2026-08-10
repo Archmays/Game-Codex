@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "recordType": "STEP07_ACCESSIBILITY_CLOSURE_PROOF",
+  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+  "recordedAtUtc": "2026-08-10T12:50:44.8079417Z",
+  "status": "PASS",
+  "gate": {
+    "path": "artifacts/game-machine-review/step-07/hard-gates/HARD-GATES.json",
+    "bytes": 10417,
+    "sha256": "F04E758E4DA902F3D5C58A729DF438900152B168F5CFD806A388631A469F6284",
+    "accessibilityStructure": "PASS",
+    "adultScrollAndReflow": "PASS",
+    "keyboardFocusAndTargets": "PASS",
+    "deterministicVisualStates": "PASS"
+  },
+  "evidence": [
+    {
+      "path": "artifacts/game-machine-review/step-07/SCROLL-MATRIX.json",
+      "bytes": 139107,
+      "sha256": "E2F54B74402CA5CC1B39B919043DBFC960A75D8ACE17F2119D8E870A7E0274BC",
+      "rows": 35,
+      "status": "PASS"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/DEEP-ROUTE-EVIDENCE.json",
+      "bytes": 366588,
+      "sha256": "E4F2A30B4049CACA3737FDBA98BBCE5F65D2FD3895428C4E3A75534512D8192C",
+      "rows": 40,
+      "status": "PASS"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/STEP07-LIFECYCLE-EVIDENCE.json",
+      "bytes": 38156,
+      "sha256": "9F27552967716EFDFDC13F1F739BEE984B94F4F528A4C09362B9307CC84C3D43",
+      "rows": 7,
+      "status": "PASS"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/VISUAL-ARIA-EVIDENCE.json",
+      "bytes": 2309,
+      "sha256": "D3EF6D96FD57B087B7A06F33E31BCFEAF77253552ABFEFD6431CF5F80623E250",
+      "baselineKind": "STEP07_ESTABLISHED_BASELINE"
+    }
+  ],
+  "machineConclusion": "The required route, scroll, keyboard, target, responsive, visual, and ARIA machine gates passed on one source tree.",
+  "limitations": [
+    "Machine accessibility evidence does not replace real-child or parent observation.",
+    "Accepted SEV_3 and SEV_4 visual findings remain non-blocking backlog."
+  ]
+}

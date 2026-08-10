@@ -33,3 +33,11 @@ Use mutation- or fixture-based negative controls. At minimum, make duplicate seq
 Persist before broadcast so transport loss cannot erase the canonical local record. Validate origin, grant expiry/status, versioned route identity, build/progress continuity, allowlisted fields, ordering, dedupe, and source/report identity. Keep invalid-route evidence separate from a canonical route matrix when it is a lifecycle scenario rather than a supported state.
 
 Telemetry is observational only. The simulation and save model own game rules. A missing observer, failed channel, schema rejection, or stopped session must never change legal moves, rewards, difficulty, progress, or child-facing availability.
+
+## Validate route identity before side effects
+
+Treat every URL or query identity as untrusted until its singleton count and exact format validate. Reject missing, duplicate, or malformed identity before fixture preparation, storage reads or writes, session recovery, bridge construction, or normal application markup.
+
+Render a rejected route from fixed DOM nodes with no application side effects. Never interpolate a query-controlled value into `innerHTML`; populate accepted display text with `textContent` after static markup exists.
+
+Use isolated negative controls to prove that malformed markup-like input creates no injected element or handler, external request, storage mutation, grant, or session. Keep these controls inert and do not turn acceptance testing into offensive payload research.

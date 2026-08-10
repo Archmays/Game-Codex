@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "recordType": "STEP07_FINAL_SEMANTIC_ACCEPTANCE",
+  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+  "acceptedAtUtc": "2026-08-10T12:50:44.8079417Z",
+  "status": "ACCEPTED_FOR_MACHINE_READINESS",
+  "decisionRule": {
+    "blockingSeverities": [
+      "SEV_1",
+      "SEV_2"
+    ],
+    "blockerFindingCount": 0,
+    "unresolvedCriticalReviewerConflict": false
+  },
+  "reviewSummary": {
+    "reviewerCount": 3,
+    "findingCount": 7,
+    "severityCounts": {
+      "SEV_1": 0,
+      "SEV_2": 0,
+      "SEV_3": 6,
+      "SEV_4": 1
+    },
+    "nonBlockingBacklogAccepted": true
+  },
+  "reviews": [
+    {
+      "reviewer": "R1_CHILD_FIRST_UX",
+      "path": "artifacts/game-machine-review/step-07/semantic-reviews/R1_CHILD_FIRST_UX.json",
+      "bytes": 10957,
+      "sha256": "9528EC1DFDC1FDC0D167830AFD07859828944F29BAB54B8FCCA9917E414A66A0",
+      "findingCount": 3,
+      "highestSeverity": "SEV_3"
+    },
+    {
+      "reviewer": "R2_VISUAL_ACCESSIBILITY",
+      "path": "artifacts/game-machine-review/step-07/semantic-reviews/R2_VISUAL_ACCESSIBILITY.json",
+      "bytes": 11222,
+      "sha256": "22776FF3C55312FA1B92A37FE4AEE5BB6EE0BBBBF56544A0567704E18087AE9F",
+      "findingCount": 4,
+      "highestSeverity": "SEV_3"
+    },
+    {
+      "reviewer": "R3_ADVERSARIAL_QA",
+      "path": "artifacts/game-machine-review/step-07/semantic-reviews/R3_ADVERSARIAL_QA.json",
+      "bytes": 2137,
+      "sha256": "EBED1EE9F65211B2517F4977E4B2B632EC004BEFC59091C38CB14B1B4DB57B9E",
+      "findingCount": 0,
+      "highestSeverity": "NONE"
+    }
+  ],
+  "reviewerConflict": {
+    "path": "artifacts/game-machine-review/step-07/semantic-reviews/REVIEW-CONFLICTS.json",
+    "bytes": 162,
+    "sha256": "0FF58D2C675DEE36F887AA89EBB32BFCAA5E490354CC92CDB15AFC448121BE8B",
+    "unresolvedCriticalReviewerConflict": false
+  },
+  "acceptedNonBlockingFindingIds": [
+    "R1_BOSS_XING_GUIDANCE_CLIPPED",
+    "R1_RUN_COMPLETE_ACTIONS_OVERLAP",
+    "R1_CHILD_ROUTE_INTERNAL_VERSION_LABEL",
+    "R2-VA-001",
+    "R2-VA-002",
+    "R2-VA-003",
+    "R2-VA-004"
+  ],
+  "limitations": [
+    "This is machine semantic acceptance only; it is not real-child, parent, fun, learning, retention, or preference acceptance.",
+    "SEV_3 and SEV_4 findings remain ordinary non-blocking backlog and do not authorize gameplay, content, or Theme C expansion."
+  ]
+}

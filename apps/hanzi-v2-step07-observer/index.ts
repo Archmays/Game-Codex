@@ -23,6 +23,7 @@ import {
 import {
   isStep07FixtureRoute,
   prepareStep07FixtureProgress,
+  parseStep07ObserverBuildIdentity,
   recoverStep07ObserverSession,
   resolveStep07RuntimeLaunch,
   preflightStep07Continuity,
@@ -86,7 +87,27 @@ function renderDerived(root: HTMLElement, grant: Step07SessionGrant): void {
 export function mountHanziV2Step07Observer(root: HTMLElement): void {
   const search = new URLSearchParams(window.location.search);
   const fixture = isStep07FixtureRoute(search);
-  const buildCommit = search.get("build") ?? "";
+  const buildIdentity = parseStep07ObserverBuildIdentity(search);
+  if (!buildIdentity.ok) {
+    root.className = "step07-observer-mount";
+    root.replaceChildren();
+
+    const denial = document.createElement("main");
+    denial.className = "step07-observer step07-route-denied";
+    denial.setAttribute("data-testid", "step07-build-denied");
+    denial.dataset.reason = buildIdentity.reason;
+
+    const heading = document.createElement("h1");
+    heading.textContent = "这次观察链接无效";
+    const message = document.createElement("p");
+    message.textContent = "请仅使用 STEP 07 的正式 START 工具打开观察页面。";
+
+    denial.append(heading, message);
+    root.append(denial);
+    return;
+  }
+
+  const buildCommit = buildIdentity.buildCommit;
   const observerSessionAttempt = search.getAll(STEP07_OBSERVER_SESSION_QUERY).length > 0;
   if (fixture && !observerSessionAttempt) prepareStep07FixtureProgress(window.localStorage);
   let runtimeLaunchReady = fixture;
@@ -104,7 +125,7 @@ export function mountHanziV2Step07Observer(root: HTMLElement): void {
   root.innerHTML = `<main class="step07-observer" data-testid="step07-observer" data-evidence-kind="${fixture ? STEP07_FIXTURE_MARKER : "REAL_CHILD_SECOND_USE"}">
     <header><p class="step07-kicker">家长窗口 · STEP 07</p><h1>真实第二次进入观察</h1><p>机器已经检查技术与界面；这里仅记录机器无法替代的儿童行为。</p>${fixture ? `<strong class="step07-fixture">${STEP07_FIXTURE_MARKER} · NO CHILD DATA</strong>` : ""}</header>
     <section class="step07-card" data-testid="step07-preflight"><h2>开始前</h2>
-      <dl><dt>固定地址</dt><dd>${STEP06_CANONICAL_ORIGIN}</dd><dt>Build</dt><dd data-build>${buildCommit || "未由启动器提供"}</dd><dt>证据类别</dt><dd>${fixture ? STEP07_FIXTURE_MARKER : "REAL_CHILD_SECOND_USE"}</dd></dl>
+      <dl><dt>固定地址</dt><dd>${STEP06_CANONICAL_ORIGIN}</dd><dt>Build</dt><dd data-build></dd><dt>证据类别</dt><dd>${fixture ? STEP07_FIXTURE_MARKER : "REAL_CHILD_SECOND_USE"}</dd></dl>
       <p class="step07-continuity ${continuity.ok ? "is-pass" : "is-blocked"}" data-testid="step07-continuity" data-continuity="${continuity.ok ? "pass" : "blocked"}">${continuityMessage(continuity)}</p>
       <p data-machine-grant role="status">${fixture ? "Fixture 不使用真实启动授权。" : "正在核对最终机器 verdict 启动授权…"}</p>
       <label>独立时段间隔<select data-interval><option value="">请选择</option>${optionsMarkup(STEP06_INTERVAL_BUCKETS)}</select></label>
@@ -127,6 +148,10 @@ export function mountHanziV2Step07Observer(root: HTMLElement): void {
     </section>
     <section class="step07-card" aria-labelledby="step07-export-heading" data-testid="step07-export"><h2 id="step07-export-heading">导出</h2><p>导出只保留允许字段；不会给出儿童是否“通过”的判断。</p><button type="button" data-export data-final-action>导出 ${fixture ? "STEP-07_SYNTHETIC_TOOLING_TEST_OBSERVATION.json" : "STEP-07_REAL_SECOND_USE_OBSERVATION.json"}</button><div class="step07-summary" data-summary role="status"></div></section>
   </main>`;
+
+  const buildTarget = root.querySelector<HTMLElement>("[data-build]");
+  if (!buildTarget) throw new Error("STEP07 observer build target is missing");
+  buildTarget.textContent = buildCommit;
 
   root.querySelectorAll<HTMLSelectElement>("[data-human]").forEach((select) => {
     select.value = "";

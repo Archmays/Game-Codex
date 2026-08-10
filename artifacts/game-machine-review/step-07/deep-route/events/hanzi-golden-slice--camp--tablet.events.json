@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceTreeSha256": "B6C2AFD041D4BCA65261B04DD0D46455A15A6F4793AE39435C8D7B8C0ED9CB63",
+  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
   "key": "hanzi-golden-slice::camp::tablet",
   "contextId": "golden-tablet-early",
   "isolatedBrowserContext": true,
@@ -79,7 +79,7 @@
       "http://127.0.0.1:5175/src/page-mode.css",
       "http://127.0.0.1:5175/src/page-mode.ts",
       "http://127.0.0.1:5175/src/styles.css",
-      "ws://127.0.0.1:5175/?token=K8dOZcZfL4bb"
+      "ws://127.0.0.1:5175/?token=-DBwzHkgkrYQ"
     ],
     "externalRequests": [],
     "networkClassification": {

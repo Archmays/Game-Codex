@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "sourceTreeSha256": "C30D77AB904A789E9F1DDCA2BF8506895DB2BE4B735322BEFDCF11E3BA70F0FA",
-  "baselineKind": "STEP07_BASELINE_CANDIDATE",
-  "generatedAtUtc": "2026-08-10T04:59:17.975Z",
+  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+  "baselineKind": "STEP07_ESTABLISHED_BASELINE",
+  "generatedAtUtc": "2026-08-10T12:44:22.637Z",
   "evidenceFiles": [
     "artifacts/game-machine-review/step-07/aria/classic-hub-step07.aria.yml",
     "artifacts/game-machine-review/step-07/aria/forest-ability-step07.aria.yml",

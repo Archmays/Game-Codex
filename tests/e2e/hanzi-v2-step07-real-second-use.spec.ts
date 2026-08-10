@@ -1,12 +1,35 @@
 import { test, expect } from "@playwright/test";
 import { readFile } from "node:fs/promises";
-import { mkdirSync } from "node:fs";
+import { mkdirSync, rmSync } from "node:fs";
 import { validateStep07Observation } from "../../apps/hanzi-v2-step07-observer/observation-schema";
 
 const BUILD_COMMIT = "b".repeat(40);
 const FIXTURE_URL = `/?observe=hanzi-v2-step07&fixture=SYNTHETIC_TOOLING_TEST_ONLY&build=${BUILD_COMMIT}`;
 
 test.describe("Hanzi Radical Battle V2 STEP 07 second-use tooling", () => {
+
+  test("rejects invalid build identity before observer initialization", async ({ page }) => {
+    const invalidRoutes = [
+      "/?observe=hanzi-v2-step07",
+      `/?observe=hanzi-v2-step07&build=${"b".repeat(39)}`,
+      `/?observe=hanzi-v2-step07&build=${"b".repeat(41)}`,
+      "/?observe=hanzi-v2-step07&build=not-a-commit",
+      `/?observe=hanzi-v2-step07&build=${BUILD_COMMIT}&build=${BUILD_COMMIT}`,
+      `/?observe=hanzi-v2-step07&build=${encodeURIComponent("<em data-step07-inert-marker>observer-sentinel</em>")}`,
+    ];
+
+    for (const route of invalidRoutes) {
+      await page.goto(route);
+      await expect(page.getByTestId("step07-build-denied")).toBeVisible();
+      await expect(page.getByTestId("step07-observer")).toHaveCount(0);
+      await expect(page.locator("em[data-step07-inert-marker]")).toHaveCount(0);
+      const step07Keys = await page.evaluate(() =>
+        Object.keys(window.localStorage).filter((key) => key.toLowerCase().includes("step07")),
+      );
+      expect(step07Keys).toEqual([]);
+    }
+  });
+
   test("fails closed without completed progress and never guesses STEP 06 from a session", async ({ page }) => {
     await page.goto(`/?observe=hanzi-v2-step07&build=${BUILD_COMMIT}`);
     await expect(page.getByTestId("step07-continuity")).toHaveAttribute("data-continuity", "blocked");
@@ -35,6 +58,7 @@ test.describe("Hanzi Radical Battle V2 STEP 07 second-use tooling", () => {
     });
 
     await page.goto(FIXTURE_URL);
+    await expect(page.locator("[data-build]")).toHaveText(BUILD_COMMIT);
     await expect(page.getByTestId("step07-observer")).toHaveAttribute("data-evidence-kind", "SYNTHETIC_TOOLING_TEST_ONLY");
     await expect(page.getByTestId("step07-observer")).toContainText("NO CHILD DATA");
     await expect(page.getByTestId("step07-continuity")).toHaveAttribute("data-continuity", "pass");
@@ -93,8 +117,10 @@ test.describe("Hanzi Radical Battle V2 STEP 07 second-use tooling", () => {
     expect(JSON.stringify(document)).not.toMatch(/name|school|email|phone|address/i);
     await expect(page.getByTestId("step07-export-complete")).toContainText("SYNTHETIC_TOOLING_TEST_ONLY");
     mkdirSync("artifacts/game-machine-review/step-07/screenshots", { recursive: true });
+    const screenshotPath = `artifacts/game-machine-review/step-07/screenshots/step07-observer-${testInfo.project.name}.png`;
+    rmSync(screenshotPath, { force: true });
     await page.screenshot({
-      path: `artifacts/game-machine-review/step-07/screenshots/step07-observer-${testInfo.project.name}.png`,
+      path: screenshotPath,
       fullPage: true,
     });
 

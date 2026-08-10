@@ -4,12 +4,12 @@
   "step": "07",
   "evidenceKind": "SYNTHETIC_TOOLING_TEST_ONLY",
   "sessionIdentity": {
-    "sessionId": "s07-fixture-8e00aa61d796",
+    "sessionId": "s07-fixture-aba475f7d8ed",
     "canonicalOrigin": "http://127.0.0.1:5175",
     "startedAtUtc": "2026-08-10T06:00:00.000Z"
   },
   "buildIdentity": {
-    "commitSha": "8e00aa61d796578f7e593243caa514da5a307189",
+    "commitSha": "aba475f7d8ed614d714ad25f2c89df77ab5d9577",
     "technicalState": "SYNTHETIC_TOOLING_TEST_ONLY",
     "machineVerdictSha256": null
   },
@@ -35,7 +35,7 @@
   "technicalEvents": [
     {
       "schemaVersion": 1,
-      "sessionId": "s07-fixture-8e00aa61d796",
+      "sessionId": "s07-fixture-aba475f7d8ed",
       "sequence": 1,
       "relativeMs": 0,
       "eventType": "session_opened",
@@ -43,7 +43,7 @@
     },
     {
       "schemaVersion": 1,
-      "sessionId": "s07-fixture-8e00aa61d796",
+      "sessionId": "s07-fixture-aba475f7d8ed",
       "sequence": 2,
       "relativeMs": 50,
       "eventType": "world_ready",
@@ -51,7 +51,7 @@
     },
     {
       "schemaVersion": 1,
-      "sessionId": "s07-fixture-8e00aa61d796",
+      "sessionId": "s07-fixture-aba475f7d8ed",
       "sequence": 3,
       "relativeMs": 80,
       "eventType": "progress_continuity_verified",
@@ -61,7 +61,7 @@
     },
     {
       "schemaVersion": 1,
-      "sessionId": "s07-fixture-8e00aa61d796",
+      "sessionId": "s07-fixture-aba475f7d8ed",
       "sequence": 4,
       "relativeMs": 220,
       "eventType": "world_first_action",
@@ -69,7 +69,7 @@
     },
     {
       "schemaVersion": 1,
-      "sessionId": "s07-fixture-8e00aa61d796",
+      "sessionId": "s07-fixture-aba475f7d8ed",
       "sequence": 5,
       "relativeMs": 230,
       "eventType": "world_destination_opened",
@@ -79,7 +79,7 @@
     },
     {
       "schemaVersion": 1,
-      "sessionId": "s07-fixture-8e00aa61d796",
+      "sessionId": "s07-fixture-aba475f7d8ed",
       "sequence": 6,
       "relativeMs": 420,
       "eventType": "forest_entered",
@@ -87,7 +87,7 @@
     },
     {
       "schemaVersion": 1,
-      "sessionId": "s07-fixture-8e00aa61d796",
+      "sessionId": "s07-fixture-aba475f7d8ed",
       "sequence": 7,
       "relativeMs": 760,
       "eventType": "golden_phase_entered",
@@ -97,7 +97,7 @@
     },
     {
       "schemaVersion": 1,
-      "sessionId": "s07-fixture-8e00aa61d796",
+      "sessionId": "s07-fixture-aba475f7d8ed",
       "sequence": 8,
       "relativeMs": 1200,
       "eventType": "ability_selected",
@@ -107,7 +107,7 @@
     },
     {
       "schemaVersion": 1,
-      "sessionId": "s07-fixture-8e00aa61d796",
+      "sessionId": "s07-fixture-aba475f7d8ed",
       "sequence": 9,
       "relativeMs": 2400,
       "eventType": "golden_run_completed",
@@ -117,7 +117,7 @@
     },
     {
       "schemaVersion": 1,
-      "sessionId": "s07-fixture-8e00aa61d796",
+      "sessionId": "s07-fixture-aba475f7d8ed",
       "sequence": 10,
       "relativeMs": 2800,
       "eventType": "returned_to_world",
@@ -127,7 +127,7 @@
     },
     {
       "schemaVersion": 1,
-      "sessionId": "s07-fixture-8e00aa61d796",
+      "sessionId": "s07-fixture-aba475f7d8ed",
       "sequence": 11,
       "relativeMs": 3000,
       "eventType": "session_stopped",

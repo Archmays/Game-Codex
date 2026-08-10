@@ -10,6 +10,8 @@ import {
 
 const repositoryRoot = resolve(import.meta.dirname, "..");
 const finishScript = join(repositoryRoot, "tools", "hanzi-v2-step02", "FINISH_STEP_02_REVIEW.ps1");
+// This Windows external-process functional integration test keeps every assertion fail-closed; the ordinary unit-test budget is not a product performance SLA.
+const windowsPackageIntegrationTimeoutMs = 15_000;
 
 function completeReviewFixture() {
   const draft = createReviewDraft();
@@ -71,7 +73,9 @@ describe("Hanzi V2 STEP 02 FINISH identity gate", () => {
         expect(summary).toContain("Storyboard 'story-camp' revisionHash must match current identity");
       } finally {
         await rm(tempRoot, { recursive: true, force: true });
+        expect(existsSync(tempRoot), "Windows package test temp root must be removed").toBe(false);
       }
     },
+    windowsPackageIntegrationTimeoutMs,
   );
 });

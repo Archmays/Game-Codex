@@ -6,6 +6,9 @@ coverage/
 .cache/
 test-results/
 playwright-report/
+tools/step07-diagnostics/
+tools/step07-local-fix/
+tools/step07-local-fix-v2/
 public/step07-runtime-grant.json
 artifacts/hanzi-radical-battle-v2/step-04/observation/
 artifacts/hanzi-radical-battle-v2/step-04/observation-inbox/

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "fix": "STEP07_OBSERVER_INPUT_BOUNDARY_V2",
+  "repo": "D:\\ChatGPT-Codex-Projects\\Game-Codex",
+  "head": "aba475f7d8ed614d714ad25f2c89df77ab5d9577",
+  "originMain": "aba475f7d8ed614d714ad25f2c89df77ab5d9577",
+  "sourceTreeSha256": "608F2C10C22768D81EDA943DB039E442711529126ACA48410229BCC9E1549249",
+  "generatedAt": "2026-08-10T11:31:07.7876439Z",
+  "changedFiles": [
+    "apps/hanzi-v2-step07-observer/index.ts",
+    "apps/hanzi-v2-step07-observer/session-controller.ts",
+    "tests/e2e/hanzi-v2-step07-real-second-use.spec.ts"
+  ],
+  "validations": [
+    "typescript",
+    "step07-unit",
+    "step07-observer-e2e",
+    "step07-lifecycle-e2e"
+  ],
+  "validationResults": {
+    "typescript": "PASS",
+    "step07Unit": "113/113 PASS",
+    "step07ObserverE2e": "6/6 PASS",
+    "step07LifecycleE2e": "7/7 PASS"
+  },
+  "notes": [
+    "Invalid build identity is rejected before fixture preparation or normal observer markup.",
+    "Accepted build identity is rendered with textContent.",
+    "Browser regression uses inert markup-like input only.",
+    "The earlier pnpm.cmd spawnSync exit -1 was a Windows runner execution failure; the four formal pnpm commands are the acceptance truth.",
+    "The fixture now removes only its own stale generated screenshot destination before deterministic recapture."
+  ]
+}

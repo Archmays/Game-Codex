@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+  "status": "PASS",
+  "evidenceFiles": [
+    "artifacts/game-machine-review/step-07/hard-gates/COMMAND-GATE-RESULTS.json",
+    "artifacts/game-machine-review/step-07/agent-playthrough/AGENT-PLAYTHROUGH-RESULTS.json",
+    "artifacts/game-machine-review/step-07/STEP07-LIFECYCLE-EVIDENCE.json"
+  ]
+}

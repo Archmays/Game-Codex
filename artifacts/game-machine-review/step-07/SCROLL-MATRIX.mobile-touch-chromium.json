@@ -1,7 +1,7 @@
 {
   "schemaVersion": "game-codex-step07-scroll-matrix-project-v1",
-  "generatedAtUtc": "2026-08-10T05:11:04.468Z",
-  "sourceTreeSha256": "B6C2AFD041D4BCA65261B04DD0D46455A15A6F4793AE39435C8D7B8C0ED9CB63",
+  "generatedAtUtc": "2026-08-10T12:20:32.953Z",
+  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
   "project": "mobile-touch-chromium",
   "rows": [
     {
@@ -38,7 +38,7 @@
         "focused": true,
         "unobscured": true,
         "clicked": true,
-        "activationEvidence": "download:STEP-02_PARENT_REVIEW_FEEDBACK.json:trusted-touch-tap-1"
+        "activationEvidence": "download:STEP-02_PARENT_REVIEW_FEEDBACK.json:trusted-touch-tap-2"
       },
       "network": {
         "policy": "SAME_ORIGIN_ALLOWED / EXTERNAL_NETWORK_FORBIDDEN",
@@ -106,7 +106,7 @@
         "focused": true,
         "unobscured": true,
         "clicked": true,
-        "activationEvidence": "download:STEP-03_PARENT_REVIEW_FEEDBACK.json:trusted-touch-tap-1"
+        "activationEvidence": "download:STEP-03_PARENT_REVIEW_FEEDBACK.json:trusted-touch-tap-2"
       },
       "network": {
         "policy": "SAME_ORIGIN_ALLOWED / EXTERNAL_NETWORK_FORBIDDEN",
@@ -174,7 +174,7 @@
         "focused": true,
         "unobscured": true,
         "clicked": true,
-        "activationEvidence": "download:STEP-04_CHILD_FIRST_USE_OBSERVATION.json:trusted-touch-tap-1"
+        "activationEvidence": "download:STEP-04_CHILD_FIRST_USE_OBSERVATION.json:trusted-touch-tap-2"
       },
       "network": {
         "policy": "SAME_ORIGIN_ALLOWED / EXTERNAL_NETWORK_FORBIDDEN",
@@ -242,7 +242,7 @@
         "focused": true,
         "unobscured": true,
         "clicked": true,
-        "activationEvidence": "download:STEP-05_PARENT_REVIEW_FEEDBACK.json:trusted-touch-tap-2"
+        "activationEvidence": "download:STEP-05_PARENT_REVIEW_FEEDBACK.json:trusted-touch-tap-1"
       },
       "network": {
         "policy": "SAME_ORIGIN_ALLOWED / EXTERNAL_NETWORK_FORBIDDEN",

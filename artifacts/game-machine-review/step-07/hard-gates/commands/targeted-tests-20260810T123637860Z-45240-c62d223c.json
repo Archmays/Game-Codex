@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "recordType": "ACTUAL_COMMAND_RUN",
+  "runId": "targeted-tests-20260810T123637860Z-45240-c62d223c",
+  "gateId": "targeted-tests",
+  "command": "pnpm",
+  "args": [
+    "run",
+    "test:hanzi-v2:step07:targeted-closure"
+  ],
+  "startedAtUtc": "2026-08-10T12:36:37.860Z",
+  "finishedAtUtc": "2026-08-10T12:37:12.301Z",
+  "exitCode": 0,
+  "sourceTreeSha256Before": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+  "sourceTreeSha256After": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+  "logSha256": "05041B39C90393FFAD03ADA8781165EBE7561B473A70CD10914633991541584F",
+  "logPath": "artifacts/game-machine-review/step-07/hard-gates/commands/targeted-tests-20260810T123637860Z-45240-c62d223c.log",
+  "status": "PASS"
+}

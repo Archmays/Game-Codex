@@ -36,3 +36,19 @@ The safe order is:
 8. bind final reports to the unchanged accepted source tree.
 
 Snapshot updating is evidence generation, never semantic acceptance by itself.
+
+## OS and subprocess integration-test timing
+
+Do not automatically treat an OS or subprocess integration test as a pure unit test. Diagnose functional correctness, any explicit performance SLA, OS/process latency, hangs, resource leaks, and file or handle cleanup as separate questions.
+
+When evidence establishes a slow functional integration test rather than a product performance gate, use only an explicit bounded timeout local to that test. Preserve every functional, compatibility, package, hash, expected-file, exit-code, and fail-closed assertion, and repair any demonstrated subprocess or temporary-resource lifecycle defect before acceptance.
+
+Never raise the global test or hook timeout, add retries to manufacture a pass, disable timeouts, reduce the normal worker model, or remove the integration test from the full suite.
+
+## One-shot programmatic Vite loaders
+
+One-shot programmatic Vite loaders should not unintentionally behave like long-lived development servers.
+
+For CLI or test-only SSR module loading, disable automatic dependency discovery when it is not part of the contract, avoid HMR and unrelated development-server configuration, disable file watching when no hot-reload lifecycle is required, keep real transform and load failures visible, and close the server deterministically. Do not use retry or sleep to hide dependency-scan lifecycle races.
+
+Before repairing one infrastructure failure, statically inventory sibling external-process and one-shot Vite harnesses so one frozen recovery wave can close the whole deterministic infrastructure class.

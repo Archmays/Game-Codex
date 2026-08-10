@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
   "recordType": "VISUAL_ARIA_BASELINE_CANDIDATE",
-  "sourceTreeSha256": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
-  "preservedAtUtc": "2026-08-10T02:58:09.511Z",
+  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+  "preservedAtUtc": "2026-08-10T12:24:16.851Z",
   "status": "CANDIDATE_REVIEW_REQUIRED",
-  "updateCommandRunRecordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T025754624Z-59072-76039293.json",
+  "updateCommandRunRecordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T122401608Z-57964-0036a6d0.json",
   "sourceIndexFile": "artifacts/game-machine-review/step-07/VISUAL-ARIA-EVIDENCE.json",
-  "sourceIndexSha256": "452F39A9A7CBF12725A5267ECBE468DAAB137A4233FE81383E9E126EC8E33F24",
+  "sourceIndexSha256": "B5AD94DC97A03544EC6A7A6A0FAA6AF7A717EBCB9519B8773844149816DD4A5D",
   "candidateIndex": {
     "schemaVersion": 1,
-    "sourceTreeSha256": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+    "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
     "baselineKind": "STEP07_BASELINE_CANDIDATE",
-    "generatedAtUtc": "2026-08-10T02:58:08.151Z",
+    "generatedAtUtc": "2026-08-10T12:24:15.475Z",
     "evidenceFiles": [
       "artifacts/game-machine-review/step-07/aria/classic-hub-step07.aria.yml",
       "artifacts/game-machine-review/step-07/aria/forest-ability-step07.aria.yml",
@@ -40,23 +40,23 @@
   "evidenceEntries": [
     {
       "path": "artifacts/game-machine-review/step-07/aria/classic-hub-step07.aria.yml",
-      "bytes": 3670,
-      "sha256": "61A2933A36155DB99463F3E949251BD40CF175F7F2EC1C724225C027B0B28D40"
+      "bytes": 3534,
+      "sha256": "FF1CF5DF9B5DA981CE3C616956A7AC2A2E2AEB05FA18DC7A42F3BFE69A29572C"
     },
     {
       "path": "artifacts/game-machine-review/step-07/aria/forest-ability-step07.aria.yml",
-      "bytes": 687,
-      "sha256": "291219C5E9573BCBEA61BC8653B467B1F6F01731F85D56B12F0631DD4796982F"
+      "bytes": 711,
+      "sha256": "68C031148982AE5BEA0746C258F7AD393CECA4C0527EA7D44FD082F91FE40F58"
     },
     {
       "path": "artifacts/game-machine-review/step-07/aria/forest-camp-step07.aria.yml",
-      "bytes": 187,
-      "sha256": "1ABD501F1796F6F6638C6C69AA9DB5E669DFB819C0D140CC0EAE3B8F7D2853C0"
+      "bytes": 211,
+      "sha256": "B2F069363A8F82128C89BE63E3B07BFE2E3ECC046E8C818895C896CA096BF1F3"
     },
     {
       "path": "artifacts/game-machine-review/step-07/aria/forest-spellbook-step07.aria.yml",
-      "bytes": 825,
-      "sha256": "335ABAFD8AAD313F76D77C68EFE5682CE3D7B76BFAEE89ED8EFEAF815DBD6E86"
+      "bytes": 849,
+      "sha256": "7E29F7F6C984129FC8430485DEDF6B352D93DCE3166E1B4ECD79CF51C1DDABE7"
     },
     {
       "path": "artifacts/game-machine-review/step-07/aria/step07-observer-export-step07.aria.yml",
@@ -152,8 +152,8 @@
   "snapshotEntries": [
     {
       "path": "artifacts/game-machine-review/step-07/baselines/desktop-chromium/game-machine-visual-regression.spec.ts/classic-hub-step07.aria.yml",
-      "bytes": 3690,
-      "sha256": "50384A4D282E09E368693AA31CC92C74996DE9A25F56093730B806906022894C"
+      "bytes": 3554,
+      "sha256": "6F07750CB8B225BE55D55C080172F2168BCE4D95444B0F818EFD7AD15EE54859"
     },
     {
       "path": "artifacts/game-machine-review/step-07/baselines/desktop-chromium/game-machine-visual-regression.spec.ts/classic-hub-step07.png",
@@ -162,8 +162,8 @@
     },
     {
       "path": "artifacts/game-machine-review/step-07/baselines/desktop-chromium/game-machine-visual-regression.spec.ts/forest-ability-step07.aria.yml",
-      "bytes": 572,
-      "sha256": "9919A771966DB642F450BB76888463B85A02D79E9BB8035D2F02AB9517072590"
+      "bytes": 596,
+      "sha256": "F5E0730221AD00423023CF65E596FDDF8574C9B1655FB8CDA2A6894B1EE50B46"
     },
     {
       "path": "artifacts/game-machine-review/step-07/baselines/desktop-chromium/game-machine-visual-regression.spec.ts/forest-ability-step07.png",
@@ -187,8 +187,8 @@
     },
     {
       "path": "artifacts/game-machine-review/step-07/baselines/desktop-chromium/game-machine-visual-regression.spec.ts/forest-camp-step07.aria.yml",
-      "bytes": 186,
-      "sha256": "EB289F678997A33E793C605E86C844FFB191AC74530755992955C18CFB5EC428"
+      "bytes": 210,
+      "sha256": "8B839D96EB37D621EA693F721F8AE76106BD7B72B75CC3485F3899A9CEEC2FB4"
     },
     {
       "path": "artifacts/game-machine-review/step-07/baselines/desktop-chromium/game-machine-visual-regression.spec.ts/forest-camp-step07.png",
@@ -202,8 +202,8 @@
     },
     {
       "path": "artifacts/game-machine-review/step-07/baselines/desktop-chromium/game-machine-visual-regression.spec.ts/forest-spellbook-step07.aria.yml",
-      "bytes": 824,
-      "sha256": "B199DCA4C26FA8B17382F966F7A013C28D68BA14FF54EE611505416BAE7443E1"
+      "bytes": 848,
+      "sha256": "C7F80F955ED851773704079A7C44C859D5DF0AE372FB9C4772FC590503BC3187"
     },
     {
       "path": "artifacts/game-machine-review/step-07/baselines/desktop-chromium/game-machine-visual-regression.spec.ts/forest-spellbook-step07.png",

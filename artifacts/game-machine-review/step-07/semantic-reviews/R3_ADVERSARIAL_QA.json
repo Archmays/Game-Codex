@@ -1,94 +1,28 @@
 {
   "schemaVersion": 1,
-  "sourceTreeSha256": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
   "reviewer": "R3_ADVERSARIAL_QA",
   "reviewEngine": "Codex collaboration subagent",
-  "model": "GPT-5 Codex inherited subagent runtime",
+  "model": "GPT-5.6 Codex subagent runtime",
   "reviewMode": "INDEPENDENT_SUBAGENT",
   "evidenceFiles": [
     "artifacts/game-machine-review/step-07/VISUAL-ARIA-CANDIDATE.json",
     "artifacts/game-machine-review/step-07/VISUAL-ARIA-EVIDENCE.json",
-    "artifacts/game-machine-review/step-07/SCROLL-MATRIX.json",
+    "artifacts/game-machine-review/step-07/DEEP-ROUTE-EVIDENCE.json",
+    "artifacts/game-machine-review/step-07/STEP07-LIFECYCLE-EVIDENCE.json",
     "artifacts/game-machine-review/step-07/GAME-CATALOG-MACHINE-SMOKE.json",
     "artifacts/game-machine-review/step-07/agent-playthrough/AGENT-PLAYTHROUGH-RESULTS.json",
-    "artifacts/game-machine-review/step-07/DEEP-ROUTE-EVIDENCE.json",
-    "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-ming-placing-step07.png",
-    "artifacts/game-machine-review/step-07/screenshots/visual-baseline/classic-hub-step07.png",
-    "artifacts/game-machine-review/step-07/screenshots/deep-route/observe-step07--default--mobile.png",
-    "artifacts/game-machine-review/step-07/screenshots/deep-route/hanzi-golden-slice--corrupt-save-recovery--mobile.png",
-    "artifacts/game-machine-review/step-07/aria/classic-hub-step07.aria.yml",
-    "artifacts/game-machine-review/step-07/aria/step07-observer-preparation-step07.aria.yml",
-    "artifacts/game-machine-review/step-07/deep-route/aria/hanzi-golden-slice--ming-placing--tablet.aria.txt",
-    "artifacts/game-machine-review/step-07/deep-route/aria/observe-step07--default--mobile.aria.txt",
-    "artifacts/game-machine-review/step-07/agent-playthrough/traces/hesitant-with-hints.zip",
-    "artifacts/game-machine-review/step-07/agent-playthrough/traces/keyboard-only.zip",
-    "artifacts/game-machine-review/step-07/agent-playthrough/traces/mobile-touch.zip",
-    "artifacts/game-machine-review/step-07/agent-playthrough/traces/muted-reduced-motion.zip",
-    "artifacts/game-machine-review/step-07/agent-playthrough/traces/returning-user.zip",
-    "artifacts/game-machine-review/step-07/deep-route/events/observe-step07--default--mobile.events.json",
-    "artifacts/game-machine-review/step-07/deep-route/events/hanzi-golden-slice--corrupt-save-recovery--mobile.events.json",
-    "artifacts/game-machine-review/step-07/deep-route/events/hanzi-golden-slice--return-world--desktop.events.json"
+    "artifacts/game-machine-review/step-07/local-input-boundary-fix-v2/LOCAL-FIX-V2-RESULT.json",
+    "artifacts/game-machine-review/step-07/screenshots/visual-baseline/step07-observer-preparation-step07.png",
+    "artifacts/game-machine-review/step-07/aria/step07-observer-preparation-step07.aria.yml"
   ],
-  "completedAtUtc": "2026-08-10T03:03:57.205Z",
-  "findings": [
-    {
-      "id": "R3_ROUTE_LIFECYCLE_EVIDENCE_GAP",
-      "reviewer": "R3_ADVERSARIAL_QA",
-      "route": "?observe=hanzi-v2-step07 and child/world navigation routes",
-      "state": "reload, back-forward, observer disconnect, and conflicting session/evidence routing",
-      "severity": "SEV_2",
-      "category": "adversarial lifecycle and route-isolation coverage",
-      "visibleEvidence": "The source-bound observe-step07 mobile event trace records only context setup, synthetic completed storage, one canonical adult-tool route open, and capture. Across the supplied agent trace archives there are no page.reload, page.goBack, page.goForward, history navigation, or disconnect action records. The 40-row deep matrix covers canonical Step 06 and Step 07 routes but contains no invalid or conflicting evidence/session URL row.",
-      "whyItMatters": "Without executable lifecycle and conflict evidence, a regression could lose or duplicate progress on refresh/history traversal, misclassify Step 07 as Step 06 when parameters conflict, or leave the adult observer in a misleading connected state after the child window closes while every current canonical-open row still passes.",
-      "suggestedFix": "Add source-bound isolated Playwright adversarial cases that perform reload, back, forward, child-window close/disconnect, and Step06/Step07/bare-session conflict URLs. Assert exact observation context or fail-closed denial, storage continuity, observer connection state, zero external requests, and capture screenshot, ARIA, and trace/event evidence for each case.",
-      "confidence": 0.99,
-      "evidenceFiles": [
-        "artifacts/game-machine-review/step-07/screenshots/deep-route/observe-step07--default--mobile.png",
-        "artifacts/game-machine-review/step-07/deep-route/aria/observe-step07--default--mobile.aria.txt",
-        "artifacts/game-machine-review/step-07/deep-route/events/observe-step07--default--mobile.events.json",
-        "artifacts/game-machine-review/step-07/agent-playthrough/traces/returning-user.zip",
-        "artifacts/game-machine-review/step-07/DEEP-ROUTE-EVIDENCE.json"
-      ]
-    },
-    {
-      "id": "R3_RAPID_INPUT_RACE_EVIDENCE_GAP",
-      "reviewer": "R3_ADVERSARIAL_QA",
-      "route": "?play=hanzi-v2-golden-slice&mode=play&from=world",
-      "state": "structure placement and state-transition controls under burst input",
-      "severity": "SEV_3",
-      "category": "rapid and duplicate input coverage",
-      "visibleEvidence": "HESITANT_WITH_HINTS explicitly demonstrates two reversible invalid placements and eventual completion, while the deep placing row captures a valid static placement state. Neither the profile interactions nor the supplied trace inventory declares rapid double-click, repeated Enter/Space, multi-touch burst, or overlapping drag/tap actuation against a transition control.",
-      "whyItMatters": "Single-step correctness does not prove transition idempotence. A young child can tap or press repeatedly, which may double-advance a scene, consume the wrong card, apply progress twice, or create a save state that normal paced interactions never reach.",
-      "suggestedFix": "Add deterministic burst-input cases at card selection, slot placement, ability choice, boss completion, finish-run, and return-world controls. Verify one logical transition, one save update, reversible invalid feedback, and no console/page errors, then preserve screenshot, ARIA, and Playwright trace evidence.",
-      "confidence": 0.98,
-      "evidenceFiles": [
-        "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-ming-placing-step07.png",
-        "artifacts/game-machine-review/step-07/deep-route/aria/hanzi-golden-slice--ming-placing--tablet.aria.txt",
-        "artifacts/game-machine-review/step-07/agent-playthrough/traces/hesitant-with-hints.zip",
-        "artifacts/game-machine-review/step-07/agent-playthrough/AGENT-PLAYTHROUGH-RESULTS.json"
-      ]
-    },
-    {
-      "id": "R3_CLASSIC_HUB_NESTED_MAIN_LANDMARK",
-      "reviewer": "R3_ADVERSARIAL_QA",
-      "route": "?hub=classic",
-      "state": "canonical catalog",
-      "severity": "SEV_3",
-      "category": "keyboard and landmark semantics",
-      "visibleEvidence": "The accepted classic-hub ARIA candidate has a top-level main landmark containing navigation, the level-one heading, filters, and then a second main landmark wrapping the ten game cards. The deep row reports focus and target checks as PASS, but those checks do not reject nested main landmarks.",
-      "whyItMatters": "Nested main landmarks are invalid document structure and can make landmark navigation ambiguous for keyboard and screen-reader users even when every button remains individually focusable.",
-      "suggestedFix": "Keep exactly one main landmark for the page, change the inner catalog container to a named section or div, and add a semantic assertion that each route exposes exactly one non-nested main landmark before establishing the ARIA baseline.",
-      "confidence": 1,
-      "evidenceFiles": [
-        "artifacts/game-machine-review/step-07/screenshots/visual-baseline/classic-hub-step07.png",
-        "artifacts/game-machine-review/step-07/aria/classic-hub-step07.aria.yml",
-        "artifacts/game-machine-review/step-07/deep-route/events/classic-hub--catalog--desktop.events.json"
-      ]
-    }
-  ],
+  "completedAtUtc": "2026-08-10T12:43:33.499Z",
+  "findings": [],
   "limitations": [
-    "This is machine-only QA over synthetic isolated browser contexts; it does not establish real-child behavior, fun, comfort, learning, retention, preference, or long-term engagement.",
-    "The supplied raw package contains no explicit reload, back-forward, observer-disconnect, conflicting-route, or burst-input trace, so those behaviors are recorded as unverified rather than inferred PASS.",
-    "The ten classic games were reviewed smoke-only; no deep gameplay or learning-quality conclusion is made for them."
+    "No ordinary release blocker was found in the authorized R3 scope; highest finding severity is none.",
+    "The observer input-boundary conclusion is limited to the repaired build-identity boundary and its existing inert markup-like negative control; this review did not repeat input-safety research or offensive testing.",
+    "LOCAL-FIX-V2-RESULT.json is pre-final repair provenance bound to source tree 608F2C10C22768D81EDA943DB039E442711529126ACA48410229BCC9E1549249; it is not used as final-tree acceptance evidence. The rerun observer, lifecycle, and deep-route evidence is bound to 65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2.",
+    "All browser sessions, storage fixtures, observer events, catalog smoke rows, and agent playthrough profiles reviewed here are synthetic machine evidence only.",
+    "This review makes no claim about a real child, fun, learning, preference, retention, long-term engagement, parent acceptance, or promotion."
   ]
 }

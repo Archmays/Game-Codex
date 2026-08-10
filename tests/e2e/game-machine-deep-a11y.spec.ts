@@ -183,10 +183,13 @@ async function createScenario(
   });
   await installSpeechStub(context);
   await context.addInitScript(({ saveKey, fixture, save, marker }) => {
-    window.localStorage.setItem("machine-review/fixture-marker", marker);
-    if (fixture === "fresh") window.localStorage.removeItem(saveKey);
-    else if (fixture === "corrupt") window.localStorage.setItem(saveKey, "{not-valid-json");
-    else window.localStorage.setItem(saveKey, JSON.stringify(save));
+    const fixtureMarkerKey = "machine-review/fixture-marker";
+    if (window.localStorage.getItem(fixtureMarkerKey) !== marker) {
+      window.localStorage.setItem(fixtureMarkerKey, marker);
+      if (fixture === "fresh") window.localStorage.removeItem(saveKey);
+      else if (fixture === "corrupt") window.localStorage.setItem(saveKey, "{not-valid-json");
+      else window.localStorage.setItem(saveKey, JSON.stringify(save));
+    }
   }, {
     saveKey: GOLDEN_SLICE_SAVE_KEY,
     fixture: storageFixture,
@@ -667,6 +670,7 @@ test.describe.serial("STEP 07 canonical deep-route and accessibility evidence", 
       await scenario.page.locator("[data-return-to-world]").click();
       const world = scenario.page.getByTestId("my-game-world");
       await expect(world).toBeVisible();
+      await expect(world).toHaveAttribute("data-repaired", "true");
       await captureRow({ scenario, row: planned("hanzi-golden-slice", "return-world"), root: world, focus: scenario.page.locator("[data-world-forest-link]"), actualVisualState: "world:return-from-forest", action: "return-to-world-with-public-link" });
     } finally {
       await scenario.context.close();

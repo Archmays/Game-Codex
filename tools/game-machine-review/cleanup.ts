@@ -171,6 +171,10 @@ const defaultPolicy: CleanupPolicy = {
       "artifacts/game-machine-review/step-07/final-closure/STEP07-FINAL-CLOSURE-CHARTER.json",
       "frozen final-closure finding disposition",
     ),
+    required(
+      "artifacts/hanzi-radical-battle-v2/asset-foundry/theme-c/batch-01/raw-candidates",
+      "complete Theme C 32-candidate foundry retained as NOT_INTEGRATED",
+    ),
   ],
   returnPackage: [
     optional(READINESS_ZIP_RELATIVE_PATH, "unique final return ZIP; mandatory at apply time"),
@@ -208,6 +212,9 @@ const defaultPolicy: CleanupPolicy = {
     optional("test-results", "Playwright transient results"),
     optional("playwright-report", "Playwright transient HTML report"),
     optional(".playwright-cli", "temporary browser tooling state"),
+    optional("tools/step07-diagnostics", "one-use STEP 07 diagnostic helper"),
+    optional("tools/step07-local-fix", "superseded one-use STEP 07 local-fix helper"),
+    optional("tools/step07-local-fix-v2", "completed one-use STEP 07 local-fix V2 helper"),
     optional("tmp/game-machine-review/step-07-readiness", "owned readiness staging directory"),
     optional("artifacts/game-machine-review/step-07/traces", "raw final-run traces replaced by summaries"),
     optional(
@@ -327,8 +334,6 @@ const defaultPolicy: CleanupPolicy = {
     verdictPath:
       "artifacts/hanzi-radical-battle-v2/asset-foundry/theme-c/batch-01/MACHINE-ASSET-VERDICT.json",
   },
-  rawAssetCandidatesRoot:
-    "artifacts/hanzi-radical-battle-v2/asset-foundry/theme-c/batch-01/raw-candidates",
   selectedAssetsRoot:
     "artifacts/hanzi-radical-battle-v2/asset-foundry/theme-c/batch-01/SELECTED",
   readinessZipPath: READINESS_ZIP_RELATIVE_PATH,

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "recordType": "ACTUAL_COMMAND_RUN",
+  "runId": "visual-baseline-update-20260810T122401608Z-57964-0036a6d0",
+  "gateId": "visual-baseline-update",
+  "command": "pnpm",
+  "args": [
+    "exec",
+    "playwright",
+    "test",
+    "tests/e2e/game-machine-visual-regression.spec.ts",
+    "--config",
+    "playwright.step07.config.ts",
+    "--project=desktop-chromium",
+    "--update-snapshots"
+  ],
+  "startedAtUtc": "2026-08-10T12:24:01.608Z",
+  "finishedAtUtc": "2026-08-10T12:24:16.844Z",
+  "exitCode": 0,
+  "sourceTreeSha256Before": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+  "sourceTreeSha256After": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+  "logSha256": "70C7EBF1C40AED384AE20481179FE9169E76D8AD20B5F5688BFA7A2792CFE35A",
+  "logPath": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T122401608Z-57964-0036a6d0.log",
+  "status": "PASS"
+}

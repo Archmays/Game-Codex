@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "recordType": "VISUAL_ARIA_BASELINE_ESTABLISHMENT",
+  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+  "establishedAtUtc": "2026-08-10T12:44:08.623Z",
+  "status": "PASS",
+  "visualBaselineUpdateRecordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T122401608Z-57964-0036a6d0.json",
+  "candidateEvidenceFile": "artifacts/game-machine-review/step-07/VISUAL-ARIA-CANDIDATE.json",
+  "preChangeReferenceFile": "artifacts/game-machine-review/step-07/pre-change-reference/PRE-CHANGE-REFERENCE.json",
+  "ordinaryCommandRunRecordFiles": {
+    "compile": "artifacts/game-machine-review/step-07/hard-gates/commands/compile-20260810T123626739Z-6884-58fc252b.json",
+    "targeted-tests": "artifacts/game-machine-review/step-07/hard-gates/commands/targeted-tests-20260810T123637860Z-45240-c62d223c.json",
+    "step-regressions": "artifacts/game-machine-review/step-07/hard-gates/commands/step-regressions-20260810T123719076Z-35480-2076b03f.json",
+    "full-tests": "artifacts/game-machine-review/step-07/hard-gates/commands/full-tests-20260810T123749810Z-61320-4e6286f1.json",
+    "build": "artifacts/game-machine-review/step-07/hard-gates/commands/build-20260810T123808449Z-28524-c6111cd8.json"
+  },
+  "semanticReviewFiles": {
+    "R1_CHILD_FIRST_UX": "artifacts/game-machine-review/step-07/semantic-reviews/R1_CHILD_FIRST_UX.json",
+    "R2_VISUAL_ACCESSIBILITY": "artifacts/game-machine-review/step-07/semantic-reviews/R2_VISUAL_ACCESSIBILITY.json",
+    "R3_ADVERSARIAL_QA": "artifacts/game-machine-review/step-07/semantic-reviews/R3_ADVERSARIAL_QA.json"
+  },
+  "reviewerConflictFile": "artifacts/game-machine-review/step-07/semantic-reviews/REVIEW-CONFLICTS.json",
+  "scrollMatrixFile": "artifacts/game-machine-review/step-07/SCROLL-MATRIX.json",
+  "catalogSmokeFile": "artifacts/game-machine-review/step-07/GAME-CATALOG-MACHINE-SMOKE.json",
+  "agentPlaythroughsFile": "artifacts/game-machine-review/step-07/agent-playthrough/AGENT-PLAYTHROUGH-RESULTS.json",
+  "deepRouteEvidenceFile": "artifacts/game-machine-review/step-07/DEEP-ROUTE-EVIDENCE.json",
+  "blockerFindingIds": [],
+  "unresolvedCriticalReviewerConflict": false,
+  "realChildEvidenceClaimed": false,
+  "limitations": [
+    "Machine baseline promotion is not real-child, parent, learning, retention, or preference acceptance."
+  ],
+  "prerequisiteEntries": [
+    {
+      "path": "artifacts/game-machine-review/step-07/DEEP-ROUTE-EVIDENCE.json",
+      "bytes": 366588,
+      "sha256": "E4F2A30B4049CACA3737FDBA98BBCE5F65D2FD3895428C4E3A75534512D8192C"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/GAME-CATALOG-MACHINE-SMOKE.json",
+      "bytes": 225223,
+      "sha256": "9AD673CB6E61F7CD6143B1D7CF8B1C3A8D6762BE0D21F6A0DE1E7D0A8AE740EF"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/SCROLL-MATRIX.json",
+      "bytes": 139107,
+      "sha256": "E2F54B74402CA5CC1B39B919043DBFC960A75D8ACE17F2119D8E870A7E0274BC"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/VISUAL-ARIA-CANDIDATE.json",
+      "bytes": 13840,
+      "sha256": "07BAA1FA56414F8ABFE35FF616D1CF1604FC81921DE9F42A41A384693EA90183"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/agent-playthrough/AGENT-PLAYTHROUGH-RESULTS.json",
+      "bytes": 95965,
+      "sha256": "C9CF1AD6AFACF82A53A8C8D19E178F664DA1826818A66CA4871D2AEAD9B96E32"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/hard-gates/commands/build-20260810T123808449Z-28524-c6111cd8.json",
+      "bytes": 723,
+      "sha256": "6603DFF1305906EFF8966E7ADB01B0185775991D052C19DE1AB4ED6688056376"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/hard-gates/commands/build-20260810T123808449Z-28524-c6111cd8.log",
+      "bytes": 18491,
+      "sha256": "FBCAD643D41719ECF744D771B9C7971AF37011F9FC89D21BF2AA4FB9E1F68241"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/hard-gates/commands/compile-20260810T123626739Z-6884-58fc252b.json",
+      "bytes": 742,
+      "sha256": "11906F4436B011B74D645CE0090BF9A03AD8B50AE5439ECB84578211FF12A502"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/hard-gates/commands/compile-20260810T123626739Z-6884-58fc252b.log",
+      "bytes": 589,
+      "sha256": "A7D22ED4F82E99BE97399479D294B5828CF4807159952131B7F01532629AE33A"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/hard-gates/commands/full-tests-20260810T123749810Z-61320-4e6286f1.json",
+      "bytes": 737,
+      "sha256": "1E2677D75CC274FB7E0647EA46FC348D130660E84984B37311F18DDC17A3C28E"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/hard-gates/commands/full-tests-20260810T123749810Z-61320-4e6286f1.log",
+      "bytes": 18765,
+      "sha256": "80FC22B5038B686BA8A544AF0A7C3BEB79DA1C059ABFFC739852212B84C5E444"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/hard-gates/commands/step-regressions-20260810T123719076Z-35480-2076b03f.json",
+      "bytes": 774,
+      "sha256": "AD8A8E75528BA870C91BA2A11A90CBA0B7970C6D8EE436324A3DAE19C3B43D57"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/hard-gates/commands/step-regressions-20260810T123719076Z-35480-2076b03f.log",
+      "bytes": 20525,
+      "sha256": "06C664E0CC293C7C4EB7E7D7C9EDD3C5AA22D83E71E6916A53BC5EA463AA5E2C"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/hard-gates/commands/targeted-tests-20260810T123637860Z-45240-c62d223c.json",
+      "bytes": 782,
+      "sha256": "3134B629ACA74FB44CA3117A5410477BCBA016282E3CDACEAC136820F506B7F2"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/hard-gates/commands/targeted-tests-20260810T123637860Z-45240-c62d223c.log",
+      "bytes": 5679,
+      "sha256": "05041B39C90393FFAD03ADA8781165EBE7561B473A70CD10914633991541584F"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T122401608Z-57964-0036a6d0.json",
+      "bytes": 959,
+      "sha256": "E7E1E425FFE434B7CF82B2071E65D1335477D14BAEB5A1E8FFDB68FC6511D2D3"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T122401608Z-57964-0036a6d0.log",
+      "bytes": 1409,
+      "sha256": "70C7EBF1C40AED384AE20481179FE9169E76D8AD20B5F5688BFA7A2792CFE35A"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/pre-change-reference/PRE-CHANGE-REFERENCE.json",
+      "bytes": 825,
+      "sha256": "4F6810033D47C4736EB7DC7D2AABE3BB6FC3388C37C2283BA2B9422AD9BFC513"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/semantic-reviews/R1_CHILD_FIRST_UX.json",
+      "bytes": 10957,
+      "sha256": "9528EC1DFDC1FDC0D167830AFD07859828944F29BAB54B8FCCA9917E414A66A0"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/semantic-reviews/R2_VISUAL_ACCESSIBILITY.json",
+      "bytes": 11222,
+      "sha256": "22776FF3C55312FA1B92A37FE4AEE5BB6EE0BBBBF56544A0567704E18087AE9F"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/semantic-reviews/R3_ADVERSARIAL_QA.json",
+      "bytes": 2137,
+      "sha256": "EBED1EE9F65211B2517F4977E4B2B632EC004BEFC59091C38CB14B1B4DB57B9E"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/semantic-reviews/REVIEW-CONFLICTS.json",
+      "bytes": 162,
+      "sha256": "0FF58D2C675DEE36F887AA89EBB32BFCAA5E490354CC92CDB15AFC448121BE8B"
+    }
+  ]
+}

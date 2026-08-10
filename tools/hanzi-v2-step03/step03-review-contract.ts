@@ -11,9 +11,18 @@ const AUDIO_DECISIONS = new Set(["ACCEPT CURRENT CANDIDATE", "NEED RECORDED AUDI
 const CHILD_AUTHORIZATIONS = new Set(["YES", "NO", "NOT_YET"]);
 const repositoryRoot = resolve(import.meta.dirname, "..", "..");
 const moduleServer = await createServer({
+  configFile: false,
   root: repositoryRoot,
   appType: "custom",
-  server: { middlewareMode: true },
+  server: {
+    middlewareMode: true,
+    hmr: false,
+    watch: null,
+  },
+  optimizeDeps: {
+    noDiscovery: true,
+    include: [],
+  },
 });
 let expectedIdentity: JsonRecord;
 let expectedItems: Array<{ id: string; revisionHash: string }>;

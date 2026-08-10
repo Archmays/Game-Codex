@@ -1,0 +1,189 @@
+{
+  "schemaVersion": 1,
+  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+  "status": "PASS",
+  "results": [
+    {
+      "id": "compile",
+      "status": "PASS",
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/hard-gates/commands/compile-20260810T123626739Z-6884-58fc252b.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/compile-20260810T123626739Z-6884-58fc252b.log"
+      ],
+      "detail": "Fixed TypeScript compile command exited 0 on the unchanged current source tree."
+    },
+    {
+      "id": "targeted-tests",
+      "status": "PASS",
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/hard-gates/commands/targeted-tests-20260810T123637860Z-45240-c62d223c.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/targeted-tests-20260810T123637860Z-45240-c62d223c.log"
+      ],
+      "detail": "Fixed machine-review targeted tests exited 0 on the unchanged current source tree."
+    },
+    {
+      "id": "full-tests",
+      "status": "PASS",
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/hard-gates/commands/full-tests-20260810T123749810Z-61320-4e6286f1.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/full-tests-20260810T123749810Z-61320-4e6286f1.log"
+      ],
+      "detail": "Fixed full Vitest command exited 0 on the unchanged current source tree."
+    },
+    {
+      "id": "build",
+      "status": "PASS",
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/hard-gates/commands/build-20260810T123808449Z-28524-c6111cd8.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/build-20260810T123808449Z-28524-c6111cd8.log"
+      ],
+      "detail": "Fixed production build command exited 0 on the unchanged current source tree."
+    },
+    {
+      "id": "route-precedence",
+      "status": "PASS",
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/hard-gates/COMMAND-GATE-RESULTS.json",
+        "artifacts/game-machine-review/step-07/STEP07-LIFECYCLE-EVIDENCE.json"
+      ],
+      "detail": "Versioned route conflicts plus lifecycle continuity and ordinary history"
+    },
+    {
+      "id": "state-invariants",
+      "status": "PASS",
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/hard-gates/COMMAND-GATE-RESULTS.json",
+        "artifacts/game-machine-review/step-07/agent-playthrough/AGENT-PLAYTHROUGH-RESULTS.json",
+        "artifacts/game-machine-review/step-07/DEEP-ROUTE-EVIDENCE.json",
+        "artifacts/game-machine-review/step-07/STEP07-LIFECYCLE-EVIDENCE.json"
+      ],
+      "detail": "STEP regressions, canonical deep states, lifecycle, and deterministic profiles"
+    },
+    {
+      "id": "save-and-corrupt-recovery",
+      "status": "PASS",
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/hard-gates/COMMAND-GATE-RESULTS.json",
+        "artifacts/game-machine-review/step-07/agent-playthrough/AGENT-PLAYTHROUGH-RESULTS.json",
+        "artifacts/game-machine-review/step-07/STEP07-LIFECYCLE-EVIDENCE.json"
+      ],
+      "detail": "Save continuity, reload/recovery, returning-user, and corrupt recovery checks"
+    },
+    {
+      "id": "console-and-page-errors",
+      "status": "PASS",
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/SCROLL-MATRIX.json",
+        "artifacts/game-machine-review/step-07/GAME-CATALOG-MACHINE-SMOKE.json",
+        "artifacts/game-machine-review/step-07/agent-playthrough/AGENT-PLAYTHROUGH-RESULTS.json",
+        "artifacts/game-machine-review/step-07/DEEP-ROUTE-EVIDENCE.json",
+        "artifacts/game-machine-review/step-07/STEP07-LIFECYCLE-EVIDENCE.json"
+      ],
+      "detail": "Runtime error entries: 0"
+    },
+    {
+      "id": "external-network",
+      "status": "PASS",
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/SCROLL-MATRIX.json",
+        "artifacts/game-machine-review/step-07/GAME-CATALOG-MACHINE-SMOKE.json",
+        "artifacts/game-machine-review/step-07/agent-playthrough/AGENT-PLAYTHROUGH-RESULTS.json",
+        "artifacts/game-machine-review/step-07/DEEP-ROUTE-EVIDENCE.json",
+        "artifacts/game-machine-review/step-07/STEP07-LIFECYCLE-EVIDENCE.json"
+      ],
+      "detail": "SAME_ORIGIN_ALLOWED; external requests: 0"
+    },
+    {
+      "id": "privacy-and-pii",
+      "status": "PASS",
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/hard-gates/COMMAND-GATE-RESULTS.json",
+        "artifacts/game-machine-review/step-07/agent-playthrough/AGENT-PLAYTHROUGH-RESULTS.json",
+        "artifacts/game-machine-review/step-07/STEP07-LIFECYCLE-EVIDENCE.json"
+      ],
+      "detail": "Deny-by-default schema/privacy tests and isolated same-context lifecycle pages"
+    },
+    {
+      "id": "adult-scroll-and-reflow",
+      "status": "PASS",
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/SCROLL-MATRIX.json"
+      ],
+      "detail": "Wheel, keyboard, touch, focus, single-owner, and reflow matrix"
+    },
+    {
+      "id": "keyboard-focus-and-targets",
+      "status": "PASS",
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/SCROLL-MATRIX.json",
+        "artifacts/game-machine-review/step-07/agent-playthrough/AGENT-PLAYTHROUGH-RESULTS.json",
+        "artifacts/game-machine-review/step-07/DEEP-ROUTE-EVIDENCE.json"
+      ],
+      "detail": "Final-action activation, focus/target matrix, and KEYBOARD_ONLY profile"
+    },
+    {
+      "id": "accessibility-structure",
+      "status": "PASS",
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/hard-gates/BASELINE-PROMOTION.json",
+        "artifacts/game-machine-review/step-07/hard-gates/BASELINE-ESTABLISHMENT.json",
+        "artifacts/game-machine-review/step-07/VISUAL-ARIA-CANDIDATE.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T122401608Z-57964-0036a6d0.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T122401608Z-57964-0036a6d0.log",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-no-update-20260810T124408920Z-13592-2231bca5.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-no-update-20260810T124408920Z-13592-2231bca5.log",
+        "artifacts/game-machine-review/step-07/VISUAL-ARIA-EVIDENCE.json",
+        "artifacts/game-machine-review/step-07/aria/classic-hub-step07.aria.yml",
+        "artifacts/game-machine-review/step-07/aria/forest-ability-step07.aria.yml",
+        "artifacts/game-machine-review/step-07/aria/forest-camp-step07.aria.yml",
+        "artifacts/game-machine-review/step-07/aria/forest-spellbook-step07.aria.yml",
+        "artifacts/game-machine-review/step-07/aria/step07-observer-export-step07.aria.yml",
+        "artifacts/game-machine-review/step-07/aria/step07-observer-human-fields-step07.aria.yml",
+        "artifacts/game-machine-review/step-07/aria/step07-observer-preparation-step07.aria.yml",
+        "artifacts/game-machine-review/step-07/aria/world-fresh-step07.aria.yml",
+        "artifacts/game-machine-review/step-07/aria/world-spellbook-step07.aria.yml",
+        "artifacts/game-machine-review/step-07/agent-playthrough/AGENT-PLAYTHROUGH-RESULTS.json",
+        "artifacts/game-machine-review/step-07/DEEP-ROUTE-EVIDENCE.json"
+      ],
+      "detail": "Reviewed ARIA baseline plus canonical route accessibility matrix"
+    },
+    {
+      "id": "deterministic-visual-states",
+      "status": "PASS",
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/hard-gates/BASELINE-PROMOTION.json",
+        "artifacts/game-machine-review/step-07/hard-gates/BASELINE-ESTABLISHMENT.json",
+        "artifacts/game-machine-review/step-07/VISUAL-ARIA-CANDIDATE.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T122401608Z-57964-0036a6d0.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T122401608Z-57964-0036a6d0.log",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-no-update-20260810T124408920Z-13592-2231bca5.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-no-update-20260810T124408920Z-13592-2231bca5.log",
+        "artifacts/game-machine-review/step-07/VISUAL-ARIA-EVIDENCE.json",
+        "artifacts/game-machine-review/step-07/screenshots/visual-baseline/classic-hub-step07.png",
+        "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-ability-step07.png",
+        "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-boss-lin-step07.png",
+        "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-boss-xing-step07.png",
+        "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-camp-repair-step07.png",
+        "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-camp-step07.png",
+        "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-ming-placing-step07.png",
+        "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-spellbook-step07.png",
+        "artifacts/game-machine-review/step-07/screenshots/visual-baseline/step07-observer-bottom-step07.png",
+        "artifacts/game-machine-review/step-07/screenshots/visual-baseline/step07-observer-preparation-step07.png",
+        "artifacts/game-machine-review/step-07/screenshots/visual-baseline/world-fresh-step07.png",
+        "artifacts/game-machine-review/step-07/screenshots/visual-baseline/world-repaired-step07.png",
+        "artifacts/game-machine-review/step-07/screenshots/visual-baseline/world-spellbook-step07.png",
+        "artifacts/game-machine-review/step-07/DEEP-ROUTE-EVIDENCE.json"
+      ],
+      "detail": "Reviewed established baseline, deep states, and no-update rerun"
+    },
+    {
+      "id": "child-copy-and-forbidden-mechanics",
+      "status": "PASS",
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/hard-gates/commands/step-regressions-20260810T123719076Z-35480-2076b03f.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/step-regressions-20260810T123719076Z-35480-2076b03f.log"
+      ],
+      "detail": "Frozen content and forbidden-mechanics regression"
+    }
+  ]
+}

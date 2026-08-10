@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "recordType": "VISUAL_ARIA_BASELINE_PROMOTION",
+  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+  "promotedAtUtc": "2026-08-10T12:44:34.015Z",
+  "status": "PASS",
+  "stages": [
+    {
+      "stage": "PRE_CHANGE_REFERENCE",
+      "evidenceFile": "artifacts/game-machine-review/step-07/pre-change-reference/PRE-CHANGE-REFERENCE.json"
+    },
+    {
+      "stage": "STEP07_ESTABLISHED_BASELINE",
+      "evidenceFile": "artifacts/game-machine-review/step-07/hard-gates/BASELINE-ESTABLISHMENT.json",
+      "commandRunRecordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T122401608Z-57964-0036a6d0.json"
+    },
+    {
+      "stage": "REGRESSION_PASS",
+      "evidenceFile": "artifacts/game-machine-review/step-07/VISUAL-ARIA-EVIDENCE.json",
+      "commandRunRecordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-no-update-20260810T124408920Z-13592-2231bca5.json"
+    }
+  ],
+  "commandRunRecordFiles": {
+    "visualBaselineUpdate": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T122401608Z-57964-0036a6d0.json",
+    "visualNoUpdate": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-no-update-20260810T124408920Z-13592-2231bca5.json"
+  },
+  "establishmentRecordFile": "artifacts/game-machine-review/step-07/hard-gates/BASELINE-ESTABLISHMENT.json",
+  "candidateEvidenceFile": "artifacts/game-machine-review/step-07/VISUAL-ARIA-CANDIDATE.json",
+  "preChangeReferenceFile": "artifacts/game-machine-review/step-07/pre-change-reference/PRE-CHANGE-REFERENCE.json",
+  "visualAriaEvidenceFile": "artifacts/game-machine-review/step-07/VISUAL-ARIA-EVIDENCE.json",
+  "semanticReviewFiles": {
+    "R1_CHILD_FIRST_UX": "artifacts/game-machine-review/step-07/semantic-reviews/R1_CHILD_FIRST_UX.json",
+    "R2_VISUAL_ACCESSIBILITY": "artifacts/game-machine-review/step-07/semantic-reviews/R2_VISUAL_ACCESSIBILITY.json",
+    "R3_ADVERSARIAL_QA": "artifacts/game-machine-review/step-07/semantic-reviews/R3_ADVERSARIAL_QA.json"
+  },
+  "reviewerConflictFile": "artifacts/game-machine-review/step-07/semantic-reviews/REVIEW-CONFLICTS.json",
+  "scrollMatrixFile": "artifacts/game-machine-review/step-07/SCROLL-MATRIX.json",
+  "catalogSmokeFile": "artifacts/game-machine-review/step-07/GAME-CATALOG-MACHINE-SMOKE.json",
+  "agentPlaythroughsFile": "artifacts/game-machine-review/step-07/agent-playthrough/AGENT-PLAYTHROUGH-RESULTS.json",
+  "deepRouteEvidenceFile": "artifacts/game-machine-review/step-07/DEEP-ROUTE-EVIDENCE.json",
+  "blockerFindingIds": [],
+  "unresolvedCriticalReviewerConflict": false,
+  "realChildEvidenceClaimed": false,
+  "limitations": [
+    "Machine baseline promotion is not real-child, parent, learning, retention, or preference acceptance."
+  ]
+}

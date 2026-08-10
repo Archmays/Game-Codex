@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "recordType": "STEP07_EXCEPTIONAL_REPAIR_INDEX",
+  "recordedAtUtc": "2026-08-10T12:50:44.8079417Z",
+  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+  "historicalOrdinaryRepairRoundsConsumed": 3,
+  "historicalHumanExceptionalRepairCount": 3,
+  "currentAutonomousCloseoutRepairLoops": {
+    "authorizationId": "HUMAN_AUTHORIZED_STEP07_AUTONOMOUS_FINAL_CLOSEOUT_01",
+    "consumed": 2,
+    "maximum": 3,
+    "thirdLoopRequired": false
+  },
+  "historicalExceptionalRepairs": [
+    {
+      "id": "HUMAN_AUTHORIZED_EXCEPTIONAL_REPAIR_01",
+      "contract": {
+        "path": "artifacts/game-machine-review/step-07/repair-rounds/exceptional-repair-01/EXCEPTION_CONTRACT.json",
+        "bytes": 1632,
+        "sha256": "A5D34AB1DD22876B0FDD5EC82ADBD9CF7485656AE0E160440A1FC2DB10222A26"
+      },
+      "result": {
+        "path": "artifacts/game-machine-review/step-07/repair-rounds/exceptional-repair-01/EXCEPTION_RESULT.json",
+        "bytes": 1351,
+        "sha256": "FE77BC0AECF393734DF2858C0735B36104E6FDB8665B0114D3C516DC996077FF"
+      }
+    },
+    {
+      "id": "HUMAN_AUTHORIZED_EXCEPTIONAL_REPAIR_02_VISUAL_HARNESS_SEQUENCE_ONLY",
+      "contract": {
+        "path": "artifacts/game-machine-review/step-07/repair-rounds/exceptional-repair-02/EXCEPTION_CONTRACT.json",
+        "bytes": 2248,
+        "sha256": "8ABE0E4EF059A550948A30DE264A56E021095AB5305A74BAAF19864575FB24C6"
+      },
+      "result": {
+        "path": "artifacts/game-machine-review/step-07/repair-rounds/exceptional-repair-02/EXCEPTION_RESULT.json",
+        "bytes": 1835,
+        "sha256": "EF9905EE84BE8C113AADA94214633FF25C7E5C7460C1248544D643AEE61524BA"
+      }
+    },
+    {
+      "id": "HUMAN_AUTHORIZED_EXCEPTIONAL_REPAIR_03_VISUAL_HARNESS_REDUCED_MOTION_ONLY",
+      "contract": {
+        "path": "artifacts/game-machine-review/step-07/repair-rounds/exceptional-repair-03/EXCEPTION_CONTRACT.json",
+        "bytes": 2488,
+        "sha256": "0AB7BCE9A9CF68A132C7C9A9E873E835764D80590F4D7DF86A7ADEE0B64C6C1F"
+      },
+      "result": {
+        "path": "artifacts/game-machine-review/step-07/repair-rounds/exceptional-repair-03/EXCEPTION_RESULT.json",
+        "bytes": 2123,
+        "sha256": "051A79D3CF9DA55D983E2E9278309B73C197DFE5DD96441AC339132A881E1C7B"
+      }
+    }
+  ],
+  "closedLineage": [
+    {
+      "path": "artifacts/game-machine-review/step-07/repair-rounds/THREE-REPAIR-LOOPS-FAILED.json",
+      "bytes": 3142,
+      "sha256": "FB842299EDB6CD13A17E69FD72133FD9906110DA97D6C5026F75E2BE87B734D8"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/recovery-preflight/CLOSED-RECOVERY-FREEZE.json",
+      "bytes": 3852,
+      "sha256": "0750EB67107FC30A2466AE0B3E17745BEBD031BED6D8F6B15E3C7F4F5E1079CC"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/recovery-preflight/CLOSED-RECOVERY-STOPPED.json",
+      "bytes": 9017,
+      "sha256": "FA9B0C2AB2B151349D05DB5D4231DDB4BB69C6CEDACB09147135678067CA15AD"
+    }
+  ]
+}
