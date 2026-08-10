@@ -1640,55 +1640,14 @@
   box-sizing: border-box;
 }
 
-html,
-body,
-#app {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-}
-
 body {
   min-width: 320px;
-  overflow: hidden;
   background:
     linear-gradient(180deg, rgba(255, 247, 217, 0.9), rgba(229, 247, 236, 0.95)),
     #f6f3e7;
 }
 
-html.step02-review-page,
-body.step02-review-page,
-html.step03-review-page,
-body.step03-review-page,
-html.step04-observer-page,
-body.step04-observer-page {
-  height: auto;
-  min-height: 100%;
-}
-
-body.step02-review-page,
-body.step03-review-page,
-body.step04-observer-page {
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-body.step02-review-page #app,
-body.step03-review-page #app,
-body.step04-observer-page #app {
-  height: auto;
-  min-height: 100vh;
-}
-
-html.hanzi-v2-golden-slice-page,
-body.hanzi-v2-golden-slice-page,
-body.hanzi-v2-golden-slice-page #app {
-  min-height: 100%;
-  height: 100%;
-}
-
 body.hanzi-v2-golden-slice-page {
-  overflow: hidden;
   background: #071c26;
 }
 

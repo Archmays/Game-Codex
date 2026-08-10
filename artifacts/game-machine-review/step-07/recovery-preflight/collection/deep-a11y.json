@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "recordType": "RECOVERY_PREFLIGHT_PLAYWRIGHT_COLLECTION",
+  "id": "deep-a11y",
+  "command": "pnpm exec playwright test tests/e2e/game-machine-deep-a11y.spec.ts --config playwright.step07.config.ts --list --output artifacts/game-machine-review/step-07/recovery-preflight/playwright-list/deep-a11y",
+  "startedAtUtc": "2026-08-10T02:37:31.7222377Z",
+  "finishedAtUtc": "2026-08-10T02:37:36.9079747Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "listedTestLineCount": 46,
+  "summary": "Listing tests: | Total: 46 tests in 1 file",
+  "browserLaunched": false,
+  "sourceTreeSha256Before": "63729F26B011E91D4EBBDB1DD82B8B0E9197E3599DD498D9301DD009AF5F1131",
+  "sourceTreeSha256After": "63729F26B011E91D4EBBDB1DD82B8B0E9197E3599DD498D9301DD009AF5F1131",
+  "sourceTreeUnchanged": true,
+  "logPath": "artifacts/game-machine-review/step-07/recovery-preflight/collection/deep-a11y.log"
+}

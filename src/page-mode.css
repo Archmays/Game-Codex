@@ -1,0 +1,50 @@
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+html.game-fullscreen-page,
+body.game-fullscreen-page,
+body.game-fullscreen-page #app {
+  min-height: 100%;
+  height: 100%;
+}
+
+body.game-fullscreen-page {
+  overflow: hidden;
+}
+
+html.adult-tool-page,
+body.adult-tool-page {
+  height: auto;
+  min-height: 100%;
+}
+
+body.adult-tool-page {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body.adult-tool-page #app {
+  height: auto;
+  min-height: 100dvh;
+  overflow: visible;
+}
+
+html.document-page,
+body.document-page {
+  height: auto;
+  min-height: 100%;
+}
+
+body.document-page {
+  overflow-x: hidden;
+}
+
+body.document-page #app {
+  height: auto;
+  min-height: 100dvh;
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Machine-First Game Review"
+  short_description: "Run bounded evidence-backed machine QA for Game-Codex"
+  default_prompt: "Use $machine-first-game-review to audit, repair, and verify a Game-Codex change without substituting for real child evidence."

@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "recordType": "RECOVERY_PREFLIGHT_INVOCATION_PROBE",
+  "id": "formal-step-wrapper-redirected-initial-probe",
+  "status": "NO_OP",
+  "exitCode": 0,
+  "sourceTreeSha256": "63729F26B011E91D4EBBDB1DD82B8B0E9197E3599DD498D9301DD009AF5F1131",
+  "reason": "The first PowerShell here-string invocation did not reach tsx evaluation. It produced only pnpm update output and no command evidence.",
+  "authoritativeReplacement": "artifacts/game-machine-review/step-07/recovery-preflight/command-evidence/hard-gates/commands/step-regressions-20260810T023626795Z-50576-cd62093d.json",
+  "logPath": "artifacts/game-machine-review/step-07/recovery-preflight/deterministic/formal-step-wrapper-redirected.log"
+}

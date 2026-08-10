@@ -15,9 +15,10 @@ describe("Hanzi V2 STEP 06 default route promotion", () => {
     expect(resolve("hub=classic&world=my-game-world").kind).toBe("classic-hub");
   });
 
-  it("does not mistake STEP 05 review evidence for a STEP 06 child route", () => {
+  it("requires explicit STEP 06 evidence and never guesses from a bare session", () => {
     expect(isStep06EvidenceAttempt(new URLSearchParams("evidence=EC04FECD4B04F294"))).toBe(false);
-    expect(isStep06EvidenceAttempt(new URLSearchParams("evidence=hanzi-v2-step06"))).toBe(true);
-    expect(isStep06EvidenceAttempt(new URLSearchParams("session=s06-12345678"))).toBe(true);
+    expect(isStep06EvidenceAttempt(new URLSearchParams("evidence=hanzi-v2-step06&session=s06-12345678"))).toBe(true);
+    expect(isStep06EvidenceAttempt(new URLSearchParams("evidence=hanzi-v2-step06"))).toBe(false);
+    expect(isStep06EvidenceAttempt(new URLSearchParams("session=s06-12345678"))).toBe(false);
   });
 });

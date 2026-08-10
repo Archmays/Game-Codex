@@ -1,5 +1,16 @@
 import "./styles.css";
-import { isStep06EvidenceAttempt, resolveAppRoute } from "./app-route";
+import "./page-mode.css";
+import { pageModeForAppRoute, resolveAppRoute } from "./app-route";
+import {
+  resolveObservationContext,
+  STEP06_OBSERVATION_EVIDENCE,
+  STEP07_OBSERVATION_EVIDENCE,
+  type ObservationContext,
+} from "./observation-context";
+import { activatePageMode } from "./page-mode";
+import type { Step06StopCode } from "../apps/my-game-world/second-use/event-types";
+import type { Step06SessionGrant } from "../apps/my-game-world/second-use/session";
+import type { Step07SessionGrant } from "../apps/my-game-world/second-use/step07-session";
 
 const WORLD_THEME_COLOR = "#071c2a";
 const CLASSIC_THEME_COLOR = "#f6f3e7";
@@ -10,12 +21,79 @@ function setBrowserIdentity(title: string, themeColor: string): void {
   if (meta) meta.content = themeColor;
 }
 
-function showStep06Denied(root: HTMLElement, reason: string): void {
-  setBrowserIdentity("家长准备 · 第二次进入检查", CLASSIC_THEME_COLOR);
-  root.innerHTML = `<main class="step06-route-denied" role="alert" data-testid="step06-route-denied" data-reason="${reason}">
+type ActiveObservationContext = Extract<ObservationContext, { kind: "step06" | "step07" }>;
+type ObservationStep = "06" | "07";
+
+type AuthorizedSecondUse = {
+  readonly ok: true;
+  readonly step: ObservationStep;
+  readonly evidenceId: typeof STEP06_OBSERVATION_EVIDENCE | typeof STEP07_OBSERVATION_EVIDENCE;
+  readonly grant: Step06SessionGrant | Step07SessionGrant;
+  stopSession(stopCode: Step06StopCode): void;
+};
+
+type DeniedSecondUse = {
+  readonly ok: false;
+  readonly step: ObservationStep;
+  readonly reason: string;
+};
+
+function addPageIdentity(className: string): void {
+  document.documentElement.classList.add(className);
+  document.body.classList.add(className);
+}
+
+function removePageIdentity(className: string): void {
+  document.documentElement.classList.remove(className);
+  document.body.classList.remove(className);
+}
+
+function showSecondUseDenied(root: HTMLElement, step: ObservationStep | null, reason: string): void {
+  activatePageMode("document");
+  removePageIdentity("hanzi-v2-golden-slice-page");
+  const stepLabel = step ? `STEP ${step} ` : "";
+  setBrowserIdentity(`家长准备 · ${stepLabel}第二次进入检查`, CLASSIC_THEME_COLOR);
+  const testId = step ? `step${step}-route-denied` : "observation-route-denied";
+  const className = step ? `step${step}-route-denied` : "observation-route-denied";
+  root.innerHTML = `<main class="${className}" role="alert" data-testid="${testId}" data-reason="${reason}">
     <h1>这次观察还没有准备好</h1>
     <p>请让家长回到第二次进入观察页，确认固定地址、同一浏览器和上次游戏进度。</p>
   </main>`;
+}
+
+function stepFromEvidence(search: URLSearchParams): ObservationStep | null {
+  if (search.get("evidence") === STEP06_OBSERVATION_EVIDENCE) return "06";
+  if (search.get("evidence") === STEP07_OBSERVATION_EVIDENCE) return "07";
+  return null;
+}
+
+async function authorizeSecondUse(
+  context: ActiveObservationContext,
+  search: URLSearchParams,
+): Promise<AuthorizedSecondUse | DeniedSecondUse> {
+  if (context.kind === "step06") {
+    const { validateStep06InstrumentedRoute, stopStep06Session } = await import("../apps/my-game-world/second-use/session");
+    const authorization = validateStep06InstrumentedRoute(search, window.location.origin, window.localStorage);
+    if (!authorization.ok) return { ok: false, step: "06", reason: authorization.reason };
+    return {
+      ok: true,
+      step: "06",
+      evidenceId: STEP06_OBSERVATION_EVIDENCE,
+      grant: authorization.grant,
+      stopSession: (stopCode) => stopStep06Session(window.localStorage, authorization.grant.sessionId, stopCode),
+    };
+  }
+
+  const { validateStep07InstrumentedRoute, stopStep07Session } = await import("../apps/my-game-world/second-use/step07-session");
+  const authorization = validateStep07InstrumentedRoute(search, window.location.origin, window.localStorage);
+  if (!authorization.ok) return { ok: false, step: "07", reason: authorization.reason };
+  return {
+    ok: true,
+    step: "07",
+    evidenceId: STEP07_OBSERVATION_EVIDENCE,
+    grant: authorization.grant,
+    stopSession: (stopCode) => stopStep07Session(window.localStorage, authorization.grant.sessionId, stopCode),
+  };
 }
 
 window.addEventListener("load", async () => {
@@ -24,14 +102,32 @@ window.addEventListener("load", async () => {
 
   const search = new URLSearchParams(window.location.search);
   const route = resolveAppRoute(search);
+  const observationContext = resolveObservationContext(search);
   const goldenSliceMode = search.get("mode");
   const fromMode = search.get("from");
-  const step06EvidenceAttempt = isStep06EvidenceAttempt(search);
+
+  if (observationContext.kind === "invalid") {
+    showSecondUseDenied(root, stepFromEvidence(search), observationContext.reason);
+    return;
+  }
+
+  const activeObservation = observationContext.kind === "step06" || observationContext.kind === "step07"
+    ? observationContext
+    : null;
+  const routePageMode = pageModeForAppRoute(route.kind);
+  if (activeObservation && routePageMode === "adult-tool") {
+    showSecondUseDenied(root, activeObservation.kind === "step06" ? "06" : "07", "INCOMPATIBLE_APP_ROUTE");
+    return;
+  }
+  activatePageMode(routePageMode);
 
   if (route.kind === "play") {
     setBrowserIdentity("汉字魔法战 · 墨迹森林", WORLD_THEME_COLOR);
-    document.documentElement.classList.add("hanzi-v2-golden-slice-page");
-    document.body.classList.add("hanzi-v2-golden-slice-page");
+    addPageIdentity("hanzi-v2-golden-slice-page");
+    if (activeObservation && goldenSliceMode === "child-first-use") {
+      showSecondUseDenied(root, activeObservation.kind === "step06" ? "06" : "07", "INCOMPATIBLE_PLAY_MODE");
+      return;
+    }
     if (goldenSliceMode === "child-first-use") {
       const session = await import("../games/hanzi-radical-battle/v2/golden-slice/first-use/session");
       const authorization = session.validateChildFirstUseSessionRoute(search, window.localStorage);
@@ -75,16 +171,15 @@ window.addEventListener("load", async () => {
       return;
     }
 
-    if (step06EvidenceAttempt) {
-      const [{ validateStep06InstrumentedRoute, stopStep06Session }, { createStep06EventBridge }, { withStep06RouteContext }, { mountHanziV2GoldenSlice }] = await Promise.all([
-        import("../apps/my-game-world/second-use/session"),
+    if (activeObservation) {
+      const [authorization, { createStep06EventBridge }, { withStep06RouteContext }, { mountHanziV2GoldenSlice }] = await Promise.all([
+        authorizeSecondUse(activeObservation, search),
         import("../apps/my-game-world/second-use/event-bridge"),
         import("../apps/my-game-world/world-routes"),
         import("../games/hanzi-radical-battle/v2/golden-slice"),
       ]);
-      const authorization = validateStep06InstrumentedRoute(search, window.location.origin, window.localStorage);
       if (!authorization.ok) {
-        showStep06Denied(root, authorization.reason);
+        showSecondUseDenied(root, authorization.step, authorization.reason);
         return;
       }
       let handle: ReturnType<typeof mountHanziV2GoldenSlice> | null = null;
@@ -92,10 +187,10 @@ window.addEventListener("load", async () => {
         grant: authorization.grant,
         storage: window.localStorage,
         onStop(stopCode) {
-          stopStep06Session(window.localStorage, authorization.grant.sessionId, stopCode);
+          authorization.stopSession(stopCode);
           bridge.close();
           handle?.destroy();
-          root.innerHTML = `<main role="status" data-testid="step06-child-stopped"><h1>这次游戏先到这里</h1><p>可以休息，也可以稍后再玩。</p></main>`;
+          root.innerHTML = `<main role="status" data-testid="step${authorization.step}-child-stopped"><h1>这次游戏先到这里</h1><p>可以休息，也可以稍后再玩。</p></main>`;
         },
       });
       let previousPhase: string | null = null;
@@ -106,7 +201,7 @@ window.addEventListener("load", async () => {
           mode: "play",
           initialMuted: authorization.grant.soundMode === "START_MUTED" ? true : undefined,
           returnToWorldHref: withStep06RouteContext("?world=my-game-world", {
-            evidence: "hanzi-v2-step06",
+            evidence: authorization.evidenceId,
             sessionId: authorization.grant.sessionId,
           }, "forest"),
           onStateChange(state) {
@@ -152,10 +247,16 @@ window.addEventListener("load", async () => {
     return;
   }
 
+  if (route.kind === "observe-step07") {
+    setBrowserIdentity("家长观察 · STEP 07 第二次进入", CLASSIC_THEME_COLOR);
+    addPageIdentity("step07-observer-page");
+    const { mountHanziV2Step07Observer } = await import("../apps/hanzi-v2-step07-observer");
+    mountHanziV2Step07Observer(root);
+    return;
+  }
   if (route.kind === "observe-step06") {
     setBrowserIdentity("家长观察 · STEP 06 第二次进入", CLASSIC_THEME_COLOR);
-    document.documentElement.classList.add("step06-observer-page");
-    document.body.classList.add("step06-observer-page");
+    addPageIdentity("step06-observer-page");
     const { mountHanziV2Step06Observer } = await import("../apps/hanzi-v2-step06-observer");
     mountHanziV2Step06Observer(root);
     return;
@@ -163,33 +264,38 @@ window.addEventListener("load", async () => {
   if (route.kind === "observe-step04") {
     setBrowserIdentity("家长观察 · STEP 04 首次使用", CLASSIC_THEME_COLOR);
     const { mountHanziV2Step04Observer } = await import("../apps/hanzi-v2-step04-observer");
-    document.documentElement.classList.add("step04-observer-page");
-    document.body.classList.add("step04-observer-page");
+    addPageIdentity("step04-observer-page");
     mountHanziV2Step04Observer(root);
     return;
   }
   if (route.kind.startsWith("review-")) {
     const step = route.kind.slice(-2);
     setBrowserIdentity(`家长审核 · STEP ${step}`, CLASSIC_THEME_COLOR);
-    document.documentElement.classList.add(`step${step}-review-page`);
-    document.body.classList.add(`step${step}-review-page`);
+    addPageIdentity(`step${step}-review-page`);
     if (step === "05") (await import("../apps/hanzi-v2-step05-review")).mountHanziV2Step05Review(root);
     else if (step === "03") (await import("../apps/hanzi-v2-step03-review")).mountHanziV2Step03Review(root);
     else (await import("../apps/hanzi-v2-step02-review")).mountHanziV2Step02Review(root);
     return;
   }
 
+  if (route.kind === "machine-review-report") {
+    setBrowserIdentity("游戏机器审核报告 · STEP 07", CLASSIC_THEME_COLOR);
+    addPageIdentity("machine-review-report-page");
+    const { mountGameMachineReviewReport } = await import("../apps/game-machine-review-report");
+    mountGameMachineReviewReport(root);
+    return;
+  }
+
   if (route.kind === "classic-hub") {
     setBrowserIdentity("游戏百宝箱", CLASSIC_THEME_COLOR);
     const { mountClassicHubFromWorld } = await import("../apps/my-game-world");
-    if (step06EvidenceAttempt) {
-      const [{ validateStep06InstrumentedRoute, stopStep06Session }, { createStep06EventBridge }] = await Promise.all([
-        import("../apps/my-game-world/second-use/session"),
+    if (activeObservation) {
+      const [authorization, { createStep06EventBridge }] = await Promise.all([
+        authorizeSecondUse(activeObservation, search),
         import("../apps/my-game-world/second-use/event-bridge"),
       ]);
-      const authorization = validateStep06InstrumentedRoute(search, window.location.origin, window.localStorage);
       if (!authorization.ok) {
-        showStep06Denied(root, authorization.reason);
+        showSecondUseDenied(root, authorization.step, authorization.reason);
         return;
       }
       let classicHandle: ReturnType<typeof mountClassicHubFromWorld> | null = null;
@@ -197,13 +303,17 @@ window.addEventListener("load", async () => {
         grant: authorization.grant,
         storage: window.localStorage,
         onStop(stopCode) {
-          stopStep06Session(window.localStorage, authorization.grant.sessionId, stopCode);
+          authorization.stopSession(stopCode);
           bridge.close();
           classicHandle?.destroy();
-          root.innerHTML = `<main role="status" data-testid="step06-child-stopped"><h1>这次游戏先到这里</h1><p>可以休息，也可以稍后再玩。</p></main>`;
+          root.innerHTML = `<main role="status" data-testid="step${authorization.step}-child-stopped"><h1>这次游戏先到这里</h1><p>可以休息，也可以稍后再玩。</p></main>`;
         },
       });
-      classicHandle = mountClassicHubFromWorld(root, { grant: authorization.grant, bridge });
+      classicHandle = mountClassicHubFromWorld(root, {
+        grant: authorization.grant,
+        bridge,
+        evidenceId: authorization.evidenceId,
+      });
       window.addEventListener("pagehide", () => bridge.close(), { once: true });
     } else {
       mountClassicHubFromWorld(root);
@@ -213,14 +323,13 @@ window.addEventListener("load", async () => {
 
   setBrowserIdentity("我的游戏世界", WORLD_THEME_COLOR);
   const { mountMyGameWorld } = await import("../apps/my-game-world");
-  if (step06EvidenceAttempt) {
-    const [{ validateStep06InstrumentedRoute, stopStep06Session }, { createStep06EventBridge }] = await Promise.all([
-      import("../apps/my-game-world/second-use/session"),
+  if (activeObservation) {
+    const [authorization, { createStep06EventBridge }] = await Promise.all([
+      authorizeSecondUse(activeObservation, search),
       import("../apps/my-game-world/second-use/event-bridge"),
     ]);
-    const authorization = validateStep06InstrumentedRoute(search, window.location.origin, window.localStorage);
     if (!authorization.ok) {
-      showStep06Denied(root, authorization.reason);
+      showSecondUseDenied(root, authorization.step, authorization.reason);
       return;
     }
     let worldHandle: ReturnType<typeof mountMyGameWorld> | null = null;
@@ -228,13 +337,20 @@ window.addEventListener("load", async () => {
       grant: authorization.grant,
       storage: window.localStorage,
       onStop(stopCode) {
-        stopStep06Session(window.localStorage, authorization.grant.sessionId, stopCode);
+        authorization.stopSession(stopCode);
         bridge.close();
         worldHandle?.destroy();
-        root.innerHTML = `<main role="status" data-testid="step06-child-stopped"><h1>这次游戏先到这里</h1><p>可以休息，也可以稍后再玩。</p></main>`;
+        root.innerHTML = `<main role="status" data-testid="step${authorization.step}-child-stopped"><h1>这次游戏先到这里</h1><p>可以休息，也可以稍后再玩。</p></main>`;
       },
     });
-    worldHandle = mountMyGameWorld(root, { secondUse: { grant: authorization.grant, bridge, from: fromMode } });
+    worldHandle = mountMyGameWorld(root, {
+      secondUse: {
+        grant: authorization.grant,
+        bridge,
+        evidenceId: authorization.evidenceId,
+        from: fromMode,
+      },
+    });
     window.addEventListener("pagehide", () => bridge.close(), { once: true });
   } else {
     mountMyGameWorld(root);

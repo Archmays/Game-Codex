@@ -1,0 +1,33 @@
+{
+  "id": "placeholder-internal",
+  "roleSkins": {
+    "add_pony": {
+      "displayName": "加法小马",
+      "shortName": "加",
+      "color": "#f8b7c7",
+      "accentColor": "#9f4360",
+      "avatarKey": "placeholder-add"
+    },
+    "sub_pony": {
+      "displayName": "减法小马",
+      "shortName": "减",
+      "color": "#f2c178",
+      "accentColor": "#8a4f14",
+      "avatarKey": "placeholder-sub"
+    },
+    "mul_pony": {
+      "displayName": "翻倍小马",
+      "shortName": "倍",
+      "color": "#83c4f4",
+      "accentColor": "#275a8a",
+      "avatarKey": "placeholder-mul"
+    },
+    "div_pony": {
+      "displayName": "平均分小马",
+      "shortName": "分",
+      "color": "#d8b4f8",
+      "accentColor": "#5f4285",
+      "avatarKey": "placeholder-div"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "recordType": "HARNESS_ANTI_CHEAT_STATIC_AUDIT",
+  "sourceTreeSha256": "63729F26B011E91D4EBBDB1DD82B8B0E9197E3599DD498D9301DD009AF5F1131",
+  "status": "NO_ADDITIONAL_DETERMINISTIC_FAILURE",
+  "checks": {
+    "waitBeforePublicAction": "PASS",
+    "sequentialContextContract": "PASS",
+    "infiniteAnimationProductReducedMotionGuard": "PASS",
+    "visualHarnessReducedMotionAssertion": "PASS",
+    "testOnly": "ABSENT",
+    "xfailOrFixme": "ABSENT",
+    "orTrue": "ABSENT",
+    "playwrightMask": "ABSENT",
+    "visualThresholdWeakening": "ABSENT",
+    "automaticSnapshotApproval": "ABSENT",
+    "producerValidatorDuplicateLiteralContract": "NOT_FOUND"
+  },
+  "projectOwnershipSkips": {
+    "count": 11,
+    "classification": "EXPECTED_PROJECT_ROUTING",
+    "reason": "Every test.skip routes a case to its canonical desktop or mobile project; none removes required coverage."
+  },
+  "observedCandidatesRejected": [
+    {
+      "id": "INACTIVE_VISUAL_MASK_STYLESHEET",
+      "path": "tools/game-machine-review/visual-mask.css",
+      "lines": "13-23",
+      "classification": "SUSPICIOUS_INACTIVE_ONLY",
+      "recoveryEligible": false,
+      "reason": "No import or use was found and no deterministic failure is associated with it."
+    },
+    {
+      "id": "SCROLL_UI_ADAPTER_LIST",
+      "path": "tests/e2e/support/step07-scroll.ts",
+      "lines": "177-249",
+      "classification": "LOW_RISK_COUPLING_ONLY",
+      "recoveryEligible": false,
+      "reason": "The strict validator independently cross-checks canonical route-kind and viewport coverage."
+    }
+  ]
+}

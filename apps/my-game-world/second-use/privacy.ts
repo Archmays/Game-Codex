@@ -5,7 +5,7 @@ import {
 } from "./event-types";
 
 const FORBIDDEN_TEXT = /(name|age|school|user.?agent|screen|pointer|coordinate|keyboard|audio|video|image|photo|voice|localstorage|email|phone)/i;
-const FORBIDDEN_OBSERVER_NOTES = /(?:https?:\/\/|[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|(?:姓名|学校|年龄|电话|手机号|住址|邮箱)\s*[:：]|\b(?:name|school|age|phone|address|email)\s*:|\b\+?\d[\d\s()-]{7,}\d\b)/i;
+const FORBIDDEN_OBSERVER_NOTES = /(?:https?:\/\/|[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|(?:姓名|学校|年龄|电话|手机号|住址|邮箱)\s*[:：]|(?:名叫|姓名是|孩子叫|小朋友叫|我是)\s*[\p{Script=Han}·]{2,8}|(?:住在|家住)\s*[\p{Script=Han}\d]|[\p{Script=Han}]{2,16}(?:小学|中学|幼儿园|学校|学院)|(?:\d{1,2}|[一二三四五六七八九十]{1,3})\s*岁|\b(?:name|school|age|phone|address|email)\s*:|\bmy\s+name\s+is\b|\b\+?\d[\d\s()-]{7,}\d\b)/iu;
 
 export function sanitizeStep06Metadata(input: Step06SafeMetadata = {}): Step06SafeMetadata {
   const safe: Record<string, unknown> = {};

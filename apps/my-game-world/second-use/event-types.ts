@@ -1,4 +1,5 @@
 export const STEP06_EVIDENCE_ID = "hanzi-v2-step06";
+export const STEP07_EVIDENCE_ID = "hanzi-v2-step07";
 export const STEP06_EVENT_SCHEMA_VERSION = 1;
 
 export const STEP06_EVENT_TYPES = [
@@ -72,7 +73,7 @@ export function isStep06TechnicalEvent(value: unknown): value is Step06Technical
   const exact = ["schemaVersion", "sessionId", "sequence", "relativeMs", "eventType", "safeMetadata"];
   if (Object.keys(event).sort().join("|") !== exact.sort().join("|")) return false;
   if (event.schemaVersion !== STEP06_EVENT_SCHEMA_VERSION) return false;
-  if (typeof event.sessionId !== "string" || !/^s06-[a-z0-9-]{8,64}$/.test(event.sessionId)) return false;
+  if (typeof event.sessionId !== "string" || !/^s0[67]-[a-z0-9-]{8,64}$/.test(event.sessionId)) return false;
   if (!Number.isInteger(event.sequence) || (event.sequence as number) < 1 || (event.sequence as number) > 100_000) return false;
   if (!Number.isInteger(event.relativeMs) || (event.relativeMs as number) < 0 || (event.relativeMs as number) > 30 * 60 * 1000) return false;
   if (typeof event.eventType !== "string" || !STEP06_EVENT_TYPES.includes(event.eventType as Step06EventType)) return false;

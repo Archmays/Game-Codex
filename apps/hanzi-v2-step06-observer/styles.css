@@ -4,13 +4,15 @@
 .step06-observer header { padding: 24px; border-radius: 20px; color: #f4fbfa; background: #123a42; }
 .step06-observer h1, .step06-observer h2, .step06-observer h3 { margin-top: 0; }
 .step06-kicker { letter-spacing: .12em; font-weight: 800; }
-.fixture-label { display: inline-block; padding: 8px 12px; border-radius: 999px; color: #4b2d00; background: #ffd77a; }
+.fixture-label { display: inline-block; box-sizing: border-box; max-width: 100%; padding: 8px 12px; border-radius: 999px; color: #4b2d00; background: #ffd77a; overflow-wrap: anywhere; white-space: normal; }
 .step06-card { margin-top: 18px; padding: 22px; border: 1px solid #c7d5d7; border-radius: 18px; background: #fff; box-shadow: 0 8px 24px rgb(16 55 63 / 8%); }
 .step06-card dl { display: grid; grid-template-columns: minmax(150px, .55fr) 1.45fr; gap: 8px 16px; }
 .step06-card dt { font-weight: 800; }
 .step06-card dd { margin: 0; overflow-wrap: anywhere; }
 .step06-card label { display: grid; gap: 6px; margin: 12px 0; font-weight: 700; }
-.step06-card select, .step06-card textarea, .step06-card button { min-height: 44px; font: inherit; }
+.step06-card select, .step06-card textarea, .step06-card button { box-sizing: border-box; max-width: 100%; min-height: 44px; font: inherit; }
+.step06-card select, .step06-card textarea { width: 100%; }
+.step06-card button { overflow-wrap: anywhere; }
 .step06-card textarea { min-height: 90px; padding: 10px; }
 .step06-card button { margin: 6px 8px 6px 0; padding: 8px 15px; border: 0; border-radius: 11px; color: white; background: #126273; font-weight: 800; cursor: pointer; }
 .step06-card button.stop { background: #8a2f3d; }

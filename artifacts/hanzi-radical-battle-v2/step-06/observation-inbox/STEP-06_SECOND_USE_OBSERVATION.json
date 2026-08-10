@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "initiativeId": "hanzi-radical-battle-v2",
+  "step": "06",
+  "evidenceKind": "SYNTHETIC_TOOLING_TEST_ONLY",
+  "sessionIdentity": {
+    "sessionId": "s06-fixture-8e00aa61d796",
+    "canonicalOrigin": "http://127.0.0.1:5175",
+    "startedAtUtc": "2026-08-09T14:00:00.000Z"
+  },
+  "buildIdentity": {
+    "commitSha": "8e00aa61d796578f7e593243caa514da5a307189",
+    "technicalState": "DEFAULT_WORLD_ENTRY_PROMOTED_SECOND_USE_READY"
+  },
+  "parentAuthorization": {
+    "feedbackSha256": "AF3878C88F68344E2EF649774FCE24C46D2312824D91AD274628B85C8A6E0800",
+    "candidateCommit": "c46e660396257767692e94d61263b4662a11ccfb",
+    "evidenceSha256": "EC04FECD4B04F294E7ED62139EBEE386F6B27B3FBC198EBCF3F6CD98341A86D8",
+    "candidateRevision": "fnv1a:c9271099",
+    "authorizeDefaultWorldEntry": "YES",
+    "authorizeSecondUseCheck": "YES"
+  },
+  "intervalBucket": "ONE_TO_THREE_DAYS",
+  "progressContinuity": {
+    "originMatched": true,
+    "canonicalSavePresent": true,
+    "completedAndComplete": true,
+    "discoveredCharacterIds": [
+      "ming",
+      "hua",
+      "lin",
+      "xing"
+    ],
+    "campRepairFlags": {
+      "lamp": true,
+      "flowers": true,
+      "guardianTrees": true,
+      "starPath": true
+    },
+    "recoveredFromCorruption": false
+  },
+  "technicalEvents": [
+    {
+      "schemaVersion": 1,
+      "sessionId": "s06-fixture-8e00aa61d796",
+      "sequence": 1,
+      "relativeMs": 0,
+      "eventType": "session_opened",
+      "safeMetadata": {}
+    },
+    {
+      "schemaVersion": 1,
+      "sessionId": "s06-fixture-8e00aa61d796",
+      "sequence": 2,
+      "relativeMs": 10,
+      "eventType": "world_ready",
+      "safeMetadata": {}
+    },
+    {
+      "schemaVersion": 1,
+      "sessionId": "s06-fixture-8e00aa61d796",
+      "sequence": 3,
+      "relativeMs": 20,
+      "eventType": "progress_continuity_verified",
+      "safeMetadata": {
+        "completed": true
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "sessionId": "s06-fixture-8e00aa61d796",
+      "sequence": 4,
+      "relativeMs": 120,
+      "eventType": "world_first_action",
+      "safeMetadata": {}
+    },
+    {
+      "schemaVersion": 1,
+      "sessionId": "s06-fixture-8e00aa61d796",
+      "sequence": 5,
+      "relativeMs": 120,
+      "eventType": "world_destination_opened",
+      "safeMetadata": {
+        "destinationId": "FOREST"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "sessionId": "s06-fixture-8e00aa61d796",
+      "sequence": 6,
+      "relativeMs": 240,
+      "eventType": "forest_entered",
+      "safeMetadata": {}
+    },
+    {
+      "schemaVersion": 1,
+      "sessionId": "s06-fixture-8e00aa61d796",
+      "sequence": 7,
+      "relativeMs": 260,
+      "eventType": "golden_phase_entered",
+      "safeMetadata": {
+        "phase": "camp_intro"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "sessionId": "s06-fixture-8e00aa61d796",
+      "sequence": 8,
+      "relativeMs": 2400,
+      "eventType": "ability_selected",
+      "safeMetadata": {
+        "abilityId": "ink-echo"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "sessionId": "s06-fixture-8e00aa61d796",
+      "sequence": 9,
+      "relativeMs": 2800,
+      "eventType": "golden_phase_entered",
+      "safeMetadata": {
+        "phase": "run_complete"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "sessionId": "s06-fixture-8e00aa61d796",
+      "sequence": 10,
+      "relativeMs": 2800,
+      "eventType": "golden_run_completed",
+      "safeMetadata": {
+        "completed": true
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "sessionId": "s06-fixture-8e00aa61d796",
+      "sequence": 11,
+      "relativeMs": 2950,
+      "eventType": "world_ready",
+      "safeMetadata": {}
+    },
+    {
+      "schemaVersion": 1,
+      "sessionId": "s06-fixture-8e00aa61d796",
+      "sequence": 12,
+      "relativeMs": 2960,
+      "eventType": "returned_to_world",
+      "safeMetadata": {
+        "worldReturned": true
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "sessionId": "s06-fixture-8e00aa61d796",
+      "sequence": 13,
+      "relativeMs": 3000,
+      "eventType": "session_stopped",
+      "safeMetadata": {}
+    }
+  ],
+  "derivedActions": {
+    "firstWorldActionMs": 120,
+    "firstDestination": "FOREST",
+    "forestEntered": true,
+    "worldSpellbookOpened": false,
+    "classicHubOpened": false,
+    "goldenRunCompleted": true,
+    "returnedToWorld": true,
+    "worldLoopCompleted": true
+  },
+  "observations": {
+    "worldRecognition": {
+      "recognizedWorld": "UNRECORDED",
+      "noticedPersistentRepairs": "UNRECORDED",
+      "selectedDestination": "UNRECORDED",
+      "understoodForestPortal": "UNRECORDED",
+      "understoodSpellbook": "UNRECORDED",
+      "understoodTreasureBox": "UNRECORDED",
+      "returnedToWorld": "UNRECORDED"
+    },
+    "familiarization": {
+      "rememberedCorePlacement": "UNRECORDED",
+      "usedBuiltInHintsOnly": "UNRECORDED",
+      "neededAdultAnswer": "UNRECORDED",
+      "showedBoredomWithRepeatedRoute": "UNRECORDED"
+    },
+    "engagement": {
+      "voluntarilyContinued": "UNRECORDED",
+      "exploredAnotherWorldObject": "UNRECORDED",
+      "askedForMoreAfterOfficialCheck": "UNRECORDED"
+    }
+  },
+  "interventions": [],
+  "wellbeing": {
+    "comfortable": "UNKNOWN",
+    "briefConfusionRecovered": "UNKNOWN",
+    "sustainedFrustration": "UNKNOWN",
+    "sensoryDiscomfort": "UNKNOWN",
+    "childInitiatedStop": "UNKNOWN",
+    "feltForced": "UNKNOWN"
+  },
+  "completion": {
+    "childRouteLoaded": true,
+    "sessionStopped": true,
+    "relativeDurationMs": 3000,
+    "stopCode": "NATURAL_END"
+  },
+  "privacyConfirmed": true,
+  "observerNotes": "Synthetic fixture dry-run only; no child data and no automatic decision."
+}

@@ -1,0 +1,16 @@
+- dialog "四字魔法书":
+  - text: 营地收藏
+  - heading "四字魔法书" [level=2]
+  - navigation "已经发现的字":
+    - button "明"
+    - button "花"
+    - button "林"
+    - button "星"
+  - article:
+    - text: 明
+    - heading "míng · 明亮" [level=3]
+    - paragraph: 有光、看得清楚
+    - paragraph: 日 + 月 → 明
+    - paragraph: 让营地灯重新发亮
+    - button "读给我听"
+  - button "回到游戏世界"

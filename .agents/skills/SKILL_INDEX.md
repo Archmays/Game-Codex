@@ -9,7 +9,8 @@ This is the single Skill root for Game-Codex. Resolve paths exactly as written; 
 3. Load `child-first-use-observation` for authorized first-use preparation, observer evidence, privacy/stop handling, or post-session interpretation.
 4. Load `hanzi-structure-quality` for any character, component, structure, word, pronunciation, meaning, image, or playable-manifest change.
 5. Load only the technical or discipline Skill needed for the bounded task.
-6. Treat real child, parent, or teacher acceptance as independent from automated PASS.
+6. Load `machine-first-game-review` for implementation acceptance, cross-route QA, adult-tool regression, or a formal machine verdict.
+7. Treat real child, parent, or teacher acceptance as independent from automated PASS.
 
 ## Canonical routes
 
@@ -18,6 +19,7 @@ This is the single Skill root for Game-Codex. Resolve paths exactly as written; 
 | `child-first-learning-game` | `.agents/skills/child-first-learning-game/SKILL.md` | Project-local, STEP 01 | Child experience, UI, feedback, retention, accessibility, privacy, or playtest gates change | Child-first and healthy-interest rules are mandatory |
 | `child-first-use-observation` | `.agents/skills/child-first-use-observation/SKILL.md` | Project-local, STEP 04 | Authorized young-child first-use preparation, observation, privacy, stop, evidence packaging, or changed-only revision | Preserve first exposure; local minimum evidence only; synthetic tooling is never child evidence |
 | `hanzi-structure-quality` | `.agents/skills/hanzi-structure-quality/SKILL.md` | Project-local, STEP 01 | Hanzi data, slots, combinations, words, images, or manifests change | Adult content/age-fit review remains required |
+| `machine-first-game-review` | `.agents/skills/machine-first-game-review/SKILL.md` | Project-local, STEP 07 | Game implementation acceptance, shared route/UI changes, adult-tool regression, lifecycle/evidence closeout, catalog smoke, or a formal machine verdict | Use discovery before mutation and fail-closed same-tree acceptance; machine PASS is never human or child acceptance |
 | `family-education-game-autopilot` | `$CODEX_HOME/skills/family-education-game-autopilot/SKILL.md` | Global installed Skill | Bounded audit or improvement rounds for family learning games | Follow its phase/status reporting; do not infer human acceptance |
 | `game-studio` | `$CODEX_HOME/plugins/cache/openai-curated/game-studio/27126220/skills/game-studio/SKILL.md` | OpenAI `game-studio@openai-curated` 0.1.2, source commit `11c74d6ba24d3a6d48f54a194cd00ef3beea18f9` | Route a browser-game task to the smallest relevant Game Studio workflow | Plugin is installed and enabled; do not vendor a duplicate |
 | `web-game-foundations` | `$CODEX_HOME/plugins/cache/openai-curated/game-studio/27126220/skills/web-game-foundations/SKILL.md` | Same OpenAI plugin identity | Browser-game loop, state, input, pause, persistence, and performance foundations | Local-only persistence; no backend |
@@ -37,3 +39,5 @@ OpenAI Game Studio 0.1.2 is MIT-licensed. The installed manifest, six routed Ski
 ## Selection rule
 
 Use the minimum set that covers the task. Do not load asset, audio, save, or prototyping guidance merely because it exists. If a canonical path is unavailable, report the exact missing path and continue only with unaffected work; do not invent a replacement or claim it was read.
+
+The `machine-first-game-review` entry routes detailed recovery/source-freeze, lifecycle/evidence, and retention/cleanup rules through its `references/` directory. Read only the reference required by the current phase.

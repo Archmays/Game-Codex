@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "initiativeId": "hanzi-radical-battle-v2",
+  "step": "06",
+  "sourcePath": "C:\\Users\\mays-\\Downloads\\STEP-05_PARENT_REVIEW_FEEDBACK.json",
+  "ingestedPath": "D:\\ChatGPT-Codex-Projects\\Game-Codex\\artifacts\\hanzi-radical-battle-v2\\step-05\\review\\STEP-05_PARENT_REVIEW_FEEDBACK.json",
+  "feedbackSha256": "AF3878C88F68344E2EF649774FCE24C46D2312824D91AD274628B85C8A6E0800",
+  "reviewContractVersion": "hanzi-v2-step05-parent-review-v1",
+  "candidateCommit": "c46e660396257767692e94d61263b4662a11ccfb",
+  "evidenceSha256": "EC04FECD4B04F294E7ED62139EBEE386F6B27B3FBC198EBCF3F6CD98341A86D8",
+  "candidateRevision": "fnv1a:c9271099",
+  "decisions": [
+    { "itemId": "real-first-use-evidence", "decision": "ACCEPT" },
+    { "itemId": "audio-context-regression", "decision": "ACCEPT" },
+    { "itemId": "private-world-shell", "decision": "ACCEPT" },
+    { "itemId": "world-navigation", "decision": "ACCEPT" }
+  ],
+  "acceptDecisionCount": 4,
+  "authorizeDefaultWorldEntry": "YES",
+  "authorizeSecondUseCheck": "YES",
+  "reviewCompleted": true,
+  "missingRequiredFieldIds": [],
+  "rawFeedbackCommitted": false,
+  "noInferredAuthorization": true,
+  "projectedAtUtc": "2026-08-09T15:40:50.492Z"
+}

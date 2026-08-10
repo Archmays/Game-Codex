@@ -1,0 +1,519 @@
+{
+  "schemaVersion": 1,
+  "recordType": "THEME_C_ASSET_BATCH_MANIFEST",
+  "batchId": "THEME_C_BATCH_01",
+  "generatedAtUtc": "2026-08-10T06:03:49.808373Z",
+  "authorizationId": "HUMAN_AUTHORIZED_STEP07_FINAL_CLOSURE_SKILL_CLEANUP_ASSET_FOUNDRY_01",
+  "technicalLaneStatus": "STOPPED_NO_MACHINE_PASS",
+  "continuationBasis": "Artifact-only Theme C foundry is explicitly allowed when the unrelated STEP07 technical lane stops.",
+  "truthSource": {
+    "selectedTheme": "C",
+    "acceptedFamilies": [
+      "themeC",
+      "mage",
+      "companion",
+      "commonMonster",
+      "boss",
+      "camp",
+      "abilityCards",
+      "meaningMagic"
+    ],
+    "meaningMagicScope": [
+      "明",
+      "花",
+      "林",
+      "星"
+    ]
+  },
+  "promptPack": {
+    "path": "prompt-pack.md",
+    "sha256": "58635B50837C6C04B3C8368D975314D42CF8FDE302D56FCD323EB1BD89D621D8",
+    "promptCount": 32
+  },
+  "generationTool": "OpenAI built-in imagegen",
+  "postProcessing": [
+    "deterministic dimension normalization only",
+    "official imagegen remove_chroma_key.py for sprite alpha",
+    "no semantic repainting and no runtime integration"
+  ],
+  "imageGenerationPerformed": true,
+  "generationAttempts": 33,
+  "candidateCount": 32,
+  "selectedCount": 16,
+  "familyCount": 16,
+  "regenerationRounds": 1,
+  "regeneratedFamilies": [
+    "A11"
+  ],
+  "candidates": [
+    {
+      "candidateId": "A01-C01",
+      "familyId": "A01",
+      "path": "raw-candidates/A01-C01.png",
+      "sha256": "C9A64CB5E73CFB677F981ACCD2896AE579F6FEB2A222CBFD6B5C3D357D6A3022",
+      "technicalPass": true,
+      "selected": false
+    },
+    {
+      "candidateId": "A01-C02",
+      "familyId": "A01",
+      "path": "raw-candidates/A01-C02.png",
+      "sha256": "848C8AD88C2AF42817F6CC6A894F93BD89EEEE3B8636724D7F0CA1BA822AF9A4",
+      "technicalPass": true,
+      "selected": true
+    },
+    {
+      "candidateId": "A02-C01",
+      "familyId": "A02",
+      "path": "raw-candidates/A02-C01.png",
+      "sha256": "433A7587B9E199A28FD8EB71DFB725916ADD4E86DCD833675CB305D0685F1B3F",
+      "technicalPass": true,
+      "selected": true
+    },
+    {
+      "candidateId": "A02-C02",
+      "familyId": "A02",
+      "path": "raw-candidates/A02-C02.png",
+      "sha256": "2B3AE65A448DADC7C289ABEB0CEDF6B13272EAF78330ED470F332F533D245CDB",
+      "technicalPass": true,
+      "selected": false
+    },
+    {
+      "candidateId": "A03-C01",
+      "familyId": "A03",
+      "path": "raw-candidates/A03-C01.png",
+      "sha256": "E753B5C6D4C92833C4C24D7CE99CF0A125A742E7D2E78882F545895B630541ED",
+      "technicalPass": true,
+      "selected": false
+    },
+    {
+      "candidateId": "A03-C02",
+      "familyId": "A03",
+      "path": "raw-candidates/A03-C02.png",
+      "sha256": "63165023E4341916DD4FCAC730D3A1B974E55B91E98C71A0E51FB9B9106F1BAA",
+      "technicalPass": true,
+      "selected": true
+    },
+    {
+      "candidateId": "A04-C01",
+      "familyId": "A04",
+      "path": "raw-candidates/A04-C01.png",
+      "sha256": "9D4CD48F10C425C15325B50144F27824E83FBBAF3A207B56C7CDC5A31EC7906A",
+      "technicalPass": true,
+      "selected": true
+    },
+    {
+      "candidateId": "A04-C02",
+      "familyId": "A04",
+      "path": "raw-candidates/A04-C02.png",
+      "sha256": "B96CC7EE3924C993A528832490FC5225A62870B34C821ECB5DD0EE5D794C9A5D",
+      "technicalPass": true,
+      "selected": false
+    },
+    {
+      "candidateId": "A05-C01",
+      "familyId": "A05",
+      "path": "raw-candidates/A05-C01.png",
+      "sha256": "B609F0057316E88977C67758433CC26BB1B7B0D4903D0BE67A20DD3AB1844E61",
+      "technicalPass": true,
+      "selected": true
+    },
+    {
+      "candidateId": "A05-C02",
+      "familyId": "A05",
+      "path": "raw-candidates/A05-C02.png",
+      "sha256": "AEA8BEA1064D2647E33AAD443EA04068F2CDC0674EC5906226FE95ACA8DAE898",
+      "technicalPass": true,
+      "selected": false
+    },
+    {
+      "candidateId": "A06-C01",
+      "familyId": "A06",
+      "path": "raw-candidates/A06-C01.png",
+      "sha256": "A8F9552C91AA4D39FE362FC53069D0099E146F63E78A9B8F008238102B16F0BB",
+      "technicalPass": true,
+      "selected": true
+    },
+    {
+      "candidateId": "A06-C02",
+      "familyId": "A06",
+      "path": "raw-candidates/A06-C02.png",
+      "sha256": "588C612A8617E54A2062B369919059B945D257ED761922790095FF1DB0681C5F",
+      "technicalPass": true,
+      "selected": false
+    },
+    {
+      "candidateId": "A07-C01",
+      "familyId": "A07",
+      "path": "raw-candidates/A07-C01.png",
+      "sha256": "AADA68BE071E0EA5B094BF7ACACCE36C84D34E32814EFEF2AC49564D63C10B85",
+      "technicalPass": true,
+      "selected": true
+    },
+    {
+      "candidateId": "A07-C02",
+      "familyId": "A07",
+      "path": "raw-candidates/A07-C02.png",
+      "sha256": "702558B3BAD9EB2FD76F03C2AA15AD35DA5350F7A49AD3896DAB9111C5E94C5D",
+      "technicalPass": true,
+      "selected": false
+    },
+    {
+      "candidateId": "A08-C01",
+      "familyId": "A08",
+      "path": "raw-candidates/A08-C01.png",
+      "sha256": "67140A0BB50947B9FE5C03DCA6E38F3B999DB978CC7AC8316EB412426E8BA3A8",
+      "technicalPass": true,
+      "selected": false
+    },
+    {
+      "candidateId": "A08-C02",
+      "familyId": "A08",
+      "path": "raw-candidates/A08-C02.png",
+      "sha256": "A4ACB3BF4AE20596EE6DC8B8043399500F3A685738272FB863C2B3CA7B5C339C",
+      "technicalPass": true,
+      "selected": true
+    },
+    {
+      "candidateId": "A09-C01",
+      "familyId": "A09",
+      "path": "raw-candidates/A09-C01.png",
+      "sha256": "E4D3B68BE7FF537E9BAB97EB8D0A8F04FE022F403510B24B6A73BBB1CEA83278",
+      "technicalPass": true,
+      "selected": true
+    },
+    {
+      "candidateId": "A09-C02",
+      "familyId": "A09",
+      "path": "raw-candidates/A09-C02.png",
+      "sha256": "763AB90B63B414ACED09075D0F04A2ED87FDA397C833A8401CDF7D325614385C",
+      "technicalPass": true,
+      "selected": false
+    },
+    {
+      "candidateId": "A10-C01",
+      "familyId": "A10",
+      "path": "raw-candidates/A10-C01.png",
+      "sha256": "39085985000ABDC004C0F66FCBFFC5FE537AA5539FD4101129B8D018EF72FA9E",
+      "technicalPass": true,
+      "selected": true
+    },
+    {
+      "candidateId": "A10-C02",
+      "familyId": "A10",
+      "path": "raw-candidates/A10-C02.png",
+      "sha256": "9E1ACCF62A310DBFF2909D99DC7FBE71E9A38F84B0E8DD5F6C180827C199F942",
+      "technicalPass": true,
+      "selected": false
+    },
+    {
+      "candidateId": "A11-C01",
+      "familyId": "A11",
+      "path": "raw-candidates/A11-C01.png",
+      "sha256": "B6536361BAA36D6B61BC070D68EDCE3B518DA5951A89D657B08804615932BDE9",
+      "technicalPass": true,
+      "selected": true
+    },
+    {
+      "candidateId": "A11-C02",
+      "familyId": "A11",
+      "path": "raw-candidates/A11-C02.png",
+      "sha256": "D4778679C488DC6F695C9279DE7B67CCCCBE9709A7D44770FC472A2C32162F0C",
+      "technicalPass": true,
+      "selected": false
+    },
+    {
+      "candidateId": "A12-C01",
+      "familyId": "A12",
+      "path": "raw-candidates/A12-C01.png",
+      "sha256": "4A3ACB1CD4AF3907C098E1DEDA34B60F2733BE9A0B11D4B4359938D5621776D8",
+      "technicalPass": true,
+      "selected": true
+    },
+    {
+      "candidateId": "A12-C02",
+      "familyId": "A12",
+      "path": "raw-candidates/A12-C02.png",
+      "sha256": "6A6DA052BA86277CFCB328A42B1FD20EDBA38A8AD14EA9719C0BA10D3729339C",
+      "technicalPass": true,
+      "selected": false
+    },
+    {
+      "candidateId": "A13-C01",
+      "familyId": "A13",
+      "path": "raw-candidates/A13-C01.png",
+      "sha256": "E1DAE1B50850CDF598F16EFF2EC1ED58553FF614C959627AA00105C511A9B559",
+      "technicalPass": true,
+      "selected": true
+    },
+    {
+      "candidateId": "A13-C02",
+      "familyId": "A13",
+      "path": "raw-candidates/A13-C02.png",
+      "sha256": "F123A6A75F2001E774589E3C9780F38D03BEDA4B0371D427A911EEA1C83751EC",
+      "technicalPass": true,
+      "selected": false
+    },
+    {
+      "candidateId": "A14-C01",
+      "familyId": "A14",
+      "path": "raw-candidates/A14-C01.png",
+      "sha256": "2448AB340B3148BF74929953EB1B63DB7791F82B37C68961DE5474C11CDB8C64",
+      "technicalPass": true,
+      "selected": true
+    },
+    {
+      "candidateId": "A14-C02",
+      "familyId": "A14",
+      "path": "raw-candidates/A14-C02.png",
+      "sha256": "32BC2B5D814753264E65FDF5C9E400D4D65999FD5927D5947CB1AC719953790D",
+      "technicalPass": true,
+      "selected": false
+    },
+    {
+      "candidateId": "A15-C01",
+      "familyId": "A15",
+      "path": "raw-candidates/A15-C01.png",
+      "sha256": "B89DD09FF724025A1635EF87C8CD22836CA31EA00BE923D779D9300B808015C4",
+      "technicalPass": true,
+      "selected": true
+    },
+    {
+      "candidateId": "A15-C02",
+      "familyId": "A15",
+      "path": "raw-candidates/A15-C02.png",
+      "sha256": "02009902FBD4FFA3FC70EA9F464EE04FA6A66A42606B95C06D5C5D18F5939049",
+      "technicalPass": true,
+      "selected": false
+    },
+    {
+      "candidateId": "A16-C01",
+      "familyId": "A16",
+      "path": "raw-candidates/A16-C01.png",
+      "sha256": "90F16CF5FDA54D6B3C0ED3726DA6EAFE47C4234C143A33029E03F9E24F0B05BA",
+      "technicalPass": true,
+      "selected": true
+    },
+    {
+      "candidateId": "A16-C02",
+      "familyId": "A16",
+      "path": "raw-candidates/A16-C02.png",
+      "sha256": "7B319F555C22F3D1713DE73EE111EF640BD73997E8F7F559BD9DFFC1F79FAC4E",
+      "technicalPass": true,
+      "selected": false
+    }
+  ],
+  "selected": [
+    {
+      "familyId": "A01",
+      "family": "camp before",
+      "candidateId": "A01-C02",
+      "path": "SELECTED/A01-C02.png",
+      "sha256": "848C8AD88C2AF42817F6CC6A894F93BD89EEEE3B8636724D7F0CA1BA822AF9A4",
+      "selectionRationale": "C02 communicates the unrepaired state more truthfully and leaves the strongest quiet overlay field.",
+      "regenerationRounds": 0
+    },
+    {
+      "familyId": "A02",
+      "family": "camp repaired",
+      "candidateId": "A02-C01",
+      "path": "SELECTED/A02-C01.png",
+      "sha256": "433A7587B9E199A28FD8EB71DFB725916ADD4E86DCD833675CB305D0685F1B3F",
+      "selectionRationale": "C01 gives the clearest before-versus-repaired contrast with A01-C02 and preserves the largest calm central overlay zone.",
+      "regenerationRounds": 0
+    },
+    {
+      "familyId": "A03",
+      "family": "mage",
+      "candidateId": "A03-C02",
+      "path": "SELECTED/A03-C02.png",
+      "sha256": "63165023E4341916DD4FCAC730D3A1B974E55B91E98C71A0E51FB9B9106F1BAA",
+      "selectionRationale": "C02 carries the accepted ink-magic identity most strongly while staying welcoming and legible.",
+      "regenerationRounds": 0
+    },
+    {
+      "familyId": "A04",
+      "family": "companion",
+      "candidateId": "A04-C01",
+      "path": "SELECTED/A04-C01.png",
+      "sha256": "9D4CD48F10C425C15325B50144F27824E83FBBAF3A207B56C7CDC5A31EC7906A",
+      "selectionRationale": "C01 is the cleanest, most iconic companion silhouette and has no visible surface defect.",
+      "regenerationRounds": 0
+    },
+    {
+      "familyId": "A05",
+      "family": "common monster",
+      "candidateId": "A05-C01",
+      "path": "SELECTED/A05-C01.png",
+      "sha256": "B609F0057316E88977C67758433CC26BB1B7B0D4903D0BE67A20DD3AB1844E61",
+      "selectionRationale": "C01 is child-safe, thematically grounded, and clean enough across all audition sizes.",
+      "regenerationRounds": 0
+    },
+    {
+      "familyId": "A06",
+      "family": "two-phase boss",
+      "candidateId": "A06-C01",
+      "path": "SELECTED/A06-C01.png",
+      "sha256": "A8F9552C91AA4D39FE362FC53069D0099E146F63E78A9B8F008238102B16F0BB",
+      "selectionRationale": "C01 provides the clearest forest-native transformation with an unmistakable phase silhouette change and no scary features.",
+      "regenerationRounds": 0
+    },
+    {
+      "familyId": "A07",
+      "family": "guardian-light motif",
+      "candidateId": "A07-C01",
+      "path": "SELECTED/A07-C01.png",
+      "sha256": "AADA68BE071E0EA5B094BF7ACACCE36C84D34E32814EFEF2AC49564D63C10B85",
+      "selectionRationale": "C01 best communicates both guardian and light in one child-readable icon.",
+      "regenerationRounds": 0
+    },
+    {
+      "familyId": "A08",
+      "family": "star-path motif",
+      "candidateId": "A08-C02",
+      "path": "SELECTED/A08-C02.png",
+      "sha256": "A4ACB3BF4AE20596EE6DC8B8043399500F3A685738272FB863C2B3CA7B5C339C",
+      "selectionRationale": "C02 is the cleaner and more immediate path icon, especially at 48 and 72 pixels.",
+      "regenerationRounds": 0
+    },
+    {
+      "familyId": "A09",
+      "family": "ink-echo motif",
+      "candidateId": "A09-C01",
+      "path": "SELECTED/A09-C01.png",
+      "sha256": "E4D3B68BE7FF537E9BAB97EB8D0A8F04FE022F403510B24B6A73BBB1CEA83278",
+      "selectionRationale": "C01 communicates ink plus echo without explanation and survives small-size reduction best.",
+      "regenerationRounds": 0
+    },
+    {
+      "familyId": "A10",
+      "family": "明 meaning magic",
+      "candidateId": "A10-C01",
+      "path": "SELECTED/A10-C01.png",
+      "sha256": "39085985000ABDC004C0F66FCBFFC5FE537AA5539FD4101129B8D018EF72FA9E",
+      "selectionRationale": "C01 gives the most direct sun-plus-moon relation and the cleanest reserved learning area.",
+      "regenerationRounds": 0
+    },
+    {
+      "familyId": "A11",
+      "family": "花 meaning magic",
+      "candidateId": "A11-C01",
+      "path": "SELECTED/A11-C01.png",
+      "sha256": "B6536361BAA36D6B61BC070D68EDCE3B518DA5951A89D657B08804615932BDE9",
+      "selectionRationale": "After the family's one allowed cleanup round, C01 is the strongest direct flower meaning motif with the most flexible central overlay aperture.",
+      "regenerationRounds": 1
+    },
+    {
+      "familyId": "A12",
+      "family": "林 meaning magic",
+      "candidateId": "A12-C01",
+      "path": "SELECTED/A12-C01.png",
+      "sha256": "4A3ACB1CD4AF3907C098E1DEDA34B60F2733BE9A0B11D4B4359938D5621776D8",
+      "selectionRationale": "C01 is the most legible forest relation and stays closest to the deep blue-green Theme C palette.",
+      "regenerationRounds": 0
+    },
+    {
+      "familyId": "A13",
+      "family": "星 meaning magic",
+      "candidateId": "A13-C01",
+      "path": "SELECTED/A13-C01.png",
+      "sha256": "E1DAE1B50850CDF598F16EFF2EC1ED58553FF614C959627AA00105C511A9B559",
+      "selectionRationale": "C01 combines the clearest star focal point, strongest Theme C palette, and a complete learning frame.",
+      "regenerationRounds": 0
+    },
+    {
+      "familyId": "A14",
+      "family": "spellbook motif",
+      "candidateId": "A14-C01",
+      "path": "SELECTED/A14-C01.png",
+      "sha256": "2448AB340B3148BF74929953EB1B63DB7791F82B37C68961DE5474C11CDB8C64",
+      "selectionRationale": "C01 is the clearest spellbook silhouette and supplies two clean page surfaces without introducing text.",
+      "regenerationRounds": 0
+    },
+    {
+      "familyId": "A15",
+      "family": "treasure-box motif",
+      "candidateId": "A15-C01",
+      "path": "SELECTED/A15-C01.png",
+      "sha256": "B89DD09FF724025A1635EF87C8CD22836CA31EA00BE923D779D9300B808015C4",
+      "selectionRationale": "C01 is the most child-readable treasure-box state and remains a motif candidate only, not a runtime reward claim.",
+      "regenerationRounds": 0
+    },
+    {
+      "familyId": "A16",
+      "family": "world portal motif",
+      "candidateId": "A16-C01",
+      "path": "SELECTED/A16-C01.png",
+      "sha256": "90F16CF5FDA54D6B3C0ED3726DA6EAFE47C4234C143A33029E03F9E24F0B05BA",
+      "selectionRationale": "C01 delivers the strongest portal affordance and the most coherent Theme C identity from 48 through 176 pixels.",
+      "regenerationRounds": 0
+    }
+  ],
+  "reviews": [
+    {
+      "role": "technical",
+      "path": "semantic-reviews/TECHNICAL-REVIEW.json",
+      "verdict": "PASS_TO_SEMANTIC_REVIEW"
+    },
+    {
+      "role": "visual-semantic",
+      "path": "semantic-reviews/VISUAL-SEMANTIC-REVIEW.json",
+      "verdict": "ASSET_CANDIDATE_ACCEPTED"
+    },
+    {
+      "role": "integration",
+      "path": "semantic-reviews/INTEGRATION-REVIEW.json",
+      "verdict": "ASSET_CANDIDATE_ACCEPTED"
+    },
+    {
+      "role": "selection-reconciliation",
+      "path": "semantic-reviews/SELECTION.json",
+      "verdict": "ASSET_CANDIDATE_ACCEPTED"
+    }
+  ],
+  "nonSevereReviewerPreferenceDifferences": [
+    {
+      "familyId": "A01",
+      "visualSemanticSelection": "A01-C02",
+      "integrationPreference": "A01-C01",
+      "resolution": "VISUAL_SEMANTIC_SELECTION; BOTH_CANDIDATES_INTEGRATION_PASS"
+    },
+    {
+      "familyId": "A02",
+      "visualSemanticSelection": "A02-C01",
+      "integrationPreference": "A02-C02",
+      "resolution": "VISUAL_SEMANTIC_SELECTION; BOTH_CANDIDATES_INTEGRATION_PASS"
+    },
+    {
+      "familyId": "A03",
+      "visualSemanticSelection": "A03-C02",
+      "integrationPreference": "A03-C01",
+      "resolution": "VISUAL_SEMANTIC_SELECTION; BOTH_CANDIDATES_INTEGRATION_PASS"
+    },
+    {
+      "familyId": "A04",
+      "visualSemanticSelection": "A04-C01",
+      "integrationPreference": "A04-C02",
+      "resolution": "VISUAL_SEMANTIC_SELECTION; BOTH_CANDIDATES_INTEGRATION_PASS"
+    },
+    {
+      "familyId": "A05",
+      "visualSemanticSelection": "A05-C01",
+      "integrationPreference": "A05-C02",
+      "resolution": "VISUAL_SEMANTIC_SELECTION; BOTH_CANDIDATES_INTEGRATION_PASS"
+    },
+    {
+      "familyId": "A08",
+      "visualSemanticSelection": "A08-C02",
+      "integrationPreference": "A08-C01",
+      "resolution": "VISUAL_SEMANTIC_SELECTION; BOTH_CANDIDATES_INTEGRATION_PASS"
+    }
+  ],
+  "contactSheet": {
+    "path": "contact-sheet.webp",
+    "sha256": "9195A03619AD90AEF860A9F3CA0BB98E15263CF14C22F32BEDFFD2509EB2B3EF"
+  },
+  "runtimeIntegrationPerformed": false,
+  "runtimeSourceMutation": false,
+  "status": "THEME_C_ASSET_BATCH_01_MACHINE_SELECTED_NOT_INTEGRATED"
+}

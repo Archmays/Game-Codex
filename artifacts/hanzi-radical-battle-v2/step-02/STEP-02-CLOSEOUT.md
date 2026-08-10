@@ -1,0 +1,30 @@
+# STEP 02 Closeout
+
+- Repository: `D:\ChatGPT-Codex-Projects\Game-Codex`
+- Branch: `main`
+- HEAD before: `34130c3fc072637b545d4bc3f33986c13754969b`
+- HEAD after: `ef4544c111987cca12cf34f794a8ce836f7bfb06`
+- Commit: `ef4544c111987cca12cf34f794a8ce836f7bfb06 feat: add Hanzi V2 core spell review pilot`
+- Push: `origin/main` succeeded (`34130c3..ef4544c`)
+- Changed paths: 60 audited files under the isolated V2 Pilot, local review app, STEP 02 tools/tests/docs, exact query routing/config, and one minimal V1 safety-copy patch
+- V1 safety wording patch: replaced `败北` / `还需要多加练习书法...` / `你的生命值归零，战斗失败。` with warm return-to-camp and retained-discovery wording; no V1 mechanics or data changed
+- Pilot anchor: provisional `明 = 日 + 月`, left-right structure, `míng`, familiar word `明亮`, light spell, persistent repaired camp lamp
+- Candidate count: 15 provisional candidates
+- Recommended count: 10 recommended, 3 conditional, 2 reserve; the final playable manifest remains unapproved and capped at 12
+- Visual directions: A `暖墨绘本`, B `剪纸字灵`, C `夜光墨林`; procedural review directions only
+- Image prompts: 18 Level 3 seed prompts; ImageGen was not called
+- Dependencies changed: none; package scripts only, no dependency or lockfile change
+- Foundation tests: PASS, 12/12
+- STEP 02 targeted tests: PASS, 19/19 across 5 files, including current/forged FINISH fixtures
+- E2E: PASS, Chromium 5/5
+- Full tests: PASS, 227/227 across 28 files
+- Build: PASS, TypeScript plus Vite, 140 modules; one non-blocking existing chunk-size warning remains
+- Screenshot evidence: 10/10 representative WebP files; capture report recorded zero console errors, zero page errors, and zero non-local requests
+- Independent read-only audit: prior invalid-card, revision-integrity, dependency-invalidation, and FINISH identity findings were repaired and re-audited PASS
+- Current phase: `STEP 02 COMPLETE` / `CORE_SPELL_PILOT_READY_FOR_PARENT_REVIEW`
+- START review: `D:\ChatGPT-Codex-Projects\Game-Codex\tools\hanzi-v2-step02\START_STEP_02_REVIEW.cmd`
+- FINISH review: `D:\ChatGPT-Codex-Projects\Game-Codex\tools\hanzi-v2-step02\FINISH_STEP_02_REVIEW.cmd`
+- Codex return zip: `D:\ChatGPT-Codex-Projects\Game-Codex\artifacts\hanzi-radical-battle-v2\step-02\STEP-02_CORE_SPELL_PILOT_RETURN_TO_CHATGPT.zip`
+- SHA-256: `DC8FC0EF2893C2156796FCA9D9DEE26EC163421B293A85CBC26C22E41C32F81D` (sealed archive; also recorded in the sibling `.zip.sha256` sidecar)
+- Unresolved: no technical blocker for parent review; pinyin, structure labels, familiar words, child-fit, A/B/C direction, 15 character decisions, seven storyboard decisions, and STEP 03 authorization all still require human review
+- Explicitly not claimed: parent acceptance, child acceptance, child-playtest readiness, an approved 12-character manifest, approved production art, completed 3–5 minute Golden Slice, or authorization to expand the full Ink Forest

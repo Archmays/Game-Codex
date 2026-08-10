@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "recordType": "ACTUAL_COMMAND_RUN",
+  "runId": "compile-20260810T051518835Z-61320-c767ddbe",
+  "gateId": "compile",
+  "command": "pnpm",
+  "args": [
+    "exec",
+    "tsc",
+    "--noEmit"
+  ],
+  "startedAtUtc": "2026-08-10T05:15:18.835Z",
+  "finishedAtUtc": "2026-08-10T05:15:24.796Z",
+  "exitCode": 0,
+  "sourceTreeSha256Before": "B6C2AFD041D4BCA65261B04DD0D46455A15A6F4793AE39435C8D7B8C0ED9CB63",
+  "sourceTreeSha256After": "B6C2AFD041D4BCA65261B04DD0D46455A15A6F4793AE39435C8D7B8C0ED9CB63",
+  "logSha256": "9109FD59089F585F70E14BB4F545009D67EF34A033AE7FACBE6A418C0B185D41",
+  "logPath": "artifacts/game-machine-review/step-07/hard-gates/commands/compile-20260810T051518835Z-61320-c767ddbe.log",
+  "status": "PASS"
+}

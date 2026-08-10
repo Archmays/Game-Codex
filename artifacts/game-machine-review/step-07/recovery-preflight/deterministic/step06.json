@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "recordType": "RECOVERY_PREFLIGHT_COMMAND",
+  "id": "step06",
+  "command": "pnpm run test:hanzi-v2:step06",
+  "startedAtUtc": "2026-08-10T02:33:07.5036807Z",
+  "finishedAtUtc": "2026-08-10T02:33:13.0595670Z",
+  "durationMs": 5556,
+  "exitCode": 0,
+  "status": "PASS",
+  "sourceTreeSha256Before": "63729F26B011E91D4EBBDB1DD82B8B0E9197E3599DD498D9301DD009AF5F1131",
+  "sourceTreeSha256After": "63729F26B011E91D4EBBDB1DD82B8B0E9197E3599DD498D9301DD009AF5F1131",
+  "sourceTreeUnchanged": true,
+  "logPath": "artifacts/game-machine-review/step-07/recovery-preflight/deterministic/step06.log"
+}

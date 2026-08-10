@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "recordType": "RECOVERY_PREFLIGHT_PLAYWRIGHT_COLLECTION",
+  "id": "step07-observer",
+  "command": "pnpm exec playwright test tests/e2e/hanzi-v2-step07-real-second-use.spec.ts --config playwright.step07.config.ts --list --output artifacts/game-machine-review/step-07/recovery-preflight/playwright-list/step07-observer",
+  "startedAtUtc": "2026-08-10T02:37:41.2135249Z",
+  "finishedAtUtc": "2026-08-10T02:37:45.5395224Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "listedTestLineCount": 4,
+  "summary": "Listing tests: | Total: 4 tests in 1 file",
+  "browserLaunched": false,
+  "sourceTreeSha256Before": "63729F26B011E91D4EBBDB1DD82B8B0E9197E3599DD498D9301DD009AF5F1131",
+  "sourceTreeSha256After": "63729F26B011E91D4EBBDB1DD82B8B0E9197E3599DD498D9301DD009AF5F1131",
+  "sourceTreeUnchanged": true,
+  "logPath": "artifacts/game-machine-review/step-07/recovery-preflight/collection/step07-observer.log"
+}

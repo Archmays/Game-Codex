@@ -1,6 +1,4 @@
-.step05-review-page { height: auto !important; min-height: 100% !important; }
-body.step05-review-page { overflow-x: hidden !important; overflow-y: auto !important; background: #f5f3ed; }
-body.step05-review-page #app { height: auto !important; min-height: 100vh; }
+body.step05-review-page { background: #f5f3ed; }
 
 .step05-review,
 .step05-review * { box-sizing: border-box; }

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "recordType": "ACTUAL_COMMAND_RUN",
+  "runId": "targeted-tests-20260810T024927296Z-29552-52a2523d",
+  "gateId": "targeted-tests",
+  "command": "pnpm",
+  "args": [
+    "exec",
+    "vitest",
+    "run",
+    "tests/game-machine-review-manifest.test.ts",
+    "tests/game-machine-review-verdict.test.ts",
+    "tests/game-machine-evidence-identity.test.ts",
+    "tests/game-machine-evidence-manifest.test.ts",
+    "tests/game-machine-command-evidence.test.ts",
+    "tests/game-machine-deep-route-evidence.test.ts",
+    "tests/game-machine-static-report-scroll-evidence.test.ts"
+  ],
+  "startedAtUtc": "2026-08-10T02:49:27.296Z",
+  "finishedAtUtc": "2026-08-10T02:49:32.716Z",
+  "exitCode": 0,
+  "sourceTreeSha256Before": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+  "sourceTreeSha256After": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+  "logSha256": "50501A3A6FD236EC685BA4AB0F8087ED20788E96BF16E3FAF0A91564246A727B",
+  "logPath": "artifacts/game-machine-review/step-07/hard-gates/commands/targeted-tests-20260810T024927296Z-29552-52a2523d.log",
+  "status": "PASS"
+}

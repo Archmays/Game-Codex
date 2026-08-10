@@ -1,0 +1,60 @@
+- main:
+  - text: Hanzi Radical Battle V2
+  - heading "核心法术 · 家长审核" [level=1]
+  - text: Round
+  - strong: "1"
+  - button "查看缺项"
+  - navigation "STEP 02 审核章节":
+    - button "01范围与北极星"
+    - button "02核心法术 Pilot"
+    - button "0315 字候选"
+    - button "04视觉方向"
+    - button "05故事板"
+    - button "06汇总与导出"
+  - text: PLAY FIRST
+  - heading "同一块世界里完成核心法术" [level=2]
+  - paragraph: 从本页开始，两次点按内进入五牌结构操作。点牌再点槽位，或直接拖放。
+  - text: 锚点：明 = 日 + 月 结构预览
+  - combobox "结构预览":
+    - option "儿童主 Pilot · 明（左右）" [selected]
+    - option "成人预览 · 花（上下）"
+    - option "成人预览 · 风（半包围）"
+  - button "桌面" [pressed]
+  - button "平板"
+  - button "手机"
+  - button "重置本次闭环"
+  - article:
+    - text: 墨林营地 · 核心法术试玩
+    - button "打开声音、动态和视觉方向设置": 设置
+    - status:
+      - text: 墨点
+      - paragraph: 营地的灯暗了。跟着墨点去看看吧。
+    - button "沿着灯路出发"
+  - article:
+    - text: 当前阶段
+    - strong: camp_intro
+  - article:
+    - text: 事件顺序
+    - list:
+      - listitem: pilot_opened
+  - article:
+    - text: 五牌生成审计
+    - paragraph:
+      - strong: 目标：
+      - text: 日 + 月 → 明
+      - strong: 干扰：
+      - text: 氵、亻、讠；母库两/三牌枚举无替代成字。
+      - strong: 交互：
+      - text: 可撤回；2 次后单槽提示；4 秒墨点引导。
+  - article:
+    - text: 审核提示
+    - paragraph: 重点观察最后一张归位后，部件 → 完整字 → 读音词义 → 法术 → 营地永久变化的因果是否连续。
+  - group "核心 Pilot 的正式决定":
+    - text: 核心 Pilot 的正式决定
+    - button "ACCEPT"
+    - button "REVISE"
+    - button "REJECT"
+    - text: 具体反馈
+    - textbox "具体反馈":
+      - /placeholder: 哪里自然？哪里仍像答题？需要怎样修改？
+  - text: 本地审核应用 · 无联网、无账号、无遥测 技术状态：CORE_SPELL_PILOT_READY_FOR_PARENT_REVIEW

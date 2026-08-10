@@ -1,0 +1,19 @@
+{
+  "baseUrl": "http://127.0.0.1:5173",
+  "outputRoot": "D:\\ChatGPT-Codex-Projects\\Game-Codex\\artifacts\\hanzi-radical-battle-v2\\step-02\\raw-screenshots",
+  "screenshots": [
+    "01-camp-before-desktop",
+    "02-first-hand-mobile",
+    "03-invalid-feedback-tablet",
+    "04-character-forming-desktop",
+    "05-spell-impact-desktop",
+    "06-camp-repaired-mobile",
+    "07-spellbook-tablet",
+    "08-theme-comparison",
+    "09-reduced-motion",
+    "10-review-candidate-card"
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "remoteRequests": []
+}

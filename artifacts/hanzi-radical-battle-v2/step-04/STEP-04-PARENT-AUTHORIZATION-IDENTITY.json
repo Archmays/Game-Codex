@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "initiativeId": "hanzi-radical-battle-v2",
+  "step": "04",
+  "authorized": true,
+  "authorizeChildFirstUse": "YES",
+  "audioDecision": "REVISE",
+  "parentFeedbackSha256": "3F0BFAC4C6D318AC197AFA95764ACFB3A9E7FE9CE47BF6FA18C1514879EA417C",
+  "acceptedReviewIdentitySha256": "DBA281F9954DFB591E2F3D7498B1B8F09F6C050BFBFA2436C9961B0513D73D3E",
+  "checkedAtUtc": "2026-08-09T02:01:00.000Z"
+}

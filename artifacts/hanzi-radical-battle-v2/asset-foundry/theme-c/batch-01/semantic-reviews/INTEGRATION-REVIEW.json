@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "recordType": "THEME_C_ASSET_INTEGRATION_READINESS_REVIEW",
+  "generatedAtUtc": "2026-08-10T05:52:09.1091652Z",
+  "batch": "theme-c/batch-01",
+  "reviewMode": "INDEPENDENT_SUBAGENT",
+  "reviewScope": "CANDIDATE_ONLY_NOT_RUNTIME_INTEGRATION",
+  "sourceByteFreezeConfirmed": true,
+  "runtimeIntegrationPerformed": false,
+  "reviewScalesPx": [48, 72, 112, 176],
+  "themePaletteChecked": ["#071C2A", "#0E343B", "#7EE8C7", "#72DFE8", "#AAA6FF", "#FF9B82", "#FFD483", "#FFF7DF"],
+  "evidence": {
+    "technicalReview": {
+      "path": "semantic-reviews/TECHNICAL-REVIEW.json",
+      "sha256": "01D65BA165A779AE0CF991BBA8BBF012DE06CBA6857EBE0E5A8B9E7DB7BA6AD8",
+      "result": "32_OF_32_PASS_NO_EXACT_DUPLICATES"
+    },
+    "auditionSheets": [
+      {"path": "semantic-reviews/ALL-CANDIDATES-AUDITION-01.webp", "sha256": "CEF27F36832E6ECDAC67BC3F76DC4AFEAF83E02B79BB8A547E0CC1BBDC7F2AE4"},
+      {"path": "semantic-reviews/ALL-CANDIDATES-AUDITION-02.webp", "sha256": "6D8E49D5B0C4B5537EB4E8A0BD12883F7AE552587631C55D83A7D82B1C344590"},
+      {"path": "semantic-reviews/SMALL-SIZE-AUDITION-01.webp", "sha256": "085859DED5DEBC2EE0DFB8917E83641362C2556649AB609049D272250A214E2B"},
+      {"path": "semantic-reviews/SMALL-SIZE-AUDITION-02.webp", "sha256": "BBDD9CA2120EA494F1E2F1A12B1084274A219EFC51D64B4BD2C12E80652C8C59"},
+      {"path": "semantic-reviews/SMALL-SIZE-AUDITION-03.webp", "sha256": "38AFD6F9034CB8E87C0D36FD0215510D4543D922387CB59CC35C570BE267CF41"},
+      {"path": "semantic-reviews/SMALL-SIZE-AUDITION-04.webp", "sha256": "6A883599F8C32A07B4F08037332A3BC1F74D02616B06962D7CAB5CF9E6D1C6F3"}
+    ]
+  },
+  "families": [
+    {
+      "familyId": "A01",
+      "family": "camp before",
+      "selectedCandidateId": "A01-C01",
+      "recommendation": "ASSET_CANDIDATE_ACCEPTED",
+      "candidates": [
+        {"candidateId": "A01-C01", "sha256": "C9A64CB5E73CFB677F981ACCD2896AE579F6FEB2A222CBFD6B5C3D357D6A3022", "smallSize48_72_112_176": ["PASS_DETAIL_LOSS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_OPAQUE_SAFE_COMPOSITION", "darkLight": "OPAQUE", "palette": "PASS", "separationPotential": "PASS_PARALLAX", "overlaySpace": "PASS_CENTER_AND_MIDDLE_LEFT", "integrity": "PASS", "rationale": "Camp, path and dim lamp remain identifiable; broad calm overlay field.", "disposition": "SELECTED"},
+        {"candidateId": "A01-C02", "sha256": "848C8AD88C2AF42817F6CC6A894F93BD89EEEE3B8636724D7F0CA1BA822AF9A4", "smallSize48_72_112_176": ["PASS_TENT_DETAIL_LOSS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_OPAQUE_SAFE_COMPOSITION", "darkLight": "OPAQUE", "palette": "PASS", "separationPotential": "PASS_PARALLAX", "overlaySpace": "PASS_CENTER_CLEARING", "integrity": "PASS", "rationale": "Usable alternate with a wider clearing, but the camp reads later at small scale.", "disposition": "ALTERNATE"}
+      ]
+    },
+    {
+      "familyId": "A02",
+      "family": "camp repaired",
+      "selectedCandidateId": "A02-C02",
+      "recommendation": "ASSET_CANDIDATE_ACCEPTED",
+      "candidates": [
+        {"candidateId": "A02-C01", "sha256": "433A7587B9E199A28FD8EB71DFB725916ADD4E86DCD833675CB305D0685F1B3F", "smallSize48_72_112_176": ["PASS_REPAIR_CUE_LOSS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_OPAQUE_SAFE_COMPOSITION", "darkLight": "OPAQUE", "palette": "PASS", "separationPotential": "PASS_PARALLAX_LIGHT", "overlaySpace": "PASS_CENTER_SKY", "integrity": "PASS", "rationale": "Broad center is safe, though repair cues are quieter at 48 px.", "disposition": "ALTERNATE"},
+        {"candidateId": "A02-C02", "sha256": "2B3AE65A448DADC7C289ABEB0CEDF6B13272EAF78330ED470F332F533D245CDB", "smallSize48_72_112_176": ["PASS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_OPAQUE_SAFE_COMPOSITION", "darkLight": "OPAQUE", "palette": "PASS", "separationPotential": "PASS_PARALLAX_LIGHT", "overlaySpace": "PASS_MIDDLE_LEFT", "integrity": "PASS", "rationale": "Warm tent and lamp are the clearest persistent-repair cue without blocking overlay space.", "disposition": "SELECTED"}
+      ]
+    },
+    {
+      "familyId": "A03",
+      "family": "mage",
+      "selectedCandidateId": "A03-C01",
+      "recommendation": "ASSET_CANDIDATE_ACCEPTED",
+      "candidates": [
+        {"candidateId": "A03-C01", "sha256": "E753B5C6D4C92833C4C24D7CE99CF0A125A742E7D2E78882F545895B630541ED", "smallSize48_72_112_176": ["PASS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_BOTTOM_CENTER_SEED", "overlaySpace": "NA", "integrity": "PASS", "rationale": "Upright brush, hat, face and boots remain readable; strong future strip seed.", "disposition": "SELECTED"},
+        {"candidateId": "A03-C02", "sha256": "63165023E4341916DD4FCAC730D3A1B974E55B91E98C71A0E51FB9B9106F1BAA", "smallSize48_72_112_176": ["PASS_WAND_DETAIL_LOSS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_MORE_RIG_COMPLEXITY", "overlaySpace": "NA", "integrity": "PASS", "rationale": "Usable alternate; low wand and asymmetric hem need more rig separation.", "disposition": "ALTERNATE"}
+      ]
+    },
+    {
+      "familyId": "A04",
+      "family": "companion",
+      "selectedCandidateId": "A04-C02",
+      "recommendation": "ASSET_CANDIDATE_ACCEPTED",
+      "candidates": [
+        {"candidateId": "A04-C01", "sha256": "9D4CD48F10C425C15325B50144F27824E83FBBAF3A207B56C7CDC5A31EC7906A", "smallSize48_72_112_176": ["PASS_DARK_BODY_LOSS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_REDUCED_DARK_CONTRAST", "palette": "PASS", "separationPotential": "PASS_BOB_TAIL", "overlaySpace": "NA", "integrity": "PASS", "rationale": "Simple motion seed, but the dark body recedes at 48 px on runtime dark.", "disposition": "ALTERNATE"},
+        {"candidateId": "A04-C02", "sha256": "B96CC7EE3924C993A528832490FC5225A62870B34C821ECB5DD0EE5D794C9A5D", "smallSize48_72_112_176": ["PASS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_SQUASH_BOB_TAIL", "overlaySpace": "NA", "integrity": "PASS", "rationale": "Broad silhouette, cyan rim and face stay clear at 48 px on dark and light.", "disposition": "SELECTED"}
+      ]
+    },
+    {
+      "familyId": "A05",
+      "family": "common monster",
+      "selectedCandidateId": "A05-C02",
+      "recommendation": "ASSET_CANDIDATE_ACCEPTED",
+      "candidates": [
+        {"candidateId": "A05-C01", "sha256": "B609F0057316E88977C67758433CC26BB1B7B0D4903D0BE67A20DD3AB1844E61", "smallSize48_72_112_176": ["PASS_FACE_DETAIL_LOSS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_LOW_SQUASH", "overlaySpace": "NA", "integrity": "PASS", "rationale": "Friendly clump reads, but facial feedback is weaker at 48 px.", "disposition": "ALTERNATE"},
+        {"candidateId": "A05-C02", "sha256": "AEA8BEA1064D2647E33AAD443EA04068F2CDC0674EC5906226FE95ACA8DAE898", "smallSize48_72_112_176": ["PASS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_THREE_SQUASH_ZONES", "overlaySpace": "NA", "integrity": "PASS", "rationale": "Three rounded bands and neutral face remain legible and support child-safe squash motion.", "disposition": "SELECTED"}
+      ]
+    },
+    {
+      "familyId": "A06",
+      "family": "two-phase boss",
+      "selectedCandidateId": "A06-C01",
+      "recommendation": "ASSET_CANDIDATE_ACCEPTED",
+      "candidates": [
+        {"candidateId": "A06-C01", "sha256": "A8F9552C91AA4D39FE362FC53069D0099E146F63E78A9B8F008238102B16F0BB", "smallSize48_72_112_176": ["PASS_PHASES", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_TWO_NON_OVERLAPPING_FORMS", "overlaySpace": "NA", "integrity": "PASS", "rationale": "Related stump and awakened tree share a baseline and crop independently; future strip still required.", "disposition": "SELECTED"},
+        {"candidateId": "A06-C02", "sha256": "588C612A8617E54A2062B369919059B945D257ED761922790095FF1DB0681C5F", "smallSize48_72_112_176": ["PASS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_TWO_NON_OVERLAPPING_FORMS", "overlaySpace": "NA", "integrity": "PASS", "rationale": "Crop-ready alternate, but the phase-change silhouette delta is smaller.", "disposition": "ALTERNATE"}
+      ]
+    },
+    {
+      "familyId": "A07",
+      "family": "guardian-light icon/card motif",
+      "selectedCandidateId": "A07-C01",
+      "recommendation": "ASSET_CANDIDATE_ACCEPTED",
+      "candidates": [
+        {"candidateId": "A07-C01", "sha256": "AADA68BE071E0EA5B094BF7ACACCE36C84D34E32814EFEF2AC49564D63C10B85", "smallSize48_72_112_176": ["PASS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_SEED_LEAVES_SHIELD_STARS", "overlaySpace": "NA", "integrity": "PASS", "rationale": "Shield, cupped leaves and warm seed stay a compact protective icon at 48 px.", "disposition": "SELECTED"},
+        {"candidateId": "A07-C02", "sha256": "702558B3BAD9EB2FD76F03C2AA15AD35DA5350F7A49AD3896DAB9111C5E94C5D", "smallSize48_72_112_176": ["PASS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_ORB_LEAVES_STAR", "overlaySpace": "NA", "integrity": "PASS", "rationale": "Strong alternate with simpler glow layers but a weaker shield reading.", "disposition": "ALTERNATE"}
+      ]
+    },
+    {
+      "familyId": "A08",
+      "family": "star-path icon/card motif",
+      "selectedCandidateId": "A08-C01",
+      "recommendation": "ASSET_CANDIDATE_ACCEPTED",
+      "candidates": [
+        {"candidateId": "A08-C01", "sha256": "67140A0BB50947B9FE5C03DCA6E38F3B999DB978CC7AC8316EB412426E8BA3A8", "smallSize48_72_112_176": ["PASS_NODE_DETAIL_LOSS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_FIVE_NODES_STAR_LEAVES", "overlaySpace": "NA", "integrity": "PASS", "rationale": "Five stepping nodes and goal star communicate a path and support sequential reveal.", "disposition": "SELECTED"},
+        {"candidateId": "A08-C02", "sha256": "A4ACB3BF4AE20596EE6DC8B8043399500F3A685738272FB863C2B3CA7B5C339C", "smallSize48_72_112_176": ["PASS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_RIBBON_REVEAL", "overlaySpace": "NA", "integrity": "PASS", "rationale": "Readable alternate, but offers fewer independent route steps.", "disposition": "ALTERNATE"}
+      ]
+    },
+    {
+      "familyId": "A09",
+      "family": "ink-echo icon/card motif",
+      "selectedCandidateId": "A09-C01",
+      "recommendation": "ASSET_CANDIDATE_ACCEPTED",
+      "candidates": [
+        {"candidateId": "A09-C01", "sha256": "E4D3B68BE7FF537E9BAB97EB8D0A8F04FE022F403510B24B6A73BBB1CEA83278", "smallSize48_72_112_176": ["PASS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_DROPLET_SHELLS_BEADS", "overlaySpace": "NA", "integrity": "PASS", "rationale": "Droplet, echo shells and timing beads remain distinct and pulse-ready at 48 px.", "disposition": "SELECTED"},
+        {"candidateId": "A09-C02", "sha256": "763AB90B63B414ACED09075D0F04A2ED87FDA397C833A8401CDF7D325614385C", "smallSize48_72_112_176": ["PASS_CENTER_DETAIL_LOSS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_OUTLINE_PULSE", "overlaySpace": "NA", "integrity": "PASS", "rationale": "Usable pulse alternate, but directional echo meaning is weaker.", "disposition": "ALTERNATE"}
+      ]
+    },
+    {
+      "familyId": "A10",
+      "family": "明 meaning magic",
+      "selectedCandidateId": "A10-C01",
+      "recommendation": "ASSET_CANDIDATE_ACCEPTED",
+      "candidates": [
+        {"candidateId": "A10-C01", "sha256": "39085985000ABDC004C0F66FCBFFC5FE537AA5539FD4101129B8D018EF72FA9E", "smallSize48_72_112_176": ["PASS_ORNAMENT_DETAIL_LOSS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_SUN_MOON_LIGHT_PLAQUE", "overlaySpace": "PASS_BLANK_DARK_PLAQUE", "integrity": "PASS", "rationale": "Sun, moon and shared light pair with the strongest controlled overlay plaque.", "disposition": "SELECTED"},
+        {"candidateId": "A10-C02", "sha256": "9E1ACCF62A310DBFF2909D99DC7FBE71E9A38F84B0E8DD5F6C180827C199F942", "smallSize48_72_112_176": ["PASS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_SUN_MOON_BEAMS_FLOWER", "overlaySpace": "LIMITED_NO_BROAD_CENTRAL_PANEL", "integrity": "PASS", "rationale": "Readable decorative alternate, but weaker for direct runtime Hanzi overlay.", "disposition": "DECORATIVE_ALTERNATE"}
+      ]
+    },
+    {
+      "familyId": "A11",
+      "family": "花 meaning magic",
+      "selectedCandidateId": "A11-C01",
+      "recommendation": "ASSET_CANDIDATE_ACCEPTED",
+      "candidates": [
+        {"candidateId": "A11-C01", "sha256": "B6536361BAA36D6B61BC070D68EDCE3B518DA5951A89D657B08804615932BDE9", "smallSize48_72_112_176": ["PASS_FLOWER_RING", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_FLOWERS_SPROUT_LEAVES", "overlaySpace": "PASS_TRANSPARENT_CENTER", "integrity": "PASS_AFTER_ONE_ALLOWED_REGENERATION", "rationale": "Flower grouping and clear center remain direct and low-noise at all sizes.", "disposition": "SELECTED"},
+        {"candidateId": "A11-C02", "sha256": "D4778679C488DC6F695C9279DE7B67CCCCBE9709A7D44770FC472A2C32162F0C", "smallSize48_72_112_176": ["PASS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_PETALS_LEAVES_PANEL", "overlaySpace": "PASS_BLANK_CREAM_OVAL", "integrity": "PASS_AFTER_ONE_ALLOWED_REGENERATION", "rationale": "Strong overlay alternate with a less general lotus-shaped flower identity.", "disposition": "ALTERNATE"}
+      ]
+    },
+    {
+      "familyId": "A12",
+      "family": "林 meaning magic",
+      "selectedCandidateId": "A12-C01",
+      "recommendation": "ASSET_CANDIDATE_ACCEPTED",
+      "candidates": [
+        {"candidateId": "A12-C01", "sha256": "4A3ACB1CD4AF3907C098E1DEDA34B60F2733BE9A0B11D4B4359938D5621776D8", "smallSize48_72_112_176": ["PASS_TREE_GROUP", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_CYAN_RIM", "palette": "PASS", "separationPotential": "PASS_THREE_TREE_CROWNS", "overlaySpace": "PASS_TRANSPARENT_CLEARING", "integrity": "PASS", "rationale": "Three trees form the clearest low-noise forest group and central clearing.", "disposition": "SELECTED"},
+        {"candidateId": "A12-C02", "sha256": "6A6DA052BA86277CFCB328A42B1FD20EDBA38A8AD14EA9719C0BA10D3729339C", "smallSize48_72_112_176": ["PASS_TREE_COUNT_LOSS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS_MORE_SATURATED", "separationPotential": "PASS_HIGHER_LAYER_COMPLEXITY", "overlaySpace": "PASS_TRANSPARENT_CENTER", "integrity": "PASS", "rationale": "Colorful alternate with more visual and animation complexity.", "disposition": "ALTERNATE"}
+      ]
+    },
+    {
+      "familyId": "A13",
+      "family": "星 meaning magic",
+      "selectedCandidateId": "A13-C01",
+      "recommendation": "ASSET_CANDIDATE_ACCEPTED",
+      "candidates": [
+        {"candidateId": "A13-C01", "sha256": "E1DAE1B50850CDF598F16EFF2EC1ED58553FF614C959627AA00105C511A9B559", "smallSize48_72_112_176": ["PASS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_STAR_ORBIT_SPARKS", "overlaySpace": "PASS_ENCLOSED_TRANSPARENT_CENTER", "integrity": "PASS", "rationale": "Large star and three sparks give the clearest star identity and enclosed overlay center.", "disposition": "SELECTED"},
+        {"candidateId": "A13-C02", "sha256": "F123A6A75F2001E774589E3C9780F38D03BEDA4B0371D427A911EEA1C83751EC", "smallSize48_72_112_176": ["PASS_STAR_ARCH", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_MULTI_STAR_ARCH", "overlaySpace": "PASS_OPEN_CENTER_NOT_ENCLOSED", "integrity": "PASS", "rationale": "Readable alternate, though the rainbow-like open arch weakens the orbit metaphor.", "disposition": "ALTERNATE"}
+      ]
+    },
+    {
+      "familyId": "A14",
+      "family": "spellbook motif",
+      "selectedCandidateId": "A14-C01",
+      "recommendation": "ASSET_CANDIDATE_ACCEPTED",
+      "candidates": [
+        {"candidateId": "A14-C01", "sha256": "2448AB340B3148BF74929953EB1B63DB7791F82B37C68961DE5474C11CDB8C64", "smallSize48_72_112_176": ["PASS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_COVER_PAGES_SPINE_BOOKMARK_CLASP", "overlaySpace": "PASS_BLANK_PAGES", "integrity": "PASS", "rationale": "Open blank pages read at 48 px and support future page-turn and overlay layers.", "disposition": "SELECTED"},
+        {"candidateId": "A14-C02", "sha256": "32BC2B5D814753264E65FDF5C9E400D4D65999FD5927D5947CB1AC719953790D", "smallSize48_72_112_176": ["PASS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_CLOSED_STATE", "overlaySpace": "PASS_BLANK_COVER_PANEL", "integrity": "PASS", "rationale": "Useful closed-state alternate, but no visible page layers.", "disposition": "ALTERNATE"}
+      ]
+    },
+    {
+      "familyId": "A15",
+      "family": "treasure-box motif",
+      "selectedCandidateId": "A15-C01",
+      "recommendation": "ASSET_CANDIDATE_ACCEPTED",
+      "candidates": [
+        {"candidateId": "A15-C01", "sha256": "B89DD09FF724025A1635EF87C8CD22836CA31EA00BE923D779D9300B808015C4", "smallSize48_72_112_176": ["PASS_STAR_COUNT_LOSS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_LID_BODY_LATCH_GLOW_KEEPSAKES", "overlaySpace": "NA", "integrity": "PASS", "rationale": "Open lid, contained light and keepsakes support a clear non-currency reveal.", "disposition": "SELECTED"},
+        {"candidateId": "A15-C02", "sha256": "02009902FBD4FFA3FC70EA9F464EE04FA6A66A42606B95C06D5C5D18F5939049", "smallSize48_72_112_176": ["PASS", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_CLOSED_STATE", "overlaySpace": "NA", "integrity": "PASS", "rationale": "Strong closed-state alternate, but provides no visible reward reveal.", "disposition": "ALTERNATE"}
+      ]
+    },
+    {
+      "familyId": "A16",
+      "family": "world portal motif",
+      "selectedCandidateId": "A16-C01",
+      "recommendation": "ASSET_CANDIDATE_ACCEPTED",
+      "candidates": [
+        {"candidateId": "A16-C01", "sha256": "90F16CF5FDA54D6B3C0ED3726DA6EAFE47C4234C143A33029E03F9E24F0B05BA", "smallSize48_72_112_176": ["PASS_ARCH", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_CYAN_RIM", "palette": "PASS", "separationPotential": "PASS_ARCH_ROOTS_STONES_THRESHOLD", "overlaySpace": "PASS_CLEAR_OPENING", "integrity": "PASS", "rationale": "Root arch, light stones and threshold read as a portal and keep a clean center.", "disposition": "SELECTED"},
+        {"candidateId": "A16-C02", "sha256": "7B319F555C22F3D1713DE73EE111EF640BD73997E8F7F559BD9DFFC1F79FAC4E", "smallSize48_72_112_176": ["PASS_RING", "PASS", "PASS", "PASS"], "cropSafety": "PASS_RGBA_1024_12_PERCENT", "darkLight": "PASS_BOTH", "palette": "PASS", "separationPotential": "PASS_RING_SEGMENTS_BASE", "overlaySpace": "PASS_CLEAR_CENTER", "integrity": "PASS", "rationale": "Usable ring alternate, but arch and threshold semantics are weaker.", "disposition": "ALTERNATE"}
+      ]
+    }
+  ],
+  "familiesAccepted": 16,
+  "familiesAutoRegenerate": 0,
+  "severeConflicts": [],
+  "limits": [
+    "No candidate was copied into runtime or registered in Phaser.",
+    "Characters and creatures are seed frames, not accepted animation strips.",
+    "A06 proves separable phase forms only; it does not prove phase animation."
+  ],
+  "verdict": "ASSET_CANDIDATE_ACCEPTED"
+}

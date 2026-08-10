@@ -26,4 +26,44 @@ describe("Hanzi V2 STEP 06 navigation-safe event bridge", () => {
     ]);
     second.close();
   });
+
+  it("delivers a persisted pending stop only after bridge construction returns", async () => {
+    const storage = new MemoryStorage();
+    storage.setItem(GOLDEN_SLICE_SAVE_KEY, JSON.stringify(createStep06SyntheticCompleteSave()));
+    const continuity = verifyStep06ProgressContinuity(STEP06_CANONICAL_ORIGIN, storage);
+    if (!continuity.ok) throw new Error("fixture invalid");
+    const grant = authorizeStep06Session(storage, {
+      sessionId: "s06-pending-stop",
+      evidenceKind: "SYNTHETIC_TOOLING_TEST_ONLY",
+      buildCommit: "a".repeat(40),
+      intervalBucket: "ONE_TO_THREE_DAYS",
+      soundMode: "START_MUTED",
+      progressContinuity: continuity.projection,
+      nowMs: 100,
+    });
+    const sender = createStep06EventBridge({
+      grant,
+      storage,
+      broadcastChannelFactory: () => { throw new Error("fallback"); },
+    });
+    sender.requestStop("TECHNICAL");
+    sender.close();
+
+    let constructionReturned = false;
+    const received: string[] = [];
+    const receiver = createStep06EventBridge({
+      grant,
+      storage,
+      onStop: (stopCode) => {
+        expect(constructionReturned).toBe(true);
+        received.push(stopCode);
+      },
+      broadcastChannelFactory: () => { throw new Error("fallback"); },
+    });
+    expect(received).toEqual([]);
+    constructionReturned = true;
+    await Promise.resolve();
+    expect(received).toEqual(["TECHNICAL"]);
+    receiver.close();
+  });
 });

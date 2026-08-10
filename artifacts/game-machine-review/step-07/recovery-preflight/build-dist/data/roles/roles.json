@@ -1,0 +1,36 @@
+{
+  "roles": [
+    {
+      "id": "add_small",
+      "operation": "add",
+      "operandOptions": [1, 2],
+      "childLabel": "加法",
+      "skinSlot": "add_pony",
+      "enabledInMvp": true
+    },
+    {
+      "id": "sub_small",
+      "operation": "subtract",
+      "operandOptions": [1, 2],
+      "childLabel": "减法",
+      "skinSlot": "sub_pony",
+      "enabledInMvp": true
+    },
+    {
+      "id": "mul_double",
+      "operation": "multiply",
+      "operandOptions": [2],
+      "childLabel": "翻倍",
+      "skinSlot": "mul_pony",
+      "enabledInMvp": false
+    },
+    {
+      "id": "div_split",
+      "operation": "divide",
+      "operandOptions": [2, 5],
+      "childLabel": "平均分",
+      "skinSlot": "div_pony",
+      "enabledInMvp": false
+    }
+  ]
+}

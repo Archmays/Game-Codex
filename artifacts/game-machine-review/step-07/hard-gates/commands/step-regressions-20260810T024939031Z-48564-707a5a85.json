@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "recordType": "ACTUAL_COMMAND_RUN",
+  "runId": "step-regressions-20260810T024939031Z-48564-707a5a85",
+  "gateId": "step-regressions",
+  "command": "pnpm",
+  "args": [
+    "run",
+    "test:hanzi-v2:all-steps"
+  ],
+  "startedAtUtc": "2026-08-10T02:49:39.031Z",
+  "finishedAtUtc": "2026-08-10T02:50:05.690Z",
+  "exitCode": 0,
+  "sourceTreeSha256Before": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+  "sourceTreeSha256After": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+  "logSha256": "E476D5EF7551E64D16FF0ECCF0F9B3D7673AE16621B1F061E54433C4014C24C2",
+  "logPath": "artifacts/game-machine-review/step-07/hard-gates/commands/step-regressions-20260810T024939031Z-48564-707a5a85.log",
+  "status": "PASS"
+}

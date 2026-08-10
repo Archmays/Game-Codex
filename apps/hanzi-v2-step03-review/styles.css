@@ -178,6 +178,10 @@
 .step03-scope-grid strong,
 .step03-summary-grid strong,
 .step03-gate-grid strong {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   font-size: 19px;
   line-height: 1.35;
 }
@@ -419,6 +423,7 @@
 .step03-export button { flex: 0 0 auto; border-color: #f6c96f; color: #332613; background: #f6c96f; }
 
 .step03-footer { display: flex; justify-content: space-between; gap: 18px; padding: 18px clamp(18px, 4vw, 58px); color: rgba(255, 255, 255, 0.64); background: #17233a; font-size: 10px; }
+.step03-footer span { min-width: 0; max-width: 100%; overflow-wrap: anywhere; word-break: break-word; }
 
 .step03-pill { display: inline-flex; width: fit-content; align-items: center; border-radius: 99px; padding: 5px 8px; font-size: 8px; font-weight: 900; letter-spacing: 0.05em; }
 .step03-pill--pending { color: #596477; background: #edf0f4; }

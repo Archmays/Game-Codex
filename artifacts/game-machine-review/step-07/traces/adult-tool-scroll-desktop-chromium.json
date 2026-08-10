@@ -1,0 +1,1185 @@
+{
+  "schemaVersion": "game-codex-step07-real-input-trace-v1",
+  "generatedAtUtc": "2026-08-10T05:10:26.106Z",
+  "sourceTreeSha256": "B6C2AFD041D4BCA65261B04DD0D46455A15A6F4793AE39435C8D7B8C0ED9CB63",
+  "project": "desktop-chromium",
+  "inputPolicy": "REAL_WHEEL_KEYBOARD_OR_CDP_TOUCH_EVENTS",
+  "rows": [
+    {
+      "routeId": "step02-review",
+      "viewport": "320x568",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 147,
+          "after": 667,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 667,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 449,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 486,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 11241,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 963,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step03-review",
+      "viewport": "320x568",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 520,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 520,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 395,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 395,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 4920,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 1810,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step04-observer-fixture",
+      "viewport": "320x568",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 520,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 520,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 395,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 456,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 3208,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 8381,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step05-review-fixture",
+      "viewport": "320x568",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 520,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 520,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 429,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 429,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 2127,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 929,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step06-observer-fixture",
+      "viewport": "320x568",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 520,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 520,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 436,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 436,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 4476,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 4588,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "machine-review-report",
+      "viewport": "320x568",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 520,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 520,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 422,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 422,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 1989,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 0,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step07-observer-fixture",
+      "viewport": "320x568",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 520,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 520,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 414,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 414,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 2580,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 2672,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step02-review",
+      "viewport": "390x844",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 126,
+          "after": 759,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 759,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 686,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 730,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 11073,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 580,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step03-review",
+      "viewport": "390x844",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 633,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 633,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 1,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 1,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 4552,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 1079,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step04-observer-fixture",
+      "viewport": "390x844",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 633,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 633,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 662,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 662,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 2709,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 7069,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step05-review-fixture",
+      "viewport": "390x844",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 633,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 633,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 590,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 678,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 1718,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 581,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step06-observer-fixture",
+      "viewport": "390x844",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 633,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 633,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 622,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 622,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 4120,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 4192,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "machine-review-report",
+      "viewport": "390x844",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 633,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 633,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 638,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 638,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 1453,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 0,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step07-observer-fixture",
+      "viewport": "390x844",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 633,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 633,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 647,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 647,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 2202,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 2274,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step02-review",
+      "viewport": "768x1024",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 102,
+          "after": 870,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 870,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 823,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 882,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 5425,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 46,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step03-review",
+      "viewport": "768x1024",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 768,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 768,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 734,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 834,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 1930,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 513,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step04-observer-fixture",
+      "viewport": "768x1024",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 768,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 768,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 659,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 659,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 1245,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 4159,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step05-review-fixture",
+      "viewport": "768x1024",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 768,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 768,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 754,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 754,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 853,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 27,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step06-observer-fixture",
+      "viewport": "768x1024",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 768,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 768,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 822,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 822,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 3297,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 3369,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "machine-review-report",
+      "viewport": "768x1024",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 758,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 758,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 702,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 702,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 758,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 0,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step07-observer-fixture",
+      "viewport": "768x1024",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 768,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 768,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 757,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 848,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 1485,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 1557,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step02-review",
+      "viewport": "1440x900",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 114,
+          "after": 789,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 789,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 734,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 779,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 3580,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 114,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step03-review",
+      "viewport": "1440x900",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 675,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 675,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 677,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 677,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 1362,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 357,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step04-observer-fixture",
+      "viewport": "1440x900",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 675,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 675,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 732,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 732,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 1193,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 3973,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step05-review-fixture",
+      "viewport": "1440x900",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 675,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 675,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 686,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 686,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 776,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 40,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step06-observer-fixture",
+      "viewport": "1440x900",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 675,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 675,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 730,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 730,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 3361,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 3433,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "machine-review-report",
+      "viewport": "1440x900",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 675,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 675,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 627,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 627,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 802,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 0,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "routeId": "step07-observer-fixture",
+      "viewport": "1440x900",
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "before": 0,
+          "after": 675,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 675,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "before": 0,
+          "after": 660,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 660,
+          "after": 0,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "before": 0,
+          "after": 1595,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 1667,
+          "after": 0,
+          "passed": true
+        }
+      ]
+    }
+  ]
+}

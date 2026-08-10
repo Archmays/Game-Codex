@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "recordType": "CLOSED_RECOVERY_DETERMINISTIC_FINAL_GATE",
+  "id": "step06-actual",
+  "command": "pnpm run test:hanzi-v2:step06",
+  "startedAtUtc": "2026-08-10T02:46:20.1950466Z",
+  "finishedAtUtc": "2026-08-10T02:46:25.2533867Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "sourceTreeSha256Before": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+  "sourceTreeSha256After": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+  "sourceTreeUnchanged": true,
+  "logPath": "artifacts/game-machine-review/step-07/recovery-preflight/validation/deterministic-final/step06-actual.log"
+}

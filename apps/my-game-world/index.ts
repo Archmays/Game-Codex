@@ -11,10 +11,12 @@ import {
   INK_FOREST_ROUTE,
   MY_GAME_WORLD_ROUTE,
   withStep06RouteContext,
-  type Step06RouteContext,
+  type SecondUseEvidenceId,
+  type SecondUseRouteContext,
 } from "./world-routes";
 import type { Step06EventBridge } from "./second-use/event-bridge";
 import type { Step06SessionGrant } from "./second-use/session";
+import type { Step07SessionGrant } from "./second-use/step07-session";
 import {
   readWorldHomeState,
   updateExistingWorldSettings,
@@ -24,8 +26,9 @@ import {
 export interface MyGameWorldOptions {
   readonly storage?: GoldenSliceStorageLike;
   readonly secondUse?: {
-    readonly grant: Step06SessionGrant;
+    readonly grant: Step06SessionGrant | Step07SessionGrant;
     readonly bridge: Step06EventBridge;
+    readonly evidenceId?: SecondUseEvidenceId;
     readonly from?: string | null;
   };
 }
@@ -56,8 +59,8 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
   let settings: WorldSettingsHandle | null = null;
   let destroyed = false;
   const secondUse = options.secondUse;
-  const routeContext: Step06RouteContext | undefined = secondUse
-    ? { evidence: "hanzi-v2-step06", sessionId: secondUse.grant.sessionId }
+  const routeContext: SecondUseRouteContext | undefined = secondUse
+    ? { evidence: secondUse.evidenceId ?? "hanzi-v2-step06", sessionId: secondUse.grant.sessionId }
     : undefined;
   const forestHref = withStep06RouteContext(INK_FOREST_ROUTE, routeContext, "world");
   const treasureHref = withStep06RouteContext(CLASSIC_HUB_FROM_WORLD_ROUTE, routeContext, "world");
@@ -181,19 +184,20 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
 }
 
 export function mountClassicHubFromWorld(root: HTMLElement, secondUse?: {
-  readonly grant: Step06SessionGrant;
+  readonly grant: Step06SessionGrant | Step07SessionGrant;
   readonly bridge: Step06EventBridge;
+  readonly evidenceId?: SecondUseEvidenceId;
 }): MountedGame {
-  const routeContext: Step06RouteContext | undefined = secondUse
-    ? { evidence: "hanzi-v2-step06", sessionId: secondUse.grant.sessionId }
+  const routeContext: SecondUseRouteContext | undefined = secondUse
+    ? { evidence: secondUse.evidenceId ?? "hanzi-v2-step06", sessionId: secondUse.grant.sessionId }
     : undefined;
   const worldHref = withStep06RouteContext(MY_GAME_WORLD_ROUTE, routeContext, "classic");
   addPageClass("classic-hub-from-world-page");
   root.className = "classic-hub-from-world-mount";
-  root.innerHTML = `<main class="classic-hub-from-world" data-testid="classic-hub-from-world">
+  root.innerHTML = `<div class="classic-hub-from-world" data-testid="classic-hub-from-world">
     <nav class="classic-hub-world-nav" aria-label="游戏百宝箱导航"><a href="${worldHref}">← 回我的游戏世界</a></nav>
     <div class="classic-hub-world-inner" data-classic-hub-inner></div>
-  </main>`;
+  </div>`;
   const inner = root.querySelector<HTMLElement>("[data-classic-hub-inner]");
   if (!inner) throw new Error("Classic hub inner mount is missing");
   secondUse?.bridge.emit("classic_hub_opened", { destinationId: "TREASURE_BOX" });

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "capturedAtUtc": "2026-08-10T01:29:06.8479000Z",
+  "authorization": "HUMAN_AUTHORIZED_EXCEPTIONAL_REPAIR_03_VISUAL_HARNESS_REDUCED_MOTION_ONLY",
+  "exceptionalRepairId": "HUMAN_AUTHORIZED_EXCEPTIONAL_REPAIR_03_VISUAL_HARNESS_REDUCED_MOTION_ONLY",
+  "repairRoundsConsumed": 3,
+  "humanExceptionalRepairs": 3,
+  "ordinaryAutoReviseLoop": false,
+  "originalBlocker": "POST_EXCEPTION_02_UNRELATED_VISUAL_CANVAS_STABILITY_BLOCKER",
+  "blockedSourceCommit": "8e00aa61d796578f7e593243caa514da5a307189",
+  "blockedSourceTreeSha256": "9219693F77D6E862943B53C02D617306904C11FCD5F9913B4CB1CF871EA8AD2A",
+  "blockerEvidenceFile": "artifacts/game-machine-review/step-07/repair-rounds/POST_EXCEPTION_02_UNRELATED_VISUAL_STABILITY_BLOCKER.json",
+  "scope": {
+    "file": "tests/e2e/game-machine-visual-regression.spec.ts",
+    "test": "Golden Slice key states",
+    "gate": "VISUAL_ARIA_BASELINE_CANDIDATE",
+    "rootCause": "PHASER_CANVAS_INFINITE_TWEEN_NOT_FROZEN_BY_PLAYWRIGHT_CSS_ANIMATION_CONTROL",
+    "requiredResolution": "PRODUCT_SUPPORTED_REDUCED_MOTION_VISUAL_HARNESS"
+  },
+  "allowedMutation": [
+    "Before navigating the Golden Slice visual test, emulate the public prefers-reduced-motion: reduce operating-system preference with Playwright.",
+    "After the Golden Slice shell mounts and before any visual capture, assert data-reduced-motion equals true."
+  ],
+  "requiredInvariants": [
+    "The application reaches reduced motion through its existing public matchMedia contract.",
+    "CharacterView, MonsterView, BossView, and MeaningMagicFx receive the existing reducedMotion state without runtime changes.",
+    "All Golden Slice route actions, phases, screenshots, and ARIA captures remain otherwise unchanged.",
+    "The visual candidate must pass without masks, pixel tolerance changes, timeout changes, or hidden Phaser controls.",
+    "All final evidence is regenerated against one post-repair source tree."
+  ],
+  "boundaries": [
+    "Do not modify game runtime, animation implementation, gameplay, content, UI, routes, or child-facing behavior.",
+    "Do not add screenshot masks or loosen maxDiffPixels, thresholds, ratios, or timeouts.",
+    "Do not pause Phaser through private or debug instrumentation.",
+    "Do not rewrite ER01, ER02, THREE-REPAIR-LOOPS-FAILED, or post-ER02 blocker evidence.",
+    "Do not treat this as a fourth ordinary auto-repair loop.",
+    "Stop and escalate if verification exposes a new unrelated material issue."
+  ]
+}

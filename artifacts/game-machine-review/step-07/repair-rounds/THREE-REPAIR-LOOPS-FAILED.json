@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "evidenceKind": "STEP07_TECHNICAL_BLOCKER",
+  "generatedAtUtc": "2026-08-09T22:59:06.4818300Z",
+  "sourceCommit": "8e00aa61d796578f7e593243caa514da5a307189",
+  "originMain": "8e00aa61d796578f7e593243caa514da5a307189",
+  "sourceTreeSha256": "3860C5E731F2B651C177C1B00B6ADB062E49DEEFACBEB194775FE4B58235664F",
+  "repairRoundsConsumed": 3,
+  "status": "ESCALATE_HUMAN",
+  "blockerCode": "THREE_REPAIR_LOOPS_FAILED",
+  "formalVerdict": "AUTO_REVISE",
+  "step07Complete": false,
+  "machineQaAcceptedRealSecondUseReady": false,
+  "completedSameTreeEvidence": {
+    "scrollMatrix": {
+      "status": "PASS",
+      "rows": 35,
+      "evidenceFile": "artifacts/game-machine-review/step-07/SCROLL-MATRIX.json"
+    },
+    "catalogSmoke": {
+      "status": "PASS",
+      "rows": 20,
+      "evidenceFile": "artifacts/game-machine-review/step-07/GAME-CATALOG-MACHINE-SMOKE.json"
+    },
+    "agentProfiles": {
+      "status": "PASS",
+      "profiles": 6,
+      "evidenceFile": "artifacts/game-machine-review/step-07/agent-playthrough/AGENT-PLAYTHROUGH-RESULTS.json"
+    }
+  },
+  "failingGate": {
+    "id": "DEEP_ROUTE_ACCESSIBILITY_STRICT_VALIDATION",
+    "reportDeclaredStatus": "PASS",
+    "strictValidatorStatus": "FAIL",
+    "rowCount": 40,
+    "isolatedScenarioContextCount": 22,
+    "evidenceFileCount": 120,
+    "reason": "The producer truthfully captures multiple sequential state rows inside one isolated scenario context, while the strict validator rejects every repeated contextId as if every row required a new context.",
+    "duplicateContextGroups": [
+      "world-compact-mobile",
+      "world-mobile-repaired",
+      "golden-tablet-early",
+      "golden-desktop-late",
+      "critical-compact-mobile",
+      "critical-mobile"
+    ],
+    "evidenceFile": "artifacts/game-machine-review/step-07/DEEP-ROUTE-EVIDENCE.json"
+  },
+  "preservedRepairEvidence": {
+    "step05TouchPreparationFailureTrace": "artifacts/game-machine-review/step-07/repair-rounds/round-03-step05-touch-preparation-failure/step05-touch-failure-trace.zip",
+    "step05TouchPreparationFailureTraceSha256": "78E9FC85E44327CD98DAEF2FB291E7B0AF6D5E007DF8C7A9691490EBE697AA57"
+  },
+  "exceptionalRepairContract": {
+    "requiresExplicitUserAuthorization": true,
+    "requirements": [
+      "Define an exact canonical mapping from all 40 row keys to their 22 expected isolated scenario context IDs.",
+      "Reject missing, unknown, or cross-scenario context assignments while allowing only canonical sequential reuse.",
+      "Regenerate deep-route evidence on a new source-tree identity.",
+      "Rerun every dependency-affected final gate; do not carry forward stale source-bound evidence."
+    ]
+  },
+  "notPerformed": [
+    "semantic reviewer acceptance",
+    "visual and ARIA baseline establishment",
+    "no-update regression pass",
+    "final machine report and PASS verdict",
+    "commit",
+    "push",
+    "readiness ZIP"
+  ],
+  "forbiddenClaims": [
+    "STEP 07 COMPLETE",
+    "MACHINE_QA_ACCEPTED_REAL_SECOND_USE_READY",
+    "REAL_SECOND_USE_PASSED",
+    "GAME_FUN_PROVEN",
+    "LONG_TERM_ENGAGEMENT_VALIDATED",
+    "LEARNING_VALIDATED"
+  ]
+}

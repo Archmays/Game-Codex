@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { resolveAppRoute } from "../src/app-route";
 import {
   CLASSIC_HUB_FROM_WORLD_ROUTE,
   INK_FOREST_ROUTE,
@@ -17,11 +18,10 @@ describe("Hanzi V2 STEP 05 navigation contract", () => {
 
   it("promotes the default world while keeping explicit classic and ordinary return context", () => {
     const main = readFileSync(resolve(root, "src/main.ts"), "utf8");
-    const routing = readFileSync(resolve(root, "src/app-route.ts"), "utf8");
-    expect(routing).toContain('search.get("review") === "hanzi-v2-step05"');
-    expect(routing).toContain('search.get("hub") === "classic"');
-    expect(routing).toContain('search.get("world") === "my-game-world"');
-    expect(routing).toContain('return { kind: "world", explicit: false }');
+    expect(resolveAppRoute(new URLSearchParams("review=hanzi-v2-step05"))).toEqual({ kind: "review-step05", explicit: true });
+    expect(resolveAppRoute(new URLSearchParams("hub=classic"))).toEqual({ kind: "classic-hub", explicit: true });
+    expect(resolveAppRoute(new URLSearchParams("world=my-game-world"))).toEqual({ kind: "world", explicit: true });
+    expect(resolveAppRoute(new URLSearchParams())).toEqual({ kind: "world", explicit: false });
     expect(main).toContain('mode === "play" && fromMode === "world" ? "?world=my-game-world" : undefined');
     expect(main).toContain("mountMyGameWorld(root)");
   });

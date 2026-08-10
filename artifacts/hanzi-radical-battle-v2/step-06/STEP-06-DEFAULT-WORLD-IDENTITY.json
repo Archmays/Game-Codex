@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "initiativeId": "hanzi-radical-battle-v2",
+  "step": "06",
+  "technicalState": "DEFAULT_WORLD_ENTRY_PROMOTED_SECOND_USE_READY",
+  "commitSha": "8e00aa61d796578f7e593243caa514da5a307189",
+  "defaultRoute": "/",
+  "worldAlias": "?world=my-game-world",
+  "classicHubRoute": "?hub=classic",
+  "classicHubFromWorldRoute": "?hub=classic&from=world",
+  "canonicalOrigin": "http://127.0.0.1:5175",
+  "routePriority": ["play", "observe", "review", "explicit-hub", "explicit-world-alias", "default-world"],
+  "documentIdentity": {
+    "defaultWorldTitle": "\u6211\u7684\u6e38\u620f\u4e16\u754c",
+    "defaultWorldThemeColor": "#071c2a",
+    "classicHubTitle": "\u6e38\u620f\u767e\u5b9d\u7bb1",
+    "forestTitle": "\u6c49\u5b57\u9b54\u6cd5\u6218 \u00b7 \u58a8\u8ff9\u68ee\u6797"
+  },
+  "generatedAtUtc": "2026-08-09T15:40:50.492Z"
+}

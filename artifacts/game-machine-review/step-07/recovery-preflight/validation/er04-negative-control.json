@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "recordType": "CLOSED_RECOVERY_TARGETED_VALIDATION",
+  "failureId": "ER04_STEP05_NAVIGATION_SOURCE_SHAPE",
+  "control": "NEGATIVE_WRONG_MAPPING",
+  "command": "intentional wrong assertion: review-step05 expected as default world",
+  "observedExitCode": 1,
+  "expectedExitCode": 1,
+  "status": "PASS_EXPECTED_REJECTION",
+  "startedAtUtc": "2026-08-10T02:43:52.5714547Z",
+  "finishedAtUtc": "2026-08-10T02:43:53.5379889Z",
+  "sourceTreeSha256Before": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+  "sourceTreeSha256After": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+  "sourceTreeUnchanged": true,
+  "logPath": "artifacts/game-machine-review/step-07/recovery-preflight/validation/er04-negative-control.log"
+}

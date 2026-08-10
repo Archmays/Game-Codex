@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "recordType": "CLOSED_RECOVERY_DETERMINISTIC_FINAL_GATE",
+  "id": "step04",
+  "command": "pnpm ",
+  "startedAtUtc": "2026-08-10T02:44:36.5943986Z",
+  "finishedAtUtc": "2026-08-10T02:44:40.0962381Z",
+  "exitCode": 1,
+  "status": "INVOCATION_ERROR_NOT_GATE_RESULT",
+  "sourceTreeSha256Before": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+  "sourceTreeSha256After": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+  "sourceTreeUnchanged": true,
+  "logPath": "artifacts/game-machine-review/step-07/recovery-preflight/validation/deterministic-final/step04.log",
+  "invocationError": "PowerShell function parameter used reserved automatic variable $args, so only bare pnpm help ran."
+}

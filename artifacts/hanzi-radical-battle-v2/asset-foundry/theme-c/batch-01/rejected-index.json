@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "recordType": "THEME_C_REJECTED_CANDIDATE_INDEX",
+  "generatedAtUtc": "2026-08-10T06:03:49.808373Z",
+  "rejectedCount": 16,
+  "candidates": [
+    {
+      "familyId": "A01",
+      "candidateId": "A01-C01",
+      "path": "raw-candidates/A01-C01.png",
+      "sha256": "C9A64CB5E73CFB677F981ACCD2896AE579F6FEB2A222CBFD6B5C3D357D6A3022",
+      "reason": "Family-state mismatch: visibly warm lamp competes with the unlit-before semantic.",
+      "retention": "RETAINED_UNTIL_READINESS_ZIP_AND_CLEANUP_CAN_RUN"
+    },
+    {
+      "familyId": "A02",
+      "candidateId": "A02-C02",
+      "path": "raw-candidates/A02-C02.png",
+      "sha256": "2B3AE65A448DADC7C289ABEB0CEDF6B13272EAF78330ED470F332F533D245CDB",
+      "reason": "Also a clear repaired state with warm light and a left-side overlay field, but the foreground path and lantern occupy more of the composition.",
+      "retention": "RETAINED_UNTIL_READINESS_ZIP_AND_CLEANUP_CAN_RUN"
+    },
+    {
+      "familyId": "A03",
+      "candidateId": "A03-C01",
+      "path": "raw-candidates/A03-C01.png",
+      "sha256": "E753B5C6D4C92833C4C24D7CE99CF0A125A742E7D2E78882F545895B630541ED",
+      "reason": "Friendly child mage, clear hat-and-brush silhouette, restrained ink-forest palette, and no prohibited marks.",
+      "retention": "RETAINED_UNTIL_READINESS_ZIP_AND_CLEANUP_CAN_RUN"
+    },
+    {
+      "familyId": "A04",
+      "candidateId": "A04-C02",
+      "path": "raw-candidates/A04-C02.png",
+      "sha256": "B96CC7EE3924C993A528832490FC5225A62870B34C821ECB5DD0EE5D794C9A5D",
+      "reason": "Visible surface-cleanup defects reduce candidate polish.",
+      "retention": "RETAINED_UNTIL_READINESS_ZIP_AND_CLEANUP_CAN_RUN"
+    },
+    {
+      "familyId": "A05",
+      "candidateId": "A05-C02",
+      "path": "raw-candidates/A05-C02.png",
+      "sha256": "AEA8BEA1064D2647E33AAD443EA04068F2CDC0674EC5906226FE95ACA8DAE898",
+      "reason": "Visible surface-cleanup defects weaken visual consistency.",
+      "retention": "RETAINED_UNTIL_READINESS_ZIP_AND_CLEANUP_CAN_RUN"
+    },
+    {
+      "familyId": "A06",
+      "candidateId": "A06-C02",
+      "path": "raw-candidates/A06-C02.png",
+      "sha256": "588C612A8617E54A2062B369919059B945D257ED761922790095FF1DB0681C5F",
+      "reason": "Compact armored phase and taller four-armed celestial phase separate clearly, but the identity is less native to the ink-forest than C01.",
+      "retention": "RETAINED_UNTIL_READINESS_ZIP_AND_CLEANUP_CAN_RUN"
+    },
+    {
+      "familyId": "A07",
+      "candidateId": "A07-C02",
+      "path": "raw-candidates/A07-C02.png",
+      "sha256": "702558B3BAD9EB2FD76F03C2AA15AD35DA5350F7A49AD3896DAB9111C5E94C5D",
+      "reason": "Clean glowing orb and leaf-flame motif, but the protection meaning is less immediate without the shield contour.",
+      "retention": "RETAINED_UNTIL_READINESS_ZIP_AND_CLEANUP_CAN_RUN"
+    },
+    {
+      "familyId": "A08",
+      "candidateId": "A08-C01",
+      "path": "raw-candidates/A08-C01.png",
+      "sha256": "67140A0BB50947B9FE5C03DCA6E38F3B999DB978CC7AC8316EB412426E8BA3A8",
+      "reason": "Internal marks weaken cleanliness and path readability.",
+      "retention": "RETAINED_UNTIL_READINESS_ZIP_AND_CLEANUP_CAN_RUN"
+    },
+    {
+      "familyId": "A09",
+      "candidateId": "A09-C02",
+      "path": "raw-candidates/A09-C02.png",
+      "sha256": "763AB90B63B414ACED09075D0F04A2ED87FDA397C833A8401CDF7D325614385C",
+      "reason": "Three expanding outline puffs read as repetition, but they can also be mistaken for flowers and carry less ink identity.",
+      "retention": "RETAINED_UNTIL_READINESS_ZIP_AND_CLEANUP_CAN_RUN"
+    },
+    {
+      "familyId": "A10",
+      "candidateId": "A10-C02",
+      "path": "raw-candidates/A10-C02.png",
+      "sha256": "9E1ACCF62A310DBFF2909D99DC7FBE71E9A38F84B0E8DD5F6C180827C199F942",
+      "reason": "Sun and moon beams converge on a flower with a blank leaf panel, but the flower adds a competing meaning cue.",
+      "retention": "RETAINED_UNTIL_READINESS_ZIP_AND_CLEANUP_CAN_RUN"
+    },
+    {
+      "familyId": "A11",
+      "candidateId": "A11-C02",
+      "path": "raw-candidates/A11-C02.png",
+      "sha256": "D4778679C488DC6F695C9279DE7B67CCCCBE9709A7D44770FC472A2C32162F0C",
+      "reason": "Single luminous bud with a pale central panel is very clear, but its emblem-like symmetry is less natural and less richly connected to the forest than C01.",
+      "retention": "RETAINED_UNTIL_READINESS_ZIP_AND_CLEANUP_CAN_RUN"
+    },
+    {
+      "familyId": "A12",
+      "candidateId": "A12-C02",
+      "path": "raw-candidates/A12-C02.png",
+      "sha256": "6A6DA052BA86277CFCB328A42B1FD20EDBA38A8AD14EA9719C0BA10D3729339C",
+      "reason": "Five colorful trees also convey a forest and preserve a center opening, but the denser palette becomes busier at 48 and 72 pixels.",
+      "retention": "RETAINED_UNTIL_READINESS_ZIP_AND_CLEANUP_CAN_RUN"
+    },
+    {
+      "familyId": "A13",
+      "candidateId": "A13-C02",
+      "path": "raw-candidates/A13-C02.png",
+      "sha256": "F123A6A75F2001E774589E3C9780F38D03BEDA4B0371D427A911EEA1C83751EC",
+      "reason": "Bright star arch is highly readable and leaves an open center, but its rainbow-like band is less night-ink in character than C01.",
+      "retention": "RETAINED_UNTIL_READINESS_ZIP_AND_CLEANUP_CAN_RUN"
+    },
+    {
+      "familyId": "A14",
+      "candidateId": "A14-C02",
+      "path": "raw-candidates/A14-C02.png",
+      "sha256": "32BC2B5D814753264E65FDF5C9E400D4D65999FD5927D5947CB1AC719953790D",
+      "reason": "Closed book with blank purple cover panel is clean and readable, but it offers less immediate learning-content and page-turn potential.",
+      "retention": "RETAINED_UNTIL_READINESS_ZIP_AND_CLEANUP_CAN_RUN"
+    },
+    {
+      "familyId": "A15",
+      "candidateId": "A15-C02",
+      "path": "raw-candidates/A15-C02.png",
+      "sha256": "02009902FBD4FFA3FC70EA9F464EE04FA6A66A42606B95C06D5C5D18F5939049",
+      "reason": "Closed chest is visually clean and cohesive, but it conveys less discovery and state feedback than the open variant.",
+      "retention": "RETAINED_UNTIL_READINESS_ZIP_AND_CLEANUP_CAN_RUN"
+    },
+    {
+      "familyId": "A16",
+      "candidateId": "A16-C02",
+      "path": "raw-candidates/A16-C02.png",
+      "sha256": "7B319F555C22F3D1713DE73EE111EF640BD73997E8F7F559BD9DFFC1F79FAC4E",
+      "reason": "Colorful stone ring and crescent base are readable, but the portal function and forest-world connection are less immediate than C01.",
+      "retention": "RETAINED_UNTIL_READINESS_ZIP_AND_CLEANUP_CAN_RUN"
+    }
+  ],
+  "rawDeletionPerformed": false,
+  "reasonNotDeleted": "The STEP07 technical lane stopped before readiness packaging and cleanup; raw candidate evidence is retained."
+}

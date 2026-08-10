@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 2,
+  "feedbackFileName": "STEP-03_PARENT_REVIEW_FEEDBACK.json",
+  "reviewIdentity": {
+    "schemaVersion": 2,
+    "reviewContractVersion": "hanzi-v2-step03-parent-contract-v2",
+    "initiativeId": "hanzi-radical-battle-v2",
+    "technicalState": "GOLDEN_SLICE_CANDIDATE_READY_FOR_PARENT_REVIEW",
+    "implementationReviewVersion": "hanzi-v2-step03-runtime-v1",
+    "goldenSliceManifestVersion": "hanzi-v2-step03-golden-slice-v1",
+    "goldenSliceManifestRevisionHash": "fnv1a:67ad1fe2",
+    "previewRoute": "?play=hanzi-v2-golden-slice&mode=review",
+    "selectedTheme": "C",
+    "sourceSnapshots": {
+      "encounters": "fnv1a:d805357d",
+      "abilities": "fnv1a:2d361817",
+      "boss": "fnv1a:ee5df70f",
+      "themeC": "fnv1a:15133968"
+    }
+  },
+  "goldenSliceIdentity": {
+    "goldenSliceManifestVersion": "hanzi-v2-step03-golden-slice-v1",
+    "goldenSliceManifestRevisionHash": "fnv1a:67ad1fe2",
+    "implementationReviewVersion": "hanzi-v2-step03-runtime-v1",
+    "previewRoute": "?play=hanzi-v2-golden-slice&mode=review",
+    "selectedTheme": "C",
+    "sourceSnapshots": {
+      "encounters": "fnv1a:d805357d",
+      "abilities": "fnv1a:2d361817",
+      "boss": "fnv1a:ee5df70f",
+      "themeC": "fnv1a:15133968"
+    }
+  },
+  "reviewItems": [
+    {
+      "id": "slice-preview",
+      "revisionHash": "fnv1a:fb8b8dc9"
+    },
+    {
+      "id": "final-manifest",
+      "revisionHash": "fnv1a:bae89ef6"
+    },
+    {
+      "id": "encounter-structure",
+      "revisionHash": "fnv1a:89d4cc08"
+    },
+    {
+      "id": "ability-trio",
+      "revisionHash": "fnv1a:5a4ad512"
+    },
+    {
+      "id": "two-phase-boss",
+      "revisionHash": "fnv1a:7efaf2ac"
+    },
+    {
+      "id": "theme-c",
+      "revisionHash": "fnv1a:f8902bcb"
+    },
+    {
+      "id": "audio-and-accessibility",
+      "revisionHash": "fnv1a:60c61489"
+    },
+    {
+      "id": "child-use-gate",
+      "revisionHash": "fnv1a:7f3c7312"
+    }
+  ],
+  "identitySha256": "DBA281F9954DFB591E2F3D7498B1B8F09F6C050BFBFA2436C9961B0513D73D3E"
+}

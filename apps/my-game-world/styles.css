@@ -1,14 +1,7 @@
-.my-game-world-page,
-.classic-hub-from-world-page {
-  min-height: 100%;
-  height: 100%;
-}
-
 .my-game-world-page body,
 body.my-game-world-page,
 .classic-hub-from-world-page body,
 body.classic-hub-from-world-page {
-  overflow: hidden;
   background: #071c2a;
 }
 

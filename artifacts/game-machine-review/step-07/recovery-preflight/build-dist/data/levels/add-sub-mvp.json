@@ -1,0 +1,2365 @@
+{
+  "stages": [
+    {
+      "id": "stage-garden-01",
+      "title": "苹果园巡逻",
+      "difficulty": "sprout",
+      "theme": {
+        "backgroundKey": "stageGardenBg",
+        "accentColor": "#2f8f46",
+        "bottomColor": "#5fbd62",
+        "successEffect": "apple-tree"
+      },
+      "chapter": "果篮入门",
+      "skillFocus": "十以内合成与调整",
+      "unlockStars": 0,
+      "rewardStickerId": "stage/garden-apple",
+      "rewardStickerLabel": "苹果贴纸",
+      "parentNote": "练习把两个数量合起来，也练习比较差多少和多多少。",
+      "description": "整理果篮，用补齐或摘下的方式让数量刚刚好。",
+      "encounters": [
+        {
+          "id": "garden-01-hit-7",
+          "type": "precision_hit",
+          "title": "补齐 7 个苹果",
+          "skillTags": [
+            "number-bonds",
+            "add-within-20"
+          ],
+          "initialValues": [
+            4,
+            3,
+            2
+          ],
+          "targetValue": 7,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "selectableValueIndexes": [
+            0
+          ],
+          "hintText": "果篮要整理到 7 个，先看篮里 4 个还少几个。",
+          "hintSteps": [
+            "果篮要整理到 7 个，先看篮里 4 个还少几个。",
+            "再放进 3 个苹果，篮里就到 7 个。",
+            "完整整理：4 + 3 = 7。"
+          ],
+          "feedback": {
+            "goal": "果篮要整理到 7 个。",
+            "overshoot": "这次放多了，果篮超过 7 个。",
+            "undershoot": "果篮还没补够 7 个。",
+            "nextStep": "先看篮里还少几个，再选正好补上的苹果。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 3,
+              "result": 7,
+              "explanation": "4 + 3 = 7"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "part-whole",
+            "title": "果篮和苹果合起来",
+            "prompt": "先点果篮 4，再点苹果 3，把两部分合起来。",
+            "sourceValueIndex": 0,
+            "operand": 3,
+            "operator": "+",
+            "result": 7,
+            "successText": "4 加 3，数量变成 7。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在苹果园里选择果篮和苹果，比较差距后用加或减完成整理。",
+            "observableEvidence": [
+              "选择了合适起点",
+              "比较了还差或多出的数量",
+              "用加减操作完成果篮整理"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "garden-02-hit-8",
+          "type": "precision_hit",
+          "title": "补齐 8 个苹果",
+          "skillTags": [
+            "number-bonds",
+            "compare-distance",
+            "add-within-20"
+          ],
+          "initialValues": [
+            6,
+            2,
+            1
+          ],
+          "targetValue": 8,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "selectableValueIndexes": [
+            0
+          ],
+          "hintText": "果篮要整理到 8 个，先看篮里 6 个还少几个。",
+          "hintSteps": [
+            "果篮要整理到 8 个，先看篮里 6 个还少几个。",
+            "再放进 2 个苹果，篮里就到 8 个。",
+            "完整整理：6 + 2 = 8。"
+          ],
+          "feedback": {
+            "goal": "果篮要整理到 8 个。",
+            "overshoot": "这次放多了，果篮超过 8 个。",
+            "undershoot": "果篮还没补够 8 个。",
+            "nextStep": "先看篮里还少几个，再选正好补上的苹果。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 2,
+              "result": 8,
+              "explanation": "6 + 2 = 8"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "part-whole",
+            "title": "果篮和苹果合起来",
+            "prompt": "先点果篮 6，再点苹果 2，把两部分合起来。",
+            "sourceValueIndex": 0,
+            "operand": 2,
+            "operator": "+",
+            "result": 8,
+            "successText": "6 加 2，数量变成 8。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在苹果园里选择果篮和苹果，比较差距后用加或减完成整理。",
+            "observableEvidence": [
+              "选择了合适起点",
+              "比较了还差或多出的数量",
+              "用加减操作完成果篮整理"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "garden-03-hit-5",
+          "type": "precision_hit",
+          "title": "留下 5 个苹果",
+          "skillTags": [
+            "compare-distance",
+            "subtract-within-20"
+          ],
+          "initialValues": [
+            8,
+            3,
+            2
+          ],
+          "targetValue": 5,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "selectableValueIndexes": [
+            0
+          ],
+          "hintText": "果篮要留下 5 个，先看 8 个比需要多几个。",
+          "hintSteps": [
+            "果篮要留下 5 个，先看 8 个比需要多几个。",
+            "摘下 3 个苹果，就留下 5 个。",
+            "完整整理：8 - 3 = 5。"
+          ],
+          "feedback": {
+            "goal": "果篮要留下 5 个。",
+            "overshoot": "果篮里还比 5 个多。",
+            "undershoot": "摘得太多，果篮里的苹果少了。",
+            "nextStep": "先看多出几个，再摘下相同数量的苹果。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "sub_small",
+              "sourceValueIndex": 0,
+              "operand": 3,
+              "result": 5,
+              "explanation": "8 - 3 = 5"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "difference",
+            "title": "看果篮多出几",
+            "prompt": "先点果篮 8，再点苹果 3，看拿走后还剩多少。",
+            "sourceValueIndex": 0,
+            "operand": 3,
+            "operator": "-",
+            "result": 5,
+            "successText": "8 拿走 3，数量变成 5。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在苹果园里选择果篮和苹果，比较差距后用加或减完成整理。",
+            "observableEvidence": [
+              "选择了合适起点",
+              "比较了还差或多出的数量",
+              "用加减操作完成果篮整理"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "garden-04-hit-9",
+          "type": "precision_hit",
+          "title": "补齐 9 个苹果",
+          "skillTags": [
+            "number-bonds",
+            "compare-distance",
+            "add-within-20"
+          ],
+          "initialValues": [
+            5,
+            4,
+            1
+          ],
+          "targetValue": 9,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "selectableValueIndexes": [
+            0
+          ],
+          "hintText": "果篮要整理到 9 个，先看篮里 5 个还少几个。",
+          "hintSteps": [
+            "果篮要整理到 9 个，先看篮里 5 个还少几个。",
+            "再放进 4 个苹果，篮里就到 9 个。",
+            "完整整理：5 + 4 = 9。"
+          ],
+          "feedback": {
+            "goal": "果篮要整理到 9 个。",
+            "overshoot": "这次放多了，果篮超过 9 个。",
+            "undershoot": "果篮还没补够 9 个。",
+            "nextStep": "先看篮里还少几个，再选正好补上的苹果。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 4,
+              "result": 9,
+              "explanation": "5 + 4 = 9"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "part-whole",
+            "title": "果篮和苹果合起来",
+            "prompt": "先点果篮 5，再点苹果 4，把两部分合起来。",
+            "sourceValueIndex": 0,
+            "operand": 4,
+            "operator": "+",
+            "result": 9,
+            "successText": "5 加 4，数量变成 9。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在苹果园里选择果篮和苹果，比较差距后用加或减完成整理。",
+            "observableEvidence": [
+              "选择了合适起点",
+              "比较了还差或多出的数量",
+              "用加减操作完成果篮整理"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "garden-05-hit-6",
+          "type": "precision_hit",
+          "title": "补齐 6 个苹果",
+          "skillTags": [
+            "number-bonds",
+            "compare-distance",
+            "add-within-20"
+          ],
+          "initialValues": [
+            2,
+            4,
+            3
+          ],
+          "targetValue": 6,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "selectableValueIndexes": [
+            0
+          ],
+          "hintText": "果篮要整理到 6 个，先看篮里 2 个还少几个。",
+          "hintSteps": [
+            "果篮要整理到 6 个，先看篮里 2 个还少几个。",
+            "再放进 4 个苹果，篮里就到 6 个。",
+            "完整整理：2 + 4 = 6。"
+          ],
+          "feedback": {
+            "goal": "果篮要整理到 6 个。",
+            "overshoot": "这次放多了，果篮超过 6 个。",
+            "undershoot": "果篮还没补够 6 个。",
+            "nextStep": "先看篮里还少几个，再选正好补上的苹果。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 4,
+              "result": 6,
+              "explanation": "2 + 4 = 6"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "part-whole",
+            "title": "果篮和苹果合起来",
+            "prompt": "先点果篮 2，再点苹果 4，把两部分合起来。",
+            "sourceValueIndex": 0,
+            "operand": 4,
+            "operator": "+",
+            "result": 6,
+            "successText": "2 加 4，数量变成 6。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在苹果园里选择果篮和苹果，比较差距后用加或减完成整理。",
+            "observableEvidence": [
+              "选择了合适起点",
+              "比较了还差或多出的数量",
+              "用加减操作完成果篮整理"
+            ],
+            "notProgressEvidence": true
+          }
+        }
+      ],
+      "sceneCopy": {
+        "targetLabel": "果篮数",
+        "sourceLabel": "果篮",
+        "materialLabel": "苹果",
+        "bonusLabel": "小果粒",
+        "progressLabel": "整理",
+        "progressDoneLabel": "果篮整理好",
+        "applyLabel": "放进果篮",
+        "applyHitLabel": "整理完成",
+        "setupLabel": "果篮更接近",
+        "hitLabel": "果篮正好！准备下一处。",
+        "addLabel": "放进",
+        "subtractLabel": "摘下"
+      },
+      "standardLinks": {
+        "alignmentDepth": "game_objective",
+        "canonicalObjectiveIds": [
+          "co.math.lp.part-whole-number-bonds.001",
+          "co.math.lp.add-subtract-within-20.001",
+          "co.math.lp.math-explanation-habits.001"
+        ],
+        "standardOutcomeIds": [
+          "std.china2022.math.stage1.number-operations.lower.001",
+          "std.sgmoe.math.p1.add-subtract.lower.001",
+          "std.sgmoe.math.primary.problem-solving.lower.001",
+          "std.ibpyp.math.phase1.number.lower.001"
+        ],
+        "playerAction": "在苹果园里选择果篮和苹果，比较差距后用加或减完成整理。",
+        "observableEvidence": [
+          "选择了合适起点",
+          "比较了还差或多出的数量",
+          "用加减操作完成果篮整理"
+        ],
+        "notProgressEvidence": true
+      }
+    },
+    {
+      "id": "stage-bakery-02",
+      "title": "甜点屋练习",
+      "difficulty": "sprout",
+      "theme": {
+        "backgroundKey": "stageBakeryBg",
+        "accentColor": "#c0678d",
+        "bottomColor": "#e9a86c",
+        "successEffect": "cake-sparkle"
+      },
+      "chapter": "配方调整",
+      "skillFocus": "十以内加减调配",
+      "unlockStars": 1,
+      "masteryGate": {
+        "minStars": 1,
+        "requiredSkillTags": [
+          "number-bonds"
+        ],
+        "minIndependentWins": 1,
+        "maxRecentHintLevel": 0,
+        "maxRecentMistakes": 0
+      },
+      "rewardStickerId": "stage/bakery-cake",
+      "rewardStickerLabel": "蛋糕贴纸",
+      "parentNote": "练习比较配方数和当前数量，再决定加还是减。",
+      "description": "根据配方数给托盘加配料或拿走多余配料。",
+      "encounters": [
+        {
+          "id": "bakery-01-hit-9",
+          "type": "precision_hit",
+          "title": "调到 9 份配方",
+          "skillTags": [
+            "number-bonds",
+            "compare-distance",
+            "add-within-20"
+          ],
+          "initialValues": [
+            7,
+            2,
+            4
+          ],
+          "targetValue": 9,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "selectableValueIndexes": [
+            0
+          ],
+          "hintText": "配方数是 9，先看托盘里 7 份还少几份。",
+          "hintSteps": [
+            "配方数是 9，先看托盘里 7 份还少几份。",
+            "加入 2 份配料，托盘就调到 9。",
+            "完整调配：7 + 2 = 9。"
+          ],
+          "feedback": {
+            "goal": "托盘要调到 9 份。",
+            "overshoot": "配料放多了，超过 9 份。",
+            "undershoot": "配料还没凑满 9 份。",
+            "nextStep": "先看托盘还少几份，再加入相同数量的配料。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 2,
+              "result": 9,
+              "explanation": "7 + 2 = 9"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "part-whole",
+            "title": "托盘和配料合起来",
+            "prompt": "先点托盘 7，再点配料 2，把两部分合起来。",
+            "sourceValueIndex": 0,
+            "operand": 2,
+            "operator": "+",
+            "result": 9,
+            "successText": "7 加 2，数量变成 9。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在甜点屋里调配托盘数量，选择配料并说明加上或拿走的理由。",
+            "observableEvidence": [
+              "比较了托盘数量和配方数",
+              "选择了合适配料",
+              "用加减完成配方调配"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "bakery-02-hit-4",
+          "type": "precision_hit",
+          "title": "调到 4 份配方",
+          "skillTags": [
+            "compare-distance",
+            "subtract-within-20"
+          ],
+          "initialValues": [
+            6,
+            2,
+            5
+          ],
+          "targetValue": 4,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "selectableValueIndexes": [
+            0
+          ],
+          "hintText": "配方数是 4，先看托盘里 6 份多了几份。",
+          "hintSteps": [
+            "配方数是 4，先看托盘里 6 份多了几份。",
+            "拿走 2 份配料，托盘就剩 4。",
+            "完整调配：6 - 2 = 4。"
+          ],
+          "feedback": {
+            "goal": "托盘要调到 4 份。",
+            "overshoot": "托盘里还比 4 份多。",
+            "undershoot": "配料拿走太多，托盘不够了。",
+            "nextStep": "先看托盘多出几份，再拿走相同数量。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "sub_small",
+              "sourceValueIndex": 0,
+              "operand": 2,
+              "result": 4,
+              "explanation": "6 - 2 = 4"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "difference",
+            "title": "看托盘多出几",
+            "prompt": "先点托盘 6，再点配料 2，看拿走后还剩多少。",
+            "sourceValueIndex": 0,
+            "operand": 2,
+            "operator": "-",
+            "result": 4,
+            "successText": "6 拿走 2，数量变成 4。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在甜点屋里调配托盘数量，选择配料并说明加上或拿走的理由。",
+            "observableEvidence": [
+              "比较了托盘数量和配方数",
+              "选择了合适配料",
+              "用加减完成配方调配"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "bakery-03-hit-10",
+          "type": "precision_hit",
+          "title": "调出 10 份奶油",
+          "skillTags": [
+            "make-ten",
+            "number-bonds",
+            "add-within-20"
+          ],
+          "initialValues": [
+            8,
+            2,
+            5
+          ],
+          "targetValue": 10,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "selectableValueIndexes": [
+            0
+          ],
+          "hintText": "配方数是 10，先看托盘里 8 份还少几份。",
+          "hintSteps": [
+            "配方数是 10，先看托盘里 8 份还少几份。",
+            "加入 2 份配料，托盘就调到 10。",
+            "完整调配：8 + 2 = 10。"
+          ],
+          "feedback": {
+            "goal": "托盘要调到 10 份。",
+            "overshoot": "配料放多了，超过 10 份。",
+            "undershoot": "配料还没凑满 10 份。",
+            "nextStep": "先看托盘还少几份，再加入相同数量的配料。"
+          },
+          "conceptInteraction": {
+            "kind": "make-ten",
+            "title": "配方数凑成 10",
+            "prompt": "先点托盘 8，再点配料 2，看它们怎样凑成 10。",
+            "sourceValueIndex": 0,
+            "operand": 2,
+            "operator": "+",
+            "result": 10,
+            "successText": "8 和 2 合起来正好是 10。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 2,
+              "result": 10,
+              "explanation": "8 + 2 = 10"
+            }
+          ],
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在甜点屋里调配托盘数量，选择配料并说明加上或拿走的理由。",
+            "observableEvidence": [
+              "比较了托盘数量和配方数",
+              "选择了合适配料",
+              "用加减完成配方调配"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "bakery-04-hit-10",
+          "type": "precision_hit",
+          "title": "调出 10 份奶油",
+          "skillTags": [
+            "make-ten",
+            "number-bonds",
+            "add-within-20"
+          ],
+          "initialValues": [
+            9,
+            1,
+            4
+          ],
+          "targetValue": 10,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "selectableValueIndexes": [
+            0
+          ],
+          "hintText": "配方数是 10，先看托盘里 9 份还少几份。",
+          "hintSteps": [
+            "配方数是 10，先看托盘里 9 份还少几份。",
+            "加入 1 份配料，托盘就调到 10。",
+            "完整调配：9 + 1 = 10。"
+          ],
+          "feedback": {
+            "goal": "托盘要调到 10 份。",
+            "overshoot": "配料放多了，超过 10 份。",
+            "undershoot": "配料还没凑满 10 份。",
+            "nextStep": "先看托盘还少几份，再加入相同数量的配料。"
+          },
+          "conceptInteraction": {
+            "kind": "make-ten",
+            "title": "配方数凑成 10",
+            "prompt": "先点托盘 9，再点配料 1，看它们怎样凑成 10。",
+            "sourceValueIndex": 0,
+            "operand": 1,
+            "operator": "+",
+            "result": 10,
+            "successText": "9 和 1 合起来正好是 10。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 1,
+              "result": 10,
+              "explanation": "9 + 1 = 10"
+            }
+          ],
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在甜点屋里调配托盘数量，选择配料并说明加上或拿走的理由。",
+            "observableEvidence": [
+              "比较了托盘数量和配方数",
+              "选择了合适配料",
+              "用加减完成配方调配"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "bakery-05-hit-10",
+          "type": "precision_hit",
+          "title": "调出 10 份奶油",
+          "skillTags": [
+            "make-ten",
+            "number-bonds",
+            "add-within-20"
+          ],
+          "initialValues": [
+            7,
+            3,
+            2
+          ],
+          "targetValue": 10,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "selectableValueIndexes": [
+            0
+          ],
+          "hintText": "配方数是 10，先看托盘里 7 份还少几份。",
+          "hintSteps": [
+            "配方数是 10，先看托盘里 7 份还少几份。",
+            "加入 3 份配料，托盘就调到 10。",
+            "完整调配：7 + 3 = 10。"
+          ],
+          "feedback": {
+            "goal": "托盘要调到 10 份。",
+            "overshoot": "配料放多了，超过 10 份。",
+            "undershoot": "配料还没凑满 10 份。",
+            "nextStep": "先看托盘还少几份，再加入相同数量的配料。"
+          },
+          "conceptInteraction": {
+            "kind": "make-ten",
+            "title": "配方数凑成 10",
+            "prompt": "先点托盘 7，再点配料 3，看它们怎样凑成 10。",
+            "sourceValueIndex": 0,
+            "operand": 3,
+            "operator": "+",
+            "result": 10,
+            "successText": "7 和 3 合起来正好是 10。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 3,
+              "result": 10,
+              "explanation": "7 + 3 = 10"
+            }
+          ],
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在甜点屋里调配托盘数量，选择配料并说明加上或拿走的理由。",
+            "observableEvidence": [
+              "比较了托盘数量和配方数",
+              "选择了合适配料",
+              "用加减完成配方调配"
+            ],
+            "notProgressEvidence": true
+          }
+        }
+      ],
+      "sceneCopy": {
+        "targetLabel": "配方数",
+        "sourceLabel": "托盘",
+        "materialLabel": "配料",
+        "bonusLabel": "小糖粒",
+        "progressLabel": "调配",
+        "progressDoneLabel": "甜点调好",
+        "applyLabel": "加入托盘",
+        "applyHitLabel": "完成配方",
+        "setupLabel": "配方更接近",
+        "hitLabel": "甜点配好！准备下一份。",
+        "addLabel": "加入",
+        "subtractLabel": "拿走"
+      },
+      "standardLinks": {
+        "alignmentDepth": "game_objective",
+        "canonicalObjectiveIds": [
+          "co.math.lp.part-whole-number-bonds.001",
+          "co.math.lp.add-subtract-within-20.001",
+          "co.math.lp.math-explanation-habits.001"
+        ],
+        "standardOutcomeIds": [
+          "std.china2022.math.stage1.number-operations.lower.001",
+          "std.sgmoe.math.p1.add-subtract.lower.001",
+          "std.sgmoe.math.primary.problem-solving.lower.001",
+          "std.ibpyp.math.phase1.number.lower.001"
+        ],
+        "playerAction": "在甜点屋里调配托盘数量，选择配料并说明加上或拿走的理由。",
+        "observableEvidence": [
+          "比较了托盘数量和配方数",
+          "选择了合适配料",
+          "用加减完成配方调配"
+        ],
+        "notProgressEvidence": true
+      }
+    },
+    {
+      "id": "stage-river-03",
+      "title": "小河靠岸",
+      "difficulty": "sprout",
+      "theme": {
+        "backgroundKey": "stageRiverBg",
+        "accentColor": "#2574a9",
+        "bottomColor": "#3aa5c8",
+        "successEffect": "river-boat"
+      },
+      "chapter": "两段航线",
+      "skillFocus": "二十以内两步调整",
+      "unlockStars": 2,
+      "masteryGate": {
+        "minStars": 2,
+        "requiredSkillTags": [
+          "number-bonds",
+          "compare-distance"
+        ],
+        "minIndependentWins": 1,
+        "maxRecentHintLevel": 1,
+        "maxRecentMistakes": 0
+      },
+      "rewardStickerId": "stage/river-boat",
+      "rewardStickerLabel": "小船贴纸",
+      "parentNote": "练习先做一段靠近，再根据新数量完成第二段计划。",
+      "description": "把小船分两段划到正确岸边，每段都重新看差几步。",
+      "encounters": [
+        {
+          "id": "river-01-combo-10",
+          "type": "combo_hit",
+          "title": "划到 10 号岸",
+          "skillTags": [
+            "two-step-plan",
+            "continuous-add",
+            "make-ten",
+            "add-within-20"
+          ],
+          "initialValues": [
+            5,
+            2,
+            3
+          ],
+          "targetValue": 10,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "maxActions": 2,
+          "selectableValueIndexes": [
+            0
+          ],
+          "comboText": "分两段划向 10 号岸，第一段先让小船靠近。",
+          "hintText": "先让 5 变成 7，再看 7 到 10 还差多少。",
+          "hintSteps": [
+            "岸边号是 10，先让小船从 5 靠近一点。",
+            "第一步 5 + 2 = 7，再看 7 到 10 怎么走。",
+            "完整路线：5 + 2 = 7，然后 7 + 3 = 10。"
+          ],
+          "feedback": {
+            "goal": "小船要停到 10 号岸。",
+            "overshoot": "小船停在更大的编号，还没对准 10 号岸。",
+            "undershoot": "小船停在更小的编号，还没对准 10 号岸。",
+            "nextStep": "看当前编号和 10 号岸差几步，再选下一段船步。",
+            "comboMiss": "两段航线要先靠近，再按新的编号划第二段。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 2,
+              "result": 7,
+              "explanation": "5 + 2 = 7"
+            },
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 3,
+              "result": 10,
+              "explanation": "7 + 3 = 10"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "two-step",
+            "title": "先走第一步",
+            "prompt": "先点小船 5，再点船步 2，完成第一步后再看下一步。",
+            "sourceValueIndex": 0,
+            "operand": 2,
+            "operator": "+",
+            "result": 7,
+            "successText": "第一步变成 7，接着再看离 10 差多少。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001",
+              "co.math.lp.word-problems-representation.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在小河上规划两段船步，比较当前位置和岸边号后完成靠岸。",
+            "observableEvidence": [
+              "完成第一段靠近",
+              "根据新数字重新比较差距",
+              "用第二段船步靠岸"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "river-02-combo-7",
+          "type": "combo_hit",
+          "title": "划到 7 号岸",
+          "skillTags": [
+            "two-step-plan",
+            "continuous-subtract",
+            "compare-distance",
+            "subtract-within-20"
+          ],
+          "initialValues": [
+            12,
+            3,
+            2
+          ],
+          "targetValue": 7,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "maxActions": 2,
+          "selectableValueIndexes": [
+            0
+          ],
+          "comboText": "分两段划向 7 号岸，第一段先让小船靠近。",
+          "hintText": "先让 12 变成 9，再看 9 到 7 还差多少。",
+          "hintSteps": [
+            "岸边号是 7，先让小船从 12 靠近一点。",
+            "第一步 12 - 3 = 9，再看 9 到 7 怎么走。",
+            "完整路线：12 - 3 = 9，然后 9 - 2 = 7。"
+          ],
+          "feedback": {
+            "goal": "小船要停到 7 号岸。",
+            "overshoot": "小船停在更大的编号，还没对准 7 号岸。",
+            "undershoot": "小船停在更小的编号，还没对准 7 号岸。",
+            "nextStep": "看当前编号和 7 号岸差几步，再选下一段船步。",
+            "comboMiss": "两段航线要先靠近，再按新的编号划第二段。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "sub_small",
+              "sourceValueIndex": 0,
+              "operand": 3,
+              "result": 9,
+              "explanation": "12 - 3 = 9"
+            },
+            {
+              "roleId": "sub_small",
+              "sourceValueIndex": 0,
+              "operand": 2,
+              "result": 7,
+              "explanation": "9 - 2 = 7"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "two-step",
+            "title": "先走第一步",
+            "prompt": "先点小船 12，再点船步 3，完成第一步后再看下一步。",
+            "sourceValueIndex": 0,
+            "operand": 3,
+            "operator": "-",
+            "result": 9,
+            "successText": "第一步变成 9，接着再看离 7 差多少。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001",
+              "co.math.lp.word-problems-representation.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在小河上规划两段船步，比较当前位置和岸边号后完成靠岸。",
+            "observableEvidence": [
+              "完成第一段靠近",
+              "根据新数字重新比较差距",
+              "用第二段船步靠岸"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "river-03-combo-14",
+          "type": "combo_hit",
+          "title": "划到 14 号岸",
+          "skillTags": [
+            "two-step-plan",
+            "continuous-add",
+            "compare-distance",
+            "add-within-20"
+          ],
+          "initialValues": [
+            9,
+            2,
+            3
+          ],
+          "targetValue": 14,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "maxActions": 2,
+          "selectableValueIndexes": [
+            0
+          ],
+          "comboText": "分两段划向 14 号岸，第一段先让小船靠近。",
+          "hintText": "先让 9 变成 11，再看 11 到 14 还差多少。",
+          "hintSteps": [
+            "岸边号是 14，先让小船从 9 靠近一点。",
+            "第一步 9 + 2 = 11，再看 11 到 14 怎么走。",
+            "完整路线：9 + 2 = 11，然后 11 + 3 = 14。"
+          ],
+          "feedback": {
+            "goal": "小船要停到 14 号岸。",
+            "overshoot": "小船停在更大的编号，还没对准 14 号岸。",
+            "undershoot": "小船停在更小的编号，还没对准 14 号岸。",
+            "nextStep": "看当前编号和 14 号岸差几步，再选下一段船步。",
+            "comboMiss": "两段航线要先靠近，再按新的编号划第二段。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 2,
+              "result": 11,
+              "explanation": "9 + 2 = 11"
+            },
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 3,
+              "result": 14,
+              "explanation": "11 + 3 = 14"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "two-step",
+            "title": "先走第一步",
+            "prompt": "先点小船 9，再点船步 2，完成第一步后再看下一步。",
+            "sourceValueIndex": 0,
+            "operand": 2,
+            "operator": "+",
+            "result": 11,
+            "successText": "第一步变成 11，接着再看离 14 差多少。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001",
+              "co.math.lp.word-problems-representation.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在小河上规划两段船步，比较当前位置和岸边号后完成靠岸。",
+            "observableEvidence": [
+              "完成第一段靠近",
+              "根据新数字重新比较差距",
+              "用第二段船步靠岸"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "river-04-combo-12",
+          "type": "combo_hit",
+          "title": "划到 12 号岸",
+          "skillTags": [
+            "two-step-plan",
+            "continuous-add",
+            "make-ten",
+            "add-within-20"
+          ],
+          "initialValues": [
+            6,
+            4,
+            2
+          ],
+          "targetValue": 12,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "maxActions": 2,
+          "selectableValueIndexes": [
+            0
+          ],
+          "comboText": "分两段划向 12 号岸，第一段先让小船靠近。",
+          "hintText": "先让 6 变成 10，再看 10 到 12 还差多少。",
+          "hintSteps": [
+            "岸边号是 12，先让小船从 6 靠近一点。",
+            "第一步 6 + 4 = 10，再看 10 到 12 怎么走。",
+            "完整路线：6 + 4 = 10，然后 10 + 2 = 12。"
+          ],
+          "feedback": {
+            "goal": "小船要停到 12 号岸。",
+            "overshoot": "小船停在更大的编号，还没对准 12 号岸。",
+            "undershoot": "小船停在更小的编号，还没对准 12 号岸。",
+            "nextStep": "看当前编号和 12 号岸差几步，再选下一段船步。",
+            "comboMiss": "两段航线要先靠近，再按新的编号划第二段。"
+          },
+          "conceptInteraction": {
+            "kind": "two-step",
+            "title": "先走第一步",
+            "prompt": "先点小船 6，再点船步 4，完成第一步后再看下一步。",
+            "sourceValueIndex": 0,
+            "operand": 4,
+            "operator": "+",
+            "result": 10,
+            "successText": "第一步变成 10，接着再看离 12 差多少。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 4,
+              "result": 10,
+              "explanation": "6 + 4 = 10"
+            },
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 2,
+              "result": 12,
+              "explanation": "10 + 2 = 12"
+            }
+          ],
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001",
+              "co.math.lp.word-problems-representation.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在小河上规划两段船步，比较当前位置和岸边号后完成靠岸。",
+            "observableEvidence": [
+              "完成第一段靠近",
+              "根据新数字重新比较差距",
+              "用第二段船步靠岸"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "river-05-combo-15",
+          "type": "combo_hit",
+          "title": "划到 15 号岸",
+          "skillTags": [
+            "two-step-plan",
+            "continuous-add",
+            "add-within-20"
+          ],
+          "initialValues": [
+            8,
+            4,
+            3
+          ],
+          "targetValue": 15,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "maxActions": 2,
+          "selectableValueIndexes": [
+            0
+          ],
+          "comboText": "分两段划向 15 号岸，第一段先让小船靠近。",
+          "hintText": "先让 8 变成 12，再看 12 到 15 还差多少。",
+          "hintSteps": [
+            "岸边号是 15，先让小船从 8 靠近一点。",
+            "第一步 8 + 4 = 12，再看 12 到 15 怎么走。",
+            "完整路线：8 + 4 = 12，然后 12 + 3 = 15。"
+          ],
+          "feedback": {
+            "goal": "小船要停到 15 号岸。",
+            "overshoot": "小船停在更大的编号，还没对准 15 号岸。",
+            "undershoot": "小船停在更小的编号，还没对准 15 号岸。",
+            "nextStep": "看当前编号和 15 号岸差几步，再选下一段船步。",
+            "comboMiss": "两段航线要先靠近，再按新的编号划第二段。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 4,
+              "result": 12,
+              "explanation": "8 + 4 = 12"
+            },
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 3,
+              "result": 15,
+              "explanation": "12 + 3 = 15"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "two-step",
+            "title": "先走第一步",
+            "prompt": "先点小船 8，再点船步 4，完成第一步后再看下一步。",
+            "sourceValueIndex": 0,
+            "operand": 4,
+            "operator": "+",
+            "result": 12,
+            "successText": "第一步变成 12，接着再看离 15 差多少。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001",
+              "co.math.lp.word-problems-representation.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在小河上规划两段船步，比较当前位置和岸边号后完成靠岸。",
+            "observableEvidence": [
+              "完成第一段靠近",
+              "根据新数字重新比较差距",
+              "用第二段船步靠岸"
+            ],
+            "notProgressEvidence": true
+          }
+        }
+      ],
+      "sceneCopy": {
+        "targetLabel": "岸边号",
+        "sourceLabel": "小船",
+        "materialLabel": "船步",
+        "bonusLabel": "小桨力",
+        "progressLabel": "航线",
+        "progressDoneLabel": "小船靠岸",
+        "applyLabel": "划一步",
+        "applyHitLabel": "靠岸",
+        "setupLabel": "航线更近",
+        "hitLabel": "小船靠岸！准备下一段。",
+        "addLabel": "前划",
+        "subtractLabel": "回划"
+      },
+      "standardLinks": {
+        "alignmentDepth": "game_objective",
+        "canonicalObjectiveIds": [
+          "co.math.lp.part-whole-number-bonds.001",
+          "co.math.lp.add-subtract-within-20.001",
+          "co.math.lp.math-explanation-habits.001",
+          "co.math.lp.word-problems-representation.001"
+        ],
+        "standardOutcomeIds": [
+          "std.china2022.math.stage1.number-operations.lower.001",
+          "std.sgmoe.math.p1.add-subtract.lower.001",
+          "std.sgmoe.math.primary.problem-solving.lower.001",
+          "std.ibpyp.math.phase1.number.lower.001"
+        ],
+        "playerAction": "在小河上规划两段船步，比较当前位置和岸边号后完成靠岸。",
+        "observableEvidence": [
+          "完成第一段靠近",
+          "根据新数字重新比较差距",
+          "用第二段船步靠岸"
+        ],
+        "notProgressEvidence": true
+      }
+    },
+    {
+      "id": "stage-library-04",
+      "title": "图书馆挑战",
+      "difficulty": "sprout",
+      "theme": {
+        "backgroundKey": "stageLibraryBg",
+        "accentColor": "#7a4a2a",
+        "bottomColor": "#b98247",
+        "successEffect": "open-book"
+      },
+      "chapter": "书架归位",
+      "skillFocus": "两步整理与干扰选择",
+      "unlockStars": 3,
+      "masteryGate": {
+        "minStars": 3,
+        "requiredSkillTags": [
+          "two-step-plan"
+        ],
+        "minIndependentWins": 1,
+        "maxRecentHintLevel": 1,
+        "maxRecentMistakes": 0
+      },
+      "rewardStickerId": "stage/library-book",
+      "rewardStickerLabel": "图书贴纸",
+      "parentNote": "练习从多个数字中筛选合适材料，并用两步计划修正偏差。",
+      "description": "用书签调整书本编号，把书本归到正确书架。",
+      "encounters": [
+        {
+          "id": "library-01-combo-17",
+          "type": "combo_hit",
+          "title": "归到 17 号书架",
+          "skillTags": [
+            "two-step-plan",
+            "continuous-add",
+            "add-within-20"
+          ],
+          "initialValues": [
+            10,
+            4,
+            3
+          ],
+          "targetValue": 17,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "maxActions": 2,
+          "selectableValueIndexes": [
+            0
+          ],
+          "comboText": "先把书本编号靠近 17，再用第二枚书签归位。",
+          "hintText": "先让 10 变成 14，再看 14 到 17 还差多少。",
+          "hintSteps": [
+            "书架号是 17，先让书本从 10 靠近一点。",
+            "第一步 10 + 4 = 14，再看 14 到 17 怎么走。",
+            "完整路线：10 + 4 = 14，然后 14 + 3 = 17。"
+          ],
+          "feedback": {
+            "goal": "书本要归到 17 号书架。",
+            "overshoot": "书本编号还比 17 大。",
+            "undershoot": "书本编号还比 17 小。",
+            "nextStep": "看当前编号离 17 号书架差多少，再选书签。",
+            "comboMiss": "整理书架时，第二步要按新的书本编号来算。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 4,
+              "result": 14,
+              "explanation": "10 + 4 = 14"
+            },
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 3,
+              "result": 17,
+              "explanation": "14 + 3 = 17"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "two-step",
+            "title": "先走第一步",
+            "prompt": "先点书本 10，再点书签 4，完成第一步后再看下一步。",
+            "sourceValueIndex": 0,
+            "operand": 4,
+            "operator": "+",
+            "result": 14,
+            "successText": "第一步变成 14，接着再看离 17 差多少。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001",
+              "co.math.lp.word-problems-representation.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在图书馆里选择书本和书签，分步调整编号完成归位。",
+            "observableEvidence": [
+              "选择了可用书签",
+              "分两步调整书本编号",
+              "能根据偏大或偏小修正方向"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "library-02-combo-9",
+          "type": "combo_hit",
+          "title": "归到 9 号书架",
+          "skillTags": [
+            "two-step-plan",
+            "continuous-subtract",
+            "compare-distance",
+            "subtract-within-20"
+          ],
+          "initialValues": [
+            16,
+            4,
+            3
+          ],
+          "targetValue": 9,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "maxActions": 2,
+          "selectableValueIndexes": [
+            0
+          ],
+          "comboText": "先把书本编号靠近 9，再用第二枚书签归位。",
+          "hintText": "先让 16 变成 12，再看 12 到 9 还差多少。",
+          "hintSteps": [
+            "书架号是 9，先让书本从 16 靠近一点。",
+            "第一步 16 - 4 = 12，再看 12 到 9 怎么走。",
+            "完整路线：16 - 4 = 12，然后 12 - 3 = 9。"
+          ],
+          "feedback": {
+            "goal": "书本要归到 9 号书架。",
+            "overshoot": "书本编号还比 9 大。",
+            "undershoot": "书本编号还比 9 小。",
+            "nextStep": "看当前编号离 9 号书架差多少，再选书签。",
+            "comboMiss": "整理书架时，第二步要按新的书本编号来算。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "sub_small",
+              "sourceValueIndex": 0,
+              "operand": 4,
+              "result": 12,
+              "explanation": "16 - 4 = 12"
+            },
+            {
+              "roleId": "sub_small",
+              "sourceValueIndex": 0,
+              "operand": 3,
+              "result": 9,
+              "explanation": "12 - 3 = 9"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "two-step",
+            "title": "先走第一步",
+            "prompt": "先点书本 16，再点书签 4，完成第一步后再看下一步。",
+            "sourceValueIndex": 0,
+            "operand": 4,
+            "operator": "-",
+            "result": 12,
+            "successText": "第一步变成 12，接着再看离 9 差多少。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001",
+              "co.math.lp.word-problems-representation.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在图书馆里选择书本和书签，分步调整编号完成归位。",
+            "observableEvidence": [
+              "选择了可用书签",
+              "分两步调整书本编号",
+              "能根据偏大或偏小修正方向"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "library-03-combo-14",
+          "type": "combo_hit",
+          "title": "归到 14 号书架",
+          "skillTags": [
+            "two-step-plan",
+            "add-then-subtract",
+            "compare-distance",
+            "add-within-20",
+            "subtract-within-20"
+          ],
+          "initialValues": [
+            10,
+            5,
+            3
+          ],
+          "targetValue": 14,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "maxActions": 2,
+          "selectableValueIndexes": [
+            0
+          ],
+          "comboText": "先把书本编号靠近 14，再用第二枚书签归位。",
+          "hintText": "先让 10 变成 15，再看 15 到 14 还差多少。",
+          "hintSteps": [
+            "书架号是 14，先让书本从 10 靠近一点。",
+            "第一步 10 + 5 = 15，再看 15 到 14 怎么走。",
+            "完整路线：10 + 5 = 15，然后 15 - 1 = 14。"
+          ],
+          "feedback": {
+            "goal": "书本要归到 14 号书架。",
+            "overshoot": "书本编号还比 14 大。",
+            "undershoot": "书本编号还比 14 小。",
+            "nextStep": "看当前编号离 14 号书架差多少，再选书签。",
+            "comboMiss": "整理书架时，第二步要按新的书本编号来算。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 5,
+              "result": 15,
+              "explanation": "10 + 5 = 15"
+            },
+            {
+              "roleId": "sub_small",
+              "sourceValueIndex": 0,
+              "operand": 1,
+              "result": 14,
+              "explanation": "15 - 1 = 14"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "two-step",
+            "title": "先走第一步",
+            "prompt": "先点书本 10，再点书签 5，完成第一步后再看下一步。",
+            "sourceValueIndex": 0,
+            "operand": 5,
+            "operator": "+",
+            "result": 15,
+            "successText": "第一步变成 15，接着再看离 14 差多少。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001",
+              "co.math.lp.word-problems-representation.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在图书馆里选择书本和书签，分步调整编号完成归位。",
+            "observableEvidence": [
+              "选择了可用书签",
+              "分两步调整书本编号",
+              "能根据偏大或偏小修正方向"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "library-04-combo-11",
+          "type": "combo_hit",
+          "title": "归到 11 号书架",
+          "skillTags": [
+            "two-step-plan",
+            "continuous-subtract",
+            "compare-distance",
+            "subtract-within-20"
+          ],
+          "initialValues": [
+            18,
+            4,
+            3
+          ],
+          "targetValue": 11,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "maxActions": 2,
+          "selectableValueIndexes": [
+            0
+          ],
+          "comboText": "先把书本编号靠近 11，再用第二枚书签归位。",
+          "hintText": "先让 18 变成 14，再看 14 到 11 还差多少。",
+          "hintSteps": [
+            "书架号是 11，先让书本从 18 靠近一点。",
+            "第一步 18 - 4 = 14，再看 14 到 11 怎么走。",
+            "完整路线：18 - 4 = 14，然后 14 - 3 = 11。"
+          ],
+          "feedback": {
+            "goal": "书本要归到 11 号书架。",
+            "overshoot": "书本编号还比 11 大。",
+            "undershoot": "书本编号还比 11 小。",
+            "nextStep": "看当前编号离 11 号书架差多少，再选书签。",
+            "comboMiss": "整理书架时，第二步要按新的书本编号来算。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "sub_small",
+              "sourceValueIndex": 0,
+              "operand": 4,
+              "result": 14,
+              "explanation": "18 - 4 = 14"
+            },
+            {
+              "roleId": "sub_small",
+              "sourceValueIndex": 0,
+              "operand": 3,
+              "result": 11,
+              "explanation": "14 - 3 = 11"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "two-step",
+            "title": "先走第一步",
+            "prompt": "先点书本 18，再点书签 4，完成第一步后再看下一步。",
+            "sourceValueIndex": 0,
+            "operand": 4,
+            "operator": "-",
+            "result": 14,
+            "successText": "第一步变成 14，接着再看离 11 差多少。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001",
+              "co.math.lp.word-problems-representation.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在图书馆里选择书本和书签，分步调整编号完成归位。",
+            "observableEvidence": [
+              "选择了可用书签",
+              "分两步调整书本编号",
+              "能根据偏大或偏小修正方向"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "library-05-combo-12",
+          "type": "combo_hit",
+          "title": "归到 12 号书架",
+          "skillTags": [
+            "two-step-plan",
+            "continuous-subtract",
+            "compare-distance",
+            "subtract-within-20"
+          ],
+          "initialValues": [
+            17,
+            3,
+            2
+          ],
+          "targetValue": 12,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "maxActions": 2,
+          "selectableValueIndexes": [
+            0
+          ],
+          "comboText": "先把书本编号靠近 12，再用第二枚书签归位。",
+          "hintText": "先让 17 变成 14，再看 14 到 12 还差多少。",
+          "hintSteps": [
+            "书架号是 12，先让书本从 17 靠近一点。",
+            "第一步 17 - 3 = 14，再看 14 到 12 怎么走。",
+            "完整路线：17 - 3 = 14，然后 14 - 2 = 12。"
+          ],
+          "feedback": {
+            "goal": "书本要归到 12 号书架。",
+            "overshoot": "书本编号还比 12 大。",
+            "undershoot": "书本编号还比 12 小。",
+            "nextStep": "看当前编号离 12 号书架差多少，再选书签。",
+            "comboMiss": "整理书架时，第二步要按新的书本编号来算。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "sub_small",
+              "sourceValueIndex": 0,
+              "operand": 3,
+              "result": 14,
+              "explanation": "17 - 3 = 14"
+            },
+            {
+              "roleId": "sub_small",
+              "sourceValueIndex": 0,
+              "operand": 2,
+              "result": 12,
+              "explanation": "14 - 2 = 12"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "two-step",
+            "title": "先走第一步",
+            "prompt": "先点书本 17，再点书签 3，完成第一步后再看下一步。",
+            "sourceValueIndex": 0,
+            "operand": 3,
+            "operator": "-",
+            "result": 14,
+            "successText": "第一步变成 14，接着再看离 12 差多少。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001",
+              "co.math.lp.word-problems-representation.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在图书馆里选择书本和书签，分步调整编号完成归位。",
+            "observableEvidence": [
+              "选择了可用书签",
+              "分两步调整书本编号",
+              "能根据偏大或偏小修正方向"
+            ],
+            "notProgressEvidence": true
+          }
+        }
+      ],
+      "sceneCopy": {
+        "targetLabel": "书架号",
+        "sourceLabel": "书本",
+        "materialLabel": "书签",
+        "bonusLabel": "小索引",
+        "progressLabel": "归位",
+        "progressDoneLabel": "书本归位",
+        "applyLabel": "整理书架",
+        "applyHitLabel": "归位",
+        "setupLabel": "书架更近",
+        "hitLabel": "书本归位！准备下一本。",
+        "addLabel": "后移",
+        "subtractLabel": "前移"
+      },
+      "standardLinks": {
+        "alignmentDepth": "game_objective",
+        "canonicalObjectiveIds": [
+          "co.math.lp.part-whole-number-bonds.001",
+          "co.math.lp.add-subtract-within-20.001",
+          "co.math.lp.math-explanation-habits.001",
+          "co.math.lp.word-problems-representation.001"
+        ],
+        "standardOutcomeIds": [
+          "std.china2022.math.stage1.number-operations.lower.001",
+          "std.sgmoe.math.p1.add-subtract.lower.001",
+          "std.sgmoe.math.primary.problem-solving.lower.001",
+          "std.ibpyp.math.phase1.number.lower.001"
+        ],
+        "playerAction": "在图书馆里选择书本和书签，分步调整编号完成归位。",
+        "observableEvidence": [
+          "选择了可用书签",
+          "分两步调整书本编号",
+          "能根据偏大或偏小修正方向"
+        ],
+        "notProgressEvidence": true
+      }
+    },
+    {
+      "id": "stage-market-05",
+      "title": "集市配订单",
+      "difficulty": "adventure",
+      "theme": {
+        "backgroundKey": "stageMarketBg",
+        "accentColor": "#b85b24",
+        "bottomColor": "#d98a2e",
+        "successEffect": "market-basket"
+      },
+      "chapter": "订单选择",
+      "skillFocus": "多起点配单",
+      "unlockStars": 4,
+      "masteryGate": {
+        "minStars": 4,
+        "requiredSkillTags": [
+          "two-step-plan",
+          "compare-distance"
+        ],
+        "minIndependentWins": 1,
+        "maxRecentHintLevel": 1,
+        "maxRecentMistakes": 1
+      },
+      "rewardStickerId": "stage/market-basket",
+      "rewardStickerLabel": "篮子贴纸",
+      "parentNote": "练习判断哪个起点更顺，也练习同一订单可以有不同路线。",
+      "description": "比较不同摊位，从更合适的起点把订单配到刚刚好。",
+      "encounters": [
+        {
+          "id": "market-01-choice-9",
+          "type": "precision_hit",
+          "title": "配好 9 号订单",
+          "skillTags": [
+            "multi-source-choice",
+            "compare-distance",
+            "number-bonds",
+            "add-within-20"
+          ],
+          "initialValues": [
+            7,
+            11,
+            2
+          ],
+          "targetValue": 9,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "selectableValueIndexes": [
+            0,
+            1
+          ],
+          "hintText": "订单数是 9，先看摊位 7 还少几。",
+          "hintSteps": [
+            "订单数是 9，先看摊位 7 还少几。",
+            "加入 2 个货物，数量会变成 9。",
+            "完整路线：7 + 2 = 9。"
+          ],
+          "feedback": {
+            "goal": "订单要配到 9。",
+            "overshoot": "篮子里的数量比 9 多。",
+            "undershoot": "篮子里的数量比 9 少。",
+            "nextStep": "先比较哪个摊位离 9 更顺，再选货物数量。",
+            "comboMiss": "多摊位订单要先选起点，再按新数量继续配。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 2,
+              "result": 9,
+              "explanation": "7 + 2 = 9"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "choice-compare",
+            "title": "先比较起点",
+            "prompt": "先比较可选摊位，再点货物 2，看哪条路线更顺。",
+            "sourceValueIndex": 0,
+            "operand": 2,
+            "operator": "+",
+            "result": 9,
+            "successText": "这条路线会变成 9，再判断能不能配好订单。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001",
+              "co.math.lp.word-problems-representation.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在集市里比较两个摊位，选择起点和货物数量完成订单。",
+            "observableEvidence": [
+              "比较了两个起点",
+              "选择了能配到订单数的货物",
+              "用加减路线完成订单"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "market-02-choice-13",
+          "type": "precision_hit",
+          "title": "配好 13 号订单",
+          "skillTags": [
+            "multi-source-choice",
+            "compare-distance",
+            "add-within-20",
+            "subtract-within-20"
+          ],
+          "initialValues": [
+            15,
+            9,
+            4
+          ],
+          "targetValue": 13,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "selectableValueIndexes": [
+            0,
+            1
+          ],
+          "hintText": "订单数是 13，先看摊位 9 还少几。",
+          "hintSteps": [
+            "订单数是 13，先看摊位 9 还少几。",
+            "加入 4 个货物，数量会变成 13。",
+            "完整路线：9 + 4 = 13。"
+          ],
+          "feedback": {
+            "goal": "订单要配到 13。",
+            "overshoot": "篮子里的数量比 13 多。",
+            "undershoot": "篮子里的数量比 13 少。",
+            "nextStep": "先比较哪个摊位离 13 更顺，再选货物数量。",
+            "comboMiss": "多摊位订单要先选起点，再按新数量继续配。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 1,
+              "operand": 4,
+              "result": 13,
+              "explanation": "9 + 4 = 13"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "choice-compare",
+            "title": "先比较起点",
+            "prompt": "先比较可选摊位，再点货物 4，看哪条路线更顺。",
+            "sourceValueIndex": 1,
+            "operand": 4,
+            "operator": "+",
+            "result": 13,
+            "successText": "这条路线会变成 13，再判断能不能配好订单。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001",
+              "co.math.lp.word-problems-representation.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在集市里比较两个摊位，选择起点和货物数量完成订单。",
+            "observableEvidence": [
+              "比较了两个起点",
+              "选择了能配到订单数的货物",
+              "用加减路线完成订单"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "market-03-combo-16",
+          "type": "combo_hit",
+          "title": "配好 16 号订单",
+          "skillTags": [
+            "multi-source-choice",
+            "two-step-plan",
+            "continuous-add",
+            "add-within-20"
+          ],
+          "initialValues": [
+            10,
+            12,
+            3
+          ],
+          "targetValue": 16,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "maxActions": 2,
+          "selectableValueIndexes": [
+            0,
+            1
+          ],
+          "comboText": "先靠近 16，再完成第二步。",
+          "hintText": "先让 10 变成 13，再看 13 到 16 还差多少。",
+          "hintSteps": [
+            "订单数是 16，先让摊位从 10 靠近一点。",
+            "第一步 10 + 3 = 13，再看 13 到 16 怎么走。",
+            "完整路线：10 + 3 = 13，然后 13 + 3 = 16。"
+          ],
+          "feedback": {
+            "goal": "订单要配到 16。",
+            "overshoot": "篮子里的数量比 16 多。",
+            "undershoot": "篮子里的数量比 16 少。",
+            "nextStep": "先比较哪个摊位离 16 更顺，再选货物数量。",
+            "comboMiss": "多摊位订单要先选起点，再按新数量继续配。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 3,
+              "result": 13,
+              "explanation": "10 + 3 = 13"
+            },
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 3,
+              "result": 16,
+              "explanation": "13 + 3 = 16"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "choice-compare",
+            "title": "先比较起点",
+            "prompt": "先比较可选摊位，再点货物 3，看哪条路线更顺。",
+            "sourceValueIndex": 0,
+            "operand": 3,
+            "operator": "+",
+            "result": 13,
+            "successText": "这条路线会变成 13，再判断能不能配好订单。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001",
+              "co.math.lp.word-problems-representation.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在集市里比较两个摊位，选择起点和货物数量完成订单。",
+            "observableEvidence": [
+              "比较了两个起点",
+              "选择了能配到订单数的货物",
+              "用加减路线完成订单"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "market-04-choice-12",
+          "type": "precision_hit",
+          "title": "配好 12 号订单",
+          "skillTags": [
+            "multi-source-choice",
+            "compare-distance",
+            "add-within-20",
+            "subtract-within-20"
+          ],
+          "initialValues": [
+            8,
+            14,
+            4
+          ],
+          "targetValue": 12,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "selectableValueIndexes": [
+            0,
+            1
+          ],
+          "hintText": "订单数是 12，先看摊位 14 多了几。",
+          "hintSteps": [
+            "订单数是 12，先看摊位 14 多了几。",
+            "拿走 2 个货物，数量会变成 12。",
+            "完整路线：14 - 2 = 12。"
+          ],
+          "feedback": {
+            "goal": "订单要配到 12。",
+            "overshoot": "篮子里的数量比 12 多。",
+            "undershoot": "篮子里的数量比 12 少。",
+            "nextStep": "先比较哪个摊位离 12 更顺，再选货物数量。",
+            "comboMiss": "多摊位订单要先选起点，再按新数量继续配。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "sub_small",
+              "sourceValueIndex": 1,
+              "operand": 2,
+              "result": 12,
+              "explanation": "14 - 2 = 12"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "choice-compare",
+            "title": "先比较起点",
+            "prompt": "先比较可选摊位，再点货物 2，看哪条路线更顺。",
+            "sourceValueIndex": 1,
+            "operand": 2,
+            "operator": "-",
+            "result": 12,
+            "successText": "这条路线会变成 12，再判断能不能配好订单。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001",
+              "co.math.lp.word-problems-representation.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在集市里比较两个摊位，选择起点和货物数量完成订单。",
+            "observableEvidence": [
+              "比较了两个起点",
+              "选择了能配到订单数的货物",
+              "用加减路线完成订单"
+            ],
+            "notProgressEvidence": true
+          }
+        },
+        {
+          "id": "market-05-choice-15",
+          "type": "precision_hit",
+          "title": "配好 15 号订单",
+          "skillTags": [
+            "multi-source-choice",
+            "compare-distance",
+            "add-within-20",
+            "subtract-within-20"
+          ],
+          "initialValues": [
+            11,
+            17,
+            4
+          ],
+          "targetValue": 15,
+          "allowedRoleIds": [
+            "add_small",
+            "sub_small"
+          ],
+          "maxMistakes": 3,
+          "selectableValueIndexes": [
+            0,
+            1
+          ],
+          "hintText": "订单数是 15，先看摊位 11 还少几。",
+          "hintSteps": [
+            "订单数是 15，先看摊位 11 还少几。",
+            "加入 4 个货物，数量会变成 15。",
+            "完整路线：11 + 4 = 15。"
+          ],
+          "feedback": {
+            "goal": "订单要配到 15。",
+            "overshoot": "篮子里的数量比 15 多。",
+            "undershoot": "篮子里的数量比 15 少。",
+            "nextStep": "先比较哪个摊位离 15 更顺，再选货物数量。",
+            "comboMiss": "多摊位订单要先选起点，再按新数量继续配。"
+          },
+          "knownSolution": [
+            {
+              "roleId": "add_small",
+              "sourceValueIndex": 0,
+              "operand": 4,
+              "result": 15,
+              "explanation": "11 + 4 = 15"
+            }
+          ],
+          "conceptInteraction": {
+            "kind": "choice-compare",
+            "title": "先比较起点",
+            "prompt": "先比较可选摊位，再点货物 4，看哪条路线更顺。",
+            "sourceValueIndex": 0,
+            "operand": 4,
+            "operator": "+",
+            "result": 15,
+            "successText": "这条路线会变成 15，再判断能不能配好订单。"
+          },
+          "standardLinks": {
+            "alignmentDepth": "game_objective",
+            "canonicalObjectiveIds": [
+              "co.math.lp.part-whole-number-bonds.001",
+              "co.math.lp.add-subtract-within-20.001",
+              "co.math.lp.math-explanation-habits.001",
+              "co.math.lp.word-problems-representation.001"
+            ],
+            "standardOutcomeIds": [
+              "std.china2022.math.stage1.number-operations.lower.001",
+              "std.sgmoe.math.p1.add-subtract.lower.001",
+              "std.sgmoe.math.primary.problem-solving.lower.001",
+              "std.ibpyp.math.phase1.number.lower.001"
+            ],
+            "playerAction": "在集市里比较两个摊位，选择起点和货物数量完成订单。",
+            "observableEvidence": [
+              "比较了两个起点",
+              "选择了能配到订单数的货物",
+              "用加减路线完成订单"
+            ],
+            "notProgressEvidence": true
+          }
+        }
+      ],
+      "sceneCopy": {
+        "targetLabel": "订单数",
+        "sourceLabel": "摊位",
+        "materialLabel": "货物",
+        "bonusLabel": "小货件",
+        "progressLabel": "配单",
+        "progressDoneLabel": "订单配好",
+        "applyLabel": "装进篮子",
+        "applyHitLabel": "完成订单",
+        "setupLabel": "订单更接近",
+        "hitLabel": "订单配好！准备下一单。",
+        "addLabel": "加货",
+        "subtractLabel": "取出"
+      },
+      "standardLinks": {
+        "alignmentDepth": "game_objective",
+        "canonicalObjectiveIds": [
+          "co.math.lp.part-whole-number-bonds.001",
+          "co.math.lp.add-subtract-within-20.001",
+          "co.math.lp.math-explanation-habits.001",
+          "co.math.lp.word-problems-representation.001"
+        ],
+        "standardOutcomeIds": [
+          "std.china2022.math.stage1.number-operations.lower.001",
+          "std.sgmoe.math.p1.add-subtract.lower.001",
+          "std.sgmoe.math.primary.problem-solving.lower.001",
+          "std.ibpyp.math.phase1.number.lower.001"
+        ],
+        "playerAction": "在集市里比较两个摊位，选择起点和货物数量完成订单。",
+        "observableEvidence": [
+          "比较了两个起点",
+          "选择了能配到订单数的货物",
+          "用加减路线完成订单"
+        ],
+        "notProgressEvidence": true
+      }
+    }
+  ]
+}

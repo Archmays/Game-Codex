@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "recordType": "RECOVERY_PREFLIGHT_PLAYWRIGHT_COLLECTION",
+  "id": "static-report",
+  "command": "pnpm exec playwright test tests/e2e/game-machine-static-report-scroll.spec.ts --config playwright.step07.config.ts --project=desktop-chromium --list --output artifacts/game-machine-review/step-07/recovery-preflight/playwright-list/static-report",
+  "startedAtUtc": "2026-08-10T02:37:36.9300883Z",
+  "finishedAtUtc": "2026-08-10T02:37:41.2118722Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "listedTestLineCount": 1,
+  "summary": "Listing tests: | Total: 1 test in 1 file",
+  "browserLaunched": false,
+  "sourceTreeSha256Before": "63729F26B011E91D4EBBDB1DD82B8B0E9197E3599DD498D9301DD009AF5F1131",
+  "sourceTreeSha256After": "63729F26B011E91D4EBBDB1DD82B8B0E9197E3599DD498D9301DD009AF5F1131",
+  "sourceTreeUnchanged": true,
+  "logPath": "artifacts/game-machine-review/step-07/recovery-preflight/collection/static-report.log"
+}

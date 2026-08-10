@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "recordType": "RECOVERY_PREFLIGHT_PLAYWRIGHT_COLLECTION",
+  "id": "adult-tools",
+  "command": "pnpm exec playwright test tests/e2e/adult-tool-scroll-regression.spec.ts --config playwright.step07.config.ts --list --output artifacts/game-machine-review/step-07/recovery-preflight/playwright-list/adult-tools",
+  "startedAtUtc": "2026-08-10T02:37:22.6712032Z",
+  "finishedAtUtc": "2026-08-10T02:37:27.0600627Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "listedTestLineCount": 4,
+  "summary": "Listing tests: | Total: 4 tests in 1 file",
+  "browserLaunched": false,
+  "sourceTreeSha256Before": "63729F26B011E91D4EBBDB1DD82B8B0E9197E3599DD498D9301DD009AF5F1131",
+  "sourceTreeSha256After": "63729F26B011E91D4EBBDB1DD82B8B0E9197E3599DD498D9301DD009AF5F1131",
+  "sourceTreeUnchanged": true,
+  "logPath": "artifacts/game-machine-review/step-07/recovery-preflight/collection/adult-tools.log"
+}

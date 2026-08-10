@@ -1,0 +1,152 @@
+{
+  "baseUrl": "http://127.0.0.1:5176",
+  "port": 5176,
+  "representativeRoot": "D:\\ChatGPT-Codex-Projects\\Game-Codex\\artifacts\\hanzi-radical-battle-v2\\step-03\\screenshots\\representative",
+  "screenshotEntries": [
+    {
+      "fileName": "01-camp-objective-desktop.webp",
+      "verifies": "Camp objective is a world-first invitation before the first structure board.",
+      "viewport": "desktop 1440x900",
+      "visualStateId": "camp_objective",
+      "url": "http://127.0.0.1:5176/?play=hanzi-v2-golden-slice"
+    },
+    {
+      "fileName": "03-ming-meaning-magic-desktop.webp",
+      "verifies": "The formed character, pinyin, familiar word, and meaning magic are shown together.",
+      "viewport": "desktop 1440x900",
+      "visualStateId": "battle_1_casting",
+      "url": "http://127.0.0.1:5176/?play=hanzi-v2-golden-slice"
+    },
+    {
+      "fileName": "04-breather-world-change.webp",
+      "verifies": "The first spell leaves a visible world change before the next encounter.",
+      "viewport": "desktop 1440x900",
+      "visualStateId": "breather_1",
+      "url": "http://127.0.0.1:5176/?play=hanzi-v2-golden-slice"
+    },
+    {
+      "fileName": "07-guardian-light-boss.webp",
+      "verifies": "Guardian Light exposes the correct boss slot after a wrong placement without moving a card.",
+      "viewport": "desktop 1440x900",
+      "visualStateId": "invalid_feedback",
+      "url": "http://127.0.0.1:5176/?play=hanzi-v2-golden-slice"
+    },
+    {
+      "fileName": "10-boss-phase-lin.webp",
+      "verifies": "The Lin boss phase keeps the two wood instances and left-right slots visible after a calm retry.",
+      "viewport": "desktop 1440x900",
+      "visualStateId": "boss_phase_1_placing",
+      "url": "http://127.0.0.1:5176/?play=hanzi-v2-golden-slice"
+    },
+    {
+      "fileName": "12-camp-full-repair.webp",
+      "verifies": "All four completed spells visibly repair the camp without a score or countdown.",
+      "viewport": "desktop 1440x900",
+      "visualStateId": "camp_repair",
+      "url": "http://127.0.0.1:5176/?play=hanzi-v2-golden-slice"
+    },
+    {
+      "fileName": "13-spellbook-four-pages.webp",
+      "verifies": "The spellbook exposes all four discovered characters through visible tabs and a local replay surface.",
+      "viewport": "desktop 1440x900",
+      "visualStateId": "spellbook_review",
+      "url": "http://127.0.0.1:5176/?play=hanzi-v2-golden-slice"
+    },
+    {
+      "fileName": "02-battle-ming-mobile.webp",
+      "verifies": "The five-card Ming structure board remains readable and touch-ready in portrait phone layout.",
+      "viewport": "phone portrait 390x844",
+      "visualStateId": "battle_1_placing",
+      "url": "http://127.0.0.1:5176/?play=hanzi-v2-golden-slice"
+    },
+    {
+      "fileName": "06-ability-choice-mobile.webp",
+      "verifies": "All three meaningful ability choices remain visible in portrait phone layout.",
+      "viewport": "phone portrait 390x844",
+      "visualStateId": "ability_choice",
+      "url": "http://127.0.0.1:5176/?play=hanzi-v2-golden-slice"
+    },
+    {
+      "fileName": "19-mobile-complete-run.webp",
+      "verifies": "The complete-run replay choice and repaired world remain usable on a phone without pressure mechanics.",
+      "viewport": "phone portrait 390x844",
+      "visualStateId": "run_complete",
+      "url": "http://127.0.0.1:5176/?play=hanzi-v2-golden-slice"
+    },
+    {
+      "fileName": "05-battle-hua-tablet.webp",
+      "verifies": "The Hua encounter presents a real top-bottom structure with five visible cards on a tablet.",
+      "viewport": "tablet landscape 1024x768",
+      "visualStateId": "battle_2_placing",
+      "url": "http://127.0.0.1:5176/?play=hanzi-v2-golden-slice"
+    },
+    {
+      "fileName": "08-star-path-boss.webp",
+      "verifies": "Star Path visibly highlights an empty real boss slot without choosing or placing a component.",
+      "viewport": "tablet landscape 1024x768",
+      "visualStateId": "boss_phase_1_placing",
+      "url": "http://127.0.0.1:5176/?play=hanzi-v2-golden-slice"
+    },
+    {
+      "fileName": "11-boss-phase-xing.webp",
+      "verifies": "The Xing boss phase reuses the taught top-bottom structure and displays one remaining seal.",
+      "viewport": "tablet landscape 1024x768",
+      "visualStateId": "boss_phase_2_placing",
+      "url": "http://127.0.0.1:5176/?play=hanzi-v2-golden-slice"
+    },
+    {
+      "fileName": "09-ink-echo-boss.webp",
+      "verifies": "Ink Echo is activated from the visible replay control during interference and does not auto-solve the board.",
+      "viewport": "desktop 1440x900",
+      "visualStateId": "boss_interference",
+      "url": "http://127.0.0.1:5176/?play=hanzi-v2-golden-slice"
+    },
+    {
+      "fileName": "14-reduced-motion.webp",
+      "verifies": "Visible settings confirm both reduced motion and mute, while the local structure state remains understandable.",
+      "viewport": "desktop 1440x900",
+      "visualStateId": "settings_open",
+      "url": "http://127.0.0.1:5176/?play=hanzi-v2-golden-slice"
+    },
+    {
+      "fileName": "15-theme-c-production-candidate.webp",
+      "verifies": "The parent-review assets tab renders both the procedural asset registry and the fixed review-only ImageGen seed grid; no seed is a child-runtime asset.",
+      "viewport": "desktop 1440x900",
+      "visualStateId": "review:assets",
+      "url": "http://127.0.0.1:5176/?review=hanzi-v2-step03"
+    },
+    {
+      "fileName": "16-audio-review.webp",
+      "verifies": "The parent audio tab presents the actual reported Chinese TTS voice or explicit visual fallback, plus its dedicated audioDecision choices.",
+      "viewport": "desktop 1440x900",
+      "visualStateId": "review:audio",
+      "url": "http://127.0.0.1:5176/?review=hanzi-v2-step03"
+    },
+    {
+      "fileName": "17-final-manifest-review.webp",
+      "verifies": "The fixed final 12-character manifest is available for parent review with structure and meaning-magic mapping.",
+      "viewport": "desktop 1440x900",
+      "visualStateId": "review:manifest",
+      "url": "http://127.0.0.1:5176/?review=hanzi-v2-step03"
+    },
+    {
+      "fileName": "18-child-gate-review.webp",
+      "verifies": "The child-use gate states that technical evidence cannot imply child acceptance or start use by itself.",
+      "viewport": "desktop 1440x900",
+      "visualStateId": "review:child-gate",
+      "url": "http://127.0.0.1:5176/?review=hanzi-v2-step03"
+    },
+    {
+      "fileName": "20-review-summary.webp",
+      "verifies": "The local parent summary exposes required decisions, changed-only handling, and the explicit YES/NO/NOT_YET gate.",
+      "viewport": "desktop 1440x900",
+      "visualStateId": "review:summary",
+      "url": "http://127.0.0.1:5176/?review=hanzi-v2-step03"
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "remoteRequests": [],
+  "failure": null,
+  "finishedAtUtc": "2026-08-09T05:00:18.904Z"
+}

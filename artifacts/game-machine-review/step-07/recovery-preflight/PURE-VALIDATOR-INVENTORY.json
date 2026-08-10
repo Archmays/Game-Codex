@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "recordType": "PURE_VALIDATOR_PREFLIGHT_INVENTORY",
+  "sourceTreeSha256": "63729F26B011E91D4EBBDB1DD82B8B0E9197E3599DD498D9301DD009AF5F1131",
+  "status": "PASS",
+  "execution": {
+    "testFiles": 14,
+    "tests": 96,
+    "failed": 0,
+    "log": "artifacts/game-machine-review/step-07/recovery-preflight/deterministic/pure-machine-validators.log"
+  },
+  "coverage": [
+    { "category": "manifest and route inventory", "test": "tests/game-machine-review-manifest.test.ts" },
+    { "category": "verdict derivation", "test": "tests/game-machine-review-verdict.test.ts" },
+    { "category": "source/evidence identity", "test": "tests/game-machine-evidence-identity.test.ts" },
+    { "category": "evidence and derived-output seals", "test": "tests/game-machine-evidence-manifest.test.ts" },
+    { "category": "command records and baseline state machine", "test": "tests/game-machine-command-evidence.test.ts" },
+    { "category": "deep-route row/context contract", "test": "tests/game-machine-deep-route-evidence.test.ts" },
+    { "category": "ER01-ER03 lineage", "test": "tests/game-machine-exceptional-repair.test.ts" },
+    { "category": "static report scroll evidence", "test": "tests/game-machine-static-report-scroll-evidence.test.ts" },
+    { "category": "readiness package parser", "test": "tests/game-machine-readiness-package.test.ts" },
+    { "category": "STEP07 observer schema", "test": "tests/hanzi-v2-step07-observer-schema.test.ts" },
+    { "category": "STEP07 privacy", "test": "tests/hanzi-v2-step07-privacy.test.ts" },
+    { "category": "STEP07 runtime grant", "test": "tests/hanzi-v2-step07-progress-gate.test.ts" },
+    { "category": "versioned observation context", "test": "tests/observation-context.test.ts" },
+    { "category": "page-mode and adult scroll contract", "test": "tests/adult-tool-page-mode.test.ts" }
+  ],
+  "notRunBecauseItWouldWriteCanonicalEvidence": [
+    "tools/game-machine-review/finalize-machine-evidence.ts",
+    "tools/game-machine-review/run-machine-review.ts",
+    "tools/game-machine-review/promote-visual-baseline.ts"
+  ],
+  "finalReadinessVerifierNotApplicableYet": "No final committed verdict exists; verify-readiness is deferred to closeout."
+}

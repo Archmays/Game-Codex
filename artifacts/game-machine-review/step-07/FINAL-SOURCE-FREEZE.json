@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "recordType": "STEP07_FINAL_SOURCE_FREEZE",
+  "authorizationId": "HUMAN_AUTHORIZED_STEP07_FINAL_CLOSURE_SKILL_CLEANUP_ASSET_FOUNDRY_01",
+  "status": "FROZEN_NO_TRACKED_MUTATION",
+  "frozenAtUtc": "2026-08-10T05:08:17.8012465Z",
+  "branch": "main",
+  "headBeforeCommit": "8e00aa61d796578f7e593243caa514da5a307189",
+  "originMainBeforeCommit": "8e00aa61d796578f7e593243caa514da5a307189",
+  "preClosureSourceTreeSha256": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+  "finalSourceTreeSha256": "B6C2AFD041D4BCA65261B04DD0D46455A15A6F4793AE39435C8D7B8C0ED9CB63",
+  "sourceIdentityTool": "tools/game-machine-review/source-identity.ts",
+  "closureCharter": {
+    "path": "artifacts/game-machine-review/step-07/final-closure/STEP07-FINAL-CLOSURE-CHARTER.json",
+    "sha256": "6DFEA591C6D961CAAAF08A4480ABA4C48948BF7697E47298506BF0F8AED70473",
+    "findingCount": 7
+  },
+  "lineage": {
+    "repairRoundsConsumed": 3,
+    "ordinaryAutoReviseLoop": false,
+    "humanExceptionalRepairs": 3,
+    "closedRecoveryAuthorizations": 1,
+    "finalClosureAuthorizations": 1,
+    "closureAutoRepairLoops": 3,
+    "closureAutoRepairLoopLimit": 3
+  },
+  "boundaries": {
+    "trackedMutationAfterFreeze": "FORBIDDEN",
+    "artifactOnlyEvidenceGeneration": "ALLOWED",
+    "themeCTrackedRuntimeIntegration": false,
+    "realSecondUsePerformed": false
+  }
+}

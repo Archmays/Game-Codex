@@ -1,0 +1,254 @@
+- main:
+  - paragraph: 家长窗口 · STEP 06
+  - heading "第二次进入 / 返回世界观察" [level=1]
+  - paragraph: 请在下一次自然、独立的游戏时段使用，不要把它接在第一场后面。
+  - strong: SYNTHETIC_TOOLING_TEST_ONLY · NO CHILD DATA
+  - heading "开始前检查" [level=2]
+  - term: STEP 05 feedback
+  - definition: AF3878C88F68344E2EF649774FCE24C46D2312824D91AD274628B85C8A6E0800
+  - term: 候选 commit
+  - definition: c46e660396257767692e94d61263b4662a11ccfb
+  - term: evidence
+  - definition: EC04FECD4B04F294E7ED62139EBEE386F6B27B3FBC198EBCF3F6CD98341A86D8
+  - term: revision
+  - definition: fnv1a:c9271099
+  - term: 默认世界 / 第二次进入授权
+  - definition: YES / YES
+  - term: STEP 06 build
+  - definition: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  - term: 默认路线
+  - definition: / → 我的游戏世界
+  - term: 固定地址
+  - definition: http://127.0.0.1:5175
+  - paragraph: 已验证：同一固定地址、同一浏览器中的完整上次进度。
+  - text: 间隔区间
+  - combobox "间隔区间":
+    - option "请选择" [selected]
+    - option "SAME_DAY_SEPARATE_SESSION"
+    - option "ONE_TO_THREE_DAYS"
+    - option "FOUR_TO_SEVEN_DAYS"
+    - option "MORE_THAN_SEVEN_DAYS"
+  - text: 声音方式
+  - combobox "声音方式":
+    - option "USE_EXISTING_SETTING" [selected]
+    - option "START_MUTED"
+    - option "CANCEL"
+  - checkbox "我确认：只记录相对时间和最小技术事件，不录音、不录像、不收集身份信息、不联网。"
+  - text: 我确认：只记录相对时间和最小技术事件，不录音、不录像、不收集身份信息、不联网。
+  - paragraph: 把游戏交给孩子，先不要指定目的地。 如果孩子问，可以只说：“你想去哪里都可以。”
+  - button "READY 后打开儿童窗口"
+  - status
+  - heading "实时观察" [level=2]
+  - paragraph: 建议 3–5 分钟以内；不要为了记录而要求孩子完成。
+  - term: 当前表面
+  - definition: WORLD
+  - term: 当前阶段
+  - definition: —
+  - term: 相对时间
+  - definition: 0 ms
+  - term: 进度连续
+  - definition: VERIFIED
+  - term: 第一次去向
+  - definition: —
+  - text: 停止原因
+  - combobox "停止原因":
+    - option "CHILD_REQUEST" [selected]
+    - option "DISTRESS"
+    - option "SENSORY_DISCOMFORT"
+    - option "TECHNICAL"
+    - option "PRIVACY"
+    - option "PROGRESS_CONTINUITY"
+    - option "ADULT_ANSWER_REQUIRED"
+    - option "NATURAL_END"
+    - option "OTHER"
+  - button "结束本次观察"
+  - status
+  - heading "人工观察" [level=2]
+  - paragraph: 这些选择由家长记录，不由技术事件代填，也不是学习测验。
+  - group "worldRecognition":
+    - text: worldRecognition 认出这是上次的世界
+    - combobox "认出这是上次的世界":
+      - option "UNRECORDED" [selected]
+      - option "NOTICED_WITHOUT_PROMPT"
+      - option "NOTICED_AFTER_BUILT_IN_SUPPORT"
+      - option "NOTICED_AFTER_REGION_ONLY_PROMPT"
+      - option "ADULT_ANSWER_REQUIRED"
+      - option "STOPPED"
+    - text: 注意到上次修复仍在
+    - combobox "注意到上次修复仍在":
+      - option "UNRECORDED" [selected]
+      - option "NOTICED_WITHOUT_PROMPT"
+      - option "NOTICED_AFTER_BUILT_IN_SUPPORT"
+      - option "NOTICED_AFTER_REGION_ONLY_PROMPT"
+      - option "ADULT_ANSWER_REQUIRED"
+      - option "STOPPED"
+    - text: 自己选择了去向
+    - combobox "自己选择了去向":
+      - option "UNRECORDED" [selected]
+      - option "NOTICED_WITHOUT_PROMPT"
+      - option "NOTICED_AFTER_BUILT_IN_SUPPORT"
+      - option "NOTICED_AFTER_REGION_ONLY_PROMPT"
+      - option "ADULT_ANSWER_REQUIRED"
+      - option "STOPPED"
+    - text: 理解森林入口
+    - combobox "理解森林入口":
+      - option "UNRECORDED" [selected]
+      - option "NOTICED_WITHOUT_PROMPT"
+      - option "NOTICED_AFTER_BUILT_IN_SUPPORT"
+      - option "NOTICED_AFTER_REGION_ONLY_PROMPT"
+      - option "ADULT_ANSWER_REQUIRED"
+      - option "STOPPED"
+    - text: 理解字灵书
+    - combobox "理解字灵书":
+      - option "UNRECORDED" [selected]
+      - option "NOTICED_WITHOUT_PROMPT"
+      - option "NOTICED_AFTER_BUILT_IN_SUPPORT"
+      - option "NOTICED_AFTER_REGION_ONLY_PROMPT"
+      - option "ADULT_ANSWER_REQUIRED"
+      - option "STOPPED"
+    - text: 理解游戏百宝箱
+    - combobox "理解游戏百宝箱":
+      - option "UNRECORDED" [selected]
+      - option "NOTICED_WITHOUT_PROMPT"
+      - option "NOTICED_AFTER_BUILT_IN_SUPPORT"
+      - option "NOTICED_AFTER_REGION_ONLY_PROMPT"
+      - option "ADULT_ANSWER_REQUIRED"
+      - option "STOPPED"
+    - text: 理解返回世界
+    - combobox "理解返回世界":
+      - option "UNRECORDED" [selected]
+      - option "NOTICED_WITHOUT_PROMPT"
+      - option "NOTICED_AFTER_BUILT_IN_SUPPORT"
+      - option "NOTICED_AFTER_REGION_ONLY_PROMPT"
+      - option "ADULT_ANSWER_REQUIRED"
+      - option "STOPPED"
+  - group "familiarization":
+    - text: familiarization 记得核心摆放方法
+    - combobox "记得核心摆放方法":
+      - option "UNRECORDED" [selected]
+      - option "NOTICED_WITHOUT_PROMPT"
+      - option "NOTICED_AFTER_BUILT_IN_SUPPORT"
+      - option "NOTICED_AFTER_REGION_ONLY_PROMPT"
+      - option "ADULT_ANSWER_REQUIRED"
+      - option "STOPPED"
+    - text: 只使用内建提示
+    - combobox "只使用内建提示":
+      - option "UNRECORDED" [selected]
+      - option "NOTICED_WITHOUT_PROMPT"
+      - option "NOTICED_AFTER_BUILT_IN_SUPPORT"
+      - option "NOTICED_AFTER_REGION_ONLY_PROMPT"
+      - option "ADULT_ANSWER_REQUIRED"
+      - option "STOPPED"
+    - text: 需要成人直接回答
+    - combobox "需要成人直接回答":
+      - option "UNRECORDED" [selected]
+      - option "NOTICED_WITHOUT_PROMPT"
+      - option "NOTICED_AFTER_BUILT_IN_SUPPORT"
+      - option "NOTICED_AFTER_REGION_ONLY_PROMPT"
+      - option "ADULT_ANSWER_REQUIRED"
+      - option "STOPPED"
+    - text: 对重复路线显得无聊
+    - combobox "对重复路线显得无聊":
+      - option "UNRECORDED" [selected]
+      - option "NOTICED_WITHOUT_PROMPT"
+      - option "NOTICED_AFTER_BUILT_IN_SUPPORT"
+      - option "NOTICED_AFTER_REGION_ONLY_PROMPT"
+      - option "ADULT_ANSWER_REQUIRED"
+      - option "STOPPED"
+  - group "engagement":
+    - text: engagement 自愿继续
+    - combobox "自愿继续":
+      - option "UNRECORDED" [selected]
+      - option "NOTICED_WITHOUT_PROMPT"
+      - option "NOTICED_AFTER_BUILT_IN_SUPPORT"
+      - option "NOTICED_AFTER_REGION_ONLY_PROMPT"
+      - option "ADULT_ANSWER_REQUIRED"
+      - option "STOPPED"
+    - text: 探索另一个世界物件
+    - combobox "探索另一个世界物件":
+      - option "UNRECORDED" [selected]
+      - option "NOTICED_WITHOUT_PROMPT"
+      - option "NOTICED_AFTER_BUILT_IN_SUPPORT"
+      - option "NOTICED_AFTER_REGION_ONLY_PROMPT"
+      - option "ADULT_ANSWER_REQUIRED"
+      - option "STOPPED"
+    - text: 正式观察结束后还想继续
+    - combobox "正式观察结束后还想继续":
+      - option "UNRECORDED" [selected]
+      - option "NOTICED_WITHOUT_PROMPT"
+      - option "NOTICED_AFTER_BUILT_IN_SUPPORT"
+      - option "NOTICED_AFTER_REGION_ONLY_PROMPT"
+      - option "ADULT_ANSWER_REQUIRED"
+      - option "STOPPED"
+  - heading "干预" [level=3]
+  - text: 观察点
+  - combobox "观察点":
+    - option "recognizedWorld" [selected]
+    - option "noticedPersistentRepairs"
+    - option "selectedDestination"
+    - option "understoodForestPortal"
+    - option "understoodSpellbook"
+    - option "understoodTreasureBox"
+    - option "returnedToWorld"
+    - option "rememberedCorePlacement"
+    - option "usedBuiltInHintsOnly"
+    - option "neededAdultAnswer"
+    - option "showedBoredomWithRepeatedRoute"
+    - option "voluntarilyContinued"
+    - option "exploredAnotherWorldObject"
+    - option "askedForMoreAfterOfficialCheck"
+  - text: 方式
+  - combobox "方式":
+    - option "NONE" [selected]
+    - option "REPEAT_VISIBLE_COPY"
+    - option "POINT_TO_REGION_ONLY"
+    - option "TECHNICAL_ASSIST"
+    - option "ADULT_ANSWER_REQUIRED"
+    - option "STOPPED"
+  - text: 区域
+  - combobox "区域":
+    - option "不指区域" [selected]
+    - option "WORLD"
+    - option "WORLD_OBJECTS"
+    - option "FOREST_PLAYFIELD"
+    - option "BOARD"
+    - option "HAND"
+  - button "记录一次干预"
+  - list
+  - heading "身心感受" [level=3]
+  - text: comfortable
+  - combobox "comfortable":
+    - option "OBSERVED" [selected]
+    - option "NOT_OBSERVED"
+    - option "UNKNOWN"
+  - text: briefConfusionRecovered
+  - combobox "briefConfusionRecovered":
+    - option "OBSERVED" [selected]
+    - option "NOT_OBSERVED"
+    - option "UNKNOWN"
+  - text: sustainedFrustration
+  - combobox "sustainedFrustration":
+    - option "OBSERVED" [selected]
+    - option "NOT_OBSERVED"
+    - option "UNKNOWN"
+  - text: sensoryDiscomfort
+  - combobox "sensoryDiscomfort":
+    - option "OBSERVED" [selected]
+    - option "NOT_OBSERVED"
+    - option "UNKNOWN"
+  - text: childInitiatedStop
+  - combobox "childInitiatedStop":
+    - option "OBSERVED" [selected]
+    - option "NOT_OBSERVED"
+    - option "UNKNOWN"
+  - text: feltForced
+  - combobox "feltForced":
+    - option "OBSERVED" [selected]
+    - option "NOT_OBSERVED"
+    - option "UNKNOWN"
+  - text: 家长备注（不要填写姓名、学校或自由儿童话语）
+  - textbox "家长备注（不要填写姓名、学校或自由儿童话语）"
+  - heading "结束与导出" [level=2]
+  - paragraph: 完成一次去向→世界、一次森林→世界、孩子主动停止、技术停止或自然结束时都可以结束。孩子还想继续时，先结束正式观察，之后自由玩不再进入本次证据。
+  - button "按自然结束停止"
+  - button "导出 STEP-06_SECOND_USE_OBSERVATION.json"

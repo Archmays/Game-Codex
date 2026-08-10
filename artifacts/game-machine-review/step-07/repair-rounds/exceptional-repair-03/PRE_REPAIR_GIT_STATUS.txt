@@ -1,0 +1,9 @@
+capturedAtUtc=2026-08-10T01:29:06.8479000Z
+branch=main
+HEAD=8e00aa61d796578f7e593243caa514da5a307189
+origin/main=8e00aa61d796578f7e593243caa514da5a307189
+blockedSourceTreeSha256=9219693F77D6E862943B53C02D617306904C11FCD5F9913B4CB1CF871EA8AD2A
+
+The existing STEP 07 working tree remains intentionally uncommitted and is preserved.
+The only ER03 source mutation authorized is in tests/e2e/game-machine-visual-regression.spec.ts.
+All pre-change-reference, three-round failure, ER01, ER02, and post-ER02 blocker evidence remains unchanged.

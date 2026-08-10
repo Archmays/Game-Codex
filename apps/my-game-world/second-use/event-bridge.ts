@@ -9,18 +9,26 @@ import {
   type Step06EventType,
 } from "./event-types";
 import { sanitizeStep06Metadata } from "./privacy";
-import type { Step06SessionGrant } from "./session";
 
 const MAX_EVENTS = 160;
 
+interface SecondUseEventGrant {
+  readonly sessionId: string;
+  readonly startedAtMs: number;
+}
+
+function namespace(sessionId: string): "hanzi-v2-step06" | "hanzi-v2-step07" {
+  return sessionId.startsWith("s07-") ? "hanzi-v2-step07" : "hanzi-v2-step06";
+}
+
 function logKey(sessionId: string): string {
-  return `hanzi-v2-step06:events:${sessionId}`;
+  return `${namespace(sessionId)}:events:${sessionId}`;
 }
 function signalKey(sessionId: string): string {
-  return `hanzi-v2-step06:signal:${sessionId}`;
+  return `${namespace(sessionId)}:signal:${sessionId}`;
 }
 function stopKey(sessionId: string): string {
-  return `hanzi-v2-step06:stop:${sessionId}`;
+  return `${namespace(sessionId)}:stop:${sessionId}`;
 }
 
 export function readStep06EventLog(storage: GoldenSliceStorageLike, sessionId: string): Step06TechnicalEvent[] {
@@ -43,7 +51,7 @@ export interface Step06EventBridge {
 }
 
 export function createStep06EventBridge(options: {
-  readonly grant: Step06SessionGrant;
+  readonly grant: SecondUseEventGrant;
   readonly storage: GoldenSliceStorageLike;
   readonly onEvent?: (event: Step06TechnicalEvent) => void;
   readonly onStop?: (stopCode: Step06StopCode) => void;
@@ -52,7 +60,7 @@ export function createStep06EventBridge(options: {
 }): Step06EventBridge {
   const { grant, storage } = options;
   const now = options.now ?? Date.now;
-  const channelName = `hanzi-v2-step06:${grant.sessionId}`;
+  const channelName = `${namespace(grant.sessionId)}:${grant.sessionId}`;
   let closed = false;
   let channel: BroadcastChannel | null = null;
   const seen = new Set(readStep06EventLog(storage, grant.sessionId).map((event) => event.sequence));
@@ -103,7 +111,7 @@ export function createStep06EventBridge(options: {
       eventType,
       safeMetadata: sanitizeStep06Metadata(safeMetadata),
     };
-    if (!isStep06TechnicalEvent(event)) throw new Error("Refusing unsafe STEP 06 event");
+    if (!isStep06TechnicalEvent(event)) throw new Error("Refusing unsafe second-use event");
     const bounded = [...existing, event].slice(-MAX_EVENTS);
     storage.setItem(logKey(grant.sessionId), JSON.stringify(bounded));
     storage.setItem(signalKey(grant.sessionId), JSON.stringify(event));
@@ -115,7 +123,10 @@ export function createStep06EventBridge(options: {
 
   const pendingStop = storage.getItem(stopKey(grant.sessionId));
   if (pendingStop) {
-    try { acceptStop(JSON.parse(pendingStop)); } catch { /* invalid pending stop */ }
+    queueMicrotask(() => {
+      if (closed) return;
+      try { acceptStop(JSON.parse(pendingStop)); } catch { /* invalid pending stop */ }
+    });
   }
 
   return {

@@ -1,0 +1,15 @@
+- main:
+  - text: 夜光墨林
+  - heading "我的游戏世界" [level=1]
+  - paragraph: 今天想去哪里？
+  - button "声音和画面"
+  - region "夜光森林和字灵营地":
+    - heading "四字魔法书" [level=2]
+    - button "翻开魔法书"
+    - heading "墨迹森林" [level=2]
+    - link "走进墨迹森林":
+      - /url: "?play=hanzi-v2-golden-slice&mode=play&from=world"
+    - heading "游戏百宝箱" [level=2]
+    - link "打开百宝箱":
+      - /url: "?hub=classic&from=world"
+    - text: 营地灯 墨花 守护树 星光路

@@ -81,6 +81,16 @@
   text-shadow: 0 2px 10px #071c2a;
 }
 
+.golden-world-title {
+  margin: 0;
+  font: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
 .golden-world-name__lamp {
   width: 14px;
   height: 14px;
@@ -367,7 +377,7 @@
   box-shadow: 0 6px 0 rgba(5, 26, 34, 0.38);
   font: inherit;
   cursor: grab;
-  touch-action: manipulation;
+  touch-action: none;
 }
 
 .golden-card span {

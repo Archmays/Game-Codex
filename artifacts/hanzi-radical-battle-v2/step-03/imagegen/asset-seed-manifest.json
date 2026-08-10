@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "initiativeId": "hanzi-radical-battle-v2",
+  "generatedAtUtc": "2026-08-09T04:04:18.225Z",
+  "previewTool": "Playwright Chromium canvas WebP encoder",
+  "parentReviewBoundary": "Previews and originals are review-only. They are not child runtime assets or authorization for sprite-strip production.",
+  "assets": [
+    {
+      "promptDocument": "docs/hanzi-radical-battle-v2/step-03/05-IMAGEGEN-THEME-C-SEED-PROMPTS.md",
+      "promptDocIds": [
+        "C-CAMP-01"
+      ],
+      "category": "camp before-after review concept sheet",
+      "sourcePath": "artifacts/hanzi-radical-battle-v2/step-03/imagegen/originals/C-CAMP-01.png",
+      "sourceSha256": "B31EFEC8C74ADD167A7DD41B1A3576811D03780C01CA048E3C129B81062196EC",
+      "sourceBytes": 2243058,
+      "previewPath": "artifacts/hanzi-radical-battle-v2/step-03/imagegen/previews/C-CAMP-01.webp",
+      "previewSha256": "6917449D5A863E874125172AD4C79E2B8F11AD42A856711952A449962F5B95A2",
+      "previewBytes": 117554,
+      "previewDimensions": {
+        "width": 1280,
+        "height": 720
+      },
+      "crop": "fit-contain; no crop",
+      "longestEdgeTargetPx": 1280,
+      "webpQuality": 0.82,
+      "status": "GENERATED_PENDING_PARENT",
+      "reviewOnly": true,
+      "runtimeIncluded": false
+    },
+    {
+      "promptDocument": "docs/hanzi-radical-battle-v2/step-03/05-IMAGEGEN-THEME-C-SEED-PROMPTS.md",
+      "promptDocIds": [
+        "C-MAGE-01",
+        "C-COMPANION-01",
+        "C-INK-01",
+        "C-BOSS-01"
+      ],
+      "category": "Theme C character concept contact sheet",
+      "sourcePath": "artifacts/hanzi-radical-battle-v2/step-03/imagegen/originals/C-CHARACTERS-01.png",
+      "sourceSha256": "2AB949C7147CBEAD48C136305751330F426333BDDA5BC65C72F05EF53FAFF9BD",
+      "sourceBytes": 1852552,
+      "previewPath": "artifacts/hanzi-radical-battle-v2/step-03/imagegen/previews/C-CHARACTERS-01.webp",
+      "previewSha256": "D1164C6C0C43713E9D17DD888DF316F842BB2236CEE70AB04E81625333076C19",
+      "previewBytes": 51590,
+      "previewDimensions": {
+        "width": 1280,
+        "height": 725
+      },
+      "crop": "fit-contain; no crop",
+      "longestEdgeTargetPx": 1280,
+      "webpQuality": 0.82,
+      "status": "GENERATED_PENDING_PARENT",
+      "reviewOnly": true,
+      "runtimeIncluded": false
+    },
+    {
+      "promptDocument": "docs/hanzi-radical-battle-v2/step-03/05-IMAGEGEN-THEME-C-SEED-PROMPTS.md",
+      "promptDocIds": [
+        "C-ABILITIES-01"
+      ],
+      "category": "three neutral ability icon review sheet",
+      "sourcePath": "artifacts/hanzi-radical-battle-v2/step-03/imagegen/originals/C-ABILITIES-01.png",
+      "sourceSha256": "4ACEBAECEA4DD4CDFD7ADDA193C3A2CA203F9F3D3D4C192EEE5DEFB68DC0724E",
+      "sourceBytes": 1910330,
+      "previewPath": "artifacts/hanzi-radical-battle-v2/step-03/imagegen/previews/C-ABILITIES-01.webp",
+      "previewSha256": "D4DFA806803D7558A826AFA067E9DEE0939730A26A1843AA777C2AD47DB99305",
+      "previewBytes": 53256,
+      "previewDimensions": {
+        "width": 1280,
+        "height": 480
+      },
+      "crop": "fit-contain; no crop",
+      "longestEdgeTargetPx": 1280,
+      "webpQuality": 0.82,
+      "status": "GENERATED_PENDING_PARENT",
+      "reviewOnly": true,
+      "runtimeIncluded": false
+    }
+  ]
+}

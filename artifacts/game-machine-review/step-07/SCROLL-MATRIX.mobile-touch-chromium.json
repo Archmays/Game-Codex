@@ -1,0 +1,484 @@
+{
+  "schemaVersion": "game-codex-step07-scroll-matrix-project-v1",
+  "generatedAtUtc": "2026-08-10T05:11:04.468Z",
+  "sourceTreeSha256": "B6C2AFD041D4BCA65261B04DD0D46455A15A6F4793AE39435C8D7B8C0ED9CB63",
+  "project": "mobile-touch-chromium",
+  "rows": [
+    {
+      "routeId": "step02-review",
+      "routeKind": "review-step02",
+      "routeLabel": "STEP 02 review",
+      "project": "mobile-touch-chromium",
+      "viewport": "390x844-touch",
+      "pageMode": "adult-tool",
+      "scrollOwner": "document.documentElement",
+      "scrollHeight": 11917,
+      "clientHeight": 844,
+      "maxScrollTop": 11073,
+      "horizontalOverflowPx": 0,
+      "nestedVerticalScrollOwners": [],
+      "inputs": [
+        {
+          "input": "touch-swipe",
+          "before": 0,
+          "after": 457,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 580,
+          "after": 0,
+          "passed": true
+        }
+      ],
+      "finalAction": {
+        "selector": "[data-export-review]",
+        "visible": true,
+        "enabled": true,
+        "focused": true,
+        "unobscured": true,
+        "clicked": true,
+        "activationEvidence": "download:STEP-02_PARENT_REVIEW_FEEDBACK.json:trusted-touch-tap-1"
+      },
+      "network": {
+        "policy": "SAME_ORIGIN_ALLOWED / EXTERNAL_NETWORK_FORBIDDEN",
+        "sameOriginRequestCount": 47,
+        "sameOriginSamples": [
+          "http://127.0.0.1:5175/?review=hanzi-v2-step02&fixture=SYNTHETIC_TOOLING_TEST_ONLY",
+          "http://127.0.0.1:5175/@vite/client",
+          "http://127.0.0.1:5175/src/main.ts",
+          "http://127.0.0.1:5175/src/styles.css",
+          "http://127.0.0.1:5175/src/page-mode.css",
+          "http://127.0.0.1:5175/src/app-route.ts",
+          "http://127.0.0.1:5175/src/observation-context.ts",
+          "http://127.0.0.1:5175/src/page-mode.ts",
+          "http://127.0.0.1:5175/node_modules/.pnpm/vite@6.4.3_@types+node@22.19.19_tsx@4.23.1/node_modules/vite/dist/client/env.mjs",
+          "http://127.0.0.1:5175/apps/my-game-world/second-use/event-types.ts",
+          "http://127.0.0.1:5175/apps/hanzi-v2-step02-review/index.ts",
+          "http://127.0.0.1:5175/apps/hanzi-v2-step02-review/styles.css"
+        ],
+        "externalRequests": []
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "trace": "artifacts/game-machine-review/step-07/traces/scroll-matrix/mobile-touch-chromium-step02-review-390x844-touch.zip",
+      "screenshots": [
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step02-review-390x844-touch-top.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step02-review-390x844-touch-after-swipe.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step02-review-390x844-touch-final-action.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step02-review-390x844-touch-full-page.png"
+      ],
+      "fullPageScreenshot": "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step02-review-390x844-touch-full-page.png",
+      "status": "PASS"
+    },
+    {
+      "routeId": "step03-review",
+      "routeKind": "review-step03",
+      "routeLabel": "STEP 03 review",
+      "project": "mobile-touch-chromium",
+      "viewport": "390x844-touch",
+      "pageMode": "adult-tool",
+      "scrollOwner": "document.documentElement",
+      "scrollHeight": 5396,
+      "clientHeight": 844,
+      "maxScrollTop": 4552,
+      "horizontalOverflowPx": 0,
+      "nestedVerticalScrollOwners": [],
+      "inputs": [
+        {
+          "input": "touch-swipe",
+          "before": 0,
+          "after": 457,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 1079,
+          "after": 0,
+          "passed": true
+        }
+      ],
+      "finalAction": {
+        "selector": "[data-export-review]",
+        "visible": true,
+        "enabled": true,
+        "focused": true,
+        "unobscured": true,
+        "clicked": true,
+        "activationEvidence": "download:STEP-03_PARENT_REVIEW_FEEDBACK.json:trusted-touch-tap-1"
+      },
+      "network": {
+        "policy": "SAME_ORIGIN_ALLOWED / EXTERNAL_NETWORK_FORBIDDEN",
+        "sameOriginRequestCount": 33,
+        "sameOriginSamples": [
+          "http://127.0.0.1:5175/?review=hanzi-v2-step03&fixture=SYNTHETIC_TOOLING_TEST_ONLY",
+          "http://127.0.0.1:5175/@vite/client",
+          "http://127.0.0.1:5175/src/main.ts",
+          "http://127.0.0.1:5175/src/styles.css",
+          "http://127.0.0.1:5175/src/page-mode.css",
+          "http://127.0.0.1:5175/src/app-route.ts",
+          "http://127.0.0.1:5175/src/observation-context.ts",
+          "http://127.0.0.1:5175/src/page-mode.ts",
+          "http://127.0.0.1:5175/node_modules/.pnpm/vite@6.4.3_@types+node@22.19.19_tsx@4.23.1/node_modules/vite/dist/client/env.mjs",
+          "http://127.0.0.1:5175/apps/my-game-world/second-use/event-types.ts",
+          "http://127.0.0.1:5175/apps/hanzi-v2-step03-review/index.ts",
+          "http://127.0.0.1:5175/apps/hanzi-v2-step03-review/styles.css"
+        ],
+        "externalRequests": []
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "trace": "artifacts/game-machine-review/step-07/traces/scroll-matrix/mobile-touch-chromium-step03-review-390x844-touch.zip",
+      "screenshots": [
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step03-review-390x844-touch-top.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step03-review-390x844-touch-after-swipe.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step03-review-390x844-touch-final-action.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step03-review-390x844-touch-full-page.png"
+      ],
+      "fullPageScreenshot": "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step03-review-390x844-touch-full-page.png",
+      "status": "PASS"
+    },
+    {
+      "routeId": "step04-observer-fixture",
+      "routeKind": "observe-step04",
+      "routeLabel": "STEP 04 observer fixture",
+      "project": "mobile-touch-chromium",
+      "viewport": "390x844-touch",
+      "pageMode": "adult-tool",
+      "scrollOwner": "document.documentElement",
+      "scrollHeight": 3553,
+      "clientHeight": 844,
+      "maxScrollTop": 2709,
+      "horizontalOverflowPx": 0,
+      "nestedVerticalScrollOwners": [],
+      "inputs": [
+        {
+          "input": "touch-swipe",
+          "before": 0,
+          "after": 457,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 7069,
+          "after": 0,
+          "passed": true
+        }
+      ],
+      "finalAction": {
+        "selector": "[data-export-observation]",
+        "visible": true,
+        "enabled": true,
+        "focused": true,
+        "unobscured": true,
+        "clicked": true,
+        "activationEvidence": "download:STEP-04_CHILD_FIRST_USE_OBSERVATION.json:trusted-touch-tap-1"
+      },
+      "network": {
+        "policy": "SAME_ORIGIN_ALLOWED / EXTERNAL_NETWORK_FORBIDDEN",
+        "sameOriginRequestCount": 35,
+        "sameOriginSamples": [
+          "http://127.0.0.1:5175/?observe=hanzi-v2-step04&session=s04-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&seed=a123456789abcde0&build=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&launch=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&commit=8e00aa61d796578f7e593243caa514da5a307189&generated=2026-08-10T01%3A00%3A00.000Z&checked=2026-08-10T01%3A01%3A00.000Z&started=2026-08-10T01%3A02%3A00.000Z&fixture=1",
+          "http://127.0.0.1:5175/@vite/client",
+          "http://127.0.0.1:5175/src/main.ts",
+          "http://127.0.0.1:5175/src/styles.css",
+          "http://127.0.0.1:5175/src/page-mode.css",
+          "http://127.0.0.1:5175/src/app-route.ts",
+          "http://127.0.0.1:5175/src/observation-context.ts",
+          "http://127.0.0.1:5175/src/page-mode.ts",
+          "http://127.0.0.1:5175/node_modules/.pnpm/vite@6.4.3_@types+node@22.19.19_tsx@4.23.1/node_modules/vite/dist/client/env.mjs",
+          "http://127.0.0.1:5175/apps/my-game-world/second-use/event-types.ts",
+          "http://127.0.0.1:5175/apps/hanzi-v2-step04-observer/index.ts",
+          "http://127.0.0.1:5175/apps/hanzi-v2-step04-observer/styles.css"
+        ],
+        "externalRequests": []
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "trace": "artifacts/game-machine-review/step-07/traces/scroll-matrix/mobile-touch-chromium-step04-observer-fixture-390x844-touch.zip",
+      "screenshots": [
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step04-observer-fixture-390x844-touch-top.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step04-observer-fixture-390x844-touch-after-swipe.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step04-observer-fixture-390x844-touch-final-action.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step04-observer-fixture-390x844-touch-full-page.png"
+      ],
+      "fullPageScreenshot": "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step04-observer-fixture-390x844-touch-full-page.png",
+      "status": "PASS"
+    },
+    {
+      "routeId": "step05-review-fixture",
+      "routeKind": "review-step05",
+      "routeLabel": "STEP 05 review fixture",
+      "project": "mobile-touch-chromium",
+      "viewport": "390x844-touch",
+      "pageMode": "adult-tool",
+      "scrollOwner": "document.documentElement",
+      "scrollHeight": 2562,
+      "clientHeight": 844,
+      "maxScrollTop": 1718,
+      "horizontalOverflowPx": 0,
+      "nestedVerticalScrollOwners": [],
+      "inputs": [
+        {
+          "input": "touch-swipe",
+          "before": 0,
+          "after": 457,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 581,
+          "after": 0,
+          "passed": true
+        }
+      ],
+      "finalAction": {
+        "selector": "[data-export-feedback]",
+        "visible": true,
+        "enabled": true,
+        "focused": true,
+        "unobscured": true,
+        "clicked": true,
+        "activationEvidence": "download:STEP-05_PARENT_REVIEW_FEEDBACK.json:trusted-touch-tap-2"
+      },
+      "network": {
+        "policy": "SAME_ORIGIN_ALLOWED / EXTERNAL_NETWORK_FORBIDDEN",
+        "sameOriginRequestCount": 304,
+        "sameOriginSamples": [
+          "http://127.0.0.1:5175/?review=hanzi-v2-step05&commit=8e00aa61d796578f7e593243caa514da5a307189&evidence=EC04FECD4B04F294E7ED62139EBEE386F6B27B3FBC198EBCF3F6CD98341A86D8&revision=fnv1a%3Ac9271099&fixture=SYNTHETIC_TOOLING_TEST_ONLY",
+          "http://127.0.0.1:5175/@vite/client",
+          "http://127.0.0.1:5175/src/main.ts",
+          "http://127.0.0.1:5175/src/styles.css",
+          "http://127.0.0.1:5175/src/page-mode.css",
+          "http://127.0.0.1:5175/src/app-route.ts",
+          "http://127.0.0.1:5175/src/observation-context.ts",
+          "http://127.0.0.1:5175/src/page-mode.ts",
+          "http://127.0.0.1:5175/node_modules/.pnpm/vite@6.4.3_@types+node@22.19.19_tsx@4.23.1/node_modules/vite/dist/client/env.mjs",
+          "http://127.0.0.1:5175/apps/my-game-world/second-use/event-types.ts",
+          "http://127.0.0.1:5175/apps/hanzi-v2-step05-review/index.ts",
+          "http://127.0.0.1:5175/apps/hanzi-v2-step05-review/styles.css"
+        ],
+        "externalRequests": []
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "trace": "artifacts/game-machine-review/step-07/traces/scroll-matrix/mobile-touch-chromium-step05-review-fixture-390x844-touch.zip",
+      "screenshots": [
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step05-review-fixture-390x844-touch-top.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step05-review-fixture-390x844-touch-after-swipe.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step05-review-fixture-390x844-touch-final-action.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step05-review-fixture-390x844-touch-full-page.png"
+      ],
+      "fullPageScreenshot": "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step05-review-fixture-390x844-touch-full-page.png",
+      "status": "PASS"
+    },
+    {
+      "routeId": "step06-observer-fixture",
+      "routeKind": "observe-step06",
+      "routeLabel": "STEP 06 observer fixture",
+      "project": "mobile-touch-chromium",
+      "viewport": "390x844-touch",
+      "pageMode": "adult-tool",
+      "scrollOwner": "document.documentElement",
+      "scrollHeight": 4964,
+      "clientHeight": 844,
+      "maxScrollTop": 4120,
+      "horizontalOverflowPx": 0,
+      "nestedVerticalScrollOwners": [],
+      "inputs": [
+        {
+          "input": "touch-swipe",
+          "before": 0,
+          "after": 457,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 4192,
+          "after": 0,
+          "passed": true
+        }
+      ],
+      "finalAction": {
+        "selector": "[data-export]",
+        "visible": true,
+        "enabled": true,
+        "focused": true,
+        "unobscured": true,
+        "clicked": true,
+        "activationEvidence": "download:STEP-06_SECOND_USE_OBSERVATION.json:trusted-touch-tap-2"
+      },
+      "network": {
+        "policy": "SAME_ORIGIN_ALLOWED / EXTERNAL_NETWORK_FORBIDDEN",
+        "sameOriginRequestCount": 30,
+        "sameOriginSamples": [
+          "http://127.0.0.1:5175/?observe=hanzi-v2-step06&fixture=SYNTHETIC_TOOLING_TEST_ONLY&build=8e00aa61d796578f7e593243caa514da5a307189",
+          "http://127.0.0.1:5175/@vite/client",
+          "http://127.0.0.1:5175/src/main.ts",
+          "http://127.0.0.1:5175/src/styles.css",
+          "http://127.0.0.1:5175/src/page-mode.css",
+          "http://127.0.0.1:5175/src/app-route.ts",
+          "http://127.0.0.1:5175/src/observation-context.ts",
+          "http://127.0.0.1:5175/src/page-mode.ts",
+          "http://127.0.0.1:5175/node_modules/.pnpm/vite@6.4.3_@types+node@22.19.19_tsx@4.23.1/node_modules/vite/dist/client/env.mjs",
+          "http://127.0.0.1:5175/apps/my-game-world/second-use/event-types.ts",
+          "http://127.0.0.1:5175/apps/hanzi-v2-step06-observer/index.ts",
+          "http://127.0.0.1:5175/apps/hanzi-v2-step06-observer/styles.css"
+        ],
+        "externalRequests": []
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "trace": "artifacts/game-machine-review/step-07/traces/scroll-matrix/mobile-touch-chromium-step06-observer-fixture-390x844-touch.zip",
+      "screenshots": [
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step06-observer-fixture-390x844-touch-top.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step06-observer-fixture-390x844-touch-after-swipe.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step06-observer-fixture-390x844-touch-final-action.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step06-observer-fixture-390x844-touch-full-page.png"
+      ],
+      "fullPageScreenshot": "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step06-observer-fixture-390x844-touch-full-page.png",
+      "status": "PASS"
+    },
+    {
+      "routeId": "machine-review-report",
+      "routeKind": "machine-review-report",
+      "routeLabel": "Machine review report",
+      "project": "mobile-touch-chromium",
+      "viewport": "390x844-touch",
+      "pageMode": "adult-tool",
+      "scrollOwner": "document.documentElement",
+      "scrollHeight": 2297,
+      "clientHeight": 844,
+      "maxScrollTop": 1453,
+      "horizontalOverflowPx": 0,
+      "nestedVerticalScrollOwners": [],
+      "inputs": [
+        {
+          "input": "touch-swipe",
+          "before": 0,
+          "after": 457,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 0,
+          "after": 0,
+          "passed": true
+        }
+      ],
+      "finalAction": {
+        "selector": "[data-final-action]",
+        "visible": true,
+        "enabled": true,
+        "focused": true,
+        "unobscured": true,
+        "clicked": true,
+        "activationEvidence": "return-top control activated and document scrollTop became 0 on trusted touch tap 2"
+      },
+      "network": {
+        "policy": "SAME_ORIGIN_ALLOWED / EXTERNAL_NETWORK_FORBIDDEN",
+        "sameOriginRequestCount": 13,
+        "sameOriginSamples": [
+          "http://127.0.0.1:5175/?report=game-machine-review",
+          "http://127.0.0.1:5175/@vite/client",
+          "http://127.0.0.1:5175/src/main.ts",
+          "http://127.0.0.1:5175/src/styles.css",
+          "http://127.0.0.1:5175/src/page-mode.css",
+          "http://127.0.0.1:5175/src/app-route.ts",
+          "http://127.0.0.1:5175/src/observation-context.ts",
+          "http://127.0.0.1:5175/src/page-mode.ts",
+          "http://127.0.0.1:5175/node_modules/.pnpm/vite@6.4.3_@types+node@22.19.19_tsx@4.23.1/node_modules/vite/dist/client/env.mjs",
+          "http://127.0.0.1:5175/apps/my-game-world/second-use/event-types.ts",
+          "http://127.0.0.1:5175/apps/game-machine-review-report/index.ts",
+          "http://127.0.0.1:5175/apps/game-machine-review-report/styles.css"
+        ],
+        "externalRequests": []
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "trace": "artifacts/game-machine-review/step-07/traces/scroll-matrix/mobile-touch-chromium-machine-review-report-390x844-touch.zip",
+      "screenshots": [
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/machine-review-report-390x844-touch-top.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/machine-review-report-390x844-touch-after-swipe.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/machine-review-report-390x844-touch-final-action.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/machine-review-report-390x844-touch-full-page.png"
+      ],
+      "fullPageScreenshot": "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/machine-review-report-390x844-touch-full-page.png",
+      "status": "PASS"
+    },
+    {
+      "routeId": "step07-observer-fixture",
+      "routeKind": "observe-step07",
+      "routeLabel": "STEP 07 observer fixture",
+      "project": "mobile-touch-chromium",
+      "viewport": "390x844-touch",
+      "pageMode": "adult-tool",
+      "scrollOwner": "document.documentElement",
+      "scrollHeight": 3046,
+      "clientHeight": 844,
+      "maxScrollTop": 2202,
+      "horizontalOverflowPx": 0,
+      "nestedVerticalScrollOwners": [],
+      "inputs": [
+        {
+          "input": "touch-swipe",
+          "before": 0,
+          "after": 457,
+          "passed": true
+        },
+        {
+          "input": "Home",
+          "before": 2274,
+          "after": 0,
+          "passed": true
+        }
+      ],
+      "finalAction": {
+        "selector": "[data-final-action]",
+        "visible": true,
+        "enabled": true,
+        "focused": true,
+        "unobscured": true,
+        "clicked": true,
+        "activationEvidence": "download:STEP-07_SYNTHETIC_TOOLING_TEST_OBSERVATION.json:trusted-touch-tap-1"
+      },
+      "network": {
+        "policy": "SAME_ORIGIN_ALLOWED / EXTERNAL_NETWORK_FORBIDDEN",
+        "sameOriginRequestCount": 30,
+        "sameOriginSamples": [
+          "http://127.0.0.1:5175/?observe=hanzi-v2-step07&fixture=SYNTHETIC_TOOLING_TEST_ONLY&build=8e00aa61d796578f7e593243caa514da5a307189",
+          "http://127.0.0.1:5175/@vite/client",
+          "http://127.0.0.1:5175/src/main.ts",
+          "http://127.0.0.1:5175/src/styles.css",
+          "http://127.0.0.1:5175/src/page-mode.css",
+          "http://127.0.0.1:5175/src/app-route.ts",
+          "http://127.0.0.1:5175/src/observation-context.ts",
+          "http://127.0.0.1:5175/src/page-mode.ts",
+          "http://127.0.0.1:5175/node_modules/.pnpm/vite@6.4.3_@types+node@22.19.19_tsx@4.23.1/node_modules/vite/dist/client/env.mjs",
+          "http://127.0.0.1:5175/apps/my-game-world/second-use/event-types.ts",
+          "http://127.0.0.1:5175/apps/hanzi-v2-step07-observer/index.ts",
+          "http://127.0.0.1:5175/apps/hanzi-v2-step07-observer/styles.css"
+        ],
+        "externalRequests": []
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "trace": "artifacts/game-machine-review/step-07/traces/scroll-matrix/mobile-touch-chromium-step07-observer-fixture-390x844-touch.zip",
+      "screenshots": [
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step07-observer-fixture-390x844-touch-top.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step07-observer-fixture-390x844-touch-after-swipe.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step07-observer-fixture-390x844-touch-final-action.png",
+        "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step07-observer-fixture-390x844-touch-full-page.png"
+      ],
+      "fullPageScreenshot": "artifacts/game-machine-review/step-07/screenshots/scroll-matrix/step07-observer-fixture-390x844-touch-full-page.png",
+      "status": "PASS"
+    }
+  ]
+}

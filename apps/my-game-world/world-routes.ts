@@ -4,14 +4,19 @@ export const CLASSIC_HUB_FROM_WORLD_ROUTE = "?hub=classic&from=world";
 
 export const MY_GAME_WORLD_TITLE = "我的游戏世界";
 
-export interface Step06RouteContext {
-  readonly evidence: "hanzi-v2-step06";
+export type SecondUseEvidenceId = "hanzi-v2-step06" | "hanzi-v2-step07";
+
+export interface SecondUseRouteContext {
+  readonly evidence: SecondUseEvidenceId;
   readonly sessionId: string;
 }
 
+/** Backward-compatible name retained for STEP 06 callers. */
+export type Step06RouteContext = SecondUseRouteContext;
+
 export function withStep06RouteContext(
   route: string,
-  context?: Step06RouteContext,
+  context?: SecondUseRouteContext,
   from?: "world" | "forest" | "classic",
 ): string {
   if (!context) return route;

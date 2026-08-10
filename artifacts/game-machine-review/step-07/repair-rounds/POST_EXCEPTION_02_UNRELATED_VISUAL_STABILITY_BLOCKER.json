@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "generatedAtUtc": "2026-08-10T01:21:58.2749426Z",
+  "evidenceKind": "STEP07_POST_EXCEPTION_02_TECHNICAL_BLOCKER",
+  "status": "ESCALATE_HUMAN",
+  "blockerCode": "POST_EXCEPTION_02_UNRELATED_VISUAL_CANVAS_STABILITY_BLOCKER",
+  "sourceCommit": "8e00aa61d796578f7e593243caa514da5a307189",
+  "sourceTreeSha256": "9219693F77D6E862943B53C02D617306904C11FCD5F9913B4CB1CF871EA8AD2A",
+  "repairRoundsConsumed": 3,
+  "humanExceptionalRepairs": 2,
+  "ordinaryAutoReviseLoop": false,
+  "exceptionalRepair02Status": "AUTHORIZED_SEQUENCE_REPAIR_COMPLETE",
+  "exceptionalRepair02Result": "artifacts/game-machine-review/step-07/repair-rounds/exceptional-repair-02/EXCEPTION_RESULT.json",
+  "failingGate": {
+    "id": "VISUAL_ARIA_BASELINE_CANDIDATE",
+    "command": "pnpm run review:machine:evidence:visual-baseline-update",
+    "exitCode": 1,
+    "commandRecord": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T011625288Z-56680-e871af10.json",
+    "failure": "forest-camp-step07.png could not produce two consecutive stable screenshots within 5000ms; retries differed by 23 to 159 pixels.",
+    "sourceLocation": "tests/e2e/game-machine-visual-regression.spec.ts:19",
+    "scopeClassification": "UNRELATED_TO_VISUAL_HARNESS_START_ACTION_SEQUENCE",
+    "independentClassification": "BLOCK_DETERMINISTIC_VISUAL_HARNESS_STABILITY_DEFECT"
+  },
+  "rootCause": {
+    "code": "PHASER_CANVAS_INFINITE_TWEEN_NOT_FROZEN_BY_PLAYWRIGHT_CSS_ANIMATION_CONTROL",
+    "evidence": "The screenshot diff localizes movement to the companion eyes. CharacterView starts a repeat:-1 Sine tween when reducedMotion=false; fresh saves default to false. Playwright animations=disabled does not pause Phaser canvas tweens.",
+    "additionalExposure": "MonsterView and BossView also use infinite Phaser tweens, so camp_intro is the first deterministic exposure rather than the only affected state."
+  },
+  "sameSourceRerun": {
+    "authorized": false,
+    "reason": "A coincidental two-frame match would not establish deterministic visual stability, and the candidate builder requires a passing update record."
+  },
+  "minimalFutureRepairBoundary": {
+    "requiresNewHumanAuthorization": true,
+    "allowedDirection": "Test-only deterministic motion setup using the product-supported prefers-reduced-motion path before navigation, with an explicit reduced-motion state assertion.",
+    "forbiddenDirections": [
+      "masking the animated game canvas",
+      "loosening pixel thresholds",
+      "increasing timeout until two moving frames happen to match",
+      "changing game runtime animation behavior",
+      "claiming a partial candidate as an established baseline"
+    ]
+  },
+  "preservedFailureEvidence": [
+    {
+      "file": "artifacts/game-machine-review/step-07/repair-rounds/post-exception-02-unrelated-visual-stability-blocker/error-context.md",
+      "sha256": "DF8D3591007C5E70FA2C4FA05566BB1796F91A1A751C384C6F88B698A28744D",
+      "bytes": 8002
+    },
+    {
+      "file": "artifacts/game-machine-review/step-07/repair-rounds/post-exception-02-unrelated-visual-stability-blocker/forest-camp-step07-actual.png",
+      "sha256": "0AFE3DAEDB9904620C8DE1B36C85E20FCB4AB36600C423FE8485C3CEFCF1CEBB",
+      "bytes": 375087
+    },
+    {
+      "file": "artifacts/game-machine-review/step-07/repair-rounds/post-exception-02-unrelated-visual-stability-blocker/forest-camp-step07-diff.png",
+      "sha256": "7F902E23FAB491740BB590A82CFBFF8A0C0C76B6C0336CC803C15370B9213384",
+      "bytes": 113315
+    },
+    {
+      "file": "artifacts/game-machine-review/step-07/repair-rounds/post-exception-02-unrelated-visual-stability-blocker/forest-camp-step07-previous.png",
+      "sha256": "56CF9021820BBB7FF4E59F7159381FB0853C9F0DC62E74764D48525F40ACC84D",
+      "bytes": 375095
+    },
+    {
+      "file": "artifacts/game-machine-review/step-07/repair-rounds/post-exception-02-unrelated-visual-stability-blocker/test-failed-1.png",
+      "sha256": "65B8F54124EF0D0DA5DBD620A15B7D475D897F4DF5ED6CD86F1F22FD667A1064",
+      "bytes": 374695
+    },
+    {
+      "file": "artifacts/game-machine-review/step-07/repair-rounds/post-exception-02-unrelated-visual-stability-blocker/visual-baseline-update-20260810T011625288Z-56680-e871af10.json",
+      "sha256": "52368E8A3EB0FD8E5F5B496FE3582F21B4F25AFAF310E495283D028DF9936BB3",
+      "bytes": 959
+    },
+    {
+      "file": "artifacts/game-machine-review/step-07/repair-rounds/post-exception-02-unrelated-visual-stability-blocker/visual-baseline-update-20260810T011625288Z-56680-e871af10.log",
+      "sha256": "F8573255F35522CFBFDB503292BA9BAB248E38916F16937959A2D8E0D380F455",
+      "bytes": 9119
+    }
+  ],
+  "baselineState": {
+    "candidateRun": "FAIL",
+    "step07EstablishedBaseline": false,
+    "noUpdateRegression": false,
+    "partialCandidateFilesAreAccepted": false
+  },
+  "notPerformed": [
+    "semantic reviewer acceptance",
+    "visual and ARIA baseline establishment",
+    "no-update regression",
+    "final machine report and verdict",
+    "commit",
+    "push",
+    "readiness ZIP"
+  ],
+  "realSecondUsePerformed": false,
+  "forbiddenClaims": [
+    "STEP 07 COMPLETE",
+    "MACHINE_QA_ACCEPTED_REAL_SECOND_USE_READY",
+    "REAL_SECOND_USE_PASSED",
+    "GAME_FUN_PROVEN",
+    "LONG_TERM_ENGAGEMENT_VALIDATED",
+    "LEARNING_VALIDATED"
+  ]
+}

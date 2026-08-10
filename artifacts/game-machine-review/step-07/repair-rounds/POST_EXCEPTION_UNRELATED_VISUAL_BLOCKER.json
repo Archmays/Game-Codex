@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "generatedAtUtc": "2026-08-10T00:54:00.5384434Z",
+  "evidenceKind": "STEP07_POST_EXCEPTION_TECHNICAL_BLOCKER",
+  "status": "ESCALATE_HUMAN",
+  "blockerCode": "POST_EXCEPTION_UNRELATED_VISUAL_HARNESS_BLOCKER",
+  "sourceCommit": "8e00aa61d796578f7e593243caa514da5a307189",
+  "sourceTreeSha256": "7527F717410BDF348E04ADDD4E814570DADCE27B34E1DAC5095942CFBB58624B",
+  "repairRoundsConsumed": 3,
+  "humanExceptionalRepairs": 1,
+  "exceptionalRepairId": "HUMAN_AUTHORIZED_EXCEPTIONAL_REPAIR_01",
+  "exceptionalRepair01Status": "EXCEPTIONAL_REPAIR_CONTRACT_ACCEPTED",
+  "exceptionalRepair01Result": "artifacts/game-machine-review/step-07/repair-rounds/exceptional-repair-01/EXCEPTION_RESULT.json",
+  "originalBlocker": "THREE_REPAIR_LOOPS_FAILED",
+  "resolvedRootCause": "ROW_UNIQUENESS_CONFUSED_WITH_CONTEXT_UNIQUENESS",
+  "resolvedBy": "CANONICAL_ROW_TO_CONTEXT_MAPPING_WITH_SEQUENTIAL_REUSE",
+  "completedSameTreeEvidence": {
+    "scrollMatrix": "35/35 PASS",
+    "catalogSmoke": "20/20 PASS",
+    "agentProfiles": "6/6 PASS",
+    "deepRoute": "40/40 rows, 22/22 canonical contexts, 120 evidence files, strict validation PASS",
+    "step07ToolingE2E": "4/4 PASS",
+    "step07UnitTests": "96/96 PASS",
+    "typescript": "PASS",
+    "syntheticFixtureDryRun": "SYNTHETIC_TOOLING_TEST_ONLY"
+  },
+  "failingGate": {
+    "id": "VISUAL_ARIA_BASELINE_CANDIDATE",
+    "command": "pnpm run review:machine:evidence:visual-baseline-update",
+    "exitCode": 1,
+    "commandRecord": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T005136548Z-48328-45295c1c.json",
+    "failure": "Golden Slice remained at boot because the visual harness waited for camp_intro before activating the public 走进墨林 action.",
+    "sourceLocation": "tests/e2e/game-machine-visual-regression.spec.ts:148",
+    "expectedPublicSequence": "page.goto -> click 走进墨林 -> wait camp_intro -> capture",
+    "actualHarnessSequence": "page.goto -> wait camp_intro -> capture -> click 走进墨林",
+    "scopeClassification": "UNRELATED_TO_DEEP_ROUTE_ROW_CONTEXT_MAPPING",
+    "independentClassification": "BLOCK_STOP_ESCALATE_HUMAN_SEV_2"
+  },
+  "preservedFailureEvidence": [
+    {
+      "file": "artifacts/game-machine-review/step-07/repair-rounds/post-exception-unrelated-visual-blocker/visual-baseline-update-20260810T005136548Z-48328-45295c1c.json",
+      "sha256": "6390FABFC8A19EE26D94DDFE59A66AECCB45B3A4A8638B87210C0BD4D47B4C48"
+    },
+    {
+      "file": "artifacts/game-machine-review/step-07/repair-rounds/post-exception-unrelated-visual-blocker/visual-baseline-update-20260810T005136548Z-48328-45295c1c.log",
+      "sha256": "55E4EABD2C553C91F38B96FE5EAC49B4FBF7CD3B7283329E149E480EFEDA0945"
+    },
+    {
+      "file": "artifacts/game-machine-review/step-07/repair-rounds/post-exception-unrelated-visual-blocker/test-failed-1.png",
+      "sha256": "7B137DDBE4AD53D49C4C41A91509B5D9AA71CB3BB2E30FB14CD6580B1489742E"
+    },
+    {
+      "file": "artifacts/game-machine-review/step-07/repair-rounds/post-exception-unrelated-visual-blocker/error-context.md",
+      "sha256": "8AFB0862314A18C97CB5013BCAA646E800473A0CF5AC55779C022A4D53D46DE8"
+    }
+  ],
+  "baselineState": {
+    "candidateRun": "FAIL",
+    "step07EstablishedBaseline": false,
+    "noUpdateRegression": false,
+    "partialCandidateFilesAreAccepted": false
+  },
+  "mutationBoundary": {
+    "visualHarnessChanged": false,
+    "reason": "Exceptional Repair 01 authorizes only the deep-route rowKey to canonical context mapping contract. This independent visual harness defect is outside that scope."
+  },
+  "notPerformed": [
+    "semantic reviewer acceptance",
+    "visual and ARIA baseline establishment",
+    "no-update regression",
+    "final machine report and verdict",
+    "commit",
+    "push",
+    "readiness ZIP"
+  ],
+  "realSecondUsePerformed": false,
+  "forbiddenClaims": [
+    "STEP 07 COMPLETE",
+    "MACHINE_QA_ACCEPTED_REAL_SECOND_USE_READY",
+    "REAL_SECOND_USE_PASSED",
+    "GAME_FUN_PROVEN",
+    "LONG_TERM_ENGAGEMENT_VALIDATED",
+    "LEARNING_VALIDATED"
+  ]
+}

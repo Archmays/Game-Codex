@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "capturedAtUtc": "2026-08-10T01:02:09.6244421Z",
+  "authorization": "HUMAN_AUTHORIZED_EXCEPTIONAL_REPAIR_02_VISUAL_HARNESS_SEQUENCE_ONLY",
+  "exceptionalRepairId": "HUMAN_AUTHORIZED_EXCEPTIONAL_REPAIR_02_VISUAL_HARNESS_SEQUENCE_ONLY",
+  "repairRoundsConsumed": 3,
+  "humanExceptionalRepairs": 2,
+  "ordinaryAutoReviseLoop": false,
+  "originalBlocker": "POST_EXCEPTION_UNRELATED_VISUAL_HARNESS_BLOCKER",
+  "blockedSourceCommit": "8e00aa61d796578f7e593243caa514da5a307189",
+  "blockedSourceTreeSha256": "7527F717410BDF348E04ADDD4E814570DADCE27B34E1DAC5095942CFBB58624B",
+  "blockerEvidenceFile": "artifacts/game-machine-review/step-07/repair-rounds/POST_EXCEPTION_UNRELATED_VISUAL_BLOCKER.json",
+  "scope": {
+    "file": "tests/e2e/game-machine-visual-regression.spec.ts",
+    "gate": "VISUAL_ARIA_BASELINE_CANDIDATE",
+    "rootCause": "VISUAL_HARNESS_START_ACTION_ORDER_INVERTED",
+    "actualSequence": "page.goto -> wait camp_intro -> capture -> click 走进墨林",
+    "requiredSequence": "page.goto -> click 走进墨林 -> wait camp_intro -> capture",
+    "requiredResolution": "PUBLIC_START_ACTION_BEFORE_CAMP_CAPTURE"
+  },
+  "allowedMutation": [
+    "Move the existing clickPrimary(page, \"走进墨林\") call to immediately after page.goto in the Golden Slice key states test.",
+    "Remove the old later occurrence of the same call so the public action is executed exactly once."
+  ],
+  "requiredInvariants": [
+    "The test enters camp_intro only through the existing public 走进墨林 control.",
+    "The camp_intro screenshot and ARIA capture occur only after the public start action and phase assertion.",
+    "All later Golden Slice state actions and evidence captures remain unchanged.",
+    "All final evidence is regenerated against one post-repair source tree."
+  ],
+  "boundaries": [
+    "Do not modify game runtime, gameplay, content, UI, state transitions, or child-facing behavior.",
+    "Do not modify hard-gate pass criteria or bypass the visual baseline gate.",
+    "Do not rewrite Exceptional Repair 01 or THREE-REPAIR-LOOPS-FAILED evidence.",
+    "Do not treat this as a fourth ordinary auto-repair loop.",
+    "Stop and escalate if verification exposes a new unrelated material issue."
+  ]
+}

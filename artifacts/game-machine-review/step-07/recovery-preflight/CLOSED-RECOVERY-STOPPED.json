@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "recordType": "STEP07_CLOSED_RECOVERY_STOP",
+  "status": "CLOSED_RECOVERY_STOPPED",
+  "stopReason": "NEW_UNAUTHORIZED_BLOCKER",
+  "machineVerdict": "ESCALATE_HUMAN",
+  "machinePassEligible": false,
+  "recordedAtUtc": "2026-08-10T03:13:09.2255766Z",
+  "branch": "main",
+  "committedBaseline": "8e00aa61d796578f7e593243caa514da5a307189",
+  "originMainAtStop": "8e00aa61d796578f7e593243caa514da5a307189",
+  "sourceTreeShaBeforeRecovery": "63729F26B011E91D4EBBDB1DD82B8B0E9197E3599DD498D9301DD009AF5F1131",
+  "sourceTreeShaAtStop": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+  "closedRecoveryFreeze": {
+    "path": "artifacts/game-machine-review/step-07/recovery-preflight/CLOSED-RECOVERY-FREEZE.json",
+    "sha256": "0750EB67107FC30A2466AE0B3E17745BEBD031BED6D8F6B15E3C7F4F5E1079CC",
+    "status": "IMMUTABLE"
+  },
+  "lineage": {
+    "repairRoundsConsumed": 3,
+    "ordinaryAutoReviseLoop": false,
+    "humanExceptionalRepairs": 3,
+    "exceptionalRepairs": [
+      "HUMAN_AUTHORIZED_EXCEPTIONAL_REPAIR_01",
+      "HUMAN_AUTHORIZED_EXCEPTIONAL_REPAIR_02_VISUAL_HARNESS_SEQUENCE_ONLY",
+      "HUMAN_AUTHORIZED_EXCEPTIONAL_REPAIR_03_VISUAL_HARNESS_REDUCED_MOTION_ONLY"
+    ],
+    "closedRecoveryAuthorizations": 1,
+    "closedRecoveryId": "HUMAN_AUTHORIZED_STEP07_CLOSED_RECOVERY_01"
+  },
+  "authorizedRepairCompleted": {
+    "failureId": "ER04_STEP05_NAVIGATION_SOURCE_SHAPE",
+    "modifiedFiles": [
+      "tests/hanzi-radical-battle-v2-step05-navigation.test.ts"
+    ],
+    "mutation": "Replaced stale src/app-route.ts source-shape assertions with exact resolveAppRoute behavior assertions while retaining all other test contracts.",
+    "positiveControl": "PASS",
+    "negativeControl": "PASS",
+    "targetedTest": "PASS"
+  },
+  "sameTreeVerificationBeforeStop": {
+    "individualStepRegressions": "PASS",
+    "aggregateStepRegressions": "PASS",
+    "fullUnitTests": "441/441 PASS",
+    "typescriptCompile": "PASS",
+    "pureValidators": "96/96 PASS",
+    "build": "PASS",
+    "adultScrollMatrix": "35/35 PASS",
+    "catalogSmoke": "20/20 PASS",
+    "agentPlaythroughProfiles": "6/6 PASS",
+    "deepRouteAccessibilityRows": "40/40 PASS",
+    "syntheticObserverTooling": "4/4 PASS",
+    "visualAriaCandidate": "3/3 PASS; CANDIDATE_REVIEW_REQUIRED",
+    "baselinePromotionPerformed": false,
+    "visualNoUpdatePerformed": false
+  },
+  "semanticReviewMerge": {
+    "sourceTreeSha256": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+    "reviewMode": "INDEPENDENT_SUBAGENT",
+    "severityCounts": {
+      "SEV_1": 0,
+      "SEV_2": 1,
+      "SEV_3": 4,
+      "SEV_4": 2
+    },
+    "blockerFindingIds": [
+      "R3_ROUTE_LIFECYCLE_EVIDENCE_GAP"
+    ],
+    "reviewDocuments": [
+      {
+        "path": "artifacts/game-machine-review/step-07/semantic-reviews/R1_CHILD_FIRST_UX.json",
+        "bytes": 5581,
+        "sha256": "E433D7D5B53F82F6D282801C7CE48706E80A11A82CDD96388CD532C2C28BFE36"
+      },
+      {
+        "path": "artifacts/game-machine-review/step-07/semantic-reviews/R2_VISUAL_ACCESSIBILITY.json",
+        "bytes": 9012,
+        "sha256": "5902A9AAD8C2683AC8C727F7B4FD896F74C81D0F3D4079E0672782DE9EA98F67"
+      },
+      {
+        "path": "artifacts/game-machine-review/step-07/semantic-reviews/R3_ADVERSARIAL_QA.json",
+        "bytes": 8341,
+        "sha256": "ACC7212AD7CFBB341C95DF51C1BBA13F9912E90FE0C081B28E39B625A4C4A000"
+      }
+    ]
+  },
+  "newUnauthorizedBlockers": [
+    {
+      "failureId": "POST_RECOVERY_R3_STEP07_LIFECYCLE_EVIDENCE_GAP",
+      "sourceTreeSha256": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+      "command": "Independent R3 semantic review and merge validation",
+      "exitCode": 1,
+      "evidence": [
+        "artifacts/game-machine-review/step-07/semantic-reviews/R3_ADVERSARIAL_QA.json",
+        "artifacts/game-machine-review/step-07/semantic-reviews/R1_CHILD_FIRST_UX.json",
+        "artifacts/game-machine-review/step-07/semantic-reviews/R2_VISUAL_ACCESSIBILITY.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/step-regressions-20260810T024939031Z-48564-707a5a85.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T025754624Z-59072-76039293.json"
+      ],
+      "reproducible": true,
+      "classification": "TEST_HARNESS_SEQUENCE_DEFECT",
+      "severity": "SEV_2",
+      "rootCause": "The formal R3 contract requires refresh, back/forward, observer disconnect, and route-conflict review. Existing current-tree tests prove versioned route conflict fail-closed behavior and a repaired-world reload, but do not execute active STEP07 observer disconnect/recovery or browser back/forward within one STEP07 session.",
+      "runtimeBehaviorAffected": null,
+      "allowedFiles": [],
+      "exactMutation": "A complete resolution would require new or modified Playwright lifecycle scenarios for active observer disconnect/recovery and same-session browser back/forward. No such mutation is authorized or performed.",
+      "affectedDependencies": [
+        "R3_ADVERSARIAL_QA",
+        "semantic blocker merge",
+        "baseline establishment",
+        "PASS_MACHINE"
+      ],
+      "recoveryEligible": false,
+      "reason": "The blocker was discovered after the first recovery mutation and is not listed in the immutable CLOSED-RECOVERY-FREEZE.json. Sections 14, 17, 23, 25, and 29 require STOP rather than a new harness repair or evidence-manufacturing workaround."
+    },
+    {
+      "failureId": "POST_RECOVERY_CLASSIC_HUB_NESTED_MAIN",
+      "sourceTreeSha256": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+      "command": "Independent R2 and R3 semantic review",
+      "exitCode": 1,
+      "evidence": [
+        "artifacts/game-machine-review/step-07/aria/classic-hub-step07.aria.yml",
+        "artifacts/game-machine-review/step-07/screenshots/visual-baseline/classic-hub-step07.png",
+        "artifacts/game-machine-review/step-07/deep-route/events/classic-hub--catalog--desktop.events.json"
+      ],
+      "reproducible": true,
+      "classification": "ACCESSIBILITY_PRODUCT_DEFECT",
+      "severity": "SEV_3",
+      "rootCause": "The classic hub exposes a main landmark nested inside the page main landmark.",
+      "runtimeBehaviorAffected": true,
+      "allowedFiles": [],
+      "exactMutation": "No mutation is authorized. A future explicitly authorized repair would replace the inner main container with an appropriate non-main section and re-review ARIA structure.",
+      "affectedDependencies": [
+        "accessibility structure",
+        "classic hub ARIA baseline"
+      ],
+      "recoveryEligible": false,
+      "reason": "This is an accessibility product defect outside the one-file recovery freeze and is an explicit CLOSED RECOVERY stop category."
+    },
+    {
+      "failureId": "POST_RECOVERY_FOREST_PRIMARY_HEADING_MISSING",
+      "sourceTreeSha256": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+      "command": "Independent R2 semantic review",
+      "exitCode": 1,
+      "evidence": [
+        "artifacts/game-machine-review/step-07/aria/forest-camp-step07.aria.yml",
+        "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-camp-step07.png",
+        "artifacts/game-machine-review/step-07/deep-route/events/hanzi-golden-slice--camp--compact-mobile.events.json"
+      ],
+      "reproducible": true,
+      "classification": "ACCESSIBILITY_PRODUCT_DEFECT",
+      "severity": "SEV_3",
+      "rootCause": "The visible Golden Slice route title is exposed as plain text, leaving the page without a level-one heading while dialog headings begin at level two.",
+      "runtimeBehaviorAffected": true,
+      "allowedFiles": [],
+      "exactMutation": "No mutation is authorized. A future explicitly authorized repair would expose the existing visible title as the single level-one heading without changing appearance and re-review affected ARIA states.",
+      "affectedDependencies": [
+        "accessibility structure",
+        "Golden Slice ARIA baseline"
+      ],
+      "recoveryEligible": false,
+      "reason": "This is an accessibility product defect outside the one-file recovery freeze and is an explicit CLOSED RECOVERY stop category."
+    }
+  ],
+  "notPerformedAfterStop": [
+    "baseline establishment or promotion",
+    "visual/ARIA no-update regression",
+    "FINAL-SOURCE-FREEZE.json",
+    "final runner #1",
+    "static report proof",
+    "final runner #2",
+    "commit",
+    "push",
+    "readiness package",
+    "real child second-use"
+  ],
+  "explicitBoundaries": {
+    "realSecondUsePerformed": false,
+    "realSecondUsePassedClaimed": false,
+    "gameFunProvenClaimed": false,
+    "longTermEngagementValidatedClaimed": false,
+    "learningValidatedClaimed": false
+  },
+  "nextAuthorityRequired": "A new explicit authorization would be required to change any Playwright lifecycle test or product accessibility file. This CLOSED RECOVERY may not add those paths to its immutable freeze."
+}

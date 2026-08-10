@@ -94,3 +94,20 @@ automatic or child-playtest validation path.
 Do not introduce Godot migration, backend accounts, cloud child tracking,
 daily-login rewards, streak pressure, leaderboards, loot boxes, FOMO timers,
 punitive progress loss, or shaming failure language.
+
+## Machine-first game review
+
+For Game-Codex changes, machine review is the default acceptance path. Do not
+ask the user to perform routine game UX, visual, accessibility, responsive, or
+regression review.
+
+Run the `machine-first-game-review` Skill and produce `PASS_MACHINE`,
+`AUTO_REVISE`, or `ESCALATE_HUMAN`.
+
+Use its `DISCOVERY_MODE` before the first mutation and `ACCEPTANCE_MODE` for
+source-bound final evidence. Load only the applicable reference for recovery,
+lifecycle, or retention/cleanup work.
+
+Escalate only for real-child behavior, value or preference choices,
+irreversible privacy or publication decisions, unresolved critical machine
+reviewer disagreement, or failure after three repair loops.

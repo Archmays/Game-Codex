@@ -1,0 +1,8 @@
+{
+  "task": "hanzi-v2-step03-capture",
+  "pid": 18340,
+  "port": 5176,
+  "baseUrl": "http://127.0.0.1:5176",
+  "repositoryRoot": "D:\\ChatGPT-Codex-Projects\\Game-Codex",
+  "startedAtUtc": "2026-08-09T04:59:29.687Z"
+}

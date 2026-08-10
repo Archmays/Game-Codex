@@ -155,7 +155,7 @@ function mountHanziRadicalBattle(context: MountGameContext): MountedGame {
   };
 
   const renderMenu = (): void => {
-    const menu = document.createElement("main");
+    const menu = document.createElement("section");
     menu.className = "hanzi-radical-menu";
 
     const titleBlock = document.createElement("div");
@@ -191,7 +191,7 @@ function mountHanziRadicalBattle(context: MountGameContext): MountedGame {
   };
 
   const renderCharacterSelect = (): void => {
-    const screen = document.createElement("main");
+    const screen = document.createElement("section");
     screen.className = "hanzi-radical-character-screen";
     screen.append(createScreenTitle("选择你的英雄", "每位英雄有不同生命、伤害和技能。"));
 
@@ -229,7 +229,7 @@ function mountHanziRadicalBattle(context: MountGameContext): MountedGame {
   };
 
   const renderInstructions = (): void => {
-    const screen = document.createElement("main");
+    const screen = document.createElement("section");
     screen.className = "hanzi-radical-instructions";
     screen.append(createScreenTitle("游戏说明", "通过组合偏旁部首，释放汉字魔法攻击怪物！"));
 
@@ -254,7 +254,7 @@ function mountHanziRadicalBattle(context: MountGameContext): MountedGame {
   };
 
   const renderGame = (): void => {
-    const shell = document.createElement("main");
+    const shell = document.createElement("section");
     shell.className = "hanzi-radical-game-shell";
     shell.append(createGameHeader(), createMonsterPanel(), createPlayerPanel());
 

@@ -1,0 +1,9 @@
+{
+    "schemaVersion":  1,
+    "initiativeId":  "hanzi-radical-battle-v2",
+    "round":  1,
+    "anchorCharacterId":  "ming",
+    "scenarioId":  "pilot-ming-left-right",
+    "candidateManifestVersion":  "step02-candidates-v2",
+    "selectedTheme":  "C"
+}

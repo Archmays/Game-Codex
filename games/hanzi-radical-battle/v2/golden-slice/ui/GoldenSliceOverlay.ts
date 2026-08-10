@@ -285,7 +285,7 @@ export function mountGoldenSliceOverlay(
   root.classList.add("golden-slice-mount");
   root.innerHTML = `<main class="golden-shell" data-testid="hanzi-v2-golden-slice" data-visual-state-id="boot" data-child-first-use="${String(Boolean(options.childFirstUse))}">
     <header class="golden-topbar">
-      <div class="golden-world-name"><i class="golden-world-name__lamp" aria-hidden="true"></i><span>汉字魔法战 · 墨迹森林</span></div>
+      <div class="golden-world-name"><i class="golden-world-name__lamp" aria-hidden="true"></i><h1 class="golden-world-title">汉字魔法战 · 墨迹森林</h1></div>
       <div class="golden-topbar__actions"><span class="golden-seed" ${options.childFirstUse ? "hidden" : ""}></span><button class="golden-icon-button" type="button" data-settings-open>声音与画面</button></div>
     </header>
     ${options.technicalFixture ? `<aside class="golden-fixture-banner" data-testid="child-first-use-fixture-banner">SYNTHETIC_TOOLING_TEST_ONLY · NO CHILD DATA</aside>` : ""}

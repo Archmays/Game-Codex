@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "recordType": "CLOSED_RECOVERY_FAILURE_CLASSIFICATIONS",
+  "sourceTreeSha256": "63729F26B011E91D4EBBDB1DD82B8B0E9197E3599DD498D9301DD009AF5F1131",
+  "status": "CLASSIFICATION_COMPLETE",
+  "failures": [
+    {
+      "failureId": "ER04_STEP05_NAVIGATION_SOURCE_SHAPE",
+      "sourceTreeSha256": "63729F26B011E91D4EBBDB1DD82B8B0E9197E3599DD498D9301DD009AF5F1131",
+      "commands": [
+        "pnpm run test:hanzi-v2:step05",
+        "pnpm test",
+        "pnpm run test:hanzi-v2:all-steps",
+        "runCommandEvidence(\"step-regressions\", { outputDirectory: recovery-preflight/command-evidence })"
+      ],
+      "exitCode": 1,
+      "evidence": [
+        "artifacts/game-machine-review/step-07/recovery-preflight/deterministic/step05.log",
+        "artifacts/game-machine-review/step-07/recovery-preflight/deterministic/full-unit.log",
+        "artifacts/game-machine-review/step-07/recovery-preflight/deterministic/all-steps-aggregate.log",
+        "artifacts/game-machine-review/step-07/recovery-preflight/command-evidence/hard-gates/commands/step-regressions-20260810T023626795Z-50576-cd62093d.json"
+      ],
+      "reproducible": true,
+      "classification": "STALE_SOURCE_SHAPE_ASSERTION",
+      "severity": "SEV2_HARD_GATE_TEST_CONTRACT_BLOCKER",
+      "rootCause": "The STEP05 navigation test asserts obsolete literal search.get implementation text. The current public routing contract is APP_ROUTE_QUERY_REGISTRY plus resolveAppRoute.",
+      "runtimeBehaviorAffected": false,
+      "allowedFiles": [
+        "tests/hanzi-radical-battle-v2-step05-navigation.test.ts"
+      ],
+      "exactMutation": "Import resolveAppRoute; remove the src/app-route.ts source read and four implementation-shape assertions; add direct exact behavior assertions for review=hanzi-v2-step05, hub=classic, world=my-game-world, and empty URLSearchParams. Preserve all remaining assertions.",
+      "affectedDependencies": [
+        "test:hanzi-v2:step05",
+        "test:hanzi-v2:all-steps",
+        "pnpm test",
+        "formal step-regressions command record"
+      ],
+      "positiveControl": "The updated STEP05 navigation test passes against resolveAppRoute public behavior.",
+      "negativeControl": "An isolated assertion that review=hanzi-v2-step05 resolves to a deliberately wrong kind must fail.",
+      "recoveryEligible": true,
+      "reason": "The failure existed before the first recovery mutation, is reproducible, has a known non-runtime root cause, and has one exact test-only repair."
+    }
+  ],
+  "rejectedFindings": [
+    {
+      "id": "OTHER_SOURCE_TEXT_ASSERTIONS",
+      "classification": "CANDIDATE_STALE_ASSERTION",
+      "recoveryEligible": false,
+      "reason": "Their individual deterministic suites pass."
+    },
+    {
+      "id": "INACTIVE_VISUAL_MASK_STYLESHEET",
+      "classification": "SUSPICIOUS_INACTIVE_ONLY",
+      "recoveryEligible": false,
+      "reason": "No reference and no deterministic failure were found."
+    },
+    {
+      "id": "PHASER_INFINITE_TWEEN",
+      "classification": "PREVIOUS_ER03_CLOSED",
+      "recoveryEligible": false,
+      "reason": "The product-supported reduced-motion path and visual harness assertion are already present and pass."
+    },
+    {
+      "id": "DEEP_ROUTE_SHARED_CONTEXTS",
+      "classification": "PREVIOUS_ER01_CLOSED",
+      "recoveryEligible": false,
+      "reason": "The canonical 40-row/22-context validator contract passes."
+    }
+  ],
+  "uniqueAdmittedFailureCount": 1
+}

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "recordType": "CLOSED_RECOVERY_DETERMINISTIC_FINAL_GATE",
+  "id": "build-actual",
+  "command": "pnpm run build",
+  "startedAtUtc": "2026-08-10T02:48:10.8171762Z",
+  "finishedAtUtc": "2026-08-10T02:48:23.2489298Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "sourceTreeSha256Before": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+  "sourceTreeSha256After": "1ACE8B3AECF0D018446731A30A8FFFDB8206746F0D659A50ABEC8021DA90BB39",
+  "sourceTreeUnchanged": true,
+  "logPath": "artifacts/game-machine-review/step-07/recovery-preflight/validation/deterministic-final/build-actual.log"
+}

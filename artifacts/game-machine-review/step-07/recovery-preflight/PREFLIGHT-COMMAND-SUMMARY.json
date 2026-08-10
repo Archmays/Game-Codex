@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "recordType": "CLOSED_RECOVERY_PREFLIGHT_COMMAND_SUMMARY",
+  "sourceTreeSha256": "63729F26B011E91D4EBBDB1DD82B8B0E9197E3599DD498D9301DD009AF5F1131",
+  "sourceTreeUnchangedAcrossEveryRecordedCommand": true,
+  "passes": [
+    "foundation: 12/12",
+    "STEP02: 19/19",
+    "STEP03: 28/28",
+    "STEP04: 27/27",
+    "STEP06: 25/25",
+    "STEP07 unit: 96/96",
+    "pure validator set: 96/96",
+    "TypeScript compile",
+    "pnpm build",
+    "Vite build redirected to recovery-preflight"
+  ],
+  "failures": [
+    {
+      "commandId": "step05",
+      "result": "37/38",
+      "failureId": "ER04_STEP05_NAVIGATION_SOURCE_SHAPE"
+    },
+    {
+      "commandId": "full-unit",
+      "result": "440/441",
+      "failureId": "ER04_STEP05_NAVIGATION_SOURCE_SHAPE"
+    },
+    {
+      "commandId": "all-steps-aggregate",
+      "result": "fails when the chain reaches STEP05",
+      "failureId": "ER04_STEP05_NAVIGATION_SOURCE_SHAPE"
+    },
+    {
+      "commandId": "formal-step-wrapper-redirected",
+      "result": "FAIL, exitCode 1",
+      "failureId": "ER04_STEP05_NAVIGATION_SOURCE_SHAPE",
+      "record": "artifacts/game-machine-review/step-07/recovery-preflight/command-evidence/hard-gates/commands/step-regressions-20260810T023626795Z-50576-cd62093d.json"
+    }
+  ],
+  "uniqueDeterministicFailureCount": 1,
+  "playwrightCollection": {
+    "adultTools": 4,
+    "machineGames": 32,
+    "deepA11y": 46,
+    "staticReport": 1,
+    "step07Observer": 4,
+    "visualAria": 3,
+    "allCollectionsPassed": true,
+    "browserLaunched": false
+  },
+  "canonicalEvidenceRegenerated": false,
+  "baselineUpdated": false,
+  "realChildSessionPerformed": false
+}

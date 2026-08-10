@@ -1,0 +1,1341 @@
+{
+  "schemaVersion": 1,
+  "step": "07",
+  "reportType": "STEP07_LIFECYCLE_EVIDENCE",
+  "evidenceKind": "SYNTHETIC_TOOLING_TEST_ONLY",
+  "sourceTreeSha256": "B6C2AFD041D4BCA65261B04DD0D46455A15A6F4793AE39435C8D7B8C0ED9CB63",
+  "sourceTreeSha256Before": "B6C2AFD041D4BCA65261B04DD0D46455A15A6F4793AE39435C8D7B8C0ED9CB63",
+  "sourceTreeSha256After": "B6C2AFD041D4BCA65261B04DD0D46455A15A6F4793AE39435C8D7B8C0ED9CB63",
+  "generatedAtUtc": "2026-08-10T05:16:23.353Z",
+  "command": "pnpm run test:e2e:hanzi-v2:step07:lifecycle",
+  "status": "PASS",
+  "scenarioIds": [
+    "L1_ACTIVE_CONNECTION",
+    "L2_DISCONNECT_CONTINUE_RECOVER",
+    "L3_BROADCASTCHANNEL_STORAGE_FALLBACK",
+    "L4_RELOAD_CONTINUITY",
+    "L5_ORDINARY_HISTORY_BACK_FORWARD",
+    "L6_CONFLICT_FAIL_CLOSED",
+    "RAPID_INPUT_TRANSITIONS"
+  ],
+  "rows": [
+    {
+      "schemaVersion": 1,
+      "scenarioId": "L1_ACTIVE_CONNECTION",
+      "sourceTreeSha256": "B6C2AFD041D4BCA65261B04DD0D46455A15A6F4793AE39435C8D7B8C0ED9CB63",
+      "browserContextId": "desktop-chromium:L1_ACTIVE_CONNECTION",
+      "pagesShareContext": true,
+      "sessionId": "s07-msms2z89-1mtcq",
+      "evidenceId": "hanzi-v2-step07",
+      "evidenceKind": "SYNTHETIC_TOOLING_TEST_ONLY",
+      "status": "PASS",
+      "eventLog": [
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms2z89-1mtcq",
+          "sequence": 1,
+          "relativeMs": 1,
+          "eventType": "session_opened",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms2z89-1mtcq",
+          "sequence": 2,
+          "relativeMs": 396,
+          "eventType": "world_ready",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms2z89-1mtcq",
+          "sequence": 3,
+          "relativeMs": 396,
+          "eventType": "progress_continuity_verified",
+          "safeMetadata": {
+            "completed": true
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms2z89-1mtcq",
+          "sequence": 4,
+          "relativeMs": 919,
+          "eventType": "world_first_action",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms2z89-1mtcq",
+          "sequence": 5,
+          "relativeMs": 919,
+          "eventType": "world_destination_opened",
+          "safeMetadata": {
+            "destinationId": "SPELLBOOK"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms2z89-1mtcq",
+          "sequence": 6,
+          "relativeMs": 919,
+          "eventType": "world_spellbook_opened",
+          "safeMetadata": {
+            "destinationId": "SPELLBOOK"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms2z89-1mtcq",
+          "sequence": 7,
+          "relativeMs": 967,
+          "eventType": "returned_to_world",
+          "safeMetadata": {
+            "worldReturned": true
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms2z89-1mtcq",
+          "sequence": 8,
+          "relativeMs": 1002,
+          "eventType": "session_stopped",
+          "safeMetadata": {}
+        }
+      ],
+      "expectedExactEventTypes": [
+        "session_opened",
+        "world_ready",
+        "progress_continuity_verified",
+        "world_first_action",
+        "world_destination_opened",
+        "world_spellbook_opened",
+        "returned_to_world",
+        "session_stopped"
+      ],
+      "disconnectWindowSequences": [],
+      "recoveredSequences": [],
+      "broadcastChannelMode": "NATIVE",
+      "observerRecoveryCount": 0,
+      "stopEffective": true,
+      "reloads": {
+        "observer": 0,
+        "child": 0,
+        "world": 0
+      },
+      "progressContinuityPreserved": true,
+      "history": null,
+      "conflicts": [],
+      "rapidInputTransitions": [],
+      "externalRequests": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "schemaVersion": 1,
+      "scenarioId": "L2_DISCONNECT_CONTINUE_RECOVER",
+      "sourceTreeSha256": "B6C2AFD041D4BCA65261B04DD0D46455A15A6F4793AE39435C8D7B8C0ED9CB63",
+      "browserContextId": "desktop-chromium:L2_DISCONNECT_CONTINUE_RECOVER",
+      "pagesShareContext": true,
+      "sessionId": "s07-msms30rt-7f91d",
+      "evidenceId": "hanzi-v2-step07",
+      "evidenceKind": "SYNTHETIC_TOOLING_TEST_ONLY",
+      "status": "PASS",
+      "eventLog": [
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms30rt-7f91d",
+          "sequence": 1,
+          "relativeMs": 0,
+          "eventType": "session_opened",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms30rt-7f91d",
+          "sequence": 2,
+          "relativeMs": 239,
+          "eventType": "world_ready",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms30rt-7f91d",
+          "sequence": 3,
+          "relativeMs": 239,
+          "eventType": "progress_continuity_verified",
+          "safeMetadata": {
+            "completed": true
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms30rt-7f91d",
+          "sequence": 4,
+          "relativeMs": 369,
+          "eventType": "world_first_action",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms30rt-7f91d",
+          "sequence": 5,
+          "relativeMs": 369,
+          "eventType": "world_destination_opened",
+          "safeMetadata": {
+            "destinationId": "SPELLBOOK"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms30rt-7f91d",
+          "sequence": 6,
+          "relativeMs": 370,
+          "eventType": "world_spellbook_opened",
+          "safeMetadata": {
+            "destinationId": "SPELLBOOK"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms30rt-7f91d",
+          "sequence": 7,
+          "relativeMs": 417,
+          "eventType": "returned_to_world",
+          "safeMetadata": {
+            "worldReturned": true
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms30rt-7f91d",
+          "sequence": 8,
+          "relativeMs": 600,
+          "eventType": "session_stopped",
+          "safeMetadata": {}
+        }
+      ],
+      "expectedExactEventTypes": null,
+      "disconnectWindowSequences": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "recoveredSequences": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "broadcastChannelMode": "NATIVE",
+      "observerRecoveryCount": 1,
+      "stopEffective": true,
+      "reloads": {
+        "observer": 0,
+        "child": 0,
+        "world": 0
+      },
+      "progressContinuityPreserved": true,
+      "history": null,
+      "conflicts": [],
+      "rapidInputTransitions": [],
+      "externalRequests": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "schemaVersion": 1,
+      "scenarioId": "L3_BROADCASTCHANNEL_STORAGE_FALLBACK",
+      "sourceTreeSha256": "B6C2AFD041D4BCA65261B04DD0D46455A15A6F4793AE39435C8D7B8C0ED9CB63",
+      "browserContextId": "desktop-chromium:L3_BROADCASTCHANNEL_STORAGE_FALLBACK",
+      "pagesShareContext": true,
+      "sessionId": "s07-msms321n-6gjqs",
+      "evidenceId": "hanzi-v2-step07",
+      "evidenceKind": "SYNTHETIC_TOOLING_TEST_ONLY",
+      "status": "PASS",
+      "eventLog": [
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms321n-6gjqs",
+          "sequence": 1,
+          "relativeMs": 1,
+          "eventType": "session_opened",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms321n-6gjqs",
+          "sequence": 2,
+          "relativeMs": 239,
+          "eventType": "world_ready",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms321n-6gjqs",
+          "sequence": 3,
+          "relativeMs": 239,
+          "eventType": "progress_continuity_verified",
+          "safeMetadata": {
+            "completed": true
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms321n-6gjqs",
+          "sequence": 4,
+          "relativeMs": 368,
+          "eventType": "world_first_action",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms321n-6gjqs",
+          "sequence": 5,
+          "relativeMs": 368,
+          "eventType": "world_destination_opened",
+          "safeMetadata": {
+            "destinationId": "SPELLBOOK"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms321n-6gjqs",
+          "sequence": 6,
+          "relativeMs": 368,
+          "eventType": "world_spellbook_opened",
+          "safeMetadata": {
+            "destinationId": "SPELLBOOK"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms321n-6gjqs",
+          "sequence": 7,
+          "relativeMs": 537,
+          "eventType": "returned_to_world",
+          "safeMetadata": {
+            "worldReturned": true
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms321n-6gjqs",
+          "sequence": 8,
+          "relativeMs": 580,
+          "eventType": "session_stopped",
+          "safeMetadata": {}
+        }
+      ],
+      "expectedExactEventTypes": [
+        "session_opened",
+        "world_ready",
+        "progress_continuity_verified",
+        "world_first_action",
+        "world_destination_opened",
+        "world_spellbook_opened",
+        "returned_to_world",
+        "session_stopped"
+      ],
+      "disconnectWindowSequences": [],
+      "recoveredSequences": [],
+      "broadcastChannelMode": "STORAGE_EVENT_FALLBACK",
+      "observerRecoveryCount": 0,
+      "stopEffective": true,
+      "reloads": {
+        "observer": 0,
+        "child": 0,
+        "world": 0
+      },
+      "progressContinuityPreserved": true,
+      "history": null,
+      "conflicts": [],
+      "rapidInputTransitions": [],
+      "externalRequests": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "schemaVersion": 1,
+      "scenarioId": "L4_RELOAD_CONTINUITY",
+      "sourceTreeSha256": "B6C2AFD041D4BCA65261B04DD0D46455A15A6F4793AE39435C8D7B8C0ED9CB63",
+      "browserContextId": "desktop-chromium:L4_RELOAD_CONTINUITY",
+      "pagesShareContext": true,
+      "sessionId": "s07-msms33g5-7wvtv",
+      "evidenceId": "hanzi-v2-step07",
+      "evidenceKind": "SYNTHETIC_TOOLING_TEST_ONLY",
+      "status": "PASS",
+      "eventLog": [
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms33g5-7wvtv",
+          "sequence": 1,
+          "relativeMs": 1,
+          "eventType": "session_opened",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms33g5-7wvtv",
+          "sequence": 2,
+          "relativeMs": 413,
+          "eventType": "world_ready",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms33g5-7wvtv",
+          "sequence": 3,
+          "relativeMs": 413,
+          "eventType": "progress_continuity_verified",
+          "safeMetadata": {
+            "completed": true
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms33g5-7wvtv",
+          "sequence": 4,
+          "relativeMs": 1081,
+          "eventType": "world_first_action",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms33g5-7wvtv",
+          "sequence": 5,
+          "relativeMs": 1081,
+          "eventType": "world_destination_opened",
+          "safeMetadata": {
+            "destinationId": "FOREST"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms33g5-7wvtv",
+          "sequence": 6,
+          "relativeMs": 1465,
+          "eventType": "forest_entered",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms33g5-7wvtv",
+          "sequence": 7,
+          "relativeMs": 1480,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "boot"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms33g5-7wvtv",
+          "sequence": 8,
+          "relativeMs": 1648,
+          "eventType": "forest_entered",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms33g5-7wvtv",
+          "sequence": 9,
+          "relativeMs": 1652,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "boot"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms33g5-7wvtv",
+          "sequence": 10,
+          "relativeMs": 1899,
+          "eventType": "world_ready",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms33g5-7wvtv",
+          "sequence": 11,
+          "relativeMs": 1899,
+          "eventType": "returned_to_world",
+          "safeMetadata": {
+            "worldReturned": true
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms33g5-7wvtv",
+          "sequence": 12,
+          "relativeMs": 2177,
+          "eventType": "world_ready",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms33g5-7wvtv",
+          "sequence": 13,
+          "relativeMs": 2177,
+          "eventType": "returned_to_world",
+          "safeMetadata": {
+            "worldReturned": true
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms33g5-7wvtv",
+          "sequence": 14,
+          "relativeMs": 2355,
+          "eventType": "session_stopped",
+          "safeMetadata": {}
+        }
+      ],
+      "expectedExactEventTypes": null,
+      "disconnectWindowSequences": [],
+      "recoveredSequences": [],
+      "broadcastChannelMode": "NATIVE",
+      "observerRecoveryCount": 1,
+      "stopEffective": true,
+      "reloads": {
+        "observer": 1,
+        "child": 1,
+        "world": 1
+      },
+      "progressContinuityPreserved": true,
+      "history": null,
+      "conflicts": [],
+      "rapidInputTransitions": [],
+      "externalRequests": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "schemaVersion": 1,
+      "scenarioId": "L5_ORDINARY_HISTORY_BACK_FORWARD",
+      "sourceTreeSha256": "B6C2AFD041D4BCA65261B04DD0D46455A15A6F4793AE39435C8D7B8C0ED9CB63",
+      "browserContextId": "desktop-chromium:L5_ORDINARY_HISTORY_BACK_FORWARD",
+      "pagesShareContext": true,
+      "sessionId": "s07-msms37ii-6jfq2",
+      "evidenceId": "hanzi-v2-step07",
+      "evidenceKind": "SYNTHETIC_TOOLING_TEST_ONLY",
+      "status": "PASS",
+      "eventLog": [
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms37ii-6jfq2",
+          "sequence": 1,
+          "relativeMs": 1,
+          "eventType": "session_opened",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms37ii-6jfq2",
+          "sequence": 2,
+          "relativeMs": 577,
+          "eventType": "world_ready",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms37ii-6jfq2",
+          "sequence": 3,
+          "relativeMs": 577,
+          "eventType": "progress_continuity_verified",
+          "safeMetadata": {
+            "completed": true
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms37ii-6jfq2",
+          "sequence": 4,
+          "relativeMs": 1025,
+          "eventType": "world_first_action",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms37ii-6jfq2",
+          "sequence": 5,
+          "relativeMs": 1025,
+          "eventType": "world_destination_opened",
+          "safeMetadata": {
+            "destinationId": "FOREST"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms37ii-6jfq2",
+          "sequence": 6,
+          "relativeMs": 1431,
+          "eventType": "forest_entered",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms37ii-6jfq2",
+          "sequence": 7,
+          "relativeMs": 1453,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "boot"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms37ii-6jfq2",
+          "sequence": 8,
+          "relativeMs": 1813,
+          "eventType": "world_ready",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms37ii-6jfq2",
+          "sequence": 9,
+          "relativeMs": 1813,
+          "eventType": "returned_to_world",
+          "safeMetadata": {
+            "worldReturned": true
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms37ii-6jfq2",
+          "sequence": 10,
+          "relativeMs": 2058,
+          "eventType": "forest_entered",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms37ii-6jfq2",
+          "sequence": 11,
+          "relativeMs": 2061,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "boot"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms37ii-6jfq2",
+          "sequence": 12,
+          "relativeMs": 2350,
+          "eventType": "world_ready",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms37ii-6jfq2",
+          "sequence": 13,
+          "relativeMs": 2350,
+          "eventType": "returned_to_world",
+          "safeMetadata": {
+            "worldReturned": true
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms37ii-6jfq2",
+          "sequence": 14,
+          "relativeMs": 2559,
+          "eventType": "session_stopped",
+          "safeMetadata": {}
+        }
+      ],
+      "expectedExactEventTypes": null,
+      "disconnectWindowSequences": [],
+      "recoveredSequences": [],
+      "broadcastChannelMode": "NATIVE",
+      "observerRecoveryCount": 0,
+      "stopEffective": true,
+      "reloads": {
+        "observer": 0,
+        "child": 0,
+        "world": 0
+      },
+      "progressContinuityPreserved": true,
+      "history": {
+        "navigationKind": "ORDINARY_HISTORY",
+        "bfcacheClaimed": false,
+        "entries": [
+          {
+            "surface": "WORLD",
+            "evidenceId": "hanzi-v2-step07",
+            "sessionId": "s07-msms37ii-6jfq2",
+            "denied": false,
+            "step06Instrumentation": false
+          },
+          {
+            "surface": "FOREST",
+            "evidenceId": "hanzi-v2-step07",
+            "sessionId": "s07-msms37ii-6jfq2",
+            "denied": false,
+            "step06Instrumentation": false
+          },
+          {
+            "surface": "WORLD",
+            "evidenceId": "hanzi-v2-step07",
+            "sessionId": "s07-msms37ii-6jfq2",
+            "denied": false,
+            "step06Instrumentation": false
+          },
+          {
+            "surface": "FOREST",
+            "evidenceId": "hanzi-v2-step07",
+            "sessionId": "s07-msms37ii-6jfq2",
+            "denied": false,
+            "step06Instrumentation": false
+          },
+          {
+            "surface": "WORLD",
+            "evidenceId": "hanzi-v2-step07",
+            "sessionId": "s07-msms37ii-6jfq2",
+            "denied": false,
+            "step06Instrumentation": false
+          }
+        ]
+      },
+      "conflicts": [],
+      "rapidInputTransitions": [],
+      "externalRequests": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "schemaVersion": 1,
+      "scenarioId": "L6_CONFLICT_FAIL_CLOSED",
+      "sourceTreeSha256": "B6C2AFD041D4BCA65261B04DD0D46455A15A6F4793AE39435C8D7B8C0ED9CB63",
+      "browserContextId": "desktop-chromium:L6_CONFLICT_FAIL_CLOSED",
+      "pagesShareContext": true,
+      "sessionId": "s07-msms3bpi-3di2u",
+      "evidenceId": "hanzi-v2-step07",
+      "evidenceKind": "SYNTHETIC_TOOLING_TEST_ONLY",
+      "status": "PASS",
+      "eventLog": [
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3bpi-3di2u",
+          "sequence": 1,
+          "relativeMs": 1,
+          "eventType": "session_opened",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3bpi-3di2u",
+          "sequence": 2,
+          "relativeMs": 477,
+          "eventType": "world_ready",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3bpi-3di2u",
+          "sequence": 3,
+          "relativeMs": 477,
+          "eventType": "progress_continuity_verified",
+          "safeMetadata": {
+            "completed": true
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3bpi-3di2u",
+          "sequence": 4,
+          "relativeMs": 2747,
+          "eventType": "world_ready",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3bpi-3di2u",
+          "sequence": 5,
+          "relativeMs": 2800,
+          "eventType": "session_stopped",
+          "safeMetadata": {}
+        }
+      ],
+      "expectedExactEventTypes": null,
+      "disconnectWindowSequences": [],
+      "recoveredSequences": [],
+      "broadcastChannelMode": "NATIVE",
+      "observerRecoveryCount": 0,
+      "stopEffective": true,
+      "reloads": {
+        "observer": 0,
+        "child": 0,
+        "world": 0
+      },
+      "progressContinuityPreserved": true,
+      "history": null,
+      "conflicts": [
+        {
+          "caseId": "STEP06_EVIDENCE_STEP07_SESSION",
+          "denied": true,
+          "denialReason": "STEP06_SESSION_MISMATCH"
+        },
+        {
+          "caseId": "STEP07_EVIDENCE_STEP06_SESSION",
+          "denied": true,
+          "denialReason": "STEP07_SESSION_MISMATCH"
+        },
+        {
+          "caseId": "BARE_SESSION",
+          "denied": true,
+          "denialReason": "BARE_OBSERVATION_SESSION"
+        },
+        {
+          "caseId": "UNKNOWN_EVIDENCE",
+          "denied": true,
+          "denialReason": "UNSUPPORTED_OBSERVATION_EVIDENCE"
+        },
+        {
+          "caseId": "WRONG_ORIGIN",
+          "denied": true,
+          "denialReason": "IDENTITY_MISMATCH"
+        },
+        {
+          "caseId": "EXPIRED_GRANT",
+          "denied": true,
+          "denialReason": "GRANT_EXPIRED"
+        },
+        {
+          "caseId": "INVALID_GRANT",
+          "denied": true,
+          "denialReason": "INVALID_GRANT"
+        },
+        {
+          "caseId": "MISSING_CANONICAL_COMPLETED_SAVE",
+          "denied": true,
+          "denialReason": "PROGRESS_CONTINUITY"
+        }
+      ],
+      "rapidInputTransitions": [],
+      "externalRequests": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    },
+    {
+      "schemaVersion": 1,
+      "scenarioId": "RAPID_INPUT_TRANSITIONS",
+      "sourceTreeSha256": "B6C2AFD041D4BCA65261B04DD0D46455A15A6F4793AE39435C8D7B8C0ED9CB63",
+      "browserContextId": "desktop-chromium:RAPID_INPUT_TRANSITIONS",
+      "pagesShareContext": true,
+      "sessionId": "s07-msms3g01-8ixnh",
+      "evidenceId": "hanzi-v2-step07",
+      "evidenceKind": "SYNTHETIC_TOOLING_TEST_ONLY",
+      "status": "PASS",
+      "eventLog": [
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 1,
+          "relativeMs": 1,
+          "eventType": "session_opened",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 2,
+          "relativeMs": 520,
+          "eventType": "world_ready",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 3,
+          "relativeMs": 520,
+          "eventType": "progress_continuity_verified",
+          "safeMetadata": {
+            "completed": true
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 4,
+          "relativeMs": 950,
+          "eventType": "world_first_action",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 5,
+          "relativeMs": 950,
+          "eventType": "world_destination_opened",
+          "safeMetadata": {
+            "destinationId": "FOREST"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 6,
+          "relativeMs": 1245,
+          "eventType": "forest_entered",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 7,
+          "relativeMs": 1261,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "boot"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 8,
+          "relativeMs": 1385,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "camp_intro"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 9,
+          "relativeMs": 1451,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "camp_objective"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 10,
+          "relativeMs": 1519,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "travel_to_battle_1"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 11,
+          "relativeMs": 1581,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "battle_1_intro"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 12,
+          "relativeMs": 1667,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "battle_1_placing"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 13,
+          "relativeMs": 2083,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "battle_1_forming"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 14,
+          "relativeMs": 2778,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "battle_1_casting"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 15,
+          "relativeMs": 3839,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "battle_1_cleared"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 16,
+          "relativeMs": 4026,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "breather_1"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 17,
+          "relativeMs": 4104,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "travel_to_battle_2"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 18,
+          "relativeMs": 4164,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "battle_2_intro"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 19,
+          "relativeMs": 4222,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "battle_2_placing"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 20,
+          "relativeMs": 4591,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "battle_2_forming"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 21,
+          "relativeMs": 5287,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "battle_2_casting"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 22,
+          "relativeMs": 6347,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "battle_2_cleared"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 23,
+          "relativeMs": 6519,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "ability_choice"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 24,
+          "relativeMs": 6703,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "travel_to_boss"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 25,
+          "relativeMs": 6703,
+          "eventType": "ability_selected",
+          "safeMetadata": {
+            "abilityId": "ink-echo"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 26,
+          "relativeMs": 6941,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "boss_intro"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 27,
+          "relativeMs": 7110,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "boss_phase_1_placing"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 28,
+          "relativeMs": 7781,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "boss_interference"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 29,
+          "relativeMs": 9406,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "boss_phase_1_placing"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 30,
+          "relativeMs": 9671,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "boss_phase_1_forming"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 31,
+          "relativeMs": 10926,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "boss_phase_1_cleared"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 32,
+          "relativeMs": 11115,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "boss_phase_2_placing"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 33,
+          "relativeMs": 11346,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "boss_interference"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 34,
+          "relativeMs": 12460,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "boss_phase_2_placing"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 35,
+          "relativeMs": 12943,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "boss_phase_2_forming"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 36,
+          "relativeMs": 14197,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "boss_cleared"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 37,
+          "relativeMs": 14372,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "return_to_camp"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 38,
+          "relativeMs": 15628,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "camp_repair"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 39,
+          "relativeMs": 15802,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "spellbook_review"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 40,
+          "relativeMs": 16079,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "run_complete"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 41,
+          "relativeMs": 16080,
+          "eventType": "golden_run_completed",
+          "safeMetadata": {
+            "completed": true
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 42,
+          "relativeMs": 16696,
+          "eventType": "world_ready",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 43,
+          "relativeMs": 16697,
+          "eventType": "returned_to_world",
+          "safeMetadata": {
+            "worldReturned": true
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msms3g01-8ixnh",
+          "sequence": 44,
+          "relativeMs": 17308,
+          "eventType": "session_stopped",
+          "safeMetadata": {}
+        }
+      ],
+      "expectedExactEventTypes": null,
+      "disconnectWindowSequences": [],
+      "recoveredSequences": [],
+      "broadcastChannelMode": "NATIVE",
+      "observerRecoveryCount": 0,
+      "stopEffective": true,
+      "reloads": {
+        "observer": 0,
+        "child": 0,
+        "world": 0
+      },
+      "progressContinuityPreserved": true,
+      "history": null,
+      "conflicts": [],
+      "rapidInputTransitions": [
+        {
+          "transitionId": "SELECTION_INPUT_LOCK",
+          "dispatchCount": 2,
+          "acceptedTransitionCount": 1,
+          "duplicateTransitionEventCount": 0,
+          "finalState": "battle_1_placing"
+        },
+        {
+          "transitionId": "PLACEMENT_INPUT_LOCK",
+          "dispatchCount": 2,
+          "acceptedTransitionCount": 1,
+          "duplicateTransitionEventCount": 0,
+          "finalState": "battle_1_cleared"
+        },
+        {
+          "transitionId": "ABILITY_CHOICE_INPUT_LOCK",
+          "dispatchCount": 2,
+          "acceptedTransitionCount": 1,
+          "duplicateTransitionEventCount": 0,
+          "finalState": "travel_to_boss"
+        },
+        {
+          "transitionId": "BOSS_COMPLETION_INPUT_LOCK",
+          "dispatchCount": 2,
+          "acceptedTransitionCount": 1,
+          "duplicateTransitionEventCount": 0,
+          "finalState": "boss_cleared"
+        },
+        {
+          "transitionId": "FINISH_RUN_INPUT_LOCK",
+          "dispatchCount": 2,
+          "acceptedTransitionCount": 1,
+          "duplicateTransitionEventCount": 0,
+          "finalState": "run_complete"
+        },
+        {
+          "transitionId": "RETURN_WORLD_INPUT_LOCK",
+          "dispatchCount": 2,
+          "acceptedTransitionCount": 1,
+          "duplicateTransitionEventCount": 0,
+          "finalState": "WORLD"
+        }
+      ],
+      "externalRequests": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": []
+    }
+  ],
+  "limitations": [
+    "SYNTHETIC_TOOLING_TEST_ONLY; NO REAL CHILD DATA",
+    "Ordinary history navigation only; no BFCache restoration claim"
+  ]
+}
