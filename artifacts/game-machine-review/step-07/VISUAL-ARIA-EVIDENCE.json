@@ -1,12 +1,13 @@
 {
   "schemaVersion": 1,
-  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+  "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
   "baselineKind": "STEP07_ESTABLISHED_BASELINE",
-  "generatedAtUtc": "2026-08-10T12:44:22.637Z",
+  "generatedAtUtc": "2026-08-12T11:52:38.504Z",
   "evidenceFiles": [
     "artifacts/game-machine-review/step-07/aria/classic-hub-step07.aria.yml",
     "artifacts/game-machine-review/step-07/aria/forest-ability-step07.aria.yml",
     "artifacts/game-machine-review/step-07/aria/forest-camp-step07.aria.yml",
+    "artifacts/game-machine-review/step-07/aria/forest-run-complete-step07.aria.yml",
     "artifacts/game-machine-review/step-07/aria/forest-spellbook-step07.aria.yml",
     "artifacts/game-machine-review/step-07/aria/step07-observer-export-step07.aria.yml",
     "artifacts/game-machine-review/step-07/aria/step07-observer-human-fields-step07.aria.yml",
@@ -20,6 +21,7 @@
     "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-camp-repair-step07.png",
     "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-camp-step07.png",
     "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-ming-placing-step07.png",
+    "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-run-complete-step07.png",
     "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-spellbook-step07.png",
     "artifacts/game-machine-review/step-07/screenshots/visual-baseline/step07-observer-bottom-step07.png",
     "artifacts/game-machine-review/step-07/screenshots/visual-baseline/step07-observer-preparation-step07.png",

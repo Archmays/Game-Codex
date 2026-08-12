@@ -1,0 +1,7 @@
+- heading "四道字光留在了营地" [level=2]
+- paragraph: 想换一道能力，再走一次相同的短路吗？
+- group "换一道能力再冒险":
+  - button "护字光再冒险"
+  - button "星光路标再冒险"
+- link "回我的游戏世界":
+  - /url: "?world=my-game-world"

@@ -420,6 +420,7 @@ describe("STEP 07 evidence content identity", () => {
         catalogSmoke: {},
         agentPlaythroughs: {},
         deepRouteAccessibility: {},
+        criticalControlGeometry: {},
         network: {},
         privacy: {},
         semanticReview: {},

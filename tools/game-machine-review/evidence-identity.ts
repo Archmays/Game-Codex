@@ -879,6 +879,7 @@ export function verifyStep07Readiness(options: VerifyStep07ReadinessOptions): Ve
     "catalogSmoke",
     "agentPlaythroughs",
     "deepRouteAccessibility",
+    "criticalControlGeometry",
     "network",
     "privacy",
     "semanticReview",

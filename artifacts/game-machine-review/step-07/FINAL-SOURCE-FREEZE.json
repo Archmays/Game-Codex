@@ -1,55 +1,59 @@
 {
   "schemaVersion": 1,
   "recordType": "STEP07_FINAL_SOURCE_FREEZE",
-  "authorizationId": "HUMAN_AUTHORIZED_STEP07_AUTONOMOUS_FINAL_CLOSEOUT_01",
-  "status": "FROZEN_NO_TRACKED_MUTATION",
-  "frozenAtUtc": "2026-08-10T12:55:50.1282391Z",
+  "authorizationId": "HUMAN_AUTHORIZED_STEP07_STATIC_REPORT_END_STATE_FINAL_RELEASE_01",
+  "status": "FINAL_SOURCE_FROZEN_NO_FURTHER_SOURCE_MUTATION",
+  "frozenAtUtc": "2026-08-12T11:30:59.2076972Z",
+  "repository": "Archmays/Game-Codex",
   "branch": "main",
-  "headBeforeCommit": "aba475f7d8ed614d714ad25f2c89df77ab5d9577",
-  "originMainBeforeCommit": "aba475f7d8ed614d714ad25f2c89df77ab5d9577",
-  "sourceTreeSha256AtDiscovery": "13EE74C52CB15257774C32CB9CDC7BC65D56FD768883209BFE2E36E7AE9A72F6",
-  "finalSourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+  "headAtFreeze": "eac16ca050511dae098b12a8ac832425c4297b3a",
+  "originMainAtFreeze": "eac16ca050511dae098b12a8ac832425c4297b3a",
+  "priorAcceptedSourceTreeSha256": "4498BBA07CEC7C46406936D4447E555E3C67C2C0D4931825EB16A75DC16FD703",
+  "finalSourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
   "sourceIdentityTool": "tools/game-machine-review/source-identity.ts",
-  "autonomousCloseoutCharter": {
-    "path": "artifacts/game-machine-review/step-07/final-closure/STEP07-AUTONOMOUS-FINAL-CLOSEOUT-CHARTER.json",
-    "bytes": 5046,
-    "sha256": "778C821AE6EEFF01291ACD13FA42D07B0E6671A5D582D7505A2FEAEE9F44C7AB"
+  "sourceMutationPathsSincePriorFreeze": [
+    ".agents/skills/machine-first-game-review/references/lifecycle-and-evidence.md",
+    "tests/e2e/game-machine-static-report-scroll.spec.ts",
+    "tests/game-machine-evidence-manifest.test.ts",
+    "tools/game-machine-review/evidence-identity.ts"
+  ],
+  "primaryInstructionMutationPaths": [
+    "tests/e2e/game-machine-static-report-scroll.spec.ts",
+    ".agents/skills/machine-first-game-review/references/lifecycle-and-evidence.md"
+  ],
+  "classifiedPureReleaseVerifierDependencyPaths": [
+    "tools/game-machine-review/evidence-identity.ts",
+    "tests/game-machine-evidence-manifest.test.ts"
+  ],
+  "closureCharter": {
+    "path": "artifacts/game-machine-review/step-07/final-closure/static-report-end-state/STATIC-REPORT-END-STATE-CLOSURE-CHARTER.json",
+    "bytes": 4971,
+    "sha256": "DAE16104430BA7E62FBB5916966F5FFB64E89A28C68E32D0E72A6A5AA86F4932"
   },
-  "priorCanonicalCharter": {
-    "path": "artifacts/game-machine-review/step-07/final-closure/STEP07-FINAL-CLOSURE-CHARTER.json",
-    "bytes": 12569,
-    "sha256": "6DFEA591C6D961CAAAF08A4480ABA4C48948BF7697E47298506BF0F8AED70473",
-    "preserved": true
-  },
-  "lineage": {
-    "historicalOrdinaryRepairRoundsConsumed": 3,
-    "historicalOrdinaryAutoReviseLoop": false,
-    "historicalHumanExceptionalRepairs": 3,
-    "closedRecoveryAuthorizations": 1,
-    "finalClosureAuthorizations": 1,
-    "currentAutonomousRepairLoopsConsumed": 2,
-    "currentAutonomousRepairLoopMaximum": 3,
-    "currentThirdLoopRequired": false
-  },
-  "machineEvidence": {
-    "hardGateStatus": "PASS",
-    "semanticBlockingFindingCount": 0,
-    "unresolvedCriticalReviewerConflict": false,
-    "visualAriaNoUpdateStatus": "PASS"
-  },
-  "themeC": {
-    "families": 16,
-    "rawCandidates": 32,
-    "machineSelected": 16,
-    "runtimeStatus": "NOT_INTEGRATED"
+  "changeProofPath": "artifacts/game-machine-review/step-07/final-closure/static-report-end-state/STATIC-REPORT-HARNESS-ONLY-CHANGE-PROOF.json",
+  "targetedStabilityProofPath": "artifacts/game-machine-review/step-07/final-closure/static-report-end-state/STATIC-REPORT-TARGETED-STABILITY-PROOF.json",
+  "priorFreezeSupersededPath": "artifacts/game-machine-review/step-07/final-closure/static-report-end-state/PRIOR-FREEZE-SUPERSEDED.json",
+  "baselineByteInventoryPath": "artifacts/game-machine-review/step-07/final-closure/static-report-end-state/PRE-FINAL-BASELINE-BYTE-INVENTORY.json",
+  "machineEvidenceAtFreeze": {
+    "staticReportTargetedConsecutivePasses": 3,
+    "staticReportTargetedRequiredPasses": 3,
+    "harnessImplementationCorrectionsConsumed": 1,
+    "harnessImplementationCorrectionsMaximum": 2,
+    "releaseVerifierUnitTests": "PASS_7_OF_7",
+    "baselineFileCount": 24,
+    "baselineAggregateSha256": "FABCDF0303ADA7DE507DA69DA2DE95A9A5AAB26C687BAAE839D0E48EAD12B2A0"
   },
   "boundaries": {
-    "trackedSourceMutationAfterFreeze": "FORBIDDEN",
+    "sourceMutationAfterFreeze": "FORBIDDEN",
     "artifactOnlyDerivedEvidenceGeneration": "ALLOWED",
+    "productRuntimeChangedAfterPriorFreeze": false,
+    "runCompleteProductBytesChanged": false,
+    "visualAriaBaselineBytesChangedBeforeFinalRerun": false,
     "themeCRuntimeIntegration": false,
     "realSecondUsePerformed": false,
     "realChildEvidenceClaimed": false,
     "gameplayExpansion": false,
-    "hanziExpansion": false
+    "hanziExpansion": false,
+    "step08Authorized": false
   }
 }

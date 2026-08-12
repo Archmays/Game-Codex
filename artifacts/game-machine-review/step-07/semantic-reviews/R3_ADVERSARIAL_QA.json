@@ -1,28 +1,34 @@
 {
   "schemaVersion": 1,
-  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+  "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
   "reviewer": "R3_ADVERSARIAL_QA",
-  "reviewEngine": "Codex collaboration subagent",
-  "model": "GPT-5.6 Codex subagent runtime",
-  "reviewMode": "INDEPENDENT_SUBAGENT",
+  "reviewEngine": "OpenAI Codex desktop runtime",
+  "model": "GPT-5 Codex",
+  "reviewMode": "RUBRIC_SEPARATED_SAME_MODEL",
   "evidenceFiles": [
     "artifacts/game-machine-review/step-07/VISUAL-ARIA-CANDIDATE.json",
-    "artifacts/game-machine-review/step-07/VISUAL-ARIA-EVIDENCE.json",
-    "artifacts/game-machine-review/step-07/DEEP-ROUTE-EVIDENCE.json",
-    "artifacts/game-machine-review/step-07/STEP07-LIFECYCLE-EVIDENCE.json",
-    "artifacts/game-machine-review/step-07/GAME-CATALOG-MACHINE-SMOKE.json",
-    "artifacts/game-machine-review/step-07/agent-playthrough/AGENT-PLAYTHROUGH-RESULTS.json",
-    "artifacts/game-machine-review/step-07/local-input-boundary-fix-v2/LOCAL-FIX-V2-RESULT.json",
-    "artifacts/game-machine-review/step-07/screenshots/visual-baseline/step07-observer-preparation-step07.png",
-    "artifacts/game-machine-review/step-07/aria/step07-observer-preparation-step07.aria.yml"
+    "artifacts/game-machine-review/step-07/FINAL-SOURCE-FREEZE.json",
+    "artifacts/game-machine-review/step-07/final-closure/static-report-end-state/STATIC-REPORT-HARNESS-ONLY-CHANGE-PROOF.json",
+    "artifacts/game-machine-review/step-07/final-closure/static-report-end-state/PRE-FINAL-BASELINE-BYTE-INVENTORY.json",
+    "artifacts/game-machine-review/step-07/RUN-COMPLETE-CONTROL-EVIDENCE.json",
+    "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-run-complete-step07.png",
+    "artifacts/game-machine-review/step-07/aria/forest-run-complete-step07.aria.yml",
+    "artifacts/game-machine-review/step-07/critical-control/RUN-COMPLETE-RESPONSIVE-CONTACT-SHEET.png",
+    "artifacts/game-machine-review/step-07/critical-control/screenshots/run-complete-320x568--guardian-light.png",
+    "artifacts/game-machine-review/step-07/critical-control/screenshots/run-complete-390x844--guardian-light.png",
+    "artifacts/game-machine-review/step-07/critical-control/screenshots/run-complete-390x844--star-path.png",
+    "artifacts/game-machine-review/step-07/critical-control/screenshots/run-complete-390x844--ink-echo.png",
+    "artifacts/game-machine-review/step-07/critical-control/screenshots/run-complete-768x1024--guardian-light.png",
+    "artifacts/game-machine-review/step-07/critical-control/screenshots/run-complete-1440x900--guardian-light.png",
+    "artifacts/game-machine-review/step-07/critical-control/screenshots/run-complete-1440x900--star-path.png",
+    "artifacts/game-machine-review/step-07/critical-control/screenshots/run-complete-1440x900--ink-echo.png"
   ],
-  "completedAtUtc": "2026-08-10T12:43:33.499Z",
+  "completedAtUtc": "2026-08-12T11:50:57.499Z",
   "findings": [],
   "limitations": [
-    "No ordinary release blocker was found in the authorized R3 scope; highest finding severity is none.",
-    "The observer input-boundary conclusion is limited to the repaired build-identity boundary and its existing inert markup-like negative control; this review did not repeat input-safety research or offensive testing.",
-    "LOCAL-FIX-V2-RESULT.json is pre-final repair provenance bound to source tree 608F2C10C22768D81EDA943DB039E442711529126ACA48410229BCC9E1549249; it is not used as final-tree acceptance evidence. The rerun observer, lifecycle, and deep-route evidence is bound to 65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2.",
-    "All browser sessions, storage fixtures, observer events, catalog smoke rows, and agent playthrough profiles reviewed here are synthetic machine evidence only.",
-    "This review makes no claim about a real child, fun, learning, preference, retention, long-term engagement, parent acceptance, or promotion."
+    "This changed-only R3 review is limited to regressions plausibly caused by the final test, Skill, and release-verifier-only source changes; the run-complete product runtime bytes are unchanged.",
+    "The evidence exercises all three activation channels, the exact eight geometry scenarios, natural keyboard order, ordinary play without returnToWorldHref, and the protected childFirstUse branch.",
+    "The review used a rubric-separated pass in the same model runtime; it is not an independent subagent or independent-model review.",
+    "All interaction evidence is synthetic browser automation and cannot establish real-child behavior, product preference, or second-use outcomes."
   ]
 }

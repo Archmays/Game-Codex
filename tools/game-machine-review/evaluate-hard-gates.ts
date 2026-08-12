@@ -13,6 +13,7 @@ export const REQUIRED_HARD_GATE_IDS = [
   "privacy-and-pii",
   "adult-scroll-and-reflow",
   "keyboard-focus-and-targets",
+  "critical-control-geometry",
   "accessibility-structure",
   "deterministic-visual-states",
   "child-copy-and-forbidden-mechanics",

@@ -197,6 +197,7 @@ export function runMachineReview(options: RunMachineReviewOptions = {}): Machine
   const catalogSmoke = evidenceSummary(readAt("GAME-CATALOG-MACHINE-SMOKE.json"), "catalog smoke", sourceTreeSha256, workspaceRoot, outputDirectory);
   const agentPlaythroughs = evidenceSummary(readAt("agent-playthrough/AGENT-PLAYTHROUGH-RESULTS.json"), "agent playthroughs", sourceTreeSha256, workspaceRoot, outputDirectory);
   const deepRouteAccessibility = evidenceSummary(readAt("DEEP-ROUTE-EVIDENCE.json"), "deep route accessibility", sourceTreeSha256, workspaceRoot, outputDirectory);
+  const criticalControlGeometry = evidenceSummary(readAt("RUN-COMPLETE-CONTROL-EVIDENCE.json"), "critical control geometry", sourceTreeSha256, workspaceRoot, outputDirectory);
   const network = networkSummary(readAt("hard-gates/NETWORK-GATE.json"), sourceTreeSha256, workspaceRoot, outputDirectory);
   const privacy = evidenceSummary(readAt("hard-gates/PRIVACY-GATE.json"), "privacy gate", sourceTreeSha256, workspaceRoot, outputDirectory);
   const finalFullTests = evidenceSummary(readAt("hard-gates/FINAL-FULL-TESTS.json"), "final full tests", sourceTreeSha256, workspaceRoot, outputDirectory);
@@ -231,6 +232,7 @@ export function runMachineReview(options: RunMachineReviewOptions = {}): Machine
     catalogSmoke,
     agentPlaythroughs,
     deepRouteAccessibility,
+    criticalControlGeometry,
     network,
     privacy,
     semanticReview,

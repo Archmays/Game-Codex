@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "recordType": "VISUAL_ARIA_BASELINE_PROMOTION",
-  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
-  "promotedAtUtc": "2026-08-10T12:44:34.015Z",
+  "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
+  "promotedAtUtc": "2026-08-12T11:57:01.683Z",
   "status": "PASS",
   "stages": [
     {
@@ -12,17 +12,17 @@
     {
       "stage": "STEP07_ESTABLISHED_BASELINE",
       "evidenceFile": "artifacts/game-machine-review/step-07/hard-gates/BASELINE-ESTABLISHMENT.json",
-      "commandRunRecordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T122401608Z-57964-0036a6d0.json"
+      "commandRunRecordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260812T114833393Z-31408-c2ba025c.json"
     },
     {
       "stage": "REGRESSION_PASS",
       "evidenceFile": "artifacts/game-machine-review/step-07/VISUAL-ARIA-EVIDENCE.json",
-      "commandRunRecordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-no-update-20260810T124408920Z-13592-2231bca5.json"
+      "commandRunRecordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-no-update-20260812T115224449Z-26152-d452f34a.json"
     }
   ],
   "commandRunRecordFiles": {
-    "visualBaselineUpdate": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T122401608Z-57964-0036a6d0.json",
-    "visualNoUpdate": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-no-update-20260810T124408920Z-13592-2231bca5.json"
+    "visualBaselineUpdate": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260812T114833393Z-31408-c2ba025c.json",
+    "visualNoUpdate": "artifacts/game-machine-review/step-07/hard-gates/commands/visual-no-update-20260812T115224449Z-26152-d452f34a.json"
   },
   "establishmentRecordFile": "artifacts/game-machine-review/step-07/hard-gates/BASELINE-ESTABLISHMENT.json",
   "candidateEvidenceFile": "artifacts/game-machine-review/step-07/VISUAL-ARIA-CANDIDATE.json",

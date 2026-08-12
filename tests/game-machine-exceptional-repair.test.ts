@@ -233,6 +233,7 @@ function reportFixture(): MachineReviewReport {
     catalogSmoke: pass,
     agentPlaythroughs: pass,
     deepRouteAccessibility: pass,
+    criticalControlGeometry: pass,
     network: {
       status: "PASS",
       policy: "SAME_ORIGIN_ALLOWED / EXTERNAL_NETWORK_FORBIDDEN",

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "recordType": "RUN_COMPLETE_R2_CLOSURE_CHARTER",
+  "authorizationId": "HUMAN_AUTHORIZED_STEP07_RUN_COMPLETE_CRITICAL_CONTROL_GEOMETRY_FINAL_CLOSEOUT_02",
+  "status": "FROZEN_BEFORE_SOURCE_MUTATION",
+  "branch": "main",
+  "head": "eac16ca050511dae098b12a8ac832425c4297b3a",
+  "originMain": "eac16ca050511dae098b12a8ac832425c4297b3a",
+  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+  "fixNow": [
+    "R2-RUN-COMPLETE-CONTROL-OVERLAP"
+  ],
+  "carryBacklog": [
+    "R1_CHILD_SURFACE_BUILD_ID",
+    "R2_OBSERVER_EXPORT_LABEL_WRAP"
+  ],
+  "experienceContract": {
+    "childValue": "A clear, non-overlapping end-of-run choice between another adventure and returning to the game world.",
+    "hanziLearningValue": "Preserve the accepted replay ability flow without changing Hanzi content, rules, or progression.",
+    "automaticValidation": "Responsive rectangle separation, interior hit ownership, real pointer/touch/keyboard activation, visual and ARIA baselines, and final same-tree machine gates.",
+    "childPlaytestValidation": "A later natural real second-use may observe whether the child recognizes the choices; synthetic evidence makes no child acceptance or learning claim."
+  },
+  "allowedMutationBoundary": [
+    "games/hanzi-radical-battle/v2/golden-slice/ui/GoldenSliceOverlay.ts",
+    "games/hanzi-radical-battle/v2/golden-slice/styles.css",
+    "tests/e2e/game-machine-visual-regression.spec.ts",
+    "tests/e2e/hanzi-v2-run-complete-controls.spec.ts",
+    "tools/game-machine-review/critical-control-evidence.ts",
+    "tests/game-machine-critical-control-evidence.test.ts",
+    "package.json",
+    "tools/game-machine-review/run-machine-review.ts",
+    "tools/game-machine-review/finalize-machine-evidence.ts",
+    ".agents/skills/machine-first-game-review/references/lifecycle-and-evidence.md",
+    "affected visual/ARIA snapshot and evidence files"
+  ],
+  "forbiddenProductMutation": [
+    "simulation machine",
+    "abilities",
+    "manifest",
+    "save schema/store",
+    "world routes",
+    "observer",
+    "STEP06/STEP07 session",
+    "Theme C assets",
+    "other games"
+  ],
+  "repairLoopMaximum": 3,
+  "stopConditions": [
+    "gameplay or ability semantics must change",
+    "Hanzi content must change",
+    "childFirstUse rules must change",
+    "privacy collection must expand",
+    "three bounded repair loops are exhausted",
+    "root cause remains unknown",
+    "a gate must be weakened to pass"
+  ]
+}

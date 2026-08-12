@@ -611,16 +611,21 @@ export function mountGoldenSliceOverlay(
   function completeMarkup(): string {
     if (state.phase !== "run_complete") return "";
     const remaining = GOLDEN_ABILITIES.filter((ability) => ability.id !== state.selectedAbilityId);
+    const replayGroup = (labelSuffix: string) => `<div class="golden-replay-abilities" data-replay-group role="group" aria-label="换一道能力再冒险">
+      ${remaining.map((ability) => `<button type="button" data-replay-ability="${ability.id}">${ability.name}${labelSuffix}</button>`).join("")}
+    </div>`;
     if (options.childFirstUse) {
       return `<section class="golden-complete-card" data-testid="run-complete">
         <h2>四道字光留在了营地</h2><p>这次冒险到这里。你可以停下来；如果你自己还想走一次，也可以选另一道光。</p>
-        ${state.replayCount < 1 ? `<div class="golden-replay-abilities">${remaining.map((ability) => `<button type="button" data-replay-ability="${ability.id}">${ability.name}</button>`).join("")}</div>` : "<p>正式观察的两次短路已经结束。</p>"}
+        ${state.replayCount < 1 ? `<div class="golden-complete-actions" data-complete-actions>${replayGroup("")}</div>` : "<p>正式观察的两次短路已经结束。</p>"}
       </section>`;
     }
     return `<section class="golden-complete-card" data-testid="run-complete">
       <h2>四道字光留在了营地</h2><p>想换一道能力，再走一次相同的短路吗？</p>
-      <div class="golden-replay-abilities">${remaining.map((ability) => `<button type="button" data-replay-ability="${ability.id}">${ability.name}再冒险</button>`).join("")}</div>
-      ${options.returnToWorldHref ? `<a class="golden-primary" data-return-to-world href="${options.returnToWorldHref}">回我的游戏世界</a>` : ""}
+      <div class="golden-complete-actions" data-complete-actions>
+        ${replayGroup("再冒险")}
+        ${options.returnToWorldHref ? `<div class="golden-return-row" data-return-row><a class="golden-primary golden-return-to-world" data-return-to-world href="${options.returnToWorldHref}">回我的游戏世界</a></div>` : ""}
+      </div>
     </section>`;
   }
 

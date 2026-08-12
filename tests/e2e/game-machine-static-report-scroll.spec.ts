@@ -101,6 +101,14 @@ async function resetToTop(page: Page): Promise<void> {
   await expect.poll(() => readScrollTop(page)).toBeLessThanOrEqual(1);
 }
 
+async function waitForDocumentBottom(page: Page, maxScrollTop: number): Promise<number> {
+  await expect.poll(
+    () => readScrollTop(page),
+    { message: "End key must settle at the document bottom" },
+  ).toBeGreaterThanOrEqual(maxScrollTop - 2);
+  return readScrollTop(page);
+}
+
 async function performCdpTouchSwipe(context: BrowserContext, page: Page, width: number, height: number): Promise<void> {
   const session = await context.newCDPSession(page);
   const x = Math.round(width / 2);
@@ -142,12 +150,17 @@ async function performInput(
 ): Promise<StaticReportScrollInputTrace> {
   await resetToTop(page);
   const before = await readScrollTop(page);
-  if (input === "mouse-wheel") await page.mouse.wheel(0, Math.max(contract.height, 600));
-  else if (input === "PageDown") await page.keyboard.press("PageDown");
-  else if (input === "End") await page.keyboard.press("End");
-  else await performCdpTouchSwipe(context, page, contract.width, contract.height);
-  await expect.poll(() => readScrollTop(page)).toBeGreaterThan(before);
-  const after = await readScrollTop(page);
+  let after: number;
+  if (input === "End") {
+    await page.keyboard.press("End");
+    after = await waitForDocumentBottom(page, maxScrollTop);
+  } else {
+    if (input === "mouse-wheel") await page.mouse.wheel(0, Math.max(contract.height, 600));
+    else if (input === "PageDown") await page.keyboard.press("PageDown");
+    else await performCdpTouchSwipe(context, page, contract.width, contract.height);
+    await expect.poll(() => readScrollTop(page)).toBeGreaterThan(before);
+    after = await readScrollTop(page);
+  }
   if (input === "End") expect(after).toBeGreaterThanOrEqual(maxScrollTop - 2);
   return {
     input,
@@ -248,7 +261,7 @@ async function captureCase(
     }
 
     await page.keyboard.press("End");
-    await expect.poll(() => readScrollTop(page)).toBeGreaterThanOrEqual(layout.maxScrollTop - 2);
+    await waitForDocumentBottom(page, layout.maxScrollTop);
     const bottom = await screenshotIdentity(page, `${screenshotPrefix}-bottom.png`);
     await page.keyboard.press("Tab");
     const focus = await finalButton.evaluate((element) => {

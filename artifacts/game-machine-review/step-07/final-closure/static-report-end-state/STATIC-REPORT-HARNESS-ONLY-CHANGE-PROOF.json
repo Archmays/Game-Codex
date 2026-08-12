@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "recordType": "STEP07_STATIC_REPORT_HARNESS_ONLY_CHANGE_PROOF",
+  "authorizationId": "HUMAN_AUTHORIZED_STEP07_STATIC_REPORT_END_STATE_FINAL_RELEASE_01",
+  "recordedAtUtc": "2026-08-12T11:30:59.2076972Z",
+  "priorAcceptedSourceTreeSha256": "4498BBA07CEC7C46406936D4447E555E3C67C2C0D4931825EB16A75DC16FD703",
+  "newFinalSourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
+  "primaryInstructionMutationPaths": [
+    "tests/e2e/game-machine-static-report-scroll.spec.ts",
+    ".agents/skills/machine-first-game-review/references/lifecycle-and-evidence.md"
+  ],
+  "classifiedReleaseVerifierDependencyPaths": [
+    "tools/game-machine-review/evidence-identity.ts",
+    "tests/game-machine-evidence-manifest.test.ts"
+  ],
+  "newChangedPathsSincePriorFreeze": [
+    ".agents/skills/machine-first-game-review/references/lifecycle-and-evidence.md",
+    "tests/e2e/game-machine-static-report-scroll.spec.ts",
+    "tests/game-machine-evidence-manifest.test.ts",
+    "tools/game-machine-review/evidence-identity.ts"
+  ],
+  "changeClassification": {
+    ".agents/skills/machine-first-game-review/references/lifecycle-and-evidence.md": "GENERAL_ASYNC_INPUT_SETTLING_RULE_PLUS_CARRIED_CRITICAL_CONTROL_RULE",
+    "tests/e2e/game-machine-static-report-scroll.spec.ts": "END_TERMINAL_STATE_TEST_HARNESS_FIX",
+    "tests/game-machine-evidence-manifest.test.ts": "READINESS_REPORT_FIXTURE_SCHEMA_SYNC",
+    "tools/game-machine-review/evidence-identity.ts": "READINESS_REPORT_EXACT_KEY_SCHEMA_SYNC"
+  },
+  "productRuntimeChangedAfterPriorFreeze": false,
+  "runCompleteProductBytesChanged": false,
+  "runCompleteProductByteAnchors": [
+    {
+      "path": "games/hanzi-radical-battle/v2/golden-slice/ui/GoldenSliceOverlay.ts",
+      "sha256": "F305696E3CA9F2EA4DB09503085D2AC280FE9B96B228F727D4B2F38BDE049785",
+      "matchesPriorBlockedPackage": true
+    },
+    {
+      "path": "games/hanzi-radical-battle/v2/golden-slice/styles.css",
+      "sha256": "02A7E0446E5776D952FC5D0AA7165B4602A0E6DE055A794C1045818E4F68023F",
+      "matchesPriorBlockedPackage": true
+    }
+  ],
+  "visualBaselineBytesChangedBeforeFinalRerun": false,
+  "ariaBaselineBytesChangedBeforeFinalRerun": false,
+  "baselineFileCount": 24,
+  "baselineAggregateSha256": "FABCDF0303ADA7DE507DA69DA2DE95A9A5AAB26C687BAAE839D0E48EAD12B2A0",
+  "runCompleteBaselineAnchors": [
+    {
+      "path": "artifacts/game-machine-review/step-07/baselines/desktop-chromium/game-machine-visual-regression.spec.ts/forest-run-complete-step07.png",
+      "bytes": 442090,
+      "sha256": "A739B6756552B754330CD62F0FCDC1B5AE64B7C3D263EC2A9B9DB4279EB95895"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/baselines/desktop-chromium/game-machine-visual-regression.spec.ts/forest-run-complete-step07.aria.yml",
+      "bytes": 285,
+      "sha256": "C829A92ACE0D02251CE0C24FD4FD2012F47C11C0F5223719F60B44D46162B6F7"
+    }
+  ],
+  "taskInstructionInput": {
+    "path": "Game-Codex-STEP07-5-Static-Report-End-State-Final-Release-Codex-Instruction-20260812.md",
+    "bytes": 18093,
+    "sha256": "BA3FACA06ACC160E29722827B1A852951B23EEE2C5FCC7FA1AC4C2895D3ECA70",
+    "classification": "PRESERVED_LOCAL_TASK_INPUT_EXCLUDED_FROM_RELEASE_SOURCE_AND_COMMIT"
+  },
+  "closureCharter": {
+    "path": "artifacts/game-machine-review/step-07/final-closure/static-report-end-state/STATIC-REPORT-END-STATE-CLOSURE-CHARTER.json",
+    "bytes": 4971,
+    "sha256": "DAE16104430BA7E62FBB5916966F5FFB64E89A28C68E32D0E72A6A5AA86F4932"
+  },
+  "status": "PASS",
+  "limitations": [
+    "The two release-verifier files were a discovered pure acceptance-tool dependency closure; they do not change product runtime or any gate threshold.",
+    "No real second-use occurred and no child, learning, fun, preference, or retention conclusion is made."
+  ]
+}

@@ -41,3 +41,27 @@ Treat every URL or query identity as untrusted until its singleton count and exa
 Render a rejected route from fixed DOM nodes with no application side effects. Never interpolate a query-controlled value into `innerHTML`; populate accepted display text with `textContent` after static markup exists.
 
 Use isolated negative controls to prove that malformed markup-like input creates no injected element or handler, external request, storage mutation, grant, or session. Keep these controls inert and do not turn acceptance testing into offensive payload research.
+
+## Critical-control spatial evidence
+
+ARIA presence does not prove spatial usability. For a critical state with multiple adjacent actions, declare the critical action group, measure every visible target, verify pairwise non-intersection and rendered group clearance, and sample multiple interior hit-test points per target.
+
+Prove real pointer, touch, and keyboard activation in isolated browser contexts across compact mobile, mobile, tablet, and desktop layouts. Make the source-bound geometry result a final hard gate rather than an optional screenshot note.
+
+Do not apply a global all-target overlap audit blindly across modal or overlay states. Use explicit critical-action contracts so intentional layering does not become a false positive.
+
+## Asynchronous input settling
+
+Do not treat the first observable movement as proof that an asynchronous browser input has reached its required terminal state.
+
+Define the actual postcondition for each input:
+
+- wheel or PageDown may require a positive scroll delta;
+- End requires the document bottom;
+- Home requires the document top;
+- navigation requires the target route or state;
+- animation-dependent controls require the stable product state.
+
+Wait for the contract with observable polling or locator conditions. Do not replace terminal-state synchronization with fixed sleeps, retries, or weakened thresholds.
+
+If the same terminal condition appears in more than one phase of one harness, use one shared helper so discovery and final-proof logic cannot drift.

@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "recordType": "RUN_COMPLETE_R2_PRE_REPAIR_EVIDENCE_INVENTORY",
+  "generatedAtUtc": "2026-08-11T23:11:19.3964022Z",
+  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+  "git": {
+    "branch": "main",
+    "head": "eac16ca050511dae098b12a8ac832425c4297b3a",
+    "originMain": "eac16ca050511dae098b12a8ac832425c4297b3a"
+  },
+  "dirtyTrackedDerivedEvidence": [
+    {
+      "path": "artifacts/game-machine-review/step-07/VISUAL-ARIA-CANDIDATE.json",
+      "tracked": true,
+      "bytes": 13840,
+      "sha256": "F7DD5C6094C1D25882A898291A8C7B502B265EF8F45F4DFEA73E6FE87BA32ABA",
+      "embeddedSourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/VISUAL-ARIA-EVIDENCE.json",
+      "tracked": true,
+      "bytes": 2309,
+      "sha256": "415BB414F487A07EAC37C8D144E44FCECE71929D26BB20C8FB033663C3F967E2",
+      "embeddedSourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/hard-gates/BASELINE-ESTABLISHMENT.json",
+      "tracked": true,
+      "bytes": 7455,
+      "sha256": "D875E30EC06E4E8F417CC8E035592F16B040E764FAB010EB0EC00585EFB8C35B",
+      "embeddedSourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/semantic-reviews/R1_CHILD_FIRST_UX.json",
+      "tracked": true,
+      "bytes": 5079,
+      "sha256": "74D2F51FEDC1640931B56488C18DBFFB4B97A514B0868B26F1C92E304310A800",
+      "embeddedSourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/semantic-reviews/R2_VISUAL_ACCESSIBILITY.json",
+      "tracked": true,
+      "bytes": 6332,
+      "sha256": "F68BC07C23BA85E6F94DDECF291B36E9FB0D0F4C5F5278B4B7A488B7E369E44D",
+      "embeddedSourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2"
+    },
+    {
+      "path": "artifacts/game-machine-review/step-07/semantic-reviews/R3_ADVERSARIAL_QA.json",
+      "tracked": true,
+      "bytes": 7263,
+      "sha256": "D47B95C0D8E302C45838970D37075E469A9D1678E72DA8651BDEC35AFEF61235",
+      "embeddedSourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2"
+    }
+  ],
+  "blockedReturn": {
+    "path": "artifacts/game-machine-review/step-07/STEP-07-FINAL_BLOCKED_RETURN_TO_CHATGPT.zip",
+    "bytes": 1219274,
+    "sha256": "65348B43CE5526BAC650A09891125C6E9D1594215D25425D9231D0A4D30C658C",
+    "reportedSourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2"
+  },
+  "charter": {
+    "path": "artifacts/game-machine-review/step-07/final-closure/run-complete-r2/RUN-COMPLETE-R2-CLOSURE-CHARTER.json",
+    "sha256": "E3DC4724B8EB2808AFFA8F996103B954BC0ECB75FACA08A82FCCB289A786CCD6"
+  },
+  "classification": "PRE_EXISTING_BLOCKED_CANDIDATE_NOT_FINAL_PASS_EVIDENCE"
+}

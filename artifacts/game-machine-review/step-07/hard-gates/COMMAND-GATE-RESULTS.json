@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
-  "generatedAtUtc": "2026-08-10T12:44:34.518Z",
+  "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
+  "generatedAtUtc": "2026-08-12T11:57:02.108Z",
   "derivation": "ACTUAL_COMMAND_RECORDS_AND_BASELINE_PROMOTION",
   "status": "PASS",
   "realChildEvidenceClaimed": false,
@@ -13,65 +13,65 @@
       "id": "compile",
       "status": "PASS",
       "evidenceFiles": [
-        "artifacts/game-machine-review/step-07/hard-gates/commands/compile-20260810T123626739Z-6884-58fc252b.json",
-        "artifacts/game-machine-review/step-07/hard-gates/commands/compile-20260810T123626739Z-6884-58fc252b.log"
+        "artifacts/game-machine-review/step-07/hard-gates/commands/compile-20260812T114633098Z-30952-d7470514.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/compile-20260812T114633098Z-30952-d7470514.log"
       ],
       "detail": "Fixed TypeScript compile command exited 0 on the unchanged current source tree.",
       "provenance": {
         "kind": "COMMAND_RUN_RECORD",
-        "recordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/compile-20260810T123626739Z-6884-58fc252b.json"
+        "recordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/compile-20260812T114633098Z-30952-d7470514.json"
       }
     },
     {
       "id": "targeted-tests",
       "status": "PASS",
       "evidenceFiles": [
-        "artifacts/game-machine-review/step-07/hard-gates/commands/targeted-tests-20260810T123637860Z-45240-c62d223c.json",
-        "artifacts/game-machine-review/step-07/hard-gates/commands/targeted-tests-20260810T123637860Z-45240-c62d223c.log"
+        "artifacts/game-machine-review/step-07/hard-gates/commands/targeted-tests-20260812T114644694Z-31908-3e669665.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/targeted-tests-20260812T114644694Z-31908-3e669665.log"
       ],
       "detail": "Fixed machine-review targeted tests exited 0 on the unchanged current source tree.",
       "provenance": {
         "kind": "COMMAND_RUN_RECORD",
-        "recordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/targeted-tests-20260810T123637860Z-45240-c62d223c.json"
+        "recordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/targeted-tests-20260812T114644694Z-31908-3e669665.json"
       }
     },
     {
       "id": "step-regressions",
       "status": "PASS",
       "evidenceFiles": [
-        "artifacts/game-machine-review/step-07/hard-gates/commands/step-regressions-20260810T123719076Z-35480-2076b03f.json",
-        "artifacts/game-machine-review/step-07/hard-gates/commands/step-regressions-20260810T123719076Z-35480-2076b03f.log"
+        "artifacts/game-machine-review/step-07/hard-gates/commands/step-regressions-20260812T114721961Z-18020-2121a5d2.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/step-regressions-20260812T114721961Z-18020-2121a5d2.log"
       ],
       "detail": "Fixed STEP 07 regression command exited 0 on the unchanged current source tree.",
       "provenance": {
         "kind": "COMMAND_RUN_RECORD",
-        "recordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/step-regressions-20260810T123719076Z-35480-2076b03f.json"
+        "recordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/step-regressions-20260812T114721961Z-18020-2121a5d2.json"
       }
     },
     {
       "id": "full-tests",
       "status": "PASS",
       "evidenceFiles": [
-        "artifacts/game-machine-review/step-07/hard-gates/commands/full-tests-20260810T123749810Z-61320-4e6286f1.json",
-        "artifacts/game-machine-review/step-07/hard-gates/commands/full-tests-20260810T123749810Z-61320-4e6286f1.log"
+        "artifacts/game-machine-review/step-07/hard-gates/commands/full-tests-20260812T114753053Z-21992-a996d687.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/full-tests-20260812T114753053Z-21992-a996d687.log"
       ],
       "detail": "Fixed full Vitest command exited 0 on the unchanged current source tree.",
       "provenance": {
         "kind": "COMMAND_RUN_RECORD",
-        "recordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/full-tests-20260810T123749810Z-61320-4e6286f1.json"
+        "recordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/full-tests-20260812T114753053Z-21992-a996d687.json"
       }
     },
     {
       "id": "build",
       "status": "PASS",
       "evidenceFiles": [
-        "artifacts/game-machine-review/step-07/hard-gates/commands/build-20260810T123808449Z-28524-c6111cd8.json",
-        "artifacts/game-machine-review/step-07/hard-gates/commands/build-20260810T123808449Z-28524-c6111cd8.log"
+        "artifacts/game-machine-review/step-07/hard-gates/commands/build-20260812T114813510Z-13668-010932e1.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/build-20260812T114813510Z-13668-010932e1.log"
       ],
       "detail": "Fixed production build command exited 0 on the unchanged current source tree.",
       "provenance": {
         "kind": "COMMAND_RUN_RECORD",
-        "recordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/build-20260810T123808449Z-28524-c6111cd8.json"
+        "recordFile": "artifacts/game-machine-review/step-07/hard-gates/commands/build-20260812T114813510Z-13668-010932e1.json"
       }
     },
     {
@@ -81,10 +81,10 @@
         "artifacts/game-machine-review/step-07/hard-gates/BASELINE-PROMOTION.json",
         "artifacts/game-machine-review/step-07/hard-gates/BASELINE-ESTABLISHMENT.json",
         "artifacts/game-machine-review/step-07/VISUAL-ARIA-CANDIDATE.json",
-        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T122401608Z-57964-0036a6d0.json",
-        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T122401608Z-57964-0036a6d0.log",
-        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-no-update-20260810T124408920Z-13592-2231bca5.json",
-        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-no-update-20260810T124408920Z-13592-2231bca5.log",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260812T114833393Z-31408-c2ba025c.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260812T114833393Z-31408-c2ba025c.log",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-no-update-20260812T115224449Z-26152-d452f34a.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-no-update-20260812T115224449Z-26152-d452f34a.log",
         "artifacts/game-machine-review/step-07/VISUAL-ARIA-EVIDENCE.json",
         "artifacts/game-machine-review/step-07/screenshots/visual-baseline/classic-hub-step07.png",
         "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-ability-step07.png",
@@ -93,6 +93,7 @@
         "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-camp-repair-step07.png",
         "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-camp-step07.png",
         "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-ming-placing-step07.png",
+        "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-run-complete-step07.png",
         "artifacts/game-machine-review/step-07/screenshots/visual-baseline/forest-spellbook-step07.png",
         "artifacts/game-machine-review/step-07/screenshots/visual-baseline/step07-observer-bottom-step07.png",
         "artifacts/game-machine-review/step-07/screenshots/visual-baseline/step07-observer-preparation-step07.png",
@@ -114,14 +115,15 @@
         "artifacts/game-machine-review/step-07/hard-gates/BASELINE-PROMOTION.json",
         "artifacts/game-machine-review/step-07/hard-gates/BASELINE-ESTABLISHMENT.json",
         "artifacts/game-machine-review/step-07/VISUAL-ARIA-CANDIDATE.json",
-        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T122401608Z-57964-0036a6d0.json",
-        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260810T122401608Z-57964-0036a6d0.log",
-        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-no-update-20260810T124408920Z-13592-2231bca5.json",
-        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-no-update-20260810T124408920Z-13592-2231bca5.log",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260812T114833393Z-31408-c2ba025c.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-baseline-update-20260812T114833393Z-31408-c2ba025c.log",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-no-update-20260812T115224449Z-26152-d452f34a.json",
+        "artifacts/game-machine-review/step-07/hard-gates/commands/visual-no-update-20260812T115224449Z-26152-d452f34a.log",
         "artifacts/game-machine-review/step-07/VISUAL-ARIA-EVIDENCE.json",
         "artifacts/game-machine-review/step-07/aria/classic-hub-step07.aria.yml",
         "artifacts/game-machine-review/step-07/aria/forest-ability-step07.aria.yml",
         "artifacts/game-machine-review/step-07/aria/forest-camp-step07.aria.yml",
+        "artifacts/game-machine-review/step-07/aria/forest-run-complete-step07.aria.yml",
         "artifacts/game-machine-review/step-07/aria/forest-spellbook-step07.aria.yml",
         "artifacts/game-machine-review/step-07/aria/step07-observer-export-step07.aria.yml",
         "artifacts/game-machine-review/step-07/aria/step07-observer-human-fields-step07.aria.yml",

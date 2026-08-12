@@ -10,6 +10,7 @@ import {
 } from "./evidence-validators";
 import { validateDeepRouteEvidenceReport, type DeepRouteEvidenceReport } from "./deep-route-evidence";
 import { validateStep07LifecycleEvidenceReport } from "./step07-lifecycle-evidence";
+import { validateCriticalControlEvidenceReport } from "./critical-control-evidence";
 import { computeMachineReviewSourceTreeSha256 } from "./source-identity";
 
 const COMMAND_GATE_IDS = [
@@ -220,11 +221,13 @@ export function finalizeMachineEvidence(outputPath?: string, workspaceRoot = pro
   const profilePath = resolve(outputDirectory, "agent-playthrough/AGENT-PLAYTHROUGH-RESULTS.json");
   const deepRoutePath = resolve(outputDirectory, "DEEP-ROUTE-EVIDENCE.json");
   const lifecyclePath = resolve(outputDirectory, "STEP07-LIFECYCLE-EVIDENCE.json");
+  const criticalControlPath = resolve(outputDirectory, "RUN-COMPLETE-CONTROL-EVIDENCE.json");
   const scroll = readJson(scrollPath);
   const catalog = readJson(catalogPath);
   const profiles = readJson(profilePath);
   const deepRoute = readJson(deepRoutePath);
   const lifecycle = readJson(lifecyclePath);
+  const criticalControl = readJson(criticalControlPath);
   assertStrictScrollMatrixCoverage(scroll, workspaceRoot);
   assertStrictCatalogSmokeCoverage(catalog, workspaceRoot);
   assertStrictAgentProfileCoverage(profiles, workspaceRoot);
@@ -241,6 +244,14 @@ export function finalizeMachineEvidence(outputPath?: string, workspaceRoot = pro
     throw new Error(`STEP07-LIFECYCLE-EVIDENCE.json failed canonical validation: ${lifecycleErrors.join("; ")}`);
   }
   const lifecyclePass = true;
+  if (!isRecord(criticalControl)) throw new Error("RUN-COMPLETE-CONTROL-EVIDENCE.json is invalid");
+  assertSourceIdentity(criticalControl, "RUN-COMPLETE-CONTROL-EVIDENCE.json", sourceTreeSha256);
+  validateReferencedEvidenceFiles(criticalControl, "RUN-COMPLETE-CONTROL-EVIDENCE.json", workspaceRoot);
+  const criticalControlErrors = validateCriticalControlEvidenceReport(criticalControl, sourceTreeSha256, workspaceRoot);
+  if (criticalControl.status !== "PASS" || criticalControlErrors.length > 0) {
+    throw new Error(`RUN-COMPLETE-CONTROL-EVIDENCE.json failed canonical validation: ${criticalControlErrors.join("; ")}`);
+  }
+  const criticalControlPass = true;
   const scrollPass = validateScrollMatrix(scroll, sourceTreeSha256, workspaceRoot);
   const catalogPass = validateCatalogSmoke(catalog, sourceTreeSha256, workspaceRoot);
   const profilePass = validateAgentPlaythroughs(profiles, sourceTreeSha256, workspaceRoot);
@@ -285,6 +296,10 @@ export function finalizeMachineEvidence(outputPath?: string, workspaceRoot = pro
   const profileRef = relative(profilePath, workspaceRoot);
   const deepRouteRef = relative(deepRoutePath, workspaceRoot);
   const lifecycleRef = relative(lifecyclePath, workspaceRoot);
+  const criticalControlRef = relative(criticalControlPath, workspaceRoot);
+  const criticalControlEvidenceFiles = Array.isArray(criticalControl.evidenceFiles)
+    ? criticalControl.evidenceFiles.filter((file): file is string => typeof file === "string")
+    : [];
   const gate = (
     id: HardGateId,
     passed: boolean,
@@ -307,6 +322,7 @@ export function finalizeMachineEvidence(outputPath?: string, workspaceRoot = pro
     gate("privacy-and-pii", commandPass("targeted-tests") && lifecyclePass && externalRequests.length === 0, [commandRef, profileRef, lifecycleRef], "Deny-by-default schema/privacy tests and isolated same-context lifecycle pages"),
     gate("adult-scroll-and-reflow", scrollPass, [scrollRef], "Wheel, keyboard, touch, focus, single-owner, and reflow matrix"),
     gate("keyboard-focus-and-targets", scrollPass && profilePass && deepRoutePass, [scrollRef, profileRef, deepRouteRef], "Final-action activation, focus/target matrix, and KEYBOARD_ONLY profile"),
+    gate("critical-control-geometry", criticalControlPass, [criticalControlRef, ...criticalControlEvidenceFiles], "Run-complete critical-control geometry, pairwise separation, interior hit ownership, and pointer/touch/keyboard activation all PASS"),
     gate("accessibility-structure", commandPass("aria-snapshots") && profilePass && deepRoutePass, [...commandEvidence("aria-snapshots"), profileRef, deepRouteRef], "Reviewed ARIA baseline plus canonical route accessibility matrix"),
     gate("deterministic-visual-states", commandPass("visual-regression") && deepRoutePass, [...commandEvidence("visual-regression"), deepRouteRef], "Reviewed established baseline, deep states, and no-update rerun"),
     gate("child-copy-and-forbidden-mechanics", commandPass("step-regressions"), commandEvidence("step-regressions"), "Frozen content and forbidden-mechanics regression"),

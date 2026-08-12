@@ -3,10 +3,10 @@
   "step": "07",
   "reportType": "STEP07_LIFECYCLE_EVIDENCE",
   "evidenceKind": "SYNTHETIC_TOOLING_TEST_ONLY",
-  "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
-  "sourceTreeSha256Before": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
-  "sourceTreeSha256After": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
-  "generatedAtUtc": "2026-08-10T12:37:10.910Z",
+  "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
+  "sourceTreeSha256Before": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
+  "sourceTreeSha256After": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
+  "generatedAtUtc": "2026-08-12T11:47:16.085Z",
   "command": "pnpm run test:e2e:hanzi-v2:step07:lifecycle",
   "status": "PASS",
   "scenarioIds": [
@@ -22,17 +22,17 @@
     {
       "schemaVersion": 1,
       "scenarioId": "L1_ACTIVE_CONNECTION",
-      "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+      "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
       "browserContextId": "desktop-chromium:L1_ACTIVE_CONNECTION",
       "pagesShareContext": true,
-      "sessionId": "s07-msn7u88y-7ht3a",
+      "sessionId": "s07-msq0xruw-9bjpb",
       "evidenceId": "hanzi-v2-step07",
       "evidenceKind": "SYNTHETIC_TOOLING_TEST_ONLY",
       "status": "PASS",
       "eventLog": [
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7u88y-7ht3a",
+          "sessionId": "s07-msq0xruw-9bjpb",
           "sequence": 1,
           "relativeMs": 1,
           "eventType": "session_opened",
@@ -40,17 +40,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7u88y-7ht3a",
+          "sessionId": "s07-msq0xruw-9bjpb",
           "sequence": 2,
-          "relativeMs": 323,
+          "relativeMs": 357,
           "eventType": "world_ready",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7u88y-7ht3a",
+          "sessionId": "s07-msq0xruw-9bjpb",
           "sequence": 3,
-          "relativeMs": 323,
+          "relativeMs": 357,
           "eventType": "progress_continuity_verified",
           "safeMetadata": {
             "completed": true
@@ -58,17 +58,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7u88y-7ht3a",
+          "sessionId": "s07-msq0xruw-9bjpb",
           "sequence": 4,
-          "relativeMs": 385,
+          "relativeMs": 870,
           "eventType": "world_first_action",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7u88y-7ht3a",
+          "sessionId": "s07-msq0xruw-9bjpb",
           "sequence": 5,
-          "relativeMs": 385,
+          "relativeMs": 870,
           "eventType": "world_destination_opened",
           "safeMetadata": {
             "destinationId": "SPELLBOOK"
@@ -76,9 +76,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7u88y-7ht3a",
+          "sessionId": "s07-msq0xruw-9bjpb",
           "sequence": 6,
-          "relativeMs": 385,
+          "relativeMs": 870,
           "eventType": "world_spellbook_opened",
           "safeMetadata": {
             "destinationId": "SPELLBOOK"
@@ -86,9 +86,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7u88y-7ht3a",
+          "sessionId": "s07-msq0xruw-9bjpb",
           "sequence": 7,
-          "relativeMs": 434,
+          "relativeMs": 920,
           "eventType": "returned_to_world",
           "safeMetadata": {
             "worldReturned": true
@@ -96,9 +96,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7u88y-7ht3a",
+          "sessionId": "s07-msq0xruw-9bjpb",
           "sequence": 8,
-          "relativeMs": 467,
+          "relativeMs": 970,
           "eventType": "session_stopped",
           "safeMetadata": {}
         }
@@ -135,17 +135,17 @@
     {
       "schemaVersion": 1,
       "scenarioId": "L2_DISCONNECT_CONTINUE_RECOVER",
-      "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+      "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
       "browserContextId": "desktop-chromium:L2_DISCONNECT_CONTINUE_RECOVER",
       "pagesShareContext": true,
-      "sessionId": "s07-msn7u9jp-7h9ap",
+      "sessionId": "s07-msq0xtc5-2owxw",
       "evidenceId": "hanzi-v2-step07",
       "evidenceKind": "SYNTHETIC_TOOLING_TEST_ONLY",
       "status": "PASS",
       "eventLog": [
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7u9jp-7h9ap",
+          "sessionId": "s07-msq0xtc5-2owxw",
           "sequence": 1,
           "relativeMs": 1,
           "eventType": "session_opened",
@@ -153,17 +153,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7u9jp-7h9ap",
+          "sessionId": "s07-msq0xtc5-2owxw",
           "sequence": 2,
-          "relativeMs": 204,
+          "relativeMs": 229,
           "eventType": "world_ready",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7u9jp-7h9ap",
+          "sessionId": "s07-msq0xtc5-2owxw",
           "sequence": 3,
-          "relativeMs": 204,
+          "relativeMs": 229,
           "eventType": "progress_continuity_verified",
           "safeMetadata": {
             "completed": true
@@ -171,17 +171,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7u9jp-7h9ap",
+          "sessionId": "s07-msq0xtc5-2owxw",
           "sequence": 4,
-          "relativeMs": 251,
+          "relativeMs": 285,
           "eventType": "world_first_action",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7u9jp-7h9ap",
+          "sessionId": "s07-msq0xtc5-2owxw",
           "sequence": 5,
-          "relativeMs": 251,
+          "relativeMs": 285,
           "eventType": "world_destination_opened",
           "safeMetadata": {
             "destinationId": "SPELLBOOK"
@@ -189,9 +189,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7u9jp-7h9ap",
+          "sessionId": "s07-msq0xtc5-2owxw",
           "sequence": 6,
-          "relativeMs": 251,
+          "relativeMs": 285,
           "eventType": "world_spellbook_opened",
           "safeMetadata": {
             "destinationId": "SPELLBOOK"
@@ -199,9 +199,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7u9jp-7h9ap",
+          "sessionId": "s07-msq0xtc5-2owxw",
           "sequence": 7,
-          "relativeMs": 303,
+          "relativeMs": 335,
           "eventType": "returned_to_world",
           "safeMetadata": {
             "worldReturned": true
@@ -209,9 +209,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7u9jp-7h9ap",
+          "sessionId": "s07-msq0xtc5-2owxw",
           "sequence": 8,
-          "relativeMs": 450,
+          "relativeMs": 500,
           "eventType": "session_stopped",
           "safeMetadata": {}
         }
@@ -253,17 +253,17 @@
     {
       "schemaVersion": 1,
       "scenarioId": "L3_BROADCASTCHANNEL_STORAGE_FALLBACK",
-      "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+      "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
       "browserContextId": "desktop-chromium:L3_BROADCASTCHANNEL_STORAGE_FALLBACK",
       "pagesShareContext": true,
-      "sessionId": "s07-msn7uavv-8g490",
+      "sessionId": "s07-msq0xuhd-5wggb",
       "evidenceId": "hanzi-v2-step07",
       "evidenceKind": "SYNTHETIC_TOOLING_TEST_ONLY",
       "status": "PASS",
       "eventLog": [
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uavv-8g490",
+          "sessionId": "s07-msq0xuhd-5wggb",
           "sequence": 1,
           "relativeMs": 1,
           "eventType": "session_opened",
@@ -271,17 +271,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uavv-8g490",
+          "sessionId": "s07-msq0xuhd-5wggb",
           "sequence": 2,
-          "relativeMs": 214,
+          "relativeMs": 207,
           "eventType": "world_ready",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uavv-8g490",
+          "sessionId": "s07-msq0xuhd-5wggb",
           "sequence": 3,
-          "relativeMs": 214,
+          "relativeMs": 207,
           "eventType": "progress_continuity_verified",
           "safeMetadata": {
             "completed": true
@@ -289,17 +289,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uavv-8g490",
+          "sessionId": "s07-msq0xuhd-5wggb",
           "sequence": 4,
-          "relativeMs": 267,
+          "relativeMs": 252,
           "eventType": "world_first_action",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uavv-8g490",
+          "sessionId": "s07-msq0xuhd-5wggb",
           "sequence": 5,
-          "relativeMs": 267,
+          "relativeMs": 252,
           "eventType": "world_destination_opened",
           "safeMetadata": {
             "destinationId": "SPELLBOOK"
@@ -307,9 +307,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uavv-8g490",
+          "sessionId": "s07-msq0xuhd-5wggb",
           "sequence": 6,
-          "relativeMs": 267,
+          "relativeMs": 252,
           "eventType": "world_spellbook_opened",
           "safeMetadata": {
             "destinationId": "SPELLBOOK"
@@ -317,9 +317,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uavv-8g490",
+          "sessionId": "s07-msq0xuhd-5wggb",
           "sequence": 7,
-          "relativeMs": 434,
+          "relativeMs": 300,
           "eventType": "returned_to_world",
           "safeMetadata": {
             "worldReturned": true
@@ -327,9 +327,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uavv-8g490",
+          "sessionId": "s07-msq0xuhd-5wggb",
           "sequence": 8,
-          "relativeMs": 468,
+          "relativeMs": 336,
           "eventType": "session_stopped",
           "safeMetadata": {}
         }
@@ -366,17 +366,17 @@
     {
       "schemaVersion": 1,
       "scenarioId": "L4_RELOAD_CONTINUITY",
-      "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+      "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
       "browserContextId": "desktop-chromium:L4_RELOAD_CONTINUITY",
       "pagesShareContext": true,
-      "sessionId": "s07-msn7uc7k-39mp2",
+      "sessionId": "s07-msq0xvhg-3hn7z",
       "evidenceId": "hanzi-v2-step07",
       "evidenceKind": "SYNTHETIC_TOOLING_TEST_ONLY",
       "status": "PASS",
       "eventLog": [
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uc7k-39mp2",
+          "sessionId": "s07-msq0xvhg-3hn7z",
           "sequence": 1,
           "relativeMs": 1,
           "eventType": "session_opened",
@@ -384,17 +384,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uc7k-39mp2",
+          "sessionId": "s07-msq0xvhg-3hn7z",
           "sequence": 2,
-          "relativeMs": 206,
+          "relativeMs": 219,
           "eventType": "world_ready",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uc7k-39mp2",
+          "sessionId": "s07-msq0xvhg-3hn7z",
           "sequence": 3,
-          "relativeMs": 206,
+          "relativeMs": 219,
           "eventType": "progress_continuity_verified",
           "safeMetadata": {
             "completed": true
@@ -402,17 +402,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uc7k-39mp2",
+          "sessionId": "s07-msq0xvhg-3hn7z",
           "sequence": 4,
-          "relativeMs": 317,
+          "relativeMs": 320,
           "eventType": "world_first_action",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uc7k-39mp2",
+          "sessionId": "s07-msq0xvhg-3hn7z",
           "sequence": 5,
-          "relativeMs": 318,
+          "relativeMs": 320,
           "eventType": "world_destination_opened",
           "safeMetadata": {
             "destinationId": "FOREST"
@@ -420,17 +420,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uc7k-39mp2",
+          "sessionId": "s07-msq0xvhg-3hn7z",
           "sequence": 6,
-          "relativeMs": 501,
+          "relativeMs": 526,
           "eventType": "forest_entered",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uc7k-39mp2",
+          "sessionId": "s07-msq0xvhg-3hn7z",
           "sequence": 7,
-          "relativeMs": 516,
+          "relativeMs": 539,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "boot"
@@ -438,17 +438,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uc7k-39mp2",
+          "sessionId": "s07-msq0xvhg-3hn7z",
           "sequence": 8,
-          "relativeMs": 597,
+          "relativeMs": 626,
           "eventType": "forest_entered",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uc7k-39mp2",
+          "sessionId": "s07-msq0xvhg-3hn7z",
           "sequence": 9,
-          "relativeMs": 600,
+          "relativeMs": 629,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "boot"
@@ -456,17 +456,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uc7k-39mp2",
+          "sessionId": "s07-msq0xvhg-3hn7z",
           "sequence": 10,
-          "relativeMs": 681,
+          "relativeMs": 721,
           "eventType": "world_ready",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uc7k-39mp2",
+          "sessionId": "s07-msq0xvhg-3hn7z",
           "sequence": 11,
-          "relativeMs": 681,
+          "relativeMs": 721,
           "eventType": "returned_to_world",
           "safeMetadata": {
             "worldReturned": true
@@ -474,17 +474,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uc7k-39mp2",
+          "sessionId": "s07-msq0xvhg-3hn7z",
           "sequence": 12,
-          "relativeMs": 780,
+          "relativeMs": 819,
           "eventType": "world_ready",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uc7k-39mp2",
+          "sessionId": "s07-msq0xvhg-3hn7z",
           "sequence": 13,
-          "relativeMs": 780,
+          "relativeMs": 819,
           "eventType": "returned_to_world",
           "safeMetadata": {
             "worldReturned": true
@@ -492,9 +492,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uc7k-39mp2",
+          "sessionId": "s07-msq0xvhg-3hn7z",
           "sequence": 14,
-          "relativeMs": 850,
+          "relativeMs": 903,
           "eventType": "session_stopped",
           "safeMetadata": {}
         }
@@ -522,17 +522,17 @@
     {
       "schemaVersion": 1,
       "scenarioId": "L5_ORDINARY_HISTORY_BACK_FORWARD",
-      "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+      "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
       "browserContextId": "desktop-chromium:L5_ORDINARY_HISTORY_BACK_FORWARD",
       "pagesShareContext": true,
-      "sessionId": "s07-msn7uds0-0bkhr",
+      "sessionId": "s07-msq0xwxc-1ecou",
       "evidenceId": "hanzi-v2-step07",
       "evidenceKind": "SYNTHETIC_TOOLING_TEST_ONLY",
       "status": "PASS",
       "eventLog": [
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uds0-0bkhr",
+          "sessionId": "s07-msq0xwxc-1ecou",
           "sequence": 1,
           "relativeMs": 1,
           "eventType": "session_opened",
@@ -540,17 +540,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uds0-0bkhr",
+          "sessionId": "s07-msq0xwxc-1ecou",
           "sequence": 2,
-          "relativeMs": 200,
+          "relativeMs": 243,
           "eventType": "world_ready",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uds0-0bkhr",
+          "sessionId": "s07-msq0xwxc-1ecou",
           "sequence": 3,
-          "relativeMs": 200,
+          "relativeMs": 243,
           "eventType": "progress_continuity_verified",
           "safeMetadata": {
             "completed": true
@@ -558,17 +558,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uds0-0bkhr",
+          "sessionId": "s07-msq0xwxc-1ecou",
           "sequence": 4,
-          "relativeMs": 252,
+          "relativeMs": 369,
           "eventType": "world_first_action",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uds0-0bkhr",
+          "sessionId": "s07-msq0xwxc-1ecou",
           "sequence": 5,
-          "relativeMs": 252,
+          "relativeMs": 370,
           "eventType": "world_destination_opened",
           "safeMetadata": {
             "destinationId": "FOREST"
@@ -576,53 +576,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uds0-0bkhr",
+          "sessionId": "s07-msq0xwxc-1ecou",
           "sequence": 6,
-          "relativeMs": 420,
-          "eventType": "forest_entered",
-          "safeMetadata": {}
-        },
-        {
-          "schemaVersion": 1,
-          "sessionId": "s07-msn7uds0-0bkhr",
-          "sequence": 7,
-          "relativeMs": 433,
-          "eventType": "golden_phase_entered",
-          "safeMetadata": {
-            "phase": "boot"
-          }
-        },
-        {
-          "schemaVersion": 1,
-          "sessionId": "s07-msn7uds0-0bkhr",
-          "sequence": 8,
-          "relativeMs": 560,
-          "eventType": "world_ready",
-          "safeMetadata": {}
-        },
-        {
-          "schemaVersion": 1,
-          "sessionId": "s07-msn7uds0-0bkhr",
-          "sequence": 9,
           "relativeMs": 561,
-          "eventType": "returned_to_world",
-          "safeMetadata": {
-            "worldReturned": true
-          }
-        },
-        {
-          "schemaVersion": 1,
-          "sessionId": "s07-msn7uds0-0bkhr",
-          "sequence": 10,
-          "relativeMs": 626,
           "eventType": "forest_entered",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uds0-0bkhr",
-          "sequence": 11,
-          "relativeMs": 629,
+          "sessionId": "s07-msq0xwxc-1ecou",
+          "sequence": 7,
+          "relativeMs": 575,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "boot"
@@ -630,17 +594,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uds0-0bkhr",
-          "sequence": 12,
-          "relativeMs": 709,
+          "sessionId": "s07-msq0xwxc-1ecou",
+          "sequence": 8,
+          "relativeMs": 699,
           "eventType": "world_ready",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uds0-0bkhr",
-          "sequence": 13,
-          "relativeMs": 709,
+          "sessionId": "s07-msq0xwxc-1ecou",
+          "sequence": 9,
+          "relativeMs": 699,
           "eventType": "returned_to_world",
           "safeMetadata": {
             "worldReturned": true
@@ -648,9 +612,45 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7uds0-0bkhr",
+          "sessionId": "s07-msq0xwxc-1ecou",
+          "sequence": 10,
+          "relativeMs": 757,
+          "eventType": "forest_entered",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msq0xwxc-1ecou",
+          "sequence": 11,
+          "relativeMs": 760,
+          "eventType": "golden_phase_entered",
+          "safeMetadata": {
+            "phase": "boot"
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msq0xwxc-1ecou",
+          "sequence": 12,
+          "relativeMs": 841,
+          "eventType": "world_ready",
+          "safeMetadata": {}
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msq0xwxc-1ecou",
+          "sequence": 13,
+          "relativeMs": 841,
+          "eventType": "returned_to_world",
+          "safeMetadata": {
+            "worldReturned": true
+          }
+        },
+        {
+          "schemaVersion": 1,
+          "sessionId": "s07-msq0xwxc-1ecou",
           "sequence": 14,
-          "relativeMs": 785,
+          "relativeMs": 901,
           "eventType": "session_stopped",
           "safeMetadata": {}
         }
@@ -674,35 +674,35 @@
           {
             "surface": "WORLD",
             "evidenceId": "hanzi-v2-step07",
-            "sessionId": "s07-msn7uds0-0bkhr",
+            "sessionId": "s07-msq0xwxc-1ecou",
             "denied": false,
             "step06Instrumentation": false
           },
           {
             "surface": "FOREST",
             "evidenceId": "hanzi-v2-step07",
-            "sessionId": "s07-msn7uds0-0bkhr",
+            "sessionId": "s07-msq0xwxc-1ecou",
             "denied": false,
             "step06Instrumentation": false
           },
           {
             "surface": "WORLD",
             "evidenceId": "hanzi-v2-step07",
-            "sessionId": "s07-msn7uds0-0bkhr",
+            "sessionId": "s07-msq0xwxc-1ecou",
             "denied": false,
             "step06Instrumentation": false
           },
           {
             "surface": "FOREST",
             "evidenceId": "hanzi-v2-step07",
-            "sessionId": "s07-msn7uds0-0bkhr",
+            "sessionId": "s07-msq0xwxc-1ecou",
             "denied": false,
             "step06Instrumentation": false
           },
           {
             "surface": "WORLD",
             "evidenceId": "hanzi-v2-step07",
-            "sessionId": "s07-msn7uds0-0bkhr",
+            "sessionId": "s07-msq0xwxc-1ecou",
             "denied": false,
             "step06Instrumentation": false
           }
@@ -718,17 +718,17 @@
     {
       "schemaVersion": 1,
       "scenarioId": "L6_CONFLICT_FAIL_CLOSED",
-      "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+      "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
       "browserContextId": "desktop-chromium:L6_CONFLICT_FAIL_CLOSED",
       "pagesShareContext": true,
-      "sessionId": "s07-msn7ufcy-9dvh0",
+      "sessionId": "s07-msq0xycr-188bw",
       "evidenceId": "hanzi-v2-step07",
       "evidenceKind": "SYNTHETIC_TOOLING_TEST_ONLY",
       "status": "PASS",
       "eventLog": [
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ufcy-9dvh0",
+          "sessionId": "s07-msq0xycr-188bw",
           "sequence": 1,
           "relativeMs": 1,
           "eventType": "session_opened",
@@ -736,17 +736,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ufcy-9dvh0",
+          "sessionId": "s07-msq0xycr-188bw",
           "sequence": 2,
-          "relativeMs": 210,
+          "relativeMs": 231,
           "eventType": "world_ready",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ufcy-9dvh0",
+          "sessionId": "s07-msq0xycr-188bw",
           "sequence": 3,
-          "relativeMs": 210,
+          "relativeMs": 231,
           "eventType": "progress_continuity_verified",
           "safeMetadata": {
             "completed": true
@@ -754,17 +754,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ufcy-9dvh0",
+          "sessionId": "s07-msq0xycr-188bw",
           "sequence": 4,
-          "relativeMs": 911,
+          "relativeMs": 959,
           "eventType": "world_ready",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ufcy-9dvh0",
+          "sessionId": "s07-msq0xycr-188bw",
           "sequence": 5,
-          "relativeMs": 984,
+          "relativeMs": 1017,
           "eventType": "session_stopped",
           "safeMetadata": {}
         }
@@ -833,17 +833,17 @@
     {
       "schemaVersion": 1,
       "scenarioId": "RAPID_INPUT_TRANSITIONS",
-      "sourceTreeSha256": "65A9130349E4D2FA5F6086726DFC57BE7686C1E964C4060D01DF3F130B576AF2",
+      "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
       "browserContextId": "desktop-chromium:RAPID_INPUT_TRANSITIONS",
       "pagesShareContext": true,
-      "sessionId": "s07-msn7ugzr-5pezj",
+      "sessionId": "s07-msq0xzvt-20bsr",
       "evidenceId": "hanzi-v2-step07",
       "evidenceKind": "SYNTHETIC_TOOLING_TEST_ONLY",
       "status": "PASS",
       "eventLog": [
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 1,
           "relativeMs": 1,
           "eventType": "session_opened",
@@ -851,17 +851,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 2,
-          "relativeMs": 206,
+          "relativeMs": 246,
           "eventType": "world_ready",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 3,
-          "relativeMs": 206,
+          "relativeMs": 246,
           "eventType": "progress_continuity_verified",
           "safeMetadata": {
             "completed": true
@@ -869,17 +869,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 4,
-          "relativeMs": 250,
+          "relativeMs": 353,
           "eventType": "world_first_action",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 5,
-          "relativeMs": 251,
+          "relativeMs": 353,
           "eventType": "world_destination_opened",
           "safeMetadata": {
             "destinationId": "FOREST"
@@ -887,17 +887,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 6,
-          "relativeMs": 430,
+          "relativeMs": 539,
           "eventType": "forest_entered",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 7,
-          "relativeMs": 442,
+          "relativeMs": 552,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "boot"
@@ -905,9 +905,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 8,
-          "relativeMs": 503,
+          "relativeMs": 619,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "camp_intro"
@@ -915,9 +915,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 9,
-          "relativeMs": 534,
+          "relativeMs": 650,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "camp_objective"
@@ -925,9 +925,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 10,
-          "relativeMs": 569,
+          "relativeMs": 686,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "travel_to_battle_1"
@@ -935,9 +935,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 11,
-          "relativeMs": 601,
+          "relativeMs": 718,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "battle_1_intro"
@@ -945,9 +945,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 12,
-          "relativeMs": 636,
+          "relativeMs": 753,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "battle_1_placing"
@@ -955,9 +955,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 13,
-          "relativeMs": 802,
+          "relativeMs": 902,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "battle_1_forming"
@@ -965,9 +965,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 14,
-          "relativeMs": 1483,
+          "relativeMs": 1588,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "battle_1_casting"
@@ -975,9 +975,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 15,
-          "relativeMs": 2537,
+          "relativeMs": 2651,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "battle_1_cleared"
@@ -985,9 +985,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 16,
-          "relativeMs": 2683,
+          "relativeMs": 2785,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "breather_1"
@@ -995,9 +995,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 17,
-          "relativeMs": 2717,
+          "relativeMs": 2817,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "travel_to_battle_2"
@@ -1005,9 +1005,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 18,
-          "relativeMs": 2750,
+          "relativeMs": 2850,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "battle_2_intro"
@@ -1015,9 +1015,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 19,
-          "relativeMs": 2785,
+          "relativeMs": 2884,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "battle_2_placing"
@@ -1025,9 +1025,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 20,
-          "relativeMs": 2918,
+          "relativeMs": 3022,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "battle_2_forming"
@@ -1035,9 +1035,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 21,
-          "relativeMs": 3599,
+          "relativeMs": 3703,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "battle_2_casting"
@@ -1045,9 +1045,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 22,
-          "relativeMs": 4653,
+          "relativeMs": 4755,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "battle_2_cleared"
@@ -1055,9 +1055,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 23,
-          "relativeMs": 4816,
+          "relativeMs": 4919,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "ability_choice"
@@ -1065,9 +1065,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 24,
-          "relativeMs": 4888,
+          "relativeMs": 4995,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "travel_to_boss"
@@ -1075,9 +1075,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 25,
-          "relativeMs": 4888,
+          "relativeMs": 4995,
           "eventType": "ability_selected",
           "safeMetadata": {
             "abilityId": "ink-echo"
@@ -1085,9 +1085,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 26,
-          "relativeMs": 4935,
+          "relativeMs": 5035,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "boss_intro"
@@ -1095,9 +1095,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 27,
-          "relativeMs": 4966,
+          "relativeMs": 5068,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "boss_phase_1_placing"
@@ -1105,9 +1105,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 28,
-          "relativeMs": 5034,
+          "relativeMs": 5135,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "boss_interference"
@@ -1115,9 +1115,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 29,
-          "relativeMs": 6384,
+          "relativeMs": 6493,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "boss_phase_1_placing"
@@ -1125,9 +1125,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 30,
-          "relativeMs": 6451,
+          "relativeMs": 6603,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "boss_phase_1_forming"
@@ -1135,9 +1135,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 31,
-          "relativeMs": 7706,
+          "relativeMs": 7855,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "boss_phase_1_cleared"
@@ -1145,9 +1145,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 32,
-          "relativeMs": 7817,
+          "relativeMs": 7969,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "boss_phase_2_placing"
@@ -1155,9 +1155,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 33,
-          "relativeMs": 7884,
+          "relativeMs": 8035,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "boss_interference"
@@ -1165,9 +1165,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 34,
-          "relativeMs": 8998,
+          "relativeMs": 9150,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "boss_phase_2_placing"
@@ -1175,9 +1175,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 35,
-          "relativeMs": 9301,
+          "relativeMs": 9451,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "boss_phase_2_forming"
@@ -1185,9 +1185,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 36,
-          "relativeMs": 10553,
+          "relativeMs": 10704,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "boss_cleared"
@@ -1195,9 +1195,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 37,
-          "relativeMs": 10684,
+          "relativeMs": 10817,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "return_to_camp"
@@ -1205,9 +1205,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 38,
-          "relativeMs": 11936,
+          "relativeMs": 12068,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "camp_repair"
@@ -1215,9 +1215,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 39,
-          "relativeMs": 12050,
+          "relativeMs": 12185,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "spellbook_review"
@@ -1225,9 +1225,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 40,
-          "relativeMs": 12125,
+          "relativeMs": 12234,
           "eventType": "golden_phase_entered",
           "safeMetadata": {
             "phase": "run_complete"
@@ -1235,9 +1235,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 41,
-          "relativeMs": 12125,
+          "relativeMs": 12235,
           "eventType": "golden_run_completed",
           "safeMetadata": {
             "completed": true
@@ -1245,17 +1245,17 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 42,
-          "relativeMs": 12275,
+          "relativeMs": 12407,
           "eventType": "world_ready",
           "safeMetadata": {}
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 43,
-          "relativeMs": 12275,
+          "relativeMs": 12407,
           "eventType": "returned_to_world",
           "safeMetadata": {
             "worldReturned": true
@@ -1263,9 +1263,9 @@
         },
         {
           "schemaVersion": 1,
-          "sessionId": "s07-msn7ugzr-5pezj",
+          "sessionId": "s07-msq0xzvt-20bsr",
           "sequence": 44,
-          "relativeMs": 12418,
+          "relativeMs": 12467,
           "eventType": "session_stopped",
           "safeMetadata": {}
         }

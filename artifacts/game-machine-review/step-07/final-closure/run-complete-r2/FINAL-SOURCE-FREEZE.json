@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "recordType": "STEP07_RUN_COMPLETE_R2_FINAL_SOURCE_FREEZE",
+  "authorizationId": "HUMAN_AUTHORIZED_STEP07_RUN_COMPLETE_CRITICAL_CONTROL_GEOMETRY_FINAL_CLOSEOUT_02",
+  "status": "FINAL_SOURCE_FROZEN",
+  "frozenAtUtc": "2026-08-11T23:57:04.399Z",
+  "repository": "Archmays/Game-Codex",
+  "branch": "main",
+  "headAtFreeze": "eac16ca050511dae098b12a8ac832425c4297b3a",
+  "originMainAtFreeze": "eac16ca050511dae098b12a8ac832425c4297b3a",
+  "sourceTreeSha256": "4498BBA07CEC7C46406936D4447E555E3C67C2C0D4931825EB16A75DC16FD703",
+  "repairLoopsMaximum": 3,
+  "repairLoopsConsumed": 3,
+  "baselinePromotionFile": "artifacts/game-machine-review/step-07/hard-gates/BASELINE-PROMOTION.json",
+  "criticalControlEvidenceFile": "artifacts/game-machine-review/step-07/RUN-COMPLETE-CONTROL-EVIDENCE.json",
+  "semanticReconciliationFile": "artifacts/game-machine-review/step-07/final-closure/run-complete-r2/RUN-COMPLETE-R2-SEMANTIC-RECONCILIATION.json",
+  "sourceMutationPaths": [
+    ".agents/skills/machine-first-game-review/references/lifecycle-and-evidence.md",
+    "games/hanzi-radical-battle/v2/golden-slice/styles.css",
+    "games/hanzi-radical-battle/v2/golden-slice/ui/GoldenSliceOverlay.ts",
+    "package.json",
+    "tests/e2e/game-machine-visual-regression.spec.ts",
+    "tests/e2e/hanzi-v2-run-complete-controls.spec.ts",
+    "tests/game-machine-critical-control-evidence.test.ts",
+    "tests/game-machine-exceptional-repair.test.ts",
+    "tools/game-machine-review/critical-control-evidence.ts",
+    "tools/game-machine-review/evaluate-hard-gates.ts",
+    "tools/game-machine-review/finalize-machine-evidence.ts",
+    "tools/game-machine-review/render-report.ts",
+    "tools/game-machine-review/run-machine-review.ts"
+  ],
+  "frozenBoundaries": {
+    "deepRouteContract": "UNCHANGED_40_ROWS_22_CONTEXTS",
+    "childFirstUse": "PROTECTED",
+    "ordinaryPlayWithoutReturnHref": "PROTECTED",
+    "globalGoldenPrimary": "UNCHANGED",
+    "realSecondUsePerformed": false,
+    "step08Authorized": false
+  }
+}

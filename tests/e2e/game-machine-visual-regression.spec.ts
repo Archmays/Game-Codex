@@ -204,6 +204,15 @@ test.describe("STEP 07 established visual and ARIA baselines", () => {
     await expect(slice(page).locator("h1")).toHaveCount(1);
     await capturePage(page, "forest-spellbook-step07.png");
     await captureAria(slice(page), "forest-spellbook-step07.aria.yml");
+
+    await page.locator("[data-finish-run]").click();
+    await waitForPhase(page, "run_complete");
+    const runComplete = page.getByTestId("run-complete");
+    await expect(runComplete.getByRole("heading", { level: 2, name: "四道字光留在了营地", exact: true })).toBeVisible();
+    await expect(runComplete.locator("[data-replay-ability]")).toHaveCount(2);
+    await expect(runComplete.getByRole("link", { name: "回我的游戏世界", exact: true })).toBeVisible();
+    await capturePage(page, "forest-run-complete-step07.png");
+    await captureAria(runComplete, "forest-run-complete-step07.aria.yml");
   });
 
   test("STEP 07 adult observer preparation and bottom structure", async ({ page }) => {

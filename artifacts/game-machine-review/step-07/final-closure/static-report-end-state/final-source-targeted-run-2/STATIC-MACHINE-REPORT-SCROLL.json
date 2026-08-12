@@ -1,0 +1,617 @@
+{
+  "schemaVersion": 1,
+  "step": "07",
+  "evidenceKind": "STATIC_MACHINE_REPORT_ADULT_TOOL_SCROLL",
+  "generatedAtUtc": "2026-08-12T11:29:17.417Z",
+  "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
+  "reportHtml": {
+    "path": "artifacts/game-machine-review/step-07/MACHINE-REVIEW-REPORT.html",
+    "bytes": 17536,
+    "sha256": "50D53499A6B59771349DF2B66A21F4567F26981184059FBA0D58ACB6CA1E942C"
+  },
+  "isolatedBrowserContexts": true,
+  "networkPolicy": {
+    "sameOrigin": "SAME_ORIGIN_ALLOWED",
+    "external": "EXTERNAL_NETWORK_FORBIDDEN"
+  },
+  "coverage": {
+    "expectedRowKeys": [
+      "desktop-chromium|320x568",
+      "desktop-chromium|390x844",
+      "desktop-chromium|768x1024",
+      "desktop-chromium|1440x900",
+      "mobile-touch-chromium|390x844"
+    ],
+    "actualRowKeys": [
+      "desktop-chromium|320x568",
+      "desktop-chromium|390x844",
+      "desktop-chromium|768x1024",
+      "desktop-chromium|1440x900",
+      "mobile-touch-chromium|390x844"
+    ],
+    "missingRowKeys": [],
+    "unexpectedRowKeys": []
+  },
+  "rows": [
+    {
+      "key": "desktop-chromium|320x568",
+      "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
+      "reportHtmlSha256": "50D53499A6B59771349DF2B66A21F4567F26981184059FBA0D58ACB6CA1E942C",
+      "contextId": "static-report-desktop-chromium-320x568",
+      "isolatedBrowserContext": true,
+      "project": "desktop-chromium",
+      "viewport": "320x568",
+      "width": 320,
+      "height": 568,
+      "hasTouch": false,
+      "actualUrl": "http://127.0.0.1:5175/artifacts/game-machine-review/step-07/MACHINE-REVIEW-REPORT.html?evidenceSha=50D53499A6B59771349DF2B66A21F4567F26981184059FBA0D58ACB6CA1E942C",
+      "pageMode": "adult-tool-page",
+      "htmlHasAdultToolClass": true,
+      "bodyHasAdultToolClass": true,
+      "scrollOwner": "document.documentElement",
+      "scrollHeight": 43803,
+      "clientHeight": 568,
+      "maxScrollTop": 43235,
+      "horizontalOverflowPx": 0,
+      "horizontalOverflowElements": [],
+      "nestedVerticalScrollOwners": [],
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "method": "Playwright mouse.wheel",
+          "before": 0,
+          "after": 600,
+          "maxScrollTop": 43235,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "method": "Playwright keyboard PageDown",
+          "before": 0,
+          "after": 292,
+          "maxScrollTop": 43235,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "method": "Playwright keyboard End",
+          "before": 0,
+          "after": 43235,
+          "maxScrollTop": 43235,
+          "passed": true
+        }
+      ],
+      "finalAction": {
+        "selector": "[data-static-final-action]",
+        "keyboardFocusMethod": "Tab",
+        "visible": true,
+        "enabled": true,
+        "focused": true,
+        "focusVisible": true,
+        "unobscured": true,
+        "clicked": true,
+        "beforeClick": 43235,
+        "afterClick": 0
+      },
+      "network": {
+        "sameOrigin": "SAME_ORIGIN_ALLOWED",
+        "external": "EXTERNAL_NETWORK_FORBIDDEN",
+        "sameOriginRequests": [
+          "http://127.0.0.1:5175/@vite/client",
+          "http://127.0.0.1:5175/artifacts/game-machine-review/step-07/MACHINE-REVIEW-REPORT.html?evidenceSha=50D53499A6B59771349DF2B66A21F4567F26981184059FBA0D58ACB6CA1E942C",
+          "http://127.0.0.1:5175/node_modules/.pnpm/vite@6.4.3_@types+node@22.19.19_tsx@4.23.1/node_modules/vite/dist/client/env.mjs",
+          "ws://127.0.0.1:5175/?token=uBfVI4MMB__0"
+        ],
+        "externalRequests": []
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "screenshots": {
+        "fullPage": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-320x568-full-page.png",
+          "bytes": 1069126,
+          "sha256": "BAC0731B07C67761A10D1D852DC1ED1AE03A9081739E4991C8D27D96C21B8EE1"
+        },
+        "top": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-320x568-top.png",
+          "bytes": 21413,
+          "sha256": "F4E2D003AACF6A67A78F74C2DBFA8FB5C653DD76B1519F2D4D42033F33C075E6"
+        },
+        "bottom": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-320x568-bottom.png",
+          "bytes": 19235,
+          "sha256": "CBB20538B49399AA1997017EDA870C75B2D4A76194465A14F5AB196A7ED6E6CA"
+        },
+        "finalAction": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-320x568-final-action.png",
+          "bytes": 19579,
+          "sha256": "27365926DC6F89BF928889D2C6B802B86A1736DA59FCEA8BD25AF319840126E6"
+        }
+      },
+      "trace": {
+        "path": "artifacts/game-machine-review/step-07/traces/static-machine-report/desktop-chromium-320x568.zip",
+        "bytes": 1509554,
+        "sha256": "4B36727FC67F20D3ECB013D5A0ABA1FCCD3851C916E755FF31B72FBA30CA232E"
+      },
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-320x568-bottom.png",
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-320x568-final-action.png",
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-320x568-full-page.png",
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-320x568-top.png",
+        "artifacts/game-machine-review/step-07/traces/static-machine-report/desktop-chromium-320x568.zip"
+      ],
+      "status": "PASS"
+    },
+    {
+      "key": "desktop-chromium|390x844",
+      "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
+      "reportHtmlSha256": "50D53499A6B59771349DF2B66A21F4567F26981184059FBA0D58ACB6CA1E942C",
+      "contextId": "static-report-desktop-chromium-390x844",
+      "isolatedBrowserContext": true,
+      "project": "desktop-chromium",
+      "viewport": "390x844",
+      "width": 390,
+      "height": 844,
+      "hasTouch": false,
+      "actualUrl": "http://127.0.0.1:5175/artifacts/game-machine-review/step-07/MACHINE-REVIEW-REPORT.html?evidenceSha=50D53499A6B59771349DF2B66A21F4567F26981184059FBA0D58ACB6CA1E942C",
+      "pageMode": "adult-tool-page",
+      "htmlHasAdultToolClass": true,
+      "bodyHasAdultToolClass": true,
+      "scrollOwner": "document.documentElement",
+      "scrollHeight": 34771,
+      "clientHeight": 844,
+      "maxScrollTop": 33927,
+      "horizontalOverflowPx": 0,
+      "horizontalOverflowElements": [],
+      "nestedVerticalScrollOwners": [],
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "method": "Playwright mouse.wheel",
+          "before": 0,
+          "after": 844,
+          "maxScrollTop": 33927,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "method": "Playwright keyboard PageDown",
+          "before": 0,
+          "after": 649,
+          "maxScrollTop": 33927,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "method": "Playwright keyboard End",
+          "before": 0,
+          "after": 33927,
+          "maxScrollTop": 33927,
+          "passed": true
+        }
+      ],
+      "finalAction": {
+        "selector": "[data-static-final-action]",
+        "keyboardFocusMethod": "Tab",
+        "visible": true,
+        "enabled": true,
+        "focused": true,
+        "focusVisible": true,
+        "unobscured": true,
+        "clicked": true,
+        "beforeClick": 33927,
+        "afterClick": 0
+      },
+      "network": {
+        "sameOrigin": "SAME_ORIGIN_ALLOWED",
+        "external": "EXTERNAL_NETWORK_FORBIDDEN",
+        "sameOriginRequests": [
+          "http://127.0.0.1:5175/@vite/client",
+          "http://127.0.0.1:5175/artifacts/game-machine-review/step-07/MACHINE-REVIEW-REPORT.html?evidenceSha=50D53499A6B59771349DF2B66A21F4567F26981184059FBA0D58ACB6CA1E942C",
+          "http://127.0.0.1:5175/node_modules/.pnpm/vite@6.4.3_@types+node@22.19.19_tsx@4.23.1/node_modules/vite/dist/client/env.mjs",
+          "ws://127.0.0.1:5175/?token=uBfVI4MMB__0"
+        ],
+        "externalRequests": []
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "screenshots": {
+        "fullPage": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-390x844-full-page.png",
+          "bytes": 1048375,
+          "sha256": "BBE8FA38E22161F04D1DA6CA75746CB29F98D021A35B7E0ABF773FC792863CC0"
+        },
+        "top": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-390x844-top.png",
+          "bytes": 38049,
+          "sha256": "8567B27B7D7D1A939A45A49F7599BF98112260BA1F9B1E958D2582FC734C3DAA"
+        },
+        "bottom": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-390x844-bottom.png",
+          "bytes": 33113,
+          "sha256": "8CDC496A25199D3292B1A1749FBFCAA2785DA6F1533C5E42DE1FE8B97D0EC2B7"
+        },
+        "finalAction": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-390x844-final-action.png",
+          "bytes": 33495,
+          "sha256": "AFAA4C1CD61BC9015119CE3942C23F616AFFAF859BD1C07EB0694D643102CF17"
+        }
+      },
+      "trace": {
+        "path": "artifacts/game-machine-review/step-07/traces/static-machine-report/desktop-chromium-390x844.zip",
+        "bytes": 2150955,
+        "sha256": "B41460A9ABCBE04DA5A136D85DA8F8DE6CC2C686D9FB418A0BF613A96CE6E9E1"
+      },
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-390x844-bottom.png",
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-390x844-final-action.png",
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-390x844-full-page.png",
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-390x844-top.png",
+        "artifacts/game-machine-review/step-07/traces/static-machine-report/desktop-chromium-390x844.zip"
+      ],
+      "status": "PASS"
+    },
+    {
+      "key": "desktop-chromium|768x1024",
+      "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
+      "reportHtmlSha256": "50D53499A6B59771349DF2B66A21F4567F26981184059FBA0D58ACB6CA1E942C",
+      "contextId": "static-report-desktop-chromium-768x1024",
+      "isolatedBrowserContext": true,
+      "project": "desktop-chromium",
+      "viewport": "768x1024",
+      "width": 768,
+      "height": 1024,
+      "hasTouch": false,
+      "actualUrl": "http://127.0.0.1:5175/artifacts/game-machine-review/step-07/MACHINE-REVIEW-REPORT.html?evidenceSha=50D53499A6B59771349DF2B66A21F4567F26981184059FBA0D58ACB6CA1E942C",
+      "pageMode": "adult-tool-page",
+      "htmlHasAdultToolClass": true,
+      "bodyHasAdultToolClass": true,
+      "scrollOwner": "document.documentElement",
+      "scrollHeight": 15980,
+      "clientHeight": 1024,
+      "maxScrollTop": 14956,
+      "horizontalOverflowPx": 0,
+      "horizontalOverflowElements": [],
+      "nestedVerticalScrollOwners": [],
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "method": "Playwright mouse.wheel",
+          "before": 0,
+          "after": 1024,
+          "maxScrollTop": 14956,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "method": "Playwright keyboard PageDown",
+          "before": 0,
+          "after": 547,
+          "maxScrollTop": 14956,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "method": "Playwright keyboard End",
+          "before": 0,
+          "after": 14956,
+          "maxScrollTop": 14956,
+          "passed": true
+        }
+      ],
+      "finalAction": {
+        "selector": "[data-static-final-action]",
+        "keyboardFocusMethod": "Tab",
+        "visible": true,
+        "enabled": true,
+        "focused": true,
+        "focusVisible": true,
+        "unobscured": true,
+        "clicked": true,
+        "beforeClick": 14956,
+        "afterClick": 0
+      },
+      "network": {
+        "sameOrigin": "SAME_ORIGIN_ALLOWED",
+        "external": "EXTERNAL_NETWORK_FORBIDDEN",
+        "sameOriginRequests": [
+          "http://127.0.0.1:5175/@vite/client",
+          "http://127.0.0.1:5175/artifacts/game-machine-review/step-07/MACHINE-REVIEW-REPORT.html?evidenceSha=50D53499A6B59771349DF2B66A21F4567F26981184059FBA0D58ACB6CA1E942C",
+          "http://127.0.0.1:5175/node_modules/.pnpm/vite@6.4.3_@types+node@22.19.19_tsx@4.23.1/node_modules/vite/dist/client/env.mjs",
+          "ws://127.0.0.1:5175/?token=uBfVI4MMB__0"
+        ],
+        "externalRequests": []
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "screenshots": {
+        "fullPage": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-768x1024-full-page.png",
+          "bytes": 959560,
+          "sha256": "D07310466E459351D7146BCA1FEF598823A698B4B23CB534CC147BB654FAF843"
+        },
+        "top": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-768x1024-top.png",
+          "bytes": 56166,
+          "sha256": "BA0BCA721FE0617B2F1DB5A5BCE40C6A3A2779E7D699CB2BEC01DC865E4130C4"
+        },
+        "bottom": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-768x1024-bottom.png",
+          "bytes": 69773,
+          "sha256": "3DDE16AB2CC7F7882062EF915305D4217977B35033C1FE04D08E81DDF5C14E46"
+        },
+        "finalAction": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-768x1024-final-action.png",
+          "bytes": 70212,
+          "sha256": "DA84C6DC3673704CAD1C815C2A9C90862019677F3A6DF03650DC94BCF6C602E2"
+        }
+      },
+      "trace": {
+        "path": "artifacts/game-machine-review/step-07/traces/static-machine-report/desktop-chromium-768x1024.zip",
+        "bytes": 3154774,
+        "sha256": "69F9B858BB69B3409265071C3831B947F801CD0849AC9D7182545ED8AE93A7D7"
+      },
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-768x1024-bottom.png",
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-768x1024-final-action.png",
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-768x1024-full-page.png",
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-768x1024-top.png",
+        "artifacts/game-machine-review/step-07/traces/static-machine-report/desktop-chromium-768x1024.zip"
+      ],
+      "status": "PASS"
+    },
+    {
+      "key": "desktop-chromium|1440x900",
+      "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
+      "reportHtmlSha256": "50D53499A6B59771349DF2B66A21F4567F26981184059FBA0D58ACB6CA1E942C",
+      "contextId": "static-report-desktop-chromium-1440x900",
+      "isolatedBrowserContext": true,
+      "project": "desktop-chromium",
+      "viewport": "1440x900",
+      "width": 1440,
+      "height": 900,
+      "hasTouch": false,
+      "actualUrl": "http://127.0.0.1:5175/artifacts/game-machine-review/step-07/MACHINE-REVIEW-REPORT.html?evidenceSha=50D53499A6B59771349DF2B66A21F4567F26981184059FBA0D58ACB6CA1E942C",
+      "pageMode": "adult-tool-page",
+      "htmlHasAdultToolClass": true,
+      "bodyHasAdultToolClass": true,
+      "scrollOwner": "document.documentElement",
+      "scrollHeight": 10712,
+      "clientHeight": 900,
+      "maxScrollTop": 9812,
+      "horizontalOverflowPx": 0,
+      "horizontalOverflowElements": [],
+      "nestedVerticalScrollOwners": [],
+      "inputs": [
+        {
+          "input": "mouse-wheel",
+          "method": "Playwright mouse.wheel",
+          "before": 0,
+          "after": 900,
+          "maxScrollTop": 9812,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "method": "Playwright keyboard PageDown",
+          "before": 0,
+          "after": 681,
+          "maxScrollTop": 9812,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "method": "Playwright keyboard End",
+          "before": 0,
+          "after": 9812,
+          "maxScrollTop": 9812,
+          "passed": true
+        }
+      ],
+      "finalAction": {
+        "selector": "[data-static-final-action]",
+        "keyboardFocusMethod": "Tab",
+        "visible": true,
+        "enabled": true,
+        "focused": true,
+        "focusVisible": true,
+        "unobscured": true,
+        "clicked": true,
+        "beforeClick": 9812,
+        "afterClick": 0
+      },
+      "network": {
+        "sameOrigin": "SAME_ORIGIN_ALLOWED",
+        "external": "EXTERNAL_NETWORK_FORBIDDEN",
+        "sameOriginRequests": [
+          "http://127.0.0.1:5175/@vite/client",
+          "http://127.0.0.1:5175/artifacts/game-machine-review/step-07/MACHINE-REVIEW-REPORT.html?evidenceSha=50D53499A6B59771349DF2B66A21F4567F26981184059FBA0D58ACB6CA1E942C",
+          "http://127.0.0.1:5175/node_modules/.pnpm/vite@6.4.3_@types+node@22.19.19_tsx@4.23.1/node_modules/vite/dist/client/env.mjs",
+          "ws://127.0.0.1:5175/?token=uBfVI4MMB__0"
+        ],
+        "externalRequests": []
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "screenshots": {
+        "fullPage": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-1440x900-full-page.png",
+          "bytes": 893500,
+          "sha256": "BFEF5F2BF19D66A5696CD11CFE6845A24CAEF877D1F4706E0E0595624F72F877"
+        },
+        "top": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-1440x900-top.png",
+          "bytes": 54382,
+          "sha256": "EBC749C6AED5C9494E164E4C0E3E4C94B6307092831AE113A5D1D9DE222D9C0B"
+        },
+        "bottom": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-1440x900-bottom.png",
+          "bytes": 68694,
+          "sha256": "2932BE4F7A7642D950C7BC2538210C7514CED17CBB0ED11711DEB9226C928C87"
+        },
+        "finalAction": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-1440x900-final-action.png",
+          "bytes": 69129,
+          "sha256": "E58FE146C9663F27E24AC09D3764173E6011B31B81773B32D5A8453D029881DD"
+        }
+      },
+      "trace": {
+        "path": "artifacts/game-machine-review/step-07/traces/static-machine-report/desktop-chromium-1440x900.zip",
+        "bytes": 1473758,
+        "sha256": "2BB2C227207EC7B1901A7C6982C63B11E20619F2CB492BAA235A7D39B19FC7B4"
+      },
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-1440x900-bottom.png",
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-1440x900-final-action.png",
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-1440x900-full-page.png",
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-1440x900-top.png",
+        "artifacts/game-machine-review/step-07/traces/static-machine-report/desktop-chromium-1440x900.zip"
+      ],
+      "status": "PASS"
+    },
+    {
+      "key": "mobile-touch-chromium|390x844",
+      "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
+      "reportHtmlSha256": "50D53499A6B59771349DF2B66A21F4567F26981184059FBA0D58ACB6CA1E942C",
+      "contextId": "static-report-mobile-touch-chromium-390x844",
+      "isolatedBrowserContext": true,
+      "project": "mobile-touch-chromium",
+      "viewport": "390x844",
+      "width": 390,
+      "height": 844,
+      "hasTouch": true,
+      "actualUrl": "http://127.0.0.1:5175/artifacts/game-machine-review/step-07/MACHINE-REVIEW-REPORT.html?evidenceSha=50D53499A6B59771349DF2B66A21F4567F26981184059FBA0D58ACB6CA1E942C",
+      "pageMode": "adult-tool-page",
+      "htmlHasAdultToolClass": true,
+      "bodyHasAdultToolClass": true,
+      "scrollOwner": "document.documentElement",
+      "scrollHeight": 34771,
+      "clientHeight": 844,
+      "maxScrollTop": 33927,
+      "horizontalOverflowPx": 0,
+      "horizontalOverflowElements": [],
+      "nestedVerticalScrollOwners": [],
+      "inputs": [
+        {
+          "input": "touch-swipe",
+          "method": "Chromium CDP Input.dispatchTouchEvent",
+          "before": 0,
+          "after": 457,
+          "maxScrollTop": 33927,
+          "passed": true
+        },
+        {
+          "input": "PageDown",
+          "method": "Playwright keyboard PageDown",
+          "before": 0,
+          "after": 452,
+          "maxScrollTop": 33927,
+          "passed": true
+        },
+        {
+          "input": "End",
+          "method": "Playwright keyboard End",
+          "before": 0,
+          "after": 33927,
+          "maxScrollTop": 33927,
+          "passed": true
+        }
+      ],
+      "finalAction": {
+        "selector": "[data-static-final-action]",
+        "keyboardFocusMethod": "Tab",
+        "visible": true,
+        "enabled": true,
+        "focused": true,
+        "focusVisible": true,
+        "unobscured": true,
+        "clicked": true,
+        "beforeClick": 33927,
+        "afterClick": 0
+      },
+      "network": {
+        "sameOrigin": "SAME_ORIGIN_ALLOWED",
+        "external": "EXTERNAL_NETWORK_FORBIDDEN",
+        "sameOriginRequests": [
+          "http://127.0.0.1:5175/@vite/client",
+          "http://127.0.0.1:5175/artifacts/game-machine-review/step-07/MACHINE-REVIEW-REPORT.html?evidenceSha=50D53499A6B59771349DF2B66A21F4567F26981184059FBA0D58ACB6CA1E942C",
+          "http://127.0.0.1:5175/node_modules/.pnpm/vite@6.4.3_@types+node@22.19.19_tsx@4.23.1/node_modules/vite/dist/client/env.mjs",
+          "ws://127.0.0.1:5175/?token=uBfVI4MMB__0"
+        ],
+        "externalRequests": []
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "screenshots": {
+        "fullPage": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/mobile-touch-chromium-390x844-full-page.png",
+          "bytes": 1048375,
+          "sha256": "BBE8FA38E22161F04D1DA6CA75746CB29F98D021A35B7E0ABF773FC792863CC0"
+        },
+        "top": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/mobile-touch-chromium-390x844-top.png",
+          "bytes": 38049,
+          "sha256": "8567B27B7D7D1A939A45A49F7599BF98112260BA1F9B1E958D2582FC734C3DAA"
+        },
+        "bottom": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/mobile-touch-chromium-390x844-bottom.png",
+          "bytes": 33113,
+          "sha256": "8CDC496A25199D3292B1A1749FBFCAA2785DA6F1533C5E42DE1FE8B97D0EC2B7"
+        },
+        "finalAction": {
+          "path": "artifacts/game-machine-review/step-07/screenshots/static-machine-report/mobile-touch-chromium-390x844-final-action.png",
+          "bytes": 33495,
+          "sha256": "AFAA4C1CD61BC9015119CE3942C23F616AFFAF859BD1C07EB0694D643102CF17"
+        }
+      },
+      "trace": {
+        "path": "artifacts/game-machine-review/step-07/traces/static-machine-report/mobile-touch-chromium-390x844.zip",
+        "bytes": 2605534,
+        "sha256": "A72C194A1B52BC6ECC3474F4FCB8E9B29515EC544E7988600F53C8F96683C7AD"
+      },
+      "evidenceFiles": [
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/mobile-touch-chromium-390x844-bottom.png",
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/mobile-touch-chromium-390x844-final-action.png",
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/mobile-touch-chromium-390x844-full-page.png",
+        "artifacts/game-machine-review/step-07/screenshots/static-machine-report/mobile-touch-chromium-390x844-top.png",
+        "artifacts/game-machine-review/step-07/traces/static-machine-report/mobile-touch-chromium-390x844.zip"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "evidenceFiles": [
+    "artifacts/game-machine-review/step-07/MACHINE-REVIEW-REPORT.html",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-1440x900-bottom.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-1440x900-final-action.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-1440x900-full-page.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-1440x900-top.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-320x568-bottom.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-320x568-final-action.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-320x568-full-page.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-320x568-top.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-390x844-bottom.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-390x844-final-action.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-390x844-full-page.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-390x844-top.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-768x1024-bottom.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-768x1024-final-action.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-768x1024-full-page.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/desktop-chromium-768x1024-top.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/mobile-touch-chromium-390x844-bottom.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/mobile-touch-chromium-390x844-final-action.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/mobile-touch-chromium-390x844-full-page.png",
+    "artifacts/game-machine-review/step-07/screenshots/static-machine-report/mobile-touch-chromium-390x844-top.png",
+    "artifacts/game-machine-review/step-07/traces/static-machine-report/desktop-chromium-1440x900.zip",
+    "artifacts/game-machine-review/step-07/traces/static-machine-report/desktop-chromium-320x568.zip",
+    "artifacts/game-machine-review/step-07/traces/static-machine-report/desktop-chromium-390x844.zip",
+    "artifacts/game-machine-review/step-07/traces/static-machine-report/desktop-chromium-768x1024.zip",
+    "artifacts/game-machine-review/step-07/traces/static-machine-report/mobile-touch-chromium-390x844.zip"
+  ],
+  "status": "PASS",
+  "machineOnlyConclusion": "This static generated report uses isolated browser contexts and proves only its technical adult-tool scroll, reflow, focus, input, and network contract. It is not real-child evidence."
+}
