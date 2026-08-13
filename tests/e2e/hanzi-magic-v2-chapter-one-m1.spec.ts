@@ -23,7 +23,7 @@ function monitor(page: Page) {
 }
 
 async function gotoFresh(page: Page, seed: string) {
-  await page.goto(`/?play=hanzi-v2-chapter-one&from=hub&fresh=1&seed=${encodeURIComponent(seed)}`);
+  await page.goto(`/?play=hanzi-v2-chapter-one&from=hub&mode=m1-proxy&fresh=1&seed=${encodeURIComponent(seed)}`);
   await expect(page.getByTestId("hanzi-magic-chapter-one")).toHaveAttribute("data-phase", "camp");
 }
 

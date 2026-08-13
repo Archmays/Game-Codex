@@ -136,6 +136,17 @@ window.addEventListener("load", async () => {
         mountChapterOneContentAudit(root, Number(search.get("sheet") ?? "0"));
         return;
       }
+      if (goldenSliceMode !== "m1-proxy") {
+        const { mountHanziMagicChapterOneM3 } = await import("../games/hanzi-radical-battle/v2/chapter-one/m3-app");
+        const requestedHero = search.get("hero");
+        mountHanziMagicChapterOneM3(root, {
+          seed: search.get("seed") ?? undefined,
+          heroId: requestedHero === "light-speaker" || requestedHero === "forest-speaker" || requestedHero === "ink-companion" ? requestedHero : undefined,
+          fresh: search.get("fresh") === "1",
+          returnHref: fromMode === "hub" ? "?hub=classic&from=world" : "?world=my-game-world",
+        });
+        return;
+      }
       const { mountHanziMagicChapterOne } = await import("../games/hanzi-radical-battle/v2/chapter-one/app");
       mountHanziMagicChapterOne(root, {
         seed: search.get("seed") ?? undefined,

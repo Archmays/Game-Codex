@@ -5,7 +5,7 @@ const baseURL = `http://127.0.0.1:${port}`;
 
 export default defineConfig({
   testDir: "./tests/e2e",
-  testMatch: /hanzi-magic-v2-chapter-one-(m1|m2-content)\.spec\.ts/,
+  testMatch: /hanzi-magic-v2-chapter-one-(m1|m2-content|m3-builds)\.spec\.ts/,
   fullyParallel: false,
   forbidOnly: Boolean(process.env.CI),
   retries: 0,

@@ -10,9 +10,9 @@ V1 frozen baseline: tag `hanzi-magic-v2-v1.0.0` → commit `43e7841d2190922b6048
 
 Authorized scope: M0–M5 continuous implementation; 36 characters; three heroes; three regions plus the final core; nine monster behaviors; 18 selectable and three innate abilities; four bosses; eight camp repairs; 36 spellbook entries; V2 local save migration; formal Theme C art/audio; hub, launcher, package, tags, and update of the existing GitHub Pages deployment.
 
-Completed gates: M0 authorization/freeze, M1 replay loop and M2 formal 36-character content pipeline are `PASS_STAGE`. M2 evidence adds a complete 24-entry source ledger, 108/108 unique-safe hand variants, 5,000 seeds with 180,000 composition-to-meaning casts, and six reviewed structure sheets covering all 36 characters.
+Completed gates: M0 authorization/freeze, M1 replay loop, M2 formal 36-character content pipeline, and M3 three-hero build system are `PASS_STAGE`. M3 evidence adds exactly 3 heroes, 3 innate and 18 selectable abilities, 30,000 deterministic seeds with 360,000 encounters, and 9 complete browser paths across mouse, keyboard, and touch.
 
-Active gate: M3 — three heroes, 18 selectable abilities plus three innate abilities, and explicit gameplay effects that never change a Hanzi answer. A milestone may advance only after its source-bound `PASS_STAGE` result. Final acceptance still requires at least 30,000 deterministic simulation seeds, 18 browser machine playthroughs, all content/save/accessibility/geometry/resource/route gates, clean source identity, and verified Pages.
+Active gate: M4 — exactly eight persistent camp repairs, V1-to-V2 local save migration, and a complete accessible 36-character spellbook. A milestone may advance only after its source-bound `PASS_STAGE` result. Final acceptance still requires at least 18 browser machine playthroughs, all content/save/accessibility/geometry/resource/route gates, clean source identity, and verified Pages.
 
 Real child validation: `NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE`. User V1 play acceptance is recorded separately and must not be represented as child evidence.
 

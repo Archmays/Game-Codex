@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M3",
+  "authorizationId": "HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813",
+  "sourceCommit": "WORKTREE",
+  "result": "PASS_STAGE",
+  "checks": [
+    { "id": "hero-identity", "status": "PASS", "evidence": "Three heroes have stable save IDs, complete selection cards, distinct world marks, one innate ability each, and explicit child and Hanzi-learning value without changing an answer." },
+    { "id": "selectable-ability-contract", "status": "PASS", "evidence": "Exactly 18 selectable abilities have unique effect fields, icons, triggers, short readable copy, simulation state, and browser-visible evidence; none is a renamed color or particle-only duplicate." },
+    { "id": "bounded-build-ui", "status": "PASS", "evidence": "Each run performs exactly three three-way choices and exposes at most four child-facing badges: one innate plus three selected abilities. No rarity, price, probability, best recommendation, score, ranking, or streak appears." },
+    { "id": "deterministic-simulation", "status": "PASS", "evidence": "10,000 seeds per hero completed with zero softlocks: 30,000 total seeds, 360,000 encounters, all 36 characters, all 18 selectable abilities, and all three innate trigger paths covered." },
+    { "id": "answer-integrity", "status": "PASS", "evidence": "Ability effects are limited to placement support, readable recovery, preview, replay, and world feedback; no effect changes a supported component set, makes an incorrect Hanzi correct, or automatically completes a whole character." },
+    { "id": "browser-input-matrix", "status": "PASS", "evidence": "Nine complete browser runs cover each hero with mouse, keyboard, and touch. Every path reached the run summary with three selections, three selectable triggers, an innate trigger, four badges, and no page error or external request." },
+    { "id": "geometry-and-accessibility", "status": "PASS", "evidence": "Desktop and mobile paths verified 44px targets, keyboard arrow choice navigation, no horizontal overflow, and readable summaries. A mobile fourth-badge clipping defect was repaired and all three affected touch paths were rerun successfully." },
+    { "id": "visual-review", "status": "PASS", "evidence": "Fifteen SHA-256-bound screenshots were inspected across hero cards, ability choices, and input summaries; final layouts are coherent and readable. Programmatic hero placeholders are explicitly superseded by the M5 formal-art gate." },
+    { "id": "targeted-tests-and-build", "status": "PASS", "evidence": "Six targeted M3 unit tests, the final nine-path browser matrix, TypeScript noEmit, and the Vite production build passed after the final source change." }
+  ],
+  "metrics": {
+    "simulationSeeds": 30000,
+    "encounters": 360000,
+    "heroes": 3,
+    "innateAbilities": 3,
+    "selectableAbilities": 18,
+    "browserPlaythroughs": 9,
+    "screenshotsReviewed": 15,
+    "targetedTests": 6,
+    "unresolvedSeverity1To3": 0
+  },
+  "unresolved": [],
+  "generatedAtUtc": "2026-08-13T14:45:19.778Z"
+}

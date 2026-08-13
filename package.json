@@ -90,7 +90,10 @@
     "test:e2e:hanzi-v2:chapter-one:m1": "playwright test tests/e2e/hanzi-magic-v2-chapter-one-m1.spec.ts --config playwright.chapter-one.config.ts",
     "test:hanzi-v2:chapter-one:m2": "vitest run tests/hanzi-v2-chapter-one-m2-content.test.ts",
     "simulate:hanzi-v2:chapter-one:m2": "tsx tools/hanzi-v2-chapter-one/scan-m2-content.ts 5000",
-    "test:e2e:hanzi-v2:chapter-one:m2": "playwright test tests/e2e/hanzi-magic-v2-chapter-one-m2-content.spec.ts --config playwright.chapter-one.config.ts"
+    "test:e2e:hanzi-v2:chapter-one:m2": "playwright test tests/e2e/hanzi-magic-v2-chapter-one-m2-content.spec.ts --config playwright.chapter-one.config.ts",
+    "test:hanzi-v2:chapter-one:m3": "vitest run tests/hanzi-v2-chapter-one-m3-builds.test.ts",
+    "simulate:hanzi-v2:chapter-one:m3": "tsx tools/hanzi-v2-chapter-one/scan-m3-builds.ts 10000",
+    "test:e2e:hanzi-v2:chapter-one:m3": "playwright test tests/e2e/hanzi-magic-v2-chapter-one-m3-builds.spec.ts --config playwright.chapter-one.config.ts"
   },
   "dependencies": {
     "phaser": "^3.90.0"
