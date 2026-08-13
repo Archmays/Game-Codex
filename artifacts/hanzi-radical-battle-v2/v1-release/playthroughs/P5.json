@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "pathId": "P5",
-  "sourceTreeSha256": "90F3F99F26C3724972175CD58E4657BE3A26F5E83434AA62B4753655833AE6E2",
-  "buildId": "v1-source-90F3F99F26C3",
+  "sourceTreeSha256": "A2996B519663C0F7B34BCB0C6D6CA5509CB9E00BB65B1E241BB14F4CFF5DA971",
+  "buildId": "v1-source-A2996B519663",
   "route": "/?play=hanzi-v2-v1&from=hub",
   "viewport": {
     "width": 1280,
@@ -53,11 +53,11 @@
       "completedRuns": 0,
       "completedAdventureCount": 1,
       "invalidPlacements": 0,
-      "lastPlayedAtUtc": "2026-08-13T11:58:40.773Z"
+      "lastPlayedAtUtc": "2026-08-13T12:13:16.155Z"
     },
     "validation": {
       "algorithm": "fnv1a32",
-      "checksum": "fnv1a32:c1b6f9b9"
+      "checksum": "fnv1a32:db286a76"
     }
   },
   "screenshots": [
