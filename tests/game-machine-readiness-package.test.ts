@@ -37,17 +37,19 @@ describe("STEP 07 machine-readiness package script", () => {
     expect(script).not.toContain("Get-FileHash");
     expect(script).not.toContain("Copy-PackageTree -SourceRoot $machineRoot");
 
-    const quotedPath = scriptPath.replaceAll("'", "''");
-    const parse = spawnSync(
-      "powershell.exe",
-      [
-        "-NoLogo",
-        "-NoProfile",
-        "-Command",
-        `[ScriptBlock]::Create([System.IO.File]::ReadAllText('${quotedPath}')) | Out-Null`,
-      ],
-      { encoding: "utf8" },
-    );
-    expect(parse.status, `${parse.stdout}\n${parse.stderr}`).toBe(0);
+    if (process.platform === "win32") {
+      const quotedPath = scriptPath.replaceAll("'", "''");
+      const parse = spawnSync(
+        "powershell.exe",
+        [
+          "-NoLogo",
+          "-NoProfile",
+          "-Command",
+          `[ScriptBlock]::Create([System.IO.File]::ReadAllText('${quotedPath}')) | Out-Null`,
+        ],
+        { encoding: "utf8" },
+      );
+      expect(parse.status, `${parse.stdout}\n${parse.stderr}`).toBe(0);
+    }
   });
 });

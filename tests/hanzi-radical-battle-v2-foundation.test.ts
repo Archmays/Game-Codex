@@ -177,11 +177,17 @@ describe("Hanzi Radical Battle V2 foundation guardrail", () => {
   it("resolves every canonical Skill path in the index", () => {
     const index = read(join(root, ".agents", "skills", "SKILL_INDEX.md"));
     const codexHome = process.env.CODEX_HOME ?? join(homedir(), ".codex");
+    const ciWithoutHostSkills = Boolean(process.env.CI) && !process.env.CODEX_HOME;
     const listedPaths = [...index.matchAll(/`([^`]+\/SKILL\.md)`/g)].map((match) => match[1]);
     const canonicalPaths = [...new Set(listedPaths)];
 
     expect(canonicalPaths.length).toBeGreaterThanOrEqual(13);
     for (const listedPath of canonicalPaths) {
+      if (listedPath.startsWith("$CODEX_HOME/") && ciWithoutHostSkills) {
+        expect(listedPath).toMatch(/^\$CODEX_HOME\/[A-Za-z0-9._/-]+\/SKILL\.md$/);
+        expect(listedPath).not.toContain("..");
+        continue;
+      }
       const resolvedPath = listedPath.startsWith("$CODEX_HOME/")
         ? join(codexHome, listedPath.slice("$CODEX_HOME/".length))
         : resolve(root, listedPath);
