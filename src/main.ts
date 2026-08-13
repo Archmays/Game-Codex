@@ -123,8 +123,22 @@ window.addEventListener("load", async () => {
 
   if (route.kind === "play") {
     const isV1Route = search.get("play") === "hanzi-v2-v1";
-    setBrowserIdentity(isV1Route ? "汉字魔法战 · 墨迹森林 V1" : "汉字魔法战 · 墨迹森林", WORLD_THEME_COLOR);
+    const isChapterOneRoute = search.get("play") === "hanzi-v2-chapter-one";
+    setBrowserIdentity(isV1Route ? "汉字魔法战 · 墨迹森林 V1" : isChapterOneRoute ? "汉字魔法战 · 第一章" : "汉字魔法战 · 墨迹森林", WORLD_THEME_COLOR);
     addPageIdentity("hanzi-v2-golden-slice-page");
+    if (isChapterOneRoute && activeObservation) {
+      showSecondUseDenied(root, activeObservation.kind === "step06" ? "06" : "07", "INCOMPATIBLE_PLAY_MODE");
+      return;
+    }
+    if (isChapterOneRoute) {
+      const { mountHanziMagicChapterOne } = await import("../games/hanzi-radical-battle/v2/chapter-one");
+      mountHanziMagicChapterOne(root, {
+        seed: search.get("seed") ?? undefined,
+        fresh: search.get("fresh") === "1",
+        returnHref: fromMode === "hub" ? "?hub=classic&from=world" : "?world=my-game-world",
+      });
+      return;
+    }
     if (isV1Route && activeObservation) {
       showSecondUseDenied(root, activeObservation.kind === "step06" ? "06" : "07", "INCOMPATIBLE_PLAY_MODE");
       return;

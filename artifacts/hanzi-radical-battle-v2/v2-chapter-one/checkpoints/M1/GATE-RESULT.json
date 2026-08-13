@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M1",
+  "authorizationId": "HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813",
+  "sourceCommit": "WORKTREE",
+  "result": "PASS_STAGE",
+  "checks": [
+    { "id": "deterministic-run-generator", "status": "PASS", "evidence": "Same seed plus action list deep-equals replayed final state; different seeds yield 8 route signatures, 504 ability signatures and 4617 encounter signatures in 5000 seeds." },
+    { "id": "twelve-character-coverage", "status": "PASS", "evidence": "12 inherited characters each cast in all 5000 seeds; all inherited five-card hands remain uniquely solvable." },
+    { "id": "nine-abilities", "status": "PASS", "evidence": "9/9 abilities selectable, triggered and changing explicit rule/visible state without changing the answer." },
+    { "id": "six-behavior-cycles", "status": "PASS", "evidence": "6/6 behaviors define telegraph, effect and guaranteed keyboard/touch recovery; 60000 total behavior cycles completed." },
+    { "id": "no-soft-lock", "status": "PASS", "evidence": "5000/5000 simulation runs completed with zero failure code, illegal hand or unrecoverable state." },
+    { "id": "two-action-entry", "status": "PASS", "evidence": "All simulated runs enter their chosen forest path in exactly two actions; first spell path has no timer." },
+    { "id": "browser-playthroughs", "status": "PASS", "evidence": "6 source-driven browser paths passed: mouse drag, touch 390x844, keyboard, muted/reduced, mid-run reload resume, varied seed plus V1 legacy route." },
+    { "id": "geometry-accessibility", "status": "PASS", "evidence": "Browser checks found no horizontal overflow and no active button/link below 44px; focus visible, touch and keyboard recovery passed." },
+    { "id": "network-privacy", "status": "PASS", "evidence": "All browser paths recorded zero console errors, page errors and external requests; M1 session contains only schemaVersion, seed and replay actions." },
+    { "id": "visual-review", "status": "PASS", "evidence": "Seven hash-bound screenshots reviewed; mobile back affordance repair re-captured; no blocking visual defect." },
+    { "id": "route-regression", "status": "PASS", "evidence": "43 targeted unit/navigation tests passed; V1 old route mounted in browser after Chapter One completion." },
+    { "id": "production-build", "status": "PASS", "evidence": "TypeScript noEmit and Vite production build passed after final M1 UI repair." }
+  ],
+  "metrics": {
+    "simulationSeeds": 5000,
+    "simulationFailures": 0,
+    "playableCharacters": 12,
+    "abilitiesTriggered": 9,
+    "behaviorTypesRecovered": 6,
+    "browserPlaythroughs": 6,
+    "targetedTests": 43,
+    "screenshotsReviewed": 7,
+    "unresolvedSeverity1To3": 0,
+    "replayProxyOnly": true
+  },
+  "unresolved": [],
+  "generatedAtUtc": "2026-08-13T14:03:37.387Z"
+}

@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M1",
+  "result": "PASS",
+  "seeds": 5000,
+  "failures": [],
+  "characterCoverage": {
+    "bao": 5000,
+    "cao": 5000,
+    "feng": 5000,
+    "hua": 5000,
+    "hui": 5000,
+    "kan": 5000,
+    "lin": 5000,
+    "mao": 5000,
+    "ming": 5000,
+    "pao": 5000,
+    "xing": 5000,
+    "yuan": 5000
+  },
+  "abilityCoverage": {
+    "bloom-step": 1652,
+    "clear-stream": 1672,
+    "echo-pouch": 1711,
+    "guardian-light": 1651,
+    "ink-echo": 1666,
+    "moon-rest": 1672,
+    "root-anchor": 1637,
+    "star-path": 1646,
+    "wind-swap": 1693
+  },
+  "behaviorCoverage": {
+    "echo-ripple": 10037,
+    "ink-mist": 9973,
+    "playful-gust": 9990,
+    "shadow-puddle": 9976,
+    "sleepy-spore": 10027,
+    "vine-snare": 9997
+  },
+  "variation": {
+    "routeSignatures": 8,
+    "abilitySignatures": 504,
+    "encounterSignatures": 4617
+  },
+  "missingAbilities": [],
+  "missingBehaviors": [],
+  "generatedAtUtc": "2026-08-13T13:48:53.246Z"
+}

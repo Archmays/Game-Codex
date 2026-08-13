@@ -10,7 +10,9 @@ V1 frozen baseline: tag `hanzi-magic-v2-v1.0.0` → commit `43e7841d2190922b6048
 
 Authorized scope: M0–M5 continuous implementation; 36 characters; three heroes; three regions plus the final core; nine monster behaviors; 18 selectable and three innate abilities; four bosses; eight camp repairs; 36 spellbook entries; V2 local save migration; formal Theme C art/audio; hub, launcher, package, tags, and update of the existing GitHub Pages deployment.
 
-Active gate: M0. A milestone may advance only after its source-bound `PASS_STAGE` result. Final acceptance requires at least 30,000 deterministic simulation seeds, 18 browser machine playthroughs, all content/save/accessibility/geometry/resource/route gates, clean source identity, and verified Pages.
+Completed gates: M0 authorization/freeze and M1 replay loop are `PASS_STAGE`. M1 evidence covers 5,000 deterministic seeds, 12/12 V1 anchor characters, 9/9 initial abilities, 6/6 recoverable behaviors, six browser playthroughs and seven reviewed screenshots.
+
+Active gate: M2 — 36-character content pipeline and 24 new machine-verified entries. A milestone may advance only after its source-bound `PASS_STAGE` result. Final acceptance still requires at least 30,000 deterministic simulation seeds, 18 browser machine playthroughs, all content/save/accessibility/geometry/resource/route gates, clean source identity, and verified Pages.
 
 Real child validation: `NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE`. User V1 play acceptance is recorded separately and must not be represented as child evidence.
 

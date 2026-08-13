@@ -28,6 +28,7 @@ export interface AppRouteQueryRegistration {
 
 /** Canonical, precedence-ordered route inventory for dispatch and machine review. */
 export const APP_ROUTE_QUERY_REGISTRY = [
+  { kind: "play", queryKey: "play", queryValue: "hanzi-v2-chapter-one", query: "?play=hanzi-v2-chapter-one", pageMode: "game-fullscreen" },
   { kind: "play", queryKey: "play", queryValue: "hanzi-v2-v1", query: "?play=hanzi-v2-v1", pageMode: "game-fullscreen" },
   { kind: "play", queryKey: "play", queryValue: "hanzi-v2-golden-slice", query: "?play=hanzi-v2-golden-slice", pageMode: "game-fullscreen" },
   { kind: "observe-step07", queryKey: "observe", queryValue: "hanzi-v2-step07", query: "?observe=hanzi-v2-step07", pageMode: "adult-tool" },
