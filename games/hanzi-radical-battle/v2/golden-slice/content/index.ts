@@ -1,5 +1,7 @@
 export * from "./abilities";
 export * from "./asset-manifest";
+export * from "./adventures";
+export * from "./v1-hand-auditor";
 export * from "./boss";
 export * from "./boss-interference";
 export * from "./encounters";

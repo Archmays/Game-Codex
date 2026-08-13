@@ -251,3 +251,14 @@
 影响范围：第二次进入 grant、world/classic/forest adapter、parent observer、START/FINISH、synthetic tooling fixture 与本地导出。
 明确没有做什么：没有执行真实 second-use，没有给 solver/正确目的地/正确卡牌，没有保存 PII、媒体、原始输入或完整 localStorage，没有自动 PASS/FAIL。
 何时重新评估：家长在下一次自然、独立时段返回 `STEP-06_SECOND_USE_RETURN_TO_CHATGPT.zip` 后，只解释该次证据；不得推断长期投入、学习效果、保持度或剩余八字准备度。
+
+## D-026 精确授权撤销真人 Second-Use 的 V1 实施阻塞
+
+日期：2026-08-13
+决定：接受精确授权 `HUMAN_AUTHORIZED_SKIP_REAL_SECOND_USE_AND_COMPLETE_V1_ONE_SHOT_01`，完成固定 12 字、三段冒险、Theme C 正式资产、V1 本地存档、机器审核与发布收口；V1 的机器发布不再等待 STEP 06/07 的真实 Second-Use session。
+为什么：用户明确要求把“实现一个完整、可直接玩的第一版”与“未来是否做真人儿童验证”拆开，并承担不执行本轮真人 Second-Use 的产品决策；继续把历史观察门禁当成实现阻塞会与最新明确授权冲突。
+依据：本次用户指令、第 1 节授权合同、固定 12 字 D-016、simulation 真源 D-017、既有 STEP07.5 `PASS_MACHINE` 基线与 V1 machine-first acceptance contract。
+影响范围：本决定覆盖 D-008 及后续 STEP 05–07 中“必须真实试玩后才能继续固定 12 字 V1 实现”的阻塞部分。它只授权当前 V1.0.0 的三章、24 个绑定素材、存档迁移、启动器、机器证据、最终包和 Git 交付。
+明确没有做什么：没有执行或声称真人 Second-Use；没有验证乐趣、学习效果、偏好、保持或普适性；没有授权超过 12 字、第四段冒险、STEP 08/09、账号/后端、操纵性留存或公开部署。
+机器门禁：只有精确 authorization ID、12 字/3 章负向边界、禁用机制扫描、P1–P8、R1–R3、源冻结、包哈希、Git/远端一致性全部通过，才可标记 `HANZI_MAGIC_BATTLE_V2_V1_PLAYABLE_READY`。
+未来儿童验证：`REAL_CHILD_VALIDATION: NO_BY_USER_DIRECTION`。家庭以后可自愿另行决定，且结果不得倒填为本次机器证据。

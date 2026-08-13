@@ -5,6 +5,7 @@ export const WORLD_COPY = {
   forestFreshAction: "走进墨迹森林",
   forestReturnAction: "再去墨迹森林",
   spellbookTitle: "四字魔法书",
+  v1SpellbookTitle: "十二字魔法书",
   spellbookAction: "翻开魔法书",
   treasureTitle: "游戏百宝箱",
   treasureAction: "打开百宝箱",

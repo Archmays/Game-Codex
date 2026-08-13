@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "pathId": "P7",
+  "sourceTreeSha256": "90F3F99F26C3724972175CD58E4657BE3A26F5E83434AA62B4753655833AE6E2",
+  "buildId": "v1-source-90F3F99F26C3",
+  "route": "/?play=hanzi-v2-v1&from=hub",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "inputMode": "mouse",
+  "saveFixture": "malformed-and-checksum-mismatch",
+  "consoleErrors": [],
+  "pageErrors": [],
+  "externalRequests": [],
+  "criticalActions": [
+    "inject malformed",
+    "capture recovery",
+    "preserve primary",
+    "inject checksum mismatch",
+    "safe fresh state"
+  ],
+  "finalState": {
+    "primary": "{\"schemaVersion\":4,\"contentManifestVersion\":\"hanzi-magic-battle-v2-v1-content-1\",\"contentRevisionHash\":\"fnv1a:5f8eab36\",\"gameVersion\":\"V1.0.0\",\"completedAdventureIds\":[],\"unlockedAdventureIds\":[\"glimmer-path\"],\"discoveredCharacterIds\":[],\"campRepairStage\":0,\"selectedAbilityHistory\":[],\"settings\":{\"muted\":false,\"reducedMotion\":false,\"inputMode\":\"auto\"},\"lastSafeRoute\":null,\"minimalLocalSessionSummary\":{\"completedRuns\":0,\"completedAdventureCount\":0,\"invalidPlacements\":0,\"lastPlayedAtUtc\":null},\"validation\":{\"algorithm\":\"fnv1a32\",\"checksum\":\"fnv1a32:00000000\"}}",
+    "recovery": "{\"schemaVersion\":1,\"reason\":\"CHECKSUM_MISMATCH\",\"capturedAtUtc\":\"2026-08-13T11:58:46.533Z\",\"raw\":\"{\\\"schemaVersion\\\":4,\\\"contentManifestVersion\\\":\\\"hanzi-magic-battle-v2-v1-content-1\\\",\\\"contentRevisionHash\\\":\\\"fnv1a:5f8eab36\\\",\\\"gameVersion\\\":\\\"V1.0.0\\\",\\\"completedAdventureIds\\\":[],\\\"unlockedAdventureIds\\\":[\\\"glimmer-path\\\"],\\\"discoveredCharacterIds\\\":[],\\\"campRepairStage\\\":0,\\\"selectedAbilityHistory\\\":[],\\\"settings\\\":{\\\"muted\\\":false,\\\"reducedMotion\\\":false,\\\"inputMode\\\":\\\"auto\\\"},\\\"lastSafeRoute\\\":null,\\\"minimalLocalSessionSummary\\\":{\\\"completedRuns\\\":0,\\\"completedAdventureCount\\\":0,\\\"invalidPlacements\\\":0,\\\"lastPlayedAtUtc\\\":null},\\\"validation\\\":{\\\"algorithm\\\":\\\"fnv1a32\\\",\\\"checksum\\\":\\\"fnv1a32:00000000\\\"}}\"}"
+  },
+  "screenshots": [
+    "D:/ChatGPT-Codex-Projects/Game-Codex/artifacts/hanzi-radical-battle-v2/v1-release/screenshots/P7-calm-recovery.png"
+  ],
+  "verdict": "PASS"
+}

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "sourceTreeSha256": "90F3F99F26C3724972175CD58E4657BE3A26F5E83434AA62B4753655833AE6E2",
+  "saveSchemaVersion": 4,
+  "canonicalKey": "family-games/hanzi-radical-battle-v2/golden-slice/state",
+  "backupKey": "family-games/hanzi-radical-battle-v2/golden-slice/state.backup",
+  "recoveryKey": "family-games/hanzi-radical-battle-v2/golden-slice/state.recovery",
+  "scenarios": {
+    "freshRoundTrip": {
+      "source": "v1",
+      "checksumValid": true,
+      "verdict": "PASS"
+    },
+    "goldenSliceV3Migration": {
+      "unitTest": "tests/hanzi-v2-v1-save.test.ts",
+      "sourcePreserved": true,
+      "verdict": "PASS"
+    },
+    "step02Migration": {
+      "unitTest": "tests/hanzi-v2-v1-save.test.ts",
+      "sourcePreserved": true,
+      "verdict": "PASS"
+    },
+    "partialSafeResume": {
+      "playthrough": "P2",
+      "transientBoardStateRestored": false,
+      "verdict": "PASS"
+    },
+    "malformedRecovery": {
+      "source": "fresh",
+      "reason": "MALFORMED_JSON",
+      "recoveryCaptured": true,
+      "verdict": "PASS"
+    },
+    "checksumMismatchRecovery": {
+      "playthrough": "P7",
+      "sourcePreserved": true,
+      "verdict": "PASS"
+    },
+    "futureVersionProtection": {
+      "writable": false,
+      "primaryWrites": 0,
+      "verdict": "PASS"
+    },
+    "replayPermanentProgress": {
+      "campRepairStage": 3,
+      "discoveredCharacters": 12,
+      "verdict": "PASS"
+    }
+  },
+  "verdict": "PASS"
+}

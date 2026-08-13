@@ -17,6 +17,8 @@ export interface GameDefinition {
   learningGoal: string;
   status: string;
   playLabel?: string;
+  /** Optional canonical full-page route for games whose runtime owns its canvas shell. */
+  route?: string;
   mount: (context: MountGameContext) => MountedGame;
 }
 

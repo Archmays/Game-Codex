@@ -1,19 +1,37 @@
 import Phaser from "phaser";
 import { THEME_C } from "../../../games/hanzi-radical-battle/v2/golden-slice/phaser/WorldView";
 import type { WorldHomeState } from "../world-state";
+import { v1AssetUrl } from "../../../games/hanzi-radical-battle/v2/v1/assets";
 
 export class WorldHomeScene extends Phaser.Scene {
   private view: WorldHomeState;
   private worldGraphics: Phaser.GameObjects.Graphics | null = null;
   private ambient: Phaser.GameObjects.Arc[] = [];
+  private background: Phaser.GameObjects.Image | null = null;
+  private hero: Phaser.GameObjects.Image | null = null;
+  private companion: Phaser.GameObjects.Image | null = null;
+  private spellbook: Phaser.GameObjects.Image | null = null;
+  private treasure: Phaser.GameObjects.Image | null = null;
+  private portal: Phaser.GameObjects.Image | null = null;
 
   constructor(initialView: WorldHomeState) {
     super({ key: "WorldHomeScene" });
     this.view = initialView;
   }
 
+  preload(): void {
+    for (const id of ["A1", "A2", "A3", "A4", "A14", "A15", "A16"] as const) this.load.image(id, v1AssetUrl(id));
+  }
+
   create(): void {
-    this.worldGraphics = this.add.graphics();
+    this.background = this.add.image(600, 340, "A1").setDepth(0).setDisplaySize(1200, 680);
+    this.worldGraphics = this.add.graphics().setDepth(1);
+    this.hero = this.add.image(470, 618, "A3").setOrigin(0.5, 1).setDepth(3);
+    this.companion = this.add.image(615, 590, "A4").setOrigin(0.5, 1).setDepth(4);
+    this.spellbook = this.add.image(145, 215, "A14").setDepth(3);
+    this.treasure = this.add.image(1060, 360, "A15").setDepth(3);
+    this.portal = this.add.image(790, 515, "A16").setOrigin(0.5, 1).setDepth(2);
+    this.fit(this.hero, 230, 330); this.fit(this.companion, 130, 150); this.fit(this.spellbook, 185, 150); this.fit(this.treasure, 175, 150); this.fit(this.portal, 260, 310);
     this.createAmbientLights();
     this.draw();
   }
@@ -54,22 +72,19 @@ export class WorldHomeScene extends Phaser.Scene {
     const g = this.worldGraphics;
     if (!g) return;
     g.clear();
-    g.fillGradientStyle(THEME_C.nightTop, THEME_C.nightTop, THEME_C.nightBottom, THEME_C.nightBottom, 1);
-    g.fillRect(0, 0, 1200, 680);
-
-    g.fillStyle(THEME_C.distant, 0.58);
-    for (let x = 0; x < 1200; x += 82) {
-      const height = 110 + ((x * 11) % 90);
-      g.fillRoundedRect(x, 320 - height, 24, height + 240, 12);
-      g.fillCircle(x + 12, 276 - height, 58);
-    }
-    g.fillStyle(THEME_C.ground, 0.96);
-    g.fillEllipse(600, 642, 1420, 330);
+    this.background?.setTexture(this.view.completedAndComplete ? "A2" : "A1").setDisplaySize(1200, 680);
+    this.portal?.setAlpha(this.view.camp.starPath ? 1 : this.view.camp.flowers ? 0.72 : 0.38);
 
     this.drawCamp(g);
     this.drawForestPortal(g);
     this.drawSpellbook(g);
     this.drawTreasure(g);
+  }
+
+  private fit(image: Phaser.GameObjects.Image | null, maxWidth: number, maxHeight: number): void {
+    if (!image) return;
+    const source = image.texture.getSourceImage() as { width: number; height: number };
+    image.setScale(Math.min(maxWidth / source.width, maxHeight / source.height));
   }
 
   private drawCamp(g: Phaser.GameObjects.Graphics): void {

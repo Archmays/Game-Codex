@@ -1,6 +1,6 @@
 # Traceability Matrix
 
-状态：STEP 03 identity-bound 家长决定已正式吸收；全部 accepted gameplay/content 冻结。STEP 04 的一次真实儿童 first-use evidence 已按原始 hash 锁定并完成语义对账；它支持 `PROMOTE_TO_PRIVATE_WORLD_ENTRY_AFTER_CHANGED_ONLY_FIX`，但不构成学习或默认入口结论。STEP 05 只到 `PRIVATE_WORLD_ENTRY_CANDIDATE_READY_FOR_PARENT_REVIEW`。每个新功能仍必须说明儿童价值、汉字学习价值，以及自动与真人验证路径。
+状态：历史 STEP 01–07 决定与证据继续保留。2026-08-13 的精确授权 `HUMAN_AUTHORIZED_SKIP_REAL_SECOND_USE_AND_COMPLETE_V1_ONE_SHOT_01` 允许在不等待真人 Second-Use 的前提下完成固定 12 字 V1；机器发布与未来可选儿童验证已拆分。每个新功能仍必须说明儿童价值、汉字学习价值及自动验证路径，并且不得从机器证据推断真人结果。
 
 | 功能 | 对应北极星原则 | 参考案例 | 儿童价值 | 汉字学习价值 | 自动验证 | 真人试玩观察 | 当前状态 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -33,6 +33,11 @@
 | 默认世界入口 | 儿童第一屏是已建立的世界，经典目录仍可达 | child-first-learning-game、game-ui-frontend | 回来先看到营地修复与三个可选物件，不出现教师目录 | 明花林星与营地变化继续投影唯一 canonical save | `/`、world alias、classic query、priority、title/theme、Pages 子路径 E2E | 家长已明确授权默认入口；实际 second-use 尚未进行 | `DEFAULT_WORLD_ENTRY_PROMOTED` |
 | 固定家庭本地 origin | 同一浏览器同一 origin 才能延续真实进度 | save-systems、child-first-use-observation | 上次修复不会因换 host/port 看似消失 | 只读验证 schema v3 存档，不迁移、不补造 | `127.0.0.1:5175` launcher、PID/root/port 验证、missing/corrupt/private-mode fail closed | 家长按固定 START/STOP 使用原 profile | `CANONICAL_ORIGIN_ESTABLISHED` |
 | 第二次进入 / 返回世界观察 | 不指定正确去向，观察认出世界与返回循环 | child-first-use-observation、game-playtest | 孩子可自由选择森林、字灵书或百宝箱；随时结束 | 只记录流程与相对状态，不把选择解释为学习效果 | 短期 identity-bound grant、跨页 event bridge、只读 derived actions、stop/privacy、synthetic fixture | 只允许下一次自然独立时段；真人结果尚不存在 | `SECOND_USE_READY / REAL_SESSION_NOT_RUN` |
+| V1 三段固定冒险 | 完整起承转合但不扩大字量 | level-design、puzzle、child-first-learning-game | 每段 3–5 分钟，可中途退出，从营地继续 | 12 字按左右、上下、全包围、半包围形成三次迁移 | exact 3×4 manifest、deterministic simulation、P1/P2/P8 | 未来可选；不是机器发布门禁 | `V1_IMPLEMENTED / MACHINE_PLAYTHROUGHS_PASS` |
+| 12 字位置字形与手牌 | 真实结构位置就是施法 | hanzi-structure-quality、puzzle | 卡片、槽位和合字外形一致，失败温和可撤回 | 看用 `龵` 显示/手语义映射；跑用 `⻊` 显示/足语义映射；园回嵌套；包风开口；林实例分离 | 12×5 手牌、2/3 部件母库全量求解、结构与键盘门禁 | 未来可选观察理解度，不替代自动字形检查 | `V1_CONTENT_SOURCE_BOUND` |
+| Theme C V1 正式视觉 | 世界修复与字义反馈直接可见 | game-ui-frontend、sprite-pipeline、imagegen | 第一屏、角色、怪物、能力、魔法和修复形成同一故事世界 | 每字有唯一 meaning-magic 资产，代码叠加正确字，不讲字源 | 24 runtime 资产存在/hash/alpha/缩放/相对 base，视觉 baseline 两轮稳定 | 未来可选偏好观察，不宣称已偏好 | `16_SELECTED_BOUND / 8_IMAGEGEN_ACTIVE` |
+| V1 本地存档与恢复 | 永久变化可回来继续且隐私最小 | save-systems | 中途离开不丢字光，损坏时安静回到安全节点 | 已发现字、三章修复和能力历史不回退 | schema v4、v3/STEP02 迁移、backup/recovery/checksum/future read-only、无 PII | 家长区可解释并二次确认清除 | `V1_SAVE_IMPLEMENTED` |
+| V1 机器发布授权 | 技术完成不等于真人验证 | machine-first-game-review、child-first-use-observation | 可直接玩完整 V1，同时保留诚实验证边界 | 发布只证明内容、状态、存档和交互按合同运行 | exact authorization positive/negative tests、R1/R2/R3、P1–P8、source freeze、Git parity | `NO_BY_USER_DIRECTION`; 以后另行选择 | `V1_MACHINE_RELEASE_CANDIDATE_COMPLETE` |
 
 ## 新功能准入模板
 

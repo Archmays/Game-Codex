@@ -65,13 +65,14 @@ let audioContext: AudioContext | null = null;
 
 export const hanziRadicalBattleGame: GameDefinition = {
   id: "hanzi-radical-battle",
-  title: "汉字魔法战-偏旁部首",
-  description: "组合偏旁部首生成汉字，释放魔法打败怪物。",
+  title: "汉字魔法战",
+  description: "走进墨迹森林，把部件送回真实位置，用十二道字光修好三条冒险路。",
   subject: "识字",
-  recommendedAge: "6-10 岁",
-  learningGoal: "认识偏旁部首的组合关系，理解汉字结构和常见字义。",
-  status: "可玩",
-  playLabel: "挑战偏旁",
+  recommendedAge: "家庭儿童",
+  learningGoal: "在左右、上下、全包围和半包围结构中辨认部件位置，并连接熟悉词与字义。",
+  status: "V1.0.0 · 可玩",
+  playLabel: "走进森林",
+  route: "?play=hanzi-v2-v1&from=hub",
   mount(context: MountGameContext): MountedGame {
     return mountHanziRadicalBattle(context);
   }

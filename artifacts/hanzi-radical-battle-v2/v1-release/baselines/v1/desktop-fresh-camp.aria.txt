@@ -1,0 +1,29 @@
+- main:
+  - link "返回游戏世界":
+    - /url: "?hub=classic&from=world"
+    - text: ← 营地外
+  - heading "汉字魔法战" [level=1]
+  - button "声音与家长"
+  - text: 墨迹森林
+  - heading "营地正在等你" [level=2]
+  - paragraph: 墨迹森林在等第一道字光。
+  - list "三段冒险进度":
+    - listitem: 1 微光
+    - listitem: 2 花园
+    - listitem: 3 风路
+  - button "走进林径"
+  - article:
+    - text: "1"
+    - heading "微光林径" [level=3]
+    - paragraph: 从左右与上下结构开始，让四道字光重新点亮营地。
+    - button "走进林径"
+  - article:
+    - text: "2"
+    - heading "花园回声" [level=3]
+    - paragraph: 前一道字光会把这里照亮
+    - text: 静静等候
+  - article:
+    - text: "3"
+    - heading "风的脚印" [level=3]
+    - paragraph: 前一道字光会把这里照亮
+    - text: 静静等候

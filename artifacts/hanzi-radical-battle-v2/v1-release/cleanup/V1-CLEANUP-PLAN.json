@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "scope": "Hanzi Magic Battle V2 V1.0.0 generated process outputs only",
+  "retain": [
+    "V1 canonical source and tests",
+    "24 runtime assets and selected hashes",
+    "stable V1 baselines and source-bound evidence",
+    "final screenshots, contact sheet, report, ZIP and SHA sidecar",
+    "historical STEP01-07 evidence and user-owned untracked files"
+  ],
+  "remove": [
+    "artifacts/hanzi-radical-battle-v2/v1-release/asset-generation/candidates",
+    "artifacts/hanzi-radical-battle-v2/v1-release/traces",
+    "dist",
+    "test-results",
+    "playwright-report",
+    "orphan V1 server PID/log records"
+  ],
+  "prohibited": [
+    "Do not delete user assets",
+    "Do not delete historical STEP01-07 evidence",
+    "Do not delete selected runtime assets"
+  ],
+  "status": "PLANNED_BEFORE_FINAL_PACKAGE"
+}

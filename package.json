@@ -77,7 +77,14 @@
     "review:machine:cleanup:plan": "tsx tools/game-machine-review/cleanup.ts plan .",
     "review:machine:cleanup:apply": "tsx tools/game-machine-review/cleanup.ts apply .",
     "review:machine:cleanup:verify": "tsx tools/game-machine-review/cleanup.ts verify .",
-    "validate:machine:games": "pnpm run test:hanzi-v2:step07 && tsc --noEmit && pnpm run review:machine:games:report"
+    "validate:machine:games": "pnpm run test:hanzi-v2:step07 && tsc --noEmit && pnpm run review:machine:games:report",
+    "test:hanzi-v2:v1": "vitest run tests/hanzi-radical-battle-v2-foundation.test.ts tests/hanzi-v2-v1-content.test.ts tests/hanzi-v2-v1-hands.test.ts tests/hanzi-v2-v1-machine.test.ts tests/hanzi-v2-v1-save.test.ts tests/hanzi-v2-v1-privacy-copy.test.ts",
+    "test:e2e:hanzi-v2:v1": "playwright test tests/e2e/hanzi-magic-v2-v1.spec.ts --config playwright.v1.config.ts",
+    "test:e2e:hanzi-v2:v1:visual": "playwright test tests/e2e/hanzi-magic-v2-v1-visual.spec.ts --config playwright.v1.config.ts",
+    "test:e2e:hanzi-v2:v1:hard-gates": "playwright test tests/e2e/hanzi-magic-v2-v1-hard-gates.spec.ts --config playwright.v1.config.ts",
+    "validate:hanzi-v2:v1": "pnpm run test:hanzi-v2:v1 && tsc --noEmit && pnpm run test:e2e:hanzi-v2:v1 && pnpm run test:e2e:hanzi-v2:v1:visual && pnpm run test:e2e:hanzi-v2:v1:hard-gates",
+    "evidence:hanzi-v2:v1": "tsx tools/hanzi-v2-v1/finalize-v1-evidence.ts",
+    "package:hanzi-v2:v1": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File tools/hanzi-v2-v1/PACKAGE_HANZI_MAGIC_BATTLE_V2_V1.ps1"
   },
   "dependencies": {
     "phaser": "^3.90.0"

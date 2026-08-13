@@ -1,0 +1,21 @@
+- main:
+  - link "返回游戏世界":
+    - /url: "?hub=classic&from=world"
+    - text: ← 营地外
+  - heading "汉字魔法战" [level=1]
+  - button "声音与家长"
+  - text: 字光相遇 · 1/4
+  - heading "把勹和巳送回位置" [level=2]
+  - paragraph: 把勹和巳送回位置
+  - group "包的有开口的外框和里面":
+    - button "包的外框位置": 外框
+    - button "包的里面位置": 里面
+  - group "五张字光卡":
+    - button "字光 讠": 讠
+    - button "字光 勹": 勹
+    - button "字光 巳": 巳
+    - button "字光 亻": 亻
+    - button "字光 氵": 氵
+  - button "收回" [disabled]
+  - button "看亮光"
+  - button "回营地"

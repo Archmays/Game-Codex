@@ -8,6 +8,7 @@ import { mountWorldSettings, type WorldSettingsHandle } from "./ui/WorldSettings
 import { WORLD_COPY } from "./world-copy";
 import {
   CLASSIC_HUB_FROM_WORLD_ROUTE,
+  HANZI_MAGIC_V1_ROUTE,
   INK_FOREST_ROUTE,
   MY_GAME_WORLD_ROUTE,
   withStep06RouteContext,
@@ -62,8 +63,10 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
   const routeContext: SecondUseRouteContext | undefined = secondUse
     ? { evidence: secondUse.evidenceId ?? "hanzi-v2-step06", sessionId: secondUse.grant.sessionId }
     : undefined;
-  const forestHref = withStep06RouteContext(INK_FOREST_ROUTE, routeContext, "world");
+  const v1FamilyMode = !secondUse;
+  const forestHref = withStep06RouteContext(v1FamilyMode ? HANZI_MAGIC_V1_ROUTE : INK_FOREST_ROUTE, routeContext, "world");
   const treasureHref = withStep06RouteContext(CLASSIC_HUB_FROM_WORLD_ROUTE, routeContext, "world");
+  const spellbookTitle = v1FamilyMode ? WORLD_COPY.v1SpellbookTitle : WORLD_COPY.spellbookTitle;
 
   addPageClass("my-game-world-page");
   root.className = "my-game-world-mount";
@@ -77,7 +80,7 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
       <div class="world-vignette" aria-hidden="true"></div>
       <section class="world-object world-object--spellbook" data-testid="world-spellbook-object">
         <span aria-hidden="true" class="world-object__mark world-object__mark--book"></span>
-        <h2>${WORLD_COPY.spellbookTitle}</h2>
+        <h2>${spellbookTitle}</h2>
         <p data-world-discoveries>${state.discoveredCharacterIds.length ? `${state.discoveredCharacterIds.length} 道字光` : "等待字光"}</p>
         <button type="button" data-world-spellbook-open>${WORLD_COPY.spellbookAction}</button>
       </section>
@@ -144,6 +147,7 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
       state.discoveredCharacterIds,
       state.save.settings.muted,
       closeSpellbook,
+      spellbookTitle,
     );
   });
 
@@ -211,5 +215,5 @@ export function mountClassicHubFromWorld(root: HTMLElement, secondUse?: {
   };
 }
 
-export { CLASSIC_HUB_FROM_WORLD_ROUTE, INK_FOREST_ROUTE, MY_GAME_WORLD_ROUTE } from "./world-routes";
+export { CLASSIC_HUB_FROM_WORLD_ROUTE, HANZI_MAGIC_V1_ROUTE, INK_FOREST_ROUTE, MY_GAME_WORLD_ROUTE } from "./world-routes";
 export { deriveWorldHomeState, readWorldHomeState, updateExistingWorldSettings } from "./world-state";

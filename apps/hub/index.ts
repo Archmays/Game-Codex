@@ -55,6 +55,10 @@ export function mountHub(root: HTMLElement): MountedGame {
   };
 
   const openGame = (game: GameDefinition): void => {
+    if (game.route) {
+      window.location.assign(game.route);
+      return;
+    }
     mountedGame?.destroy();
     mountedGame = null;
     root.className = "game-runner";

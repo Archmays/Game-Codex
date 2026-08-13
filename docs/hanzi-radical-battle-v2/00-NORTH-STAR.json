@@ -2,6 +2,8 @@
   "schema_version": 1,
   "initiative_id": "hanzi-radical-battle-v2",
   "initiative_name": "黄小越的游戏世界：汉字魔法战——墨迹森林",
+  "current_version": "V1.0.0",
+  "active_authorization_id": "HUMAN_AUTHORIZED_SKIP_REAL_SECOND_USE_AND_COMPLETE_V1_ONE_SHOT_01",
   "target_player": {
     "name": "黄小越",
     "stage": "约6岁，刚进入小学阶段",
@@ -27,7 +29,7 @@
     "bosses": 1,
     "upgrade_choices": 1,
     "upgrade_options": 3,
-    "camp_repairs": 1,
+    "camp_repairs": 3,
     "persistent_spellbook": true
   },
   "required_experience": [
@@ -59,17 +61,26 @@
     "复杂装备系统",
     "大型宠物收集",
     "数百项能力",
-    "未经儿童验证即扩建完整墨迹森林"
+    "超过固定12字或新增第四段冒险",
+    "把机器审核写成真人儿童验证"
   ],
   "promotion_gates": [
+    "精确V1授权ID匹配",
     "自动测试通过",
     "真实浏览器和代表性设备可用",
     "关键视觉状态有截图证据",
-    "黄小越能完成第一次合字",
-    "黄小越能理解一次选择",
-    "黄小越注意到营地永久变化",
-    "试玩观察支持继续扩建"
+    "三段冒险与12字固定清单完整",
+    "Theme C运行时资产hash匹配",
+    "存档迁移、损坏恢复与未来版本保护通过",
+    "机器审核无未解决SEV_1到SEV_3",
+    "明确保留REAL_CHILD_VALIDATION为NO_BY_USER_DIRECTION"
   ],
+  "optional_future_child_validation": {
+    "status": "NOT_REQUIRED_FOR_V1_MACHINE_RELEASE",
+    "may_be_offered_later": true,
+    "cannot_be_inferred_from_machine_evidence": true,
+    "requires_separate_family_choice": true
+  },
   "pre_implementation_questions": [
     "它是否让黄小越更像是在玩，而不是做练习？",
     "它是否让合字本身仍然是核心动作，而不是被奖励系统遮住？",
@@ -82,11 +93,21 @@
     "新增每日任务、连续登录、排行榜或抽卡",
     "引入Godot、后端、账号或云端儿童追踪",
     "同时重写其他游戏",
-    "儿童试玩前扩建完整墨迹森林",
-    "核心合字体验验证前批量生产角色或场景素材",
+    "没有精确V1授权ID却扩建三段完整墨迹森林",
+    "超过24个已绑定V1生产素材而未新增traceability",
     "儿童首屏重新出现学习目标、正确率或适合年龄",
     "新功能没有traceability行",
     "失败文案出现败北、你还需要练习、做错了等羞辱性判断"
   ],
-  "status": "FOUNDATION_ONLY"
+  "v1_release_scope": {
+    "playable_characters": 12,
+    "adventures": 3,
+    "encounters": 12,
+    "ability_options": 3,
+    "camp_repairs": 3,
+    "runtime_assets": 24,
+    "machine_playthroughs": 8,
+    "real_child_validation": "NO_BY_USER_DIRECTION"
+  },
+  "status": "V1_MACHINE_RELEASE_CANDIDATE_COMPLETE"
 }

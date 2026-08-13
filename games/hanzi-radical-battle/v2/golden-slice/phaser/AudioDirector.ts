@@ -179,7 +179,7 @@ export class AudioDirector {
     }
   }
 
-  playSfx(kind: "place" | "invalid" | "form" | "magic" | "choice" | "ui"): void {
+  playSfx(kind: "place" | "invalid" | "form" | "magic" | "choice" | "ui" | "restore" | "boss"): void {
     const context = this.ensureContext();
     if (!context) return;
     const bus = this.gains.get(kind === "ui" ? "ui" : "sfx");
@@ -194,12 +194,14 @@ export class AudioDirector {
       magic: 660,
       choice: 480,
       ui: 360,
+      restore: 570,
+      boss: 205,
     };
     const variations = [-9, 0, 12];
-    oscillator.type = kind === "invalid" ? "triangle" : kind === "magic" ? "sine" : "sine";
+    oscillator.type = kind === "invalid" || kind === "boss" ? "triangle" : "sine";
     oscillator.frequency.setValueAtTime(baseByKind[kind] + variations[this.sfxVariation % variations.length], now);
     this.sfxVariation += 1;
-    if (kind === "magic" || kind === "form") {
+    if (kind === "magic" || kind === "form" || kind === "restore") {
       oscillator.frequency.exponentialRampToValueAtTime(baseByKind[kind] * 1.42, now + 0.28);
     }
     gain.gain.setValueAtTime(0.0001, now);
@@ -209,7 +211,7 @@ export class AudioDirector {
     this.activeSources.add(oscillator);
     oscillator.addEventListener("ended", () => this.activeSources.delete(oscillator), { once: true });
     oscillator.start(now);
-    oscillator.stop(now + (kind === "magic" ? 0.5 : 0.26));
+    oscillator.stop(now + (kind === "magic" || kind === "restore" ? 0.5 : 0.26));
   }
 
   async speak(text: string, lang = "zh-CN"): Promise<VoiceResult> {

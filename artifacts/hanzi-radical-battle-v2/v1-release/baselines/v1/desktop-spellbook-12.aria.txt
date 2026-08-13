@@ -1,0 +1,32 @@
+- main:
+  - link "返回游戏世界":
+    - /url: "?hub=classic&from=world"
+    - text: ← 营地外
+  - heading "汉字魔法战" [level=1]
+  - button "声音与家长"
+  - dialog "十二字魔法书":
+    - text: 12/12 道字光
+    - heading "十二字魔法书" [level=2]
+    - button "合上魔法书": 合上
+    - navigation "已经发现的字":
+      - button "明"
+      - button "花"
+      - button "林"
+      - button "星"
+      - button "草"
+      - button "看"
+      - button "园"
+      - button "回"
+      - button "包"
+      - button "风"
+      - button "猫"
+      - button "跑"
+    - article:
+      - text: 明 míng
+      - heading "明亮" [level=3]
+      - paragraph: 有光、看得清楚
+      - term: 结构
+      - definition: 日 + 月
+      - term: 意义魔法
+      - definition: 让营地灯重新发亮
+      - button "读给我听"

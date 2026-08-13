@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "pathId": "P5",
+  "sourceTreeSha256": "90F3F99F26C3724972175CD58E4657BE3A26F5E83434AA62B4753655833AE6E2",
+  "buildId": "v1-source-90F3F99F26C3",
+  "route": "/?play=hanzi-v2-v1&from=hub",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "inputMode": "keyboard",
+  "saveFixture": "fresh",
+  "consoleErrors": [],
+  "pageErrors": [],
+  "externalRequests": [],
+  "criticalActions": [
+    "Tab",
+    "ArrowRight",
+    "Enter",
+    "Space",
+    "boss modal input gate",
+    "complete chapter"
+  ],
+  "finalState": {
+    "schemaVersion": 4,
+    "contentManifestVersion": "hanzi-magic-battle-v2-v1-content-1",
+    "contentRevisionHash": "fnv1a:5f8eab36",
+    "gameVersion": "V1.0.0",
+    "completedAdventureIds": [
+      "glimmer-path"
+    ],
+    "unlockedAdventureIds": [
+      "glimmer-path",
+      "garden-echo"
+    ],
+    "discoveredCharacterIds": [
+      "ming",
+      "hua",
+      "lin",
+      "xing"
+    ],
+    "campRepairStage": 1,
+    "selectedAbilityHistory": [
+      "ink-echo"
+    ],
+    "settings": {
+      "muted": false,
+      "reducedMotion": false,
+      "inputMode": "keyboard"
+    },
+    "lastSafeRoute": null,
+    "minimalLocalSessionSummary": {
+      "completedRuns": 0,
+      "completedAdventureCount": 1,
+      "invalidPlacements": 0,
+      "lastPlayedAtUtc": "2026-08-13T11:58:40.773Z"
+    },
+    "validation": {
+      "algorithm": "fnv1a32",
+      "checksum": "fnv1a32:c1b6f9b9"
+    }
+  },
+  "screenshots": [
+    "D:/ChatGPT-Codex-Projects/Game-Codex/artifacts/hanzi-radical-battle-v2/v1-release/screenshots/P5-keyboard-complete.png"
+  ],
+  "verdict": "PASS"
+}

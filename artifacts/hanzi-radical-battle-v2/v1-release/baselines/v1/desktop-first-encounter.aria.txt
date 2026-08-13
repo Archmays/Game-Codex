@@ -1,0 +1,21 @@
+- main:
+  - link "返回游戏世界":
+    - /url: "?hub=classic&from=world"
+    - text: ← 营地外
+  - heading "汉字魔法战" [level=1]
+  - button "声音与家长"
+  - text: 字光相遇 · 1/4
+  - heading "把日和月送回位置" [level=2]
+  - paragraph: 把日和月送回位置
+  - group "明的结构":
+    - button "明的左边位置": 左边
+    - button "明的右边位置": 右边
+  - group "五张字光卡":
+    - button "字光 月": 月
+    - button "字光 氵": 氵
+    - button "字光 亻": 亻
+    - button "字光 日": 日
+    - button "字光 讠": 讠
+  - button "收回" [disabled]
+  - button "看亮光"
+  - button "回营地"

@@ -1,11 +1,14 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { homedir } from "node:os";
 import { basename, join, resolve } from "node:path";
+import { HANZI_MAGIC_V1_ROUTE, INK_FOREST_ROUTE } from "../apps/my-game-world/world-routes";
 
 interface NorthStar {
   schema_version: number;
   initiative_id: string;
   initiative_name: string;
+  current_version: string;
+  active_authorization_id: string;
   target_player: {
     name: string;
     stage: string;
@@ -27,10 +30,21 @@ interface NorthStar {
     playable_characters_max: number;
     persistent_spellbook: boolean;
   };
+  v1_release_scope: {
+    playable_characters: number;
+    adventures: number;
+    encounters: number;
+    ability_options: number;
+    camp_repairs: number;
+    runtime_assets: number;
+    machine_playthroughs: number;
+    real_child_validation: string;
+  };
   required_experience: string[];
   prohibited_mechanics: string[];
   non_goals: string[];
   promotion_gates: string[];
+  drift_alerts: string[];
   status: string;
 }
 
@@ -86,7 +100,19 @@ describe("Hanzi Radical Battle V2 foundation guardrail", () => {
     expect(northStar.core_learning_mechanic).toContain("动作本身就是施法");
     expect(northStar.required_experience.length).toBeGreaterThan(0);
     expect(northStar.promotion_gates.length).toBeGreaterThan(0);
-    expect(northStar.status).toBe("FOUNDATION_ONLY");
+    expect(northStar.current_version).toBe("V1.0.0");
+    expect(northStar.active_authorization_id).toBe("HUMAN_AUTHORIZED_SKIP_REAL_SECOND_USE_AND_COMPLETE_V1_ONE_SHOT_01");
+    expect(northStar.v1_release_scope).toEqual({
+      playable_characters: 12,
+      adventures: 3,
+      encounters: 12,
+      ability_options: 3,
+      camp_repairs: 3,
+      runtime_assets: 24,
+      machine_playthroughs: 8,
+      real_child_validation: "NO_BY_USER_DIRECTION",
+    });
+    expect(northStar.status).toBe("V1_MACHINE_RELEASE_CANDIDATE_COMPLETE");
   });
 
   it("locks the approved browser runtime", () => {
@@ -124,7 +150,21 @@ describe("Hanzi Radical Battle V2 foundation guardrail", () => {
     const joined = northStar.non_goals.join("\n");
     expect(joined).toContain("完整开放世界");
     expect(joined).toContain("同时重做其余游戏");
-    expect(joined).toContain("未经儿童验证即扩建");
+    expect(joined).toContain("超过固定12字");
+    expect(joined).toContain("机器审核写成真人儿童验证");
+  });
+
+  it("authorizes only the fixed V1 boundary and preserves negative drift gates", () => {
+    expect(northStar.promotion_gates).toContain("精确V1授权ID匹配");
+    const drift = northStar.drift_alerts.join("\n");
+    expect(drift).toContain("没有精确V1授权ID");
+    expect(drift).toContain("超过12个汉字");
+    expect(northStar.prohibited_mechanics).toEqual(expect.arrayContaining(["backend account", "loot box", "FOMO timer"]));
+  });
+
+  it("keeps the historical observer route separate from ordinary V1 family play", () => {
+    expect(INK_FOREST_ROUTE).toBe("?play=hanzi-v2-golden-slice&mode=play&from=world");
+    expect(HANZI_MAGIC_V1_ROUTE).toBe("?play=hanzi-v2-v1&from=world");
   });
 
   it("keeps both project Skills and the single index available", () => {

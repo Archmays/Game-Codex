@@ -12,7 +12,7 @@ export interface HanziRadicalVisualHint extends HanziRadicalVisualHintConfig {
   formula: readonly string[];
 }
 
-const RAW_APP_BASE_URL = import.meta.env.BASE_URL;
+const RAW_APP_BASE_URL = import.meta.env?.BASE_URL ?? "./";
 const APP_BASE_URL = RAW_APP_BASE_URL === "/"
   ? "./"
   : RAW_APP_BASE_URL.endsWith("/")
