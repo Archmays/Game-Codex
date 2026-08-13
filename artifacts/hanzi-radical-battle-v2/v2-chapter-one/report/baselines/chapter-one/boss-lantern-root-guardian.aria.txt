@@ -1,0 +1,20 @@
+- main:
+  - link "返回我的游戏世界":
+    - /url: "?hub=classic&from=world"
+    - text: ← 营地外
+  - text: 汉字魔法战
+  - heading "墨迹森林 · 第一章" [level=1]
+  - button "静音"
+  - button "恢复动画" [pressed]
+  - list "第一章区域进度":
+    - listitem: 1 微光林径
+    - listitem: 2 花园回声
+    - listitem: 3 风的脚印
+    - listitem: 4 墨王核心
+  - text: 初光路 根系守护
+  - paragraph: 灯根守护兽 · 第 1/2 阶段 · 先看预告
+  - heading "转圈小风" [level=2]
+  - paragraph: 小风沿手牌外圈走一圈，牌面不会翻转。
+  - paragraph: 总能恢复：轻触“稳住手牌”后，从新的清楚顺序继续。
+  - button "我看清了"
+  - text: 本地保存 · 无登录 · 无排名 第一章故事 · 三英雄

@@ -1,0 +1,17 @@
+{
+    "schemaVersion":  1,
+    "result":  "PASS",
+    "started":  true,
+    "reused":  true,
+    "stopped":  true,
+    "preferredPort":  5194,
+    "actualPort":  5194,
+    "pid":  34916,
+    "url":  "http://127.0.0.1:5194/?play=hanzi-v2-chapter-one\u0026from=hub",
+    "checks":  [
+                   "HTTP_READY",
+                   "EXACT_REUSE_PRESERVED",
+                   "OWNED_PROCESS_CLEANED"
+               ],
+    "generatedAtUtc":  "2026-08-13T16:22:57.5730652Z"
+}

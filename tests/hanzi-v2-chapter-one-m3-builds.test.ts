@@ -67,11 +67,13 @@ describe("Hanzi Magic Battle V2 Chapter One M3 heroes and builds", () => {
           expect(path.encounters).toHaveLength(4);
           expect(new Set(path.encounters.map((entry) => entry.characterId)).size).toBe(4);
           expect(path.encounters.every((entry) => CHAPTER_ONE_CHARACTERS.find((character) => character.id === entry.characterId)?.regionId === region.regionId)).toBe(true);
-          expect(path.encounters[3].boss).toBe(true);
-          expect(path.encounters.slice(0, 3).map((entry) => entry.behaviorId)).toContain(path.encounters[3].behaviorId);
-          const openingParts = new Set(path.encounters.slice(0, 3).flatMap((entry) => CHAPTER_ONE_CHARACTERS.find((character) => character.id === entry.characterId)!.orderedComponents.map((component) => component.sourceGlyph)));
-          expect(path.encounters[3].characterId).toBeTruthy();
-          expect(CHAPTER_ONE_CHARACTERS.find((character) => character.id === path.encounters[3].characterId)!.orderedComponents.some((component) => openingParts.has(component.sourceGlyph))).toBe(true);
+          expect(path.encounters.map((entry) => entry.boss)).toEqual([false, false, true, true]);
+          expect(path.encounters.map((entry) => entry.bossPhase)).toEqual([0, 0, 1, 2]);
+          expect(path.encounters.slice(0, 2).map((entry) => entry.behaviorId)).toContain(path.encounters[2].behaviorId);
+          expect(path.encounters.slice(0, 2).map((entry) => entry.behaviorId)).toContain(path.encounters[3].behaviorId);
+          const openingParts = new Set(path.encounters.slice(0, 2).flatMap((entry) => CHAPTER_ONE_CHARACTERS.find((character) => character.id === entry.characterId)!.orderedComponents.map((component) => component.sourceGlyph)));
+          expect(path.encounters[2].characterId).toBeTruthy();
+          expect(CHAPTER_ONE_CHARACTERS.find((character) => character.id === path.encounters[2].characterId)!.orderedComponents.some((component) => openingParts.has(component.sourceGlyph))).toBe(true);
         }
       }
     }
@@ -82,11 +84,11 @@ describe("Hanzi Magic Battle V2 Chapter One M3 heroes and builds", () => {
       const result = simulateM3Run(`m3-replay-${hero.id}`, hero.id);
       expect(result.failureCodes).toEqual([]);
       expect(result.finalState.phase).toBe("run-summary");
-      expect(result.finalState.discoveredCharacterIds).toHaveLength(12);
+      expect(result.finalState.discoveredCharacterIds).toHaveLength(15);
       expect(result.finalState.selectedAbilityIds).toHaveLength(3);
       expect(result.finalState.triggeredAbilityIds).toHaveLength(3);
       expect(result.finalState.innateEvidence).toMatchObject({ stateChanged: true, visibleEffectObserved: true, neverAutoSolved: true, noIllegalAnswer: true });
-      expect(result.actions.filter((action) => action.type === "place-card")).toHaveLength(24);
+      expect(result.actions.filter((action) => action.type === "place-card")).toHaveLength(30);
       expect(replayM3Actions(result.finalState.seed, hero.id, result.actions)).toEqual(result.finalState);
     }
   });
@@ -120,7 +122,7 @@ describe("Hanzi Magic Battle V2 Chapter One M3 heroes and builds", () => {
     const actions = simulation.actions.slice(0, 31) as M3Action[];
     writeM3Session(storage, "m3-session", "forest-speaker", actions);
     expect(readM3Session(storage)?.state).toEqual(replayM3Actions("m3-session", "forest-speaker", actions));
-    expect(Object.keys(JSON.parse(storage.getItem(M3_SESSION_KEY)!)).sort()).toEqual(["actions", "initialHeroId", "schemaVersion", "seed"]);
+    expect(Object.keys(JSON.parse(storage.getItem(M3_SESSION_KEY)!)).sort()).toEqual(["actions", "initialHeroId", "mode", "schemaVersion", "seed"]);
     storage.setItem(M3_SESSION_KEY, JSON.stringify({ schemaVersion: 99, seed: "x", initialHeroId: "forest-speaker", actions: [] }));
     expect(readM3Session(storage)).toBeNull();
     storage.setItem(M3_SESSION_KEY, "{broken");

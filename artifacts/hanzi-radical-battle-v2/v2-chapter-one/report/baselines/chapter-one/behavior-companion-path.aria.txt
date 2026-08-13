@@ -1,0 +1,20 @@
+- main:
+  - link "返回我的游戏世界":
+    - /url: "?hub=classic&from=world"
+    - text: ← 营地外
+  - text: 汉字魔法战
+  - heading "墨迹森林 · 第一章" [level=1]
+  - button "静音"
+  - button "恢复动画" [pressed]
+  - list "第一章区域进度":
+    - listitem: 1 微光林径
+    - listitem: 2 花园回声
+    - listitem: 3 风的脚印
+    - listitem: 4 墨王核心
+  - text: 初光路 再看一眼 根系守护
+  - paragraph: 森林墨怪动作 · 先看预告
+  - heading "墨点领路" [level=2]
+  - paragraph: 墨点伙伴先跳到一个不会挡住棋盘的位置。
+  - paragraph: 总能恢复：轻触伙伴指向的按钮后，世界层退开并进入清楚棋盘。
+  - button "我看清了"
+  - text: 本地保存 · 无登录 · 无排名 第一章故事 · 三英雄

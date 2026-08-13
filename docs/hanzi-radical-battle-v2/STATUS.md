@@ -10,9 +10,9 @@ V1 frozen baseline: tag `hanzi-magic-v2-v1.0.0` → commit `43e7841d2190922b6048
 
 Authorized scope: M0–M5 continuous implementation; 36 characters; three heroes; three regions plus the final core; nine monster behaviors; 18 selectable and three innate abilities; four bosses; eight camp repairs; 36 spellbook entries; V2 local save migration; formal Theme C art/audio; hub, launcher, package, tags, and update of the existing GitHub Pages deployment.
 
-Completed gates: M0 authorization/freeze, M1 replay loop, M2 formal 36-character content pipeline, M3 three-hero build system, and M4 persistent camp/save/spellbook are `PASS_STAGE`. M4 evidence adds exactly 8 interactive repair objects, 36 complete searchable and paginated spellbook entries, byte-preserving V1 migration, corruption/future-version protection, safe browser resume, and a parent second-confirmation clear path.
+Completed gates: M0 authorization/freeze, M1 replay loop, M2 formal 36-character content pipeline, M3 three-hero build system, M4 persistent camp/save/spellbook, and M5 complete Chapter One are `PASS_STAGE`. M5 adds three formal regions plus the final core, exactly nine recoverable behaviors, four bosses, 72 optimized Theme C runtime assets, the complete story/free-adventure ending loop, a child-only hub card, 18 complete browser runs, fixed visual/ARIA baselines, and an identity-safe launcher.
 
-Active gate: M5 — three formal regions plus the final Ink King core, exactly nine normal monster behaviors, three two-phase region bosses and one three-phase final boss, formal Theme C art/audio, story ending/free adventure, hub card, launcher, and complete Chapter One browser flow. A milestone may advance only after its source-bound `PASS_STAGE` result. Final acceptance still requires all content/save/accessibility/geometry/resource/route gates, clean source identity, and verified Pages.
+Active gate: FINAL — source-bound 30,000-seed audit, two exact no-update rounds, full repository/V1/V2/build regression, independent reviewer reconciliation, Pages/remote verification, release tag, return package, cleanup and clean-repository proof. M5 `PASS_STAGE` is not the terminal result by itself.
 
 Real child validation: `NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE`. User V1 play acceptance is recorded separately and must not be represented as child evidence.
 

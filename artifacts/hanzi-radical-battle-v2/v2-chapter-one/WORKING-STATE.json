@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "authorizationId": "HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813",
   "targetVersion": "V2.0.0",
-  "activeMilestone": "M5",
-  "completedMilestones": ["M0", "M1", "M2", "M3", "M4"],
+  "activeMilestone": "FINAL",
+  "completedMilestones": ["M0", "M1", "M2", "M3", "M4", "M5"],
   "status": "PASS_STAGE",
-  "latestGatePath": "artifacts/hanzi-radical-battle-v2/v2-chapter-one/checkpoints/M4/GATE-RESULT.json",
+  "latestGatePath": "artifacts/hanzi-radical-battle-v2/v2-chapter-one/checkpoints/M5/GATE-RESULT.json",
   "sourceCommit": "WORKTREE",
   "notes": [
     "V1 baseline frozen at tag hanzi-magic-v2-v1.0.0.",
@@ -14,7 +14,9 @@
     "M1 passed: 5000 deterministic seeds, 12 characters, 9 abilities, 6 recoverable behaviors, six browser playthroughs and visual review.",
     "M2 passed: exact 36-character manifest, 24-entry source ledger, 108 unique-safe hands, 180000 content casts and six reviewed structure sheets.",
     "M3 passed: three heroes, 18 selectable and three innate abilities, 30000 deterministic seeds, 360000 encounters, nine browser playthroughs and fifteen reviewed screenshots.",
-    "M4 passed: eight persistent camp repairs, 36 complete spellbook entries, exact V1 12-character/three-repair byte-preserving migration, safe resume/recovery, six browser evidence paths and six reviewed screenshots."
+    "M4 passed: eight persistent camp repairs, 36 complete spellbook entries, exact V1 12-character/three-repair byte-preserving migration, safe resume/recovery, six browser evidence paths and six reviewed screenshots.",
+    "M5 passed: three formal regions plus the final core, nine safe behaviors, four bosses, three heroes, 18 selectable abilities, 72 optimized Theme C assets, complete story/free paths, 18 browser playthroughs, deterministic visual/ARIA baselines, and an identity-safe double-click launcher.",
+    "Final source-bound audit, two no-update rounds, full repository regression, Pages verification, tag, push, package and cleanup remain required before the terminal result."
   ],
-  "updatedAtUtc": "2026-08-13T15:04:22.284Z"
+  "updatedAtUtc": "2026-08-13T16:38:12.6990432Z"
 }

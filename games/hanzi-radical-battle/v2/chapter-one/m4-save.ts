@@ -59,7 +59,7 @@ const REGION_IDS = new Set<ChapterRegionId>(["glimmer-grove", "echo-garden", "wi
 const REPAIR_IDS = new Set(M4_REPAIR_IDS);
 const HERO_IDS = new Set<M3HeroId>(M3_HEROES.map((entry) => entry.id));
 const ABILITY_IDS = new Set<M3AbilityId>(M3_BUILD_ABILITIES.map((entry) => entry.id));
-const PHASES = new Set<M3Phase>(["camp", "route-choice", "behavior-telegraph", "behavior-effect", "encounter", "composition", "meaning", "ability-choice", "region-complete", "run-summary"]);
+const PHASES = new Set<M3Phase>(["camp", "route-choice", "behavior-telegraph", "behavior-effect", "encounter", "composition", "meaning", "ability-choice", "region-complete", "final-intro", "ending", "run-summary"]);
 const INPUT_MODES = new Set<M4InputMode>(["auto", "mouse", "touch", "keyboard"]);
 
 function unique<T>(items: readonly T[]): T[] { return [...new Set(items)]; }
@@ -180,7 +180,7 @@ export function syncM4SaveFromGame(previous: M4SaveState, state: M3GameState): M
   return updateM4Save(previous, {
     discoveredCharacterIds,
     completedRegionIds,
-    repairedObjectIds: deriveM4Repairs(discoveredCharacterIds, completedRegionIds, previous.repairedObjectIds),
+    repairedObjectIds: deriveM4Repairs(discoveredCharacterIds, completedRegionIds, state.phase === "run-summary" ? M4_REPAIR_IDS : previous.repairedObjectIds),
     selectedHeroId: state.heroId,
     seenAbilityIds: unique([...previous.seenAbilityIds, ...state.selectedAbilityIds]),
     currentRun: { seed: state.seed, heroId: state.heroId, phase: state.phase, regionIndex: state.regionIndex, encounterIndex: state.encounterIndex, actionCount: state.actionCount },

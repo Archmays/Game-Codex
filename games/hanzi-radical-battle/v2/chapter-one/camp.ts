@@ -44,9 +44,10 @@ export function deriveM4Repairs(
   completedRegionIds: readonly ChapterRegionId[],
   carried: readonly M4RepairId[] = [],
 ): readonly M4RepairId[] {
-  const repaired = new Set<M4RepairId>(carried.filter((id) => M4_REPAIR_IDS.slice(0, 3).includes(id)));
   const count = new Set(discoveredCharacterIds).size;
   const v2Count = new Set(discoveredCharacterIds.filter((id) => !V1_CHARACTER_IDS.has(id))).size;
+  const carryable = v2Count > 0 ? M4_REPAIR_IDS : M4_REPAIR_IDS.slice(0, 3);
+  const repaired = new Set<M4RepairId>(carried.filter((id) => carryable.includes(id)));
   if (count >= 1) repaired.add("camp-lamp");
   if (count >= 4) repaired.add("garden-path");
   if (count >= 8) repaired.add("world-gate");
@@ -54,7 +55,7 @@ export function deriveM4Repairs(
   if (v2Count >= 4 || (v2Count >= 1 && completedRegionIds.includes("glimmer-grove"))) repaired.add("little-bridge");
   if (v2Count >= 8 || (v2Count >= 4 && completedRegionIds.includes("echo-garden"))) repaired.add("spellbook-house");
   if (v2Count >= 12 || (v2Count >= 8 && completedRegionIds.includes("wind-trail"))) repaired.add("ink-companion-house");
-  if (count >= 36) repaired.add("stargazing-platform");
+  if (count >= 36 || (v2Count >= 1 && completedRegionIds.length === 3)) repaired.add("stargazing-platform");
   return M4_REPAIR_IDS.filter((id) => repaired.has(id));
 }
 

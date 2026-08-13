@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M5",
+  "authorizationId": "HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813",
+  "sourceCommit": "WORKTREE",
+  "result": "PASS_STAGE",
+  "checks": [
+    { "id": "formal-world-scope", "status": "PASS", "evidence": "Exactly three 12-character regions plus the Ink King core are implemented with distinct scenes, route choices, ambience cues, repair rewards, and a complete story/free-adventure state path." },
+    { "id": "monster-and-boss-contract", "status": "PASS", "evidence": "Exactly nine regional behaviors each expose telegraph, effect, guaranteed recovery and keyboard/touch safety; three two-phase region bosses and one three-phase final boss only combine already-seen behaviors." },
+    { "id": "complete-play-path", "status": "PASS", "evidence": "The canonical browser route reaches camp, three regions, four bosses, the three-stage Ink King core, skippable ending, run summary, camp, spellbook and free adventure without scores, timers, ranks or permanent loss." },
+    { "id": "heroes-builds-and-persistence", "status": "PASS", "evidence": "All three heroes, 18 selectable abilities and three innate abilities retain distinct simulation effects; a completed V2 chapter reaches 8/8 durable repairs even after a byte-preserving V1 migration." },
+    { "id": "theme-c-assets-and-audio", "status": "PASS", "evidence": "Seventy-two optimized WebP runtime assets total 1,657,346 bytes and cover hub, regions, heroes, nine monsters, four bosses, 24 new meaning scenes, 18 abilities, eight repairs and the ending; procedural WebAudio cues preserve silent and reduced-motion comprehension." },
+    { "id": "browser-machine-play", "status": "PASS", "evidence": "Eighteen complete browser runs covered all three heroes, story/free modes, mouse, touch, keyboard, muted/reduced-motion, V1 migration, resume and corrupt-save recovery with zero console, page or external-request errors; a separate hub/spellbook/legacy/mobile surface test passed." },
+    { "id": "visual-and-geometry-baseline", "status": "PASS", "evidence": "Thirty deterministic exact PNG/ARIA states and a five-viewport 360x800 through 1440x900 geometry/hit-test gate passed after visual inspection; the final baseline contains no rejected atlas-edge presentation or low-contrast ending control." },
+    { "id": "launcher-lifecycle", "status": "PASS", "evidence": "The exact CMD launcher started an owned Vite server, proved HTTP readiness, reused the exact PID, and safely stopped only its identity-verified process; occupied ports fall through 5186-5195 without stopping other processes." },
+    { "id": "legacy-and-hub-routing", "status": "PASS", "evidence": "The child-facing hub card contains only the game name, world art and enter action; the canonical route is the V2.0 Chapter One runtime and the frozen V1 route remains independently reachable." }
+  ],
+  "metrics": {
+    "characters": 36,
+    "heroes": 3,
+    "regions": 3,
+    "finalCore": 1,
+    "monsterBehaviors": 9,
+    "bosses": 4,
+    "selectableAbilities": 18,
+    "innateAbilities": 3,
+    "campRepairs": 8,
+    "spellbookEntries": 36,
+    "runtimeAssets": 72,
+    "runtimeAssetBytes": 1657346,
+    "browserPlaythroughs": 18,
+    "visualAriaBaselines": 30,
+    "geometryViewports": 5,
+    "unresolvedSeverity1To3": 0
+  },
+  "unresolved": [],
+  "generatedAtUtc": "2026-08-13T16:38:12.6990432Z"
+}

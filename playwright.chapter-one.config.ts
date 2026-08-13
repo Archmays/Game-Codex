@@ -5,7 +5,7 @@ const baseURL = `http://127.0.0.1:${port}`;
 
 export default defineConfig({
   testDir: "./tests/e2e",
-  testMatch: /hanzi-magic-v2-chapter-one-(m1|m2-content|m3-builds|m4-persistence)\.spec\.ts/,
+  testMatch: /hanzi-magic-v2-chapter-one-(m1|m2-content|m3-builds|m4-persistence|m5-release|visual)\.spec\.ts/,
   fullyParallel: false,
   forbidOnly: Boolean(process.env.CI),
   retries: 0,
@@ -13,6 +13,7 @@ export default defineConfig({
   workers: 1,
   reporter: [["line"]],
   outputDir: "test-results/hanzi-v2-chapter-one",
+  snapshotPathTemplate: "artifacts/hanzi-radical-battle-v2/v2-chapter-one/report/baselines/playwright/{projectName}/{testFileName}/{arg}{ext}",
   use: {
     baseURL,
     trace: "retain-on-failure",

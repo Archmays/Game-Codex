@@ -1,6 +1,8 @@
 import type { ChapterHandCard, ChapterRegionId, ChapterSlotId } from "./content-types";
-import type { M1BehaviorId } from "./types";
 import type { M3AbilityEffectKey, M3AbilityId, M3HeroId } from "./builds";
+import type { M5BehaviorId, M5BossId } from "./m5-content";
+
+export type M5AdventureMode = "story" | "free";
 
 export type M3PathId = `${ChapterRegionId}:${"lantern" | "wild"}`;
 
@@ -8,9 +10,13 @@ export interface M3EncounterPlan {
   readonly id: string;
   readonly characterId: string;
   readonly handVariant: 0 | 1 | 2;
-  readonly behaviorId: M1BehaviorId;
+  readonly behaviorId: M5BehaviorId;
+  readonly combinedBehaviorIds: readonly M5BehaviorId[];
   readonly sequence: 0 | 1 | 2 | 3;
   readonly boss: boolean;
+  readonly bossId: M5BossId | null;
+  readonly bossPhase: 0 | 1 | 2 | 3;
+  readonly finalChallenge: "none" | "structure-review" | "behavior-combination" | "meaning-restoration";
 }
 
 export interface M3PathPlan {
@@ -30,10 +36,20 @@ export interface M3RegionPlan {
 }
 
 export interface M3RunPlan {
-  readonly schemaVersion: 2;
+  readonly schemaVersion: 3;
   readonly seed: string;
   readonly heroId: M3HeroId;
+  readonly mode: M5AdventureMode;
   readonly regions: readonly [M3RegionPlan, M3RegionPlan, M3RegionPlan];
+  readonly finalCore: {
+    readonly title: "墨王核心";
+    readonly sceneKey: "region-ink-king-core";
+    readonly ambienceKey: "ambience-core";
+    readonly encounters: readonly [M3EncounterPlan, M3EncounterPlan, M3EncounterPlan];
+  };
+  readonly regionOrder: readonly ChapterRegionId[];
+  readonly characterCoverage: readonly string[];
+  readonly monsterBehaviorSchedule: readonly M5BehaviorId[];
   readonly planSignature: string;
 }
 
@@ -66,16 +82,18 @@ export interface M3HeroEffects {
   readonly companionShieldCount: number;
 }
 
-export type M3Phase = "camp" | "route-choice" | "behavior-telegraph" | "behavior-effect" | "encounter" | "composition" | "meaning" | "ability-choice" | "region-complete" | "run-summary";
+export type M3Phase = "camp" | "route-choice" | "behavior-telegraph" | "behavior-effect" | "encounter" | "composition" | "meaning" | "ability-choice" | "region-complete" | "final-intro" | "ending" | "run-summary";
 
 export interface M3Placement { readonly cardId: string; readonly slotId: ChapterSlotId; readonly protected: boolean; }
 
 export interface M3GameState {
-  readonly schemaVersion: 2;
+  readonly schemaVersion: 3;
   readonly seed: string;
   readonly heroId: M3HeroId;
+  readonly mode: M5AdventureMode;
   readonly plan: M3RunPlan;
   readonly phase: M3Phase;
+  readonly chapterStage: "regions" | "final-core" | "ending" | "complete";
   readonly regionIndex: 0 | 1 | 2;
   readonly encounterIndex: 0 | 1 | 2 | 3;
   readonly chosenPathIds: readonly M3PathId[];
@@ -90,7 +108,8 @@ export interface M3GameState {
   readonly invalidPlacementCount: number;
   readonly discoveredCharacterIds: readonly string[];
   readonly seenComponentGlyphs: readonly string[];
-  readonly completedBehaviorCycles: readonly M1BehaviorId[];
+  readonly completedBehaviorCycles: readonly M5BehaviorId[];
+  readonly completedBossIds: readonly M5BossId[];
   readonly abilityEffects: M3AbilityEffects;
   readonly heroEffects: M3HeroEffects;
   readonly abilityEvidence: readonly M3AbilityEvidence[];
@@ -111,6 +130,10 @@ export type M3Action =
   | { readonly type: "undo" }
   | { readonly type: "continue" }
   | { readonly type: "choose-ability"; readonly abilityId: M3AbilityId }
+  | { readonly type: "enter-final-core" }
+  | { readonly type: "finish-ending" }
+  | { readonly type: "start-free-adventure"; readonly seed?: string }
+  | { readonly type: "return-camp" }
   | { readonly type: "repeat-seed" };
 
 export interface M3SimulationResult {

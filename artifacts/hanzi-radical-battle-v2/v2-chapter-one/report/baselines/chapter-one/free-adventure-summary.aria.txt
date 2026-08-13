@@ -1,0 +1,32 @@
+- main:
+  - link "返回我的游戏世界":
+    - /url: "?hub=classic&from=world"
+    - text: ← 营地外
+  - text: 汉字魔法战
+  - heading "墨迹森林 · 第一章" [level=1]
+  - button "静音"
+  - button "恢复动画" [pressed]
+  - list "第一章区域进度":
+    - listitem: 1 花园回声
+    - listitem: 2 微光林径
+    - listitem: 3 风的脚印
+    - listitem: 4 墨王核心
+  - text: 墨点守望 轻收回 路光窗 同伴生长
+  - paragraph: 自由冒险完成 · 没有分数、排名或连胜
+  - heading "墨点伙伴师让墨王核心重新发光" [level=2]
+  - term: 同行伙伴
+  - definition: 墨点伙伴师 · 墨点守望
+  - term: 本局能力
+  - definition: 轻收回、路光窗、同伴生长
+  - term: 发现汉字
+  - definition: 他 草 你 音 海 安 河 闪 问 图 闭 圆 林 菜 园
+  - term: 恢复变化
+  - definition: 3 个区域 · 4 位守护者 · 营地持续保存
+  - term: seed
+  - definition:
+    - code: m5-visual-free-summary-0
+  - button "沿同一 seed 重放"
+  - button "新的自由冒险"
+  - button "回营地"
+  - button "打开魔法书"
+  - text: 本地保存 · 无登录 · 无排名 自由冒险 · 三英雄

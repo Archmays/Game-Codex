@@ -1,0 +1,22 @@
+- main:
+  - link "返回我的游戏世界":
+    - /url: "?hub=classic&from=world"
+    - text: ← 营地外
+  - text: 汉字魔法战
+  - heading "墨迹森林 · 第一章" [level=1]
+  - button "静音"
+  - button "恢复动画" [pressed]
+  - list "第一章区域进度":
+    - listitem: 1 微光林径
+    - listitem: 2 花园回声
+    - listitem: 3 风的脚印
+    - listitem: 4 墨王核心
+  - text: 初光路 词语灯
+  - paragraph: 首领前 · 第 2/3 次选择
+  - heading "带哪一道字光？" [level=2]
+  - paragraph: 三项都能走完整局。左右方向键可换卡，Enter 确认。
+  - radiogroup "三项能力":
+    - button "风排牌 干扰散开后，五张牌会排成新的清楚顺序。"
+    - button "再看一眼 干扰散开后，棋盘会保持安静供你再看。"
+    - button "引位光 首领出现时，一个真实空位会亮起轮廓。"
+  - text: 本地保存 · 无登录 · 无排名 第一章故事 · 三英雄

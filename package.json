@@ -95,7 +95,16 @@
     "simulate:hanzi-v2:chapter-one:m3": "tsx tools/hanzi-v2-chapter-one/scan-m3-builds.ts 10000",
     "test:e2e:hanzi-v2:chapter-one:m3": "playwright test tests/e2e/hanzi-magic-v2-chapter-one-m3-builds.spec.ts --config playwright.chapter-one.config.ts",
     "test:hanzi-v2:chapter-one:m4": "vitest run tests/hanzi-v2-chapter-one-m4-persistence.test.ts",
-    "test:e2e:hanzi-v2:chapter-one:m4": "playwright test tests/e2e/hanzi-magic-v2-chapter-one-m4-persistence.spec.ts --config playwright.chapter-one.config.ts"
+    "test:e2e:hanzi-v2:chapter-one:m4": "playwright test tests/e2e/hanzi-magic-v2-chapter-one-m4-persistence.spec.ts --config playwright.chapter-one.config.ts",
+    "play:hanzi-v2:chapter-one": "vite --host 127.0.0.1 --port 5186 --strictPort",
+    "test:hanzi-v2:chapter-one": "vitest run tests/hanzi-v2-chapter-one-m1.test.ts tests/hanzi-v2-chapter-one-m2-content.test.ts tests/hanzi-v2-chapter-one-m3-builds.test.ts tests/hanzi-v2-chapter-one-m4-persistence.test.ts tests/hanzi-v2-chapter-one-m5-release.test.ts",
+    "test:e2e:hanzi-v2:chapter-one": "playwright test tests/e2e/hanzi-magic-v2-chapter-one-m1.spec.ts tests/e2e/hanzi-magic-v2-chapter-one-m2-content.spec.ts tests/e2e/hanzi-magic-v2-chapter-one-m3-builds.spec.ts tests/e2e/hanzi-magic-v2-chapter-one-m4-persistence.spec.ts tests/e2e/hanzi-magic-v2-chapter-one-m5-release.spec.ts --config playwright.chapter-one.config.ts",
+    "test:e2e:hanzi-v2:chapter-one:visual": "playwright test tests/e2e/hanzi-magic-v2-chapter-one-visual.spec.ts --config playwright.chapter-one.config.ts --project=desktop-chromium --grep @visual",
+    "test:e2e:hanzi-v2:chapter-one:hard-gates": "playwright test tests/e2e/hanzi-magic-v2-chapter-one-visual.spec.ts --config playwright.chapter-one.config.ts --project=desktop-chromium --grep @hard-gates",
+    "simulate:hanzi-v2:chapter-one": "tsx tools/hanzi-v2-chapter-one/scan-m5-release.ts 30000",
+    "validate:hanzi-v2:chapter-one": "pnpm run test:hanzi-v2:chapter-one && pnpm exec tsc --noEmit && pnpm run simulate:hanzi-v2:chapter-one",
+    "evidence:hanzi-v2:chapter-one": "tsx tools/hanzi-v2-chapter-one/finalize-chapter-one-evidence.ts",
+    "package:hanzi-v2:chapter-one": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File tools/hanzi-v2-chapter-one/PACKAGE_HANZI_MAGIC_BATTLE_V2_CHAPTER_ONE.ps1"
   },
   "dependencies": {
     "phaser": "^3.90.0"

@@ -74,13 +74,32 @@ describe("Hanzi Magic Battle V2 Chapter One M4 persistence", () => {
     expect(storage.getItem(HANZI_MAGIC_V1_SAVE_KEY)).toBe(raw);
   });
 
+  it("grants all eight durable repairs after a migrated player completes V2 Chapter One", () => {
+    const storage = new MemoryStorage();
+    const legacyState = createV1GameState("v1-then-v2", {
+      completedAdventureIds: ["glimmer-path", "garden-echo", "wind-footprints"],
+      unlockedAdventureIds: ["glimmer-path", "garden-echo", "wind-footprints"],
+      discoveredCharacterIds: V1_IDS,
+      campRepairStage: 3,
+      freeAdventureUnlocked: true,
+    });
+    writeV1Save(storage, saveFromGameState(createFreshV1Save(), legacyState));
+    let save = readM4Save(storage).state;
+    const result = simulateM3Run("migrated-v2-completion", "light-speaker");
+    let state = createM3GameState("migrated-v2-completion", "light-speaker");
+    for (const action of result.actions) { state = reduceM3State(state, action); save = syncM4SaveFromGame(save, state); }
+    expect(state.phase).toBe("run-summary");
+    expect(save.repairedObjectIds).toEqual(M4_REPAIR_IDS);
+    expect(validateM4Save(save)).toEqual(save);
+  });
+
   it("persists at least four repairs through one full V2 run without scores or detailed input history", () => {
     const result = simulateM3Run("m4-first-story", "forest-speaker");
     let state = createM3GameState("m4-first-story", "forest-speaker");
     let save = createFreshM4Save();
     for (const action of result.actions) { state = reduceM3State(state, action); save = syncM4SaveFromGame(save, state); }
     expect(state.phase).toBe("run-summary");
-    expect(save.discoveredCharacterIds).toHaveLength(12);
+    expect(save.discoveredCharacterIds).toHaveLength(15);
     expect(save.repairedObjectIds.length).toBeGreaterThanOrEqual(4);
     expect(save.completedRegionIds).toEqual(["glimmer-grove", "echo-garden", "wind-trail"]);
     expect(save.selectedHeroId).toBe("forest-speaker");

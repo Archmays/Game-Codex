@@ -1,6 +1,6 @@
 # 汉字魔法战 V2 文档索引
 
-当前活动版本是第一章 V2.0.0，状态 `V2_CHAPTER_ONE_IMPLEMENTATION_AUTHORIZED`。历史 STEP 01–07 和 V1.0.0 文件保留为证据，不再限制已获授权的第一章范围。
+当前活动版本是第一章 V2.0.0，M0–M5 均已 `PASS_STAGE`，正在执行最终 source-bound 机器审核与发布。历史 STEP 01–07 和 V1.0.0 文件保留为证据，不再限制已获授权的第一章范围。
 
 - `00-NORTH-STAR.md` / `.json`：活动产品与机器门禁真源。
 - `02-GOLDEN-SLICE-SPEC.md`：V1 黄金样板历史规格。

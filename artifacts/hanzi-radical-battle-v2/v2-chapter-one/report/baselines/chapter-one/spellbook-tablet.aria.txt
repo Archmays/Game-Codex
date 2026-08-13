@@ -1,0 +1,53 @@
+- main:
+  - link "返回我的游戏世界":
+    - /url: "?hub=classic&from=world"
+    - text: ← 营地外
+  - text: 汉字魔法战
+  - heading "墨迹森林 · 第一章" [level=1]
+  - button "静音"
+  - button "减少动画"
+  - list "第一章区域进度":
+    - listitem: 1 微光林径
+    - listitem: 2 花园回声
+    - listitem: 3 风的脚印
+    - listitem: 4 墨王核心
+  - text: 初光路
+  - dialog "重看完整字、读音和字义魔法":
+    - paragraph: 36 字魔法书 · 不记录正确率
+    - heading "重看完整字、读音和字义魔法" [level=2]
+    - button "关闭魔法书": 关闭
+    - text: 找一个字、词、拼音或部件
+    - searchbox "找一个字、词、拼音或部件"
+    - group "按区域或结构查看":
+      - button "全部" [pressed]
+      - button "微光"
+      - button "花园"
+      - button "风路"
+      - button "左右"
+      - button "上下"
+      - button "全包围"
+      - button "半包围"
+    - list:
+      - listitem "明，明亮，已经遇见":
+        - text: 明 míng 明亮 · 微光林径
+        - emphasis: 字光已遇见
+      - listitem "花，花朵，已经遇见":
+        - text: 花 huā 花朵 · 微光林径
+        - emphasis: 字光已遇见
+      - listitem "林，树林，已经遇见":
+        - text: 林 lín 树林 · 微光林径
+        - emphasis: 字光已遇见
+      - listitem "星，星星，已经遇见":
+        - text: 星 xīng 星星 · 微光林径
+        - emphasis: 字光已遇见
+      - listitem "草，小草，已经遇见":
+        - text: 草 cǎo 小草 · 花园回声
+        - emphasis: 字光已遇见
+      - listitem "看，看见，已经遇见":
+        - text: 看 kàn 看见 · 花园回声
+        - emphasis: 字光已遇见
+    - navigation "魔法书分页":
+      - button "上一页" [disabled]
+      - text: 1/6
+      - button "下一页"
+  - text: 本地保存 · 无登录 · 无排名 第一章故事 · 三英雄

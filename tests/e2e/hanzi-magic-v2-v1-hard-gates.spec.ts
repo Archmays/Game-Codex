@@ -27,7 +27,7 @@ test.afterAll(() => {
   writeFileSync(REPORT_PATH, `${JSON.stringify({ schemaVersion: 1, sourceTreeSha256: SOURCE_TREE_SHA256, resultCount: results.length, results, verdict: "PASS" }, null, 2)}\n`, "utf8");
 });
 
-test("classic hub keeps all ten entries, an existing game round-trip, and V1 as the Hanzi default", async ({ page, context }) => {
+test("classic hub keeps all ten entries, an existing game round-trip, V2 as canonical, and V1 as legacy", async ({ page, context }) => {
   const diagnostics = observe(page, context);
   await page.goto("/?hub=classic");
   const cards = page.locator(".game-card");
@@ -43,12 +43,14 @@ test("classic hub keeps all ten entries, an existing game round-trip, and V1 as 
   await expect(cards).toHaveCount(catalog.length);
 
   const hanzi = cards.filter({ has: page.getByRole("heading", { name: "汉字魔法战", exact: true }) });
-  await expect(hanzi).toContainText("V1.0.0 · 可玩");
-  await hanzi.getByRole("button", { name: "走进森林" }).click();
-  await expect(page).toHaveURL(/\?play=hanzi-v2-v1&from=hub$/);
+  await hanzi.getByRole("button", { name: "进入墨迹森林" }).click();
+  await expect(page).toHaveURL(/\?play=hanzi-v2-chapter-one&from=hub$/);
+  await expect(page.getByTestId("hanzi-magic-chapter-one-m3")).toBeVisible();
+
+  await page.goto("/?play=hanzi-v2-v1&from=hub");
   await expect(page.getByTestId("hanzi-magic-v1")).toBeVisible();
   expect(diagnostics).toEqual({ consoleErrors: [], pageErrors: [], externalRequests: [] });
-  results.push({ id: "HUB_OTHER_GAMES_AND_V1_DEFAULT", catalogEntries: catalog.length, existingGameRoundTrip: true, v1Default: true, diagnostics, verdict: "PASS" });
+  results.push({ id: "HUB_OTHER_GAMES_V2_CANONICAL_AND_V1_LEGACY", catalogEntries: catalog.length, existingGameRoundTrip: true, v2Canonical: true, v1Legacy: true, diagnostics, verdict: "PASS" });
 });
 
 test("ordinary world opens V1 while the historical observer route remains the Golden Slice", async ({ page, context }) => {

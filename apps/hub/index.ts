@@ -98,6 +98,19 @@ export function mountHub(root: HTMLElement): MountedGame {
 function createGameCard(game: GameDefinition, onPlay: () => void): HTMLElement {
   const card = createPanel("game-card");
 
+  if (game.id === "hanzi-radical-battle") {
+    card.classList.add("game-card--ink-forest");
+    const title = document.createElement("h2");
+    title.textContent = game.title;
+    const worldArt = document.createElement("img");
+    worldArt.className = "game-card__world-art";
+    worldArt.src = "./assets/hanzi-radical-battle/v2/theme-c/chapter-one/hub-ink-forest.webp";
+    worldArt.alt = "夜色墨迹森林里有发光小径、魔法树和温和的墨点伙伴";
+    const button = createButton(game.playLabel ?? "进入墨迹森林", onPlay, { className: "ui-button game-card__button" });
+    card.append(title, worldArt, button);
+    return card;
+  }
+
   const meta = document.createElement("div");
   meta.className = "game-card__meta";
 

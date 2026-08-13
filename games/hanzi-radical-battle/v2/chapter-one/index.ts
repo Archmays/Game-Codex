@@ -15,4 +15,7 @@ export * from "./m3-run-generator";
 export * from "./m3-session";
 export * from "./m3-types";
 export * from "./m4-save";
+export * from "./m5-content";
+export * from "./m5-audio";
+export * from "./m5-assets";
 export * from "./types";

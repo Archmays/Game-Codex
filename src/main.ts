@@ -142,6 +142,7 @@ window.addEventListener("load", async () => {
         mountHanziMagicChapterOneM3(root, {
           seed: search.get("seed") ?? undefined,
           heroId: requestedHero === "light-speaker" || requestedHero === "forest-speaker" || requestedHero === "ink-companion" ? requestedHero : undefined,
+          adventureMode: search.get("adventure") === "free" ? "free" : "story",
           fresh: search.get("fresh") === "1",
           returnHref: fromMode === "hub" ? "?hub=classic&from=world" : "?world=my-game-world",
         });
