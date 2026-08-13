@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "milestone": "M0",
   "authorizationId": "HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813",
-  "sourceCommit": "WORKTREE",
+  "sourceCommit": "e96c94b",
   "result": "PASS_STAGE",
   "checks": [
     {

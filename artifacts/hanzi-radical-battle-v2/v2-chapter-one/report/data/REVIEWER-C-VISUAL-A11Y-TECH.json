@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "REVIEWER_C_VISUAL_A11Y_TECH",
+  "sourceTreeSha256": "302E318AA250DC10593985FB4E27B8F87CC31BE8CCBE57FEDDAC963955EFBA3E",
+  "verdict": "PASS_MACHINE",
+  "machineOnly": true,
+  "focus": [
+    "Theme C consistency",
+    "asset integrity",
+    "responsive geometry",
+    "touch/mouse/keyboard",
+    "focus and ARIA",
+    "reduced motion and mute",
+    "save recovery",
+    "local lifecycle"
+  ],
+  "evidence": {
+    "runtimeAssets": 72,
+    "runtimeAssetBytes": 1657346,
+    "exactPngAriaStatesPerRound": 30,
+    "noUpdateRounds": 2,
+    "geometryViewportsPerRound": 5,
+    "launcherStartReuseStop": true,
+    "externalRuntimeRequests": 0
+  },
+  "unresolved": [],
+  "generatedAtUtc": "2026-08-13T18:34:57.881Z"
+}

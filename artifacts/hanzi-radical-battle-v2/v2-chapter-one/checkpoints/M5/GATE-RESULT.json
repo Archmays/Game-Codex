@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "milestone": "M5",
   "authorizationId": "HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813",
-  "sourceCommit": "WORKTREE",
+  "sourceCommit": "4b6159a",
   "result": "PASS_STAGE",
   "checks": [
     { "id": "formal-world-scope", "status": "PASS", "evidence": "Exactly three 12-character regions plus the Ink King core are implemented with distinct scenes, route choices, ambience cues, repair rewards, and a complete story/free-adventure state path." },

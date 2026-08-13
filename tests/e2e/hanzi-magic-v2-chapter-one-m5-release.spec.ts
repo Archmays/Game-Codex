@@ -13,10 +13,12 @@ import {
 } from "../../games/hanzi-radical-battle/v2/chapter-one";
 import { createV1GameState } from "../../games/hanzi-radical-battle/v2/v1/machine";
 import { HANZI_MAGIC_V1_SAVE_KEY, createFreshV1Save, saveFromGameState, writeV1Save } from "../../games/hanzi-radical-battle/v2/v1/save";
+import { computeMachineReviewSourceTreeSha256 } from "../../tools/game-machine-review/source-identity";
 
 const root = resolve("artifacts/hanzi-radical-battle-v2/v2-chapter-one");
 const screenshotDir = resolve(root, "report/screenshots");
 const baseURL = `http://127.0.0.1:${Number(process.env.CHAPTER_ONE_PLAYWRIGHT_PORT ?? "5183")}`;
+const sourceTreeSha256 = process.env.CHAPTER_ONE_SOURCE_TREE_SHA256 ?? computeMachineReviewSourceTreeSha256();
 mkdirSync(screenshotDir, { recursive: true });
 
 type InputMode = "mouse" | "keyboard" | "touch";
@@ -169,7 +171,7 @@ test("M5 18-run release matrix completes without machine errors", async ({ brows
       await context.close();
     }
   }
-  const matrix = { schemaVersion: 1, result: "PASS", playthroughCount: rows.length, rows };
+  const matrix = { schemaVersion: 1, sourceTreeSha256, result: "PASS", playthroughCount: rows.length, rows };
   writeFileSync(resolve(root, "report/data/MACHINE-PLAYTHROUGH-MATRIX.json"), `${JSON.stringify(matrix, null, 2)}\n`, "utf8");
   expect(rows).toHaveLength(18);
   expect(new Set(rows.map((row) => row.hero))).toEqual(new Set(M3_HEROES.map((hero) => hero.id)));

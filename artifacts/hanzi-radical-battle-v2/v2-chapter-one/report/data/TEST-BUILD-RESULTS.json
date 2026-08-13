@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "sourceTreeSha256": "302E318AA250DC10593985FB4E27B8F87CC31BE8CCBE57FEDDAC963955EFBA3E",
+  "result": "PASS",
+  "summary": {
+    "fullRepository": "89 files / 525 tests passed",
+    "chapterOneUnit": "5 files / 36 tests passed",
+    "v1Unit": "6 files / 37 tests passed",
+    "v1Browser": "8 playthroughs + 5 visual/ARIA + 3 hard gates passed",
+    "chapterOneBrowser": "24 executed / 24 passed / 24 project-inapplicable skipped; includes 18 complete release playthroughs",
+    "noUpdateReview": "2 rounds x 31 checks passed",
+    "launcherLifecycle": "start + exact-PID reuse + identity-safe stop passed",
+    "productionBuild": "TypeScript noEmit passed; Vite transformed 268 modules"
+  },
+  "counts": {
+    "fullRepositoryFiles": 89,
+    "fullRepositoryTests": 525,
+    "chapterOneUnitFiles": 5,
+    "chapterOneUnitTests": 36,
+    "v1UnitFiles": 6,
+    "v1UnitTests": 37,
+    "v1Playthroughs": 8,
+    "v1VisualAriaAndGeometry": 5,
+    "v1HardGates": 3,
+    "chapterOneBrowserExecuted": 24,
+    "chapterOneBrowserPassed": 24,
+    "chapterOneBrowserProjectSkipped": 24,
+    "chapterOneCompleteReleasePlaythroughs": 18,
+    "noUpdateRounds": 2,
+    "checksPerNoUpdateRound": 31,
+    "productionModules": 268
+  },
+  "commands": [
+    "pnpm test",
+    "pnpm build",
+    "pnpm run validate:hanzi-v2:v1",
+    "pnpm run test:hanzi-v2:chapter-one",
+    "pnpm run test:e2e:hanzi-v2:chapter-one",
+    "pnpm run simulate:hanzi-v2:chapter-one",
+    "powershell.exe -File tools/hanzi-v2-chapter-one/test-launcher-lifecycle.ps1",
+    "playwright chapter-one visual/hard-gates round-1 (NO_UPDATE)",
+    "playwright chapter-one visual/hard-gates round-2 (NO_UPDATE)"
+  ],
+  "knownNonBlockingWarnings": [
+    "Vite reports the existing Phaser production chunk above 500 kB; build succeeds."
+  ],
+  "generatedAtUtc": "2026-08-13T18:35:20.000Z"
+}

@@ -80,6 +80,13 @@ async function open(page: Page, save: V1SaveState | null = null): Promise<void> 
 }
 
 async function assertBaseline(page: Page, id: string): Promise<void> {
+  await page.evaluate(async () => {
+    await Promise.all([...document.images].map(async (image) => {
+      if (!image.complete || image.naturalWidth === 0) await image.decode();
+    }));
+    await new Promise<void>((resolveFrame) => requestAnimationFrame(() => resolveFrame()));
+    await new Promise<void>((resolveFrame) => requestAnimationFrame(() => resolveFrame()));
+  });
   const png = await page.screenshot({ animations: "disabled", fullPage: true });
   const aria = await page.getByTestId("hanzi-magic-v1").ariaSnapshot();
   const pngPath = resolve(BASELINE_ROOT, `${id}.png`);

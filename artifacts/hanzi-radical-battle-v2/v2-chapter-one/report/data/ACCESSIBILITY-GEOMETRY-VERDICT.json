@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "sourceTreeSha256": "302E318AA250DC10593985FB4E27B8F87CC31BE8CCBE57FEDDAC963955EFBA3E",
+  "exactAriaStatesPerRound": 30,
+  "noUpdateRounds": 2,
+  "viewportsPerRound": 5,
+  "viewportRange": "360x800 to 1440x900",
+  "minimumTargetCssPixels": 44,
+  "multiPointHitTesting": true,
+  "horizontalOverflow": false,
+  "modalBottomReachable": true,
+  "keyboardMouseTouch": true,
+  "verdict": "PASS",
+  "generatedAtUtc": "2026-08-13T18:34:57.881Z"
+}

@@ -25,7 +25,13 @@ $required = @(
   "report\data\GAMEPLAY-COVERAGE.json",
   "report\data\SAVE-NETWORK-PRIVACY.json",
   "report\data\ASSET-MANIFEST.json",
+  "report\data\MACHINE-ASSET-VERDICT.json",
+  "report\data\REVIEWER-A-CHILD-GAME-SCOPE.json",
+  "report\data\REVIEWER-B-HANZI-LEARNING.json",
+  "report\data\REVIEWER-C-VISUAL-A11Y-TECH.json",
   "report\data\REVIEWER-RECONCILIATION.json",
+  "report\data\ACCESSIBILITY-GEOMETRY-VERDICT.json",
+  "report\data\PERFORMANCE-NETWORK-PRIVACY.json",
   "report\data\VISUAL-ARIA-round-1.json",
   "report\data\VISUAL-ARIA-round-2.json",
   "report\data\CRITICAL-GEOMETRY-round-1.json",
@@ -84,10 +90,8 @@ try {
   if (Test-Path -LiteralPath $zipPath) { Remove-Item -LiteralPath $zipPath -Force }
   if (Test-Path -LiteralPath $sidecarPath) { Remove-Item -LiteralPath $sidecarPath -Force }
   Compress-Archive -Path (Join-Path $stagingRoot "*") -DestinationPath $zipPath -CompressionLevel Optimal
-  $hash = (Get-FileHash -LiteralPath $zipPath -Algorithm SHA256).Hash.ToUpperInvariant()
-  $bytes = (Get-Item -LiteralPath $zipPath).Length
-  [System.IO.File]::WriteAllText($sidecarPath, "$hash  $zipName`n", [System.Text.UTF8Encoding]::new($false))
-  [ordered]@{ zipPath = $zipPath; bytes = $bytes; sha256 = $hash; result = "PASS" } | ConvertTo-Json -Compress
+  $hashBeforeCleanup = (Get-FileHash -LiteralPath $zipPath -Algorithm SHA256).Hash.ToUpperInvariant()
+  $bytesBeforeCleanup = (Get-Item -LiteralPath $zipPath).Length
 }
 finally {
   if (Test-Path -LiteralPath $stagingRoot) {
@@ -95,3 +99,8 @@ finally {
     if ($resolved.StartsWith((Resolve-Path $releaseRoot).Path, [StringComparison]::OrdinalIgnoreCase)) { Remove-Item -LiteralPath $resolved -Recurse -Force }
   }
 }
+$hashAfterCleanup = (Get-FileHash -LiteralPath $zipPath -Algorithm SHA256).Hash.ToUpperInvariant()
+$bytesAfterCleanup = (Get-Item -LiteralPath $zipPath).Length
+if ($hashBeforeCleanup -ne $hashAfterCleanup -or $bytesBeforeCleanup -ne $bytesAfterCleanup) { throw "Return ZIP identity changed while package staging was cleaned." }
+[System.IO.File]::WriteAllText($sidecarPath, "$hashAfterCleanup  $zipName`n", [System.Text.UTF8Encoding]::new($false))
+[ordered]@{ zipPath = $zipPath; bytes = $bytesAfterCleanup; sha256 = $hashAfterCleanup; bytesBeforeCleanup = $bytesBeforeCleanup; sha256BeforeCleanup = $hashBeforeCleanup; packageStagingRemoved = -not (Test-Path -LiteralPath $stagingRoot); identityStableAfterCleanup = $true; result = "PASS" } | ConvertTo-Json -Compress

@@ -36,9 +36,11 @@ describe("Hanzi V2 STEP 02 child-facing copy", () => {
     const runtime = sourceFiles(join(root, "games", "hanzi-radical-battle", "v2"))
       .map((path) => readFileSync(path, "utf8"))
       .join("\n");
+    const runtimeWithoutNoAdsPromise = runtime.replace("无账号、无上传、无广告", "无账号、无上传");
     for (const term of ["leaderboard", "loot box", "daily login", "streak pressure", "FOMO", "付费", "广告"]) {
-      expect(runtime.toLowerCase(), term).not.toContain(term.toLowerCase());
+      expect(runtimeWithoutNoAdsPromise.toLowerCase(), term).not.toContain(term.toLowerCase());
     }
+    expect(runtime).toContain("无账号、无上传、无广告");
     expect(runtime).toContain("字灵没有丢");
     expect(runtime).toContain("换个位置看看");
   });

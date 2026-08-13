@@ -65,7 +65,9 @@ async function completeRun(page: Page, mode: InputMode, captureAbilityChoices = 
       abilityChoiceIndex += 1;
       if (captureAbilityChoices) await page.screenshot({ path: resolve(output, `M3-ABILITY-CHOICE-${abilityChoiceIndex}.png`), fullPage: true });
       await chooseAbility(page, mode);
-    } else throw new Error(`unexpected M3 phase: ${phase}`);
+    } else if (phase === "final-intro") await activate(page, page.locator('[data-action="enter-final-core"]'), mode);
+    else if (phase === "ending") await activate(page, page.locator('.hm2-ending .hm2-primary[data-action="finish-ending"]'), mode);
+    else throw new Error(`unexpected M3 phase: ${phase}`);
   }
   throw new Error("M3 browser run exceeded action guard");
 }

@@ -8,7 +8,7 @@
     "dev": "vite --host 127.0.0.1",
     "preview": "vite preview --host 127.0.0.1",
     "build": "tsc --noEmit && vite build",
-    "test": "vitest run",
+    "test": "vitest run --no-file-parallelism",
     "test:e2e": "playwright test",
     "test:e2e:equation-slider": "playwright test tests/e2e/equation-slider.spec.ts",
     "test:e2e:equation-slider:gate-a": "playwright test tests/e2e/equation-slider.spec.ts --grep @gate-a",
@@ -104,6 +104,8 @@
     "simulate:hanzi-v2:chapter-one": "tsx tools/hanzi-v2-chapter-one/scan-m5-release.ts 30000",
     "validate:hanzi-v2:chapter-one": "pnpm run test:hanzi-v2:chapter-one && pnpm exec tsc --noEmit && pnpm run simulate:hanzi-v2:chapter-one",
     "evidence:hanzi-v2:chapter-one": "tsx tools/hanzi-v2-chapter-one/finalize-chapter-one-evidence.ts",
+    "verify:pages:hanzi-v2:chapter-one": "tsx tools/hanzi-v2-chapter-one/verify-pages.ts",
+    "finalize:hanzi-v2:chapter-one": "tsx tools/hanzi-v2-chapter-one/finalize-release-state.ts",
     "package:hanzi-v2:chapter-one": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File tools/hanzi-v2-chapter-one/PACKAGE_HANZI_MAGIC_BATTLE_V2_CHAPTER_ONE.ps1"
   },
   "dependencies": {

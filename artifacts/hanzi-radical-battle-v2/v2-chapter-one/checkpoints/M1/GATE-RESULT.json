@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "milestone": "M1",
   "authorizationId": "HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813",
-  "sourceCommit": "WORKTREE",
+  "sourceCommit": "3e961f5",
   "result": "PASS_STAGE",
   "checks": [
     { "id": "deterministic-run-generator", "status": "PASS", "evidence": "Same seed plus action list deep-equals replayed final state; different seeds yield 8 route signatures, 504 ability signatures and 4617 encounter signatures in 5000 seeds." },

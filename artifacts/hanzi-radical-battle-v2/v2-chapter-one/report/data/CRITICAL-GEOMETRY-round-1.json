@@ -1,0 +1,344 @@
+{
+  "schemaVersion": 1,
+  "sourceTreeSha256": "302E318AA250DC10593985FB4E27B8F87CC31BE8CCBE57FEDDAC963955EFBA3E",
+  "round": "round-1",
+  "viewports": [
+    {
+      "viewport": {
+        "id": "compact",
+        "width": 360,
+        "height": 800
+      },
+      "groups": [
+        [
+          {
+            "id": "outer",
+            "x": 67,
+            "y": 523.171875,
+            "width": 226,
+            "height": 226,
+            "name": "外框，空"
+          }
+        ],
+        [
+          {
+            "id": "bi-close-v0-d1-5973",
+            "x": 23,
+            "y": 728.171875,
+            "width": 58.796875,
+            "height": 71.703125,
+            "name": "女"
+          },
+          {
+            "id": "bi-close-v0-d3-751f",
+            "x": 86.796875,
+            "y": 728.171875,
+            "width": 58.796875,
+            "height": 71.703125,
+            "name": "生"
+          },
+          {
+            "id": "bi-close-part-1",
+            "x": 150.59375,
+            "y": 728.171875,
+            "width": 58.796875,
+            "height": 71.703125,
+            "name": "门"
+          },
+          {
+            "id": "bi-close-part-2",
+            "x": 214.390625,
+            "y": 728.171875,
+            "width": 58.796875,
+            "height": 71.703125,
+            "name": "才"
+          },
+          {
+            "id": "bi-close-v0-d2-738b",
+            "x": 278.1875,
+            "y": 728.171875,
+            "width": 58.796875,
+            "height": 71.703125,
+            "name": "王"
+          }
+        ]
+      ],
+      "pageWidth": {
+        "scrollWidth": 360,
+        "clientWidth": 360
+      },
+      "verdict": "PASS"
+    },
+    {
+      "viewport": {
+        "id": "mobile",
+        "width": 390,
+        "height": 844
+      },
+      "groups": [
+        [
+          {
+            "id": "outer",
+            "x": 82,
+            "y": 525.5625,
+            "width": 226,
+            "height": 226,
+            "name": "外框，空"
+          }
+        ],
+        [
+          {
+            "id": "bi-close-v0-d1-5973",
+            "x": 23,
+            "y": 764.5625,
+            "width": 64.796875,
+            "height": 79.015625,
+            "name": "女"
+          },
+          {
+            "id": "bi-close-v0-d3-751f",
+            "x": 92.796875,
+            "y": 764.5625,
+            "width": 64.796875,
+            "height": 79.015625,
+            "name": "生"
+          },
+          {
+            "id": "bi-close-part-1",
+            "x": 162.59375,
+            "y": 764.5625,
+            "width": 64.796875,
+            "height": 79.015625,
+            "name": "门"
+          },
+          {
+            "id": "bi-close-part-2",
+            "x": 232.390625,
+            "y": 764.5625,
+            "width": 64.796875,
+            "height": 79.015625,
+            "name": "才"
+          },
+          {
+            "id": "bi-close-v0-d2-738b",
+            "x": 302.1875,
+            "y": 764.5625,
+            "width": 64.8125,
+            "height": 79.03125,
+            "name": "王"
+          }
+        ]
+      ],
+      "pageWidth": {
+        "scrollWidth": 390,
+        "clientWidth": 390
+      },
+      "verdict": "PASS"
+    },
+    {
+      "viewport": {
+        "id": "tablet",
+        "width": 820,
+        "height": 1180
+      },
+      "groups": [
+        [
+          {
+            "id": "outer",
+            "x": 87.109375,
+            "y": 466.578125,
+            "width": 286,
+            "height": 286,
+            "name": "外框，空"
+          }
+        ],
+        [
+          {
+            "id": "guo-v1-d1-6c35",
+            "x": 442.421875,
+            "y": 477.84375,
+            "width": 103.921875,
+            "height": 126.71875,
+            "name": "氵"
+          },
+          {
+            "id": "guo-v1-d3-706b",
+            "x": 556.34375,
+            "y": 477.84375,
+            "width": 103.921875,
+            "height": 126.71875,
+            "name": "火"
+          },
+          {
+            "id": "guo-part-2",
+            "x": 670.265625,
+            "y": 477.84375,
+            "width": 103.9375,
+            "height": 126.75,
+            "name": "玉"
+          },
+          {
+            "id": "guo-v1-d2-65e5",
+            "x": 442.421875,
+            "y": 614.59375,
+            "width": 103.921875,
+            "height": 126.71875,
+            "name": "日"
+          },
+          {
+            "id": "guo-part-1",
+            "x": 556.34375,
+            "y": 614.59375,
+            "width": 103.921875,
+            "height": 126.71875,
+            "name": "囗"
+          }
+        ]
+      ],
+      "pageWidth": {
+        "scrollWidth": 820,
+        "clientWidth": 820
+      },
+      "verdict": "PASS"
+    },
+    {
+      "viewport": {
+        "id": "desktop",
+        "width": 1280,
+        "height": 720
+      },
+      "groups": [
+        [
+          {
+            "id": "outer",
+            "x": 315.78125,
+            "y": 433.78125,
+            "width": 286,
+            "height": 286,
+            "name": "外框，空"
+          }
+        ],
+        [
+          {
+            "id": "guo-v1-d1-6c35",
+            "x": 672.578125,
+            "y": 443.96875,
+            "width": 104.796875,
+            "height": 127.796875,
+            "name": "氵"
+          },
+          {
+            "id": "guo-v1-d3-706b",
+            "x": 787.375,
+            "y": 443.96875,
+            "width": 104.8125,
+            "height": 127.8125,
+            "name": "火"
+          },
+          {
+            "id": "guo-part-2",
+            "x": 902.1875,
+            "y": 443.96875,
+            "width": 104.796875,
+            "height": 127.796875,
+            "name": "玉"
+          },
+          {
+            "id": "guo-v1-d2-65e5",
+            "x": 672.578125,
+            "y": 581.78125,
+            "width": 104.796875,
+            "height": 127.796875,
+            "name": "日"
+          },
+          {
+            "id": "guo-part-1",
+            "x": 787.375,
+            "y": 581.78125,
+            "width": 104.8125,
+            "height": 127.8125,
+            "name": "囗"
+          }
+        ]
+      ],
+      "pageWidth": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280
+      },
+      "verdict": "PASS"
+    },
+    {
+      "viewport": {
+        "id": "wide",
+        "width": 1440,
+        "height": 900
+      },
+      "groups": [
+        [
+          {
+            "id": "outer",
+            "x": 395.78125,
+            "y": 493.78125,
+            "width": 286,
+            "height": 286,
+            "name": "外框，空"
+          }
+        ],
+        [
+          {
+            "id": "guo-v1-d1-6c35",
+            "x": 752.578125,
+            "y": 503.96875,
+            "width": 104.796875,
+            "height": 127.796875,
+            "name": "氵"
+          },
+          {
+            "id": "guo-v1-d3-706b",
+            "x": 867.375,
+            "y": 503.96875,
+            "width": 104.8125,
+            "height": 127.8125,
+            "name": "火"
+          },
+          {
+            "id": "guo-part-2",
+            "x": 982.1875,
+            "y": 503.96875,
+            "width": 104.796875,
+            "height": 127.796875,
+            "name": "玉"
+          },
+          {
+            "id": "guo-v1-d2-65e5",
+            "x": 752.578125,
+            "y": 641.78125,
+            "width": 104.796875,
+            "height": 127.796875,
+            "name": "日"
+          },
+          {
+            "id": "guo-part-1",
+            "x": 867.375,
+            "y": 641.78125,
+            "width": 104.8125,
+            "height": 127.8125,
+            "name": "囗"
+          }
+        ]
+      ],
+      "pageWidth": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440
+      },
+      "verdict": "PASS"
+    }
+  ],
+  "modalBottom": {
+    "y": 16,
+    "bottom": 16
+  },
+  "multiPointHitTesting": true,
+  "minimumTargetCssPixels": 44,
+  "verdict": "PASS"
+}

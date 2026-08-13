@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "milestone": "M2",
   "authorizationId": "HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813",
-  "sourceCommit": "WORKTREE",
+  "sourceCommit": "45c852e",
   "result": "PASS_STAGE",
   "checks": [
     { "id": "formal-manifest", "status": "PASS", "evidence": "Manifest contains exactly 36 unique characters: 12 V1 identity-bound carry-forwards and 24 machine-verified V2 additions; no new item has parent or child acceptance status." },

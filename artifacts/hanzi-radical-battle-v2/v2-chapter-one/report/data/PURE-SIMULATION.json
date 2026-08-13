@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "sourceTreeSha256": "302E318AA250DC10593985FB4E27B8F87CC31BE8CCBE57FEDDAC963955EFBA3E",
+  "result": "PASS",
+  "seedsPerHero": 30000,
+  "totalSeeds": 90000,
+  "totalCompletedEncounters": 1350000,
+  "failures": [],
+  "resumeMismatches": 0,
+  "coverage": {
+    "characters": {
+      "an": 35759,
+      "bao": 35251,
+      "bi": 27968,
+      "bi-close": 58942,
+      "cai": 39172,
+      "cao": 38640,
+      "chang": 25285,
+      "chen": 27754,
+      "feng": 34998,
+      "guo": 49867,
+      "hai": 30682,
+      "hao": 25177,
+      "he": 30685,
+      "hua": 35756,
+      "hui": 51283,
+      "jia": 25297,
+      "kan": 25345,
+      "lin": 35999,
+      "mao": 27042,
+      "miao": 38965,
+      "ming": 35265,
+      "ni": 47005,
+      "pao": 27324,
+      "qing-clear": 36165,
+      "qing-sunny": 35978,
+      "shan": 42418,
+      "song": 36112,
+      "ta": 47027,
+      "tu": 49912,
+      "wen": 58730,
+      "xing": 49270,
+      "yang": 30574,
+      "yin": 25331,
+      "yuan": 51296,
+      "yuan-round": 49889,
+      "zao": 27837
+    },
+    "abilities": {
+      "calm-field": {
+        "offered": 44587,
+        "selected": 14858,
+        "triggered": 14858
+      },
+      "enclosure-ribbon": {
+        "offered": 45045,
+        "selected": 15016,
+        "triggered": 15016
+      },
+      "gentle-undo": {
+        "offered": 45002,
+        "selected": 14949,
+        "triggered": 14949
+      },
+      "guided-slot": {
+        "offered": 44710,
+        "selected": 14806,
+        "triggered": 14806
+      },
+      "ink-shield": {
+        "offered": 45074,
+        "selected": 14983,
+        "triggered": 14983
+      },
+      "intent-echo": {
+        "offered": 45016,
+        "selected": 15103,
+        "triggered": 15103
+      },
+      "meaning-glimpse": {
+        "offered": 45102,
+        "selected": 15004,
+        "triggered": 15004
+      },
+      "next-shape": {
+        "offered": 45228,
+        "selected": 14971,
+        "triggered": 14971
+      },
+      "path-window": {
+        "offered": 45008,
+        "selected": 14900,
+        "triggered": 14900
+      },
+      "recovery-leaf": {
+        "offered": 45040,
+        "selected": 14796,
+        "triggered": 14796
+      },
+      "repair-preview": {
+        "offered": 45034,
+        "selected": 15071,
+        "triggered": 15071
+      },
+      "root-guard": {
+        "offered": 45082,
+        "selected": 15225,
+        "triggered": 15225
+      },
+      "second-look": {
+        "offered": 45087,
+        "selected": 15051,
+        "triggered": 15051
+      },
+      "shared-part": {
+        "offered": 44985,
+        "selected": 15026,
+        "triggered": 15026
+      },
+      "structure-lantern": {
+        "offered": 44842,
+        "selected": 15064,
+        "triggered": 15064
+      },
+      "wind-order": {
+        "offered": 45093,
+        "selected": 15058,
+        "triggered": 15058
+      },
+      "word-echo": {
+        "offered": 44920,
+        "selected": 15129,
+        "triggered": 15129
+      },
+      "word-lantern": {
+        "offered": 45145,
+        "selected": 14990,
+        "triggered": 14990
+      }
+    },
+    "behaviors": {
+      "companion-path": 285112,
+      "distractor-hold": 90200,
+      "dual-route": 90114,
+      "hand-gust": 329954,
+      "hint-fade": 89886,
+      "ink-shell": 284934,
+      "mimic-flare": 89804,
+      "scenery-shift": 90196,
+      "slot-veil": 89800
+    },
+    "bosses": {
+      "echo-bloom-guardian": 90000,
+      "ink-king-core": 90000,
+      "lantern-root-guardian": 90000,
+      "wind-bell-guardian": 90000
+    },
+    "routeSignatures": 56,
+    "encounterSignatures": 89999
+  },
+  "missingCharacters": [],
+  "missingAbilities": [],
+  "missingBehaviors": [],
+  "missingBosses": [],
+  "generatedAtUtc": "2026-08-13T18:29:43.684Z"
+}

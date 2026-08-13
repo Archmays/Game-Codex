@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "REVIEWER_B_HANZI_LEARNING",
+  "sourceTreeSha256": "302E318AA250DC10593985FB4E27B8F87CC31BE8CCBE57FEDDAC963955EFBA3E",
+  "verdict": "PASS_MACHINE",
+  "machineOnly": true,
+  "focus": [
+    "36 character identities",
+    "four structures",
+    "ordered components",
+    "tone-mark pinyin",
+    "familiar words",
+    "short meanings",
+    "unique-solution hands",
+    "no etymology claim"
+  ],
+  "evidence": {
+    "v1CarryForwardCharacters": 12,
+    "newSourceLedgerEntries": 24,
+    "completeCharacters": 36,
+    "exhaustiveHands": 108,
+    "simulationSeeds": 90000
+  },
+  "unresolved": [],
+  "generatedAtUtc": "2026-08-13T18:34:57.881Z"
+}

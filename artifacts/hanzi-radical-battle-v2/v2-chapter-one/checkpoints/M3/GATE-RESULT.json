@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "milestone": "M3",
   "authorizationId": "HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813",
-  "sourceCommit": "WORKTREE",
+  "sourceCommit": "031d1fc",
   "result": "PASS_STAGE",
   "checks": [
     { "id": "hero-identity", "status": "PASS", "evidence": "Three heroes have stable save IDs, complete selection cards, distinct world marks, one innate ability each, and explicit child and Hanzi-learning value without changing an answer." },

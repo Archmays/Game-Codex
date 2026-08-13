@@ -12,7 +12,7 @@ Authorized scope: M0–M5 continuous implementation; 36 characters; three heroes
 
 Completed gates: M0 authorization/freeze, M1 replay loop, M2 formal 36-character content pipeline, M3 three-hero build system, M4 persistent camp/save/spellbook, and M5 complete Chapter One are `PASS_STAGE`. M5 adds three formal regions plus the final core, exactly nine recoverable behaviors, four bosses, 72 optimized Theme C runtime assets, the complete story/free-adventure ending loop, a child-only hub card, 18 complete browser runs, fixed visual/ARIA baselines, and an identity-safe launcher.
 
-Active gate: FINAL — source-bound 30,000-seed audit, two exact no-update rounds, full repository/V1/V2/build regression, independent reviewer reconciliation, Pages/remote verification, release tag, return package, cleanup and clean-repository proof. M5 `PASS_STAGE` is not the terminal result by itself.
+Active gate: FINAL — source-bound 90,000-seed audit, 18 complete browser playthroughs, two exact no-update rounds, full repository/V1/V2/build regression, launcher lifecycle and independent reviewer reconciliation are `PASS_MACHINE_CANDIDATE`. Final evidence commit, Pages/remote verification, release tag, return package, cleanup and clean-repository proof remain. This candidate is not the terminal result by itself.
 
 Real child validation: `NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE`. User V1 play acceptance is recorded separately and must not be represented as child evidence.
 

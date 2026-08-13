@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "sourceTreeSha256": "302E318AA250DC10593985FB4E27B8F87CC31BE8CCBE57FEDDAC963955EFBA3E",
+  "reviewers": [
+    "REVIEWER_A_CHILD_GAME_SCOPE",
+    "REVIEWER_B_HANZI_LEARNING",
+    "REVIEWER_C_VISUAL_A11Y_TECH"
+  ],
+  "verdicts": [
+    "PASS_MACHINE",
+    "PASS_MACHINE",
+    "PASS_MACHINE"
+  ],
+  "conservativeVerdict": "PASS_MACHINE",
+  "disagreements": [],
+  "severities": {
+    "SEV_1": 0,
+    "SEV_2": 0,
+    "SEV_3": 0,
+    "contentCorrectnessSEV_4": 0,
+    "childUsabilitySEV_4": 0,
+    "futureEnhancementSEV_4": 0
+  },
+  "realChildValidation": "NO_BY_USER_DIRECTION",
+  "generatedAtUtc": "2026-08-13T18:34:57.881Z"
+}

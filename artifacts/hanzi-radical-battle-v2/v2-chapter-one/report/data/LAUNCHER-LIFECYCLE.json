@@ -1,17 +1,18 @@
 {
     "schemaVersion":  1,
+    "sourceTreeSha256":  "302E318AA250DC10593985FB4E27B8F87CC31BE8CCBE57FEDDAC963955EFBA3E",
     "result":  "PASS",
     "started":  true,
     "reused":  true,
     "stopped":  true,
     "preferredPort":  5194,
     "actualPort":  5194,
-    "pid":  34916,
+    "pid":  2084,
     "url":  "http://127.0.0.1:5194/?play=hanzi-v2-chapter-one\u0026from=hub",
     "checks":  [
                    "HTTP_READY",
                    "EXACT_REUSE_PRESERVED",
                    "OWNED_PROCESS_CLEANED"
                ],
-    "generatedAtUtc":  "2026-08-13T16:22:57.5730652Z"
+    "generatedAtUtc":  "2026-08-13T18:29:50.7201684Z"
 }

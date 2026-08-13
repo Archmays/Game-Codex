@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "milestone": "M4",
   "authorizationId": "HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813",
-  "sourceCommit": "WORKTREE",
+  "sourceCommit": "1eadcd1",
   "result": "PASS_STAGE",
   "checks": [
     { "id": "eight-persistent-repairs", "status": "PASS", "evidence": "Exactly eight stable repair IDs are visible and interactive in the camp. Each defines distinct before/after shape, function, and color states; all eight persist through schema-v5 progress without currency, daily tasks, grind, or decay." },

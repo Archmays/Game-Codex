@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "sourceTreeSha256": "302E318AA250DC10593985FB4E27B8F87CC31BE8CCBE57FEDDAC963955EFBA3E",
+  "localStorageOnly": true,
+  "v1RawPreserved": true,
+  "v1MigrationDiscoveries": 12,
+  "v1MigrationRepairs": 3,
+  "checksum": "fnv1a32",
+  "backupRecovery": true,
+  "futureVersionReadOnly": true,
+  "detailedInputHistoryStored": false,
+  "childDataUploaded": false,
+  "externalRuntimeRequests": 0,
+  "verdict": "PASS",
+  "generatedAtUtc": "2026-08-13T18:34:57.881Z"
+}

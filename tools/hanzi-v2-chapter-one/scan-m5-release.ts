@@ -11,6 +11,7 @@ import {
   simulateM3Run,
   type M3AbilityId,
 } from "../../games/hanzi-radical-battle/v2/chapter-one";
+import { computeMachineReviewSourceTreeSha256 } from "../game-machine-review/source-identity";
 
 const seedsPerHero = Number(process.argv[2] ?? "10000");
 if (!Number.isSafeInteger(seedsPerHero) || seedsPerHero < 1) throw new Error("seeds per hero must be a positive integer");
@@ -58,6 +59,7 @@ const missingBosses = [...bosses].filter(([, count]) => count === 0).map(([id]) 
 const passed = failures.length === 0 && resumeMismatches === 0 && missingCharacters.length === 0 && missingAbilities.length === 0 && missingBehaviors.length === 0 && missingBosses.length === 0;
 const report = {
   schemaVersion: 1,
+  sourceTreeSha256: computeMachineReviewSourceTreeSha256(),
   result: passed ? "PASS" : "FAIL",
   seedsPerHero,
   totalSeeds: seedsPerHero * M3_HEROES.length,

@@ -1,5 +1,8 @@
 [CmdletBinding()]
-param([int]$PreferredPort = 5194)
+param(
+  [int]$PreferredPort = 5194,
+  [string]$SourceTreeSha256 = $env:CHAPTER_ONE_SOURCE_TREE_SHA256
+)
 
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
@@ -10,7 +13,8 @@ $paths = Get-ChapterOneLauncherPaths -RepositoryRoot $repositoryRoot
 $startScript = Join-Path $PSScriptRoot "START_HANZI_MAGIC_BATTLE_V2_CHAPTER_ONE.ps1"
 $stopScript = Join-Path $PSScriptRoot "STOP_HANZI_MAGIC_BATTLE_V2_CHAPTER_ONE.ps1"
 $reportPath = Join-Path $repositoryRoot "artifacts\hanzi-radical-battle-v2\v2-chapter-one\report\data\LAUNCHER-LIFECYCLE.json"
-$result = [ordered]@{ schemaVersion = 1; result = "FAIL"; started = $false; reused = $false; stopped = $false; preferredPort = $PreferredPort; actualPort = $null; pid = $null; url = $null; checks = @() }
+if ($SourceTreeSha256 -notmatch '^[A-Fa-f0-9]{64}$') { throw "SourceTreeSha256 must be a 64-character SHA-256 identity." }
+$result = [ordered]@{ schemaVersion = 1; sourceTreeSha256 = $SourceTreeSha256.ToUpperInvariant(); result = "FAIL"; started = $false; reused = $false; stopped = $false; preferredPort = $PreferredPort; actualPort = $null; pid = $null; url = $null; checks = @() }
 
 try {
   & $stopScript 2>$null
