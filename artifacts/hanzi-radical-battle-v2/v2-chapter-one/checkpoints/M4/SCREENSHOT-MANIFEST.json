@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M4",
+  "result": "PASS",
+  "review": "Six SHA-256-bound screenshots were inspected across desktop camp, desktop and tablet spellbook, mobile V1 migration, browser resume, and parent second-confirmation states. Layouts remain readable without overlap or horizontal overflow.",
+  "files": [
+    { "file": "screenshots/M4-CAMP-DESKTOP-8-REPAIRS.png", "bytes": 787180, "sha256": "B1B6F3B106F181C7637D1543E006D46B4E5817A68EBE5B577818B565D3C7B625" },
+    { "file": "screenshots/M4-PARENT-SECOND-CONFIRM.png", "bytes": 530687, "sha256": "22CADA872507EB6E758075D124EF9CBBE3FE116ADC1D95E45E7D99197C837DB2" },
+    { "file": "screenshots/M4-RESUME-DESKTOP.png", "bytes": 563375, "sha256": "FE2D0A0D375F85D766AD95E16D56769A35A9080C1980694CBB684C0374BFB45E" },
+    { "file": "screenshots/M4-SPELLBOOK-DESKTOP-REPLAYS.png", "bytes": 710498, "sha256": "48DA41576ACB7F01A0F7DD8103E43DB0DA482C3B47C09DEE205792B83A9AFD83" },
+    { "file": "screenshots/M4-SPELLBOOK-TABLET.png", "bytes": 447010, "sha256": "617EDECB9270DDD5C1E1A721BE63989B550278634530BAC8C873E0C197DA820D" },
+    { "file": "screenshots/M4-V1-MIGRATION-MOBILE.png", "bytes": 832484, "sha256": "1FC2338DAD41844A718FCC13C682D6DB5DE5D336D943014E99EE61513E4CFB8E" }
+  ]
+}

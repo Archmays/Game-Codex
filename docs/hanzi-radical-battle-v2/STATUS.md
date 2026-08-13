@@ -10,9 +10,9 @@ V1 frozen baseline: tag `hanzi-magic-v2-v1.0.0` → commit `43e7841d2190922b6048
 
 Authorized scope: M0–M5 continuous implementation; 36 characters; three heroes; three regions plus the final core; nine monster behaviors; 18 selectable and three innate abilities; four bosses; eight camp repairs; 36 spellbook entries; V2 local save migration; formal Theme C art/audio; hub, launcher, package, tags, and update of the existing GitHub Pages deployment.
 
-Completed gates: M0 authorization/freeze, M1 replay loop, M2 formal 36-character content pipeline, and M3 three-hero build system are `PASS_STAGE`. M3 evidence adds exactly 3 heroes, 3 innate and 18 selectable abilities, 30,000 deterministic seeds with 360,000 encounters, and 9 complete browser paths across mouse, keyboard, and touch.
+Completed gates: M0 authorization/freeze, M1 replay loop, M2 formal 36-character content pipeline, M3 three-hero build system, and M4 persistent camp/save/spellbook are `PASS_STAGE`. M4 evidence adds exactly 8 interactive repair objects, 36 complete searchable and paginated spellbook entries, byte-preserving V1 migration, corruption/future-version protection, safe browser resume, and a parent second-confirmation clear path.
 
-Active gate: M4 — exactly eight persistent camp repairs, V1-to-V2 local save migration, and a complete accessible 36-character spellbook. A milestone may advance only after its source-bound `PASS_STAGE` result. Final acceptance still requires at least 18 browser machine playthroughs, all content/save/accessibility/geometry/resource/route gates, clean source identity, and verified Pages.
+Active gate: M5 — three formal regions plus the final Ink King core, exactly nine normal monster behaviors, three two-phase region bosses and one three-phase final boss, formal Theme C art/audio, story ending/free adventure, hub card, launcher, and complete Chapter One browser flow. A milestone may advance only after its source-bound `PASS_STAGE` result. Final acceptance still requires all content/save/accessibility/geometry/resource/route gates, clean source identity, and verified Pages.
 
 Real child validation: `NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE`. User V1 play acceptance is recorded separately and must not be represented as child evidence.
 

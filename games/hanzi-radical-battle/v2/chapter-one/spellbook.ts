@@ -13,6 +13,10 @@ export const CHAPTER_ONE_SPELLBOOK: readonly ChapterSpellbookEntry[] = CHAPTER_O
   magicName: character.magicName,
   magicEffect: character.magicEffect,
   meaningAssetKey: character.meaningAssetKey,
+  regionId: character.regionId,
+  worldAssociation: character.magicEffect,
+  meaningImageDisclaimer: "这是字义联想，不是字源说明",
+  replayPronunciation: true,
   replayFormation: true,
   replayMeaningMagic: true,
 }));

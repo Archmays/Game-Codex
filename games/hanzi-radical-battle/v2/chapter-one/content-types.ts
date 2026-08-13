@@ -81,6 +81,10 @@ export interface ChapterSpellbookEntry {
   readonly magicName: string;
   readonly magicEffect: string;
   readonly meaningAssetKey: string;
+  readonly regionId: ChapterRegionId;
+  readonly worldAssociation: string;
+  readonly meaningImageDisclaimer: "这是字义联想，不是字源说明";
+  readonly replayPronunciation: true;
   readonly replayFormation: true;
   readonly replayMeaningMagic: true;
 }

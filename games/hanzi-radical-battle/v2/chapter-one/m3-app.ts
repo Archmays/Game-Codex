@@ -1,15 +1,16 @@
 import type { MountedGame } from "../../../../packages/game-core";
 import { getM1Behavior } from "./content";
 import { getChapterOneCharacter } from "./characters";
-import { M3_BUILD_ABILITIES, M3_HEROES, getM3Ability, getM3Hero, type M3AbilityId, type M3HeroId } from "./builds";
+import { getM3Ability, getM3Hero, type M3AbilityId, type M3HeroId } from "./builds";
+import type { M4RepairId } from "./camp";
 import { clearM3Session, readM3Session, writeM3Session } from "./m3-session";
 import { createM3GameState, currentM3Character, reduceM3State } from "./m3-machine";
+import { clearM4Save, createFreshM4Save, readM4Save, syncM4SaveFromGame, updateM4Save, writeM4Save } from "./m4-save";
+import { FRESH_M4_SPELLBOOK_VIEW, renderM4Camp, renderM4Parent, renderM4RepairDetail, renderM4Spellbook, spellbookPageCount, type M4OverlayKind, type M4SpellbookFilter, type M4SpellbookView } from "./m4-ui";
 import type { M3Action, M3GameState, M3PathId } from "./m3-types";
 import type { ChapterSlotId } from "./content-types";
 import type { M1SessionStorage } from "./session";
 import "./styles.css";
-
-const PREFS_KEY = "family-games/hanzi-magic-v2/chapter-one/preferences";
 
 interface Preferences { readonly muted: boolean; readonly reducedMotion: boolean; }
 export interface MountM3Options { readonly seed?: string; readonly heroId?: M3HeroId; readonly storage?: M1SessionStorage; readonly fresh?: boolean; readonly returnHref?: string; readonly onStateChange?: (state: M3GameState) => void; }
@@ -19,11 +20,10 @@ function browserStorage(): M1SessionStorage { return window.localStorage; }
 function escapeHtml(value: string): string { return value.replace(/[&<>\"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[character]!); }
 function slotLabel(slot: ChapterSlotId): string { return ({ left: "左边", right: "右边", top: "上边", bottom: "下边", outer: "外框", inner: "里面" })[slot]; }
 function structureLabel(structure: ReturnType<typeof getChapterOneCharacter>["structure"]): string { return ({ "left-right": "左右结构", "top-bottom": "上下结构", "full-enclosure": "全包围结构", "semi-enclosure": "半包围结构" })[structure]; }
-function readPreferences(storage: M1SessionStorage): Preferences {
-  try { const value = JSON.parse(storage.getItem(PREFS_KEY) ?? "null") as Partial<Preferences> | null; return { muted: value?.muted === true, reducedMotion: value?.reducedMotion === true || window.matchMedia?.("(prefers-reduced-motion: reduce)").matches === true }; }
-  catch { return { muted: false, reducedMotion: false }; }
+function speak(text: string, preferences: Preferences): void {
+  if (preferences.muted || typeof window.speechSynthesis === "undefined" || typeof SpeechSynthesisUtterance === "undefined") return;
+  window.speechSynthesis.cancel(); const utterance = new SpeechSynthesisUtterance(text); utterance.lang = "zh-CN"; utterance.rate = 0.88; window.speechSynthesis.speak(utterance);
 }
-function writePreferences(storage: M1SessionStorage, preferences: Preferences) { storage.setItem(PREFS_KEY, JSON.stringify(preferences)); }
 
 function renderProgress(state: M3GameState): string {
   return `<ol class="hm2-progress" aria-label="三片区域进度">${state.plan.regions.map((region, index) => {
@@ -39,13 +39,6 @@ function renderBuildBadges(state: M3GameState): string {
     <span class="hm2-build-badge is-active" data-innate-id="${hero.innateAbilityId}" title="${escapeHtml(hero.innateDescription)}"><i data-icon-key="${hero.iconKey}"></i><b>${hero.innateName}</b></span>
     ${selected.map(({ ability, active }) => `<span class="hm2-build-badge${active ? " is-active" : ""}" data-build-ability-id="${ability.id}" data-triggered="${String(active)}" title="${escapeHtml(ability.childDescription)}"><i data-icon-key="${ability.iconKey}"></i><b>${ability.name}</b></span>`).join("")}
   </div>`;
-}
-
-function renderCamp(state: M3GameState): string {
-  return `<section class="hm2-panel hm2-camp hm2-m3-camp" data-testid="chapter-one-m3-camp"><p class="hm2-kicker">第一章 · 选一位同行伙伴</p><h2>哪一种字光想和你一起走？</h2><p>操作方式相同，三位伙伴只带来不同的观察、保护和世界反馈。光语伙伴已经可以直接出发。</p>
-    <div class="hm2-hero-grid" role="group" aria-label="三位英雄">${M3_HEROES.map((hero) => `<button type="button" class="hm2-hero-card${state.heroId === hero.id ? " is-selected" : ""}" data-action="select-hero" data-hero-id="${hero.id}" aria-pressed="${String(state.heroId === hero.id)}"><span data-icon-key="${hero.iconKey}" aria-hidden="true"></span><b>${hero.name}</b><small>${hero.shortDescription}</small><em>${hero.innateName}</em></button>`).join("")}</div>
-    <button class="hm2-primary" type="button" data-action="start-run">和${getM3Hero(state.heroId).name}出发</button>
-  </section>`;
 }
 
 function renderRouteChoice(state: M3GameState): string {
@@ -104,8 +97,11 @@ function renderSummary(state: M3GameState): string {
   return `<section class="hm2-panel hm2-summary" data-testid="chapter-one-m3-run-summary"><p class="hm2-kicker">完整短局 · 没有分数、排名或连胜</p><h2>${getM3Hero(state.heroId).name}带回了三道字光</h2><dl><div><dt>同行伙伴</dt><dd>${getM3Hero(state.heroId).name} · ${getM3Hero(state.heroId).innateName}</dd></div><div><dt>本局能力</dt><dd>${state.selectedAbilityIds.map((id) => getM3Ability(id).name).join("、")}</dd></div><div><dt>发现汉字</dt><dd>${state.discoveredCharacterIds.map((id) => getChapterOneCharacter(id).glyph).join(" ")}</dd></div><div><dt>seed</dt><dd><code>${escapeHtml(state.seed)}</code></dd></div></dl><div class="hm2-summary-actions"><button class="hm2-primary" type="button" data-action="repeat-seed">同一英雄沿 seed 重放</button><a href="?play=hanzi-v2-chapter-one&from=hub&fresh=1&seed=${encodeURIComponent(`${state.seed}-next`)}">换英雄或路线</a></div></section>`;
 }
 
-function renderPhase(state: M3GameState): string {
-  if (state.phase === "camp") return renderCamp(state);
+function renderPhase(state: M3GameState, progress: ReturnType<typeof createFreshM4Save>, overlay: M4OverlayKind, spellbookView: M4SpellbookView, repairId: M4RepairId | null, parentClearArmed: boolean, readOnly: boolean): string {
+  if (overlay === "spellbook") return renderM4Spellbook(progress, spellbookView);
+  if (overlay === "parent") return renderM4Parent(progress, parentClearArmed, readOnly);
+  if (overlay === "repair" && repairId) return renderM4RepairDetail(progress, repairId);
+  if (state.phase === "camp") return renderM4Camp(state, progress);
   if (state.phase === "route-choice") return renderRouteChoice(state);
   if (state.phase === "behavior-telegraph" || state.phase === "behavior-effect") return renderBehavior(state);
   if (state.phase === "encounter") return renderBoard(state);
@@ -119,36 +115,70 @@ function renderPhase(state: M3GameState): string {
 export function mountHanziMagicChapterOneM3(root: HTMLElement, options: MountM3Options = {}): MountedM3ChapterOne {
   const storage = options.storage ?? browserStorage();
   if (options.fresh) { clearM3Session(storage); const consumed = new URL(window.location.href); consumed.searchParams.delete("fresh"); window.history.replaceState(window.history.state, "", `${consumed.pathname}${consumed.search}${consumed.hash}`); }
+  const saveRead = readM4Save(storage);
+  const writable = saveRead.writable;
+  let progress = saveRead.state;
   const requestedSeed = options.seed?.trim() || "ink-forest-2";
-  const requestedHero = options.heroId ?? "light-speaker";
+  const requestedHero = options.heroId ?? progress.selectedHeroId;
   const restored = options.fresh ? null : readM3Session(storage);
   const canRestore = restored?.state.seed === requestedSeed;
   let state = canRestore ? restored.state : createM3GameState(requestedSeed, requestedHero);
   let actions: M3Action[] = canRestore ? restored.actions : [];
   let initialHeroId: M3HeroId = canRestore ? restored.initialHeroId : requestedHero;
-  let preferences = readPreferences(storage);
+  let preferences: Preferences = { muted: progress.settings.muted, reducedMotion: progress.settings.reducedMotion || window.matchMedia?.("(prefers-reduced-motion: reduce)").matches === true };
+  const initialMode = new URL(window.location.href).searchParams.get("mode");
+  let overlay: M4OverlayKind = initialMode === "spellbook" ? "spellbook" : initialMode === "parent" ? "parent" : "none";
+  let spellbookView: M4SpellbookView = FRESH_M4_SPELLBOOK_VIEW;
+  let repairId: M4RepairId | null = null;
+  let parentClearArmed = false;
+  let restoreFocusSelector: string | null = null;
   let draggedCardId: string | null = null;
   let destroyed = false;
   const returnHref = options.returnHref ?? "?world=my-game-world";
+  progress = syncM4SaveFromGame(progress, state);
+  if (writable) writeM4Save(storage, progress);
+
+  const persistProgress = () => { if (writable) writeM4Save(storage, progress); };
+  const closeOverlay = () => {
+    overlay = "none"; parentClearArmed = false; repairId = null; render();
+    if (restoreFocusSelector) root.querySelector<HTMLElement>(restoreFocusSelector)?.focus({ preventScroll: true });
+    restoreFocusSelector = null;
+  };
 
   const render = () => {
-    root.innerHTML = `<main class="hm2-shell hm2-m3-shell" data-testid="hanzi-magic-chapter-one-m3" data-phase="${state.phase}" data-seed="${escapeHtml(state.seed)}" data-hero-id="${state.heroId}" data-muted="${String(preferences.muted)}" data-reduced-motion="${String(preferences.reducedMotion)}" data-selected-ability-count="${state.selectedAbilityIds.length}" data-triggered-ability-count="${state.triggeredAbilityIds.length}" data-innate-trigger-count="${state.innateEvidence.triggeredCount}" data-action-count="${state.actionCount}"><div class="hm2-world" aria-hidden="true"><div class="hm2-canopy"></div><div class="hm2-path"></div><div class="hm2-fireflies"></div></div><header class="hm2-header"><a href="${returnHref}" aria-label="返回我的游戏世界">← 营地外</a><div><span>汉字魔法战</span><h1>墨迹森林 · 第一章</h1></div><div class="hm2-settings"><button type="button" data-pref="muted" aria-pressed="${String(preferences.muted)}">${preferences.muted ? "打开声音" : "静音"}</button><button type="button" data-pref="reduced-motion" aria-pressed="${String(preferences.reducedMotion)}">${preferences.reducedMotion ? "恢复动画" : "减少动画"}</button></div></header><div class="hm2-ui">${renderProgress(state)}${renderBuildBadges(state)}<div class="hm2-phase" aria-live="polite">${renderPhase(state)}</div></div><footer class="hm2-footer"><span>本地保存 · 无登录 · 无排名</span><span>V2.0.0 · 三英雄</span></footer></main>`;
-    root.querySelector<HTMLElement>(state.phase === "ability-choice" ? "[data-ability-id]" : state.phase === "camp" ? `[data-hero-id="${state.heroId}"]` : "[data-action]")?.focus({ preventScroll: true });
+    root.innerHTML = `<main class="hm2-shell hm2-m3-shell" data-testid="hanzi-magic-chapter-one-m3" data-phase="${state.phase}" data-overlay="${overlay}" data-seed="${escapeHtml(state.seed)}" data-hero-id="${state.heroId}" data-muted="${String(preferences.muted)}" data-reduced-motion="${String(preferences.reducedMotion)}" data-selected-ability-count="${state.selectedAbilityIds.length}" data-triggered-ability-count="${state.triggeredAbilityIds.length}" data-innate-trigger-count="${state.innateEvidence.triggeredCount}" data-action-count="${state.actionCount}" data-discovered-count="${progress.discoveredCharacterIds.length}" data-repair-count="${progress.repairedObjectIds.length}" data-save-source="${saveRead.source}" data-save-read-only="${String(!writable)}"><div class="hm2-world" aria-hidden="true"><div class="hm2-canopy"></div><div class="hm2-path"></div><div class="hm2-fireflies"></div></div><header class="hm2-header"><a href="${returnHref}" aria-label="返回我的游戏世界">← 营地外</a><div><span>汉字魔法战</span><h1>墨迹森林 · 第一章</h1></div><div class="hm2-settings"><button type="button" data-pref="muted" aria-pressed="${String(preferences.muted)}">${preferences.muted ? "打开声音" : "静音"}</button><button type="button" data-pref="reduced-motion" aria-pressed="${String(preferences.reducedMotion)}">${preferences.reducedMotion ? "恢复动画" : "减少动画"}</button></div></header>${saveRead.recovered || !writable ? `<div class="hm2-save-note" role="status">${!writable ? "发现较新版本存档：当前只读，不会覆盖。" : "已从本机备份安全恢复。"}</div>` : ""}<div class="hm2-ui">${renderProgress(state)}${renderBuildBadges(state)}<div class="hm2-phase" aria-live="polite">${renderPhase(state, progress, overlay, spellbookView, repairId, parentClearArmed, !writable)}</div></div><footer class="hm2-footer"><span>本地保存 · 无登录 · 无排名</span><span>V2.0.0 · 三英雄</span></footer></main>`;
+    const focusSelector = overlay === "spellbook" ? "[data-spellbook-search]" : overlay === "parent" || overlay === "repair" ? "[data-action=\"close-overlay\"]" : state.phase === "ability-choice" ? "[data-ability-id]" : state.phase === "camp" ? `[data-hero-id="${state.heroId}"]` : "[data-action]";
+    root.querySelector<HTMLElement>(focusSelector)?.focus({ preventScroll: true });
     options.onStateChange?.(state);
   };
   const dispatch = (action: M3Action) => {
     if (destroyed) return;
     state = reduceM3State(state, action);
     if (action.type === "repeat-seed") { actions = []; initialHeroId = state.heroId; } else actions = [...actions, action];
-    writeM3Session(storage, state.seed, initialHeroId, actions);
+    if (writable) writeM3Session(storage, state.seed, initialHeroId, actions);
+    progress = syncM4SaveFromGame(progress, state);
+    persistProgress();
     render();
   };
   const onClick = (event: Event) => {
     const target = (event.target as HTMLElement | null)?.closest<HTMLElement>("button, a"); if (!target) return;
     const pref = target.dataset.pref;
-    if (pref === "muted" || pref === "reduced-motion") { preferences = pref === "muted" ? { ...preferences, muted: !preferences.muted } : { ...preferences, reducedMotion: !preferences.reducedMotion }; writePreferences(storage, preferences); render(); return; }
+    if (pref === "muted" || pref === "reduced-motion") { preferences = pref === "muted" ? { ...preferences, muted: !preferences.muted } : { ...preferences, reducedMotion: !preferences.reducedMotion }; progress = updateM4Save(progress, { settings: { ...progress.settings, ...preferences } }); persistProgress(); render(); return; }
     const action = target.dataset.action;
-    if (action === "select-hero" && target.dataset.heroId) dispatch({ type: "select-hero", heroId: target.dataset.heroId as M3HeroId });
+    if (action === "open-spellbook") { restoreFocusSelector = '[data-action="open-spellbook"]'; overlay = "spellbook"; spellbookView = FRESH_M4_SPELLBOOK_VIEW; progress = updateM4Save(progress, { minimalLocalEvents: { ...progress.minimalLocalEvents, spellbookOpens: progress.minimalLocalEvents.spellbookOpens + 1 } }); persistProgress(); render(); }
+    else if (action === "open-parent") { restoreFocusSelector = '[data-action="open-parent"]'; overlay = "parent"; parentClearArmed = false; render(); }
+    else if (action === "open-repair" && target.dataset.repairId) { repairId = target.dataset.repairId as M4RepairId; restoreFocusSelector = `[data-repair-id="${repairId}"]`; overlay = "repair"; progress = updateM4Save(progress, { minimalLocalEvents: { ...progress.minimalLocalEvents, repairInteractions: progress.minimalLocalEvents.repairInteractions + 1 } }); persistProgress(); render(); }
+    else if (action === "close-overlay") closeOverlay();
+    else if (action === "filter-spellbook" && target.dataset.filter) { spellbookView = { ...spellbookView, filter: target.dataset.filter as M4SpellbookFilter, page: 0, selectedCharacterId: null, replayKind: null }; render(); }
+    else if (action === "spellbook-previous") { spellbookView = { ...spellbookView, page: Math.max(0, spellbookView.page - 1), selectedCharacterId: null, replayKind: null }; render(); }
+    else if (action === "spellbook-next") { spellbookView = { ...spellbookView, page: Math.min(spellbookPageCount(spellbookView) - 1, spellbookView.page + 1), selectedCharacterId: null, replayKind: null }; render(); }
+    else if (action === "select-spellbook-entry" && target.dataset.characterId) { spellbookView = { ...spellbookView, selectedCharacterId: target.dataset.characterId, replayKind: null }; render(); }
+    else if ((action === "replay-pronunciation" || action === "replay-formation" || action === "replay-meaning") && target.dataset.characterId) { const character = getChapterOneCharacter(target.dataset.characterId); const replayKind = action === "replay-pronunciation" ? "pronunciation" : action === "replay-formation" ? "formation" : "meaning"; spellbookView = { ...spellbookView, selectedCharacterId: character.id, replayKind }; if (replayKind === "pronunciation") speak(character.spokenPhrase, preferences); render(); }
+    else if (action === "arm-clear-progress") { parentClearArmed = true; render(); }
+    else if (action === "cancel-clear-progress") { parentClearArmed = false; render(); }
+    else if (action === "confirm-clear-progress" && parentClearArmed && writable) { clearM4Save(storage); clearM3Session(storage); progress = createFreshM4Save(); preferences = { muted: false, reducedMotion: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches === true }; state = createM3GameState(requestedSeed, "light-speaker"); actions = []; initialHeroId = "light-speaker"; progress = syncM4SaveFromGame(progress, state); persistProgress(); overlay = "none"; parentClearArmed = false; render(); }
+    else if (action === "word-echo") { const character = currentM3Character(state); if (character) speak(character.spokenPhrase, preferences); }
+    else if (action === "select-hero" && target.dataset.heroId) dispatch({ type: "select-hero", heroId: target.dataset.heroId as M3HeroId });
     else if (action === "start-run") dispatch({ type: "start-run" });
     else if (action === "choose-route" && target.dataset.pathId) dispatch({ type: "choose-route", pathId: target.dataset.pathId as M3PathId });
     else if (action === "begin-behavior") dispatch({ type: "begin-behavior" });
@@ -160,17 +190,19 @@ export function mountHanziMagicChapterOneM3(root: HTMLElement, options: MountM3O
     else if (target.dataset.cardId) dispatch({ type: "select-card", cardId: target.dataset.cardId });
     else if (target.dataset.slotId) dispatch({ type: "place-card", slotId: target.dataset.slotId as ChapterSlotId });
   };
+  const onInput = (event: Event) => { const input = (event.target as HTMLElement | null)?.closest<HTMLInputElement>("[data-spellbook-search]"); if (!input) return; spellbookView = { ...spellbookView, query: input.value, page: 0, selectedCharacterId: null, replayKind: null }; render(); };
   const onDragStart = (event: DragEvent) => { const card = (event.target as HTMLElement | null)?.closest<HTMLElement>("[data-card-id]"); if (!card?.dataset.cardId) return; draggedCardId = card.dataset.cardId; event.dataTransfer?.setData("text/plain", draggedCardId); };
   const onDragOver = (event: DragEvent) => { if ((event.target as HTMLElement | null)?.closest("[data-slot-id]")) event.preventDefault(); };
   const onDrop = (event: DragEvent) => { const slot = (event.target as HTMLElement | null)?.closest<HTMLElement>("[data-slot-id]"); const cardId = event.dataTransfer?.getData("text/plain") || draggedCardId; if (!slot?.dataset.slotId || !cardId) return; event.preventDefault(); dispatch({ type: "place-card", slotId: slot.dataset.slotId as ChapterSlotId, cardId }); draggedCardId = null; };
   const onKeyDown = (event: KeyboardEvent) => {
-    if ((event.key === "ArrowLeft" || event.key === "ArrowRight") && (state.phase === "ability-choice" || state.phase === "camp")) {
+    if (event.key === "Escape" && overlay !== "none") { closeOverlay(); event.preventDefault(); return; }
+    if (overlay === "none" && (event.key === "ArrowLeft" || event.key === "ArrowRight") && (state.phase === "ability-choice" || state.phase === "camp")) {
       const selector = state.phase === "ability-choice" ? "[data-ability-id]" : "[data-hero-id]";
       const candidates = [...root.querySelectorAll<HTMLElement>(selector)]; const current = candidates.indexOf(document.activeElement as HTMLElement); if (!candidates.length) return;
       const delta = event.key === "ArrowRight" ? 1 : -1; candidates[(current + delta + candidates.length) % candidates.length].focus(); event.preventDefault();
     }
   };
-  root.addEventListener("click", onClick); root.addEventListener("dragstart", onDragStart); root.addEventListener("dragover", onDragOver); root.addEventListener("drop", onDrop); root.addEventListener("keydown", onKeyDown);
+  root.addEventListener("click", onClick); root.addEventListener("input", onInput); root.addEventListener("dragstart", onDragStart); root.addEventListener("dragover", onDragOver); root.addEventListener("drop", onDrop); root.addEventListener("keydown", onKeyDown);
   render();
-  return { getState: () => state, dispatch, destroy() { destroyed = true; root.removeEventListener("click", onClick); root.removeEventListener("dragstart", onDragStart); root.removeEventListener("dragover", onDragOver); root.removeEventListener("drop", onDrop); root.removeEventListener("keydown", onKeyDown); root.replaceChildren(); } };
+  return { getState: () => state, dispatch, destroy() { destroyed = true; root.removeEventListener("click", onClick); root.removeEventListener("input", onInput); root.removeEventListener("dragstart", onDragStart); root.removeEventListener("dragover", onDragOver); root.removeEventListener("drop", onDrop); root.removeEventListener("keydown", onKeyDown); root.replaceChildren(); } };
 }
