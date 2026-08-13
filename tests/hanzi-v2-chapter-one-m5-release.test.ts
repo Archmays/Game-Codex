@@ -10,6 +10,7 @@ import {
   M5_BOSSES,
   M5_REGION_META,
   M5_RUNTIME_ASSETS,
+  m5AssetUrl,
   generateM3RunPlan,
   replayM3Actions,
   simulateM3Run,
@@ -91,5 +92,7 @@ describe("Hanzi Magic Battle V2 Chapter One M5 release contract", () => {
     expect(M5_RUNTIME_ASSETS.filter((entry) => entry.role === "meaning")).toHaveLength(24);
     expect(M5_RUNTIME_ASSETS.filter((entry) => entry.role === "ability")).toHaveLength(M3_BUILD_ABILITIES.length);
     expect(M5_RUNTIME_ASSETS.filter((entry) => entry.role === "repair")).toHaveLength(M4_REPAIR_IDS.length);
+    expect(m5AssetUrl("region-ink-king-core")).toMatch(/^\.?\/assets\/hanzi-radical-battle\/v2\/theme-c\/chapter-one\/region-ink-king-core\.webp$/);
+    expect(m5AssetUrl("region-ink-king-core")).not.toContain("/assets/assets/");
   });
 });

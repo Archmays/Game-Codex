@@ -59,15 +59,24 @@ export async function verifyPages(): Promise<void> {
   const consoleErrors: string[] = [];
   const pageErrors: string[] = [];
   const failedRequests: string[] = [];
+  const abortedNavigationRequests: string[] = [];
+  const httpErrors: string[] = [];
   const externalRequests: string[] = [];
   const checkedScenes: JsonObject[] = [];
   const browser = await chromium.launch({ headless: true });
   try {
     const context = await browser.newContext({ viewport: { width: 1280, height: 720 } });
     const page = await context.newPage();
-    page.on("console", (message) => { if (message.type() === "error") consoleErrors.push(message.text()); });
+    page.on("console", (message) => {
+      if (message.type() === "error" && !message.text().startsWith("Failed to load resource:")) consoleErrors.push(message.text());
+    });
     page.on("pageerror", (error) => pageErrors.push(error.message));
-    page.on("requestfailed", (request) => failedRequests.push(`${request.url()} :: ${request.failure()?.errorText ?? "unknown"}`));
+    page.on("requestfailed", (request) => {
+      const detail = `${request.url()} :: ${request.failure()?.errorText ?? "unknown"}`;
+      if (request.failure()?.errorText === "net::ERR_ABORTED") abortedNavigationRequests.push(detail);
+      else failedRequests.push(detail);
+    });
+    page.on("response", (response) => { if (response.status() >= 400) httpErrors.push(`${response.status()} ${response.url()}`); });
     page.on("request", (request) => {
       const url = new URL(request.url());
       if (/^https?:$/.test(url.protocol) && url.origin !== pagesBase.origin) externalRequests.push(request.url());
@@ -117,11 +126,11 @@ export async function verifyPages(): Promise<void> {
 
     await page.goto(new URL("?play=hanzi-v2-v1&from=hub", pagesBase).href, { waitUntil: "networkidle" });
     await page.getByTestId("hanzi-magic-v1").waitFor({ state: "visible" });
-    requireValue(consoleErrors.length === 0 && pageErrors.length === 0 && failedRequests.length === 0 && externalRequests.length === 0, "Pages emitted browser errors, failed requests, or external runtime requests");
+    requireValue(consoleErrors.length === 0 && pageErrors.length === 0 && failedRequests.length === 0 && httpErrors.length === 0 && externalRequests.length === 0, "Pages emitted browser errors, failed requests, HTTP errors, or external runtime requests");
 
-    write({ schemaVersion: 1, sourceTreeSha256, commit, result: "PASS", canonicalUrl, hubCard: "PASS", directDeepLink: "PASS", refreshRecovery: "PASS", checkedScenes, runtimeAssets: { expected: 72, checked: assets.length, failed: 0, assets }, legacyV1Route: "PASS", consoleErrors, pageErrors, failedRequests, externalRequests, generatedAtUtc: new Date().toISOString() });
+    write({ schemaVersion: 1, sourceTreeSha256, commit, result: "PASS", canonicalUrl, hubCard: "PASS", directDeepLink: "PASS", refreshRecovery: "PASS", checkedScenes, runtimeAssets: { expected: 72, checked: assets.length, failed: 0, assets }, legacyV1Route: "PASS", consoleErrors, pageErrors, failedRequests, httpErrors, abortedNavigationRequests, externalRequests, generatedAtUtc: new Date().toISOString() });
   } catch (error) {
-    write({ schemaVersion: 1, sourceTreeSha256, commit, result: "FAIL", canonicalUrl, consoleErrors, pageErrors, failedRequests, externalRequests, error: error instanceof Error ? error.message : String(error), generatedAtUtc: new Date().toISOString() });
+    write({ schemaVersion: 1, sourceTreeSha256, commit, result: "FAIL", canonicalUrl, consoleErrors, pageErrors, failedRequests, httpErrors, abortedNavigationRequests, externalRequests, error: error instanceof Error ? error.message : String(error), generatedAtUtc: new Date().toISOString() });
     throw error;
   } finally {
     await browser.close();

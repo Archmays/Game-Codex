@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceTreeSha256": "302E318AA250DC10593985FB4E27B8F87CC31BE8CCBE57FEDDAC963955EFBA3E",
+  "sourceTreeSha256": "472A2A88E8EFA1469865D3D6C9B87CCAE5AC0D697EA5BFCC81D7819219AC329E",
   "characters": [
     {
       "id": "ming",
@@ -2888,5 +2888,5 @@
   "sourceLedgerEntries": 24,
   "exhaustiveHands": 108,
   "verdict": "PASS",
-  "generatedAtUtc": "2026-08-13T18:34:57.881Z"
+  "generatedAtUtc": "2026-08-13T19:09:22.358Z"
 }

@@ -188,6 +188,8 @@ test("M5 hub card, spellbook, assets, legacy route, and mobile geometry remain a
   const full = updateM4Save(createFreshM4Save(), { discoveredCharacterIds: CHAPTER_ONE_CHARACTER_IDS, completedRegionIds: ["glimmer-grove", "echo-garden", "wind-trail"] });
   await page.evaluate(([key, value]) => localStorage.setItem(key, value), [HANZI_MAGIC_M4_SAVE_KEY, JSON.stringify(full)]);
   await page.goto("/?play=hanzi-v2-chapter-one&from=hub&fresh=1&seed=m5-surfaces"); await page.locator('[data-action="open-spellbook"]').click(); await expect(page.getByTestId("chapter-one-spellbook")).toHaveAttribute("data-total-entries", "36");
+  const sceneImage = await page.getByTestId("hanzi-magic-chapter-one-m3").evaluate((element) => getComputedStyle(element).getPropertyValue("--hm2-scene-image"));
+  expect(sceneImage).toContain("/assets/hanzi-radical-battle/v2/theme-c/chapter-one/"); expect(sceneImage).not.toContain("/assets/assets/");
   await page.locator("[data-spellbook-search]").fill("清"); await page.locator('[data-action="select-spellbook-entry"][data-character-id="qing-clear"]').click(); await page.locator('[data-action="replay-meaning"]').click(); await expect(page.locator(".hm2-magic-replay i")).toHaveCSS("background-image", /meaning-/); await page.screenshot({ path: resolve(screenshotDir, "M5-SPELLBOOK.png"), fullPage: true });
   await page.goto("/?play=hanzi-v2-v1&from=hub"); await expect(page.getByTestId("hanzi-magic-v1")).toBeVisible();
   await page.setViewportSize({ width: 360, height: 800 }); await page.goto("/?play=hanzi-v2-chapter-one&from=hub&fresh=1&seed=m5-mobile-geometry"); await assertGeometry(page);

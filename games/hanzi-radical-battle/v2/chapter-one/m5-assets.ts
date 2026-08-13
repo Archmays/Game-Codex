@@ -7,6 +7,11 @@ const RAW_BASE_URL = import.meta.env?.BASE_URL ?? "./";
 const APP_BASE_URL = RAW_BASE_URL === "/" ? "/" : RAW_BASE_URL.endsWith("/") ? RAW_BASE_URL : `${RAW_BASE_URL}/`;
 export const M5_ASSET_BASE_URL = `${APP_BASE_URL}assets/hanzi-radical-battle/v2/theme-c/chapter-one/`;
 
+function runtimeAssetUrl(fileName: string): string {
+  const relativeUrl = `${M5_ASSET_BASE_URL}${fileName}`;
+  return typeof document === "undefined" ? relativeUrl : new URL(relativeUrl, document.baseURI).href;
+}
+
 export type M5AssetRole = "region" | "hero" | "monster" | "boss" | "meaning" | "ability" | "repair" | "ending" | "hub";
 
 export interface M5RuntimeAsset {
@@ -34,10 +39,10 @@ export const M5_RUNTIME_ASSETS: readonly M5RuntimeAsset[] = [
 export function m5AssetUrl(key: string): string {
   const entry = M5_RUNTIME_ASSETS.find((candidate) => candidate.key === key);
   if (!entry) throw new Error(`Unknown M5 runtime asset: ${key}`);
-  return `${M5_ASSET_BASE_URL}${entry.fileName}`;
+  return runtimeAssetUrl(entry.fileName);
 }
 
 export function m5MeaningAssetUrl(characterId: string): string | null {
   const generated = M5_RUNTIME_ASSETS.find((entry) => entry.key === `meaning-${characterId}`);
-  return generated ? `${M5_ASSET_BASE_URL}${generated.fileName}` : null;
+  return generated ? runtimeAssetUrl(generated.fileName) : null;
 }
