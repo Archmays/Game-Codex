@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archmays.github.io/Game-Codex/schemas/hanzi-v2-chapter-one-milestone-gate.schema.json",
+  "title": "Hanzi Magic Battle V2 Chapter One milestone gate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "milestone", "authorizationId", "sourceCommit", "result", "checks", "generatedAtUtc"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "milestone": { "enum": ["M0", "M1", "M2", "M3", "M4", "M5", "FINAL"] },
+    "authorizationId": { "const": "HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813" },
+    "sourceCommit": { "type": "string", "pattern": "^(WORKTREE|[0-9a-f]{40})$" },
+    "result": { "enum": ["PASS_STAGE", "AUTO_REVISE", "ESCALATE_HUMAN", "PASS_MACHINE"] },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status", "evidence"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["PASS", "FAIL", "NOT_APPLICABLE"] },
+          "evidence": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "metrics": { "type": "object", "additionalProperties": { "type": ["number", "string", "boolean"] } },
+    "unresolved": { "type": "array", "items": { "type": "string" } },
+    "generatedAtUtc": { "type": "string", "format": "date-time" }
+  }
+}

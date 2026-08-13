@@ -1,10 +1,17 @@
 # Hanzi Radical Battle V2 Status
 
-Current phase: V1_MACHINE_RELEASE_CANDIDATE_COMPLETE
-Active version: V1.0.0
-Authorization: `HUMAN_AUTHORIZED_SKIP_REAL_SECOND_USE_AND_COMPLETE_V1_ONE_SHOT_01`
-Completed historical baseline: STEP 01–07 machine readiness, default private world, classic hub preservation, fixed local origin, and historical Second-Use tooling remain preserved.
-Completed scope: exactly 12 characters, three fixed adventures, Theme C production runtime art, V1 save migration/recovery, local launcher, P1–P8 machine playthroughs, R1–R3 machine reviews, stable visual/ARIA baselines and source-bound final evidence.
-Closeout scope: one final commit and push, Git parity, one final package and post-package cleanup/hash verification.
-Real child validation: `NO_BY_USER_DIRECTION`; no Second-Use, fun, learning, retention, or preference claim may be inferred.
-Stop boundary: `HANZI_MAGIC_BATTLE_V2_V1_PLAYABLE_READY`. Do not enter STEP 08/09 or create a public deployment without separate authorization.
+Current phase: `V2_CHAPTER_ONE_IMPLEMENTATION_AUTHORIZED`
+
+Active version: V2.0.0 — 第一章：墨迹森林
+
+Authorization: `HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813`
+
+V1 frozen baseline: tag `hanzi-magic-v2-v1.0.0` → commit `43e7841d2190922b6048182cab4b871c55715840`; legacy route `?play=hanzi-v2-v1&from=hub` remains required.
+
+Authorized scope: M0–M5 continuous implementation; 36 characters; three heroes; three regions plus the final core; nine monster behaviors; 18 selectable and three innate abilities; four bosses; eight camp repairs; 36 spellbook entries; V2 local save migration; formal Theme C art/audio; hub, launcher, package, tags, and update of the existing GitHub Pages deployment.
+
+Active gate: M0. A milestone may advance only after its source-bound `PASS_STAGE` result. Final acceptance requires at least 30,000 deterministic simulation seeds, 18 browser machine playthroughs, all content/save/accessibility/geometry/resource/route gates, clean source identity, and verified Pages.
+
+Real child validation: `NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE`. User V1 play acceptance is recorded separately and must not be represented as child evidence.
+
+Terminal boundary: `PASS_MACHINE / CHAPTER_ONE_COMPLETE / HANZI_MAGIC_BATTLE_V2_CHAPTER_ONE_PLAYABLE_READY`. Do not enter a second chapter or broaden beyond the explicit V2.0.0 scope without new authorization.

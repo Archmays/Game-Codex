@@ -1,6 +1,6 @@
 # Traceability Matrix
 
-状态：历史 STEP 01–07 决定与证据继续保留。2026-08-13 的精确授权 `HUMAN_AUTHORIZED_SKIP_REAL_SECOND_USE_AND_COMPLETE_V1_ONE_SHOT_01` 允许在不等待真人 Second-Use 的前提下完成固定 12 字 V1；机器发布与未来可选儿童验证已拆分。每个新功能仍必须说明儿童价值、汉字学习价值及自动验证路径，并且不得从机器证据推断真人结果。
+状态：历史 STEP 01–07 与 V1.0.0 决定继续保留。2026-08-13 的新精确授权 `HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813` 将旧 12 字、三段和 24 素材上限降为 V1 历史范围，并授权连续完成第一章 V2.0.0。机器发布与未来可选儿童验证仍严格拆分；每个新功能必须说明儿童价值、汉字学习价值及自动或机器实玩路径。
 
 | 功能 | 对应北极星原则 | 参考案例 | 儿童价值 | 汉字学习价值 | 自动验证 | 真人试玩观察 | 当前状态 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -38,6 +38,15 @@
 | Theme C V1 正式视觉 | 世界修复与字义反馈直接可见 | game-ui-frontend、sprite-pipeline、imagegen | 第一屏、角色、怪物、能力、魔法和修复形成同一故事世界 | 每字有唯一 meaning-magic 资产，代码叠加正确字，不讲字源 | 24 runtime 资产存在/hash/alpha/缩放/相对 base，视觉 baseline 两轮稳定 | 未来可选偏好观察，不宣称已偏好 | `16_SELECTED_BOUND / 8_IMAGEGEN_ACTIVE` |
 | V1 本地存档与恢复 | 永久变化可回来继续且隐私最小 | save-systems | 中途离开不丢字光，损坏时安静回到安全节点 | 已发现字、三章修复和能力历史不回退 | schema v4、v3/STEP02 迁移、backup/recovery/checksum/future read-only、无 PII | 家长区可解释并二次确认清除 | `V1_SAVE_IMPLEMENTED` |
 | V1 机器发布授权 | 技术完成不等于真人验证 | machine-first-game-review、child-first-use-observation | 可直接玩完整 V1，同时保留诚实验证边界 | 发布只证明内容、状态、存档和交互按合同运行 | exact authorization positive/negative tests、R1/R2/R3、P1–P8、source freeze、Git parity | `NO_BY_USER_DIRECTION`; 以后另行选择 | `V1_MACHINE_RELEASE_CANDIDATE_COMPLETE` |
+| V2 第一章授权与 V1 冻结 | 新授权覆盖旧范围上限但不改写历史 | machine-first-game-review、save-systems | 从已认可的 V1 直接进入更完整世界，旧入口仍可玩 | 12 字既有内容保持身份，24 个新字另走来源与结构门禁 | exact V1 tag/commit、exact V2 authorization、legacy route、负向授权与禁用机制测试 | `NO_BY_USER_DIRECTION`; 不把用户试玩当儿童证据 | `V2_CHAPTER_ONE_IMPLEMENTATION_AUTHORIZED` |
+| 36 字正式内容管线 | 合字始终是施法核心 | hanzi-structure-quality、puzzle | 字量扩展仍保持熟悉词、清楚结构和可撤回操作 | 14 左右、12 上下、5 全包围、5 半包围；每字来源、拼音、短义、魔法与唯一解手牌绑定 | 36/36 schema、母库/公式/视觉账本、全量求解、结构与完整字截图、coverage seed | 未来可选逐字理解观察，不是本轮门禁 | `AUTHORIZED_FOR_M2` |
+| 三英雄与能力构筑 | 自主选择带来重玩而不靠压力机制 | Slay the Spire、Brotato、Dicey Dungeons、child-first-learning-game | 三位英雄和每局三次三选一形成可理解的不同玩法 | 能力只支持放置、恢复、提示和字义反馈，不改正确答案 | 3 固有+18 可选 exact IDs、候选生成、触发状态、UI 标记、coverage seeds | 未来可选偏好观察，不推断普适偏好 | `AUTHORIZED_FOR_M3` |
+| 受约束区域路线与怪物行为 | 每局有变化但无死路和赌博式稀有度 | level-design、puzzle、roguelite 参考 | 世界内二选一路径短而清楚，同 seed 可重放 | 9 行为改变当前操作环境但不改字形、部件、槽位与答案 | route graph invariants、30k seeds、9 行为覆盖、同 seed 复现、无软锁/必败 | 未来可选路线理解观察 | `AUTHORIZED_FOR_M1_M5` |
+| 三区域首领与最终字核 | 完整章节高潮只综合已教规则 | level-design、game-feel | 3 个区域高潮与三阶段最终恢复形成清楚起承转合 | 最后一击由完整汉字发出；最终首领不引入未见结构规则 | 4 首领可达/可完成、intent、phase restore、browser playthroughs、ending state | 未来可选情绪和理解观察 | `AUTHORIZED_FOR_M5` |
+| 八项营地修复与 36 页魔法书 | 世界永久变化和低压收藏支持回归 | save-systems、DragonBox、Metamorphabet | 不用每日任务也能看见属于自己的变化与发现 | 每页重现字、拼音、词、短义、结构、部件和字义魔法 | 8 repair keys、36 entries、reload/migration/clear、前后截图 | 未来可选自发回看观察 | `AUTHORIZED_FOR_M4` |
+| V2 本地存档迁移 | 进度连续且隐私最小 | save-systems | V1 发现与修复不丢失，损坏时温和恢复 | 保留 12 字与 3 修复；扩展到 36 字和 8 修复 | raw V1 backup、schema/checksum/backup/recovery/future read-only/current-run equivalence | 家长可解释并二次确认清除 | `AUTHORIZED_FOR_M4` |
+| Theme C 第一章正式视觉与音频 | 反馈明确、静音和减少动画仍完整 | game-feel、audio-design、imagegen | 英雄、区域、怪物和修复形成同一儿童安全世界 | 结构和完整汉字始终由代码清晰渲染，不让生成图承担字形正确性 | manifest/hash/尺寸/alpha/WebP/预算/on-demand、visual no-update、mute/reduced motion | 未来可选审美偏好，不宣称已偏好 | `AUTHORIZED_FOR_M5` |
+| 现有 Pages 更新与 canonical route | 可直接进入完整第一章且保留历史入口 | Vite/Phaser 官方文档、machine-first-game-review | 大厅主卡片、直链和刷新均能回到同一世界 | canonical/legacy 共用正式内容真源，不复制答案 | base path build、direct/refresh/assets/no-external-request、V1 legacy regression | 公开发布由本次用户明确授权 | `AUTHORIZED_FOR_FINAL_RELEASE` |
 
 ## 新功能准入模板
 

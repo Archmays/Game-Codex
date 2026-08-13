@@ -1,9 +1,9 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "initiative_id": "hanzi-radical-battle-v2",
   "initiative_name": "黄小越的游戏世界：汉字魔法战——墨迹森林",
-  "current_version": "V1.0.0",
-  "active_authorization_id": "HUMAN_AUTHORIZED_SKIP_REAL_SECOND_USE_AND_COMPLETE_V1_ONE_SHOT_01",
+  "current_version": "V2.0.0",
+  "active_authorization_id": "HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813",
   "target_player": {
     "name": "黄小越",
     "stage": "约6岁，刚进入小学阶段",
@@ -20,6 +20,7 @@
     "distribution": "GitHub Pages"
   },
   "golden_slice": {
+    "status": "V1_HISTORICAL_SCOPE",
     "duration_minutes_min": 3,
     "duration_minutes_max": 5,
     "heroes": 1,
@@ -32,14 +33,37 @@
     "camp_repairs": 3,
     "persistent_spellbook": true
   },
+  "chapter_one_scope": {
+    "title": "第一章：墨迹森林",
+    "version": "V2.0.0",
+    "story_run_minutes_min": 10,
+    "story_run_minutes_max": 14,
+    "playable_characters": 36,
+    "heroes": 3,
+    "regions": 3,
+    "region_bosses": 3,
+    "final_bosses": 1,
+    "selectable_abilities": 18,
+    "innate_hero_abilities": 3,
+    "monster_behaviors": 9,
+    "camp_repairs": 8,
+    "spellbook_entries": 36,
+    "machine_simulation_seeds_min": 30000,
+    "browser_playthroughs_min": 18,
+    "public_pages_update_authorized": true,
+    "real_child_validation": "NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE"
+  },
   "required_experience": [
     "两次点击以内进入冒险",
     "首次成功施法尽量在60秒内发生",
     "不阅读长规则页也能开始",
     "合字动画明确表现真实结构",
-    "至少一次有意义的三选一",
+    "每局三次有意义的三选一",
+    "三位英雄的固有能力改变策略但不改变汉字答案",
+    "三个区域与最终字核形成完整章节起承转合",
     "结束时看见永久世界变化",
-    "失败或撤退不羞辱儿童",
+    "完成故事局即可看见章节结尾，不强迫收集36字",
+    "失败或撤退不羞辱儿童且不损失永久发现",
     "存档只保存在本地"
   ],
   "prohibited_mechanics": [
@@ -55,28 +79,30 @@
     "shaming failure language"
   ],
   "non_goals": [
-    "完整开放世界",
+    "超出第一章的完整开放世界",
     "同时重做其余游戏",
     "多货币经济",
     "复杂装备系统",
     "大型宠物收集",
-    "数百项能力",
-    "超过固定12字或新增第四段冒险",
+    "超出正式18项的能力膨胀",
     "把机器审核写成真人儿童验证"
   ],
   "promotion_gates": [
-    "精确V1授权ID匹配",
-    "自动测试通过",
-    "真实浏览器和代表性设备可用",
-    "关键视觉状态有截图证据",
-    "三段冒险与12字固定清单完整",
-    "Theme C运行时资产hash匹配",
+    "精确V2第一章授权ID匹配",
+    "M0到M5逐阶段PASS_STAGE",
+    "36字来源、结构、手牌唯一解与渲染证据通过",
+    "三英雄、18能力、9行为、4首领和8修复覆盖通过",
+    "至少30000个确定性seed无软锁且同seed可复现",
+    "至少18次真实浏览器机器通关",
     "存档迁移、损坏恢复与未来版本保护通过",
+    "减少动画、静音、触控、键盘和响应式几何通过",
     "机器审核无未解决SEV_1到SEV_3",
+    "V1旧路由和经典大厅回归通过",
+    "GitHub Pages canonical route直接访问与刷新通过",
     "明确保留REAL_CHILD_VALIDATION为NO_BY_USER_DIRECTION"
   ],
   "optional_future_child_validation": {
-    "status": "NOT_REQUIRED_FOR_V1_MACHINE_RELEASE",
+    "status": "NOT_REQUIRED_FOR_V2_CHAPTER_ONE_MACHINE_RELEASE",
     "may_be_offered_later": true,
     "cannot_be_inferred_from_machine_evidence": true,
     "requires_separate_family_choice": true
@@ -88,18 +114,22 @@
     "它是否避免焦虑、操纵、羞辱和强迫性留存？"
   ],
   "drift_alerts": [
-    "黄金样板超过12个汉字",
+    "超过36个正式可玩汉字或三个区域和最终字核",
     "新增第二种局外货币",
     "新增每日任务、连续登录、排行榜或抽卡",
     "引入Godot、后端、账号或云端儿童追踪",
     "同时重写其他游戏",
-    "没有精确V1授权ID却扩建三段完整墨迹森林",
-    "超过24个已绑定V1生产素材而未新增traceability",
+    "没有精确V2第一章授权ID却扩建本章范围",
+    "新汉字没有source ledger、结构证据、唯一解手牌或revision identity",
     "儿童首屏重新出现学习目标、正确率或适合年龄",
-    "新功能没有traceability行",
-    "失败文案出现败北、你还需要练习、做错了等羞辱性判断"
+    "新功能没有traceability行和自动或机器实玩路径",
+    "失败文案出现败北、你还需要练习、做错了等羞辱性判断",
+    "把机器证据表述成儿童乐趣、学习、保持或偏好证据"
   ],
   "v1_release_scope": {
+    "status": "FROZEN_HISTORICAL_BASELINE",
+    "tag": "hanzi-magic-v2-v1.0.0",
+    "commit": "43e7841d2190922b6048182cab4b871c55715840",
     "playable_characters": 12,
     "adventures": 3,
     "encounters": 12,
@@ -109,5 +139,5 @@
     "machine_playthroughs": 8,
     "real_child_validation": "NO_BY_USER_DIRECTION"
   },
-  "status": "V1_MACHINE_RELEASE_CANDIDATE_COMPLETE"
+  "status": "V2_CHAPTER_ONE_IMPLEMENTATION_AUTHORIZED"
 }

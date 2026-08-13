@@ -262,3 +262,15 @@
 明确没有做什么：没有执行或声称真人 Second-Use；没有验证乐趣、学习效果、偏好、保持或普适性；没有授权超过 12 字、第四段冒险、STEP 08/09、账号/后端、操纵性留存或公开部署。
 机器门禁：只有精确 authorization ID、12 字/3 章负向边界、禁用机制扫描、P1–P8、R1–R3、源冻结、包哈希、Git/远端一致性全部通过，才可标记 `HANZI_MAGIC_BATTLE_V2_V1_PLAYABLE_READY`。
 未来儿童验证：`REAL_CHILD_VALIDATION: NO_BY_USER_DIRECTION`。家庭以后可自愿另行决定，且结果不得倒填为本次机器证据。
+
+## D-027 用户 V1 试玩 PASS 后授权连续完成第一章 V2.0.0
+
+日期：2026-08-13
+决定：接受精确授权 `HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813`。用户已亲自试玩 V1 并明确 PASS；在保留 V1 冻结身份和旧路由的前提下，于同一 `main` 连续完成 M0–M5、第一章 V2.0.0 机器审核、现有 GitHub Pages 更新、commit、push、tag、清理与最终包。
+为什么：V1 已达到用户认可的可玩基线；本次目标明确要求把 12 字固定章节扩展为可重玩的完整第一章。继续沿用 D-026 的 12 字、三段、24 素材和“不公开部署”边界会与新授权冲突。
+依据：本次一次性用户指令、V1 冻结 commit `43e7841d2190922b6048182cab4b871c55715840`、tag `hanzi-magic-v2-v1.0.0`、D-016/D-017 的内容与 simulation 真源，以及 V1 `PASS_MACHINE` 证据。
+影响范围：V2.0.0 正式范围为 36 字、3 英雄、3 区域加最终字核、9 怪物行为、18 可选能力加 3 固有能力、4 首领、8 修复、36 页魔法书、V2 存档、正式 Theme C 资产、大厅主入口、启动器和既有 Pages。旧 12 字、三段、24 素材只保留为 V1 历史范围。
+开发门禁：M0–M5 逐阶段 `PASS_STAGE`；最终至少 30,000 个确定性 seeds、18 次浏览器机器通关、完整内容/手牌/存档/几何/可访问性/资源/路由/Pages 验证与 source-bound reviewer 收口。
+明确没有做什么：没有执行或声称真人儿童验证；没有把用户个人试玩当成儿童学习证据；没有授权后端、账号、云端儿童追踪、Godot、第二种局外货币、排行榜、抽卡、FOMO、惩罚性损失或羞辱性失败语言。
+真人边界：`REAL_CHILD_VALIDATION = NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE`。机器结果只能证明合同内软件行为；未来儿童观察必须由家庭另行决定并保持独立证据身份。
+何时重新评估：达到 `HANZI_MAGIC_BATTLE_V2_CHAPTER_ONE_PLAYABLE_READY` 后即停止；任何第二章、超过 36 字或新的公开产品范围都需新授权。

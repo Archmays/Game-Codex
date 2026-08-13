@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "contractId": "hanzi-magic-battle-v2-chapter-one-scope-1",
+  "authorizationId": "HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813",
+  "version": "V2.0.0",
+  "title": "第一章：墨迹森林",
+  "terminalResult": "PASS_MACHINE / CHAPTER_ONE_COMPLETE / HANZI_MAGIC_BATTLE_V2_CHAPTER_ONE_PLAYABLE_READY",
+  "realChildValidation": "NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE",
+  "v1FrozenBaseline": {
+    "tag": "hanzi-magic-v2-v1.0.0",
+    "commit": "43e7841d2190922b6048182cab4b871c55715840",
+    "legacyRoute": "?play=hanzi-v2-v1&from=hub"
+  },
+  "exactScope": {
+    "playableCharacters": 36,
+    "structureDistribution": {
+      "leftRight": 14,
+      "topBottom": 12,
+      "fullEnclosure": 5,
+      "semiEnclosure": 5
+    },
+    "heroes": 3,
+    "regions": 3,
+    "regionBosses": 3,
+    "finalBosses": 1,
+    "monsterBehaviors": 9,
+    "selectableAbilities": 18,
+    "innateHeroAbilities": 3,
+    "campRepairs": 8,
+    "spellbookEntries": 36,
+    "abilityChoicesPerRun": 3,
+    "routeChoicesPerRegionMin": 1,
+    "storyRunMinutes": { "min": 10, "max": 14 },
+    "machineSimulationSeedsMin": 30000,
+    "browserPlaythroughsMin": 18
+  },
+  "requiredRoutes": {
+    "canonical": "?play=hanzi-v2-chapter-one&from=hub",
+    "pages": "https://archmays.github.io/Game-Codex/?play=hanzi-v2-chapter-one&from=hub",
+    "legacyV1": "?play=hanzi-v2-v1&from=hub"
+  },
+  "requiredMilestones": ["M0", "M1", "M2", "M3", "M4", "M5"],
+  "prohibitedMechanics": [
+    "Godot migration",
+    "backend account",
+    "cloud child tracking",
+    "daily login reward",
+    "streak pressure",
+    "leaderboard",
+    "loot box",
+    "FOMO timer",
+    "punitive progress loss",
+    "shaming failure language"
+  ],
+  "publication": {
+    "existingGitHubPagesUpdateAuthorized": true,
+    "newBackendOrServiceAuthorized": false
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "authorizationId": "HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813",
+  "targetVersion": "V2.0.0",
+  "activeMilestone": "M1",
+  "completedMilestones": ["M0"],
+  "status": "PASS_STAGE",
+  "latestGatePath": "artifacts/hanzi-radical-battle-v2/v2-chapter-one/checkpoints/M0/GATE-RESULT.json",
+  "sourceCommit": "WORKTREE",
+  "notes": [
+    "V1 baseline frozen at tag hanzi-magic-v2-v1.0.0.",
+    "Real child validation is not a development gate and no child result may be inferred.",
+    "M0 passed: V1 tag, active contracts, prohibited mechanics, V1 targeted tests, build and legacy browser smoke."
+  ],
+  "updatedAtUtc": "2026-08-13T13:39:42.355Z"
+}

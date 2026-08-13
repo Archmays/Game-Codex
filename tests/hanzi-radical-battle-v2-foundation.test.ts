@@ -25,12 +25,16 @@ interface NorthStar {
     distribution: string;
   };
   golden_slice: {
+    status: string;
     duration_minutes_min: number;
     duration_minutes_max: number;
     playable_characters_max: number;
     persistent_spellbook: boolean;
   };
   v1_release_scope: {
+    status: string;
+    tag: string;
+    commit: string;
     playable_characters: number;
     adventures: number;
     encounters: number;
@@ -38,6 +42,23 @@ interface NorthStar {
     camp_repairs: number;
     runtime_assets: number;
     machine_playthroughs: number;
+    real_child_validation: string;
+  };
+  chapter_one_scope: {
+    version: string;
+    playable_characters: number;
+    heroes: number;
+    regions: number;
+    region_bosses: number;
+    final_bosses: number;
+    selectable_abilities: number;
+    innate_hero_abilities: number;
+    monster_behaviors: number;
+    camp_repairs: number;
+    spellbook_entries: number;
+    machine_simulation_seeds_min: number;
+    browser_playthroughs_min: number;
+    public_pages_update_authorized: boolean;
     real_child_validation: string;
   };
   required_experience: string[];
@@ -88,10 +109,11 @@ function findNamedFile(directory: string, target: string): string[] {
 describe("Hanzi Radical Battle V2 foundation guardrail", () => {
   const northStarPath = join(docsDir, "00-NORTH-STAR.json");
   const northStar = readJson<NorthStar>(northStarPath);
+  const chapterScope = readJson<Record<string, unknown>>(join(docsDir, "chapter-one", "00-SCOPE-CONTRACT.json"));
   const packageJson = readJson<PackageJson>(join(root, "package.json"));
 
   it("keeps the machine-readable north star parseable and complete", () => {
-    expect(northStar.schema_version).toBe(1);
+    expect(northStar.schema_version).toBe(2);
     expect(northStar.initiative_id).toBe("hanzi-radical-battle-v2");
     expect(northStar.initiative_name).toContain("墨迹森林");
     expect(northStar.target_player.name).toBe("黄小越");
@@ -100,9 +122,12 @@ describe("Hanzi Radical Battle V2 foundation guardrail", () => {
     expect(northStar.core_learning_mechanic).toContain("动作本身就是施法");
     expect(northStar.required_experience.length).toBeGreaterThan(0);
     expect(northStar.promotion_gates.length).toBeGreaterThan(0);
-    expect(northStar.current_version).toBe("V1.0.0");
-    expect(northStar.active_authorization_id).toBe("HUMAN_AUTHORIZED_SKIP_REAL_SECOND_USE_AND_COMPLETE_V1_ONE_SHOT_01");
+    expect(northStar.current_version).toBe("V2.0.0");
+    expect(northStar.active_authorization_id).toBe("HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813");
     expect(northStar.v1_release_scope).toEqual({
+      status: "FROZEN_HISTORICAL_BASELINE",
+      tag: "hanzi-magic-v2-v1.0.0",
+      commit: "43e7841d2190922b6048182cab4b871c55715840",
       playable_characters: 12,
       adventures: 3,
       encounters: 12,
@@ -112,7 +137,7 @@ describe("Hanzi Radical Battle V2 foundation guardrail", () => {
       machine_playthroughs: 8,
       real_child_validation: "NO_BY_USER_DIRECTION",
     });
-    expect(northStar.status).toBe("V1_MACHINE_RELEASE_CANDIDATE_COMPLETE");
+    expect(northStar.status).toBe("V2_CHAPTER_ONE_IMPLEMENTATION_AUTHORIZED");
   });
 
   it("locks the approved browser runtime", () => {
@@ -127,6 +152,7 @@ describe("Hanzi Radical Battle V2 foundation guardrail", () => {
   });
 
   it("keeps the golden slice small", () => {
+    expect(northStar.golden_slice.status).toBe("V1_HISTORICAL_SCOPE");
     expect(northStar.golden_slice.playable_characters_max).toBeLessThanOrEqual(12);
     expect(northStar.golden_slice.duration_minutes_min).toBeGreaterThanOrEqual(3);
     expect(northStar.golden_slice.duration_minutes_max).toBeLessThanOrEqual(5);
@@ -150,16 +176,49 @@ describe("Hanzi Radical Battle V2 foundation guardrail", () => {
     const joined = northStar.non_goals.join("\n");
     expect(joined).toContain("完整开放世界");
     expect(joined).toContain("同时重做其余游戏");
-    expect(joined).toContain("超过固定12字");
+    expect(joined).toContain("超出第一章");
     expect(joined).toContain("机器审核写成真人儿童验证");
   });
 
-  it("authorizes only the fixed V1 boundary and preserves negative drift gates", () => {
-    expect(northStar.promotion_gates).toContain("精确V1授权ID匹配");
+  it("authorizes the exact V2 chapter-one boundary and preserves negative drift gates", () => {
+    expect(northStar.promotion_gates).toContain("精确V2第一章授权ID匹配");
     const drift = northStar.drift_alerts.join("\n");
-    expect(drift).toContain("没有精确V1授权ID");
-    expect(drift).toContain("超过12个汉字");
+    expect(drift).toContain("没有精确V2第一章授权ID");
+    expect(drift).toContain("超过36个正式可玩汉字");
     expect(northStar.prohibited_mechanics).toEqual(expect.arrayContaining(["backend account", "loot box", "FOMO timer"]));
+  });
+
+  it("treats the 12-character cap as V1 history and binds the exact V2 chapter scope", () => {
+    expect(northStar.chapter_one_scope).toMatchObject({
+      version: "V2.0.0",
+      playable_characters: 36,
+      heroes: 3,
+      regions: 3,
+      region_bosses: 3,
+      final_bosses: 1,
+      selectable_abilities: 18,
+      innate_hero_abilities: 3,
+      monster_behaviors: 9,
+      camp_repairs: 8,
+      spellbook_entries: 36,
+      machine_simulation_seeds_min: 30000,
+      browser_playthroughs_min: 18,
+      public_pages_update_authorized: true,
+      real_child_validation: "NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE",
+    });
+    expect(chapterScope).toMatchObject({
+      authorizationId: northStar.active_authorization_id,
+      version: "V2.0.0",
+      realChildValidation: "NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE",
+    });
+  });
+
+  it("keeps manipulative mechanics blocked in both active contracts", () => {
+    const scopeProhibited = chapterScope.prohibitedMechanics as string[];
+    for (const mechanic of ["daily login reward", "leaderboard", "loot box", "FOMO timer", "shaming failure language"]) {
+      expect(northStar.prohibited_mechanics).toContain(mechanic);
+      expect(scopeProhibited).toContain(mechanic);
+    }
   });
 
   it("keeps the historical observer route separate from ordinary V1 family play", () => {

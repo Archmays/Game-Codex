@@ -4,6 +4,12 @@
 
 项目保持为静态网页形式：本地使用 Vite 开发，发布时生成 `dist/`，可以部署到 GitHub Pages 或类似静态网站服务。
 
+## 汉字魔法战 V2 第一章
+
+第一章 V2.0.0 已由 `HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813` 授权连续实施，活动状态为 `V2_CHAPTER_ONE_IMPLEMENTATION_AUTHORIZED`。目标范围是 36 字、3 位英雄、3 个区域加最终字核、9 种怪物行为、18 项可选与 3 项固有能力、8 项营地修复和 36 页魔法书；M0–M5 仅在逐阶段机器门禁通过后前进。
+
+V1.0.0 由 tag `hanzi-magic-v2-v1.0.0` 冻结在 commit `43e7841d2190922b6048182cab4b871c55715840`，旧路由会继续保留。真人儿童验证由用户明确设为 `NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE`；机器通过不代表儿童乐趣、学习或保持通过。活动真源见 `docs/hanzi-radical-battle-v2/README.md`。
+
 ## 当前游戏
 
 经典大厅当前收录 10 个游戏。默认入口 `/` 现在是儿童侧的“我的游戏世界”；世界中的“游戏百宝箱”，或显式地址 `?hub=classic`，继续展示这 10 个游戏目录：
