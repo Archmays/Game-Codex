@@ -5,14 +5,14 @@ const baseURL = `http://127.0.0.1:${port}`;
 
 export default defineConfig({
   testDir: "./tests/e2e",
-  testMatch: /hanzi-magic-v2-chapter-one-m1\.spec\.ts/,
+  testMatch: /hanzi-magic-v2-chapter-one-(m1|m2-content)\.spec\.ts/,
   fullyParallel: false,
   forbidOnly: Boolean(process.env.CI),
   retries: 0,
   timeout: 90_000,
   workers: 1,
   reporter: [["line"]],
-  outputDir: "test-results/hanzi-v2-chapter-one-m1",
+  outputDir: "test-results/hanzi-v2-chapter-one",
   use: {
     baseURL,
     trace: "retain-on-failure",

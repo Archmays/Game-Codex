@@ -131,7 +131,12 @@ window.addEventListener("load", async () => {
       return;
     }
     if (isChapterOneRoute) {
-      const { mountHanziMagicChapterOne } = await import("../games/hanzi-radical-battle/v2/chapter-one");
+      if (goldenSliceMode === "content-audit") {
+        const { mountChapterOneContentAudit } = await import("../games/hanzi-radical-battle/v2/chapter-one/content-audit");
+        mountChapterOneContentAudit(root, Number(search.get("sheet") ?? "0"));
+        return;
+      }
+      const { mountHanziMagicChapterOne } = await import("../games/hanzi-radical-battle/v2/chapter-one/app");
       mountHanziMagicChapterOne(root, {
         seed: search.get("seed") ?? undefined,
         fresh: search.get("fresh") === "1",

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M2",
+  "authorizationId": "HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813",
+  "sourceCommit": "WORKTREE",
+  "result": "PASS_STAGE",
+  "checks": [
+    { "id": "formal-manifest", "status": "PASS", "evidence": "Manifest contains exactly 36 unique characters: 12 V1 identity-bound carry-forwards and 24 machine-verified V2 additions; no new item has parent or child acceptance status." },
+    { "id": "balanced-regions-and-structures", "status": "PASS", "evidence": "Three regions contain exactly 12 characters each; structure distribution is 14 left-right, 12 top-bottom, 5 full-enclosure and 5 semi-enclosure; familiarity distribution is 28 high and 8 near." },
+    { "id": "source-ledger", "status": "PASS", "evidence": "All 24 additions bind Unicode 17.0.0 Unihan reading identity, MOE standard-character scope, local mother library, accepted formula audit and existing visual hint; source boundary explicitly excludes etymology and child-validation claims." },
+    { "id": "pinyin-copy-and-risk", "status": "PASS", "evidence": "All 36 readings, fixed phrases, short meanings, magic names/effects and asset keys are present; 看 and 好 are explicitly fixed-context polyphones." },
+    { "id": "unique-safe-hands", "status": "PASS", "evidence": "108/108 five-card hand variants passed exhaustive 2-card and 3-card subset permutations with one supported answer instance set and no alternate mother-library result." },
+    { "id": "machine-cast-coverage", "status": "PASS", "evidence": "5,000 deterministic coverage seeds completed 180,000 composition-to-meaning casts; every character appeared 5,000 times and all 108 hand variants appeared." },
+    { "id": "spellbook-data", "status": "PASS", "evidence": "36/36 spellbook entries build from the formal manifest and retain formation and meaning-magic replay flags." },
+    { "id": "structure-and-glyph-rendering", "status": "PASS", "evidence": "One browser evidence path rendered six source-driven sheets covering all 36 characters; each card contains both a slot-accurate structure board and a complete code-rendered glyph, with all local meaning images loaded." },
+    { "id": "visual-review", "status": "PASS", "evidence": "Six SHA-256-bound full-page screenshots were inspected; text, components, enclosure layouts, complete glyphs and thumbnails remained legible with no horizontal overflow." },
+    { "id": "targeted-tests-and-build", "status": "PASS", "evidence": "Seven M2 unit tests, the desktop browser content audit, TypeScript noEmit and Vite production build passed after the final source change." }
+  ],
+  "metrics": {
+    "simulationSeeds": 5000,
+    "compositionCasts": 180000,
+    "playableCharacters": 36,
+    "newCharacters": 24,
+    "handVariants": 108,
+    "browserEvidencePaths": 1,
+    "screenshotsReviewed": 6,
+    "targetedTests": 7,
+    "unresolvedSeverity1To3": 0
+  },
+  "unresolved": [],
+  "generatedAtUtc": "2026-08-13T14:20:40.124Z"
+}

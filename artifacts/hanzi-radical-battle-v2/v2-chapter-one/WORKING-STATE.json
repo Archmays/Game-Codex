@@ -2,16 +2,17 @@
   "schemaVersion": 1,
   "authorizationId": "HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813",
   "targetVersion": "V2.0.0",
-  "activeMilestone": "M2",
-  "completedMilestones": ["M0", "M1"],
+  "activeMilestone": "M3",
+  "completedMilestones": ["M0", "M1", "M2"],
   "status": "PASS_STAGE",
-  "latestGatePath": "artifacts/hanzi-radical-battle-v2/v2-chapter-one/checkpoints/M1/GATE-RESULT.json",
+  "latestGatePath": "artifacts/hanzi-radical-battle-v2/v2-chapter-one/checkpoints/M2/GATE-RESULT.json",
   "sourceCommit": "WORKTREE",
   "notes": [
     "V1 baseline frozen at tag hanzi-magic-v2-v1.0.0.",
     "Real child validation is not a development gate and no child result may be inferred.",
     "M0 passed: V1 tag, active contracts, prohibited mechanics, V1 targeted tests, build and legacy browser smoke.",
-    "M1 passed: 5000 deterministic seeds, 12 characters, 9 abilities, 6 recoverable behaviors, six browser playthroughs and visual review."
+    "M1 passed: 5000 deterministic seeds, 12 characters, 9 abilities, 6 recoverable behaviors, six browser playthroughs and visual review.",
+    "M2 passed: exact 36-character manifest, 24-entry source ledger, 108 unique-safe hands, 180000 content casts and six reviewed structure sheets."
   ],
-  "updatedAtUtc": "2026-08-13T14:03:37.387Z"
+  "updatedAtUtc": "2026-08-13T14:20:40.124Z"
 }

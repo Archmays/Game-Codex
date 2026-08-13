@@ -87,7 +87,10 @@
     "package:hanzi-v2:v1": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File tools/hanzi-v2-v1/PACKAGE_HANZI_MAGIC_BATTLE_V2_V1.ps1",
     "test:hanzi-v2:chapter-one:m1": "vitest run tests/hanzi-v2-chapter-one-m1.test.ts",
     "simulate:hanzi-v2:chapter-one:m1": "tsx tools/hanzi-v2-chapter-one/scan-m1.ts 5000",
-    "test:e2e:hanzi-v2:chapter-one:m1": "playwright test tests/e2e/hanzi-magic-v2-chapter-one-m1.spec.ts --config playwright.chapter-one.config.ts"
+    "test:e2e:hanzi-v2:chapter-one:m1": "playwright test tests/e2e/hanzi-magic-v2-chapter-one-m1.spec.ts --config playwright.chapter-one.config.ts",
+    "test:hanzi-v2:chapter-one:m2": "vitest run tests/hanzi-v2-chapter-one-m2-content.test.ts",
+    "simulate:hanzi-v2:chapter-one:m2": "tsx tools/hanzi-v2-chapter-one/scan-m2-content.ts 5000",
+    "test:e2e:hanzi-v2:chapter-one:m2": "playwright test tests/e2e/hanzi-magic-v2-chapter-one-m2-content.spec.ts --config playwright.chapter-one.config.ts"
   },
   "dependencies": {
     "phaser": "^3.90.0"

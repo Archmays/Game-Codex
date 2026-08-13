@@ -1,0 +1,1738 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M2",
+  "result": "PASS",
+  "handCount": 108,
+  "expectedHandCount": 108,
+  "exhaustiveMethod": "all 2-card and 3-card subsets, every order, mother-library lookup, stable instance IDs",
+  "hands": [
+    {
+      "handId": "chapter-one-ming-v0",
+      "characterId": "ming",
+      "targetGlyph": "明",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "明"
+      ],
+      "supportedAnswerCardSets": [
+        "ming-ri+ming-yue"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-ming-v1",
+      "characterId": "ming",
+      "targetGlyph": "明",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "明"
+      ],
+      "supportedAnswerCardSets": [
+        "ming-ri+ming-yue"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-ming-v2",
+      "characterId": "ming",
+      "targetGlyph": "明",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "明"
+      ],
+      "supportedAnswerCardSets": [
+        "ming-ri+ming-yue"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-hua-v0",
+      "characterId": "hua",
+      "targetGlyph": "花",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "花"
+      ],
+      "supportedAnswerCardSets": [
+        "hua-cao+hua-hua"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-hua-v1",
+      "characterId": "hua",
+      "targetGlyph": "花",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "花"
+      ],
+      "supportedAnswerCardSets": [
+        "hua-cao+hua-hua"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-hua-v2",
+      "characterId": "hua",
+      "targetGlyph": "花",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "花"
+      ],
+      "supportedAnswerCardSets": [
+        "hua-cao+hua-hua"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-lin-v0",
+      "characterId": "lin",
+      "targetGlyph": "林",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "林"
+      ],
+      "supportedAnswerCardSets": [
+        "lin-mu-left+lin-mu-right"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-lin-v1",
+      "characterId": "lin",
+      "targetGlyph": "林",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "林"
+      ],
+      "supportedAnswerCardSets": [
+        "lin-mu-left+lin-mu-right"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-lin-v2",
+      "characterId": "lin",
+      "targetGlyph": "林",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "林"
+      ],
+      "supportedAnswerCardSets": [
+        "lin-mu-left+lin-mu-right"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-xing-v0",
+      "characterId": "xing",
+      "targetGlyph": "星",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "星"
+      ],
+      "supportedAnswerCardSets": [
+        "xing-ri+xing-sheng"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-xing-v1",
+      "characterId": "xing",
+      "targetGlyph": "星",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "星"
+      ],
+      "supportedAnswerCardSets": [
+        "xing-ri+xing-sheng"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-xing-v2",
+      "characterId": "xing",
+      "targetGlyph": "星",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "星"
+      ],
+      "supportedAnswerCardSets": [
+        "xing-ri+xing-sheng"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-cao-v0",
+      "characterId": "cao",
+      "targetGlyph": "草",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "草"
+      ],
+      "supportedAnswerCardSets": [
+        "cao-cao+cao-zao"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-cao-v1",
+      "characterId": "cao",
+      "targetGlyph": "草",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "草"
+      ],
+      "supportedAnswerCardSets": [
+        "cao-cao+cao-zao"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-cao-v2",
+      "characterId": "cao",
+      "targetGlyph": "草",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "草"
+      ],
+      "supportedAnswerCardSets": [
+        "cao-cao+cao-zao"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-kan-v0",
+      "characterId": "kan",
+      "targetGlyph": "看",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "看"
+      ],
+      "supportedAnswerCardSets": [
+        "kan-mu+kan-shou"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-kan-v1",
+      "characterId": "kan",
+      "targetGlyph": "看",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "看"
+      ],
+      "supportedAnswerCardSets": [
+        "kan-mu+kan-shou"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-kan-v2",
+      "characterId": "kan",
+      "targetGlyph": "看",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "看"
+      ],
+      "supportedAnswerCardSets": [
+        "kan-mu+kan-shou"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-yuan-v0",
+      "characterId": "yuan",
+      "targetGlyph": "园",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "园"
+      ],
+      "supportedAnswerCardSets": [
+        "yuan-wei+yuan-yuan"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-yuan-v1",
+      "characterId": "yuan",
+      "targetGlyph": "园",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "园"
+      ],
+      "supportedAnswerCardSets": [
+        "yuan-wei+yuan-yuan"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-yuan-v2",
+      "characterId": "yuan",
+      "targetGlyph": "园",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "园"
+      ],
+      "supportedAnswerCardSets": [
+        "yuan-wei+yuan-yuan"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-hui-v0",
+      "characterId": "hui",
+      "targetGlyph": "回",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "回"
+      ],
+      "supportedAnswerCardSets": [
+        "hui-kou+hui-wei"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-hui-v1",
+      "characterId": "hui",
+      "targetGlyph": "回",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "回"
+      ],
+      "supportedAnswerCardSets": [
+        "hui-kou+hui-wei"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-hui-v2",
+      "characterId": "hui",
+      "targetGlyph": "回",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "回"
+      ],
+      "supportedAnswerCardSets": [
+        "hui-kou+hui-wei"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-bao-v0",
+      "characterId": "bao",
+      "targetGlyph": "包",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "包"
+      ],
+      "supportedAnswerCardSets": [
+        "bao-bao+bao-si"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-bao-v1",
+      "characterId": "bao",
+      "targetGlyph": "包",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "包"
+      ],
+      "supportedAnswerCardSets": [
+        "bao-bao+bao-si"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-bao-v2",
+      "characterId": "bao",
+      "targetGlyph": "包",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "包"
+      ],
+      "supportedAnswerCardSets": [
+        "bao-bao+bao-si"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-feng-v0",
+      "characterId": "feng",
+      "targetGlyph": "风",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "风"
+      ],
+      "supportedAnswerCardSets": [
+        "feng-ji+feng-yi"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-feng-v1",
+      "characterId": "feng",
+      "targetGlyph": "风",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "风"
+      ],
+      "supportedAnswerCardSets": [
+        "feng-ji+feng-yi"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-feng-v2",
+      "characterId": "feng",
+      "targetGlyph": "风",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "风"
+      ],
+      "supportedAnswerCardSets": [
+        "feng-ji+feng-yi"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-mao-v0",
+      "characterId": "mao",
+      "targetGlyph": "猫",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "猫"
+      ],
+      "supportedAnswerCardSets": [
+        "mao-miao+mao-quan"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-mao-v1",
+      "characterId": "mao",
+      "targetGlyph": "猫",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "猫"
+      ],
+      "supportedAnswerCardSets": [
+        "mao-miao+mao-quan"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-mao-v2",
+      "characterId": "mao",
+      "targetGlyph": "猫",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "猫"
+      ],
+      "supportedAnswerCardSets": [
+        "mao-miao+mao-quan"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-pao-v0",
+      "characterId": "pao",
+      "targetGlyph": "跑",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "跑"
+      ],
+      "supportedAnswerCardSets": [
+        "pao-bao+pao-zu"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-pao-v1",
+      "characterId": "pao",
+      "targetGlyph": "跑",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "跑"
+      ],
+      "supportedAnswerCardSets": [
+        "pao-bao+pao-zu"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-pao-v2",
+      "characterId": "pao",
+      "targetGlyph": "跑",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "跑"
+      ],
+      "supportedAnswerCardSets": [
+        "pao-bao+pao-zu"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-qing-clear-v0",
+      "characterId": "qing-clear",
+      "targetGlyph": "清",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "清"
+      ],
+      "supportedAnswerCardSets": [
+        "qing-clear-part-1+qing-clear-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-qing-clear-v1",
+      "characterId": "qing-clear",
+      "targetGlyph": "清",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "清"
+      ],
+      "supportedAnswerCardSets": [
+        "qing-clear-part-1+qing-clear-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-qing-clear-v2",
+      "characterId": "qing-clear",
+      "targetGlyph": "清",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "清"
+      ],
+      "supportedAnswerCardSets": [
+        "qing-clear-part-1+qing-clear-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-qing-sunny-v0",
+      "characterId": "qing-sunny",
+      "targetGlyph": "晴",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "晴"
+      ],
+      "supportedAnswerCardSets": [
+        "qing-sunny-part-1+qing-sunny-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-qing-sunny-v1",
+      "characterId": "qing-sunny",
+      "targetGlyph": "晴",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "晴"
+      ],
+      "supportedAnswerCardSets": [
+        "qing-sunny-part-1+qing-sunny-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-qing-sunny-v2",
+      "characterId": "qing-sunny",
+      "targetGlyph": "晴",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "晴"
+      ],
+      "supportedAnswerCardSets": [
+        "qing-sunny-part-1+qing-sunny-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-song-v0",
+      "characterId": "song",
+      "targetGlyph": "松",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "松"
+      ],
+      "supportedAnswerCardSets": [
+        "song-part-1+song-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-song-v1",
+      "characterId": "song",
+      "targetGlyph": "松",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "松"
+      ],
+      "supportedAnswerCardSets": [
+        "song-part-1+song-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-song-v2",
+      "characterId": "song",
+      "targetGlyph": "松",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "松"
+      ],
+      "supportedAnswerCardSets": [
+        "song-part-1+song-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-he-v0",
+      "characterId": "he",
+      "targetGlyph": "河",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "河"
+      ],
+      "supportedAnswerCardSets": [
+        "he-part-1+he-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-he-v1",
+      "characterId": "he",
+      "targetGlyph": "河",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "河"
+      ],
+      "supportedAnswerCardSets": [
+        "he-part-1+he-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-he-v2",
+      "characterId": "he",
+      "targetGlyph": "河",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "河"
+      ],
+      "supportedAnswerCardSets": [
+        "he-part-1+he-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-hai-v0",
+      "characterId": "hai",
+      "targetGlyph": "海",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "海"
+      ],
+      "supportedAnswerCardSets": [
+        "hai-part-1+hai-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-hai-v1",
+      "characterId": "hai",
+      "targetGlyph": "海",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "海"
+      ],
+      "supportedAnswerCardSets": [
+        "hai-part-1+hai-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-hai-v2",
+      "characterId": "hai",
+      "targetGlyph": "海",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "海"
+      ],
+      "supportedAnswerCardSets": [
+        "hai-part-1+hai-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-yang-v0",
+      "characterId": "yang",
+      "targetGlyph": "洋",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "洋"
+      ],
+      "supportedAnswerCardSets": [
+        "yang-part-1+yang-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-yang-v1",
+      "characterId": "yang",
+      "targetGlyph": "洋",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "洋"
+      ],
+      "supportedAnswerCardSets": [
+        "yang-part-1+yang-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-yang-v2",
+      "characterId": "yang",
+      "targetGlyph": "洋",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "洋"
+      ],
+      "supportedAnswerCardSets": [
+        "yang-part-1+yang-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-an-v0",
+      "characterId": "an",
+      "targetGlyph": "安",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "安"
+      ],
+      "supportedAnswerCardSets": [
+        "an-part-1+an-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-an-v1",
+      "characterId": "an",
+      "targetGlyph": "安",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "安"
+      ],
+      "supportedAnswerCardSets": [
+        "an-part-1+an-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-an-v2",
+      "characterId": "an",
+      "targetGlyph": "安",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "安"
+      ],
+      "supportedAnswerCardSets": [
+        "an-part-1+an-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-shan-v0",
+      "characterId": "shan",
+      "targetGlyph": "闪",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "闪"
+      ],
+      "supportedAnswerCardSets": [
+        "shan-part-1+shan-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-shan-v1",
+      "characterId": "shan",
+      "targetGlyph": "闪",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "闪"
+      ],
+      "supportedAnswerCardSets": [
+        "shan-part-1+shan-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-shan-v2",
+      "characterId": "shan",
+      "targetGlyph": "闪",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "闪"
+      ],
+      "supportedAnswerCardSets": [
+        "shan-part-1+shan-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-ni-v0",
+      "characterId": "ni",
+      "targetGlyph": "你",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "你"
+      ],
+      "supportedAnswerCardSets": [
+        "ni-part-1+ni-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-ni-v1",
+      "characterId": "ni",
+      "targetGlyph": "你",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "你"
+      ],
+      "supportedAnswerCardSets": [
+        "ni-part-1+ni-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-ni-v2",
+      "characterId": "ni",
+      "targetGlyph": "你",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "你"
+      ],
+      "supportedAnswerCardSets": [
+        "ni-part-1+ni-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-ta-v0",
+      "characterId": "ta",
+      "targetGlyph": "他",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "他"
+      ],
+      "supportedAnswerCardSets": [
+        "ta-part-1+ta-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-ta-v1",
+      "characterId": "ta",
+      "targetGlyph": "他",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "他"
+      ],
+      "supportedAnswerCardSets": [
+        "ta-part-1+ta-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-ta-v2",
+      "characterId": "ta",
+      "targetGlyph": "他",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "他"
+      ],
+      "supportedAnswerCardSets": [
+        "ta-part-1+ta-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-hao-v0",
+      "characterId": "hao",
+      "targetGlyph": "好",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "好"
+      ],
+      "supportedAnswerCardSets": [
+        "hao-part-1+hao-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-hao-v1",
+      "characterId": "hao",
+      "targetGlyph": "好",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "好"
+      ],
+      "supportedAnswerCardSets": [
+        "hao-part-1+hao-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-hao-v2",
+      "characterId": "hao",
+      "targetGlyph": "好",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "好"
+      ],
+      "supportedAnswerCardSets": [
+        "hao-part-1+hao-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-chang-v0",
+      "characterId": "chang",
+      "targetGlyph": "唱",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "唱"
+      ],
+      "supportedAnswerCardSets": [
+        "chang-part-1+chang-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-chang-v1",
+      "characterId": "chang",
+      "targetGlyph": "唱",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "唱"
+      ],
+      "supportedAnswerCardSets": [
+        "chang-part-1+chang-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-chang-v2",
+      "characterId": "chang",
+      "targetGlyph": "唱",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "唱"
+      ],
+      "supportedAnswerCardSets": [
+        "chang-part-1+chang-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-jia-v0",
+      "characterId": "jia",
+      "targetGlyph": "家",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "家"
+      ],
+      "supportedAnswerCardSets": [
+        "jia-part-1+jia-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-jia-v1",
+      "characterId": "jia",
+      "targetGlyph": "家",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "家"
+      ],
+      "supportedAnswerCardSets": [
+        "jia-part-1+jia-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-jia-v2",
+      "characterId": "jia",
+      "targetGlyph": "家",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "家"
+      ],
+      "supportedAnswerCardSets": [
+        "jia-part-1+jia-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-miao-v0",
+      "characterId": "miao",
+      "targetGlyph": "苗",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "苗"
+      ],
+      "supportedAnswerCardSets": [
+        "miao-part-1+miao-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-miao-v1",
+      "characterId": "miao",
+      "targetGlyph": "苗",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "苗"
+      ],
+      "supportedAnswerCardSets": [
+        "miao-part-1+miao-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-miao-v2",
+      "characterId": "miao",
+      "targetGlyph": "苗",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "苗"
+      ],
+      "supportedAnswerCardSets": [
+        "miao-part-1+miao-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-cai-v0",
+      "characterId": "cai",
+      "targetGlyph": "菜",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "菜"
+      ],
+      "supportedAnswerCardSets": [
+        "cai-part-1+cai-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-cai-v1",
+      "characterId": "cai",
+      "targetGlyph": "菜",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "菜"
+      ],
+      "supportedAnswerCardSets": [
+        "cai-part-1+cai-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-cai-v2",
+      "characterId": "cai",
+      "targetGlyph": "菜",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "菜"
+      ],
+      "supportedAnswerCardSets": [
+        "cai-part-1+cai-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-yin-v0",
+      "characterId": "yin",
+      "targetGlyph": "音",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "音"
+      ],
+      "supportedAnswerCardSets": [
+        "yin-part-1+yin-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-yin-v1",
+      "characterId": "yin",
+      "targetGlyph": "音",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "音"
+      ],
+      "supportedAnswerCardSets": [
+        "yin-part-1+yin-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-yin-v2",
+      "characterId": "yin",
+      "targetGlyph": "音",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "音"
+      ],
+      "supportedAnswerCardSets": [
+        "yin-part-1+yin-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-zao-v0",
+      "characterId": "zao",
+      "targetGlyph": "早",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "早"
+      ],
+      "supportedAnswerCardSets": [
+        "zao-part-1+zao-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-zao-v1",
+      "characterId": "zao",
+      "targetGlyph": "早",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "早"
+      ],
+      "supportedAnswerCardSets": [
+        "zao-part-1+zao-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-zao-v2",
+      "characterId": "zao",
+      "targetGlyph": "早",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "早"
+      ],
+      "supportedAnswerCardSets": [
+        "zao-part-1+zao-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-bi-v0",
+      "characterId": "bi",
+      "targetGlyph": "笔",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "笔"
+      ],
+      "supportedAnswerCardSets": [
+        "bi-part-1+bi-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-bi-v1",
+      "characterId": "bi",
+      "targetGlyph": "笔",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "笔"
+      ],
+      "supportedAnswerCardSets": [
+        "bi-part-1+bi-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-bi-v2",
+      "characterId": "bi",
+      "targetGlyph": "笔",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "笔"
+      ],
+      "supportedAnswerCardSets": [
+        "bi-part-1+bi-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-chen-v0",
+      "characterId": "chen",
+      "targetGlyph": "尘",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "尘"
+      ],
+      "supportedAnswerCardSets": [
+        "chen-part-1+chen-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-chen-v1",
+      "characterId": "chen",
+      "targetGlyph": "尘",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "尘"
+      ],
+      "supportedAnswerCardSets": [
+        "chen-part-1+chen-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-chen-v2",
+      "characterId": "chen",
+      "targetGlyph": "尘",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "尘"
+      ],
+      "supportedAnswerCardSets": [
+        "chen-part-1+chen-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-guo-v0",
+      "characterId": "guo",
+      "targetGlyph": "国",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "国"
+      ],
+      "supportedAnswerCardSets": [
+        "guo-part-1+guo-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-guo-v1",
+      "characterId": "guo",
+      "targetGlyph": "国",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "国"
+      ],
+      "supportedAnswerCardSets": [
+        "guo-part-1+guo-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-guo-v2",
+      "characterId": "guo",
+      "targetGlyph": "国",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "国"
+      ],
+      "supportedAnswerCardSets": [
+        "guo-part-1+guo-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-tu-v0",
+      "characterId": "tu",
+      "targetGlyph": "图",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "图"
+      ],
+      "supportedAnswerCardSets": [
+        "tu-part-1+tu-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-tu-v1",
+      "characterId": "tu",
+      "targetGlyph": "图",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "图"
+      ],
+      "supportedAnswerCardSets": [
+        "tu-part-1+tu-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-tu-v2",
+      "characterId": "tu",
+      "targetGlyph": "图",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "图"
+      ],
+      "supportedAnswerCardSets": [
+        "tu-part-1+tu-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-yuan-round-v0",
+      "characterId": "yuan-round",
+      "targetGlyph": "圆",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "圆"
+      ],
+      "supportedAnswerCardSets": [
+        "yuan-round-part-1+yuan-round-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-yuan-round-v1",
+      "characterId": "yuan-round",
+      "targetGlyph": "圆",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "圆"
+      ],
+      "supportedAnswerCardSets": [
+        "yuan-round-part-1+yuan-round-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-yuan-round-v2",
+      "characterId": "yuan-round",
+      "targetGlyph": "圆",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "圆"
+      ],
+      "supportedAnswerCardSets": [
+        "yuan-round-part-1+yuan-round-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-wen-v0",
+      "characterId": "wen",
+      "targetGlyph": "问",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "问"
+      ],
+      "supportedAnswerCardSets": [
+        "wen-part-1+wen-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-wen-v1",
+      "characterId": "wen",
+      "targetGlyph": "问",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "问"
+      ],
+      "supportedAnswerCardSets": [
+        "wen-part-1+wen-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-wen-v2",
+      "characterId": "wen",
+      "targetGlyph": "问",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "问"
+      ],
+      "supportedAnswerCardSets": [
+        "wen-part-1+wen-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-bi-close-v0",
+      "characterId": "bi-close",
+      "targetGlyph": "闭",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "闭"
+      ],
+      "supportedAnswerCardSets": [
+        "bi-close-part-1+bi-close-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-bi-close-v1",
+      "characterId": "bi-close",
+      "targetGlyph": "闭",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "闭"
+      ],
+      "supportedAnswerCardSets": [
+        "bi-close-part-1+bi-close-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    },
+    {
+      "handId": "chapter-one-bi-close-v2",
+      "characterId": "bi-close",
+      "targetGlyph": "闭",
+      "twoCardSubsets": 10,
+      "threeCardSubsets": 10,
+      "permutationsChecked": 80,
+      "distinctResultGlyphs": [
+        "闭"
+      ],
+      "supportedAnswerCardSets": [
+        "bi-close-part-1+bi-close-part-2"
+      ],
+      "failureCodes": [],
+      "passed": true
+    }
+  ]
+}

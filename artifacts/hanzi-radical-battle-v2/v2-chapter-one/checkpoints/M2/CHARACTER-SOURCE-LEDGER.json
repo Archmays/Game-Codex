@@ -1,0 +1,1432 @@
+{
+  "schemaVersion": 1,
+  "milestone": "M2",
+  "result": "PASS",
+  "scope": "24 new Chapter One characters; 12 V1 characters are identity-bound carry-forward",
+  "officialSources": {
+    "unicode": "https://www.unicode.org/Public/UCD/latest/ucd/Unihan.zip",
+    "unicodeVersion": "17.0.0",
+    "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+    "moe": "https://www.moe.gov.cn/jyb_sjzl/ziliao/A19/201306/t20130601_186002.html",
+    "moeExplanation": "https://www.moe.gov.cn/jyb_xwfb/xw_fbh/moe_2069/moe_2590/moe_2914/moe_2912/tnull_50831.html"
+  },
+  "sourceBoundary": "standard identity, fixed-context Mandarin, local combination, formula status and visual hint; no etymology or child-validation claim",
+  "entries": [
+    {
+      "id": "qing-clear",
+      "glyph": "清",
+      "pinyinWithToneMarks": "qīng",
+      "spokenPhrase": "清，清水",
+      "familiarWord": "清水",
+      "shortMeaning": "干净、清亮的水",
+      "regionId": "glimmer-grove",
+      "structure": "left-right",
+      "orderedComponents": [
+        {
+          "id": "qing-clear-part-1",
+          "glyph": "氵",
+          "sourceGlyph": "氵",
+          "slotId": "left",
+          "order": 1
+        },
+        {
+          "id": "qing-clear-part-2",
+          "glyph": "青",
+          "sourceGlyph": "青",
+          "slotId": "right",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "left",
+        "right"
+      ],
+      "sourceCombinationKey": "氵青",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+6E05",
+        "unihanMandarin": "qīng",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u6e05.png",
+        "sourceOrderedParts": [
+          "氵",
+          "青"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "hanzi-wheel",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-qing-clear",
+      "magicName": "清泉澄光",
+      "magicEffect": "清泉洗开墨雾，水面变得清亮。",
+      "meaningAssetKey": "meaning-qing-clear",
+      "familiarityBand": "near",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "青也是完整字；手牌必须防止形成其他氵组合。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:e1f01c05",
+      "visualHintExists": true
+    },
+    {
+      "id": "qing-sunny",
+      "glyph": "晴",
+      "pinyinWithToneMarks": "qíng",
+      "spokenPhrase": "晴，晴天",
+      "familiarWord": "晴天",
+      "shortMeaning": "天空没有雨云、很明亮",
+      "regionId": "glimmer-grove",
+      "structure": "left-right",
+      "orderedComponents": [
+        {
+          "id": "qing-sunny-part-1",
+          "glyph": "日",
+          "sourceGlyph": "日",
+          "slotId": "left",
+          "order": 1
+        },
+        {
+          "id": "qing-sunny-part-2",
+          "glyph": "青",
+          "sourceGlyph": "青",
+          "slotId": "right",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "left",
+        "right"
+      ],
+      "sourceCombinationKey": "日青",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+6674",
+        "unihanMandarin": "qíng",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u6674.png",
+        "sourceOrderedParts": [
+          "日",
+          "青"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "hanzi-wheel",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-qing-sunny",
+      "magicName": "晴空光幕",
+      "magicEffect": "云层散开，晴光照亮森林小路。",
+      "meaningAssetKey": "meaning-qing-sunny",
+      "familiarityBand": "high",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "与清同含青；必须依靠左部件和真实槽位区分。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:67bff0be",
+      "visualHintExists": true
+    },
+    {
+      "id": "song",
+      "glyph": "松",
+      "pinyinWithToneMarks": "sōng",
+      "spokenPhrase": "松，松树",
+      "familiarWord": "松树",
+      "shortMeaning": "四季常青的一种树",
+      "regionId": "glimmer-grove",
+      "structure": "left-right",
+      "orderedComponents": [
+        {
+          "id": "song-part-1",
+          "glyph": "木",
+          "sourceGlyph": "木",
+          "slotId": "left",
+          "order": 1
+        },
+        {
+          "id": "song-part-2",
+          "glyph": "公",
+          "sourceGlyph": "公",
+          "slotId": "right",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "left",
+        "right"
+      ],
+      "sourceCombinationKey": "木公",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+677E",
+        "unihanMandarin": "sōng",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u677e.png",
+        "sourceOrderedParts": [
+          "木",
+          "公"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "hanzi-wheel",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-song",
+      "magicName": "松针守护",
+      "magicEffect": "松针展开一圈柔和的绿色守护光。",
+      "meaningAssetKey": "meaning-song",
+      "familiarityBand": "near",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "不用树木联想解释字源，只呈现部件位置。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:1bb11406",
+      "visualHintExists": true
+    },
+    {
+      "id": "he",
+      "glyph": "河",
+      "pinyinWithToneMarks": "hé",
+      "spokenPhrase": "河，河流",
+      "familiarWord": "河流",
+      "shortMeaning": "流动的大片水道",
+      "regionId": "glimmer-grove",
+      "structure": "left-right",
+      "orderedComponents": [
+        {
+          "id": "he-part-1",
+          "glyph": "氵",
+          "sourceGlyph": "氵",
+          "slotId": "left",
+          "order": 1
+        },
+        {
+          "id": "he-part-2",
+          "glyph": "可",
+          "sourceGlyph": "可",
+          "slotId": "right",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "left",
+        "right"
+      ],
+      "sourceCombinationKey": "氵可",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+6CB3",
+        "unihanMandarin": "hé",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u6cb3.png",
+        "sourceOrderedParts": [
+          "氵",
+          "可"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-he",
+      "magicName": "河流引路",
+      "magicEffect": "一条发光河流绕开墨团，指向前路。",
+      "meaningAssetKey": "meaning-he",
+      "familiarityBand": "high",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "可有独立字义；不在合字前讲字源。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:8a736ba0",
+      "visualHintExists": true
+    },
+    {
+      "id": "hai",
+      "glyph": "海",
+      "pinyinWithToneMarks": "hǎi",
+      "spokenPhrase": "海，大海",
+      "familiarWord": "大海",
+      "shortMeaning": "很大很广的咸水水域",
+      "regionId": "glimmer-grove",
+      "structure": "left-right",
+      "orderedComponents": [
+        {
+          "id": "hai-part-1",
+          "glyph": "氵",
+          "sourceGlyph": "氵",
+          "slotId": "left",
+          "order": 1
+        },
+        {
+          "id": "hai-part-2",
+          "glyph": "每",
+          "sourceGlyph": "每",
+          "slotId": "right",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "left",
+        "right"
+      ],
+      "sourceCombinationKey": "氵每",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+6D77",
+        "unihanMandarin": "hǎi",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u6d77.png",
+        "sourceOrderedParts": [
+          "氵",
+          "每"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-hai",
+      "magicName": "海潮回声",
+      "magicEffect": "蓝色海潮推开墨迹，再轻轻退回。",
+      "meaningAssetKey": "meaning-hai",
+      "familiarityBand": "high",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "意义图只表现海潮，不把部件编成故事。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:79851013",
+      "visualHintExists": true
+    },
+    {
+      "id": "yang",
+      "glyph": "洋",
+      "pinyinWithToneMarks": "yáng",
+      "spokenPhrase": "洋，海洋",
+      "familiarWord": "海洋",
+      "shortMeaning": "广阔相连的海水",
+      "regionId": "glimmer-grove",
+      "structure": "left-right",
+      "orderedComponents": [
+        {
+          "id": "yang-part-1",
+          "glyph": "氵",
+          "sourceGlyph": "氵",
+          "slotId": "left",
+          "order": 1
+        },
+        {
+          "id": "yang-part-2",
+          "glyph": "羊",
+          "sourceGlyph": "羊",
+          "slotId": "right",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "left",
+        "right"
+      ],
+      "sourceCombinationKey": "氵羊",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+6D0B",
+        "unihanMandarin": "yáng",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u6d0b.png",
+        "sourceOrderedParts": [
+          "氵",
+          "羊"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-yang",
+      "magicName": "洋流风帆",
+      "magicEffect": "洋流托起一面小光帆，越过暗水。",
+      "meaningAssetKey": "meaning-yang",
+      "familiarityBand": "near",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "羊是独立熟悉字；只核对部件和位置，不作字源断言。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:12962010",
+      "visualHintExists": true
+    },
+    {
+      "id": "an",
+      "glyph": "安",
+      "pinyinWithToneMarks": "ān",
+      "spokenPhrase": "安，安全",
+      "familiarWord": "安全",
+      "shortMeaning": "平稳、没有危险",
+      "regionId": "glimmer-grove",
+      "structure": "top-bottom",
+      "orderedComponents": [
+        {
+          "id": "an-part-1",
+          "glyph": "宀",
+          "sourceGlyph": "宀",
+          "slotId": "top",
+          "order": 1
+        },
+        {
+          "id": "an-part-2",
+          "glyph": "女",
+          "sourceGlyph": "女",
+          "slotId": "bottom",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "top",
+        "bottom"
+      ],
+      "sourceCombinationKey": "宀女",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+5B89",
+        "unihanMandarin": "ān",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u5b89.png",
+        "sourceOrderedParts": [
+          "宀",
+          "女"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-an",
+      "magicName": "安心结界",
+      "magicEffect": "营地上方出现安稳柔和的保护光罩。",
+      "meaningAssetKey": "meaning-an",
+      "familiarityBand": "high",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "不把宀+女讲成字源故事；只呈现规范位置。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:d9d196df",
+      "visualHintExists": true
+    },
+    {
+      "id": "shan",
+      "glyph": "闪",
+      "pinyinWithToneMarks": "shǎn",
+      "spokenPhrase": "闪，闪电",
+      "familiarWord": "闪电",
+      "shortMeaning": "很快地亮一下或移动开",
+      "regionId": "glimmer-grove",
+      "structure": "semi-enclosure",
+      "orderedComponents": [
+        {
+          "id": "shan-part-1",
+          "glyph": "门",
+          "sourceGlyph": "门",
+          "slotId": "outer",
+          "order": 1
+        },
+        {
+          "id": "shan-part-2",
+          "glyph": "人",
+          "sourceGlyph": "人",
+          "slotId": "inner",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "outer",
+        "inner"
+      ],
+      "sourceCombinationKey": "门人",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+95EA",
+        "unihanMandarin": "shǎn",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u95ea.png",
+        "sourceOrderedParts": [
+          "门",
+          "人"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-shan",
+      "magicName": "闪光跃门",
+      "magicEffect": "一道短促柔光穿过门影，不闪烁刺激。",
+      "meaningAssetKey": "meaning-shan",
+      "familiarityBand": "high",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "效果必须避免高频闪烁；减少动画时用静态光带。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:2b08d997",
+      "visualHintExists": true
+    },
+    {
+      "id": "ni",
+      "glyph": "你",
+      "pinyinWithToneMarks": "nǐ",
+      "spokenPhrase": "你，你好",
+      "familiarWord": "你好",
+      "shortMeaning": "称呼面前的人",
+      "regionId": "echo-garden",
+      "structure": "left-right",
+      "orderedComponents": [
+        {
+          "id": "ni-part-1",
+          "glyph": "亻",
+          "sourceGlyph": "亻",
+          "slotId": "left",
+          "order": 1
+        },
+        {
+          "id": "ni-part-2",
+          "glyph": "尔",
+          "sourceGlyph": "尔",
+          "slotId": "right",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "left",
+        "right"
+      ],
+      "sourceCombinationKey": "亻尔",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+4F60",
+        "unihanMandarin": "nǐ",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u4f60.png",
+        "sourceOrderedParts": [
+          "亻",
+          "尔"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-ni",
+      "magicName": "伙伴招呼",
+      "magicEffect": "友好的光点向同伴挥手，打开花园路。",
+      "meaningAssetKey": "meaning-ni",
+      "familiarityBand": "high",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "母库词为你我；固定朗读采用更熟悉的你好。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:bdcb6de9",
+      "visualHintExists": true
+    },
+    {
+      "id": "ta",
+      "glyph": "他",
+      "pinyinWithToneMarks": "tā",
+      "spokenPhrase": "他，他人",
+      "familiarWord": "他人",
+      "shortMeaning": "说到另外一个人",
+      "regionId": "echo-garden",
+      "structure": "left-right",
+      "orderedComponents": [
+        {
+          "id": "ta-part-1",
+          "glyph": "亻",
+          "sourceGlyph": "亻",
+          "slotId": "left",
+          "order": 1
+        },
+        {
+          "id": "ta-part-2",
+          "glyph": "也",
+          "sourceGlyph": "也",
+          "slotId": "right",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "left",
+        "right"
+      ],
+      "sourceCombinationKey": "亻也",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+4ED6",
+        "unihanMandarin": "tā",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u4ed6.png",
+        "sourceOrderedParts": [
+          "亻",
+          "也"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-ta",
+      "magicName": "同伴灯影",
+      "magicEffect": "远处同伴的灯影回应，照亮另一侧小路。",
+      "meaningAssetKey": "meaning-ta",
+      "familiarityBand": "high",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "只解释固定代词语境，不扩展性别判断。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:b8ccc52d",
+      "visualHintExists": true
+    },
+    {
+      "id": "hao",
+      "glyph": "好",
+      "pinyinWithToneMarks": "hǎo",
+      "spokenPhrase": "好，美好",
+      "familiarWord": "美好",
+      "shortMeaning": "让人喜欢、觉得不错",
+      "regionId": "echo-garden",
+      "structure": "left-right",
+      "orderedComponents": [
+        {
+          "id": "hao-part-1",
+          "glyph": "女",
+          "sourceGlyph": "女",
+          "slotId": "left",
+          "order": 1
+        },
+        {
+          "id": "hao-part-2",
+          "glyph": "子",
+          "sourceGlyph": "子",
+          "slotId": "right",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "left",
+        "right"
+      ],
+      "sourceCombinationKey": "女子",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+597D",
+        "unihanMandarin": "hǎo",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u597d.png",
+        "sourceOrderedParts": [
+          "女",
+          "子"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-hao",
+      "magicName": "美好暖光",
+      "magicEffect": "暖光让花叶舒展开，颜色重新回来。",
+      "meaningAssetKey": "meaning-hao",
+      "familiarityBand": "high",
+      "pronunciationRisk": "fixed-context-polyphone",
+      "ambiguityRisk": "好也读hào；本章固定在美好hǎo语境。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:4392d696",
+      "visualHintExists": true
+    },
+    {
+      "id": "chang",
+      "glyph": "唱",
+      "pinyinWithToneMarks": "chàng",
+      "spokenPhrase": "唱，唱歌",
+      "familiarWord": "唱歌",
+      "shortMeaning": "用声音唱出歌曲",
+      "regionId": "echo-garden",
+      "structure": "left-right",
+      "orderedComponents": [
+        {
+          "id": "chang-part-1",
+          "glyph": "口",
+          "sourceGlyph": "口",
+          "slotId": "left",
+          "order": 1
+        },
+        {
+          "id": "chang-part-2",
+          "glyph": "昌",
+          "sourceGlyph": "昌",
+          "slotId": "right",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "left",
+        "right"
+      ],
+      "sourceCombinationKey": "口昌",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+5531",
+        "unihanMandarin": "chàng",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u5531.png",
+        "sourceOrderedParts": [
+          "口",
+          "昌"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-chang",
+      "magicName": "歌声波纹",
+      "magicEffect": "柔和歌声化成可见波纹，推开墨雾。",
+      "meaningAssetKey": "meaning-chang",
+      "familiarityBand": "high",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "静音时必须保留可见波纹和文字。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:036ebcfb",
+      "visualHintExists": true
+    },
+    {
+      "id": "jia",
+      "glyph": "家",
+      "pinyinWithToneMarks": "jiā",
+      "spokenPhrase": "家，家庭",
+      "familiarWord": "家庭",
+      "shortMeaning": "一起生活的家人与住处",
+      "regionId": "echo-garden",
+      "structure": "top-bottom",
+      "orderedComponents": [
+        {
+          "id": "jia-part-1",
+          "glyph": "宀",
+          "sourceGlyph": "宀",
+          "slotId": "top",
+          "order": 1
+        },
+        {
+          "id": "jia-part-2",
+          "glyph": "豕",
+          "sourceGlyph": "豕",
+          "slotId": "bottom",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "top",
+        "bottom"
+      ],
+      "sourceCombinationKey": "宀豕",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+5BB6",
+        "unihanMandarin": "jiā",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u5bb6.png",
+        "sourceOrderedParts": [
+          "宀",
+          "豕"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-jia",
+      "magicName": "家灯归路",
+      "magicEffect": "一盏家灯亮起，回营小径变得温暖。",
+      "meaningAssetKey": "meaning-jia",
+      "familiarityBand": "high",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "豕较不熟悉，需要清晰大字卡；不讲字源故事。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:9dd5a026",
+      "visualHintExists": true
+    },
+    {
+      "id": "miao",
+      "glyph": "苗",
+      "pinyinWithToneMarks": "miáo",
+      "spokenPhrase": "苗，禾苗",
+      "familiarWord": "禾苗",
+      "shortMeaning": "刚长出来的幼小植物",
+      "regionId": "echo-garden",
+      "structure": "top-bottom",
+      "orderedComponents": [
+        {
+          "id": "miao-part-1",
+          "glyph": "艹",
+          "sourceGlyph": "艹",
+          "slotId": "top",
+          "order": 1
+        },
+        {
+          "id": "miao-part-2",
+          "glyph": "田",
+          "sourceGlyph": "田",
+          "slotId": "bottom",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "top",
+        "bottom"
+      ],
+      "sourceCombinationKey": "艹田",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+82D7",
+        "unihanMandarin": "miáo",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u82d7.png",
+        "sourceOrderedParts": [
+          "艹",
+          "田"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-miao",
+      "magicName": "新苗生长",
+      "magicEffect": "小苗从田边冒出，花园恢复绿色。",
+      "meaningAssetKey": "meaning-miao",
+      "familiarityBand": "near",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "苗也是猫的右部件；以完整字和词语区分。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:783676b3",
+      "visualHintExists": true
+    },
+    {
+      "id": "cai",
+      "glyph": "菜",
+      "pinyinWithToneMarks": "cài",
+      "spokenPhrase": "菜，蔬菜",
+      "familiarWord": "蔬菜",
+      "shortMeaning": "可以做成食物的植物",
+      "regionId": "echo-garden",
+      "structure": "top-bottom",
+      "orderedComponents": [
+        {
+          "id": "cai-part-1",
+          "glyph": "艹",
+          "sourceGlyph": "艹",
+          "slotId": "top",
+          "order": 1
+        },
+        {
+          "id": "cai-part-2",
+          "glyph": "采",
+          "sourceGlyph": "采",
+          "slotId": "bottom",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "top",
+        "bottom"
+      ],
+      "sourceCombinationKey": "艹采",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+83DC",
+        "unihanMandarin": "cài",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u83dc.png",
+        "sourceOrderedParts": [
+          "艹",
+          "采"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-cai",
+      "magicName": "菜园丰光",
+      "magicEffect": "菜园长出一排鲜绿叶片，补回营地颜色。",
+      "meaningAssetKey": "meaning-cai",
+      "familiarityBand": "high",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "采是完整字；手牌求解必须排除其他艹组合。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:537fdba4",
+      "visualHintExists": true
+    },
+    {
+      "id": "yin",
+      "glyph": "音",
+      "pinyinWithToneMarks": "yīn",
+      "spokenPhrase": "音，音乐",
+      "familiarWord": "音乐",
+      "shortMeaning": "耳朵能听见的声音",
+      "regionId": "echo-garden",
+      "structure": "top-bottom",
+      "orderedComponents": [
+        {
+          "id": "yin-part-1",
+          "glyph": "立",
+          "sourceGlyph": "立",
+          "slotId": "top",
+          "order": 1
+        },
+        {
+          "id": "yin-part-2",
+          "glyph": "日",
+          "sourceGlyph": "日",
+          "slotId": "bottom",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "top",
+        "bottom"
+      ],
+      "sourceCombinationKey": "立日",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+97F3",
+        "unihanMandarin": "yīn",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u97f3.png",
+        "sourceOrderedParts": [
+          "立",
+          "日"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-yin",
+      "magicName": "音符回廊",
+      "magicEffect": "音符化成柔光脚印，沿花园回廊前进。",
+      "meaningAssetKey": "meaning-yin",
+      "familiarityBand": "high",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "静音分支用可见音符，不把声音设为规则前提。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:c59b787d",
+      "visualHintExists": true
+    },
+    {
+      "id": "zao",
+      "glyph": "早",
+      "pinyinWithToneMarks": "zǎo",
+      "spokenPhrase": "早，早晨",
+      "familiarWord": "早晨",
+      "shortMeaning": "一天刚开始的时候",
+      "regionId": "wind-trail",
+      "structure": "top-bottom",
+      "orderedComponents": [
+        {
+          "id": "zao-part-1",
+          "glyph": "日",
+          "sourceGlyph": "日",
+          "slotId": "top",
+          "order": 1
+        },
+        {
+          "id": "zao-part-2",
+          "glyph": "十",
+          "sourceGlyph": "十",
+          "slotId": "bottom",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "top",
+        "bottom"
+      ],
+      "sourceCombinationKey": "日十",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+65E9",
+        "unihanMandarin": "zǎo",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u65e9.png",
+        "sourceOrderedParts": [
+          "日",
+          "十"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-zao",
+      "magicName": "晨光唤醒",
+      "magicEffect": "早晨的柔光越过风径，唤醒小路。",
+      "meaningAssetKey": "meaning-zao",
+      "familiarityBand": "high",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "十作为部件须与加号UI明显区分。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:e500a740",
+      "visualHintExists": true
+    },
+    {
+      "id": "bi",
+      "glyph": "笔",
+      "pinyinWithToneMarks": "bǐ",
+      "spokenPhrase": "笔，毛笔",
+      "familiarWord": "毛笔",
+      "shortMeaning": "写字和画画的工具",
+      "regionId": "wind-trail",
+      "structure": "top-bottom",
+      "orderedComponents": [
+        {
+          "id": "bi-part-1",
+          "glyph": "⺮",
+          "sourceGlyph": "⺮",
+          "slotId": "top",
+          "order": 1
+        },
+        {
+          "id": "bi-part-2",
+          "glyph": "毛",
+          "sourceGlyph": "毛",
+          "slotId": "bottom",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "top",
+        "bottom"
+      ],
+      "sourceCombinationKey": "⺮毛",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+7B14",
+        "unihanMandarin": "bǐ",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u7b14.png",
+        "sourceOrderedParts": [
+          "⺮",
+          "毛"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-bi",
+      "magicName": "墨笔星线",
+      "magicEffect": "毛笔画出一条不含文字的星光路线。",
+      "meaningAssetKey": "meaning-bi",
+      "familiarityBand": "high",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "竹字头必须作为完整⺮部件清晰显示。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:e2d3b77f",
+      "visualHintExists": true
+    },
+    {
+      "id": "chen",
+      "glyph": "尘",
+      "pinyinWithToneMarks": "chén",
+      "spokenPhrase": "尘，尘土",
+      "familiarWord": "尘土",
+      "shortMeaning": "很细小的土和灰",
+      "regionId": "wind-trail",
+      "structure": "top-bottom",
+      "orderedComponents": [
+        {
+          "id": "chen-part-1",
+          "glyph": "小",
+          "sourceGlyph": "小",
+          "slotId": "top",
+          "order": 1
+        },
+        {
+          "id": "chen-part-2",
+          "glyph": "土",
+          "sourceGlyph": "土",
+          "slotId": "bottom",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "top",
+        "bottom"
+      ],
+      "sourceCombinationKey": "小土",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+5C18",
+        "unihanMandarin": "chén",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u5c18.png",
+        "sourceOrderedParts": [
+          "小",
+          "土"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-chen",
+      "magicName": "尘光归土",
+      "magicEffect": "飞起的尘点慢慢落回地面，露出脚印。",
+      "meaningAssetKey": "meaning-chen",
+      "familiarityBand": "near",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "不把小+土当作字源说明；只呈现结构位置。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:b8e620ee",
+      "visualHintExists": true
+    },
+    {
+      "id": "guo",
+      "glyph": "国",
+      "pinyinWithToneMarks": "guó",
+      "spokenPhrase": "国，国家",
+      "familiarWord": "国家",
+      "shortMeaning": "许多人共同生活的国家",
+      "regionId": "wind-trail",
+      "structure": "full-enclosure",
+      "orderedComponents": [
+        {
+          "id": "guo-part-1",
+          "glyph": "囗",
+          "sourceGlyph": "囗",
+          "slotId": "outer",
+          "order": 1
+        },
+        {
+          "id": "guo-part-2",
+          "glyph": "玉",
+          "sourceGlyph": "玉",
+          "slotId": "inner",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "outer",
+        "inner"
+      ],
+      "sourceCombinationKey": "囗玉",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+56FD",
+        "unihanMandarin": "guó",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u56fd.png",
+        "sourceOrderedParts": [
+          "囗",
+          "玉"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-guo",
+      "magicName": "国土光环",
+      "magicEffect": "完整外框守住一片发光土地和回家之门。",
+      "meaningAssetKey": "meaning-guo",
+      "familiarityBand": "near",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "概念较大，以国家固定词和外框结构呈现。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:c0555c3b",
+      "visualHintExists": true
+    },
+    {
+      "id": "tu",
+      "glyph": "图",
+      "pinyinWithToneMarks": "tú",
+      "spokenPhrase": "图，图画",
+      "familiarWord": "图画",
+      "shortMeaning": "画出来供人观看的图像",
+      "regionId": "wind-trail",
+      "structure": "full-enclosure",
+      "orderedComponents": [
+        {
+          "id": "tu-part-1",
+          "glyph": "囗",
+          "sourceGlyph": "囗",
+          "slotId": "outer",
+          "order": 1
+        },
+        {
+          "id": "tu-part-2",
+          "glyph": "冬",
+          "sourceGlyph": "冬",
+          "slotId": "inner",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "outer",
+        "inner"
+      ],
+      "sourceCombinationKey": "囗冬",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+56FE",
+        "unihanMandarin": "tú",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u56fe.png",
+        "sourceOrderedParts": [
+          "囗",
+          "冬"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-tu",
+      "magicName": "图画地图",
+      "magicEffect": "一幅无文字光图展开，标出安全路线。",
+      "meaningAssetKey": "meaning-tu",
+      "familiarityBand": "near",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "母库词为图书；本章使用更直观的图画固定语境。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:16248729",
+      "visualHintExists": true
+    },
+    {
+      "id": "yuan-round",
+      "glyph": "圆",
+      "pinyinWithToneMarks": "yuán",
+      "spokenPhrase": "圆，圆形",
+      "familiarWord": "圆形",
+      "shortMeaning": "像圆圈一样没有角的形状",
+      "regionId": "wind-trail",
+      "structure": "full-enclosure",
+      "orderedComponents": [
+        {
+          "id": "yuan-round-part-1",
+          "glyph": "囗",
+          "sourceGlyph": "囗",
+          "slotId": "outer",
+          "order": 1
+        },
+        {
+          "id": "yuan-round-part-2",
+          "glyph": "员",
+          "sourceGlyph": "员",
+          "slotId": "inner",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "outer",
+        "inner"
+      ],
+      "sourceCombinationKey": "囗员",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+5706",
+        "unihanMandarin": "yuán",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u5706.png",
+        "sourceOrderedParts": [
+          "囗",
+          "员"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-yuan-round",
+      "magicName": "圆光护环",
+      "magicEffect": "圆形柔光环绕营地，补好破损边缘。",
+      "meaningAssetKey": "meaning-yuan-round",
+      "familiarityBand": "high",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "与园同音；必须用字形、词语和意义图区分。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:a7600d78",
+      "visualHintExists": true
+    },
+    {
+      "id": "wen",
+      "glyph": "问",
+      "pinyinWithToneMarks": "wèn",
+      "spokenPhrase": "问，问题",
+      "familiarWord": "问题",
+      "shortMeaning": "想知道时提出疑问",
+      "regionId": "wind-trail",
+      "structure": "semi-enclosure",
+      "orderedComponents": [
+        {
+          "id": "wen-part-1",
+          "glyph": "门",
+          "sourceGlyph": "门",
+          "slotId": "outer",
+          "order": 1
+        },
+        {
+          "id": "wen-part-2",
+          "glyph": "口",
+          "sourceGlyph": "口",
+          "slotId": "inner",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "outer",
+        "inner"
+      ],
+      "sourceCombinationKey": "门口",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+95EE",
+        "unihanMandarin": "wèn",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u95ee.png",
+        "sourceOrderedParts": [
+          "门",
+          "口"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-wen",
+      "magicName": "问路回声",
+      "magicEffect": "门内传出一个温和回声，为岔路点亮提示。",
+      "meaningAssetKey": "meaning-wen",
+      "familiarityBand": "high",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "不自动给答案；能力与魔法只显示方向。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:817b4c77",
+      "visualHintExists": true
+    },
+    {
+      "id": "bi-close",
+      "glyph": "闭",
+      "pinyinWithToneMarks": "bì",
+      "spokenPhrase": "闭，关闭",
+      "familiarWord": "关闭",
+      "shortMeaning": "把开着的东西合上",
+      "regionId": "wind-trail",
+      "structure": "semi-enclosure",
+      "orderedComponents": [
+        {
+          "id": "bi-close-part-1",
+          "glyph": "门",
+          "sourceGlyph": "门",
+          "slotId": "outer",
+          "order": 1
+        },
+        {
+          "id": "bi-close-part-2",
+          "glyph": "才",
+          "sourceGlyph": "才",
+          "slotId": "inner",
+          "order": 2
+        }
+      ],
+      "slotIds": [
+        "outer",
+        "inner"
+      ],
+      "sourceCombinationKey": "门才",
+      "sourceMapping": {
+        "unicodeCodePoint": "U+95ED",
+        "unihanMandarin": "bì",
+        "unihanSource": "Unicode 17.0.0 Unihan_Readings.txt kMandarin",
+        "unihanZipSha256": "F7A48B2B545ACFAA77B2D607AE28747404CE02BAEFEE16396C5D2D7A8EF34B5E",
+        "moeSource": "教育部 通用规范汉字表 2013",
+        "motherLibraryPath": "games/hanzi-radical-battle/game-data.ts",
+        "formulaAuditPath": "games/hanzi-radical-battle/formula-audit.ts",
+        "visualHintPath": "public/assets/hanzi-radical-battle/visuals/u95ed.png",
+        "sourceOrderedParts": [
+          "门",
+          "才"
+        ],
+        "formulaAuditStatus": "accepted",
+        "formulaAuditSource": "existing",
+        "sourceLimit": "sources-support-standard-identity-reading-combination-and-meaning-link-not-etymology-or-child-validation"
+      },
+      "magicId": "magic-bi-close",
+      "magicName": "闭门挡墨",
+      "magicEffect": "光门轻轻合上，把墨风挡在外面。",
+      "meaningAssetKey": "meaning-bi-close",
+      "familiarityBand": "near",
+      "pronunciationRisk": "low-in-fixed-phrase",
+      "ambiguityRisk": "门部件须保持半包围开口结构，不画成完整囗。",
+      "etymologyClaim": null,
+      "acceptanceStatus": "machine-verified-v2",
+      "revisionHash": "fnv1a:2a358b38",
+      "visualHintExists": true
+    }
+  ]
+}
