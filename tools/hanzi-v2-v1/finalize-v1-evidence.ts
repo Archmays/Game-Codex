@@ -34,6 +34,7 @@ const expectedSourceSha = process.env.V1_SOURCE_TREE_SHA256 ?? computeMachineRev
 const buildId = process.env.V1_BUILD_ID ?? "local-source";
 const finalCommit = process.env.V1_FINAL_COMMIT ?? null;
 const originMain = process.env.V1_ORIGIN_MAIN ?? null;
+const pagesUrl = process.env.V1_PAGES_URL ?? "NOT_PREVIOUSLY_CONFIGURED";
 const testSummary = process.env.V1_TEST_SUMMARY ?? "84 files / 487 tests";
 
 function sha256(value: Buffer | string): string {
@@ -233,7 +234,7 @@ const releaseManifest = {
   baselines,
   finalCommit,
   originMain,
-  pages: "NOT_PREVIOUSLY_CONFIGURED",
+  pages: pagesUrl,
   verdict: "PASS",
 };
 writeJson(resolve(evidenceRoot, "V1-RELEASE-MANIFEST.json"), releaseManifest);
@@ -272,7 +273,7 @@ writeJson(resolve(evidenceRoot, "V1-MACHINE-VERDICT.json"), {
   verdict: "PASS",
 });
 
-const closeout = `# 汉字魔法战 V2｜V1.0.0 收口\n\n- RESULT: PASS_MACHINE / V1_MACHINE_COMPLETE / HANZI_MAGIC_BATTLE_V2_V1_PLAYABLE_READY\n- VERSION: V1.0.0\n- AUTHORIZATION: ${HANZI_MAGIC_V1_AUTHORIZATION_ID}\n- REAL_CHILD_VALIDATION: NO_BY_USER_DIRECTION\n- SOURCE_TREE_SHA256: ${expectedSourceSha}\n- PLAYABLE_CHARACTERS: 12/12\n- ADVENTURES: 3/3\n- ASSETS: Theme C 16/16 + new meaning magic 8/8\n- E2E_PLAYTHROUGHS: 8/8\n- TESTS: ${testSummary}\n- FINAL_COMMIT: ${finalCommit ?? "PENDING_GIT_CLOSEOUT"}\n- ORIGIN_MAIN: ${originMain ?? "PENDING_GIT_CLOSEOUT"}\n- PAGES: NOT_PREVIOUSLY_CONFIGURED\n\n没有执行或声称真实儿童 Second-Use、乐趣验证或学习效果验证；这是已经完整实现并通过机器审核的第一版可玩游戏。未进入 STEP08/09，未执行公开部署。\n`;
+const closeout = `# 汉字魔法战 V2｜V1.0.0 收口\n\n- RESULT: PASS_MACHINE / V1_MACHINE_COMPLETE / HANZI_MAGIC_BATTLE_V2_V1_PLAYABLE_READY\n- VERSION: V1.0.0\n- AUTHORIZATION: ${HANZI_MAGIC_V1_AUTHORIZATION_ID}\n- REAL_CHILD_VALIDATION: NO_BY_USER_DIRECTION\n- SOURCE_TREE_SHA256: ${expectedSourceSha}\n- PLAYABLE_CHARACTERS: 12/12\n- ADVENTURES: 3/3\n- ASSETS: Theme C 16/16 + new meaning magic 8/8\n- E2E_PLAYTHROUGHS: 8/8\n- TESTS: ${testSummary}\n- FINAL_COMMIT: ${finalCommit ?? "PENDING_GIT_CLOSEOUT"}\n- ORIGIN_MAIN: ${originMain ?? "PENDING_GIT_CLOSEOUT"}\n- PAGES: ${pagesUrl}\n\n没有执行或声称真实儿童 Second-Use、乐趣验证或学习效果验证；这是已经完整实现并通过机器审核的第一版可玩游戏。未进入 STEP08/09，未创建新的公开部署机制。\n`;
 writeFileSync(resolve(evidenceRoot, "V1-CLOSEOUT.md"), closeout, "utf8");
 
 const guide = `# 用户试玩指南\n\n1. 双击 \`D:\\ChatGPT-Codex-Projects\\Game-Codex\\tools\\hanzi-v2-v1\\START_HANZI_MAGIC_BATTLE_V2_V1.cmd\`。\n2. 浏览器会直接打开汉字魔法战 V1.0.0；选择“走进林径”开始。\n3. 点击一张部件牌，再点击对应结构槽。每章完成四个字、选择一项守护技，并修复一处营地。\n4. 完成三章后翻开十二字魔法书，并可自由重玩三章。\n5. “声音与家长”中可静音、减少动画、查看本地隐私说明或二次确认后清除本地存档。\n6. 结束时双击 \`D:\\ChatGPT-Codex-Projects\\Game-Codex\\tools\\hanzi-v2-v1\\STOP_HANZI_MAGIC_BATTLE_V2_V1.cmd\`。\n\n本游戏完全在本机运行；不上传姓名、语音、照片、自由文本或使用记录。\n`;
