@@ -1,5 +1,0 @@
-- region "导出":
-  - heading "导出" [level=2]
-  - paragraph: 导出只保留允许字段；不会给出儿童是否“通过”的判断。
-  - button "导出 STEP-07_SYNTHETIC_TOOLING_TEST_OBSERVATION.json"
-  - status

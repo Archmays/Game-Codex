@@ -13,13 +13,13 @@ import {
   type M3Action,
   type M3GameState,
 } from "../../games/hanzi-radical-battle/v2/chapter-one";
-import { computeMachineReviewSourceTreeSha256 } from "../game-machine-review/source-identity";
+import { computeHanziV2SourceTreeSha256 } from "./source-identity";
 
 const workspace = resolve(process.cwd());
-const output = resolve(workspace, "artifacts/hanzi-radical-battle-v2/v2-chapter-one/report/data/PAGES-VERDICT.json");
+const output = resolve(workspace, "test-results/hanzi-v2/chapter-one/validation/PAGES-VERDICT.json");
 const pagesBase = new URL(process.argv[2] ?? "https://archmays.github.io/Game-Codex/");
 const canonicalUrl = new URL("?play=hanzi-v2-chapter-one&from=hub", pagesBase).href;
-const sourceTreeSha256 = (process.env.CHAPTER_ONE_SOURCE_TREE_SHA256 ?? computeMachineReviewSourceTreeSha256(workspace)).toUpperCase();
+const sourceTreeSha256 = (process.env.CHAPTER_ONE_SOURCE_TREE_SHA256 ?? computeHanziV2SourceTreeSha256(workspace)).toUpperCase();
 const commit = process.env.CHAPTER_ONE_FINAL_COMMIT ?? execFileSync("git", ["rev-parse", "HEAD"], { cwd: workspace, encoding: "utf8" }).trim();
 
 interface Fixture { readonly seed: string; readonly actions: readonly M3Action[]; readonly state: M3GameState }
@@ -124,7 +124,7 @@ export async function verifyPages(): Promise<void> {
     }
     requireValue(assets.length === 72, "Pages did not validate exactly 72 Chapter One runtime assets");
 
-    await page.goto(new URL("?play=hanzi-v2-v1&from=hub", pagesBase).href, { waitUntil: "networkidle" });
+    await page.goto(new URL("?play=hanzi-v2-v1&from=hub", pagesBase).href, { waitUntil: "domcontentloaded" });
     await page.getByTestId("hanzi-magic-v1").waitFor({ state: "visible" });
     requireValue(consoleErrors.length === 0 && pageErrors.length === 0 && failedRequests.length === 0 && httpErrors.length === 0 && externalRequests.length === 0, "Pages emitted browser errors, failed requests, HTTP errors, or external runtime requests");
 

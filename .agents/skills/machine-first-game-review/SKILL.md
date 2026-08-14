@@ -5,7 +5,7 @@ description: Run evidence-backed machine review, bounded automatic repair, and s
 
 # Machine-First Game Review
 
-Use this Skill for implementation acceptance or formal readiness work involving gameplay, child-facing game UI, shared routes, persistence, adult tools, accessibility, responsive behavior, privacy, or browser evidence. It owns routine machine QA; it does not replace real-child, parent, or teacher acceptance.
+Use this Skill for implementation acceptance or formal readiness work involving gameplay, child-facing game UI, shared routes, persistence, accessibility, responsive behavior, privacy, or browser evidence. It owns routine machine QA; it does not create claims about unobserved real-child, parent, or teacher behavior.
 
 ## Six review layers
 
@@ -50,7 +50,7 @@ Record each finding before mutation. Apply the smallest authorized repair, then 
 
 ## Human escalation
 
-Escalate only for real-child behavior, value or preference choices, irreversible privacy/publication decisions, unresolved critical machine-reviewer disagreement, or exhausted bounded repairs. Provide one evidence-backed question and do not ask the user to perform routine UX, accessibility, browser, visual, or QA review.
+When a repair fails, reclassify the root cause and change the test, implementation, or tool approach; do not stop because a fixed retry count was reached. Escalate only for real-child behavior the task genuinely depends on, value or preference choices, irreversible privacy/publication decisions, credentials or external permissions, or unresolved critical machine-reviewer disagreement. Provide one evidence-backed question and do not ask the user to perform routine UX, accessibility, browser, visual, or QA review.
 
 ## Phase closeout
 

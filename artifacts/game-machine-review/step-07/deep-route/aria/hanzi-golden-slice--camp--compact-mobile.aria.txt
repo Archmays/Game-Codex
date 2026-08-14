@@ -1,6 +1,0 @@
-- main:
-  - heading "汉字魔法战 · 墨迹森林" [level=1]
-  - button "声音与画面"
-  - status:
-    - paragraph: 墨点精灵在等你。
-  - button "看看营地灯"

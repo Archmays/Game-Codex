@@ -1,19 +1,25 @@
-# Hanzi Radical Battle V2 Status
+# 当前状态
 
-Current phase: `V2_CHAPTER_ONE_IMPLEMENTATION_AUTHORIZED`
+| Field | Value |
+| --- | --- |
+| Version | `V2.0.0` |
+| Product state | `CHAPTER_ONE_COMPLETE` |
+| Machine release state | `PASS_MACHINE / HANZI_MAGIC_BATTLE_V2_CHAPTER_ONE_PLAYABLE_READY` |
+| Playable characters | `36/36` |
+| Heroes | `3/3` |
+| Regions | `3/3 + INK_KING_CORE` |
+| Selectable / innate abilities | `18/18 + 3/3` |
+| Monster behaviors / bosses | `9/9 + 4/4` |
+| Camp repairs / spellbook | `8/8 + 36/36` |
+| Parent V1 play acceptance | `PASS` |
+| Real child validation | `NO_BY_USER_DIRECTION` |
+| V2 release tag | `hanzi-magic-v2-v2.0.0` → `85c0b37179271eb98697befb418d319d6579b5dd` |
+| V2 release source tree SHA-256 | `472A2A88E8EFA1469865D3D6C9B87CCAE5AC0D697EA5BFCC81D7819219AC329E` |
+| Maintenance main | the commit containing this file; resolve with `git rev-parse HEAD` |
 
-Active version: V2.0.0 — 第一章：墨迹森林
+- Pages：<https://archmays.github.io/Game-Codex/?play=hanzi-v2-chapter-one&from=hub>
+- Launcher：`tools/hanzi-v2-chapter-one/START_HANZI_MAGIC_BATTLE_V2_CHAPTER_ONE.cmd`
+- Frozen release：`artifacts/hanzi-radical-battle-v2/v2-chapter-one/HANZI_MAGIC_BATTLE_V2_CHAPTER_ONE_V2_COMPLETE_RETURN_TO_CHATGPT.zip`
+- Release ZIP SHA-256：`8503D6BF1BF39D33B00E1671702C26B987CBB941C7176B2852A3B0A2A37036AE`
 
-Authorization: `HUMAN_AUTHORIZED_CONTINUOUS_V1_TO_V2_CHAPTER_ONE_20260813`
-
-V1 frozen baseline: tag `hanzi-magic-v2-v1.0.0` → commit `43e7841d2190922b6048182cab4b871c55715840`; legacy route `?play=hanzi-v2-v1&from=hub` remains required.
-
-Authorized scope: M0–M5 continuous implementation; 36 characters; three heroes; three regions plus the final core; nine monster behaviors; 18 selectable and three innate abilities; four bosses; eight camp repairs; 36 spellbook entries; V2 local save migration; formal Theme C art/audio; hub, launcher, package, tags, and update of the existing GitHub Pages deployment.
-
-Completed gates: M0 authorization/freeze, M1 replay loop, M2 formal 36-character content pipeline, M3 three-hero build system, M4 persistent camp/save/spellbook, and M5 complete Chapter One are `PASS_STAGE`. M5 adds three formal regions plus the final core, exactly nine recoverable behaviors, four bosses, 72 optimized Theme C runtime assets, the complete story/free-adventure ending loop, a child-only hub card, 18 complete browser runs, fixed visual/ARIA baselines, and an identity-safe launcher.
-
-Active gate: FINAL — source-bound 90,000-seed audit, 18 complete browser playthroughs, two exact no-update rounds, full repository/V1/V2/build regression, launcher lifecycle and independent reviewer reconciliation are `PASS_MACHINE_CANDIDATE`. Final evidence commit, Pages/remote verification, release tag, return package, cleanup and clean-repository proof remain. This candidate is not the terminal result by itself.
-
-Real child validation: `NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE`. User V1 play acceptance is recorded separately and must not be represented as child evidence.
-
-Terminal boundary: `PASS_MACHINE / CHAPTER_ONE_COMPLETE / HANZI_MAGIC_BATTLE_V2_CHAPTER_ONE_PLAYABLE_READY`. Do not enter a second chapter or broaden beyond the explicit V2.0.0 scope without new authorization.
+当前 main 是发布后的维护真源；历史阶段材料由 Git/tags/release ZIP 保存。日常机器验证结果是技术证据，不改变 `REAL_CHILD_VALIDATION` 事实。

@@ -1,8 +1,0 @@
-- dialog "声音和画面":
-  - heading "声音和画面" [level=2]
-  - checkbox "静音"
-  - text: 静音
-  - checkbox "减少动态"
-  - text: 减少动态
-  - status: 声音关闭也能看清世界。
-  - button "回到游戏世界"

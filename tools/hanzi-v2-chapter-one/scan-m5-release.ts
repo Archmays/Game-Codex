@@ -11,7 +11,7 @@ import {
   simulateM3Run,
   type M3AbilityId,
 } from "../../games/hanzi-radical-battle/v2/chapter-one";
-import { computeMachineReviewSourceTreeSha256 } from "../game-machine-review/source-identity";
+import { computeHanziV2SourceTreeSha256 } from "./source-identity";
 
 const seedsPerHero = Number(process.argv[2] ?? "10000");
 if (!Number.isSafeInteger(seedsPerHero) || seedsPerHero < 1) throw new Error("seeds per hero must be a positive integer");
@@ -59,7 +59,7 @@ const missingBosses = [...bosses].filter(([, count]) => count === 0).map(([id]) 
 const passed = failures.length === 0 && resumeMismatches === 0 && missingCharacters.length === 0 && missingAbilities.length === 0 && missingBehaviors.length === 0 && missingBosses.length === 0;
 const report = {
   schemaVersion: 1,
-  sourceTreeSha256: computeMachineReviewSourceTreeSha256(),
+  sourceTreeSha256: computeHanziV2SourceTreeSha256(),
   result: passed ? "PASS" : "FAIL",
   seedsPerHero,
   totalSeeds: seedsPerHero * M3_HEROES.length,
@@ -80,7 +80,7 @@ const report = {
   missingBosses,
   generatedAtUtc: new Date().toISOString(),
 };
-const directory = resolve("artifacts/hanzi-radical-battle-v2/v2-chapter-one/report/data");
+const directory = resolve("test-results/hanzi-v2/chapter-one/validation");
 mkdirSync(directory, { recursive: true });
 const output = resolve(directory, "PURE-SIMULATION.json");
 writeFileSync(output, `${JSON.stringify(report, null, 2)}\n`, "utf8");

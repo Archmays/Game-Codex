@@ -1,50 +1,30 @@
 ---
 name: child-first-learning-game
-description: Guard child-first learning-game design, implementation, review, and promotion decisions. Use for work that changes a child's first screen, core loop, feedback, difficulty, retention, accessibility, local play records, parent surfaces, or playtest gates; especially for the Hanzi Radical Battle V2 initiative.
+description: Guard child-first learning-game design and implementation when a child's first screen, core loop, feedback, difficulty, accessibility, privacy, local records, or parent surfaces change.
 ---
 
 # Child First Learning Game
 
-Keep the child's felt experience, healthy agency, and observable comprehension ahead of curriculum dashboards or engagement metrics. Automated PASS is technical evidence only; it never substitutes for real child observation or parent judgment.
+Keep the child's felt experience, healthy agency, and comprehension ahead of curriculum dashboards or engagement metrics. Automated evidence may establish technical contracts; never present it as observed child enjoyment, preference, or learning effect.
 
-## Required workflow
+## Workflow
 
-1. Read the initiative north star, machine constraints, traceability matrix, and current decision log.
-2. Name the single child-experience question being changed or tested.
-3. Declare the paths in scope and the experiences explicitly out of scope.
-4. Map every feature to child value, learning value, automatic evidence, and child-playtest evidence before implementation.
-5. Verify the affected interaction in a real browser. Record observation needs separately from technical results.
-6. End with one honest state: `FOUNDATION`, `GOLDEN_SLICE_CANDIDATE`, `CHILD_PLAYTEST_READY`, `REVISE`, or `PROMOTED`. Never infer `PROMOTED` from code or tests alone.
+1. Read the current canonical project docs relevant to the change.
+2. State the child-experience question, child value, learning value, paths in scope, and explicit non-goals.
+3. Give each new behavior an automatic validation path. Add a real-child observation path only when the task itself asks a question that machines cannot answer.
+4. Make the smallest complete change and verify the affected interaction in a real browser.
+5. End with an honest machine verdict and keep any unobserved human claim explicitly unvalidated.
 
-## Child-first experience rules
+## Child-first rules
 
-- The first view must read as a game world: world, character, adventure, monster, choice, magic, discovery, and visible change.
-- Put learning objectives, age, accuracy, error lists, practice counts, and teacher explanations in a separate parent or settings surface.
-- Let “wanting to continue” come from choice, mastery, character differences, readable magic feedback, and permanent world change.
-- Do not use leaderboards, global comparison, daily login rewards, streak pressure, FOMO, loot boxes, expiring rewards, punitive progress loss, or shaming failure language.
-- Failure or retreat must preserve discoveries and already-earned persistent progress and offer a calm next action.
-- Target about 3–5 minutes for the golden slice and about 8–12 minutes for a later complete Pilot.
-- A child should understand the core action with little prompting and without a long rules page.
-- Real child observation cannot be replaced by an agent, telemetry, screenshots, or automated tests.
+- The first view should read as a game world with a clear next action, not a curriculum dashboard.
+- Keep learning objectives, age, accuracy, error lists, practice counts, and teacher explanations out of the child's core play surface.
+- Support choice, mastery, readable feedback, discovery, and persistent world change without engagement pressure.
+- Do not use leaderboards, global comparison, daily rewards, streak pressure, FOMO, loot boxes, expiring rewards, punitive progress loss, or shaming language.
+- Failure or retreat preserves earned progress and offers a calm next action.
+- Use short child-facing sentences, readable hierarchy, touch targets near 44 CSS pixels where layout permits, keyboard/touch access, reduced motion, optional audio, and non-color-only feedback.
+- Store only local, anonymous, minimum-necessary records. No accounts, advertising identifiers, network telemetry, or cloud child tracking.
 
-## Interaction and safety requirements
+## Human-evidence boundary
 
-- Use short child-facing sentences, large readable type, clear hierarchy, and a single obvious next action.
-- Give touch targets at least 44 CSS pixels where layout permits; do not rely on hover or color alone.
-- Keep essential controls visible in portrait phone, landscape tablet, and desktop layouts without covering the playfield.
-- Provide reduced-motion behavior for non-essential camera motion, shake, particles, and transitions. Never make flashing the only feedback.
-- Make sound optional, provide a persistent mute control, avoid startling peaks, and keep important state understandable without audio.
-- Use warm, specific recovery feedback: show which parts are available and how the structure slot can be tried again; do not label the child as wrong or defeated.
-- Store only local, anonymous, minimum-necessary play records. No accounts, network transmission, advertising identifiers, or cloud child tracking.
-
-## Promotion boundary
-
-Automated tests may establish constraint, persistence, and runtime correctness. Browser checks may establish that the interaction renders and responds. Only observed child behavior can establish whether the child understood, cared, noticed the world change, and wanted another try. Use `PROMOTE`, `REVISE`, or `STOP_AND_RETHINK` only under the initiative playtest gate.
-
-## From validated game to private world entry
-
-- Require real child evidence before proposing a game as a private-world entry.
-- Let the classic catalog become a secondary treasure-box route rather than copying it into the child world home.
-- Read the accepted game's existing local progress so permanent world change remains visible; do not create a competing progress record.
-- Never place a real child name, school, photograph, or other identity data in the public repository or review screenshots.
-- After real use, repair only the evidenced defect and its dependency-affected surfaces; keep accepted gameplay and content frozen until a new gate authorizes expansion.
+Real observation remains the authority only for claims about actual child behavior, preference, fun, comprehension, or learning effect. It is not a standing gate for ordinary development or content expansion. Escalate only when the requested decision genuinely depends on such a claim or on a value/preference choice that automation cannot resolve.

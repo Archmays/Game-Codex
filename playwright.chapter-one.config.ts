@@ -4,16 +4,16 @@ const port = Number(process.env.CHAPTER_ONE_PLAYWRIGHT_PORT ?? "5183");
 const baseURL = `http://127.0.0.1:${port}`;
 
 export default defineConfig({
-  testDir: "./tests/e2e",
-  testMatch: /hanzi-magic-v2-chapter-one-(m1|m2-content|m3-builds|m4-persistence|m5-release|visual)\.spec\.ts/,
+  testDir: "./tests/e2e/hanzi-v2",
+  testMatch: /chapter-one-(core|content|builds|persistence|playthroughs|visual)\.spec\.ts/,
   fullyParallel: false,
   forbidOnly: Boolean(process.env.CI),
   retries: 0,
   timeout: 90_000,
   workers: 1,
   reporter: [["line"]],
-  outputDir: "test-results/hanzi-v2-chapter-one",
-  snapshotPathTemplate: "artifacts/hanzi-radical-battle-v2/v2-chapter-one/report/baselines/playwright/{projectName}/{testFileName}/{arg}{ext}",
+  outputDir: "test-results/hanzi-v2/chapter-one/playwright",
+  snapshotPathTemplate: "test-results/hanzi-v2/chapter-one/snapshots/{projectName}/{testFileName}/{arg}{ext}",
   use: {
     baseURL,
     trace: "retain-on-failure",

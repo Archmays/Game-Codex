@@ -4,15 +4,15 @@ const port = Number(process.env.V1_PLAYWRIGHT_PORT ?? "5181");
 const baseURL = `http://127.0.0.1:${port}`;
 
 export default defineConfig({
-  testDir: "./tests/e2e",
-  testMatch: /hanzi-magic-v2-v1(?:-visual|-hard-gates)?\.spec\.ts/,
+  testDir: "./tests/e2e/hanzi-v2",
+  testMatch: /v1-(playthroughs|visual)\.spec\.ts/,
   fullyParallel: false,
   forbidOnly: Boolean(process.env.CI),
   retries: 0,
   workers: 1,
   reporter: [["line"]],
-  outputDir: "artifacts/hanzi-radical-battle-v2/v1-release/traces/playwright",
-  snapshotPathTemplate: "artifacts/hanzi-radical-battle-v2/v1-release/baselines/{projectName}/{testFileName}/{arg}{ext}",
+  outputDir: "test-results/hanzi-v2/v1/playwright",
+  snapshotPathTemplate: "test-results/hanzi-v2/v1/snapshots/{projectName}/{testFileName}/{arg}{ext}",
   use: {
     baseURL,
     ...devices["Desktop Chrome"],

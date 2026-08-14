@@ -1,9 +1,0 @@
-{
-  "schemaVersion": 1,
-  "sourceTreeSha256": "72E0ECF0524F0AE485C946590FDBC6FBDCF6319D8FEC3438529F974BCE6909E7",
-  "status": "PASS",
-  "evidenceFiles": [
-    "artifacts/game-machine-review/step-07/hard-gates/commands/build-20260812T114813510Z-13668-010932e1.json",
-    "artifacts/game-machine-review/step-07/hard-gates/commands/build-20260812T114813510Z-13668-010932e1.log"
-  ]
-}

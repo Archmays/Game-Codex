@@ -1,43 +1,24 @@
 # Skill Index
 
-This is the single Skill root for Game-Codex. Resolve paths exactly as written; `$CODEX_HOME` means the active Codex home (normally `C:/Users/mays-/.codex` on this machine). Do not create a second `skill/` or `.codex/skills/` tree in this repository.
+这是 Game-Codex 的唯一项目 Skill 路由。路径按下表解析；不要在仓库内创建第二套 Skill 树。
 
-## Required load order for Hanzi Radical Battle V2
+## 选择顺序
 
-1. Read the initiative guardrail documents named in `AGENTS.md`.
-2. Load `child-first-learning-game` for any child-facing experience or promotion decision.
-3. Load `child-first-use-observation` for authorized first-use preparation, observer evidence, privacy/stop handling, or post-session interpretation.
-4. Load `hanzi-structure-quality` for any character, component, structure, word, pronunciation, meaning, image, or playable-manifest change.
-5. Load only the technical or discipline Skill needed for the bounded task.
-6. Load `machine-first-game-review` for implementation acceptance, cross-route QA, adult-tool regression, or a formal machine verdict.
-7. Treat real child, parent, or teacher acceptance as independent from automated PASS.
+1. 先读 `AGENTS.md` 与任务直接相关的当前文档。
+2. 只加载覆盖任务所需的最小 Skill 集。
+3. 游戏实现或验收使用 `machine-first-game-review`；汉字内容变化同时使用 `hanzi-structure-quality`；儿童界面或反馈变化同时使用 `child-first-learning-game`。
+4. 只有用户明确要求真人首次/再次使用观察时，才加载 `child-first-use-observation`。
+5. 自动 PASS 只代表其声明的机器 contract，不代表真人儿童体验、偏好或学习效果。
 
 ## Canonical routes
 
-| Skill ID | Canonical path | Source identity | Use when | Project constraint |
-| --- | --- | --- | --- | --- |
-| `child-first-learning-game` | `.agents/skills/child-first-learning-game/SKILL.md` | Project-local, STEP 01 | Child experience, UI, feedback, retention, accessibility, privacy, or playtest gates change | Child-first and healthy-interest rules are mandatory |
-| `child-first-use-observation` | `.agents/skills/child-first-use-observation/SKILL.md` | Project-local, STEP 04 | Authorized young-child first-use preparation, observation, privacy, stop, evidence packaging, or changed-only revision | Preserve first exposure; local minimum evidence only; synthetic tooling is never child evidence |
-| `hanzi-structure-quality` | `.agents/skills/hanzi-structure-quality/SKILL.md` | Project-local, STEP 01 | Hanzi data, slots, combinations, words, images, or manifests change | Adult content/age-fit review remains required |
-| `machine-first-game-review` | `.agents/skills/machine-first-game-review/SKILL.md` | Project-local, STEP 07 | Game implementation acceptance, shared route/UI changes, adult-tool regression, lifecycle/evidence closeout, catalog smoke, or a formal machine verdict | Use discovery before mutation and fail-closed same-tree acceptance; machine PASS is never human or child acceptance |
-| `family-education-game-autopilot` | `$CODEX_HOME/skills/family-education-game-autopilot/SKILL.md` | Global installed Skill | Bounded audit or improvement rounds for family learning games | Follow its phase/status reporting; do not infer human acceptance |
-| `game-studio` | `$CODEX_HOME/plugins/cache/openai-curated/game-studio/27126220/skills/game-studio/SKILL.md` | OpenAI `game-studio@openai-curated` 0.1.2, source commit `11c74d6ba24d3a6d48f54a194cd00ef3beea18f9` | Route a browser-game task to the smallest relevant Game Studio workflow | Plugin is installed and enabled; do not vendor a duplicate |
-| `web-game-foundations` | `$CODEX_HOME/plugins/cache/openai-curated/game-studio/27126220/skills/web-game-foundations/SKILL.md` | Same OpenAI plugin identity | Browser-game loop, state, input, pause, persistence, and performance foundations | Local-only persistence; no backend |
-| `phaser-2d-game` | `$CODEX_HOME/plugins/cache/openai-curated/game-studio/27126220/skills/phaser-2d-game/SKILL.md` | Same OpenAI plugin identity | Phaser 3 implementation or architecture changes | Simulation owns rules; Phaser scenes stay thin; DOM owns dense text |
-| `game-ui-frontend` | `$CODEX_HOME/plugins/cache/openai-curated/game-studio/27126220/skills/game-ui-frontend/SKILL.md` | Same OpenAI plugin identity | HUD, menus, responsive layout, child-facing UI | Protect playfield; reduced motion; no dashboard-like child home |
-| `sprite-pipeline` | `$CODEX_HOME/plugins/cache/openai-curated/game-studio/27126220/skills/sprite-pipeline/SKILL.md` | Same OpenAI plugin identity | Future sprite planning, generation, normalization, or validation | Not authorized in FOUNDATION; use only after an approved visual brief |
-| `game-playtest` | `$CODEX_HOME/plugins/cache/openai-curated/game-studio/27126220/skills/game-playtest/SKILL.md` | Same OpenAI plugin identity | Browser playtest and screenshot evidence | Automation cannot substitute for Huang Xiaoyue's observation |
-| `game-feel` | `.agents/skills/vendor/gamedev-skills/game-feel/SKILL.md` | `gamedev-skills/awesome-gamedev-agent-skills` commit `2bea8297d9f09d90d6720c0334221417f7c9a928`, Apache-2.0 | Tune a small number of high-value feedback moments | Avoid heavy shake/flashes; provide reduced motion; translate examples to Phaser |
-| `audio-design` | `.agents/skills/vendor/gamedev-skills/audio-design/SKILL.md` | Same pinned repository and license | Plan or tune optional layered game audio | No network audio, no startling peaks, and silent play remains understandable |
-| `save-systems` | `.agents/skills/vendor/gamedev-skills/save-systems/SKILL.md` | Same pinned repository and license | Version local save schema, validation, migration, and recovery | Translate file examples to defensive `localStorage`; no cloud save |
-| `prototype-fast` | `.agents/skills/vendor/gamedev-skills/prototype-fast/SKILL.md` | Same pinned repository and license | Bound a golden-slice experiment to one observable question | Interpret as Minimum Lovable Prototype: small scope, but first spell, character, monster, one choice, camp change, and sound/visual feedback must be credible enough to test attraction |
-| `level-design` | `.agents/skills/vendor/gamedev-skills/level-design/SKILL.md` | `gamedev-skills/awesome-gamedev-agent-skills` commit `2bea8297d9f09d90d6720c0334221417f7c9a928`, Apache-2.0 | Author the golden-slice critical path, teach/practice/test beats, pacing, and readable guidance | Translate spatial metrics to the fixed Phaser camera/playfield; keep the 3–5 minute slice and validate with child observation before dressing or expansion |
-| `puzzle` | `.agents/skills/vendor/gamedev-skills/puzzle/SKILL.md` | Same pinned repository and license | Specify deterministic component-slot legality, resolution, undo, solvability, and input locking | Use a small pure rule state, not match-3 scoring/time pressure; wrong placement stays reversible and never labels the child as wrong |
+| Skill ID | Canonical path | Use when | Current constraint |
+| --- | --- | --- | --- |
+| `machine-first-game-review` | `.agents/skills/machine-first-game-review/SKILL.md` | 游戏实现、路由、存档、响应式、无障碍、隐私或正式机器验收 | discovery 在改动前；acceptance 绑定最终同源树；例行问题自动修复 |
+| `hanzi-structure-quality` | `.agents/skills/hanzi-structure-quality/SKILL.md` | 汉字、部件、结构、读音、词义、图像或 playable manifest 变化 | 结构与跨字段一致性必须可自动验证；无固定 12 字门禁 |
+| `child-first-learning-game` | `.agents/skills/child-first-learning-game/SKILL.md` | 儿童首屏、核心循环、反馈、难度、可用性、隐私或本地记录变化 | 保护健康体验；真人观察不是日常开发门禁，不得虚构真人结论 |
+| `child-first-use-observation` | `.agents/skills/child-first-use-observation/SKILL.md` | 用户明确授权的真人首次/再次使用准备、观察、隐私与解释 | 本地最小证据；合成工具绝不冒充真人证据 |
 
-OpenAI Game Studio 0.1.2 is MIT-licensed. The installed manifest, six routed Skill files, and four required reference files were SHA-256 matched to source commit `11c74d6ba24d3a6d48f54a194cd00ef3beea18f9` on 2026-08-09. The six vendored gamedev Skills retain upstream `LICENSE` and `NOTICE` at `.agents/skills/vendor/gamedev-skills/`.
+按任务还可使用项目内 `vendor/gamedev-skills/` 的 `game-feel`、`audio-design`、`save-systems`、`prototype-fast`、`level-design`、`puzzle`，以及已安装的全局 Skill。仅在其学科确实进入范围时加载。
 
-## Selection rule
-
-Use the minimum set that covers the task. Do not load asset, audio, save, or prototyping guidance merely because it exists. If a canonical path is unavailable, report the exact missing path and continue only with unaffected work; do not invent a replacement or claim it was read.
-
-The `machine-first-game-review` entry routes detailed recovery/source-freeze, lifecycle/evidence, and retention/cleanup rules through its `references/` directory. Read only the reference required by the current phase.
+`machine-first-game-review/references/` 提供 source freeze、lifecycle/evidence 与 retention/cleanup 规则；只读当前阶段需要的 reference。路径缺失时报告准确路径并继续不受影响的工作，不得假称已读。
