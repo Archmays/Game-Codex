@@ -2,6 +2,7 @@ export const WHEEL_ISSUE_CODES = [
   "CIRCULAR_DECOMPOSITION",
   "RESULT_USED_AS_COMPONENT",
   "NON_GLYPH_COMPONENT_LABEL",
+  "WRONG_COMPONENT_FORM",
   "WRONG_COMPONENT_ORDER",
   "WRONG_STRUCTURE",
   "UNKNOWN_STRUCTURE",
@@ -18,4 +19,3 @@ export const WHEEL_ISSUE_CODES = [
 ] as const;
 
 export type WheelIssueCode = (typeof WHEEL_ISSUE_CODES)[number];
-

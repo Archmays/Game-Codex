@@ -1,0 +1,384 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-16T11:34:15.676Z",
+  "source": {
+    "name": "Unicode Unihan Database",
+    "unicodeVersion": "17.0.0",
+    "readingsFile": "Unihan_Readings.txt",
+    "sourceZipName": "Unihan.zip",
+    "sourceZipSha256": "f7a48b2b545acfaa77b2d607ae28747404ce02baefee16396c5d2d7a8ef34b5e",
+    "sourceUrl": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
+    "termsUrl": "https://www.unicode.org/terms_of_use.html",
+    "runtimeUse": "none; temporary audit input only"
+  },
+  "summary": {
+    "playableRecordCount": 36,
+    "codePointPresentCount": 36,
+    "defaultReadingConfirmedCount": 35,
+    "contextualReadingConfirmedCount": 1,
+    "mismatchCount": 0
+  },
+  "playableManifestSha256": "420c18a3628abf0bccdfc44d1e4a8550e4ab9b4728a0e78e604105b74cbcc7b1",
+  "records": [
+    {
+      "recordId": "wheel-p1-char-000",
+      "glyph": "明",
+      "codePoint": "U+660E",
+      "playablePinyin": "míng",
+      "familiarWord": "光明",
+      "kMandarin": "míng",
+      "kHanyuPinyin": "21491.080:míng,mèng",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p1-char-001",
+      "glyph": "尖",
+      "codePoint": "U+5C16",
+      "playablePinyin": "jiān",
+      "familiarWord": "笔尖",
+      "kMandarin": "jiān",
+      "kHanyuPinyin": "10562.090:jiān",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p1-char-002",
+      "glyph": "灭",
+      "codePoint": "U+706D",
+      "playablePinyin": "miè",
+      "familiarWord": "灭火",
+      "kMandarin": "miè",
+      "kHanyuPinyin": null,
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p1-char-017",
+      "glyph": "字",
+      "codePoint": "U+5B57",
+      "playablePinyin": "zì",
+      "familiarWord": "写字",
+      "kMandarin": "zì",
+      "kHanyuPinyin": "21010.020:zì",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p2-char-000",
+      "glyph": "清",
+      "codePoint": "U+6E05",
+      "playablePinyin": "qīng",
+      "familiarWord": "清水",
+      "kMandarin": "qīng",
+      "kHanyuPinyin": "31637.110:qīng,qìng",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p2-char-001",
+      "glyph": "晴",
+      "codePoint": "U+6674",
+      "playablePinyin": "qíng",
+      "familiarWord": "晴天",
+      "kMandarin": "qíng",
+      "kHanyuPinyin": "21515.070:qíng",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p2-char-009",
+      "glyph": "抱",
+      "codePoint": "U+62B1",
+      "playablePinyin": "bào",
+      "familiarWord": "拥抱",
+      "kMandarin": "bào",
+      "kHanyuPinyin": "31856.040:bào,pāo,pǒu",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p2-char-011",
+      "glyph": "松",
+      "codePoint": "U+677E",
+      "playablePinyin": "sōng",
+      "familiarWord": "松树",
+      "kMandarin": "sōng",
+      "kHanyuPinyin": "21173.050:sōng",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p3-char-007",
+      "glyph": "草",
+      "codePoint": "U+8349",
+      "playablePinyin": "cǎo",
+      "familiarWord": "草原",
+      "kMandarin": "cǎo",
+      "kHanyuPinyin": "53203.040:zào,cǎo",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p3-char-004",
+      "glyph": "猫",
+      "codePoint": "U+732B",
+      "playablePinyin": "māo",
+      "familiarWord": "花猫",
+      "kMandarin": "māo",
+      "kHanyuPinyin": "21352.010:māo,miáo,máo",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p3-char-006",
+      "glyph": "花",
+      "codePoint": "U+82B1",
+      "playablePinyin": "huā",
+      "familiarWord": "花朵",
+      "kMandarin": "huā",
+      "kHanyuPinyin": "53181.070:huā",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p3-char-013",
+      "glyph": "安",
+      "codePoint": "U+5B89",
+      "playablePinyin": "ān",
+      "familiarWord": "安全",
+      "kMandarin": "ān",
+      "kHanyuPinyin": "20913.090:ān",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p4-char-000",
+      "glyph": "潮",
+      "codePoint": "U+6F6E",
+      "playablePinyin": "cháo",
+      "familiarWord": "潮湿",
+      "kMandarin": "cháo",
+      "kHanyuPinyin": "31737.050:cháo",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p4-char-010",
+      "glyph": "洋",
+      "codePoint": "U+6D0B",
+      "playablePinyin": "yáng",
+      "familiarWord": "海洋",
+      "kMandarin": "yáng",
+      "kHanyuPinyin": "31615.110:xiáng,yáng,yǎng",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p4-char-013",
+      "glyph": "做",
+      "codePoint": "U+505A",
+      "playablePinyin": "zuò",
+      "familiarWord": "做事",
+      "kMandarin": "zuò",
+      "kHanyuPinyin": "10186.180:zuò",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p4-char-017",
+      "glyph": "闻",
+      "codePoint": "U+95FB",
+      "playablePinyin": "wén",
+      "familiarWord": "新闻",
+      "kMandarin": "wén",
+      "kHanyuPinyin": null,
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p5-char-001",
+      "glyph": "嗜",
+      "codePoint": "U+55DC",
+      "playablePinyin": "shì",
+      "familiarWord": "嗜好",
+      "kMandarin": "shì",
+      "kHanyuPinyin": "10664.160:shì",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p5-char-004",
+      "glyph": "恩",
+      "codePoint": "U+6069",
+      "playablePinyin": "ēn",
+      "familiarWord": "恩惠",
+      "kMandarin": "ēn",
+      "kHanyuPinyin": "42290.180:ēn",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p5-char-008",
+      "glyph": "英",
+      "codePoint": "U+82F1",
+      "playablePinyin": "yīng",
+      "familiarWord": "英雄",
+      "kMandarin": "yīng",
+      "kHanyuPinyin": "53192.010:yīng,yāng",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p5-char-006",
+      "glyph": "盲",
+      "codePoint": "U+76F2",
+      "playablePinyin": "máng",
+      "familiarWord": "盲人",
+      "kMandarin": "máng",
+      "kHanyuPinyin": "42469.190:máng",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p6-char-001",
+      "glyph": "陈",
+      "codePoint": "U+9648",
+      "playablePinyin": "chén",
+      "familiarWord": "陈列",
+      "kMandarin": "chén",
+      "kHanyuPinyin": null,
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p6-char-003",
+      "glyph": "虹",
+      "codePoint": "U+8679",
+      "playablePinyin": "hóng",
+      "familiarWord": "彩虹",
+      "kMandarin": "hóng",
+      "kHanyuPinyin": "42834.080:hóng,hòng,gòng",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p6-char-013",
+      "glyph": "盆",
+      "codePoint": "U+76C6",
+      "playablePinyin": "pén",
+      "familiarWord": "花盆",
+      "kMandarin": "pén",
+      "kHanyuPinyin": "42558.070:pén",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-p6-char-009",
+      "glyph": "霜",
+      "codePoint": "U+971C",
+      "playablePinyin": "shuāng",
+      "familiarWord": "冰霜",
+      "kMandarin": "shuāng",
+      "kHanyuPinyin": "64070.020:shuāng",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-j1-char-000",
+      "glyph": "酝",
+      "codePoint": "U+915D",
+      "playablePinyin": "yùn",
+      "familiarWord": "酝酿",
+      "kMandarin": "yùn",
+      "kHanyuPinyin": null,
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-j1-char-010",
+      "glyph": "枫",
+      "codePoint": "U+67AB",
+      "playablePinyin": "fēng",
+      "familiarWord": "枫叶",
+      "kMandarin": "fēng",
+      "kHanyuPinyin": null,
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-j1-char-003",
+      "glyph": "喉",
+      "codePoint": "U+5589",
+      "playablePinyin": "hóu",
+      "familiarWord": "喉咙",
+      "kMandarin": "hóu",
+      "kHanyuPinyin": "10657.040:hóu",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-j1-char-007",
+      "glyph": "朗",
+      "codePoint": "U+6717",
+      "playablePinyin": "lǎng",
+      "familiarWord": "朗润",
+      "kMandarin": "lǎng",
+      "kHanyuPinyin": "32072.060:lǎng",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-j2-char-000",
+      "glyph": "溃",
+      "codePoint": "U+6E83",
+      "playablePinyin": "kuì",
+      "familiarWord": "溃退",
+      "kMandarin": "kuì",
+      "kHanyuPinyin": null,
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-j2-char-002",
+      "glyph": "督",
+      "codePoint": "U+7763",
+      "playablePinyin": "dū",
+      "familiarWord": "督战",
+      "kMandarin": "dū",
+      "kHanyuPinyin": "42495.120:dū",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-j2-char-004",
+      "glyph": "酷",
+      "codePoint": "U+9177",
+      "playablePinyin": "kù",
+      "familiarWord": "酷似",
+      "kMandarin": "kù",
+      "kHanyuPinyin": "63583.100:kù",
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-j2-char-006",
+      "glyph": "娴",
+      "codePoint": "U+5A34",
+      "playablePinyin": "xián",
+      "familiarWord": "娴熟",
+      "kMandarin": "xián",
+      "kHanyuPinyin": null,
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-j3-char-013",
+      "glyph": "阅",
+      "codePoint": "U+9605",
+      "playablePinyin": "yuè",
+      "familiarWord": "阅读",
+      "kMandarin": "yuè",
+      "kHanyuPinyin": null,
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-j3-char-003",
+      "glyph": "汗",
+      "codePoint": "U+6C57",
+      "playablePinyin": "hán",
+      "familiarWord": "可汗",
+      "kMandarin": "hàn",
+      "kHanyuPinyin": "31550.060:hàn,hán,gān",
+      "status": "contextual-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-j3-char-004",
+      "glyph": "锦",
+      "codePoint": "U+9526",
+      "playablePinyin": "jǐn",
+      "familiarWord": "锦绣",
+      "kMandarin": "jǐn",
+      "kHanyuPinyin": null,
+      "status": "default-reading-confirmed"
+    },
+    {
+      "recordId": "wheel-j3-char-010",
+      "glyph": "圆",
+      "codePoint": "U+5706",
+      "playablePinyin": "yuán",
+      "familiarWord": "圆形",
+      "kMandarin": "yuán",
+      "kHanyuPinyin": null,
+      "status": "default-reading-confirmed"
+    }
+  ]
+}

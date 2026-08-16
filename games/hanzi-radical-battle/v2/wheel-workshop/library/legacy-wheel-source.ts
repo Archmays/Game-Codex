@@ -2,6 +2,8 @@
 // Preserve byte-significant data and ordering; corrections belong in the canonical audit layer.
 import type { LegacyWheelSet } from "./legacy-wheel-types";
 
+export const LEGACY_WHEEL_SOURCE_HEAD_SHA = "3dfa537d41d6f7abccf6ef7bf460290656ef65fe" as const;
+export const LEGACY_WHEEL_SOURCE_GIT_BLOB_SHA = "722d6c20bf4f2a1213b9f04135ea929d8fb36aa8" as const;
 export const LEGACY_WHEEL_SOURCE_STABLE_JSON_SHA256 = "0e47b5d434cff65c9af1a65fad1dcd5a4f6432bf218223213083a43a54af64ac" as const;
 
 const LEGACY_WHEEL_SOURCE_DATA = [

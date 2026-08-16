@@ -12,6 +12,8 @@ import {
 } from "../../../games/hanzi-radical-battle/v2/chapter-one";
 import { createV1GameState } from "../../../games/hanzi-radical-battle/v2/v1/machine";
 import { HANZI_MAGIC_V1_SAVE_KEY, createFreshV1Save, saveFromGameState, writeV1Save } from "../../../games/hanzi-radical-battle/v2/v1/save";
+import { PLAYABLE_WHEEL_MANIFEST_REVISION } from "../../../games/hanzi-radical-battle/v2/wheel-workshop/library/playable-wheel-manifest";
+import { WHEEL_WORKSHOP_SAVE_KEY } from "../../../games/hanzi-radical-battle/v2/wheel-workshop/save/wheel-save";
 
 const output = resolve("test-results/hanzi-v2/chapter-one/persistence");
 mkdirSync(output, { recursive: true });
@@ -140,7 +142,8 @@ test("M4 interrupted run resumes after browser reload with a safe current-run su
 
 test("M4 parent clear requires a second confirmation and leaves frozen V1 data intact", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium"); const legacy = completedV1Raw();
-  await inject(page, [[HANZI_MAGIC_M4_SAVE_KEY, JSON.stringify(fullSave())], [HANZI_MAGIC_V1_SAVE_KEY, legacy], [HANZI_MAGIC_M4_V1_RAW_KEY, legacy]]);
+  const wheelSave = { schemaVersion: 1, selectedGradeId: "p1", discoveredRecordIds: ["wheel-p1-char-000"], recentRecordIds: ["wheel-p1-char-000"], lastSafeState: null, contentRevision: PLAYABLE_WHEEL_MANIFEST_REVISION };
+  await inject(page, [[HANZI_MAGIC_M4_SAVE_KEY, JSON.stringify(fullSave())], [HANZI_MAGIC_V1_SAVE_KEY, legacy], [HANZI_MAGIC_M4_V1_RAW_KEY, legacy], [WHEEL_WORKSHOP_SAVE_KEY, JSON.stringify(wheelSave)]]);
   await page.goto("/?play=hanzi-v2-chapter-one&from=hub&fresh=1&seed=m4-parent-clear");
   await page.locator('[data-action="open-parent"]').click(); const parent = page.getByTestId("chapter-one-parent");
   await expect(parent).toContainText("不会保存详细按键历史"); await page.locator('[data-action="arm-clear-progress"]').click();
@@ -148,6 +151,7 @@ test("M4 parent clear requires a second confirmation and leaves frozen V1 data i
   await page.screenshot({ path: resolve(output, "M4-PARENT-SECOND-CONFIRM.png"), fullPage: true });
   await page.locator('[data-action="confirm-clear-progress"]').click();
   await expect(page.getByTestId("hanzi-magic-chapter-one-m3")).toHaveAttribute("data-repair-count", "0");
+  expect(await page.evaluate((key) => localStorage.getItem(key), WHEEL_WORKSHOP_SAVE_KEY)).toBeNull();
   expect(await page.evaluate((key) => localStorage.getItem(key), HANZI_MAGIC_V1_SAVE_KEY)).toBe(legacy);
   expect(await page.evaluate((key) => localStorage.getItem(key), HANZI_MAGIC_M4_V1_RAW_KEY)).toBe(legacy);
 });

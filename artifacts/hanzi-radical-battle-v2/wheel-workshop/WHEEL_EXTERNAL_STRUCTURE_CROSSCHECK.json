@@ -1,0 +1,3431 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-16T11:30:18.072Z",
+  "source": {
+    "name": "Make Me a Hanzi dictionary.txt",
+    "repository": "https://github.com/skishore/makemeahanzi",
+    "commit": "bddc96d41bef78427ed0e034e9f7e31d71fd1b92",
+    "dictionarySha256": "744bb05d5b0742e9ee35c37791f94d56a173349b3367569e7ca11e510364d203",
+    "copyingSha256": "26fa6b699b32401de4b75a4af574c2e0a99b3df6cb12df9313d257ee4634359c",
+    "dictionaryLicense": "LGPL-3.0-or-later",
+    "graphicsLicense": "Arphic-Public-License",
+    "graphicsFileUsed": false,
+    "runtimeUse": "none; temporary audit input only"
+  },
+  "summary": {
+    "characterRecordCount": 162,
+    "dictionaryEntryPresentCount": 162,
+    "approvedRootConfirmedCount": 161,
+    "approvedExactComponentConfirmedCount": 156,
+    "documentedComponentVariantCount": 5,
+    "expectedQuarantineCount": 1,
+    "approvedRootMismatchCount": 0,
+    "approvedComponentMismatchCount": 0,
+    "unknownIdsCount": 0
+  },
+  "canonicalAuditSha256": "bc79e4149935013a0d0c99dd8ce0afb3b51e8216a8c6e1685e4bb0e57753dee0",
+  "records": [
+    {
+      "legacyId": "p1.char.000",
+      "glyph": "明",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "日",
+        "月"
+      ],
+      "externalDecomposition": "⿰日月",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "日",
+        "月"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p1.char.001",
+      "glyph": "尖",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "小",
+        "大"
+      ],
+      "externalDecomposition": "⿱小大",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "小",
+        "大"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p1.char.002",
+      "glyph": "灭",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "一",
+        "火"
+      ],
+      "externalDecomposition": "⿱一火",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "一",
+        "火"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p1.char.003",
+      "glyph": "男",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "田",
+        "力"
+      ],
+      "externalDecomposition": "⿱田力",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "田",
+        "力"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p1.char.004",
+      "glyph": "看",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "龵",
+        "目"
+      ],
+      "externalDecomposition": "⿱手目",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "手",
+        "目"
+      ],
+      "rootMatches": true,
+      "componentsMatch": false,
+      "componentVariantAdjudication": "CNS11643 U+770B IDS ⿱龵目",
+      "approved": true,
+      "status": "documented-component-variant"
+    },
+    {
+      "legacyId": "p1.char.005",
+      "glyph": "歪",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "不",
+        "正"
+      ],
+      "externalDecomposition": "⿱不正",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "不",
+        "正"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p1.char.006",
+      "glyph": "林",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "木",
+        "木"
+      ],
+      "externalDecomposition": "⿰木木",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "木",
+        "木"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p1.char.007",
+      "glyph": "从",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "人",
+        "人"
+      ],
+      "externalDecomposition": "⿰人人",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "人",
+        "人"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p1.char.008",
+      "glyph": "古",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "十",
+        "口"
+      ],
+      "externalDecomposition": "⿱十口",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "十",
+        "口"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p1.char.009",
+      "glyph": "问",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "门",
+        "口"
+      ],
+      "externalDecomposition": "⿵门口",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "门",
+        "口"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p1.char.010",
+      "glyph": "爸",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "父",
+        "巴"
+      ],
+      "externalDecomposition": "⿱父巴",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "父",
+        "巴"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p1.char.011",
+      "glyph": "妈",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "女",
+        "马"
+      ],
+      "externalDecomposition": "⿰女马",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "女",
+        "马"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p1.char.012",
+      "glyph": "间",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "门",
+        "日"
+      ],
+      "externalDecomposition": "⿵门日",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "门",
+        "日"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p1.char.013",
+      "glyph": "和",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "禾",
+        "口"
+      ],
+      "externalDecomposition": "⿰禾口",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "禾",
+        "口"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p1.char.014",
+      "glyph": "李",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "木",
+        "子"
+      ],
+      "externalDecomposition": "⿱木子",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "木",
+        "子"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p1.char.015",
+      "glyph": "你",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "亻",
+        "尔"
+      ],
+      "externalDecomposition": "⿰亻尔",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "亻",
+        "尔"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p1.char.016",
+      "glyph": "好",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "女",
+        "子"
+      ],
+      "externalDecomposition": "⿰女子",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "女",
+        "子"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p1.char.017",
+      "glyph": "字",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "宀",
+        "子"
+      ],
+      "externalDecomposition": "⿱宀子",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "宀",
+        "子"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p2.char.000",
+      "glyph": "清",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "氵",
+        "青"
+      ],
+      "externalDecomposition": "⿰氵青",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "氵",
+        "青"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p2.char.001",
+      "glyph": "晴",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "日",
+        "青"
+      ],
+      "externalDecomposition": "⿰日青",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "日",
+        "青"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p2.char.002",
+      "glyph": "睛",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "目",
+        "青"
+      ],
+      "externalDecomposition": "⿰目青",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "目",
+        "青"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p2.char.003",
+      "glyph": "请",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "讠",
+        "青"
+      ],
+      "externalDecomposition": "⿰讠青",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "讠",
+        "青"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p2.char.004",
+      "glyph": "情",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "忄",
+        "青"
+      ],
+      "externalDecomposition": "⿰忄青",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "忄",
+        "青"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p2.char.005",
+      "glyph": "蜻",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "虫",
+        "青"
+      ],
+      "externalDecomposition": "⿰虫青",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "虫",
+        "青"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p2.char.006",
+      "glyph": "泡",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "氵",
+        "包"
+      ],
+      "externalDecomposition": "⿰氵包",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "氵",
+        "包"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p2.char.007",
+      "glyph": "炮",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "火",
+        "包"
+      ],
+      "externalDecomposition": "⿰火包",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "火",
+        "包"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p2.char.008",
+      "glyph": "跑",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "𧾷",
+        "包"
+      ],
+      "externalDecomposition": "⿰足包",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "足",
+        "包"
+      ],
+      "rootMatches": true,
+      "componentsMatch": false,
+      "componentVariantAdjudication": "CNS11643 U+8DD1 IDS ⿰𧾷包",
+      "approved": true,
+      "status": "documented-component-variant"
+    },
+    {
+      "legacyId": "p2.char.009",
+      "glyph": "抱",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "扌",
+        "包"
+      ],
+      "externalDecomposition": "⿰扌包",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "扌",
+        "包"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p2.char.010",
+      "glyph": "饱",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "饣",
+        "包"
+      ],
+      "externalDecomposition": "⿰饣包",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "饣",
+        "包"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p2.char.011",
+      "glyph": "松",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "木",
+        "公"
+      ],
+      "externalDecomposition": "⿰木公",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "木",
+        "公"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p2.char.012",
+      "glyph": "柏",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "木",
+        "白"
+      ],
+      "externalDecomposition": "⿰木白",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "木",
+        "白"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p2.char.013",
+      "glyph": "伯",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "亻",
+        "白"
+      ],
+      "externalDecomposition": "⿰亻白",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "亻",
+        "白"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p2.char.014",
+      "glyph": "江",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "氵",
+        "工"
+      ],
+      "externalDecomposition": "⿰氵工",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "氵",
+        "工"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p2.char.015",
+      "glyph": "河",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "氵",
+        "可"
+      ],
+      "externalDecomposition": "⿰氵可",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "氵",
+        "可"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p2.char.016",
+      "glyph": "海",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "氵",
+        "每"
+      ],
+      "externalDecomposition": "⿰氵每",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "氵",
+        "每"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p2.char.017",
+      "glyph": "进",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "辶",
+        "井"
+      ],
+      "externalDecomposition": "⿺辶井",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "辶",
+        "井"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p3.char.000",
+      "glyph": "胆",
+      "auditStatus": "quarantined",
+      "auditStructure": "unknown",
+      "auditComponents": [
+        "月",
+        "旦"
+      ],
+      "externalDecomposition": "⿰⺼旦",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "⺼",
+        "旦"
+      ],
+      "rootMatches": false,
+      "componentsMatch": false,
+      "componentVariantAdjudication": null,
+      "approved": false,
+      "status": "expected-quarantine"
+    },
+    {
+      "legacyId": "p3.char.001",
+      "glyph": "肥",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "⺼",
+        "巴"
+      ],
+      "externalDecomposition": "⿰⺼巴",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "⺼",
+        "巴"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p3.char.002",
+      "glyph": "腰",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "⺼",
+        "要"
+      ],
+      "externalDecomposition": "⿰⺼要",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "⺼",
+        "要"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p3.char.003",
+      "glyph": "狂",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "犭",
+        "王"
+      ],
+      "externalDecomposition": "⿰犭王",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "犭",
+        "王"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p3.char.004",
+      "glyph": "猫",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "犭",
+        "苗"
+      ],
+      "externalDecomposition": "⿰犭苗",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "犭",
+        "苗"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p3.char.005",
+      "glyph": "猜",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "犭",
+        "青"
+      ],
+      "externalDecomposition": "⿰犭青",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "犭",
+        "青"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p3.char.006",
+      "glyph": "花",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "艹",
+        "化"
+      ],
+      "externalDecomposition": "⿱艹化",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "艹",
+        "化"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p3.char.007",
+      "glyph": "草",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "艹",
+        "早"
+      ],
+      "externalDecomposition": "⿱艹早",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "艹",
+        "早"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p3.char.008",
+      "glyph": "宁",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "宀",
+        "丁"
+      ],
+      "externalDecomposition": "⿱宀丁",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "宀",
+        "丁"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p3.char.009",
+      "glyph": "空",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "穴",
+        "工"
+      ],
+      "externalDecomposition": "⿱穴工",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "穴",
+        "工"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p3.char.010",
+      "glyph": "雾",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "雨",
+        "务"
+      ],
+      "externalDecomposition": "⿱雨务",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "雨",
+        "务"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p3.char.011",
+      "glyph": "雹",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "雨",
+        "包"
+      ],
+      "externalDecomposition": "⿱雨包",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "雨",
+        "包"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p3.char.012",
+      "glyph": "宝",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "宀",
+        "玉"
+      ],
+      "externalDecomposition": "⿱宀玉",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "宀",
+        "玉"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p3.char.013",
+      "glyph": "安",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "宀",
+        "女"
+      ],
+      "externalDecomposition": "⿱宀女",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "宀",
+        "女"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p3.char.014",
+      "glyph": "笔",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "⺮",
+        "毛"
+      ],
+      "externalDecomposition": "⿱⺮毛",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "⺮",
+        "毛"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p3.char.015",
+      "glyph": "思",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "田",
+        "心"
+      ],
+      "externalDecomposition": "⿱田心",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "田",
+        "心"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p3.char.016",
+      "glyph": "想",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "相",
+        "心"
+      ],
+      "externalDecomposition": "⿱相心",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "相",
+        "心"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p3.char.017",
+      "glyph": "雷",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "雨",
+        "田"
+      ],
+      "externalDecomposition": "⿱雨田",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "雨",
+        "田"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p4.char.000",
+      "glyph": "潮",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "氵",
+        "朝"
+      ],
+      "externalDecomposition": "⿰氵朝",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "氵",
+        "朝"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p4.char.001",
+      "glyph": "堤",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "土",
+        "是"
+      ],
+      "externalDecomposition": "⿰土是",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "土",
+        "是"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p4.char.002",
+      "glyph": "阔",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "门",
+        "活"
+      ],
+      "externalDecomposition": "⿵门活",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "门",
+        "活"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p4.char.003",
+      "glyph": "盼",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "目",
+        "分"
+      ],
+      "externalDecomposition": "⿰目分",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "目",
+        "分"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p4.char.004",
+      "glyph": "滚",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "氵",
+        "衮"
+      ],
+      "externalDecomposition": "⿰氵衮",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "氵",
+        "衮"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p4.char.005",
+      "glyph": "顿",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "屯",
+        "页"
+      ],
+      "externalDecomposition": "⿰屯页",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "屯",
+        "页"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p4.char.006",
+      "glyph": "逐",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "辶",
+        "豕"
+      ],
+      "externalDecomposition": "⿺辶豕",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "辶",
+        "豕"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p4.char.007",
+      "glyph": "渐",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "氵",
+        "斩"
+      ],
+      "externalDecomposition": "⿰氵斩",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "氵",
+        "斩"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p4.char.008",
+      "glyph": "犹",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "犭",
+        "尤"
+      ],
+      "externalDecomposition": "⿰犭尤",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "犭",
+        "尤"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p4.char.009",
+      "glyph": "崩",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "山",
+        "朋"
+      ],
+      "externalDecomposition": "⿱山朋",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "山",
+        "朋"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p4.char.010",
+      "glyph": "洋",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "氵",
+        "羊"
+      ],
+      "externalDecomposition": "⿰氵羊",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "氵",
+        "羊"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p4.char.011",
+      "glyph": "淡",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "氵",
+        "炎"
+      ],
+      "externalDecomposition": "⿰氵炎",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "氵",
+        "炎"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p4.char.012",
+      "glyph": "注",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "氵",
+        "主"
+      ],
+      "externalDecomposition": "⿰氵主",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "氵",
+        "主"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p4.char.013",
+      "glyph": "做",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "亻",
+        "故"
+      ],
+      "externalDecomposition": "⿰亻故",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "亻",
+        "故"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p4.char.014",
+      "glyph": "作",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "亻",
+        "乍"
+      ],
+      "externalDecomposition": "⿰亻乍",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "亻",
+        "乍"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p4.char.015",
+      "glyph": "指",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "扌",
+        "旨"
+      ],
+      "externalDecomposition": "⿰扌旨",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "扌",
+        "旨"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p4.char.016",
+      "glyph": "讨",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "讠",
+        "寸"
+      ],
+      "externalDecomposition": "⿰讠寸",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "讠",
+        "寸"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p4.char.017",
+      "glyph": "闻",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "门",
+        "耳"
+      ],
+      "externalDecomposition": "⿵门耳",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "门",
+        "耳"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p5.char.000",
+      "glyph": "鹭",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "路",
+        "鸟"
+      ],
+      "externalDecomposition": "⿱路鸟",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "路",
+        "鸟"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p5.char.001",
+      "glyph": "嗜",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "口",
+        "耆"
+      ],
+      "externalDecomposition": "⿰口耆",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "口",
+        "耆"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p5.char.002",
+      "glyph": "匣",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "匚",
+        "甲"
+      ],
+      "externalDecomposition": "⿷匚甲",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "匚",
+        "甲"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p5.char.003",
+      "glyph": "哨",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "口",
+        "肖"
+      ],
+      "externalDecomposition": "⿰口肖",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "口",
+        "肖"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p5.char.004",
+      "glyph": "恩",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "因",
+        "心"
+      ],
+      "externalDecomposition": "⿱因心",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "因",
+        "心"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p5.char.005",
+      "glyph": "韵",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "音",
+        "匀"
+      ],
+      "externalDecomposition": "⿰音匀",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "音",
+        "匀"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p5.char.006",
+      "glyph": "盲",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "亡",
+        "目"
+      ],
+      "externalDecomposition": "⿱亡目",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "亡",
+        "目"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p5.char.007",
+      "glyph": "牟",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "厶",
+        "牛"
+      ],
+      "externalDecomposition": "⿱厶牛",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "厶",
+        "牛"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p5.char.008",
+      "glyph": "英",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "艹",
+        "央"
+      ],
+      "externalDecomposition": "⿱艹央",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "艹",
+        "央"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p5.char.009",
+      "glyph": "芬",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "艹",
+        "分"
+      ],
+      "externalDecomposition": "⿱艹分",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "艹",
+        "分"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p5.char.010",
+      "glyph": "芳",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "艹",
+        "方"
+      ],
+      "externalDecomposition": "⿱艹方",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "艹",
+        "方"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p5.char.011",
+      "glyph": "容",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "宀",
+        "谷"
+      ],
+      "externalDecomposition": "⿱宀谷",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "宀",
+        "谷"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p5.char.012",
+      "glyph": "客",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "宀",
+        "各"
+      ],
+      "externalDecomposition": "⿱宀各",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "宀",
+        "各"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p5.char.013",
+      "glyph": "管",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "⺮",
+        "官"
+      ],
+      "externalDecomposition": "⿱⺮官",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "⺮",
+        "官"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p5.char.014",
+      "glyph": "答",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "⺮",
+        "合"
+      ],
+      "externalDecomposition": "⿱⺮合",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "⺮",
+        "合"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p5.char.015",
+      "glyph": "意",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "音",
+        "心"
+      ],
+      "externalDecomposition": "⿱音心",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "音",
+        "心"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p5.char.016",
+      "glyph": "员",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "口",
+        "贝"
+      ],
+      "externalDecomposition": "⿱口贝",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "口",
+        "贝"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p5.char.017",
+      "glyph": "货",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "化",
+        "贝"
+      ],
+      "externalDecomposition": "⿱化贝",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "化",
+        "贝"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p6.char.000",
+      "glyph": "毯",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "毛",
+        "炎"
+      ],
+      "externalDecomposition": "⿺毛炎",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "毛",
+        "炎"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p6.char.001",
+      "glyph": "陈",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "阝",
+        "东"
+      ],
+      "externalDecomposition": "⿰阝东",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "阝",
+        "东"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p6.char.002",
+      "glyph": "裳",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "尚",
+        "衣"
+      ],
+      "externalDecomposition": "⿱尚衣",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "尚",
+        "衣"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p6.char.003",
+      "glyph": "虹",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "虫",
+        "工"
+      ],
+      "externalDecomposition": "⿰虫工",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "虫",
+        "工"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p6.char.004",
+      "glyph": "蹄",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "足",
+        "帝"
+      ],
+      "externalDecomposition": "⿰足帝",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "足",
+        "帝"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p6.char.005",
+      "glyph": "腐",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "府",
+        "肉"
+      ],
+      "externalDecomposition": "⿸广⿱付肉",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "广",
+        "⿱付肉"
+      ],
+      "rootMatches": true,
+      "componentsMatch": false,
+      "componentVariantAdjudication": "CNS11643 U+8150 alternative IDS ⿸府肉",
+      "approved": true,
+      "status": "documented-component-variant"
+    },
+    {
+      "legacyId": "p6.char.006",
+      "glyph": "羞",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "⺶",
+        "丑"
+      ],
+      "externalDecomposition": "⿸羊丑",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "羊",
+        "丑"
+      ],
+      "rootMatches": true,
+      "componentsMatch": false,
+      "componentVariantAdjudication": "CNS11643 U+7F9E IDS ⿸⺶丑",
+      "approved": true,
+      "status": "documented-component-variant"
+    },
+    {
+      "legacyId": "p6.char.007",
+      "glyph": "曝",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "日",
+        "暴"
+      ],
+      "externalDecomposition": "⿰日暴",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "日",
+        "暴"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p6.char.008",
+      "glyph": "谱",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "讠",
+        "普"
+      ],
+      "externalDecomposition": "⿰讠普",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "讠",
+        "普"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p6.char.009",
+      "glyph": "霜",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "雨",
+        "相"
+      ],
+      "externalDecomposition": "⿱雨相",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "雨",
+        "相"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p6.char.010",
+      "glyph": "零",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "雨",
+        "令"
+      ],
+      "externalDecomposition": "⿱雨令",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "雨",
+        "令"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p6.char.011",
+      "glyph": "穿",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "穴",
+        "牙"
+      ],
+      "externalDecomposition": "⿱穴牙",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "穴",
+        "牙"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p6.char.012",
+      "glyph": "究",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "穴",
+        "九"
+      ],
+      "externalDecomposition": "⿱穴九",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "穴",
+        "九"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p6.char.013",
+      "glyph": "盆",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "分",
+        "皿"
+      ],
+      "externalDecomposition": "⿱分皿",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "分",
+        "皿"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p6.char.014",
+      "glyph": "盘",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "舟",
+        "皿"
+      ],
+      "externalDecomposition": "⿱舟皿",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "舟",
+        "皿"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p6.char.015",
+      "glyph": "迷",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "辶",
+        "米"
+      ],
+      "externalDecomposition": "⿺辶米",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "辶",
+        "米"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p6.char.016",
+      "glyph": "道",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "辶",
+        "首"
+      ],
+      "externalDecomposition": "⿺辶首",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "辶",
+        "首"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "p6.char.017",
+      "glyph": "庭",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "广",
+        "廷"
+      ],
+      "externalDecomposition": "⿸广廷",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "广",
+        "廷"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j1.char.000",
+      "glyph": "酝",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "酉",
+        "云"
+      ],
+      "externalDecomposition": "⿰酉云",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "酉",
+        "云"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j1.char.001",
+      "glyph": "酿",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "酉",
+        "良"
+      ],
+      "externalDecomposition": "⿰酉良",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "酉",
+        "良"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j1.char.002",
+      "glyph": "窠",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "穴",
+        "果"
+      ],
+      "externalDecomposition": "⿱穴果",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "穴",
+        "果"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j1.char.003",
+      "glyph": "喉",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "口",
+        "侯"
+      ],
+      "externalDecomposition": "⿰口侯",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "口",
+        "侯"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j1.char.004",
+      "glyph": "咙",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "口",
+        "龙"
+      ],
+      "externalDecomposition": "⿰口龙",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "口",
+        "龙"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j1.char.005",
+      "glyph": "莅",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "艹",
+        "位"
+      ],
+      "externalDecomposition": "⿱艹位",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "艹",
+        "位"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j1.char.006",
+      "glyph": "吝",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "文",
+        "口"
+      ],
+      "externalDecomposition": "⿱文口",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "文",
+        "口"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j1.char.007",
+      "glyph": "朗",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "良",
+        "月"
+      ],
+      "externalDecomposition": "⿰良月",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "良",
+        "月"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j1.char.008",
+      "glyph": "淅",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "氵",
+        "析"
+      ],
+      "externalDecomposition": "⿰氵析",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "氵",
+        "析"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j1.char.009",
+      "glyph": "沥",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "氵",
+        "历"
+      ],
+      "externalDecomposition": "⿰氵历",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "氵",
+        "历"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j1.char.010",
+      "glyph": "枫",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "木",
+        "风"
+      ],
+      "externalDecomposition": "⿰木风",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "木",
+        "风"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j1.char.011",
+      "glyph": "根",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "木",
+        "艮"
+      ],
+      "externalDecomposition": "⿰木艮",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "木",
+        "艮"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j1.char.012",
+      "glyph": "停",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "亻",
+        "亭"
+      ],
+      "externalDecomposition": "⿰亻亭",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "亻",
+        "亭"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j1.char.013",
+      "glyph": "像",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "亻",
+        "象"
+      ],
+      "externalDecomposition": "⿰亻象",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "亻",
+        "象"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j1.char.014",
+      "glyph": "谢",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "讠",
+        "射"
+      ],
+      "externalDecomposition": "⿰讠射",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "讠",
+        "射"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j1.char.015",
+      "glyph": "病",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "疒",
+        "丙"
+      ],
+      "externalDecomposition": "⿸疒丙",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "疒",
+        "丙"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j1.char.016",
+      "glyph": "痛",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "疒",
+        "甬"
+      ],
+      "externalDecomposition": "⿸疒甬",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "疒",
+        "甬"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j1.char.017",
+      "glyph": "居",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "尸",
+        "古"
+      ],
+      "externalDecomposition": "⿸户古",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "户",
+        "古"
+      ],
+      "rootMatches": true,
+      "componentsMatch": false,
+      "componentVariantAdjudication": "Academia Sinica U+5C45 character evolution identifies 尸 as the outer semantic form",
+      "approved": true,
+      "status": "documented-component-variant"
+    },
+    {
+      "legacyId": "j2.char.000",
+      "glyph": "溃",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "氵",
+        "贵"
+      ],
+      "externalDecomposition": "⿰氵贵",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "氵",
+        "贵"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j2.char.001",
+      "glyph": "泄",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "氵",
+        "世"
+      ],
+      "externalDecomposition": "⿰氵世",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "氵",
+        "世"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j2.char.002",
+      "glyph": "督",
+      "auditStatus": "validated",
+      "auditStructure": "top-bottom",
+      "auditComponents": [
+        "叔",
+        "目"
+      ],
+      "externalDecomposition": "⿱叔目",
+      "externalRootStructure": "top-bottom",
+      "externalFirstLevelOperands": [
+        "叔",
+        "目"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j2.char.003",
+      "glyph": "翘",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "尧",
+        "羽"
+      ],
+      "externalDecomposition": "⿺尧羽",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "尧",
+        "羽"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j2.char.004",
+      "glyph": "酷",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "酉",
+        "告"
+      ],
+      "externalDecomposition": "⿰酉告",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "酉",
+        "告"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j2.char.005",
+      "glyph": "悄",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "忄",
+        "肖"
+      ],
+      "externalDecomposition": "⿰忄肖",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "忄",
+        "肖"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j2.char.006",
+      "glyph": "娴",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "女",
+        "闲"
+      ],
+      "externalDecomposition": "⿰女闲",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "女",
+        "闲"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j2.char.007",
+      "glyph": "懈",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "忄",
+        "解"
+      ],
+      "externalDecomposition": "⿰忄解",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "忄",
+        "解"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j2.char.008",
+      "glyph": "燥",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "火",
+        "喿"
+      ],
+      "externalDecomposition": "⿰火喿",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "火",
+        "喿"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j2.char.009",
+      "glyph": "殚",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "歹",
+        "单"
+      ],
+      "externalDecomposition": "⿰歹单",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "歹",
+        "单"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j2.char.010",
+      "glyph": "康",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "广",
+        "隶"
+      ],
+      "externalDecomposition": "⿸广隶",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "广",
+        "隶"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j2.char.011",
+      "glyph": "廊",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "广",
+        "郎"
+      ],
+      "externalDecomposition": "⿸广郎",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "广",
+        "郎"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j2.char.012",
+      "glyph": "症",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "疒",
+        "正"
+      ],
+      "externalDecomposition": "⿸疒正",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "疒",
+        "正"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j2.char.013",
+      "glyph": "疯",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "疒",
+        "风"
+      ],
+      "externalDecomposition": "⿸疒风",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "疒",
+        "风"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j2.char.014",
+      "glyph": "屋",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "尸",
+        "至"
+      ],
+      "externalDecomposition": "⿸尸至",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "尸",
+        "至"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j2.char.015",
+      "glyph": "层",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "尸",
+        "云"
+      ],
+      "externalDecomposition": "⿸尸云",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "尸",
+        "云"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j2.char.016",
+      "glyph": "超",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "走",
+        "召"
+      ],
+      "externalDecomposition": "⿺走召",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "走",
+        "召"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j2.char.017",
+      "glyph": "趣",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "走",
+        "取"
+      ],
+      "externalDecomposition": "⿺走取",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "走",
+        "取"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j3.char.000",
+      "glyph": "妖",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "女",
+        "夭"
+      ],
+      "externalDecomposition": "⿰女夭",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "女",
+        "夭"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j3.char.001",
+      "glyph": "娆",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "女",
+        "尧"
+      ],
+      "externalDecomposition": "⿰女尧",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "女",
+        "尧"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j3.char.002",
+      "glyph": "折",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "扌",
+        "斤"
+      ],
+      "externalDecomposition": "⿰扌斤",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "扌",
+        "斤"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j3.char.003",
+      "glyph": "汗",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "氵",
+        "干"
+      ],
+      "externalDecomposition": "⿰氵干",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "氵",
+        "干"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j3.char.004",
+      "glyph": "锦",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "钅",
+        "帛"
+      ],
+      "externalDecomposition": "⿰钅帛",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "钅",
+        "帛"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j3.char.005",
+      "glyph": "婵",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "女",
+        "单"
+      ],
+      "externalDecomposition": "⿰女单",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "女",
+        "单"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j3.char.006",
+      "glyph": "哑",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "口",
+        "亚"
+      ],
+      "externalDecomposition": "⿰口亚",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "口",
+        "亚"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j3.char.007",
+      "glyph": "圃",
+      "auditStatus": "validated",
+      "auditStructure": "full-enclosure",
+      "auditComponents": [
+        "囗",
+        "甫"
+      ],
+      "externalDecomposition": "⿴囗甫",
+      "externalRootStructure": "full-enclosure",
+      "externalFirstLevelOperands": [
+        "囗",
+        "甫"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j3.char.008",
+      "glyph": "锢",
+      "auditStatus": "validated",
+      "auditStructure": "left-right",
+      "auditComponents": [
+        "钅",
+        "固"
+      ],
+      "externalDecomposition": "⿰钅固",
+      "externalRootStructure": "left-right",
+      "externalFirstLevelOperands": [
+        "钅",
+        "固"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j3.char.009",
+      "glyph": "圈",
+      "auditStatus": "validated",
+      "auditStructure": "full-enclosure",
+      "auditComponents": [
+        "囗",
+        "卷"
+      ],
+      "externalDecomposition": "⿴囗卷",
+      "externalRootStructure": "full-enclosure",
+      "externalFirstLevelOperands": [
+        "囗",
+        "卷"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j3.char.010",
+      "glyph": "圆",
+      "auditStatus": "validated",
+      "auditStructure": "full-enclosure",
+      "auditComponents": [
+        "囗",
+        "员"
+      ],
+      "externalDecomposition": "⿴囗员",
+      "externalRootStructure": "full-enclosure",
+      "externalFirstLevelOperands": [
+        "囗",
+        "员"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j3.char.011",
+      "glyph": "逃",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "辶",
+        "兆"
+      ],
+      "externalDecomposition": "⿺辶兆",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "辶",
+        "兆"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j3.char.012",
+      "glyph": "迹",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "辶",
+        "亦"
+      ],
+      "externalDecomposition": "⿺辶亦",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "辶",
+        "亦"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j3.char.013",
+      "glyph": "阅",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "门",
+        "兑"
+      ],
+      "externalDecomposition": "⿵门兑",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "门",
+        "兑"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j3.char.014",
+      "glyph": "闷",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "门",
+        "心"
+      ],
+      "externalDecomposition": "⿵门心",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "门",
+        "心"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j3.char.015",
+      "glyph": "废",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "广",
+        "发"
+      ],
+      "externalDecomposition": "⿸广发",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "广",
+        "发"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j3.char.016",
+      "glyph": "越",
+      "auditStatus": "validated",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "走",
+        "戉"
+      ],
+      "externalDecomposition": "⿺走戉",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "走",
+        "戉"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    },
+    {
+      "legacyId": "j3.char.017",
+      "glyph": "医",
+      "auditStatus": "corrected-derived-record",
+      "auditStructure": "semi-enclosure",
+      "auditComponents": [
+        "匸",
+        "矢"
+      ],
+      "externalDecomposition": "⿷匸矢",
+      "externalRootStructure": "semi-enclosure",
+      "externalFirstLevelOperands": [
+        "匸",
+        "矢"
+      ],
+      "rootMatches": true,
+      "componentsMatch": true,
+      "componentVariantAdjudication": null,
+      "approved": true,
+      "status": "root-and-components-confirmed"
+    }
+  ]
+}

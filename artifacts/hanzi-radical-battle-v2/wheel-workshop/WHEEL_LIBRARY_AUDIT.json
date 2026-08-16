@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "auditVersion": "wheel-library-audit-v1",
+  "auditVersion": "wheel-library-audit-v2",
   "generatedAt": "2026-08-16T10:28:52.927Z",
   "sourceFreeze": {
     "sourcePath": "packages/data/learningGames.ts",
@@ -27,28 +27,103 @@
     {
       "sourceId": "Unicode-Unicode17-Unihan",
       "version": "17.0.0",
+      "sourceZipSha256": "f7a48b2b545acfaa77b2d607ae28747404ce02baefee16396c5d2d7a8ef34b5e",
       "license": "Unicode-3.0",
       "url": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
-      "usage": "identity and Mandarin reading cross-check only"
+      "usage": "temporary identity and Mandarin reading cross-check; no runtime dependency"
+    },
+    {
+      "sourceId": "Make-Me-a-Hanzi-dictionary",
+      "version": "bddc96d41bef78427ed0e034e9f7e31d71fd1b92",
+      "dictionarySha256": "744bb05d5b0742e9ee35c37791f94d56a173349b3367569e7ca11e510364d203",
+      "license": "LGPL-3.0-or-later",
+      "url": "https://github.com/skishore/makemeahanzi",
+      "usage": "temporary all-162 root IDS and first-level operand cross-check; no bulk data or runtime dependency imported"
+    },
+    {
+      "sourceId": "CNS11643",
+      "version": "2024:U+770B,U+8DD1,U+7F9E,U+8150,U+533B",
+      "license": "Taiwan-Government-Data-Open-License-1.0",
+      "urls": [
+        "https://www.cns11643.gov.tw/wordView.jsp?ID=86624",
+        "https://www.cns11643.gov.tw/wordView.jsp?ID=90692",
+        "https://www.cns11643.gov.tw/wordView.jsp?ID=89184",
+        "https://www.cns11643.gov.tw/wordView.jsp?ID=92751",
+        "https://www.cns11643.gov.tw/wordView.jsp?ID=205926"
+      ],
+      "usage": "exact component-form and documented IDS-variant adjudication"
+    },
+    {
+      "sourceId": "Academia-Sinica-Character-Structure-Database",
+      "version": "accessed-2026-08-16:U+5C45",
+      "license": "reference-only",
+      "url": "https://chardb.iis.sinica.edu.tw/evolution.jsp?cid=10323",
+      "usage": "居 尸 outer-form adjudication"
+    },
+    {
+      "sourceId": "MOE-Concised-Dictionary",
+      "version": "2021",
+      "license": "reference-only",
+      "url": "https://dict.concised.moe.edu.tw/dictView.jsp?ID=18026&la=0&powerMode=0",
+      "usage": "fixed-context 可汗 = kè hán lexical pronunciation evidence"
+    },
+    {
+      "sourceId": "MOE-Revised-Dictionary",
+      "version": "2021",
+      "license": "reference-only",
+      "url": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=99918&la=0&powerMode=0",
+      "usage": "fixed-context 翘首 = qiáo shǒu lexical pronunciation evidence"
     }
   ],
   "reviewedButNotImported": [
     {
-      "sourceId": "Make-Me-a-Hanzi-dictionary",
-      "license": "LGPL-3.0-or-later",
-      "url": "https://github.com/skishore/makemeahanzi",
-      "reason": "license boundary reviewed; network retrieval unavailable in the execution shell, so no values or runtime dependency were imported"
-    },
-    {
       "sourceId": "Make-Me-a-Hanzi-graphics",
       "license": "Arphic-Public-License",
       "url": "https://github.com/skishore/makemeahanzi",
-      "reason": "not needed for text-structure-only V2.1 workshop and not imported"
+      "reason": "dictionary/graphics license split was recorded; graphics were not downloaded, needed, or imported for the text-structure-only workshop"
     }
   ],
+  "externalCrosschecks": {
+    "makeMeAHanzi": {
+      "characterRecordCount": 162,
+      "dictionaryEntryPresentCount": 162,
+      "approvedRootConfirmedCount": 161,
+      "approvedExactComponentConfirmedCount": 156,
+      "documentedComponentVariantCount": 5,
+      "expectedQuarantineCount": 1,
+      "approvedRootMismatchCount": 0,
+      "approvedComponentMismatchCount": 0,
+      "unknownIdsCount": 0
+    },
+    "unihan": {
+      "playableRecordCount": 36,
+      "codePointPresentCount": 36,
+      "defaultReadingConfirmedCount": 35,
+      "contextualReadingConfirmedCount": 1,
+      "mismatchCount": 0
+    }
+  },
   "alignmentBoundary": "Source grade labels are preserved historical labels. curriculumStage is an organizational grouping only; no per-character 2022 curriculum alignment is claimed.",
   "countsByGradeAndMode": {
     "p1": {
+      "char": {
+        "raw": 18,
+        "validated": 16,
+        "correctedDerived": 2,
+        "quarantined": 0,
+        "contextOnly": 0,
+        "playable": 4
+      },
+      "word": {
+        "raw": 12,
+        "validated": 0,
+        "correctedDerived": 0,
+        "quarantined": 0,
+        "contextOnly": 12,
+        "playable": 0
+      }
+    },
+    "p2": {
       "char": {
         "raw": 18,
         "validated": 17,
@@ -66,29 +141,11 @@
         "playable": 0
       }
     },
-    "p2": {
-      "char": {
-        "raw": 18,
-        "validated": 18,
-        "correctedDerived": 0,
-        "quarantined": 0,
-        "contextOnly": 0,
-        "playable": 4
-      },
-      "word": {
-        "raw": 12,
-        "validated": 0,
-        "correctedDerived": 0,
-        "quarantined": 0,
-        "contextOnly": 12,
-        "playable": 0
-      }
-    },
     "p3": {
       "char": {
         "raw": 18,
-        "validated": 16,
-        "correctedDerived": 1,
+        "validated": 14,
+        "correctedDerived": 3,
         "quarantined": 1,
         "contextOnly": 0,
         "playable": 4
@@ -141,8 +198,8 @@
     "p6": {
       "char": {
         "raw": 18,
-        "validated": 17,
-        "correctedDerived": 1,
+        "validated": 16,
+        "correctedDerived": 2,
         "quarantined": 0,
         "contextOnly": 0,
         "playable": 4
@@ -159,8 +216,8 @@
     "j1": {
       "char": {
         "raw": 18,
-        "validated": 18,
-        "correctedDerived": 0,
+        "validated": 17,
+        "correctedDerived": 1,
         "quarantined": 0,
         "contextOnly": 0,
         "playable": 4
@@ -177,8 +234,8 @@
     "j2": {
       "char": {
         "raw": 18,
-        "validated": 18,
-        "correctedDerived": 0,
+        "validated": 17,
+        "correctedDerived": 1,
         "quarantined": 0,
         "contextOnly": 0,
         "playable": 4
@@ -195,8 +252,8 @@
     "j3": {
       "char": {
         "raw": 18,
-        "validated": 18,
-        "correctedDerived": 0,
+        "validated": 16,
+        "correctedDerived": 2,
         "quarantined": 0,
         "contextOnly": 0,
         "playable": 4
@@ -212,8 +269,8 @@
     }
   },
   "statusCounts": {
-    "validated": 148,
-    "corrected-derived-record": 13,
+    "validated": 139,
+    "corrected-derived-record": 22,
     "quarantined": 1,
     "not-playable-context-only": 108
   },
@@ -221,23 +278,24 @@
     "CIRCULAR_DECOMPOSITION": 10,
     "RESULT_USED_AS_COMPONENT": 10,
     "NON_GLYPH_COMPONENT_LABEL": 1,
+    "WRONG_COMPONENT_FORM": 7,
     "WRONG_COMPONENT_ORDER": 11,
-    "WRONG_STRUCTURE": 5,
+    "WRONG_STRUCTURE": 7,
     "UNKNOWN_STRUCTURE": 1,
-    "PINYIN_MISMATCH": 0,
+    "PINYIN_MISMATCH": 1,
     "FIXED_CONTEXT_POLYPHONE": 13,
     "WORD_FRAGMENT": 8,
     "NON_STANDALONE_LEXEME": 8,
-    "MEANING_MISMATCH": 0,
+    "MEANING_MISMATCH": 2,
     "GRADE_ALIGNMENT_UNVERIFIED": 270,
     "AMBIGUOUS_HAND": 0,
     "MISSING_SOURCE": 2,
-    "FONT_RENDER_RISK": 0,
+    "FONT_RENDER_RISK": 5,
     "DUPLICATE_RECORD": 0
   },
-  "canonicalAuditSha256": "5a5a8cbfc5fef3e8ace2ff07d0e601ee4f74819a56a48bf914edbe4d48b62f95",
-  "playableManifestRevision": "fnv1a:36ec4e11",
-  "playableManifestSha256": "25cde568984bbff012bd4b41c89f6d4dc306dc939772248b3a8a3399b2b37ca7",
+  "canonicalAuditSha256": "bc79e4149935013a0d0c99dd8ce0afb3b51e8216a8c6e1685e4bb0e57753dee0",
+  "playableManifestRevision": "fnv1a:6c4d00c4",
+  "playableManifestSha256": "420c18a3628abf0bccdfc44d1e4a8550e4ab9b4728a0e78e604105b74cbcc7b1",
   "playableManifestCount": 36,
   "records": [
     {
@@ -292,10 +350,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:6982ff3d"
+      "revisionHash": "fnv1a:0bd08f8a"
     },
     {
       "legacyId": "p1.char.001",
@@ -349,10 +407,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:572428ae"
+      "revisionHash": "fnv1a:312ac1dd"
     },
     {
       "legacyId": "p1.char.002",
@@ -406,10 +464,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:162d04f6"
+      "revisionHash": "fnv1a:4bf60d3b"
     },
     {
       "legacyId": "p1.char.003",
@@ -463,10 +521,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:ad69f512"
+      "revisionHash": "fnv1a:3469db43"
     },
     {
       "legacyId": "p1.char.004",
@@ -484,7 +542,7 @@
       "alignmentStatus": "legacy-label-only",
       "structure": "top-bottom",
       "orderedComponents": [
-        "手",
+        "龵",
         "目"
       ],
       "slotIds": [
@@ -495,11 +553,13 @@
         "top-component",
         "bottom-component"
       ],
-      "auditStatus": "validated",
+      "auditStatus": "corrected-derived-record",
       "issueCodes": [
+        "WRONG_COMPONENT_FORM",
+        "FONT_RENDER_RISK",
         "GRADE_ALIGNMENT_UNVERIFIED"
       ],
-      "correctionNote": null,
+      "correctionNote": "原始层保留“手 + 目”；派生层按 CNS IDS ⿱龵目记录手在字内的真实变形。该部件不进入首版可玩池。",
       "sourceEvidence": [
         {
           "sourceId": "legacy-wheel-source-freeze",
@@ -509,21 +569,28 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         },
         {
-          "sourceId": "hanzi-radical-formula-audit",
-          "location": "games/hanzi-radical-battle/formula-audit.ts",
-          "version": "3dfa537d41d6f7abccf6ef7bf460290656ef65fe",
-          "license": "repository-source",
-          "supports": "accepted component combination and coarse structure cross-check"
-        },
-        {
           "sourceId": "unicode-unihan",
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
+        },
+        {
+          "sourceId": "cns11643-look-ids",
+          "location": "https://www.cns11643.gov.tw/wordView.jsp?ID=86624",
+          "version": "CNS11643-2024:U+770B",
+          "license": "Taiwan-Government-Data-Open-License-1.0",
+          "supports": "看 IDS ⿱龵目 and exact positional component form"
+        },
+        {
+          "sourceId": "make-me-a-hanzi-dictionary",
+          "location": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt",
+          "version": "bddc96d41bef78427ed0e034e9f7e31d71fd1b92:sha256:744bb05d5b0742e9ee35c37791f94d56a173349b3367569e7ca11e510364d203",
+          "license": "LGPL-3.0-or-later",
+          "supports": "temporary audit-only simplified-glyph IDS root and component-form cross-check; no runtime data imported"
         }
       ],
-      "revisionHash": "fnv1a:fae91285"
+      "revisionHash": "fnv1a:c60f9765"
     },
     {
       "legacyId": "p1.char.005",
@@ -576,10 +643,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:04339013"
+      "revisionHash": "fnv1a:2310dcc4"
     },
     {
       "legacyId": "p1.char.006",
@@ -632,10 +699,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:bb1501ad"
+      "revisionHash": "fnv1a:bbf31816"
     },
     {
       "legacyId": "p1.char.007",
@@ -689,10 +756,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:ee148278"
+      "revisionHash": "fnv1a:475f09d7"
     },
     {
       "legacyId": "p1.char.008",
@@ -741,17 +808,17 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         },
         {
           "sourceId": "simplified-glyph-structure-review",
           "location": "target browser font stack and repository structure contract",
-          "version": "wheel-library-audit-v1",
+          "version": "wheel-library-audit-v2",
           "license": "not-applicable",
           "supports": "ordered spatial slots and visible simplified glyph structure; not historical etymology"
         }
       ],
-      "revisionHash": "fnv1a:8d434172"
+      "revisionHash": "fnv1a:fb7a8808"
     },
     {
       "legacyId": "p1.char.009",
@@ -805,10 +872,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:8ed8fad7"
+      "revisionHash": "fnv1a:e62bd9ca"
     },
     {
       "legacyId": "p1.char.010",
@@ -860,10 +927,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:ce7d9fea"
+      "revisionHash": "fnv1a:25f1e4c9"
     },
     {
       "legacyId": "p1.char.011",
@@ -915,10 +982,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:7bdcaf5d"
+      "revisionHash": "fnv1a:fd7596a6"
     },
     {
       "legacyId": "p1.char.012",
@@ -971,10 +1038,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:3de594ff"
+      "revisionHash": "fnv1a:81fcb5e6"
     },
     {
       "legacyId": "p1.char.013",
@@ -1028,10 +1095,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:2fd8bab6"
+      "revisionHash": "fnv1a:342e69e7"
     },
     {
       "legacyId": "p1.char.014",
@@ -1084,10 +1151,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:29150bf8"
+      "revisionHash": "fnv1a:bd0cb5bd"
     },
     {
       "legacyId": "p1.char.015",
@@ -1140,10 +1207,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:b97fc1ce"
+      "revisionHash": "fnv1a:5085a5cf"
     },
     {
       "legacyId": "p1.char.016",
@@ -1196,10 +1263,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:1b029c5b"
+      "revisionHash": "fnv1a:3ff4fa90"
     },
     {
       "legacyId": "p1.char.017",
@@ -1252,10 +1319,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:5dba247a"
+      "revisionHash": "fnv1a:0fa2716f"
     },
     {
       "legacyId": "p1.word.000",
@@ -1297,7 +1364,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:9f311557"
+      "revisionHash": "fnv1a:489e815a"
     },
     {
       "legacyId": "p1.word.001",
@@ -1338,7 +1405,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:b3664443"
+      "revisionHash": "fnv1a:c214ef18"
     },
     {
       "legacyId": "p1.word.002",
@@ -1380,7 +1447,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:3d8399fd"
+      "revisionHash": "fnv1a:89ce2f6c"
     },
     {
       "legacyId": "p1.word.003",
@@ -1421,7 +1488,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:a69b1260"
+      "revisionHash": "fnv1a:38d5248f"
     },
     {
       "legacyId": "p1.word.004",
@@ -1462,7 +1529,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:431f9603"
+      "revisionHash": "fnv1a:39563b7c"
     },
     {
       "legacyId": "p1.word.005",
@@ -1504,7 +1571,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:ecb48859"
+      "revisionHash": "fnv1a:cd0a8136"
     },
     {
       "legacyId": "p1.word.006",
@@ -1545,7 +1612,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:945d5549"
+      "revisionHash": "fnv1a:fab82a48"
     },
     {
       "legacyId": "p1.word.007",
@@ -1586,7 +1653,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:6077a496"
+      "revisionHash": "fnv1a:a7b2fb7f"
     },
     {
       "legacyId": "p1.word.008",
@@ -1627,7 +1694,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:ab3c2bd0"
+      "revisionHash": "fnv1a:d6f01993"
     },
     {
       "legacyId": "p1.word.009",
@@ -1668,7 +1735,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:10e2c716"
+      "revisionHash": "fnv1a:dc92bc69"
     },
     {
       "legacyId": "p1.word.010",
@@ -1709,7 +1776,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:48564c50"
+      "revisionHash": "fnv1a:b9d4f2e1"
     },
     {
       "legacyId": "p1.word.011",
@@ -1750,7 +1817,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:98db86c2"
+      "revisionHash": "fnv1a:da00f597"
     },
     {
       "legacyId": "p2.char.000",
@@ -1804,10 +1871,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:abeae1df"
+      "revisionHash": "fnv1a:f3c523b0"
     },
     {
       "legacyId": "p2.char.001",
@@ -1860,10 +1927,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:43aadf0b"
+      "revisionHash": "fnv1a:025919d6"
     },
     {
       "legacyId": "p2.char.002",
@@ -1916,10 +1983,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:14c7bda8"
+      "revisionHash": "fnv1a:5910498d"
     },
     {
       "legacyId": "p2.char.003",
@@ -1972,10 +2039,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:e72e33aa"
+      "revisionHash": "fnv1a:ef842e77"
     },
     {
       "legacyId": "p2.char.004",
@@ -2029,10 +2096,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:e10e4882"
+      "revisionHash": "fnv1a:4d3e73e1"
     },
     {
       "legacyId": "p2.char.005",
@@ -2084,10 +2151,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:bd42c394"
+      "revisionHash": "fnv1a:f901ff7f"
     },
     {
       "legacyId": "p2.char.006",
@@ -2140,10 +2207,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:e89f872f"
+      "revisionHash": "fnv1a:c8f457fc"
     },
     {
       "legacyId": "p2.char.007",
@@ -2196,10 +2263,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:44a65a68"
+      "revisionHash": "fnv1a:f86d2b8f"
     },
     {
       "legacyId": "p2.char.008",
@@ -2216,7 +2283,7 @@
       "alignmentStatus": "legacy-label-only",
       "structure": "left-right",
       "orderedComponents": [
-        "足",
+        "𧾷",
         "包"
       ],
       "slotIds": [
@@ -2227,11 +2294,13 @@
         "left-component",
         "right-component"
       ],
-      "auditStatus": "validated",
+      "auditStatus": "corrected-derived-record",
       "issueCodes": [
+        "WRONG_COMPONENT_FORM",
+        "FONT_RENDER_RISK",
         "GRADE_ALIGNMENT_UNVERIFIED"
       ],
-      "correctionNote": null,
+      "correctionNote": "原始层保留“足 + 包”；派生层按 CNS IDS ⿰𧾷包记录足字旁的真实位置字形。该扩展区部件不进入首版可玩池。",
       "sourceEvidence": [
         {
           "sourceId": "legacy-wheel-source-freeze",
@@ -2241,21 +2310,28 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         },
         {
-          "sourceId": "hanzi-radical-formula-audit",
-          "location": "games/hanzi-radical-battle/formula-audit.ts",
-          "version": "3dfa537d41d6f7abccf6ef7bf460290656ef65fe",
-          "license": "repository-source",
-          "supports": "accepted component combination and coarse structure cross-check"
-        },
-        {
           "sourceId": "unicode-unihan",
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
+        },
+        {
+          "sourceId": "cns11643-run-ids",
+          "location": "https://www.cns11643.gov.tw/wordView.jsp?ID=90692",
+          "version": "CNS11643-2024:U+8DD1",
+          "license": "Taiwan-Government-Data-Open-License-1.0",
+          "supports": "跑 IDS ⿰𧾷包 and exact positional component form"
+        },
+        {
+          "sourceId": "make-me-a-hanzi-dictionary",
+          "location": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt",
+          "version": "bddc96d41bef78427ed0e034e9f7e31d71fd1b92:sha256:744bb05d5b0742e9ee35c37791f94d56a173349b3367569e7ca11e510364d203",
+          "license": "LGPL-3.0-or-later",
+          "supports": "temporary audit-only simplified-glyph IDS root and component-form cross-check; no runtime data imported"
         }
       ],
-      "revisionHash": "fnv1a:6cf66bac"
+      "revisionHash": "fnv1a:e80f35d9"
     },
     {
       "legacyId": "p2.char.009",
@@ -2308,10 +2384,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:ea4af64a"
+      "revisionHash": "fnv1a:384fbfd9"
     },
     {
       "legacyId": "p2.char.010",
@@ -2364,10 +2440,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:ec5e4779"
+      "revisionHash": "fnv1a:03756b06"
     },
     {
       "legacyId": "p2.char.011",
@@ -2420,10 +2496,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:bb601083"
+      "revisionHash": "fnv1a:c17da836"
     },
     {
       "legacyId": "p2.char.012",
@@ -2477,10 +2553,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:436cf02d"
+      "revisionHash": "fnv1a:2b6f6b7a"
     },
     {
       "legacyId": "p2.char.013",
@@ -2534,10 +2610,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:f860452f"
+      "revisionHash": "fnv1a:e213d47a"
     },
     {
       "legacyId": "p2.char.014",
@@ -2590,10 +2666,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:39f78965"
+      "revisionHash": "fnv1a:88406f26"
     },
     {
       "legacyId": "p2.char.015",
@@ -2646,10 +2722,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:66dbf901"
+      "revisionHash": "fnv1a:2ef91668"
     },
     {
       "legacyId": "p2.char.016",
@@ -2702,10 +2778,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:5ce46d57"
+      "revisionHash": "fnv1a:43b8b394"
     },
     {
       "legacyId": "p2.char.017",
@@ -2758,10 +2834,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:6c503a30"
+      "revisionHash": "fnv1a:194608fb"
     },
     {
       "legacyId": "p2.word.000",
@@ -2802,7 +2878,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:a91cbde6"
+      "revisionHash": "fnv1a:06a1fe73"
     },
     {
       "legacyId": "p2.word.001",
@@ -2843,7 +2919,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:88bacffa"
+      "revisionHash": "fnv1a:75d3f7ed"
     },
     {
       "legacyId": "p2.word.002",
@@ -2884,7 +2960,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:5d6e65ab"
+      "revisionHash": "fnv1a:330ba240"
     },
     {
       "legacyId": "p2.word.003",
@@ -2926,7 +3002,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:96f45f81"
+      "revisionHash": "fnv1a:72652d52"
     },
     {
       "legacyId": "p2.word.004",
@@ -2967,7 +3043,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:3cc58dce"
+      "revisionHash": "fnv1a:a78ffb4d"
     },
     {
       "legacyId": "p2.word.005",
@@ -3008,7 +3084,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:2008ed44"
+      "revisionHash": "fnv1a:3b5f4aeb"
     },
     {
       "legacyId": "p2.word.006",
@@ -3049,7 +3125,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:76470396"
+      "revisionHash": "fnv1a:df4f87fb"
     },
     {
       "legacyId": "p2.word.007",
@@ -3090,7 +3166,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:9ca66adb"
+      "revisionHash": "fnv1a:d889d832"
     },
     {
       "legacyId": "p2.word.008",
@@ -3131,7 +3207,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:c5511401"
+      "revisionHash": "fnv1a:3cf12776"
     },
     {
       "legacyId": "p2.word.009",
@@ -3172,7 +3248,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:b2983cf1"
+      "revisionHash": "fnv1a:8c228452"
     },
     {
       "legacyId": "p2.word.010",
@@ -3213,7 +3289,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:fa0b9495"
+      "revisionHash": "fnv1a:5e3d55c0"
     },
     {
       "legacyId": "p2.word.011",
@@ -3254,7 +3330,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:8fee21e4"
+      "revisionHash": "fnv1a:97e841bb"
     },
     {
       "legacyId": "p3.char.000",
@@ -3295,10 +3371,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:ec148be5"
+      "revisionHash": "fnv1a:1bb262d4"
     },
     {
       "legacyId": "p3.char.001",
@@ -3314,7 +3390,7 @@
       "alignmentStatus": "legacy-label-only",
       "structure": "left-right",
       "orderedComponents": [
-        "月",
+        "⺼",
         "巴"
       ],
       "slotIds": [
@@ -3325,11 +3401,13 @@
         "left-component",
         "right-component"
       ],
-      "auditStatus": "validated",
+      "auditStatus": "corrected-derived-record",
       "issueCodes": [
+        "WRONG_COMPONENT_FORM",
+        "FONT_RENDER_RISK",
         "GRADE_ALIGNMENT_UNVERIFIED"
       ],
-      "correctionNote": null,
+      "correctionNote": "原始层保留“月 + 巴”；派生层按肉月旁字形改为“⺼ + 巴”。该记录不进入首版可玩池，避免把肉旁教学成月旁。",
       "sourceEvidence": [
         {
           "sourceId": "legacy-wheel-source-freeze",
@@ -3339,21 +3417,21 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         },
         {
-          "sourceId": "hanzi-radical-formula-audit",
-          "location": "games/hanzi-radical-battle/formula-audit.ts",
-          "version": "3dfa537d41d6f7abccf6ef7bf460290656ef65fe",
-          "license": "repository-source",
-          "supports": "accepted component combination and coarse structure cross-check"
-        },
-        {
           "sourceId": "unicode-unihan",
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
+        },
+        {
+          "sourceId": "make-me-a-hanzi-dictionary",
+          "location": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt",
+          "version": "bddc96d41bef78427ed0e034e9f7e31d71fd1b92:sha256:744bb05d5b0742e9ee35c37791f94d56a173349b3367569e7ca11e510364d203",
+          "license": "LGPL-3.0-or-later",
+          "supports": "temporary audit-only simplified-glyph IDS root and component-form cross-check; no runtime data imported"
         }
       ],
-      "revisionHash": "fnv1a:21183224"
+      "revisionHash": "fnv1a:0ef3678d"
     },
     {
       "legacyId": "p3.char.002",
@@ -3369,7 +3447,7 @@
       "alignmentStatus": "legacy-label-only",
       "structure": "left-right",
       "orderedComponents": [
-        "月",
+        "⺼",
         "要"
       ],
       "slotIds": [
@@ -3380,11 +3458,13 @@
         "left-component",
         "right-component"
       ],
-      "auditStatus": "validated",
+      "auditStatus": "corrected-derived-record",
       "issueCodes": [
+        "WRONG_COMPONENT_FORM",
+        "FONT_RENDER_RISK",
         "GRADE_ALIGNMENT_UNVERIFIED"
       ],
-      "correctionNote": null,
+      "correctionNote": "原始层保留“月 + 要”；派生层按肉月旁字形改为“⺼ + 要”。",
       "sourceEvidence": [
         {
           "sourceId": "legacy-wheel-source-freeze",
@@ -3394,21 +3474,21 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         },
         {
-          "sourceId": "hanzi-radical-formula-audit",
-          "location": "games/hanzi-radical-battle/formula-audit.ts",
-          "version": "3dfa537d41d6f7abccf6ef7bf460290656ef65fe",
-          "license": "repository-source",
-          "supports": "accepted component combination and coarse structure cross-check"
-        },
-        {
           "sourceId": "unicode-unihan",
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
+        },
+        {
+          "sourceId": "make-me-a-hanzi-dictionary",
+          "location": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt",
+          "version": "bddc96d41bef78427ed0e034e9f7e31d71fd1b92:sha256:744bb05d5b0742e9ee35c37791f94d56a173349b3367569e7ca11e510364d203",
+          "license": "LGPL-3.0-or-later",
+          "supports": "temporary audit-only simplified-glyph IDS root and component-form cross-check; no runtime data imported"
         }
       ],
-      "revisionHash": "fnv1a:ba5486b1"
+      "revisionHash": "fnv1a:d21e7921"
     },
     {
       "legacyId": "p3.char.003",
@@ -3460,10 +3540,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:e9a66559"
+      "revisionHash": "fnv1a:30338e68"
     },
     {
       "legacyId": "p3.char.004",
@@ -3515,10 +3595,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:37d08ccb"
+      "revisionHash": "fnv1a:6a9da44a"
     },
     {
       "legacyId": "p3.char.005",
@@ -3570,10 +3650,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:90ec42b1"
+      "revisionHash": "fnv1a:8f1d016c"
     },
     {
       "legacyId": "p3.char.006",
@@ -3625,10 +3705,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:fdb51cb0"
+      "revisionHash": "fnv1a:8682eb01"
     },
     {
       "legacyId": "p3.char.007",
@@ -3680,10 +3760,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:4642226e"
+      "revisionHash": "fnv1a:cf74abaf"
     },
     {
       "legacyId": "p3.char.008",
@@ -3732,17 +3812,17 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         },
         {
           "sourceId": "simplified-glyph-structure-review",
           "location": "target browser font stack and repository structure contract",
-          "version": "wheel-library-audit-v1",
+          "version": "wheel-library-audit-v2",
           "license": "not-applicable",
           "supports": "ordered spatial slots and visible simplified glyph structure; not historical etymology"
         }
       ],
-      "revisionHash": "fnv1a:b27b6698"
+      "revisionHash": "fnv1a:1eb17606"
     },
     {
       "legacyId": "p3.char.009",
@@ -3794,10 +3874,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:7e77b14e"
+      "revisionHash": "fnv1a:faa3ccf1"
     },
     {
       "legacyId": "p3.char.010",
@@ -3849,10 +3929,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:59bd48b6"
+      "revisionHash": "fnv1a:c0bf8a11"
     },
     {
       "legacyId": "p3.char.011",
@@ -3904,10 +3984,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:9ec6e9dd"
+      "revisionHash": "fnv1a:879282b4"
     },
     {
       "legacyId": "p3.char.012",
@@ -3960,10 +4040,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:edcf4b14"
+      "revisionHash": "fnv1a:cebb5d1f"
     },
     {
       "legacyId": "p3.char.013",
@@ -4016,10 +4096,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:83a4ff26"
+      "revisionHash": "fnv1a:4a233c87"
     },
     {
       "legacyId": "p3.char.014",
@@ -4072,10 +4152,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:d3fa6ba4"
+      "revisionHash": "fnv1a:7dd45781"
     },
     {
       "legacyId": "p3.char.015",
@@ -4128,10 +4208,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:9a0ca358"
+      "revisionHash": "fnv1a:5e1f7861"
     },
     {
       "legacyId": "p3.char.016",
@@ -4184,10 +4264,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:f139ef9c"
+      "revisionHash": "fnv1a:c1764a97"
     },
     {
       "legacyId": "p3.char.017",
@@ -4240,10 +4320,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:b722167a"
+      "revisionHash": "fnv1a:785acdb9"
     },
     {
       "legacyId": "p3.word.000",
@@ -4284,7 +4364,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:4d074f71"
+      "revisionHash": "fnv1a:6a3d615e"
     },
     {
       "legacyId": "p3.word.001",
@@ -4325,7 +4405,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:a89603c9"
+      "revisionHash": "fnv1a:1f559118"
     },
     {
       "legacyId": "p3.word.002",
@@ -4354,9 +4434,10 @@
       ],
       "auditStatus": "not-playable-context-only",
       "issueCodes": [
-        "GRADE_ALIGNMENT_UNVERIFIED"
+        "GRADE_ALIGNMENT_UNVERIFIED",
+        "MEANING_MISMATCH"
       ],
-      "correctionNote": "首版仅作为熟悉词、语境或成功后的词语回声候选。",
+      "correctionNote": "原始例句“虚心使人进步”不含目标“骄傲”，仅构成反义对照；保留原始字段并标为语义未对齐的 context-only。",
       "sourceEvidence": [
         {
           "sourceId": "legacy-wheel-source-freeze",
@@ -4366,7 +4447,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:2f031b29"
+      "revisionHash": "fnv1a:fa0455cb"
     },
     {
       "legacyId": "p3.word.003",
@@ -4407,7 +4488,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:8fe7dd1a"
+      "revisionHash": "fnv1a:665b4cf1"
     },
     {
       "legacyId": "p3.word.004",
@@ -4448,7 +4529,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:52574659"
+      "revisionHash": "fnv1a:a7cafafa"
     },
     {
       "legacyId": "p3.word.005",
@@ -4489,7 +4570,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:94c8b4bc"
+      "revisionHash": "fnv1a:a446b373"
     },
     {
       "legacyId": "p3.word.006",
@@ -4530,7 +4611,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:69612136"
+      "revisionHash": "fnv1a:7da2f639"
     },
     {
       "legacyId": "p3.word.007",
@@ -4571,7 +4652,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:a8820b5a"
+      "revisionHash": "fnv1a:4a02931d"
     },
     {
       "legacyId": "p3.word.008",
@@ -4612,7 +4693,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:ca032c1b"
+      "revisionHash": "fnv1a:ab108dda"
     },
     {
       "legacyId": "p3.word.009",
@@ -4653,7 +4734,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:83aca306"
+      "revisionHash": "fnv1a:3449aee3"
     },
     {
       "legacyId": "p3.word.010",
@@ -4694,7 +4775,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:14a2c1af"
+      "revisionHash": "fnv1a:76103036"
     },
     {
       "legacyId": "p3.word.011",
@@ -4735,7 +4816,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:f9190791"
+      "revisionHash": "fnv1a:992b8060"
     },
     {
       "legacyId": "p4.char.000",
@@ -4787,10 +4868,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:82dd3089"
+      "revisionHash": "fnv1a:125a0e9a"
     },
     {
       "legacyId": "p4.char.001",
@@ -4838,17 +4919,17 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         },
         {
           "sourceId": "simplified-glyph-structure-review",
           "location": "target browser font stack and repository structure contract",
-          "version": "wheel-library-audit-v1",
+          "version": "wheel-library-audit-v2",
           "license": "not-applicable",
           "supports": "ordered spatial slots and visible simplified glyph structure; not historical etymology"
         }
       ],
-      "revisionHash": "fnv1a:2f214318"
+      "revisionHash": "fnv1a:26a47e96"
     },
     {
       "legacyId": "p4.char.002",
@@ -4897,7 +4978,7 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         },
         {
           "sourceId": "hanzi-radical-formula-audit",
@@ -4907,7 +4988,7 @@
           "supports": "accepted component combination and coarse structure cross-check"
         }
       ],
-      "revisionHash": "fnv1a:99b0b002"
+      "revisionHash": "fnv1a:5a3f1c51"
     },
     {
       "legacyId": "p4.char.003",
@@ -4955,17 +5036,17 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         },
         {
           "sourceId": "simplified-glyph-structure-review",
           "location": "target browser font stack and repository structure contract",
-          "version": "wheel-library-audit-v1",
+          "version": "wheel-library-audit-v2",
           "license": "not-applicable",
           "supports": "ordered spatial slots and visible simplified glyph structure; not historical etymology"
         }
       ],
-      "revisionHash": "fnv1a:7ce52324"
+      "revisionHash": "fnv1a:9602beec"
     },
     {
       "legacyId": "p4.char.004",
@@ -5013,17 +5094,17 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         },
         {
           "sourceId": "simplified-glyph-structure-review",
           "location": "target browser font stack and repository structure contract",
-          "version": "wheel-library-audit-v1",
+          "version": "wheel-library-audit-v2",
           "license": "not-applicable",
           "supports": "ordered spatial slots and visible simplified glyph structure; not historical etymology"
         }
       ],
-      "revisionHash": "fnv1a:6d1d3c9c"
+      "revisionHash": "fnv1a:9bc76804"
     },
     {
       "legacyId": "p4.char.005",
@@ -5071,17 +5152,17 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         },
         {
           "sourceId": "simplified-glyph-structure-review",
           "location": "target browser font stack and repository structure contract",
-          "version": "wheel-library-audit-v1",
+          "version": "wheel-library-audit-v2",
           "license": "not-applicable",
           "supports": "ordered spatial slots and visible simplified glyph structure; not historical etymology"
         }
       ],
-      "revisionHash": "fnv1a:06f67440"
+      "revisionHash": "fnv1a:3235d370"
     },
     {
       "legacyId": "p4.char.006",
@@ -5130,17 +5211,17 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         },
         {
           "sourceId": "simplified-glyph-structure-review",
           "location": "target browser font stack and repository structure contract",
-          "version": "wheel-library-audit-v1",
+          "version": "wheel-library-audit-v2",
           "license": "not-applicable",
           "supports": "ordered spatial slots and visible simplified glyph structure; not historical etymology"
         }
       ],
-      "revisionHash": "fnv1a:83d556e8"
+      "revisionHash": "fnv1a:b2072b64"
     },
     {
       "legacyId": "p4.char.007",
@@ -5188,17 +5269,17 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         },
         {
           "sourceId": "simplified-glyph-structure-review",
           "location": "target browser font stack and repository structure contract",
-          "version": "wheel-library-audit-v1",
+          "version": "wheel-library-audit-v2",
           "license": "not-applicable",
           "supports": "ordered spatial slots and visible simplified glyph structure; not historical etymology"
         }
       ],
-      "revisionHash": "fnv1a:2c04e8f2"
+      "revisionHash": "fnv1a:f5e70cb0"
     },
     {
       "legacyId": "p4.char.008",
@@ -5246,17 +5327,17 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         },
         {
           "sourceId": "simplified-glyph-structure-review",
           "location": "target browser font stack and repository structure contract",
-          "version": "wheel-library-audit-v1",
+          "version": "wheel-library-audit-v2",
           "license": "not-applicable",
           "supports": "ordered spatial slots and visible simplified glyph structure; not historical etymology"
         }
       ],
-      "revisionHash": "fnv1a:987d062b"
+      "revisionHash": "fnv1a:c34a866f"
     },
     {
       "legacyId": "p4.char.009",
@@ -5305,17 +5386,17 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         },
         {
           "sourceId": "simplified-glyph-structure-review",
           "location": "target browser font stack and repository structure contract",
-          "version": "wheel-library-audit-v1",
+          "version": "wheel-library-audit-v2",
           "license": "not-applicable",
           "supports": "ordered spatial slots and visible simplified glyph structure; not historical etymology"
         }
       ],
-      "revisionHash": "fnv1a:a7584e62"
+      "revisionHash": "fnv1a:085d8d7a"
     },
     {
       "legacyId": "p4.char.010",
@@ -5368,10 +5449,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:e01e4d0a"
+      "revisionHash": "fnv1a:2387c98b"
     },
     {
       "legacyId": "p4.char.011",
@@ -5424,10 +5505,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:d54e2ab4"
+      "revisionHash": "fnv1a:2bcc1ac3"
     },
     {
       "legacyId": "p4.char.012",
@@ -5480,10 +5561,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:1bcb7a78"
+      "revisionHash": "fnv1a:607fbe27"
     },
     {
       "legacyId": "p4.char.013",
@@ -5536,10 +5617,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:a2b43878"
+      "revisionHash": "fnv1a:dec9001f"
     },
     {
       "legacyId": "p4.char.014",
@@ -5592,10 +5673,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:f29e3d0e"
+      "revisionHash": "fnv1a:7e8b15b9"
     },
     {
       "legacyId": "p4.char.015",
@@ -5648,10 +5729,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:4378cf3d"
+      "revisionHash": "fnv1a:e0a8215e"
     },
     {
       "legacyId": "p4.char.016",
@@ -5704,10 +5785,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:4cf86e40"
+      "revisionHash": "fnv1a:20537c63"
     },
     {
       "legacyId": "p4.char.017",
@@ -5760,10 +5841,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:9479c88a"
+      "revisionHash": "fnv1a:29bfcde5"
     },
     {
       "legacyId": "p4.word.000",
@@ -5804,7 +5885,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:b1978e96"
+      "revisionHash": "fnv1a:485c1435"
     },
     {
       "legacyId": "p4.word.001",
@@ -5833,9 +5914,10 @@
       ],
       "auditStatus": "not-playable-context-only",
       "issueCodes": [
-        "GRADE_ALIGNMENT_UNVERIFIED"
+        "GRADE_ALIGNMENT_UNVERIFIED",
+        "MEANING_MISMATCH"
       ],
-      "correctionNote": "首版仅作为熟悉词、语境或成功后的词语回声候选。",
+      "correctionNote": "原始例词“人声鼎沸”只出现“沸”，未完整出现目标“沸腾”；保留原始字段并标为 context-only。",
       "sourceEvidence": [
         {
           "sourceId": "legacy-wheel-source-freeze",
@@ -5845,7 +5927,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:0216e759"
+      "revisionHash": "fnv1a:ccf51782"
     },
     {
       "legacyId": "p4.word.002",
@@ -5886,7 +5968,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:0d9338e7"
+      "revisionHash": "fnv1a:42c6bde6"
     },
     {
       "legacyId": "p4.word.003",
@@ -5927,7 +6009,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:6a77f988"
+      "revisionHash": "fnv1a:0695f7f1"
     },
     {
       "legacyId": "p4.word.004",
@@ -5968,7 +6050,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:01ea069b"
+      "revisionHash": "fnv1a:e63940a0"
     },
     {
       "legacyId": "p4.word.005",
@@ -6009,7 +6091,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:f0bc2d14"
+      "revisionHash": "fnv1a:549c7591"
     },
     {
       "legacyId": "p4.word.006",
@@ -6050,7 +6132,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:6df0274f"
+      "revisionHash": "fnv1a:16bdbf68"
     },
     {
       "legacyId": "p4.word.007",
@@ -6091,7 +6173,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:f54958a1"
+      "revisionHash": "fnv1a:73ae6828"
     },
     {
       "legacyId": "p4.word.008",
@@ -6132,7 +6214,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:491b0f59"
+      "revisionHash": "fnv1a:21bc8fec"
     },
     {
       "legacyId": "p4.word.009",
@@ -6173,7 +6255,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:dcab289a"
+      "revisionHash": "fnv1a:827a0c2b"
     },
     {
       "legacyId": "p4.word.010",
@@ -6214,7 +6296,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:dbdb4e96"
+      "revisionHash": "fnv1a:b5a99afd"
     },
     {
       "legacyId": "p4.word.011",
@@ -6255,7 +6337,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:271a8c9e"
+      "revisionHash": "fnv1a:44005745"
     },
     {
       "legacyId": "p5.char.000",
@@ -6301,17 +6383,24 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         },
         {
           "sourceId": "simplified-glyph-structure-review",
           "location": "target browser font stack and repository structure contract",
-          "version": "wheel-library-audit-v1",
+          "version": "wheel-library-audit-v2",
           "license": "not-applicable",
           "supports": "ordered spatial slots and visible simplified glyph structure; not historical etymology"
+        },
+        {
+          "sourceId": "make-me-a-hanzi-dictionary",
+          "location": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt",
+          "version": "bddc96d41bef78427ed0e034e9f7e31d71fd1b92:sha256:744bb05d5b0742e9ee35c37791f94d56a173349b3367569e7ca11e510364d203",
+          "license": "LGPL-3.0-or-later",
+          "supports": "temporary audit-only simplified-glyph IDS root and component-form cross-check; no runtime data imported"
         }
       ],
-      "revisionHash": "fnv1a:fc239178"
+      "revisionHash": "fnv1a:207cde2c"
     },
     {
       "legacyId": "p5.char.001",
@@ -6363,10 +6452,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:0f00d626"
+      "revisionHash": "fnv1a:fcbd15a3"
     },
     {
       "legacyId": "p5.char.002",
@@ -6418,10 +6507,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:0d256cd0"
+      "revisionHash": "fnv1a:ae7c9661"
     },
     {
       "legacyId": "p5.char.003",
@@ -6473,10 +6562,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:a015339b"
+      "revisionHash": "fnv1a:97d70cc4"
     },
     {
       "legacyId": "p5.char.004",
@@ -6528,10 +6617,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:45a8d86d"
+      "revisionHash": "fnv1a:6e92300a"
     },
     {
       "legacyId": "p5.char.005",
@@ -6583,10 +6672,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:b93f85a1"
+      "revisionHash": "fnv1a:6cef495c"
     },
     {
       "legacyId": "p5.char.006",
@@ -6638,10 +6727,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:dc22c7a9"
+      "revisionHash": "fnv1a:767a1b66"
     },
     {
       "legacyId": "p5.char.007",
@@ -6693,10 +6782,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:5056da10"
+      "revisionHash": "fnv1a:80b60f2d"
     },
     {
       "legacyId": "p5.char.008",
@@ -6749,10 +6838,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:d816a9b3"
+      "revisionHash": "fnv1a:75aba186"
     },
     {
       "legacyId": "p5.char.009",
@@ -6804,10 +6893,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:6ce1572b"
+      "revisionHash": "fnv1a:f74ca742"
     },
     {
       "legacyId": "p5.char.010",
@@ -6860,10 +6949,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:f1888ed3"
+      "revisionHash": "fnv1a:f5d17ade"
     },
     {
       "legacyId": "p5.char.011",
@@ -6916,10 +7005,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:295dbfb6"
+      "revisionHash": "fnv1a:9cfa8897"
     },
     {
       "legacyId": "p5.char.012",
@@ -6972,10 +7061,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:e9c712f9"
+      "revisionHash": "fnv1a:d5dcf97c"
     },
     {
       "legacyId": "p5.char.013",
@@ -7028,10 +7117,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:36bdc902"
+      "revisionHash": "fnv1a:68473bcb"
     },
     {
       "legacyId": "p5.char.014",
@@ -7084,10 +7173,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:9bcedb29"
+      "revisionHash": "fnv1a:90ea9810"
     },
     {
       "legacyId": "p5.char.015",
@@ -7140,10 +7229,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:76f2da7f"
+      "revisionHash": "fnv1a:35826e8a"
     },
     {
       "legacyId": "p5.char.016",
@@ -7196,10 +7285,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:ee688d46"
+      "revisionHash": "fnv1a:62789d5b"
     },
     {
       "legacyId": "p5.char.017",
@@ -7252,10 +7341,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:116266d3"
+      "revisionHash": "fnv1a:9bd35e9c"
     },
     {
       "legacyId": "p5.word.000",
@@ -7296,7 +7385,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:f6575a09"
+      "revisionHash": "fnv1a:032d91b8"
     },
     {
       "legacyId": "p5.word.001",
@@ -7337,7 +7426,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:e4822fd0"
+      "revisionHash": "fnv1a:1c4f8ff5"
     },
     {
       "legacyId": "p5.word.002",
@@ -7378,7 +7467,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:6f81948c"
+      "revisionHash": "fnv1a:50d055ad"
     },
     {
       "legacyId": "p5.word.003",
@@ -7420,7 +7509,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:d627033d"
+      "revisionHash": "fnv1a:fce99f84"
     },
     {
       "legacyId": "p5.word.004",
@@ -7461,7 +7550,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:c2fe3706"
+      "revisionHash": "fnv1a:60c030f9"
     },
     {
       "legacyId": "p5.word.005",
@@ -7502,7 +7591,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:7a4f509e"
+      "revisionHash": "fnv1a:57134dc7"
     },
     {
       "legacyId": "p5.word.006",
@@ -7543,7 +7632,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:2d9fbc46"
+      "revisionHash": "fnv1a:64d8d0cd"
     },
     {
       "legacyId": "p5.word.007",
@@ -7584,7 +7673,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:11aeb94d"
+      "revisionHash": "fnv1a:2e80f00a"
     },
     {
       "legacyId": "p5.word.008",
@@ -7625,7 +7714,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:8dbdccf0"
+      "revisionHash": "fnv1a:871c5c8f"
     },
     {
       "legacyId": "p5.word.009",
@@ -7666,7 +7755,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:e1a1095a"
+      "revisionHash": "fnv1a:68c45441"
     },
     {
       "legacyId": "p5.word.010",
@@ -7707,7 +7796,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:2ef86000"
+      "revisionHash": "fnv1a:bf325c53"
     },
     {
       "legacyId": "p5.word.011",
@@ -7748,7 +7837,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:296d1a76"
+      "revisionHash": "fnv1a:600fd7df"
     },
     {
       "legacyId": "p6.char.000",
@@ -7762,25 +7851,25 @@
         "地毯"
       ],
       "alignmentStatus": "legacy-label-only",
-      "structure": "left-right",
+      "structure": "semi-enclosure",
       "orderedComponents": [
         "毛",
         "炎"
       ],
       "slotIds": [
-        "left",
-        "right"
+        "outer",
+        "inner"
       ],
       "componentRoles": [
-        "left-component",
-        "right-component"
+        "enclosing-component",
+        "inner-component"
       ],
       "auditStatus": "corrected-derived-record",
       "issueCodes": [
         "WRONG_STRUCTURE",
         "GRADE_ALIGNMENT_UNVERIFIED"
       ],
-      "correctionNote": "内部旧公式把毯粗分为 sur；派生审核按目标字形改为左右结构。",
+      "correctionNote": "原始组件保留；派生审核按外部 IDS ⿺毛炎纠正为左下包围，而非初次审核误标的左右结构。",
       "sourceEvidence": [
         {
           "sourceId": "legacy-wheel-source-freeze",
@@ -7794,17 +7883,17 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         },
         {
-          "sourceId": "simplified-glyph-structure-review",
-          "location": "target browser font stack and repository structure contract",
-          "version": "wheel-library-audit-v1",
-          "license": "not-applicable",
-          "supports": "ordered spatial slots and visible simplified glyph structure; not historical etymology"
+          "sourceId": "make-me-a-hanzi-dictionary",
+          "location": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt",
+          "version": "bddc96d41bef78427ed0e034e9f7e31d71fd1b92:sha256:744bb05d5b0742e9ee35c37791f94d56a173349b3367569e7ca11e510364d203",
+          "license": "LGPL-3.0-or-later",
+          "supports": "temporary audit-only simplified-glyph IDS root and component-form cross-check; no runtime data imported"
         }
       ],
-      "revisionHash": "fnv1a:6dd35ff2"
+      "revisionHash": "fnv1a:8c344c45"
     },
     {
       "legacyId": "p6.char.001",
@@ -7856,10 +7945,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:da532fea"
+      "revisionHash": "fnv1a:e9918c6d"
     },
     {
       "legacyId": "p6.char.002",
@@ -7912,10 +8001,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:3951d596"
+      "revisionHash": "fnv1a:1f4a848b"
     },
     {
       "legacyId": "p6.char.003",
@@ -7967,10 +8056,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:a36365ab"
+      "revisionHash": "fnv1a:328adbd4"
     },
     {
       "legacyId": "p6.char.004",
@@ -8022,10 +8111,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:0cfa223c"
+      "revisionHash": "fnv1a:aa891737"
     },
     {
       "legacyId": "p6.char.005",
@@ -8077,10 +8166,17 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
+        },
+        {
+          "sourceId": "cns11643-corrupt-ids",
+          "location": "https://www.cns11643.gov.tw/wordView.jsp?ID=92751",
+          "version": "CNS11643-2024:U+8150",
+          "license": "Taiwan-Government-Data-Open-License-1.0",
+          "supports": "腐 alternative high-level IDS ⿸府肉"
         }
       ],
-      "revisionHash": "fnv1a:a1106d13"
+      "revisionHash": "fnv1a:ebffecf9"
     },
     {
       "legacyId": "p6.char.006",
@@ -8094,24 +8190,27 @@
         "害羞"
       ],
       "alignmentStatus": "legacy-label-only",
-      "structure": "top-bottom",
+      "structure": "semi-enclosure",
       "orderedComponents": [
-        "羊",
+        "⺶",
         "丑"
       ],
       "slotIds": [
-        "top",
-        "bottom"
+        "outer",
+        "inner"
       ],
       "componentRoles": [
-        "top-component",
-        "bottom-component"
+        "enclosing-component",
+        "inner-component"
       ],
-      "auditStatus": "validated",
+      "auditStatus": "corrected-derived-record",
       "issueCodes": [
+        "WRONG_COMPONENT_FORM",
+        "WRONG_STRUCTURE",
+        "FONT_RENDER_RISK",
         "GRADE_ALIGNMENT_UNVERIFIED"
       ],
-      "correctionNote": null,
+      "correctionNote": "原始层保留“羊 + 丑”；派生层按 CNS IDS ⿸⺶丑纠正为左上包围。该记录不进入首版可玩池。",
       "sourceEvidence": [
         {
           "sourceId": "legacy-wheel-source-freeze",
@@ -8121,21 +8220,28 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         },
         {
-          "sourceId": "hanzi-radical-formula-audit",
-          "location": "games/hanzi-radical-battle/formula-audit.ts",
-          "version": "3dfa537d41d6f7abccf6ef7bf460290656ef65fe",
-          "license": "repository-source",
-          "supports": "accepted component combination and coarse structure cross-check"
-        },
-        {
           "sourceId": "unicode-unihan",
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
+        },
+        {
+          "sourceId": "cns11643-shame-ids",
+          "location": "https://www.cns11643.gov.tw/wordView.jsp?ID=89184",
+          "version": "CNS11643-2024:U+7F9E",
+          "license": "Taiwan-Government-Data-Open-License-1.0",
+          "supports": "羞 IDS ⿸⺶丑 and exact component form"
+        },
+        {
+          "sourceId": "make-me-a-hanzi-dictionary",
+          "location": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt",
+          "version": "bddc96d41bef78427ed0e034e9f7e31d71fd1b92:sha256:744bb05d5b0742e9ee35c37791f94d56a173349b3367569e7ca11e510364d203",
+          "license": "LGPL-3.0-or-later",
+          "supports": "temporary audit-only simplified-glyph IDS root and component-form cross-check; no runtime data imported"
         }
       ],
-      "revisionHash": "fnv1a:429453e4"
+      "revisionHash": "fnv1a:cfa66ffb"
     },
     {
       "legacyId": "p6.char.007",
@@ -8188,10 +8294,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:76f22f5b"
+      "revisionHash": "fnv1a:eff15bc0"
     },
     {
       "legacyId": "p6.char.008",
@@ -8243,10 +8349,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:7b84d981"
+      "revisionHash": "fnv1a:27ce650e"
     },
     {
       "legacyId": "p6.char.009",
@@ -8299,10 +8405,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:839cafdc"
+      "revisionHash": "fnv1a:bdf7b039"
     },
     {
       "legacyId": "p6.char.010",
@@ -8355,10 +8461,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:39f18baa"
+      "revisionHash": "fnv1a:a092104f"
     },
     {
       "legacyId": "p6.char.011",
@@ -8411,10 +8517,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:12b372a9"
+      "revisionHash": "fnv1a:7e6e2b66"
     },
     {
       "legacyId": "p6.char.012",
@@ -8467,10 +8573,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:3693ae23"
+      "revisionHash": "fnv1a:65f924d4"
     },
     {
       "legacyId": "p6.char.013",
@@ -8523,10 +8629,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:e0cb6869"
+      "revisionHash": "fnv1a:6324da96"
     },
     {
       "legacyId": "p6.char.014",
@@ -8579,10 +8685,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:684cdcc3"
+      "revisionHash": "fnv1a:ad87f738"
     },
     {
       "legacyId": "p6.char.015",
@@ -8635,10 +8741,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:14c6325a"
+      "revisionHash": "fnv1a:979b95f7"
     },
     {
       "legacyId": "p6.char.016",
@@ -8691,10 +8797,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:e6929ded"
+      "revisionHash": "fnv1a:a9d94bb6"
     },
     {
       "legacyId": "p6.char.017",
@@ -8747,10 +8853,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:1849d3aa"
+      "revisionHash": "fnv1a:7fd7c057"
     },
     {
       "legacyId": "p6.word.000",
@@ -8791,7 +8897,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:38ef766e"
+      "revisionHash": "fnv1a:d0e76f7f"
     },
     {
       "legacyId": "p6.word.001",
@@ -8832,7 +8938,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:62f3049c"
+      "revisionHash": "fnv1a:32ca2c5d"
     },
     {
       "legacyId": "p6.word.002",
@@ -8873,7 +8979,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:31000ed4"
+      "revisionHash": "fnv1a:881858ed"
     },
     {
       "legacyId": "p6.word.003",
@@ -8914,7 +9020,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:fb01fef6"
+      "revisionHash": "fnv1a:87a71051"
     },
     {
       "legacyId": "p6.word.004",
@@ -8955,7 +9061,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:49fd9380"
+      "revisionHash": "fnv1a:a726ddcf"
     },
     {
       "legacyId": "p6.word.005",
@@ -8996,7 +9102,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:e76dcafa"
+      "revisionHash": "fnv1a:8b6eb23b"
     },
     {
       "legacyId": "p6.word.006",
@@ -9037,7 +9143,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:d7696580"
+      "revisionHash": "fnv1a:d70ef4c1"
     },
     {
       "legacyId": "p6.word.007",
@@ -9078,7 +9184,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:cae393b9"
+      "revisionHash": "fnv1a:fc23eb0e"
     },
     {
       "legacyId": "p6.word.008",
@@ -9119,7 +9225,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:ca0c1c6d"
+      "revisionHash": "fnv1a:4d164288"
     },
     {
       "legacyId": "p6.word.009",
@@ -9160,7 +9266,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:c8f7d799"
+      "revisionHash": "fnv1a:8fdfa3e0"
     },
     {
       "legacyId": "p6.word.010",
@@ -9201,7 +9307,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:71495d5d"
+      "revisionHash": "fnv1a:6a42b898"
     },
     {
       "legacyId": "p6.word.011",
@@ -9242,7 +9348,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:6f3db099"
+      "revisionHash": "fnv1a:40170a94"
     },
     {
       "legacyId": "j1.char.000",
@@ -9294,10 +9400,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:6a1c684a"
+      "revisionHash": "fnv1a:e46e019d"
     },
     {
       "legacyId": "j1.char.001",
@@ -9349,10 +9455,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:0f4aa146"
+      "revisionHash": "fnv1a:679849a5"
     },
     {
       "legacyId": "j1.char.002",
@@ -9404,10 +9510,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:941b5d66"
+      "revisionHash": "fnv1a:f928bfe7"
     },
     {
       "legacyId": "j1.char.003",
@@ -9459,10 +9565,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:e813c4ed"
+      "revisionHash": "fnv1a:671bdb2a"
     },
     {
       "legacyId": "j1.char.004",
@@ -9514,10 +9620,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:405655fc"
+      "revisionHash": "fnv1a:13f14f29"
     },
     {
       "legacyId": "j1.char.005",
@@ -9569,10 +9675,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:3e1ad20d"
+      "revisionHash": "fnv1a:48859bd0"
     },
     {
       "legacyId": "j1.char.006",
@@ -9624,10 +9730,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:9811def4"
+      "revisionHash": "fnv1a:41ffebef"
     },
     {
       "legacyId": "j1.char.007",
@@ -9679,10 +9785,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:4ee463ee"
+      "revisionHash": "fnv1a:3a7f3beb"
     },
     {
       "legacyId": "j1.char.008",
@@ -9734,10 +9840,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:7a0e27e4"
+      "revisionHash": "fnv1a:ac6f5cdd"
     },
     {
       "legacyId": "j1.char.009",
@@ -9754,7 +9860,7 @@
       "structure": "left-right",
       "orderedComponents": [
         "氵",
-        "力"
+        "历"
       ],
       "slotIds": [
         "left",
@@ -9764,11 +9870,12 @@
         "left-component",
         "right-component"
       ],
-      "auditStatus": "validated",
+      "auditStatus": "corrected-derived-record",
       "issueCodes": [
+        "WRONG_COMPONENT_FORM",
         "GRADE_ALIGNMENT_UNVERIFIED"
       ],
-      "correctionNote": null,
+      "correctionNote": "原始层保留“氵 + 力”；派生层按简体字形纠正为“氵 + 历”。",
       "sourceEvidence": [
         {
           "sourceId": "legacy-wheel-source-freeze",
@@ -9778,21 +9885,21 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         },
         {
-          "sourceId": "hanzi-radical-formula-audit",
-          "location": "games/hanzi-radical-battle/formula-audit.ts",
-          "version": "3dfa537d41d6f7abccf6ef7bf460290656ef65fe",
-          "license": "repository-source",
-          "supports": "accepted component combination and coarse structure cross-check"
-        },
-        {
           "sourceId": "unicode-unihan",
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
+        },
+        {
+          "sourceId": "make-me-a-hanzi-dictionary",
+          "location": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt",
+          "version": "bddc96d41bef78427ed0e034e9f7e31d71fd1b92:sha256:744bb05d5b0742e9ee35c37791f94d56a173349b3367569e7ca11e510364d203",
+          "license": "LGPL-3.0-or-later",
+          "supports": "temporary audit-only simplified-glyph IDS root and component-form cross-check; no runtime data imported"
         }
       ],
-      "revisionHash": "fnv1a:085f4e8c"
+      "revisionHash": "fnv1a:61cf0313"
     },
     {
       "legacyId": "j1.char.010",
@@ -9844,10 +9951,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:2a50bd62"
+      "revisionHash": "fnv1a:d80008e3"
     },
     {
       "legacyId": "j1.char.011",
@@ -9900,10 +10007,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:08bd867b"
+      "revisionHash": "fnv1a:19e5f336"
     },
     {
       "legacyId": "j1.char.012",
@@ -9956,10 +10063,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:aa51ca89"
+      "revisionHash": "fnv1a:0526b872"
     },
     {
       "legacyId": "j1.char.013",
@@ -10012,10 +10119,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:adcd96a6"
+      "revisionHash": "fnv1a:aea4597f"
     },
     {
       "legacyId": "j1.char.014",
@@ -10068,10 +10175,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:bbbc26f7"
+      "revisionHash": "fnv1a:fd2470da"
     },
     {
       "legacyId": "j1.char.015",
@@ -10124,10 +10231,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:194eb5f3"
+      "revisionHash": "fnv1a:78f48924"
     },
     {
       "legacyId": "j1.char.016",
@@ -10180,10 +10287,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:e56f6afb"
+      "revisionHash": "fnv1a:3ad1eaa8"
     },
     {
       "legacyId": "j1.char.017",
@@ -10236,10 +10343,17 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
+        },
+        {
+          "sourceId": "sinica-character-structure-ju",
+          "location": "https://chardb.iis.sinica.edu.tw/evolution.jsp?cid=10323",
+          "version": "accessed-2026-08-16:U+5C45",
+          "license": "reference-only",
+          "supports": "居 uses 尸 as its outer form; external 户 decomposition is treated as a documented source variant"
         }
       ],
-      "revisionHash": "fnv1a:d12ad69b"
+      "revisionHash": "fnv1a:b468bb39"
     },
     {
       "legacyId": "j1.word.000",
@@ -10280,7 +10394,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:ef653f3a"
+      "revisionHash": "fnv1a:4df3839f"
     },
     {
       "legacyId": "j1.word.001",
@@ -10321,7 +10435,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:08d36133"
+      "revisionHash": "fnv1a:8d517c38"
     },
     {
       "legacyId": "j1.word.002",
@@ -10362,7 +10476,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:d4f9810d"
+      "revisionHash": "fnv1a:ee7cfc6e"
     },
     {
       "legacyId": "j1.word.003",
@@ -10404,7 +10518,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:5ac5bf59"
+      "revisionHash": "fnv1a:52f58f48"
     },
     {
       "legacyId": "j1.word.004",
@@ -10445,7 +10559,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:a00438c8"
+      "revisionHash": "fnv1a:48f10c13"
     },
     {
       "legacyId": "j1.word.005",
@@ -10486,7 +10600,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:e02ec381"
+      "revisionHash": "fnv1a:3e82e5e8"
     },
     {
       "legacyId": "j1.word.006",
@@ -10527,7 +10641,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:297cdde2"
+      "revisionHash": "fnv1a:86b95ccb"
     },
     {
       "legacyId": "j1.word.007",
@@ -10568,7 +10682,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:5758b171"
+      "revisionHash": "fnv1a:8f55f288"
     },
     {
       "legacyId": "j1.word.008",
@@ -10609,7 +10723,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:f51fd60f"
+      "revisionHash": "fnv1a:b1c9b97e"
     },
     {
       "legacyId": "j1.word.009",
@@ -10650,7 +10764,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:fb420460"
+      "revisionHash": "fnv1a:4b535253"
     },
     {
       "legacyId": "j1.word.010",
@@ -10691,7 +10805,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:75551000"
+      "revisionHash": "fnv1a:8a6679c3"
     },
     {
       "legacyId": "j1.word.011",
@@ -10733,7 +10847,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:46246833"
+      "revisionHash": "fnv1a:d19fdee8"
     },
     {
       "legacyId": "j2.char.000",
@@ -10785,10 +10899,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:620eee1b"
+      "revisionHash": "fnv1a:87e40898"
     },
     {
       "legacyId": "j2.char.001",
@@ -10840,10 +10954,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:0a9589ca"
+      "revisionHash": "fnv1a:15abaa35"
     },
     {
       "legacyId": "j2.char.002",
@@ -10895,10 +11009,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:9e552dcd"
+      "revisionHash": "fnv1a:aa590dd0"
     },
     {
       "legacyId": "j2.char.003",
@@ -10912,25 +11026,26 @@
         "翘首"
       ],
       "alignmentStatus": "legacy-label-only",
-      "structure": "top-bottom",
+      "structure": "semi-enclosure",
       "orderedComponents": [
         "尧",
         "羽"
       ],
       "slotIds": [
-        "top",
-        "bottom"
+        "outer",
+        "inner"
       ],
       "componentRoles": [
-        "top-component",
-        "bottom-component"
+        "enclosing-component",
+        "inner-component"
       ],
-      "auditStatus": "validated",
+      "auditStatus": "corrected-derived-record",
       "issueCodes": [
-        "GRADE_ALIGNMENT_UNVERIFIED",
-        "FIXED_CONTEXT_POLYPHONE"
+        "WRONG_STRUCTURE",
+        "FIXED_CONTEXT_POLYPHONE",
+        "GRADE_ALIGNMENT_UNVERIFIED"
       ],
-      "correctionNote": null,
+      "correctionNote": "原始组件保留；派生审核按外部 IDS ⿺尧羽纠正为左下包围，并依据教育部词典固定“翘首”语境读 qiáo。",
       "sourceEvidence": [
         {
           "sourceId": "legacy-wheel-source-freeze",
@@ -10940,21 +11055,28 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         },
         {
-          "sourceId": "hanzi-radical-formula-audit",
-          "location": "games/hanzi-radical-battle/formula-audit.ts",
-          "version": "3dfa537d41d6f7abccf6ef7bf460290656ef65fe",
-          "license": "repository-source",
-          "supports": "accepted component combination and coarse structure cross-check"
-        },
-        {
           "sourceId": "unicode-unihan",
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
+        },
+        {
+          "sourceId": "make-me-a-hanzi-dictionary",
+          "location": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt",
+          "version": "bddc96d41bef78427ed0e034e9f7e31d71fd1b92:sha256:744bb05d5b0742e9ee35c37791f94d56a173349b3367569e7ca11e510364d203",
+          "license": "LGPL-3.0-or-later",
+          "supports": "temporary audit-only simplified-glyph IDS root and component-form cross-check; no runtime data imported"
+        },
+        {
+          "sourceId": "moe-revised-dictionary-qiaoshou",
+          "location": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=99918&la=0&powerMode=0",
+          "version": "MOE-Revised-Dictionary-2021",
+          "license": "reference-only",
+          "supports": "fixed lexical context 翘首 and pronunciation qiáo shǒu"
         }
       ],
-      "revisionHash": "fnv1a:b5d06da2"
+      "revisionHash": "fnv1a:c5987164"
     },
     {
       "legacyId": "j2.char.004",
@@ -11006,10 +11128,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:abb9c66a"
+      "revisionHash": "fnv1a:e5338bdf"
     },
     {
       "legacyId": "j2.char.005",
@@ -11062,10 +11184,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:f83cb0a8"
+      "revisionHash": "fnv1a:1338de45"
     },
     {
       "legacyId": "j2.char.006",
@@ -11117,10 +11239,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:12b9e4d5"
+      "revisionHash": "fnv1a:25699e0c"
     },
     {
       "legacyId": "j2.char.007",
@@ -11172,10 +11294,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:7512699a"
+      "revisionHash": "fnv1a:6030adf1"
     },
     {
       "legacyId": "j2.char.008",
@@ -11227,10 +11349,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:893c0055"
+      "revisionHash": "fnv1a:c9328456"
     },
     {
       "legacyId": "j2.char.009",
@@ -11282,10 +11404,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:ade2635f"
+      "revisionHash": "fnv1a:6a6d7990"
     },
     {
       "legacyId": "j2.char.010",
@@ -11338,10 +11460,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:bae76b11"
+      "revisionHash": "fnv1a:16196cde"
     },
     {
       "legacyId": "j2.char.011",
@@ -11394,10 +11516,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:9aaa45af"
+      "revisionHash": "fnv1a:9a6f3f80"
     },
     {
       "legacyId": "j2.char.012",
@@ -11450,10 +11572,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:516e5496"
+      "revisionHash": "fnv1a:bd9e7fcf"
     },
     {
       "legacyId": "j2.char.013",
@@ -11506,10 +11628,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:1128cf8d"
+      "revisionHash": "fnv1a:f732b1ba"
     },
     {
       "legacyId": "j2.char.014",
@@ -11562,10 +11684,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:8bb30549"
+      "revisionHash": "fnv1a:c7b8b42e"
     },
     {
       "legacyId": "j2.char.015",
@@ -11618,10 +11740,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:a47a614b"
+      "revisionHash": "fnv1a:0a57d248"
     },
     {
       "legacyId": "j2.char.016",
@@ -11674,10 +11796,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:0c295a37"
+      "revisionHash": "fnv1a:4a7a2cd4"
     },
     {
       "legacyId": "j2.char.017",
@@ -11730,10 +11852,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:e0a0257c"
+      "revisionHash": "fnv1a:81380a5f"
     },
     {
       "legacyId": "j2.word.000",
@@ -11776,7 +11898,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:be24e8b0"
+      "revisionHash": "fnv1a:4bd3c0cf"
     },
     {
       "legacyId": "j2.word.001",
@@ -11819,7 +11941,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:a8d54184"
+      "revisionHash": "fnv1a:217c587b"
     },
     {
       "legacyId": "j2.word.002",
@@ -11862,7 +11984,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:bc0c97b6"
+      "revisionHash": "fnv1a:56cd91a5"
     },
     {
       "legacyId": "j2.word.003",
@@ -11905,7 +12027,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:2f3160eb"
+      "revisionHash": "fnv1a:69916232"
     },
     {
       "legacyId": "j2.word.004",
@@ -11946,7 +12068,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:647eb003"
+      "revisionHash": "fnv1a:9979544c"
     },
     {
       "legacyId": "j2.word.005",
@@ -11989,7 +12111,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:c83151a5"
+      "revisionHash": "fnv1a:81cbaef8"
     },
     {
       "legacyId": "j2.word.006",
@@ -12032,7 +12154,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:ad88db5d"
+      "revisionHash": "fnv1a:f549e616"
     },
     {
       "legacyId": "j2.word.007",
@@ -12075,7 +12197,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:5fc812ba"
+      "revisionHash": "fnv1a:bb38c521"
     },
     {
       "legacyId": "j2.word.008",
@@ -12118,7 +12240,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:8d70c7ab"
+      "revisionHash": "fnv1a:553dba3a"
     },
     {
       "legacyId": "j2.word.009",
@@ -12159,7 +12281,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:09e3f003"
+      "revisionHash": "fnv1a:19e25bc2"
     },
     {
       "legacyId": "j2.word.010",
@@ -12200,7 +12322,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:ec4b91ba"
+      "revisionHash": "fnv1a:10b348b3"
     },
     {
       "legacyId": "j2.word.011",
@@ -12241,7 +12363,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:d5ca8515"
+      "revisionHash": "fnv1a:39ec9028"
     },
     {
       "legacyId": "j3.char.000",
@@ -12293,10 +12415,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:12aa7989"
+      "revisionHash": "fnv1a:ce2898aa"
     },
     {
       "legacyId": "j3.char.001",
@@ -12348,10 +12470,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:52fae0b3"
+      "revisionHash": "fnv1a:b63811e4"
     },
     {
       "legacyId": "j3.char.002",
@@ -12403,10 +12525,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:cfdb5d89"
+      "revisionHash": "fnv1a:1a0f736e"
     },
     {
       "legacyId": "j3.char.003",
@@ -12459,10 +12581,17 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
+        },
+        {
+          "sourceId": "moe-concised-dictionary-kehan",
+          "location": "https://dict.concised.moe.edu.tw/dictView.jsp?ID=18026&la=0&powerMode=0",
+          "version": "MOE-Concised-Dictionary-2021",
+          "license": "reference-only",
+          "supports": "fixed lexical context 可汗 and pronunciation kè hán"
         }
       ],
-      "revisionHash": "fnv1a:7359e773"
+      "revisionHash": "fnv1a:95cf08d0"
     },
     {
       "legacyId": "j3.char.004",
@@ -12514,10 +12643,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:61e66747"
+      "revisionHash": "fnv1a:2c60ad40"
     },
     {
       "legacyId": "j3.char.005",
@@ -12569,10 +12698,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:7195ba6c"
+      "revisionHash": "fnv1a:1bfd41e9"
     },
     {
       "legacyId": "j3.char.006",
@@ -12624,10 +12753,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:b7e28150"
+      "revisionHash": "fnv1a:05d41d5d"
     },
     {
       "legacyId": "j3.char.007",
@@ -12679,10 +12808,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:0981e68d"
+      "revisionHash": "fnv1a:6a293184"
     },
     {
       "legacyId": "j3.char.008",
@@ -12734,10 +12863,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:2bdcb8c6"
+      "revisionHash": "fnv1a:22dedb1f"
     },
     {
       "legacyId": "j3.char.009",
@@ -12791,10 +12920,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:b9df99a7"
+      "revisionHash": "fnv1a:039c836c"
     },
     {
       "legacyId": "j3.char.010",
@@ -12847,10 +12976,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:90181b59"
+      "revisionHash": "fnv1a:1b7e7f32"
     },
     {
       "legacyId": "j3.char.011",
@@ -12903,10 +13032,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:96b51165"
+      "revisionHash": "fnv1a:f595fdd8"
     },
     {
       "legacyId": "j3.char.012",
@@ -12959,10 +13088,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:20b3c106"
+      "revisionHash": "fnv1a:09de0b51"
     },
     {
       "legacyId": "j3.char.013",
@@ -13015,10 +13144,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:bfe813b3"
+      "revisionHash": "fnv1a:232e03fa"
     },
     {
       "legacyId": "j3.char.014",
@@ -13029,8 +13158,7 @@
       "result": "闷",
       "pinyin": "mèn",
       "familiarWords": [
-        "苦闷",
-        "闷热"
+        "苦闷"
       ],
       "alignmentStatus": "legacy-label-only",
       "structure": "semi-enclosure",
@@ -13046,12 +13174,13 @@
         "enclosing-component",
         "inner-component"
       ],
-      "auditStatus": "validated",
+      "auditStatus": "corrected-derived-record",
       "issueCodes": [
-        "GRADE_ALIGNMENT_UNVERIFIED",
-        "FIXED_CONTEXT_POLYPHONE"
+        "PINYIN_MISMATCH",
+        "FIXED_CONTEXT_POLYPHONE",
+        "GRADE_ALIGNMENT_UNVERIFIED"
       ],
-      "correctionNote": null,
+      "correctionNote": "原始层同时保留“苦闷/闷热”；派生层固定 mèn 的“苦闷”语境，隔离读 mēn 的“闷热”。",
       "sourceEvidence": [
         {
           "sourceId": "legacy-wheel-source-freeze",
@@ -13061,21 +13190,21 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         },
         {
-          "sourceId": "hanzi-radical-formula-audit",
-          "location": "games/hanzi-radical-battle/formula-audit.ts",
-          "version": "3dfa537d41d6f7abccf6ef7bf460290656ef65fe",
-          "license": "repository-source",
-          "supports": "accepted component combination and coarse structure cross-check"
-        },
-        {
           "sourceId": "unicode-unihan",
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
+        },
+        {
+          "sourceId": "make-me-a-hanzi-dictionary",
+          "location": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt",
+          "version": "bddc96d41bef78427ed0e034e9f7e31d71fd1b92:sha256:744bb05d5b0742e9ee35c37791f94d56a173349b3367569e7ca11e510364d203",
+          "license": "LGPL-3.0-or-later",
+          "supports": "temporary audit-only simplified-glyph IDS root and component-form cross-check; no runtime data imported"
         }
       ],
-      "revisionHash": "fnv1a:8283fd58"
+      "revisionHash": "fnv1a:3202222e"
     },
     {
       "legacyId": "j3.char.015",
@@ -13128,10 +13257,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:afa611ed"
+      "revisionHash": "fnv1a:f5ac5918"
     },
     {
       "legacyId": "j3.char.016",
@@ -13184,10 +13313,10 @@
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
         }
       ],
-      "revisionHash": "fnv1a:60789e6e"
+      "revisionHash": "fnv1a:779f953f"
     },
     {
       "legacyId": "j3.char.017",
@@ -13204,7 +13333,7 @@
       "alignmentStatus": "legacy-label-only",
       "structure": "semi-enclosure",
       "orderedComponents": [
-        "匚",
+        "匸",
         "矢"
       ],
       "slotIds": [
@@ -13215,11 +13344,12 @@
         "enclosing-component",
         "inner-component"
       ],
-      "auditStatus": "validated",
+      "auditStatus": "corrected-derived-record",
       "issueCodes": [
+        "WRONG_COMPONENT_FORM",
         "GRADE_ALIGNMENT_UNVERIFIED"
       ],
-      "correctionNote": null,
+      "correctionNote": "原始层保留“匚 + 矢”；派生层按 CNS 与外部 IDS 纠正为“匸 + 矢”。",
       "sourceEvidence": [
         {
           "sourceId": "legacy-wheel-source-freeze",
@@ -13229,21 +13359,28 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         },
         {
-          "sourceId": "hanzi-radical-formula-audit",
-          "location": "games/hanzi-radical-battle/formula-audit.ts",
-          "version": "3dfa537d41d6f7abccf6ef7bf460290656ef65fe",
-          "license": "repository-source",
-          "supports": "accepted component combination and coarse structure cross-check"
-        },
-        {
           "sourceId": "unicode-unihan",
           "location": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
           "version": "17.0.0",
           "license": "Unicode-3.0",
-          "supports": "encoded Han identity and Mandarin reading cross-check; not grade alignment or etymology"
+          "supports": "encoded Han identity and available Mandarin reading fields; a contextual reading requires separate lexical evidence"
+        },
+        {
+          "sourceId": "cns11643-medical-ids",
+          "location": "https://www.cns11643.gov.tw/wordView.jsp?ID=205926",
+          "version": "CNS11643-2024:U+533B",
+          "license": "Taiwan-Government-Data-Open-License-1.0",
+          "supports": "医 IDS ⿷匸矢 and exact enclosing component form"
+        },
+        {
+          "sourceId": "make-me-a-hanzi-dictionary",
+          "location": "https://github.com/skishore/makemeahanzi/blob/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt",
+          "version": "bddc96d41bef78427ed0e034e9f7e31d71fd1b92:sha256:744bb05d5b0742e9ee35c37791f94d56a173349b3367569e7ca11e510364d203",
+          "license": "LGPL-3.0-or-later",
+          "supports": "temporary audit-only simplified-glyph IDS root and component-form cross-check; no runtime data imported"
         }
       ],
-      "revisionHash": "fnv1a:b8c51c2b"
+      "revisionHash": "fnv1a:44a03e88"
     },
     {
       "legacyId": "j3.word.000",
@@ -13284,7 +13421,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:d69e3cab"
+      "revisionHash": "fnv1a:d146b26e"
     },
     {
       "legacyId": "j3.word.001",
@@ -13325,7 +13462,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:f713023a"
+      "revisionHash": "fnv1a:e96d1411"
     },
     {
       "legacyId": "j3.word.002",
@@ -13366,7 +13503,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:443ca227"
+      "revisionHash": "fnv1a:4ccc4f96"
     },
     {
       "legacyId": "j3.word.003",
@@ -13407,7 +13544,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:ddc6929a"
+      "revisionHash": "fnv1a:41dced4b"
     },
     {
       "legacyId": "j3.word.004",
@@ -13448,7 +13585,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:7eca9c0f"
+      "revisionHash": "fnv1a:766a9cbc"
     },
     {
       "legacyId": "j3.word.005",
@@ -13489,7 +13626,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:2dc5a215"
+      "revisionHash": "fnv1a:a6f082fc"
     },
     {
       "legacyId": "j3.word.006",
@@ -13530,7 +13667,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:5b80f916"
+      "revisionHash": "fnv1a:2deeed37"
     },
     {
       "legacyId": "j3.word.007",
@@ -13571,7 +13708,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:14bfe96f"
+      "revisionHash": "fnv1a:ed6afc16"
     },
     {
       "legacyId": "j3.word.008",
@@ -13612,7 +13749,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:1a219ee1"
+      "revisionHash": "fnv1a:139c0dfe"
     },
     {
       "legacyId": "j3.word.009",
@@ -13653,7 +13790,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:796dcbe3"
+      "revisionHash": "fnv1a:f9fc7c6a"
     },
     {
       "legacyId": "j3.word.010",
@@ -13694,7 +13831,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:e9d9f6b7"
+      "revisionHash": "fnv1a:d80483f4"
     },
     {
       "legacyId": "j3.word.011",
@@ -13735,7 +13872,7 @@
           "supports": "raw field values, record order, source labels, and byte-bound preservation"
         }
       ],
-      "revisionHash": "fnv1a:398b53fc"
+      "revisionHash": "fnv1a:55acff65"
     }
   ]
 }

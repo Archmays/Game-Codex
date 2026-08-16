@@ -11,6 +11,7 @@ import {
   createFreshM4Save,
   createM3GameState,
   currentM3Character,
+  deriveM4Repairs,
   reduceM3State,
   simulateM3Run,
   updateM4Save,
@@ -21,6 +22,7 @@ import {
   type M3HeroId,
   type M5AdventureMode,
 } from "../../../games/hanzi-radical-battle/v2/chapter-one";
+import { generateWheelRound } from "../../../games/hanzi-radical-battle/v2/wheel-workshop/machine/wheel-round-generator";
 
 const ARTIFACT_ROOT = resolve("test-results/hanzi-v2/chapter-one/visual");
 const BASELINE_ROOT = resolve("tests/hanzi-v2/baselines/chapter-one");
@@ -132,6 +134,48 @@ test.describe.serial("Chapter One exact visual and ARIA baselines", () => {
     await inject(page, []); await page.goto("/?play=hanzi-v2-chapter-one&from=hub&fresh=1&seed=m5-visual-fresh-camp");
     await expect(page.getByTestId("chapter-one-m3-camp")).toHaveAttribute("data-repair-count", "0"); await page.waitForLoadState("networkidle");
     await assertBaseline(page, "camp-fresh-mobile", page.getByTestId("hanzi-magic-chapter-one-m3")); done();
+  });
+
+  test("wheel workshop grade selection, final hint, placement, and success @visual", async ({ page }) => {
+    await page.setViewportSize({ width: 1366, height: 768 }); const done = await assertNoExternalErrors(page);
+    const seed = "m5-visual-wheel";
+    const full = updateM4Save(createFreshM4Save(), {
+      discoveredCharacterIds: CHAPTER_ONE_CHARACTER_IDS,
+      completedRegionIds: ["glimmer-grove", "echo-garden", "wind-trail"],
+      repairedObjectIds: deriveM4Repairs(CHAPTER_ONE_CHARACTER_IDS, ["glimmer-grove", "echo-garden", "wind-trail"]),
+    });
+    await inject(page, [[HANZI_MAGIC_M4_SAVE_KEY, JSON.stringify(full)]]);
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto(`/?play=hanzi-v2-chapter-one&from=hub&fresh=1&seed=${seed}`);
+    await page.getByTestId("wheel-workshop-entry").click();
+    const workshop = page.getByTestId("wheel-workshop");
+    await expect(workshop).toBeVisible();
+    await page.locator('[data-action="wheel-open-grade-select"]').click();
+    await assertBaseline(page, "wheel-grade-select-desktop", workshop);
+    await page.locator('[data-wheel-grade-id="p1"]').click();
+
+    const round = generateWheelRound({
+      seed: `${seed}:wheel-workshop`,
+      gradeId: "p1",
+      completedRoundCount: 0,
+      sessionRecordIds: [],
+      recentRecordIds: [],
+    });
+    expect(round).not.toBeNull();
+    await page.locator('[data-action="wheel-spin"]').click();
+    await expect(workshop).toHaveAttribute("data-wheel-phase", "choose-card");
+    for (let index = 0; index < 4; index += 1) await page.locator('[data-action="wheel-hint"]').click();
+    await expect(page.locator(".ww-card.is-final-hint")).toContainText("伙伴提示");
+    await assertBaseline(page, "wheel-final-hint-desktop", workshop);
+
+    const partner = round!.candidateCards.find((card) => card.kind === "partner")!;
+    await page.locator("[data-wheel-card-id]").filter({ hasText: partner.glyph }).first().click();
+    await expect(workshop).toHaveAttribute("data-wheel-phase", "place-card");
+    await assertBaseline(page, "wheel-structure-placement-desktop", workshop);
+    await page.locator('[data-action="wheel-place-card"]').click();
+    await expect(workshop).toHaveAttribute("data-wheel-phase", "success");
+    await page.setViewportSize({ width: 390, height: 844 });
+    await assertBaseline(page, "wheel-success-mobile", workshop); done();
   });
 
   for (const target of [

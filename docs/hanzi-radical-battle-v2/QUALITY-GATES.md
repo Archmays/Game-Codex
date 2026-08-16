@@ -5,10 +5,13 @@
 ## 当前命令
 
 - `pnpm run test:hanzi-v2`：第一章与 V1 compatibility 的 unit/content/hand/save/privacy contracts
+- `pnpm run audit:hanzi-v2:wheel`：从冻结 Git blob 复算 9 个来源集、270 条记录与 hash，并重建唯一处置审核报告
+- `pnpm run simulate:hanzi-v2:wheel`：10,000 个字轮 seed、36 条 playable 覆盖、唯一解、确定性和 impossible-state 检查
+- `pnpm run test:e2e:hanzi-v2:wheel`：营地解锁、字卷、鼠标/键盘/触控、三字局、提示、恢复、视口、字形、隐私与大厅回归
 - `pnpm run simulate:hanzi-v2`：90,000 deterministic seeds、replay、coverage 与 impossible-state 检查
 - `pnpm run test:e2e:hanzi-v2`：当前第一章功能与 18-run playthrough matrix
 - `pnpm run test:e2e:hanzi-v2:v1`：V1 legacy route
-- `pnpm run test:visual:hanzi-v2`：30 个 current visual/ARIA states，必须 no-update
+- `pnpm run test:visual:hanzi-v2`：current 第一章与字轮 visual/ARIA states，必须 no-update
 - `pnpm run test:geometry:hanzi-v2`：critical controls、hit targets、overlap 与 overflow
 - `pnpm run test:visual:hanzi-v2:v1`：V1 baseline compatibility
 - `pnpm run validate:hanzi-v2`：unit + TypeScript + simulation
@@ -24,6 +27,8 @@
 - 鼠标、键盘、触控；手机、平板、桌面；静音与 reduced motion
 - hub/返回/launcher/Pages route；无资产 404、console/page error 或意外外部请求
 - visual、ARIA 与 geometry baseline 两轮 no-update（正式发布/结构收口时）
+- 字轮原始 freeze/hash、270 条唯一审核处置、36 条 playable、10,000 seed 与结果/动画终点一致
+- 字轮首屏不是课程 dashboard；目标字在成功前不揭示，提示不自动合字，儿童仍需亲自选牌和放槽
 - 无排行榜、连胜/FOMO、惩罚性损失、羞辱性失败或儿童网络追踪回归
 
-测试输出只写入 `test-results/` 或 `tmp/`；baseline 更新必须由明确视觉变更授权，不能用来掩盖回归。
+测试输出只写入 `test-results/` 或 `tmp/`；正式审核/回传产物写入任务指定的 `artifacts/` 与 `handoffs/`。baseline 更新必须由明确视觉变更授权，不能用来掩盖回归；字轮新 baseline 先经过独立语义 review，再执行至少两轮 no-update。

@@ -1,0 +1,15 @@
+- dialog "字轮工坊":
+  - paragraph: 第一章营地 · 魔法树旁
+  - heading "字轮工坊" [level=2]
+  - button "返回第一章营地": 返回营地
+  - text: 当前字卷 晨光启程卷
+  - button "选择字卷"
+  - text: 明
+  - paragraph: 日 ＋ 月 · 左右结构
+  - heading "明 · míng" [level=3]
+  - paragraph: 光明：光亮，也可以表示清楚、懂得。
+  - paragraph: 字义魔法：光明的字光已经回到工坊。
+  - button "朗读“明，光明”"
+  - button "继续下一道"
+  - status: 部件回到正确位置，完整字亮起来了。
+  - paragraph: 本机保存 · 无分数、排名、连胜或倒计时
