@@ -1,0 +1,88 @@
+{
+  "sourcePath": "packages/data/learningGames.ts",
+  "sourceGitBlobSha": "722d6c20bf4f2a1213b9f04135ea929d8fb36aa8",
+  "sourceHeadSha": "3dfa537d41d6f7abccf6ef7bf460290656ef65fe",
+  "setIds": [
+    "p1",
+    "p2",
+    "p3",
+    "p4",
+    "p5",
+    "p6",
+    "j1",
+    "j2",
+    "j3"
+  ],
+  "setLabels": [
+    "一年级",
+    "二年级",
+    "三年级",
+    "四年级",
+    "五年级",
+    "六年级",
+    "初一",
+    "初二",
+    "初三"
+  ],
+  "countsBySetAndMode": {
+    "p1": {
+      "char": 18,
+      "word": 12
+    },
+    "p2": {
+      "char": 18,
+      "word": 12
+    },
+    "p3": {
+      "char": 18,
+      "word": 12
+    },
+    "p4": {
+      "char": 18,
+      "word": 12
+    },
+    "p5": {
+      "char": 18,
+      "word": 12
+    },
+    "p6": {
+      "char": 18,
+      "word": 12
+    },
+    "j1": {
+      "char": 18,
+      "word": 12
+    },
+    "j2": {
+      "char": 18,
+      "word": 12
+    },
+    "j3": {
+      "char": 18,
+      "word": 12
+    }
+  },
+  "totalCharRecords": 162,
+  "totalWordRecords": 108,
+  "totalRecords": 270,
+  "stableJsonSha256": "0e47b5d434cff65c9af1a65fad1dcd5a4f6432bf218223213083a43a54af64ac",
+  "fieldInventory": [
+    "set.id",
+    "set.label",
+    "set.char.outerOptions[]",
+    "set.char.innerOptions[]",
+    "set.char.validPairs[].outer",
+    "set.char.validPairs[].inner",
+    "set.char.validPairs[].result",
+    "set.char.validPairs[].pinyin",
+    "set.char.validPairs[].words[]",
+    "set.word.outerOptions[]",
+    "set.word.innerOptions[]",
+    "set.word.validPairs[].outer",
+    "set.word.validPairs[].inner",
+    "set.word.validPairs[].result",
+    "set.word.validPairs[].pinyin",
+    "set.word.validPairs[].words[]"
+  ],
+  "extractedAt": "2026-08-16T10:28:52.927Z"
+}

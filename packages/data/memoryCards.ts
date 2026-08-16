@@ -1,4 +1,4 @@
-import { hanziWheelSets } from "./learningGames";
+import { LEGACY_WHEEL_SOURCE } from "../../games/hanzi-radical-battle/v2/wheel-workshop/library/legacy-wheel-source";
 
 export interface MemoryCardPair {
   id: string;
@@ -16,7 +16,9 @@ export interface MemoryCardSet {
 
 export const MEMORY_CARD_PAIR_COUNT = 6;
 
-export const memoryCardSets: MemoryCardSet[] = hanziWheelSets.map((set) => ({
+// The memory game still uses the preserved raw character pairs. Corrections for
+// Wheel Workshop play remain isolated in its canonical and playable layers.
+export const memoryCardSets: MemoryCardSet[] = LEGACY_WHEEL_SOURCE.map((set) => ({
   id: set.id,
   label: set.label,
   pairs: set.char.validPairs.map((pair) => ({

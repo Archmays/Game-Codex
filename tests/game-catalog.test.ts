@@ -1,12 +1,12 @@
 import { readFileSync, readdirSync } from "node:fs";
-import { englishWords, hanziWheelSets, pinyinCards } from "../packages/data/learningGames";
+import { LEGACY_WHEEL_SOURCE } from "../games/hanzi-radical-battle/v2/wheel-workshop/library/legacy-wheel-source";
+import { englishWords, pinyinCards } from "../packages/data/learningGames";
 import { MEMORY_CARD_PAIR_COUNT, memoryCardSets, pickMemoryCardPairs } from "../packages/data/memoryCards";
 
 describe("game catalog", () => {
   it("registers the first batch of migrated single-file games", () => {
     const source = readFileSync("packages/data/gameCatalog.ts", "utf8");
 
-    expect(source).toContain("hanziWheelGame");
     expect(source).toContain("multiplicationAdventureGame");
     expect(source).toContain("englishSpellBattleGame");
     expect(source).toContain("clockReaderGame");
@@ -21,8 +21,8 @@ describe("game catalog", () => {
   it("has shared learning data for the migrated games", () => {
     expect(englishWords.length).toBeGreaterThanOrEqual(30);
     expect(pinyinCards.length).toBeGreaterThanOrEqual(60);
-    expect(hanziWheelSets.length).toBe(9);
-    expect(hanziWheelSets.every((set) => set.char.validPairs.length > 0 && set.word.validPairs.length > 0)).toBe(true);
+    expect(LEGACY_WHEEL_SOURCE.length).toBe(9);
+    expect(LEGACY_WHEEL_SOURCE.every((set) => set.char.validPairs.length > 0 && set.word.validPairs.length > 0)).toBe(true);
   });
 
   it("keeps every catalog game documented for the hub", () => {
@@ -30,7 +30,7 @@ describe("game catalog", () => {
       .filter((entry) => entry.isDirectory())
       .map((entry) => entry.name);
 
-    expect(gameDirs).toHaveLength(10);
+    expect(gameDirs).toHaveLength(9);
 
     for (const gameDir of gameDirs) {
       const source = readFileSync(`games/${gameDir}/index.ts`, "utf8");
@@ -52,18 +52,19 @@ describe("game catalog", () => {
     expect(equationSliderReadme).toContain("200 份 V3 schema 关卡");
     expect(equationSliderReadme).toContain("40 个手工金标准");
     const rootReadme = readFileSync("README.md", "utf8");
-    expect(rootReadme).toContain("当前收录 10 个游戏");
+    expect(rootReadme).toContain("当前收录 9 个游戏");
+    expect(rootReadme).not.toContain("| 汉字大转盘 |");
     expect(rootReadme.match(/\| 算式滑轨 \|/g)).toHaveLength(1);
   });
 
-  it("keeps memory card grade sets aligned with hanzi wheel grades", () => {
+  it("keeps memory card grade sets aligned with the preserved raw grade sets", () => {
     expect(memoryCardSets).toHaveLength(9);
-    expect(memoryCardSets.map((set) => set.label)).toEqual(hanziWheelSets.map((set) => set.label));
+    expect(memoryCardSets.map((set) => set.label)).toEqual(LEGACY_WHEEL_SOURCE.map((set) => set.label));
 
     for (const set of memoryCardSets) {
       const ids = new Set(set.pairs.map((pair) => pair.id));
       const symbols = new Set(set.pairs.map((pair) => pair.symbol));
-      const wheelSet = hanziWheelSets.find((item) => item.id === set.id);
+      const wheelSet = LEGACY_WHEEL_SOURCE.find((item) => item.id === set.id);
 
       expect(set.pairs.length, set.label).toBe(wheelSet?.char.validPairs.length);
       expect(ids.size, `${set.label} ids`).toBe(set.pairs.length);
@@ -98,8 +99,8 @@ describe("game catalog", () => {
     expect(firstPick).not.toBe(secondPick);
   });
 
-  it("keeps hanzi wheel options unique and referenced by every valid pair", () => {
-    for (const set of hanziWheelSets) {
+  it("keeps preserved raw options unique and referenced by every source record", () => {
+    for (const set of LEGACY_WHEEL_SOURCE) {
       expect(set.char.validPairs.length, `${set.id} char count`).toBeGreaterThanOrEqual(18);
       expect(set.word.validPairs.length, `${set.id} word count`).toBeGreaterThanOrEqual(12);
 
@@ -121,11 +122,11 @@ describe("game catalog", () => {
     }
   });
 
-  it("uses the correct component pair for 胆 in hanzi wheel", () => {
-    const badPair = hanziWheelSets
+  it("keeps the source component pair for 胆 byte-faithful", () => {
+    const badPair = LEGACY_WHEEL_SOURCE
       .flatMap((set) => set.char.validPairs)
       .find((pair) => pair.outer === "月" && pair.inner === "胆" && pair.result === "胆");
-    const thirdGrade = hanziWheelSets.find((set) => set.id === "p3");
+    const thirdGrade = LEGACY_WHEEL_SOURCE.find((set) => set.id === "p3");
 
     expect(badPair).toBeUndefined();
     expect(thirdGrade?.char.validPairs).toContainEqual(
