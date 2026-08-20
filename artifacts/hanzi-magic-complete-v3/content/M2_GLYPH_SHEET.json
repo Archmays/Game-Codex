@@ -1,0 +1,1089 @@
+{
+  "schemaVersion": 1,
+  "title": "汉字魔法战 V3 核心 72 字浏览器字形表",
+  "route": "?play=hanzi-magic-complete&from=hub&audit=content-graph",
+  "fontStack": "Microsoft YaHei, Noto Sans CJK SC, SimSun, sans-serif",
+  "characterCount": 72,
+  "characters": [
+    {
+      "ordinal": 1,
+      "id": "char-u660e",
+      "glyph": "明",
+      "codePoint": "U+660E",
+      "pinyin": "míng",
+      "fixedPhrase": "明，明亮",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "日",
+        "月"
+      ]
+    },
+    {
+      "ordinal": 2,
+      "id": "char-u82b1",
+      "glyph": "花",
+      "codePoint": "U+82B1",
+      "pinyin": "huā",
+      "fixedPhrase": "花，花朵",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "top-bottom",
+      "componentGlyphs": [
+        "艹",
+        "化"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "id": "char-u6797",
+      "glyph": "林",
+      "codePoint": "U+6797",
+      "pinyin": "lín",
+      "fixedPhrase": "林，树林",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "木",
+        "木"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "id": "char-u661f",
+      "glyph": "星",
+      "codePoint": "U+661F",
+      "pinyin": "xīng",
+      "fixedPhrase": "星，星星",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "top-bottom",
+      "componentGlyphs": [
+        "日",
+        "生"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "id": "char-u8349",
+      "glyph": "草",
+      "codePoint": "U+8349",
+      "pinyin": "cǎo",
+      "fixedPhrase": "草，小草",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "top-bottom",
+      "componentGlyphs": [
+        "艹",
+        "早"
+      ]
+    },
+    {
+      "ordinal": 6,
+      "id": "char-u770b",
+      "glyph": "看",
+      "codePoint": "U+770B",
+      "pinyin": "kàn",
+      "fixedPhrase": "看，看见",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "top-bottom",
+      "componentGlyphs": [
+        "龵",
+        "目"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "id": "char-u56ed",
+      "glyph": "园",
+      "codePoint": "U+56ED",
+      "pinyin": "yuán",
+      "fixedPhrase": "园，花园",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "full-enclosure",
+      "componentGlyphs": [
+        "囗",
+        "元"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "id": "char-u56de",
+      "glyph": "回",
+      "codePoint": "U+56DE",
+      "pinyin": "huí",
+      "fixedPhrase": "回，回家",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "full-enclosure",
+      "componentGlyphs": [
+        "囗",
+        "口"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "id": "char-u5305",
+      "glyph": "包",
+      "codePoint": "U+5305",
+      "pinyin": "bāo",
+      "fixedPhrase": "包，书包",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "semi-enclosure",
+      "componentGlyphs": [
+        "勹",
+        "巳"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "id": "char-u98ce",
+      "glyph": "风",
+      "codePoint": "U+98CE",
+      "pinyin": "fēng",
+      "fixedPhrase": "风，大风",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "semi-enclosure",
+      "componentGlyphs": [
+        "几",
+        "乂"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "id": "char-u732b",
+      "glyph": "猫",
+      "codePoint": "U+732B",
+      "pinyin": "māo",
+      "fixedPhrase": "猫，花猫",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "犭",
+        "苗"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "id": "char-u8dd1",
+      "glyph": "跑",
+      "codePoint": "U+8DD1",
+      "pinyin": "pǎo",
+      "fixedPhrase": "跑，跑步",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "⻊",
+        "包"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "id": "char-u6e05",
+      "glyph": "清",
+      "codePoint": "U+6E05",
+      "pinyin": "qīng",
+      "fixedPhrase": "清，清水",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "氵",
+        "青"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "id": "char-u6674",
+      "glyph": "晴",
+      "codePoint": "U+6674",
+      "pinyin": "qíng",
+      "fixedPhrase": "晴，晴天",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "日",
+        "青"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "id": "char-u677e",
+      "glyph": "松",
+      "codePoint": "U+677E",
+      "pinyin": "sōng",
+      "fixedPhrase": "松，松树",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "木",
+        "公"
+      ]
+    },
+    {
+      "ordinal": 16,
+      "id": "char-u6cb3",
+      "glyph": "河",
+      "codePoint": "U+6CB3",
+      "pinyin": "hé",
+      "fixedPhrase": "河，河流",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "氵",
+        "可"
+      ]
+    },
+    {
+      "ordinal": 17,
+      "id": "char-u6d77",
+      "glyph": "海",
+      "codePoint": "U+6D77",
+      "pinyin": "hǎi",
+      "fixedPhrase": "海，大海",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "氵",
+        "每"
+      ]
+    },
+    {
+      "ordinal": 18,
+      "id": "char-u6d0b",
+      "glyph": "洋",
+      "codePoint": "U+6D0B",
+      "pinyin": "yáng",
+      "fixedPhrase": "洋，海洋",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "氵",
+        "羊"
+      ]
+    },
+    {
+      "ordinal": 19,
+      "id": "char-u5b89",
+      "glyph": "安",
+      "codePoint": "U+5B89",
+      "pinyin": "ān",
+      "fixedPhrase": "安，安全",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "top-bottom",
+      "componentGlyphs": [
+        "宀",
+        "女"
+      ]
+    },
+    {
+      "ordinal": 20,
+      "id": "char-u95ea",
+      "glyph": "闪",
+      "codePoint": "U+95EA",
+      "pinyin": "shǎn",
+      "fixedPhrase": "闪，闪电",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "semi-enclosure",
+      "componentGlyphs": [
+        "门",
+        "人"
+      ]
+    },
+    {
+      "ordinal": 21,
+      "id": "char-u4f60",
+      "glyph": "你",
+      "codePoint": "U+4F60",
+      "pinyin": "nǐ",
+      "fixedPhrase": "你，你好",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "亻",
+        "尔"
+      ]
+    },
+    {
+      "ordinal": 22,
+      "id": "char-u4ed6",
+      "glyph": "他",
+      "codePoint": "U+4ED6",
+      "pinyin": "tā",
+      "fixedPhrase": "他，他人",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "亻",
+        "也"
+      ]
+    },
+    {
+      "ordinal": 23,
+      "id": "char-u597d",
+      "glyph": "好",
+      "codePoint": "U+597D",
+      "pinyin": "hǎo",
+      "fixedPhrase": "好，美好",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "女",
+        "子"
+      ]
+    },
+    {
+      "ordinal": 24,
+      "id": "char-u5531",
+      "glyph": "唱",
+      "codePoint": "U+5531",
+      "pinyin": "chàng",
+      "fixedPhrase": "唱，唱歌",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "口",
+        "昌"
+      ]
+    },
+    {
+      "ordinal": 25,
+      "id": "char-u5bb6",
+      "glyph": "家",
+      "codePoint": "U+5BB6",
+      "pinyin": "jiā",
+      "fixedPhrase": "家，家庭",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "top-bottom",
+      "componentGlyphs": [
+        "宀",
+        "豕"
+      ]
+    },
+    {
+      "ordinal": 26,
+      "id": "char-u82d7",
+      "glyph": "苗",
+      "codePoint": "U+82D7",
+      "pinyin": "miáo",
+      "fixedPhrase": "苗，禾苗",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "top-bottom",
+      "componentGlyphs": [
+        "艹",
+        "田"
+      ]
+    },
+    {
+      "ordinal": 27,
+      "id": "char-u83dc",
+      "glyph": "菜",
+      "codePoint": "U+83DC",
+      "pinyin": "cài",
+      "fixedPhrase": "菜，蔬菜",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "top-bottom",
+      "componentGlyphs": [
+        "艹",
+        "采"
+      ]
+    },
+    {
+      "ordinal": 28,
+      "id": "char-u97f3",
+      "glyph": "音",
+      "codePoint": "U+97F3",
+      "pinyin": "yīn",
+      "fixedPhrase": "音，音乐",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "top-bottom",
+      "componentGlyphs": [
+        "立",
+        "日"
+      ]
+    },
+    {
+      "ordinal": 29,
+      "id": "char-u65e9",
+      "glyph": "早",
+      "codePoint": "U+65E9",
+      "pinyin": "zǎo",
+      "fixedPhrase": "早，早晨",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "top-bottom",
+      "componentGlyphs": [
+        "日",
+        "十"
+      ]
+    },
+    {
+      "ordinal": 30,
+      "id": "char-u7b14",
+      "glyph": "笔",
+      "codePoint": "U+7B14",
+      "pinyin": "bǐ",
+      "fixedPhrase": "笔，毛笔",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "top-bottom",
+      "componentGlyphs": [
+        "⺮",
+        "毛"
+      ]
+    },
+    {
+      "ordinal": 31,
+      "id": "char-u5c18",
+      "glyph": "尘",
+      "codePoint": "U+5C18",
+      "pinyin": "chén",
+      "fixedPhrase": "尘，尘土",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "top-bottom",
+      "componentGlyphs": [
+        "小",
+        "土"
+      ]
+    },
+    {
+      "ordinal": 32,
+      "id": "char-u56fd",
+      "glyph": "国",
+      "codePoint": "U+56FD",
+      "pinyin": "guó",
+      "fixedPhrase": "国，国家",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "full-enclosure",
+      "componentGlyphs": [
+        "囗",
+        "玉"
+      ]
+    },
+    {
+      "ordinal": 33,
+      "id": "char-u56fe",
+      "glyph": "图",
+      "codePoint": "U+56FE",
+      "pinyin": "tú",
+      "fixedPhrase": "图，图画",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "full-enclosure",
+      "componentGlyphs": [
+        "囗",
+        "冬"
+      ]
+    },
+    {
+      "ordinal": 34,
+      "id": "char-u5706",
+      "glyph": "圆",
+      "codePoint": "U+5706",
+      "pinyin": "yuán",
+      "fixedPhrase": "圆，圆形",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "full-enclosure",
+      "componentGlyphs": [
+        "囗",
+        "员"
+      ]
+    },
+    {
+      "ordinal": 35,
+      "id": "char-u95ee",
+      "glyph": "问",
+      "codePoint": "U+95EE",
+      "pinyin": "wèn",
+      "fixedPhrase": "问，问题",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "semi-enclosure",
+      "componentGlyphs": [
+        "门",
+        "口"
+      ]
+    },
+    {
+      "ordinal": 36,
+      "id": "char-u95ed",
+      "glyph": "闭",
+      "codePoint": "U+95ED",
+      "pinyin": "bì",
+      "fixedPhrase": "闭，关闭",
+      "chapterId": "chapter-one",
+      "band": "story-required",
+      "structure": "semi-enclosure",
+      "componentGlyphs": [
+        "门",
+        "才"
+      ]
+    },
+    {
+      "ordinal": 37,
+      "id": "char-u6307",
+      "glyph": "指",
+      "codePoint": "U+6307",
+      "pinyin": "zhǐ",
+      "fixedPhrase": "指路",
+      "chapterId": "chapter-two",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "扌",
+        "旨"
+      ]
+    },
+    {
+      "ordinal": 38,
+      "id": "char-u9971",
+      "glyph": "饱",
+      "codePoint": "U+9971",
+      "pinyin": "bǎo",
+      "fixedPhrase": "吃饱",
+      "chapterId": "chapter-two",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "饣",
+        "包"
+      ]
+    },
+    {
+      "ordinal": 39,
+      "id": "char-u60c5",
+      "glyph": "情",
+      "codePoint": "U+60C5",
+      "pinyin": "qíng",
+      "fixedPhrase": "心情",
+      "chapterId": "chapter-two",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "忄",
+        "青"
+      ]
+    },
+    {
+      "ordinal": 40,
+      "id": "char-u8bf7",
+      "glyph": "请",
+      "codePoint": "U+8BF7",
+      "pinyin": "qǐng",
+      "fixedPhrase": "请问",
+      "chapterId": "chapter-two",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "讠",
+        "青"
+      ]
+    },
+    {
+      "ordinal": 41,
+      "id": "char-u8def",
+      "glyph": "路",
+      "codePoint": "U+8DEF",
+      "pinyin": "lù",
+      "fixedPhrase": "道路",
+      "chapterId": "chapter-two",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "⻊",
+        "各"
+      ]
+    },
+    {
+      "ordinal": 42,
+      "id": "char-u8fdb",
+      "glyph": "进",
+      "codePoint": "U+8FDB",
+      "pinyin": "jìn",
+      "fixedPhrase": "前进",
+      "chapterId": "chapter-two",
+      "band": "story-required",
+      "structure": "semi-enclosure",
+      "componentGlyphs": [
+        "辶",
+        "井"
+      ]
+    },
+    {
+      "ordinal": 43,
+      "id": "char-u8ff7",
+      "glyph": "迷",
+      "codePoint": "U+8FF7",
+      "pinyin": "mí",
+      "fixedPhrase": "迷路",
+      "chapterId": "chapter-two",
+      "band": "story-required",
+      "structure": "semi-enclosure",
+      "componentGlyphs": [
+        "辶",
+        "米"
+      ]
+    },
+    {
+      "ordinal": 44,
+      "id": "char-u601d",
+      "glyph": "思",
+      "codePoint": "U+601D",
+      "pinyin": "sī",
+      "fixedPhrase": "思考",
+      "chapterId": "chapter-two",
+      "band": "story-required",
+      "structure": "top-bottom",
+      "componentGlyphs": [
+        "田",
+        "心"
+      ]
+    },
+    {
+      "ordinal": 45,
+      "id": "char-u8bed",
+      "glyph": "语",
+      "codePoint": "U+8BED",
+      "pinyin": "yǔ",
+      "fixedPhrase": "语言",
+      "chapterId": "chapter-two",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "讠",
+        "吾"
+      ]
+    },
+    {
+      "ordinal": 46,
+      "id": "char-u996d",
+      "glyph": "饭",
+      "codePoint": "U+996D",
+      "pinyin": "fàn",
+      "fixedPhrase": "米饭",
+      "chapterId": "chapter-two",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "饣",
+        "反"
+      ]
+    },
+    {
+      "ordinal": 47,
+      "id": "char-u949f",
+      "glyph": "钟",
+      "codePoint": "U+949F",
+      "pinyin": "zhōng",
+      "fixedPhrase": "时钟",
+      "chapterId": "chapter-two",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "钅",
+        "中"
+      ]
+    },
+    {
+      "ordinal": 48,
+      "id": "char-u94b1",
+      "glyph": "钱",
+      "codePoint": "U+94B1",
+      "pinyin": "qián",
+      "fixedPhrase": "钱包",
+      "chapterId": "chapter-two",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "钅",
+        "戋"
+      ]
+    },
+    {
+      "ordinal": 49,
+      "id": "char-u521d",
+      "glyph": "初",
+      "codePoint": "U+521D",
+      "pinyin": "chū",
+      "fixedPhrase": "最初",
+      "chapterId": "chapter-two",
+      "band": "optional",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "衤",
+        "刀"
+      ]
+    },
+    {
+      "ordinal": 50,
+      "id": "char-u88ab",
+      "glyph": "被",
+      "codePoint": "U+88AB",
+      "pinyin": "bèi",
+      "fixedPhrase": "被子",
+      "chapterId": "chapter-two",
+      "band": "optional",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "衤",
+        "皮"
+      ]
+    },
+    {
+      "ordinal": 51,
+      "id": "char-u795d",
+      "glyph": "祝",
+      "codePoint": "U+795D",
+      "pinyin": "zhù",
+      "fixedPhrase": "祝福",
+      "chapterId": "chapter-two",
+      "band": "optional",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "礻",
+        "兄"
+      ]
+    },
+    {
+      "ordinal": 52,
+      "id": "char-u795e",
+      "glyph": "神",
+      "codePoint": "U+795E",
+      "pinyin": "shén",
+      "fixedPhrase": "神话",
+      "chapterId": "chapter-two",
+      "band": "optional",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "礻",
+        "申"
+      ]
+    },
+    {
+      "ordinal": 53,
+      "id": "char-u8df3",
+      "glyph": "跳",
+      "codePoint": "U+8DF3",
+      "pinyin": "tiào",
+      "fixedPhrase": "跳高",
+      "chapterId": "chapter-two",
+      "band": "optional",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "⻊",
+        "兆"
+      ]
+    },
+    {
+      "ordinal": 54,
+      "id": "char-u4eec",
+      "glyph": "们",
+      "codePoint": "U+4EEC",
+      "pinyin": "men",
+      "fixedPhrase": "他们",
+      "chapterId": "chapter-two",
+      "band": "optional",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "亻",
+        "门"
+      ]
+    },
+    {
+      "ordinal": 55,
+      "id": "char-u7a7a",
+      "glyph": "空",
+      "codePoint": "U+7A7A",
+      "pinyin": "kōng",
+      "fixedPhrase": "天空",
+      "chapterId": "chapter-three",
+      "band": "story-required",
+      "structure": "top-bottom",
+      "componentGlyphs": [
+        "穴",
+        "工"
+      ]
+    },
+    {
+      "ordinal": 56,
+      "id": "char-u9759",
+      "glyph": "静",
+      "codePoint": "U+9759",
+      "pinyin": "jìng",
+      "fixedPhrase": "安静",
+      "chapterId": "chapter-three",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "青",
+        "争"
+      ]
+    },
+    {
+      "ordinal": 57,
+      "id": "char-u775b",
+      "glyph": "睛",
+      "codePoint": "U+775B",
+      "pinyin": "jīng",
+      "fixedPhrase": "眼睛",
+      "chapterId": "chapter-three",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "目",
+        "青"
+      ]
+    },
+    {
+      "ordinal": 58,
+      "id": "char-u5ead",
+      "glyph": "庭",
+      "codePoint": "U+5EAD",
+      "pinyin": "tíng",
+      "fixedPhrase": "家庭",
+      "chapterId": "chapter-three",
+      "band": "story-required",
+      "structure": "semi-enclosure",
+      "componentGlyphs": [
+        "广",
+        "廷"
+      ]
+    },
+    {
+      "ordinal": 59,
+      "id": "char-u6b4c",
+      "glyph": "歌",
+      "codePoint": "U+6B4C",
+      "pinyin": "gē",
+      "fixedPhrase": "唱歌",
+      "chapterId": "chapter-three",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "哥",
+        "欠"
+      ]
+    },
+    {
+      "ordinal": 60,
+      "id": "char-u54cd",
+      "glyph": "响",
+      "codePoint": "U+54CD",
+      "pinyin": "xiǎng",
+      "fixedPhrase": "声响",
+      "chapterId": "chapter-three",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "口",
+        "向"
+      ]
+    },
+    {
+      "ordinal": 61,
+      "id": "char-u9999",
+      "glyph": "香",
+      "codePoint": "U+9999",
+      "pinyin": "xiāng",
+      "fixedPhrase": "花香",
+      "chapterId": "chapter-three",
+      "band": "story-required",
+      "structure": "top-bottom",
+      "componentGlyphs": [
+        "禾",
+        "日"
+      ]
+    },
+    {
+      "ordinal": 62,
+      "id": "char-u95f4",
+      "glyph": "间",
+      "codePoint": "U+95F4",
+      "pinyin": "jiān",
+      "fixedPhrase": "中间",
+      "chapterId": "chapter-three",
+      "band": "story-required",
+      "structure": "semi-enclosure",
+      "componentGlyphs": [
+        "门",
+        "日"
+      ]
+    },
+    {
+      "ordinal": 63,
+      "id": "char-u56f4",
+      "glyph": "围",
+      "codePoint": "U+56F4",
+      "pinyin": "wéi",
+      "fixedPhrase": "包围",
+      "chapterId": "chapter-three",
+      "band": "story-required",
+      "structure": "full-enclosure",
+      "componentGlyphs": [
+        "囗",
+        "韦"
+      ]
+    },
+    {
+      "ordinal": 64,
+      "id": "char-u9053",
+      "glyph": "道",
+      "codePoint": "U+9053",
+      "pinyin": "dào",
+      "fixedPhrase": "道路",
+      "chapterId": "chapter-three",
+      "band": "story-required",
+      "structure": "semi-enclosure",
+      "componentGlyphs": [
+        "辶",
+        "首"
+      ]
+    },
+    {
+      "ordinal": 65,
+      "id": "char-u773c",
+      "glyph": "眼",
+      "codePoint": "U+773C",
+      "pinyin": "yǎn",
+      "fixedPhrase": "眼睛",
+      "chapterId": "chapter-three",
+      "band": "story-required",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "目",
+        "艮"
+      ]
+    },
+    {
+      "ordinal": 66,
+      "id": "char-u5708",
+      "glyph": "圈",
+      "codePoint": "U+5708",
+      "pinyin": "quān",
+      "fixedPhrase": "圆圈",
+      "chapterId": "chapter-three",
+      "band": "story-required",
+      "structure": "full-enclosure",
+      "componentGlyphs": [
+        "囗",
+        "卷"
+      ]
+    },
+    {
+      "ordinal": 67,
+      "id": "char-u6c5f",
+      "glyph": "江",
+      "codePoint": "U+6C5F",
+      "pinyin": "jiāng",
+      "fixedPhrase": "江河",
+      "chapterId": "chapter-three",
+      "band": "optional",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "氵",
+        "工"
+      ]
+    },
+    {
+      "ordinal": 68,
+      "id": "char-u6d01",
+      "glyph": "洁",
+      "codePoint": "U+6D01",
+      "pinyin": "jié",
+      "fixedPhrase": "清洁",
+      "chapterId": "chapter-three",
+      "band": "optional",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "氵",
+        "吉"
+      ]
+    },
+    {
+      "ordinal": 69,
+      "id": "char-u6811",
+      "glyph": "树",
+      "codePoint": "U+6811",
+      "pinyin": "shù",
+      "fixedPhrase": "树木",
+      "chapterId": "chapter-three",
+      "band": "optional",
+      "structure": "left-right",
+      "componentGlyphs": [
+        "木",
+        "对"
+      ]
+    },
+    {
+      "ordinal": 70,
+      "id": "char-u666f",
+      "glyph": "景",
+      "codePoint": "U+666F",
+      "pinyin": "jǐng",
+      "fixedPhrase": "风景",
+      "chapterId": "chapter-three",
+      "band": "optional",
+      "structure": "top-bottom",
+      "componentGlyphs": [
+        "日",
+        "京"
+      ]
+    },
+    {
+      "ordinal": 71,
+      "id": "char-u6668",
+      "glyph": "晨",
+      "codePoint": "U+6668",
+      "pinyin": "chén",
+      "fixedPhrase": "清晨",
+      "chapterId": "chapter-three",
+      "band": "optional",
+      "structure": "top-bottom",
+      "componentGlyphs": [
+        "日",
+        "辰"
+      ]
+    },
+    {
+      "ordinal": 72,
+      "id": "char-u7b54",
+      "glyph": "答",
+      "codePoint": "U+7B54",
+      "pinyin": "dá",
+      "fixedPhrase": "回答",
+      "chapterId": "chapter-three",
+      "band": "optional",
+      "structure": "top-bottom",
+      "componentGlyphs": [
+        "⺮",
+        "合"
+      ]
+    }
+  ]
+}

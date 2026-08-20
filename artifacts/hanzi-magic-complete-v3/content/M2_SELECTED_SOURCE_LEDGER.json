@@ -1,0 +1,1246 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Frozen external cross-check for the 36 genuinely new V3 CharacterNodes; not a runtime dependency or etymology claim.",
+  "sources": {
+    "makeMeAHanzi": {
+      "url": "https://raw.githubusercontent.com/skishore/makemeahanzi/bddc96d41bef78427ed0e034e9f7e31d71fd1b92/dictionary.txt",
+      "commit": "bddc96d41bef78427ed0e034e9f7e31d71fd1b92",
+      "sha256": "744bb05d5b0742e9ee35c37791f94d56a173349b3367569e7ca11e510364d203"
+    },
+    "unihan": {
+      "url": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
+      "version": "17.0.0",
+      "sha256": "f7a48b2b545acfaa77b2d607ae28747404ce02baefee16396c5d2d7a8ef34b5e",
+      "entry": "Unihan_Readings.txt"
+    }
+  },
+  "selectedCharacterCount": 36,
+  "passedCharacterCount": 36,
+  "allPassed": true,
+  "records": [
+    {
+      "characterId": "char-u6307",
+      "glyph": "指",
+      "unicodeCodePoint": "U+6307",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "扌",
+          "旨"
+        ],
+        "pinyin": "zhǐ",
+        "fixedPhrase": "指路"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰扌旨",
+        "pinyin": [
+          "zhǐ"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "zhǐ"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u9971",
+      "glyph": "饱",
+      "unicodeCodePoint": "U+9971",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "饣",
+          "包"
+        ],
+        "pinyin": "bǎo",
+        "fixedPhrase": "吃饱"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰饣包",
+        "pinyin": [
+          "bǎo"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "bǎo"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u60c5",
+      "glyph": "情",
+      "unicodeCodePoint": "U+60C5",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "忄",
+          "青"
+        ],
+        "pinyin": "qíng",
+        "fixedPhrase": "心情"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰忄青",
+        "pinyin": [
+          "qíng"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "qíng"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u8bf7",
+      "glyph": "请",
+      "unicodeCodePoint": "U+8BF7",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "讠",
+          "青"
+        ],
+        "pinyin": "qǐng",
+        "fixedPhrase": "请问"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰讠青",
+        "pinyin": [
+          "qǐng"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "qǐng"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u8def",
+      "glyph": "路",
+      "unicodeCodePoint": "U+8DEF",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "⻊",
+          "各"
+        ],
+        "pinyin": "lù",
+        "fixedPhrase": "道路"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰足各",
+        "pinyin": [
+          "lù"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "lù"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u8fdb",
+      "glyph": "进",
+      "unicodeCodePoint": "U+8FDB",
+      "expected": {
+        "structure": "semi-enclosure",
+        "components": [
+          "辶",
+          "井"
+        ],
+        "pinyin": "jìn",
+        "fixedPhrase": "前进"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿺辶井",
+        "pinyin": [
+          "jìn"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "jìn"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u8ff7",
+      "glyph": "迷",
+      "unicodeCodePoint": "U+8FF7",
+      "expected": {
+        "structure": "semi-enclosure",
+        "components": [
+          "辶",
+          "米"
+        ],
+        "pinyin": "mí",
+        "fixedPhrase": "迷路"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿺辶米",
+        "pinyin": [
+          "mí"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "mí"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u601d",
+      "glyph": "思",
+      "unicodeCodePoint": "U+601D",
+      "expected": {
+        "structure": "top-bottom",
+        "components": [
+          "田",
+          "心"
+        ],
+        "pinyin": "sī",
+        "fixedPhrase": "思考"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿱田心",
+        "pinyin": [
+          "sī"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "sī"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u8bed",
+      "glyph": "语",
+      "unicodeCodePoint": "U+8BED",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "讠",
+          "吾"
+        ],
+        "pinyin": "yǔ",
+        "fixedPhrase": "语言"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰讠吾",
+        "pinyin": [
+          "yǔ"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "yǔ"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u996d",
+      "glyph": "饭",
+      "unicodeCodePoint": "U+996D",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "饣",
+          "反"
+        ],
+        "pinyin": "fàn",
+        "fixedPhrase": "米饭"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰饣反",
+        "pinyin": [
+          "fàn"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "fàn"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u949f",
+      "glyph": "钟",
+      "unicodeCodePoint": "U+949F",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "钅",
+          "中"
+        ],
+        "pinyin": "zhōng",
+        "fixedPhrase": "时钟"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰钅中",
+        "pinyin": [
+          "zhōng"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "zhōng"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u94b1",
+      "glyph": "钱",
+      "unicodeCodePoint": "U+94B1",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "钅",
+          "戋"
+        ],
+        "pinyin": "qián",
+        "fixedPhrase": "钱包"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰钅戋",
+        "pinyin": [
+          "qián"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "qián"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u521d",
+      "glyph": "初",
+      "unicodeCodePoint": "U+521D",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "衤",
+          "刀"
+        ],
+        "pinyin": "chū",
+        "fixedPhrase": "最初"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰衤刀",
+        "pinyin": [
+          "chū"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "chū"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u88ab",
+      "glyph": "被",
+      "unicodeCodePoint": "U+88AB",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "衤",
+          "皮"
+        ],
+        "pinyin": "bèi",
+        "fixedPhrase": "被子"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰衤皮",
+        "pinyin": [
+          "bèi"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "bèi"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u795d",
+      "glyph": "祝",
+      "unicodeCodePoint": "U+795D",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "礻",
+          "兄"
+        ],
+        "pinyin": "zhù",
+        "fixedPhrase": "祝福"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰礻兄",
+        "pinyin": [
+          "zhù"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "zhù"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u795e",
+      "glyph": "神",
+      "unicodeCodePoint": "U+795E",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "礻",
+          "申"
+        ],
+        "pinyin": "shén",
+        "fixedPhrase": "神话"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰礻申",
+        "pinyin": [
+          "shén"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "shén"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u8df3",
+      "glyph": "跳",
+      "unicodeCodePoint": "U+8DF3",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "⻊",
+          "兆"
+        ],
+        "pinyin": "tiào",
+        "fixedPhrase": "跳高"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰足兆",
+        "pinyin": [
+          "tiào"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "tiào"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u4eec",
+      "glyph": "们",
+      "unicodeCodePoint": "U+4EEC",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "亻",
+          "门"
+        ],
+        "pinyin": "men",
+        "fixedPhrase": "他们"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰亻门",
+        "pinyin": [
+          "men"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "men"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u7a7a",
+      "glyph": "空",
+      "unicodeCodePoint": "U+7A7A",
+      "expected": {
+        "structure": "top-bottom",
+        "components": [
+          "穴",
+          "工"
+        ],
+        "pinyin": "kōng",
+        "fixedPhrase": "天空"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿱穴工",
+        "pinyin": [
+          "kōng"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "kōng"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u9759",
+      "glyph": "静",
+      "unicodeCodePoint": "U+9759",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "青",
+          "争"
+        ],
+        "pinyin": "jìng",
+        "fixedPhrase": "安静"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰青争",
+        "pinyin": [
+          "jìng"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "jìng"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u775b",
+      "glyph": "睛",
+      "unicodeCodePoint": "U+775B",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "目",
+          "青"
+        ],
+        "pinyin": "jīng",
+        "fixedPhrase": "眼睛"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰目青",
+        "pinyin": [
+          "jīng"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "jīng"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u5ead",
+      "glyph": "庭",
+      "unicodeCodePoint": "U+5EAD",
+      "expected": {
+        "structure": "semi-enclosure",
+        "components": [
+          "广",
+          "廷"
+        ],
+        "pinyin": "tíng",
+        "fixedPhrase": "家庭"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿸广廷",
+        "pinyin": [
+          "tíng"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "tíng"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u6b4c",
+      "glyph": "歌",
+      "unicodeCodePoint": "U+6B4C",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "哥",
+          "欠"
+        ],
+        "pinyin": "gē",
+        "fixedPhrase": "唱歌"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰哥欠",
+        "pinyin": [
+          "gē"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "gē"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u54cd",
+      "glyph": "响",
+      "unicodeCodePoint": "U+54CD",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "口",
+          "向"
+        ],
+        "pinyin": "xiǎng",
+        "fixedPhrase": "声响"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰口向",
+        "pinyin": [
+          "xiǎng"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "xiǎng"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u9999",
+      "glyph": "香",
+      "unicodeCodePoint": "U+9999",
+      "expected": {
+        "structure": "top-bottom",
+        "components": [
+          "禾",
+          "日"
+        ],
+        "pinyin": "xiāng",
+        "fixedPhrase": "花香"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿱禾日",
+        "pinyin": [
+          "xiāng"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "xiāng"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u95f4",
+      "glyph": "间",
+      "unicodeCodePoint": "U+95F4",
+      "expected": {
+        "structure": "semi-enclosure",
+        "components": [
+          "门",
+          "日"
+        ],
+        "pinyin": "jiān",
+        "fixedPhrase": "中间"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿵门日",
+        "pinyin": [
+          "jiān"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "jiān"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u56f4",
+      "glyph": "围",
+      "unicodeCodePoint": "U+56F4",
+      "expected": {
+        "structure": "full-enclosure",
+        "components": [
+          "囗",
+          "韦"
+        ],
+        "pinyin": "wéi",
+        "fixedPhrase": "包围"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿴囗韦",
+        "pinyin": [
+          "wéi"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "wéi"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u9053",
+      "glyph": "道",
+      "unicodeCodePoint": "U+9053",
+      "expected": {
+        "structure": "semi-enclosure",
+        "components": [
+          "辶",
+          "首"
+        ],
+        "pinyin": "dào",
+        "fixedPhrase": "道路"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿺辶首",
+        "pinyin": [
+          "dào"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "dào"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u773c",
+      "glyph": "眼",
+      "unicodeCodePoint": "U+773C",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "目",
+          "艮"
+        ],
+        "pinyin": "yǎn",
+        "fixedPhrase": "眼睛"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰目艮",
+        "pinyin": [
+          "yǎn"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "yǎn"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u5708",
+      "glyph": "圈",
+      "unicodeCodePoint": "U+5708",
+      "expected": {
+        "structure": "full-enclosure",
+        "components": [
+          "囗",
+          "卷"
+        ],
+        "pinyin": "quān",
+        "fixedPhrase": "圆圈"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿴囗卷",
+        "pinyin": [
+          "quān"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "quān"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u6c5f",
+      "glyph": "江",
+      "unicodeCodePoint": "U+6C5F",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "氵",
+          "工"
+        ],
+        "pinyin": "jiāng",
+        "fixedPhrase": "江河"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰氵工",
+        "pinyin": [
+          "jiāng"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "jiāng"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u6d01",
+      "glyph": "洁",
+      "unicodeCodePoint": "U+6D01",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "氵",
+          "吉"
+        ],
+        "pinyin": "jié",
+        "fixedPhrase": "清洁"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰氵吉",
+        "pinyin": [
+          "jié"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "jié"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u6811",
+      "glyph": "树",
+      "unicodeCodePoint": "U+6811",
+      "expected": {
+        "structure": "left-right",
+        "components": [
+          "木",
+          "对"
+        ],
+        "pinyin": "shù",
+        "fixedPhrase": "树木"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿰木对",
+        "pinyin": [
+          "shù"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "shù"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u666f",
+      "glyph": "景",
+      "unicodeCodePoint": "U+666F",
+      "expected": {
+        "structure": "top-bottom",
+        "components": [
+          "日",
+          "京"
+        ],
+        "pinyin": "jǐng",
+        "fixedPhrase": "风景"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿱日京",
+        "pinyin": [
+          "jǐng"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "jǐng"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u6668",
+      "glyph": "晨",
+      "unicodeCodePoint": "U+6668",
+      "expected": {
+        "structure": "top-bottom",
+        "components": [
+          "日",
+          "辰"
+        ],
+        "pinyin": "chén",
+        "fixedPhrase": "清晨"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿱日辰",
+        "pinyin": [
+          "chén"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "chén"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    },
+    {
+      "characterId": "char-u7b54",
+      "glyph": "答",
+      "unicodeCodePoint": "U+7B54",
+      "expected": {
+        "structure": "top-bottom",
+        "components": [
+          "⺮",
+          "合"
+        ],
+        "pinyin": "dá",
+        "fixedPhrase": "回答"
+      },
+      "makeMeAHanzi": {
+        "decomposition": "⿱⺮合",
+        "pinyin": [
+          "dá"
+        ]
+      },
+      "unihan": {
+        "kMandarin": [
+          "dá"
+        ]
+      },
+      "checks": {
+        "makeMeAHanziRecordPresent": true,
+        "makeMeAHanziStructureMatch": true,
+        "makeMeAHanziComponentMatch": true,
+        "makeMeAHanziReadingMatch": true,
+        "unihanReadingPresent": true,
+        "unihanReadingMatch": true
+      },
+      "passed": true
+    }
+  ]
+}

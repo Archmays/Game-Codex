@@ -72,6 +72,9 @@ export interface CharacterNode {
   readonly familiarWord: string;
   readonly shortMeaning: string;
   readonly illustrationBrief: string;
+  readonly magicName: string;
+  readonly magicEffect: string;
+  readonly meaningImageDisclaimer: "这是字义联想，不是字源说明";
   readonly familiarity: "high" | "near" | "advanced-optional";
   readonly ambiguityRisk: string;
   readonly sourceIds: readonly string[];
@@ -106,6 +109,7 @@ export interface WordNode {
   readonly reverseOrderStatus: "rejected-not-word" | "rejected-wrong-context";
   readonly ambiguityRisk: string;
   readonly sourceIds: readonly string[];
+  readonly sourceNote: string;
   readonly revisionHash: string;
 }
 

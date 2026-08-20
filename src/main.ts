@@ -31,6 +31,11 @@ window.addEventListener("load", async () => {
   if (route.kind === "play" && play === "hanzi-magic-complete") {
     setBrowserIdentity("汉字魔法战 · 字光归林", WORLD_THEME_COLOR);
     addPageIdentity("hanzi-magic-page");
+    if (search.get("audit") === "content-graph") {
+      const { mountCompleteContentAuditSheet } = await import("../games/hanzi-radical-battle/complete/app/content-audit-sheet");
+      mountCompleteContentAuditSheet(root, Number(search.get("sheet") ?? "0"));
+      return;
+    }
     const { mountHanziMagicCompleteSlice } = await import("../games/hanzi-radical-battle/complete/app/slice-app");
     mountHanziMagicCompleteSlice(root, {
       sliceId: search.get("slice") === "word" ? "word" : "family",

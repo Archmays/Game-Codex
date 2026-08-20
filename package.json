@@ -38,7 +38,13 @@
     "test:launcher:hanzi-v2": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File tools/hanzi-v2-chapter-one/test-launcher-lifecycle.ps1",
     "source-hash:hanzi-v2": "tsx tools/hanzi-v2-chapter-one/source-identity.ts",
     "test:hanzi-complete:slices": "vitest run tests/hanzi-complete/vertical-slices.test.ts --no-file-parallelism",
-    "test:e2e:hanzi-complete:slices": "playwright test tests/e2e/hanzi-complete/vertical-slices.spec.ts --config playwright.hanzi-complete.config.ts"
+    "test:e2e:hanzi-complete:slices": "playwright test tests/e2e/hanzi-complete/vertical-slices.spec.ts --config playwright.hanzi-complete.config.ts",
+    "audit:hanzi-complete:content": "tsx tools/hanzi-magic-complete/build-m2-content.ts --check",
+    "test:hanzi-complete:content": "vitest run tests/hanzi-complete/content-graph.test.ts --no-file-parallelism",
+    "test:hanzi-complete:families": "vitest run tests/hanzi-complete/families.test.ts --no-file-parallelism",
+    "test:hanzi-complete:words": "vitest run tests/hanzi-complete/words.test.ts --no-file-parallelism",
+    "test:hanzi-complete": "vitest run tests/hanzi-complete --no-file-parallelism",
+    "test:e2e:hanzi-complete:content": "playwright test tests/e2e/hanzi-complete/content-graph.spec.ts --config playwright.hanzi-complete.config.ts"
   },
   "dependencies": {
     "phaser": "^3.90.0"

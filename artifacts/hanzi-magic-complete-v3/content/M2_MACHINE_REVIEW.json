@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "mode": "ACCEPTANCE_MODE",
+  "milestone": "M2_CONTENT_GRAPH",
+  "baseCommit": "fc32046",
+  "contentGraphRevision": "fnv1a:4f5caecb",
+  "wheelManifestRevision": "fnv1a:5590987e",
+  "verdict": "PASS_MACHINE",
+  "counts": {
+    "coreCharacters": 72,
+    "existingCharacters": 36,
+    "genuinelyNewCharacters": 36,
+    "componentFamilies": 18,
+    "wordResonances": 36,
+    "wheelPlayable": 72,
+    "uniqueHandPasses": 72,
+    "externalSourcePasses": 36,
+    "playableAmbiguities": 0
+  },
+  "reviewers": [
+    {
+      "id": "R1_CHILD_FIRST_GAME_DESIGN",
+      "verdict": "PASS_MACHINE",
+      "note": "Content records contain no ranking, streak, timer, payment, identity collection or progress-loss mechanic; optional bands do not gate story completion."
+    },
+    {
+      "id": "R2_HANZI_CONTENT_AND_PEDAGOGY",
+      "verdict": "PASS_MACHINE",
+      "note": "72 canonical glyphs are deduplicated; 36 new records pass frozen structure and reading cross-checks; component relation kinds and meaning-image disclaimers remain explicit."
+    },
+    {
+      "id": "R3_VISUAL_ACCESSIBILITY",
+      "verdict": "PASS_MACHINE",
+      "note": "All 72 complete glyphs produced non-fallback browser rasters across six sheets; desktop and 390 px mobile geometry have no horizontal overflow."
+    },
+    {
+      "id": "R4_ADVERSARIAL_RUNTIME_QA",
+      "verdict": "PASS_MACHINE",
+      "note": "Every five-card hand has one canonical core solution; all word order failure classes reject; wheel adapters reference audit-approved records without mutating legacy fields."
+    }
+  ],
+  "checks": [
+    "pnpm run test:hanzi-complete -> 22/22 PASS",
+    "pnpm run audit:hanzi-complete:content -> 72/72, 18/18, 36/36, 72/72 PASS and ambiguity 0",
+    "pnpm run test:e2e:hanzi-complete:content -> 2 PASS, 2 expected project skips",
+    "pnpm run test:e2e:hanzi-complete:slices -> 6 PASS, 6 expected project skips",
+    "pnpm run test:hanzi-v2 -> 71/71 PASS",
+    "pnpm exec tsc --noEmit -> PASS",
+    "pnpm run build -> PASS"
+  ],
+  "evidenceBoundary": "REAL_CHILD_VALIDATION NOT_PERFORMED_AND_NOT_CLAIMED"
+}
