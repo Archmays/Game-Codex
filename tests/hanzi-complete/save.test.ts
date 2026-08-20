@@ -91,6 +91,20 @@ describe("complete-edition V3 save", () => {
     expect(JSON.parse(storage.getItem(HANZI_MAGIC_COMPLETE_SAVE_KEY)!).chapterThreeReplay).toBeNull();
   });
 
+  test("normalizes the pre-M6 postgame resume shape to a safe exact replay", () => {
+    const storage = new MemoryStorage();
+    const current = updateCompleteSave(createFreshCompleteSave(), { selectedHeroId: "forest-speaker" });
+    const { validation: _validation, ...payload } = current;
+    const legacyPayload = { ...payload, postgameResume: { mode: "free-adventure", seed: "legacy-postgame", phase: "active", actionCount: 17 } };
+    const legacy = { ...legacyPayload, validation: { algorithm: "fnv1a32", checksum: preChapterTwoChecksum(legacyPayload) } };
+    storage.setItem(HANZI_MAGIC_COMPLETE_SAVE_KEY, JSON.stringify(legacy));
+
+    const read = readCompleteSave(storage);
+    expect(read).toMatchObject({ source: "v3", recovered: false, writable: true });
+    expect(read.state.postgameResume).toEqual({ mode: "free-adventure", seed: "legacy-postgame", initialHeroId: "forest-speaker", band: "whole-forest", phase: "mode-intro", actionCount: 0, actions: [] });
+    expect(validateCompleteSave(JSON.parse(storage.getItem(HANZI_MAGIC_COMPLETE_SAVE_KEY)!))).not.toBeNull();
+  });
+
   test("round-trips a bounded anonymous save and creates a valid backup", () => {
     const storage = new MemoryStorage();
     const first = createFreshCompleteSave();

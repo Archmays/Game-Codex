@@ -1,6 +1,8 @@
 import type { M3Action, M3HeroId, M5AdventureMode } from "../chapters/chapter-one-adapter/engine";
 import type { ChapterTwoAction, ChapterTwoRun } from "../chapters/chapter-two/engine";
 import type { ChapterThreeAction, ChapterThreeRun } from "../chapters/chapter-three/engine";
+import type { CompletePostgameBand } from "../postgame/contracts";
+import type { CompletePostgameAction, CompletePostgameRun } from "../postgame/engine";
 
 export type CompleteEngineChapterId = "chapter-one" | "chapter-two" | "chapter-three";
 export type CompleteEngineScreen = "world" | CompleteEngineChapterId | "epilogue" | "postgame";
@@ -36,6 +38,13 @@ export interface CompleteEngineProgressSeed {
     readonly initialHeroId: M3HeroId;
     readonly actions: readonly ChapterThreeAction[];
   } | null;
+  readonly postgameReplay: {
+    readonly seed: string;
+    readonly initialHeroId: M3HeroId;
+    readonly mode: CompletePostgameMode;
+    readonly band: CompletePostgameBand;
+    readonly actions: readonly CompletePostgameAction[];
+  } | null;
 }
 
 export interface CompleteEngineState {
@@ -58,6 +67,7 @@ export interface CompleteEngineState {
   readonly chapterOneRun: import("../chapters/chapter-one-adapter/engine").CompleteChapterOneRun | null;
   readonly chapterTwoRun: ChapterTwoRun | null;
   readonly chapterThreeRun: ChapterThreeRun | null;
+  readonly postgameRun: CompletePostgameRun | null;
   readonly activePostgameMode: CompletePostgameMode | null;
   readonly gentleMessage: string;
   readonly actionCount: number;
@@ -69,6 +79,7 @@ export type CompleteEngineAction =
   | { readonly type: "chapter-one-action"; readonly action: M3Action }
   | { readonly type: "chapter-two-action"; readonly action: ChapterTwoAction }
   | { readonly type: "chapter-three-action"; readonly action: ChapterThreeAction }
+  | { readonly type: "postgame-action"; readonly action: CompletePostgameAction }
   | { readonly type: "enter-chapter"; readonly chapterId: CompleteEngineChapterId }
   | { readonly type: "return-world" }
-  | { readonly type: "enter-postgame"; readonly mode: CompletePostgameMode };
+  | { readonly type: "enter-postgame"; readonly mode: CompletePostgameMode; readonly seed?: string; readonly band?: CompletePostgameBand; readonly restart?: boolean };

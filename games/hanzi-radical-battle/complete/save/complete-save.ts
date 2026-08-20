@@ -168,6 +168,13 @@ export function progressSeedFromCompleteSave(save: CompleteSaveState): CompleteE
     chapterOneReplay: save.chapterOneReplay,
     chapterTwoReplay: save.chapterTwoReplay,
     chapterThreeReplay: save.chapterThreeReplay,
+    postgameReplay: save.postgameResume ? {
+      seed: save.postgameResume.seed,
+      initialHeroId: save.postgameResume.initialHeroId,
+      mode: save.postgameResume.mode,
+      band: save.postgameResume.band,
+      actions: save.postgameResume.actions,
+    } : null,
   };
 }
 
@@ -197,24 +204,36 @@ export function syncCompleteSaveFromEngine(previous: CompleteSaveState, state: C
   const chapterOneReplay = state.chapterOneRun ? { seed: state.chapterOneRun.seed, initialHeroId: state.chapterOneRun.initialHeroId, mode: state.chapterOneRun.mode, actions: state.chapterOneRun.actions } : previous.chapterOneReplay;
   const chapterTwoReplay = state.chapterTwoRun ? { seed: state.chapterTwoRun.seed, initialHeroId: state.chapterTwoRun.initialHeroId, actions: state.chapterTwoRun.actions } : previous.chapterTwoReplay;
   const chapterThreeReplay = state.chapterThreeRun ? { seed: state.chapterThreeRun.seed, initialHeroId: state.chapterThreeRun.initialHeroId, actions: state.chapterThreeRun.actions } : previous.chapterThreeReplay;
+  const postgameResume = state.postgameRun ? {
+    mode: state.postgameRun.mode,
+    seed: state.postgameRun.seed,
+    initialHeroId: state.postgameRun.initialHeroId,
+    band: state.postgameRun.band,
+    phase: state.postgameRun.state.phase,
+    actionCount: state.postgameRun.state.actionCount,
+    actions: state.postgameRun.actions,
+  } : previous.postgameResume;
   const resumeActionCount = state.screen === "chapter-one" && state.chapterOneRun
     ? state.chapterOneRun.state.actionCount
     : state.screen === "chapter-two" && state.chapterTwoRun
       ? state.chapterTwoRun.state.actionCount
       : state.screen === "chapter-three" && state.chapterThreeRun
         ? state.chapterThreeRun.state.actionCount
-        : state.actionCount;
+        : state.screen === "postgame" && state.postgameRun
+          ? state.postgameRun.state.actionCount
+          : state.actionCount;
+  const completedNewPostgameSession = state.postgameRun?.state.phase === "session-summary" && previous.postgameResume?.phase !== "session-summary";
   return updateCompleteSave(previous, {
     selectedHeroId: state.heroId,
     activeResume: {
       screen: state.screen,
       chapterId: state.activeChapterId,
       episodeId: completeEpisodeForEngine(state),
-      phase: state.screen === "chapter-one" && state.chapterOneRun ? state.chapterOneRun.state.phase : state.screen === "chapter-two" && state.chapterTwoRun ? state.chapterTwoRun.state.phase : state.screen === "chapter-three" && state.chapterThreeRun ? state.chapterThreeRun.state.phase : state.screen,
+      phase: state.screen === "chapter-one" && state.chapterOneRun ? state.chapterOneRun.state.phase : state.screen === "chapter-two" && state.chapterTwoRun ? state.chapterTwoRun.state.phase : state.screen === "chapter-three" && state.chapterThreeRun ? state.chapterThreeRun.state.phase : state.screen === "postgame" && state.postgameRun ? state.postgameRun.state.phase : state.screen,
       seed: state.seed,
       actionCount: resumeActionCount,
     },
-    postgameResume: state.screen === "postgame" && state.activePostgameMode ? { mode: state.activePostgameMode, seed: state.seed, phase: "active", actionCount: state.actionCount } : previous.postgameResume,
+    postgameResume,
     chapterOneReplay,
     chapterTwoReplay,
     chapterThreeReplay,
@@ -234,7 +253,7 @@ export function syncCompleteSaveFromEngine(previous: CompleteSaveState, state: C
       completedLiteracyActions: previous.minimalLocalEvents.completedLiteracyActions + newCharacterIds.length + newFamilyIds.length + newWordIds.length,
       completedEpisodes: Math.max(previous.minimalLocalEvents.completedEpisodes, state.completedEpisodeIds.length),
       completedChapters: Math.max(previous.minimalLocalEvents.completedChapters, state.completedChapterIds.length),
-      postgameSessions: previous.minimalLocalEvents.postgameSessions,
+      postgameSessions: previous.minimalLocalEvents.postgameSessions + (completedNewPostgameSession ? 1 : 0),
       lastPlayedAtUtc: nowUtc,
     },
     migration: {

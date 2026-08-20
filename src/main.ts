@@ -45,6 +45,24 @@ window.addEventListener("load", async () => {
       });
       return;
     }
+    if (search.get("view") === "spellbook") {
+      const { mountCompleteSpellbook } = await import("../games/hanzi-radical-battle/complete/app/spellbook-app");
+      mountCompleteSpellbook(root, { returnHref: "?play=hanzi-magic-complete&from=hub" });
+      return;
+    }
+    if (search.get("view") === "wheel") {
+      const { mountCompleteWorkshop } = await import("../games/hanzi-radical-battle/complete/workshop-adapter/app");
+      mountCompleteWorkshop(root, { seed: search.get("seed") ?? undefined, returnHref: "?play=hanzi-magic-complete&from=hub" });
+      return;
+    }
+    const requestedPostgame = search.get("postgame");
+    if (requestedPostgame === "free-adventure" || requestedPostgame === "component-trails" || requestedPostgame === "word-resonance") {
+      const requestedBand = search.get("band");
+      const band = requestedBand === "story-path" || requestedBand === "optional-glow" ? requestedBand : "whole-forest";
+      const { mountCompletePostgame } = await import("../games/hanzi-radical-battle/complete/postgame/app");
+      mountCompletePostgame(root, { mode: requestedPostgame, band, seed: search.get("seed") ?? undefined, restart: search.get("new") === "1", returnHref: "?play=hanzi-magic-complete&from=hub" });
+      return;
+    }
     if (search.get("chapter") === "one") {
       const { mountHanziMagicChapterOneM3 } = await import("../games/hanzi-radical-battle/v2/chapter-one/m3-app");
       mountHanziMagicChapterOneM3(root, {
@@ -74,7 +92,7 @@ window.addEventListener("load", async () => {
     }
     const requestedChapter = null;
     const { mountHanziMagicComplete } = await import("../games/hanzi-radical-battle/complete/app/complete-app");
-    mountHanziMagicComplete(root, { fresh: search.get("fresh") === "1", requestedChapter, returnHref: from === "hub" ? "?hub=classic&from=world" : "?world=my-game-world" });
+    mountHanziMagicComplete(root, { fresh: search.get("fresh") === "1", requestedChapter, view: search.get("view") === "archive" ? "archive" : "world", returnHref: from === "hub" ? "?hub=classic&from=world" : "?world=my-game-world" });
     return;
   }
 

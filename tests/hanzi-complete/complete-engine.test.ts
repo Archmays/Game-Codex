@@ -25,6 +25,7 @@ const FRESH_PROGRESS: CompleteEngineProgressSeed = {
   chapterOneReplay: null,
   chapterTwoReplay: null,
   chapterThreeReplay: null,
+  postgameReplay: null,
 };
 
 describe("complete-edition pure engine and Chapter One adapter", () => {

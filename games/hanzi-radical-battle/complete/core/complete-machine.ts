@@ -11,6 +11,7 @@ import {
 import type { CompleteEngineAction, CompleteEngineProgressSeed, CompleteEngineState } from "./complete-types";
 import { createChapterTwoRun, reduceChapterTwoRun, replayChapterTwoRun } from "../chapters/chapter-two/engine";
 import { createChapterThreeRun, reduceChapterThreeRun, replayChapterThreeRun } from "../chapters/chapter-three/engine";
+import { createCompletePostgameRun, reduceCompletePostgameRun, replayCompletePostgameRun } from "../postgame/engine";
 
 function unique<T>(values: readonly T[]): T[] {
   return [...new Set(values)];
@@ -33,6 +34,7 @@ const FRESH_PROGRESS: CompleteEngineProgressSeed = {
   chapterOneReplay: null,
   chapterTwoReplay: null,
   chapterThreeReplay: null,
+  postgameReplay: null,
 };
 
 export function createCompleteEngineState(seed = "character-light-return", progress: CompleteEngineProgressSeed = FRESH_PROGRESS): CompleteEngineState {
@@ -44,6 +46,9 @@ export function createCompleteEngineState(seed = "character-light-return", progr
     : null;
   const chapterThreeRun = progress.chapterThreeReplay
     ? replayChapterThreeRun(progress.chapterThreeReplay.seed, progress.chapterThreeReplay.initialHeroId, progress.chapterThreeReplay.actions)
+    : null;
+  const postgameRun = progress.postgameReplay
+    ? replayCompletePostgameRun(progress.postgameReplay.seed, progress.postgameReplay.initialHeroId, progress.postgameReplay.mode, progress.postgameReplay.band, progress.postgameReplay.actions)
     : null;
   return {
     schemaVersion: 1,
@@ -65,6 +70,7 @@ export function createCompleteEngineState(seed = "character-light-return", progr
     chapterOneRun,
     chapterTwoRun,
     chapterThreeRun,
+    postgameRun,
     activePostgameMode: null,
     gentleMessage: progress.completedChapterIds.length ? "森林记得已经完成的修复，下一盏字光正在路上。" : "墨迹森林的第一盏营地灯正在等你。",
     actionCount: 0,
@@ -144,6 +150,18 @@ export function reduceCompleteEngineState(state: CompleteEngineState, action: Co
       gentleMessage: chapter.gentleMessage,
     });
   }
+  if (action.type === "postgame-action" && state.screen === "postgame" && state.postgameRun) {
+    const postgameRun = reduceCompletePostgameRun(state.postgameRun, action.action);
+    if (postgameRun === state.postgameRun) return state;
+    const postgame = postgameRun.state;
+    return counted(state, {
+      postgameRun,
+      discoveredCharacterIds: unique([...state.discoveredCharacterIds, ...postgame.discoveredCharacterIds]),
+      discoveredFamilyIds: unique([...state.discoveredFamilyIds, ...postgame.discoveredFamilyIds]),
+      discoveredWordIds: unique([...state.discoveredWordIds, ...postgame.discoveredWordIds]),
+      gentleMessage: postgame.gentleMessage,
+    });
+  }
   if (action.type === "enter-chapter" && state.screen === "world") {
     if (!state.unlockedChapterIds.includes(action.chapterId)) return counted(state, { gentleMessage: "这条林路还没有亮起；先完成前一章，已有进度都会保留。" });
     if (action.chapterId === "chapter-one") {
@@ -161,7 +179,12 @@ export function reduceCompleteEngineState(state: CompleteEngineState, action: Co
     return counted(state, { screen: "world", activePostgameMode: null, gentleMessage: "回到墨迹森林；修复和发现都保留在本机。" });
   }
   if (action.type === "enter-postgame" && state.screen === "world" && state.completedChapterIds.includes("chapter-three")) {
-    return counted(state, { screen: "postgame", activePostgameMode: action.mode, gentleMessage: "自由探索不会扣除任何进度。" });
+    const band = action.band ?? "whole-forest";
+    const resumable = !action.restart && state.postgameRun?.mode === action.mode && state.postgameRun.band === band;
+    const postgameRun = resumable
+      ? state.postgameRun!
+      : createCompletePostgameRun(action.seed?.trim() || `${state.seed}:postgame:${action.mode}`, state.heroId, action.mode, band);
+    return counted(state, { screen: "postgame", activePostgameMode: action.mode, postgameRun, gentleMessage: "自由探索不会扣除任何进度。" });
   }
   return counted(state, { gentleMessage: "这里暂时不能这样走；原来的发现和修复都保留。" });
 }

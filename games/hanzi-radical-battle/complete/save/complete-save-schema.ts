@@ -7,6 +7,8 @@ import { COMPLETE_CHARACTER_NODES, COMPLETE_CONTENT_GRAPH_REVISION } from "../co
 import { COMPLETE_WORD_NODES } from "../content-graph/words";
 import type { CompleteEngineChapterId, CompleteEngineScreen, CompletePostgameMode } from "../core/complete-types";
 import { COMPLETE_CHAPTER_IDS, COMPLETE_EPISODE_IDS, COMPLETE_NEW_ABILITY_IDS, COMPLETE_POSTGAME_MODES, COMPLETE_REPAIR_IDS } from "../core/world-contracts";
+import type { CompletePostgameBand } from "../postgame/contracts";
+import { isCompletePostgameAction, type CompletePostgameAction } from "../postgame/engine";
 
 export const HANZI_MAGIC_COMPLETE_SAVE_KEY = "family-games/hanzi-magic-complete/v3";
 export const HANZI_MAGIC_COMPLETE_SAVE_BACKUP_KEY = `${HANZI_MAGIC_COMPLETE_SAVE_KEY}.backup`;
@@ -44,8 +46,11 @@ export interface CompleteActiveResume {
 export interface CompletePostgameResume {
   readonly mode: CompletePostgameMode;
   readonly seed: string;
+  readonly initialHeroId: M3HeroId;
+  readonly band: CompletePostgameBand;
   readonly phase: string;
   readonly actionCount: number;
+  readonly actions: readonly CompletePostgameAction[];
 }
 
 export interface CompleteChapterOneReplay {
@@ -115,6 +120,7 @@ const REPAIR_IDS = new Set<string>(COMPLETE_REPAIR_IDS);
 const HERO_IDS = new Set<string>(M3_HEROES.map((hero) => hero.id));
 const ABILITY_IDS = new Set<string>([...M3_BUILD_ABILITIES.map((ability) => ability.id), ...COMPLETE_NEW_ABILITY_IDS]);
 const POSTGAME_MODES = new Set<string>(COMPLETE_POSTGAME_MODES);
+const POSTGAME_BANDS = new Set<string>(["whole-forest", "story-path", "optional-glow"]);
 const INPUT_MODES = new Set<string>(["auto", "mouse", "touch", "keyboard"]);
 const SCREENS = new Set<string>(["world", "chapter-one", "chapter-two", "chapter-three", "epilogue", "postgame"]);
 const REVIEW_STATES = new Set<string>(["independent", "hinted", "revisit"]);
@@ -217,9 +223,14 @@ function validPostgameResume(value: unknown): value is CompletePostgameResume | 
   if (value === null) return true;
   if (!value || typeof value !== "object" || Array.isArray(value)) return false;
   const resume = value as Record<string, unknown>;
-  return exactKeys(resume, ["mode", "seed", "phase", "actionCount"])
+  const legacy = exactKeys(resume, ["mode", "seed", "phase", "actionCount"]);
+  const current = exactKeys(resume, ["mode", "seed", "initialHeroId", "band", "phase", "actionCount", "actions"]);
+  return (legacy || current)
     && typeof resume.mode === "string" && POSTGAME_MODES.has(resume.mode)
-    && boundedString(resume.seed) && boundedString(resume.phase) && boundedInteger(resume.actionCount);
+    && boundedString(resume.seed) && boundedString(resume.phase) && boundedInteger(resume.actionCount)
+    && (legacy || (typeof resume.initialHeroId === "string" && HERO_IDS.has(resume.initialHeroId)
+      && typeof resume.band === "string" && POSTGAME_BANDS.has(resume.band)
+      && Array.isArray(resume.actions) && resume.actions.length <= 900 && resume.actions.every(isCompletePostgameAction)));
 }
 
 function validChapterOneReplay(value: unknown): value is CompleteChapterOneReplay | null {
@@ -287,6 +298,7 @@ export function validateCompleteSaveDetailed(value: unknown, allowRevisionMismat
   const preChapterThreeKeys = keys.filter((key) => key !== "chapterThreeReplay");
   const preChapterTwo = !("chapterTwoReplay" in save) && !("chapterThreeReplay" in save) && exactKeys(save, preChapterTwoKeys);
   const preChapterThree = "chapterTwoReplay" in save && !("chapterThreeReplay" in save) && exactKeys(save, preChapterThreeKeys);
+  const legacyPostgame = save.postgameResume !== null && typeof save.postgameResume === "object" && !Array.isArray(save.postgameResume) && !("actions" in save.postgameResume);
   if ((!exactKeys(save, keys) && !preChapterTwo && !preChapterThree) || save.schemaVersion !== 3 || save.gameVersion !== "3.0.0" || typeof save.contentRevisionHash !== "string") return { state: null, reason: "INVALID_SHAPE" };
   const mismatch = save.contentRevisionHash !== COMPLETE_CONTENT_GRAPH_REVISION;
   if (mismatch && !allowRevisionMismatch) return { state: null, reason: "INVALID_SHAPE" };
@@ -310,9 +322,12 @@ export function validateCompleteSaveDetailed(value: unknown, allowRevisionMismat
   if (!exactKeys(validation, ["algorithm", "checksum"]) || validation.algorithm !== "fnv1a32" || typeof validation.checksum !== "string") return { state: null, reason: "INVALID_SHAPE" };
   const { validation: omitted, ...payload } = save as unknown as CompleteSaveState;
   if (omitted.checksum !== payloadChecksum(payload)) return { state: null, reason: "CHECKSUM_MISMATCH" };
-  if (preChapterTwo || preChapterThree) {
+  if (preChapterTwo || preChapterThree || legacyPostgame) {
     const { validation: _validation, ...legacyPayload } = save;
-    return { state: withCompleteSaveChecksum({ ...legacyPayload, chapterTwoReplay: preChapterTwo ? null : save.chapterTwoReplay, chapterThreeReplay: null } as Omit<CompleteSaveState, "validation">), reason: null };
+    const postgameResume = legacyPostgame && save.postgameResume && typeof save.postgameResume === "object"
+      ? { ...(save.postgameResume as unknown as Record<string, unknown>), initialHeroId: save.selectedHeroId, band: "whole-forest" as const, phase: "mode-intro", actionCount: 0, actions: [] }
+      : save.postgameResume;
+    return { state: withCompleteSaveChecksum({ ...legacyPayload, postgameResume, chapterTwoReplay: preChapterTwo ? null : save.chapterTwoReplay, chapterThreeReplay: preChapterTwo || preChapterThree ? null : save.chapterThreeReplay } as Omit<CompleteSaveState, "validation">), reason: null };
   }
   return { state: save as unknown as CompleteSaveState, reason: null };
 }
