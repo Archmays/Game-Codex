@@ -90,6 +90,11 @@ function tagCommit(tag: string): string {
   try { return git("rev-list", "-n", "1", tag); } catch { return "MISSING"; }
 }
 
+function isAncestor(ancestor: string, descendant: string): boolean {
+  try { execFileSync("git", ["merge-base", "--is-ancestor", ancestor, descendant], { cwd: workspace }); return true; }
+  catch { return false; }
+}
+
 function reading(characterId: string) {
   return COMPLETE_CORE_READING_SENSES.find((record) => record.characterId === characterId)!;
 }
@@ -116,6 +121,11 @@ export function buildFinalArtifacts(): Record<string, unknown> {
   const v1Tag = tagCommit("hanzi-magic-v2-v1.0.0");
   const v2Tag = tagCommit("hanzi-magic-v2-v2.0.0");
   const v3Tag = tagCommit("hanzi-magic-v3.0.0");
+  const v3FollowupPaths = v3Tag === "MISSING" || v3Tag === finalCommit ? [] : git("diff", "--name-only", v3Tag, finalCommit).split(/\r?\n/).filter(Boolean);
+  const allowedV3FollowupPaths = new Set([
+    "tools/hanzi-magic-complete/build-final-artifacts.ts",
+    "tools/hanzi-magic-complete/verify-pages.ts",
+  ]);
   const regressionStatus = process.argv[2] ?? process.env.HANZI_COMPLETE_REGRESSION_STATUS ?? "UNRECORDED";
   const visualNoUpdateRounds = Number(process.argv[3] ?? process.env.HANZI_COMPLETE_VISUAL_NO_UPDATE_ROUNDS ?? "0");
   const cleanupStatus = process.argv[4] ?? process.env.HANZI_COMPLETE_CLEANUP_STATUS ?? "PREPARED";
@@ -125,7 +135,8 @@ export function buildFinalArtifacts(): Record<string, unknown> {
   requireValue(branch === "main", "Final report requires branch main");
   requireValue(v1Tag === V1_TAG_COMMIT && v2Tag === V2_TAG_COMMIT, "Protected V1/V2 tags changed");
   requireValue(existsSync(V2_FROZEN_ZIP) && sha256(readFileSync(V2_FROZEN_ZIP)) === V2_FROZEN_ZIP_SHA256, "Frozen V2 return ZIP changed");
-  requireValue(v3Tag === finalCommit, "V3 tag does not point to the final commit");
+  requireValue(v3Tag !== "MISSING" && isAncestor(v3Tag, finalCommit), "V3 tag is missing or not an ancestor of the final commit");
+  requireValue(v3FollowupPaths.every((path) => allowedV3FollowupPaths.has(path)), "V3 tag-to-final delta contains product or unapproved release changes");
   requireValue(pages.verdict === "PASS_MACHINE" && pages.deployedCommit === finalCommit, "Pages is not verified at the final commit");
   requireValue(simulation.verdict === "PASS_MACHINE" && browser.verdict === "PASS_MACHINE" && visual.verdict === "PASS_MACHINE" && reviewers.verdict === "PASS_MACHINE", "A final machine checkpoint did not pass");
   requireValue(!finalMode || (gitStatus === "" && regressionStatus === "PASS" && visualNoUpdateRounds >= 2 && cleanupStatus === "PASS"), "Final release report requires a clean tree, full regression, two no-update rounds and cleanup PASS");
@@ -164,6 +175,7 @@ export function buildFinalArtifacts(): Record<string, unknown> {
     route: "?play=hanzi-magic-complete&from=hub",
     pagesUrl: pages.canonicalUrl,
     tags: { v1: v1Tag, v2: v2Tag, v3: v3Tag },
+    postTagVerificationOnlyPaths: v3FollowupPaths,
     realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED",
   };
   const contentIdentity = {

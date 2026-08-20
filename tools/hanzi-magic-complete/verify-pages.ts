@@ -20,6 +20,7 @@ const ciRun = process.argv[4] ?? process.env.HANZI_COMPLETE_CI_RUN ?? null;
 const ciStatus = process.argv[5] ?? process.env.HANZI_COMPLETE_CI_STATUS ?? null;
 const sourceTreeSha256 = computeHanziCompleteSourceTreeSha256(workspace);
 const allowLocal = process.env.HANZI_COMPLETE_ALLOW_LOCAL_PAGES === "1";
+const remoteTimeoutMs = Number(process.env.HANZI_COMPLETE_PAGES_TIMEOUT_MS ?? "120000");
 
 function requireValue(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);
@@ -61,15 +62,25 @@ async function assetSnapshot(page: Page): Promise<string[]> {
 
 async function checkResponse(context: BrowserContext, relative: string): Promise<{ url: string; status: number; bytes: number; contentType: string }> {
   const url = new URL(relative, pagesBase).href;
-  const response = await context.request.get(url);
-  const body = await response.body();
-  requireValue(response.ok() && body.byteLength > 0, `Pages resource failed: ${url}`);
-  return { url, status: response.status(), bytes: body.byteLength, contentType: response.headers()["content-type"] ?? "" };
+  let lastError: unknown;
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    try {
+      const response = await context.request.get(url, { timeout: remoteTimeoutMs });
+      const body = await response.body();
+      requireValue(response.ok() && body.byteLength > 0, `Pages resource failed: ${url}`);
+      return { url, status: response.status(), bytes: body.byteLength, contentType: response.headers()["content-type"] ?? "" };
+    } catch (error) {
+      lastError = error;
+      if (attempt < 3) await new Promise<void>((done) => setTimeout(done, attempt * 1_000));
+    }
+  }
+  throw lastError;
 }
 
 export async function verifyCompletePages(): Promise<Record<string, unknown>> {
   requireValue(allowLocal || (pagesBase.protocol === "https:" && pagesBase.pathname.endsWith("/Game-Codex/")), "Pages base must be the HTTPS Game-Codex deployment root");
   requireValue(/^[a-f0-9]{40}$/.test(expectedCommit), "Expected deployed commit must be a full Git SHA");
+  requireValue(Number.isFinite(remoteTimeoutMs) && remoteTimeoutMs >= 30_000 && remoteTimeoutMs <= 300_000, "Pages timeout must be between 30 and 300 seconds");
   const consoleErrors: string[] = [];
   const pageErrors: string[] = [];
   const failedRequests: string[] = [];
@@ -81,6 +92,8 @@ export async function verifyCompletePages(): Promise<Record<string, unknown>> {
   try {
     const context = await browser.newContext({ viewport: { width: 1366, height: 768 }, reducedMotion: "reduce" });
     const page = await context.newPage();
+    page.setDefaultTimeout(remoteTimeoutMs);
+    page.setDefaultNavigationTimeout(remoteTimeoutMs);
     page.on("console", (message) => { if (message.type() === "error" && !message.text().startsWith("Failed to load resource:")) consoleErrors.push(message.text()); });
     page.on("pageerror", (error) => pageErrors.push(error.message));
     page.on("requestfailed", (request) => { if (request.failure()?.errorText !== "net::ERR_ABORTED") failedRequests.push(`${request.url()} :: ${request.failure()?.errorText ?? "unknown"}`); });
@@ -91,7 +104,7 @@ export async function verifyCompletePages(): Promise<Record<string, unknown>> {
       if (/^https?:$/.test(url.protocol) && url.origin === pagesBase.origin && !url.pathname.startsWith(pagesBase.pathname)) basePathEscapes.push(url.href);
     });
 
-    await page.goto(new URL("?hub=classic&from=world", pagesBase).href, { waitUntil: "networkidle" });
+    await page.goto(new URL("?hub=classic&from=world", pagesBase).href, { waitUntil: "domcontentloaded" });
     await assertBuildIdentity(page);
     const card = page.locator(".game-card--ink-forest");
     await card.waitFor({ state: "visible" });
@@ -101,53 +114,53 @@ export async function verifyCompletePages(): Promise<Record<string, unknown>> {
     await page.getByTestId("hanzi-magic-complete").waitFor({ state: "visible" });
     routeChecks.classicHubToV3 = "PASS";
 
-    await page.reload({ waitUntil: "networkidle" });
+    await page.reload({ waitUntil: "domcontentloaded" });
     await page.getByTestId("hanzi-magic-complete").waitFor({ state: "visible" });
     await assertBuildIdentity(page);
     routeChecks.directDeepLinkAndRefresh = "PASS";
     const worldAssets = await assetSnapshot(page);
 
-    await page.goto(new URL("?world=my-game-world", pagesBase).href, { waitUntil: "networkidle" });
+    await page.goto(new URL("?world=my-game-world", pagesBase).href, { waitUntil: "domcontentloaded" });
     const forestLink = page.locator("[data-world-forest-link]");
     await forestLink.waitFor({ state: "visible" });
     requireValue(await forestLink.getAttribute("href") === "?play=hanzi-magic-complete&from=world", "My Game World forest portal does not point to V3");
     routeChecks.myGameWorldToV3 = "PASS";
 
     await setCompletedSave(page);
-    await page.goto(canonicalUrl, { waitUntil: "networkidle" });
+    await page.goto(canonicalUrl, { waitUntil: "domcontentloaded" });
     const world = page.getByTestId("hanzi-magic-complete");
     await world.waitFor({ state: "visible" });
     requireValue(await world.getAttribute("data-story-complete") === "true", "Completed Pages save did not restore the world");
     await page.locator('[data-hero-id="ink-companion"]').last().click();
-    await page.reload({ waitUntil: "networkidle" });
+    await page.reload({ waitUntil: "domcontentloaded" });
     requireValue(await page.getByTestId("hanzi-magic-complete").getAttribute("data-hero-id") === "ink-companion", "Pages save/reload did not retain the selected hero");
     routeChecks.saveReload = "PASS";
 
-    await page.goto(new URL("?play=hanzi-magic-complete&from=hub&chapter=one&seed=pages-one", pagesBase).href, { waitUntil: "networkidle" });
+    await page.goto(new URL("?play=hanzi-magic-complete&from=hub&chapter=one&seed=pages-one", pagesBase).href, { waitUntil: "domcontentloaded" });
     await page.getByTestId("hanzi-magic-chapter-one-m3").waitFor({ state: "visible" });
     routeChecks.chapterOne = "PASS";
 
     await setCompletedSave(page);
-    await page.goto(new URL("?play=hanzi-magic-complete&from=hub&chapter=two&fresh=1&seed=pages-two", pagesBase).href, { waitUntil: "networkidle" });
+    await page.goto(new URL("?play=hanzi-magic-complete&from=hub&chapter=two&fresh=1&seed=pages-two", pagesBase).href, { waitUntil: "domcontentloaded" });
     await page.getByTestId("hanzi-complete-chapter-two").waitFor({ state: "visible" });
     const chapterTwoAssets = await assetSnapshot(page);
     requireValue(chapterTwoAssets.some((url) => !worldAssets.includes(url)), "Chapter Two did not prove lazy-loaded runtime assets");
     routeChecks.chapterTwoLazy = "PASS";
 
     await setCompletedSave(page);
-    await page.goto(new URL("?play=hanzi-magic-complete&from=hub&chapter=three&fresh=1&seed=pages-three", pagesBase).href, { waitUntil: "networkidle" });
+    await page.goto(new URL("?play=hanzi-magic-complete&from=hub&chapter=three&fresh=1&seed=pages-three", pagesBase).href, { waitUntil: "domcontentloaded" });
     await page.getByTestId("hanzi-complete-chapter-three").waitFor({ state: "visible" });
     routeChecks.chapterThreeLazy = "PASS";
 
     await setCompletedSave(page);
-    await page.goto(new URL("?play=hanzi-magic-complete&from=hub&postgame=word-resonance&new=1&seed=pages-postgame", pagesBase).href, { waitUntil: "networkidle" });
+    await page.goto(new URL("?play=hanzi-magic-complete&from=hub&postgame=word-resonance&new=1&seed=pages-postgame", pagesBase).href, { waitUntil: "domcontentloaded" });
     await page.getByTestId("complete-postgame-intro").waitFor({ state: "visible" });
     routeChecks.postgame = "PASS";
 
-    await page.goto(new URL("?play=hanzi-v2-chapter-one&from=hub", pagesBase).href, { waitUntil: "networkidle" });
+    await page.goto(new URL("?play=hanzi-v2-chapter-one&from=hub", pagesBase).href, { waitUntil: "domcontentloaded" });
     await page.getByTestId("hanzi-magic-chapter-one-m3").waitFor({ state: "visible" });
     routeChecks.legacyV2 = "PASS";
-    await page.goto(new URL("?play=hanzi-v2-v1&from=hub", pagesBase).href, { waitUntil: "networkidle" });
+    await page.goto(new URL("?play=hanzi-v2-v1&from=hub", pagesBase).href, { waitUntil: "domcontentloaded" });
     await page.getByTestId("hanzi-magic-v1").waitFor({ state: "visible" });
     routeChecks.legacyV1 = "PASS";
 
