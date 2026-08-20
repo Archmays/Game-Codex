@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "routes": {
+    "registry": "src/app-route.ts",
+    "dispatcher": "src/main.ts",
+    "precedence": [
+      "hanzi-magic-complete",
+      "hanzi-v2-chapter-one",
+      "hanzi-v2-v1",
+      "classic-hub",
+      "world"
+    ],
+    "legacyRoutes": [
+      "?play=hanzi-v2-chapter-one",
+      "?play=hanzi-v2-v1"
+    ],
+    "targetRoute": "?play=hanzi-magic-complete&from=hub"
+  },
+  "chapterOne": {
+    "manifest": "games/hanzi-radical-battle/v2/chapter-one/characters.ts",
+    "reducer": "games/hanzi-radical-battle/v2/chapter-one/m3-machine.ts",
+    "ui": "games/hanzi-radical-battle/v2/chapter-one/m3-app.ts",
+    "save": "games/hanzi-radical-battle/v2/chapter-one/m4-save.ts",
+    "saveKey": "family-games/hanzi-magic-v2/chapter-one/save-v5"
+  },
+  "wheel": {
+    "raw": "games/hanzi-radical-battle/v2/wheel-workshop/library/legacy-wheel-source.ts",
+    "freeze": "games/hanzi-radical-battle/v2/wheel-workshop/library/legacy-wheel-source-freeze.json",
+    "audit": "games/hanzi-radical-battle/v2/wheel-workshop/library/canonical-wheel-library.ts",
+    "playable": "games/hanzi-radical-battle/v2/wheel-workshop/library/playable-wheel-manifest.ts",
+    "save": "games/hanzi-radical-battle/v2/wheel-workshop/save/wheel-save.ts",
+    "saveKey": "family-games/hanzi-magic-v2/wheel-workshop/v1"
+  },
+  "v1": {
+    "entry": "games/hanzi-radical-battle/v2/v1/index.ts",
+    "save": "games/hanzi-radical-battle/v2/v1/save.ts"
+  },
+  "assets": {
+    "manifest": "games/hanzi-radical-battle/v2/chapter-one/m5-assets.ts",
+    "runtimeRoot": "public/assets/hanzi-radical-battle/v2"
+  },
+  "visualBaselines": [
+    "tests/hanzi-v2/baselines/chapter-one",
+    "tests/hanzi-v2/baselines/v1"
+  ],
+  "launcher": "tools/hanzi-v2-chapter-one",
+  "pagesVerifier": "tools/hanzi-v2-chapter-one/verify-pages.ts",
+  "packageScripts": [
+    "test:hanzi-v2",
+    "simulate:hanzi-v2",
+    "simulate:hanzi-v2:wheel",
+    "test:e2e:hanzi-v2",
+    "test:e2e:hanzi-v2:v1",
+    "test:visual:hanzi-v2",
+    "test:geometry:hanzi-v2",
+    "test:visual:hanzi-v2:v1",
+    "test:launcher:hanzi-v2",
+    "build"
+  ],
+  "retention": {
+    "protected": [
+      "artifacts/hanzi-radical-battle-v2/v2-chapter-one",
+      "games/hanzi-radical-battle/v2/wheel-workshop/library/legacy-wheel-source-freeze.json",
+      "handoffs/GAME_CODEX_HANZI_WHEEL_TO_V2_RETURN_TO_CHATGPT.zip"
+    ],
+    "transient": [
+      "dist",
+      "test-results",
+      "playwright-report",
+      "tmp"
+    ]
+  }
+}
