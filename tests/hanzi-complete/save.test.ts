@@ -63,7 +63,7 @@ describe("complete-edition V3 save", () => {
   test("normalizes an exact pre-Chapter-Two V3 save without discarding progress", () => {
     const storage = new MemoryStorage();
     const current = updateCompleteSave(createFreshCompleteSave(), { selectedHeroId: "forest-speaker", discoveredCharacterIds: ["char-u660e"] });
-    const { chapterTwoReplay: _chapterTwoReplay, validation: _validation, ...legacyPayload } = current;
+    const { chapterTwoReplay: _chapterTwoReplay, chapterThreeReplay: _chapterThreeReplay, validation: _validation, ...legacyPayload } = current;
     const legacy = { ...legacyPayload, validation: { algorithm: "fnv1a32", checksum: preChapterTwoChecksum(legacyPayload) } };
     storage.setItem(HANZI_MAGIC_COMPLETE_SAVE_KEY, JSON.stringify(legacy));
 
@@ -72,7 +72,23 @@ describe("complete-edition V3 save", () => {
     expect(read.state.selectedHeroId).toBe("forest-speaker");
     expect(read.state.discoveredCharacterIds).toEqual(["char-u660e"]);
     expect(read.state.chapterTwoReplay).toBeNull();
+    expect(read.state.chapterThreeReplay).toBeNull();
     expect(JSON.parse(storage.getItem(HANZI_MAGIC_COMPLETE_SAVE_KEY)!).chapterTwoReplay).toBeNull();
+  });
+
+  test("normalizes an exact pre-Chapter-Three V3 save and preserves its Chapter Two replay field", () => {
+    const storage = new MemoryStorage();
+    const current = updateCompleteSave(createFreshCompleteSave(), { selectedHeroId: "ink-companion" });
+    const { chapterThreeReplay: _chapterThreeReplay, validation: _validation, ...legacyPayload } = current;
+    const legacy = { ...legacyPayload, validation: { algorithm: "fnv1a32", checksum: preChapterTwoChecksum(legacyPayload) } };
+    storage.setItem(HANZI_MAGIC_COMPLETE_SAVE_KEY, JSON.stringify(legacy));
+
+    const read = readCompleteSave(storage);
+    expect(read).toMatchObject({ source: "v3", recovered: false, writable: true });
+    expect(read.state.selectedHeroId).toBe("ink-companion");
+    expect(read.state.chapterTwoReplay).toBeNull();
+    expect(read.state.chapterThreeReplay).toBeNull();
+    expect(JSON.parse(storage.getItem(HANZI_MAGIC_COMPLETE_SAVE_KEY)!).chapterThreeReplay).toBeNull();
   });
 
   test("round-trips a bounded anonymous save and creates a valid backup", () => {

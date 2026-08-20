@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentGraphRevision": "fnv1a:4f5caecb",
+  "contentGraphRevision": "fnv1a:a0a066d9",
   "sourceLedger": {
     "path": "M2_SELECTED_SOURCE_LEDGER.json",
     "sha256": "58816fdeec70ed863de7de8f3d27245310b4a34c46ef9105339736937f33656e"
@@ -5060,7 +5060,7 @@
       "glyph": "歌",
       "unicodeCodePoint": "U+6B4C",
       "chapterId": "chapter-three",
-      "band": "story-required",
+      "band": "optional",
       "structure": "left-right",
       "components": [
         {
@@ -5102,7 +5102,7 @@
       "provenance": [
         "new-candidate:m0"
       ],
-      "revisionHash": "fnv1a:2b767397",
+      "revisionHash": "fnv1a:f148dd4b",
       "hand": [
         {
           "id": "char-u6b4c-target-1",
@@ -5146,7 +5146,7 @@
       "glyph": "响",
       "unicodeCodePoint": "U+54CD",
       "chapterId": "chapter-three",
-      "band": "story-required",
+      "band": "optional",
       "structure": "left-right",
       "components": [
         {
@@ -5188,7 +5188,7 @@
       "provenance": [
         "new-candidate:m0"
       ],
-      "revisionHash": "fnv1a:fbf7ecc9",
+      "revisionHash": "fnv1a:2117ffb7",
       "hand": [
         {
           "id": "char-u54cd-target-1",
@@ -6018,7 +6018,7 @@
       "glyph": "景",
       "unicodeCodePoint": "U+666F",
       "chapterId": "chapter-three",
-      "band": "optional",
+      "band": "story-required",
       "structure": "top-bottom",
       "components": [
         {
@@ -6060,7 +6060,7 @@
       "provenance": [
         "new-candidate:m0"
       ],
-      "revisionHash": "fnv1a:4b749026",
+      "revisionHash": "fnv1a:697d6925",
       "hand": [
         {
           "id": "char-u666f-target-1",
@@ -6104,7 +6104,7 @@
       "glyph": "晨",
       "unicodeCodePoint": "U+6668",
       "chapterId": "chapter-three",
-      "band": "optional",
+      "band": "story-required",
       "structure": "top-bottom",
       "components": [
         {
@@ -6146,7 +6146,7 @@
       "provenance": [
         "new-candidate:m0"
       ],
-      "revisionHash": "fnv1a:2e324ea7",
+      "revisionHash": "fnv1a:1bf4e174",
       "hand": [
         {
           "id": "char-u6668-target-1",

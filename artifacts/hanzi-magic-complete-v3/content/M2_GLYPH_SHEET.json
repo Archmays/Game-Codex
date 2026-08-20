@@ -883,7 +883,7 @@
       "pinyin": "gē",
       "fixedPhrase": "唱歌",
       "chapterId": "chapter-three",
-      "band": "story-required",
+      "band": "optional",
       "structure": "left-right",
       "componentGlyphs": [
         "哥",
@@ -898,7 +898,7 @@
       "pinyin": "xiǎng",
       "fixedPhrase": "声响",
       "chapterId": "chapter-three",
-      "band": "story-required",
+      "band": "optional",
       "structure": "left-right",
       "componentGlyphs": [
         "口",
@@ -1048,7 +1048,7 @@
       "pinyin": "jǐng",
       "fixedPhrase": "风景",
       "chapterId": "chapter-three",
-      "band": "optional",
+      "band": "story-required",
       "structure": "top-bottom",
       "componentGlyphs": [
         "日",
@@ -1063,7 +1063,7 @@
       "pinyin": "chén",
       "fixedPhrase": "清晨",
       "chapterId": "chapter-three",
-      "band": "optional",
+      "band": "story-required",
       "structure": "top-bottom",
       "componentGlyphs": [
         "日",
