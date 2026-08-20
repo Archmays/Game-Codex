@@ -70,7 +70,14 @@ finally {
 
 $zip = Get-Item -LiteralPath $zipPath
 if ($zip.Length -ge 50MB) { throw "Return ZIP exceeds the 50 MiB target: $($zip.Length) bytes" }
-$hash = (Get-FileHash -LiteralPath $zipPath -Algorithm SHA256).Hash.ToUpperInvariant()
+$stream = [IO.File]::OpenRead($zipPath)
+try {
+  $algorithm = [Security.Cryptography.SHA256]::Create()
+  try { $hashBytes = $algorithm.ComputeHash($stream) }
+  finally { $algorithm.Dispose() }
+}
+finally { $stream.Dispose() }
+$hash = ([BitConverter]::ToString($hashBytes)).Replace("-", "").ToUpperInvariant()
 [IO.File]::WriteAllText($shaPath, "$hash *$zipName`n", [Text.UTF8Encoding]::new($false))
 
 Add-Type -AssemblyName System.IO.Compression.FileSystem

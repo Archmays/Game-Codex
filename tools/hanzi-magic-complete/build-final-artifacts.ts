@@ -124,6 +124,7 @@ export function buildFinalArtifacts(): Record<string, unknown> {
   const v3FollowupPaths = v3Tag === "MISSING" || v3Tag === finalCommit ? [] : git("diff", "--name-only", v3Tag, finalCommit).split(/\r?\n/).filter(Boolean);
   const allowedV3FollowupPaths = new Set([
     "tools/hanzi-magic-complete/build-final-artifacts.ts",
+    "tools/hanzi-magic-complete/package-complete.ps1",
     "tools/hanzi-magic-complete/verify-pages.ts",
   ]);
   const regressionStatus = process.argv[2] ?? process.env.HANZI_COMPLETE_REGRESSION_STATUS ?? "UNRECORDED";
