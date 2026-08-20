@@ -36,7 +36,9 @@
     "validate:hanzi-v2": "pnpm run audit:hanzi-v2:wheel && pnpm run test:hanzi-v2 && pnpm exec tsc --noEmit && pnpm run simulate:hanzi-v2 && pnpm run simulate:hanzi-v2:wheel",
     "verify:pages:hanzi-v2": "tsx tools/hanzi-v2-chapter-one/verify-pages.ts",
     "test:launcher:hanzi-v2": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File tools/hanzi-v2-chapter-one/test-launcher-lifecycle.ps1",
-    "source-hash:hanzi-v2": "tsx tools/hanzi-v2-chapter-one/source-identity.ts"
+    "source-hash:hanzi-v2": "tsx tools/hanzi-v2-chapter-one/source-identity.ts",
+    "test:hanzi-complete:slices": "vitest run tests/hanzi-complete/vertical-slices.test.ts --no-file-parallelism",
+    "test:e2e:hanzi-complete:slices": "playwright test tests/e2e/hanzi-complete/vertical-slices.spec.ts --config playwright.hanzi-complete.config.ts"
   },
   "dependencies": {
     "phaser": "^3.90.0"

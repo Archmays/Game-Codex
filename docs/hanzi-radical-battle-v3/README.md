@@ -18,6 +18,13 @@ V3.0.0 在当前 V2 第一章和字轮工坊之上新增完整篇章，不移动
 
 纯规则层拥有内容、手牌、家族、词序、进度与迁移真值。Vitest 验证 schema、唯一解、solvers、存档和 legacy；确定性模拟验证可达性与覆盖；Playwright 验证真实 route、输入、响应式、无障碍、网络、视觉和生命周期。最终机器结论不代表真人儿童乐趣或学习效果。
 
+## 纵向切片入口
+
+- `?play=hanzi-magic-complete&from=hub&slice=family`：先完成“情、请”，再从“清、晴、情、请”中连接准确的青字族关系，经过已见行为的守护兽阶段后修复部件根心。
+- `?play=hanzi-magic-complete&from=hub&slice=word`：逐字完成“花香、眼睛、安静”，按固定读音和真实字序触发词语魔法；反序温和退回且不丢进度，最后修复词语字心。
+
+两个入口共用纯 reducer、五牌唯一解、V3 本地 action replay 存档、pointer/keyboard/touch 输入、点击替代拖动、reduced motion 和 V2 音频控制器。它们是批量内容生产前的工程门禁，不是完整 V3 已发布声明。
+
 ## 非目标
 
 V3.0.0 不加入后端、账号、云端儿童资料、排行榜、FOMO、惩罚性进度损失或强制书写。Hanzi Writer/笔顺数据只保留未来 `StrokeDataProvider` 接口边界，不阻塞本次发布。

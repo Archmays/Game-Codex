@@ -10,6 +10,7 @@
 - [CNS11643 全字库](https://www.cns11643.gov.tw/)：仅在组件字形或 IDS 变体有争议时裁决精确字形，不作为简体课程分级来源。
 - [Make Me a Hanzi](https://github.com/skishore/makemeahanzi/tree/bddc96d41bef78427ed0e034e9f7e31d71fd1b92)：固定 commit `bddc96d41bef78427ed0e034e9f7e31d71fd1b92`；`dictionary.txt` 仅作 IDS/部件交叉核对。其 dictionary 与 graphics 许可证边界保持分离，不复制 graphics，也不增加运行时依赖。
 - 当前仓库 `formula-audit.ts`、Chapter One manifest、wheel raw/audit/playable 与冻结 hashes 仍是产品真源。历史错误只在派生审核层纠正或隔离。
+- [教育部《国语辞典简编本》“安静”](https://dict.concised.moe.edu.tw/dictView.jsp?ID=39717&la=0&powerMode=0) 与 [《重编国语辞典修订本》“眼睛”](https://dict.revised.moe.edu.tw/dictView.jsp?ID=155724&la=0&powerMode=0)：为 Slice B 固定 `ān jìng`、`yǎn jīng` 的字序、读音和普通词义；“花香”由简编本“芳香”词条所载常用语境与仓库内既有熟悉词共同交叉核对。反序只在当前普通词语语境拒绝，不声称抹去专名等其他语境。
 
 ## 学习游戏机制
 

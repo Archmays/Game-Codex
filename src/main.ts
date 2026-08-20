@@ -28,6 +28,18 @@ window.addEventListener("load", async () => {
   const from = search.get("from");
   activatePageMode(pageModeForAppRoute(route.kind));
 
+  if (route.kind === "play" && play === "hanzi-magic-complete") {
+    setBrowserIdentity("汉字魔法战 · 字光归林", WORLD_THEME_COLOR);
+    addPageIdentity("hanzi-magic-page");
+    const { mountHanziMagicCompleteSlice } = await import("../games/hanzi-radical-battle/complete/app/slice-app");
+    mountHanziMagicCompleteSlice(root, {
+      sliceId: search.get("slice") === "word" ? "word" : "family",
+      fresh: search.get("fresh") === "1",
+      returnHref: from === "hub" ? "?hub=classic&from=world" : "?world=my-game-world",
+    });
+    return;
+  }
+
   if (route.kind === "play" && play === "hanzi-v2-chapter-one") {
     setBrowserIdentity("汉字魔法战 · 第一章", WORLD_THEME_COLOR);
     addPageIdentity("hanzi-magic-page");
