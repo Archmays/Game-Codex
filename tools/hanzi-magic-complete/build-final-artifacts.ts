@@ -153,10 +153,15 @@ export function buildFinalArtifacts(): Record<string, unknown> {
   const behaviors = [...M5_BEHAVIORS, ...CHAPTER_TWO_BEHAVIORS, ...CHAPTER_THREE_BEHAVIORS];
   const bosses = [...M5_BOSSES, ...CHAPTER_TWO_BOSSES, ...CHAPTER_THREE_BOSSES];
   const repairs = [...M4_REPAIR_OBJECTS, ...CHAPTER_TWO_REPAIRS, ...CHAPTER_THREE_REPAIRS];
-  const assetFiles = filesUnder(resolve(workspace, "public/assets/hanzi-radical-battle"));
-  const allAssetBytes = assetFiles.reduce((sum, path) => sum + statSync(path).size, 0);
+  const legacyRuntimeAssetFiles = filesUnder(resolve(workspace, "public/assets/hanzi-radical-battle/v2"));
   const newRuntimeAssetFiles = filesUnder(resolve(workspace, "public/assets/hanzi-radical-battle/complete"));
+  const assetFiles = [...legacyRuntimeAssetFiles, ...newRuntimeAssetFiles];
+  const allAssetBytes = assetFiles.reduce((sum, path) => sum + statSync(path).size, 0);
   const newRuntimeAssetBytes = newRuntimeAssetFiles.reduce((sum, path) => sum + statSync(path).size, 0);
+  const runtimeAssetHashes = assetFiles.map((path) => ({ path, sha256: sha256(readFileSync(path)) }));
+  const duplicateRuntimeHashes = [...new Set(runtimeAssetHashes.map((record) => record.sha256))]
+    .map((hash) => runtimeAssetHashes.filter((record) => record.sha256 === hash))
+    .filter((records) => records.length > 1);
   const transientPaths = ["dist", "test-results", "playwright-report", "tmp"].map((path) => ({ path, exists: existsSync(resolve(workspace, path)) }));
   if (cleanupStatus === "PASS") requireValue(transientPaths.every((entry) => !entry.exists), "Cleanup PASS cannot retain transient output directories");
 
@@ -220,13 +225,17 @@ export function buildFinalArtifacts(): Record<string, unknown> {
     required: { v1: "PASS", v2: "PASS", wheel: "PASS", v2AndWheelMerge: "PASS", corruptBackup: "PASS", futureReadOnly: "PASS", contentRevision: "PASS" },
   };
   const assetBudget = {
-    verdict: allAssetBytes < 64 * 1024 * 1024 && newRuntimeAssetBytes < 32 * 1024 * 1024 ? "PASS_MACHINE" : "FAIL",
+    verdict: allAssetBytes <= 64 * 1024 * 1024 && newRuntimeAssetBytes <= 32 * 1024 * 1024 && duplicateRuntimeHashes.length === 0 ? "PASS_MACHINE" : "FAIL",
+    inventoryScope: ["public/assets/hanzi-radical-battle/v2", "public/assets/hanzi-radical-battle/complete"],
+    excludedFrozenSourceLibrary: "public/assets/hanzi-radical-battle/visuals",
     newRuntimeBinaryFiles: newRuntimeAssetFiles.length,
     newRuntimeBinaryBytes: newRuntimeAssetBytes,
     newRuntimeTargetBytes: 32 * 1024 * 1024,
+    newRuntimeHardMaximumBytes: 40 * 1024 * 1024,
     allHanziRuntimeFiles: assetFiles.length,
     allHanziRuntimeBytes: allAssetBytes,
     allHanziRuntimeTargetBytes: 64 * 1024 * 1024,
+    duplicateRuntimeHashes,
   };
   requireValue(assetBudget.verdict === "PASS_MACHINE", "Runtime asset budget exceeded");
   const performanceNetworkPrivacy = {
