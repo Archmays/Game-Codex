@@ -71,9 +71,10 @@ async function solvePostgameBuild(page: Page, mode: InputMode, rejectWrong = fal
     }
   }
   for (const component of target.components) {
-    const card = page.locator("[data-card-id]:not([disabled])").filter({ hasText: component.glyph }).first();
-    await activate(page, card, mode);
-    await activate(page, page.locator(`[data-slot-id="${component.slotId}"]`), mode);
+    const slot = page.locator(`[data-slot-id="${component.slotId}"]`);
+    if (await slot.evaluate((element) => element.classList.contains("is-filled"))) continue;
+    await activate(page, page.locator(`[data-card-id$="-${component.order}"]:not([disabled])`), mode);
+    await activate(page, slot, mode);
   }
 }
 

@@ -18,12 +18,23 @@ V3.0.0 在当前 V2 第一章和字轮工坊之上新增完整篇章，不移动
 
 纯规则层拥有内容、手牌、家族、词序、进度与迁移真值。Vitest 验证 schema、唯一解、solvers、存档和 legacy；确定性模拟验证可达性与覆盖；Playwright 验证真实 route、输入、响应式、无障碍、网络、视觉和生命周期。最终机器结论不代表真人儿童乐趣或学习效果。
 
-## 纵向切片入口
+## 完整篇入口
 
-- `?play=hanzi-magic-complete&from=hub&slice=family`：先完成“情、请”，再从“清、晴、情、请”中连接准确的青字族关系，经过已见行为的守护兽阶段后修复部件根心。
-- `?play=hanzi-magic-complete&from=hub&slice=word`：逐字完成“花香、眼睛、安静”，按固定读音和真实字序触发词语魔法；反序温和退回且不丢进度，最后修复词语字心。
+- `?play=hanzi-magic-complete&from=hub`：三章世界、尾声与通关后自由探索的正式入口。
+- `&chapter=one|two|three`：三个可恢复的故事章节；第二、三章按需加载。
+- `&view=spellbook|wheel|archive`：72 字魔法书、72 字字轮与不会重置进度的故事档案。
+- `&postgame=free-adventure|component-trails|word-resonance`：三条无排名、无收集门槛的通关后林路。
+- `&slice=family|word`：保留为纯规则与浏览器回归入口，不作为儿童主导航。
 
-两个入口共用纯 reducer、五牌唯一解、V3 本地 action replay 存档、pointer/keyboard/touch 输入、点击替代拖动、reduced motion 和 V2 音频控制器。它们是批量内容生产前的工程门禁，不是完整 V3 已发布声明。
+完整篇共用纯 reducer、唯一解求解器、V3 本地 action replay 存档、pointer/keyboard/touch 输入、点击替代拖动、reduced motion 和 V2 音频控制器。故事通关不要求 72/72 收集；V1、V2 与字轮旧存档按来源保留并迁移到独立 V3 存档。
+
+## 稳定验证命令
+
+- `pnpm run validate:hanzi-complete`：内容、规则、存档、200,000 场景模拟与四审查协调。
+- `pnpm run test:e2e:hanzi-complete`：功能浏览器套件与 36 条、19 档案验收矩阵。
+- `pnpm run test:visual:hanzi-complete`：83 个 V3 稳定视觉、ARIA 与几何状态的无更新校验。
+- `pnpm run verify:pages:hanzi-complete`：正式 Pages 路由、延迟资产、存档、legacy 与部署 commit 身份。
+- `pnpm run package:hanzi-complete`：从正式报告目录生成唯一回传 ZIP 与 SHA-256。
 
 ## 非目标
 

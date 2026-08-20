@@ -47,9 +47,15 @@
     "test:hanzi-complete:legacy": "vitest run tests/hanzi-complete/legacy.test.ts --no-file-parallelism",
     "test:hanzi-complete": "vitest run tests/hanzi-complete --no-file-parallelism",
     "test:e2e:hanzi-complete:content": "playwright test tests/e2e/hanzi-complete/content-graph.spec.ts --config playwright.hanzi-complete.config.ts",
-    "test:e2e:hanzi-complete": "playwright test --config playwright.hanzi-complete.config.ts",
+    "simulate:hanzi-complete": "tsx tools/hanzi-magic-complete/simulate-complete.ts",
+    "test:e2e:hanzi-complete": "playwright test --config playwright.hanzi-complete.config.ts && playwright test --config playwright.hanzi-complete.acceptance.config.ts && tsx tools/hanzi-magic-complete/build-browser-matrix.ts",
+    "test:visual:hanzi-complete": "playwright test --config playwright.hanzi-complete.visual.config.ts",
+    "test:geometry:hanzi-complete": "playwright test --config playwright.hanzi-complete.visual.config.ts",
+    "validate:hanzi-complete": "pnpm run audit:hanzi-complete:content && pnpm run test:hanzi-complete && pnpm run simulate:hanzi-complete && tsx tools/hanzi-magic-complete/review-complete.ts && pnpm exec tsc --noEmit",
+    "verify:pages:hanzi-complete": "tsx tools/hanzi-magic-complete/verify-pages.ts",
     "test:launcher:hanzi-complete": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File tools/hanzi-magic-complete/test-launcher-lifecycle.ps1",
-    "source-hash:hanzi-complete": "tsx tools/hanzi-magic-complete/source-identity.ts"
+    "source-hash:hanzi-complete": "tsx tools/hanzi-magic-complete/source-identity.ts",
+    "package:hanzi-complete": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File tools/hanzi-magic-complete/package-complete.ps1"
   },
   "dependencies": {
     "phaser": "^3.90.0"

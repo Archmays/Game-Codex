@@ -6,6 +6,8 @@ coverage/
 .cache/
 test-results/
 playwright-report/
+handoffs/
+artifacts/hanzi-magic-battle/v3-complete/report/
 .env
 .env.*
 *.log

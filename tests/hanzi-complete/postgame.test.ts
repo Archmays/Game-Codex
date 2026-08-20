@@ -106,6 +106,16 @@ describe("complete-edition postgame", () => {
     expect(offered).toEqual(new Set(COMPLETE_WORD_NODES.map((word) => word.id)));
   });
 
+  test.each(["whole-forest", "story-path", "optional-glow"] as const)("free-adventure %s completes six rounds while discoveries match the actual choices", (band) => {
+    for (let offerChoice = 0; offerChoice < 3; offerChoice += 1) {
+      const simulation = simulateCompletePostgame("free-adventure", `postgame-band-${band}-${offerChoice}`, "light-speaker", band, offerChoice);
+      expect(simulation.failureCodes).toEqual([]);
+      expect(simulation.finalRun.state.completedOfferIds).toHaveLength(6);
+      const selected = new Set(simulation.finalRun.state.completedOfferIds.map((offerId) => simulation.finalRun.plan.rounds.flatMap((round) => round.offers).find((offer) => offer.id === offerId)!.targetId));
+      expect(new Set(simulation.finalRun.state.discoveredCharacterIds)).toEqual(selected);
+    }
+  });
+
   test("master engine and V3 save resume the exact postgame replay and count completion once", () => {
     const initial = updateCompleteSave(createFreshCompleteSave(), {
       unlockedChapterIds: ["chapter-one", "chapter-two", "chapter-three"],

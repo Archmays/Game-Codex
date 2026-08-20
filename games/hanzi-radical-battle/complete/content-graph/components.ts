@@ -12,7 +12,7 @@ const VARIANT_GLYPHS = new Set(["氵", "扌", "龵", "⻊", "𧾷", "忄", "⺗"
 export function buildCompleteComponentNodes(characters: readonly CharacterNode[]): ComponentNode[] {
   const wholeGlyphs = new Set(characters.map((character) => character.glyph));
   const glyphs = [...new Set([...characters.flatMap((character) => character.components.map((component) => component.glyph)), ...COMPLETE_FAMILY_COMPONENT_GLYPHS])];
-  return glyphs.sort((left, right) => left.localeCompare(right, "zh-Hans-CN")).map((glyph) => ({
+  return glyphs.sort((left, right) => (left.codePointAt(0) ?? 0) - (right.codePointAt(0) ?? 0) || (left < right ? -1 : left > right ? 1 : 0)).map((glyph) => ({
     id: completeComponentId(glyph),
     glyph,
     label: COMPONENT_LABELS[glyph] ?? glyph,

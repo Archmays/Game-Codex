@@ -70,9 +70,9 @@ export const hanziRadicalBattleGame: GameDefinition = {
   subject: "识字",
   recommendedAge: "家庭儿童",
   learningGoal: "在左右、上下、全包围和半包围结构中辨认部件位置，并连接熟悉词与字义。",
-  status: "V2.0.0 · 第一章",
+  status: "墨迹森林完整篇",
   playLabel: "进入墨迹森林",
-  route: "?play=hanzi-v2-chapter-one&from=hub",
+  route: "?play=hanzi-magic-complete&from=hub",
   mount(context: MountGameContext): MountedGame {
     return mountHanziRadicalBattle(context);
   }

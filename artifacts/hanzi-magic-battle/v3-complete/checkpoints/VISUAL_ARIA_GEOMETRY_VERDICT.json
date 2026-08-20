@@ -1,0 +1,1035 @@
+{
+  "schemaVersion": 1,
+  "verdict": "PASS_MACHINE",
+  "stableStateMinimum": 72,
+  "stableStateCount": 83,
+  "ariaStateCount": 83,
+  "geometryStateCount": 83,
+  "screenshotBaselineCount": 83,
+  "categories": {
+    "world": 13,
+    "mode": 3,
+    "boss": 36,
+    "repair": 16,
+    "spellbook": 8,
+    "family": 2,
+    "word": 2,
+    "epilogue": 3
+  },
+  "worldLocations": {
+    "regular": [
+      "chapter-three:myriad-book-harbor",
+      "chapter-two:wood-voice-canopy",
+      "chapter-three:star-map-peak",
+      "chapter-two:door-shadow-corridor",
+      "chapter-one:echo-garden",
+      "chapter-one:glimmer-grove",
+      "chapter-three:home-lantern-town",
+      "chapter-two:spring-stone-valley",
+      "chapter-one:wind-trail"
+    ],
+    "cores": [
+      "chapter-two:component-root-core",
+      "chapter-one:ink-king-core",
+      "chapter-three:word-heart-core"
+    ]
+  },
+  "stateRecords": [
+    {
+      "id": "boss-book-harbor-guardian-stage-0",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "83d2b322f87a3403295f2ba0cdbb9cb28adbcf279f885dd5f5f1f569722f7a1a",
+      "visibleControlCount": 36,
+      "locationId": "chapter-three:myriad-book-harbor",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-book-harbor-guardian-stage-1",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "25c938f99c37d9d746c57a07967d5902721dbef645fc43828a51b02390eab817",
+      "visibleControlCount": 37,
+      "locationId": "chapter-three:myriad-book-harbor",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-book-harbor-guardian-stage-2",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "bf231ef5d132a5bc67ef37a14e8f13ae5552ff1d205f38dbbde3f9ac39cd3113",
+      "visibleControlCount": 36,
+      "locationId": "chapter-three:myriad-book-harbor",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-canopy-keeper-stage-0",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "c4cfa248ce182fa6de3c9e5ea7c1a97fd6f811ab74caafc8ff5a2ad57ef007c8",
+      "visibleControlCount": 36,
+      "locationId": "chapter-two:wood-voice-canopy",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-canopy-keeper-stage-1",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "b68526b3aac254e6a958e6045344b672a6afdef464e74dc0ace3a8e67ab3226a",
+      "visibleControlCount": 37,
+      "locationId": "chapter-two:wood-voice-canopy",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-canopy-keeper-stage-2",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "e72d61d1fa98ca16fb5887d5943ffc2ab7528bff5c4e09cb06358bf2ba33a2d9",
+      "visibleControlCount": 36,
+      "locationId": "chapter-two:wood-voice-canopy",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-component-root-guardian-stage-0",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "23026e69d74f70f8f27b4ced8d9029f3f532876de67f1a60467306ad27d0579d",
+      "visibleControlCount": 36,
+      "locationId": "chapter-two:component-root-core",
+      "locationKind": "core"
+    },
+    {
+      "id": "boss-component-root-guardian-stage-1",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "ab6617c3ec37a55569b6048dcdbbe4e0fdda89bae9ec06895b7a241ef228b610",
+      "visibleControlCount": 37,
+      "locationId": "chapter-two:component-root-core",
+      "locationKind": "core"
+    },
+    {
+      "id": "boss-component-root-guardian-stage-2",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "841bdd4e9820b1cb0d1b5aaa3e936da3b3d2203d2d6882ee5a181d71680533dc",
+      "visibleControlCount": 36,
+      "locationId": "chapter-two:component-root-core",
+      "locationKind": "core"
+    },
+    {
+      "id": "boss-constellation-keeper-stage-0",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "d3ad9c51058bef2adbdfb18432f1bf286af37674aeb74fd066f0a313713c55fd",
+      "visibleControlCount": 36,
+      "locationId": "chapter-three:star-map-peak",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-constellation-keeper-stage-1",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "37647909abb0d946761f1b7868e1bcadc63d5fe979d024dc08d31cf76c7bb988",
+      "visibleControlCount": 37,
+      "locationId": "chapter-three:star-map-peak",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-constellation-keeper-stage-2",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "3d89fcf89d0d0abe71baec10fed409ec582dc212ea10efa4dd770ce0edc556cf",
+      "visibleControlCount": 36,
+      "locationId": "chapter-three:star-map-peak",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-door-shadow-keeper-stage-0",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "de1afde5a4d9ea219a43c86e139ab708dfa64e6b68fa3ae0009da9d3ea8aa771",
+      "visibleControlCount": 36,
+      "locationId": "chapter-two:door-shadow-corridor",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-door-shadow-keeper-stage-1",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "84db7b3dae61bb45bbee41439f47f4407d8cfdbd0377fa1964ed8a13199e324c",
+      "visibleControlCount": 37,
+      "locationId": "chapter-two:door-shadow-corridor",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-door-shadow-keeper-stage-2",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "492b114d6c48eebee493ba92e323786afa1e02ecc62e59a51d57d845700b13f0",
+      "visibleControlCount": 36,
+      "locationId": "chapter-two:door-shadow-corridor",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-echo-bloom-guardian-stage-0",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "d2789cfafcacde5e34d1fcc0413471a34d6f97599d31aa87c8f4ec4fef15df28",
+      "visibleControlCount": 36,
+      "locationId": "chapter-one:echo-garden",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-echo-bloom-guardian-stage-1",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "4eebf23659389d861586ff2423faf6eb8ae7055278bd636d6e40e8feacb7fceb",
+      "visibleControlCount": 37,
+      "locationId": "chapter-one:echo-garden",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-echo-bloom-guardian-stage-2",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "bfbf0c1a700cfd629d6b2d090f3dc5bf14ac0a0cf07e19770b6ca0a727d93a63",
+      "visibleControlCount": 36,
+      "locationId": "chapter-one:echo-garden",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-ink-king-core-stage-0",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "4de7b2f55f9af7626cd82955297558456d12c917fd5e1d90d6465630a20e80e8",
+      "visibleControlCount": 36,
+      "locationId": "chapter-one:ink-king-core",
+      "locationKind": "core"
+    },
+    {
+      "id": "boss-ink-king-core-stage-1",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "b1b4a7507e56da2da78412088eac295ab7aa54aeacb9044be92700eda6c94c72",
+      "visibleControlCount": 37,
+      "locationId": "chapter-one:ink-king-core",
+      "locationKind": "core"
+    },
+    {
+      "id": "boss-ink-king-core-stage-2",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "c485b454191dbe3b9651fa7c7e70a6740a7cd49bfe3cc565ebf8554eae19f6aa",
+      "visibleControlCount": 36,
+      "locationId": "chapter-one:ink-king-core",
+      "locationKind": "core"
+    },
+    {
+      "id": "boss-lantern-root-guardian-stage-0",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "80ae1fd03ab6c4e8b3725e4e27d606eb57aa91a377a93cb77b3c64739e9099a6",
+      "visibleControlCount": 36,
+      "locationId": "chapter-one:glimmer-grove",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-lantern-root-guardian-stage-1",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "e1b519e85e33ee10d6db89c17e5c6d1789d5efd6b6862ee4cbcbf39a0bd5ead7",
+      "visibleControlCount": 37,
+      "locationId": "chapter-one:glimmer-grove",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-lantern-root-guardian-stage-2",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "8cdedf1df5ee4b186e7939810068ff79f1fb7a297d62ef773d4ccc1474f51699",
+      "visibleControlCount": 36,
+      "locationId": "chapter-one:glimmer-grove",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-lantern-town-keeper-stage-0",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "1bd3a61219d933f143d315b7e696f8aca5eac7cd2bdbf1e9a0c00e6129ec6a8c",
+      "visibleControlCount": 36,
+      "locationId": "chapter-three:home-lantern-town",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-lantern-town-keeper-stage-1",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "ffc337ef7a19578d700742cde7974ddd811ff121c490f76a34a03f2276a92c9f",
+      "visibleControlCount": 37,
+      "locationId": "chapter-three:home-lantern-town",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-lantern-town-keeper-stage-2",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "94b9c648e22a851c8c082fa76282927c21cfac83e480e6d10da31ed1aca014fb",
+      "visibleControlCount": 36,
+      "locationId": "chapter-three:home-lantern-town",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-spring-wheel-guardian-stage-0",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "bc6579c8e98378068a3f706de8f17c92b6d7bae86c821583329e6b93e40e92ca",
+      "visibleControlCount": 36,
+      "locationId": "chapter-two:spring-stone-valley",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-spring-wheel-guardian-stage-1",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "169b805847e0f6fd1b2ced209296c953beac78f0a5ce72f6d23e5f525fee81ee",
+      "visibleControlCount": 37,
+      "locationId": "chapter-two:spring-stone-valley",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-spring-wheel-guardian-stage-2",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "4c1c91999c9cefb46e7a7366131ece4d3699836cfed04c90dc08ac1afaa0be2d",
+      "visibleControlCount": 36,
+      "locationId": "chapter-two:spring-stone-valley",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-wind-bell-guardian-stage-0",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "fd0ac8d1cbed6125800808d593f29e4d0fd185bd8816ed5f0433b28a834d7331",
+      "visibleControlCount": 36,
+      "locationId": "chapter-one:wind-trail",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-wind-bell-guardian-stage-1",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "0108fdf8f9c733ecdfb05901ab69db38550796046dc063781ffbb21c8770eb6e",
+      "visibleControlCount": 37,
+      "locationId": "chapter-one:wind-trail",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-wind-bell-guardian-stage-2",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "9957324341fa8be47209c56a708baeb2bc92341295cbf1c35f4a1ffa35a04260",
+      "visibleControlCount": 36,
+      "locationId": "chapter-one:wind-trail",
+      "locationKind": "regular"
+    },
+    {
+      "id": "boss-word-heart-guardian-stage-0",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "32b19942ecfd16d4a405d372eb79a2419bef7fb9da037724a547a51ad8ccc79e",
+      "visibleControlCount": 36,
+      "locationId": "chapter-three:word-heart-core",
+      "locationKind": "core"
+    },
+    {
+      "id": "boss-word-heart-guardian-stage-1",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "f3a0e7b931fa214c754cfe35555c91a5a3a1b28a276023c7491ad95efa3a7448",
+      "visibleControlCount": 37,
+      "locationId": "chapter-three:word-heart-core",
+      "locationKind": "core"
+    },
+    {
+      "id": "boss-word-heart-guardian-stage-2",
+      "category": "boss",
+      "viewport": "1366x768",
+      "ariaSha256": "ed8056ee79e1dd626cd920524c4f15ca5c94b9750a38660608118f9a8f058d9b",
+      "visibleControlCount": 36,
+      "locationId": "chapter-three:word-heart-core",
+      "locationKind": "core"
+    },
+    {
+      "id": "epilogue-epilogue-companions",
+      "category": "epilogue",
+      "viewport": "1366x768",
+      "ariaSha256": "e6d9e91945f18246a92cadc000e2b07c359eb94890bc56a374f180ec8b4b1d0e",
+      "visibleControlCount": 4
+    },
+    {
+      "id": "epilogue-epilogue-forest",
+      "category": "epilogue",
+      "viewport": "1366x768",
+      "ariaSha256": "d3e1f98b06d8dff4a04f92782873107165038222ac61328644d1ad3d83167540",
+      "visibleControlCount": 4
+    },
+    {
+      "id": "epilogue-epilogue-home",
+      "category": "epilogue",
+      "viewport": "1366x768",
+      "ariaSha256": "bb30d9ea169127638bc9a0ab84cf4b1723ef3c7b0205488246fc4172377cca8e",
+      "visibleControlCount": 4
+    },
+    {
+      "id": "family-interaction-family-build",
+      "category": "family",
+      "viewport": "1366x768",
+      "ariaSha256": "c54872b5458d71be1a5bd2ba8ede5e8dad720c1a3335b1ec868f9f0e358edffa",
+      "visibleControlCount": 7
+    },
+    {
+      "id": "family-interaction-family-link",
+      "category": "family",
+      "viewport": "1366x768",
+      "ariaSha256": "c18bfc4a0fd0b87e287dc22211e9ab0401b9aeeb1caf02fad3c3a5d6626ff1a2",
+      "visibleControlCount": 6
+    },
+    {
+      "id": "mode-component-trails-intro",
+      "category": "mode",
+      "viewport": "1366x768",
+      "ariaSha256": "846495d6c6f374faa0c8d183cb2a3d17a5252cbee34892997a54dd7bf6ce0c76",
+      "visibleControlCount": 4
+    },
+    {
+      "id": "mode-free-adventure-intro",
+      "category": "mode",
+      "viewport": "1366x768",
+      "ariaSha256": "f487743397bef03226db1a319a89987919d898b85851b1774a86893f5cd841a4",
+      "visibleControlCount": 7
+    },
+    {
+      "id": "mode-word-resonance-intro",
+      "category": "mode",
+      "viewport": "1366x768",
+      "ariaSha256": "2c59e152730d6116e4a4ae516342863cf2d6fd7934dcb86486b15f372466103c",
+      "visibleControlCount": 4
+    },
+    {
+      "id": "repair-book-page-harbor",
+      "category": "repair",
+      "viewport": "1366x768",
+      "ariaSha256": "7f823fed301c98d19f2d44be3036a3d825211140f35ced81a4ef1af49a3b1785",
+      "visibleControlCount": 34
+    },
+    {
+      "id": "repair-camp-lamp",
+      "category": "repair",
+      "viewport": "1366x768",
+      "ariaSha256": "41915164c9d061570099881f8af5cbbadacea84a5619729fc8b90b17093a1f1d",
+      "visibleControlCount": 34
+    },
+    {
+      "id": "repair-component-root-heart",
+      "category": "repair",
+      "viewport": "1366x768",
+      "ariaSha256": "64281052344947d5bd3e407cb3aa2d104fcd2d84bdeba0eb0a04bf7a49b40296",
+      "visibleControlCount": 34
+    },
+    {
+      "id": "repair-constellation-lighthouse",
+      "category": "repair",
+      "viewport": "1366x768",
+      "ariaSha256": "4d4c7ffbbd022e4c6607188135b6eccc095cc1c12987f92a5c58833d9f74cbad",
+      "visibleControlCount": 34
+    },
+    {
+      "id": "repair-door-shadow-corridor",
+      "category": "repair",
+      "viewport": "1366x768",
+      "ariaSha256": "6f26c60795e945dff995a817ba061c2c0ce444ebca2a4fcba8fc96ef90e74cae",
+      "visibleControlCount": 34
+    },
+    {
+      "id": "repair-garden-path",
+      "category": "repair",
+      "viewport": "1366x768",
+      "ariaSha256": "dc4b97f7ae2cfcc9a21d11838f66bbcbdfcb6a5794576f7074df5013d5146350",
+      "visibleControlCount": 34
+    },
+    {
+      "id": "repair-home-lantern-street",
+      "category": "repair",
+      "viewport": "1366x768",
+      "ariaSha256": "87e66bcf8f93fc803e8eb1adedf44563fcb33bcb265955c549fd8ec46d62fb77",
+      "visibleControlCount": 34
+    },
+    {
+      "id": "repair-ink-companion-house",
+      "category": "repair",
+      "viewport": "1366x768",
+      "ariaSha256": "f6af9804b9f60b9e8090fa4a1ff86654fa6b6b130d1047b7959bb64815a62832",
+      "visibleControlCount": 34
+    },
+    {
+      "id": "repair-little-bridge",
+      "category": "repair",
+      "viewport": "1366x768",
+      "ariaSha256": "e42b8b511d5741b0507ff2c17e06d75e4941f7a7761eee1cbb9d3fc05b4c5f8c",
+      "visibleControlCount": 34
+    },
+    {
+      "id": "repair-magic-tree",
+      "category": "repair",
+      "viewport": "1366x768",
+      "ariaSha256": "226b2c9b2fae225b3543bcf35becdde5a706d0c5e35c62c21f52c470dc55fddd",
+      "visibleControlCount": 34
+    },
+    {
+      "id": "repair-spellbook-house",
+      "category": "repair",
+      "viewport": "1366x768",
+      "ariaSha256": "7f875ccab87f450d3edb2344c5332078b278a4689e924b2cda3d9284f6269203",
+      "visibleControlCount": 34
+    },
+    {
+      "id": "repair-spring-waterwheel",
+      "category": "repair",
+      "viewport": "1366x768",
+      "ariaSha256": "df4f3535be4ad49cdbd453bbd586310d176fe16f050b85454d499389dc5d5244",
+      "visibleControlCount": 34
+    },
+    {
+      "id": "repair-stargazing-platform",
+      "category": "repair",
+      "viewport": "1366x768",
+      "ariaSha256": "f2a52c2b79895366837971f7feadfb31f64284dbb1c228a3781e917a8bef5911",
+      "visibleControlCount": 34
+    },
+    {
+      "id": "repair-tree-canopy-bridge",
+      "category": "repair",
+      "viewport": "1366x768",
+      "ariaSha256": "8026894ef021d799c013b0fe24302868c4171b7f57e46b92248d43a873afd6c0",
+      "visibleControlCount": 34
+    },
+    {
+      "id": "repair-word-heart",
+      "category": "repair",
+      "viewport": "1366x768",
+      "ariaSha256": "78cc48a00673a7fed4433b5ea91e9b85be51a0603cbd03c8cd6d7b88fb3840f7",
+      "visibleControlCount": 34
+    },
+    {
+      "id": "repair-world-gate",
+      "category": "repair",
+      "viewport": "1366x768",
+      "ariaSha256": "c3a2a887791e3dff15499fbf66ae38d2cd931123d2b1e40a21254526c0da6d96",
+      "visibleControlCount": 34
+    },
+    {
+      "id": "save-corrupt-backup-recovery",
+      "category": "world",
+      "viewport": "1600x900",
+      "ariaSha256": "c7db6e6156a1e8dfa57e3795b3a4121cd1f6a08d3ff03f10aed8f6aeff4dfda0",
+      "visibleControlCount": 14
+    },
+    {
+      "id": "save-future-read-only",
+      "category": "world",
+      "viewport": "1600x900",
+      "ariaSha256": "61711d6f73e6206d8b3c657fee8379d8e64b7159a54d78f1894cc07c86e119e8",
+      "visibleControlCount": 9
+    },
+    {
+      "id": "spellbook-01-char-u660e",
+      "category": "spellbook",
+      "viewport": "1366x768",
+      "ariaSha256": "1148a45851e6c088e2198767e9ac07b1eb9930e098625c251866264c9cfc8d67",
+      "visibleControlCount": 81
+    },
+    {
+      "id": "spellbook-12-char-u8dd1",
+      "category": "spellbook",
+      "viewport": "1366x768",
+      "ariaSha256": "63daffd42a95cd786800166d1cb76d6e798ea7a3db23f4f9c84be308c6eee312",
+      "visibleControlCount": 81
+    },
+    {
+      "id": "spellbook-24-char-u5531",
+      "category": "spellbook",
+      "viewport": "1366x768",
+      "ariaSha256": "95563622171dc482c1abcbd19c0b53075c0500d64acafb934d3431809e458b2e",
+      "visibleControlCount": 81
+    },
+    {
+      "id": "spellbook-36-char-u95ed",
+      "category": "spellbook",
+      "viewport": "1366x768",
+      "ariaSha256": "c59270e7bbebbea965419dcb3872df057a3acc22b666c00d3fc7e0a8cdfe00a2",
+      "visibleControlCount": 81
+    },
+    {
+      "id": "spellbook-48-char-u94b1",
+      "category": "spellbook",
+      "viewport": "1366x768",
+      "ariaSha256": "c0e3f9102341ed1d6ecef69b24db411063f19c7fd33b8cccd5c0f6529afe93b5",
+      "visibleControlCount": 81
+    },
+    {
+      "id": "spellbook-60-char-u54cd",
+      "category": "spellbook",
+      "viewport": "1366x768",
+      "ariaSha256": "bf2b713b4a451c6eb232fdbf87c5ae4a190deac2554c70cfb9929f4470e3622b",
+      "visibleControlCount": 81
+    },
+    {
+      "id": "spellbook-66-char-u5708",
+      "category": "spellbook",
+      "viewport": "1366x768",
+      "ariaSha256": "0ff5fc1c1db1acf37c7d17dae9475a83970df7fe008d0f8fa54949bb10376905",
+      "visibleControlCount": 81
+    },
+    {
+      "id": "spellbook-72-char-u7b54",
+      "category": "spellbook",
+      "viewport": "1366x768",
+      "ariaSha256": "2a0a4bd3604952466879b895ea4dd70f87d9452623e9a0a66349d862702db081",
+      "visibleControlCount": 81
+    },
+    {
+      "id": "word-interaction-word-context",
+      "category": "word",
+      "viewport": "1366x768",
+      "ariaSha256": "8f48a5d130bf423ac0a469cbb4646a519cd678475fa418cdc614f4fb73fd9bce",
+      "visibleControlCount": 6
+    },
+    {
+      "id": "word-interaction-word-order",
+      "category": "word",
+      "viewport": "1366x768",
+      "ariaSha256": "5e04e41643d4b36e7d195657cb2dc88391632ae22f9a4c07cf1a847a8cff7ffd",
+      "visibleControlCount": 5
+    },
+    {
+      "id": "world-chapter-select",
+      "category": "world",
+      "viewport": "1366x768",
+      "ariaSha256": "f189d2fcaec908992a751349ba2dd9d29decd921994884a8a322f1f5c4404224",
+      "visibleControlCount": 14
+    },
+    {
+      "id": "world-complete-hotspots",
+      "category": "world",
+      "viewport": "1366x768",
+      "ariaSha256": "021b3753ac0a536f3fc26503979eb42367ad86d8d18c3b845dc132ff455a4691",
+      "visibleControlCount": 14
+    },
+    {
+      "id": "world-fresh-desktop",
+      "category": "world",
+      "viewport": "1366x768",
+      "ariaSha256": "4851e1efbe040af183ae2871cf555bcb600dd0f98f2f70a37129706f61fea924",
+      "visibleControlCount": 9
+    },
+    {
+      "id": "world-hero-forest-speaker",
+      "category": "world",
+      "viewport": "1366x768",
+      "ariaSha256": "4da0ef226905a4652f91966c90e7968952c0ae63087ebd680a24069d2d5b1c90",
+      "visibleControlCount": 14
+    },
+    {
+      "id": "world-hero-ink-companion",
+      "category": "world",
+      "viewport": "1366x768",
+      "ariaSha256": "99496eb4d8abe4af1a238e26eb35848994f4d280fbb76947149fbaa2c715639e",
+      "visibleControlCount": 14
+    },
+    {
+      "id": "world-hero-light-speaker",
+      "category": "world",
+      "viewport": "1366x768",
+      "ariaSha256": "a0e51812c0ba1583c7be80c5b639b35e9eb23787df8f3b8de79638be175e6928",
+      "visibleControlCount": 14
+    },
+    {
+      "id": "world-mobile-390x844",
+      "category": "world",
+      "viewport": "390x844",
+      "ariaSha256": "3a484d9a81ac941217b47f1ba62dd870b2ddd80dd542bb2445095acb31493ba1",
+      "visibleControlCount": 14
+    },
+    {
+      "id": "world-muted-toggle",
+      "category": "world",
+      "viewport": "1600x900",
+      "ariaSha256": "be9772f9979e5ac451da9e70909404cec7ebcaeca79bdda3eb12d5e3fdaef2ab",
+      "visibleControlCount": 14
+    },
+    {
+      "id": "world-reduced-motion",
+      "category": "world",
+      "viewport": "1600x900",
+      "ariaSha256": "ae84fe3955b9f94b188deb883096d420c5e83240be5df2ed0ed9ae5e7529f0a0",
+      "visibleControlCount": 14
+    },
+    {
+      "id": "world-tablet-768x1024",
+      "category": "world",
+      "viewport": "768x1024",
+      "ariaSha256": "b95a411195c1652b8a54f8acfb8e46e949fed964ccaa70b94329c8f3b0cc8711",
+      "visibleControlCount": 14
+    },
+    {
+      "id": "world-wide-1600x900",
+      "category": "world",
+      "viewport": "1600x900",
+      "ariaSha256": "b95a411195c1652b8a54f8acfb8e46e949fed964ccaa70b94329c8f3b0cc8711",
+      "visibleControlCount": 14
+    }
+  ],
+  "snapshotCombinedSha256": "1044c8a4dca879dc9f955535929f25352b3cfd4b441957f6d48731e5e097b484",
+  "snapshotHashes": [
+    {
+      "name": "boss-book-harbor-guardian-stage-0.png",
+      "sha256": "d2111b88c41f9b90936c2ec75b913fdfbc26661676f10394f2217f9e71bb283a"
+    },
+    {
+      "name": "boss-book-harbor-guardian-stage-1.png",
+      "sha256": "c460a8fb3d959c51139febc194b6023f7f7227693224e1d9de9e05e833cb188d"
+    },
+    {
+      "name": "boss-book-harbor-guardian-stage-2.png",
+      "sha256": "1e0321ef2072d88ef02089e5f28484fe71d024fc4e6c5277235b5a5ed2d63df3"
+    },
+    {
+      "name": "boss-canopy-keeper-stage-0.png",
+      "sha256": "9da53d8ff8c2372bcf0031ca9c750224ff6c5219dbd922eb4398b9756083678a"
+    },
+    {
+      "name": "boss-canopy-keeper-stage-1.png",
+      "sha256": "2050235764d2a4f5ca50c0585fccbcf334b208e95f61417b861b2946729daf0d"
+    },
+    {
+      "name": "boss-canopy-keeper-stage-2.png",
+      "sha256": "782e17f06f74541fe39d3d3e643222b62d9ffb7411399f44d27d8725e20848c3"
+    },
+    {
+      "name": "boss-component-root-guardian-stage-0.png",
+      "sha256": "1ffb8defedcf281f412a5be87765f98f8e7df9a6c12875a76c39331732888f5d"
+    },
+    {
+      "name": "boss-component-root-guardian-stage-1.png",
+      "sha256": "5ee4d6729129c949445574c09efd64238fe54549218740844600c81267ed1bc3"
+    },
+    {
+      "name": "boss-component-root-guardian-stage-2.png",
+      "sha256": "1bf3a77af12ce880bbd7abc92adaef9514a279d82892e1a5576241ab1ec02d6a"
+    },
+    {
+      "name": "boss-constellation-keeper-stage-0.png",
+      "sha256": "060c200df1d6fcac12f0629e3e908c82b00f556ddee7204f5aed341bfc9cdf2a"
+    },
+    {
+      "name": "boss-constellation-keeper-stage-1.png",
+      "sha256": "d6d90a0946206cb2a9c04a840bcbc59cdadf5b4fb6bbc5ab2e49e7aa4165f9a7"
+    },
+    {
+      "name": "boss-constellation-keeper-stage-2.png",
+      "sha256": "bd8f9afef30e11fbcc10ac56a053fd902a5c10462e9cd0691100136ff3e126a4"
+    },
+    {
+      "name": "boss-door-shadow-keeper-stage-0.png",
+      "sha256": "d36ab17c429c8e8a169d07e3147bb75fccb48712c3fc76168f74d08c92fb9b70"
+    },
+    {
+      "name": "boss-door-shadow-keeper-stage-1.png",
+      "sha256": "3470dbaa0adc44e6fa7ffd0ba58f6e2246b54f58b706b309743e5f909f565b29"
+    },
+    {
+      "name": "boss-door-shadow-keeper-stage-2.png",
+      "sha256": "95e10d0f4b51c25364afeaf5acd057fae654938237cfc3c4f48b0699afc5a91c"
+    },
+    {
+      "name": "boss-echo-bloom-guardian-stage-0.png",
+      "sha256": "68b74bbdd6ab1b3cafdf13dd1201203827864a97f0bd179497fbbe1127e25632"
+    },
+    {
+      "name": "boss-echo-bloom-guardian-stage-1.png",
+      "sha256": "dd982ea5d2fd70e8448762a4acf54dde35c8bfbeb8ba3d02a9789f5a6837ca02"
+    },
+    {
+      "name": "boss-echo-bloom-guardian-stage-2.png",
+      "sha256": "a63405709abcf75423bb2d4cc8775445b1ea2826d8b24cab4fe6f62f78fa82b4"
+    },
+    {
+      "name": "boss-ink-king-core-stage-0.png",
+      "sha256": "67356db4662ba9252f43c989c51753ee0172c228c886f838b2364bc4a4ceddc2"
+    },
+    {
+      "name": "boss-ink-king-core-stage-1.png",
+      "sha256": "62c24fc8164b86e4652d5a2b448bca07d5c1dca01c0c0b62f259cb7a59875c1f"
+    },
+    {
+      "name": "boss-ink-king-core-stage-2.png",
+      "sha256": "ce88f11dd4f611508e067191c8380d3f2adb4e92920ed07d47f7cf9c9cdd55c4"
+    },
+    {
+      "name": "boss-lantern-root-guardian-stage-0.png",
+      "sha256": "30c7a589d1ab43b75ffa53a31291c5d64a392e6723a934193d73c92f29206c95"
+    },
+    {
+      "name": "boss-lantern-root-guardian-stage-1.png",
+      "sha256": "8291ccdd14637aa82df1b03ce0d3fde5f1e798ba7eff1fd0b73f9d50505fa3da"
+    },
+    {
+      "name": "boss-lantern-root-guardian-stage-2.png",
+      "sha256": "330b605233496062af4a333c3661e1cbb91130f2c5832242db846f39f60b4102"
+    },
+    {
+      "name": "boss-lantern-town-keeper-stage-0.png",
+      "sha256": "282f16f0b8af552a52b06612a24afa28c09c5310e412f0e28aa7bdfc792e2ca8"
+    },
+    {
+      "name": "boss-lantern-town-keeper-stage-1.png",
+      "sha256": "10c604aa26d229ac912c04b0519841ccd11e658002a39393257857b6e883fa0a"
+    },
+    {
+      "name": "boss-lantern-town-keeper-stage-2.png",
+      "sha256": "a23932b26428c2ae46080bbbdf4bdbd782769e7897eaa1e22aae849438fb9b35"
+    },
+    {
+      "name": "boss-spring-wheel-guardian-stage-0.png",
+      "sha256": "a18c7ffa9ba961715df8cdc53ccf253bb38b1d66c527aedc52063127d52954a2"
+    },
+    {
+      "name": "boss-spring-wheel-guardian-stage-1.png",
+      "sha256": "6e84bd53fa950796a7487524838189f42049b162d7b862a70d1af2888f33d087"
+    },
+    {
+      "name": "boss-spring-wheel-guardian-stage-2.png",
+      "sha256": "7c248c9b6308bc138b85180ebf6bd6d321245da3a2e46257cb998c04dd05ea43"
+    },
+    {
+      "name": "boss-wind-bell-guardian-stage-0.png",
+      "sha256": "1115fb2ffbdb4cd04451f95b836c64e9632e4e6144ba949f8c25fc6b9292cdc3"
+    },
+    {
+      "name": "boss-wind-bell-guardian-stage-1.png",
+      "sha256": "5e67178c944757203b2d11c27ed8c5391e71b5fffdc41d44e3e584cf81822d34"
+    },
+    {
+      "name": "boss-wind-bell-guardian-stage-2.png",
+      "sha256": "8739052964b15f5eace0a957b8b179c9c84adbce0ff4c9f68d3b8678cd16c7bf"
+    },
+    {
+      "name": "boss-word-heart-guardian-stage-0.png",
+      "sha256": "ef96947fa59b80b72d42569dcf8ecdde5a2bcee3e70c75c79f0cd93fe184ebf8"
+    },
+    {
+      "name": "boss-word-heart-guardian-stage-1.png",
+      "sha256": "f0761efb300ac33f898c9b3138261e478898f0b393ccbad7392f40b89c3d9014"
+    },
+    {
+      "name": "boss-word-heart-guardian-stage-2.png",
+      "sha256": "66bc9a037ce9e2058bd656cddb6a1764112b9cef93b14e8ac0bedb40aca8efad"
+    },
+    {
+      "name": "epilogue-epilogue-companions.png",
+      "sha256": "f2763c1a693c68ddae68370666cbc3f7a23e731e0db18103498d9acaaa0444b6"
+    },
+    {
+      "name": "epilogue-epilogue-forest.png",
+      "sha256": "99e25c8d1ae871ef34e76cdcc80fd7975ff9b6c32d5cde1a4b2a9b11c021c912"
+    },
+    {
+      "name": "epilogue-epilogue-home.png",
+      "sha256": "cbb3ba8880782b4d6945f9aee4d0dc4831e5c763610bf7b2d0ec3f4bc778d14f"
+    },
+    {
+      "name": "family-interaction-family-build.png",
+      "sha256": "0dea59da2b0816d5d2f454d81bb908ed06fe9453d73d978b72a1c7884c226825"
+    },
+    {
+      "name": "family-interaction-family-link.png",
+      "sha256": "e29ba68870cc1c9f843b3431696fc16af128491f7456c7b25024408d2bb9bffc"
+    },
+    {
+      "name": "mode-component-trails-intro.png",
+      "sha256": "1a975cda278297c80b09826b62681ba6d56b25e62ef8808b1a07df93e09f2f99"
+    },
+    {
+      "name": "mode-free-adventure-intro.png",
+      "sha256": "fc20dbfb120ffa2f59c6ab2bec78b28f08fb9b0251ea7cf30b14ba89804997a6"
+    },
+    {
+      "name": "mode-word-resonance-intro.png",
+      "sha256": "16745a8428ee0786066cc34b0a836a76fc3ff0e46957bb675dfcc34caf7a9ac4"
+    },
+    {
+      "name": "repair-book-page-harbor.png",
+      "sha256": "13a934c7527d5fe1332adbf71f5ce209e616d697eaf0112a112bccf53e414720"
+    },
+    {
+      "name": "repair-camp-lamp.png",
+      "sha256": "d4665a2f7e321bc74c498dd27ec7f2df64699c8c7fb93be6e0e4a25003841e26"
+    },
+    {
+      "name": "repair-component-root-heart.png",
+      "sha256": "d8843e1ab3dab7064bbbd383cf3f077aa5fd5a7076320e261d2a9e487c73a36c"
+    },
+    {
+      "name": "repair-constellation-lighthouse.png",
+      "sha256": "17d05a5ec922c1dc7b737e6fa31fd81a49aeb953161997db3f5c17f642deae59"
+    },
+    {
+      "name": "repair-door-shadow-corridor.png",
+      "sha256": "facb099e3c41dd316f19f4ec6220edd04fed8ebaeb4517e23ef3e5499fd3dfa5"
+    },
+    {
+      "name": "repair-garden-path.png",
+      "sha256": "96d3e15535f1291fdf148f318ea83b85213cf066ee416be3d7087503354fafa0"
+    },
+    {
+      "name": "repair-home-lantern-street.png",
+      "sha256": "d9d16523ca8da2a43284926b8d03f201b02e3f02458136a9c228b9d2122c7c77"
+    },
+    {
+      "name": "repair-ink-companion-house.png",
+      "sha256": "ed1cc8de7b271a1fdf469a4c4a4d6e4f8db8b641d453feb734b948f3b6915c16"
+    },
+    {
+      "name": "repair-little-bridge.png",
+      "sha256": "56960d1d39c9ecd9679cec681337b5033fa0697d340d071f41b1ae88e7a418e6"
+    },
+    {
+      "name": "repair-magic-tree.png",
+      "sha256": "cb052d4e8ce40c232030f58fafaeae367f576248b89bf9d085c3c4cf908e7cf9"
+    },
+    {
+      "name": "repair-spellbook-house.png",
+      "sha256": "6fcc536290df7c39d535cbd2a300620f551b5b064c1e7152aee0b1cabffb1eab"
+    },
+    {
+      "name": "repair-spring-waterwheel.png",
+      "sha256": "8b03c03467b7ae8f6e08176c9093cb502f937cc30b7b3a2630ce51cf1b2ee356"
+    },
+    {
+      "name": "repair-stargazing-platform.png",
+      "sha256": "599327cf1bf0b0041ba824fbfdf324b333f9d1d2f55c0a886af74d2eb8e4e385"
+    },
+    {
+      "name": "repair-tree-canopy-bridge.png",
+      "sha256": "8936d0a27aae04ccc5498838ec23e03236621bf9d311b781a042bb83cbcc9453"
+    },
+    {
+      "name": "repair-word-heart.png",
+      "sha256": "a73480a7b3de81bff8a1156e1f8a8c67b61b9e8b03f82639acc3145e0def91bd"
+    },
+    {
+      "name": "repair-world-gate.png",
+      "sha256": "111a5e96efd75740265ba2245357e5bfe3b917e68aa109c79008ba907b98c308"
+    },
+    {
+      "name": "save-corrupt-backup-recovery.png",
+      "sha256": "c61287738e712626c67569b33bb8ed9442c4da838e4579b6910b01ba26a34e58"
+    },
+    {
+      "name": "save-future-read-only.png",
+      "sha256": "94d6eaa82f829340c6f6d5734e0e4c723647c22be43a6d5b751f598087d1520c"
+    },
+    {
+      "name": "spellbook-01-char-u660e.png",
+      "sha256": "9ce256e22189d646775ffc79aab02c85408708e6e81538f632de8db1b40ec69a"
+    },
+    {
+      "name": "spellbook-12-char-u8dd1.png",
+      "sha256": "d9c53af0a7a009c78bf54563f44192706e983f4f78222ff9b8a0e786ffbc8328"
+    },
+    {
+      "name": "spellbook-24-char-u5531.png",
+      "sha256": "8ee2d20492f338171686dd5239b34a1f8ac0a7d0efc4943e171e750345e79ad2"
+    },
+    {
+      "name": "spellbook-36-char-u95ed.png",
+      "sha256": "3ecb280a800600ef3d27c353b9c4b23d41a709a8adb838907df153f134e30693"
+    },
+    {
+      "name": "spellbook-48-char-u94b1.png",
+      "sha256": "d4f2fedf837a8c5f06913c93ad5b2bf96f8efe15db1797d13dd5d4733139a99b"
+    },
+    {
+      "name": "spellbook-60-char-u54cd.png",
+      "sha256": "f341868c1af93f9030cd1ba216d5941c41b20e2186e9e0bdbd8b382d742982a2"
+    },
+    {
+      "name": "spellbook-66-char-u5708.png",
+      "sha256": "e2c4b3c6e58b21ae3844e7863c685b0c47af9f9e43fda9d23e2e0891dc505ba0"
+    },
+    {
+      "name": "spellbook-72-char-u7b54.png",
+      "sha256": "d9bb135a2310056c77602ef3f812fd22df55b28174b7a4e0842761138c41601d"
+    },
+    {
+      "name": "word-interaction-word-context.png",
+      "sha256": "44cc4c6db135281f392d7a14a1f49c669adc9b73ec42277fbece4138f17990c4"
+    },
+    {
+      "name": "word-interaction-word-order.png",
+      "sha256": "219fe0dbc1784ce9ffb893dfdc5848b0d7fd025171a30e8e5fe7b5d0682aaf8e"
+    },
+    {
+      "name": "world-chapter-select.png",
+      "sha256": "6fc0b16c65dff99b1c794e3370cf11b278cf68237846e8a92d2e859dede84007"
+    },
+    {
+      "name": "world-complete-hotspots.png",
+      "sha256": "ed9e3c3f91468b90f188635760d5aa78359d796b8c8b64a9b59d7b327b94f5e3"
+    },
+    {
+      "name": "world-fresh-desktop.png",
+      "sha256": "6c7b680e308a9700b3d69b02fd9dd9e290f6c465e193d2e8eed86ebf03bdc9aa"
+    },
+    {
+      "name": "world-hero-forest-speaker.png",
+      "sha256": "05544cfa0c9fa47a2d399a05b5f47e41491a13a174ee62af896d44bb8ee58dad"
+    },
+    {
+      "name": "world-hero-ink-companion.png",
+      "sha256": "2bafe9250e780cc36451a26299e9803efbace93ce9f22068262207e1ac47b17f"
+    },
+    {
+      "name": "world-hero-light-speaker.png",
+      "sha256": "9ff93cf8b011ac43321c5b03215e9aa8181287cf1adfb2a42c61c1a3244756fa"
+    },
+    {
+      "name": "world-mobile-390x844.png",
+      "sha256": "c711a7510d226a3432ae8117d325266345e93f1fdbcd595659e60022a67d37ee"
+    },
+    {
+      "name": "world-muted-toggle.png",
+      "sha256": "51fee6d400abf25712924e34ecc69ea98f271364bb3fc3789292e5c4a7cf73a3"
+    },
+    {
+      "name": "world-reduced-motion.png",
+      "sha256": "4cd6e1d9247407778616b9fe355ae4ee6b1ad68b8ffa1b93e833450c80913dc8"
+    },
+    {
+      "name": "world-tablet-768x1024.png",
+      "sha256": "a331319d55179f4d37ad4c599efd043e94fd1490dafd7ebe1b12b38793f49154"
+    },
+    {
+      "name": "world-wide-1600x900.png",
+      "sha256": "569f783908b846de4fb4bfbc1873399e7c9543b89b7f7d58a5d4fa4e0bcfabf6"
+    }
+  ],
+  "noUpdateRequirement": {
+    "consecutiveRounds": 2,
+    "commands": [
+      "pnpm run test:visual:hanzi-complete",
+      "pnpm run test:geometry:hanzi-complete"
+    ]
+  },
+  "realChildValidation": "NOT_PERFORMED_AND_NOT_CLAIMED"
+}

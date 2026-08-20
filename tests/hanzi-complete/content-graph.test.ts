@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 import { CHAPTER_ONE_CHARACTERS } from "../../games/hanzi-radical-battle/v2/chapter-one/characters";
 import { PLAYABLE_WHEEL_MANIFEST } from "../../games/hanzi-radical-battle/v2/wheel-workshop/library/playable-wheel-manifest";
 import { COMPLETE_CORE_CHARACTER_NODES, COMPLETE_CORE_READING_SENSES } from "../../games/hanzi-radical-battle/complete/content-graph/core-characters";
-import { COMPLETE_CHARACTER_NODES, COMPLETE_CONTENT_GRAPH_REVISION, COMPLETE_CORE_PLAYABLE_MANIFEST, COMPLETE_SPELLBOOK_MANIFEST } from "../../games/hanzi-radical-battle/complete/content-graph/manifest";
+import { COMPLETE_CHARACTER_NODES, COMPLETE_COMPONENT_NODES, COMPLETE_CONTENT_GRAPH_REVISION, COMPLETE_CORE_PLAYABLE_MANIFEST, COMPLETE_SPELLBOOK_MANIFEST } from "../../games/hanzi-radical-battle/complete/content-graph/manifest";
 import { COMPLETE_NEW_CHARACTER_NODES } from "../../games/hanzi-radical-battle/complete/content-graph/new-characters";
 import { COMPLETE_SOURCE_RECORDS } from "../../games/hanzi-radical-battle/complete/content-graph/sources";
 import { auditCompleteCharacterHands, createCompleteCharacterHand, enumerateCompleteHandSolutions } from "../../games/hanzi-radical-battle/complete/core/content-solvers";
@@ -60,6 +60,11 @@ describe("complete-edition canonical character graph", () => {
     const qing = COMPLETE_CHARACTER_NODES.filter((character) => character.glyph === "情");
     expect(qing).toHaveLength(1);
     expect(qing[0].provenance).toEqual(expect.arrayContaining(["new-candidate:m0", "wheel:p2.char.004"]));
+  });
+
+  test("orders component identities by Unicode code point so Node and Chromium share one content revision", () => {
+    const codePoints = COMPLETE_COMPONENT_NODES.map((component) => component.glyph.codePointAt(0) ?? 0);
+    expect(codePoints).toEqual([...codePoints].sort((left, right) => left - right));
   });
 
   test("keeps a 72-record reviewed wheel adapter with eight records in every legacy-label-only band", () => {

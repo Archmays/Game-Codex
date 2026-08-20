@@ -5,6 +5,9 @@ import { activatePageMode } from "./page-mode";
 
 const WORLD_THEME_COLOR = "#071c2a";
 const CLASSIC_THEME_COLOR = "#f6f3e7";
+const BUILD_COMMIT = (import.meta.env.VITE_BUILD_COMMIT || "local-source").trim() || "local-source";
+
+document.documentElement.dataset.buildCommit = BUILD_COMMIT;
 
 function setBrowserIdentity(title: string, themeColor: string): void {
   document.title = title;

@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "verdict": "PASS_MACHINE",
+  "scenarios": 200000,
+  "batchSize": 10000,
+  "batches": 20,
+  "coverageConvergedAtBatch": 1,
+  "consecutiveBatchesWithoutNewFailureClass": 20,
+  "consecutiveBatchesAfterCoverageConvergence": 19,
+  "failures": [],
+  "hardOutcomes": {
+    "failures": 0,
+    "softlocks": 0,
+    "impossibleStates": 0,
+    "replayMismatch": 0,
+    "resumeMismatch": 0
+  },
+  "coverage": {
+    "characters": {
+      "reached": 72,
+      "required": 72
+    },
+    "families": {
+      "reached": 18,
+      "required": 18
+    },
+    "words": {
+      "reached": 36,
+      "required": 36
+    },
+    "abilities": {
+      "offered": 24,
+      "selected": 24,
+      "triggered": 24,
+      "required": 24
+    },
+    "innateAbilities": {
+      "triggered": 3,
+      "required": 3
+    },
+    "behaviors": {
+      "reached": 15,
+      "required": 15
+    },
+    "bosses": {
+      "reached": 12,
+      "required": 12
+    },
+    "repairs": {
+      "reached": 16,
+      "required": 16
+    },
+    "modes": {
+      "reached": 3,
+      "required": 3
+    },
+    "episodes": {
+      "reached": 12,
+      "required": 12
+    },
+    "wheel": {
+      "reached": 72,
+      "required": 72
+    },
+    "migrations": {
+      "reached": 10,
+      "required": 10,
+      "ids": [
+        "content-revision",
+        "corrupt-backup",
+        "fresh",
+        "future-read-only",
+        "pre-m6-postgame",
+        "slice-v1",
+        "v1",
+        "v2",
+        "v2+wheel",
+        "wheel"
+      ]
+    }
+  },
+  "convergenceBatches": [
+    {
+      "batch": 1,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 102
+    },
+    {
+      "batch": 2,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    },
+    {
+      "batch": 3,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    },
+    {
+      "batch": 4,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    },
+    {
+      "batch": 5,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    },
+    {
+      "batch": 6,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    },
+    {
+      "batch": 7,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    },
+    {
+      "batch": 8,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    },
+    {
+      "batch": 9,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    },
+    {
+      "batch": 10,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    },
+    {
+      "batch": 11,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    },
+    {
+      "batch": 12,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    },
+    {
+      "batch": 13,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    },
+    {
+      "batch": 14,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    },
+    {
+      "batch": 15,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    },
+    {
+      "batch": 16,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    },
+    {
+      "batch": 17,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    },
+    {
+      "batch": 18,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    },
+    {
+      "batch": 19,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    },
+    {
+      "batch": 20,
+      "scenarios": 10000,
+      "newFailureClasses": 0,
+      "newCoverageFeatures": 0
+    }
+  ]
+}

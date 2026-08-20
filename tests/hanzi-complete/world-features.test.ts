@@ -7,8 +7,16 @@ import { COMPLETE_SPELLBOOK_ENTRIES } from "../../games/hanzi-radical-battle/com
 import { COMPLETE_WHEEL_MANIFEST } from "../../games/hanzi-radical-battle/complete/wheel-adapter/selection";
 import { createCompleteWorkshopState, getCompleteWorkshopPool, reduceCompleteWorkshopState, simulateCompleteWorkshop } from "../../games/hanzi-radical-battle/complete/workshop-adapter/engine";
 import { COMPLETE_WHEEL_GRADE_OPTIONS, getCompleteWheelRecord } from "../../games/hanzi-radical-battle/complete/wheel-adapter/selection";
+import { hanziRadicalBattleGame } from "../../games/hanzi-radical-battle";
+import { HANZI_MAGIC_COMPLETE_ROUTE, HANZI_MAGIC_V1_ROUTE } from "../../apps/my-game-world/world-routes";
 
 describe("complete-edition world features", () => {
+  test("promotes only the hub and world primary portals while preserving the V1 history route", () => {
+    expect(hanziRadicalBattleGame.route).toBe("?play=hanzi-magic-complete&from=hub");
+    expect(HANZI_MAGIC_COMPLETE_ROUTE).toBe("?play=hanzi-magic-complete&from=world");
+    expect(HANZI_MAGIC_V1_ROUTE).toBe("?play=hanzi-v2-v1&from=world");
+  });
+
   test("archives all 16 durable repairs with visible before/after, interaction and learning contracts", () => {
     expect(COMPLETE_REPAIR_ARCHIVE).toHaveLength(16);
     expect(COMPLETE_REPAIR_ARCHIVE.map((repair) => repair.id)).toEqual(COMPLETE_REPAIR_IDS);

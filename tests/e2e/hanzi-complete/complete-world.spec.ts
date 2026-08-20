@@ -78,6 +78,21 @@ test("deep-links to the unchanged Chapter One app and returns to the V3 world", 
   await expect(page.locator(".hm2-header a")).toHaveAttribute("href", "?play=hanzi-magic-complete&from=hub");
 });
 
+test("promotes the classic hub and My Game World forest portals to V3 while legacy deep links remain", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium");
+  await page.goto("/?hub=classic&from=world");
+  const card = page.locator(".game-card--ink-forest");
+  await card.getByRole("button", { name: "进入墨迹森林" }).click();
+  await expect(page).toHaveURL(/\?play=hanzi-magic-complete&from=hub$/);
+  await expect(page.getByTestId("hanzi-magic-complete")).toBeVisible();
+  await page.goto("/?world=my-game-world");
+  await expect(page.locator("[data-world-forest-link]")).toHaveAttribute("href", "?play=hanzi-magic-complete&from=world");
+  await page.goto("/?play=hanzi-v2-chapter-one&from=hub");
+  await expect(page.getByTestId("hanzi-magic-chapter-one-m3")).toBeVisible();
+  await page.goto("/?play=hanzi-v2-v1&from=hub");
+  await expect(page.getByTestId("hanzi-magic-v1")).toBeVisible();
+});
+
 test("protects a future V3 save without overwriting it", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium");
   const futureRaw = JSON.stringify({ schemaVersion: 99, futureField: "preserve-exactly" });

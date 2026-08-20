@@ -1,0 +1,419 @@
+{
+  "schemaVersion": 1,
+  "verdict": "PASS_MACHINE",
+  "playthroughs": 36,
+  "requiredMinimum": 36,
+  "requiredProfiles": [
+    "NOVICE_POINTER",
+    "HESITANT_WITH_HINTS",
+    "KEYBOARD_ONLY",
+    "MOBILE_TOUCH",
+    "MUTED",
+    "REDUCED_MOTION",
+    "RETURNING_V1",
+    "RETURNING_V2",
+    "RETURNING_WHEEL",
+    "RETURNING_V2_PLUS_WHEEL",
+    "CORRUPT_SAVE",
+    "FUTURE_SAVE_READ_ONLY",
+    "CHAPTER_TWO",
+    "CHAPTER_THREE",
+    "EPILOGUE",
+    "FREE_ADVENTURE",
+    "COMPONENT_TRAILS",
+    "WORD_RESONANCE",
+    "WORLD_RETURN"
+  ],
+  "coveredProfiles": [
+    "CHAPTER_THREE",
+    "CHAPTER_TWO",
+    "COMPONENT_TRAILS",
+    "CORRUPT_SAVE",
+    "EPILOGUE",
+    "FREE_ADVENTURE",
+    "FUTURE_SAVE_READ_ONLY",
+    "HESITANT_WITH_HINTS",
+    "KEYBOARD_ONLY",
+    "MOBILE_TOUCH",
+    "MUTED",
+    "NOVICE_POINTER",
+    "REDUCED_MOTION",
+    "RETURNING_V1",
+    "RETURNING_V2",
+    "RETURNING_V2_PLUS_WHEEL",
+    "RETURNING_WHEEL",
+    "WORD_RESONANCE",
+    "WORLD_RETURN"
+  ],
+  "results": [
+    {
+      "id": "P01",
+      "kind": "postgame",
+      "profiles": [
+        "NOVICE_POINTER",
+        "FREE_ADVENTURE"
+      ],
+      "input": "mouse",
+      "viewport": "1366x768",
+      "result": "PASS"
+    },
+    {
+      "id": "P02",
+      "kind": "postgame",
+      "profiles": [
+        "HESITANT_WITH_HINTS",
+        "COMPONENT_TRAILS"
+      ],
+      "input": "mouse",
+      "viewport": "1366x768",
+      "result": "PASS"
+    },
+    {
+      "id": "P03",
+      "kind": "postgame",
+      "profiles": [
+        "KEYBOARD_ONLY",
+        "WORD_RESONANCE"
+      ],
+      "input": "keyboard",
+      "viewport": "1366x768",
+      "result": "PASS"
+    },
+    {
+      "id": "P04",
+      "kind": "postgame",
+      "profiles": [
+        "MOBILE_TOUCH",
+        "FREE_ADVENTURE"
+      ],
+      "input": "touch",
+      "viewport": "390x844",
+      "result": "PASS"
+    },
+    {
+      "id": "P05",
+      "kind": "postgame",
+      "profiles": [
+        "MUTED",
+        "COMPONENT_TRAILS"
+      ],
+      "input": "mouse",
+      "viewport": "768x1024",
+      "result": "PASS"
+    },
+    {
+      "id": "P06",
+      "kind": "postgame",
+      "profiles": [
+        "REDUCED_MOTION",
+        "WORD_RESONANCE"
+      ],
+      "input": "mouse",
+      "viewport": "1366x768",
+      "result": "PASS"
+    },
+    {
+      "id": "P07",
+      "kind": "postgame",
+      "profiles": [
+        "RETURNING_V1",
+        "FREE_ADVENTURE"
+      ],
+      "input": "mouse",
+      "viewport": "1366x768",
+      "result": "PASS"
+    },
+    {
+      "id": "P08",
+      "kind": "postgame",
+      "profiles": [
+        "RETURNING_V2",
+        "COMPONENT_TRAILS"
+      ],
+      "input": "mouse",
+      "viewport": "1366x768",
+      "result": "PASS"
+    },
+    {
+      "id": "P09",
+      "kind": "postgame",
+      "profiles": [
+        "RETURNING_WHEEL",
+        "WORD_RESONANCE"
+      ],
+      "input": "keyboard",
+      "viewport": "1366x768",
+      "result": "PASS"
+    },
+    {
+      "id": "P10",
+      "kind": "postgame",
+      "profiles": [
+        "RETURNING_V2_PLUS_WHEEL",
+        "FREE_ADVENTURE"
+      ],
+      "input": "mouse",
+      "viewport": "1600x900",
+      "result": "PASS"
+    },
+    {
+      "id": "P11",
+      "kind": "postgame",
+      "profiles": [
+        "CHAPTER_TWO",
+        "COMPONENT_TRAILS"
+      ],
+      "input": "keyboard",
+      "viewport": "768x1024",
+      "result": "PASS"
+    },
+    {
+      "id": "P12",
+      "kind": "postgame",
+      "profiles": [
+        "CHAPTER_THREE",
+        "WORD_RESONANCE"
+      ],
+      "input": "mouse",
+      "viewport": "1600x900",
+      "result": "PASS"
+    },
+    {
+      "id": "P13",
+      "kind": "postgame",
+      "profiles": [
+        "EPILOGUE",
+        "FREE_ADVENTURE"
+      ],
+      "input": "mouse",
+      "viewport": "1366x768",
+      "result": "PASS"
+    },
+    {
+      "id": "P14",
+      "kind": "postgame",
+      "profiles": [
+        "WORLD_RETURN",
+        "FREE_ADVENTURE"
+      ],
+      "input": "mouse",
+      "viewport": "1366x768",
+      "result": "PASS"
+    },
+    {
+      "id": "P15",
+      "kind": "postgame",
+      "profiles": [
+        "FREE_ADVENTURE"
+      ],
+      "input": "mouse",
+      "viewport": "768x1024",
+      "result": "PASS"
+    },
+    {
+      "id": "P16",
+      "kind": "postgame",
+      "profiles": [
+        "COMPONENT_TRAILS"
+      ],
+      "input": "mouse",
+      "viewport": "1600x900",
+      "result": "PASS"
+    },
+    {
+      "id": "P17",
+      "kind": "postgame",
+      "profiles": [
+        "WORD_RESONANCE",
+        "MOBILE_TOUCH"
+      ],
+      "input": "touch",
+      "viewport": "390x844",
+      "result": "PASS"
+    },
+    {
+      "id": "P18",
+      "kind": "postgame",
+      "profiles": [
+        "FREE_ADVENTURE"
+      ],
+      "input": "mouse",
+      "viewport": "1366x768",
+      "result": "PASS"
+    },
+    {
+      "id": "P19",
+      "kind": "postgame",
+      "profiles": [
+        "FREE_ADVENTURE",
+        "KEYBOARD_ONLY"
+      ],
+      "input": "keyboard",
+      "viewport": "1366x768",
+      "result": "PASS"
+    },
+    {
+      "id": "P20",
+      "kind": "postgame",
+      "profiles": [
+        "FREE_ADVENTURE"
+      ],
+      "input": "mouse",
+      "viewport": "1600x900",
+      "result": "PASS"
+    },
+    {
+      "id": "P21",
+      "kind": "postgame",
+      "profiles": [
+        "COMPONENT_TRAILS"
+      ],
+      "input": "keyboard",
+      "viewport": "1366x768",
+      "result": "PASS"
+    },
+    {
+      "id": "P22",
+      "kind": "postgame",
+      "profiles": [
+        "WORD_RESONANCE"
+      ],
+      "input": "mouse",
+      "viewport": "768x1024",
+      "result": "PASS"
+    },
+    {
+      "id": "P23",
+      "kind": "postgame",
+      "profiles": [
+        "MUTED",
+        "KEYBOARD_ONLY",
+        "WORD_RESONANCE"
+      ],
+      "input": "keyboard",
+      "viewport": "1366x768",
+      "result": "PASS"
+    },
+    {
+      "id": "P24",
+      "kind": "postgame",
+      "profiles": [
+        "REDUCED_MOTION",
+        "MOBILE_TOUCH",
+        "COMPONENT_TRAILS"
+      ],
+      "input": "touch",
+      "viewport": "390x844",
+      "result": "PASS"
+    },
+    {
+      "id": "S01",
+      "kind": "state",
+      "profiles": [
+        "CORRUPT_SAVE"
+      ],
+      "input": "mouse",
+      "viewport": "1366x768",
+      "result": "PASS"
+    },
+    {
+      "id": "S02",
+      "kind": "state",
+      "profiles": [
+        "FUTURE_SAVE_READ_ONLY"
+      ],
+      "input": "keyboard",
+      "viewport": "1366x768",
+      "result": "PASS"
+    },
+    {
+      "id": "S03",
+      "kind": "state",
+      "profiles": [
+        "RETURNING_V1",
+        "WORLD_RETURN"
+      ],
+      "input": "touch",
+      "viewport": "390x844",
+      "result": "PASS"
+    },
+    {
+      "id": "W01",
+      "kind": "wheel",
+      "profiles": [
+        "NOVICE_POINTER"
+      ],
+      "input": "mouse",
+      "viewport": "1366x768",
+      "result": "PASS"
+    },
+    {
+      "id": "W02",
+      "kind": "wheel",
+      "profiles": [
+        "KEYBOARD_ONLY"
+      ],
+      "input": "keyboard",
+      "viewport": "768x1024",
+      "result": "PASS"
+    },
+    {
+      "id": "W03",
+      "kind": "wheel",
+      "profiles": [
+        "MOBILE_TOUCH"
+      ],
+      "input": "touch",
+      "viewport": "390x844",
+      "result": "PASS"
+    },
+    {
+      "id": "W04",
+      "kind": "wheel",
+      "profiles": [],
+      "input": "mouse",
+      "viewport": "768x1024",
+      "result": "PASS"
+    },
+    {
+      "id": "W05",
+      "kind": "wheel",
+      "profiles": [],
+      "input": "keyboard",
+      "viewport": "1366x768",
+      "result": "PASS"
+    },
+    {
+      "id": "W06",
+      "kind": "wheel",
+      "profiles": [],
+      "input": "touch",
+      "viewport": "390x844",
+      "result": "PASS"
+    },
+    {
+      "id": "W07",
+      "kind": "wheel",
+      "profiles": [],
+      "input": "mouse",
+      "viewport": "1366x768",
+      "result": "PASS"
+    },
+    {
+      "id": "W08",
+      "kind": "wheel",
+      "profiles": [],
+      "input": "keyboard",
+      "viewport": "768x1024",
+      "result": "PASS"
+    },
+    {
+      "id": "W09",
+      "kind": "wheel",
+      "profiles": [],
+      "input": "touch",
+      "viewport": "390x844",
+      "result": "PASS"
+    }
+  ]
+}

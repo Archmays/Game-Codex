@@ -352,8 +352,9 @@ export function simulateCompletePostgame(
   const failureCodes: string[] = [];
   if (run.state.phase !== "session-summary") failureCodes.push("SESSION_NOT_COMPLETE");
   if (run.state.completedOfferIds.length !== 6) failureCodes.push("ROUND_COVERAGE");
-  if (mode === "free-adventure" && run.state.discoveredCharacterIds.length !== 6) failureCodes.push("CHARACTER_COVERAGE");
-  if (mode === "component-trails" && run.state.discoveredFamilyIds.length !== 6) failureCodes.push("FAMILY_COVERAGE");
-  if (mode === "word-resonance" && run.state.discoveredWordIds.length !== 6) failureCodes.push("WORD_COVERAGE");
+  const selectedTargetIds = [...new Set(run.state.completedOfferIds.map((offerId) => run.plan.rounds.flatMap((round) => round.offers).find((offer) => offer.id === offerId)?.targetId).filter((id): id is string => Boolean(id)))];
+  if (mode === "free-adventure" && JSON.stringify([...run.state.discoveredCharacterIds].sort()) !== JSON.stringify([...selectedTargetIds].sort())) failureCodes.push("CHARACTER_COVERAGE");
+  if (mode === "component-trails" && JSON.stringify([...run.state.discoveredFamilyIds].sort()) !== JSON.stringify([...selectedTargetIds].sort())) failureCodes.push("FAMILY_COVERAGE");
+  if (mode === "word-resonance" && JSON.stringify([...run.state.discoveredWordIds].sort()) !== JSON.stringify([...selectedTargetIds].sort())) failureCodes.push("WORD_COVERAGE");
   return { passed: failureCodes.length === 0, failureCodes, finalRun: run, actions: run.actions };
 }

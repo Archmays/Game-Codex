@@ -8,7 +8,7 @@ import { mountWorldSettings, type WorldSettingsHandle } from "./ui/WorldSettings
 import { WORLD_COPY } from "./world-copy";
 import {
   CLASSIC_HUB_FROM_WORLD_ROUTE,
-  HANZI_MAGIC_V1_ROUTE,
+  HANZI_MAGIC_COMPLETE_ROUTE,
   MY_GAME_WORLD_ROUTE,
 } from "./world-routes";
 import {
@@ -66,7 +66,7 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
       <section class="world-object world-object--forest is-active" data-testid="world-forest-portal">
         <span aria-hidden="true" class="world-object__mark world-object__mark--forest"></span>
         <h2>${WORLD_COPY.forestTitle}</h2>
-        <a class="world-primary-link" href="${HANZI_MAGIC_V1_ROUTE}" data-world-forest-link>${state.completedAndComplete ? WORLD_COPY.forestReturnAction : WORLD_COPY.forestFreshAction}</a>
+        <a class="world-primary-link" href="${HANZI_MAGIC_COMPLETE_ROUTE}" data-world-forest-link>${state.completedAndComplete ? WORLD_COPY.forestReturnAction : WORLD_COPY.forestFreshAction}</a>
       </section>
       <section class="world-object world-object--treasure" data-testid="world-treasure-box">
         <span aria-hidden="true" class="world-object__mark world-object__mark--treasure"></span>
@@ -151,5 +151,5 @@ export function mountClassicHubFromWorld(root: HTMLElement): MountedGame {
   };
 }
 
-export { CLASSIC_HUB_FROM_WORLD_ROUTE, HANZI_MAGIC_V1_ROUTE, MY_GAME_WORLD_ROUTE } from "./world-routes";
+export { CLASSIC_HUB_FROM_WORLD_ROUTE, HANZI_MAGIC_COMPLETE_ROUTE, HANZI_MAGIC_V1_ROUTE, MY_GAME_WORLD_ROUTE } from "./world-routes";
 export { deriveWorldHomeState, readWorldHomeState, updateExistingWorldSettings } from "./world-state";

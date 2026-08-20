@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "product": "汉字魔法战 · 墨迹森林完整篇：字光归林",
+  "version": "V3.0.0",
+  "route": "?play=hanzi-magic-complete&from=hub",
+  "expectedBaselineAtPlanning": "3dcb6076a5f58c6877cfeccb09cda2f2acf83626",
+  "actualBaseline": "3dcb6076a5f58c6877cfeccb09cda2f2acf83626",
+  "preMutationSourceTreeSha256": "7826E9B94B6773398B02C020A717D30F27E0370E6D079F4E76CE89A10247026A",
+  "protectedLegacy": {
+    "v1Tag": "hanzi-magic-v2-v1.0.0",
+    "v1Commit": "43e7841d2190922b6048182cab4b871c55715840",
+    "v2Tag": "hanzi-magic-v2-v2.0.0",
+    "v2Commit": "85c0b37179271eb98697befb418d319d6579b5dd",
+    "frozenV2ReleaseSha256": "8503D6BF1BF39D33B00E1671702C26B987CBB941C7176B2852A3B0A2A37036AE",
+    "wheelRawAndAudit": "PRESERVE_EXACT"
+  },
+  "counts": {
+    "chapters": 3,
+    "epilogue": true,
+    "characters": 72,
+    "existingCharacters": 36,
+    "newCharacters": 36,
+    "newStoryRequired": 24,
+    "newOptional": 12,
+    "families": 18,
+    "words": 36,
+    "wheelPlayable": 72,
+    "heroes": 3,
+    "selectableAbilities": 24,
+    "innateAbilities": 3,
+    "behaviors": 15,
+    "regularRegions": 9,
+    "cores": 3,
+    "bosses": 12,
+    "repairs": 16,
+    "spellbook": 72,
+    "postgameModes": 3
+  },
+  "budgets": {
+    "newRuntimeBinaryTargetBytes": 33554432,
+    "allHanziRuntimeTargetBytes": 67108864,
+    "saveHardMaxBytes": 512000,
+    "firstInteractiveTransferMaxRatioVsV2": 1.2
+  },
+  "acceptanceMode": "PASS_MACHINE_OR_AUTO_REVISE_OR_ESCALATE_HUMAN",
+  "realChildValidation": "NOT_PERFORMED_AND_NOT_CLAIMED"
+}
