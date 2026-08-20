@@ -63,6 +63,7 @@ export function readCompleteSave(storage: CompleteStorageLike): CompleteSaveRead
   let source: CompleteSaveReadResult["source"] = "fresh";
   let recovered = false;
   let recoveryReason: CompleteSaveReadResult["recoveryReason"] = "NONE";
+  let normalizedPrimary = false;
 
   if (raw !== null) {
     let parsed: unknown;
@@ -100,7 +101,7 @@ export function readCompleteSave(storage: CompleteStorageLike): CompleteSaveRead
               state = migrateCompleteContentRevision(checked.state);
               source = "content-migrated";
             }
-          } else { state = checked.state; source = "v3"; }
+          } else { state = checked.state; source = "v3"; normalizedPrimary = JSON.stringify(checked.state) !== JSON.stringify(parsed); }
         } else {
           captureRecovery(storage, raw, checked.reason ?? "INVALID_SHAPE");
           const backup = readBackup(storage);
@@ -124,7 +125,7 @@ export function readCompleteSave(storage: CompleteStorageLike): CompleteSaveRead
   const changed = !hasSameCompleteSavePayload(state, merged);
   state = merged;
   source = migrationSource(state, source);
-  if (changed || source === "content-migrated" || source.endsWith("-migrated") || recovered) writeCompleteSave(storage, state);
+  if (changed || normalizedPrimary || source === "content-migrated" || source.endsWith("-migrated") || recovered) writeCompleteSave(storage, state);
   return { state, source, recovered, recoveryReason, futureVersionProtected: false, writable: true };
 }
 
@@ -165,10 +166,12 @@ export function progressSeedFromCompleteSave(save: CompleteSaveState): CompleteE
     completedBehaviorIds: save.completedBehaviorIds,
     completedBossIds: save.completedBossIds,
     chapterOneReplay: save.chapterOneReplay,
+    chapterTwoReplay: save.chapterTwoReplay,
   };
 }
 
 function completeEpisodeForEngine(state: CompleteEngineState): CompleteEpisodeId | null {
+  if (state.screen === "chapter-two" && state.chapterTwoRun) return `chapter-two:${["wood-voice-canopy", "spring-stone-valley", "door-shadow-corridor", "component-root-core"][state.chapterTwoRun.state.episodeIndex]}` as CompleteEpisodeId;
   if (state.screen !== "chapter-one" || !state.chapterOneRun) return null;
   if (state.chapterOneRun.state.chapterStage === "final-core" || state.chapterOneRun.state.chapterStage === "ending" || state.chapterOneRun.state.chapterStage === "complete") return "chapter-one:ink-king-core";
   const region = state.chapterOneRun.state.plan.regions[state.chapterOneRun.state.regionIndex]?.regionId;
@@ -190,18 +193,25 @@ export function syncCompleteSaveFromEngine(previous: CompleteSaveState, state: C
   const nextEligibleAt = new Date(Date.parse(nowUtc) + 24 * 60 * 60 * 1000).toISOString();
   const newReviewRecords = [...newCharacterIds, ...newFamilyIds, ...newWordIds].map((recordId) => ({ recordId, state: "independent" as const, lastEncounteredAt: nowUtc, nextEligibleAt }));
   const chapterOneReplay = state.chapterOneRun ? { seed: state.chapterOneRun.seed, initialHeroId: state.chapterOneRun.initialHeroId, mode: state.chapterOneRun.mode, actions: state.chapterOneRun.actions } : previous.chapterOneReplay;
+  const chapterTwoReplay = state.chapterTwoRun ? { seed: state.chapterTwoRun.seed, initialHeroId: state.chapterTwoRun.initialHeroId, actions: state.chapterTwoRun.actions } : previous.chapterTwoReplay;
+  const resumeActionCount = state.screen === "chapter-one" && state.chapterOneRun
+    ? state.chapterOneRun.state.actionCount
+    : state.screen === "chapter-two" && state.chapterTwoRun
+      ? state.chapterTwoRun.state.actionCount
+      : state.actionCount;
   return updateCompleteSave(previous, {
     selectedHeroId: state.heroId,
     activeResume: {
       screen: state.screen,
       chapterId: state.activeChapterId,
       episodeId: completeEpisodeForEngine(state),
-      phase: state.screen === "chapter-one" && state.chapterOneRun ? state.chapterOneRun.state.phase : state.screen,
+      phase: state.screen === "chapter-one" && state.chapterOneRun ? state.chapterOneRun.state.phase : state.screen === "chapter-two" && state.chapterTwoRun ? state.chapterTwoRun.state.phase : state.screen,
       seed: state.seed,
-      actionCount: state.actionCount,
+      actionCount: resumeActionCount,
     },
     postgameResume: state.screen === "postgame" && state.activePostgameMode ? { mode: state.activePostgameMode, seed: state.seed, phase: "active", actionCount: state.actionCount } : previous.postgameResume,
     chapterOneReplay,
+    chapterTwoReplay,
     unlockedChapterIds: state.unlockedChapterIds,
     completedChapterIds: state.completedChapterIds,
     completedEpisodeIds: state.completedEpisodeIds,

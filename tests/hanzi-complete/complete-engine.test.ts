@@ -23,6 +23,7 @@ const FRESH_PROGRESS: CompleteEngineProgressSeed = {
   completedBehaviorIds: [],
   completedBossIds: [],
   chapterOneReplay: null,
+  chapterTwoReplay: null,
 };
 
 describe("complete-edition pure engine and Chapter One adapter", () => {

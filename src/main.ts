@@ -54,7 +54,16 @@ window.addEventListener("load", async () => {
       });
       return;
     }
-    const requestedChapter = search.get("chapter") === "two" ? "chapter-two" : search.get("chapter") === "three" ? "chapter-three" : null;
+    if (search.get("chapter") === "two") {
+      const { mountHanziMagicChapterTwo } = await import("../games/hanzi-radical-battle/complete/chapters/chapter-two/app");
+      mountHanziMagicChapterTwo(root, {
+        seed: search.get("seed") ?? undefined,
+        fresh: search.get("fresh") === "1",
+        returnHref: "?play=hanzi-magic-complete&from=hub",
+      });
+      return;
+    }
+    const requestedChapter = search.get("chapter") === "three" ? "chapter-three" : null;
     const { mountHanziMagicComplete } = await import("../games/hanzi-radical-battle/complete/app/complete-app");
     mountHanziMagicComplete(root, { fresh: search.get("fresh") === "1", requestedChapter, returnHref: from === "hub" ? "?hub=classic&from=world" : "?world=my-game-world" });
     return;

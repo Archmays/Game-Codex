@@ -1,5 +1,6 @@
 import { M3_BUILD_ABILITIES, M3_HEROES, type M3HeroId } from "../../v2/chapter-one/builds";
 import type { M3Action, M5AdventureMode } from "../../v2/chapter-one/m3-types";
+import { isChapterTwoAction, type ChapterTwoAction } from "../chapters/chapter-two/engine";
 import { COMPLETE_COMPONENT_FAMILIES } from "../content-graph/families";
 import { COMPLETE_CHARACTER_NODES, COMPLETE_CONTENT_GRAPH_REVISION } from "../content-graph/manifest";
 import { COMPLETE_WORD_NODES } from "../content-graph/words";
@@ -53,6 +54,12 @@ export interface CompleteChapterOneReplay {
   readonly actions: readonly M3Action[];
 }
 
+export interface CompleteChapterTwoReplay {
+  readonly seed: string;
+  readonly initialHeroId: M3HeroId;
+  readonly actions: readonly ChapterTwoAction[];
+}
+
 export interface CompleteSaveState {
   readonly schemaVersion: 3;
   readonly gameVersion: "3.0.0";
@@ -62,6 +69,7 @@ export interface CompleteSaveState {
   readonly activeResume: CompleteActiveResume;
   readonly postgameResume: CompletePostgameResume | null;
   readonly chapterOneReplay: CompleteChapterOneReplay | null;
+  readonly chapterTwoReplay: CompleteChapterTwoReplay | null;
   readonly unlockedChapterIds: readonly CompleteEngineChapterId[];
   readonly completedChapterIds: readonly CompleteEngineChapterId[];
   readonly completedEpisodeIds: readonly string[];
@@ -132,6 +140,7 @@ export function createFreshCompleteSave(): CompleteSaveState {
     activeResume: { screen: "world", chapterId: "chapter-one", episodeId: null, phase: "world", seed: "character-light-return", actionCount: 0 },
     postgameResume: null,
     chapterOneReplay: null,
+    chapterTwoReplay: null,
     unlockedChapterIds: ["chapter-one"],
     completedChapterIds: [],
     completedEpisodeIds: [],
@@ -213,6 +222,15 @@ function validChapterOneReplay(value: unknown): value is CompleteChapterOneRepla
     && ["story", "free"].includes(String(replay.mode)) && Array.isArray(replay.actions) && replay.actions.length <= 900 && replay.actions.every(validM3Action);
 }
 
+function validChapterTwoReplay(value: unknown): value is CompleteChapterTwoReplay | null {
+  if (value === null) return true;
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const replay = value as Record<string, unknown>;
+  return exactKeys(replay, ["seed", "initialHeroId", "actions"])
+    && boundedString(replay.seed) && typeof replay.initialHeroId === "string" && HERO_IDS.has(replay.initialHeroId)
+    && Array.isArray(replay.actions) && replay.actions.length <= 900 && replay.actions.every(isChapterTwoAction);
+}
+
 function validReviewRecords(value: unknown, allowUnknownContent: boolean): value is CompleteReviewRecord[] {
   if (!Array.isArray(value) || value.length > 256) return false;
   const allowed = new Set([...CHARACTER_IDS, ...FAMILY_IDS, ...WORD_IDS]);
@@ -246,15 +264,17 @@ function validMigration(value: unknown, allowUnknownContent: boolean): value is 
 export function validateCompleteSaveDetailed(value: unknown, allowRevisionMismatch = false): { readonly state: CompleteSaveState | null; readonly reason: "INVALID_SHAPE" | "CHECKSUM_MISMATCH" | null } {
   if (!value || typeof value !== "object" || Array.isArray(value)) return { state: null, reason: "INVALID_SHAPE" };
   const save = value as Record<string, unknown>;
-  const keys = ["schemaVersion", "gameVersion", "contentRevisionHash", "selectedHeroId", "settings", "activeResume", "postgameResume", "chapterOneReplay", "unlockedChapterIds", "completedChapterIds", "completedEpisodeIds", "discoveredCharacterIds", "discoveredFamilyIds", "discoveredWordIds", "repairedObjectIds", "selectedAbilityIds", "triggeredAbilityIds", "completedBehaviorIds", "completedBossIds", "reviewRecords", "minimalLocalEvents", "migration", "privacy", "validation"];
-  if (!exactKeys(save, keys) || save.schemaVersion !== 3 || save.gameVersion !== "3.0.0" || typeof save.contentRevisionHash !== "string") return { state: null, reason: "INVALID_SHAPE" };
+  const keys = ["schemaVersion", "gameVersion", "contentRevisionHash", "selectedHeroId", "settings", "activeResume", "postgameResume", "chapterOneReplay", "chapterTwoReplay", "unlockedChapterIds", "completedChapterIds", "completedEpisodeIds", "discoveredCharacterIds", "discoveredFamilyIds", "discoveredWordIds", "repairedObjectIds", "selectedAbilityIds", "triggeredAbilityIds", "completedBehaviorIds", "completedBossIds", "reviewRecords", "minimalLocalEvents", "migration", "privacy", "validation"];
+  const preChapterTwoKeys = keys.filter((key) => key !== "chapterTwoReplay");
+  const preChapterTwo = !("chapterTwoReplay" in save) && exactKeys(save, preChapterTwoKeys);
+  if ((!exactKeys(save, keys) && !preChapterTwo) || save.schemaVersion !== 3 || save.gameVersion !== "3.0.0" || typeof save.contentRevisionHash !== "string") return { state: null, reason: "INVALID_SHAPE" };
   const mismatch = save.contentRevisionHash !== COMPLETE_CONTENT_GRAPH_REVISION;
   if (mismatch && !allowRevisionMismatch) return { state: null, reason: "INVALID_SHAPE" };
   if (typeof save.selectedHeroId !== "string" || !HERO_IDS.has(save.selectedHeroId)) return { state: null, reason: "INVALID_SHAPE" };
   if (!save.settings || typeof save.settings !== "object" || Array.isArray(save.settings)) return { state: null, reason: "INVALID_SHAPE" };
   const settings = save.settings as Record<string, unknown>;
   if (!exactKeys(settings, ["muted", "reducedMotion", "inputMode"]) || typeof settings.muted !== "boolean" || typeof settings.reducedMotion !== "boolean" || typeof settings.inputMode !== "string" || !INPUT_MODES.has(settings.inputMode)) return { state: null, reason: "INVALID_SHAPE" };
-  if (!validActiveResume(save.activeResume) || !validPostgameResume(save.postgameResume) || !validChapterOneReplay(save.chapterOneReplay)) return { state: null, reason: "INVALID_SHAPE" };
+  if (!validActiveResume(save.activeResume) || !validPostgameResume(save.postgameResume) || !validChapterOneReplay(save.chapterOneReplay) || !validChapterTwoReplay(preChapterTwo ? null : save.chapterTwoReplay)) return { state: null, reason: "INVALID_SHAPE" };
   if (!uniqueStrings(save.unlockedChapterIds, CHAPTER_IDS, 3) || !(save.unlockedChapterIds as string[]).includes("chapter-one") || !uniqueStrings(save.completedChapterIds, CHAPTER_IDS, 3) || !uniqueStrings(save.completedEpisodeIds, mismatch ? undefined : EPISODE_IDS, 12)) return { state: null, reason: "INVALID_SHAPE" };
   if (!uniqueStrings(save.discoveredCharacterIds, mismatch ? undefined : CHARACTER_IDS, 256) || !uniqueStrings(save.discoveredFamilyIds, mismatch ? undefined : FAMILY_IDS, 18) || !uniqueStrings(save.discoveredWordIds, mismatch ? undefined : WORD_IDS, 36)) return { state: null, reason: "INVALID_SHAPE" };
   if (!uniqueStrings(save.repairedObjectIds, REPAIR_IDS, 16) || !uniqueStrings(save.selectedAbilityIds, ABILITY_IDS, 24) || !uniqueStrings(save.triggeredAbilityIds, ABILITY_IDS, 24) || !uniqueStrings(save.completedBehaviorIds, undefined, 32) || !uniqueStrings(save.completedBossIds, undefined, 20)) return { state: null, reason: "INVALID_SHAPE" };
@@ -270,6 +290,10 @@ export function validateCompleteSaveDetailed(value: unknown, allowRevisionMismat
   if (!exactKeys(validation, ["algorithm", "checksum"]) || validation.algorithm !== "fnv1a32" || typeof validation.checksum !== "string") return { state: null, reason: "INVALID_SHAPE" };
   const { validation: omitted, ...payload } = save as unknown as CompleteSaveState;
   if (omitted.checksum !== payloadChecksum(payload)) return { state: null, reason: "CHECKSUM_MISMATCH" };
+  if (preChapterTwo) {
+    const { validation: _validation, ...legacyPayload } = save;
+    return { state: withCompleteSaveChecksum({ ...legacyPayload, chapterTwoReplay: null } as Omit<CompleteSaveState, "validation">), reason: null };
+  }
   return { state: save as unknown as CompleteSaveState, reason: null };
 }
 

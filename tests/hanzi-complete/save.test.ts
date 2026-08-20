@@ -37,6 +37,15 @@ class MemoryStorage {
 
 const V1_IDS = ["ming", "hua", "lin", "xing", "cao", "kan", "yuan", "hui", "bao", "feng", "mao", "pao"] as const;
 
+function preChapterTwoChecksum(payload: unknown): string {
+  let hash = 2166136261;
+  for (const character of JSON.stringify(payload)) {
+    hash ^= character.codePointAt(0) ?? 0;
+    hash = Math.imul(hash, 16777619);
+  }
+  return `fnv1a32:${(hash >>> 0).toString(16).padStart(8, "0")}`;
+}
+
 function writeCompletedV2(storage: MemoryStorage, seed = "v2-to-v3") {
   const simulation = simulateM3Run(seed, "forest-speaker");
   let game = createM3GameState(seed, "forest-speaker");
@@ -51,6 +60,21 @@ function writeCompletedV2(storage: MemoryStorage, seed = "v2-to-v3") {
 }
 
 describe("complete-edition V3 save", () => {
+  test("normalizes an exact pre-Chapter-Two V3 save without discarding progress", () => {
+    const storage = new MemoryStorage();
+    const current = updateCompleteSave(createFreshCompleteSave(), { selectedHeroId: "forest-speaker", discoveredCharacterIds: ["char-u660e"] });
+    const { chapterTwoReplay: _chapterTwoReplay, validation: _validation, ...legacyPayload } = current;
+    const legacy = { ...legacyPayload, validation: { algorithm: "fnv1a32", checksum: preChapterTwoChecksum(legacyPayload) } };
+    storage.setItem(HANZI_MAGIC_COMPLETE_SAVE_KEY, JSON.stringify(legacy));
+
+    const read = readCompleteSave(storage);
+    expect(read).toMatchObject({ source: "v3", recovered: false, writable: true });
+    expect(read.state.selectedHeroId).toBe("forest-speaker");
+    expect(read.state.discoveredCharacterIds).toEqual(["char-u660e"]);
+    expect(read.state.chapterTwoReplay).toBeNull();
+    expect(JSON.parse(storage.getItem(HANZI_MAGIC_COMPLETE_SAVE_KEY)!).chapterTwoReplay).toBeNull();
+  });
+
   test("round-trips a bounded anonymous save and creates a valid backup", () => {
     const storage = new MemoryStorage();
     const first = createFreshCompleteSave();

@@ -9,6 +9,7 @@ import {
   toCompleteChapterOneCharacterIds,
 } from "../chapters/chapter-one-adapter/engine";
 import type { CompleteEngineAction, CompleteEngineProgressSeed, CompleteEngineState } from "./complete-types";
+import { createChapterTwoRun, reduceChapterTwoRun, replayChapterTwoRun } from "../chapters/chapter-two/engine";
 
 function unique<T>(values: readonly T[]): T[] {
   return [...new Set(values)];
@@ -29,11 +30,15 @@ const FRESH_PROGRESS: CompleteEngineProgressSeed = {
   completedBehaviorIds: [],
   completedBossIds: [],
   chapterOneReplay: null,
+  chapterTwoReplay: null,
 };
 
 export function createCompleteEngineState(seed = "character-light-return", progress: CompleteEngineProgressSeed = FRESH_PROGRESS): CompleteEngineState {
   const chapterOneRun = progress.chapterOneReplay
     ? replayCompleteChapterOneRun(progress.chapterOneReplay.seed, progress.chapterOneReplay.initialHeroId, progress.chapterOneReplay.actions, progress.chapterOneReplay.mode)
+    : null;
+  const chapterTwoRun = progress.chapterTwoReplay
+    ? replayChapterTwoRun(progress.chapterTwoReplay.seed, progress.chapterTwoReplay.initialHeroId, progress.chapterTwoReplay.actions)
     : null;
   return {
     schemaVersion: 1,
@@ -53,6 +58,7 @@ export function createCompleteEngineState(seed = "character-light-return", progr
     completedBehaviorIds: unique(progress.completedBehaviorIds),
     completedBossIds: unique(progress.completedBossIds),
     chapterOneRun,
+    chapterTwoRun,
     activePostgameMode: null,
     gentleMessage: progress.completedChapterIds.length ? "森林记得已经完成的修复，下一盏字光正在路上。" : "墨迹森林的第一盏营地灯正在等你。",
     actionCount: 0,
@@ -91,13 +97,38 @@ export function reduceCompleteEngineState(state: CompleteEngineState, action: Co
       gentleMessage: chapter.gentleMessage,
     });
   }
+  if (action.type === "chapter-two-action" && state.screen === "chapter-two" && state.chapterTwoRun) {
+    const chapterTwoRun = reduceChapterTwoRun(state.chapterTwoRun, action.action);
+    if (chapterTwoRun === state.chapterTwoRun) return state;
+    const chapter = chapterTwoRun.state;
+    const complete = chapter.phase === "chapter-summary";
+    return counted(state, {
+      chapterTwoRun,
+      discoveredCharacterIds: unique([...state.discoveredCharacterIds, ...chapter.discoveredCharacterIds]),
+      discoveredFamilyIds: unique([...state.discoveredFamilyIds, ...chapter.discoveredFamilyIds]),
+      completedEpisodeIds: unique([...state.completedEpisodeIds, ...chapter.completedEpisodeIds]),
+      repairedObjectIds: unique([...state.repairedObjectIds, ...chapter.repairedObjectIds]),
+      selectedAbilityIds: unique([...state.selectedAbilityIds, ...chapter.selectedAbilityIds]),
+      triggeredAbilityIds: unique([...state.triggeredAbilityIds, ...chapter.triggeredAbilityIds]),
+      completedBehaviorIds: unique([...state.completedBehaviorIds, ...chapter.completedBehaviorIds]),
+      completedBossIds: unique([...state.completedBossIds, ...chapter.completedBossIds]),
+      completedChapterIds: complete ? unique([...state.completedChapterIds, "chapter-two"]) : state.completedChapterIds,
+      unlockedChapterIds: complete ? unique([...state.unlockedChapterIds, "chapter-three"]) : state.unlockedChapterIds,
+      activeChapterId: complete ? "chapter-three" : "chapter-two",
+      gentleMessage: chapter.gentleMessage,
+    });
+  }
   if (action.type === "enter-chapter" && state.screen === "world") {
     if (!state.unlockedChapterIds.includes(action.chapterId)) return counted(state, { gentleMessage: "这条林路还没有亮起；先完成前一章，已有进度都会保留。" });
     if (action.chapterId === "chapter-one") {
       const chapterOneRun = state.chapterOneRun ?? createCompleteChapterOneRun(`${state.seed}:chapter-one`, state.heroId, "story");
       return counted(state, { screen: "chapter-one", activeChapterId: "chapter-one", chapterOneRun, gentleMessage: "第一章冒险已经安全恢复。" });
     }
-    return counted(state, { screen: action.chapterId, activeChapterId: action.chapterId, activePostgameMode: null, gentleMessage: action.chapterId === "chapter-two" ? "字脉树冠的路已经打开。" : "万象书港的灯正在远处回应。" });
+    if (action.chapterId === "chapter-two") {
+      const chapterTwoRun = state.chapterTwoRun ?? createChapterTwoRun(`${state.seed}:chapter-two`, state.heroId);
+      return counted(state, { screen: "chapter-two", activeChapterId: "chapter-two", chapterTwoRun, activePostgameMode: null, gentleMessage: "第二章字脉冒险已经安全恢复。" });
+    }
+    return counted(state, { screen: action.chapterId, activeChapterId: action.chapterId, activePostgameMode: null, gentleMessage: "万象书港的灯正在远处回应。" });
   }
   if (action.type === "return-world") {
     return counted(state, { screen: "world", activePostgameMode: null, gentleMessage: "回到墨迹森林；修复和发现都保留在本机。" });
