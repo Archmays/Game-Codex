@@ -43,8 +43,13 @@
     "test:hanzi-complete:content": "vitest run tests/hanzi-complete/content-graph.test.ts --no-file-parallelism",
     "test:hanzi-complete:families": "vitest run tests/hanzi-complete/families.test.ts --no-file-parallelism",
     "test:hanzi-complete:words": "vitest run tests/hanzi-complete/words.test.ts --no-file-parallelism",
+    "test:hanzi-complete:save": "vitest run tests/hanzi-complete/save.test.ts --no-file-parallelism",
+    "test:hanzi-complete:legacy": "vitest run tests/hanzi-complete/legacy.test.ts --no-file-parallelism",
     "test:hanzi-complete": "vitest run tests/hanzi-complete --no-file-parallelism",
-    "test:e2e:hanzi-complete:content": "playwright test tests/e2e/hanzi-complete/content-graph.spec.ts --config playwright.hanzi-complete.config.ts"
+    "test:e2e:hanzi-complete:content": "playwright test tests/e2e/hanzi-complete/content-graph.spec.ts --config playwright.hanzi-complete.config.ts",
+    "test:e2e:hanzi-complete": "playwright test --config playwright.hanzi-complete.config.ts",
+    "test:launcher:hanzi-complete": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File tools/hanzi-magic-complete/test-launcher-lifecycle.ps1",
+    "source-hash:hanzi-complete": "tsx tools/hanzi-magic-complete/source-identity.ts"
   },
   "dependencies": {
     "phaser": "^3.90.0"

@@ -36,12 +36,27 @@ window.addEventListener("load", async () => {
       mountCompleteContentAuditSheet(root, Number(search.get("sheet") ?? "0"));
       return;
     }
-    const { mountHanziMagicCompleteSlice } = await import("../games/hanzi-radical-battle/complete/app/slice-app");
-    mountHanziMagicCompleteSlice(root, {
-      sliceId: search.get("slice") === "word" ? "word" : "family",
-      fresh: search.get("fresh") === "1",
-      returnHref: from === "hub" ? "?hub=classic&from=world" : "?world=my-game-world",
-    });
+    if (search.get("slice") === "family" || search.get("slice") === "word") {
+      const { mountHanziMagicCompleteSlice } = await import("../games/hanzi-radical-battle/complete/app/slice-app");
+      mountHanziMagicCompleteSlice(root, {
+        sliceId: search.get("slice") === "word" ? "word" : "family",
+        fresh: search.get("fresh") === "1",
+        returnHref: from === "hub" ? "?hub=classic&from=world" : "?world=my-game-world",
+      });
+      return;
+    }
+    if (search.get("chapter") === "one") {
+      const { mountHanziMagicChapterOneM3 } = await import("../games/hanzi-radical-battle/v2/chapter-one/m3-app");
+      mountHanziMagicChapterOneM3(root, {
+        seed: search.get("seed") ?? undefined,
+        fresh: search.get("fresh") === "1",
+        returnHref: "?play=hanzi-magic-complete&from=hub",
+      });
+      return;
+    }
+    const requestedChapter = search.get("chapter") === "two" ? "chapter-two" : search.get("chapter") === "three" ? "chapter-three" : null;
+    const { mountHanziMagicComplete } = await import("../games/hanzi-radical-battle/complete/app/complete-app");
+    mountHanziMagicComplete(root, { fresh: search.get("fresh") === "1", requestedChapter, returnHref: from === "hub" ? "?hub=classic&from=world" : "?world=my-game-world" });
     return;
   }
 

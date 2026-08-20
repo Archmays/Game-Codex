@@ -1,0 +1,87 @@
+:root.hanzi-magic-page,
+body.hanzi-magic-page { margin: 0; min-width: 320px; min-height: 100%; background: #061c26; color: #fff4cf; }
+
+.hmc3-shell { position: relative; box-sizing: border-box; min-height: 100vh; overflow: hidden; padding: clamp(14px, 2.4vw, 30px); font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; background: #071f29; isolation: isolate; }
+.hmc3-world-art { position: absolute; inset: 0; z-index: -2; background-image: linear-gradient(180deg, rgba(3, 21, 27, .16), rgba(4, 21, 26, .86)), var(--world-image); background-size: cover; background-position: center; }
+.hmc3-world-art::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 52% 72%, rgba(255, 218, 104, .2), transparent 24%), radial-gradient(circle at 18% 20%, rgba(94, 214, 178, .2), transparent 28%); }
+.hmc3-canopy { position: absolute; inset: 0 0 auto; height: 38%; background: linear-gradient(180deg, rgba(6, 32, 34, .5), transparent); }
+.hmc3-lights { position: absolute; inset: 12% 7%; background-image: radial-gradient(circle, #ffe69b 0 2px, transparent 3px), radial-gradient(circle, #9ce7c4 0 1.5px, transparent 3px); background-size: 180px 140px, 130px 190px; opacity: .72; }
+.hmc3-path-light { position: absolute; left: 38%; bottom: -8%; width: 30%; height: 60%; border-radius: 50%; background: linear-gradient(180deg, transparent, rgba(255, 220, 121, .16)); transform: perspective(380px) rotateX(56deg); }
+
+.hmc3-header { position: relative; display: grid; grid-template-columns: minmax(118px, 1fr) auto minmax(118px, 1fr); align-items: center; gap: 16px; max-width: 1360px; margin: auto; }
+.hmc3-header > div { text-align: center; }
+.hmc3-header span { color: #a7e2d2; font-size: 13px; letter-spacing: .14em; }
+.hmc3-header h1 { margin: 2px 0 0; font-size: clamp(21px, 3vw, 34px); }
+.hmc3-header a, .hmc3-header button, .hmc3-footer button, .hmc3-parent button { box-sizing: border-box; min-height: 46px; padding: 10px 14px; border: 1px solid rgba(142, 219, 196, .72); border-radius: 999px; color: #fff2c3; background: rgba(6, 35, 39, .82); text-decoration: none; font: inherit; cursor: pointer; }
+.hmc3-header button { justify-self: end; }
+.hmc3-header a:focus-visible, .hmc3-header button:focus-visible, .hmc3-footer button:focus-visible, .hmc3-parent button:focus-visible, .hmc3-primary:focus-visible { outline: 4px solid #ffd65f; outline-offset: 3px; }
+
+.hmc3-save-note { max-width: 780px; margin: 12px auto -4px; padding: 9px 14px; border: 1px solid #8fd5bd; border-radius: 12px; color: #dff8ed; text-align: center; background: rgba(5, 39, 42, .9); }
+.hmc3-world-panel { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(250px, .55fr); grid-template-areas: "story hero" "story repairs" "journey journey"; gap: 15px; max-width: 1180px; margin: clamp(20px, 5vh, 52px) auto 18px; }
+.hmc3-story, .hmc3-hero, .hmc3-repairs, .hmc3-journey { border: 1px solid rgba(122, 201, 178, .62); border-radius: 24px; background: rgba(4, 26, 31, .82); box-shadow: 0 18px 50px rgba(0, 0, 0, .24); backdrop-filter: blur(5px); }
+.hmc3-story { grid-area: story; display: flex; min-height: 310px; padding: clamp(24px, 5vw, 58px); flex-direction: column; align-items: flex-start; justify-content: center; }
+.hmc3-place { margin: 0; color: #91dbc4; letter-spacing: .12em; }
+.hmc3-story h2 { max-width: 720px; margin: 10px 0; font-size: clamp(30px, 5.5vw, 64px); line-height: 1.05; text-wrap: balance; }
+.hmc3-story > p:not(.hmc3-place) { max-width: 640px; margin: 0 0 22px; color: #d2eae2; font-size: clamp(16px, 2vw, 20px); }
+.hmc3-primary { box-sizing: border-box; display: inline-grid; place-items: center; min-height: 58px; padding: 14px 24px; border: 2px solid #ffdc74; border-radius: 18px; color: #18281f; background: linear-gradient(180deg, #ffe598, #f8c956); box-shadow: 0 7px 0 #805b25, 0 15px 30px rgba(0,0,0,.24); font-weight: 800; text-decoration: none; }
+.hmc3-story small { margin-top: 18px; color: #a8ccc2; }
+.hmc3-hero { grid-area: hero; display: grid; grid-template-columns: 86px 1fr; align-items: center; gap: 12px; padding: 15px; }
+.hmc3-hero-portrait { width: 86px; height: 86px; border-radius: 18px; background-image: var(--hero-image); background-size: cover; background-position: center; }
+.hmc3-hero p, .hmc3-hero h2, .hmc3-hero span { margin: 0; }
+.hmc3-hero p { color: #8ed7c2; font-size: 12px; }
+.hmc3-hero h2 { margin: 3px 0; font-size: 19px; }
+.hmc3-hero span { color: #cbe4dd; font-size: 13px; }
+.hmc3-repairs { grid-area: repairs; padding: 15px 18px; }
+.hmc3-repairs h2, .hmc3-journey h2 { margin: 0 0 10px; font-size: 16px; }
+.hmc3-repairs p { margin: 0; color: #c4ddd6; }
+.hmc3-repairs ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.hmc3-repairs li { padding: 7px 10px; border-radius: 999px; color: #f8e7ae; background: rgba(40, 104, 87, .55); }
+.hmc3-repairs li span { color: #ffd862; }
+.hmc3-journey { grid-area: journey; padding: 15px 20px; }
+.hmc3-path { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 0; padding: 0; list-style: none; }
+.hmc3-path li { display: grid; grid-template-columns: 26px 1fr; align-items: center; gap: 6px; min-width: 0; padding: 9px 10px; border-radius: 14px; color: #9dbeb5; background: rgba(8, 47, 50, .64); }
+.hmc3-path li[data-status="current"], .hmc3-path li[data-status="open"] { color: #fff0bc; background: rgba(35, 102, 81, .72); }
+.hmc3-path li[data-status="complete"] { color: #d7f5e9; }
+.hmc3-path li > span { color: #ffd968; font-size: 20px; }
+.hmc3-path b, .hmc3-path small { display: block; overflow-wrap: anywhere; }
+.hmc3-path small { margin-top: 2px; color: inherit; opacity: .72; }
+
+.hmc3-footer { display: flex; align-items: center; justify-content: space-between; gap: 14px; max-width: 1180px; margin: auto; }
+.hmc3-hero-switch, .hmc3-prefs { display: flex; flex-wrap: wrap; gap: 8px; }
+.hmc3-footer button[aria-pressed="true"] { border-color: #ffdc72; color: #18271f; background: #ffe39a; }
+.hmc3-parent { position: fixed; inset: auto 20px 20px auto; z-index: 5; box-sizing: border-box; width: min(520px, calc(100vw - 40px)); padding: 20px; border: 2px solid #9edbc9; border-radius: 22px; color: #f8edc9; background: #092c32; box-shadow: 0 24px 80px rgba(0,0,0,.5); }
+.hmc3-parent h2, .hmc3-parent p { margin-top: 0; }
+.hmc3-parent div { display: flex; flex-wrap: wrap; gap: 8px; }
+.hmc3-parent button[data-action="confirm-clear-all"] { border-color: #ffb28a; }
+
+.hmc3-preview { display: grid; place-items: center; background: #071f29; }
+.hmc3-preview > section { max-width: 650px; padding: clamp(28px, 6vw, 70px); border: 1px solid #7fc7af; border-radius: 28px; text-align: center; background: rgba(4, 29, 34, .88); }
+.hmc3-preview h1 { font-size: clamp(34px, 7vw, 68px); margin: 8px 0; }
+.hmc3-preview p { color: #d3e8e0; }
+.hmc3-preview a { margin: 10px; }
+
+@media (max-width: 760px) {
+  .hmc3-header { grid-template-columns: auto 1fr auto; }
+  .hmc3-header h1 { font-size: 19px; }
+  .hmc3-world-panel { grid-template-columns: 1fr; grid-template-areas: "story" "hero" "repairs" "journey"; margin-top: 20px; }
+  .hmc3-story { min-height: 270px; padding: 28px 22px; }
+  .hmc3-path { grid-template-columns: 1fr 1fr; }
+  .hmc3-footer { align-items: stretch; flex-direction: column; }
+}
+
+@media (max-width: 470px) {
+  .hmc3-shell { padding: 10px; }
+  .hmc3-header { grid-template-columns: 50px 1fr 50px; gap: 5px; }
+  .hmc3-header > a, .hmc3-header > button { min-width: 46px; width: 46px; padding: 8px; overflow: hidden; white-space: nowrap; color: transparent; font-size: 0; }
+  .hmc3-header > a::after, .hmc3-header > button::after { color: #fff2c3; font-size: 17px; }
+  .hmc3-header > a::after { content: "返"; }
+  .hmc3-header > button::after { content: "家"; }
+  .hmc3-header span { display: none; }
+  .hmc3-header h1 { font-size: 17px; }
+  .hmc3-path { grid-template-columns: 1fr; }
+  .hmc3-footer button { flex: 1 1 100px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hmc3-shell *, .hmc3-shell *::before, .hmc3-shell *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}
