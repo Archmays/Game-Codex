@@ -388,6 +388,25 @@ function pruneEmptyParents(repoRoot: string, filePath: string): void {
   }
 }
 
+export function pruneEmptyTaskWorkspace(repoRoot: string): boolean {
+  const root = realpathSync(repoRoot);
+  const taskRoot = resolve(root, ACTIVE_TASK_PREFIX);
+  if (!pathWithin(root, taskRoot)) throw new Error("Active task workspace escapes repository root.");
+  if (!existsSync(taskRoot)) return true;
+
+  const prune = (directory: string): void => {
+    for (const entry of readdirSync(directory, { withFileTypes: true })) {
+      const child = resolve(directory, entry.name);
+      if (entry.isSymbolicLink()) throw new Error(`Symlink/junction in active task workspace refused: ${slash(relative(root, child))}`);
+      if (entry.isDirectory()) prune(child);
+    }
+    if (readdirSync(directory).length === 0) rmdirSync(directory);
+  };
+
+  prune(taskRoot);
+  return !existsSync(taskRoot);
+}
+
 export function applyPlan(plan: CleanupPlan, appliedAt = new Date().toISOString()): {
   archiveManifestPath: string;
   deletionLedgerPath: string;
@@ -590,6 +609,9 @@ function executeCli(argv: readonly string[]): void {
     const planPath = resolve(options.archiveRoot, "reports", "final-cleanup-plan.json");
     writeJsonAtomic(planPath, plan);
     const result = applyPlan(plan);
+    if (!pruneEmptyTaskWorkspace(options.repoRoot)) {
+      throw new Error("Active task workspace still contains unplanned files after close-task.");
+    }
     const after = existsSync(resolve(options.repoRoot, RETURN_ZIP)) ? verifyMaintenance(options.repoRoot, options.archiveRoot).package : null;
     if (before && (!after || before.bytes !== after.bytes || before.sha256 !== after.sha256)) {
       throw new Error("Return package bytes/hash changed during close-task.");

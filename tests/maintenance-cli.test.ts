@@ -9,6 +9,7 @@ import {
   TASK_ID,
   applyPlan,
   assertDeletionAllowed,
+  pruneEmptyTaskWorkspace,
   verificationReportPath,
   type CleanupPlan,
 } from "../tools/maintenance/repository-maintenance";
@@ -120,5 +121,20 @@ describe("repository maintenance safety", () => {
     expect(verificationReportPath(repo, archive)).toBe(resolve(archive, "reports", "post-close-maintenance-verify.json"));
     mkdirSync(resolve(repo, "tmp", "tasks", TASK_ID), { recursive: true });
     expect(verificationReportPath(repo, archive)).toBe(resolve(repo, "tmp", "tasks", TASK_ID, "reports", "cleanup-verify.json"));
+  });
+
+  it("removes nested empty active-task directories after the final file plan is applied", () => {
+    const { repo, archive } = fixture();
+    const report = resolve(repo, "tmp", "tasks", TASK_ID, "reports", "cleanup-verify.json");
+    mkdirSync(resolve(repo, "tmp", "tasks", TASK_ID, "research"), { recursive: true });
+    mkdirSync(resolve(repo, "tmp", "tasks", TASK_ID, "screenshots"), { recursive: true });
+    mkdirSync(resolve(report, ".."), { recursive: true });
+    writeFileSync(report, "transient", "utf8");
+
+    applyPlan({ ...plan(repo, archive, `tmp/tasks/${TASK_ID}/reports/cleanup-verify.json`, "transient"), includeActiveTask: true });
+
+    expect(pruneEmptyTaskWorkspace(repo)).toBe(true);
+    expect(existsSync(resolve(repo, "tmp", "tasks", TASK_ID))).toBe(false);
+    expect(verificationReportPath(repo, archive)).toBe(resolve(archive, "reports", "post-close-maintenance-verify.json"));
   });
 });
