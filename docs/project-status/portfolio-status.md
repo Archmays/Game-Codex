@@ -1,0 +1,36 @@
+# Game-Codex Portfolio 状态
+
+> 本页由 `packages/data/gamePortfolio.ts` 确定性生成，是跨游戏生命周期、世界归属、质量等级、可见性和测试配置的唯一当前状态页。游戏自己的儿童文案仍由各 `GameDefinition` 管理。
+
+## Foundation 基线
+
+- 实际起点：`12c86dc22b7219a23baeb26efbe7eab9fb0a2da2`
+- 起点 tracked 文件：`708232522` bytes
+- 经典大厅：`9/9` 当前可见
+- 历史治理：本阶段不重写 Git 历史、不强推、不移动或覆盖 tag
+- 真人儿童验证：`NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE`
+
+## 当前组合
+
+| 游戏 | 稳定 ID | 目标世界 | 产品角色 | 等级 | 生命周期 | 当前独立可见 | 目标独立可见 | 当前 route | save namespace | test profile |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 汉字魔法战 | `hanzi-radical-battle` | 中文世界 | 旗舰 | S | `active-maintenance` | 是 | 是 | ?play=hanzi-magic-complete&from=hub | `family-games/hanzi-magic-complete/v3`<br>`family-games/hanzi-magic-v2/chapter-one`<br>`family-games/hanzi-magic-v2/wheel-workshop/v1`<br>`family-games/hanzi-radical-battle-v2/golden-slice/state` | `s-hanzi-release` |
+| 算式滑轨 | `equation-slider` | 数学世界 | 旗舰 | S | `active` | 是 | 是 | 经典大厅内嵌 | `family-games/equation-slider` | `s-equation-release` |
+| 数学实验室 | `math-lab` | 数学世界 | 核心世界 | A | `architecture-consolidation-candidate` | 是 | 是 | 经典大厅内嵌 | `math-battle-web/save-v1` | `a-core-world` |
+| 英文魔法战 | `english-spell-battle` | 英语世界 | 核心世界 | A | `flagship-candidate` | 是 | 是 | 经典大厅内嵌 | `family-games/english-spell-battle` | `a-core-world` |
+| 凑10算12算24 | `make-target` | 数学世界 | 独立谜题 | B | `active` | 是 | 是 | 经典大厅内嵌 | `family-games/make-target` | `b-independent-puzzle` |
+| 认识时钟 | `clock-reader` | 数学世界 | 模块 | C | `module-candidate` | 是 | 否 | 经典大厅内嵌 | `family-games/clock-reader` | `c-module` |
+| 九九乘法表 | `multiplication-adventure` | 数学世界 | 模块 | C | `migrate-then-retire-standalone` | 是 | 否 | 经典大厅内嵌 | `family-games/multiplication-adventure` | `c-module` |
+| 记忆翻牌 | `memory-card` | 共享模块 | 模块 | C | `shared-engine-candidate` | 是 | 否 | 经典大厅内嵌 | `family-games/memory-card` | `c-module` |
+| 汉字魔法战-拼音 | `pinyin-magic-battle` | 中文世界 | 模块 | C | `migrate-then-retire-standalone` | 是 | 否 | 经典大厅内嵌 | `family-games/pinyin-magic-battle` | `c-module` |
+
+## 质量等级
+
+- **S**：汉字魔法战、算式滑轨；核心机制或发布变化才运行各自完整 release gate。
+- **A**：数学实验室、英文魔法战；核心变化覆盖状态/内容、目标浏览器、响应式、存档、输入、console/network 和返回流程。
+- **B**：凑10算12算24；覆盖可解性、确定性题库、提示/恢复、输入、route 和 save。
+- **C**：时钟、乘法、记忆、拼音；覆盖内容、mount、一次主交互、exit、双视口、焦点、console/asset/network。
+
+## 下一阶段
+
+`GAME-CODEX-MATH-WORLD-02`：先建立有真实内容的数学世界骨架，再逐个接入时钟、乘法与目标数模块；算式滑轨继续保留独立旗舰入口。

@@ -2,7 +2,7 @@ import { expect, test, type Locator, type Page } from "@playwright/test";
 
 const BOARD = "[data-equation-board]";
 const ACTIONS = "[data-primary-actions]";
-const AFTER_DIR = "docs/screenshots/equation-slider/rebuild-v3/after";
+const AFTER_DIR = "test-results/equation-slider/formal-screenshots";
 
 const VIEWPORTS = [
   { name: "360x800", width: 360, height: 800, expectedBoardHeight: 252 },

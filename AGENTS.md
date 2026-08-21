@@ -52,3 +52,11 @@ Keep final evidence proportional to risk; do not generate large process packs fo
 ## Git
 
 Stay on the current branch, preserve unrelated work, and normally make one final commit and one push. Do not rewrite history, force-push, or modify existing tags without explicit authorization.
+
+## Task closure and cleanup
+
+- Use `tmp/tasks/<TASK_ID>/` for non-trivial task discovery, working files, tests, screenshots, reports, and package staging; none of these process files enter Git.
+- Validate the final source tree before creating one return package. Then run the maintenance cleanup plan, apply, and verify stages.
+- Confirm the final return ZIP bytes and SHA-256 are unchanged by cleanup, remove every task T3 transient, and retain only the current handoff.
+- A blocked task may retain only the minimum recovery diagnostics and one blocked ZIP. Never accumulate round, retry, or changed-only packages.
+- Maintenance deletion uses explicit manifest paths and hashes, never broad globs. Routine QA remains Codex's responsibility.

@@ -1,4 +1,5 @@
-export { gameCatalog } from "./gameCatalog";
+export { currentClassicGameCatalog, gameCatalog } from "./gameCatalog";
+export * from "./gamePortfolio";
 export {
   englishWordCategories,
   englishWords,

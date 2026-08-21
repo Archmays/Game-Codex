@@ -1,21 +1,52 @@
-name: Deploy GitHub Pages
+name: Portfolio CI
 
 on:
+  pull_request:
   push:
     branches: [main]
-  workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: portfolio-ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build:
+  deterministic-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full comparison history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify portfolio manifest and generated documentation
+        run: pnpm run portfolio:check
+
+      - name: Resolve affected gate tier
+        run: pnpm run test:portfolio:affected -- --base "${{ github.event.pull_request.base.sha || github.event.before }}" --head "${{ github.sha }}"
+
+      - name: Run unit, content, and maintenance safety tests
+        run: pnpm test
+
+      - name: Typecheck and production build
+        run: pnpm build
+
+  all-game-smoke:
+    needs: deterministic-gates
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,46 +64,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Verify portfolio manifest and generated documentation
-        run: pnpm run portfolio:check
-
-      - name: Run unit, content, and maintenance safety tests
-        run: pnpm test
-
-      - name: Build static site
-        run: pnpm build
-        env:
-          VITE_BUILD_COMMIT: ${{ github.sha }}
-
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
 
-      - name: Exercise the exact production build across the portfolio
+      - name: Exercise all games and public routes in both viewports
         run: pnpm run test:portfolio:smoke
-        env:
-          PORTFOLIO_SMOKE_PREVIEW: "1"
 
       - name: Upload failure evidence only
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: pages-portfolio-failure-${{ github.sha }}
+          name: portfolio-smoke-failure-${{ github.sha }}
           path: test-results/portfolio-smoke
           if-no-files-found: ignore
           retention-days: 7
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4

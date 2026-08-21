@@ -1,6 +1,6 @@
 import type { GameDefinition, MountedGame } from "../../packages/game-core";
 import { createLocalStorageStore } from "../../packages/game-core";
-import { gameCatalog } from "../../packages/data/gameCatalog";
+import { currentClassicGameCatalog } from "../../packages/data/gameCatalog";
 import { clearElement, createButton, createPanel } from "../../packages/ui";
 import { ALL_SUBJECTS_FILTER, getSubjectFilters } from "./filters";
 
@@ -28,7 +28,7 @@ export function mountHub(root: HTMLElement): MountedGame {
     const filters = document.createElement("nav");
     filters.className = "hub-filters";
     filters.setAttribute("aria-label", "按学科筛选游戏");
-    for (const subject of getSubjectFilters(gameCatalog)) {
+    for (const subject of getSubjectFilters(currentClassicGameCatalog)) {
       const isActive = subject === selectedSubject;
       const button = createButton(subject, () => {
         selectedSubject = subject;
@@ -44,8 +44,8 @@ export function mountHub(root: HTMLElement): MountedGame {
     grid.className = "hub-grid";
 
     const visibleGames = selectedSubject === ALL_SUBJECTS_FILTER
-      ? gameCatalog
-      : gameCatalog.filter((game) => game.subject === selectedSubject);
+      ? currentClassicGameCatalog
+      : currentClassicGameCatalog.filter((game) => game.subject === selectedSubject);
 
     for (const game of visibleGames) {
       grid.append(createGameCard(game, () => openGame(game)));
@@ -97,6 +97,7 @@ export function mountHub(root: HTMLElement): MountedGame {
 
 function createGameCard(game: GameDefinition, onPlay: () => void): HTMLElement {
   const card = createPanel("game-card");
+  card.dataset.gameId = game.id;
 
   if (game.id === "hanzi-radical-battle") {
     card.classList.add("game-card--ink-forest");

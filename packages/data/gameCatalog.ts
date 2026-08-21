@@ -8,6 +8,7 @@ import { mathLabGame } from "../../games/math-lab";
 import { memoryCardGame } from "../../games/memory-card";
 import { multiplicationAdventureGame } from "../../games/multiplication-adventure";
 import { pinyinMagicBattleGame } from "../../games/pinyin-magic-battle";
+import { GAME_PORTFOLIO_BY_ID } from "./gamePortfolio";
 
 export const gameCatalog: GameDefinition[] = [
   memoryCardGame,
@@ -20,3 +21,7 @@ export const gameCatalog: GameDefinition[] = [
   equationSliderGame,
   pinyinMagicBattleGame
 ];
+
+export const currentClassicGameCatalog: GameDefinition[] = gameCatalog.filter(
+  (game) => GAME_PORTFOLIO_BY_ID.get(game.id)?.currentStandaloneVisible === true,
+);

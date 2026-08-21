@@ -55,7 +55,15 @@
     "verify:pages:hanzi-complete": "tsx tools/hanzi-magic-complete/verify-pages.ts",
     "test:launcher:hanzi-complete": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File tools/hanzi-magic-complete/test-launcher-lifecycle.ps1",
     "source-hash:hanzi-complete": "tsx tools/hanzi-magic-complete/source-identity.ts",
-    "package:hanzi-complete": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File tools/hanzi-magic-complete/package-complete.ps1"
+    "package:hanzi-complete": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File tools/hanzi-magic-complete/package-complete.ps1",
+    "portfolio:generate": "tsx tools/portfolio/generate-portfolio-docs.ts",
+    "portfolio:check": "tsx tools/portfolio/check-portfolio.ts",
+    "test:portfolio:smoke": "playwright test --config playwright.portfolio.config.ts",
+    "test:portfolio:affected": "tsx tools/portfolio/affected-gates.ts",
+    "maintenance:inventory": "tsx tools/maintenance/repository-maintenance.ts inventory",
+    "maintenance:cleanup": "tsx tools/maintenance/repository-maintenance.ts cleanup",
+    "maintenance:verify": "tsx tools/maintenance/repository-maintenance.ts verify",
+    "maintenance:close-task": "tsx tools/maintenance/repository-maintenance.ts close-task"
   },
   "dependencies": {
     "phaser": "^3.90.0"
