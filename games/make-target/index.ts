@@ -1,107 +1,160 @@
 import type { GameDefinition, MountGameContext, MountedGame } from "../../packages/game-core";
 import { clearElement, createButton, createFeedbackBanner, createStatus, playFeedbackSound } from "../../packages/ui";
 import type { FeedbackState } from "../../packages/ui";
-
-type TargetMode = 10 | 12 | 24;
-type Operator = "+" | "-" | "×" | "÷";
-
-interface NumberCard {
-  id: string;
-  value: number;
-  expression: string;
-}
+import {
+  applyTargetOperation,
+  cloneExpr,
+  createTargetCards,
+  formatExpr,
+  formatOperationEquation,
+  type TargetCard,
+  type TargetOperator,
+} from "./model";
+import { puzzlesForTarget, type TargetMode, type TargetPuzzleManifestEntry } from "./puzzles";
+import { solveTarget } from "./solver";
 
 interface ActionSnapshot {
-  cards: NumberCard[];
-  equation: string;
+  cards: TargetCard[];
+  equations: string[];
+  nextCardNumber: number;
 }
 
 interface MakeTargetSave {
   wins: number;
+  completedPuzzleIds?: string[];
 }
+
+const OPERATORS: readonly TargetOperator[] = ["+", "-", "×", "÷"];
 
 export const makeTargetGame: GameDefinition = {
   id: "make-target",
-  title: "凑10算12算24",
-  description: "选择数字和运算符，把一手牌一步步合成目标数。",
+  title: "目标工坊",
+  description: "依次选择两张数字牌，用四则运算把四张牌合成目标数。",
   subject: "数学",
   recommendedAge: "7-10 岁",
-  learningGoal: "练习数感、四则运算顺序和目标数推理。",
-  status: "可玩",
-  playLabel: "开始凑数",
+  learningGoal: "练习数感、运算顺序、括号表达和目标数推理。",
+  status: "数学世界模块",
+  playLabel: "进入工坊",
   mount(context: MountGameContext): MountedGame {
     return mountMakeTarget(context);
-  }
+  },
 };
 
 function mountMakeTarget(context: MountGameContext): MountedGame {
   const root = document.createElement("section");
   root.className = "learning-game make-target-game";
+  root.dataset.testid = "target-workshop";
   context.container.append(root);
 
   let target: TargetMode = 10;
-  let cards: NumberCard[] = [];
+  const puzzleIndexByTarget: Record<TargetMode, number> = { 10: 0, 12: 0, 24: 0 };
+  let puzzle: TargetPuzzleManifestEntry = puzzlesForTarget(target)[0];
+  let cards: TargetCard[] = [];
   let selectedIds: string[] = [];
-  let operator: Operator = "+";
-  let feedback: FeedbackState = { kind: "info", text: "选两张数字牌，再选择运算。" };
+  let operator: TargetOperator = "+";
+  let feedback: FeedbackState = { kind: "info", text: "按顺序选两张牌，再选择运算。" };
   let history: ActionSnapshot[] = [];
+  let equations: string[] = [];
+  let hintLevel = 0;
+  let nextCardNumber = 1;
   const save = context.storage.get<MakeTargetSave>("progress", { wins: 0 });
 
   const render = (): void => {
     clearElement(root);
-    root.append(createHeader("凑数探险", "用两张牌合成新数字，最后得到目标。"));
+    root.append(createHeader("目标工坊", "四张牌每张只用一次。减法看顺序，除法必须整除。"));
 
     const toolbar = document.createElement("div");
     toolbar.className = "learning-game__toolbar";
+    toolbar.setAttribute("aria-label", "选择目标数");
     for (const value of [10, 12, 24] as TargetMode[]) {
-      toolbar.append(createButton(`凑 ${value}`, () => {
+      const targetButton = createButton(`目标 ${value}`, () => {
+        if (value === target) return;
         target = value;
-        startRound();
+        startPuzzle(false);
       }, {
-        className: value === target ? "ui-button learning-game__pill is-active" : "ui-button learning-game__pill"
-      }));
+        className: value === target ? "ui-button learning-game__pill is-active" : "ui-button learning-game__pill",
+      });
+      targetButton.setAttribute("aria-pressed", String(value === target));
+      toolbar.append(targetButton);
     }
 
-    const stats = document.createElement("div");
-    stats.className = "learning-game__stats";
-    stats.append(createStatus("目标", target), createStatus("剩余牌", cards.length), createStatus("成功", save.wins));
+    const status = document.createElement("div");
+    status.className = "learning-game__stats";
+    status.append(createStatus("目标", target), createStatus("手中牌", cards.length));
+
+    const orderGuide = document.createElement("p");
+    orderGuide.className = "make-target-order-guide";
+    orderGuide.textContent = selectedIds.length === 0
+      ? "先选左边的数，再选右边的数。"
+      : selectedIds.length === 1
+        ? "已选左边；现在选右边的数。"
+        : "两张牌已按左、右排好。需要时可以交换顺序。";
 
     const cardGrid = document.createElement("div");
     cardGrid.className = "make-target-cards";
+    cardGrid.dataset.testid = "target-cards";
     for (const card of cards) {
-      cardGrid.append(createNumberCardButton(card, selectedIds.includes(card.id), () => toggleCard(card.id)));
+      const position = selectedIds.indexOf(card.id);
+      cardGrid.append(createNumberCardButton(card, position, () => toggleCard(card.id)));
     }
 
     const ops = document.createElement("div");
     ops.className = "make-target-ops";
-    for (const op of getOperators(target)) {
-      ops.append(createButton(op, () => {
+    ops.setAttribute("aria-label", "选择运算符");
+    for (const op of OPERATORS) {
+      const operatorButton = createButton(op, () => {
         operator = op;
         render();
       }, {
-        className: op === operator ? "ui-button learning-game__pill is-active" : "ui-button learning-game__pill"
-      }));
+        className: op === operator ? "ui-button learning-game__pill is-active" : "ui-button learning-game__pill",
+      });
+      operatorButton.setAttribute("aria-pressed", String(op === operator));
+      ops.append(operatorButton);
     }
 
     const actions = document.createElement("div");
     actions.className = "learning-game__actions";
     actions.append(
       createButton("合并", combineSelected),
-      createButton("撤销", undo, { className: "ui-button ui-button--secondary", disabled: history.length === 0 }),
-      createButton("重来", startRound, { className: "ui-button ui-button--secondary" })
+      createButton("交换左右", swapSelection, {
+        className: "ui-button ui-button--secondary",
+        disabled: selectedIds.length !== 2,
+      }),
+      createButton("撤销一步", undo, { className: "ui-button ui-button--secondary", disabled: history.length === 0 }),
+      createButton("给我一点提示", revealHint, { className: "ui-button ui-button--secondary" }),
+      createButton("换一组牌", nextPuzzle, { className: "ui-button ui-button--secondary" }),
     );
 
-    root.append(toolbar, stats, cardGrid, ops, createPreview(), actions, createHistoryList(), createFeedbackBanner(feedback));
+    root.append(
+      toolbar,
+      status,
+      orderGuide,
+      cardGrid,
+      ops,
+      createPreview(),
+      actions,
+      createHintPanel(),
+      createHistoryList(),
+      createFeedbackBanner(feedback),
+    );
   };
 
-  const startRound = (): void => {
-    cards = generateSolvableCards(target);
+  const startPuzzle = (advance: boolean): void => {
+    const candidates = puzzlesForTarget(target);
+    if (advance) puzzleIndexByTarget[target] = (puzzleIndexByTarget[target] + 1) % candidates.length;
+    puzzle = candidates[puzzleIndexByTarget[target]];
+    cards = createTargetCards(puzzle.id, puzzle.cards);
     selectedIds = [];
     operator = "+";
     history = [];
-    feedback = { kind: "info", text: "选两张数字牌，再选择运算。" };
+    equations = [];
+    hintLevel = 0;
+    nextCardNumber = 1;
+    feedback = { kind: "info", text: "按顺序选两张牌，再选择运算。" };
     render();
   };
+
+  const nextPuzzle = (): void => startPuzzle(true);
 
   const toggleCard = (id: string): void => {
     if (selectedIds.includes(id)) {
@@ -112,44 +165,61 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
     render();
   };
 
+  const swapSelection = (): void => {
+    if (selectedIds.length !== 2) return;
+    selectedIds = [selectedIds[1], selectedIds[0]];
+    feedback = { kind: "info", text: "左右顺序已经交换。" };
+    render();
+  };
+
   const combineSelected = (): void => {
     if (selectedIds.length !== 2) {
-      feedback = { kind: "info", text: "需要先选两张牌。" };
+      feedback = { kind: "info", text: "需要按顺序选两张牌。" };
       render();
       return;
     }
 
     const first = cards.find((card) => card.id === selectedIds[0]);
     const second = cards.find((card) => card.id === selectedIds[1]);
-    if (!first || !second) {
-      return;
-    }
+    if (!first || !second) return;
 
-    const result = calculate(first.value, second.value, operator);
-    if (result === null) {
-      feedback = { kind: "error", text: "这两张牌不能这样整除，换个运算试试。" };
+    const result = applyTargetOperation(first.expr, second.expr, operator);
+    if (!result) {
+      feedback = operator === "-"
+        ? { kind: "error", text: "左边的数要不小于右边；可以交换左右再试。" }
+        : { kind: "error", text: "这一步不能整除；可以换顺序、换运算或撤销。" };
       playFeedbackSound("error");
       render();
       return;
     }
 
-    const equation = `${first.expression} ${operator} ${second.expression} = ${formatCardValue(result)}`;
-    history = [{ cards: [...cards], equation }, ...history];
+    history = [{
+      cards: cards.map((card) => ({ ...card, expr: cloneExpr(card.expr) })),
+      equations: [...equations],
+      nextCardNumber,
+    }, ...history];
+    equations = [...equations, formatOperationEquation(result)];
     cards = cards.filter((card) => !selectedIds.includes(card.id));
-    cards.push({
-      id: crypto.randomUUID(),
-      value: result,
-      expression: `(${first.expression} ${operator} ${second.expression})`
-    });
+    cards.push({ id: `${puzzle.id}-combined-${nextCardNumber}`, expr: result });
+    nextCardNumber += 1;
     selectedIds = [];
+    hintLevel = 0;
 
-    if (cards.length === 1 && cards[0].value === target) {
-      save.wins += 1;
-      context.storage.set("progress", save);
-      feedback = { kind: "success", text: `成功凑出 ${target}。` };
+    if (cards.length === 1 && cards[0].expr.value === target) {
+      const completed = new Set(save.completedPuzzleIds ?? []);
+      if (!completed.has(puzzle.id)) {
+        completed.add(puzzle.id);
+        save.wins += 1;
+        save.completedPuzzleIds = [...completed].sort();
+        context.storage.set("progress", save);
+      }
+      feedback = { kind: "success", text: `成功凑出 ${target}。可以看看完整算式，或换一组继续。` };
       playFeedbackSound("success");
+    } else if (cards.length === 1) {
+      feedback = { kind: "info", text: `最后得到 ${cards[0].expr.value}。可以撤销一步，再换一种组合。` };
+      playFeedbackSound("info");
     } else {
-      feedback = { kind: "success", text: `合并得到 ${formatCardValue(result)}，继续凑目标。` };
+      feedback = { kind: "success", text: `这一步得到 ${result.value}。继续想想下一对。` };
       playFeedbackSound("info");
     }
     render();
@@ -157,61 +227,105 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
 
   const undo = (): void => {
     const previous = history.shift();
-    if (!previous) {
+    if (!previous) return;
+    cards = previous.cards.map((card) => ({ ...card, expr: cloneExpr(card.expr) }));
+    equations = [...previous.equations];
+    nextCardNumber = previous.nextCardNumber;
+    selectedIds = [];
+    hintLevel = 0;
+    feedback = { kind: "info", text: "已回到合并前，牌和算式都恢复了。" };
+    render();
+  };
+
+  const revealHint = (): void => {
+    const solved = solveTarget(cards.map((card) => card.expr), target);
+    if (!solved.solvable || !solved.legalNextMoves[0]) {
+      feedback = { kind: "info", text: history.length > 0 ? "这里没有通路了，撤销一步会更有帮助。" : "换一组牌再试试。" };
+      render();
       return;
     }
-    cards = previous.cards;
-    selectedIds = [];
-    feedback = { kind: "info", text: "已撤销一步。" };
+    hintLevel = Math.min(4, hintLevel + 1);
     render();
   };
 
   const createPreview = (): HTMLElement => {
     const preview = document.createElement("section");
     preview.className = "make-target-preview";
-    const selected = selectedIds.map((id) => cards.find((card) => card.id === id)).filter((card): card is NumberCard => Boolean(card));
+    preview.dataset.testid = "target-preview";
+    const selected = selectedIds.map((id) => cards.find((card) => card.id === id)).filter((card): card is TargetCard => Boolean(card));
     if (selected.length !== 2) {
-      preview.textContent = "预览：先选两张牌。";
+      preview.textContent = "预览：先按左右顺序选两张牌。";
       return preview;
     }
-
-    const result = calculate(selected[0].value, selected[1].value, operator);
-    preview.textContent = result === null
-      ? `预览：${selected[0].expression} ${operator} ${selected[1].expression} 不能整除`
-      : `预览：${selected[0].expression} ${operator} ${selected[1].expression} = ${formatCardValue(result)}`;
+    const result = applyTargetOperation(selected[0].expr, selected[1].expr, operator);
+    preview.textContent = result
+      ? `预览：${formatOperationEquation(result)}`
+      : operator === "-"
+        ? "预览：左边小于右边，不能这样相减。"
+        : "预览：这两个数不能这样整除。";
     return preview;
+  };
+
+  const createHintPanel = (): HTMLElement => {
+    const panel = document.createElement("section");
+    panel.className = "make-target-hint";
+    panel.dataset.testid = "target-hint";
+    const title = document.createElement("strong");
+    title.textContent = "提示台";
+    panel.append(title);
+    if (hintLevel === 0) {
+      panel.append(" 提示会逐层展开，不会直接展示整题答案。");
+      return panel;
+    }
+    const move = solveTarget(cards.map((card) => card.expr), target).legalNextMoves[0];
+    if (!move) {
+      panel.append(" 当前组合没有通路，可以撤销一步。");
+      return panel;
+    }
+    const parts = [
+      "先留意哪两个数之间有容易看见的关系。",
+      `可以先选 ${move.leftExpression}，再选 ${move.rightExpression}。`,
+      `这一步可以试试“${move.op}”。`,
+      `第一步可写成：${move.leftExpression} ${move.op} ${move.rightExpression} = ${move.value}。`,
+    ];
+    const list = document.createElement("ol");
+    for (const itemText of parts.slice(0, hintLevel)) {
+      const item = document.createElement("li");
+      item.textContent = itemText;
+      list.append(item);
+    }
+    panel.append(list);
+    return panel;
   };
 
   const createHistoryList = (): HTMLElement => {
     const list = document.createElement("section");
     list.className = "make-target-history";
     const title = document.createElement("strong");
-    title.textContent = "合并记录";
+    title.textContent = "算式记录";
     list.append(title);
-
-    if (history.length === 0) {
+    if (equations.length === 0) {
       const empty = document.createElement("span");
-      empty.textContent = "还没有合并步骤。";
+      empty.textContent = " 还没有合并步骤。";
       list.append(empty);
       return list;
     }
-
     const steps = document.createElement("ol");
-    for (const item of [...history].reverse()) {
+    for (const equation of equations) {
       const step = document.createElement("li");
-      step.textContent = item.equation;
+      step.textContent = equation;
       steps.append(step);
     }
     list.append(steps);
     return list;
   };
 
-  startRound();
+  startPuzzle(false);
 
   return {
     destroy(): void {
       root.remove();
-    }
+    },
   };
 }
 
@@ -226,89 +340,30 @@ function createHeader(titleText: string, introText: string): HTMLElement {
   return header;
 }
 
-function createNumberCardButton(card: NumberCard, selected: boolean, onClick: () => void): HTMLButtonElement {
+function createNumberCardButton(card: TargetCard, selectedPosition: number, onClick: () => void): HTMLButtonElement {
+  const selected = selectedPosition >= 0;
   const button = createButton("", onClick, {
-    className: selected ? "ui-button make-target-card is-selected" : "ui-button make-target-card"
+    className: selected ? "ui-button make-target-card is-selected" : "ui-button make-target-card",
   });
+  button.setAttribute("aria-pressed", String(selected));
+  button.dataset.cardId = card.id;
+  const order = document.createElement("span");
+  order.className = "make-target-card__order";
+  order.textContent = selectedPosition === 0 ? "左" : selectedPosition === 1 ? "右" : "";
   const expression = document.createElement("span");
-  expression.textContent = card.expression;
+  expression.textContent = formatExpr(card.expr);
   const value = document.createElement("strong");
-  value.textContent = `= ${formatCardValue(card.value)}`;
-  button.append(expression, value);
+  value.textContent = `= ${formatCardValue(card.expr.value)}`;
+  button.append(order, expression, value);
   return button;
 }
 
-function generateSolvableCards(target: TargetMode): NumberCard[] {
-  for (let attempt = 0; attempt < 500; attempt += 1) {
-    const values = Array.from({ length: 4 }, () => Math.floor(Math.random() * 10) + 1);
-    if (canReachTarget(values, target, target === 24)) {
-      return values.map((value, index) => ({
-        id: `${Date.now()}-${attempt}-${index}`,
-        value,
-        expression: String(value)
-      }));
-    }
-  }
-
-  return [1, 2, 3, target - 6].map((value, index) => ({
-    id: `fallback-${index}`,
-    value,
-    expression: String(value)
-  }));
-}
-
-function canReachTarget(values: number[], target: number, allowDivision: boolean): boolean {
-  if (values.length === 1) {
-    return values[0] === target;
-  }
-
-  for (let i = 0; i < values.length; i += 1) {
-    for (let j = i + 1; j < values.length; j += 1) {
-      const rest = values.filter((_, index) => index !== i && index !== j);
-      for (const result of getPossibleResults(values[i], values[j], allowDivision)) {
-        if (canReachTarget([...rest, result], target, allowDivision)) {
-          return true;
-        }
-      }
-    }
-  }
-  return false;
-}
-
-function getPossibleResults(a: number, b: number, allowDivision: boolean): number[] {
-  const results = [a + b, Math.abs(a - b), a * b];
-  if (allowDivision) {
-    if (b !== 0 && a % b === 0) {
-      results.push(a / b);
-    }
-    if (a !== 0 && b % a === 0) {
-      results.push(b / a);
-    }
-  }
-  return results;
-}
-
-function getOperators(target: TargetMode): Operator[] {
-  return target === 24 ? ["+", "-", "×", "÷"] : ["+", "-", "×"];
-}
-
-export function calculate(a: number, b: number, operator: Operator): number | null {
-  if (operator === "+") {
-    return a + b;
-  }
-  if (operator === "-") {
-    return Math.abs(a - b);
-  }
-  if (operator === "×") {
-    return a * b;
-  }
-  if (b !== 0 && a % b === 0) {
-    return a / b;
-  }
-  if (a !== 0 && b % a === 0) {
-    return b / a;
-  }
-  return null;
+export function calculate(a: number, b: number, operator: TargetOperator): number | null {
+  return applyTargetOperation(
+    { kind: "literal", value: a, sourceCardId: "legacy-left" },
+    { kind: "literal", value: b, sourceCardId: "legacy-right" },
+    operator,
+  )?.value ?? null;
 }
 
 export function formatCardValue(value: number): string {

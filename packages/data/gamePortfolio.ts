@@ -3,12 +3,14 @@ export type ProductRole = "flagship" | "core-world" | "independent-puzzle" | "mo
 export type QualityTier = "S" | "A" | "B" | "C";
 export type LifecycleStatus =
   | "active"
+  | "active-module"
   | "active-maintenance"
   | "flagship-candidate"
   | "architecture-consolidation-candidate"
   | "module-candidate"
   | "shared-engine-candidate"
-  | "migrate-then-retire-standalone";
+  | "migrate-then-retire-standalone"
+  | "migrated-module";
 export type LoadingPolicy = "current-eager" | "route-lazy" | "mixed";
 export type TestProfileId = "s-hanzi-release" | "s-equation-release" | "a-core-world" | "b-independent-puzzle" | "c-module";
 
@@ -60,9 +62,9 @@ export const GAME_PORTFOLIO: readonly GamePortfolioRecord[] = [
     canonicalDocs: ["docs/equation-slider/rebuild-v3/11-final-acceptance-report.md", "docs/equation-slider/rebuild-v3/12-final-reflection.md"],
   },
   {
-    id: "math-lab", targetWorld: "math", productRole: "core-world", qualityTier: "A", lifecycleStatus: "architecture-consolidation-candidate",
-    currentStandaloneVisible: true, targetStandaloneVisible: true, mergeTarget: "math-world", saveNamespaces: ["math-battle-web/save-v1"],
-    testProfile: "a-core-world", loadingPolicy: "current-eager", canonicalDocs: ["games/math-lab/README.md", "docs/math-lab-deep-research-brief.md"],
+    id: "math-lab", targetWorld: "math", productRole: "core-world", qualityTier: "A", lifecycleStatus: "active",
+    currentStandaloneVisible: true, targetStandaloneVisible: true, mergeTarget: "math-world", canonicalRoute: "?world=math-world&from=hub", saveNamespaces: ["family-games/math-world/v1", "math-battle-web/save-v1"],
+    testProfile: "a-core-world", loadingPolicy: "route-lazy", canonicalDocs: ["games/math-lab/README.md", "docs/math-lab-deep-research-brief.md"],
   },
   {
     id: "english-spell-battle", targetWorld: "english", productRole: "core-world", qualityTier: "A", lifecycleStatus: "flagship-candidate",
@@ -75,14 +77,14 @@ export const GAME_PORTFOLIO: readonly GamePortfolioRecord[] = [
     testProfile: "b-independent-puzzle", loadingPolicy: "current-eager", canonicalDocs: ["games/make-target/README.md"],
   },
   {
-    id: "clock-reader", targetWorld: "math", productRole: "module", qualityTier: "C", lifecycleStatus: "module-candidate",
-    currentStandaloneVisible: true, targetStandaloneVisible: false, mergeTarget: "math-world/clock-tower", saveNamespaces: ["family-games/clock-reader"],
-    testProfile: "c-module", loadingPolicy: "current-eager", canonicalDocs: ["games/clock-reader/README.md"],
+    id: "clock-reader", targetWorld: "math", productRole: "module", qualityTier: "C", lifecycleStatus: "active-module",
+    currentStandaloneVisible: false, targetStandaloneVisible: false, mergeTarget: "math-world/clock-tower", saveNamespaces: ["family-games/clock-reader"],
+    testProfile: "c-module", loadingPolicy: "route-lazy", canonicalDocs: ["games/clock-reader/README.md"],
   },
   {
-    id: "multiplication-adventure", targetWorld: "math", productRole: "module", qualityTier: "C", lifecycleStatus: "migrate-then-retire-standalone",
-    currentStandaloneVisible: true, targetStandaloneVisible: false, mergeTarget: "math-world/multiplication-workshop", saveNamespaces: ["family-games/multiplication-adventure"],
-    testProfile: "c-module", loadingPolicy: "current-eager", canonicalDocs: ["games/multiplication-adventure/README.md"],
+    id: "multiplication-adventure", targetWorld: "math", productRole: "module", qualityTier: "C", lifecycleStatus: "migrated-module",
+    currentStandaloneVisible: false, targetStandaloneVisible: false, mergeTarget: "math-world/array-workshop", saveNamespaces: ["family-games/multiplication-adventure"],
+    testProfile: "c-module", loadingPolicy: "route-lazy", canonicalDocs: ["games/multiplication-adventure/README.md"],
   },
   {
     id: "memory-card", targetWorld: "shared", productRole: "module", qualityTier: "C", lifecycleStatus: "shared-engine-candidate",

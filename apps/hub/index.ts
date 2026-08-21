@@ -112,6 +112,19 @@ function createGameCard(game: GameDefinition, onPlay: () => void): HTMLElement {
     return card;
   }
 
+  if (game.id === "math-lab") {
+    card.classList.add("game-card--math-world");
+    const title = document.createElement("h2");
+    title.textContent = game.title;
+    const worldArt = document.createElement("img");
+    worldArt.className = "game-card__world-art";
+    worldArt.src = "./assets/math-world/math-world-city-background.webp";
+    worldArt.alt = "明亮的数学实验城市，里面有苹果园、钟楼、方格工坊、数字牌屋和火车站";
+    const button = createButton(game.playLabel ?? "进入数学世界", onPlay, { className: "ui-button game-card__button" });
+    card.append(title, worldArt, button);
+    return card;
+  }
+
   const meta = document.createElement("div");
   meta.className = "game-card__meta";
 

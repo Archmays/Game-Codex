@@ -1,4 +1,4 @@
-# 凑10算12算24
+# 目标工坊
 
 ## 游戏目标
 
@@ -11,7 +11,7 @@
 
 ## 玩法说明
 
-抽取 4 张数字牌，选择两张数字和一个运算符进行合并，直到凑成目标数。
+从确定性题库取得 4 张牌，按左、右顺序选择操作数，再用加减乘除合并。减法不取绝对值，除法不静默换序且必须整除；每张合成牌携带可精确复算的 AST。
 
 ## 涉及知识点
 
@@ -27,14 +27,15 @@
 
 ## 当前完成度
 
-可玩。已接入大厅，支持凑 10、凑 12 和凑 24 模式，并保存成功次数。
+V1.0.0 支持目标 10、12、24、完整撤销和四层提示。提示来自 solver graph，只逐层展示关系、牌对、运算或第一步，不直接给完整答案。
 
 ## 后续改进建议
 
-- 增加提示功能，展示可能的第一步。
-- 增加题目可解性检查或精选题库。
+- 发布 manifest 为每个目标提供 4 题，并记录解数量、难度、canonical solution 与合法第一步。
+- 系统测试覆盖 1..10 的全部 4-card multisets × 3 个目标（2,145 组）。
 
 ## 接入方式
 
 - 导出：`makeTargetGame`。
-- 注册位置：`packages/data/gameCatalog.ts`。
+- 同一 AST、solver、manifest 和 `family-games/make-target` save 同时服务 Classic 与 Math World。
+- Math World station：`?world=math-world&station=target`。

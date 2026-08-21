@@ -120,25 +120,11 @@ export const achievementDefinitions: AchievementDefinition[] = [
     evidenceText: "用减法完成数量调整，能判断多了多少。"
   },
   {
-    id: "star_collector",
-    title: "星星收藏家",
-    description: "累计展示 9 颗星的稳定练习记录。",
-    stickerLabel: "星星贴纸",
-    evidenceText: "累计 9 颗星，留下多次稳定练习记录。"
-  },
-  {
     id: "map_explorer",
     title: "地图探险家",
     description: "自由探索 5 组数学场景。",
     stickerLabel: "地图贴纸",
     evidenceText: "自由探索 5 组，尝试不同数学策略。"
-  },
-  {
-    id: "three_day_streak",
-    title: "三天坚持",
-    description: "连续 3 天完成数学场景。",
-    stickerLabel: "坚持贴纸",
-    evidenceText: "连续 3 天练习，保持温和复练节奏。"
   }
 ];
 
@@ -193,8 +179,6 @@ export function applyStageCompletion(
   today.mistakes += mistakes;
   today.starsEarned += Math.max(0, stars - previousBestStars);
   save.dailyProgress[completedDate] = today;
-
-  updateStreak(save, completedDate);
 
   const newStickerLabels: string[] = [];
   if (metadata.stageRewardStickerId && !save.earnedStickerIds.includes(metadata.stageRewardStickerId)) {
@@ -510,9 +494,7 @@ function evaluateNewAchievements(
     ["brave_no_hint", context.hintsUsed === 0],
     ["combo_builder", context.usedCombo],
     ["subtraction_helper", context.usedSubtraction],
-    ["star_collector", getTotalStars(save) >= 9],
-    ["map_explorer", completedStages >= 5],
-    ["three_day_streak", save.currentStreak >= 3]
+    ["map_explorer", completedStages >= 5]
   ];
 
   return checks.filter(([id, earned]) => earned && !save.achievements[id]).map(([id]) => id);
@@ -675,15 +657,15 @@ function getSupportText(today: SaveData["dailyProgress"][string]): string {
   }
 
   if (today.hintsUsed === 0 && today.mistakes === 0) {
-    return "今天能独立完成，提示依赖较低。";
+    return "今天能独立完成，可以继续保留观察和试验的空间。";
   }
 
   if (today.hintsUsed >= today.completedStages) {
-    return "今天提示使用较多，适合从轻提示开始复练。";
+    return "今天使用过提示，下一次可以先给轻提示，再等一等。";
   }
 
   if (today.mistakes > 0) {
-    return "今天有失误修正，建议复练同类题巩固策略。";
+    return "今天调整过一些步骤，可以用同类场景再比较一种方法。";
   }
 
   return "今天练习较平稳，可以自由选择下一组。";
@@ -708,28 +690,6 @@ function getRecommendationReasonText(save: SaveData, recommendation: PracticeRec
   }
 
   return `原因：${recommendation.skillLabel}是后续题常用策略，复练能让步骤更清楚。`;
-}
-
-function updateStreak(save: SaveData, completedDate: string): void {
-  if (!save.lastPlayDate) {
-    save.currentStreak = 1;
-    save.lastPlayDate = completedDate;
-    return;
-  }
-
-  if (save.lastPlayDate === completedDate) {
-    return;
-  }
-
-  save.currentStreak = isNextDay(save.lastPlayDate, completedDate) ? save.currentStreak + 1 : 1;
-  save.lastPlayDate = completedDate;
-}
-
-function isNextDay(previousDate: string, currentDate: string): boolean {
-  const previous = new Date(`${previousDate}T00:00:00`);
-  const current = new Date(`${currentDate}T00:00:00`);
-  previous.setDate(previous.getDate() + 1);
-  return formatLocalDate(previous) === formatLocalDate(current);
 }
 
 function formatLocalDate(date: Date): string {
@@ -763,8 +723,8 @@ function getWrongTypeLabel(type: string): string {
   const labels: Record<string, string> = {
     overshoot: "容易算得比目标大，建议多练“差多少”。",
     undershoot: "容易算得比目标小，建议多练补数。",
-    combo_hit: "两步计划失误较多，建议复练先靠近、再完成的题。",
-    precision_hit: "一步调整失误较多，建议复练基础加减。"
+    combo_hit: "两步计划最近需要再看看，可以比较“先靠近、再完成”的方法。",
+    precision_hit: "一步调整最近需要再看看，可以从具体数量开始比较。"
   };
 
   return labels[type] ?? `需要复练：${type}`;
@@ -778,7 +738,7 @@ function getNextSuggestion(save: SaveData, stages: StageDefinition[]): string {
 
   const lowStarStage = stages.find((stage) => (save.stages[stage.id]?.stars ?? 0) > 0 && (save.stages[stage.id]?.stars ?? 0) < 3);
   if (lowStarStage) {
-    return `可以复练“${lowStarStage.title}”，争取更多星星。`;
+    return `可以再看看“${lowStarStage.title}”，尝试另一种方法。`;
   }
 
   return "今天可以任选一组短场景保持手感。";

@@ -70,11 +70,16 @@ jobs:
       - name: Exercise all games and public routes in both viewports
         run: pnpm run test:portfolio:smoke
 
+      - name: Exercise Math World routes, interactions, saves, and lifecycle
+        run: pnpm run test:e2e:math-world
+
       - name: Upload failure evidence only
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: portfolio-smoke-failure-${{ github.sha }}
-          path: test-results/portfolio-smoke
+          path: |
+            test-results/portfolio-smoke
+            test-results/math-world
           if-no-files-found: ignore
           retention-days: 7

@@ -52,7 +52,8 @@ describe("game catalog", () => {
     expect(equationSliderReadme).toContain("200 份 V3 schema 关卡");
     expect(equationSliderReadme).toContain("40 个手工金标准");
     const rootReadme = readFileSync("README.md", "utf8");
-    expect(rootReadme).toContain("当前收录 9 个游戏");
+    expect(rootReadme).toContain("保留 9 个可挂载定义");
+    expect(rootReadme).toContain("经典大厅当前展示 7 个独立入口");
     expect(rootReadme).not.toContain("| 汉字大转盘 |");
     expect(rootReadme.match(/\| 算式滑轨 \|/g)).toHaveLength(1);
   });

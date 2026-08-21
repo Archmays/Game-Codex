@@ -62,34 +62,20 @@ export class ResultScene extends Phaser.Scene {
       })
       .setOrigin(0.5);
     this.add
-      .text(width / 2, panelY + (compact ? 204 : 248), "★".repeat(data.stars), {
-        color: "#ffb22e",
-        fontFamily: "Trebuchet MS, Microsoft YaHei, Arial",
-        fontSize: `${(compact ? 38 : 46) + fontBoost}px`,
-        fontStyle: "900"
-      })
-      .setOrigin(0.5);
-    this.add
-      .text(width / 2, panelY + (compact ? 250 : 300), `提示 ${data.hintsUsed} 次    失误 ${data.mistakes} 次`, {
+      .text(width / 2, panelY + (compact ? 212 : 252), "这组已经完成。可以继续探索，也可以再试一种方法。", {
         color: "#4d5b63",
         fontFamily: "Trebuchet MS, Microsoft YaHei, Arial",
-        fontSize: `${(compact ? 16 : 20) + fontBoost}px`,
-        fontStyle: "800"
-      })
-      .setOrigin(0.5);
-    this.add
-      .text(width / 2, panelY + (compact ? 276 : 322), `总完成：${Object.keys(save.stages).length}/${stages.length} 组`, {
-        color: "#4d5b63",
-        fontFamily: "Trebuchet MS, Microsoft YaHei, Arial",
-        fontSize: `${(compact ? 15 : 18) + fontBoost}px`,
-        fontStyle: "700"
+        fontSize: `${(compact ? 16 : 19) + fontBoost}px`,
+        fontStyle: "800",
+        align: "center",
+        wordWrap: { width: panelWidth - 46, useAdvancedWrap: true }
       })
       .setOrigin(0.5);
 
     const growthText = getGrowthSignalText(save, currentStage, data.hintsUsed, data.mistakes);
     const rewardText = this.getRewardText(data);
     this.add
-      .text(width / 2, panelY + panelHeight - (compact ? 124 : 142), growthText, {
+      .text(width / 2, panelY + panelHeight - (compact ? 152 : 176), growthText, {
         color: "#2363a7",
         fontFamily: "Trebuchet MS, Microsoft YaHei, Arial",
         fontSize: `${(compact ? 14 : 16) + fontBoost}px`,
@@ -105,7 +91,7 @@ export class ResultScene extends Phaser.Scene {
 
     if (rewardText) {
       this.add
-        .text(width / 2, panelY + panelHeight - (compact ? 96 : 110), rewardText, {
+        .text(width / 2, panelY + panelHeight - (compact ? 112 : 132), rewardText, {
           color: "#227a4f",
           fontFamily: "Trebuchet MS, Microsoft YaHei, Arial",
           fontSize: `${(compact ? 14 : 16) + fontBoost}px`,
@@ -167,13 +153,13 @@ export class ResultScene extends Phaser.Scene {
     }
 
     if (stickers.length > 0 && achievements.length > 0) {
-      return `新奖励：贴纸 ${stickers.length} 张，徽章 ${achievements.length} 个，记录这次练会的策略。`;
+      return "新的场景贴纸和探索纪念已经放进贴纸墙。";
     }
 
     if (stickers.length > 0) {
-      return `新奖励：贴纸 ${stickers.length} 张，记录新的练习证据。`;
+      return `“${stickers.join("、")}”已经放进贴纸墙。`;
     }
 
-    return `新奖励：徽章 ${achievements.length} 个，来自稳定练习表现。`;
+    return "新的探索纪念已经放进贴纸墙。";
   }
 }

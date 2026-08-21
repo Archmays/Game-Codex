@@ -1,12 +1,12 @@
-import type { GoldenSliceSettings } from "../../../games/hanzi-radical-battle/v2/golden-slice/save/schema";
 import { WORLD_COPY } from "../world-copy";
+import type { WorldHomeSettings } from "../world-state";
 
 export interface WorldSettingsHandle { destroy(): void; }
 
 export function mountWorldSettings(
   root: HTMLElement,
-  settings: GoldenSliceSettings,
-  onChange: (next: Partial<GoldenSliceSettings>) => boolean,
+  settings: WorldHomeSettings,
+  onChange: (next: Partial<WorldHomeSettings>) => boolean,
   onClose: () => void,
 ): WorldSettingsHandle {
   root.innerHTML = `<section class="world-modal" role="dialog" aria-modal="true" aria-labelledby="world-settings-title" data-testid="world-settings">

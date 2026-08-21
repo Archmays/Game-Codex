@@ -1,11 +1,9 @@
 import Phaser from "phaser";
 import {
-  getMaxStars,
   getParentSummary,
   getRecommendedPractice,
   getStickerWallItems,
-  getStageReadinessStatus,
-  getTotalStars
+  getStageReadinessStatus
 } from "../domain/progression/progression";
 import { getStagesFromCache } from "../content/loadContent";
 import { loadSave, resetSave, updateAccessibilitySettings } from "../save/saveStore";
@@ -19,6 +17,7 @@ const stageStrokes = [0x9f4360, 0x8a4f14, 0x275a8a, 0x5f4285, 0x227a4f];
 
 export class MenuScene extends Phaser.Scene {
   private view: MenuView = "map";
+  private resetConfirmationPending = false;
 
   constructor() {
     super(sceneKeys.menu);
@@ -27,10 +26,12 @@ export class MenuScene extends Phaser.Scene {
   create(): void {
     this.render();
     this.scale.on("resize", this.render, this);
+    this.input.keyboard?.on("keydown-ESC", this.cancelReset, this);
   }
 
   shutdown(): void {
     this.scale.off("resize", this.render, this);
+    this.input.keyboard?.off("keydown-ESC", this.cancelReset, this);
   }
 
   private render(): void {
@@ -56,23 +57,6 @@ export class MenuScene extends Phaser.Scene {
       this.drawSettings(width, height, compact, save);
     }
 
-    addButton(
-      this,
-      width / 2,
-      height - (compact ? 30 : 34),
-      compact ? 118 : 138,
-      compact ? 42 : 46,
-      "清空进度",
-      () => {
-        resetSave();
-        this.render();
-      },
-      {
-        fill: 0xe8f6ff,
-        stroke: save.accessibility.highContrast ? 0x000000 : 0x2f78b8,
-        fontSize: this.getFontSize(compact ? 14 : 16, save)
-      }
-    );
   }
 
   private drawMap(
@@ -82,11 +66,7 @@ export class MenuScene extends Phaser.Scene {
     stages: ReturnType<typeof getStagesFromCache>,
     save: ReturnType<typeof loadSave>
   ): void {
-    const totalStars = getTotalStars(save);
-    const maxStars = getMaxStars(stages);
-    const rewards = getStickerWallItems(save, stages);
-    const earnedRewards = rewards.filter((reward) => reward.earned).length;
-    const statsText = `星星 ${totalStars}/${maxStars}    奖励 ${earnedRewards}/${rewards.length}    连续 ${save.currentStreak} 天`;
+    const statsText = "所有场景都可以自由进入；想从哪里开始都可以。";
 
     this.add
       .text(width / 2, compact ? 138 : 150, statsText, {
@@ -118,7 +98,7 @@ export class MenuScene extends Phaser.Scene {
       const row = Math.floor(index / columns);
       const x = startX + column * (cardWidth + gap);
       const y = top + row * (cardHeight + gap) + cardHeight / 2;
-      const bestStars = save.stages[stage.id]?.stars ?? 0;
+      const visited = Boolean(save.stages[stage.id]);
       const readiness = getStageReadinessStatus(stage, save);
       const accent = stageAccents[index % stageAccents.length];
       const stroke = save.accessibility.highContrast ? 0x25313b : stageStrokes[index % stageStrokes.length];
@@ -166,8 +146,8 @@ export class MenuScene extends Phaser.Scene {
         .setOrigin(0, 0.5);
 
       this.add
-        .text(x + cardWidth / 2 - (compact ? 78 : 96), y - (compact ? 12 : 18), "★".repeat(bestStars) || "未完成", {
-          color: bestStars > 0 ? "#d98f21" : "#728089",
+        .text(x + cardWidth / 2 - (compact ? 78 : 96), y - (compact ? 12 : 18), visited ? "去过这里" : "可探索", {
+          color: visited ? "#227a4f" : "#728089",
           fontFamily: "Trebuchet MS, Microsoft YaHei, Arial",
           fontSize: compact ? "12px" : "15px",
           fontStyle: "900"
@@ -203,7 +183,6 @@ export class MenuScene extends Phaser.Scene {
     save: ReturnType<typeof loadSave>
   ): void {
     const rewards = getStickerWallItems(save, stages);
-    const earnedCount = rewards.filter((reward) => reward.earned).length;
     const columns = compact ? 2 : 4;
     const gap = compact ? 8 : 10;
     const top = compact ? 156 : 164;
@@ -217,7 +196,7 @@ export class MenuScene extends Phaser.Scene {
     const stroke = save.accessibility.highContrast ? 0x000000 : 0xc78a35;
 
     this.add
-      .text(width / 2, compact ? 138 : 146, `已获得 ${earnedCount}/${rewards.length} 个奖励`, {
+      .text(width / 2, compact ? 138 : 146, "贴纸墙：玩过的场景会留下小小纪念", {
         color: "#25313b",
         fontFamily: "Trebuchet MS, Microsoft YaHei, Arial",
         fontSize: compact ? "14px" : "17px",
@@ -310,13 +289,11 @@ export class MenuScene extends Phaser.Scene {
     addPanel(this, panelX, panelY, panelWidth, panelHeight, 0xfffdf6, save.accessibility.highContrast ? 0x000000 : 0x2f78b8);
 
     const lines = [
-      `完成进度：${summary.completedStages}/${summary.totalStages} 组，星星 ${summary.totalStars}/${summary.maxStars}`,
-      `今日练习：完成 ${summary.todayCompleted} 组，提示 ${summary.todayHints} 次，失误 ${summary.todayMistakes} 次`,
-      `连续记录：${summary.currentStreak} 天`,
-      `技能掌握：${summary.skillStatusText}`,
-      `支架变化：${summary.supportText}`,
+      `探索记录：已经去过 ${summary.completedStages} 个场景；全部 ${summary.totalStages} 个场景始终开放。`,
+      `技能观察：${summary.skillStatusText}`,
+      `支持方式：${summary.supportText}`,
       `复练节奏：${summary.reviewText}`,
-      `易错观察：${summary.focusText}`,
+      `最近可能需要再看看：${summary.focusText}`,
       recommendation ? `建议入口：${recommendation.reason}` : summary.nextSuggestion,
       summary.recommendationReasonText
     ];
@@ -334,7 +311,7 @@ export class MenuScene extends Phaser.Scene {
     lines.forEach((line, index) => {
       this.add
         .text(panelX + 24, panelY + (compact ? 58 : 64) + index * rowGap, line, {
-          color: index >= 3 ? "#6b3f15" : "#25313b",
+          color: index >= 1 ? "#6b3f15" : "#25313b",
           fontFamily: "Trebuchet MS, Microsoft YaHei, Arial",
           fontSize: `${this.getFontSize(compact ? 13 : 16, save)}px`,
           fontStyle: "800",
@@ -393,10 +370,15 @@ export class MenuScene extends Phaser.Scene {
   }
 
   private drawSettings(width: number, height: number, compact: boolean, save: ReturnType<typeof loadSave>): void {
+    const short = height < 650;
     const panelWidth = Math.min(compact ? width - 28 : 560, width - 32);
-    const panelHeight = Math.min(compact ? 270 : 290, height - (compact ? 186 : 206));
+    const panelHeight = compact
+      ? Math.min(430, height - 166)
+      : short
+        ? height - 154
+        : Math.min(440, height - 184);
     const panelX = width / 2 - panelWidth / 2;
-    const panelY = compact ? 150 : 164;
+    const panelY = compact ? 150 : short ? 144 : 164;
     const settings = [
       { key: "largeText", label: "大字模式" },
       { key: "reducedMotion", label: "减少动画" },
@@ -428,7 +410,7 @@ export class MenuScene extends Phaser.Scene {
 
     settings.forEach((setting, index) => {
       const enabled = save.accessibility[setting.key];
-      const y = panelY + 98 + index * (compact ? 46 : 50);
+      const y = panelY + (short ? 86 : 98) + index * (compact ? 46 : short ? 40 : 50);
       this.add
         .text(panelX + 24, y, setting.label, {
           color: "#25313b",
@@ -457,6 +439,71 @@ export class MenuScene extends Phaser.Scene {
         }
       );
     });
+
+    const resetTop = panelY + (short ? 86 : 98) + settings.length * (compact ? 46 : short ? 40 : 50) + (short ? 0 : 6);
+    this.add.rectangle(panelX + panelWidth / 2, resetTop, panelWidth - 44, 2, save.accessibility.highContrast ? 0x000000 : 0xd4c8af);
+
+    if (!this.resetConfirmationPending) {
+      this.add
+        .text(panelX + 24, resetTop + (compact ? 26 : short ? 20 : 30), "本机数据", {
+          color: "#6b3f15",
+          fontFamily: "Trebuchet MS, Microsoft YaHei, Arial",
+          fontSize: `${this.getFontSize(compact ? 14 : 16, save)}px`,
+          fontStyle: "900"
+        })
+        .setOrigin(0, 0.5);
+      addButton(
+        this,
+        panelX + panelWidth - (compact ? 92 : 110),
+        resetTop + (compact ? 30 : short ? 24 : 34),
+        compact ? 150 : 176,
+        compact ? 38 : 42,
+        "清空本机进度",
+        () => {
+          this.resetConfirmationPending = true;
+          this.render();
+        },
+        {
+          fill: 0xfff3e3,
+          stroke: save.accessibility.highContrast ? 0x000000 : 0x9d5b00,
+          fontSize: this.getFontSize(compact ? 13 : 15, save)
+        }
+      );
+    } else {
+      this.add
+        .text(panelX + 24, resetTop + (compact ? 24 : short ? 14 : 26), "只会删除本机键 math-battle-web/save-v1 中的数学实验室场景、贴纸、练习记录和显示设置；其他数学世界站点不受影响。", {
+          color: "#6b3f15",
+          fontFamily: "Trebuchet MS, Microsoft YaHei, Arial",
+          fontSize: `${this.getFontSize(compact ? 11 : 13, save)}px`,
+          fontStyle: "800",
+          wordWrap: { width: panelWidth - 48, useAdvancedWrap: true }
+        })
+        .setOrigin(0, 0);
+      const buttonY = resetTop + (compact ? 86 : short ? 76 : 88);
+      addButton(this, panelX + panelWidth * 0.34, buttonY, compact ? 126 : 148, compact ? 38 : 42, "确认清空", () => {
+        resetSave();
+        this.resetConfirmationPending = false;
+        this.render();
+      }, {
+        fill: 0xffe1d8,
+        stroke: save.accessibility.highContrast ? 0x000000 : 0x9d3d2f,
+        fontSize: this.getFontSize(compact ? 13 : 15, save)
+      });
+      addButton(this, panelX + panelWidth * 0.68, buttonY, compact ? 100 : 120, compact ? 38 : 42, "取消", () => {
+        this.resetConfirmationPending = false;
+        this.render();
+      }, {
+        fill: 0xffffff,
+        stroke: save.accessibility.highContrast ? 0x000000 : 0x728089,
+        fontSize: this.getFontSize(compact ? 13 : 15, save)
+      });
+    }
+  }
+
+  private cancelReset(): void {
+    if (!this.resetConfirmationPending) return;
+    this.resetConfirmationPending = false;
+    this.render();
   }
 
   private getShortReadinessReason(reason: string): string {

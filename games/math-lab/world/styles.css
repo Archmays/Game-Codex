@@ -1,0 +1,359 @@
+:root {
+  --math-world-ink: #25313b;
+  --math-world-paper: #fffaf0;
+  --math-world-blue: #22668a;
+  --math-world-green: #477a55;
+  --math-world-gold: #d6943d;
+}
+
+.math-world-page {
+  min-height: 100%;
+  background: #dff2eb;
+}
+
+.math-world-mount,
+.math-world-station-mount {
+  min-height: 100vh;
+}
+
+.math-world {
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.85), transparent 45%),
+    #dff2eb;
+  color: var(--math-world-ink);
+}
+
+.math-world__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1500px;
+  margin: 0 auto;
+  gap: 24px;
+  padding: 22px clamp(18px, 4vw, 58px) 16px;
+}
+
+.math-world__header h1 {
+  margin: 2px 0 4px;
+  color: #214a3b;
+  font-size: clamp(32px, 4.5vw, 58px);
+  line-height: 1;
+}
+
+.math-world__header p,
+.math-world__footer p {
+  margin: 0;
+  color: #42564e;
+  font-size: clamp(15px, 1.5vw, 19px);
+  font-weight: 700;
+}
+
+.math-world__kicker {
+  color: #9b5d26;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+}
+
+.math-world__header a,
+.math-world-station__bar a,
+.math-world-station__bar button,
+.math-world__motion {
+  min-height: 44px;
+  border: 2px solid #315f51;
+  border-radius: 999px;
+  background: rgba(255, 250, 240, 0.94);
+  color: #214a3b;
+  padding: 10px 16px;
+  font: inherit;
+  font-weight: 900;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.math-world__city {
+  position: relative;
+  width: min(1500px, calc(100% - 32px));
+  min-height: min(72vw, 790px);
+  margin: 0 auto;
+  overflow: hidden;
+  border: 4px solid #315f51;
+  border-radius: 30px;
+  background: #cdeedb;
+  box-shadow: 0 16px 0 rgba(49, 95, 81, 0.13);
+}
+
+.math-world__art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.math-world__stations {
+  position: absolute;
+  inset: 0;
+}
+
+.math-world-card {
+  position: absolute;
+  width: min(250px, 19vw);
+  border: 3px solid #315f51;
+  border-radius: 20px;
+  background: rgba(255, 250, 240, 0.94);
+  box-shadow: 0 8px 0 rgba(37, 49, 59, 0.18);
+  padding: 14px;
+  backdrop-filter: blur(6px);
+}
+
+.math-world-card--lab { top: 5%; left: 3%; }
+.math-world-card--clock { top: 5%; right: 3%; }
+.math-world-card--array { top: 42%; left: 2%; }
+.math-world-card--target { top: 43%; right: 2%; }
+.math-world-card--slider { bottom: 3%; left: 50%; transform: translateX(-50%); }
+
+.math-world-card > span {
+  color: #7a5130;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.math-world-card h2 {
+  margin: 3px 0 5px;
+  font-size: clamp(20px, 2vw, 29px);
+  line-height: 1.05;
+}
+
+.math-world-card p {
+  margin: 0 0 10px;
+  color: #42564e;
+  font-size: clamp(13px, 1.15vw, 16px);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.math-world-card button {
+  width: 100%;
+  min-height: 42px;
+  border: 0;
+  border-radius: 14px;
+  background: #315f51;
+  color: #fffaf0;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.math-world-card--sky button { background: #22668a; }
+.math-world-card--clay button { background: #9a513b; }
+.math-world-card--gold button { background: #8b5a19; }
+.math-world-card--rail button { background: #4c536b; }
+
+.math-world-card button:hover,
+.math-world-card button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 rgba(37, 49, 59, 0.24);
+}
+
+.math-world__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1500px;
+  margin: 0 auto;
+  gap: 20px;
+  padding: 18px clamp(18px, 4vw, 58px) 28px;
+}
+
+.math-world__motion {
+  flex: 0 0 auto;
+  font-size: 14px;
+}
+
+.math-world-station {
+  min-height: 100vh;
+  background: #f8f3e7;
+  color: var(--math-world-ink);
+}
+
+.math-world-station__bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 18px;
+  border-bottom: 3px solid #315f51;
+  background: rgba(223, 242, 235, 0.97);
+  padding: 10px clamp(12px, 3vw, 34px);
+  box-shadow: 0 5px 0 rgba(49, 95, 81, 0.1);
+}
+
+.math-world-station__bar div {
+  display: grid;
+  justify-items: center;
+}
+
+.math-world-station__bar span {
+  color: #7a5130;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.math-world-station__bar strong {
+  color: #214a3b;
+  font-size: clamp(18px, 2vw, 26px);
+}
+
+.math-world-station__stage {
+  min-height: calc(100vh - 70px);
+}
+
+.math-world-station__loading,
+.math-world-station__error {
+  width: min(560px, calc(100% - 32px));
+  margin: 80px auto;
+  border: 3px solid #315f51;
+  border-radius: 22px;
+  background: #fffaf0;
+  padding: 28px;
+  text-align: center;
+  font-weight: 900;
+}
+
+.make-target-order-guide,
+.make-target-hint {
+  width: min(720px, 100%);
+  margin: 0 auto;
+  border: 3px solid #355c4d;
+  border-radius: 12px;
+  background: #f2fbf4;
+  padding: 10px 14px;
+  color: #25313b;
+  font-weight: 900;
+}
+
+.make-target-hint ol {
+  margin: 8px 0 0;
+  padding-left: 26px;
+}
+
+.make-target-card {
+  position: relative;
+}
+
+.make-target-card__order {
+  position: absolute;
+  top: -10px;
+  right: -8px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 2px solid #25313b;
+  border-radius: 50%;
+  background: #fffdf6;
+  color: #9a513b !important;
+  font-size: 15px !important;
+}
+
+.make-target-card__order:empty {
+  display: none;
+}
+
+[data-reduced-motion="true"] *,
+[data-reduced-motion="true"] *::before,
+[data-reduced-motion="true"] *::after {
+  scroll-behavior: auto !important;
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+@media (max-width: 900px) {
+  .math-world__city {
+    min-height: auto;
+    overflow: visible;
+  }
+
+  .math-world__art {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+
+  .math-world__stations {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    background: #dff2eb;
+    padding: 14px;
+  }
+
+  .math-world-card {
+    position: relative;
+    inset: auto;
+    width: auto;
+    transform: none;
+  }
+
+  .math-world-card--slider {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 620px) {
+  .math-world__header,
+  .math-world__footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .math-world__header nav,
+  .math-world__header a,
+  .math-world__motion {
+    width: 100%;
+    text-align: center;
+  }
+
+  .math-world__city {
+    width: calc(100% - 20px);
+    border-radius: 20px;
+  }
+
+  .math-world__stations {
+    grid-template-columns: 1fr;
+  }
+
+  .math-world-card--slider {
+    grid-column: auto;
+  }
+
+  .math-world-station__bar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .math-world-station__bar div {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .math-world-station__bar button,
+  .math-world-station__bar a {
+    width: 100%;
+    padding-inline: 8px;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .math-world-card button {
+    transition: none;
+  }
+}

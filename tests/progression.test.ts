@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import {
   applyStageCompletion,
   getGrowthSignalText,
@@ -99,6 +100,34 @@ describe("progression", () => {
     expect(first.newStickerLabels).toContain("测试贴纸");
   });
 
+  it("preserves legacy streak bytes without extending or awarding them", () => {
+    const save = createSave();
+    save.currentStreak = 7;
+    save.lastPlayDate = "2026-06-05";
+    save.achievements.three_day_streak = {
+      id: "three_day_streak",
+      earnedAt: "2026-06-05T10:00:00.000Z"
+    };
+    const result = applyStageCompletion(save, "stage-1", 3, 0, 0, "precision_hit", {
+      completedAt: new Date("2026-06-06T10:00:00"),
+      usedCombo: false,
+      usedSubtraction: false,
+      wrongTypes: {}
+    });
+    expect(result.save.currentStreak).toBe(7);
+    expect(result.save.lastPlayDate).toBe("2026-06-05");
+    expect(result.save.achievements.three_day_streak?.earnedAt).toBe("2026-06-05T10:00:00.000Z");
+    expect(result.newAchievementIds).not.toContain("three_day_streak");
+    expect(getStickerWallItems(result.save, stages).some((item) => item.id === "achievement/three_day_streak")).toBe(false);
+  });
+
+  it("does not expose an encounter streak message in the child battle scene", () => {
+    const battleSource = readFileSync("src/game/scenes/BattleScene.ts", "utf8");
+
+    expect(battleSource).not.toContain("cleanHitStreak");
+    expect(battleSource).not.toContain("连续完成 3 次");
+  });
+
   it("records independent skill mastery and unlocks stages from mastery gates", () => {
     const save = createSave();
 
@@ -177,7 +206,7 @@ describe("progression", () => {
     expect(summary.todayCompleted).toBe(1);
     expect(summary.focusText).toContain("比目标大");
     expect(summary.skillStatusText).toContain("需要帮助");
-    expect(summary.supportText).toContain("提示使用较多");
+    expect(summary.supportText).toContain("使用过提示");
     expect(summary.reviewText).toContain("自由选择");
     expect(summary.nextSuggestion).toContain("复练");
     expect(summary.recommendationReasonText).toContain("逐步减少支架");

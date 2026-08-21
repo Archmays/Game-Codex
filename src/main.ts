@@ -4,6 +4,7 @@ import { pageModeForAppRoute, resolveAppRoute } from "./app-route";
 import { activatePageMode } from "./page-mode";
 
 const WORLD_THEME_COLOR = "#071c2a";
+const MATH_WORLD_THEME_COLOR = "#dff2eb";
 const CLASSIC_THEME_COLOR = "#f6f3e7";
 const BUILD_COMMIT = (import.meta.env.VITE_BUILD_COMMIT || "local-source").trim() || "local-source";
 
@@ -142,6 +143,13 @@ window.addEventListener("load", async () => {
     setBrowserIdentity("游戏百宝箱", CLASSIC_THEME_COLOR);
     const { mountClassicHubFromWorld } = await import("../apps/my-game-world");
     mountClassicHubFromWorld(root);
+    return;
+  }
+
+  if (route.kind === "world" && search.get("world") === "math-world") {
+    setBrowserIdentity("数学世界 · 数感实验城", MATH_WORLD_THEME_COLOR);
+    const { mountMathWorld } = await import("../games/math-lab/world");
+    mountMathWorld(root);
     return;
   }
 

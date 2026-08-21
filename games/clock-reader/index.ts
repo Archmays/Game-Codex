@@ -1,82 +1,87 @@
 import type { GameDefinition, MountGameContext, MountedGame } from "../../packages/game-core";
 import { clearElement, createButton, createFeedbackBanner, createStatus, playFeedbackSound, speakText } from "../../packages/ui";
 import type { FeedbackState } from "../../packages/ui";
+import {
+  addClockMinutes,
+  clockTtsText,
+  createClockChallenge,
+  deriveClockView,
+  setClockMinuteByDial,
+  type ClockChallengeMode,
+} from "./model";
 
-type ClockMode = "explore" | "quiz";
-
-interface ClockSave {
-  bestStreak: number;
-}
-
-interface ClockTime {
-  hour: number;
-  minute: number;
-}
+type ClockMode = "explore" | ClockChallengeMode;
 
 export const clockReaderGame: GameDefinition = {
   id: "clock-reader",
-  title: "认识时钟",
-  description: "观察 60 个分钟刻度，拨动时针和分针，学习整点、半点和 5 分钟时间。",
+  title: "时钟塔",
+  description: "直接拨动同一座机械钟，观察分针走一圈时短针怎样连续前进。",
   subject: "数学",
   recommendedAge: "5-7 岁",
-  learningGoal: "认识整点、半点和 5 分钟刻度，能把表盘时间读出来。",
-  status: "可玩",
-  playLabel: "拨时钟",
+  learningGoal: "用一套一致的时间状态理解整点、半点、一刻和 5 分钟时间。",
+  status: "数学世界模块",
+  playLabel: "拨动时钟",
   mount(context: MountGameContext): MountedGame {
     return mountClockReader(context);
-  }
+  },
 };
 
 function mountClockReader(context: MountGameContext): MountedGame {
   const root = document.createElement("section");
   root.className = "learning-game clock-game";
+  root.dataset.clockRuntime = "minutes-since-midnight-v1";
   context.container.append(root);
 
+  // Read the legacy record without rewriting or deleting its original bytes.
+  context.storage.get<unknown>("progress", null);
+
   let mode: ClockMode = "explore";
-  let time: ClockTime = { hour: 3, minute: 0 };
-  let target: ClockTime | null = null;
-  let streak = 0;
-  let locked = false;
-  let timer: number | undefined;
-  let feedback: FeedbackState = { kind: "info", text: "自由探索：拨一拨，看看现在是几点。" };
-  const save = context.storage.get<ClockSave>("progress", { bestStreak: 0 });
+  let minutesSinceMidnight = 3 * 60;
+  let challengeIndex = 0;
+  let targetMinutes: number | null = null;
+  let feedback: FeedbackState = { kind: "info", text: "自由拨钟：拖动长针，或用按钮慢慢看看时间怎样变化。" };
+  let activePointerId: number | null = null;
+  let activeDial: { left: number; top: number; width: number; height: number } | null = null;
+  let destroyed = false;
 
   const render = (): void => {
+    if (destroyed) return;
     clearElement(root);
-    root.append(createHeader("认识时钟", "60 个小刻度都在表盘上，5 分钟位置标出 00、05、10……"));
+    const view = deriveClockView(minutesSinceMidnight);
+    root.append(createHeader("时钟塔", "长针和短针属于同一个时间；长针走动时，短针会一起前进。"));
 
     const toolbar = document.createElement("div");
     toolbar.className = "learning-game__toolbar";
-    toolbar.append(
-      createButton("自由探索", () => switchMode("explore"), {
-        className: mode === "explore" ? "ui-button learning-game__pill is-active" : "ui-button learning-game__pill",
-        disabled: locked
-      }),
-      createButton("挑战任务", () => switchMode("quiz"), {
-        className: mode === "quiz" ? "ui-button learning-game__pill is-active" : "ui-button learning-game__pill",
-        disabled: locked
-      })
-    );
+    for (const item of [
+      { id: "explore", label: "自由拨钟" },
+      { id: "exact", label: "精确时间" },
+      { id: "relative", label: "相对时间" },
+    ] as const) {
+      toolbar.append(createButton(item.label, () => switchMode(item.id), {
+        className: mode === item.id ? "ui-button learning-game__pill is-active" : "ui-button learning-game__pill",
+      }));
+    }
 
     const stats = document.createElement("div");
-    stats.className = "learning-game__stats";
+    stats.className = "learning-game__stats clock-readout";
     stats.append(
-      createStatus("连对", streak),
-      createStatus("最佳", save.bestStreak),
-      createStatus("现在", formatTime(time))
+      createStatus("数字时间", view.digitalText),
+      createStatus(mode === "relative" ? "相对表达" : "精确表达", mode === "relative" ? view.relativeText : view.exactText),
     );
 
     const stage = document.createElement("div");
     stage.className = "clock-stage";
-    stage.append(createClock(time), createControls());
+    stage.append(createClock(minutesSinceMidnight), createControls());
 
     const actions = document.createElement("div");
     actions.className = "learning-game__actions";
-    actions.append(createButton("听时间", () => speakTime(time), { className: "ui-button ui-button--secondary" }));
-    if (mode === "quiz") {
+    actions.append(createButton("听时间", () => speakText(clockTtsText(minutesSinceMidnight, mode), "zh-CN", 0.9), {
+      className: "ui-button ui-button--secondary",
+    }));
+    if (mode !== "explore") {
       actions.append(
-        createButton("我拨好了", checkAnswer, { disabled: locked }),
-        createButton("换一题", newChallenge, { className: "ui-button ui-button--secondary", disabled: locked })
+        createButton("我拨好了", checkAnswer),
+        createButton("换一题", nextChallenge, { className: "ui-button ui-button--secondary" }),
       );
     }
 
@@ -85,86 +90,54 @@ function mountClockReader(context: MountGameContext): MountedGame {
 
   const switchMode = (nextMode: ClockMode): void => {
     mode = nextMode;
-    streak = nextMode === "quiz" ? streak : 0;
-    window.clearTimeout(timer);
-    locked = false;
-    if (nextMode === "quiz") {
-      newChallenge();
-      return;
-    }
-    target = null;
-    feedback = { kind: "info", text: "自由探索：拨一拨，看看现在是几点。" };
-    render();
-  };
-
-  const changeHour = (delta: number): void => {
-    if (locked) {
-      return;
-    }
-    time = {
-      ...time,
-      hour: wrapHour(time.hour + delta)
-    };
+    activePointerId = null;
+    activeDial = null;
     if (mode === "explore") {
-      feedback = { kind: "info", text: `现在是 ${formatTime(time)}。` };
-      speakTime(time);
-    }
-    render();
-  };
-
-  const changeMinute = (delta: number): void => {
-    if (locked) {
+      targetMinutes = null;
+      feedback = { kind: "info", text: "自由拨钟：拖动长针，或用按钮慢慢看看时间怎样变化。" };
+      render();
       return;
     }
-    const total = time.hour * 60 + time.minute + delta;
-    const normalized = ((total - 60) % 720 + 720) % 720 + 60;
-    time = {
-      hour: Math.floor(normalized / 60),
-      minute: normalized % 60
+    challengeIndex = 0;
+    loadChallenge();
+  };
+
+  const loadChallenge = (): void => {
+    if (mode === "explore") return;
+    const challenge = createClockChallenge("math-world-clock-v1", challengeIndex, mode);
+    targetMinutes = challenge.targetMinutes;
+    minutesSinceMidnight = challenge.startingMinutes;
+    const target = deriveClockView(targetMinutes);
+    feedback = {
+      kind: "info",
+      text: mode === "exact"
+        ? `请拨到 ${target.digitalText}（${target.exactText}）。`
+        : `请拨到“${target.relativeText}”。这一轮只练相对表达。`,
     };
-    if (mode === "explore") {
-      feedback = { kind: "info", text: `现在是 ${formatTime(time)}。` };
-      speakTime(time);
-    }
     render();
   };
 
-  const newChallenge = (): void => {
-    window.clearTimeout(timer);
-    target = {
-      hour: Math.floor(Math.random() * 12) + 1,
-      minute: Math.floor(Math.random() * 12) * 5
-    };
-    time = {
-      hour: Math.floor(Math.random() * 12) + 1,
-      minute: Math.floor(Math.random() * 12) * 5
-    };
-    locked = false;
-    feedback = { kind: "info", text: `挑战目标：拨到 ${formatTime(target)}。` };
+  const nextChallenge = (): void => {
+    challengeIndex += 1;
+    loadChallenge();
+  };
+
+  const changeTime = (delta: number): void => {
+    minutesSinceMidnight = addClockMinutes(minutesSinceMidnight, delta);
+    if (mode === "explore") feedback = { kind: "info", text: `现在是 ${deriveClockView(minutesSinceMidnight).exactText}。` };
     render();
   };
 
   const checkAnswer = (): void => {
-    if (!target || locked) {
-      return;
-    }
-
-    if (time.hour === target.hour && time.minute === target.minute) {
-      streak += 1;
-      locked = true;
-      save.bestStreak = Math.max(save.bestStreak, streak);
-      context.storage.set("progress", save);
-      feedback = { kind: "success", text: `答对了：${formatTime(time)}。先看一眼表盘，再进入下一题。` };
+    if (targetMinutes === null) return;
+    if (minutesSinceMidnight === targetMinutes) {
+      const view = deriveClockView(minutesSinceMidnight);
+      feedback = { kind: "success", text: `找到了：${mode === "relative" ? view.relativeText : `${view.digitalText}，${view.exactText}`}。` };
       playFeedbackSound("success");
-      speakTime(time);
-      render();
-      timer = window.setTimeout(newChallenge, 1000);
-      return;
+    } else {
+      feedback = { kind: "info", text: getClockMismatchHint(targetMinutes, minutesSinceMidnight) };
+      playFeedbackSound("info");
     }
-
-    streak = 0;
-    feedback = { kind: "error", text: `还没对。目标是 ${formatTime(target)}，现在是 ${formatTime(time)}。${getClockMismatchHint(target, time)}` };
-    playFeedbackSound("error");
     render();
   };
 
@@ -172,22 +145,116 @@ function mountClockReader(context: MountGameContext): MountedGame {
     const controls = document.createElement("div");
     controls.className = "clock-controls";
     controls.append(
-      createButton("时针 -", () => changeHour(-1), { className: "ui-button ui-button--secondary", disabled: locked }),
-      createButton("时针 +", () => changeHour(1), { disabled: locked }),
-      createButton("分针 -5", () => changeMinute(-5), { className: "ui-button ui-button--secondary", disabled: locked }),
-      createButton("分针 +5", () => changeMinute(5), { disabled: locked })
+      createButton("时针 -", () => changeTime(-60), { className: "ui-button ui-button--secondary" }),
+      createButton("时针 +", () => changeTime(60)),
+      createButton("分针 -5", () => changeTime(-5), { className: "ui-button ui-button--secondary" }),
+      createButton("分针 +5", () => changeTime(5)),
     );
     return controls;
   };
 
+  const createClock = (value: number): HTMLElement => {
+    const view = deriveClockView(value);
+    const clock = document.createElement("div");
+    clock.className = "clock-face";
+    clock.tabIndex = 0;
+    clock.setAttribute("role", "slider");
+    clock.setAttribute("aria-label", "拨动分针");
+    clock.setAttribute("aria-valuemin", "0");
+    clock.setAttribute("aria-valuemax", "719");
+    clock.setAttribute("aria-valuenow", String(value));
+    clock.setAttribute("aria-valuetext", `${view.digitalText}，${view.exactText}`);
+    clock.addEventListener("pointerdown", (event) => {
+      const rect = clock.getBoundingClientRect();
+      activePointerId = event.pointerId;
+      activeDial = { left: rect.left, top: rect.top, width: rect.width, height: rect.height };
+      updateFromPointer(event.clientX, event.clientY);
+      event.preventDefault();
+    });
+    clock.addEventListener("keydown", (event) => {
+      const deltas: Partial<Record<string, number>> = {
+        ArrowLeft: -5, ArrowDown: -5, ArrowRight: 5, ArrowUp: 5,
+        PageDown: -60, PageUp: 60, Home: -value, End: 715 - value,
+      };
+      const delta = deltas[event.key];
+      if (delta === undefined) return;
+      event.preventDefault();
+      changeTime(delta);
+      root.querySelector<HTMLElement>(".clock-face")?.focus();
+    });
+
+    for (let minute = 0; minute < 60; minute += 1) {
+      const tick = document.createElement("i");
+      tick.className = minute % 5 === 0 ? "clock-face__tick clock-face__tick--major" : "clock-face__tick";
+      tick.style.setProperty("--clock-minute", String(minute));
+      tick.style.setProperty("--clock-angle", `${minute * 6}deg`);
+      clock.append(tick);
+    }
+    for (let minute = 0; minute < 60; minute += 5) {
+      const label = document.createElement("span");
+      label.className = "clock-face__minute-label";
+      label.textContent = String(minute).padStart(2, "0");
+      label.style.setProperty("--clock-minute", String(minute));
+      label.style.setProperty("--clock-angle", `${minute * 6}deg`);
+      label.style.setProperty("--clock-angle-reverse", `${minute * -6}deg`);
+      clock.append(label);
+    }
+    for (let numberValue = 1; numberValue <= 12; numberValue += 1) {
+      const angle = numberValue * 30;
+      const number = document.createElement("span");
+      number.className = "clock-face__number";
+      number.textContent = String(numberValue);
+      number.style.setProperty("--clock-index", String(numberValue));
+      number.style.setProperty("--clock-angle", `${angle}deg`);
+      number.style.setProperty("--clock-angle-reverse", `${-angle}deg`);
+      clock.append(number);
+    }
+    const hourHand = document.createElement("i");
+    hourHand.className = "clock-hand clock-hand--hour";
+    hourHand.style.transform = `rotate(${view.hourHandAngle}deg)`;
+    const minuteHand = document.createElement("i");
+    minuteHand.className = "clock-hand clock-hand--minute";
+    minuteHand.style.transform = `rotate(${view.minuteHandAngle}deg)`;
+    const center = document.createElement("b");
+    center.className = "clock-face__center";
+    clock.append(hourHand, minuteHand, center);
+    return clock;
+  };
+
+  const updateFromPointer = (clientX: number, clientY: number): void => {
+    if (!activeDial) return;
+    const x = clientX - (activeDial.left + activeDial.width / 2);
+    const y = clientY - (activeDial.top + activeDial.height / 2);
+    const angle = (Math.atan2(y, x) * 180 / Math.PI + 450) % 360;
+    minutesSinceMidnight = setClockMinuteByDial(minutesSinceMidnight, angle / 6);
+    if (mode === "explore") feedback = { kind: "info", text: `现在是 ${deriveClockView(minutesSinceMidnight).exactText}。` };
+    render();
+  };
+
+  const onPointerMove = (event: PointerEvent): void => {
+    if (event.pointerId !== activePointerId) return;
+    updateFromPointer(event.clientX, event.clientY);
+  };
+  const onPointerEnd = (event: PointerEvent): void => {
+    if (event.pointerId !== activePointerId) return;
+    activePointerId = null;
+    activeDial = null;
+  };
+
+  window.addEventListener("pointermove", onPointerMove);
+  window.addEventListener("pointerup", onPointerEnd);
+  window.addEventListener("pointercancel", onPointerEnd);
   render();
 
   return {
     destroy(): void {
-      window.clearTimeout(timer);
+      destroyed = true;
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", onPointerEnd);
+      window.removeEventListener("pointercancel", onPointerEnd);
       window.speechSynthesis?.cancel();
       root.remove();
-    }
+    },
   };
 }
 
@@ -202,78 +269,13 @@ function createHeader(titleText: string, introText: string): HTMLElement {
   return header;
 }
 
-function createClock(time: ClockTime): HTMLElement {
-  const clock = document.createElement("div");
-  clock.className = "clock-face";
-
-  for (let minute = 0; minute < 60; minute += 1) {
-    const tick = document.createElement("i");
-    tick.className = minute % 5 === 0 ? "clock-face__tick clock-face__tick--major" : "clock-face__tick";
-    tick.style.setProperty("--clock-minute", String(minute));
-    tick.style.setProperty("--clock-angle", `${minute * 6}deg`);
-    clock.append(tick);
-  }
-
-  for (let minute = 0; minute < 60; minute += 5) {
-    const label = document.createElement("span");
-    label.className = "clock-face__minute-label";
-    label.textContent = String(minute).padStart(2, "0");
-    label.style.setProperty("--clock-minute", String(minute));
-    label.style.setProperty("--clock-angle", `${minute * 6}deg`);
-    label.style.setProperty("--clock-angle-reverse", `${minute * -6}deg`);
-    clock.append(label);
-  }
-
-  for (let value = 1; value <= 12; value += 1) {
-    const angle = value * 30;
-    const number = document.createElement("span");
-    number.className = "clock-face__number";
-    number.textContent = String(value);
-    number.style.setProperty("--clock-index", String(value));
-    number.style.setProperty("--clock-angle", `${angle}deg`);
-    number.style.setProperty("--clock-angle-reverse", `${-angle}deg`);
-    clock.append(number);
-  }
-
-  const minuteHand = document.createElement("i");
-  minuteHand.className = "clock-hand clock-hand--minute";
-  minuteHand.style.transform = `rotate(${time.minute * 6}deg)`;
-  const hourHand = document.createElement("i");
-  hourHand.className = "clock-hand clock-hand--hour";
-  hourHand.style.transform = `rotate(${(time.hour % 12) * 30 + time.minute * 0.5}deg)`;
-  const center = document.createElement("b");
-  center.className = "clock-face__center";
-  clock.append(minuteHand, hourHand, center);
-  return clock;
-}
-
-function wrapHour(hour: number): number {
-  if (hour < 1) {
-    return 12;
-  }
-  if (hour > 12) {
-    return 1;
-  }
-  return hour;
-}
-
-function formatTime(time: ClockTime): string {
-  if (time.minute === 0) {
-    return `${time.hour} 点整`;
-  }
-  return `${time.hour} 点 ${time.minute} 分`;
-}
-
-function speakTime(time: ClockTime): void {
-  speakText(formatTime(time), "zh-CN", 0.9);
-}
-
-export function getClockMismatchHint(target: ClockTime, current: ClockTime): string {
-  if (target.hour !== current.hour) {
-    return "先看短针，调到目标小时。";
-  }
-  if (target.minute !== current.minute) {
-    return "小时已经对了，再调分针到目标分钟。";
-  }
+export function getClockMismatchHint(
+  targetValue: number | { readonly hour: number; readonly minute: number },
+  currentValue: number | { readonly hour: number; readonly minute: number },
+): string {
+  const target = typeof targetValue === "number" ? deriveClockView(targetValue) : targetValue;
+  const current = typeof currentValue === "number" ? deriveClockView(currentValue) : currentValue;
+  if (target.hour !== current.hour) return `还没到目标。先看短针：目标在 ${target.hour} 点这一小时。`;
+  if (target.minute !== current.minute) return `小时已经对了，再调分针到 ${String(target.minute).padStart(2, "0")} 分刻度。`;
   return "";
 }

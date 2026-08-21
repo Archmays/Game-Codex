@@ -4,13 +4,14 @@ import { gameConfig } from "../../src/game/config";
 
 export const mathLabGame: GameDefinition = {
   id: "math-lab",
-  title: "数学实验室",
-  description: "进入苹果园、甜点屋、小河、图书馆和集市，用加减法完成场景任务。",
+  title: "数学世界",
+  description: "进入数感实验城，在实验室、时钟塔、阵列工坊、目标工坊和算式滑轨站探索数学关系。",
   subject: "数学",
   recommendedAge: "6-9 岁",
-  learningGoal: "在场景任务中练习加减法、数量关系和简单两步推理。",
+  learningGoal: "通过可直接操作的场景、时钟、阵列、数字牌和算式滑轨理解数学关系。",
   status: "可玩",
-  playLabel: "进入数学游戏",
+  playLabel: "进入数学世界",
+  route: "?world=math-world&from=hub",
   mount(context: MountGameContext): MountedGame {
     return mountMathLab(context);
   }

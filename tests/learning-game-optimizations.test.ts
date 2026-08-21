@@ -44,17 +44,22 @@ describe("learning game optimizations", () => {
     const english = readFileSync("games/english-spell-battle/index.ts", "utf8");
     const pinyin = readFileSync("games/pinyin-magic-battle/index.ts", "utf8");
 
-    expect(multiplication).toContain("返回乘法主页");
+    expect(multiplication).toContain("换一个任务");
     expect(english).toContain("返回英文魔法战");
     expect(pinyin).toContain("返回汉字魔法战");
   });
 
-  it("keeps multiplication challenge review controlled by the next button", () => {
+  it("makes the array itself the multiplication core without score-loop pressure", () => {
     const multiplication = readFileSync("games/multiplication-adventure/index.ts", "utf8");
 
     expect(multiplication).not.toContain("setTimeout");
-    expect(multiplication).toContain("下一题");
-    expect(multiplication).toContain("查看成绩");
+    expect(multiplication).toContain("搭阵列");
+    expect(multiplication).toContain("看阵列");
+    expect(multiplication).toContain("翻转阵列");
+    expect(multiplication).not.toContain("bestScore");
+    expect(multiplication).not.toContain("plays");
+    expect(multiplication).not.toContain("import.meta.glob");
+    expect(multiplication).not.toContain("source/number-blocks-character");
   });
 
   it("keeps the restored learning feedback surfaces in source", () => {

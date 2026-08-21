@@ -110,7 +110,6 @@ export class BattleScene extends Phaser.Scene {
   private encounterIndex = 0;
   private totalHintsUsed = 0;
   private totalMistakes = 0;
-  private cleanHitStreak = 0;
   private usedComboInStage = false;
   private usedSubtractionInStage = false;
   private wrongTypesInStage: Record<string, number> = {};
@@ -143,7 +142,6 @@ export class BattleScene extends Phaser.Scene {
     this.engine = new BattleEngine(this.roles);
     this.totalHintsUsed = 0;
     this.totalMistakes = 0;
-    this.cleanHitStreak = 0;
     this.usedComboInStage = false;
     this.usedSubtractionInStage = false;
     this.wrongTypesInStage = {};
@@ -852,19 +850,6 @@ export class BattleScene extends Phaser.Scene {
     return this.state.maxActions > 1 && this.state.actionsUsedInAttempt + 1 < this.state.maxActions;
   }
 
-  private getHitMessage(): string {
-    const sceneCopy = this.getSceneCopy();
-    if (this.cleanHitStreak >= 3) {
-      return `连续完成 3 次！${sceneCopy.hitLabel}`;
-    }
-
-    if (this.cleanHitStreak >= 2) {
-      return `连续完成 ${this.cleanHitStreak}/3！${sceneCopy.hitLabel}`;
-    }
-
-    return sceneCopy.hitLabel;
-  }
-
   private applySelectedAction(): void {
     if (this.isResolving) {
       return;
@@ -896,11 +881,10 @@ export class BattleScene extends Phaser.Scene {
       this.message = result.preview.reason ?? "这一步不能用。";
     } else if (result.outcome === "hit") {
       this.isResolving = true;
-      this.cleanHitStreak += 1;
       this.usedComboInStage = this.usedComboInStage || this.encounter.type === "combo_hit";
       this.usedSubtractionInStage = this.usedSubtractionInStage || role?.operation === "subtract";
       this.recordEncounterSkillResults();
-      this.message = this.getHitMessage();
+      this.message = this.getSceneCopy().hitLabel;
     } else if (result.outcome === "setup") {
       this.usedComboInStage = true;
       this.usedSubtractionInStage = this.usedSubtractionInStage || role?.operation === "subtract";
@@ -908,7 +892,6 @@ export class BattleScene extends Phaser.Scene {
     } else {
       this.totalMistakes += result.didConsumeMistake ? 1 : 0;
       this.encounterMistakes += result.didConsumeMistake ? 1 : 0;
-      this.cleanHitStreak = 0;
       if (result.didConsumeMistake) {
         this.recordWrongType(result.preview);
       }

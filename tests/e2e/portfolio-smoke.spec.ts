@@ -66,16 +66,15 @@ const GAMES: readonly SmokeGame[] = [
     },
   },
   {
-    id: "math-lab", title: "数学实验室", surface: "canvas",
+    id: "math-lab", title: "数学世界", surface: '[data-testid="math-world-map"]',
     async interact(page) {
-      const canvas = page.locator(".game-stage canvas");
-      await expect(canvas).toBeVisible({ timeout: 30_000 });
-      const box = await canvas.boundingBox();
-      if (!box) throw new Error("Math Lab canvas has no layout box");
-      const compact = box.width < 560;
-      await canvas.click({ position: { x: box.width * (compact ? 0.89 : 0.42), y: Math.min(box.height - 20, compact ? 193 : 215) } });
-      await expect(canvas).toBeVisible();
-      return canvas;
+      const station = page.locator('[data-station-id="clock"] button');
+      await expectUsableTarget(station);
+      await station.click();
+      await expect(page.locator('[data-station-id="clock"] .clock-game')).toBeVisible({ timeout: 30_000 });
+      await page.getByRole("button", { name: "← 回城市地图" }).click();
+      await expect(page.getByTestId("math-world-map")).toBeVisible();
+      return station;
     },
   },
   {
@@ -91,16 +90,6 @@ const GAMES: readonly SmokeGame[] = [
     },
   },
   {
-    id: "multiplication-adventure", title: "九九乘法表", surface: ".multiplication-game",
-    async interact(page) {
-      const action = page.getByRole("button", { name: "看卡片学习" });
-      await expectUsableTarget(action);
-      await action.click();
-      await expect(page.getByRole("button", { name: "返回乘法主页" })).toBeVisible();
-      return action;
-    },
-  },
-  {
     id: "english-spell-battle", title: "英文魔法战", surface: ".english-spell-game",
     async interact(page) {
       await page.getByRole("button", { name: "Level 1 首字母" }).click();
@@ -113,17 +102,7 @@ const GAMES: readonly SmokeGame[] = [
     },
   },
   {
-    id: "clock-reader", title: "认识时钟", surface: ".clock-game",
-    async interact(page) {
-      const action = page.getByRole("button", { name: "时针 +" });
-      await expectUsableTarget(action);
-      await action.click();
-      await expect(page.locator(".clock-hand--hour")).toBeVisible();
-      return action;
-    },
-  },
-  {
-    id: "make-target", title: "凑10算12算24", surface: ".make-target-game",
+    id: "make-target", title: "目标工坊", surface: ".make-target-game",
     async interact(page) {
       const cards = page.locator(".make-target-card");
       await cards.nth(0).click();
@@ -166,7 +145,7 @@ for (const game of GAMES) {
     await page.goto("/?hub=classic", { waitUntil: "domcontentloaded" });
     await page.evaluate(() => localStorage.clear());
     await page.reload({ waitUntil: "domcontentloaded" });
-    await expect(page.locator(".game-card")).toHaveCount(9);
+    await expect(page.locator(".game-card")).toHaveCount(7);
     const card = page.locator(`.game-card[data-game-id="${game.id}"]`);
     await expect(card.getByRole("heading", { name: game.title, exact: true })).toBeVisible();
     const entry = card.getByRole("button");
@@ -182,13 +161,17 @@ for (const game of GAMES) {
       const returnLink = page.locator('a[href*="hub=classic"]').first();
       await expectUsableTarget(returnLink);
       await returnLink.click();
+    } else if (game.id === "math-lab") {
+      await page.getByRole("link", { name: "回我的游戏世界" }).click();
+      await expect(page.getByTestId("world-treasure-box")).toBeVisible();
+      await page.getByTestId("world-treasure-box").getByRole("link").click();
     } else {
       const returnButton = page.getByRole("button", { name: "返回大厅", exact: true });
       await expectUsableTarget(returnButton);
       await returnButton.focus();
       await page.keyboard.press("Enter");
     }
-    await expect(page.locator(".game-card")).toHaveCount(9);
+    await expect(page.locator(".game-card")).toHaveCount(7);
     await expectRuntimeClean(runtime);
   });
 }
@@ -199,6 +182,12 @@ test("@portfolio public route registry preserves world, classic, and Hanzi legac
     ["/", '[data-testid="my-game-world"]'],
     ["/?world=my-game-world", '[data-testid="my-game-world"]'],
     ["/?hub=classic", ".hub-grid"],
+    ["/?world=math-world", '[data-testid="math-world-map"]'],
+    ["/?world=math-world&station=lab", '[data-station-id="lab"] canvas'],
+    ["/?world=math-world&station=clock", '[data-station-id="clock"] .clock-game'],
+    ["/?world=math-world&station=array", '[data-station-id="array"] .array-workshop'],
+    ["/?world=math-world&station=target", '[data-station-id="target"] .make-target-game'],
+    ["/?world=math-world&station=slider", '[data-station-id="slider"] .equation-slider'],
     ["/?play=hanzi-magic-complete&from=hub", '[data-testid="hanzi-magic-complete"]'],
     ["/?play=hanzi-v2-chapter-one&from=hub", '[data-testid="hanzi-magic-chapter-one-m3"]'],
     ["/?play=hanzi-v2-v1&from=hub", '[data-testid="hanzi-magic-v1"]'],

@@ -13,21 +13,21 @@
 ## 当前游戏
 
 <!-- GAME_PORTFOLIO:START -->
-经典大厅当前收录 9 个游戏。默认入口 `/` 是儿童侧“我的游戏世界”；世界中的“游戏百宝箱”或 `?hub=classic` 继续展示全部 9 个当前独立入口。
+Portfolio 与 `allGameDefinitions` 保留 9 个可挂载定义；经典大厅当前展示 7 个独立入口。默认入口 `/` 是儿童侧“我的游戏世界”，其中可进入墨迹森林、数学世界和游戏百宝箱。
 
 | 游戏 | 学科 | 适合年龄 | 目标世界 | 产品角色 | 质量等级 | 当前状态 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 汉字魔法战 | 识字 | 家庭儿童 | 中文世界 | 旗舰 | S | 墨迹森林完整篇 |
 | 算式滑轨 | 数学 | 6-10 岁 | 数学世界 | 旗舰 | S | 可玩 |
-| 数学实验室 | 数学 | 6-9 岁 | 数学世界 | 核心世界 | A | 可玩 |
+| 数学世界 | 数学 | 6-9 岁 | 数学世界 | 核心世界 | A | 可玩 |
 | 英文魔法战 | 英语 | 5-9 岁 | 英语世界 | 核心世界 | A | 可玩 |
-| 凑10算12算24 | 数学 | 7-10 岁 | 数学世界 | 独立谜题 | B | 可玩 |
-| 认识时钟 | 数学 | 5-7 岁 | 数学世界 | 模块 | C | 可玩 |
-| 九九乘法表 | 数学 | 7-9 岁 | 数学世界 | 模块 | C | 可玩 |
+| 目标工坊 | 数学 | 7-10 岁 | 数学世界 | 独立谜题 | B | 数学世界模块 |
+| 时钟塔 | 数学 | 5-7 岁 | 数学世界 | 模块 | C | 数学世界模块 |
+| 阵列工坊 | 数学 | 7-9 岁 | 数学世界 | 模块 | C | 数学世界模块 |
 | 记忆翻牌 | 识字 | 4-8 岁 | 共享模块 | 模块 | C | 可玩 |
 | 汉字魔法战-拼音 | 识字 | 6-8 岁 | 中文世界 | 模块 | C | 可玩 |
 
-长期方向是中文、数学、英语三个真实世界入口；本阶段没有创建尚无内容的空占位页。`targetStandaloneVisible = false` 只表示替代入口成熟后的方向，当前经典大厅可见性不变。
+数学世界现有 5 个自由开放站点。时钟塔和阵列工坊仍保留在全部定义与 Portfolio 中，但已由数学世界入口替代，不再作为经典大厅独立卡；没有创建尚无真实内容的空英语世界。
 <!-- GAME_PORTFOLIO:END -->
 
 > **算式滑轨 V3：**4 章共 200 关已按新 schema 重建；正式棋盘教程、统一状态机、40 个手工金标准、确定性生成、真实 pointer/键盘 E2E 与 25 关 UI-only agent 试玩均已纳入发布门禁。验收与后续儿童观察边界见 `docs/equation-slider/rebuild-v3/`。
@@ -63,7 +63,8 @@ pnpm run play:my-game-world
 路由约定：
 
 - `/` 或 `?world=my-game-world`：我的游戏世界；
-- `?hub=classic`：9 游戏经典大厅；
+- `?hub=classic`：7 个当前独立入口的经典大厅；
+- `?world=math-world`：数学世界 · 数感实验城；支持 `station=lab|clock|array|target|slider` 直接进入并刷新恢复；
 - 世界、森林与经典大厅之间使用 query-only 返回链接，兼容 GitHub Pages 项目子路径。
 
 ## 测试和构建
@@ -102,7 +103,7 @@ pnpm build
 1. 在 `games/新游戏名/` 下创建游戏文件。
 2. 至少包含 `index.ts` 和 `README.md`。
 3. `index.ts` 导出一个 `GameDefinition`，包含 `id`、`title`、`description`、`subject`、`recommendedAge`、`learningGoal`、`status` 和 `mount()`。
-4. 在 `packages/data/gameCatalog.ts` 中导入并加入 `gameCatalog`。
+4. 在 `packages/data/gameCatalog.ts` 中导入并加入 `allGameDefinitions`，再由 Portfolio 可见性确定是否进入 `classicGameCatalog`。
 5. 如果是共享题库或词库，放到 `packages/data/`；如果是单个游戏专用数据，优先放在该游戏目录内。
 6. 运行 `pnpm test` 和 `pnpm build`。
 7. 手动检查大厅能看到新游戏，能进入并返回大厅。

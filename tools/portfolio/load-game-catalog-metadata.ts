@@ -66,14 +66,14 @@ export function loadGameCatalogMetadata(root = resolve(import.meta.dirname, "../
   for (const statement of source.statements) {
     if (!ts.isVariableStatement(statement)) continue;
     for (const declaration of statement.declarationList.declarations) {
-      if (!ts.isIdentifier(declaration.name) || declaration.name.text !== "gameCatalog" || !declaration.initializer || !ts.isArrayLiteralExpression(declaration.initializer)) continue;
+      if (!ts.isIdentifier(declaration.name) || declaration.name.text !== "allGameDefinitions" || !declaration.initializer || !ts.isArrayLiteralExpression(declaration.initializer)) continue;
       return declaration.initializer.elements.map((element) => {
-        if (!ts.isIdentifier(element)) throw new Error("gameCatalog entries must be imported identifiers");
+        if (!ts.isIdentifier(element)) throw new Error("allGameDefinitions entries must be imported identifiers");
         const definitionPath = imports.get(element.text);
         if (!definitionPath) throw new Error(`Missing import path for catalog entry ${element.text}`);
         return readDefinition(definitionPath, element.text);
       });
     }
   }
-  throw new Error("Unable to locate gameCatalog array");
+  throw new Error("Unable to locate allGameDefinitions array");
 }

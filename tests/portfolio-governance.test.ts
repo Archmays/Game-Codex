@@ -16,7 +16,11 @@ describe("game portfolio governance", () => {
       GAME_PORTFOLIO.flatMap((record) => record.saveNamespaces).length,
     );
     expect(new Set(GAME_PORTFOLIO.map((record) => record.qualityTier))).toEqual(new Set(["S", "A", "B", "C"]));
-    expect(GAME_PORTFOLIO.every((record) => record.currentStandaloneVisible)).toBe(true);
+    expect(currentClassicGameCatalog).toHaveLength(7);
+    expect(GAME_PORTFOLIO.filter((record) => !record.currentStandaloneVisible).map((record) => record.id).sort()).toEqual([
+      "clock-reader",
+      "multiplication-adventure",
+    ]);
   });
 
   it("binds every game to a same-tier test profile and existing canonical docs", () => {
@@ -39,14 +43,21 @@ describe("game portfolio governance", () => {
     expect(docs.map((command) => command.label)).toEqual(["portfolio consistency"]);
 
     const game = affectedGateCommands(["games/clock-reader/index.ts"]);
-    expect(game.map((command) => command.label)).toContain("clock-reader entry/interaction/return smoke");
+    expect(game.map((command) => command.label)).toEqual([
+      "portfolio consistency",
+      "Math World model, content, and save gates",
+      "Math World portfolio and replacement contract",
+      "Math World routes, interactions, and lifecycle",
+    ]);
 
     const shared = affectedGateCommands(["packages/game-core/index.ts"]);
     expect(shared.map((command) => command.label)).toEqual([
       "portfolio consistency",
       "unit and content tests",
+      "Math World portfolio and replacement contract",
       "typecheck",
       "production build",
+      "Math World routes, interactions, and lifecycle",
       "all-game portfolio smoke",
     ]);
 

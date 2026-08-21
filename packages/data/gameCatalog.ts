@@ -10,7 +10,7 @@ import { multiplicationAdventureGame } from "../../games/multiplication-adventur
 import { pinyinMagicBattleGame } from "../../games/pinyin-magic-battle";
 import { GAME_PORTFOLIO_BY_ID } from "./gamePortfolio";
 
-export const gameCatalog: GameDefinition[] = [
+export const allGameDefinitions: GameDefinition[] = [
   memoryCardGame,
   mathLabGame,
   hanziRadicalBattleGame,
@@ -22,6 +22,10 @@ export const gameCatalog: GameDefinition[] = [
   pinyinMagicBattleGame
 ];
 
-export const currentClassicGameCatalog: GameDefinition[] = gameCatalog.filter(
+export const classicGameCatalog: GameDefinition[] = allGameDefinitions.filter(
   (game) => GAME_PORTFOLIO_BY_ID.get(game.id)?.currentStandaloneVisible === true,
 );
+
+/** Compatibility aliases for existing consumers; use the explicit names above in new code. */
+export const gameCatalog = allGameDefinitions;
+export const currentClassicGameCatalog = classicGameCatalog;

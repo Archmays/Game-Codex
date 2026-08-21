@@ -4,14 +4,12 @@ export const WORLD_COPY = {
   forestTitle: "墨迹森林",
   forestFreshAction: "走进墨迹森林",
   forestReturnAction: "再去墨迹森林",
-  spellbookTitle: "四字魔法书",
-  v1SpellbookTitle: "十二字魔法书",
-  spellbookAction: "翻开魔法书",
+  mathTitle: "数学实验城",
+  mathAction: "走进数学世界",
   treasureTitle: "游戏百宝箱",
   treasureAction: "打开百宝箱",
   settingsAction: "声音和画面",
   closeAction: "回到游戏世界",
-  emptySpellbook: "字光还在森林里等你。",
 } as const;
 
 export const WORLD_PRIMARY_COPY = Object.values(WORLD_COPY).join("\n");

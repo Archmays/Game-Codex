@@ -20,6 +20,7 @@ function gamesById(catalog: readonly GameCatalogMetadata[]): ReadonlyMap<string,
 
 export function renderReadmePortfolio(catalog: readonly GameCatalogMetadata[]): string {
   const catalogById = gamesById(catalog);
+  const classicCount = GAME_PORTFOLIO.filter((record) => record.currentStandaloneVisible).length;
   const rows = GAME_PORTFOLIO.map((record) => {
     const game = catalogById.get(record.id);
     if (!game) throw new Error(`Missing GameDefinition for ${record.id}`);
@@ -27,13 +28,13 @@ export function renderReadmePortfolio(catalog: readonly GameCatalogMetadata[]): 
   });
   return [
     README_PORTFOLIO_START,
-    "经典大厅当前收录 9 个游戏。默认入口 `/` 是儿童侧“我的游戏世界”；世界中的“游戏百宝箱”或 `?hub=classic` 继续展示全部 9 个当前独立入口。",
+    `Portfolio 与 \`allGameDefinitions\` 保留 ${GAME_PORTFOLIO.length} 个可挂载定义；经典大厅当前展示 ${classicCount} 个独立入口。默认入口 \`/\` 是儿童侧“我的游戏世界”，其中可进入墨迹森林、数学世界和游戏百宝箱。`,
     "",
     "| 游戏 | 学科 | 适合年龄 | 目标世界 | 产品角色 | 质量等级 | 当前状态 |",
     "| --- | --- | --- | --- | --- | --- | --- |",
     ...rows,
     "",
-    "长期方向是中文、数学、英语三个真实世界入口；本阶段没有创建尚无内容的空占位页。`targetStandaloneVisible = false` 只表示替代入口成熟后的方向，当前经典大厅可见性不变。",
+    "数学世界现有 5 个自由开放站点。时钟塔和阵列工坊仍保留在全部定义与 Portfolio 中，但已由数学世界入口替代，不再作为经典大厅独立卡；没有创建尚无真实内容的空英语世界。",
     README_PORTFOLIO_END,
   ].join("\n");
 }
@@ -47,6 +48,7 @@ export function replaceMarkedSection(source: string, rendered: string): string {
 
 export function renderPortfolioStatus(catalog: readonly GameCatalogMetadata[]): string {
   const catalogById = gamesById(catalog);
+  const classicCount = GAME_PORTFOLIO.filter((record) => record.currentStandaloneVisible).length;
   const rows = GAME_PORTFOLIO.map((record) => {
     const game = catalogById.get(record.id);
     if (!game) throw new Error(`Missing GameDefinition for ${record.id}`);
@@ -61,7 +63,9 @@ export function renderPortfolioStatus(catalog: readonly GameCatalogMetadata[]): 
     "",
     `- 实际起点：\`${PORTFOLIO_FOUNDATION_BASELINE}\``,
     `- 起点 tracked 文件：\`${PORTFOLIO_FOUNDATION_INITIAL_TRACKED_BYTES}\` bytes`,
-    "- 经典大厅：`9/9` 当前可见",
+    `- Portfolio / all definitions：\`${GAME_PORTFOLIO.length}/${GAME_PORTFOLIO.length}\` 保留`,
+    `- 经典大厅：\`${classicCount}\` 当前独立入口`,
+    "- 数学世界：`5/5` 自由开放站点",
     "- 历史治理：本阶段不重写 Git 历史、不强推、不移动或覆盖 tag",
     "- 真人儿童验证：`NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE`",
     "",
@@ -74,13 +78,13 @@ export function renderPortfolioStatus(catalog: readonly GameCatalogMetadata[]): 
     "## 质量等级",
     "",
     "- **S**：汉字魔法战、算式滑轨；核心机制或发布变化才运行各自完整 release gate。",
-    "- **A**：数学实验室、英文魔法战；核心变化覆盖状态/内容、目标浏览器、响应式、存档、输入、console/network 和返回流程。",
-    "- **B**：凑10算12算24；覆盖可解性、确定性题库、提示/恢复、输入、route 和 save。",
+    "- **A**：数学世界、英文魔法战；核心变化覆盖状态/内容、目标浏览器、响应式、存档、输入、console/network 和返回流程。",
+    "- **B**：目标工坊；覆盖可解性、确定性题库、提示/恢复、输入、route 和 save。",
     "- **C**：时钟、乘法、记忆、拼音；覆盖内容、mount、一次主交互、exit、双视口、焦点、console/asset/network。",
     "",
     "## 下一阶段",
     "",
-    "`GAME-CODEX-MATH-WORLD-02`：先建立有真实内容的数学世界骨架，再逐个接入时钟、乘法与目标数模块；算式滑轨继续保留独立旗舰入口。",
+    "`GAME-CODEX-CHINESE-CONSOLIDATION-03`：在不启动汉字 V4 的边界内，收拢拼音试炼与跨学科复习入口。",
     "",
   ].join("\n");
 }
@@ -97,7 +101,7 @@ export function renderPortfolioRoadmap(): string {
     "",
     "## 2. Math World",
     "",
-    "数学实验室作为场景骨架；时钟成为时钟塔，乘法成为阵列工坊，目标数成为工坊；算式滑轨保持独立旗舰。替代入口成熟后再考虑退役九九乘法表独立卡片。",
+    "V1.0.0 已完成：数学实验室作为场景骨架；时钟塔、阵列工坊、目标工坊与算式滑轨站统一进入数感实验城；时钟与旧乘法独立卡已在替代门禁后退役，定义和旧存档继续保留。",
     "",
     "## 3. Chinese Consolidation",
     "",

@@ -17,8 +17,8 @@ import { homedir } from "node:os";
 import { basename, dirname, extname, isAbsolute, relative, resolve, sep } from "node:path";
 import { spawnSync } from "node:child_process";
 
-export const TASK_ID = "GAME-CODEX-PORTFOLIO-FOUNDATION-01";
-export const RETURN_ZIP = "handoffs/GAME_CODEX_PORTFOLIO_FOUNDATION_01_RETURN_TO_CHATGPT.zip";
+export const TASK_ID = "GAME-CODEX-MATH-WORLD-02-R2";
+export const RETURN_ZIP = "handoffs/GAME_CODEX_MATH_WORLD_02_R2_RETURN_TO_CHATGPT.zip";
 export const RETURN_SHA = `${RETURN_ZIP}.sha256`;
 
 export type RetentionTier =
@@ -178,7 +178,8 @@ function isArchiveCandidate(path: string): boolean {
   if (lower.startsWith("docs/references/curriculum/") && lower.endsWith(".pdf")) return true;
   if (/^docs\/screenshots\/equation-slider\/rebuild-v3\/(before|after)\//.test(lower)) return true;
   if (lower.startsWith("artifacts/maintenance/hanzi-v2/")) return true;
-  if (lower.startsWith("handoffs/") && lower !== RETURN_ZIP.toLowerCase() && lower !== RETURN_SHA.toLowerCase()) return true;
+  if (/^handoffs\/game_codex_portfolio_foundation_01_return_to_chatgpt.*\.zip(?:\.sha256)?$/.test(lower)) return true;
+  if (/^handoffs\/game_codex_math_world_02_return_to_chatgpt.*\.zip(?:\.sha256)?$/.test(lower)) return true;
   return false;
 }
 

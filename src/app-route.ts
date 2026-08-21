@@ -21,6 +21,7 @@ export const APP_ROUTE_QUERY_REGISTRY = [
   { kind: "play", queryKey: "play", queryValue: "hanzi-v2-chapter-one", query: "?play=hanzi-v2-chapter-one", pageMode: "game-fullscreen" },
   { kind: "play", queryKey: "play", queryValue: "hanzi-v2-v1", query: "?play=hanzi-v2-v1", pageMode: "game-fullscreen" },
   { kind: "classic-hub", queryKey: "hub", queryValue: "classic", query: "?hub=classic", pageMode: "game-fullscreen" },
+  { kind: "world", queryKey: "world", queryValue: "math-world", query: "?world=math-world", pageMode: "game-fullscreen" },
   { kind: "world", queryKey: "world", queryValue: "my-game-world", query: "?world=my-game-world", pageMode: "game-fullscreen" },
 ] as const satisfies readonly AppRouteQueryRegistration[];
 

@@ -1,4 +1,4 @@
-# 九九乘法表
+# 阵列工坊
 
 ## 游戏目标
 
@@ -11,7 +11,7 @@
 
 ## 玩法说明
 
-先查看乘法卡片和可视化模型，再完成 10 道随机乘法题。孩子输入答案后获得即时反馈。
+孩子可直接改变 1–9 行和列，阅读真实方格数量，并把阵列翻转为“列 × 行”；方向变化时总数保持不变。
 
 ## 涉及知识点
 
@@ -27,14 +27,15 @@
 
 ## 当前完成度
 
-可玩。已接入大厅，支持乘法表查看、随机挑战和本地最佳成绩。
+V1.0.0 数学世界模块。旧 10 题得分循环、最佳成绩和 `source/` eager-load 已退出核心体验；任务 seeded 可重现。
 
 ## 后续改进建议
 
-- 增加按乘法段分组练习。
-- 增加错题复练提示。
+- 81 个 1–9 乘积、81 个 cell count/label 与 81 个 transpose 状态由纯模型测试覆盖。
+- 旧 `family-games/multiplication-adventure/*` 只读兼容。
 
 ## 接入方式
 
 - 导出：`multiplicationAdventureGame`。
-- 注册位置：`packages/data/gameCatalog.ts`。
+- 全部定义：`packages/data/gameCatalog.ts`；经典大厅独立可见性为 false。
+- Math World station：`?world=math-world&station=array`。

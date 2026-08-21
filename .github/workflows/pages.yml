@@ -52,12 +52,17 @@ jobs:
         env:
           PORTFOLIO_SMOKE_PREVIEW: "1"
 
+      - name: Validate Math World models, catalog replacement, and browser lifecycle
+        run: pnpm run validate:math-world && pnpm run test:e2e:math-world
+
       - name: Upload failure evidence only
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: pages-portfolio-failure-${{ github.sha }}
-          path: test-results/portfolio-smoke
+          path: |
+            test-results/portfolio-smoke
+            test-results/math-world
           if-no-files-found: ignore
           retention-days: 7
 
