@@ -531,6 +531,14 @@ function defaultReport(repoRoot: string, name: string): string {
   return resolve(repoRoot, "tmp", "tasks", TASK_ID, "reports", name);
 }
 
+export function verificationReportPath(repoRoot: string, archiveRoot: string, explicitOutput?: string): string {
+  if (explicitOutput) return resolve(explicitOutput);
+  const activeTaskRoot = resolve(repoRoot, "tmp", "tasks", TASK_ID);
+  return existsSync(activeTaskRoot)
+    ? resolve(activeTaskRoot, "reports", "cleanup-verify.json")
+    : resolve(archiveRoot, "reports", "post-close-maintenance-verify.json");
+}
+
 function executeCli(argv: readonly string[]): void {
   const options = parseArgs(argv);
   if (options.command === "inventory") {
@@ -568,7 +576,7 @@ function executeCli(argv: readonly string[]): void {
   }
   if (options.command === "verify") {
     const report = verifyMaintenance(options.repoRoot, options.archiveRoot);
-    const output = resolve(options.output ?? defaultReport(options.repoRoot, "cleanup-verify.json"));
+    const output = verificationReportPath(options.repoRoot, options.archiveRoot, options.output);
     writeJsonAtomic(output, report);
     console.log(`Verify: ${report.ok ? "PASS" : "FAIL"}; remaining ${report.remainingCleanupCandidates.length}; archive objects ${report.archiveObjectsVerified}.`);
     if (!report.ok) process.exitCode = 1;

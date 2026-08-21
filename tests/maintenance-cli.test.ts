@@ -9,6 +9,7 @@ import {
   TASK_ID,
   applyPlan,
   assertDeletionAllowed,
+  verificationReportPath,
   type CleanupPlan,
 } from "../tools/maintenance/repository-maintenance";
 
@@ -112,5 +113,12 @@ describe("repository maintenance safety", () => {
     applyPlan(plan(repo, archive, "tmp/later.tmp", "transient", "delete"));
     const manifest = JSON.parse(readFileSync(resolve(archive, "reports", "archive-manifest.json"), "utf8")) as { entries: unknown[] };
     expect(manifest.entries).toHaveLength(1);
+  });
+
+  it("routes verification outside the repository after close-task removed its workspace", () => {
+    const { repo, archive } = fixture();
+    expect(verificationReportPath(repo, archive)).toBe(resolve(archive, "reports", "post-close-maintenance-verify.json"));
+    mkdirSync(resolve(repo, "tmp", "tasks", TASK_ID), { recursive: true });
+    expect(verificationReportPath(repo, archive)).toBe(resolve(repo, "tmp", "tasks", TASK_ID, "reports", "cleanup-verify.json"));
   });
 });
