@@ -2,6 +2,7 @@ import { execFileSync } from "node:child_process";
 import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { PROJECT_LIFECYCLE_TERMINAL_TRUTH, PROJECT_PHASES } from "../../packages/data/projectLifecycle";
+import { PLAY_SURFACE_MANIFEST } from "../../packages/data/playSurfaceManifest";
 
 const TASK_ID = "GAME-CODEX-STABLE-NATURAL-USE-ENTRY-07";
 const TAG = "game-codex-family-stable-v1.0.0";
@@ -13,6 +14,7 @@ const HITTEST_REPORTS = resolve(ROOT, "test-results/interaction-integrity/report
 const SCREENSHOTS = resolve(ROOT, "test-results/scroll-reachability/screenshots");
 const SELECTED = resolve(REPORTS, "selected-screenshots");
 const EXPECTED_PROJECTS = ["desktop-1366", "desktop-1440", "desktop-1920", "landscape-1024", "mobile-360", "mobile-390", "tablet-768"];
+const POLICY_COUNTS = Object.fromEntries(["document", "internal", "locked"].map((policy) => [policy, PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === policy).length]));
 
 function option(name: string, fallback = ""): string {
   const index = process.argv.indexOf(name);
@@ -105,7 +107,7 @@ write("WORD_JOURNAL_SCROLL_FIX_VERDICT.json", {
 write("PAGE_MODE_SCROLL_POLICY_VERDICT.json", {
   verdict: "PASS",
   manifestSurfaces: 42,
-  policies: { document: 39, internal: 2, locked: 1 },
+  policies: POLICY_COUNTS,
   pageModes: { document: "game-scrollable-page", internal: "game-fullscreen-page", locked: "game-fullscreen-page" },
   routeSelection: "MOST_SPECIFIC_QUERY_MATCH",
   formerHardcodedFullscreen: "REMOVED",
