@@ -36,6 +36,13 @@ if (Test-Path -LiteralPath $shaPath) { throw "Protected return SHA already exist
 Compress-Archive -Path (Join-Path $stagingRoot "*") -DestinationPath $zipPath -CompressionLevel Optimal
 $bytes = (Get-Item -LiteralPath $zipPath).Length
 if ($bytes -ge 8MB) { throw "Return ZIP exceeds 8 MiB: $bytes" }
-$hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $zipPath).Hash.ToLowerInvariant()
-Set-Content -LiteralPath $shaPath -Value "$hash  $zipName" -Encoding ascii
+$stream = [System.IO.File]::OpenRead($zipPath)
+try {
+  $sha256 = [System.Security.Cryptography.SHA256]::Create()
+  try { $hashBytes = $sha256.ComputeHash($stream) } finally { $sha256.Dispose() }
+} finally {
+  $stream.Dispose()
+}
+$hash = ([System.BitConverter]::ToString($hashBytes)).Replace("-", "").ToLowerInvariant()
+[System.IO.File]::WriteAllText($shaPath, "$hash  $zipName`r`n", [System.Text.Encoding]::ASCII)
 Write-Output (@{ verdict = "PASS"; zip = $zipPath; bytes = $bytes; sha256 = $hash } | ConvertTo-Json -Compress)

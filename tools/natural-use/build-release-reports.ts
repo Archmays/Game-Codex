@@ -26,6 +26,7 @@ const REPORTS = resolve(ROOT, `tmp/tasks/${TASK_ID}/reports`);
 const commit = execFileSync("git", ["rev-parse", "HEAD"], { cwd: ROOT, encoding: "utf8" }).trim();
 const originMain = execFileSync("git", ["rev-parse", "refs/remotes/origin/main"], { cwd: ROOT, encoding: "utf8" }).trim();
 const productTagCommit = execFileSync("git", ["rev-list", "-n", "1", "game-codex-observation-kit-v1.0.0"], { cwd: ROOT, encoding: "utf8" }).trim();
+const productTagMergeBase = execFileSync("git", ["merge-base", productTagCommit, commit], { cwd: ROOT, encoding: "utf8" }).trim();
 const sourceTreeListing = execFileSync("git", ["ls-tree", "-r", "--full-tree", "HEAD"], { cwd: ROOT, encoding: "utf8", maxBuffer: 128 * 1024 * 1024 });
 const sourceTreeSha256 = createHash("sha256").update(sourceTreeListing).digest("hex");
 
@@ -33,7 +34,7 @@ function stable(value: unknown): string { return `${JSON.stringify(value, null, 
 function writeJson(name: string, value: unknown): void { const path = resolve(REPORTS, name); mkdirSync(dirname(path), { recursive: true }); writeFileSync(path, stable(value), "utf8"); }
 function readJson(name: string): any { return JSON.parse(readFileSync(resolve(REPORTS, name), "utf8")); }
 
-if (commit !== originMain || productTagCommit !== commit) throw new Error("Final reports require HEAD == origin/main == observation tag");
+if (commit !== originMain || productTagMergeBase !== productTagCommit) throw new Error("Final reports require HEAD == origin/main with the immutable observation product tag in its ancestry");
 const pages = readJson("PAGES_VERDICT.json");
 const gates = readJson("FINAL_GATE_EVIDENCE.json");
 if (pages.verdict !== "PASS_MACHINE" || pages.deployedCommit !== commit) throw new Error("Pages exact-commit evidence is not ready");
