@@ -76,7 +76,7 @@ const entries = riskInventory();
 const issues: string[] = [];
 const policyCounts = Object.fromEntries(["document", "internal", "locked"].map((policy) => [policy, PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === policy).length]));
 if (PLAY_SURFACE_MANIFEST.length !== 42) issues.push(`Expected 42 play surfaces, found ${PLAY_SURFACE_MANIFEST.length}`);
-if (policyCounts.document !== 39 || policyCounts.internal !== 2 || policyCounts.locked !== 1) issues.push(`Unexpected scroll classification: ${JSON.stringify(policyCounts)}`);
+if (policyCounts.document !== 38 || policyCounts.internal !== 2 || policyCounts.locked !== 2) issues.push(`Unexpected scroll classification: ${JSON.stringify(policyCounts)}`);
 for (const surface of PLAY_SURFACE_MANIFEST) {
   if (surface.scrollPolicy === "internal") {
     if (!surface.scrollContainerSelector) issues.push(`${surface.id}: internal policy requires scrollContainerSelector`);
@@ -86,7 +86,8 @@ for (const surface of PLAY_SURFACE_MANIFEST) {
   if (surface.scrollPolicy !== "locked" && surface.lockedReason) issues.push(`${surface.id}: only locked policy may declare lockedReason`);
 }
 if (APP_ROUTE_QUERY_MANIFEST.every((route) => route.defaultScrollPolicy === "locked")) issues.push("Route registry still locks every route family");
-if (APP_ROUTE_QUERY_MANIFEST.filter((route) => route.defaultScrollPolicy === "locked").map((route) => route.queryValue).join(",") !== "hanzi-v2-v1") issues.push("Only the fixed Hanzi V1 route family may default to locked");
+const lockedRouteDefaults = APP_ROUTE_QUERY_MANIFEST.filter((route) => route.defaultScrollPolicy === "locked").map((route) => route.queryValue).sort();
+if (JSON.stringify(lockedRouteDefaults) !== JSON.stringify(["hanzi-v2-v1", "my-game-world"])) issues.push("Only the two verified fixed-viewport route families may default to locked");
 const appRoute = readFileSync(resolve(ROOT, "src/app-route.ts"), "utf8");
 const pageMode = readFileSync(resolve(ROOT, "src/page-mode.css"), "utf8");
 const sliceApp = readFileSync(resolve(ROOT, "games/hanzi-radical-battle/complete/app/slice-app.ts"), "utf8");

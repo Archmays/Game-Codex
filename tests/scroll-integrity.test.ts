@@ -16,14 +16,15 @@ function classTarget() {
 describe("play-surface scroll integrity", () => {
   it("classifies all 42 surfaces with explicit internal and locked exceptions", () => {
     expect(PLAY_SURFACE_MANIFEST).toHaveLength(42);
-    expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === "document")).toHaveLength(39);
+    expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === "document")).toHaveLength(38);
     expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === "internal").map((surface) => surface.id)).toEqual([
       "hanzi-family-slice",
       "hanzi-word-slice",
     ]);
-    expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === "locked").map((surface) => surface.id)).toEqual(["hanzi-v1-compat"]);
+    expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === "locked").map((surface) => surface.id)).toEqual(["my-game-world", "hanzi-v1-compat"]);
     expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === "internal").every((surface) => surface.scrollContainerSelector === ".hmc-shell")).toBe(true);
     expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === "hanzi-v1-compat")?.lockedReason).toMatch(/fixed inset Phaser/);
+    expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === "my-game-world")?.lockedReason).toMatch(/fixed viewport canvas/);
   });
 
   it("uses the most specific surface query instead of a route-family fullscreen default", () => {
@@ -38,6 +39,10 @@ describe("play-surface scroll integrity", () => {
     const fixed = new URLSearchParams("play=hanzi-v2-v1&from=world");
     expect(playSurfaceForSearch(fixed)?.id).toBe("hanzi-v1-compat");
     expect(pageModeForSearch(fixed)).toBe("game-fullscreen");
+
+    const familyWorld = new URLSearchParams("world=my-game-world&parent=observation");
+    expect(playSurfaceForSearch(familyWorld)?.id).toBe("my-game-world");
+    expect(pageModeForSearch(familyWorld)).toBe("game-fullscreen");
 
     expect(pageModeForSearch(new URLSearchParams("world=english-world"))).toBe("game-scrollable");
     expect(pageModeForSearch(new URLSearchParams())).toBe("game-scrollable");

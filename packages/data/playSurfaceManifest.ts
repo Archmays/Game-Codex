@@ -54,7 +54,7 @@ export const APP_ROUTE_QUERY_MANIFEST = [
   { kind: "classic-hub", queryKey: "hub", queryValue: "classic", query: "?hub=classic", defaultScrollPolicy: "document" },
   { kind: "world", queryKey: "world", queryValue: "english-world", query: "?world=english-world", defaultScrollPolicy: "document" },
   { kind: "world", queryKey: "world", queryValue: "math-world", query: "?world=math-world", defaultScrollPolicy: "document" },
-  { kind: "world", queryKey: "world", queryValue: "my-game-world", query: "?world=my-game-world", defaultScrollPolicy: "document" },
+  { kind: "world", queryKey: "world", queryValue: "my-game-world", query: "?world=my-game-world", defaultScrollPolicy: "locked" },
 ] as const satisfies readonly AppRouteQueryRegistration[];
 
 const ALL_INPUTS = ["pointer", "touch", "keyboard"] as const;
@@ -104,7 +104,7 @@ const english = (record: ProductSurfaceInput): PlaySurfaceRecord => surface({
 });
 
 export const PLAY_SURFACE_MANIFEST: readonly PlaySurfaceRecord[] = [
-  surface({ id: "my-game-world", title: "我的游戏世界", route: "?world=my-game-world", productId: "portfolio", kind: "portfolio-world", returnRoute: "?world=my-game-world", primaryActionSelector: "[data-world-forest-link]", settingsAvailable: true, destructiveActionAvailable: false, saveNamespaces: ["family-games/my-game-world/v1"], expectedInputs: ALL_INPUTS, qualityProfile: "portfolio-play-ready", primaryEntry: true }),
+  surface({ id: "my-game-world", title: "我的游戏世界", route: "?world=my-game-world", productId: "portfolio", kind: "portfolio-world", returnRoute: "?world=my-game-world", primaryActionSelector: "[data-world-forest-link]", settingsAvailable: true, destructiveActionAvailable: false, saveNamespaces: ["family-games/my-game-world/v1"], expectedInputs: ALL_INPUTS, qualityProfile: "portfolio-play-ready", scrollPolicy: "locked", lockedReason: "The responsive family-world stage is a fixed viewport canvas with viewport-safe portal controls and internally scrolling parent overlays.", primaryEntry: true }),
   surface({ id: "classic-hub", title: "游戏百宝箱", route: "?hub=classic&from=world", productId: "portfolio", kind: "classic-hub", parentSurfaceId: "my-game-world", returnRoute: "?world=my-game-world", primaryActionSelector: ".game-card__button", settingsAvailable: false, destructiveActionAvailable: false, saveNamespaces: [], expectedInputs: ALL_INPUTS, qualityProfile: "portfolio-play-ready", primaryEntry: true }),
 
   hanzi({ id: "hanzi-world", title: "墨迹森林", route: "?play=hanzi-magic-complete&from=world", kind: "product-world", parentSurfaceId: "my-game-world", returnRoute: "?world=my-game-world", primaryActionSelector: "[data-primary-focus], button:not([disabled]), a", primaryEntry: true }),
