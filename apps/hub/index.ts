@@ -19,9 +19,9 @@ export function mountHub(root: HTMLElement): MountedGame {
 
     const titleGroup = document.createElement("div");
     const title = document.createElement("h1");
-    title.textContent = "儿童学习游戏大厅";
+    title.textContent = "游戏百宝箱";
     const subtitle = document.createElement("p");
-    subtitle.textContent = "选择一个短小游戏，在手机、平板或电脑上练习识字、数学、英语和亲子互动。";
+    subtitle.textContent = "挑一个想玩的小游戏，玩完随时回来换一个。";
     titleGroup.append(title, subtitle);
     header.append(titleGroup);
 
@@ -69,7 +69,7 @@ export function mountHub(root: HTMLElement): MountedGame {
     const backButton = createButton("返回大厅", renderHub, {
       className: "ui-button ui-button--secondary"
     });
-    const title = document.createElement("strong");
+    const title = document.createElement("h1");
     title.textContent = game.title;
     topbar.append(backButton, title);
 
@@ -107,8 +107,10 @@ function createGameCard(game: GameDefinition, onPlay: () => void): HTMLElement {
     worldArt.className = "game-card__world-art";
     worldArt.src = "./assets/hanzi-radical-battle/v2/theme-c/chapter-one/hub-ink-forest.webp";
     worldArt.alt = "夜色墨迹森林里有发光小径、魔法树和温和的墨点伙伴";
+    const description = document.createElement("p");
+    description.textContent = game.description;
     const button = createButton(game.playLabel ?? "进入墨迹森林", onPlay, { className: "ui-button game-card__button" });
-    card.append(title, worldArt, button);
+    card.append(title, worldArt, description, button);
     return card;
   }
 
@@ -120,23 +122,12 @@ function createGameCard(game: GameDefinition, onPlay: () => void): HTMLElement {
     worldArt.className = "game-card__world-art";
     worldArt.src = "./assets/math-world/math-world-city-background.webp";
     worldArt.alt = "明亮的数学实验城市，里面有苹果园、钟楼、方格工坊、数字牌屋和火车站";
+    const description = document.createElement("p");
+    description.textContent = game.description;
     const button = createButton(game.playLabel ?? "进入数学世界", onPlay, { className: "ui-button game-card__button" });
-    card.append(title, worldArt, button);
+    card.append(title, worldArt, description, button);
     return card;
   }
-
-  const meta = document.createElement("div");
-  meta.className = "game-card__meta";
-
-  const subject = document.createElement("span");
-  subject.className = "game-card__subject";
-  subject.textContent = game.subject;
-
-  const status = document.createElement("span");
-  status.className = "game-card__status";
-  status.textContent = game.status;
-
-  meta.append(subject, status);
 
   const title = document.createElement("h2");
   title.textContent = game.title;
@@ -144,18 +135,10 @@ function createGameCard(game: GameDefinition, onPlay: () => void): HTMLElement {
   const description = document.createElement("p");
   description.textContent = game.description;
 
-  const goal = document.createElement("p");
-  goal.className = "game-card__goal";
-  goal.textContent = `学习目标：${game.learningGoal}`;
-
-  const age = document.createElement("div");
-  age.className = "game-card__age";
-  age.textContent = `适合年龄：${game.recommendedAge}`;
-
   const button = createButton(game.playLabel ?? "开始游戏", onPlay, {
     className: "ui-button game-card__button"
   });
 
-  card.append(meta, title, description, goal, age, button);
+  card.append(title, description, button);
   return card;
 }

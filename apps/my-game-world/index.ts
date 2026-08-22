@@ -51,7 +51,7 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
   root.className = "my-game-world-mount";
   root.innerHTML = `<main class="my-game-world" data-testid="my-game-world" data-recovered="${String(state.recoveredCalmly)}">
     <header class="world-header">
-      <div><span class="world-kicker">夜光墨林</span><h1>${WORLD_COPY.title}</h1><p>${WORLD_COPY.subtitle}</p></div>
+      <div><span class="world-kicker">三个世界 · 一个百宝箱</span><h1>${WORLD_COPY.title}</h1><p>${WORLD_COPY.subtitle}</p></div>
       <button class="world-icon-button" type="button" data-world-settings-open>${WORLD_COPY.settingsAction}</button>
     </header>
     <section class="world-stage" aria-label="墨迹森林、数学世界、英语世界和游戏百宝箱入口">

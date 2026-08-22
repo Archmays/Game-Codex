@@ -199,7 +199,7 @@ test.describe("@release equation slider browser-only release gaps", () => {
     await expect(page.locator(COVERAGE)).toHaveText(/^0\/\d+$/);
     await expect(page.locator(MOVES)).toHaveText("0");
     await activateWithKeyboard(page, page.locator(".game-topbar").getByRole("button", { name: "返回大厅" }));
-    await expect(page.getByRole("heading", { name: "儿童学习游戏大厅" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "游戏百宝箱" })).toBeVisible();
   });
 
   test("chapter loading, chapter map, route map, and return to hub remain connected", async ({ page }) => {
@@ -213,7 +213,7 @@ test.describe("@release equation slider browser-only release gaps", () => {
     await expect(page.locator("[data-chapter-id]")).toHaveCount(4);
 
     await page.locator(".equation-slider").getByRole("button", { name: "返回大厅" }).click();
-    await expect(page.getByRole("heading", { name: "儿童学习游戏大厅" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "游戏百宝箱" })).toBeVisible();
     await expect(page.getByRole("button", { name: "进入轨道站" })).toBeVisible();
   });
 
@@ -414,13 +414,13 @@ test.describe("@release equation slider browser-only release gaps", () => {
     await page.locator(".game-topbar").getByRole("button", { name: "返回大厅" }).focus();
     await page.keyboard.press("Enter");
     await page.mouse.up();
-    await expect(page.getByRole("heading", { name: "儿童学习游戏大厅" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "游戏百宝箱" })).toBeVisible();
 
     for (let iteration = 0; iteration < 4; iteration += 1) {
       await page.getByRole("button", { name: "进入轨道站" }).click();
       await expect(page.locator(BOARD)).toBeVisible();
       await page.locator(".game-topbar").getByRole("button", { name: "返回大厅" }).click();
-      await expect(page.getByRole("heading", { name: "儿童学习游戏大厅" })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "游戏百宝箱" })).toBeVisible();
     }
     expect(pageErrors).toEqual([]);
   });

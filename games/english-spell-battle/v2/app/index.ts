@@ -110,6 +110,7 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
   let sentenceTileSelected = false;
   let announcement = "选择一个地方，让词光亮起来。";
   let destroyed = false;
+  let settingsReturnFocus: HTMLElement | null = null;
 
   addPageClass();
 
@@ -135,8 +136,8 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
   };
 
   const renderHeader = (compact = false): string => `<header class="wordlight-header ${compact ? "is-compact" : ""}">
-    <div><span class="wordlight-kicker">英语世界</span><h1>词光岛 <small>Wordlight Island</small></h1>${compact ? "" : "<p>看见意思，拼出单词，再让一句话点亮小岛。</p>"}</div>
-    <nav aria-label="词光岛导航"><button type="button" data-action="map">岛屿地图</button><button type="button" data-action="journal">词光册</button><a href="?world=english-world&amp;view=memory">English Memory</a><a href="${escapeHtml(returnHref)}">回我的游戏世界</a><button type="button" data-action="settings" aria-haspopup="dialog">设置</button></nav>
+    <div><span class="wordlight-kicker">英语世界</span><h1>词光岛 <small lang="en-US">Wordlight Island</small></h1>${compact ? "" : "<p>看见意思，拼出单词，再让一句话点亮小岛。</p>"}</div>
+    <nav aria-label="词光岛导航"><button type="button" data-action="map">岛屿地图</button><button type="button" data-action="journal">词光册</button><a href="?world=english-world&amp;view=memory" lang="en-US">English Memory</a><a href="${escapeHtml(returnHref)}">回我的游戏世界</a><button type="button" data-action="settings" aria-haspopup="dialog">设置</button></nav>
   </header>`;
 
   const renderNotice = (): string => {
@@ -179,7 +180,7 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
     root.innerHTML = `<main class="wordlight" data-testid="english-journal">${renderHeader(true)}<section class="wordlight-journal"><button type="button" class="wordlight-back" data-action="map">← 回岛屿地图</button><header><span>Word Journal</span><h2>词光册</h2><p>看图片、单词和声音块。这里没有正确率或错误次数。</p></header><div class="wordlight-journal__grid">${ENGLISH_V2_WORDS.map((word) => {
       const sentence = ENGLISH_V2_SENTENCE_BY_ID.get(word.sentenceIds[0]);
       const status = word.storyBand === "optional" ? "拓展词" : save.completedStoryWordIds.includes(word.id) ? "已遇见" : "还没遇见";
-      return `<article data-testid="journal-word" data-word-id="${word.id}" data-story-band="${word.storyBand}">${visualMarkup(word)}<div><span>${status}</span><h3>${word.displayWord}</h3>${save.settings.chineseScaffold ? `<p>${word.childGlossZh}</p>` : ""}<p>${word.childDefinitionEn}</p><div class="wordlight-chunks" aria-label="${word.displayWord} 的拼写块">${word.graphemeUnits.map((unit) => `<span data-role="${unit.role}">${unit.letters}</span>`).join("")}</div>${sentence ? `<p class="wordlight-journal__sentence">${sentence.text}</p>` : `<p class="wordlight-journal__sentence">Optional word · 可以只看图、词义和拼写块。</p>`}${save.settings.soundEnabled && canSpeakEnglish() ? `<button type="button" data-speak="${escapeHtml(word.displayWord)}">听整个单词</button>` : ""}</div></article>`;
+      return `<article data-testid="journal-word" data-word-id="${word.id}" data-story-band="${word.storyBand}">${visualMarkup(word)}<div><span>${status}</span><h3 lang="en-US">${word.displayWord}</h3>${save.settings.chineseScaffold ? `<p>${word.childGlossZh}</p>` : ""}<p lang="en-US">${word.childDefinitionEn}</p><div class="wordlight-chunks" aria-label="${word.displayWord} 的拼写块" lang="en-US">${word.graphemeUnits.map((unit) => `<span data-role="${unit.role}">${unit.letters}</span>`).join("")}</div>${sentence ? `<p class="wordlight-journal__sentence" lang="en-US">${sentence.text}</p>` : `<p class="wordlight-journal__sentence"><span lang="en-US">Optional word</span> · 可以只看图、词义和拼写块。</p>`}${save.settings.soundEnabled && canSpeakEnglish() ? `<button type="button" data-speak="${escapeHtml(word.displayWord)}">听整个单词</button>` : ""}</div></article>`;
     }).join("")}</div></section><div data-settings-layer></div><div class="wordlight-live" aria-live="polite">${escapeHtml(announcement)}</div></main>`;
   };
 
@@ -194,14 +195,14 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
     root.innerHTML = `<main class="wordlight wordlight-mission" data-testid="english-mission" data-word-id="${word.id}" data-phase="${phase}">${renderHeader(true)}
       <section class="wordlight-mission__stage"><button type="button" class="wordlight-back" data-action="region">← 回到这个地方</button>
       <div class="wordlight-stepper" aria-label="任务步骤"><span data-current="${String(phase === "meaning")}">看懂</span><span data-current="${String(phase === "build")}">拼词</span><span data-current="${String(phase === "sentence")}">放进句子</span><span data-current="${String(phase === "response")}">世界回应</span></div>
-      ${phase === "meaning" ? `<section class="wordlight-meaning"><div>${visualMarkup(word)}<div class="wordlight-scene-glow" aria-hidden="true"></div></div><div><span class="wordlight-phase-label">先看懂它</span><h2>${word.displayWord}</h2>${save.settings.chineseScaffold ? `<p class="wordlight-gloss">${word.childGlossZh}</p>` : ""}<p>${word.childDefinitionEn}</p>${save.settings.soundEnabled && canSpeakEnglish() ? `<button type="button" data-speak="${escapeHtml(word.displayWord)}">听整个单词</button>` : `<p class="wordlight-audio-note">没有可用英文声音也没关系，图片和文字会陪你走完。</p>`}<button type="button" data-action="to-build">看看它怎么拼</button></div></section>` : ""}
+      ${phase === "meaning" ? `<section class="wordlight-meaning"><div>${visualMarkup(word)}<div class="wordlight-scene-glow" aria-hidden="true"></div></div><div><span class="wordlight-phase-label">先看懂它</span><h2 lang="en-US">${word.displayWord}</h2>${save.settings.chineseScaffold ? `<p class="wordlight-gloss">${word.childGlossZh}</p>` : ""}<p lang="en-US">${word.childDefinitionEn}</p>${save.settings.soundEnabled && canSpeakEnglish() ? `<button type="button" data-speak="${escapeHtml(word.displayWord)}">听整个单词</button>` : `<p class="wordlight-audio-note">没有可用英文声音也没关系，图片和文字会陪你走完。</p>`}<button type="button" data-action="to-build">看看它怎么拼</button></div></section>` : ""}
       ${phase === "build" ? `<section class="wordlight-build"><header><span class="wordlight-phase-label">把词光放到一起</span><h2>Build ${word.displayWord}</h2><p>${word.decodingBand === "irregular-supported" ? "心形部分需要记住；它不是假装规则的声音。" : "同一个拼写块里的字母会一起发光。"}</p></header><div class="wordlight-sound-map" aria-label="${word.displayWord} 的声音与拼写块">${word.graphemeUnits.map((unit) => `<span data-role="${unit.role}" title="${escapeHtml(unitHint(unit))}">${unit.letters}</span>`).join("")}</div><div class="wordlight-build__slots" aria-label="拼词槽位">${word.graphemeUnits.map((unit, index) => {
         const selected = slotTiles[index];
         const fixed = build.fixedTargetUnitIds.includes(unit.id);
         return `<span data-slot-index="${index}" data-fixed="${String(fixed)}">${escapeHtml(fixed ? targetUnitForSlot(word, index).letters : selected?.letters ?? "")}</span>`;
       }).join("")}</div><div class="wordlight-tile-bank" aria-label="可选拼写块">${availableTiles.map((tile) => `<button type="button" data-tile-id="${escapeHtml(tile.id)}" aria-pressed="${String(build.selectedTileIds.includes(tile.id))}" ${build.selectedTileIds.includes(tile.id) || (tile.targetUnitId ? build.fixedTargetUnitIds.includes(tile.targetUnitId) : false) ? "disabled" : ""}>${escapeHtml(tile.letters)}</button>`).join("")}</div><div class="wordlight-controls"><button type="button" data-action="undo" ${build.selectedTileIds.length ? "" : "disabled"}>撤销</button><button type="button" data-action="reset">重新摆</button><button type="button" data-action="hint">给一点提示</button><button type="button" data-action="check-build">放好这个词</button></div>${build.hintLevel ? `<p class="wordlight-hint" role="status">${build.hintLevel === 1 ? "先看亮起的槽位。" : build.hintLevel === 2 ? "一个多余拼写块已经轻轻退开。" : build.hintLevel === 4 ? word.graphemeUnits.find((unit) => unit.role === "irregular-heart")?.childHint ?? "心形部分已经亮起。" : "一个正确拼写块已经固定。"}</p>` : ""}</section>` : ""}
-      ${phase === "sentence" ? `<section class="wordlight-sentence"><div>${visualMarkup(word)}<p>${word.childDefinitionEn}</p></div><div><span class="wordlight-phase-label">把完整单词放进句子</span><h2>${blankTokens.map((token, index) => token.startsWith("__") ? `<button type="button" class="wordlight-sentence__slot" data-action="sentence-slot" aria-label="句子中的空位">${sentenceTileSelected ? word.displayWord : "_____"}</button>` : `<span>${escapeHtml(token)}${index === blankTokens.length - 1 ? "." : ""}</span>`).join(" ")}</h2>${save.settings.chineseScaffold && sentence.scaffoldZh ? `<p class="wordlight-gloss">${sentence.scaffoldZh}</p>` : ""}<button type="button" class="wordlight-word-tile" data-action="sentence-tile" aria-pressed="${String(sentenceTileSelected)}">${word.displayWord}</button><p>先选单词，再点句子里的空位。拖动不是必需的。</p></div></section>` : ""}
-      ${phase === "response" ? `<section class="wordlight-response" data-world-action="${sentence.worldActionId}"><div>${visualMarkup(word, true)}<span class="wordlight-response__ripple" aria-hidden="true"></span></div><div><span class="wordlight-phase-label">世界听懂了</span><h2>${sentence.text}</h2><p>${word.displayWord} fits here. ${responseCopy(word.id)}</p><button type="button" data-action="next-word">再找一个词光</button></div></section>` : ""}
+      ${phase === "sentence" ? `<section class="wordlight-sentence"><div>${visualMarkup(word)}<p lang="en-US">${word.childDefinitionEn}</p></div><div><span class="wordlight-phase-label">把完整单词放进句子</span><h2 lang="en-US">${blankTokens.map((token, index) => token.startsWith("__") ? `<button type="button" class="wordlight-sentence__slot" data-action="sentence-slot" aria-label="句子中的空位">${sentenceTileSelected ? word.displayWord : "_____"}</button>` : `<span>${escapeHtml(token)}${index === blankTokens.length - 1 ? "." : ""}</span>`).join(" ")}</h2>${save.settings.chineseScaffold && sentence.scaffoldZh ? `<p class="wordlight-gloss">${sentence.scaffoldZh}</p>` : ""}<button type="button" class="wordlight-word-tile" data-action="sentence-tile" aria-pressed="${String(sentenceTileSelected)}" lang="en-US">${word.displayWord}</button><p>先选单词，再点句子里的空位。拖动不是必需的。</p></div></section>` : ""}
+      ${phase === "response" ? `<section class="wordlight-response" data-world-action="${sentence.worldActionId}"><div>${visualMarkup(word, true)}<span class="wordlight-response__ripple" aria-hidden="true"></span></div><div><span class="wordlight-phase-label">世界听懂了</span><h2 lang="en-US">${sentence.text}</h2><p lang="en-US">${word.displayWord} fits here. ${responseCopy(word.id)}</p><button type="button" data-action="next-word">再找一个词光</button></div></section>` : ""}
       </section><div data-settings-layer></div><div class="wordlight-live" aria-live="polite">${escapeHtml(announcement)}</div></main>`;
   };
 
@@ -210,6 +211,12 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
     if (!layer) return;
     layer.innerHTML = `<div class="wordlight-dialog-backdrop"><section class="wordlight-dialog" role="dialog" aria-modal="true" aria-labelledby="wordlight-settings-title"><h2 id="wordlight-settings-title">声音和帮助</h2><label><input type="checkbox" data-setting="chineseScaffold" ${save.settings.chineseScaffold ? "checked" : ""}/> 中文帮助</label><label><input type="checkbox" data-setting="soundEnabled" ${save.settings.soundEnabled ? "checked" : ""}/> 可选整词和整句声音</label><label><input type="checkbox" data-setting="reducedMotion" ${save.settings.reducedMotion ? "checked" : ""}/> 减少动态效果</label><p>声音不是答题条件；浏览器 TTS 不作为发音质量证据。</p><button type="button" data-action="close-settings">回到词光岛</button></section></div>`;
     layer.querySelector<HTMLInputElement>("input")?.focus();
+  };
+
+  const closeSettings = (): void => {
+    root.querySelector<HTMLElement>("[data-settings-layer]")?.replaceChildren();
+    settingsReturnFocus?.focus();
+    settingsReturnFocus = null;
   };
 
   const startMission = (word: EnglishWordRecord): void => {
@@ -291,8 +298,8 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
       case "map": activeThemeId = null; navigate("map"); break;
       case "region": if (mission) { activeThemeId = mission.word.themeId; navigate("region", { region: mission.word.themeId }); } break;
       case "journal": navigate("journal", { view: "journal" }); break;
-      case "settings": renderSettings(); break;
-      case "close-settings": target.closest("[data-settings-layer]")?.replaceChildren(); break;
+      case "settings": settingsReturnFocus = target; renderSettings(); break;
+      case "close-settings": closeSettings(); break;
       case "to-build": phase = "build"; build = initialBuildState(); announcement = "按顺序放好拼写块。"; renderMission(); break;
       case "undo": build = undoBuildTile(build); renderMission(); break;
       case "reset": build = resetBuildState(build); announcement = "拼写块回到原位了。"; renderMission(); break;
@@ -320,8 +327,23 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
     renderSettings();
   };
 
+  const keydown = (event: KeyboardEvent): void => {
+    const dialog = root.querySelector<HTMLElement>(".wordlight-dialog[role=dialog]");
+    if (!dialog) return;
+    if (event.key === "Escape") { event.preventDefault(); closeSettings(); return; }
+    if (event.key !== "Tab") return;
+    const controls = [...dialog.querySelectorAll<HTMLElement>("button:not([disabled]), input:not([disabled]), a[href]")]
+      .filter((control) => control.getClientRects().length > 0);
+    if (!controls.length) return;
+    const first = controls[0];
+    const last = controls.at(-1)!;
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  };
+
   root.addEventListener("click", click);
   root.addEventListener("change", change);
+  root.addEventListener("keydown", keydown);
   window.addEventListener("popstate", syncFromLocation);
   syncFromLocation();
 
@@ -332,6 +354,7 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
       window.speechSynthesis?.cancel();
       root.removeEventListener("click", click);
       root.removeEventListener("change", change);
+      root.removeEventListener("keydown", keydown);
       window.removeEventListener("popstate", syncFromLocation);
       removePageClass();
       root.replaceChildren();

@@ -36,6 +36,9 @@ jobs:
       - name: Verify portfolio manifest and generated documentation
         run: pnpm run portfolio:check
 
+      - name: Validate play-readiness lifecycle, surfaces, saves, assets, and privacy
+        run: pnpm run validate:play-readiness
+
       - name: Resolve affected gate tier
         run: pnpm run test:portfolio:affected -- --base "${{ github.event.pull_request.base.sha || github.event.before }}" --head "${{ github.sha }}"
 
@@ -76,6 +79,9 @@ jobs:
       - name: Exercise all games and public routes in both viewports
         run: pnpm run test:portfolio:smoke
 
+      - name: Exercise portfolio first-use, return, reload, and resume smoke
+        run: pnpm run test:e2e:play-readiness:smoke
+
       - name: Exercise Math World routes, interactions, saves, and lifecycle
         run: pnpm run test:e2e:math-world
 
@@ -95,5 +101,6 @@ jobs:
             test-results/math-world
             test-results/chinese-support
             test-results/english-v2
+            test-results/play-readiness
           if-no-files-found: ignore
           retention-days: 7

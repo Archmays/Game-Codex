@@ -126,11 +126,12 @@ function supportActivities(): string {
 }
 
 function renderWorld(state: CompleteEngineState, save: CompleteSaveState, readSource: string, readOnly: boolean, parentClearArmed: boolean, returnHref: string): string {
+  const returnLabel = returnHref.includes("hub=classic") ? "回到游戏百宝箱" : "回到我的游戏世界";
   const repaired = COMPLETE_REPAIR_IDS.filter((id) => save.repairedObjectIds.includes(id)).slice(-3);
   const storyComplete = state.completedChapterIds.includes("chapter-three");
   return `<main class="hmc3-shell" data-testid="hanzi-magic-complete" data-screen="world" data-story-complete="${String(storyComplete)}" data-hero-id="${state.heroId}" data-active-chapter="${state.activeChapterId}" data-save-source="${readSource}" data-save-read-only="${String(readOnly)}" data-discovered-count="${save.discoveredCharacterIds.length}" data-repair-count="${save.repairedObjectIds.length}" data-migration-sources="${save.migration.sources.join(",")}" style="--world-image:url('${m5AssetUrl(storyComplete ? "chapter-one-restored" : "region-glimmer-grove")}')">
     <div class="hmc3-world-art" aria-hidden="true"><div class="hmc3-canopy"></div><div class="hmc3-lights"></div><div class="hmc3-path-light"></div></div>
-    <header class="hmc3-header"><a href="${escapeHtml(returnHref)}" aria-label="返回我的游戏世界">← 游戏世界</a><div><span>汉字魔法战</span><h1>墨迹森林 · 字光归林</h1></div><button type="button" data-action="toggle-parent" aria-label="打开家长角" aria-expanded="${String(parentClearArmed)}">家长角</button></header>
+    <header class="hmc3-header"><a href="${escapeHtml(returnHref)}">← ${returnLabel}</a><div><span>汉字魔法战</span><h1>墨迹森林 · 字光归林</h1></div><button type="button" data-action="toggle-parent" aria-label="打开家长角" aria-expanded="${String(parentClearArmed)}">家长角</button></header>
     ${readOnly ? `<div class="hmc3-save-note" role="status">发现较新版本存档：当前只读，不会覆盖。</div>` : readSource.includes("migrated") || readSource === "legacy-merged" ? `<div class="hmc3-save-note" role="status">旧冒险的字光已安全接回；原存档字节仍保留。</div>` : ""}
     <section class="hmc3-world-panel" aria-label="当前森林场景">
       <div class="hmc3-story"><p class="hmc3-place">${storyComplete ? "字光归林后的墨迹森林" : "墨迹森林营地"}</p><h2>${storyComplete ? "森林会写光，也会记得每一处修复" : state.completedChapterIds.includes("chapter-one") ? "树冠上又亮起了一条路" : "营地灯在等第一道完整字光"}</h2><p>${storyComplete ? "三章故事已经完整收束。现在可以自由重走、连接字脉、探索词语；没有收集门槛。" : escapeHtml(state.gentleMessage)}</p>${worldPrimary(state)}<small>本地保存 · 无登录 · 无排名 · 随时可以停下</small></div>

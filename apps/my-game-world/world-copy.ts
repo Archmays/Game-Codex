@@ -10,7 +10,7 @@ export const WORLD_COPY = {
   englishAction: "走进英语世界",
   treasureTitle: "游戏百宝箱",
   treasureAction: "打开百宝箱",
-  settingsAction: "声音和画面",
+  settingsAction: "声音、画面和家长角",
   closeAction: "回到游戏世界",
 } as const;
 

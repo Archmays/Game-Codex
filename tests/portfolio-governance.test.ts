@@ -1,5 +1,8 @@
 import { existsSync, readFileSync } from "node:fs";
 import { GAME_PORTFOLIO, PORTFOLIO_TEST_PROFILES } from "../packages/data/gamePortfolio";
+import { PLAY_SURFACE_MANIFEST, PRIMARY_PLAY_SURFACES } from "../packages/data/playSurfaceManifest";
+import { NEXT_PROJECT_PHASE, PROJECT_PHASES } from "../packages/data/projectLifecycle";
+import { KNOWN_SAVE_KEYS, portfolioNamespacesWithoutKnownKey } from "../packages/data/saveKeyInventory";
 import { affectedGateCommands } from "../tools/portfolio/affected-gates";
 import { checkGeneratedDocs, validatePortfolio } from "../tools/portfolio/check-portfolio";
 import { loadGameCatalogMetadata } from "../tools/portfolio/load-game-catalog-metadata";
@@ -37,6 +40,17 @@ describe("game portfolio governance", () => {
     const status = readFileSync("docs/project-status/portfolio-status.md", "utf8");
     expect(status).toContain("9/9");
     expect(status).toContain("NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE");
+  });
+
+  it("binds the terminal lifecycle, first-use surfaces, and exact save inventory", () => {
+    expect(PROJECT_PHASES.filter((phase) => phase.status === "complete")).toHaveLength(5);
+    expect(PROJECT_PHASES.find((phase) => phase.id === NEXT_PROJECT_PHASE)?.status).toBe("pending");
+    expect(new Set(PLAY_SURFACE_MANIFEST.map((surface) => surface.id)).size).toBe(PLAY_SURFACE_MANIFEST.length);
+    expect(PRIMARY_PLAY_SURFACES.map((surface) => surface.id)).toEqual([
+      "my-game-world", "classic-hub", "hanzi-world", "math-world", "english-world", "classic-equation", "classic-target", "classic-memory",
+    ]);
+    expect(new Set(KNOWN_SAVE_KEYS.map((record) => record.key)).size).toBe(KNOWN_SAVE_KEYS.length);
+    expect(portfolioNamespacesWithoutKnownKey()).toEqual([]);
   });
 
   it("maps shared and unknown changes to fail-safe gates", () => {

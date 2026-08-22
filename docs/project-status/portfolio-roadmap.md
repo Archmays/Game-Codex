@@ -2,22 +2,44 @@
 
 > 路线只描述产品阶段，不创建空的儿童世界占位页；每个替代入口必须成熟并验证后，才退役对应经典大厅独立入口。
 
-## 1. Foundation
+## 1. Foundation — COMPLETE
 
-组合真源、S/A/B/C 质量分级、确定性状态文档、安全维护事务、首次当前树清理、affected gates、项目级 smoke 与 CI。
+Portfolio 真源、分级门禁、安全维护事务、CI 与 Pages 组合验证。
 
-## 2. Math World
+## 2. Math World — COMPLETE
 
-V1.0.0 已完成：数学实验室作为场景骨架；时钟塔、阵列工坊、目标工坊与算式滑轨站统一进入数感实验城；时钟与旧乘法独立卡已在替代门禁后退役，定义和旧存档继续保留。
+数感实验城与五个自由开放站点。
 
-## 3. Chinese Consolidation
+- 发布 tag：`math-world-v1.0.0`
+- 当前 route：`?world=math-world`
 
-汉字魔法战 V3 保持维护；拼音重构为声韵试炼，记忆翻牌抽成跨学科复习引擎。替代入口成熟后再收拢独立卡片，不启动汉字 V4。
+## 3. Chinese Consolidation — COMPLETE
 
-## 4. English V2
+墨迹森林、声韵试炼与字光配对完成收拢。
 
-先完成一个纵向切片：看图/听音 → 理解词义 → 组合字母 → 放入极短句 → 英语世界发生变化；切片机器门禁通过后再扩展词库。
+- 发布 tag：`chinese-consolidation-v1.0.0`
+- 当前 route：`?play=hanzi-magic-complete`
 
-## 5. Observation & Polish
+## 4. English V2 — COMPLETE
 
-只依据本地、匿名、低干扰的真实家庭使用观察做小步修订。机器审核继续只证明技术与内容合同，不冒充儿童兴趣、学习效果或保持度。
+词光岛五个区域、词光册、句子任务与 English Memory。
+
+- 发布 tag：`english-world-v2.0.0`
+- 当前 route：`?world=english-world`
+
+## 5. Play Readiness — COMPLETE
+
+首用、反馈、返回、存档保险箱、无障碍、性能与长期家庭使用准备。
+
+- 发布 tag：`game-codex-play-ready-v1.0.0`
+- 当前 route：`?world=my-game-world`
+
+## 6. Natural-use Observation — PENDING
+
+只在真实自然家庭使用证据出现后做小范围修订；当前不安排自动大型开发。
+
+## 终态边界
+
+- `NEXT: Natural-use observation only when real family-use evidence exists.`
+- 真实儿童验证：`NOT_PERFORMED_AND_NOT_CLAIMED`
+- Natural-use Observation 只能基于未来自然出现的真实家庭使用证据；机器审核不冒充儿童兴趣、学习效果或保持度。

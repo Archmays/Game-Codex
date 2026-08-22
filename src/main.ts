@@ -22,9 +22,36 @@ function addPageIdentity(className: string): void {
   document.body.classList.add(className);
 }
 
-window.addEventListener("load", async () => {
-  const root = document.getElementById("app");
-  if (!root) throw new Error("Missing #app container.");
+function renderRouteLoading(root: HTMLElement): void {
+  root.innerHTML = `<main class="route-state" aria-busy="true" aria-labelledby="route-loading-title">
+    <span class="route-state__glow" aria-hidden="true"></span>
+    <h1 id="route-loading-title">正在打开游戏世界……</h1>
+    <p role="status">请稍等一下，已经保存的进度不会改变。</p>
+  </main>`;
+}
+
+function renderRouteError(root: HTMLElement): void {
+  root.innerHTML = `<main class="route-state route-state--error" aria-labelledby="route-error-title">
+    <h1 id="route-error-title">这个地方暂时没有打开</h1>
+    <p role="alert">可以再试一次，或安全回到我的游戏世界。游戏进度没有被清除。</p>
+    <div><button type="button" data-route-retry>再试一次</button><a href="?world=my-game-world">回到我的游戏世界</a></div>
+  </main>`;
+  root.querySelector<HTMLButtonElement>("[data-route-retry]")?.addEventListener("click", () => window.location.reload());
+}
+
+function preserveHanziReturnContext(root: HTMLElement, from: string | null): void {
+  const context = from === "hub" ? "hub" : "world";
+  root.addEventListener("click", (event) => {
+    const link = (event.target as HTMLElement | null)?.closest<HTMLAnchorElement>('a[href*="play=hanzi-magic-complete"]');
+    if (!link) return;
+    const target = new URL(link.href, window.location.href);
+    if (target.searchParams.get("play") !== "hanzi-magic-complete") return;
+    target.searchParams.set("from", context);
+    link.href = `${target.pathname}${target.search}${target.hash}`;
+  }, { capture: true });
+}
+
+async function mountApp(root: HTMLElement): Promise<void> {
 
   const search = new URLSearchParams(window.location.search);
   const route = resolveAppRoute(search);
@@ -36,6 +63,7 @@ window.addEventListener("load", async () => {
   if (route.kind === "play" && play === "hanzi-magic-complete") {
     setBrowserIdentity("汉字魔法战 · 字光归林", WORLD_THEME_COLOR);
     addPageIdentity("hanzi-magic-page");
+    preserveHanziReturnContext(root, from);
     if (search.get("view") === "pinyin") {
       const requestedMode = search.get("mode");
       const { mountSoundRhymeTrial } = await import("../games/hanzi-radical-battle/complete/support/pinyin/app");
@@ -219,4 +247,11 @@ window.addEventListener("load", async () => {
   setBrowserIdentity("我的游戏世界", WORLD_THEME_COLOR);
   const { mountMyGameWorld } = await import("../apps/my-game-world");
   mountMyGameWorld(root);
+}
+
+window.addEventListener("load", () => {
+  const root = document.getElementById("app");
+  if (!root) return;
+  renderRouteLoading(root);
+  void mountApp(root).catch(() => renderRouteError(root));
 });

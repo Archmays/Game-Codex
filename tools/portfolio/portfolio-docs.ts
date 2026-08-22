@@ -6,6 +6,13 @@ import {
   PRODUCT_ROLE_LABELS,
   WORLD_LABELS,
 } from "../../packages/data/gamePortfolio";
+import {
+  ACTIVE_PROJECT_PHASE,
+  NEXT_PROJECT_PHASE,
+  PRIMARY_WORLDS,
+  PROJECT_LIFECYCLE_TERMINAL_TRUTH,
+  PROJECT_PHASES,
+} from "../../packages/data/projectLifecycle";
 
 export const README_PORTFOLIO_START = "<!-- GAME_PORTFOLIO:START -->";
 export const README_PORTFOLIO_END = "<!-- GAME_PORTFOLIO:END -->";
@@ -34,7 +41,9 @@ export function renderReadmePortfolio(catalog: readonly GameCatalogMetadata[]): 
     "| --- | --- | --- | --- | --- | --- | --- |",
     ...rows,
     "",
-    "数学世界现有 5 个自由开放站点。时钟塔和阵列工坊仍保留在全部定义与 Portfolio 中，但已由数学世界入口替代，不再作为经典大厅独立卡；没有创建尚无真实内容的空英语世界。",
+    `三个正式世界（${PRIMARY_WORLDS.join(" / ")}）均已完成当前发布阶段；数学世界有 5 个自由开放站点，中文与英语世界的支持活动由各自世界进入。时钟塔、阵列工坊与旧拼音定义继续保留，但不再重复占用经典大厅卡片。`,
+    "",
+    `项目阶段：Foundation、Math World、Chinese Consolidation、English V2 与 Play Readiness 均为 COMPLETE；${PROJECT_PHASES.find((phase) => phase.id === NEXT_PROJECT_PHASE)?.title} 为 PENDING。`,
     README_PORTFOLIO_END,
   ].join("\n");
 }
@@ -75,6 +84,16 @@ export function renderPortfolioStatus(catalog: readonly GameCatalogMetadata[]): 
     "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ...rows,
     "",
+    "## 项目阶段真源",
+    "",
+    "| 阶段 | 状态 | 发布 tag / route | 摘要 |",
+    "| --- | --- | --- | --- |",
+    ...PROJECT_PHASES.map((phase) => `| ${cell(phase.title)} | \`${phase.status.toUpperCase()}\` | ${cell([phase.releaseTag, phase.canonicalRoute].filter(Boolean).map((value) => `\`${value}\``).join("<br>") || "—")} | ${cell(phase.summary)} |`),
+    "",
+    `- 当前收敛阶段：\`${ACTIVE_PROJECT_PHASE}\`` ,
+    `- 三个正式世界：\`${PRIMARY_WORLDS.join(" / ")}\`` ,
+    `- 真实儿童验证：\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.realChildValidation}\`` ,
+    "",
     "## 质量等级",
     "",
     "- **S**：汉字魔法战、算式滑轨；核心机制或发布变化才运行各自完整 release gate。",
@@ -82,9 +101,11 @@ export function renderPortfolioStatus(catalog: readonly GameCatalogMetadata[]): 
     "- **B**：目标工坊；覆盖可解性、确定性题库、提示/恢复、输入、route 和 save。",
     "- **C**：时钟、乘法、记忆、拼音；覆盖内容、mount、一次主交互、exit、双视口、焦点、console/asset/network。",
     "",
-    "## 下一阶段",
+    "## 下一步边界",
     "",
-    "`GAME-CODEX-CHINESE-CONSOLIDATION-03`：在不启动汉字 V4 的边界内，收拢拼音试炼与跨学科复习入口。",
+    `\`NEXT: ${PROJECT_LIFECYCLE_TERMINAL_TRUTH.next}\``,
+    "",
+    "不自动启动大型 V3/V4 或第四世界；只有真实自然家庭使用证据出现后，才进入小范围观察修订。",
     "",
   ].join("\n");
 }
@@ -95,25 +116,19 @@ export function renderPortfolioRoadmap(): string {
     "",
     "> 路线只描述产品阶段，不创建空的儿童世界占位页；每个替代入口必须成熟并验证后，才退役对应经典大厅独立入口。",
     "",
-    "## 1. Foundation",
+    ...PROJECT_PHASES.flatMap((phase, index) => [
+      `## ${index + 1}. ${phase.title} — ${phase.status.toUpperCase()}`,
+      "",
+      phase.summary,
+      ...(phase.releaseTag ? ["", `- 发布 tag：\`${phase.releaseTag}\``] : []),
+      ...(phase.canonicalRoute ? [`- 当前 route：\`${phase.canonicalRoute}\``] : []),
+      "",
+    ]),
+    "## 终态边界",
     "",
-    "组合真源、S/A/B/C 质量分级、确定性状态文档、安全维护事务、首次当前树清理、affected gates、项目级 smoke 与 CI。",
-    "",
-    "## 2. Math World",
-    "",
-    "V1.0.0 已完成：数学实验室作为场景骨架；时钟塔、阵列工坊、目标工坊与算式滑轨站统一进入数感实验城；时钟与旧乘法独立卡已在替代门禁后退役，定义和旧存档继续保留。",
-    "",
-    "## 3. Chinese Consolidation",
-    "",
-    "汉字魔法战 V3 保持维护；拼音重构为声韵试炼，记忆翻牌抽成跨学科复习引擎。替代入口成熟后再收拢独立卡片，不启动汉字 V4。",
-    "",
-    "## 4. English V2",
-    "",
-    "先完成一个纵向切片：看图/听音 → 理解词义 → 组合字母 → 放入极短句 → 英语世界发生变化；切片机器门禁通过后再扩展词库。",
-    "",
-    "## 5. Observation & Polish",
-    "",
-    "只依据本地、匿名、低干扰的真实家庭使用观察做小步修订。机器审核继续只证明技术与内容合同，不冒充儿童兴趣、学习效果或保持度。",
+    `- \`NEXT: ${PROJECT_LIFECYCLE_TERMINAL_TRUTH.next}\`` ,
+    `- 真实儿童验证：\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.realChildValidation}\`` ,
+    "- Natural-use Observation 只能基于未来自然出现的真实家庭使用证据；机器审核不冒充儿童兴趣、学习效果或保持度。",
     "",
   ].join("\n");
 }

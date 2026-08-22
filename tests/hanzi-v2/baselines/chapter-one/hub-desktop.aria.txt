@@ -2,62 +2,31 @@
   - link "← 回我的游戏世界":
     - /url: "?world=my-game-world"
 - banner:
-  - heading "儿童学习游戏大厅" [level=1]
-  - paragraph: 选择一个短小游戏，在手机、平板或电脑上练习识字、数学、英语和亲子互动。
+  - heading "游戏百宝箱" [level=1]
+  - paragraph: 挑一个想玩的小游戏，玩完随时回来换一个。
 - navigation "按学科筛选游戏":
   - button "全部" [pressed]
   - button "识字"
   - button "数学"
   - button "英语"
 - main:
-  - text: 识字 可玩
-  - heading "记忆翻牌" [level=2]
-  - paragraph: 翻开卡片，找到相同的字形和图像线索，练习观察和记忆。
-  - paragraph: 学习目标：通过配对翻牌练习观察、短时记忆和汉字字形辨认。
-  - text: 适合年龄：4-8 岁
-  - button "开始翻牌"
-  - text: 数学 可玩
-  - heading "数学实验室" [level=2]
-  - paragraph: 进入苹果园、甜点屋、小河、图书馆和集市，用加减法完成场景任务。
-  - paragraph: 学习目标：在场景任务中练习加减法、数量关系和简单两步推理。
-  - text: 适合年龄：6-9 岁
-  - button "进入数学游戏"
+  - heading "记忆配对" [level=2]
+  - paragraph: 翻开两张卡，找到同字、字音或词语之间的关系。
+  - button "开始配对"
+  - heading "数学世界" [level=2]
+  - img "明亮的数学实验城市，里面有苹果园、钟楼、方格工坊、数字牌屋和火车站"
+  - paragraph: 进入数感实验城，在实验室、时钟塔、阵列工坊、目标工坊和算式滑轨站探索数学关系。
+  - button "进入数学世界"
   - heading "汉字魔法战" [level=2]
   - img "夜色墨迹森林里有发光小径、魔法树和温和的墨点伙伴"
+  - paragraph: 走进墨迹森林，把部件送回真实位置，让完整汉字发出字义魔法。
   - button "进入墨迹森林"
-  - text: 数学 可玩
-  - heading "九九乘法表" [level=2]
-  - paragraph: 用小方块理解乘法，再完成 10 道乘法挑战。
-  - paragraph: 学习目标：理解乘法阵列关系，熟练 1 到 9 的乘法事实。
-  - text: 适合年龄：7-9 岁
-  - button "练乘法"
-  - text: 英语 可玩
-  - heading "英文魔法战" [level=2]
-  - paragraph: 看图听词，从首字母到完整拼写逐步练习 Raz aa-A 词汇。
-  - paragraph: 学习目标：通过图像、发音和拼写练习常见英语词汇。
-  - text: 适合年龄：5-9 岁
-  - button "开始拼写"
-  - text: 数学 可玩
-  - heading "认识时钟" [level=2]
-  - paragraph: 观察 60 个分钟刻度，拨动时针和分针，学习整点、半点和 5 分钟时间。
-  - paragraph: 学习目标：认识整点、半点和 5 分钟刻度，能把表盘时间读出来。
-  - text: 适合年龄：5-7 岁
-  - button "拨时钟"
-  - text: 数学 可玩
-  - heading "凑10算12算24" [level=2]
-  - paragraph: 选择数字和运算符，把一手牌一步步合成目标数。
-  - paragraph: 学习目标：练习数感、四则运算顺序和目标数推理。
-  - text: 适合年龄：7-10 岁
-  - button "开始凑数"
-  - text: 数学 可玩
+  - heading "英语世界" [level=2]
+  - paragraph: 走进词光岛，把词义、拼写块和极短句连起来，让五个地方重新发光。
+  - button "进入词光岛"
+  - heading "目标工坊" [level=2]
+  - paragraph: 依次选择两张数字牌，用四则运算把四张牌合成目标数。
+  - button "进入工坊"
   - heading "算式滑轨" [level=2]
   - paragraph: 移动数字与运算滑轨，组成正确关系并点亮每一枚信号灯。
-  - paragraph: 学习目标：练习数感、四则运算、运算顺序、等式理解和组合推理。
-  - text: 适合年龄：6-10 岁
   - button "进入轨道站"
-  - text: 识字 可玩
-  - heading "汉字魔法战-拼音" [level=2]
-  - paragraph: 看汉字、读拼音，再进入勇者试炼打败拼音怪兽。
-  - paragraph: 学习目标：练习常见汉字拼音、声调辨认和认读反应。
-  - text: 适合年龄：6-8 岁
-  - button "练拼音"

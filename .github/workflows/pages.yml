@@ -38,6 +38,9 @@ jobs:
       - name: Verify portfolio manifest and generated documentation
         run: pnpm run portfolio:check
 
+      - name: Validate play-readiness lifecycle, surfaces, saves, assets, and privacy
+        run: pnpm run validate:play-readiness
+
       - name: Run unit, content, and maintenance safety tests
         run: pnpm test
 
@@ -60,6 +63,9 @@ jobs:
         env:
           PORTFOLIO_SMOKE_PREVIEW: "1"
 
+      - name: Exercise portfolio first-use, return, reload, and resume smoke
+        run: pnpm run test:e2e:play-readiness:smoke
+
       - name: Validate Math World models, catalog replacement, and browser lifecycle
         run: pnpm run validate:math-world && pnpm run test:e2e:math-world
 
@@ -79,6 +85,7 @@ jobs:
             test-results/math-world
             test-results/chinese-support
             test-results/english-v2
+            test-results/play-readiness
           if-no-files-found: ignore
           retention-days: 7
 

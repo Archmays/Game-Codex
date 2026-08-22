@@ -107,6 +107,25 @@ body.classic-hub-from-world-page {
 .world-modal__panel { display: grid; width: min(760px, 100%); max-height: calc(100vh - 36px); overflow: auto; gap: 16px; border: 2px solid rgba(126, 232, 199, 0.42); border-radius: 24px; padding: clamp(18px, 4vw, 34px); color: var(--world-paper); background: linear-gradient(145deg, #0b2b35, #143f43); box-shadow: 0 24px 80px rgba(0,0,0,.44); }
 .world-modal__panel h2 { margin: 0; font-size: clamp(27px, 4vw, 40px); }
 .world-settings label { display: flex; align-items: center; gap: 12px; min-height: 48px; font-size: 17px; font-weight: 900; }
+.world-parent-corner { display: grid; gap: 10px; margin: 14px 0; padding: 14px; border: 1px solid rgba(126,233,193,.42); border-radius: 16px; background: rgba(8,38,45,.72); }
+.world-parent-corner > p { margin: 0; color: #7ee9c1; font-size: 13px; font-weight: 900; letter-spacing: .1em; }
+.world-parent-corner h3 { margin: 0; font-size: 17px; line-height: 1.35; }
+.save-vault { display: grid; gap: 12px; max-height: min(60vh, 560px); margin-top: 6px; padding: 14px; overflow: auto; border: 1px solid rgba(255,224,145,.5); border-radius: 16px; background: #f7f1dc; color: #17343a; text-align: left; }
+.save-vault header p, .save-vault header h3, .save-vault h4, .save-vault p { margin: 0; }
+.save-vault header p { color: #476b63; font-size: 12px; font-weight: 900; letter-spacing: .08em; }
+.save-vault__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.save-vault button, .save-vault__file { box-sizing: border-box; display: inline-flex; min-height: 44px; align-items: center; justify-content: center; padding: 9px 13px; border: 2px solid #315f56; border-radius: 13px; background: #fff9e6; color: #17343a; font: inherit; font-weight: 900; cursor: pointer; }
+.save-vault button:disabled { cursor: not-allowed; opacity: .5; }
+.save-vault__file input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.save-vault__status { padding: 10px; border-radius: 12px; background: #e3f0df; }
+.save-vault__preview, .save-vault__clear { display: grid; gap: 10px; padding: 12px; border: 1px solid #78938a; border-radius: 14px; }
+.save-vault__preview[hidden] { display: none; }
+.save-vault dl { display: grid; gap: 5px; margin: 0; }
+.save-vault dl div { display: grid; grid-template-columns: minmax(110px, .7fr) 1fr; gap: 8px; }
+.save-vault dt { font-weight: 900; }
+.save-vault dd { margin: 0; overflow-wrap: anywhere; }
+.save-vault ul { max-height: 150px; margin: 8px 0 0; overflow: auto; padding-left: 22px; font-family: Consolas, monospace; font-size: 11px; overflow-wrap: anywhere; }
+.save-vault :focus-visible { outline: 4px solid #9a5a12; outline-offset: 3px; }
 .world-settings input { width: 24px; height: 24px; }
 
 .classic-hub-from-world { display: grid; width: 100%; height: 100%; grid-template-rows: auto minmax(0,1fr); background: #f6f3e7; }

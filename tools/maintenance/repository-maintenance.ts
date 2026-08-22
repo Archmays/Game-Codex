@@ -17,8 +17,8 @@ import { homedir } from "node:os";
 import { basename, dirname, extname, isAbsolute, relative, resolve, sep } from "node:path";
 import { spawnSync } from "node:child_process";
 
-export const TASK_ID = "GAME-CODEX-ENGLISH-V2-04";
-export const RETURN_ZIP = "handoffs/GAME_CODEX_ENGLISH_V2_04_RETURN_TO_CHATGPT.zip";
+export const TASK_ID = "GAME-CODEX-PLAY-READINESS-POLISH-05";
+export const RETURN_ZIP = "handoffs/GAME_CODEX_PLAY_READINESS_POLISH_05_RETURN_TO_CHATGPT.zip";
 export const RETURN_SHA = `${RETURN_ZIP}.sha256`;
 
 export type RetentionTier =
@@ -163,7 +163,7 @@ function walkFiles(repoRoot: string): { files: string[]; skippedLinks: string[] 
 function isTransient(path: string): boolean {
   const lower = path.toLowerCase();
   return (
-    /^(dist|tmp|\.vite|coverage|\.cache|test-results|playwright-report)\//.test(lower)
+    /^(dist|tmp|\.vite|\.playwright-cli|coverage|\.cache|test-results|playwright-report)\//.test(lower)
     || lower.endsWith(".log")
     || lower.endsWith(".tmp")
     || lower.includes("/raw-trace")
@@ -268,7 +268,7 @@ export function createInventory(repoRoot: string, generatedAt = new Date().toISO
       sha256: identity,
       gitStatus: git.tracked.has(lower) ? "tracked" : git.ignored.has(lower) ? "ignored" : "untracked",
       references: inferReferences(path),
-      generated: /^(dist|tmp|test-results|playwright-report|coverage|\.cache|\.vite)\//.test(lower) || lower.includes("/generated/"),
+      generated: /^(dist|tmp|test-results|playwright-report|coverage|\.cache|\.vite|\.playwright-cli)\//.test(lower) || lower.includes("/generated/"),
       source: lower.startsWith("source/") || /^(apps|games|packages|src|tools)\//.test(lower),
       visualBaseline: lower.includes("/baselines/") || lower.includes("-snapshots/") || lower.includes("/__snapshots__/") || lower.endsWith(".snap"),
       releaseEvidence: lower.startsWith("artifacts/") || lower.startsWith("handoffs/") || lower.includes("release"),

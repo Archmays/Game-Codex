@@ -1,0 +1,56 @@
+name: Full Play Readiness
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 20 * * 6"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: full-play-readiness-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  full-portfolio-machine-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies and Chromium
+        run: pnpm install --frozen-lockfile && pnpm exec playwright install --with-deps chromium
+
+      - name: Validate truth sources and static play-readiness contracts
+        run: pnpm run portfolio:check && pnpm run validate:play-readiness && pnpm run test:play-readiness
+
+      - name: Build exact production tree
+        run: pnpm build
+
+      - name: Exercise every target viewport and the 100-transition stress route
+        run: pnpm run test:e2e:play-readiness
+
+      - name: Exercise accessibility and Save Vault recovery
+        run: pnpm run test:a11y:play-readiness && pnpm run test:save-vault
+
+      - name: Sample production performance
+        run: pnpm run test:performance:portfolio
+
+      - name: Upload failure evidence only
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-play-readiness-failure-${{ github.sha }}
+          path: test-results/play-readiness*
+          if-no-files-found: ignore
+          retention-days: 7

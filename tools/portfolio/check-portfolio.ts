@@ -1,6 +1,9 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { GAME_PORTFOLIO, PORTFOLIO_TEST_PROFILES } from "../../packages/data/gamePortfolio";
+import { PLAY_SURFACE_MANIFEST, PRIMARY_PLAY_SURFACES } from "../../packages/data/playSurfaceManifest";
+import { ACTIVE_PROJECT_PHASE, NEXT_PROJECT_PHASE, PRIMARY_WORLDS, PROJECT_PHASES } from "../../packages/data/projectLifecycle";
+import { KNOWN_SAVE_KEYS, portfolioNamespacesWithoutKnownKey } from "../../packages/data/saveKeyInventory";
 import type { GameCatalogMetadata } from "./load-game-catalog-metadata";
 import { loadGameCatalogMetadata } from "./load-game-catalog-metadata";
 import { renderPortfolioRoadmap, renderPortfolioStatus, renderReadmePortfolio, replaceMarkedSection } from "./portfolio-docs";
@@ -38,6 +41,17 @@ export function validatePortfolio(catalog: readonly GameCatalogMetadata[], curre
   const visiblePortfolio = GAME_PORTFOLIO.filter((record) => record.currentStandaloneVisible).map((record) => record.id).sort();
   const visibleCatalog = currentCatalog.map((game) => game.id).sort();
   if (JSON.stringify(visiblePortfolio) !== JSON.stringify(visibleCatalog)) issues.push("Current classic-hub visibility differs from Portfolio");
+  if (PROJECT_PHASES.filter((phase) => phase.status === "complete").length !== 5) issues.push("Expected five completed project phases");
+  if (PROJECT_PHASES.find((phase) => phase.id === ACTIVE_PROJECT_PHASE)?.status !== "complete") issues.push("Play Readiness terminal phase is not complete");
+  if (PROJECT_PHASES.find((phase) => phase.id === NEXT_PROJECT_PHASE)?.status !== "pending") issues.push("Natural-use Observation must remain pending");
+  if (PRIMARY_WORLDS.length !== 3) issues.push(`Expected three primary worlds, found ${PRIMARY_WORLDS.length}`);
+  for (const id of duplicates(PLAY_SURFACE_MANIFEST.map((record) => record.id))) issues.push(`Duplicate play surface id: ${id}`);
+  if (PRIMARY_PLAY_SURFACES.length !== 8) issues.push(`Expected eight primary first-use surfaces, found ${PRIMARY_PLAY_SURFACES.length}`);
+  for (const surface of PLAY_SURFACE_MANIFEST) {
+    if (!surface.route || !surface.returnRoute || !surface.primaryActionSelector) issues.push(`Incomplete play surface contract: ${surface.id}`);
+  }
+  for (const key of duplicates(KNOWN_SAVE_KEYS.map((record) => record.key))) issues.push(`Duplicate known save key: ${key}`);
+  for (const namespace of portfolioNamespacesWithoutKnownKey()) issues.push(`Portfolio namespace missing from Save Vault inventory: ${namespace}`);
   return issues;
 }
 
@@ -62,6 +76,6 @@ if (process.argv[1] && resolve(process.argv[1]) === resolve(import.meta.filename
     process.stderr.write(`${issues.map((issue) => `- ${issue}`).join("\n")}\n`);
     process.exitCode = 1;
   } else {
-    process.stdout.write("Portfolio consistency and generated-doc drift: PASS (9/9).\n");
+    process.stdout.write(`Portfolio consistency, ${PLAY_SURFACE_MANIFEST.length} play surfaces, ${KNOWN_SAVE_KEYS.length} save keys, and generated-doc drift: PASS (9/9).\n`);
   }
 }

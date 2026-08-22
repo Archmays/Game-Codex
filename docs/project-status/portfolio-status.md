@@ -26,6 +26,21 @@
 | 记忆配对 | `memory-card` | 共享模块 | 模块 | C | `active-module` | 是 | 是 | 经典大厅内嵌 | `family-games/memory-card`<br>`family-games/memory-match/v1` | `c-module` |
 | 声韵试炼 | `pinyin-magic-battle` | 中文世界 | 模块 | C | `migrated-module` | 否 | 否 | ?play=hanzi-magic-complete&view=pinyin | `family-games/pinyin-magic-battle`<br>`family-games/chinese-support/pinyin/v1` | `c-module` |
 
+## 项目阶段真源
+
+| 阶段 | 状态 | 发布 tag / route | 摘要 |
+| --- | --- | --- | --- |
+| Foundation | `COMPLETE` | — | Portfolio 真源、分级门禁、安全维护事务、CI 与 Pages 组合验证。 |
+| Math World | `COMPLETE` | `math-world-v1.0.0`<br>`?world=math-world` | 数感实验城与五个自由开放站点。 |
+| Chinese Consolidation | `COMPLETE` | `chinese-consolidation-v1.0.0`<br>`?play=hanzi-magic-complete` | 墨迹森林、声韵试炼与字光配对完成收拢。 |
+| English V2 | `COMPLETE` | `english-world-v2.0.0`<br>`?world=english-world` | 词光岛五个区域、词光册、句子任务与 English Memory。 |
+| Play Readiness | `COMPLETE` | `game-codex-play-ready-v1.0.0`<br>`?world=my-game-world` | 首用、反馈、返回、存档保险箱、无障碍、性能与长期家庭使用准备。 |
+| Natural-use Observation | `PENDING` | — | 只在真实自然家庭使用证据出现后做小范围修订；当前不安排自动大型开发。 |
+
+- 当前收敛阶段：`play-readiness`
+- 三个正式世界：`chinese / math / english`
+- 真实儿童验证：`NOT_PERFORMED_AND_NOT_CLAIMED`
+
 ## 质量等级
 
 - **S**：汉字魔法战、算式滑轨；核心机制或发布变化才运行各自完整 release gate。
@@ -33,6 +48,8 @@
 - **B**：目标工坊；覆盖可解性、确定性题库、提示/恢复、输入、route 和 save。
 - **C**：时钟、乘法、记忆、拼音；覆盖内容、mount、一次主交互、exit、双视口、焦点、console/asset/network。
 
-## 下一阶段
+## 下一步边界
 
-`GAME-CODEX-CHINESE-CONSOLIDATION-03`：在不启动汉字 V4 的边界内，收拢拼音试炼与跨学科复习入口。
+`NEXT: Natural-use observation only when real family-use evidence exists.`
+
+不自动启动大型 V3/V4 或第四世界；只有真实自然家庭使用证据出现后，才进入小范围观察修订。

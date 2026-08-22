@@ -1647,6 +1647,37 @@ body {
     #f6f3e7;
 }
 
+.route-state {
+  position: relative;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  min-height: 100dvh;
+  padding: 32px;
+  overflow: hidden;
+  text-align: center;
+  background: radial-gradient(circle at 50% 32%, #fff7c7 0 7%, transparent 28%), linear-gradient(160deg, #e8fbf4, #e8f0ff 62%, #fff1d2);
+}
+
+.route-state__glow {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #f5b94d;
+  box-shadow: 0 0 0 14px rgba(255, 255, 255, 0.62), 0 14px 40px rgba(48, 81, 96, 0.22);
+  animation: route-state-pulse 1.4s ease-in-out infinite alternate;
+}
+
+.route-state h1 { margin: 28px 0 8px; font-size: clamp(28px, 6vw, 48px); }
+.route-state p { max-width: 36rem; margin: 0; font-size: 18px; line-height: 1.65; }
+.route-state div { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 24px; }
+.route-state button, .route-state a { min-height: 48px; padding: 12px 20px; border: 2px solid #234257; border-radius: 999px; background: #fff; color: #173244; font: inherit; font-weight: 900; text-decoration: none; cursor: pointer; }
+.route-state--error { background: linear-gradient(150deg, #fff5df, #edf8f4); }
+
+@keyframes route-state-pulse { to { transform: translateY(-5px) scale(1.05); } }
+
+@media (prefers-reduced-motion: reduce) { .route-state__glow { animation: none; } }
+
 body.hanzi-magic-page {
   background: #071c26;
 }
@@ -1859,9 +1890,11 @@ button {
   padding: 10px 14px;
 }
 
-.game-topbar strong {
+.game-topbar h1 {
+  margin: 0;
   color: #25313b;
   font-size: 18px;
+  line-height: 1.2;
 }
 
 .game-stage {
