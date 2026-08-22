@@ -43,7 +43,7 @@ export function renderReadmePortfolio(catalog: readonly GameCatalogMetadata[]): 
     "",
     `三个正式世界（${PRIMARY_WORLDS.join(" / ")}）均已完成当前发布阶段；数学世界有 5 个自由开放站点，中文与英语世界的支持活动由各自世界进入。时钟塔、阵列工坊与旧拼音定义继续保留，但不再重复占用经典大厅卡片。`,
     "",
-    `项目阶段：Foundation、Math World、Chinese Consolidation、English V2 与 Play Readiness 均为 COMPLETE；${PROJECT_PHASES.find((phase) => phase.id === NEXT_PROJECT_PHASE)?.title} 为 PENDING。`,
+    `项目阶段：Foundation、Math World、Chinese Consolidation、English V2 与 Play Readiness 均为 COMPLETE；${PROJECT_PHASES.find((phase) => phase.id === NEXT_PROJECT_PHASE)?.title} 仍为 PENDING_REAL_EVIDENCE，家长主动 Observation Kit 已 READY。`,
     README_PORTFOLIO_END,
   ].join("\n");
 }
@@ -93,6 +93,8 @@ export function renderPortfolioStatus(catalog: readonly GameCatalogMetadata[]): 
     `- 当前收敛阶段：\`${ACTIVE_PROJECT_PHASE}\`` ,
     `- 三个正式世界：\`${PRIMARY_WORLDS.join(" / ")}\`` ,
     `- 真实儿童验证：\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.realChildValidation}\`` ,
+    `- Observation Kit：\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.observationTooling}\`` ,
+    `- Natural-use evidence：\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.naturalUseObservation}\`` ,
     "",
     "## 质量等级",
     "",
@@ -105,7 +107,7 @@ export function renderPortfolioStatus(catalog: readonly GameCatalogMetadata[]): 
     "",
     `\`NEXT: ${PROJECT_LIFECYCLE_TERMINAL_TRUTH.next}\``,
     "",
-    "不自动启动大型 V3/V4 或第四世界；只有真实自然家庭使用证据出现后，才进入小范围观察修订。",
+    "Observation Kit ready；Natural-use evidence not yet collected；No scheduled human review required。不自动启动大型 V3/V4 或第四世界；只有真实自然家庭使用证据出现后，才进入小范围观察修订。",
     "",
   ].join("\n");
 }
@@ -128,6 +130,8 @@ export function renderPortfolioRoadmap(): string {
     "",
     `- \`NEXT: ${PROJECT_LIFECYCLE_TERMINAL_TRUTH.next}\`` ,
     `- 真实儿童验证：\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.realChildValidation}\`` ,
+    `- Observation Kit：\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.observationTooling}\`` ,
+    `- Natural-use evidence：\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.naturalUseObservation}\`` ,
     "- Natural-use Observation 只能基于未来自然出现的真实家庭使用证据；机器审核不冒充儿童兴趣、学习效果或保持度。",
     "",
   ].join("\n");

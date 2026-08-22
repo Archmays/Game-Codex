@@ -58,6 +58,7 @@ const prohibitedRuntimeTransmission = runtimeFiles.flatMap((path) => {
 const issues: string[] = [];
 if (PROJECT_PHASES.filter((phase) => phase.status === "complete").length !== 5) issues.push("project lifecycle completion count");
 if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.naturalUseObservation !== "PENDING_REAL_EVIDENCE") issues.push("natural-use boundary");
+if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.observationTooling !== "READY") issues.push("observation tooling boundary");
 if (GAME_PORTFOLIO.length !== 9) issues.push("portfolio count");
 if (PLAY_SURFACE_MANIFEST.length !== 42 || PRIMARY_PLAY_SURFACES.length !== 8) issues.push("play surface inventory");
 if (PLAY_SURFACE_MANIFEST.filter((surface) => surface.kind === "classic-entry").length !== 6) issues.push("Classic count");

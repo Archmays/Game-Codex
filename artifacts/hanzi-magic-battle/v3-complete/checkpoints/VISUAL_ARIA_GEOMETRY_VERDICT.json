@@ -531,14 +531,14 @@
       "id": "save-corrupt-backup-recovery",
       "category": "world",
       "viewport": "1600x900",
-      "ariaSha256": "3e915fb3941f9acc23a1321d5e14cbb64ff3b2da5687fab82d11b1c3a45f1761",
+      "ariaSha256": "fe8c6d07df7d12f0c07a740a616d09ac09ce330d78d1a16c8683d13e30ba8bd8",
       "visibleControlCount": 16
     },
     {
       "id": "save-future-read-only",
       "category": "world",
       "viewport": "1600x900",
-      "ariaSha256": "c456c0c78fb47b6c85818f3cbe6c83161e6039b3940b13942d51538c4cca2991",
+      "ariaSha256": "e7572446ad6c78f3c66e138fc8e694e0dfc3669d3d0bcbd81c889694ef8976b5",
       "visibleControlCount": 11
     },
     {
@@ -629,7 +629,7 @@
       "id": "world-fresh-desktop",
       "category": "world",
       "viewport": "1366x768",
-      "ariaSha256": "4f46768c6ee17947885d42a96cecce862d9867b6448cdd17d1b3d098acd7b8d2",
+      "ariaSha256": "5979835787448cbfd39b118216a4f007ce62885e97ec56083dbe17380c0f70e4",
       "visibleControlCount": 11
     },
     {
@@ -657,39 +657,39 @@
       "id": "world-mobile-390x844",
       "category": "world",
       "viewport": "390x844",
-      "ariaSha256": "177c4b0e9439d1ceb63d56f8bbac96f4cfeb0395381f69918c0a588ac8a13c1a",
+      "ariaSha256": "0b7674a51dd88b73017c8645ad91a4be09d4bf403ab44957dbcabccf26b5e9da",
       "visibleControlCount": 16
     },
     {
       "id": "world-muted-toggle",
       "category": "world",
       "viewport": "1600x900",
-      "ariaSha256": "fc02c45735ba1c72b55ac7389f5c4c6579bd53b95ed35ec57b2834240f8b7892",
+      "ariaSha256": "674e5f65d54e02c52404d955f24ee09e7044de2454504d45bb92e01aa239c1b9",
       "visibleControlCount": 16
     },
     {
       "id": "world-reduced-motion",
       "category": "world",
       "viewport": "1600x900",
-      "ariaSha256": "b67c37c770a83410902037c2b34410f5ac5bfe476aa9486c44d525d31a35afe9",
+      "ariaSha256": "18878484ace2f1fb6590fc7c2170439b467bdc923de968964c53a0d8b8f73da6",
       "visibleControlCount": 16
     },
     {
       "id": "world-tablet-768x1024",
       "category": "world",
       "viewport": "768x1024",
-      "ariaSha256": "7bd88fe3cf185ee1e3bf3d6ab7b487caf5734b5be1e07305043917c9cb76c3c2",
+      "ariaSha256": "fdcf96b524ac7d42c856bd3aff45ee486aeed177ffa383cd024adc11ff69baca",
       "visibleControlCount": 16
     },
     {
       "id": "world-wide-1600x900",
       "category": "world",
       "viewport": "1600x900",
-      "ariaSha256": "7bd88fe3cf185ee1e3bf3d6ab7b487caf5734b5be1e07305043917c9cb76c3c2",
+      "ariaSha256": "fdcf96b524ac7d42c856bd3aff45ee486aeed177ffa383cd024adc11ff69baca",
       "visibleControlCount": 16
     }
   ],
-  "snapshotCombinedSha256": "dcc08115b63a36f1f9fd9457bc7882fad8eed5a105374104019f034a636a8ba9",
+  "snapshotCombinedSha256": "fe1ad06ec7a7a43af4a45661743dbf736721f518bdb89766544bed7b0e9e47dd",
   "snapshotHashes": [
     {
       "name": "boss-book-harbor-guardian-stage-0.png",
@@ -933,11 +933,11 @@
     },
     {
       "name": "save-corrupt-backup-recovery.png",
-      "sha256": "704cef0cf7ee7a6aa9a46b440d5ebf1ed5f76daca2fed15800ada6a3e425bed4"
+      "sha256": "de130d5e3e25545a7a53e77dbeadb2df892355554f058bdb0ae9d5af669c13fe"
     },
     {
       "name": "save-future-read-only.png",
-      "sha256": "5fd10712eaaa2c3b54840b85c7525a9736a5d282fbc6c6ed0741db3ed667076f"
+      "sha256": "8c9d9358eb11e4f31e2a40cbc8040790c2dc31917313d05bd076bdd78a6cf579"
     },
     {
       "name": "spellbook-01-char-u660e.png",
@@ -989,7 +989,7 @@
     },
     {
       "name": "world-fresh-desktop.png",
-      "sha256": "bbe22f68bc46f4c6a09fd7178e2956a718bda87b4dc966c0a6fb5ade3ea6a722"
+      "sha256": "1ebf9be9428780f503b98f10a298ede9e16686cc7c9f9fc977acb56579a8a3ab"
     },
     {
       "name": "world-hero-forest-speaker.png",
@@ -1009,19 +1009,19 @@
     },
     {
       "name": "world-muted-toggle.png",
-      "sha256": "216324bfb17097ff31d08921b67be34005c08d1ecc567b1f9a8734635b63c8ba"
+      "sha256": "192255622184af2d2166092c9ae16e7286b9c9827fd50c5fe5239e5304f182a5"
     },
     {
       "name": "world-reduced-motion.png",
-      "sha256": "bb472d13c10ad375d03e61d4ab2396f57d9abf6081d7bf64900dcda688497601"
+      "sha256": "480986de46cc40589c0c2058f22feff31add9f2ae27d9a1356cd2bf4f83a1837"
     },
     {
       "name": "world-tablet-768x1024.png",
-      "sha256": "7ea1f887e23a2fc3d1e3ba52f8a3526a2bef98a0222e36792bf2efcb21a6b3bc"
+      "sha256": "f2ae34efa68d5701b8999b15e3af33eeeb8dd0367ec753777e5c176e5bea3d8f"
     },
     {
       "name": "world-wide-1600x900.png",
-      "sha256": "3f7dcd03f30622931bc298375ef35a5aa15a74db861c21bb5e1c271f7b149408"
+      "sha256": "95c39c12e9cd2245a1fcec4c8a41bf1e6ed7090695786f70a3296b9e43268901"
     }
   ],
   "noUpdateRequirement": {

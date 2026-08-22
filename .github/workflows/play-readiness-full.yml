@@ -32,7 +32,7 @@ jobs:
         run: pnpm install --frozen-lockfile && pnpm exec playwright install --with-deps chromium
 
       - name: Validate truth sources and static play-readiness contracts
-        run: pnpm run portfolio:check && pnpm run validate:play-readiness && pnpm run test:play-readiness
+        run: pnpm run portfolio:check && pnpm run validate:play-readiness && pnpm run test:play-readiness && pnpm run test:privacy:natural-use-kit
 
       - name: Build exact production tree
         run: pnpm build
@@ -41,7 +41,7 @@ jobs:
         run: pnpm run test:e2e:play-readiness
 
       - name: Exercise accessibility and Save Vault recovery
-        run: pnpm run test:a11y:play-readiness && pnpm run test:save-vault
+        run: pnpm run test:a11y:play-readiness && pnpm run test:save-vault && pnpm run test:e2e:natural-use-kit
 
       - name: Sample production performance
         run: pnpm run test:performance:portfolio

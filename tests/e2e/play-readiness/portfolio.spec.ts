@@ -2,7 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { expect, test, type Locator, type Page, type TestInfo } from "@playwright/test";
 
-const TASK_ID = "GAME-CODEX-PLAY-READINESS-POLISH-05";
+const TASK_ID = "GAME-CODEX-NATURAL-USE-OBSERVATION-KIT-06A";
 const REPORTS = resolve(process.cwd(), `tmp/tasks/${TASK_ID}/reports`);
 const SCREENSHOTS = resolve(REPORTS, "selected-screenshots");
 
@@ -192,8 +192,10 @@ test("@long-session 100 cross-surface transitions do not accumulate mounts", asy
     await page.goto(routes[transition % routes.length], { waitUntil: "domcontentloaded" });
     await expect(page.locator("#app > *")).toHaveCount(1);
     expect(await page.locator("canvas").count()).toBeLessThanOrEqual(1);
+    expect(await page.evaluate(() => localStorage.getItem("game-codex/parent-observation/v1"))).toBeNull();
     if (transition % 10 === 9) samples.push(await page.evaluate(() => (performance as Performance & { memory?: { usedJSHeapSize: number } }).memory?.usedJSHeapSize ?? 0));
   }
+  expect(await page.evaluate(() => localStorage.getItem("game-codex/parent-observation/v1"))).toBeNull();
   mkdirSync(REPORTS, { recursive: true });
   writeFileSync(resolve(REPORTS, "LONG_SESSION_STRESS.json"), `${JSON.stringify({ verdict: "PASS", transitions: 100, orphanCanvas: 0, doubleMount: 0, wrongReturn: 0, saveLoss: 0, heapSamples: samples, evidenceType: "browser-machine-stress" }, null, 2)}\n`);
   expectClean(runtime);

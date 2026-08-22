@@ -105,6 +105,16 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
     }, closeModal);
   });
 
+  if (new URLSearchParams(window.location.search).get("parent") === "observation") {
+    closeModal();
+    settings = mountWorldSettings(modalHost, state.settings, (patch) => {
+      const update = updateWorldSettings(storage, state, patch);
+      state = update.state;
+      canvas?.setView(state);
+      return update.ok;
+    }, closeModal, { openObservation: true });
+  }
+
   return {
     getState: () => state,
     destroy(): void {

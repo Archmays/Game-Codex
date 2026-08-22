@@ -44,6 +44,7 @@ export function validatePortfolio(catalog: readonly GameCatalogMetadata[], curre
   if (PROJECT_PHASES.filter((phase) => phase.status === "complete").length !== 5) issues.push("Expected five completed project phases");
   if (PROJECT_PHASES.find((phase) => phase.id === ACTIVE_PROJECT_PHASE)?.status !== "complete") issues.push("Play Readiness terminal phase is not complete");
   if (PROJECT_PHASES.find((phase) => phase.id === NEXT_PROJECT_PHASE)?.status !== "pending") issues.push("Natural-use Observation must remain pending");
+  if (PROJECT_PHASES.find((phase) => phase.id === NEXT_PROJECT_PHASE)?.releaseTag !== "game-codex-observation-kit-v1.0.0") issues.push("Observation Kit release identity is missing");
   if (PRIMARY_WORLDS.length !== 3) issues.push(`Expected three primary worlds, found ${PRIMARY_WORLDS.length}`);
   for (const id of duplicates(PLAY_SURFACE_MANIFEST.map((record) => record.id))) issues.push(`Duplicate play surface id: ${id}`);
   if (PRIMARY_PLAY_SURFACES.length !== 8) issues.push(`Expected eight primary first-use surfaces, found ${PRIMARY_PLAY_SURFACES.length}`);

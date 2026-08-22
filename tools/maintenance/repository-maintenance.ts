@@ -17,9 +17,15 @@ import { homedir } from "node:os";
 import { basename, dirname, extname, isAbsolute, relative, resolve, sep } from "node:path";
 import { spawnSync } from "node:child_process";
 
-export const TASK_ID = "GAME-CODEX-PLAY-READINESS-POLISH-05";
-export const RETURN_ZIP = "handoffs/GAME_CODEX_PLAY_READINESS_POLISH_05_RETURN_TO_CHATGPT.zip";
+// Defaults describe the current formal closeout. Future tasks can reuse the same
+// manifest-driven engine without editing source by setting both task-scoped
+// environment variables before invoking the CLI.
+export const TASK_ID = process.env.GAME_CODEX_MAINTENANCE_TASK_ID?.trim() || "GAME-CODEX-NATURAL-USE-OBSERVATION-KIT-06A";
+export const RETURN_ZIP = process.env.GAME_CODEX_MAINTENANCE_RETURN_ZIP?.trim() || "handoffs/GAME_CODEX_NATURAL_USE_OBSERVATION_KIT_06A_RETURN_TO_CHATGPT.zip";
 export const RETURN_SHA = `${RETURN_ZIP}.sha256`;
+
+if (!/^[A-Z0-9][A-Z0-9-]{4,119}$/.test(TASK_ID)) throw new Error("Unsafe GAME_CODEX_MAINTENANCE_TASK_ID.");
+if (!/^handoffs\/[A-Za-z0-9][A-Za-z0-9_.-]{4,180}\.zip$/.test(RETURN_ZIP)) throw new Error("Unsafe GAME_CODEX_MAINTENANCE_RETURN_ZIP.");
 
 export type RetentionTier =
   | "T0_CANONICAL"

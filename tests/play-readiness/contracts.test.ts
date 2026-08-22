@@ -15,6 +15,7 @@ describe("portfolio play-readiness contracts", () => {
     ]);
     expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.realChildValidation).toBe("NOT_PERFORMED_AND_NOT_CLAIMED");
     expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.naturalUseObservation).toBe("PENDING_REAL_EVIDENCE");
+    expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.observationTooling).toBe("READY");
   });
 
   it("covers every primary first-use surface and keeps Classic at six", () => {
