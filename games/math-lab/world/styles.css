@@ -154,8 +154,9 @@
 
 .math-world-card button:hover,
 .math-world-card button:focus-visible {
-  transform: translateY(-2px);
   box-shadow: 0 4px 0 rgba(37, 49, 59, 0.24);
+  outline: 3px solid rgba(34, 102, 138, 0.42);
+  outline-offset: 2px;
 }
 
 .math-world__footer {

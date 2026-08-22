@@ -68,6 +68,7 @@ describe("game portfolio governance", () => {
     const shared = affectedGateCommands(["packages/game-core/index.ts"]);
     expect(shared.map((command) => command.label)).toEqual([
       "portfolio consistency",
+      "UI occlusion inventory and interaction-integrity contracts",
       "unit and content tests",
       "Math World portfolio and replacement contract",
       "canonical Pinyin, source audit, and memory relation contracts",
@@ -75,9 +76,21 @@ describe("game portfolio governance", () => {
       "production build",
       "Math World routes, interactions, and lifecycle",
       "Chinese support routes, inputs, saves, and fallbacks",
+      "English World routes, interactions, and geometry",
+      "representative 42-surface browser hit-test matrix",
       "all-game portfolio smoke",
     ]);
 
     expect(affectedGateCommands(["<unknown>"]).at(-1)?.label).toBe("all-game portfolio smoke");
+  });
+
+  it("keeps consolidated support and Classic return routes aligned with runtime context", () => {
+    for (const id of ["hanzi-pinyin-assemble", "hanzi-pinyin-tone", "hanzi-pinyin-contrast", "hanzi-memory-same-glyph", "hanzi-memory-glyph-pinyin", "hanzi-memory-glyph-phrase"]) {
+      expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === id)?.returnRoute).toBe("?play=hanzi-magic-complete&from=world");
+    }
+    expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === "classic-math")?.returnRoute).toBe("?world=my-game-world");
+    for (const id of ["classic-hanzi", "classic-english", "classic-equation", "classic-target", "classic-memory"]) {
+      expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === id)?.returnRoute).toBe("?hub=classic&from=world");
+    }
   });
 });

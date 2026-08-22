@@ -45,6 +45,17 @@ test("@visual English map has a stable responsive baseline and accessible geomet
   await expect(page).toHaveScreenshot("english-world-map.png", { fullPage: false });
 });
 
+test("@visual English 01-04 entry cards keep imagery inside the non-interactive media layer", async ({ page }) => {
+  await page.goto("/?world=english-world&region=animals");
+  await settle(page);
+  await expectAccessibleSurface(page);
+  for (const wordId of ["word-cat", "word-dog", "word-fish", "word-duck"] as const) {
+    const card = page.locator(`[data-word-id="${wordId}"]`).locator("xpath=ancestor::article[1]");
+    await expect(card).toBeVisible();
+    await expect(card).toHaveScreenshot(`${wordId}-entry-card.png`);
+  }
+});
+
 test("@visual representative Wordlight surfaces remain visually stable", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-1440");
 

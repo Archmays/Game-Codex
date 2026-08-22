@@ -66,7 +66,7 @@ export const PROJECT_PHASES: readonly ProjectPhaseRecord[] = [
     status: "pending",
     releaseTag: "game-codex-observation-kit-v1.0.0",
     canonicalRoute: "?world=my-game-world&parent=observation",
-    summary: "家长主动、本机最小化的 Observation Kit 已就绪；真实自然使用证据仍待自然出现，当前不安排自动大型开发。",
+    summary: "家长主动、本机最小化的 Observation Kit 已就绪；一条真实交互证据已完成修复闭环，后续仍只随自然使用证据推进。",
   },
 ] as const;
 
@@ -77,8 +77,10 @@ export const PROJECT_PHASE_BY_ID: ReadonlyMap<ProjectPhaseId, ProjectPhaseRecord
 export const PROJECT_LIFECYCLE_TERMINAL_TRUTH = {
   completed: PROJECT_PHASES.filter((phase) => phase.status === "complete").map((phase) => phase.id),
   pending: PROJECT_PHASES.filter((phase) => phase.status === "pending").map((phase) => phase.id),
-  naturalUseObservation: "PENDING_REAL_EVIDENCE",
+  naturalUseObservation: "ONGOING_WHEN_REAL_EVIDENCE_EXISTS",
   observationTooling: "READY",
+  realEvidencePatchCount: 1,
+  interactionIntegrity: "PORTFOLIO_HITTEST_GUARD_ACTIVE",
   realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED",
-  next: "Export the parent-created observation bundle after useful natural-use evidence exists; only then plan evidence-driven 06B changes.",
+  next: "Continue normal family use; export a parent-created observation bundle only when new useful evidence naturally exists.",
 } as const;

@@ -39,6 +39,9 @@ jobs:
       - name: Validate play-readiness lifecycle, surfaces, saves, assets, and privacy
         run: pnpm run validate:play-readiness
 
+      - name: Validate UI occlusion inventory and interaction-integrity contracts
+        run: pnpm run validate:interaction-integrity
+
       - name: Prove natural-use observation privacy defaults and storage isolation
         run: pnpm run test:privacy:natural-use-kit
 
@@ -85,6 +88,9 @@ jobs:
       - name: Exercise portfolio first-use, return, reload, and resume smoke
         run: pnpm run test:e2e:play-readiness:smoke
 
+      - name: Exercise representative 42-surface hit-test matrix
+        run: pnpm run test:e2e:hittest:representative
+
       - name: Exercise parent-only natural-use observation flow
         run: pnpm run test:e2e:natural-use-kit
 
@@ -108,5 +114,6 @@ jobs:
             test-results/chinese-support
             test-results/english-v2
             test-results/play-readiness
+            test-results/interaction-integrity
           if-no-files-found: ignore
           retention-days: 7

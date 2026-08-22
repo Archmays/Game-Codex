@@ -35,13 +35,13 @@
 | Chinese Consolidation | `COMPLETE` | `chinese-consolidation-v1.0.0`<br>`?play=hanzi-magic-complete` | 墨迹森林、声韵试炼与字光配对完成收拢。 |
 | English V2 | `COMPLETE` | `english-world-v2.0.0`<br>`?world=english-world` | 词光岛五个区域、词光册、句子任务与 English Memory。 |
 | Play Readiness | `COMPLETE` | `game-codex-play-ready-v1.0.0`<br>`?world=my-game-world` | 首用、反馈、返回、存档保险箱、无障碍、性能与长期家庭使用准备。 |
-| Natural-use Observation | `PENDING` | `game-codex-observation-kit-v1.0.0`<br>`?world=my-game-world&parent=observation` | 家长主动、本机最小化的 Observation Kit 已就绪；真实自然使用证据仍待自然出现，当前不安排自动大型开发。 |
+| Natural-use Observation | `PENDING` | `game-codex-observation-kit-v1.0.0`<br>`?world=my-game-world&parent=observation` | 家长主动、本机最小化的 Observation Kit 已就绪；一条真实交互证据已完成修复闭环，后续仍只随自然使用证据推进。 |
 
 - 当前收敛阶段：`play-readiness`
 - 三个正式世界：`chinese / math / english`
 - 真实儿童验证：`NOT_PERFORMED_AND_NOT_CLAIMED`
 - Observation Kit：`READY`
-- Natural-use evidence：`PENDING_REAL_EVIDENCE`
+- Natural-use evidence：`ONGOING_WHEN_REAL_EVIDENCE_EXISTS`
 
 ## 质量等级
 
@@ -52,6 +52,6 @@
 
 ## 下一步边界
 
-`NEXT: Export the parent-created observation bundle after useful natural-use evidence exists; only then plan evidence-driven 06B changes.`
+`NEXT: Continue normal family use; export a parent-created observation bundle only when new useful evidence naturally exists.`
 
 Observation Kit ready；Natural-use evidence not yet collected；No scheduled human review required。不自动启动大型 V3/V4 或第四世界；只有真实自然家庭使用证据出现后，才进入小范围观察修订。

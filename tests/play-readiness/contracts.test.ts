@@ -4,7 +4,7 @@ import { PROJECT_LIFECYCLE_TERMINAL_TRUTH, PROJECT_PHASES } from "../../packages
 import { EXPORTABLE_SAVE_KEYS, KNOWN_SAVE_KEYS } from "../../packages/data/saveKeyInventory";
 
 describe("portfolio play-readiness contracts", () => {
-  it("keeps phase five machine-complete while human observation remains pending", () => {
+  it("keeps phase five machine-complete while evidence-triggered observation remains pending", () => {
     expect(PROJECT_PHASES.map(({ id, status }) => [id, status])).toEqual([
       ["foundation", "complete"],
       ["math-world", "complete"],
@@ -14,8 +14,10 @@ describe("portfolio play-readiness contracts", () => {
       ["natural-use-observation", "pending"],
     ]);
     expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.realChildValidation).toBe("NOT_PERFORMED_AND_NOT_CLAIMED");
-    expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.naturalUseObservation).toBe("PENDING_REAL_EVIDENCE");
+    expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.naturalUseObservation).toBe("ONGOING_WHEN_REAL_EVIDENCE_EXISTS");
     expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.observationTooling).toBe("READY");
+    expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.realEvidencePatchCount).toBe(1);
+    expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.interactionIntegrity).toBe("PORTFOLIO_HITTEST_GUARD_ACTIVE");
   });
 
   it("covers every primary first-use surface and keeps Classic at six", () => {

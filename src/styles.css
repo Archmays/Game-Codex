@@ -1839,7 +1839,7 @@ button {
 }
 
 .ui-button:hover:not(:disabled) {
-  transform: translateY(-1px);
+  filter: brightness(1.04);
 }
 
 .ui-button:disabled {
