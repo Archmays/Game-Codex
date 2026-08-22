@@ -288,11 +288,12 @@ test("@scroll @journal Word Journal wheel, touch, keyboard, 200% zoom and bottom
   writeReport(`WORD_JOURNAL_SCROLL_FIX.${testInfo.project.name}.json`, { verdict: "PASS", project: testInfo.project.name, rows, realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED" });
 });
 
-test("@scroll @representative modal close restores the declared document scroll owner", async ({ page }, testInfo) => {
+test("@scroll @representative modal close restores each surface's declared scroll owner", async ({ page }, testInfo) => {
   test.skip(!["desktop-1366", "mobile-390"].includes(testInfo.project.name));
   await installEnglishVoice(page);
   const runtime = runtimeObserver(page);
   const surface = PLAY_SURFACE_MANIFEST.find((record) => record.id === "english-journal")!;
+  const familyWorld = PLAY_SURFACE_MANIFEST.find((record) => record.id === "my-game-world")!;
   await openSurface(page, surface);
   await wheelMoves(page, surface);
   await page.keyboard.press("Home");
@@ -312,12 +313,13 @@ test("@scroll @representative modal close restores the declared document scroll 
   await expect(page.getByRole("dialog")).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(parent).toBeFocused();
-  expect(await page.locator("body").evaluate((body) => getComputedStyle(body).overflowY)).not.toBe("hidden");
+  expect(familyWorld.scrollPolicy).toBe("locked");
+  expect(await page.locator("body").evaluate((body) => getComputedStyle(body).overflowY)).toBe("hidden");
 
   await page.goto("/?world=my-game-world&parent=observation", { waitUntil: "domcontentloaded" });
   await expect(page.getByTestId("observation-notebook")).toBeVisible();
   await page.keyboard.press("Escape");
-  expect(await page.locator("body").evaluate((body) => getComputedStyle(body).overflowY)).not.toBe("hidden");
+  expect(await page.locator("body").evaluate((body) => getComputedStyle(body).overflowY)).toBe("hidden");
   expect(runtime.errors).toEqual([]);
-  writeReport(`MODAL_SCROLL_RESTORE.${testInfo.project.name}.json`, { verdict: "PASS", project: testInfo.project.name, englishSettings: "PASS", worldSettingsAndSaveVaultHost: "PASS", observationNotebook: "PASS", staleBodyScrollLock: 0 });
+  writeReport(`MODAL_SCROLL_RESTORE.${testInfo.project.name}.json`, { verdict: "PASS", project: testInfo.project.name, englishSettings: "PASS_DOCUMENT_OWNER_RESTORED", worldSettingsAndSaveVaultHost: "PASS_LOCKED_OWNER_RESTORED", observationNotebook: "PASS_LOCKED_OWNER_RESTORED", staleBodyScrollLock: 0 });
 });
