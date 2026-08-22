@@ -87,13 +87,13 @@ export const GAME_PORTFOLIO: readonly GamePortfolioRecord[] = [
     testProfile: "c-module", loadingPolicy: "route-lazy", canonicalDocs: ["games/multiplication-adventure/README.md"],
   },
   {
-    id: "memory-card", targetWorld: "shared", productRole: "module", qualityTier: "C", lifecycleStatus: "shared-engine-candidate",
-    currentStandaloneVisible: true, targetStandaloneVisible: false, mergeTarget: "shared/review-engine", saveNamespaces: ["family-games/memory-card"],
+    id: "memory-card", targetWorld: "shared", productRole: "module", qualityTier: "C", lifecycleStatus: "active-module",
+    currentStandaloneVisible: true, targetStandaloneVisible: true, mergeTarget: "shared/memory-match", saveNamespaces: ["family-games/memory-card", "family-games/memory-match/v1"],
     testProfile: "c-module", loadingPolicy: "current-eager", canonicalDocs: ["games/memory-card/README.md"],
   },
   {
-    id: "pinyin-magic-battle", targetWorld: "chinese", productRole: "module", qualityTier: "C", lifecycleStatus: "migrate-then-retire-standalone",
-    currentStandaloneVisible: true, targetStandaloneVisible: false, mergeTarget: "chinese-world/phonics-trial", saveNamespaces: ["family-games/pinyin-magic-battle"],
+    id: "pinyin-magic-battle", targetWorld: "chinese", productRole: "module", qualityTier: "C", lifecycleStatus: "migrated-module",
+    currentStandaloneVisible: false, targetStandaloneVisible: false, mergeTarget: "chinese-world/sound-rhyme-trial", canonicalRoute: "?play=hanzi-magic-complete&view=pinyin", saveNamespaces: ["family-games/pinyin-magic-battle", "family-games/chinese-support/pinyin/v1"],
     testProfile: "c-module", loadingPolicy: "current-eager", canonicalDocs: ["games/pinyin-magic-battle/README.md"],
   },
 ] as const;

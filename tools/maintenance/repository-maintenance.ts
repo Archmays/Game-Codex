@@ -17,8 +17,8 @@ import { homedir } from "node:os";
 import { basename, dirname, extname, isAbsolute, relative, resolve, sep } from "node:path";
 import { spawnSync } from "node:child_process";
 
-export const TASK_ID = "GAME-CODEX-MATH-WORLD-02-R2";
-export const RETURN_ZIP = "handoffs/GAME_CODEX_MATH_WORLD_02_R2_RETURN_TO_CHATGPT.zip";
+export const TASK_ID = "GAME-CODEX-CHINESE-CONSOLIDATION-03";
+export const RETURN_ZIP = "handoffs/GAME_CODEX_CHINESE_CONSOLIDATION_03_RETURN_TO_CHATGPT.zip";
 export const RETURN_SHA = `${RETURN_ZIP}.sha256`;
 
 export type RetentionTier =

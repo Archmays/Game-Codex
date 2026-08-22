@@ -1,21 +1,19 @@
-import { getMemoryRevealTileStates } from "../games/memory-card";
+import { CHINESE_MEMORY_PACKS, createMemoryState, flipMemoryCard } from "../packages/activity-engines/memory-match";
 
-describe("memory card reveal progress", () => {
-  it("marks no reveal tiles visible before any pairs are matched", () => {
-    expect(getMemoryRevealTileStates(0, 6)).toEqual([false, false, false, false, false, false]);
+describe("memory relation engine", () => {
+  it("builds a deterministic relational deck", () => {
+    const pack = CHINESE_MEMORY_PACKS[1];
+    expect(createMemoryState(pack, "same")).toEqual(createMemoryState(pack, "same"));
+    expect(createMemoryState(pack, "same").cards).toHaveLength(12);
   });
 
-  it("reveals one tile for each matched pair", () => {
-    expect(getMemoryRevealTileStates(3, 6)).toEqual([true, true, true, false, false, false]);
-  });
-
-  it("reveals all tiles when all pairs are matched", () => {
-    expect(getMemoryRevealTileStates(6, 6)).toEqual([true, true, true, true, true, true]);
-  });
-
-  it("clamps reveal progress to the playable pair count", () => {
-    expect(getMemoryRevealTileStates(-2, 3)).toEqual([false, false, false]);
-    expect(getMemoryRevealTileStates(5, 3)).toEqual([true, true, true]);
-    expect(getMemoryRevealTileStates(2, 0)).toEqual([]);
+  it("matches two different faces through one relation", () => {
+    const initial = createMemoryState(CHINESE_MEMORY_PACKS[1], "pair", 4);
+    const first = initial.cards[0];
+    const partner = initial.cards.find((card) => card.relationId === first.relationId && card.instanceId !== first.instanceId)!;
+    const opened = flipMemoryCard(initial, first.instanceId);
+    const matched = flipMemoryCard(opened, partner.instanceId);
+    expect(matched.matchedRelationIds).toEqual([first.relationId]);
+    expect(matched.openInstanceIds).toEqual([]);
   });
 });

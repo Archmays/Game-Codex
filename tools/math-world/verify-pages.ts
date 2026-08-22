@@ -60,14 +60,14 @@ try {
   }
 
   await route(page, "?hub=classic", ".hub-grid");
-  requireValue(await page.locator(".game-card").count() === 7, "Pages classic catalog is not seven cards");
+  requireValue(await page.locator(".game-card").count() === 6, "Pages classic catalog is not six cards after Pinyin consolidation");
   requireValue(await page.locator('[data-game-id="clock-reader"], [data-game-id="multiplication-adventure"]').count() === 0, "Retired standalone cards remain on Pages");
   for (const id of ["make-target", "equation-slider"] as const) {
     await page.locator(`[data-game-id="${id}"] button`).click();
     await page.locator(id === "make-target" ? ".make-target-game" : ".equation-slider").waitFor({ state: "visible" });
     await page.getByRole("button", { name: "返回大厅", exact: true }).first().click();
   }
-  checked.push("classic-7-and-standalones");
+  checked.push("classic-6-and-standalones");
 
   await page.setViewportSize({ width: 390, height: 844 });
   await route(page, "?world=math-world", '[data-testid="math-world-map"]');

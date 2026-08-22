@@ -1,0 +1,35 @@
+.memory-match { min-height: 100vh; box-sizing: border-box; padding: clamp(1rem,3vw,2.5rem); color: #2d3028; background: radial-gradient(circle at 30% 5%,#fff8d6,#f0ead2 45%,#dce8db); font-family: "Noto Sans SC","Microsoft YaHei",sans-serif; }
+.memory-match.is-hanzi { color: #f4f0d7; background: radial-gradient(circle at 50% 10%,#31584f,#102f38 48%,#071c2a); }
+.memory-match > header, .memory-match > nav, .memory-match__play, .memory-match__done { width: min(940px,100%); margin-inline: auto; }
+.memory-match > header > a { color: inherit; text-decoration: none; }
+.memory-match > header > p { margin: 1.2rem 0 .1rem; color: #497864; letter-spacing: .1em; }
+.memory-match.is-hanzi > header > p { color: #a4d6bc; }
+.memory-match h1 { margin: 0; font: 700 clamp(2.2rem,6vw,3.8rem) "STKaiti","KaiTi",serif; }
+.memory-match > header > span { display: inline-block; margin-top: .5rem; color: #647068; }
+.memory-match.is-hanzi > header > span { color: #abc3ba; }
+.memory-match__packs { display: grid; grid-template-columns: repeat(3,1fr); gap: .7rem; margin-top: 1.2rem; }
+.memory-match__packs button { display: grid; gap: .2rem; padding: .8rem; border: 1px solid #99ad95; border-radius: 16px; color: inherit; background: rgba(255,255,255,.58); text-align: left; font: inherit; cursor: pointer; }
+.memory-match.is-hanzi .memory-match__packs button { border-color: #577e72; background: #153b3d; }
+.memory-match__packs button[aria-pressed="true"] { outline: 3px solid #d8a94e; background: #fff0b8; color: #31342c; }
+.memory-match.is-hanzi .memory-match__packs button[aria-pressed="true"] { background: #fff0b8; color: #26342e; }
+.memory-match__packs small { opacity: .78; }
+.memory-match__play { margin-top: 1rem; padding: clamp(.8rem,3vw,1.5rem); border-radius: 24px; background: rgba(255,255,255,.5); box-shadow: 0 16px 60px rgba(52,66,50,.15); }
+.memory-match.is-hanzi .memory-match__play { background: rgba(7,28,42,.74); border: 1px solid rgba(190,222,181,.28); }
+.memory-match__found { margin-bottom: .7rem; font-weight: 700; }
+.memory-match__grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: clamp(.45rem,2vw,.85rem); }
+.memory-match__grid button { position: relative; min-height: clamp(5.2rem,14vw,8rem); border: 0; border-radius: 17px; background: linear-gradient(145deg,#315f53,#193e3b); box-shadow: 0 5px 0 #102e2c; color: #fff5c7; font: 700 clamp(1.25rem,4vw,2.1rem) "STKaiti","KaiTi",serif; cursor: pointer; }
+.memory-match__grid button[data-open="true"] { background: linear-gradient(145deg,#fff8d8,#ead698); color: #263c34; box-shadow: 0 5px 0 #b49d5f; }
+.memory-match__grid button[data-matched="true"] { opacity: .67; box-shadow: none; }
+.memory-match__back, .memory-match__face { position: absolute; inset: 0; display: grid; place-items: center; padding: .5rem; }
+.memory-match__back { font-size: 1.5rem; color: #e9d378; }
+.memory-match__face { visibility: hidden; }
+.memory-match__grid button[data-open="true"] .memory-match__back { visibility: hidden; }
+.memory-match__grid button[data-open="true"] .memory-match__face { visibility: visible; }
+.memory-match__announcement { min-height: 1.6rem; margin: 1rem 0 .5rem; padding: .75rem; border-radius: 12px; background: rgba(48,92,74,.1); }
+.memory-match.is-hanzi .memory-match__announcement { background: #173f42; }
+.memory-match__controls button, .memory-match__done button { min-height: 2.8rem; padding: 0 1rem; border: 1px solid #617f6d; border-radius: 999px; color: #24362f; background: #f6e7ac; font: inherit; font-weight: 700; cursor: pointer; }
+.memory-match__done { box-sizing: border-box; margin-top: 1rem; padding: 1.2rem; border-radius: 20px; color: #26392f; background: #fff2bd; text-align: center; }
+.memory-match__done span { font-size: 3rem; color: #a46c20; }
+.memory-match__done h2 { margin: .2rem; }
+@media (max-width: 620px) { .memory-match { padding: .8rem; } .memory-match__packs { grid-template-columns: 1fr; } .memory-match__packs button { grid-template-columns: 7rem 1fr; align-items: center; } .memory-match__grid { grid-template-columns: repeat(3,minmax(0,1fr)); } .memory-match__grid button { min-height: 5.2rem; } }
+@media (prefers-reduced-motion: reduce) { .memory-match *, .memory-match *::before, .memory-match *::after { animation-duration:.01ms!important; transition-duration:.01ms!important; } }

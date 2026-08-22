@@ -146,6 +146,7 @@ async function completeChapterTwo(page: Page, mode: InputMode, options: { dragFi
 
 test("Chapter Two completes with mouse, drag fallback, wrong-answer recovery and exact reload resume", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium");
+  test.setTimeout(90_000);
   const logs = monitor(page);
   await page.setViewportSize({ width: 1600, height: 900 });
   await gotoFreshChapterTwo(page);

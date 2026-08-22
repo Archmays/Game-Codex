@@ -56,12 +56,12 @@ async function expectUsableTarget(locator: Locator): Promise<void> {
 
 const GAMES: readonly SmokeGame[] = [
   {
-    id: "memory-card", title: "记忆翻牌", surface: ".memory-card-game",
+    id: "memory-card", title: "记忆配对", surface: '[data-testid="memory-match"]',
     async interact(page) {
-      const card = page.locator(".memory-card-grid button").first();
+      const card = page.locator("[data-card-id]").first();
       await expectUsableTarget(card);
       await card.click();
-      await expect(card).not.toHaveAttribute("aria-label", "未翻开的卡片");
+      await expect(card).toHaveAttribute("data-open", "true");
       return card;
     },
   },
@@ -126,17 +126,6 @@ const GAMES: readonly SmokeGame[] = [
       return action;
     },
   },
-  {
-    id: "pinyin-magic-battle", title: "汉字魔法战-拼音", surface: ".pinyin-game",
-    async interact(page) {
-      await page.getByRole("button", { name: "勇者试炼" }).click();
-      const action = page.locator(".pinyin-option-grid button").first();
-      await expectUsableTarget(action);
-      await action.click();
-      await expect(page.locator(".learning-feedback")).toBeVisible();
-      return action;
-    },
-  },
 ] as const;
 
 for (const game of GAMES) {
@@ -145,7 +134,7 @@ for (const game of GAMES) {
     await page.goto("/?hub=classic", { waitUntil: "domcontentloaded" });
     await page.evaluate(() => localStorage.clear());
     await page.reload({ waitUntil: "domcontentloaded" });
-    await expect(page.locator(".game-card")).toHaveCount(7);
+    await expect(page.locator(".game-card")).toHaveCount(6);
     const card = page.locator(`.game-card[data-game-id="${game.id}"]`);
     await expect(card.getByRole("heading", { name: game.title, exact: true })).toBeVisible();
     const entry = card.getByRole("button");
@@ -171,7 +160,7 @@ for (const game of GAMES) {
       await returnButton.focus();
       await page.keyboard.press("Enter");
     }
-    await expect(page.locator(".game-card")).toHaveCount(7);
+    await expect(page.locator(".game-card")).toHaveCount(6);
     await expectRuntimeClean(runtime);
   });
 }
@@ -189,6 +178,9 @@ test("@portfolio public route registry preserves world, classic, and Hanzi legac
     ["/?world=math-world&station=target", '[data-station-id="target"] .make-target-game'],
     ["/?world=math-world&station=slider", '[data-station-id="slider"] .equation-slider'],
     ["/?play=hanzi-magic-complete&from=hub", '[data-testid="hanzi-magic-complete"]'],
+    ["/?play=hanzi-magic-complete&view=pinyin", '[data-testid="sound-rhyme-trial"]'],
+    ["/?play=hanzi-magic-complete&view=memory", '[data-testid="memory-match"]'],
+    ["/?play=pinyin-magic-battle", '[data-testid="sound-rhyme-trial"]'],
     ["/?play=hanzi-v2-chapter-one&from=hub", '[data-testid="hanzi-magic-chapter-one-m3"]'],
     ["/?play=hanzi-v2-v1&from=hub", '[data-testid="hanzi-magic-v1"]'],
   ] as const;

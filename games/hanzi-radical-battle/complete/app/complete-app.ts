@@ -115,6 +115,16 @@ function worldHotspots(state: CompleteEngineState, save: CompleteSaveState): str
   </div></section>`;
 }
 
+function supportActivities(): string {
+  return `<section class="hmc3-support-activities" data-testid="complete-support-activities" aria-label="营地里的回声小径">
+    <div><p>随时可走 · 不改变故事完成状态</p><h2>营地里的回声小径</h2><span>用已经认识的字，短短地听一听、配一配。</span></div>
+    <nav>
+      <a href="?play=hanzi-magic-complete&from=hub&view=pinyin"><span aria-hidden="true">声</span><b>声韵试炼</b><small>拼声韵、看调形、比较易混读音</small></a>
+      <a href="?play=hanzi-magic-complete&from=hub&view=memory&pack=glyph-pinyin"><span aria-hidden="true">配</span><b>字光配对</b><small>把汉字和读音、词语的关系找回来</small></a>
+    </nav>
+  </section>`;
+}
+
 function renderWorld(state: CompleteEngineState, save: CompleteSaveState, readSource: string, readOnly: boolean, parentClearArmed: boolean, returnHref: string): string {
   const repaired = COMPLETE_REPAIR_IDS.filter((id) => save.repairedObjectIds.includes(id)).slice(-3);
   const storyComplete = state.completedChapterIds.includes("chapter-three");
@@ -127,6 +137,7 @@ function renderWorld(state: CompleteEngineState, save: CompleteSaveState, readSo
       ${heroCard(state.heroId)}
       <section class="hmc3-repairs" aria-label="场景里的修复"><h2>森林里已经亮着</h2>${repaired.length ? `<ul>${repaired.map((id) => `<li data-repair-id="${id}"><span aria-hidden="true">✦</span>${REPAIR_NAMES[id]}</li>`).join("")}</ul>` : `<p>第一盏营地灯会在完成汉字后亮起。</p>`}</section>
       <section class="hmc3-journey" aria-label="森林路线"><h2>前方的林路</h2>${chapterPath(state)}</section>
+      ${supportActivities()}
       ${worldHotspots(state, save)}
     </section>
     <footer class="hmc3-footer"><div class="hmc3-hero-switch" aria-label="选择同行伙伴">${M3_HEROES.map((hero) => `<button type="button" data-hero-id="${hero.id}" aria-pressed="${String(hero.id === state.heroId)}">${hero.name.replace("魔法师", "").replace("伙伴师", "伙伴")}</button>`).join("")}</div><div class="hmc3-prefs"><button type="button" data-pref="muted" aria-pressed="${String(save.settings.muted)}">${save.settings.muted ? "打开声音" : "静音"}</button><button type="button" data-pref="reduced-motion" aria-pressed="${String(save.settings.reducedMotion)}">${save.settings.reducedMotion ? "恢复动画" : "减少动画"}</button></div></footer>

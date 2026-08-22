@@ -42,6 +42,9 @@ jobs:
       - name: Run unit, content, and maintenance safety tests
         run: pnpm test
 
+      - name: Validate canonical Pinyin and shared memory contracts
+        run: pnpm run validate:chinese-support
+
       - name: Typecheck and production build
         run: pnpm build
 
@@ -73,6 +76,9 @@ jobs:
       - name: Exercise Math World routes, interactions, saves, and lifecycle
         run: pnpm run test:e2e:math-world
 
+      - name: Exercise Chinese support routes, inputs, saves, and fallbacks
+        run: pnpm run test:e2e:chinese-support
+
       - name: Upload failure evidence only
         if: failure()
         uses: actions/upload-artifact@v4
@@ -81,5 +87,6 @@ jobs:
           path: |
             test-results/portfolio-smoke
             test-results/math-world
+            test-results/chinese-support
           if-no-files-found: ignore
           retention-days: 7

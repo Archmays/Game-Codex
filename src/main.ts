@@ -35,6 +35,26 @@ window.addEventListener("load", async () => {
   if (route.kind === "play" && play === "hanzi-magic-complete") {
     setBrowserIdentity("汉字魔法战 · 字光归林", WORLD_THEME_COLOR);
     addPageIdentity("hanzi-magic-page");
+    if (search.get("view") === "pinyin") {
+      const requestedMode = search.get("mode");
+      const { mountSoundRhymeTrial } = await import("../games/hanzi-radical-battle/complete/support/pinyin/app");
+      mountSoundRhymeTrial(root, {
+        mode: requestedMode === "tone" || requestedMode === "contrast" ? requestedMode : "assemble",
+        seed: search.get("seed") ?? undefined,
+        returnHref: "?play=hanzi-magic-complete&from=hub",
+      });
+      return;
+    }
+    if (search.get("view") === "memory") {
+      const { mountMemoryMatch } = await import("../packages/activity-engines/memory-match");
+      mountMemoryMatch(root, {
+        context: "hanzi",
+        packId: search.get("pack") ?? "glyph-pinyin",
+        seed: search.get("seed") ?? undefined,
+        returnHref: "?play=hanzi-magic-complete&from=hub",
+      });
+      return;
+    }
     if (search.get("audit") === "content-graph") {
       const { mountCompleteContentAuditSheet } = await import("../games/hanzi-radical-battle/complete/app/content-audit-sheet");
       mountCompleteContentAuditSheet(root, Number(search.get("sheet") ?? "0"));
@@ -136,6 +156,14 @@ window.addEventListener("load", async () => {
     mountHanziMagicV1(root, {
       returnHref: from === "hub" ? "?hub=classic&from=world" : "?world=my-game-world",
     });
+    return;
+  }
+
+  if (route.kind === "play" && play === "pinyin-magic-battle") {
+    setBrowserIdentity("声韵试炼 · 墨迹森林", WORLD_THEME_COLOR);
+    addPageIdentity("hanzi-magic-page");
+    const { mountSoundRhymeTrial } = await import("../games/hanzi-radical-battle/complete/support/pinyin/app");
+    mountSoundRhymeTrial(root, { mode: "assemble", seed: search.get("seed") ?? undefined, returnHref: "?hub=classic&from=world" });
     return;
   }
 

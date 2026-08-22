@@ -17,7 +17,7 @@ body.hanzi-magic-page { margin: 0; min-width: 320px; min-height: 100%; backgroun
 .hmc3-header a:focus-visible, .hmc3-header button:focus-visible, .hmc3-footer button:focus-visible, .hmc3-parent button:focus-visible, .hmc3-primary:focus-visible { outline: 4px solid #ffd65f; outline-offset: 3px; }
 
 .hmc3-save-note { max-width: 780px; margin: 12px auto -4px; padding: 9px 14px; border: 1px solid #8fd5bd; border-radius: 12px; color: #dff8ed; text-align: center; background: rgba(5, 39, 42, .9); }
-.hmc3-world-panel { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(250px, .55fr); grid-template-areas: "story hero" "story repairs" "journey journey" "hotspots hotspots"; gap: 15px; max-width: 1180px; margin: clamp(20px, 5vh, 52px) auto 18px; }
+.hmc3-world-panel { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(250px, .55fr); grid-template-areas: "story hero" "story repairs" "journey journey" "support support" "hotspots hotspots"; gap: 15px; max-width: 1180px; margin: clamp(20px, 5vh, 52px) auto 18px; }
 .hmc3-story, .hmc3-hero, .hmc3-repairs, .hmc3-journey { border: 1px solid rgba(122, 201, 178, .62); border-radius: 24px; background: rgba(4, 26, 31, .82); box-shadow: 0 18px 50px rgba(0, 0, 0, .24); backdrop-filter: blur(5px); }
 .hmc3-story { grid-area: story; display: flex; min-height: 310px; padding: clamp(24px, 5vw, 58px); flex-direction: column; align-items: flex-start; justify-content: center; }
 .hmc3-place { margin: 0; color: #91dbc4; letter-spacing: .12em; }
@@ -45,6 +45,18 @@ body.hanzi-magic-page { margin: 0; min-width: 320px; min-height: 100%; backgroun
 .hmc3-path li > span { color: #ffd968; font-size: 20px; }
 .hmc3-path b, .hmc3-path small { display: block; overflow-wrap: anywhere; }
 .hmc3-path small { margin-top: 2px; color: inherit; opacity: .72; }
+
+.hmc3-support-activities { grid-area: support; display: grid; grid-template-columns: minmax(220px,.7fr) minmax(0,1.3fr); gap: 14px; padding: 18px 20px; border: 1px solid rgba(236,205,112,.72); border-radius: 24px; background: linear-gradient(120deg,rgba(52,72,54,.9),rgba(8,43,45,.9)); box-shadow: 0 18px 50px rgba(0,0,0,.2); }
+.hmc3-support-activities p, .hmc3-support-activities h2, .hmc3-support-activities span { margin: 0; }
+.hmc3-support-activities p { color: #e9cf83; font-size: 12px; letter-spacing: .08em; }
+.hmc3-support-activities h2 { margin: 4px 0; font-size: 21px; }
+.hmc3-support-activities > div > span { color: #bed9ce; }
+.hmc3-support-activities nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.hmc3-support-activities a { display: grid; grid-template-columns: 46px 1fr; grid-template-areas: "icon title" "icon copy"; align-items: center; min-height: 72px; padding: 10px; border: 1px solid rgba(233,208,127,.55); border-radius: 16px; color: #fff1bf; background: rgba(13,61,57,.8); text-decoration: none; }
+.hmc3-support-activities a:hover, .hmc3-support-activities a:focus-visible { border-color: #ffe077; background: rgba(28,84,70,.9); }
+.hmc3-support-activities a > span { grid-area: icon; display: grid; place-items: center; width: 39px; height: 39px; border-radius: 50%; color: #173228; background: #f5d87e; font-weight: 900; }
+.hmc3-support-activities b { grid-area: title; }
+.hmc3-support-activities small { grid-area: copy; color: #bdd7cd; }
 
 .hmc3-hotspots { grid-area: hotspots; padding: 17px 20px; border: 1px solid rgba(122, 201, 178, .62); border-radius: 24px; background: rgba(4, 26, 31, .82); box-shadow: 0 18px 50px rgba(0, 0, 0, .2); }
 .hmc3-hotspots h2 { margin: 0 0 11px; font-size: 17px; }
@@ -92,11 +104,12 @@ body.hanzi-magic-page { margin: 0; min-width: 320px; min-height: 100%; backgroun
 @media (max-width: 760px) {
   .hmc3-header { grid-template-columns: auto 1fr auto; }
   .hmc3-header h1 { font-size: 19px; }
-  .hmc3-world-panel { grid-template-columns: 1fr; grid-template-areas: "story" "hero" "repairs" "journey" "hotspots"; margin-top: 20px; }
+  .hmc3-world-panel { grid-template-columns: 1fr; grid-template-areas: "story" "hero" "repairs" "journey" "support" "hotspots"; margin-top: 20px; }
   .hmc3-story { min-height: 270px; padding: 28px 22px; }
   .hmc3-path { grid-template-columns: 1fr 1fr; }
   .hmc3-footer { align-items: stretch; flex-direction: column; }
   .hmc3-hotspots > div, .hmc3-archive-chapters, .hmc3-archive-grid { grid-template-columns: 1fr 1fr; }
+  .hmc3-support-activities { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 470px) {
@@ -111,6 +124,7 @@ body.hanzi-magic-page { margin: 0; min-width: 320px; min-height: 100%; backgroun
   .hmc3-path { grid-template-columns: 1fr; }
   .hmc3-footer button { flex: 1 1 100px; }
   .hmc3-hotspots > div, .hmc3-archive-chapters, .hmc3-archive-grid, .hmc3-archive-before-after { grid-template-columns: 1fr; }
+  .hmc3-support-activities nav { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

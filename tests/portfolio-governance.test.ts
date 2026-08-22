@@ -16,10 +16,11 @@ describe("game portfolio governance", () => {
       GAME_PORTFOLIO.flatMap((record) => record.saveNamespaces).length,
     );
     expect(new Set(GAME_PORTFOLIO.map((record) => record.qualityTier))).toEqual(new Set(["S", "A", "B", "C"]));
-    expect(currentClassicGameCatalog).toHaveLength(7);
+    expect(currentClassicGameCatalog).toHaveLength(6);
     expect(GAME_PORTFOLIO.filter((record) => !record.currentStandaloneVisible).map((record) => record.id).sort()).toEqual([
       "clock-reader",
       "multiplication-adventure",
+      "pinyin-magic-battle",
     ]);
   });
 
@@ -55,9 +56,11 @@ describe("game portfolio governance", () => {
       "portfolio consistency",
       "unit and content tests",
       "Math World portfolio and replacement contract",
+      "canonical Pinyin, source audit, and memory relation contracts",
       "typecheck",
       "production build",
       "Math World routes, interactions, and lifecycle",
+      "Chinese support routes, inputs, saves, and fallbacks",
       "all-game portfolio smoke",
     ]);
 

@@ -7,7 +7,7 @@
 - 实际起点：`12c86dc22b7219a23baeb26efbe7eab9fb0a2da2`
 - 起点 tracked 文件：`708232522` bytes
 - Portfolio / all definitions：`9/9` 保留
-- 经典大厅：`7` 当前独立入口
+- 经典大厅：`6` 当前独立入口
 - 数学世界：`5/5` 自由开放站点
 - 历史治理：本阶段不重写 Git 历史、不强推、不移动或覆盖 tag
 - 真人儿童验证：`NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE`
@@ -23,8 +23,8 @@
 | 目标工坊 | `make-target` | 数学世界 | 独立谜题 | B | `active` | 是 | 是 | 经典大厅内嵌 | `family-games/make-target` | `b-independent-puzzle` |
 | 时钟塔 | `clock-reader` | 数学世界 | 模块 | C | `active-module` | 否 | 否 | 经典大厅内嵌 | `family-games/clock-reader` | `c-module` |
 | 阵列工坊 | `multiplication-adventure` | 数学世界 | 模块 | C | `migrated-module` | 否 | 否 | 经典大厅内嵌 | `family-games/multiplication-adventure` | `c-module` |
-| 记忆翻牌 | `memory-card` | 共享模块 | 模块 | C | `shared-engine-candidate` | 是 | 否 | 经典大厅内嵌 | `family-games/memory-card` | `c-module` |
-| 汉字魔法战-拼音 | `pinyin-magic-battle` | 中文世界 | 模块 | C | `migrate-then-retire-standalone` | 是 | 否 | 经典大厅内嵌 | `family-games/pinyin-magic-battle` | `c-module` |
+| 记忆配对 | `memory-card` | 共享模块 | 模块 | C | `active-module` | 是 | 是 | 经典大厅内嵌 | `family-games/memory-card`<br>`family-games/memory-match/v1` | `c-module` |
+| 声韵试炼 | `pinyin-magic-battle` | 中文世界 | 模块 | C | `migrated-module` | 否 | 否 | ?play=hanzi-magic-complete&view=pinyin | `family-games/pinyin-magic-battle`<br>`family-games/chinese-support/pinyin/v1` | `c-module` |
 
 ## 质量等级
 

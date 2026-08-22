@@ -23,6 +23,8 @@ V3.0.0 在当前 V2 第一章和字轮工坊之上新增完整篇章，不移动
 - `?play=hanzi-magic-complete&from=hub`：三章世界、尾声与通关后自由探索的正式入口。
 - `&chapter=one|two|three`：三个可恢复的故事章节；第二、三章按需加载。
 - `&view=spellbook|wheel|archive`：72 字魔法书、72 字字轮与不会重置进度的故事档案。
+- `&view=pinyin&mode=assemble|tone|contrast`：营地里的“声韵试炼”，使用 72/72 规范读音清单。
+- `&view=memory&pack=same-glyph|glyph-pinyin|glyph-phrase`：共享关系引擎驱动的“字光配对”。
 - `&postgame=free-adventure|component-trails|word-resonance`：三条无排名、无收集门槛的通关后林路。
 - `&slice=family|word`：保留为纯规则与浏览器回归入口，不作为儿童主导航。
 
@@ -35,6 +37,8 @@ V3.0.0 在当前 V2 第一章和字轮工坊之上新增完整篇章，不移动
 - `pnpm run test:visual:hanzi-complete`：83 个 V3 稳定视觉、ARIA 与几何状态的无更新校验。
 - `pnpm run verify:pages:hanzi-complete`：正式 Pages 路由、延迟资产、存档、legacy 与部署 commit 身份。
 - `pnpm run package:hanzi-complete`：从正式报告目录生成唯一回传 ZIP 与 SHA-256。
+- `pnpm run validate:chinese-support`：声韵模型、旧数据边界、三种题型、共享记忆引擎与独立存档。
+- `pnpm run test:e2e:chinese-support`：两项短活动的桌面、移动、键盘、无语音与旧存档浏览器验证。
 
 ## 非目标
 

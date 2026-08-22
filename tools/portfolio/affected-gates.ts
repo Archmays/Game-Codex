@@ -11,6 +11,8 @@ const SMOKE: GateCommand = { program: "pnpm", args: ["run", "test:portfolio:smok
 const MATH_WORLD_UNIT: GateCommand = { program: "pnpm", args: ["run", "test:math-world"], label: "Math World model, content, and save gates" };
 const MATH_WORLD_VALIDATE: GateCommand = { program: "pnpm", args: ["run", "validate:math-world"], label: "Math World portfolio and replacement contract" };
 const MATH_WORLD_E2E: GateCommand = { program: "pnpm", args: ["run", "test:e2e:math-world"], label: "Math World routes, interactions, and lifecycle" };
+const CHINESE_SUPPORT_VALIDATE: GateCommand = { program: "pnpm", args: ["run", "validate:chinese-support"], label: "canonical Pinyin, source audit, and memory relation contracts" };
+const CHINESE_SUPPORT_E2E: GateCommand = { program: "pnpm", args: ["run", "test:e2e:chinese-support"], label: "Chinese support routes, inputs, saves, and fallbacks" };
 
 function gameSmoke(id: string): GateCommand {
   return { program: "pnpm", args: ["run", "test:portfolio:smoke", "--", "--grep", `@game:${id}`], label: `${id} entry/interaction/return smoke` };
@@ -26,11 +28,14 @@ export function affectedGateCommands(changedFiles: readonly string[]): GateComma
   if (!files.length) return [PORTFOLIO_CHECK];
   const full = files.some((file) => /^(src\/main\.ts|src\/app-route\.ts|package\.json|pnpm-lock\.yaml|tsconfig\.json|vite\.config\.ts|vitest\.config\.ts|playwright.*\.config\.ts)$/.test(file)
     || file.startsWith("packages/game-core/") || file.startsWith("apps/my-game-world/") || file === "<unknown>");
-  if (full) return [PORTFOLIO_CHECK, UNIT, MATH_WORLD_VALIDATE, TYPECHECK, BUILD, MATH_WORLD_E2E, SMOKE];
+  if (full) return [PORTFOLIO_CHECK, UNIT, MATH_WORLD_VALIDATE, CHINESE_SUPPORT_VALIDATE, TYPECHECK, BUILD, MATH_WORLD_E2E, CHINESE_SUPPORT_E2E, SMOKE];
   const commands: GateCommand[] = [PORTFOLIO_CHECK];
   for (const file of files) {
     const game = /^games\/([^/]+)\//.exec(file)?.[1];
-    if (game && ["math-lab", "clock-reader", "multiplication-adventure", "make-target"].includes(game)) commands.push(MATH_WORLD_UNIT, MATH_WORLD_VALIDATE, MATH_WORLD_E2E);
+    if (file.startsWith("packages/activity-engines/memory-match/") || file.includes("support/pinyin/")) commands.push(CHINESE_SUPPORT_VALIDATE, CHINESE_SUPPORT_E2E, SMOKE);
+    else if (game && ["math-lab", "clock-reader", "multiplication-adventure", "make-target"].includes(game)) commands.push(MATH_WORLD_UNIT, MATH_WORLD_VALIDATE, MATH_WORLD_E2E);
+    else if (game === "pinyin-magic-battle") commands.push(CHINESE_SUPPORT_VALIDATE, CHINESE_SUPPORT_E2E, SMOKE);
+    else if (game === "memory-card") commands.push(CHINESE_SUPPORT_VALIDATE, CHINESE_SUPPORT_E2E, gameSmoke(game));
     else if (game) commands.push(UNIT, gameSmoke(game));
     else if (file.startsWith("apps/hub/") || file.startsWith("packages/ui/") || file.startsWith("packages/data/") || file.startsWith("public/assets/")) commands.push(UNIT, MATH_WORLD_VALIDATE, SMOKE);
     else if (!file.startsWith("docs/") && file !== "README.md" && file !== "AGENTS.md") commands.push(UNIT, TYPECHECK, BUILD, SMOKE);

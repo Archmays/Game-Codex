@@ -531,15 +531,15 @@
       "id": "save-corrupt-backup-recovery",
       "category": "world",
       "viewport": "1600x900",
-      "ariaSha256": "c7db6e6156a1e8dfa57e3795b3a4121cd1f6a08d3ff03f10aed8f6aeff4dfda0",
-      "visibleControlCount": 14
+      "ariaSha256": "3e915fb3941f9acc23a1321d5e14cbb64ff3b2da5687fab82d11b1c3a45f1761",
+      "visibleControlCount": 16
     },
     {
       "id": "save-future-read-only",
       "category": "world",
       "viewport": "1600x900",
-      "ariaSha256": "61711d6f73e6206d8b3c657fee8379d8e64b7159a54d78f1894cc07c86e119e8",
-      "visibleControlCount": 9
+      "ariaSha256": "c456c0c78fb47b6c85818f3cbe6c83161e6039b3940b13942d51538c4cca2991",
+      "visibleControlCount": 11
     },
     {
       "id": "spellbook-01-char-u660e",
@@ -616,80 +616,80 @@
       "category": "world",
       "viewport": "1366x768",
       "ariaSha256": "f189d2fcaec908992a751349ba2dd9d29decd921994884a8a322f1f5c4404224",
-      "visibleControlCount": 14
+      "visibleControlCount": 16
     },
     {
       "id": "world-complete-hotspots",
       "category": "world",
       "viewport": "1366x768",
       "ariaSha256": "021b3753ac0a536f3fc26503979eb42367ad86d8d18c3b845dc132ff455a4691",
-      "visibleControlCount": 14
+      "visibleControlCount": 16
     },
     {
       "id": "world-fresh-desktop",
       "category": "world",
       "viewport": "1366x768",
-      "ariaSha256": "4851e1efbe040af183ae2871cf555bcb600dd0f98f2f70a37129706f61fea924",
-      "visibleControlCount": 9
+      "ariaSha256": "4f46768c6ee17947885d42a96cecce862d9867b6448cdd17d1b3d098acd7b8d2",
+      "visibleControlCount": 11
     },
     {
       "id": "world-hero-forest-speaker",
       "category": "world",
       "viewport": "1366x768",
       "ariaSha256": "4da0ef226905a4652f91966c90e7968952c0ae63087ebd680a24069d2d5b1c90",
-      "visibleControlCount": 14
+      "visibleControlCount": 16
     },
     {
       "id": "world-hero-ink-companion",
       "category": "world",
       "viewport": "1366x768",
       "ariaSha256": "99496eb4d8abe4af1a238e26eb35848994f4d280fbb76947149fbaa2c715639e",
-      "visibleControlCount": 14
+      "visibleControlCount": 16
     },
     {
       "id": "world-hero-light-speaker",
       "category": "world",
       "viewport": "1366x768",
       "ariaSha256": "a0e51812c0ba1583c7be80c5b639b35e9eb23787df8f3b8de79638be175e6928",
-      "visibleControlCount": 14
+      "visibleControlCount": 16
     },
     {
       "id": "world-mobile-390x844",
       "category": "world",
       "viewport": "390x844",
-      "ariaSha256": "3a484d9a81ac941217b47f1ba62dd870b2ddd80dd542bb2445095acb31493ba1",
-      "visibleControlCount": 14
+      "ariaSha256": "177c4b0e9439d1ceb63d56f8bbac96f4cfeb0395381f69918c0a588ac8a13c1a",
+      "visibleControlCount": 16
     },
     {
       "id": "world-muted-toggle",
       "category": "world",
       "viewport": "1600x900",
-      "ariaSha256": "be9772f9979e5ac451da9e70909404cec7ebcaeca79bdda3eb12d5e3fdaef2ab",
-      "visibleControlCount": 14
+      "ariaSha256": "fc02c45735ba1c72b55ac7389f5c4c6579bd53b95ed35ec57b2834240f8b7892",
+      "visibleControlCount": 16
     },
     {
       "id": "world-reduced-motion",
       "category": "world",
       "viewport": "1600x900",
-      "ariaSha256": "ae84fe3955b9f94b188deb883096d420c5e83240be5df2ed0ed9ae5e7529f0a0",
-      "visibleControlCount": 14
+      "ariaSha256": "b67c37c770a83410902037c2b34410f5ac5bfe476aa9486c44d525d31a35afe9",
+      "visibleControlCount": 16
     },
     {
       "id": "world-tablet-768x1024",
       "category": "world",
       "viewport": "768x1024",
-      "ariaSha256": "b95a411195c1652b8a54f8acfb8e46e949fed964ccaa70b94329c8f3b0cc8711",
-      "visibleControlCount": 14
+      "ariaSha256": "7bd88fe3cf185ee1e3bf3d6ab7b487caf5734b5be1e07305043917c9cb76c3c2",
+      "visibleControlCount": 16
     },
     {
       "id": "world-wide-1600x900",
       "category": "world",
       "viewport": "1600x900",
-      "ariaSha256": "b95a411195c1652b8a54f8acfb8e46e949fed964ccaa70b94329c8f3b0cc8711",
-      "visibleControlCount": 14
+      "ariaSha256": "7bd88fe3cf185ee1e3bf3d6ab7b487caf5734b5be1e07305043917c9cb76c3c2",
+      "visibleControlCount": 16
     }
   ],
-  "snapshotCombinedSha256": "1044c8a4dca879dc9f955535929f25352b3cfd4b441957f6d48731e5e097b484",
+  "snapshotCombinedSha256": "dcc08115b63a36f1f9fd9457bc7882fad8eed5a105374104019f034a636a8ba9",
   "snapshotHashes": [
     {
       "name": "boss-book-harbor-guardian-stage-0.png",
@@ -933,11 +933,11 @@
     },
     {
       "name": "save-corrupt-backup-recovery.png",
-      "sha256": "c61287738e712626c67569b33bb8ed9442c4da838e4579b6910b01ba26a34e58"
+      "sha256": "704cef0cf7ee7a6aa9a46b440d5ebf1ed5f76daca2fed15800ada6a3e425bed4"
     },
     {
       "name": "save-future-read-only.png",
-      "sha256": "94d6eaa82f829340c6f6d5734e0e4c723647c22be43a6d5b751f598087d1520c"
+      "sha256": "5fd10712eaaa2c3b54840b85c7525a9736a5d282fbc6c6ed0741db3ed667076f"
     },
     {
       "name": "spellbook-01-char-u660e.png",
@@ -981,7 +981,7 @@
     },
     {
       "name": "world-chapter-select.png",
-      "sha256": "6fc0b16c65dff99b1c794e3370cf11b278cf68237846e8a92d2e859dede84007"
+      "sha256": "8440a49c5b92fae17e46410578bea9d468cc358495a28941071a75d784935e1b"
     },
     {
       "name": "world-complete-hotspots.png",
@@ -989,39 +989,39 @@
     },
     {
       "name": "world-fresh-desktop.png",
-      "sha256": "6c7b680e308a9700b3d69b02fd9dd9e290f6c465e193d2e8eed86ebf03bdc9aa"
+      "sha256": "bbe22f68bc46f4c6a09fd7178e2956a718bda87b4dc966c0a6fb5ade3ea6a722"
     },
     {
       "name": "world-hero-forest-speaker.png",
-      "sha256": "05544cfa0c9fa47a2d399a05b5f47e41491a13a174ee62af896d44bb8ee58dad"
+      "sha256": "c33b7135befcf76337df19575c5d31695ebfea4c6f517d3387a00ab4c59a2fba"
     },
     {
       "name": "world-hero-ink-companion.png",
-      "sha256": "2bafe9250e780cc36451a26299e9803efbace93ce9f22068262207e1ac47b17f"
+      "sha256": "129046beb6901347b6802dffc4e655bc17fd249d44f54ecbe7602e11b58fa226"
     },
     {
       "name": "world-hero-light-speaker.png",
-      "sha256": "9ff93cf8b011ac43321c5b03215e9aa8181287cf1adfb2a42c61c1a3244756fa"
+      "sha256": "ffbdf3d0a024435a305bf0ef164f33c81924f792fcb1a0451c267a756d8c80d0"
     },
     {
       "name": "world-mobile-390x844.png",
-      "sha256": "c711a7510d226a3432ae8117d325266345e93f1fdbcd595659e60022a67d37ee"
+      "sha256": "e81f8b5537701f256dcfcaec5773305f9f2ec264abb24fad706e8d6557178f57"
     },
     {
       "name": "world-muted-toggle.png",
-      "sha256": "51fee6d400abf25712924e34ecc69ea98f271364bb3fc3789292e5c4a7cf73a3"
+      "sha256": "216324bfb17097ff31d08921b67be34005c08d1ecc567b1f9a8734635b63c8ba"
     },
     {
       "name": "world-reduced-motion.png",
-      "sha256": "4cd6e1d9247407778616b9fe355ae4ee6b1ad68b8ffa1b93e833450c80913dc8"
+      "sha256": "bb472d13c10ad375d03e61d4ab2396f57d9abf6081d7bf64900dcda688497601"
     },
     {
       "name": "world-tablet-768x1024.png",
-      "sha256": "a331319d55179f4d37ad4c599efd043e94fd1490dafd7ebe1b12b38793f49154"
+      "sha256": "7ea1f887e23a2fc3d1e3ba52f8a3526a2bef98a0222e36792bf2efcb21a6b3bc"
     },
     {
       "name": "world-wide-1600x900.png",
-      "sha256": "569f783908b846de4fb4bfbc1873399e7c9543b89b7f7d58a5d4fa4e0bcfabf6"
+      "sha256": "3f7dcd03f30622931bc298375ef35a5aa15a74db861c21bb5e1c271f7b149408"
     }
   ],
   "noUpdateRequirement": {

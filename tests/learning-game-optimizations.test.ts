@@ -4,7 +4,7 @@ import { getClockMismatchHint } from "../games/clock-reader";
 import { getEnglishSpellFeedback } from "../games/english-spell-battle";
 import { calculate, formatCardValue } from "../games/make-target";
 import { getMultiplicationGridCount, getNumberBlockCount } from "../games/multiplication-adventure";
-import { getPinyinDamage, PINYIN_MONSTER_ROSTER } from "../games/pinyin-magic-battle";
+import { createPinyinSession } from "../games/hanzi-radical-battle/complete/support/pinyin/machine";
 
 describe("learning game optimizations", () => {
   it("counts multiplication visual blocks from the displayed factors", () => {
@@ -20,23 +20,9 @@ describe("learning game optimizations", () => {
     expect(formatCardValue(7)).toBe("7");
   });
 
-  it("keeps pinyin battle damage as child-friendly integers", () => {
-    expect(getPinyinDamage(0)).toBe(10);
-    expect(getPinyinDamage(1)).toBe(10);
-    expect(getPinyinDamage(1.8)).toBe(10);
-    expect(getPinyinDamage(2)).toBe(11);
-    expect(getPinyinDamage(3)).toBe(12);
-    expect(getPinyinDamage(11)).toBe(20);
-    expect(getPinyinDamage(18)).toBe(20);
-  });
-
-  it("keeps a varied pinyin monster roster for hero trials", () => {
-    const ids = new Set(PINYIN_MONSTER_ROSTER.map((monster) => monster.id));
-    const names = new Set(PINYIN_MONSTER_ROSTER.map((monster) => monster.name));
-
-    expect(PINYIN_MONSTER_ROSTER.length).toBeGreaterThanOrEqual(12);
-    expect(ids.size).toBe(PINYIN_MONSTER_ROSTER.length);
-    expect(names.size).toBe(PINYIN_MONSTER_ROSTER.length);
+  it("keeps sound-rhyme sessions short and deterministic", () => {
+    expect(createPinyinSession("assemble", "same")).toEqual(createPinyinSession("assemble", "same"));
+    expect(createPinyinSession("assemble", "same")).toHaveLength(4);
   });
 
   it("keeps child-mode return buttons in the migrated games", () => {
@@ -46,7 +32,7 @@ describe("learning game optimizations", () => {
 
     expect(multiplication).toContain("换一个任务");
     expect(english).toContain("返回英文魔法战");
-    expect(pinyin).toContain("返回汉字魔法战");
+    expect(pinyin).toContain("mountSoundRhymeTrial");
   });
 
   it("makes the array itself the multiplication core without score-loop pressure", () => {
@@ -71,28 +57,18 @@ describe("learning game optimizations", () => {
     expect(clock).toContain("clock-face__minute-label");
     expect(english).toContain("revealWord = true");
     expect(english).toContain("900");
-    expect(pinyin).toContain("revealAnswer = true");
-    expect(pinyin).toContain("pinyin-monster-health");
+    expect(pinyin).toContain("声韵试炼");
+    expect(pinyin).not.toContain("pinyinCards");
   });
 
-  it("keeps pinyin hero trial focused on monster battles", () => {
+  it("retires the pinyin battle surface in favor of the canonical wrapper", () => {
     const pinyin = readFileSync("games/pinyin-magic-battle/index.ts", "utf8");
-    const styles = readFileSync("src/styles.css", "utf8");
     const readme = readFileSync("games/pinyin-magic-battle/README.md", "utf8");
 
-    expect(pinyin).toContain("INITIAL_MONSTER_HP = 50");
-    expect(pinyin).toContain("MONSTER_HP_STEP = 10");
-    expect(pinyin).toContain("勇者试炼");
-    expect(pinyin).toContain("pinyin-game--battle");
-    expect(pinyin).toContain("pinyin-monster-stage");
-    expect(pinyin).toContain("PINYIN_MONSTER_ROSTER");
-    expect(pinyin).not.toContain("气" + "球魔法战");
-    expect(pinyin).not.toContain("气" + "球魔法站");
-    expect(pinyin).not.toContain("pinyin-game--" + "bal" + "loon");
-    expect(pinyin).not.toContain("pinyin-" + "bal" + "loon");
-    expect(styles).not.toContain("pinyin-" + "bal" + "loon");
+    expect(pinyin).toContain("mountSoundRhymeTrial");
+    expect(pinyin).toContain("已并入墨迹森林");
+    expect(pinyin).not.toMatch(/HP|damage|streak|score|monster/i);
     expect(readme).not.toContain("气" + "球");
-    expect(styles).toContain("pinyin-damage-pop");
   });
 
   it("derives stable subject filters for the hub", () => {
