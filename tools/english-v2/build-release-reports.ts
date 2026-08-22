@@ -28,7 +28,8 @@ const commit = git("rev-parse", "HEAD");
 const branch = git("branch", "--show-current");
 const originMain = git("rev-parse", "origin/main");
 const tagCommit = git("rev-list", "-n", "1", "english-world-v2.0.0");
-if (pages.expectedCommit !== commit || commit !== originMain || tagCommit !== commit || branch !== "main") throw new Error("Git, tag, Pages, and main are not converged");
+const runtimeDiffAfterTag = git("diff", `${tagCommit}..${commit}`, "--", "apps", "games", "packages", "src", "public");
+if (pages.expectedCommit !== commit || commit !== originMain || branch !== "main" || runtimeDiffAfterTag !== "") throw new Error("Git, Pages, main, and the post-tag runtime freeze are not converged");
 
 const legacyFreezePath = resolve(taskRoot, "source-freeze/LEGACY_ENGLISH_SOURCE_FREEZE.json");
 const sliceVerdictPath = resolve(taskRoot, "slice/REVIEWER_VERDICTS.json");
@@ -37,17 +38,17 @@ const legacyFreeze = JSON.parse(readFileSync(legacyFreezePath, "utf8"));
 const sliceVerdict = JSON.parse(readFileSync(sliceVerdictPath, "utf8"));
 const assetManifest = JSON.parse(readFileSync("public/assets/english-world/asset-manifest.json", "utf8")) as { assets: Array<{ visualKind: string; bytes?: number; runtimePath?: string; sha256?: string }> };
 const runtimeAssets = assetManifest.assets.filter((asset) => asset.visualKind === "asset");
-const sourceTreeSha = sha(git("ls-tree", "-r", "--full-tree", "HEAD"));
+const sourceTreeSha = sha(git("ls-tree", "-r", "--full-tree", tagCommit));
 const classicPortfolio = GAME_PORTFOLIO.filter((record) => record.currentStandaloneVisible);
 const englishPortfolio = GAME_PORTFOLIO.find((record) => record.id === "english-spell-battle");
 const wordErrors = ENGLISH_V2_WORDS.flatMap((word) => validateWordRecord(word).map((error) => `${word.id}: ${error}`));
 const sourceFileUnchanged = git("diff", baseline, "--", "packages/data/learningGames.ts") === "";
 const classicRuntimeUnchanged = git("diff", baseline, "--", "games/english-spell-battle/index.ts") === "";
-const common = { taskId: "GAME-CODEX-ENGLISH-V2-04", product: "英语世界 · 词光岛 / Wordlight Island", version: "V2.0.0", baseline, finalCommit: commit, generatedAtUtc: new Date().toISOString() };
+const common = { taskId: "GAME-CODEX-ENGLISH-V2-04", product: "英语世界 · 词光岛 / Wordlight Island", version: "V2.0.0", baseline, productTagCommit: tagCommit, finalMainCommit: commit, finalCommit: commit, generatedAtUtc: new Date().toISOString() };
 
 writeJson("FINAL_RESULT.json", { ...common, result: "PASS_MACHINE", status: "ENGLISH_WORLD_V2_COMPLETE", ready: true, cleanupStatus: "PENDING_POST_PACKAGE_BY_PROTOCOL", realChildValidation: "NO_BY_USER_DIRECTION", ttsPronunciationQuality: "NOT_VALIDATED_AND_NOT_CLAIMED" });
-writeText("FINAL_SUMMARY.md", `# English World V2-04\n\n- Result: PASS_MACHINE / ENGLISH_WORLD_V2_COMPLETE / READY\n- Commit and tag: \`${commit}\` / \`english-world-v2.0.0\`\n- Product: five free regions, 48 words, 30 story missions, 18 journal-only optional words, and 30 original short sentences.\n- Meaning and pronunciation records retain fixed Open English WordNet and CMUdict identifiers; grapheme maps are hand audited.\n- English Memory adds 24 word-image relations to the shared engine; the Classic English card promotes V2 while the frozen legacy runtime remains available through its compatibility route.\n- Machine verification does not establish real-child enjoyment, learning, retention, acceptance, or TTS pronunciation quality.\n`);
-writeJson("GIT_STATE.json", { ...common, branch, head: commit, originMain, tag: { name: "english-world-v2.0.0", commit: tagCommit }, productRuntimeSourceUnchangedAfterTagExpected: true, cleanExpectedAfterPackageCleanup: true });
+writeText("FINAL_SUMMARY.md", `# English World V2-04\n\n- Result: PASS_MACHINE / ENGLISH_WORLD_V2_COMPLETE / READY\n- Product tag: \`english-world-v2.0.0\` at \`${tagCommit}\`.\n- Final main: \`${commit}\`; product runtime source is unchanged after the tag.\n- Product: five free regions, 48 words, 30 story missions, 18 journal-only optional words, and 30 original short sentences.\n- Meaning and pronunciation records retain fixed Open English WordNet and CMUdict identifiers; grapheme maps are hand audited.\n- English Memory adds 24 word-image relations to the shared engine; the Classic English card promotes V2 while the frozen legacy runtime remains available through its compatibility route.\n- Machine verification does not establish real-child enjoyment, learning, retention, acceptance, or TTS pronunciation quality.\n`);
+writeJson("GIT_STATE.json", { ...common, branch, head: commit, originMain, tag: { name: "english-world-v2.0.0", commit: tagCommit }, productRuntimeSourceUnchangedAfterTag: runtimeDiffAfterTag === "", cleanExpectedAfterPackageCleanup: true });
 writeJson("PAGES_VERDICT.json", pages);
 writeText("ENGLISH_V2_CONTRACT.md", `# English World V2 Contract\n\nWordlight Island is the canonical English route at \`?world=english-world\`. Five regions are always open. A story mission moves through meaning, audited grapheme build, one original sentence, and visible world response. Thirty story words have one mission each; eighteen optional words remain journal-only. Hints never auto-complete the final child action. Browser TTS is optional whole-word/whole-sentence support, not phoneme evidence. No score, rank, streak, timer, HP, damage, punitive progress loss, account, tracking, payment, or learning-effect claim is introduced. Classic source and legacy save bytes remain available and are not interpreted by V2.\n`);
 
@@ -88,4 +89,4 @@ for (const name of selected) {
   if (!existsSync(source) || statSync(source).size === 0) throw new Error(`Selected screenshot missing: ${source}`);
   copyFileSync(source, resolve(screenshotRoot, basename(source)));
 }
-process.stdout.write(`${JSON.stringify({ verdict: "PASS_MACHINE", reportRoot, reports: 26, screenshots: selected.length, commit, sourceTreeSha })}\n`);
+process.stdout.write(`${JSON.stringify({ verdict: "PASS_MACHINE", reportRoot, reports: 26, screenshots: selected.length, productTagCommit: tagCommit, finalMainCommit: commit, sourceTreeSha })}\n`);

@@ -33,7 +33,14 @@ try {
 } finally { if (Test-Path -LiteralPath $staging) { Remove-Item -LiteralPath $staging -Recurse -Force } }
 $zip = Get-Item -LiteralPath $zipPath
 if ($zip.Length -ge 20MB) { throw "Return ZIP exceeds 20 MiB: $($zip.Length) bytes" }
-$hash = (Get-FileHash -LiteralPath $zipPath -Algorithm SHA256).Hash
+$sha256 = [Security.Cryptography.SHA256]::Create()
+$zipStream = [IO.File]::OpenRead($zipPath)
+try {
+  $hash = -join ($sha256.ComputeHash($zipStream) | ForEach-Object { $_.ToString("X2") })
+} finally {
+  $zipStream.Dispose()
+  $sha256.Dispose()
+}
 [IO.File]::WriteAllText($shaPath, "$hash *$zipName`n", [Text.UTF8Encoding]::new($false))
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $archive = [IO.Compression.ZipFile]::OpenRead($zipPath)
