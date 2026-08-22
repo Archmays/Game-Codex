@@ -1,5 +1,6 @@
 .memory-match { min-height: 100vh; box-sizing: border-box; padding: clamp(1rem,3vw,2.5rem); color: #2d3028; background: radial-gradient(circle at 30% 5%,#fff8d6,#f0ead2 45%,#dce8db); font-family: "Noto Sans SC","Microsoft YaHei",sans-serif; }
 .memory-match.is-hanzi { color: #f4f0d7; background: radial-gradient(circle at 50% 10%,#31584f,#102f38 48%,#071c2a); }
+.memory-match.is-english { color: #17384c; background: radial-gradient(circle at 30% 5%,#fff8d6,#d7f1ee 48%,#b9dfe1); }
 .memory-match > header, .memory-match > nav, .memory-match__play, .memory-match__done { width: min(940px,100%); margin-inline: auto; }
 .memory-match > header > a { color: inherit; text-decoration: none; }
 .memory-match > header > p { margin: 1.2rem 0 .1rem; color: #497864; letter-spacing: .1em; }
@@ -23,6 +24,7 @@
 .memory-match__back, .memory-match__face { position: absolute; inset: 0; display: grid; place-items: center; padding: .5rem; }
 .memory-match__back { font-size: 1.5rem; color: #e9d378; }
 .memory-match__face { visibility: hidden; }
+.memory-match__face img { width: min(100%,7rem); height: min(100%,7rem); object-fit: contain; filter: drop-shadow(0 6px 8px rgba(21,56,76,.14)); }
 .memory-match__grid button[data-open="true"] .memory-match__back { visibility: hidden; }
 .memory-match__grid button[data-open="true"] .memory-match__face { visibility: visible; }
 .memory-match__announcement { min-height: 1.6rem; margin: 1rem 0 .5rem; padding: .75rem; border-radius: 12px; background: rgba(48,92,74,.1); }

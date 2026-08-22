@@ -1,0 +1,1121 @@
+:root {
+  --wordlight-sky: #8bd5e8;
+  --wordlight-sea: #2f9d91;
+  --wordlight-cream: #fff7dd;
+  --wordlight-gold: #f2c65c;
+  --wordlight-coral: #ee8068;
+  --wordlight-navy: #15384c;
+  --wordlight-paper: rgba(255, 252, 238, 0.94);
+}
+
+html.english-world-page,
+body.english-world-page {
+  min-height: 100%;
+  margin: 0;
+  background: #d7f1ee;
+  color: var(--wordlight-navy);
+  font-family: "Trebuchet MS", "Aptos", "Segoe UI", sans-serif;
+}
+
+body.english-world-page #app {
+  min-height: 100vh;
+}
+
+.wordlight * {
+  box-sizing: border-box;
+}
+
+.wordlight button,
+.wordlight a {
+  min-height: 44px;
+  border-radius: 999px;
+  font: inherit;
+}
+
+.wordlight button {
+  border: 2px solid rgba(21, 56, 76, 0.22);
+  background: #fffaf0;
+  color: var(--wordlight-navy);
+  padding: 0.68rem 1rem;
+  cursor: pointer;
+  box-shadow: 0 5px 0 rgba(21, 56, 76, 0.13);
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.wordlight button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 rgba(21, 56, 76, 0.14);
+}
+
+.wordlight button:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 rgba(21, 56, 76, 0.14);
+}
+
+.wordlight button:disabled {
+  cursor: default;
+  opacity: 0.48;
+  box-shadow: none;
+}
+
+.wordlight :focus-visible {
+  outline: 4px solid #0a5f7a;
+  outline-offset: 4px;
+}
+
+.wordlight {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 18% 8%, rgba(255,255,255,.85) 0 4%, transparent 12%),
+    linear-gradient(180deg, #bceaf3 0%, #dff4ec 45%, #87cdbf 100%);
+  overflow-x: clip;
+}
+
+.wordlight-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 1.3rem 0 0.9rem;
+}
+
+.wordlight-header h1,
+.wordlight-header p {
+  margin: 0;
+}
+
+.wordlight-header h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 4vw, 3.55rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.wordlight-header h1 small {
+  display: block;
+  margin-top: 0.45rem;
+  font: 700 clamp(0.78rem, 1.3vw, 1rem)/1.2 "Trebuchet MS", sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #2b766f;
+}
+
+.wordlight-header p {
+  max-width: 48ch;
+  margin-top: 0.7rem;
+  line-height: 1.5;
+}
+
+.wordlight-kicker,
+.wordlight-phase-label {
+  display: inline-block;
+  margin-bottom: 0.45rem;
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #246c67;
+}
+
+.wordlight-header nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.55rem;
+}
+
+.wordlight-header nav a,
+.wordlight-header nav button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  border: 1px solid rgba(21, 56, 76, 0.2);
+  background: rgba(255,255,255,.7);
+  color: var(--wordlight-navy);
+  padding: 0.65rem 0.9rem;
+  box-shadow: none;
+  text-decoration: none;
+}
+
+.wordlight-notice {
+  position: relative;
+  z-index: 6;
+  width: min(760px, calc(100% - 32px));
+  margin: 0.3rem auto 0.8rem;
+  border: 1px solid rgba(21,56,76,.18);
+  border-radius: 1rem;
+  background: rgba(255,247,221,.92);
+  padding: 0.8rem 1rem;
+  text-align: center;
+}
+
+.wordlight-island {
+  position: relative;
+  width: min(1180px, calc(100% - 32px));
+  min-height: 690px;
+  margin: 0 auto;
+  border: 1px solid rgba(21, 56, 76, 0.17);
+  border-radius: 3rem 3rem 1.4rem 1.4rem;
+  background:
+    radial-gradient(ellipse at 50% 115%, rgba(255,247,221,.98) 0 39%, transparent 39.5%),
+    linear-gradient(180deg, rgba(255,255,255,.4) 0 34%, rgba(49,157,145,.22) 35% 100%);
+  box-shadow: 0 30px 80px rgba(20,74,85,.2);
+  overflow: hidden;
+}
+
+.wordlight-island::before,
+.wordlight-island::after {
+  content: "";
+  position: absolute;
+  right: -8%;
+  bottom: 20%;
+  left: -8%;
+  height: 84px;
+  border-radius: 50%;
+  border-top: 4px solid rgba(255,255,255,.6);
+  transform: rotate(-3deg);
+}
+
+.wordlight-island::after {
+  bottom: 9%;
+  transform: rotate(2deg);
+  opacity: 0.55;
+}
+
+.wordlight-island__sky {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.wordlight-island__sky span {
+  position: absolute;
+  width: 96px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.62);
+  filter: blur(1px);
+}
+
+.wordlight-island__sky span:nth-child(1) { top: 17%; left: 7%; }
+.wordlight-island__sky span:nth-child(2) { top: 11%; right: 13%; width: 132px; }
+.wordlight-island__sky span:nth-child(3) { top: 32%; left: 45%; width: 72px; opacity: .56; }
+
+.wordlight-island__intro {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2.5rem 1rem 1.4rem;
+  text-align: center;
+}
+
+.wordlight-island__intro h2 {
+  margin: 0;
+  font: 700 clamp(1.7rem, 3vw, 2.7rem)/1.05 Georgia, serif;
+}
+
+.wordlight-island__intro p {
+  margin: 0.8rem auto 0;
+  line-height: 1.55;
+}
+
+.wordlight-regions {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+  width: min(1000px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 1rem 0 8rem;
+}
+
+.wordlight-region {
+  position: relative;
+  grid-column: span 2;
+  min-height: 218px;
+  border: 2px solid color-mix(in srgb, var(--region-accent) 52%, white);
+  border-radius: 2rem 0.8rem 2rem 0.8rem;
+  background: linear-gradient(145deg, rgba(255,255,255,.97), color-mix(in srgb, var(--region-accent) 12%, #fff7dd));
+  padding: 1.25rem;
+  box-shadow: 0 18px 36px rgba(21,56,76,.13);
+}
+
+.wordlight-region:nth-child(4) { grid-column: 2 / span 2; }
+.wordlight-region:nth-child(5) { grid-column: 4 / span 2; }
+
+.wordlight-region::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 48% 52% 60% 40%;
+  background: var(--region-accent);
+  opacity: .18;
+  transform: rotate(18deg);
+}
+
+.wordlight-region__number {
+  color: var(--region-accent);
+  font-weight: 900;
+  letter-spacing: .15em;
+}
+
+.wordlight-region h3 {
+  margin: 0.55rem 0 0;
+  font: 700 1.45rem/1.05 Georgia, serif;
+}
+
+.wordlight-region p {
+  margin: 0.35rem 0 0.75rem;
+  color: color-mix(in srgb, var(--wordlight-navy) 78%, white);
+}
+
+.wordlight-region > span:not(.wordlight-region__number) {
+  display: block;
+  min-height: 2.6em;
+  font-size: .85rem;
+}
+
+.wordlight-region button {
+  width: 100%;
+  margin-top: 0.75rem;
+  border-color: color-mix(in srgb, var(--region-accent) 60%, var(--wordlight-navy));
+  background: var(--region-accent);
+  color: white;
+  font-weight: 800;
+}
+
+.wordlight-footer {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 1rem 0 2rem;
+  text-align: center;
+}
+
+.wordlight-region-page,
+.wordlight-journal,
+.wordlight-mission__stage {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto 2rem;
+  border: 1px solid rgba(21,56,76,.16);
+  border-radius: 2rem;
+  background: var(--wordlight-paper);
+  padding: clamp(1rem, 2.5vw, 2rem);
+  box-shadow: 0 24px 70px rgba(21,56,76,.16);
+}
+
+.wordlight-back {
+  margin-bottom: 1rem;
+  box-shadow: none !important;
+}
+
+.wordlight-region-page__title {
+  border-left: 7px solid var(--region-accent);
+  padding-left: 1rem;
+}
+
+.wordlight-region-page__title span,
+.wordlight-journal header > span {
+  color: #32776e;
+  font-weight: 900;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.wordlight-region-page__title h2,
+.wordlight-journal h2 {
+  margin: .25rem 0;
+  font: 700 clamp(1.9rem, 4vw, 3rem)/1 Georgia, serif;
+}
+
+.wordlight-region-page__title p,
+.wordlight-journal header p {
+  margin: .55rem 0 0;
+}
+
+.wordlight-mission-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.wordlight-mission-list article {
+  display: grid;
+  grid-template-rows: 150px auto auto auto;
+  align-items: center;
+  border: 1px solid rgba(21,56,76,.15);
+  border-radius: 1.4rem;
+  background: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.wordlight-mission-list article[data-complete="true"] {
+  background: linear-gradient(180deg, #fffef8, color-mix(in srgb, var(--region-accent) 12%, white));
+}
+
+.wordlight-mission-list .wordlight-meaning__art,
+.wordlight-mission-list .wordlight-quantity {
+  height: 150px;
+}
+
+.wordlight-mission-list h3 {
+  margin: .35rem 0 0;
+  font: 700 1.75rem Georgia, serif;
+}
+
+.wordlight-mission-list p {
+  margin: .25rem 0 .7rem;
+}
+
+.wordlight-optional {
+  display: grid;
+  grid-template-columns: minmax(220px, .7fr) minmax(0, 1.3fr);
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1rem;
+  border: 1px dashed color-mix(in srgb, var(--region-accent) 48%, white);
+  border-radius: 1.25rem;
+  background: rgba(255,255,255,.7);
+  padding: 1rem;
+}
+
+.wordlight-optional h3,
+.wordlight-optional p { margin: .2rem 0; }
+
+.wordlight-optional > div:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.wordlight-calm-empty {
+  margin-top: 1.5rem;
+  border: 2px dashed color-mix(in srgb, var(--region-accent) 45%, white);
+  border-radius: 1.4rem;
+  background: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+.wordlight-journal > header {
+  margin-bottom: 1.5rem;
+}
+
+.wordlight-journal__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 1rem;
+}
+
+.wordlight-journal__grid article {
+  display: grid;
+  grid-template-columns: 150px minmax(0,1fr);
+  gap: 1rem;
+  border: 1px solid rgba(21,56,76,.14);
+  border-radius: 1.4rem;
+  background: white;
+  padding: 1rem;
+}
+
+.wordlight-journal__grid article > .wordlight-meaning__art,
+.wordlight-journal__grid article > .wordlight-quantity {
+  height: 150px;
+}
+
+.wordlight-journal__grid h3 {
+  margin: .18rem 0 .35rem;
+  font: 700 1.8rem Georgia, serif;
+}
+
+.wordlight-journal__grid p {
+  margin: .25rem 0;
+  line-height: 1.4;
+}
+
+.wordlight-journal__sentence {
+  font-weight: 800;
+}
+
+.wordlight-chunks,
+.wordlight-sound-map {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin: .75rem 0;
+}
+
+.wordlight-chunks span,
+.wordlight-sound-map span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  min-height: 42px;
+  border: 2px solid #55988e;
+  border-radius: .8rem .3rem .8rem .3rem;
+  background: #eef9f5;
+  padding: .3rem .55rem;
+  font-weight: 900;
+}
+
+.wordlight-chunks span[data-role="common-pattern"],
+.wordlight-sound-map span[data-role="common-pattern"] {
+  border-color: #4e79b2;
+  background: #eef4ff;
+}
+
+.wordlight-chunks span[data-role="irregular-heart"],
+.wordlight-sound-map span[data-role="irregular-heart"] {
+  border-color: #d76761;
+  background: #fff0ed;
+  box-shadow: inset 0 -4px 0 rgba(238,128,104,.15);
+}
+
+.wordlight-stepper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .55rem;
+  margin-bottom: 1rem;
+}
+
+.wordlight-stepper span {
+  border-radius: 999px;
+  background: #eaf2ee;
+  padding: .55rem .7rem;
+  text-align: center;
+  font-size: .82rem;
+  font-weight: 900;
+}
+
+.wordlight-stepper span[data-current="true"] {
+  background: var(--wordlight-navy);
+  color: white;
+}
+
+.wordlight-meaning,
+.wordlight-sentence,
+.wordlight-response {
+  display: grid;
+  grid-template-columns: minmax(240px,.9fr) minmax(280px,1.1fr);
+  align-items: center;
+  gap: clamp(1.5rem,4vw,4rem);
+  min-height: 470px;
+  padding: clamp(.5rem,2vw,1.5rem);
+}
+
+.wordlight-meaning > div:first-child,
+.wordlight-response > div:first-child {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 360px;
+  border-radius: 50% 45% 48% 44%;
+  background: radial-gradient(circle, #fff9e8 0 55%, rgba(139,213,232,.24) 56% 70%, transparent 71%);
+}
+
+.wordlight-meaning h2,
+.wordlight-response h2 {
+  margin: 0;
+  font: 700 clamp(3rem,8vw,6.2rem)/.9 Georgia, serif;
+  letter-spacing: -.04em;
+}
+
+.wordlight-meaning p,
+.wordlight-response p {
+  max-width: 38ch;
+  font-size: 1.08rem;
+  line-height: 1.55;
+}
+
+.wordlight-gloss {
+  color: #246c67;
+  font-weight: 900;
+}
+
+.wordlight-audio-note {
+  border-left: 4px solid var(--wordlight-gold);
+  padding-left: .8rem;
+  font-size: .92rem !important;
+}
+
+.wordlight-meaning__art,
+.wordlight-quantity,
+.wordlight-color {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 180px;
+}
+
+.wordlight-meaning__art img {
+  width: min(100%, 360px);
+  height: min(100%, 360px);
+  object-fit: contain;
+  filter: drop-shadow(0 18px 24px rgba(21,56,76,.14));
+}
+
+.wordlight-meaning__art.is-transformed img {
+  animation: wordlight-rise 800ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+.wordlight-quantity {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  gap: .35rem;
+}
+
+.wordlight-shell {
+  position: relative;
+  display: block;
+  width: 148px;
+  aspect-ratio: 1.18;
+  border: 5px solid #a97229;
+  border-radius: 55% 55% 42% 42% / 72% 72% 35% 35%;
+  background: repeating-radial-gradient(ellipse at 50% 90%, #ffe48a 0 13px, #efb949 15px 23px);
+  box-shadow: 0 18px 35px rgba(169,114,41,.22), inset 0 7px 8px rgba(255,255,255,.48);
+}
+
+.wordlight-shell::after {
+  content: "";
+  position: absolute;
+  inset: 20px 46%;
+  border-radius: 999px;
+  background: rgba(125,78,24,.35);
+}
+
+.wordlight-quantity[data-quantity="2"] .wordlight-shell,
+.wordlight-quantity[data-quantity="3"] .wordlight-shell {
+  width: min(30%, 92px);
+}
+
+.wordlight-quantity[data-quantity="10"] .wordlight-shell {
+  width: min(17%, 58px);
+  border-width: 3px;
+  background: repeating-radial-gradient(ellipse at 50% 90%, #ffe48a 0 6px, #efb949 7px 11px);
+}
+
+.wordlight-quantity[data-quantity="10"] .wordlight-shell::after {
+  inset: 10px 46%;
+}
+
+.wordlight-quantity.is-transformed .wordlight-shell {
+  animation: wordlight-shell 1100ms ease-in-out both;
+}
+
+.wordlight-build {
+  max-width: 880px;
+  min-height: 470px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.wordlight-build header {
+  text-align: center;
+}
+
+.wordlight-build h2 {
+  margin: 0;
+  font: 700 clamp(2rem,5vw,4rem)/1 Georgia, serif;
+}
+
+.wordlight-build header p {
+  margin: .65rem auto 0;
+  max-width: 52ch;
+}
+
+.wordlight-sound-map {
+  justify-content: center;
+  margin: 1.3rem 0;
+}
+
+.wordlight-build__slots {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .55rem;
+  min-height: 86px;
+  margin: 1rem 0;
+}
+
+.wordlight-build__slots span {
+  display: grid;
+  place-items: center;
+  min-width: 68px;
+  min-height: 68px;
+  border: 3px dashed #5a948e;
+  border-radius: 1rem .35rem 1rem .35rem;
+  background: #f7fffc;
+  padding: .35rem .7rem;
+  font-size: 1.55rem;
+  font-weight: 900;
+}
+
+.wordlight-build__slots span[data-fixed="true"] {
+  border-style: solid;
+  border-color: var(--wordlight-coral);
+  background: #fff0ed;
+}
+
+.wordlight-tile-bank {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .7rem;
+  min-height: 74px;
+  border-radius: 1.2rem;
+  background: #e8f4ef;
+  padding: .8rem;
+}
+
+.wordlight-tile-bank button {
+  min-width: 62px;
+  min-height: 58px;
+  border-radius: .9rem .32rem .9rem .32rem;
+  background: white;
+  font-size: 1.45rem;
+  font-weight: 900;
+}
+
+.wordlight-controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .65rem;
+  margin-top: 1rem;
+}
+
+.wordlight-controls button:last-child {
+  border-color: #195f59;
+  background: #2f8f80;
+  color: white;
+  font-weight: 900;
+}
+
+.wordlight-hint {
+  max-width: 680px;
+  margin: 1rem auto 0;
+  border-radius: 1rem;
+  background: #fff4cf;
+  padding: .8rem 1rem;
+  text-align: center;
+  font-weight: 800;
+}
+
+.wordlight-sentence > div:first-child {
+  border-radius: 2rem;
+  background: #eaf6f0;
+  padding: 1rem;
+  text-align: center;
+}
+
+.wordlight-sentence > div:first-child .wordlight-meaning__art,
+.wordlight-sentence > div:first-child .wordlight-quantity {
+  height: 250px;
+}
+
+.wordlight-sentence h2 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: .2rem 0 1rem;
+  font: 700 clamp(1.7rem,4.2vw,3.2rem)/1.2 Georgia, serif;
+}
+
+.wordlight-sentence__slot {
+  min-width: 150px;
+  border: 3px dashed #2e7e75 !important;
+  background: #f5fffb !important;
+  box-shadow: none !important;
+  font: inherit !important;
+}
+
+.wordlight-word-tile {
+  min-width: 150px;
+  border-radius: 1rem .35rem 1rem .35rem !important;
+  background: var(--wordlight-gold) !important;
+  font-size: 1.4rem !important;
+  font-weight: 900 !important;
+}
+
+.wordlight-word-tile[aria-pressed="true"] {
+  outline: 4px solid #8c5513;
+  transform: translateY(-3px);
+}
+
+.wordlight-response {
+  overflow: hidden;
+}
+
+.wordlight-response > div:first-child {
+  background: radial-gradient(circle, rgba(255,229,128,.98) 0 38%, rgba(139,213,232,.32) 54%, transparent 72%);
+}
+
+.wordlight-response__ripple {
+  position: absolute;
+  width: 70%;
+  height: 24%;
+  bottom: 12%;
+  border: 4px solid rgba(47,157,145,.55);
+  border-radius: 50%;
+  animation: wordlight-ripple 1300ms ease-out both;
+}
+
+.wordlight-dialog-backdrop {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(10,40,52,.58);
+  padding: 1rem;
+}
+
+.wordlight-dialog {
+  width: min(520px, 100%);
+  border-radius: 1.5rem;
+  background: #fffaf0;
+  padding: 1.4rem;
+  box-shadow: 0 30px 80px rgba(0,0,0,.28);
+}
+
+.wordlight-dialog h2 {
+  margin: 0 0 1rem;
+  font: 700 2rem Georgia, serif;
+}
+
+.wordlight-dialog label {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  min-height: 52px;
+  border-top: 1px solid rgba(21,56,76,.12);
+  font-weight: 800;
+}
+
+.wordlight-dialog input {
+  width: 24px;
+  height: 24px;
+}
+
+.wordlight-live {
+  position: fixed;
+  z-index: 60;
+  right: 1rem;
+  bottom: 1rem;
+  max-width: min(420px, calc(100% - 2rem));
+  border: 1px solid rgba(21,56,76,.16);
+  border-radius: 1rem;
+  background: rgba(255,250,240,.96);
+  padding: .7rem .9rem;
+  box-shadow: 0 12px 30px rgba(21,56,76,.17);
+  font-size: .9rem;
+}
+
+@keyframes wordlight-rise {
+  from { opacity: .4; transform: translateY(18px) scale(.92); }
+  to { opacity: 1; transform: translateY(0) scale(1.04); }
+}
+
+@keyframes wordlight-shell {
+  0% { filter: brightness(1); transform: scale(.9); }
+  55% { filter: brightness(1.35) drop-shadow(0 0 24px #ffd05a); transform: scale(1.1) rotate(-3deg); }
+  100% { filter: brightness(1.12) drop-shadow(0 0 14px #ffd05a); transform: scale(1); }
+}
+
+@keyframes wordlight-ripple {
+  from { opacity: .85; transform: scale(.35); }
+  to { opacity: 0; transform: scale(1.5); }
+}
+
+.wordlight[data-reduced-motion="true"] *,
+.wordlight[data-reduced-motion="true"] *::before,
+.wordlight[data-reduced-motion="true"] *::after {
+  scroll-behavior: auto !important;
+  animation-duration: 1ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 1ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wordlight *, .wordlight *::before, .wordlight *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+@media (max-width: 820px) {
+  .wordlight-header {
+    align-items: flex-start;
+  }
+
+  .wordlight-header nav {
+    max-width: 310px;
+  }
+
+  .wordlight-regions {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    padding-bottom: 5rem;
+  }
+
+  .wordlight-region,
+  .wordlight-region:nth-child(4),
+  .wordlight-region:nth-child(5) {
+    grid-column: auto;
+  }
+
+  .wordlight-region:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .wordlight-mission-list {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+
+  .wordlight-journal__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wordlight-meaning,
+  .wordlight-sentence,
+  .wordlight-response {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .wordlight {
+    padding-bottom: 4rem;
+  }
+
+  .wordlight-optional {
+    grid-template-columns: 1fr;
+  }
+
+  .wordlight-header {
+    display: block;
+    width: calc(100% - 24px);
+    padding-top: .9rem;
+  }
+
+  .wordlight-header h1 {
+    font-size: 2rem;
+  }
+
+  .wordlight-header h1 small {
+    display: inline;
+    margin-left: .35rem;
+    font-size: .68rem;
+  }
+
+  .wordlight-header p {
+    font-size: .9rem;
+  }
+
+  .wordlight-header nav {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    max-width: none;
+    margin-top: .8rem;
+  }
+
+  .wordlight-header nav a,
+  .wordlight-header nav button {
+    width: 100%;
+    padding: .55rem;
+    font-size: .82rem;
+  }
+
+  .wordlight-island,
+  .wordlight-region-page,
+  .wordlight-journal,
+  .wordlight-mission__stage {
+    width: calc(100% - 16px);
+    border-radius: 1.25rem;
+  }
+
+  .wordlight-island {
+    min-height: 720px;
+  }
+
+  .wordlight-island__intro {
+    padding: 1.5rem .8rem 1rem;
+  }
+
+  .wordlight-island__intro p {
+    font-size: .9rem;
+  }
+
+  .wordlight-regions {
+    grid-template-columns: 1fr;
+    gap: .65rem;
+    width: calc(100% - 20px);
+    padding-bottom: 3rem;
+  }
+
+  .wordlight-region,
+  .wordlight-region:nth-child(4),
+  .wordlight-region:nth-child(5),
+  .wordlight-region:last-child {
+    grid-column: auto;
+    display: grid;
+    grid-template-columns: 48px minmax(0,1fr) auto;
+    align-items: center;
+    min-height: 0;
+    border-radius: 1.1rem .45rem 1.1rem .45rem;
+    padding: .85rem;
+  }
+
+  .wordlight-region::before,
+  .wordlight-region > span:not(.wordlight-region__number) {
+    display: none;
+  }
+
+  .wordlight-region h3,
+  .wordlight-region p {
+    grid-column: 2;
+    margin: 0;
+  }
+
+  .wordlight-region p { font-size: .75rem; }
+  .wordlight-region button { grid-column: 3; grid-row: 1 / span 2; width: auto; margin: 0; padding: .55rem .75rem; }
+
+  .wordlight-mission-list {
+    grid-template-columns: 1fr;
+  }
+
+  .wordlight-mission-list article {
+    grid-template-columns: 100px minmax(0,1fr) auto;
+    grid-template-rows: auto auto;
+    text-align: left;
+  }
+
+  .wordlight-mission-list article > .wordlight-meaning__art,
+  .wordlight-mission-list article > .wordlight-quantity {
+    grid-row: 1 / span 2;
+    height: 100px;
+    min-height: 100px;
+  }
+
+  .wordlight-mission-list article h3,
+  .wordlight-mission-list article p {
+    grid-column: 2;
+    margin-left: .55rem;
+  }
+
+  .wordlight-mission-list article button {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    padding: .5rem .7rem;
+  }
+
+  .wordlight-journal__grid article {
+    grid-template-columns: 92px minmax(0,1fr);
+    gap: .7rem;
+    padding: .7rem;
+  }
+
+  .wordlight-journal__grid article > .wordlight-meaning__art,
+  .wordlight-journal__grid article > .wordlight-quantity {
+    height: 92px;
+    min-height: 92px;
+  }
+
+  .wordlight-journal__grid h3 { font-size: 1.45rem; }
+  .wordlight-journal__grid p { font-size: .85rem; }
+
+  .wordlight-stepper {
+    gap: .25rem;
+  }
+
+  .wordlight-stepper span {
+    padding: .45rem .25rem;
+    font-size: .68rem;
+  }
+
+  .wordlight-meaning,
+  .wordlight-sentence,
+  .wordlight-response {
+    display: block;
+    min-height: 0;
+    padding: 0;
+  }
+
+  .wordlight-meaning > div:first-child,
+  .wordlight-response > div:first-child {
+    min-height: 230px;
+  }
+
+  .wordlight-meaning__art img {
+    max-height: 235px;
+  }
+
+  .wordlight-meaning h2,
+  .wordlight-response h2 {
+    font-size: 3.3rem;
+    margin-top: .5rem;
+  }
+
+  .wordlight-build {
+    padding: 0;
+  }
+
+  .wordlight-build__slots span {
+    min-width: 52px;
+    min-height: 56px;
+    font-size: 1.2rem;
+  }
+
+  .wordlight-tile-bank button {
+    min-width: 54px;
+  }
+
+  .wordlight-controls {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+
+  .wordlight-sentence > div:first-child {
+    display: grid;
+    grid-template-columns: 105px minmax(0,1fr);
+    align-items: center;
+    margin-bottom: .8rem;
+    padding: .5rem;
+    text-align: left;
+  }
+
+  .wordlight-sentence > div:first-child .wordlight-meaning__art,
+  .wordlight-sentence > div:first-child .wordlight-quantity {
+    height: 105px;
+    min-height: 105px;
+  }
+
+  .wordlight-sentence h2 {
+    font-size: 1.8rem;
+  }
+
+  .wordlight-live {
+    right: .5rem;
+    bottom: .5rem;
+    max-width: calc(100% - 1rem);
+    font-size: .78rem;
+  }
+}

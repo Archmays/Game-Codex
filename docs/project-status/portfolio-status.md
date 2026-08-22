@@ -19,7 +19,7 @@
 | 汉字魔法战 | `hanzi-radical-battle` | 中文世界 | 旗舰 | S | `active-maintenance` | 是 | 是 | ?play=hanzi-magic-complete&from=hub | `family-games/hanzi-magic-complete/v3`<br>`family-games/hanzi-magic-v2/chapter-one`<br>`family-games/hanzi-magic-v2/wheel-workshop/v1`<br>`family-games/hanzi-radical-battle-v2/golden-slice/state` | `s-hanzi-release` |
 | 算式滑轨 | `equation-slider` | 数学世界 | 旗舰 | S | `active` | 是 | 是 | 经典大厅内嵌 | `family-games/equation-slider` | `s-equation-release` |
 | 数学世界 | `math-lab` | 数学世界 | 核心世界 | A | `active` | 是 | 是 | ?world=math-world&from=hub | `family-games/math-world/v1`<br>`math-battle-web/save-v1` | `a-core-world` |
-| 英文魔法战 | `english-spell-battle` | 英语世界 | 核心世界 | A | `flagship-candidate` | 是 | 是 | 经典大厅内嵌 | `family-games/english-spell-battle` | `a-core-world` |
+| 英文魔法战 | `english-spell-battle` | 英语世界 | 核心世界 | A | `active` | 是 | 是 | ?world=english-world&from=world | `family-games/english-spell-battle`<br>`family-games/english-world/v2` | `a-core-world` |
 | 目标工坊 | `make-target` | 数学世界 | 独立谜题 | B | `active` | 是 | 是 | 经典大厅内嵌 | `family-games/make-target` | `b-independent-puzzle` |
 | 时钟塔 | `clock-reader` | 数学世界 | 模块 | C | `active-module` | 否 | 否 | 经典大厅内嵌 | `family-games/clock-reader` | `c-module` |
 | 阵列工坊 | `multiplication-adventure` | 数学世界 | 模块 | C | `migrated-module` | 否 | 否 | 经典大厅内嵌 | `family-games/multiplication-adventure` | `c-module` |

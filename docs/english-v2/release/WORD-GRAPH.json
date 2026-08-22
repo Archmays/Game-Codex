@@ -1,0 +1,5228 @@
+{
+  "schemaVersion": 1,
+  "words": [
+    {
+      "lemma": "cat",
+      "senseId": "oewn:02124272-n",
+      "partOfSpeech": "noun",
+      "themeId": "animals",
+      "childGlossZh": "猫",
+      "childDefinitionEn": "A small animal that can live with people.",
+      "imageBrief": "One friendly domestic ginger-and-cream cat sitting, full body.",
+      "visualKind": "asset",
+      "arpabet": [
+        "K",
+        "AE1",
+        "T"
+      ],
+      "units": [
+        [
+          "c",
+          [
+            "K"
+          ]
+        ],
+        [
+          "a",
+          [
+            "AE1"
+          ]
+        ],
+        [
+          "t",
+          [
+            "T"
+          ]
+        ]
+      ],
+      "decodingBand": "simple-regular",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-cat-home"
+      ],
+      "riskFlags": [],
+      "id": "word-cat",
+      "displayWord": "cat",
+      "imageAssetId": "word-cat",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "cat-1",
+          "letters": "c",
+          "phonemeIds": [
+            "K"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "cat-2",
+          "letters": "a",
+          "phonemeIds": [
+            "AE1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "cat-3",
+          "letters": "t",
+          "phonemeIds": [
+            "T"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-05a32cc7"
+    },
+    {
+      "lemma": "dog",
+      "senseId": "oewn:02086723-n",
+      "partOfSpeech": "noun",
+      "themeId": "animals",
+      "childGlossZh": "狗",
+      "childDefinitionEn": "A tame animal that often lives with people.",
+      "imageBrief": "One friendly tan-and-cream domestic dog standing, full body.",
+      "visualKind": "asset",
+      "arpabet": [
+        "D",
+        "AO1",
+        "G"
+      ],
+      "units": [
+        [
+          "d",
+          [
+            "D"
+          ]
+        ],
+        [
+          "o",
+          [
+            "AO1"
+          ]
+        ],
+        [
+          "g",
+          [
+            "G"
+          ]
+        ]
+      ],
+      "decodingBand": "simple-regular",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-dog-dig"
+      ],
+      "riskFlags": [],
+      "id": "word-dog",
+      "displayWord": "dog",
+      "imageAssetId": "word-dog",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "dog-1",
+          "letters": "d",
+          "phonemeIds": [
+            "D"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "dog-2",
+          "letters": "o",
+          "phonemeIds": [
+            "AO1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "dog-3",
+          "letters": "g",
+          "phonemeIds": [
+            "G"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-a231a9e4"
+    },
+    {
+      "lemma": "fish",
+      "senseId": "oewn:02514684-n",
+      "partOfSpeech": "noun",
+      "themeId": "animals",
+      "childGlossZh": "鱼",
+      "childDefinitionEn": "An animal that lives and swims in water.",
+      "imageBrief": "One living blue-green fish in side view.",
+      "visualKind": "asset",
+      "arpabet": [
+        "F",
+        "IH1",
+        "SH"
+      ],
+      "units": [
+        [
+          "f",
+          [
+            "F"
+          ]
+        ],
+        [
+          "i",
+          [
+            "IH1"
+          ]
+        ],
+        [
+          "sh",
+          [
+            "SH"
+          ],
+          "common-pattern",
+          "Keep s and h together: sh."
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-fish-swim"
+      ],
+      "riskFlags": [],
+      "id": "word-fish",
+      "displayWord": "fish",
+      "imageAssetId": "word-fish",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "fish-1",
+          "letters": "f",
+          "phonemeIds": [
+            "F"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "fish-2",
+          "letters": "i",
+          "phonemeIds": [
+            "IH1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "fish-3",
+          "letters": "sh",
+          "phonemeIds": [
+            "SH"
+          ],
+          "role": "common-pattern",
+          "childHint": "Keep s and h together: sh."
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-2cce131c"
+    },
+    {
+      "lemma": "duck",
+      "senseId": "oewn:01848972-n",
+      "partOfSpeech": "noun",
+      "themeId": "animals",
+      "childGlossZh": "鸭子",
+      "childDefinitionEn": "A swimming bird with a broad bill and webbed feet.",
+      "imageBrief": "One yellow-brown duck standing beside a small water ripple.",
+      "visualKind": "asset",
+      "arpabet": [
+        "D",
+        "AH1",
+        "K"
+      ],
+      "units": [
+        [
+          "d",
+          [
+            "D"
+          ]
+        ],
+        [
+          "u",
+          [
+            "AH1"
+          ]
+        ],
+        [
+          "ck",
+          [
+            "K"
+          ],
+          "common-pattern",
+          "Keep c and k together at the end."
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-duck-splash"
+      ],
+      "riskFlags": [],
+      "id": "word-duck",
+      "displayWord": "duck",
+      "imageAssetId": "word-duck",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "duck-1",
+          "letters": "d",
+          "phonemeIds": [
+            "D"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "duck-2",
+          "letters": "u",
+          "phonemeIds": [
+            "AH1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "duck-3",
+          "letters": "ck",
+          "phonemeIds": [
+            "K"
+          ],
+          "role": "common-pattern",
+          "childHint": "Keep c and k together at the end."
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-3d8541ce"
+    },
+    {
+      "lemma": "frog",
+      "senseId": "oewn:01642406-n",
+      "partOfSpeech": "noun",
+      "themeId": "animals",
+      "childGlossZh": "青蛙",
+      "childDefinitionEn": "A small animal with long back legs for jumping.",
+      "imageBrief": "One bright green frog in a natural crouch, full body.",
+      "visualKind": "asset",
+      "arpabet": [
+        "F",
+        "R",
+        "AA1",
+        "G"
+      ],
+      "units": [
+        [
+          "f",
+          [
+            "F"
+          ]
+        ],
+        [
+          "r",
+          [
+            "R"
+          ]
+        ],
+        [
+          "o",
+          [
+            "AA1"
+          ]
+        ],
+        [
+          "g",
+          [
+            "G"
+          ]
+        ]
+      ],
+      "decodingBand": "simple-regular",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-frog-hop"
+      ],
+      "riskFlags": [],
+      "id": "word-frog",
+      "displayWord": "frog",
+      "imageAssetId": "word-frog",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 4,
+      "graphemeUnits": [
+        {
+          "id": "frog-1",
+          "letters": "f",
+          "phonemeIds": [
+            "F"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "frog-2",
+          "letters": "r",
+          "phonemeIds": [
+            "R"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "frog-3",
+          "letters": "o",
+          "phonemeIds": [
+            "AA1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "frog-4",
+          "letters": "g",
+          "phonemeIds": [
+            "G"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-d7111f53"
+    },
+    {
+      "lemma": "bee",
+      "senseId": "oewn:02209508-n",
+      "partOfSpeech": "noun",
+      "themeId": "animals",
+      "childGlossZh": "蜜蜂",
+      "childDefinitionEn": "A flying insect that gathers nectar from flowers.",
+      "imageBrief": "One anatomically readable honeybee hovering in side view.",
+      "visualKind": "asset",
+      "arpabet": [
+        "B",
+        "IY1"
+      ],
+      "units": [
+        [
+          "b",
+          [
+            "B"
+          ]
+        ],
+        [
+          "ee",
+          [
+            "IY1"
+          ],
+          "common-pattern",
+          "Two e letters share one long sound."
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-bee-flower"
+      ],
+      "riskFlags": [],
+      "id": "word-bee",
+      "displayWord": "bee",
+      "imageAssetId": "word-bee",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 2,
+      "graphemeUnits": [
+        {
+          "id": "bee-1",
+          "letters": "b",
+          "phonemeIds": [
+            "B"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "bee-2",
+          "letters": "ee",
+          "phonemeIds": [
+            "IY1"
+          ],
+          "role": "common-pattern",
+          "childHint": "Two e letters share one long sound."
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-5fc5b32d"
+    },
+    {
+      "lemma": "pig",
+      "senseId": "oewn:02398058-n",
+      "partOfSpeech": "noun",
+      "themeId": "animals",
+      "childGlossZh": "猪",
+      "childDefinitionEn": "A domestic animal with a snout.",
+      "imageBrief": "One cheerful pink domestic pig standing, full body.",
+      "visualKind": "asset",
+      "arpabet": [
+        "P",
+        "IH1",
+        "G"
+      ],
+      "units": [
+        [
+          "p",
+          [
+            "P"
+          ]
+        ],
+        [
+          "i",
+          [
+            "IH1"
+          ]
+        ],
+        [
+          "g",
+          [
+            "G"
+          ]
+        ]
+      ],
+      "decodingBand": "simple-regular",
+      "storyBand": "optional",
+      "sentenceIds": [],
+      "riskFlags": [],
+      "id": "word-pig",
+      "displayWord": "pig",
+      "imageAssetId": "word-pig",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "pig-1",
+          "letters": "p",
+          "phonemeIds": [
+            "P"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "pig-2",
+          "letters": "i",
+          "phonemeIds": [
+            "IH1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "pig-3",
+          "letters": "g",
+          "phonemeIds": [
+            "G"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "s"
+      ],
+      "revisionHash": "fnv1a-e93dafa7"
+    },
+    {
+      "lemma": "cow",
+      "senseId": "oewn:02406106-n",
+      "partOfSpeech": "noun",
+      "themeId": "animals",
+      "childGlossZh": "母牛",
+      "childDefinitionEn": "An adult female animal of domestic cattle.",
+      "imageBrief": "One gentle black-and-white dairy cow standing, full body.",
+      "visualKind": "asset",
+      "arpabet": [
+        "K",
+        "AW1"
+      ],
+      "units": [
+        [
+          "c",
+          [
+            "K"
+          ]
+        ],
+        [
+          "ow",
+          [
+            "AW1"
+          ],
+          "common-pattern",
+          "Keep o and w together: ow."
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "optional",
+      "sentenceIds": [],
+      "riskFlags": [],
+      "id": "word-cow",
+      "displayWord": "cow",
+      "imageAssetId": "word-cow",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 2,
+      "graphemeUnits": [
+        {
+          "id": "cow-1",
+          "letters": "c",
+          "phonemeIds": [
+            "K"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "cow-2",
+          "letters": "ow",
+          "phonemeIds": [
+            "AW1"
+          ],
+          "role": "common-pattern",
+          "childHint": "Keep o and w together: ow."
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-2c5bf19c"
+    },
+    {
+      "lemma": "bear",
+      "senseId": "oewn:02134305-n",
+      "partOfSpeech": "noun",
+      "themeId": "animals",
+      "childGlossZh": "熊",
+      "childDefinitionEn": "A large furry animal with strong claws.",
+      "imageBrief": "One gentle brown bear standing on all fours.",
+      "visualKind": "asset",
+      "arpabet": [
+        "B",
+        "EH1",
+        "R"
+      ],
+      "units": [
+        [
+          "b",
+          [
+            "B"
+          ]
+        ],
+        [
+          "ear",
+          [
+            "EH1",
+            "R"
+          ],
+          "irregular-heart",
+          "The letters ear make the sound heard in bear."
+        ]
+      ],
+      "decodingBand": "irregular-supported",
+      "storyBand": "optional",
+      "sentenceIds": [],
+      "riskFlags": [
+        "IRREGULAR_ORTHOGRAPHY"
+      ],
+      "id": "word-bear",
+      "displayWord": "bear",
+      "imageAssetId": "word-bear",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "bear-1",
+          "letters": "b",
+          "phonemeIds": [
+            "B"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "bear-2",
+          "letters": "ear",
+          "phonemeIds": [
+            "EH1",
+            "R"
+          ],
+          "role": "irregular-heart",
+          "childHint": "The letters ear make the sound heard in bear."
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-a5a02f48"
+    },
+    {
+      "lemma": "rabbit",
+      "senseId": "oewn:02326697-n",
+      "partOfSpeech": "noun",
+      "themeId": "animals",
+      "childGlossZh": "兔子",
+      "childDefinitionEn": "A small animal with long ears and a short tail.",
+      "imageBrief": "One small cream-and-brown rabbit sitting, full body.",
+      "visualKind": "asset",
+      "arpabet": [
+        "R",
+        "AE1",
+        "B",
+        "AH0",
+        "T"
+      ],
+      "units": [
+        [
+          "r",
+          [
+            "R"
+          ]
+        ],
+        [
+          "a",
+          [
+            "AE1"
+          ]
+        ],
+        [
+          "bb",
+          [
+            "B"
+          ],
+          "common-pattern"
+        ],
+        [
+          "i",
+          [
+            "AH0"
+          ],
+          "common-pattern"
+        ],
+        [
+          "t",
+          [
+            "T"
+          ]
+        ]
+      ],
+      "decodingBand": "optional-advanced",
+      "storyBand": "optional",
+      "sentenceIds": [],
+      "riskFlags": [
+        "MULTISYLLABLE_OPTIONAL"
+      ],
+      "id": "word-rabbit",
+      "displayWord": "rabbit",
+      "imageAssetId": "word-rabbit",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 5,
+      "graphemeUnits": [
+        {
+          "id": "rabbit-1",
+          "letters": "r",
+          "phonemeIds": [
+            "R"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "rabbit-2",
+          "letters": "a",
+          "phonemeIds": [
+            "AE1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "rabbit-3",
+          "letters": "bb",
+          "phonemeIds": [
+            "B"
+          ],
+          "role": "common-pattern"
+        },
+        {
+          "id": "rabbit-4",
+          "letters": "i",
+          "phonemeIds": [
+            "AH0"
+          ],
+          "role": "common-pattern"
+        },
+        {
+          "id": "rabbit-5",
+          "letters": "t",
+          "phonemeIds": [
+            "T"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1,
+        0
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-5162ee06"
+    },
+    {
+      "lemma": "tiger",
+      "senseId": "oewn:02132256-n",
+      "partOfSpeech": "noun",
+      "themeId": "animals",
+      "childGlossZh": "老虎",
+      "childDefinitionEn": "A large striped wild cat from Asia.",
+      "imageBrief": "One orange tiger standing, full body, black stripes clear.",
+      "visualKind": "asset",
+      "arpabet": [
+        "T",
+        "AY1",
+        "G",
+        "ER0"
+      ],
+      "units": [
+        [
+          "t",
+          [
+            "T"
+          ]
+        ],
+        [
+          "i",
+          [
+            "AY1"
+          ],
+          "common-pattern"
+        ],
+        [
+          "g",
+          [
+            "G"
+          ]
+        ],
+        [
+          "er",
+          [
+            "ER0"
+          ],
+          "common-pattern"
+        ]
+      ],
+      "decodingBand": "optional-advanced",
+      "storyBand": "optional",
+      "sentenceIds": [],
+      "riskFlags": [
+        "MULTISYLLABLE_OPTIONAL"
+      ],
+      "id": "word-tiger",
+      "displayWord": "tiger",
+      "imageAssetId": "word-tiger",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 4,
+      "graphemeUnits": [
+        {
+          "id": "tiger-1",
+          "letters": "t",
+          "phonemeIds": [
+            "T"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "tiger-2",
+          "letters": "i",
+          "phonemeIds": [
+            "AY1"
+          ],
+          "role": "common-pattern"
+        },
+        {
+          "id": "tiger-3",
+          "letters": "g",
+          "phonemeIds": [
+            "G"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "tiger-4",
+          "letters": "er",
+          "phonemeIds": [
+            "ER0"
+          ],
+          "role": "common-pattern"
+        }
+      ],
+      "stressPattern": [
+        1,
+        0
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-245d7baa"
+    },
+    {
+      "lemma": "horse",
+      "senseId": "oewn:02377103-n",
+      "partOfSpeech": "noun",
+      "themeId": "animals",
+      "childGlossZh": "马",
+      "childDefinitionEn": "A large animal people can ride.",
+      "imageBrief": "One gentle chestnut horse standing, full body.",
+      "visualKind": "asset",
+      "arpabet": [
+        "HH",
+        "AO1",
+        "R",
+        "S"
+      ],
+      "units": [
+        [
+          "h",
+          [
+            "HH"
+          ]
+        ],
+        [
+          "or",
+          [
+            "AO1",
+            "R"
+          ],
+          "common-pattern"
+        ],
+        [
+          "s",
+          [
+            "S"
+          ]
+        ],
+        [
+          "e",
+          [],
+          "common-pattern",
+          "The final e is quiet."
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "optional",
+      "sentenceIds": [],
+      "riskFlags": [
+        "SILENT_E_PATTERN"
+      ],
+      "id": "word-horse",
+      "displayWord": "horse",
+      "imageAssetId": "word-horse",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 4,
+      "graphemeUnits": [
+        {
+          "id": "horse-1",
+          "letters": "h",
+          "phonemeIds": [
+            "HH"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "horse-2",
+          "letters": "or",
+          "phonemeIds": [
+            "AO1",
+            "R"
+          ],
+          "role": "common-pattern"
+        },
+        {
+          "id": "horse-3",
+          "letters": "s",
+          "phonemeIds": [
+            "S"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "horse-4",
+          "letters": "e",
+          "phonemeIds": [],
+          "role": "common-pattern",
+          "childHint": "The final e is quiet."
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-b4216245"
+    },
+    {
+      "lemma": "goat",
+      "senseId": "oewn:02419165-n",
+      "partOfSpeech": "noun",
+      "themeId": "animals",
+      "childGlossZh": "山羊",
+      "childDefinitionEn": "An agile animal related to sheep, often with horns.",
+      "imageBrief": "One cream-and-brown domestic goat standing, full body.",
+      "visualKind": "asset",
+      "arpabet": [
+        "G",
+        "OW1",
+        "T"
+      ],
+      "units": [
+        [
+          "g",
+          [
+            "G"
+          ]
+        ],
+        [
+          "oa",
+          [
+            "OW1"
+          ],
+          "common-pattern",
+          "Keep o and a together: oa."
+        ],
+        [
+          "t",
+          [
+            "T"
+          ]
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "optional",
+      "sentenceIds": [],
+      "riskFlags": [
+        "NEW_SELECTED_OA_PATTERN"
+      ],
+      "id": "word-goat",
+      "displayWord": "goat",
+      "imageAssetId": "word-goat",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "goat-1",
+          "letters": "g",
+          "phonemeIds": [
+            "G"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "goat-2",
+          "letters": "oa",
+          "phonemeIds": [
+            "OW1"
+          ],
+          "role": "common-pattern",
+          "childHint": "Keep o and a together: oa."
+        },
+        {
+          "id": "goat-3",
+          "letters": "t",
+          "phonemeIds": [
+            "T"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-1c3ef3ad"
+    },
+    {
+      "lemma": "dad",
+      "senseId": "oewn:10007601-n",
+      "partOfSpeech": "noun",
+      "themeId": "home",
+      "childGlossZh": "爸爸",
+      "childDefinitionEn": "A familiar word for a father.",
+      "imageBrief": "One fictional adult father figure kneeling in a welcoming pose.",
+      "visualKind": "asset",
+      "arpabet": [
+        "D",
+        "AE1",
+        "D"
+      ],
+      "units": [
+        [
+          "d",
+          [
+            "D"
+          ]
+        ],
+        [
+          "a",
+          [
+            "AE1"
+          ]
+        ],
+        [
+          "d",
+          [
+            "D"
+          ]
+        ]
+      ],
+      "decodingBand": "simple-regular",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-dad-door"
+      ],
+      "riskFlags": [
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "id": "word-dad",
+      "displayWord": "dad",
+      "imageAssetId": "word-dad",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "dad-1",
+          "letters": "d",
+          "phonemeIds": [
+            "D"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "dad-2",
+          "letters": "a",
+          "phonemeIds": [
+            "AE1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "dad-3",
+          "letters": "d",
+          "phonemeIds": [
+            "D"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-e9a43206"
+    },
+    {
+      "lemma": "mom",
+      "senseId": "oewn:10297825-n",
+      "partOfSpeech": "noun",
+      "themeId": "home",
+      "childGlossZh": "妈妈",
+      "childDefinitionEn": "A familiar word for a mother.",
+      "imageBrief": "One fictional adult mother figure standing in a welcoming pose.",
+      "visualKind": "asset",
+      "arpabet": [
+        "M",
+        "AA1",
+        "M"
+      ],
+      "units": [
+        [
+          "m",
+          [
+            "M"
+          ]
+        ],
+        [
+          "o",
+          [
+            "AA1"
+          ]
+        ],
+        [
+          "m",
+          [
+            "M"
+          ]
+        ]
+      ],
+      "decodingBand": "simple-regular",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-mom-hello"
+      ],
+      "riskFlags": [
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "id": "word-mom",
+      "displayWord": "mom",
+      "imageAssetId": "word-mom",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "mom-1",
+          "letters": "m",
+          "phonemeIds": [
+            "M"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "mom-2",
+          "letters": "o",
+          "phonemeIds": [
+            "AA1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "mom-3",
+          "letters": "m",
+          "phonemeIds": [
+            "M"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "p",
+        "s"
+      ],
+      "revisionHash": "fnv1a-a71bdf5e"
+    },
+    {
+      "lemma": "baby",
+      "senseId": "oewn:09846929-n",
+      "partOfSpeech": "noun",
+      "themeId": "home",
+      "childGlossZh": "婴儿",
+      "childDefinitionEn": "A very young child who cannot yet walk.",
+      "imageBrief": "One awake fictional baby sitting safely on a plain mat.",
+      "visualKind": "asset",
+      "arpabet": [
+        "B",
+        "EY1",
+        "B",
+        "IY0"
+      ],
+      "units": [
+        [
+          "b",
+          [
+            "B"
+          ]
+        ],
+        [
+          "a",
+          [
+            "EY1"
+          ],
+          "common-pattern"
+        ],
+        [
+          "b",
+          [
+            "B"
+          ]
+        ],
+        [
+          "y",
+          [
+            "IY0"
+          ],
+          "common-pattern"
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-baby-cozy"
+      ],
+      "riskFlags": [
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "id": "word-baby",
+      "displayWord": "baby",
+      "imageAssetId": "word-baby",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 4,
+      "graphemeUnits": [
+        {
+          "id": "baby-1",
+          "letters": "b",
+          "phonemeIds": [
+            "B"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "baby-2",
+          "letters": "a",
+          "phonemeIds": [
+            "EY1"
+          ],
+          "role": "common-pattern"
+        },
+        {
+          "id": "baby-3",
+          "letters": "b",
+          "phonemeIds": [
+            "B"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "baby-4",
+          "letters": "y",
+          "phonemeIds": [
+            "IY0"
+          ],
+          "role": "common-pattern"
+        }
+      ],
+      "stressPattern": [
+        1,
+        0
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-26ea8f90"
+    },
+    {
+      "lemma": "boy",
+      "senseId": "oewn:10305010-n",
+      "partOfSpeech": "noun",
+      "themeId": "home",
+      "childGlossZh": "男孩",
+      "childDefinitionEn": "A young male child.",
+      "imageBrief": "One fictional young boy standing and waving hello.",
+      "visualKind": "asset",
+      "arpabet": [
+        "B",
+        "OY1"
+      ],
+      "units": [
+        [
+          "b",
+          [
+            "B"
+          ]
+        ],
+        [
+          "oy",
+          [
+            "OY1"
+          ],
+          "common-pattern",
+          "Keep o and y together: oy."
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-boy-waves"
+      ],
+      "riskFlags": [
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "id": "word-boy",
+      "displayWord": "boy",
+      "imageAssetId": "word-boy",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 2,
+      "graphemeUnits": [
+        {
+          "id": "boy-1",
+          "letters": "b",
+          "phonemeIds": [
+            "B"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "boy-2",
+          "letters": "oy",
+          "phonemeIds": [
+            "OY1"
+          ],
+          "role": "common-pattern",
+          "childHint": "Keep o and y together: oy."
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-b05a6fea"
+    },
+    {
+      "lemma": "girl",
+      "senseId": "oewn:10104064-n",
+      "partOfSpeech": "noun",
+      "themeId": "home",
+      "childGlossZh": "女孩",
+      "childDefinitionEn": "A young female child.",
+      "imageBrief": "One fictional young girl standing, full body.",
+      "visualKind": "asset",
+      "arpabet": [
+        "G",
+        "ER1",
+        "L"
+      ],
+      "units": [
+        [
+          "g",
+          [
+            "G"
+          ]
+        ],
+        [
+          "ir",
+          [
+            "ER1"
+          ],
+          "common-pattern",
+          "Keep i and r together: ir."
+        ],
+        [
+          "l",
+          [
+            "L"
+          ]
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-girl-kite"
+      ],
+      "riskFlags": [
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "id": "word-girl",
+      "displayWord": "girl",
+      "imageAssetId": "word-girl",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "girl-1",
+          "letters": "g",
+          "phonemeIds": [
+            "G"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "girl-2",
+          "letters": "ir",
+          "phonemeIds": [
+            "ER1"
+          ],
+          "role": "common-pattern",
+          "childHint": "Keep i and r together: ir."
+        },
+        {
+          "id": "girl-3",
+          "letters": "l",
+          "phonemeIds": [
+            "L"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-ad37b0fb"
+    },
+    {
+      "lemma": "friend",
+      "senseId": "oewn:10132360-n",
+      "partOfSpeech": "noun",
+      "themeId": "home",
+      "childGlossZh": "朋友",
+      "childDefinitionEn": "A person you know well, like, and trust.",
+      "imageBrief": "Two fictional young friends sharing an equal high-five.",
+      "visualKind": "asset",
+      "arpabet": [
+        "F",
+        "R",
+        "EH1",
+        "N",
+        "D"
+      ],
+      "units": [
+        [
+          "f",
+          [
+            "F"
+          ]
+        ],
+        [
+          "r",
+          [
+            "R"
+          ]
+        ],
+        [
+          "ie",
+          [
+            "EH1"
+          ],
+          "irregular-heart",
+          "The letters ie make the short e sound here."
+        ],
+        [
+          "n",
+          [
+            "N"
+          ]
+        ],
+        [
+          "d",
+          [
+            "D"
+          ]
+        ]
+      ],
+      "decodingBand": "irregular-supported",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-friend-here"
+      ],
+      "riskFlags": [
+        "IRREGULAR_ORTHOGRAPHY",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "id": "word-friend",
+      "displayWord": "friend",
+      "imageAssetId": "word-friend",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 5,
+      "graphemeUnits": [
+        {
+          "id": "friend-1",
+          "letters": "f",
+          "phonemeIds": [
+            "F"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "friend-2",
+          "letters": "r",
+          "phonemeIds": [
+            "R"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "friend-3",
+          "letters": "ie",
+          "phonemeIds": [
+            "EH1"
+          ],
+          "role": "irregular-heart",
+          "childHint": "The letters ie make the short e sound here."
+        },
+        {
+          "id": "friend-4",
+          "letters": "n",
+          "phonemeIds": [
+            "N"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "friend-5",
+          "letters": "d",
+          "phonemeIds": [
+            "D"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-ff9bf1a2"
+    },
+    {
+      "lemma": "teacher",
+      "senseId": "oewn:10713754-n",
+      "partOfSpeech": "noun",
+      "themeId": "home",
+      "childGlossZh": "老师",
+      "childDefinitionEn": "A person whose work is teaching.",
+      "imageBrief": "One fictional adult teacher beside a blank portable board.",
+      "visualKind": "asset",
+      "arpabet": [
+        "T",
+        "IY1",
+        "CH",
+        "ER0"
+      ],
+      "units": [
+        [
+          "t",
+          [
+            "T"
+          ]
+        ],
+        [
+          "ea",
+          [
+            "IY1"
+          ],
+          "common-pattern"
+        ],
+        [
+          "ch",
+          [
+            "CH"
+          ],
+          "common-pattern"
+        ],
+        [
+          "er",
+          [
+            "ER0"
+          ],
+          "common-pattern"
+        ]
+      ],
+      "decodingBand": "optional-advanced",
+      "storyBand": "optional",
+      "sentenceIds": [],
+      "riskFlags": [
+        "MULTISYLLABLE_OPTIONAL",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "id": "word-teacher",
+      "displayWord": "teacher",
+      "imageAssetId": "word-teacher",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 4,
+      "graphemeUnits": [
+        {
+          "id": "teacher-1",
+          "letters": "t",
+          "phonemeIds": [
+            "T"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "teacher-2",
+          "letters": "ea",
+          "phonemeIds": [
+            "IY1"
+          ],
+          "role": "common-pattern"
+        },
+        {
+          "id": "teacher-3",
+          "letters": "ch",
+          "phonemeIds": [
+            "CH"
+          ],
+          "role": "common-pattern"
+        },
+        {
+          "id": "teacher-4",
+          "letters": "er",
+          "phonemeIds": [
+            "ER0"
+          ],
+          "role": "common-pattern"
+        }
+      ],
+      "stressPattern": [
+        1,
+        0
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-c6984bb7"
+    },
+    {
+      "lemma": "family",
+      "senseId": "oewn:07986853-n",
+      "partOfSpeech": "noun",
+      "themeId": "home",
+      "childGlossZh": "家庭；家人",
+      "childDefinitionEn": "Parents or caregivers and children as a group.",
+      "imageBrief": "One fictional inclusive family group of caregivers and children.",
+      "visualKind": "asset",
+      "arpabet": [
+        "F",
+        "AE1",
+        "M",
+        "AH0",
+        "L",
+        "IY0"
+      ],
+      "units": [
+        [
+          "f",
+          [
+            "F"
+          ]
+        ],
+        [
+          "a",
+          [
+            "AE1"
+          ]
+        ],
+        [
+          "m",
+          [
+            "M"
+          ]
+        ],
+        [
+          "i",
+          [
+            "AH0"
+          ],
+          "common-pattern"
+        ],
+        [
+          "l",
+          [
+            "L"
+          ]
+        ],
+        [
+          "y",
+          [
+            "IY0"
+          ],
+          "common-pattern"
+        ]
+      ],
+      "decodingBand": "optional-advanced",
+      "storyBand": "optional",
+      "sentenceIds": [],
+      "riskFlags": [
+        "MULTISYLLABLE_OPTIONAL",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "id": "word-family",
+      "displayWord": "family",
+      "imageAssetId": "word-family",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 6,
+      "graphemeUnits": [
+        {
+          "id": "family-1",
+          "letters": "f",
+          "phonemeIds": [
+            "F"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "family-2",
+          "letters": "a",
+          "phonemeIds": [
+            "AE1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "family-3",
+          "letters": "m",
+          "phonemeIds": [
+            "M"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "family-4",
+          "letters": "i",
+          "phonemeIds": [
+            "AH0"
+          ],
+          "role": "common-pattern"
+        },
+        {
+          "id": "family-5",
+          "letters": "l",
+          "phonemeIds": [
+            "L"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "family-6",
+          "letters": "y",
+          "phonemeIds": [
+            "IY0"
+          ],
+          "role": "common-pattern"
+        }
+      ],
+      "stressPattern": [
+        1,
+        0,
+        0
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "p",
+        "s"
+      ],
+      "revisionHash": "fnv1a-b6c6347b"
+    },
+    {
+      "lemma": "book",
+      "senseId": "oewn:02873453-n",
+      "partOfSpeech": "noun",
+      "themeId": "home",
+      "childGlossZh": "书",
+      "childDefinitionEn": "Bound pages that you can read or look through.",
+      "imageBrief": "One plain teal bound storybook with no writing.",
+      "visualKind": "asset",
+      "arpabet": [
+        "B",
+        "UH1",
+        "K"
+      ],
+      "units": [
+        [
+          "b",
+          [
+            "B"
+          ]
+        ],
+        [
+          "oo",
+          [
+            "UH1"
+          ],
+          "common-pattern",
+          "The letters oo share one sound in book."
+        ],
+        [
+          "k",
+          [
+            "K"
+          ]
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "optional",
+      "sentenceIds": [],
+      "riskFlags": [
+        "NEW_SELECTED_OO_PATTERN"
+      ],
+      "id": "word-book",
+      "displayWord": "book",
+      "imageAssetId": "word-book",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "book-1",
+          "letters": "b",
+          "phonemeIds": [
+            "B"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "book-2",
+          "letters": "oo",
+          "phonemeIds": [
+            "UH1"
+          ],
+          "role": "common-pattern",
+          "childHint": "The letters oo share one sound in book."
+        },
+        {
+          "id": "book-3",
+          "letters": "k",
+          "phonemeIds": [
+            "K"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-b2a969b8"
+    },
+    {
+      "lemma": "apple",
+      "senseId": "oewn:07755101-n",
+      "partOfSpeech": "noun",
+      "themeId": "food",
+      "childGlossZh": "苹果",
+      "childDefinitionEn": "A round fruit with crisp flesh and thin skin.",
+      "imageBrief": "One fresh red-and-green whole apple with a leaf.",
+      "visualKind": "asset",
+      "arpabet": [
+        "AE1",
+        "P",
+        "AH0",
+        "L"
+      ],
+      "units": [
+        [
+          "a",
+          [
+            "AE1"
+          ]
+        ],
+        [
+          "pp",
+          [
+            "P"
+          ],
+          "common-pattern"
+        ],
+        [
+          "le",
+          [
+            "AH0",
+            "L"
+          ],
+          "common-pattern"
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-apple-rolls"
+      ],
+      "riskFlags": [],
+      "id": "word-apple",
+      "displayWord": "apple",
+      "imageAssetId": "word-apple",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 4,
+      "graphemeUnits": [
+        {
+          "id": "apple-1",
+          "letters": "a",
+          "phonemeIds": [
+            "AE1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "apple-2",
+          "letters": "pp",
+          "phonemeIds": [
+            "P"
+          ],
+          "role": "common-pattern"
+        },
+        {
+          "id": "apple-3",
+          "letters": "le",
+          "phonemeIds": [
+            "AH0",
+            "L"
+          ],
+          "role": "common-pattern"
+        }
+      ],
+      "stressPattern": [
+        1,
+        0
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-d313752c"
+    },
+    {
+      "lemma": "egg",
+      "senseId": "oewn:07856780-n",
+      "partOfSpeech": "noun",
+      "themeId": "food",
+      "childGlossZh": "鸡蛋",
+      "childDefinitionEn": "An oval food laid by a hen.",
+      "imageBrief": "One plain brown hen egg resting in a teal egg cup.",
+      "visualKind": "asset",
+      "arpabet": [
+        "EH1",
+        "G"
+      ],
+      "units": [
+        [
+          "e",
+          [
+            "EH1"
+          ]
+        ],
+        [
+          "gg",
+          [
+            "G"
+          ],
+          "common-pattern"
+        ]
+      ],
+      "decodingBand": "simple-regular",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-egg-warm"
+      ],
+      "riskFlags": [],
+      "id": "word-egg",
+      "displayWord": "egg",
+      "imageAssetId": "word-egg",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 2,
+      "graphemeUnits": [
+        {
+          "id": "egg-1",
+          "letters": "e",
+          "phonemeIds": [
+            "EH1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "egg-2",
+          "letters": "gg",
+          "phonemeIds": [
+            "G"
+          ],
+          "role": "common-pattern"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-db1e1e0f"
+    },
+    {
+      "lemma": "milk",
+      "senseId": "oewn:07860018-n",
+      "partOfSpeech": "noun",
+      "themeId": "food",
+      "childGlossZh": "牛奶",
+      "childDefinitionEn": "A white drink that comes from mammals.",
+      "imageBrief": "Opaque white milk poured into one clear glass.",
+      "visualKind": "asset",
+      "arpabet": [
+        "M",
+        "IH1",
+        "L",
+        "K"
+      ],
+      "units": [
+        [
+          "m",
+          [
+            "M"
+          ]
+        ],
+        [
+          "i",
+          [
+            "IH1"
+          ]
+        ],
+        [
+          "l",
+          [
+            "L"
+          ]
+        ],
+        [
+          "k",
+          [
+            "K"
+          ]
+        ]
+      ],
+      "decodingBand": "simple-regular",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-milk-cup"
+      ],
+      "riskFlags": [],
+      "id": "word-milk",
+      "displayWord": "milk",
+      "imageAssetId": "word-milk",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 4,
+      "graphemeUnits": [
+        {
+          "id": "milk-1",
+          "letters": "m",
+          "phonemeIds": [
+            "M"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "milk-2",
+          "letters": "i",
+          "phonemeIds": [
+            "IH1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "milk-3",
+          "letters": "l",
+          "phonemeIds": [
+            "L"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "milk-4",
+          "letters": "k",
+          "phonemeIds": [
+            "K"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "p",
+        "s"
+      ],
+      "revisionHash": "fnv1a-99ebd666"
+    },
+    {
+      "lemma": "cake",
+      "senseId": "oewn:07644479-n",
+      "partOfSpeech": "noun",
+      "themeId": "food",
+      "childGlossZh": "蛋糕",
+      "childDefinitionEn": "A sweet baked food made with flour and eggs.",
+      "imageBrief": "One small round frosted sponge cake on one plate.",
+      "visualKind": "asset",
+      "arpabet": [
+        "K",
+        "EY1",
+        "K"
+      ],
+      "units": [
+        [
+          "c",
+          [
+            "K"
+          ]
+        ],
+        [
+          "a",
+          [
+            "EY1"
+          ],
+          "common-pattern",
+          "The quiet e helps a say its name."
+        ],
+        [
+          "k",
+          [
+            "K"
+          ]
+        ],
+        [
+          "e",
+          [],
+          "common-pattern",
+          "This e is quiet, but it helps a."
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-cake-ready"
+      ],
+      "riskFlags": [
+        "SILENT_E_PATTERN"
+      ],
+      "id": "word-cake",
+      "displayWord": "cake",
+      "imageAssetId": "word-cake",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "cake-1",
+          "letters": "c",
+          "phonemeIds": [
+            "K"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "cake-2",
+          "letters": "a",
+          "phonemeIds": [
+            "EY1"
+          ],
+          "role": "common-pattern",
+          "childHint": "The quiet e helps a say its name."
+        },
+        {
+          "id": "cake-3",
+          "letters": "k",
+          "phonemeIds": [
+            "K"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "cake-4",
+          "letters": "e",
+          "phonemeIds": [],
+          "role": "common-pattern",
+          "childHint": "This e is quiet, but it helps a."
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-4d1733e3"
+    },
+    {
+      "lemma": "water",
+      "senseId": "oewn:14869913-n",
+      "partOfSpeech": "noun",
+      "themeId": "food",
+      "childGlossZh": "水",
+      "childDefinitionEn": "A clear liquid that people, animals, and plants need.",
+      "imageBrief": "One clear tumbler filled with transparent water.",
+      "visualKind": "asset",
+      "arpabet": [
+        "W",
+        "AO1",
+        "T",
+        "ER0"
+      ],
+      "units": [
+        [
+          "w",
+          [
+            "W"
+          ]
+        ],
+        [
+          "a",
+          [
+            "AO1"
+          ],
+          "irregular-heart",
+          "The a has the broad sound heard in water."
+        ],
+        [
+          "t",
+          [
+            "T"
+          ]
+        ],
+        [
+          "er",
+          [
+            "ER0"
+          ],
+          "common-pattern"
+        ]
+      ],
+      "decodingBand": "irregular-supported",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-water-pond"
+      ],
+      "riskFlags": [
+        "IRREGULAR_ORTHOGRAPHY"
+      ],
+      "id": "word-water",
+      "displayWord": "water",
+      "imageAssetId": "word-water",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 4,
+      "graphemeUnits": [
+        {
+          "id": "water-1",
+          "letters": "w",
+          "phonemeIds": [
+            "W"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "water-2",
+          "letters": "a",
+          "phonemeIds": [
+            "AO1"
+          ],
+          "role": "irregular-heart",
+          "childHint": "The a has the broad sound heard in water."
+        },
+        {
+          "id": "water-3",
+          "letters": "t",
+          "phonemeIds": [
+            "T"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "water-4",
+          "letters": "er",
+          "phonemeIds": [
+            "ER0"
+          ],
+          "role": "common-pattern"
+        }
+      ],
+      "stressPattern": [
+        1,
+        0
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-43c5e8b7"
+    },
+    {
+      "lemma": "bread",
+      "senseId": "oewn:07695101-n",
+      "partOfSpeech": "noun",
+      "themeId": "food",
+      "childGlossZh": "面包",
+      "childDefinitionEn": "Baked food made from flour and water.",
+      "imageBrief": "One small golden-brown loaf of baked bread.",
+      "visualKind": "asset",
+      "arpabet": [
+        "B",
+        "R",
+        "EH1",
+        "D"
+      ],
+      "units": [
+        [
+          "b",
+          [
+            "B"
+          ]
+        ],
+        [
+          "r",
+          [
+            "R"
+          ]
+        ],
+        [
+          "ea",
+          [
+            "EH1"
+          ],
+          "irregular-heart",
+          "The letters ea make the short e sound here."
+        ],
+        [
+          "d",
+          [
+            "D"
+          ]
+        ]
+      ],
+      "decodingBand": "irregular-supported",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-bread-good"
+      ],
+      "riskFlags": [
+        "IRREGULAR_ORTHOGRAPHY"
+      ],
+      "id": "word-bread",
+      "displayWord": "bread",
+      "imageAssetId": "word-bread",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 4,
+      "graphemeUnits": [
+        {
+          "id": "bread-1",
+          "letters": "b",
+          "phonemeIds": [
+            "B"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "bread-2",
+          "letters": "r",
+          "phonemeIds": [
+            "R"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "bread-3",
+          "letters": "ea",
+          "phonemeIds": [
+            "EH1"
+          ],
+          "role": "irregular-heart",
+          "childHint": "The letters ea make the short e sound here."
+        },
+        {
+          "id": "bread-4",
+          "letters": "d",
+          "phonemeIds": [
+            "D"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-3c881c4c"
+    },
+    {
+      "lemma": "banana",
+      "senseId": "oewn:07769568-n",
+      "partOfSpeech": "noun",
+      "themeId": "food",
+      "childGlossZh": "香蕉",
+      "childDefinitionEn": "A long curved fruit with soft sweet flesh.",
+      "imageBrief": "One ripe yellow unpeeled banana.",
+      "visualKind": "asset",
+      "arpabet": [
+        "B",
+        "AH0",
+        "N",
+        "AE1",
+        "N",
+        "AH0"
+      ],
+      "units": [
+        [
+          "b",
+          [
+            "B"
+          ]
+        ],
+        [
+          "a",
+          [
+            "AH0"
+          ],
+          "common-pattern"
+        ],
+        [
+          "n",
+          [
+            "N"
+          ]
+        ],
+        [
+          "a",
+          [
+            "AE1"
+          ]
+        ],
+        [
+          "n",
+          [
+            "N"
+          ]
+        ],
+        [
+          "a",
+          [
+            "AH0"
+          ],
+          "common-pattern"
+        ]
+      ],
+      "decodingBand": "optional-advanced",
+      "storyBand": "optional",
+      "sentenceIds": [],
+      "riskFlags": [
+        "MULTISYLLABLE_OPTIONAL"
+      ],
+      "id": "word-banana",
+      "displayWord": "banana",
+      "imageAssetId": "word-banana",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 6,
+      "graphemeUnits": [
+        {
+          "id": "banana-1",
+          "letters": "b",
+          "phonemeIds": [
+            "B"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "banana-2",
+          "letters": "a",
+          "phonemeIds": [
+            "AH0"
+          ],
+          "role": "common-pattern"
+        },
+        {
+          "id": "banana-3",
+          "letters": "n",
+          "phonemeIds": [
+            "N"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "banana-4",
+          "letters": "a",
+          "phonemeIds": [
+            "AE1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "banana-5",
+          "letters": "n",
+          "phonemeIds": [
+            "N"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "banana-6",
+          "letters": "a",
+          "phonemeIds": [
+            "AH0"
+          ],
+          "role": "common-pattern"
+        }
+      ],
+      "stressPattern": [
+        0,
+        1,
+        0
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-028a420c"
+    },
+    {
+      "lemma": "rice",
+      "senseId": "oewn:07820299-n",
+      "partOfSpeech": "noun",
+      "themeId": "food",
+      "childGlossZh": "米饭；米",
+      "childDefinitionEn": "Small grains cooked or used as food.",
+      "imageBrief": "One small teal bowl filled with plain cooked white rice.",
+      "visualKind": "asset",
+      "arpabet": [
+        "R",
+        "AY1",
+        "S"
+      ],
+      "units": [
+        [
+          "r",
+          [
+            "R"
+          ]
+        ],
+        [
+          "i",
+          [
+            "AY1"
+          ],
+          "common-pattern",
+          "The quiet e helps i say its name."
+        ],
+        [
+          "c",
+          [
+            "S"
+          ],
+          "common-pattern"
+        ],
+        [
+          "e",
+          [],
+          "common-pattern",
+          "The final e is quiet."
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "optional",
+      "sentenceIds": [],
+      "riskFlags": [
+        "SILENT_E_PATTERN"
+      ],
+      "id": "word-rice",
+      "displayWord": "rice",
+      "imageAssetId": "word-rice",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "rice-1",
+          "letters": "r",
+          "phonemeIds": [
+            "R"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "rice-2",
+          "letters": "i",
+          "phonemeIds": [
+            "AY1"
+          ],
+          "role": "common-pattern",
+          "childHint": "The quiet e helps i say its name."
+        },
+        {
+          "id": "rice-3",
+          "letters": "c",
+          "phonemeIds": [
+            "S"
+          ],
+          "role": "common-pattern"
+        },
+        {
+          "id": "rice-4",
+          "letters": "e",
+          "phonemeIds": [],
+          "role": "common-pattern",
+          "childHint": "The final e is quiet."
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-cc524a30"
+    },
+    {
+      "lemma": "corn",
+      "senseId": "oewn:07747928-n",
+      "partOfSpeech": "noun",
+      "themeId": "food",
+      "childGlossZh": "玉米",
+      "childDefinitionEn": "Yellow kernels on an ear that people can eat.",
+      "imageBrief": "One fresh ear of yellow corn with its green husk opened.",
+      "visualKind": "asset",
+      "arpabet": [
+        "K",
+        "AO1",
+        "R",
+        "N"
+      ],
+      "units": [
+        [
+          "c",
+          [
+            "K"
+          ]
+        ],
+        [
+          "or",
+          [
+            "AO1",
+            "R"
+          ],
+          "common-pattern",
+          "Keep o and r together: or."
+        ],
+        [
+          "n",
+          [
+            "N"
+          ]
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "optional",
+      "sentenceIds": [],
+      "riskFlags": [
+        "NEW_SELECTED_OR_PATTERN"
+      ],
+      "id": "word-corn",
+      "displayWord": "corn",
+      "imageAssetId": "word-corn",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 4,
+      "graphemeUnits": [
+        {
+          "id": "corn-1",
+          "letters": "c",
+          "phonemeIds": [
+            "K"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "corn-2",
+          "letters": "or",
+          "phonemeIds": [
+            "AO1",
+            "R"
+          ],
+          "role": "common-pattern",
+          "childHint": "Keep o and r together: or."
+        },
+        {
+          "id": "corn-3",
+          "letters": "n",
+          "phonemeIds": [
+            "N"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-8028e27f"
+    },
+    {
+      "lemma": "run",
+      "senseId": "oewn:01930264-v",
+      "partOfSpeech": "verb",
+      "themeId": "actions",
+      "childGlossZh": "跑",
+      "childDefinitionEn": "To move quickly on your feet.",
+      "imageBrief": "One fictional child running in clear side view.",
+      "visualKind": "asset",
+      "arpabet": [
+        "R",
+        "AH1",
+        "N"
+      ],
+      "units": [
+        [
+          "r",
+          [
+            "R"
+          ]
+        ],
+        [
+          "u",
+          [
+            "AH1"
+          ]
+        ],
+        [
+          "n",
+          [
+            "N"
+          ]
+        ]
+      ],
+      "decodingBand": "simple-regular",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-run-can"
+      ],
+      "riskFlags": [
+        "ACTION_IMAGE_REVIEWED",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "id": "word-run",
+      "displayWord": "run",
+      "imageAssetId": "word-run",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "run-1",
+          "letters": "r",
+          "phonemeIds": [
+            "R"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "run-2",
+          "letters": "u",
+          "phonemeIds": [
+            "AH1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "run-3",
+          "letters": "n",
+          "phonemeIds": [
+            "N"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-b5aaa3df"
+    },
+    {
+      "lemma": "jump",
+      "senseId": "oewn:01967949-v",
+      "partOfSpeech": "verb",
+      "themeId": "actions",
+      "childGlossZh": "跳",
+      "childDefinitionEn": "To push off the ground with your feet.",
+      "imageBrief": "One fictional child jumping with both feet off the ground.",
+      "visualKind": "asset",
+      "arpabet": [
+        "JH",
+        "AH1",
+        "M",
+        "P"
+      ],
+      "units": [
+        [
+          "j",
+          [
+            "JH"
+          ]
+        ],
+        [
+          "u",
+          [
+            "AH1"
+          ]
+        ],
+        [
+          "m",
+          [
+            "M"
+          ]
+        ],
+        [
+          "p",
+          [
+            "P"
+          ]
+        ]
+      ],
+      "decodingBand": "simple-regular",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-jump-can"
+      ],
+      "riskFlags": [
+        "ACTION_IMAGE_REVIEWED",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "id": "word-jump",
+      "displayWord": "jump",
+      "imageAssetId": "word-jump",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 4,
+      "graphemeUnits": [
+        {
+          "id": "jump-1",
+          "letters": "j",
+          "phonemeIds": [
+            "JH"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "jump-2",
+          "letters": "u",
+          "phonemeIds": [
+            "AH1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "jump-3",
+          "letters": "m",
+          "phonemeIds": [
+            "M"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "jump-4",
+          "letters": "p",
+          "phonemeIds": [
+            "P"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "s",
+        "t"
+      ],
+      "revisionHash": "fnv1a-9b20c97e"
+    },
+    {
+      "lemma": "sit",
+      "senseId": "oewn:01545905-v",
+      "partOfSpeech": "verb",
+      "themeId": "actions",
+      "childGlossZh": "坐",
+      "childDefinitionEn": "To rest with your body supported from below.",
+      "imageBrief": "One fictional child sitting upright on a plain low stool.",
+      "visualKind": "asset",
+      "arpabet": [
+        "S",
+        "IH1",
+        "T"
+      ],
+      "units": [
+        [
+          "s",
+          [
+            "S"
+          ]
+        ],
+        [
+          "i",
+          [
+            "IH1"
+          ]
+        ],
+        [
+          "t",
+          [
+            "T"
+          ]
+        ]
+      ],
+      "decodingBand": "simple-regular",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-sit-can"
+      ],
+      "riskFlags": [
+        "ACTION_IMAGE_REVIEWED",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "id": "word-sit",
+      "displayWord": "sit",
+      "imageAssetId": "word-sit",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "sit-1",
+          "letters": "s",
+          "phonemeIds": [
+            "S"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "sit-2",
+          "letters": "i",
+          "phonemeIds": [
+            "IH1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "sit-3",
+          "letters": "t",
+          "phonemeIds": [
+            "T"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-0c54cf6d"
+    },
+    {
+      "lemma": "sleep",
+      "senseId": "oewn:00014735-v",
+      "partOfSpeech": "verb",
+      "themeId": "actions",
+      "childGlossZh": "睡觉",
+      "childDefinitionEn": "To rest with your eyes closed and mind quiet.",
+      "imageBrief": "One fictional child peacefully asleep on a plain floor mat.",
+      "visualKind": "asset",
+      "arpabet": [
+        "S",
+        "L",
+        "IY1",
+        "P"
+      ],
+      "units": [
+        [
+          "s",
+          [
+            "S"
+          ]
+        ],
+        [
+          "l",
+          [
+            "L"
+          ]
+        ],
+        [
+          "ee",
+          [
+            "IY1"
+          ],
+          "common-pattern"
+        ],
+        [
+          "p",
+          [
+            "P"
+          ]
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-sleep-can"
+      ],
+      "riskFlags": [
+        "ACTION_IMAGE_REVIEWED",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "id": "word-sleep",
+      "displayWord": "sleep",
+      "imageAssetId": "word-sleep",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 4,
+      "graphemeUnits": [
+        {
+          "id": "sleep-1",
+          "letters": "s",
+          "phonemeIds": [
+            "S"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "sleep-2",
+          "letters": "l",
+          "phonemeIds": [
+            "L"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "sleep-3",
+          "letters": "ee",
+          "phonemeIds": [
+            "IY1"
+          ],
+          "role": "common-pattern"
+        },
+        {
+          "id": "sleep-4",
+          "letters": "p",
+          "phonemeIds": [
+            "P"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "t"
+      ],
+      "revisionHash": "fnv1a-0fcd8691"
+    },
+    {
+      "lemma": "eat",
+      "senseId": "oewn:01170802-v",
+      "partOfSpeech": "verb",
+      "themeId": "actions",
+      "childGlossZh": "吃",
+      "childDefinitionEn": "To take solid food into your body.",
+      "imageBrief": "One fictional child clearly eating one apple slice.",
+      "visualKind": "asset",
+      "arpabet": [
+        "IY1",
+        "T"
+      ],
+      "units": [
+        [
+          "ea",
+          [
+            "IY1"
+          ],
+          "common-pattern"
+        ],
+        [
+          "t",
+          [
+            "T"
+          ]
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-eat-can"
+      ],
+      "riskFlags": [
+        "ACTION_IMAGE_REVIEWED",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "id": "word-eat",
+      "displayWord": "eat",
+      "imageAssetId": "word-eat",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 2,
+      "graphemeUnits": [
+        {
+          "id": "eat-1",
+          "letters": "ea",
+          "phonemeIds": [
+            "IY1"
+          ],
+          "role": "common-pattern"
+        },
+        {
+          "id": "eat-2",
+          "letters": "t",
+          "phonemeIds": [
+            "T"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-9a6206c1"
+    },
+    {
+      "lemma": "sing",
+      "senseId": "oewn:01733312-v",
+      "partOfSpeech": "verb",
+      "themeId": "actions",
+      "childGlossZh": "唱歌",
+      "childDefinitionEn": "To make musical sounds with your voice.",
+      "imageBrief": "One fictional child singing with an open vowel mouth shape.",
+      "visualKind": "asset",
+      "arpabet": [
+        "S",
+        "IH1",
+        "NG"
+      ],
+      "units": [
+        [
+          "s",
+          [
+            "S"
+          ]
+        ],
+        [
+          "i",
+          [
+            "IH1"
+          ]
+        ],
+        [
+          "ng",
+          [
+            "NG"
+          ],
+          "common-pattern"
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-sing-can"
+      ],
+      "riskFlags": [
+        "ACTION_IMAGE_REVIEWED",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "id": "word-sing",
+      "displayWord": "sing",
+      "imageAssetId": "word-sing",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "sing-1",
+          "letters": "s",
+          "phonemeIds": [
+            "S"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "sing-2",
+          "letters": "i",
+          "phonemeIds": [
+            "IH1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "sing-3",
+          "letters": "ng",
+          "phonemeIds": [
+            "NG"
+          ],
+          "role": "common-pattern"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-2b284e4b"
+    },
+    {
+      "lemma": "walk",
+      "senseId": "oewn:01908923-v",
+      "partOfSpeech": "verb",
+      "themeId": "actions",
+      "childGlossZh": "走路",
+      "childDefinitionEn": "To move forward on your feet by steps.",
+      "imageBrief": "One fictional child walking in clear side view.",
+      "visualKind": "asset",
+      "arpabet": [
+        "W",
+        "AO1",
+        "K"
+      ],
+      "units": [
+        [
+          "w",
+          [
+            "W"
+          ]
+        ],
+        [
+          "al",
+          [
+            "AO1"
+          ],
+          "irregular-heart",
+          "The l is quiet in walk."
+        ],
+        [
+          "k",
+          [
+            "K"
+          ]
+        ]
+      ],
+      "decodingBand": "irregular-supported",
+      "storyBand": "optional",
+      "sentenceIds": [],
+      "riskFlags": [
+        "IRREGULAR_ORTHOGRAPHY",
+        "ACTION_IMAGE_REVIEWED",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "id": "word-walk",
+      "displayWord": "walk",
+      "imageAssetId": "word-walk",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "walk-1",
+          "letters": "w",
+          "phonemeIds": [
+            "W"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "walk-2",
+          "letters": "al",
+          "phonemeIds": [
+            "AO1"
+          ],
+          "role": "irregular-heart",
+          "childHint": "The l is quiet in walk."
+        },
+        {
+          "id": "walk-3",
+          "letters": "k",
+          "phonemeIds": [
+            "K"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-e28a2e9a"
+    },
+    {
+      "lemma": "drink",
+      "senseId": "oewn:01172332-v",
+      "partOfSpeech": "verb",
+      "themeId": "actions",
+      "childGlossZh": "喝",
+      "childDefinitionEn": "To take liquid into your mouth.",
+      "imageBrief": "One fictional child drinking water from a clear cup.",
+      "visualKind": "asset",
+      "arpabet": [
+        "D",
+        "R",
+        "IH1",
+        "NG",
+        "K"
+      ],
+      "units": [
+        [
+          "d",
+          [
+            "D"
+          ]
+        ],
+        [
+          "r",
+          [
+            "R"
+          ]
+        ],
+        [
+          "i",
+          [
+            "IH1"
+          ]
+        ],
+        [
+          "n",
+          [
+            "NG"
+          ],
+          "common-pattern",
+          "Before k, n carries the ng sound."
+        ],
+        [
+          "k",
+          [
+            "K"
+          ]
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "optional",
+      "sentenceIds": [],
+      "riskFlags": [
+        "ACTION_IMAGE_REVIEWED",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "id": "word-drink",
+      "displayWord": "drink",
+      "imageAssetId": "word-drink",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 5,
+      "graphemeUnits": [
+        {
+          "id": "drink-1",
+          "letters": "d",
+          "phonemeIds": [
+            "D"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "drink-2",
+          "letters": "r",
+          "phonemeIds": [
+            "R"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "drink-3",
+          "letters": "i",
+          "phonemeIds": [
+            "IH1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "drink-4",
+          "letters": "n",
+          "phonemeIds": [
+            "NG"
+          ],
+          "role": "common-pattern",
+          "childHint": "Before k, n carries the ng sound."
+        },
+        {
+          "id": "drink-5",
+          "letters": "k",
+          "phonemeIds": [
+            "K"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-0e7c3c68"
+    },
+    {
+      "lemma": "clap",
+      "senseId": "oewn:00034108-v",
+      "partOfSpeech": "verb",
+      "themeId": "actions",
+      "childGlossZh": "拍手",
+      "childDefinitionEn": "To strike your hands together.",
+      "imageBrief": "One fictional child clapping both hands together at chest height.",
+      "visualKind": "asset",
+      "arpabet": [
+        "K",
+        "L",
+        "AE1",
+        "P"
+      ],
+      "units": [
+        [
+          "c",
+          [
+            "K"
+          ]
+        ],
+        [
+          "l",
+          [
+            "L"
+          ]
+        ],
+        [
+          "a",
+          [
+            "AE1"
+          ]
+        ],
+        [
+          "p",
+          [
+            "P"
+          ]
+        ]
+      ],
+      "decodingBand": "simple-regular",
+      "storyBand": "optional",
+      "sentenceIds": [],
+      "riskFlags": [
+        "NEW_SELECTED_CONSONANT_CLUSTER",
+        "ACTION_IMAGE_REVIEWED",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "id": "word-clap",
+      "displayWord": "clap",
+      "imageAssetId": "word-clap",
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 4,
+      "graphemeUnits": [
+        {
+          "id": "clap-1",
+          "letters": "c",
+          "phonemeIds": [
+            "K"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "clap-2",
+          "letters": "l",
+          "phonemeIds": [
+            "L"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "clap-3",
+          "letters": "a",
+          "phonemeIds": [
+            "AE1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "clap-4",
+          "letters": "p",
+          "phonemeIds": [
+            "P"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "s"
+      ],
+      "revisionHash": "fnv1a-71ee7e18"
+    },
+    {
+      "lemma": "red",
+      "senseId": "oewn:00382159-s",
+      "partOfSpeech": "adjective",
+      "themeId": "colors",
+      "childGlossZh": "红色的",
+      "childDefinitionEn": "Having the color of a ripe tomato.",
+      "imageBrief": "A verified CSS red color field, without a competing object.",
+      "visualKind": "color",
+      "arpabet": [
+        "R",
+        "EH1",
+        "D"
+      ],
+      "units": [
+        [
+          "r",
+          [
+            "R"
+          ]
+        ],
+        [
+          "e",
+          [
+            "EH1"
+          ]
+        ],
+        [
+          "d",
+          [
+            "D"
+          ]
+        ]
+      ],
+      "decodingBand": "simple-regular",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-red-shell"
+      ],
+      "riskFlags": [
+        "CSS_COLOR_VISUAL"
+      ],
+      "id": "word-red",
+      "displayWord": "red",
+      "imageAssetId": null,
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "red-1",
+          "letters": "r",
+          "phonemeIds": [
+            "R"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "red-2",
+          "letters": "e",
+          "phonemeIds": [
+            "EH1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "red-3",
+          "letters": "d",
+          "phonemeIds": [
+            "D"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-bcd916be"
+    },
+    {
+      "lemma": "blue",
+      "senseId": "oewn:00371931-s",
+      "partOfSpeech": "adjective",
+      "themeId": "colors",
+      "childGlossZh": "蓝色的",
+      "childDefinitionEn": "Having the color of a clear daytime sky.",
+      "imageBrief": "A verified CSS blue color field, without a competing object.",
+      "visualKind": "color",
+      "arpabet": [
+        "B",
+        "L",
+        "UW1"
+      ],
+      "units": [
+        [
+          "b",
+          [
+            "B"
+          ]
+        ],
+        [
+          "l",
+          [
+            "L"
+          ]
+        ],
+        [
+          "ue",
+          [
+            "UW1"
+          ],
+          "common-pattern"
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-blue-boat"
+      ],
+      "riskFlags": [
+        "CSS_COLOR_VISUAL"
+      ],
+      "id": "word-blue",
+      "displayWord": "blue",
+      "imageAssetId": null,
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "blue-1",
+          "letters": "b",
+          "phonemeIds": [
+            "B"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "blue-2",
+          "letters": "l",
+          "phonemeIds": [
+            "L"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "blue-3",
+          "letters": "ue",
+          "phonemeIds": [
+            "UW1"
+          ],
+          "role": "common-pattern"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-d908e366"
+    },
+    {
+      "lemma": "green",
+      "senseId": "oewn:00377031-s",
+      "partOfSpeech": "adjective",
+      "themeId": "colors",
+      "childGlossZh": "绿色的",
+      "childDefinitionEn": "Having the color of fresh grass.",
+      "imageBrief": "A verified CSS green color field, without a competing object.",
+      "visualKind": "color",
+      "arpabet": [
+        "G",
+        "R",
+        "IY1",
+        "N"
+      ],
+      "units": [
+        [
+          "g",
+          [
+            "G"
+          ]
+        ],
+        [
+          "r",
+          [
+            "R"
+          ]
+        ],
+        [
+          "ee",
+          [
+            "IY1"
+          ],
+          "common-pattern"
+        ],
+        [
+          "n",
+          [
+            "N"
+          ]
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-green-leaf"
+      ],
+      "riskFlags": [
+        "CSS_COLOR_VISUAL"
+      ],
+      "id": "word-green",
+      "displayWord": "green",
+      "imageAssetId": null,
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 4,
+      "graphemeUnits": [
+        {
+          "id": "green-1",
+          "letters": "g",
+          "phonemeIds": [
+            "G"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "green-2",
+          "letters": "r",
+          "phonemeIds": [
+            "R"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "green-3",
+          "letters": "ee",
+          "phonemeIds": [
+            "IY1"
+          ],
+          "role": "common-pattern"
+        },
+        {
+          "id": "green-4",
+          "letters": "n",
+          "phonemeIds": [
+            "N"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-b44f4c83"
+    },
+    {
+      "lemma": "yellow",
+      "senseId": "oewn:00386818-s",
+      "partOfSpeech": "adjective",
+      "themeId": "colors",
+      "childGlossZh": "黄色的",
+      "childDefinitionEn": "Having the color of an egg yolk.",
+      "imageBrief": "A verified CSS yellow color field, without a competing object.",
+      "visualKind": "color",
+      "arpabet": [
+        "Y",
+        "EH1",
+        "L",
+        "OW0"
+      ],
+      "units": [
+        [
+          "y",
+          [
+            "Y"
+          ]
+        ],
+        [
+          "e",
+          [
+            "EH1"
+          ]
+        ],
+        [
+          "ll",
+          [
+            "L"
+          ],
+          "common-pattern"
+        ],
+        [
+          "ow",
+          [
+            "OW0"
+          ],
+          "common-pattern"
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-yellow-sun"
+      ],
+      "riskFlags": [
+        "CSS_COLOR_VISUAL",
+        "MULTISYLLABLE_CORE"
+      ],
+      "id": "word-yellow",
+      "displayWord": "yellow",
+      "imageAssetId": null,
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 4,
+      "graphemeUnits": [
+        {
+          "id": "yellow-1",
+          "letters": "y",
+          "phonemeIds": [
+            "Y"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "yellow-2",
+          "letters": "e",
+          "phonemeIds": [
+            "EH1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "yellow-3",
+          "letters": "ll",
+          "phonemeIds": [
+            "L"
+          ],
+          "role": "common-pattern"
+        },
+        {
+          "id": "yellow-4",
+          "letters": "ow",
+          "phonemeIds": [
+            "OW0"
+          ],
+          "role": "common-pattern"
+        }
+      ],
+      "stressPattern": [
+        1,
+        0
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-a3b38217"
+    },
+    {
+      "lemma": "one",
+      "senseId": "oewn:02193977-s",
+      "partOfSpeech": "number",
+      "themeId": "colors",
+      "childGlossZh": "一；一个",
+      "childDefinitionEn": "A single thing, not two or more.",
+      "imageBrief": "Exactly one DOM-rendered golden shell.",
+      "visualKind": "quantity",
+      "arpabet": [
+        "W",
+        "AH1",
+        "N"
+      ],
+      "units": [
+        [
+          "o",
+          [
+            "W",
+            "AH1"
+          ],
+          "irregular-heart",
+          "This o carries the heart sound in one."
+        ],
+        [
+          "n",
+          [
+            "N"
+          ]
+        ],
+        [
+          "e",
+          [],
+          "irregular-heart",
+          "The final e is quiet in one."
+        ]
+      ],
+      "decodingBand": "irregular-supported",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-one-shell"
+      ],
+      "riskFlags": [
+        "IRREGULAR_ORTHOGRAPHY",
+        "DOM_QUANTITY_VISUAL"
+      ],
+      "id": "word-one",
+      "displayWord": "one",
+      "imageAssetId": null,
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "one-1",
+          "letters": "o",
+          "phonemeIds": [
+            "W",
+            "AH1"
+          ],
+          "role": "irregular-heart",
+          "childHint": "This o carries the heart sound in one."
+        },
+        {
+          "id": "one-2",
+          "letters": "n",
+          "phonemeIds": [
+            "N"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "one-3",
+          "letters": "e",
+          "phonemeIds": [],
+          "role": "irregular-heart",
+          "childHint": "The final e is quiet in one."
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-417605e2"
+    },
+    {
+      "lemma": "two",
+      "senseId": "oewn:02194109-s",
+      "partOfSpeech": "number",
+      "themeId": "colors",
+      "childGlossZh": "二；两个",
+      "childDefinitionEn": "One more than one.",
+      "imageBrief": "Exactly two DOM-rendered golden shells.",
+      "visualKind": "quantity",
+      "arpabet": [
+        "T",
+        "UW1"
+      ],
+      "units": [
+        [
+          "t",
+          [
+            "T"
+          ]
+        ],
+        [
+          "wo",
+          [
+            "UW1"
+          ],
+          "irregular-heart",
+          "The w is quiet; wo carries the long oo sound."
+        ]
+      ],
+      "decodingBand": "irregular-supported",
+      "storyBand": "story-core",
+      "sentenceIds": [
+        "sentence-two-boats"
+      ],
+      "riskFlags": [
+        "IRREGULAR_ORTHOGRAPHY",
+        "DOM_QUANTITY_VISUAL"
+      ],
+      "id": "word-two",
+      "displayWord": "two",
+      "imageAssetId": null,
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 2,
+      "graphemeUnits": [
+        {
+          "id": "two-1",
+          "letters": "t",
+          "phonemeIds": [
+            "T"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "two-2",
+          "letters": "wo",
+          "phonemeIds": [
+            "UW1"
+          ],
+          "role": "irregular-heart",
+          "childHint": "The w is quiet; wo carries the long oo sound."
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-e97f5336"
+    },
+    {
+      "lemma": "three",
+      "senseId": "oewn:02194219-s",
+      "partOfSpeech": "number",
+      "themeId": "colors",
+      "childGlossZh": "三；三个",
+      "childDefinitionEn": "One more than two.",
+      "imageBrief": "Exactly three DOM-rendered golden shells.",
+      "visualKind": "quantity",
+      "arpabet": [
+        "TH",
+        "R",
+        "IY1"
+      ],
+      "units": [
+        [
+          "th",
+          [
+            "TH"
+          ],
+          "common-pattern"
+        ],
+        [
+          "r",
+          [
+            "R"
+          ]
+        ],
+        [
+          "ee",
+          [
+            "IY1"
+          ],
+          "common-pattern"
+        ]
+      ],
+      "decodingBand": "common-pattern",
+      "storyBand": "optional",
+      "sentenceIds": [],
+      "riskFlags": [
+        "DOM_QUANTITY_VISUAL"
+      ],
+      "id": "word-three",
+      "displayWord": "three",
+      "imageAssetId": null,
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "three-1",
+          "letters": "th",
+          "phonemeIds": [
+            "TH"
+          ],
+          "role": "common-pattern"
+        },
+        {
+          "id": "three-2",
+          "letters": "r",
+          "phonemeIds": [
+            "R"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "three-3",
+          "letters": "ee",
+          "phonemeIds": [
+            "IY1"
+          ],
+          "role": "common-pattern"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-3b47e652"
+    },
+    {
+      "lemma": "ten",
+      "senseId": "oewn:02194935-s",
+      "partOfSpeech": "number",
+      "themeId": "colors",
+      "childGlossZh": "十；十个",
+      "childDefinitionEn": "One more than nine.",
+      "imageBrief": "Exactly ten DOM-rendered golden shells.",
+      "visualKind": "quantity",
+      "arpabet": [
+        "T",
+        "EH1",
+        "N"
+      ],
+      "units": [
+        [
+          "t",
+          [
+            "T"
+          ]
+        ],
+        [
+          "e",
+          [
+            "EH1"
+          ]
+        ],
+        [
+          "n",
+          [
+            "N"
+          ]
+        ]
+      ],
+      "decodingBand": "simple-regular",
+      "storyBand": "optional",
+      "sentenceIds": [],
+      "riskFlags": [
+        "DOM_QUANTITY_VISUAL"
+      ],
+      "id": "word-ten",
+      "displayWord": "ten",
+      "imageAssetId": null,
+      "pronunciationLocale": "en-US",
+      "phonemeCount": 3,
+      "graphemeUnits": [
+        {
+          "id": "ten-1",
+          "letters": "t",
+          "phonemeIds": [
+            "T"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "ten-2",
+          "letters": "e",
+          "phonemeIds": [
+            "EH1"
+          ],
+          "role": "regular"
+        },
+        {
+          "id": "ten-3",
+          "letters": "n",
+          "phonemeIds": [
+            "N"
+          ],
+          "role": "regular"
+        }
+      ],
+      "stressPattern": [
+        1
+      ],
+      "sourceIds": [
+        "cmudict-7479086",
+        "oewn-2025",
+        "wordlight-project-authored-v2"
+      ],
+      "distractorUnits": [
+        "m",
+        "p"
+      ],
+      "revisionHash": "fnv1a-635c311a"
+    }
+  ],
+  "sentences": [
+    {
+      "id": "sentence-cat-home",
+      "text": "The cat is home.",
+      "targetWordId": "word-cat",
+      "targetSlotIndex": 1,
+      "supportWordIds": [
+        "support-the",
+        "support-is",
+        "support-home"
+      ],
+      "worldActionId": "cat-comes-home",
+      "scaffoldZh": "猫回家了。",
+      "decodabilityStatus": "meaning-first",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-cat-home"
+    },
+    {
+      "id": "sentence-dog-dig",
+      "text": "The dog can dig.",
+      "targetWordId": "word-dog",
+      "targetSlotIndex": 1,
+      "supportWordIds": [
+        "support-the",
+        "support-can",
+        "support-dig"
+      ],
+      "worldActionId": "dog-digs-garden",
+      "scaffoldZh": "狗会挖土。",
+      "decodabilityStatus": "mostly-core-patterns",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-dog-dig"
+    },
+    {
+      "id": "sentence-fish-swim",
+      "text": "The fish can swim.",
+      "targetWordId": "word-fish",
+      "targetSlotIndex": 1,
+      "supportWordIds": [
+        "support-the",
+        "support-can",
+        "support-swim"
+      ],
+      "worldActionId": "fish-swims",
+      "scaffoldZh": "鱼会游泳。",
+      "decodabilityStatus": "mixed-with-supported-words",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-fish-swim"
+    },
+    {
+      "id": "sentence-duck-splash",
+      "text": "The duck can splash.",
+      "targetWordId": "word-duck",
+      "targetSlotIndex": 1,
+      "supportWordIds": [
+        "support-the",
+        "support-can",
+        "support-splash"
+      ],
+      "worldActionId": "duck-splashes",
+      "scaffoldZh": "鸭子会溅起水花。",
+      "decodabilityStatus": "mixed-with-supported-words",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-duck-splash"
+    },
+    {
+      "id": "sentence-frog-hop",
+      "text": "The frog can hop.",
+      "targetWordId": "word-frog",
+      "targetSlotIndex": 1,
+      "supportWordIds": [
+        "support-the",
+        "support-can",
+        "support-hop"
+      ],
+      "worldActionId": "frog-hops",
+      "scaffoldZh": "青蛙会跳。",
+      "decodabilityStatus": "mostly-core-patterns",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-frog-hop"
+    },
+    {
+      "id": "sentence-bee-flower",
+      "text": "The bee finds a flower.",
+      "targetWordId": "word-bee",
+      "targetSlotIndex": 1,
+      "supportWordIds": [
+        "support-the",
+        "support-finds",
+        "support-a",
+        "support-flower"
+      ],
+      "worldActionId": "bee-finds-flower",
+      "scaffoldZh": "蜜蜂找到了一朵花。",
+      "decodabilityStatus": "meaning-first",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-bee-flower"
+    },
+    {
+      "id": "sentence-dad-door",
+      "text": "Dad opens the door.",
+      "targetWordId": "word-dad",
+      "targetSlotIndex": 0,
+      "supportWordIds": [
+        "support-opens",
+        "support-the",
+        "support-door"
+      ],
+      "worldActionId": "dad-opens-door",
+      "scaffoldZh": "爸爸打开门。",
+      "decodabilityStatus": "meaning-first",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-dad-door"
+    },
+    {
+      "id": "sentence-mom-hello",
+      "text": "Mom waves hello.",
+      "targetWordId": "word-mom",
+      "targetSlotIndex": 0,
+      "supportWordIds": [
+        "support-waves",
+        "support-hello"
+      ],
+      "worldActionId": "mom-waves",
+      "scaffoldZh": "妈妈挥手问好。",
+      "decodabilityStatus": "meaning-first",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-mom-hello"
+    },
+    {
+      "id": "sentence-baby-cozy",
+      "text": "The baby is cozy.",
+      "targetWordId": "word-baby",
+      "targetSlotIndex": 1,
+      "supportWordIds": [
+        "support-the",
+        "support-is",
+        "support-cozy"
+      ],
+      "worldActionId": "baby-rests",
+      "scaffoldZh": "宝宝很舒服。",
+      "decodabilityStatus": "meaning-first",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-baby-cozy"
+    },
+    {
+      "id": "sentence-boy-waves",
+      "text": "The boy waves.",
+      "targetWordId": "word-boy",
+      "targetSlotIndex": 1,
+      "supportWordIds": [
+        "support-the",
+        "support-waves"
+      ],
+      "worldActionId": "boy-waves",
+      "scaffoldZh": "男孩挥挥手。",
+      "decodabilityStatus": "meaning-first",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-boy-waves"
+    },
+    {
+      "id": "sentence-girl-kite",
+      "text": "The girl has a kite.",
+      "targetWordId": "word-girl",
+      "targetSlotIndex": 1,
+      "supportWordIds": [
+        "support-the",
+        "support-has",
+        "support-a",
+        "support-kite"
+      ],
+      "worldActionId": "girl-finds-kite",
+      "scaffoldZh": "女孩有一只风筝。",
+      "decodabilityStatus": "meaning-first",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-girl-kite"
+    },
+    {
+      "id": "sentence-friend-here",
+      "text": "My friend is here.",
+      "targetWordId": "word-friend",
+      "targetSlotIndex": 1,
+      "supportWordIds": [
+        "support-my",
+        "support-is",
+        "support-here"
+      ],
+      "worldActionId": "friend-arrives",
+      "scaffoldZh": "我的朋友来了。",
+      "decodabilityStatus": "meaning-first",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-friend-here"
+    },
+    {
+      "id": "sentence-apple-rolls",
+      "text": "The apple rolls.",
+      "targetWordId": "word-apple",
+      "targetSlotIndex": 1,
+      "supportWordIds": [
+        "support-the",
+        "support-rolls"
+      ],
+      "worldActionId": "apple-rolls",
+      "scaffoldZh": "苹果滚动起来。",
+      "decodabilityStatus": "meaning-first",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-apple-rolls"
+    },
+    {
+      "id": "sentence-egg-warm",
+      "text": "The egg is warm.",
+      "targetWordId": "word-egg",
+      "targetSlotIndex": 1,
+      "supportWordIds": [
+        "support-the",
+        "support-is",
+        "support-warm"
+      ],
+      "worldActionId": "egg-warms",
+      "scaffoldZh": "鸡蛋是温热的。",
+      "decodabilityStatus": "meaning-first",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-egg-warm"
+    },
+    {
+      "id": "sentence-milk-cup",
+      "text": "Milk fills the cup.",
+      "targetWordId": "word-milk",
+      "targetSlotIndex": 0,
+      "supportWordIds": [
+        "support-fills",
+        "support-the",
+        "support-cup"
+      ],
+      "worldActionId": "milk-fills-cup",
+      "scaffoldZh": "牛奶装满杯子。",
+      "decodabilityStatus": "meaning-first",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-milk-cup"
+    },
+    {
+      "id": "sentence-cake-ready",
+      "text": "The cake is ready.",
+      "targetWordId": "word-cake",
+      "targetSlotIndex": 1,
+      "supportWordIds": [
+        "support-the",
+        "support-is",
+        "support-ready"
+      ],
+      "worldActionId": "cake-table-lights",
+      "scaffoldZh": "蛋糕准备好了。",
+      "decodabilityStatus": "meaning-first",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-cake-ready"
+    },
+    {
+      "id": "sentence-water-pond",
+      "text": "Water fills the pond.",
+      "targetWordId": "word-water",
+      "targetSlotIndex": 0,
+      "supportWordIds": [
+        "support-fills",
+        "support-the",
+        "support-pond"
+      ],
+      "worldActionId": "water-fills-pond",
+      "scaffoldZh": "水注满池塘。",
+      "decodabilityStatus": "meaning-first",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-water-pond"
+    },
+    {
+      "id": "sentence-bread-good",
+      "text": "The bread smells good.",
+      "targetWordId": "word-bread",
+      "targetSlotIndex": 1,
+      "supportWordIds": [
+        "support-the",
+        "support-smells",
+        "support-good"
+      ],
+      "worldActionId": "bread-sends-aroma",
+      "scaffoldZh": "面包闻起来很香。",
+      "decodabilityStatus": "meaning-first",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-bread-good"
+    },
+    {
+      "id": "sentence-run-can",
+      "text": "I can run.",
+      "targetWordId": "word-run",
+      "targetSlotIndex": 2,
+      "supportWordIds": [
+        "support-i",
+        "support-can"
+      ],
+      "worldActionId": "child-runs-path",
+      "scaffoldZh": "我会跑。",
+      "decodabilityStatus": "mostly-core-patterns",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-run-can"
+    },
+    {
+      "id": "sentence-jump-can",
+      "text": "I can jump.",
+      "targetWordId": "word-jump",
+      "targetSlotIndex": 2,
+      "supportWordIds": [
+        "support-i",
+        "support-can"
+      ],
+      "worldActionId": "child-jumps",
+      "scaffoldZh": "我会跳。",
+      "decodabilityStatus": "mostly-core-patterns",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-jump-can"
+    },
+    {
+      "id": "sentence-sit-can",
+      "text": "I can sit.",
+      "targetWordId": "word-sit",
+      "targetSlotIndex": 2,
+      "supportWordIds": [
+        "support-i",
+        "support-can"
+      ],
+      "worldActionId": "child-sits",
+      "scaffoldZh": "我会坐。",
+      "decodabilityStatus": "mostly-core-patterns",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-sit-can"
+    },
+    {
+      "id": "sentence-sleep-can",
+      "text": "I can sleep.",
+      "targetWordId": "word-sleep",
+      "targetSlotIndex": 2,
+      "supportWordIds": [
+        "support-i",
+        "support-can"
+      ],
+      "worldActionId": "child-sleeps",
+      "scaffoldZh": "我会睡觉。",
+      "decodabilityStatus": "mixed-with-supported-words",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-sleep-can"
+    },
+    {
+      "id": "sentence-eat-can",
+      "text": "I can eat.",
+      "targetWordId": "word-eat",
+      "targetSlotIndex": 2,
+      "supportWordIds": [
+        "support-i",
+        "support-can"
+      ],
+      "worldActionId": "child-eats",
+      "scaffoldZh": "我会吃。",
+      "decodabilityStatus": "mixed-with-supported-words",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-eat-can"
+    },
+    {
+      "id": "sentence-sing-can",
+      "text": "I can sing.",
+      "targetWordId": "word-sing",
+      "targetSlotIndex": 2,
+      "supportWordIds": [
+        "support-i",
+        "support-can"
+      ],
+      "worldActionId": "child-sings",
+      "scaffoldZh": "我会唱歌。",
+      "decodabilityStatus": "mixed-with-supported-words",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-sing-can"
+    },
+    {
+      "id": "sentence-red-shell",
+      "text": "The shell is red.",
+      "targetWordId": "word-red",
+      "targetSlotIndex": 3,
+      "supportWordIds": [
+        "support-the",
+        "support-shell",
+        "support-is"
+      ],
+      "worldActionId": "shell-turns-red",
+      "scaffoldZh": "贝壳是红色的。",
+      "decodabilityStatus": "meaning-first",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-red-shell"
+    },
+    {
+      "id": "sentence-blue-boat",
+      "text": "The boat is blue.",
+      "targetWordId": "word-blue",
+      "targetSlotIndex": 3,
+      "supportWordIds": [
+        "support-the",
+        "support-boat",
+        "support-is"
+      ],
+      "worldActionId": "boat-turns-blue",
+      "scaffoldZh": "小船是蓝色的。",
+      "decodabilityStatus": "meaning-first",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-blue-boat"
+    },
+    {
+      "id": "sentence-green-leaf",
+      "text": "The leaf is green.",
+      "targetWordId": "word-green",
+      "targetSlotIndex": 3,
+      "supportWordIds": [
+        "support-the",
+        "support-leaf",
+        "support-is"
+      ],
+      "worldActionId": "leaf-turns-green",
+      "scaffoldZh": "叶子是绿色的。",
+      "decodabilityStatus": "meaning-first",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-green-leaf"
+    },
+    {
+      "id": "sentence-yellow-sun",
+      "text": "The sun is yellow.",
+      "targetWordId": "word-yellow",
+      "targetSlotIndex": 3,
+      "supportWordIds": [
+        "support-the",
+        "support-sun",
+        "support-is"
+      ],
+      "worldActionId": "sun-turns-yellow",
+      "scaffoldZh": "太阳是黄色的。",
+      "decodabilityStatus": "meaning-first",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-yellow-sun"
+    },
+    {
+      "id": "sentence-one-shell",
+      "text": "One shell shines.",
+      "targetWordId": "word-one",
+      "targetSlotIndex": 0,
+      "supportWordIds": [
+        "support-shell",
+        "support-shines"
+      ],
+      "worldActionId": "one-shell-shines",
+      "scaffoldZh": "一个贝壳在发光。",
+      "decodabilityStatus": "mixed-with-supported-words",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-one-shell"
+    },
+    {
+      "id": "sentence-two-boats",
+      "text": "Two boats sail.",
+      "targetWordId": "word-two",
+      "targetSlotIndex": 0,
+      "supportWordIds": [
+        "support-boats",
+        "support-sail"
+      ],
+      "worldActionId": "two-boats-sail",
+      "scaffoldZh": "两艘小船启航。",
+      "decodabilityStatus": "mixed-with-supported-words",
+      "sourceNote": "project-authored",
+      "reviewStatus": "accepted",
+      "revisionHash": "sentence-v2-two-boats"
+    }
+  ],
+  "supportWords": [
+    {
+      "id": "support-the",
+      "display": "the",
+      "decodingNote": "supported"
+    },
+    {
+      "id": "support-is",
+      "display": "is",
+      "decodingNote": "supported"
+    },
+    {
+      "id": "support-home",
+      "display": "home",
+      "decodingNote": "not-assessed"
+    },
+    {
+      "id": "support-can",
+      "display": "can",
+      "decodingNote": "regular"
+    },
+    {
+      "id": "support-dig",
+      "display": "dig",
+      "decodingNote": "regular"
+    },
+    {
+      "id": "support-swim",
+      "display": "swim",
+      "decodingNote": "regular"
+    },
+    {
+      "id": "support-splash",
+      "display": "splash",
+      "decodingNote": "supported"
+    },
+    {
+      "id": "support-hop",
+      "display": "hop",
+      "decodingNote": "regular"
+    },
+    {
+      "id": "support-finds",
+      "display": "finds",
+      "decodingNote": "not-assessed"
+    },
+    {
+      "id": "support-a",
+      "display": "a",
+      "decodingNote": "supported"
+    },
+    {
+      "id": "support-flower",
+      "display": "flower",
+      "decodingNote": "not-assessed"
+    },
+    {
+      "id": "support-opens",
+      "display": "opens",
+      "decodingNote": "not-assessed"
+    },
+    {
+      "id": "support-door",
+      "display": "door",
+      "decodingNote": "not-assessed"
+    },
+    {
+      "id": "support-waves",
+      "display": "waves",
+      "decodingNote": "not-assessed"
+    },
+    {
+      "id": "support-hello",
+      "display": "hello",
+      "decodingNote": "not-assessed"
+    },
+    {
+      "id": "support-cozy",
+      "display": "cozy",
+      "decodingNote": "not-assessed"
+    },
+    {
+      "id": "support-has",
+      "display": "has",
+      "decodingNote": "supported"
+    },
+    {
+      "id": "support-kite",
+      "display": "kite",
+      "decodingNote": "supported"
+    },
+    {
+      "id": "support-my",
+      "display": "my",
+      "decodingNote": "supported"
+    },
+    {
+      "id": "support-here",
+      "display": "here",
+      "decodingNote": "not-assessed"
+    },
+    {
+      "id": "support-rolls",
+      "display": "rolls",
+      "decodingNote": "not-assessed"
+    },
+    {
+      "id": "support-warm",
+      "display": "warm",
+      "decodingNote": "not-assessed"
+    },
+    {
+      "id": "support-fills",
+      "display": "fills",
+      "decodingNote": "not-assessed"
+    },
+    {
+      "id": "support-cup",
+      "display": "cup",
+      "decodingNote": "regular"
+    },
+    {
+      "id": "support-ready",
+      "display": "ready",
+      "decodingNote": "not-assessed"
+    },
+    {
+      "id": "support-pond",
+      "display": "pond",
+      "decodingNote": "regular"
+    },
+    {
+      "id": "support-smells",
+      "display": "smells",
+      "decodingNote": "not-assessed"
+    },
+    {
+      "id": "support-good",
+      "display": "good",
+      "decodingNote": "supported"
+    },
+    {
+      "id": "support-i",
+      "display": "I",
+      "decodingNote": "supported"
+    },
+    {
+      "id": "support-shell",
+      "display": "shell",
+      "decodingNote": "supported"
+    },
+    {
+      "id": "support-boat",
+      "display": "boat",
+      "decodingNote": "supported"
+    },
+    {
+      "id": "support-leaf",
+      "display": "leaf",
+      "decodingNote": "not-assessed"
+    },
+    {
+      "id": "support-sun",
+      "display": "sun",
+      "decodingNote": "regular"
+    },
+    {
+      "id": "support-shines",
+      "display": "shines",
+      "decodingNote": "not-assessed"
+    },
+    {
+      "id": "support-boats",
+      "display": "boats",
+      "decodingNote": "not-assessed"
+    },
+    {
+      "id": "support-sail",
+      "display": "sail",
+      "decodingNote": "supported"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "ies-foundational-2016-rev2019",
+      "title": "Foundational Skills to Support Reading for Understanding in Kindergarten Through 3rd Grade",
+      "version": "released 2016; revised 2019",
+      "url": "https://ies.ed.gov/ncee/wwc/PracticeGuide/21/Published",
+      "role": "instruction",
+      "licenseOrBoundary": "Implementation evidence only; Wordlight Island does not claim to be a complete reading curriculum."
+    },
+    {
+      "id": "ies-english-learners-2014",
+      "title": "Teaching Academic Content and Literacy to English Learners in Elementary and Middle School",
+      "version": "NCEE 2014-4012",
+      "url": "https://ies.ed.gov/ncee/wwc/Docs/PracticeGuide/english_learners_pg_040114.pdf",
+      "role": "instruction",
+      "licenseOrBoundary": "Supports small sets of vocabulary learned intensively through varied oral and written activities."
+    },
+    {
+      "id": "eef-phonics-2025",
+      "title": "EEF Teaching and Learning Toolkit: Phonics",
+      "version": "review last updated October 2025",
+      "url": "https://educationendowmentfoundation.org.uk/education-evidence/teaching-learning-toolkit/phonics",
+      "role": "instruction",
+      "licenseOrBoundary": "Phonics is explicit and systematic but only one part of literacy; vocabulary and comprehension remain explicit."
+    },
+    {
+      "id": "eef-ks1-literacy-2020",
+      "title": "Improving Literacy in Key Stage 1",
+      "version": "second edition, 2020-09-04",
+      "url": "https://educationendowmentfoundation.org.uk/education-evidence/guidance-reports/literacy-ks-1",
+      "role": "instruction",
+      "licenseOrBoundary": "Mechanism guidance only; not a curriculum mapping or branded level claim."
+    },
+    {
+      "id": "cmudict-7479086",
+      "title": "Carnegie Mellon Pronouncing Dictionary",
+      "version": "git 74790861f652b15e4ac49015a90074ad62a27690",
+      "url": "https://github.com/cmusphinx/cmudict/tree/74790861f652b15e4ac49015a90074ad62a27690",
+      "role": "pronunciation",
+      "licenseOrBoundary": "Use is unrestricted with requested acknowledgement. CMU explicitly warns that errors and omissions may remain; machine pronunciation source only."
+    },
+    {
+      "id": "oewn-2025",
+      "title": "Open English WordNet",
+      "version": "2025 edition, 2025-12-31",
+      "url": "https://en-word.net/downloads",
+      "role": "sense",
+      "licenseOrBoundary": "CC BY 4.0. Sense IDs are retained; child definitions are short project-authored paraphrases."
+    },
+    {
+      "id": "teach-your-monster-overview-2026",
+      "title": "Teach Your Monster to Read overview",
+      "version": "verified 2026-08-22",
+      "url": "https://www.teachyourmonster.org/teach-your-monster-to-read-overview/",
+      "role": "mechanism-reference",
+      "licenseOrBoundary": "Abstracted sequence only: grapheme recognition, blending/segmenting, tricky-word support, short-sentence meaning. No copied assets, characters, map, copy, progression, or rewards."
+    },
+    {
+      "id": "graphogame-evidence-2026",
+      "title": "GraphoGame evidence overview",
+      "version": "verified 2026-08-22",
+      "url": "https://graphogame.com/evidence/",
+      "role": "mechanism-reference",
+      "licenseOrBoundary": "Abstracted letter-sound and word-recognition mechanisms only; no copied product expression."
+    },
+    {
+      "id": "duolingo-abc-2026",
+      "title": "Duolingo ABC",
+      "version": "verified 2026-08-22",
+      "url": "https://abc.duolingo.com/",
+      "role": "mechanism-reference",
+      "licenseOrBoundary": "Abstracted bite-sized phonics, tricky-word, vocabulary, and story sequence only; no copied product expression."
+    },
+    {
+      "id": "wordlight-project-authored-v2",
+      "title": "Wordlight Island project-authored child definitions and sentences",
+      "version": "2.0.0",
+      "url": "docs/english-v2/CONTENT-RULES.md",
+      "role": "project-authored",
+      "licenseOrBoundary": "Original project copy; reviewed against fixed senses and scene actions."
+    }
+  ]
+}

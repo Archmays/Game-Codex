@@ -5,6 +5,7 @@ import { activatePageMode } from "./page-mode";
 
 const WORLD_THEME_COLOR = "#071c2a";
 const MATH_WORLD_THEME_COLOR = "#dff2eb";
+const ENGLISH_WORLD_THEME_COLOR = "#d7f1ee";
 const CLASSIC_THEME_COLOR = "#f6f3e7";
 const BUILD_COMMIT = (import.meta.env.VITE_BUILD_COMMIT || "local-source").trim() || "local-source";
 
@@ -171,6 +172,26 @@ window.addEventListener("load", async () => {
     setBrowserIdentity("游戏百宝箱", CLASSIC_THEME_COLOR);
     const { mountClassicHubFromWorld } = await import("../apps/my-game-world");
     mountClassicHubFromWorld(root);
+    return;
+  }
+
+  if (route.kind === "world" && search.get("world") === "english-world") {
+    setBrowserIdentity("英语世界 · 词光岛", ENGLISH_WORLD_THEME_COLOR);
+    if (search.get("view") === "memory") {
+      const { mountMemoryMatch } = await import("../packages/activity-engines/memory-match");
+      mountMemoryMatch(root, {
+        context: "english",
+        packId: "english-word-image",
+        seed: search.get("seed") ?? undefined,
+        returnHref: "?world=english-world",
+      });
+      return;
+    }
+    const { mountEnglishWorld } = await import("../games/english-spell-battle/v2/app");
+    mountEnglishWorld(root, {
+      seed: search.get("seed") ?? undefined,
+      returnHref: from === "hub" ? "?hub=classic&from=world" : "?world=my-game-world",
+    });
     return;
   }
 

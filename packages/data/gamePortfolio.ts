@@ -67,9 +67,9 @@ export const GAME_PORTFOLIO: readonly GamePortfolioRecord[] = [
     testProfile: "a-core-world", loadingPolicy: "route-lazy", canonicalDocs: ["games/math-lab/README.md", "docs/math-lab-deep-research-brief.md"],
   },
   {
-    id: "english-spell-battle", targetWorld: "english", productRole: "core-world", qualityTier: "A", lifecycleStatus: "flagship-candidate",
-    currentStandaloneVisible: true, targetStandaloneVisible: true, mergeTarget: "english-world", saveNamespaces: ["family-games/english-spell-battle"],
-    testProfile: "a-core-world", loadingPolicy: "current-eager", canonicalDocs: ["games/english-spell-battle/README.md"],
+    id: "english-spell-battle", targetWorld: "english", productRole: "core-world", qualityTier: "A", lifecycleStatus: "active",
+    currentStandaloneVisible: true, targetStandaloneVisible: true, mergeTarget: "english-world", canonicalRoute: "?world=english-world&from=world", saveNamespaces: ["family-games/english-spell-battle", "family-games/english-world/v2"],
+    testProfile: "a-core-world", loadingPolicy: "route-lazy", canonicalDocs: ["games/english-spell-battle/README.md"],
   },
   {
     id: "make-target", targetWorld: "math", productRole: "independent-puzzle", qualityTier: "B", lifecycleStatus: "active",

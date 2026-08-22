@@ -1,0 +1,576 @@
+{
+  "schemaVersion": 1,
+  "baselineCount": 44,
+  "audit": [
+    {
+      "lemma": "cat",
+      "originalCategory": "animals",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "dog",
+      "originalCategory": "animals",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "pig",
+      "originalCategory": "animals",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "optional-journal-only",
+      "mechanismRole": "journal-extension",
+      "riskFlags": [],
+      "disposition": "retained-optional"
+    },
+    {
+      "lemma": "cow",
+      "originalCategory": "animals",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "optional-journal-only",
+      "mechanismRole": "journal-extension",
+      "riskFlags": [],
+      "disposition": "retained-optional"
+    },
+    {
+      "lemma": "duck",
+      "originalCategory": "animals",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "fish",
+      "originalCategory": "animals",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "bear",
+      "originalCategory": "animals",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "optional-journal-only",
+      "mechanismRole": "journal-extension",
+      "riskFlags": [
+        "IRREGULAR_ORTHOGRAPHY"
+      ],
+      "disposition": "retained-optional"
+    },
+    {
+      "lemma": "rabbit",
+      "originalCategory": "animals",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "optional-journal-only",
+      "mechanismRole": "journal-extension",
+      "riskFlags": [
+        "MULTISYLLABLE_OPTIONAL"
+      ],
+      "disposition": "retained-optional"
+    },
+    {
+      "lemma": "frog",
+      "originalCategory": "animals",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "tiger",
+      "originalCategory": "animals",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "optional-journal-only",
+      "mechanismRole": "journal-extension",
+      "riskFlags": [
+        "MULTISYLLABLE_OPTIONAL"
+      ],
+      "disposition": "retained-optional"
+    },
+    {
+      "lemma": "horse",
+      "originalCategory": "animals",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "optional-journal-only",
+      "mechanismRole": "journal-extension",
+      "riskFlags": [
+        "SILENT_E_PATTERN"
+      ],
+      "disposition": "retained-optional"
+    },
+    {
+      "lemma": "bee",
+      "originalCategory": "animals",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "dad",
+      "originalCategory": "home",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "mom",
+      "originalCategory": "home",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "baby",
+      "originalCategory": "home",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "boy",
+      "originalCategory": "home",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "girl",
+      "originalCategory": "home",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "teacher",
+      "originalCategory": "home",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "optional-journal-only",
+      "mechanismRole": "journal-extension",
+      "riskFlags": [
+        "MULTISYLLABLE_OPTIONAL",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "disposition": "retained-optional"
+    },
+    {
+      "lemma": "friend",
+      "originalCategory": "home",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "IRREGULAR_ORTHOGRAPHY",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "family",
+      "originalCategory": "home",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "optional-journal-only",
+      "mechanismRole": "journal-extension",
+      "riskFlags": [
+        "MULTISYLLABLE_OPTIONAL",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "disposition": "retained-optional"
+    },
+    {
+      "lemma": "red",
+      "originalCategory": "colors",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "verified-css-color",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "CSS_COLOR_VISUAL"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "blue",
+      "originalCategory": "colors",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "verified-css-color",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "CSS_COLOR_VISUAL"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "green",
+      "originalCategory": "colors",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "verified-css-color",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "CSS_COLOR_VISUAL"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "yellow",
+      "originalCategory": "colors",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "verified-css-color",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "CSS_COLOR_VISUAL",
+        "MULTISYLLABLE_CORE"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "one",
+      "originalCategory": "colors",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "verified-dom-quantity",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "IRREGULAR_ORTHOGRAPHY",
+        "DOM_QUANTITY_VISUAL"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "two",
+      "originalCategory": "colors",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "verified-dom-quantity",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "IRREGULAR_ORTHOGRAPHY",
+        "DOM_QUANTITY_VISUAL"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "three",
+      "originalCategory": "colors",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "verified-dom-quantity",
+      "sentenceRole": "optional-journal-only",
+      "mechanismRole": "journal-extension",
+      "riskFlags": [
+        "DOM_QUANTITY_VISUAL"
+      ],
+      "disposition": "retained-optional"
+    },
+    {
+      "lemma": "ten",
+      "originalCategory": "colors",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "verified-dom-quantity",
+      "sentenceRole": "optional-journal-only",
+      "mechanismRole": "journal-extension",
+      "riskFlags": [
+        "DOM_QUANTITY_VISUAL"
+      ],
+      "disposition": "retained-optional"
+    },
+    {
+      "lemma": "apple",
+      "originalCategory": "food",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "banana",
+      "originalCategory": "food",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "optional-journal-only",
+      "mechanismRole": "journal-extension",
+      "riskFlags": [
+        "MULTISYLLABLE_OPTIONAL"
+      ],
+      "disposition": "retained-optional"
+    },
+    {
+      "lemma": "egg",
+      "originalCategory": "food",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "milk",
+      "originalCategory": "food",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "cake",
+      "originalCategory": "food",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "SILENT_E_PATTERN"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "water",
+      "originalCategory": "food",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "IRREGULAR_ORTHOGRAPHY"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "bread",
+      "originalCategory": "food",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "IRREGULAR_ORTHOGRAPHY"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "rice",
+      "originalCategory": "food",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "optional-journal-only",
+      "mechanismRole": "journal-extension",
+      "riskFlags": [
+        "SILENT_E_PATTERN"
+      ],
+      "disposition": "retained-optional"
+    },
+    {
+      "lemma": "run",
+      "originalCategory": "actions",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "ACTION_IMAGE_REVIEWED",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "jump",
+      "originalCategory": "actions",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "ACTION_IMAGE_REVIEWED",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "walk",
+      "originalCategory": "actions",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "optional-journal-only",
+      "mechanismRole": "journal-extension",
+      "riskFlags": [
+        "IRREGULAR_ORTHOGRAPHY",
+        "ACTION_IMAGE_REVIEWED",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "disposition": "retained-optional"
+    },
+    {
+      "lemma": "sit",
+      "originalCategory": "actions",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "ACTION_IMAGE_REVIEWED",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "sleep",
+      "originalCategory": "actions",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "ACTION_IMAGE_REVIEWED",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "eat",
+      "originalCategory": "actions",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "ACTION_IMAGE_REVIEWED",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "disposition": "retained-story-core"
+    },
+    {
+      "lemma": "drink",
+      "originalCategory": "actions",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "optional-journal-only",
+      "mechanismRole": "journal-extension",
+      "riskFlags": [
+        "ACTION_IMAGE_REVIEWED",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "disposition": "retained-optional"
+    },
+    {
+      "lemma": "sing",
+      "originalCategory": "actions",
+      "semanticSense": "fixed-oewn-sense",
+      "spellingSoundMapping": "manual-cmudict-aligned",
+      "visualRepresentation": "formal-generated-asset",
+      "sentenceRole": "story-sentence-target",
+      "mechanismRole": "meaning-build-sentence-response",
+      "riskFlags": [
+        "ACTION_IMAGE_REVIEWED",
+        "FICTIONAL_INCLUSIVE_ART"
+      ],
+      "disposition": "retained-story-core"
+    }
+  ],
+  "unsupportedLevelLabel": {
+    "rawValue": "Raz aa-A",
+    "status": "QUARANTINED_UNSUPPORTED",
+    "reason": "No verified RAZ source or mapping contract was present; V2 makes no branded level claim."
+  }
+}

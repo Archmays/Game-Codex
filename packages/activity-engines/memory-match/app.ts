@@ -1,6 +1,6 @@
 import type { MountedGame } from "../../game-core";
 import { closeMemoryMismatch, createMemoryState, flipMemoryCard } from "./machine";
-import { CHINESE_MEMORY_PACKS, getMemoryPack, PINYIN_STARTER_CHARACTER_IDS } from "./packs";
+import { CHINESE_MEMORY_PACKS, ENGLISH_MEMORY_PACKS, getMemoryPack, PINYIN_STARTER_CHARACTER_IDS } from "./packs";
 import { readLegacyMemoryPresence, readMemorySave, writeMemorySave, type MemoryMatchSave } from "./save";
 import type { MatchRelation, MemoryMatchPack, MemoryMatchState } from "./types";
 import "./styles.css";
@@ -10,7 +10,7 @@ export interface MountMemoryMatchOptions {
   readonly seed?: string;
   readonly pairCount?: number;
   readonly returnHref?: string;
-  readonly context?: "classic" | "hanzi";
+  readonly context?: "classic" | "hanzi" | "english";
   readonly storage?: Storage;
 }
 
@@ -19,11 +19,12 @@ function escapeHtml(value: string): string {
 }
 
 export function mountMemoryMatch(root: HTMLElement, options: MountMemoryMatchOptions = {}): MountedGame {
-  let pack = getMemoryPack(options.packId ?? (options.context === "hanzi" ? "glyph-pinyin" : "same-glyph"));
+  const availablePacks = options.context === "english" ? ENGLISH_MEMORY_PACKS : CHINESE_MEMORY_PACKS;
+  let pack = getMemoryPack(options.packId ?? (options.context === "hanzi" ? "glyph-pinyin" : options.context === "english" ? "english-word-image" : "same-glyph"));
   const seed = options.seed?.trim() || "forest-light";
   const pairCount = Math.max(4, Math.min(6, options.pairCount ?? pack.defaultPairCount));
   const storage = options.storage ?? window.localStorage;
-  const returnHref = options.returnHref ?? (options.context === "hanzi" ? "?play=hanzi-magic-complete&from=hub" : "?hub=classic&from=world");
+  const returnHref = options.returnHref ?? (options.context === "hanzi" ? "?play=hanzi-magic-complete&from=hub" : options.context === "english" ? "?world=english-world" : "?hub=classic&from=world");
   const discoveredCharacterIds = (() => {
     if (options.context !== "hanzi") return [] as string[];
     try { const parsed = JSON.parse(storage.getItem("family-games/hanzi-magic-complete/v3") ?? "null") as { discoveredCharacterIds?: unknown } | null; return Array.isArray(parsed?.discoveredCharacterIds) ? parsed.discoveredCharacterIds.filter((id): id is string => typeof id === "string") : []; }
@@ -50,18 +51,19 @@ export function mountMemoryMatch(root: HTMLElement, options: MountMemoryMatchOpt
 
   const render = () => {
     const completed = isComplete();
-    root.innerHTML = `<main class="memory-match ${options.context === "hanzi" ? "is-hanzi" : "is-classic"}" data-testid="memory-match" data-pack="${pack.id}" data-complete="${String(completed)}">
-      <header><a href="${escapeHtml(returnHref)}">← ${options.context === "hanzi" ? "回到墨迹森林" : "回到游戏百宝箱"}</a><p>${options.context === "hanzi" ? "营地里的回声小径" : "看一看，想一想，再翻开"}</p><h1>${options.context === "hanzi" ? "字光配对" : "记忆配对"}</h1><span>不计时 · 不排名 · 可以慢慢找</span></header>
-      <nav class="memory-match__packs" aria-label="选择配对内容">${CHINESE_MEMORY_PACKS.map((item) => `<button type="button" data-pack-id="${item.id}" aria-pressed="${String(item.id === pack.id)}"><b>${item.title}</b><small>${item.id === "same-glyph" ? "找到两张同样的字" : item.id === "glyph-pinyin" ? "把汉字和读音连起来" : "把汉字放回熟悉词语"}</small></button>`).join("")}</nav>
+    const isEnglish = options.context === "english";
+    root.innerHTML = `<main class="memory-match ${options.context === "hanzi" ? "is-hanzi" : isEnglish ? "is-english" : "is-classic"}" data-testid="memory-match" data-pack="${pack.id}" data-complete="${String(completed)}">
+      <header><a href="${escapeHtml(returnHref)}">← ${options.context === "hanzi" ? "回到墨迹森林" : isEnglish ? "回到词光岛" : "回到游戏百宝箱"}</a><p>${options.context === "hanzi" ? "营地里的回声小径" : isEnglish ? "词光册里的图像回声" : "看一看，想一想，再翻开"}</p><h1>${options.context === "hanzi" ? "字光配对" : isEnglish ? "English Memory" : "记忆配对"}</h1><span>不计时 · 不排名 · 可以慢慢找</span></header>
+      <nav class="memory-match__packs" aria-label="选择配对内容">${availablePacks.map((item) => `<button type="button" data-pack-id="${item.id}" aria-pressed="${String(item.id === pack.id)}"><b>${item.title}</b><small>${isEnglish ? "把完整单词和意思图片连起来" : item.id === "same-glyph" ? "找到两张同样的字" : item.id === "glyph-pinyin" ? "把汉字和读音连起来" : "把汉字放回熟悉词语"}</small></button>`).join("")}</nav>
       <section class="memory-match__play"><div class="memory-match__found" role="status">已找到 ${state.matchedRelationIds.length}/${state.cards.length / 2}</div>
       <div class="memory-match__grid" role="grid" aria-label="${pack.title}，${state.cards.length} 张卡片" style="--card-count:${state.cards.length}">${state.cards.map((card) => {
         const open = state.openInstanceIds.includes(card.instanceId) || state.matchedRelationIds.includes(card.relationId);
         const matched = state.matchedRelationIds.includes(card.relationId);
-        return `<button type="button" role="gridcell" data-card-id="${escapeHtml(card.instanceId)}" data-relation-id="${escapeHtml(card.relationId)}" data-open="${String(open)}" data-matched="${String(matched)}" ${matched ? "disabled" : ""} aria-label="${open ? escapeHtml(card.face.ariaLabel) : `第 ${card.position + 1} 张，未翻开的卡片`}" aria-rowindex="${Math.floor(card.position / (state.cards.length > 8 ? 4 : 3)) + 1}" aria-colindex="${card.position % (state.cards.length > 8 ? 4 : 3) + 1}"><span class="memory-match__back" aria-hidden="true">光</span><span class="memory-match__face">${escapeHtml(card.face.text ?? "")}</span></button>`;
+        return `<button type="button" role="gridcell" data-card-id="${escapeHtml(card.instanceId)}" data-relation-id="${escapeHtml(card.relationId)}" data-open="${String(open)}" data-matched="${String(matched)}" ${matched ? "disabled" : ""} aria-label="${open ? escapeHtml(card.face.ariaLabel) : `第 ${card.position + 1} 张，未翻开的卡片`}" aria-rowindex="${Math.floor(card.position / (state.cards.length > 8 ? 4 : 3)) + 1}" aria-colindex="${card.position % (state.cards.length > 8 ? 4 : 3) + 1}"><span class="memory-match__back" aria-hidden="true">光</span><span class="memory-match__face">${card.face.assetUrl ? `<img src="${escapeHtml(card.face.assetUrl)}" alt="" />` : ""}${escapeHtml(card.face.text ?? "")}</span></button>`;
       }).join("")}</div>
       <div class="memory-match__announcement" aria-live="polite">${escapeHtml(completed ? "这些关系都找到了。" : announcement)}</div>
       <div class="memory-match__controls"><button type="button" data-action="restart">重新铺开</button></div></section>
-      ${completed ? `<section class="memory-match__done" data-testid="memory-complete"><span aria-hidden="true">✦</span><h2>这些关系都找到了。</h2><p>每一对字光都回到了自己的位置。</p><button type="button" data-action="restart">再找一轮</button></section>` : ""}
+      ${completed ? `<section class="memory-match__done" data-testid="memory-complete">${isEnglish ? "" : '<span aria-hidden="true">✦</span>'}<h2>这些关系都找到了。</h2><p>${isEnglish ? "单词和意思图片已经一一相认。" : "每一对字光都回到了自己的位置。"}</p><button type="button" data-action="restart">再找一轮</button></section>` : ""}
       </main>`;
     if (focusInstanceId) root.querySelector<HTMLButtonElement>(`[data-card-id="${CSS.escape(focusInstanceId)}"]`)?.focus({ preventScroll: true });
   };

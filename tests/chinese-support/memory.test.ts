@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { CHINESE_MEMORY_PACKS, closeMemoryMismatch, createMemoryDeck, createMemoryState, flipMemoryCard, validatePack, validateRoundRelations, type MemoryMatchPack } from "../../packages/activity-engines/memory-match";
+import { CHINESE_MEMORY_PACKS, ENGLISH_MEMORY_PACKS, closeMemoryMismatch, createMemoryDeck, createMemoryState, flipMemoryCard, validatePack, validateRoundRelations, type MemoryMatchPack } from "../../packages/activity-engines/memory-match";
 
 describe("shared memory relation engine", () => {
   it("ships three validated Chinese packs sourced from the canonical graph", () => {
@@ -19,6 +19,15 @@ describe("shared memory relation engine", () => {
       expect(validateRoundRelations(relations, pack.id === "same-glyph"), `deck-${index}`).toEqual([]);
       expect(deck.every((card) => deck.filter((other) => other.relationId === card.relationId).length === 2)).toBe(true);
     }
+  });
+
+  it("ships one 24-relation English word-to-meaning-image pack", () => {
+    expect(ENGLISH_MEMORY_PACKS).toHaveLength(1);
+    const pack = ENGLISH_MEMORY_PACKS[0];
+    expect(pack.id).toBe("english-word-image");
+    expect(pack.relations).toHaveLength(24);
+    expect(pack.relations.every((relation) => relation.left.kind === "text" && relation.right.kind === "meaning-image" && relation.right.assetUrl?.endsWith(".webp"))).toBe(true);
+    expect(validatePack(pack)).toEqual([]);
   });
 
   it("limits opening to two cards and reverses mismatches", () => {

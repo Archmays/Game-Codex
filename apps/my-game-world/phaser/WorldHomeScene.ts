@@ -73,6 +73,18 @@ export class WorldHomeScene extends Phaser.Scene {
     this.background?.setTexture("A1").setDisplaySize(1200, 680);
     this.portal?.setAlpha(0.82);
 
+    // A physical, distant island in the shared world scene. The DOM portal is
+    // positioned over it for accessible text and interaction.
+    g.fillStyle(0x3f8992, 0.72).fillEllipse(982, 566, 285, 92);
+    g.lineStyle(4, 0x8de0d4, 0.5).strokeEllipse(982, 566, 292, 98);
+    g.fillStyle(0xd8b65d, 0.94).fillEllipse(982, 548, 208, 70);
+    g.fillStyle(0x79b979, 0.96).fillEllipse(970, 531, 172, 55);
+    const islandLights = [[923, 526, 0x7ee8c7], [956, 510, 0xffd483], [990, 518, 0xff9b82], [1022, 532, 0xa7a6ff], [1051, 546, 0x8de0d4]] as const;
+    for (const [x, y, color] of islandLights) {
+      g.fillStyle(color, 0.92).fillCircle(x, y, 7);
+      g.lineStyle(2, 0xfff7df, 0.58).strokeCircle(x, y, 10);
+    }
+
   }
 
   private fit(image: Phaser.GameObjects.Image | null, maxWidth: number, maxHeight: number): void {

@@ -6,6 +6,8 @@ export const WORLD_COPY = {
   forestReturnAction: "再去墨迹森林",
   mathTitle: "数学实验城",
   mathAction: "走进数学世界",
+  englishTitle: "词光岛",
+  englishAction: "走进英语世界",
   treasureTitle: "游戏百宝箱",
   treasureAction: "打开百宝箱",
   settingsAction: "声音和画面",

@@ -1,8 +1,9 @@
 import { PINYIN_READING_MANIFEST } from "../../../games/hanzi-radical-battle/complete/support/pinyin/manifest";
+import { ENGLISH_V2_WORDS } from "../../../games/english-spell-battle/v2/content/words";
 import type { MatchFace, MatchRelation, MemoryMatchPack } from "./types";
 
-function face(id: string, kind: MatchFace["kind"], text: string, ariaLabel: string, sourceIds: readonly string[]): MatchFace {
-  return { id, kind, text, ariaLabel, sourceIds };
+function face(id: string, kind: MatchFace["kind"], text: string | undefined, ariaLabel: string, sourceIds: readonly string[], assetUrl?: string): MatchFace {
+  return { id, kind, ...(text ? { text } : {}), ...(assetUrl ? { assetUrl } : {}), ariaLabel, sourceIds };
 }
 
 function relation(id: string, left: MatchFace, right: MatchFace, explanation: string, sourceIds: readonly string[]): MatchRelation {
@@ -59,6 +60,20 @@ export const CHINESE_MEMORY_PACKS: readonly MemoryMatchPack[] = [
   { id: "glyph-phrase", title: "词境相认", subject: "chinese", relationType: "glyph-fixed-phrase", defaultPairCount: 6, relations: glyphPhrase, revisionHash: revision(glyphPhrase) },
 ] as const;
 
+const englishMeaningImages = ENGLISH_V2_WORDS.filter((word) => word.storyBand === "story-core" && word.visualKind === "asset").map((word) => relation(
+  `english-word-image:${word.id}`,
+  face(`english-word:${word.id}`, "text", word.displayWord, `English word ${word.displayWord}`, word.sourceIds),
+  face(`english-image:${word.id}`, "meaning-image", undefined, word.imageBrief, word.sourceIds, `./assets/english-world/words/${word.lemma}.webp`),
+  `${word.displayWord} means ${word.childDefinitionEn}`,
+  word.sourceIds,
+));
+
+export const ENGLISH_MEMORY_PACKS: readonly MemoryMatchPack[] = [
+  { id: "english-word-image", title: "词与图相认", subject: "english", relationType: "english-word-meaning-image", defaultPairCount: 6, relations: englishMeaningImages, revisionHash: revision(englishMeaningImages) },
+] as const;
+
+export const MEMORY_MATCH_PACKS: readonly MemoryMatchPack[] = [...CHINESE_MEMORY_PACKS, ...ENGLISH_MEMORY_PACKS];
+
 export function getMemoryPack(id: string | undefined): MemoryMatchPack {
-  return CHINESE_MEMORY_PACKS.find((pack) => pack.id === id) ?? CHINESE_MEMORY_PACKS[0];
+  return MEMORY_MATCH_PACKS.find((pack) => pack.id === id) ?? CHINESE_MEMORY_PACKS[0];
 }

@@ -44,6 +44,9 @@ jobs:
       - name: Validate canonical Pinyin and shared memory contracts
         run: pnpm run validate:chinese-support
 
+      - name: Validate English V2 content reports
+        run: pnpm run reports:english-v2 && git diff --exit-code -- docs/english-v2/release public/assets/english-world/asset-manifest.json
+
       - name: Build static site
         run: pnpm build
         env:
@@ -63,6 +66,9 @@ jobs:
       - name: Validate Chinese support routes and interactions
         run: pnpm run test:e2e:chinese-support
 
+      - name: Validate English World routes, missions, saves, and visual baselines
+        run: pnpm run test:e2e:english-v2
+
       - name: Upload failure evidence only
         if: failure()
         uses: actions/upload-artifact@v4
@@ -72,6 +78,7 @@ jobs:
             test-results/portfolio-smoke
             test-results/math-world
             test-results/chinese-support
+            test-results/english-v2
           if-no-files-found: ignore
           retention-days: 7
 

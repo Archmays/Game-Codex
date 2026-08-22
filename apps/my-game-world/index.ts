@@ -6,6 +6,7 @@ import { mountWorldSettings, type WorldSettingsHandle } from "./ui/WorldSettings
 import { WORLD_COPY } from "./world-copy";
 import {
   CLASSIC_HUB_FROM_WORLD_ROUTE,
+  ENGLISH_WORLD_ROUTE,
   HANZI_MAGIC_COMPLETE_ROUTE,
   MATH_WORLD_ROUTE,
   MY_GAME_WORLD_ROUTE,
@@ -53,7 +54,7 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
       <div><span class="world-kicker">夜光墨林</span><h1>${WORLD_COPY.title}</h1><p>${WORLD_COPY.subtitle}</p></div>
       <button class="world-icon-button" type="button" data-world-settings-open>${WORLD_COPY.settingsAction}</button>
     </header>
-    <section class="world-stage" aria-label="墨迹森林、数学世界和游戏百宝箱入口">
+    <section class="world-stage" aria-label="墨迹森林、数学世界、英语世界和游戏百宝箱入口">
       <div class="world-canvas" data-world-canvas></div>
       <div class="world-vignette" aria-hidden="true"></div>
       <section class="world-object world-object--forest is-active" data-testid="world-forest-portal">
@@ -66,6 +67,12 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
         <h2>${WORLD_COPY.mathTitle}</h2>
         <p>钟楼、阵列、数字牌与算式轨道</p>
         <a class="world-secondary-link" href="${MATH_WORLD_ROUTE}" data-world-math-link>${WORLD_COPY.mathAction}</a>
+      </section>
+      <section class="world-object world-object--english" data-testid="world-english-portal">
+        <span aria-hidden="true" class="world-object__mark world-object__mark--english"></span>
+        <h2>${WORLD_COPY.englishTitle}</h2>
+        <p>词义、拼词、句子与世界回应</p>
+        <a class="world-secondary-link" href="${ENGLISH_WORLD_ROUTE}" data-world-english-link>${WORLD_COPY.englishAction}</a>
       </section>
       <section class="world-object world-object--treasure" data-testid="world-treasure-box">
         <span aria-hidden="true" class="world-object__mark world-object__mark--treasure"></span>
@@ -130,5 +137,5 @@ export function mountClassicHubFromWorld(root: HTMLElement): MountedGame {
   };
 }
 
-export { CLASSIC_HUB_FROM_WORLD_ROUTE, HANZI_MAGIC_COMPLETE_ROUTE, HANZI_MAGIC_V1_ROUTE, MATH_WORLD_ROUTE, MY_GAME_WORLD_ROUTE } from "./world-routes";
+export { CLASSIC_HUB_FROM_WORLD_ROUTE, ENGLISH_WORLD_ROUTE, HANZI_MAGIC_COMPLETE_ROUTE, HANZI_MAGIC_V1_ROUTE, MATH_WORLD_ROUTE, MY_GAME_WORLD_ROUTE } from "./world-routes";
 export { MY_GAME_WORLD_SETTINGS_KEY, readWorldHomeState, updateWorldSettings } from "./world-state";

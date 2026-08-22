@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "candidateCount": 23,
+  "selectedCount": 4,
+  "candidates": [
+    {
+      "lemma": "goat",
+      "patternContribution": "oa / OW1",
+      "selected": true,
+      "decision": "Adds a common vowel team with a concrete, distinct animal image."
+    },
+    {
+      "lemma": "book",
+      "patternContribution": "oo / UH1",
+      "selected": true,
+      "decision": "Adds the short oo pattern and a home-literacy referent."
+    },
+    {
+      "lemma": "corn",
+      "patternContribution": "or / AO1 R",
+      "selected": true,
+      "decision": "Adds an r-controlled pattern and a distinct food image."
+    },
+    {
+      "lemma": "clap",
+      "patternContribution": "initial consonant cluster cl",
+      "selected": true,
+      "decision": "Adds a transparent action and a regular consonant cluster."
+    },
+    {
+      "lemma": "mouse",
+      "patternContribution": "ou / AW1",
+      "selected": false,
+      "decision": "Useful but overlaps the cow vowel outcome without improving theme balance."
+    },
+    {
+      "lemma": "bird",
+      "patternContribution": "ir / ER1",
+      "selected": false,
+      "decision": "Pattern already represented by girl."
+    },
+    {
+      "lemma": "snail",
+      "patternContribution": "ai / EY1",
+      "selected": false,
+      "decision": "Candidate retained for a later image and sentence expansion."
+    },
+    {
+      "lemma": "fox",
+      "patternContribution": "x / K S",
+      "selected": false,
+      "decision": "Regular pattern, but no larger gap than selected candidates."
+    },
+    {
+      "lemma": "bed",
+      "patternContribution": "CVC short e",
+      "selected": false,
+      "decision": "Simple but adds little beyond current CVC coverage."
+    },
+    {
+      "lemma": "lamp",
+      "patternContribution": "final consonant cluster mp",
+      "selected": false,
+      "decision": "Useful but less balanced than book for the home theme."
+    },
+    {
+      "lemma": "sock",
+      "patternContribution": "ck / K",
+      "selected": false,
+      "decision": "The ck pattern is already represented by duck."
+    },
+    {
+      "lemma": "cup",
+      "patternContribution": "CVC short u",
+      "selected": false,
+      "decision": "Already used as a sentence support word."
+    },
+    {
+      "lemma": "pear",
+      "patternContribution": "ear / EH R",
+      "selected": false,
+      "decision": "Potentially confusable with bear and not needed for this release."
+    },
+    {
+      "lemma": "soup",
+      "patternContribution": "ou / UW1",
+      "selected": false,
+      "decision": "Useful later; four-word expansion cap already filled."
+    },
+    {
+      "lemma": "cookie",
+      "patternContribution": "oo / UH1",
+      "selected": false,
+      "decision": "Book supplies the pattern with fewer syllables."
+    },
+    {
+      "lemma": "swim",
+      "patternContribution": "initial consonant cluster sw",
+      "selected": false,
+      "decision": "Already used as a sentence support word."
+    },
+    {
+      "lemma": "hop",
+      "patternContribution": "CVC short o",
+      "selected": false,
+      "decision": "Already used as a sentence support word."
+    },
+    {
+      "lemma": "black",
+      "patternContribution": "initial and final clusters",
+      "selected": false,
+      "decision": "Color set remains intentionally bounded to four story colors."
+    },
+    {
+      "lemma": "pink",
+      "patternContribution": "final consonant cluster nk",
+      "selected": false,
+      "decision": "Color set remains intentionally bounded to four story colors."
+    },
+    {
+      "lemma": "four",
+      "patternContribution": "our / AO R",
+      "selected": false,
+      "decision": "Quantity set already spans one, two, three, and ten."
+    },
+    {
+      "lemma": "five",
+      "patternContribution": "silent-e long i",
+      "selected": false,
+      "decision": "Silent-e is already represented by cake and rice."
+    },
+    {
+      "lemma": "boat",
+      "patternContribution": "oa / OW1",
+      "selected": false,
+      "decision": "Already used as a sentence support word; goat keeps target/support roles disjoint."
+    },
+    {
+      "lemma": "moon",
+      "patternContribution": "oo / UW1",
+      "selected": false,
+      "decision": "Book adds the complementary short oo pattern instead."
+    }
+  ]
+}
