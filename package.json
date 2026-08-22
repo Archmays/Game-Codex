@@ -86,7 +86,7 @@
     "verify:pages:math-world": "tsx tools/math-world/verify-pages.ts",
     "reports:english-v2": "tsx tools/english-v2/build-content-reports.ts",
     "test:english-v2": "vitest run tests/english-v2 --no-file-parallelism",
-    "test:e2e:english-v2": "playwright test --config playwright.english-v2.config.ts",
+    "test:e2e:english-v2": "playwright test --config playwright.english-v2.config.ts --grep-invert @visual",
     "test:visual:english-v2": "playwright test tests/e2e/english-v2/visual.spec.ts --config playwright.english-v2.config.ts",
     "verify:pages:english-v2": "tsx tools/english-v2/verify-pages.ts",
     "reports:release:english-v2": "tsx tools/english-v2/build-release-reports.ts",

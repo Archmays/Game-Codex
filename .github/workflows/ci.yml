@@ -82,7 +82,7 @@ jobs:
       - name: Exercise Chinese support routes, inputs, saves, and fallbacks
         run: pnpm run test:e2e:chinese-support
 
-      - name: Exercise English World routes, missions, saves, and visual baselines
+      - name: Exercise English World routes, missions, saves, and geometry
         run: pnpm run test:e2e:english-v2
 
       - name: Upload failure evidence only
