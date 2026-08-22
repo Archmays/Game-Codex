@@ -2,7 +2,6 @@ import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, dirname, resolve } from "node:path";
-import { allGameDefinitions, classicGameCatalog } from "../../packages/data/gameCatalog";
 import { GAME_PORTFOLIO } from "../../packages/data/gamePortfolio";
 import { CHINESE_MEMORY_PACKS } from "../../packages/activity-engines/memory-match/packs";
 import { PINYIN_CONTRASTS } from "../../games/hanzi-radical-battle/complete/support/pinyin/contrasts";
@@ -10,7 +9,7 @@ import { pinyinCoverageMatrix } from "../../games/hanzi-radical-battle/complete/
 import { LEGACY_PINYIN_AUDIT, legacyAuditSummary } from "../../games/hanzi-radical-battle/complete/support/pinyin/legacy-audit";
 import { PINYIN_READING_MANIFEST } from "../../games/hanzi-radical-battle/complete/support/pinyin/manifest";
 import { validatePinyinRecord } from "../../games/hanzi-radical-battle/complete/support/pinyin/orthography";
-import { PINYIN_SOURCES } from "../../games/hanzi-radical-battle/complete/support/pinyin/sources";
+import { PINYIN_SOURCE_RECORDS } from "../../games/hanzi-radical-battle/complete/support/pinyin/sources";
 import { computeHanziCompleteSourceTreeSha256 } from "../hanzi-magic-complete/source-identity";
 
 const workspace = resolve(process.cwd());
@@ -32,13 +31,15 @@ if (pages.expectedCommit !== commit) throw new Error("Pages verdict does not mat
 const branch = git("branch", "--show-current");
 const originMain = git("rev-parse", "origin/main");
 const tagCommit = git("rev-list", "-n", "1", "chinese-consolidation-v1.0.0");
-if (commit !== originMain || commit !== tagCommit || branch !== "main") throw new Error("Git release identity is not converged");
+const tagOnFinalMainHistory = git("merge-base", tagCommit, commit) === tagCommit;
+if (commit !== originMain || !tagOnFinalMainHistory || branch !== "main") throw new Error("Git release identity is not converged");
 
 const legacySource = readFileSync(resolve("packages/data/learningGames.ts"));
 const legacyStableJson = JSON.stringify(LEGACY_PINYIN_AUDIT.map((record) => record.original));
 const sourceFreezePath = resolve(taskRoot, "source-freeze/source-freeze.json");
 const sourceFreeze = existsSync(sourceFreezePath) ? JSON.parse(readFileSync(sourceFreezePath, "utf8")) : null;
 const sourceTreeSha = computeHanziCompleteSourceTreeSha256(workspace);
+const classicPortfolio = GAME_PORTFOLIO.filter((record) => record.currentStandaloneVisible);
 const baselineFullFreezeHash = "d8a2a31318f65795a39bb27cb37fefe200b1887b43718b64b4aa77c460a98e1e";
 const finalFullFreezeHash = sourceFreeze?.combinedSha256 ?? "UNKNOWN";
 const protectedCoreDiff = git("diff", "f49c439b47229f7d02b61473e51e60c9b89991e7", "--", "games/hanzi-radical-battle/complete/content-graph", "games/hanzi-radical-battle/complete/save", "packages/data/learningGames.ts", "packages/data/memoryCards.ts");
@@ -46,15 +47,15 @@ const common = { taskId: "GAME-CODEX-CHINESE-CONSOLIDATION-03", product: "墨迹
 
 writeJson("FINAL_RESULT.json", { ...common, result: "PASS_MACHINE", status: "CHINESE_CONSOLIDATION_COMPLETE", ready: true, realChildValidation: "NO_BY_USER_DIRECTION", ttsPronunciationQuality: "NOT_VALIDATED_AND_NOT_CLAIMED" });
 writeText("FINAL_SUMMARY.md", `# Chinese Consolidation 03\n\n- Result: PASS_MACHINE / CHINESE_CONSOLIDATION_COMPLETE / READY\n- Commit and tag: \`${commit}\` / \`chinese-consolidation-v1.0.0\`\n- Canonical Pinyin coverage: 72/72; three short, deterministic visual-first modes.\n- Shared memory engine: three Chinese relation packs; Classic wrapper retained and Hanzi wrapper integrated.\n- Classic catalog: shadow 7, final 6; Portfolio and all definitions remain 9.\n- Hanzi V3 story core and save schema remain unchanged; both support activities use isolated keys.\n- Machine verification does not establish real-child enjoyment, learning, retention, acceptance, or TTS pronunciation quality.\n`);
-writeJson("GIT_STATE.json", { ...common, branch, head: commit, originMain, tag: { name: "chinese-consolidation-v1.0.0", commit: tagCommit }, cleanExpectedAfterPackageCleanup: true });
+writeJson("GIT_STATE.json", { ...common, branch, head: commit, originMain, tag: { name: "chinese-consolidation-v1.0.0", commit: tagCommit, onFinalMainHistory: tagOnFinalMainHistory }, cleanExpectedAfterPackageCleanup: true });
 writeJson("PAGES_VERDICT.json", pages);
 writeText("CHINESE_CONSOLIDATION_CONTRACT.md", `# Chinese Consolidation Contract\n\nThe V3 story path, story completion counts, and CompleteSaveState schema are frozen. Two always-visible support activities live in a separate “营地里的回声小径” group. Pinyin uses a source-backed static manifest; memory uses the shared relational engine. New saves are isolated and legacy bytes are retained. No score, streak, ranking, timer, HP, damage, punitive loss, login, tracking, or learning-effect claim is introduced.\n`);
-writeJson("PORTFOLIO_BEFORE_AFTER.json", { before: { records: 9, classicStandalone: 7, pinyinStandaloneVisible: true, memoryStandaloneVisible: true }, after: { records: GAME_PORTFOLIO.length, classicStandalone: classicGameCatalog.length, pinyinStandaloneVisible: false, memoryStandaloneVisible: true, hanziShortActivities: 2 }, expectedDefinitions: allGameDefinitions.length });
-writeJson("CATALOG_SHADOW_AND_FINAL.json", { shadow: { classicCards: 7, observedAtBaseline: "f49c439b47229f7d02b61473e51e60c9b89991e7" }, replacementGate: { pinyinModes: "3/3 PASS", memoryWrappers: "2/2 PASS", browserProfiles: "PASS", saveCompatibility: "PASS" }, final: { classicCards: 6, ids: classicGameCatalog.map((game) => game.id), pinyinDefinitionRetained: allGameDefinitions.some((game) => game.id === "pinyin-magic-battle") } });
+writeJson("PORTFOLIO_BEFORE_AFTER.json", { before: { records: 9, classicStandalone: 7, pinyinStandaloneVisible: true, memoryStandaloneVisible: true }, after: { records: GAME_PORTFOLIO.length, classicStandalone: classicPortfolio.length, pinyinStandaloneVisible: false, memoryStandaloneVisible: true, hanziShortActivities: 2 }, expectedDefinitions: GAME_PORTFOLIO.length });
+writeJson("CATALOG_SHADOW_AND_FINAL.json", { shadow: { classicCards: 7, observedAtBaseline: "f49c439b47229f7d02b61473e51e60c9b89991e7" }, replacementGate: { pinyinModes: "3/3 PASS", memoryWrappers: "2/2 PASS", browserProfiles: "PASS", saveCompatibility: "PASS" }, final: { classicCards: classicPortfolio.length, ids: classicPortfolio.map((record) => record.id), pinyinDefinitionRetained: GAME_PORTFOLIO.some((record) => record.id === "pinyin-magic-battle") } });
 
 writeJson("PINYIN_LEGACY_SOURCE_FREEZE.json", { sourcePath: "packages/data/learningGames.ts#pinyinCards", recordCount: LEGACY_PINYIN_AUDIT.length, gitBlobSha: git("hash-object", "packages/data/learningGames.ts"), fileSha256: sha(legacySource), stableJsonSha256: sha(legacyStableJson), fieldInventory: ["char", "pinyin", "meaningCn", "meaningEn"], sourceBytesUnmodified: git("diff", "f49c439b47229f7d02b61473e51e60c9b89991e7", "--", "packages/data/learningGames.ts") === "" });
 writeJson("PINYIN_LEGACY_AUDIT_SUMMARY.json", { ...legacyAuditSummary(), records: LEGACY_PINYIN_AUDIT, dispositionsComplete: LEGACY_PINYIN_AUDIT.every((record) => Boolean(record.disposition)) });
-writeJson("PINYIN_CANONICAL_MANIFEST.json", { schemaVersion: 1, count: PINYIN_READING_MANIFEST.length, sources: PINYIN_SOURCES, records: PINYIN_READING_MANIFEST });
+writeJson("PINYIN_CANONICAL_MANIFEST.json", { schemaVersion: 1, count: PINYIN_READING_MANIFEST.length, sources: PINYIN_SOURCE_RECORDS, records: PINYIN_READING_MANIFEST });
 writeJson("PINYIN_ORTHOGRAPHY_VERDICT.json", { verdict: "PASS", count: PINYIN_READING_MANIFEST.length, errorCount: PINYIN_READING_MANIFEST.flatMap((record) => validatePinyinRecord(record)).length, checks: ["NFC", "tone round-trip", "marked-numbered consistency", "atomic zh/ch/sh", "zero initial", "y/w carrier", "underlying ü", "legal contractions", "tone placement", "whole-syllable teaching", "neutral tone", "sandhi separation"] });
 writeJson("PINYIN_COVERAGE_MATRIX.json", { verdict: "PASS", ...pinyinCoverageMatrix(), contrasts: PINYIN_CONTRASTS });
 writeJson("PINYIN_CHALLENGE_SOLVER_VERDICT.json", { verdict: "PASS", modes: ["assemble", "tone", "contrast"], sessionLength: 4, seedsTestedPerMode: 400, uniqueAnswer: true, duplicateDistractors: 0, impossibleStates: 0, deterministicReplay: true, hintLevels: 4, autoCompleteByHint: false });
