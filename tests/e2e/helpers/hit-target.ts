@@ -64,23 +64,6 @@ function diagnostic(evidence: HitTargetEvidence): string {
 export async function sampleHitTarget(locator: Locator): Promise<HitTargetEvidence> {
   return locator.evaluate((control) => {
     const element = control as HTMLElement;
-    const toRect = (target: Element): HitRect => {
-      const rect = target.getBoundingClientRect();
-      return { x: rect.x, y: rect.y, width: rect.width, height: rect.height, right: rect.right, bottom: rect.bottom };
-    };
-    const describe = (target: Element): string => {
-      const node = target as HTMLElement;
-      const classes = typeof node.className === "string" && node.className.trim() ? `.${node.className.trim().replace(/\s+/g, ".")}` : "";
-      return `${node.tagName.toLowerCase()}${node.id ? `#${node.id}` : ""}${classes}`;
-    };
-    const nearestPositioned = (target: Element): string | null => {
-      let current: Element | null = target;
-      while (current) {
-        if (getComputedStyle(current).position !== "static") return describe(current);
-        current = current.parentElement;
-      }
-      return null;
-    };
     const rect = element.getBoundingClientRect();
     const visibleLeft = Math.max(0, rect.left);
     const visibleTop = Math.max(0, rect.top);
@@ -99,6 +82,18 @@ export async function sampleHitTarget(locator: Locator): Promise<HitTargetEviden
       });
       const topmost = stack[0] as HTMLElement | undefined;
       const topStyle = topmost ? getComputedStyle(topmost) : null;
+      const topRect = topmost?.getBoundingClientRect();
+      let nearestPositionedAncestor: string | null = null;
+      let positionedCandidate: Element | null = topmost ?? null;
+      while (positionedCandidate) {
+        if (getComputedStyle(positionedCandidate).position !== "static") {
+          const positionedNode = positionedCandidate as HTMLElement;
+          const positionedClasses = typeof positionedNode.className === "string" && positionedNode.className.trim() ? `.${positionedNode.className.trim().replace(/\s+/g, ".")}` : "";
+          nearestPositionedAncestor = `${positionedNode.tagName.toLowerCase()}${positionedNode.id ? `#${positionedNode.id}` : ""}${positionedClasses}`;
+          break;
+        }
+        positionedCandidate = positionedCandidate.parentElement;
+      }
       return {
         x,
         y,
@@ -110,10 +105,14 @@ export async function sampleHitTarget(locator: Locator): Promise<HitTargetEviden
           pointerEvents: topStyle.pointerEvents,
           position: topStyle.position,
           zIndex: topStyle.zIndex,
-          rect: toRect(topmost),
-          nearestPositionedAncestor: nearestPositioned(topmost),
+          rect: { x: topRect!.x, y: topRect!.y, width: topRect!.width, height: topRect!.height, right: topRect!.right, bottom: topRect!.bottom },
+          nearestPositionedAncestor,
         } : null,
-        stack: stack.slice(0, 8).map(describe),
+        stack: stack.slice(0, 8).map((candidate) => {
+          const node = candidate as HTMLElement;
+          const classes = typeof node.className === "string" && node.className.trim() ? `.${node.className.trim().replace(/\s+/g, ".")}` : "";
+          return `${node.tagName.toLowerCase()}${node.id ? `#${node.id}` : ""}${classes}`;
+        }),
       };
     }));
     const style = getComputedStyle(element);
@@ -122,14 +121,16 @@ export async function sampleHitTarget(locator: Locator): Promise<HitTargetEviden
     while (ancestor) {
       const ancestorStyle = getComputedStyle(ancestor);
       if (![ancestorStyle.overflow, ancestorStyle.overflowX, ancestorStyle.overflowY].every((value) => value === "visible")) {
-        overflowAncestors.push(`${describe(ancestor)} overflow=${ancestorStyle.overflow}/${ancestorStyle.overflowX}/${ancestorStyle.overflowY}`);
+        const ancestorClasses = typeof ancestor.className === "string" && ancestor.className.trim() ? `.${ancestor.className.trim().replace(/\s+/g, ".")}` : "";
+        overflowAncestors.push(`${ancestor.tagName.toLowerCase()}${ancestor.id ? `#${ancestor.id}` : ""}${ancestorClasses} overflow=${ancestorStyle.overflow}/${ancestorStyle.overflowX}/${ancestorStyle.overflowY}`);
       }
       ancestor = ancestor.parentElement;
     }
+    const elementClasses = typeof element.className === "string" && element.className.trim() ? `.${element.className.trim().replace(/\s+/g, ".")}` : "";
     return {
-      selector: element.matches("[data-word-id]") ? `[data-word-id="${element.dataset.wordId}"]` : describe(element),
+      selector: element.matches("[data-word-id]") ? `[data-word-id="${element.dataset.wordId}"]` : `${element.tagName.toLowerCase()}${element.id ? `#${element.id}` : ""}${elementClasses}`,
       label: (element.getAttribute("aria-label") ?? element.textContent ?? "").trim().slice(0, 160),
-      rect: toRect(element),
+      rect: { x: rect.x, y: rect.y, width: rect.width, height: rect.height, right: rect.right, bottom: rect.bottom },
       inViewport: rect.left >= -1 && rect.top >= -1 && rect.right <= window.innerWidth + 1 && rect.bottom <= window.innerHeight + 1,
       computedStyle: {
         display: style.display,

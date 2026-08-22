@@ -60,6 +60,7 @@ try {
   await route(page, "?world=english-world&region=animals", '[data-testid="english-region"][data-region="animals"]');
   for (const wordId of ["word-cat", "word-dog", "word-fish", "word-duck"] as const) {
     const control = page.locator(`[data-word-id="${wordId}"]`);
+    await control.scrollIntoViewIfNeeded();
     const evidence = await sampleHitTarget(control);
     requireValue(evidence.rect.width >= 44 && evidence.rect.height >= 44, `${wordId} deployed target is smaller than 44px`);
     requireValue(evidence.hitSuccessRatio === 1, `${wordId} deployed target is occluded: ${JSON.stringify(evidence.samples.filter((sample) => !sample.pass))}`);
@@ -72,7 +73,9 @@ try {
 
   await page.setViewportSize({ width: 390, height: 844 });
   await route(page, "?world=english-world&region=animals", '[data-testid="english-region"][data-region="animals"]');
-  const mobileCat = await sampleHitTarget(page.locator('[data-word-id="word-cat"]'));
+  const mobileCatControl = page.locator('[data-word-id="word-cat"]');
+  await mobileCatControl.scrollIntoViewIfNeeded();
+  const mobileCat = await sampleHitTarget(mobileCatControl);
   requireValue(mobileCat.hitSuccessRatio === 1, "Mobile deployed word-cat target is occluded");
   requireValue(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1), "Mobile English region overflows horizontally");
   checks.push({ type: "mobile-hit-test", wordId: "word-cat", ratio: mobileCat.hitSuccessRatio, verdict: "PASS" });
