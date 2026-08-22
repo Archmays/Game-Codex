@@ -34,6 +34,13 @@ if (Test-Path -LiteralPath $shaPath) { throw "Protected return SHA already exist
 Compress-Archive -Path (Join-Path $stagingRoot "*") -DestinationPath $zipPath -CompressionLevel Optimal
 $bytes = (Get-Item -LiteralPath $zipPath).Length
 if ($bytes -ge 12MB) { throw "Return ZIP exceeds 12 MiB: $bytes" }
-$hash = (Get-FileHash -LiteralPath $zipPath -Algorithm SHA256).Hash.ToLowerInvariant()
+$stream = [IO.File]::OpenRead($zipPath)
+$algorithm = [Security.Cryptography.SHA256]::Create()
+try {
+  $hash = -join ($algorithm.ComputeHash($stream) | ForEach-Object { $_.ToString("x2") })
+} finally {
+  $algorithm.Dispose()
+  $stream.Dispose()
+}
 Set-Content -LiteralPath $shaPath -Value "$hash  GAME_CODEX_PLAY_READINESS_POLISH_05_RETURN_TO_CHATGPT.zip" -Encoding ascii
 Write-Output (@{ verdict = "PASS"; zip = $zipPath; bytes = $bytes; sha256 = $hash } | ConvertTo-Json -Compress)
