@@ -48,7 +48,7 @@ describe("Hanzi Magic Battle V2 Chapter One M1 replay loop", () => {
   it("registers the canonical chapter route without replacing the frozen V1 route", () => {
     expect(resolveAppRoute(new URLSearchParams("play=hanzi-v2-chapter-one&from=hub"))).toEqual({ kind: "play", explicit: true });
     expect(APP_ROUTE_QUERY_REGISTRY).toEqual(expect.arrayContaining([
-      expect.objectContaining({ queryKey: "play", queryValue: "hanzi-v2-chapter-one", pageMode: "game-fullscreen" }),
+      expect.objectContaining({ queryKey: "play", queryValue: "hanzi-v2-chapter-one", pageMode: "game-scrollable" }),
       expect.objectContaining({ queryKey: "play", queryValue: "hanzi-v2-v1", pageMode: "game-fullscreen" }),
     ]));
   });

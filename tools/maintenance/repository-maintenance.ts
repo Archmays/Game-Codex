@@ -20,8 +20,8 @@ import { spawnSync } from "node:child_process";
 // Defaults describe the current formal closeout. Future tasks can reuse the same
 // manifest-driven engine without editing source by setting both task-scoped
 // environment variables before invoking the CLI.
-export const TASK_ID = process.env.GAME_CODEX_MAINTENANCE_TASK_ID?.trim() || "GAME-CODEX-NATURAL-USE-OBSERVATION-KIT-06A";
-export const RETURN_ZIP = process.env.GAME_CODEX_MAINTENANCE_RETURN_ZIP?.trim() || "handoffs/GAME_CODEX_NATURAL_USE_OBSERVATION_KIT_06A_RETURN_TO_CHATGPT.zip";
+export const TASK_ID = process.env.GAME_CODEX_MAINTENANCE_TASK_ID?.trim() || "GAME-CODEX-STABLE-NATURAL-USE-ENTRY-07";
+export const RETURN_ZIP = process.env.GAME_CODEX_MAINTENANCE_RETURN_ZIP?.trim() || "handoffs/GAME_CODEX_STABLE_NATURAL_USE_ENTRY_07_RETURN_TO_CHATGPT.zip";
 export const RETURN_SHA = `${RETURN_ZIP}.sha256`;
 
 if (!/^[A-Z0-9][A-Z0-9-]{4,119}$/.test(TASK_ID)) throw new Error("Unsafe GAME_CODEX_MAINTENANCE_TASK_ID.");

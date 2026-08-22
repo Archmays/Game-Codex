@@ -1,6 +1,6 @@
 import "./styles.css";
 import "./page-mode.css";
-import { pageModeForAppRoute, resolveAppRoute } from "./app-route";
+import { pageModeForSearch, resolveAppRoute } from "./app-route";
 import { activatePageMode } from "./page-mode";
 
 const WORLD_THEME_COLOR = "#071c2a";
@@ -58,7 +58,7 @@ async function mountApp(root: HTMLElement): Promise<void> {
   const play = search.get("play");
   const mode = search.get("mode");
   const from = search.get("from");
-  activatePageMode(pageModeForAppRoute(route.kind));
+  activatePageMode(pageModeForSearch(search));
 
   if (route.kind === "play" && play === "hanzi-magic-complete") {
     setBrowserIdentity("汉字魔法战 · 字光归林", WORLD_THEME_COLOR);

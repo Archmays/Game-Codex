@@ -69,6 +69,7 @@ describe("game portfolio governance", () => {
     expect(shared.map((command) => command.label)).toEqual([
       "portfolio consistency",
       "UI occlusion inventory and interaction-integrity contracts",
+      "play-surface scroll ownership contracts",
       "unit and content tests",
       "Math World portfolio and replacement contract",
       "canonical Pinyin, source audit, and memory relation contracts",
@@ -78,6 +79,7 @@ describe("game portfolio governance", () => {
       "Chinese support routes, inputs, saves, and fallbacks",
       "English World routes, interactions, and geometry",
       "representative 42-surface browser hit-test matrix",
+      "representative scroll and bottom reachability matrix",
       "all-game portfolio smoke",
     ]);
 

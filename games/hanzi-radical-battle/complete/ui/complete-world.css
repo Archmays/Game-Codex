@@ -1,12 +1,12 @@
 :root.hanzi-magic-page,
 body.hanzi-magic-page { margin: 0; min-width: 320px; min-height: 100%; background: #061c26; color: #fff4cf; }
 
-.hmc3-shell { position: relative; box-sizing: border-box; min-height: 100vh; overflow-x: hidden; padding: clamp(14px, 2.4vw, 30px); font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; background: #071f29; isolation: isolate; }
+.hmc3-shell { position: relative; box-sizing: border-box; min-height: 100vh; padding: clamp(14px, 2.4vw, 30px); font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; background: #071f29; isolation: isolate; }
 .hmc3-world-art { position: absolute; inset: 0; z-index: -2; background-image: linear-gradient(180deg, rgba(3, 21, 27, .16), rgba(4, 21, 26, .86)), var(--world-image); background-size: cover; background-position: center; }
 .hmc3-world-art::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 52% 72%, rgba(255, 218, 104, .2), transparent 24%), radial-gradient(circle at 18% 20%, rgba(94, 214, 178, .2), transparent 28%); }
 .hmc3-canopy { position: absolute; inset: 0 0 auto; height: 38%; background: linear-gradient(180deg, rgba(6, 32, 34, .5), transparent); }
 .hmc3-lights { position: absolute; inset: 12% 7%; background-image: radial-gradient(circle, #ffe69b 0 2px, transparent 3px), radial-gradient(circle, #9ce7c4 0 1.5px, transparent 3px); background-size: 180px 140px, 130px 190px; opacity: .72; }
-.hmc3-path-light { position: absolute; left: 38%; bottom: -8%; width: 30%; height: 60%; border-radius: 50%; background: linear-gradient(180deg, transparent, rgba(255, 220, 121, .16)); transform: perspective(380px) rotateX(56deg); }
+.hmc3-path-light { position: absolute; left: 38%; bottom: -8%; width: 30%; height: 60%; border-radius: 50%; background: linear-gradient(180deg, transparent, rgba(255, 220, 121, .16)); }
 
 .hmc3-header { position: relative; display: grid; grid-template-columns: minmax(118px, 1fr) auto minmax(118px, 1fr); align-items: center; gap: 16px; max-width: 1360px; margin: auto; }
 .hmc3-header > div { text-align: center; }

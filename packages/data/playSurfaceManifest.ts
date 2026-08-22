@@ -14,6 +14,7 @@ export type PlaySurfaceKind =
 
 export type PlayInput = "pointer" | "touch" | "keyboard";
 export type PlaySurfaceQualityProfile = TestProfileId | "portfolio-play-ready";
+export type ScrollPolicy = "document" | "internal" | "locked";
 
 export interface PlaySurfaceRecord {
   readonly id: string;
@@ -29,6 +30,9 @@ export interface PlaySurfaceRecord {
   readonly saveNamespaces: readonly string[];
   readonly expectedInputs: readonly PlayInput[];
   readonly qualityProfile: PlaySurfaceQualityProfile;
+  readonly scrollPolicy: ScrollPolicy;
+  readonly scrollContainerSelector?: string;
+  readonly lockedReason?: string;
   readonly primaryEntry?: boolean;
 }
 
@@ -38,18 +42,19 @@ export interface AppRouteQueryRegistration {
   readonly queryKey: "play" | "hub" | "world";
   readonly queryValue: string;
   readonly query: string;
+  readonly defaultScrollPolicy: "document" | "locked";
 }
 
 export const APP_ROUTE_QUERY_MANIFEST = [
-  { kind: "play", queryKey: "play", queryValue: "hanzi-magic-complete", query: "?play=hanzi-magic-complete" },
-  { kind: "play", queryKey: "play", queryValue: "hanzi-v2-chapter-one", query: "?play=hanzi-v2-chapter-one" },
-  { kind: "play", queryKey: "play", queryValue: "hanzi-v2-v1", query: "?play=hanzi-v2-v1" },
-  { kind: "play", queryKey: "play", queryValue: "pinyin-magic-battle", query: "?play=pinyin-magic-battle" },
-  { kind: "play", queryKey: "play", queryValue: "english-spell-battle-legacy", query: "?play=english-spell-battle-legacy" },
-  { kind: "classic-hub", queryKey: "hub", queryValue: "classic", query: "?hub=classic" },
-  { kind: "world", queryKey: "world", queryValue: "english-world", query: "?world=english-world" },
-  { kind: "world", queryKey: "world", queryValue: "math-world", query: "?world=math-world" },
-  { kind: "world", queryKey: "world", queryValue: "my-game-world", query: "?world=my-game-world" },
+  { kind: "play", queryKey: "play", queryValue: "hanzi-magic-complete", query: "?play=hanzi-magic-complete", defaultScrollPolicy: "document" },
+  { kind: "play", queryKey: "play", queryValue: "hanzi-v2-chapter-one", query: "?play=hanzi-v2-chapter-one", defaultScrollPolicy: "document" },
+  { kind: "play", queryKey: "play", queryValue: "hanzi-v2-v1", query: "?play=hanzi-v2-v1", defaultScrollPolicy: "locked" },
+  { kind: "play", queryKey: "play", queryValue: "pinyin-magic-battle", query: "?play=pinyin-magic-battle", defaultScrollPolicy: "document" },
+  { kind: "play", queryKey: "play", queryValue: "english-spell-battle-legacy", query: "?play=english-spell-battle-legacy", defaultScrollPolicy: "document" },
+  { kind: "classic-hub", queryKey: "hub", queryValue: "classic", query: "?hub=classic", defaultScrollPolicy: "document" },
+  { kind: "world", queryKey: "world", queryValue: "english-world", query: "?world=english-world", defaultScrollPolicy: "document" },
+  { kind: "world", queryKey: "world", queryValue: "math-world", query: "?world=math-world", defaultScrollPolicy: "document" },
+  { kind: "world", queryKey: "world", queryValue: "my-game-world", query: "?world=my-game-world", defaultScrollPolicy: "document" },
 ] as const satisfies readonly AppRouteQueryRegistration[];
 
 const ALL_INPUTS = ["pointer", "touch", "keyboard"] as const;
@@ -57,12 +62,14 @@ const HANZI_SAVE = ["family-games/hanzi-magic-complete/v3"] as const;
 const MATH_SAVE = ["family-games/math-world/v1", "math-battle-web/save-v1"] as const;
 const ENGLISH_SAVE = ["family-games/english-world/v2"] as const;
 
-function surface(record: PlaySurfaceRecord): PlaySurfaceRecord {
-  return record;
+type SurfaceInput = Omit<PlaySurfaceRecord, "scrollPolicy"> & { readonly scrollPolicy?: ScrollPolicy };
+
+function surface(record: SurfaceInput): PlaySurfaceRecord {
+  return { scrollPolicy: "document", ...record };
 }
 
 type ProductSurfaceInput = Omit<
-  PlaySurfaceRecord,
+  SurfaceInput,
   "productId" | "expectedInputs" | "qualityProfile" | "settingsAvailable" | "destructiveActionAvailable" | "saveNamespaces"
 >;
 
@@ -108,10 +115,10 @@ export const PLAY_SURFACE_MANIFEST: readonly PlaySurfaceRecord[] = [
   ...(["assemble", "tone", "contrast"] as const).map((mode) => hanzi({ id: `hanzi-pinyin-${mode}`, title: `声韵试炼 · ${mode}`, route: `?play=hanzi-magic-complete&view=pinyin&mode=${mode}`, kind: "support-activity", parentSurfaceId: "hanzi-world", returnRoute: "?play=hanzi-magic-complete&from=world", primaryActionSelector: "[data-answer], [data-action=hint], a" })),
   ...(["same-glyph", "glyph-pinyin", "glyph-phrase"] as const).map((pack) => hanzi({ id: `hanzi-memory-${pack}`, title: `字光配对 · ${pack}`, route: `?play=hanzi-magic-complete&view=memory&pack=${pack}`, kind: "support-activity", parentSurfaceId: "hanzi-world", returnRoute: "?play=hanzi-magic-complete&from=world", primaryActionSelector: "[data-card-id], [data-pack-id], a" })),
   ...(["free-adventure", "component-trails", "word-resonance"] as const).map((mode) => hanzi({ id: `hanzi-postgame-${mode}`, title: `墨迹森林通关探索 · ${mode}`, route: `?play=hanzi-magic-complete&from=hub&postgame=${mode}`, kind: "postgame", parentSurfaceId: "hanzi-world", returnRoute: "?play=hanzi-magic-complete&from=hub", primaryActionSelector: "[data-primary-focus], button:not([disabled]), a" })),
-  hanzi({ id: "hanzi-family-slice", title: "字脉连接", route: "?play=hanzi-magic-complete&from=hub&slice=family", kind: "support-activity", parentSurfaceId: "hanzi-world", returnRoute: "?play=hanzi-magic-complete&from=hub", primaryActionSelector: "[data-primary-focus], button:not([disabled]), a" }),
-  hanzi({ id: "hanzi-word-slice", title: "词带连接", route: "?play=hanzi-magic-complete&from=hub&slice=word", kind: "support-activity", parentSurfaceId: "hanzi-world", returnRoute: "?play=hanzi-magic-complete&from=hub", primaryActionSelector: "[data-primary-focus], button:not([disabled]), a" }),
+  hanzi({ id: "hanzi-family-slice", title: "字脉连接", route: "?play=hanzi-magic-complete&from=hub&slice=family", kind: "support-activity", parentSurfaceId: "hanzi-world", returnRoute: "?play=hanzi-magic-complete&from=hub", primaryActionSelector: "[data-primary-focus], button:not([disabled]), a", scrollPolicy: "internal", scrollContainerSelector: ".hmc-shell" }),
+  hanzi({ id: "hanzi-word-slice", title: "词带连接", route: "?play=hanzi-magic-complete&from=hub&slice=word", kind: "support-activity", parentSurfaceId: "hanzi-world", returnRoute: "?play=hanzi-magic-complete&from=hub", primaryActionSelector: "[data-primary-focus], button:not([disabled]), a", scrollPolicy: "internal", scrollContainerSelector: ".hmc-shell" }),
   hanzi({ id: "hanzi-v2-compat", title: "墨迹森林 V2", route: "?play=hanzi-v2-chapter-one&from=world", kind: "chapter", parentSurfaceId: "hanzi-world", returnRoute: "?world=my-game-world", primaryActionSelector: "[data-primary-focus], button:not([disabled]), a" }),
-  hanzi({ id: "hanzi-v1-compat", title: "墨迹森林 V1", route: "?play=hanzi-v2-v1&from=world", kind: "chapter", parentSurfaceId: "hanzi-world", returnRoute: "?world=my-game-world", primaryActionSelector: "button:not([disabled]), a" }),
+  hanzi({ id: "hanzi-v1-compat", title: "墨迹森林 V1", route: "?play=hanzi-v2-v1&from=world", kind: "chapter", parentSurfaceId: "hanzi-world", returnRoute: "?world=my-game-world", primaryActionSelector: "button:not([disabled]), a", scrollPolicy: "locked", lockedReason: "The compatibility edition is a fixed inset Phaser scene with its own viewport-safe overlays." }),
 
   math({ id: "math-world", title: "数感实验城", route: "?world=math-world&from=world", kind: "product-world", parentSurfaceId: "my-game-world", returnRoute: "?world=my-game-world", primaryActionSelector: "[data-station-id] button", primaryEntry: true }),
   ...(["lab", "clock", "array", "target", "slider"] as const).map((station) => math({ id: `math-${station}`, title: `数学站点 · ${station}`, route: `?world=math-world&station=${station}`, kind: "station", parentSurfaceId: "math-world", returnRoute: "?world=math-world", primaryActionSelector: "[data-return-map], button:not([disabled]), a" })),

@@ -17,6 +17,24 @@ body.game-fullscreen-page {
   overflow: hidden;
 }
 
+html.game-scrollable-page,
+body.game-scrollable-page {
+  height: auto;
+  min-height: 100%;
+}
+
+body.game-scrollable-page {
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body.game-scrollable-page #app {
+  height: auto;
+  min-height: 100dvh;
+  overflow: visible;
+}
+
 html.adult-tool-page,
 body.adult-tool-page {
   height: auto;

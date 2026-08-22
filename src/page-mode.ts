@@ -1,7 +1,8 @@
-export type PageMode = "game-fullscreen" | "adult-tool" | "document";
+export type PageMode = "game-fullscreen" | "game-scrollable" | "adult-tool" | "document";
 
 export const PAGE_MODE_CLASS: Readonly<Record<PageMode, string>> = {
   "game-fullscreen": "game-fullscreen-page",
+  "game-scrollable": "game-scrollable-page",
   "adult-tool": "adult-tool-page",
   document: "document-page",
 };

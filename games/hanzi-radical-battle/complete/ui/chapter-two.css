@@ -1,5 +1,5 @@
 :root.hanzi-magic-page, body.hanzi-magic-page { margin: 0; min-width: 320px; min-height: 100%; background: #061d25; color: #fff3cd; }
-.hmc2-shell { position: relative; box-sizing: border-box; min-height: 100vh; overflow: hidden; padding: clamp(12px,2.2vw,28px); font-family: "Microsoft YaHei","Noto Sans CJK SC",sans-serif; color: #fff3cd; background: #071f29; isolation: isolate; }
+.hmc2-shell { position: relative; box-sizing: border-box; min-height: 100vh; overflow: visible; padding: clamp(12px,2.2vw,28px); font-family: "Microsoft YaHei","Noto Sans CJK SC",sans-serif; color: #fff3cd; background: #071f29; isolation: isolate; }
 .hmc2-world { position: fixed; inset: 0; z-index: -2; background-image: linear-gradient(180deg,rgba(2,20,25,.28),rgba(3,22,27,.9)),var(--hmc2-scene); background-size: cover; background-position: center; }
 .hmc2-world::after { content:""; position:absolute; inset:0; background: radial-gradient(circle at 50% 70%,rgba(255,216,92,.22),transparent 24%),radial-gradient(circle at 18% 30%,rgba(86,220,171,.18),transparent 28%); }
 .hmc2-world i,.hmc2-world span,.hmc2-world b { position:absolute; border-radius:50%; background:#ffe27c; box-shadow:0 0 22px #ffdc70; animation:hmc2-float 5s ease-in-out infinite; }

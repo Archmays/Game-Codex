@@ -1138,3 +1138,36 @@ body.english-world-page #app {
     font-size: .78rem;
   }
 }
+
+@media (max-width: 240px) {
+  .wordlight-header nav {
+    grid-template-columns: 1fr;
+  }
+
+  .wordlight button,
+  .wordlight a {
+    max-width: 100%;
+    padding-inline: .4rem;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .wordlight-journal {
+    padding: .55rem;
+  }
+
+  .wordlight-journal__grid article {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .wordlight-journal__grid article > .wordlight-meaning__art,
+  .wordlight-journal__grid article > .wordlight-quantity {
+    width: min(100%, 120px);
+    justify-self: center;
+  }
+
+  .wordlight-journal__grid article > div {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}

@@ -351,6 +351,10 @@
     padding-inline: 8px;
     text-align: center;
   }
+
+  .math-world-station__stage {
+    min-height: calc(100dvh - 118px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
