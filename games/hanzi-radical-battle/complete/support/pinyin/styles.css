@@ -4,7 +4,7 @@
 .sound-rhyme > header > p { margin: 1.4rem 0 .15rem; color: #a7d9bd; letter-spacing: .12em; }
 .sound-rhyme h1 { margin: 0 0 1rem; font-family: "STKaiti", "KaiTi", serif; font-size: clamp(2rem, 6vw, 3.7rem); }
 .sound-rhyme nav { display: flex; flex-wrap: wrap; gap: .55rem; }
-.sound-rhyme nav a, .sound-rhyme__done button { border: 1px solid #77b79a; border-radius: 999px; padding: .65rem 1rem; color: #f8f5dd; background: #123e3e; text-decoration: none; font-weight: 700; }
+.sound-rhyme nav a, .sound-rhyme__done button { min-height: 44px; box-sizing: border-box; display: inline-grid; place-items: center; border: 1px solid #77b79a; border-radius: 999px; padding: .65rem 1rem; color: #f8f5dd; background: #123e3e; text-decoration: none; font-weight: 700; }
 .sound-rhyme nav a[aria-current="page"] { color: #19342f; background: #f2d98c; border-color: #f2d98c; }
 .sound-rhyme__card, .sound-rhyme__done { margin-top: 1.2rem; padding: clamp(1rem, 4vw, 2rem); border: 1px solid rgba(198,230,182,.35); border-radius: 28px; background: rgba(7,28,42,.78); box-shadow: 0 20px 70px rgba(0,0,0,.28); }
 .sound-rhyme__progress { display: flex; gap: .4rem; }
