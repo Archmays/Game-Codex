@@ -1,7 +1,7 @@
 import type { GameDefinition } from "../game-core";
 import { clockReaderGame } from "../../games/clock-reader";
 import { equationSliderGame } from "../../games/equation-slider";
-import { englishSpellBattleGame } from "../../games/english-spell-battle";
+import { englishSpellBattleGame } from "../../games/english-spell-battle/v2";
 import { hanziRadicalBattleGame } from "../../games/hanzi-radical-battle";
 import { makeTargetGame } from "../../games/make-target";
 import { mathLabGame } from "../../games/math-lab";

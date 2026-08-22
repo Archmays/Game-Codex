@@ -90,15 +90,15 @@ const GAMES: readonly SmokeGame[] = [
     },
   },
   {
-    id: "english-spell-battle", title: "英文魔法战", surface: ".english-spell-game",
+    id: "english-spell-battle", title: "英语世界", surface: '[data-testid="english-world-map"]',
     async interact(page) {
-      await page.getByRole("button", { name: "Level 1 首字母" }).click();
-      const letter = page.locator(".letter-bank button").first();
-      await expectUsableTarget(letter);
-      await letter.click();
-      await expect(page.locator(".learning-feedback")).toBeVisible();
-      await expect(page.locator(".learning-feedback")).not.toBeEmpty();
-      return letter;
+      const region = page.locator(".wordlight-region button").first();
+      await expectUsableTarget(region);
+      await region.click();
+      await expect(page.getByTestId("english-region")).toBeVisible();
+      await page.getByRole("button", { name: "← 回岛屿地图" }).click();
+      await expect(page.getByTestId("english-world-map")).toBeVisible();
+      return region;
     },
   },
   {
@@ -154,6 +154,10 @@ for (const game of GAMES) {
       await page.getByRole("link", { name: "回我的游戏世界" }).click();
       await expect(page.getByTestId("world-treasure-box")).toBeVisible();
       await page.getByTestId("world-treasure-box").getByRole("link").click();
+    } else if (game.id === "english-spell-battle") {
+      const returnLink = page.getByRole("link", { name: "回我的游戏世界" });
+      await expectUsableTarget(returnLink);
+      await returnLink.click();
     } else {
       const returnButton = page.getByRole("button", { name: "返回大厅", exact: true });
       await expectUsableTarget(returnButton);
@@ -171,6 +175,8 @@ test("@portfolio public route registry preserves world, classic, and Hanzi legac
     ["/", '[data-testid="my-game-world"]'],
     ["/?world=my-game-world", '[data-testid="my-game-world"]'],
     ["/?hub=classic", ".hub-grid"],
+    ["/?world=english-world", '[data-testid="english-world-map"]'],
+    ["/?play=english-spell-battle-legacy&from=hub", ".english-spell-game"],
     ["/?world=math-world", '[data-testid="math-world-map"]'],
     ["/?world=math-world&station=lab", '[data-station-id="lab"] canvas'],
     ["/?world=math-world&station=clock", '[data-station-id="clock"] .clock-game'],

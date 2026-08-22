@@ -45,7 +45,7 @@ try {
 
   for (const region of ["animals", "home", "food", "actions", "colors"]) {
     await route(page, `?world=english-world&region=${region}`, `[data-testid="english-region"][data-region="${region}"]`);
-    requireValue(await page.locator('[data-testid="english-word-card"]').count() === 6, `Region ${region} does not expose six story missions`);
+    requireValue(await page.locator(".wordlight-mission-list > article").count() === 6, `Region ${region} does not expose six story missions`);
     checked.push(`region-${region}`);
   }
   await route(page, "?world=english-world&view=journal", '[data-testid="english-journal"]');

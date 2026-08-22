@@ -5,7 +5,8 @@
 - 英语世界 V2：`?world=english-world`
 - Word Journal：`?world=english-world&view=journal`
 - English Memory：`?world=english-world&view=memory`
-- 旧版 Classic：从 `?hub=classic&from=world` 进入“英文魔法战”；旧路由、旧题库和旧本机数据保留，不作为 V2 学习证据。
+- Classic 英语卡：从 `?hub=classic&from=world` 进入英语世界 V2。
+- 旧版兼容入口：`?play=english-spell-battle-legacy&from=hub`；旧题库和旧本机数据保留，不作为 V2 学习证据。
 
 ## 游戏目标
 

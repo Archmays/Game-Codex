@@ -206,13 +206,19 @@ test("optional words stay journal-only and DOM quantities are exact", async ({ p
   await expect(ten.locator(".wordlight-shell")).toHaveCount(10);
 });
 
-test("Classic English game and legacy bytes remain directly accessible", async ({ page }, testInfo) => {
+test("Classic English card promotes V2 while the frozen legacy game and bytes remain directly accessible", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-1440");
   const legacy = '{"bestScore":7,"wins":3,"classic":"unchanged"}';
   await page.goto("/?hub=classic&from=world");
   await page.evaluate(([key, value]) => localStorage.setItem(key, value), ["family-games/english-spell-battle/progress", legacy]);
   const card = page.locator('.game-card[data-game-id="english-spell-battle"]');
+  await expect(card.getByRole("heading", { name: "英语世界", exact: true })).toBeVisible();
   await card.getByRole("button").click();
+  await expect(page).toHaveURL(/\?world=english-world&from=hub$/);
+  await expect(page.getByTestId("english-world-map")).toBeVisible();
+  expect(await page.evaluate(() => localStorage.getItem("family-games/english-spell-battle/progress"))).toBe(legacy);
+
+  await page.goto("/?play=english-spell-battle-legacy&from=hub");
   await expect(page.locator(".english-spell-game")).toBeVisible();
   expect(await page.evaluate(() => localStorage.getItem("family-games/english-spell-battle/progress"))).toBe(legacy);
 });

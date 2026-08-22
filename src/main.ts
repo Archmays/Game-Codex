@@ -168,6 +168,20 @@ window.addEventListener("load", async () => {
     return;
   }
 
+  if (route.kind === "play" && play === "english-spell-battle-legacy") {
+    setBrowserIdentity("英文魔法战 · 旧版拼写练习", CLASSIC_THEME_COLOR);
+    const [{ englishSpellBattleGame }, { createLocalStorageStore }] = await Promise.all([
+      import("../games/english-spell-battle"),
+      import("../packages/game-core"),
+    ]);
+    englishSpellBattleGame.mount({
+      container: root,
+      onExit: () => window.location.assign("?world=english-world&from=legacy"),
+      storage: createLocalStorageStore(englishSpellBattleGame.id),
+    });
+    return;
+  }
+
   if (route.kind === "classic-hub") {
     setBrowserIdentity("游戏百宝箱", CLASSIC_THEME_COLOR);
     const { mountClassicHubFromWorld } = await import("../apps/my-game-world");

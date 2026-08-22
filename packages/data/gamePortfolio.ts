@@ -68,7 +68,7 @@ export const GAME_PORTFOLIO: readonly GamePortfolioRecord[] = [
   },
   {
     id: "english-spell-battle", targetWorld: "english", productRole: "core-world", qualityTier: "A", lifecycleStatus: "active",
-    currentStandaloneVisible: true, targetStandaloneVisible: true, mergeTarget: "english-world", canonicalRoute: "?world=english-world&from=world", saveNamespaces: ["family-games/english-spell-battle", "family-games/english-world/v2"],
+    currentStandaloneVisible: true, targetStandaloneVisible: true, mergeTarget: "english-world", canonicalRoute: "?world=english-world&from=hub", saveNamespaces: ["family-games/english-spell-battle", "family-games/english-world/v2"],
     testProfile: "a-core-world", loadingPolicy: "route-lazy", canonicalDocs: ["games/english-spell-battle/README.md"],
   },
   {
