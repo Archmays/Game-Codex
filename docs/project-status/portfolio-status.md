@@ -10,6 +10,7 @@
 - 经典大厅：`6` 当前独立入口
 - 数学世界：`5/5` 自由开放站点
 - 历史治理：本阶段不重写 Git 历史、不强推、不移动或覆盖 tag
+- 家庭稳定基线：`FROZEN`（`game-codex-family-stable-v1.0.0` / `8b890ff14880bcb576dd1ced37e14e6e3df28af1`）
 - 真人儿童验证：`NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE`
 
 ## 当前组合
@@ -35,13 +36,15 @@
 | Chinese Consolidation | `COMPLETE` | `chinese-consolidation-v1.0.0`<br>`?play=hanzi-magic-complete` | 墨迹森林、声韵试炼与字光配对完成收拢。 |
 | English V2 | `COMPLETE` | `english-world-v2.0.0`<br>`?world=english-world` | 词光岛五个区域、词光册、句子任务与 English Memory。 |
 | Play Readiness | `COMPLETE` | `game-codex-play-ready-v1.0.0`<br>`?world=my-game-world` | 首用、反馈、返回、存档保险箱、无障碍、性能与长期家庭使用准备。 |
-| Natural-use Observation | `PENDING` | `game-codex-observation-kit-v1.0.0`<br>`?world=my-game-world&parent=observation` | 家长主动、本机最小化的 Observation Kit 已就绪；一条真实交互证据已完成修复闭环，后续仍只随自然使用证据推进。 |
+| Natural-use Observation | `ACTIVE` | `game-codex-observation-kit-v1.0.0`<br>`?world=my-game-world&parent=observation` | 普通家庭使用已开始；Observation Kit 保持家长主动、本机最小化、默认零记录，只在自然出现的真实证据需要时使用。 |
 
-- 当前收敛阶段：`play-readiness`
+- 当前收敛阶段：`natural-use-observation`
+- 下一自动阶段：`NONE`
 - 三个正式世界：`chinese / math / english`
 - 真实儿童验证：`NOT_PERFORMED_AND_NOT_CLAIMED`
 - Observation Kit：`READY`
-- Natural-use evidence：`ONGOING_WHEN_REAL_EVIDENCE_EXISTS`
+- Natural-use evidence：`ACTIVE`
+- 自动大型任务：`NONE`
 
 ## 质量等级
 
@@ -52,6 +55,8 @@
 
 ## 下一步边界
 
-`NEXT: Continue normal family use; export a parent-created observation bundle only when new useful evidence naturally exists.`
+`NEXT: Normal family use. New development only when real evidence or a reproducible defect exists.`
 
-Observation Kit ready；Natural-use evidence not yet collected；No scheduled human review required。不自动启动大型 V3/V4 或第四世界；只有真实自然家庭使用证据出现后，才进入小范围观察修订。
+普通家庭使用已开始。Observation Kit 可选、家长主动、本机保存、默认零记录，没有规定频率；只在自然出现的真实证据、可复现缺陷或明确的大范围扩展决定出现时开始新的有界工作。
+
+家庭使用说明：`docs/project-status/natural-use.md`。

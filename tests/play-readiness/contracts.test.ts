@@ -4,20 +4,25 @@ import { PROJECT_LIFECYCLE_TERMINAL_TRUTH, PROJECT_PHASES } from "../../packages
 import { EXPORTABLE_SAVE_KEYS, KNOWN_SAVE_KEYS } from "../../packages/data/saveKeyInventory";
 
 describe("portfolio play-readiness contracts", () => {
-  it("keeps phase five machine-complete while evidence-triggered observation remains pending", () => {
+  it("keeps phase five machine-complete while natural family use is active", () => {
     expect(PROJECT_PHASES.map(({ id, status }) => [id, status])).toEqual([
       ["foundation", "complete"],
       ["math-world", "complete"],
       ["chinese-consolidation", "complete"],
       ["english-v2", "complete"],
       ["play-readiness", "complete"],
-      ["natural-use-observation", "pending"],
+      ["natural-use-observation", "active"],
     ]);
     expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.realChildValidation).toBe("NOT_PERFORMED_AND_NOT_CLAIMED");
-    expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.naturalUseObservation).toBe("ONGOING_WHEN_REAL_EVIDENCE_EXISTS");
+    expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.naturalUseMode).toBe("ACTIVE");
+    expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.naturalUseObservation).toBe("ACTIVE");
     expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.observationTooling).toBe("READY");
-    expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.realEvidencePatchCount).toBe(1);
-    expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.interactionIntegrity).toBe("PORTFOLIO_HITTEST_GUARD_ACTIVE");
+    expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineStatus).toBe("FROZEN");
+    expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineTag).toBe("game-codex-family-stable-v1.0.0");
+    expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineCommit).toBe("8b890ff14880bcb576dd1ced37e14e6e3df28af1");
+    expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.realEvidencePatchCount).toBe(2);
+    expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.interactionIntegrity).toBe("HITTEST_AND_REACHABILITY_GUARD_ACTIVE");
+    expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.automaticLargeTask).toBe("NONE");
   });
 
   it("covers every primary first-use surface and keeps Classic at six", () => {

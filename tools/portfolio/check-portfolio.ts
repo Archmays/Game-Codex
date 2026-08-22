@@ -42,12 +42,17 @@ export function validatePortfolio(catalog: readonly GameCatalogMetadata[], curre
   const visibleCatalog = currentCatalog.map((game) => game.id).sort();
   if (JSON.stringify(visiblePortfolio) !== JSON.stringify(visibleCatalog)) issues.push("Current classic-hub visibility differs from Portfolio");
   if (PROJECT_PHASES.filter((phase) => phase.status === "complete").length !== 5) issues.push("Expected five completed project phases");
-  if (PROJECT_PHASES.find((phase) => phase.id === ACTIVE_PROJECT_PHASE)?.status !== "complete") issues.push("Play Readiness terminal phase is not complete");
-  if (PROJECT_PHASES.find((phase) => phase.id === NEXT_PROJECT_PHASE)?.status !== "pending") issues.push("Natural-use Observation must remain pending");
-  if (PROJECT_PHASES.find((phase) => phase.id === NEXT_PROJECT_PHASE)?.releaseTag !== "game-codex-observation-kit-v1.0.0") issues.push("Observation Kit release identity is missing");
-  if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.naturalUseObservation !== "ONGOING_WHEN_REAL_EVIDENCE_EXISTS") issues.push("Natural-use Observation evidence state is not ongoing-on-evidence");
-  if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.realEvidencePatchCount !== 1) issues.push("Expected one evidence-driven patch");
-  if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.interactionIntegrity !== "PORTFOLIO_HITTEST_GUARD_ACTIVE") issues.push("Portfolio hit-test guard is not active");
+  if (PROJECT_PHASES.find((phase) => phase.id === "play-readiness")?.status !== "complete") issues.push("Play Readiness terminal product phase is not complete");
+  if (PROJECT_PHASES.find((phase) => phase.id === ACTIVE_PROJECT_PHASE)?.status !== "active") issues.push("Natural-use Observation is not active");
+  if (NEXT_PROJECT_PHASE !== null) issues.push("Natural-use must not schedule an automatic next phase");
+  if (PROJECT_PHASES.find((phase) => phase.id === ACTIVE_PROJECT_PHASE)?.releaseTag !== "game-codex-observation-kit-v1.0.0") issues.push("Observation Kit release identity is missing");
+  if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.naturalUseMode !== "ACTIVE" || PROJECT_LIFECYCLE_TERMINAL_TRUTH.naturalUseObservation !== "ACTIVE") issues.push("Natural-use mode is not active");
+  if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaseline !== "FROZEN" || PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineStatus !== "FROZEN") issues.push("Family stable baseline is not frozen");
+  if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineTag !== "game-codex-family-stable-v1.0.0") issues.push("Family stable baseline tag drifted");
+  if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineCommit !== "8b890ff14880bcb576dd1ced37e14e6e3df28af1") issues.push("Family stable baseline commit drifted");
+  if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.realEvidencePatchCount !== 2) issues.push("Expected two evidence-driven patches");
+  if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.interactionIntegrity !== "HITTEST_AND_REACHABILITY_GUARD_ACTIVE") issues.push("Hit-test and reachability guards are not active");
+  if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.automaticLargeTask !== "NONE") issues.push("Natural-use must not schedule an automatic large task");
   if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.realChildValidation !== "NOT_PERFORMED_AND_NOT_CLAIMED") issues.push("Real-child validation boundary drifted");
   if (PRIMARY_WORLDS.length !== 3) issues.push(`Expected three primary worlds, found ${PRIMARY_WORLDS.length}`);
   for (const id of duplicates(PLAY_SURFACE_MANIFEST.map((record) => record.id))) issues.push(`Duplicate play surface id: ${id}`);
@@ -65,10 +70,18 @@ export function checkGeneratedDocs(root = resolve(import.meta.dirname, "../.."),
   const readmePath = resolve(root, "README.md");
   const statusPath = resolve(root, "docs/project-status/portfolio-status.md");
   const roadmapPath = resolve(root, "docs/project-status/portfolio-roadmap.md");
+  const naturalUsePath = resolve(root, "docs/project-status/natural-use.md");
   const readme = readFileSync(readmePath, "utf8");
   if (replaceMarkedSection(readme, renderReadmePortfolio(catalog)) !== readme) issues.push("README portfolio section has drifted");
   if (!existsSync(statusPath) || readFileSync(statusPath, "utf8") !== renderPortfolioStatus(catalog)) issues.push("Portfolio status has drifted");
   if (!existsSync(roadmapPath) || readFileSync(roadmapPath, "utf8") !== renderPortfolioRoadmap()) issues.push("Portfolio roadmap has drifted");
+  if (!existsSync(naturalUsePath)) issues.push("Natural-use family guide is missing");
+  else {
+    const naturalUse = readFileSync(naturalUsePath, "utf8");
+    for (const required of ["NATURAL-USE ACTIVE", "game-codex-family-stable-v1.0.0", "http://127.0.0.1:5175/", "no required frequency", "NOT_PERFORMED_AND_NOT_CLAIMED"]) {
+      if (!naturalUse.includes(required)) issues.push(`Natural-use family guide is missing: ${required}`);
+    }
+  }
   return issues;
 }
 

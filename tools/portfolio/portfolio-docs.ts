@@ -43,7 +43,8 @@ export function renderReadmePortfolio(catalog: readonly GameCatalogMetadata[]): 
     "",
     `三个正式世界（${PRIMARY_WORLDS.join(" / ")}）均已完成当前发布阶段；数学世界有 5 个自由开放站点，中文与英语世界的支持活动由各自世界进入。时钟塔、阵列工坊与旧拼音定义继续保留，但不再重复占用经典大厅卡片。`,
     "",
-    `项目阶段：Foundation、Math World、Chinese Consolidation、English V2 与 Play Readiness 均为 COMPLETE；${PROJECT_PHASES.find((phase) => phase.id === NEXT_PROJECT_PHASE)?.title} 仍为 PENDING_REAL_EVIDENCE，家长主动 Observation Kit 已 READY。`,
+    `项目阶段：Foundation、Math World、Chinese Consolidation、English V2 与 Play Readiness 均为 COMPLETE；Natural-use Observation 为 ACTIVE；家庭稳定基线已冻结在 \`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineTag}\`；下一自动阶段为 \`${NEXT_PROJECT_PHASE ?? "NONE"}\`。`,
+    "家庭使用入口、可选 Observation Kit 与重新开发边界见 `docs/project-status/natural-use.md`。",
     README_PORTFOLIO_END,
   ].join("\n");
 }
@@ -76,6 +77,7 @@ export function renderPortfolioStatus(catalog: readonly GameCatalogMetadata[]): 
     `- 经典大厅：\`${classicCount}\` 当前独立入口`,
     "- 数学世界：`5/5` 自由开放站点",
     "- 历史治理：本阶段不重写 Git 历史、不强推、不移动或覆盖 tag",
+    `- 家庭稳定基线：\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaseline}\`（\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineTag}\` / \`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineCommit}\`）`,
     "- 真人儿童验证：`NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE`",
     "",
     "## 当前组合",
@@ -91,10 +93,12 @@ export function renderPortfolioStatus(catalog: readonly GameCatalogMetadata[]): 
     ...PROJECT_PHASES.map((phase) => `| ${cell(phase.title)} | \`${phase.status.toUpperCase()}\` | ${cell([phase.releaseTag, phase.canonicalRoute].filter(Boolean).map((value) => `\`${value}\``).join("<br>") || "—")} | ${cell(phase.summary)} |`),
     "",
     `- 当前收敛阶段：\`${ACTIVE_PROJECT_PHASE}\`` ,
+    `- 下一自动阶段：\`${NEXT_PROJECT_PHASE ?? "NONE"}\`` ,
     `- 三个正式世界：\`${PRIMARY_WORLDS.join(" / ")}\`` ,
     `- 真实儿童验证：\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.realChildValidation}\`` ,
     `- Observation Kit：\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.observationTooling}\`` ,
     `- Natural-use evidence：\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.naturalUseObservation}\`` ,
+    `- 自动大型任务：\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.automaticLargeTask}\`` ,
     "",
     "## 质量等级",
     "",
@@ -107,7 +111,9 @@ export function renderPortfolioStatus(catalog: readonly GameCatalogMetadata[]): 
     "",
     `\`NEXT: ${PROJECT_LIFECYCLE_TERMINAL_TRUTH.next}\``,
     "",
-    "Observation Kit ready；Natural-use evidence not yet collected；No scheduled human review required。不自动启动大型 V3/V4 或第四世界；只有真实自然家庭使用证据出现后，才进入小范围观察修订。",
+    "普通家庭使用已开始。Observation Kit 可选、家长主动、本机保存、默认零记录，没有规定频率；只在自然出现的真实证据、可复现缺陷或明确的大范围扩展决定出现时开始新的有界工作。",
+    "",
+    "家庭使用说明：`docs/project-status/natural-use.md`。",
     "",
   ].join("\n");
 }
@@ -129,10 +135,12 @@ export function renderPortfolioRoadmap(): string {
     "## 终态边界",
     "",
     `- \`NEXT: ${PROJECT_LIFECYCLE_TERMINAL_TRUTH.next}\`` ,
+    `- 下一自动阶段：\`${NEXT_PROJECT_PHASE ?? "NONE"}\`` ,
+    `- 家庭稳定基线：\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineTag}\`（\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineCommit}\`）`,
     `- 真实儿童验证：\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.realChildValidation}\`` ,
     `- Observation Kit：\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.observationTooling}\`` ,
     `- Natural-use evidence：\`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.naturalUseObservation}\`` ,
-    "- Natural-use Observation 只能基于未来自然出现的真实家庭使用证据；机器审核不冒充儿童兴趣、学习效果或保持度。",
+    "- Natural-use Observation 处于 ACTIVE，但工具仍为可选、家长主动、本机保存、默认零记录且没有规定频率；机器审核不冒充儿童兴趣、学习效果或保持度。",
     "",
   ].join("\n");
 }

@@ -34,17 +34,19 @@ Portfolio 真源、分级门禁、安全维护事务、CI 与 Pages 组合验证
 - 发布 tag：`game-codex-play-ready-v1.0.0`
 - 当前 route：`?world=my-game-world`
 
-## 6. Natural-use Observation — PENDING
+## 6. Natural-use Observation — ACTIVE
 
-家长主动、本机最小化的 Observation Kit 已就绪；一条真实交互证据已完成修复闭环，后续仍只随自然使用证据推进。
+普通家庭使用已开始；Observation Kit 保持家长主动、本机最小化、默认零记录，只在自然出现的真实证据需要时使用。
 
 - 发布 tag：`game-codex-observation-kit-v1.0.0`
 - 当前 route：`?world=my-game-world&parent=observation`
 
 ## 终态边界
 
-- `NEXT: Continue normal family use; export a parent-created observation bundle only when new useful evidence naturally exists.`
+- `NEXT: Normal family use. New development only when real evidence or a reproducible defect exists.`
+- 下一自动阶段：`NONE`
+- 家庭稳定基线：`game-codex-family-stable-v1.0.0`（`8b890ff14880bcb576dd1ced37e14e6e3df28af1`）
 - 真实儿童验证：`NOT_PERFORMED_AND_NOT_CLAIMED`
 - Observation Kit：`READY`
-- Natural-use evidence：`ONGOING_WHEN_REAL_EVIDENCE_EXISTS`
-- Natural-use Observation 只能基于未来自然出现的真实家庭使用证据；机器审核不冒充儿童兴趣、学习效果或保持度。
+- Natural-use evidence：`ACTIVE`
+- Natural-use Observation 处于 ACTIVE，但工具仍为可选、家长主动、本机保存、默认零记录且没有规定频率；机器审核不冒充儿童兴趣、学习效果或保持度。

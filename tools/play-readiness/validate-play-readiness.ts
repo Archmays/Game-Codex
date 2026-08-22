@@ -4,7 +4,7 @@ import { dirname, extname, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { GAME_PORTFOLIO } from "../../packages/data/gamePortfolio";
 import { PLAY_SURFACE_MANIFEST, PRIMARY_PLAY_SURFACES } from "../../packages/data/playSurfaceManifest";
-import { PRIMARY_WORLDS, PROJECT_LIFECYCLE_TERMINAL_TRUTH, PROJECT_PHASES } from "../../packages/data/projectLifecycle";
+import { ACTIVE_PROJECT_PHASE, NEXT_PROJECT_PHASE, PRIMARY_WORLDS, PROJECT_LIFECYCLE_TERMINAL_TRUTH, PROJECT_PHASES } from "../../packages/data/projectLifecycle";
 import { EXPORTABLE_SAVE_KEYS, KNOWN_SAVE_KEYS, portfolioNamespacesWithoutKnownKey } from "../../packages/data/saveKeyInventory";
 
 const ROOT = resolve(import.meta.dirname, "../..");
@@ -57,10 +57,13 @@ const prohibitedRuntimeTransmission = runtimeFiles.flatMap((path) => {
 
 const issues: string[] = [];
 if (PROJECT_PHASES.filter((phase) => phase.status === "complete").length !== 5) issues.push("project lifecycle completion count");
-if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.naturalUseObservation !== "ONGOING_WHEN_REAL_EVIDENCE_EXISTS") issues.push("natural-use boundary");
+if (ACTIVE_PROJECT_PHASE !== "natural-use-observation" || PROJECT_PHASES.find((phase) => phase.id === ACTIVE_PROJECT_PHASE)?.status !== "active") issues.push("natural-use phase");
+if (NEXT_PROJECT_PHASE !== null || PROJECT_LIFECYCLE_TERMINAL_TRUTH.automaticLargeTask !== "NONE") issues.push("automatic next phase boundary");
+if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.naturalUseMode !== "ACTIVE" || PROJECT_LIFECYCLE_TERMINAL_TRUTH.naturalUseObservation !== "ACTIVE") issues.push("natural-use boundary");
 if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.observationTooling !== "READY") issues.push("observation tooling boundary");
-if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.realEvidencePatchCount !== 1) issues.push("evidence patch count");
-if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.interactionIntegrity !== "PORTFOLIO_HITTEST_GUARD_ACTIVE") issues.push("interaction-integrity boundary");
+if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineTag !== "game-codex-family-stable-v1.0.0" || PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineCommit !== "8b890ff14880bcb576dd1ced37e14e6e3df28af1") issues.push("family stable baseline identity");
+if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.realEvidencePatchCount !== 2) issues.push("evidence patch count");
+if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.interactionIntegrity !== "HITTEST_AND_REACHABILITY_GUARD_ACTIVE") issues.push("interaction-integrity boundary");
 if (GAME_PORTFOLIO.length !== 9) issues.push("portfolio count");
 if (PLAY_SURFACE_MANIFEST.length !== 42 || PRIMARY_PLAY_SURFACES.length !== 8) issues.push("play surface inventory");
 if (PLAY_SURFACE_MANIFEST.filter((surface) => surface.kind === "classic-entry").length !== 6) issues.push("Classic count");
@@ -70,7 +73,7 @@ if (duplicateTrackedLargeBinaryGroups.length) issues.push("duplicate tracked lar
 if (issues.length) throw new Error(`Play-readiness validation failed: ${issues.join(", ")}`);
 
 writeJson("PROJECT_LIFECYCLE.json", {
-  taskId: TASK_ID, verdict: "PASS", activePhase: "play-readiness", phases: PROJECT_PHASES,
+  taskId: TASK_ID, verdict: "PASS", activePhase: ACTIVE_PROJECT_PHASE, nextAutomaticPhase: NEXT_PROJECT_PHASE ?? "NONE", phases: PROJECT_PHASES,
   primaryWorlds: PRIMARY_WORLDS, terminalTruth: PROJECT_LIFECYCLE_TERMINAL_TRUTH,
 });
 writeJson("PLAY_SURFACE_MANIFEST.json", { taskId: TASK_ID, verdict: "PASS", count: PLAY_SURFACE_MANIFEST.length, primaryCount: PRIMARY_PLAY_SURFACES.length, surfaces: PLAY_SURFACE_MANIFEST });

@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { GAME_PORTFOLIO, PORTFOLIO_TEST_PROFILES } from "../packages/data/gamePortfolio";
 import { PLAY_SURFACE_MANIFEST, PRIMARY_PLAY_SURFACES } from "../packages/data/playSurfaceManifest";
-import { NEXT_PROJECT_PHASE, PROJECT_PHASES } from "../packages/data/projectLifecycle";
+import { ACTIVE_PROJECT_PHASE, NEXT_PROJECT_PHASE, PROJECT_LIFECYCLE_TERMINAL_TRUTH, PROJECT_PHASES } from "../packages/data/projectLifecycle";
 import { KNOWN_SAVE_KEYS, portfolioNamespacesWithoutKnownKey } from "../packages/data/saveKeyInventory";
 import { affectedGateCommands } from "../tools/portfolio/affected-gates";
 import { checkGeneratedDocs, validatePortfolio } from "../tools/portfolio/check-portfolio";
@@ -44,7 +44,10 @@ describe("game portfolio governance", () => {
 
   it("binds the terminal lifecycle, first-use surfaces, and exact save inventory", () => {
     expect(PROJECT_PHASES.filter((phase) => phase.status === "complete")).toHaveLength(5);
-    expect(PROJECT_PHASES.find((phase) => phase.id === NEXT_PROJECT_PHASE)?.status).toBe("pending");
+    expect(PROJECT_PHASES.find((phase) => phase.id === ACTIVE_PROJECT_PHASE)?.status).toBe("active");
+    expect(NEXT_PROJECT_PHASE).toBeNull();
+    expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineTag).toBe("game-codex-family-stable-v1.0.0");
+    expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.automaticLargeTask).toBe("NONE");
     expect(new Set(PLAY_SURFACE_MANIFEST.map((surface) => surface.id)).size).toBe(PLAY_SURFACE_MANIFEST.length);
     expect(PRIMARY_PLAY_SURFACES.map((surface) => surface.id)).toEqual([
       "my-game-world", "classic-hub", "hanzi-world", "math-world", "english-world", "classic-equation", "classic-target", "classic-memory",

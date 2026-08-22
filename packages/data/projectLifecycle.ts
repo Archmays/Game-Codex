@@ -17,8 +17,8 @@ export interface ProjectPhaseRecord {
   readonly summary: string;
 }
 
-export const ACTIVE_PROJECT_PHASE: ProjectPhaseId = "play-readiness";
-export const NEXT_PROJECT_PHASE: ProjectPhaseId = "natural-use-observation";
+export const ACTIVE_PROJECT_PHASE: ProjectPhaseId = "natural-use-observation";
+export const NEXT_PROJECT_PHASE: ProjectPhaseId | null = null;
 export const PRIMARY_WORLDS = ["chinese", "math", "english"] as const;
 
 export const PROJECT_PHASES: readonly ProjectPhaseRecord[] = [
@@ -63,10 +63,10 @@ export const PROJECT_PHASES: readonly ProjectPhaseRecord[] = [
   {
     id: "natural-use-observation",
     title: "Natural-use Observation",
-    status: "pending",
+    status: "active",
     releaseTag: "game-codex-observation-kit-v1.0.0",
     canonicalRoute: "?world=my-game-world&parent=observation",
-    summary: "家长主动、本机最小化的 Observation Kit 已就绪；一条真实交互证据已完成修复闭环，后续仍只随自然使用证据推进。",
+    summary: "普通家庭使用已开始；Observation Kit 保持家长主动、本机最小化、默认零记录，只在自然出现的真实证据需要时使用。",
   },
 ] as const;
 
@@ -76,11 +76,18 @@ export const PROJECT_PHASE_BY_ID: ReadonlyMap<ProjectPhaseId, ProjectPhaseRecord
 
 export const PROJECT_LIFECYCLE_TERMINAL_TRUTH = {
   completed: PROJECT_PHASES.filter((phase) => phase.status === "complete").map((phase) => phase.id),
+  active: PROJECT_PHASES.filter((phase) => phase.status === "active").map((phase) => phase.id),
   pending: PROJECT_PHASES.filter((phase) => phase.status === "pending").map((phase) => phase.id),
-  naturalUseObservation: "ONGOING_WHEN_REAL_EVIDENCE_EXISTS",
+  naturalUseMode: "ACTIVE",
+  naturalUseObservation: "ACTIVE",
   observationTooling: "READY",
-  realEvidencePatchCount: 1,
-  interactionIntegrity: "PORTFOLIO_HITTEST_GUARD_ACTIVE",
+  familyStableBaseline: "FROZEN",
+  familyStableBaselineTag: "game-codex-family-stable-v1.0.0",
+  familyStableBaselineCommit: "8b890ff14880bcb576dd1ced37e14e6e3df28af1",
+  familyStableBaselineStatus: "FROZEN",
+  realEvidencePatchCount: 2,
+  interactionIntegrity: "HITTEST_AND_REACHABILITY_GUARD_ACTIVE",
+  automaticLargeTask: "NONE",
   realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED",
-  next: "Continue normal family use; export a parent-created observation bundle only when new useful evidence naturally exists.",
+  next: "Normal family use. New development only when real evidence or a reproducible defect exists.",
 } as const;
