@@ -39,7 +39,17 @@ Remove-Item -LiteralPath $stage -Recurse -Force
 
 $size = (Get-Item -LiteralPath $zip).Length
 if ($size -ge 12MB) { throw "Return ZIP exceeds 12 MiB: $size" }
-$hash = (Get-FileHash -LiteralPath $zip -Algorithm SHA256).Hash.ToLowerInvariant()
+$hashStream = [System.IO.File]::OpenRead($zip)
+try {
+  $sha256 = [System.Security.Cryptography.SHA256]::Create()
+  try {
+    $hash = ([System.BitConverter]::ToString($sha256.ComputeHash($hashStream))).Replace("-", "").ToLowerInvariant()
+  } finally {
+    $sha256.Dispose()
+  }
+} finally {
+  $hashStream.Dispose()
+}
 [System.IO.File]::WriteAllText($shaFile, "$hash  $([System.IO.Path]::GetFileName($zip))`n", [System.Text.UTF8Encoding]::new($false))
 
 $archive = [System.IO.Compression.ZipFile]::OpenRead($zip)
