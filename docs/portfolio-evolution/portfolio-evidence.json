@@ -267,11 +267,11 @@
     {
       "id": "GAMEPLAY_REVIEW",
       "reviewerId": "/root/final_gameplay_review",
-      "reviewRunId": "GAMEPLAY_REVIEW_FINAL_2026-08-27_R4",
+      "reviewRunId": "GAMEPLAY_REVIEW_FINAL_2026-08-27_R5",
       "finalTreeBinding": "RELEASE_TAG_TARGET",
       "identityContract": "Reviewed against the current release candidate; any later tracked mutation invalidates this review; the release tag and exact-SHA readback bind the immutable final tree.",
       "sourceTreeAlgorithm": "sha256-git-clean-filter-tree-with-self-normalized-evidence-v1",
-      "sourceTreeSha256": "30d8f58ea3135882a2e905f4b93c4b40ff2a2b0d19cc4c66a87d608e429da415",
+      "sourceTreeSha256": "3ef856231c9cadead2a079aa93d819dbbfe4e448eb41444e74eb311c52f112f3",
       "sourceTreeFileCount": 1470,
       "reviewRound": "FINAL_CANDIDATE",
       "reviewedAt": "2026-08-27",
@@ -321,6 +321,13 @@
           "disposition": "FIXED",
           "evidence": ["games/hanzi-radical-battle/complete/ui/complete-world.css", "tests/e2e/chinese-support/visual.spec.ts", "tests/e2e/hanzi-complete/visual.spec.ts-snapshots/world-mobile-390x844.png"],
           "resolution": "The decorative Hanzi path light now reproduces its intended in-bounds appearance without adding an invisible 8% document tail; its aria-hidden wrapper uses overflow:hidden instead of the globally unauthorized overflow:clip, and the static scroll contract plus strict desktop, mobile and tablet screenshots pass."
+        },
+        {
+          "id": "GPR-07",
+          "severity": "SEV_2",
+          "disposition": "FIXED",
+          "evidence": ["tests/e2e/interaction-integrity/portfolio-hittest.spec.ts", ".github/workflows/ci.yml"],
+          "resolution": "The Classic parent-world return proof now waits for the lazy public wrapper's terminal surface before locating and hit-testing its control; slower CI can no longer mistake the intermediate route-loading state for a missing return path."
         }
       ],
       "validationEvidence": ["docs/portfolio-evolution/evidence/local-validation-evidence.json", "tests/equation-slider-solver.test.ts", "tests/e2e/equation-slider.spec.ts", "tests/e2e/math-world.spec.ts"],
@@ -330,11 +337,11 @@
     {
       "id": "LEARNING_PORTFOLIO_REVIEW",
       "reviewerId": "/root/final_learning_review",
-      "reviewRunId": "LEARNING_PORTFOLIO_REVIEW_FINAL_2026-08-27_R4",
+      "reviewRunId": "LEARNING_PORTFOLIO_REVIEW_FINAL_2026-08-27_R5",
       "finalTreeBinding": "RELEASE_TAG_TARGET",
       "identityContract": "Reviewed against the current release candidate; any later tracked mutation invalidates this review; the release tag and exact-SHA readback bind the immutable final tree.",
       "sourceTreeAlgorithm": "sha256-git-clean-filter-tree-with-self-normalized-evidence-v1",
-      "sourceTreeSha256": "30d8f58ea3135882a2e905f4b93c4b40ff2a2b0d19cc4c66a87d608e429da415",
+      "sourceTreeSha256": "3ef856231c9cadead2a079aa93d819dbbfe4e448eb41444e74eb311c52f112f3",
       "sourceTreeFileCount": 1470,
       "reviewRound": "FINAL_CANDIDATE",
       "reviewedAt": "2026-08-27",
@@ -391,6 +398,13 @@
           "disposition": "FIXED",
           "evidence": ["tools/english-v2/build-release-reports.ts", "tools/chinese-support/build-release-reports.ts"],
           "resolution": "The historical English V2 release builder keeps its six-card proof isolated from later Portfolio projections, while validating product-tag ancestry and only the English evidence inputs it actually consumes."
+        },
+        {
+          "id": "LPR-08",
+          "severity": "SEV_2",
+          "disposition": "FIXED",
+          "evidence": ["tests/e2e/interaction-integrity/portfolio-hittest.spec.ts", "apps/my-game-world/index.ts"],
+          "resolution": "The compatibility-safe Classic return contract is verified only after its asynchronous public wrapper is visible, preserving the actual two-step product-to-Classic-to-parent-world path without weakening control, route or hit-test assertions."
         }
       ],
       "validationEvidence": ["docs/portfolio-evolution/evidence/local-validation-evidence.json", "tests/portfolio-governance.test.ts", "tests/e2e/portfolio-smoke.spec.ts", "tests/save-vault/save-vault.test.ts"],

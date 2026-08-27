@@ -130,6 +130,9 @@ test("@hittest @representative @portfolio all manifest surfaces expose topmost c
         await returnControl!.click({ trial: true });
         await activateAndExpectStateChange(page, returnControl!, "pointer");
         if (record.kind === "classic-hub" && routeMatches(page.url(), record.route) && !routeMatches(page.url(), record.returnRoute)) {
+          // A route/placeholder change can precede the lazy Classic wrapper mount on slower CI runners.
+          // Bind the next control lookup to the public terminal surface, not that intermediate state.
+          await expect(page.getByTestId("classic-hub-from-world")).toBeVisible();
           const parentReturn = await findReturnControl(page, record);
           expect(parentReturn, `${record.id} must expose its parent-world return after the played product returns to Classic`).not.toBeNull();
           await expectHitTarget(parentReturn!, { minimumRatio: 1, minimumSize: 1 });
