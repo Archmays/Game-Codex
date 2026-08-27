@@ -56,10 +56,10 @@ try {
   checked.push("english-memory");
 
   await route(page, "?hub=classic&from=world", ".hub-grid");
-  requireValue(await page.locator(".game-card").count() === 6, "Classic catalog is not six cards");
+  requireValue(await page.locator(".game-card").count() === 4, "Classic catalog is not the four active child products");
   await page.locator('[data-game-id="english-spell-battle"] button').click();
   await page.locator('[data-testid="english-world-map"]').waitFor({ state: "visible" });
-  checked.push("classic-english-to-world", "classic-6");
+  checked.push("classic-english-to-world", "classic-4-active-products");
 
   await page.setViewportSize({ width: 360, height: 800 });
   await route(page, "?world=english-world", '[data-testid="english-world-map"]');

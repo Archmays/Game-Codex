@@ -14,9 +14,9 @@ function classTarget() {
 }
 
 describe("play-surface scroll integrity", () => {
-  it("classifies all 42 surfaces with explicit internal and locked exceptions", () => {
-    expect(PLAY_SURFACE_MANIFEST).toHaveLength(42);
-    expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === "document")).toHaveLength(38);
+  it("classifies all 40 surfaces with explicit internal and locked exceptions", () => {
+    expect(PLAY_SURFACE_MANIFEST).toHaveLength(40);
+    expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === "document")).toHaveLength(36);
     expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === "internal").map((surface) => surface.id)).toEqual([
       "hanzi-family-slice",
       "hanzi-word-slice",

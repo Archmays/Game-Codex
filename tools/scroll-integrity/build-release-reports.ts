@@ -2,7 +2,6 @@ import { execFileSync } from "node:child_process";
 import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { PROJECT_LIFECYCLE_TERMINAL_TRUTH, PROJECT_PHASES } from "../../packages/data/projectLifecycle";
-import { PLAY_SURFACE_MANIFEST } from "../../packages/data/playSurfaceManifest";
 
 const TASK_ID = "GAME-CODEX-STABLE-NATURAL-USE-ENTRY-07";
 const TAG = "game-codex-family-stable-v1.0.0";
@@ -14,7 +13,12 @@ const HITTEST_REPORTS = resolve(ROOT, "test-results/interaction-integrity/report
 const SCREENSHOTS = resolve(ROOT, "test-results/scroll-reachability/screenshots");
 const SELECTED = resolve(REPORTS, "selected-screenshots");
 const EXPECTED_PROJECTS = ["desktop-1366", "desktop-1440", "desktop-1920", "landscape-1024", "mobile-360", "mobile-390", "tablet-768"];
-const POLICY_COUNTS = Object.fromEntries(["document", "internal", "locked"].map((policy) => [policy, PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === policy).length]));
+// This closeout builder reproduces the immutable family-stable tag. Later
+// Portfolio projections must not be mixed into its historical 42-surface proof.
+const HISTORICAL_SURFACE_COUNT = 42;
+const HISTORICAL_CLASSIC_COUNT = 6;
+const HISTORICAL_POLICY_COUNTS = { document: 38, internal: 2, locked: 2 } as const;
+const HISTORICAL_COMBINATION_COUNT = HISTORICAL_SURFACE_COUNT * EXPECTED_PROJECTS.length;
 
 function option(name: string, fallback = ""): string {
   const index = process.argv.indexOf(name);
@@ -79,8 +83,8 @@ const journalProjects = journal.map((report) => String(report.project)).sort();
 const scrollSurfaceIds = new Set(scroll.flatMap((report) => (report.rows ?? []).map((row: any) => row.surfaceId)));
 requireValue(scroll.length === 7 && JSON.stringify(scrollProjects) === JSON.stringify(EXPECTED_PROJECTS), `Incomplete scroll matrix: ${scrollProjects.join(",")}`);
 requireValue(journal.length === 7 && JSON.stringify(journalProjects) === JSON.stringify(EXPECTED_PROJECTS), `Incomplete Journal matrix: ${journalProjects.join(",")}`);
-requireValue(modal.length === 2 && hittest.length === 7 && scrollSurfaceIds.size === 42, `Incomplete modal/hittest/surface evidence: modal=${modal.length}, hittest=${hittest.length}, surfaces=${scrollSurfaceIds.size}`);
-requireValue(scroll.every((report) => report.verdict === "PASS" && Number(report.testedSurfaceCount) === 42), "A full scroll matrix report is not PASS/42");
+requireValue(modal.length === 2 && hittest.length === 7 && scrollSurfaceIds.size === HISTORICAL_SURFACE_COUNT, `Incomplete historical modal/hittest/surface evidence: modal=${modal.length}, hittest=${hittest.length}, surfaces=${scrollSurfaceIds.size}`);
+requireValue(scroll.every((report) => report.verdict === "PASS" && Number(report.testedSurfaceCount) === HISTORICAL_SURFACE_COUNT), `A historical full scroll matrix report is not PASS/${HISTORICAL_SURFACE_COUNT}`);
 requireValue(journal.every((report) => report.verdict === "PASS" && (report.rows ?? []).length === 4), "A Journal viewport report is not PASS/4 zoom levels");
 
 copyRequired(resolve(TASK, "reproduction/WORD_JOURNAL_SCROLL_REPRODUCTION.json"), "WORD_JOURNAL_SCROLL_REPRODUCTION.json");
@@ -106,30 +110,31 @@ write("WORD_JOURNAL_SCROLL_FIX_VERDICT.json", {
 });
 write("PAGE_MODE_SCROLL_POLICY_VERDICT.json", {
   verdict: "PASS",
-  manifestSurfaces: 42,
-  policies: POLICY_COUNTS,
+  evidenceScope: "HISTORICAL_FAMILY_STABLE_TAG",
+  manifestSurfaces: HISTORICAL_SURFACE_COUNT,
+  policies: HISTORICAL_POLICY_COUNTS,
   pageModes: { document: "game-scrollable-page", internal: "game-fullscreen-page", locked: "game-fullscreen-page" },
   routeSelection: "MOST_SPECIFIC_QUERY_MATCH",
   formerHardcodedFullscreen: "REMOVED",
   staticGate: "tools/scroll-integrity/validate-scroll-integrity.ts",
 });
-write("SCROLL_REACHABILITY_MATRIX.json", { verdict: "PASS", viewportCount: 7, surfaceCount: 42, combinations: 294, projects: scrollProjects, reports: scroll });
+write("SCROLL_REACHABILITY_MATRIX.json", { verdict: "PASS", evidenceScope: "HISTORICAL_FAMILY_STABLE_TAG", viewportCount: EXPECTED_PROJECTS.length, surfaceCount: HISTORICAL_SURFACE_COUNT, combinations: HISTORICAL_COMBINATION_COUNT, projects: scrollProjects, reports: scroll });
 const bottomRows = scroll.flatMap((report) => (report.rows ?? []).filter((row: any) => row.requiresScroll).map((row: any) => ({ project: report.project, surfaceId: row.surfaceId, bottomReached: row.bottomReached, bottomCriticalAction: row.bottomCriticalAction, hitTest: row.hitTest, verdict: row.verdict })));
 requireValue(bottomRows.every((row) => row.bottomReached && row.verdict === "PASS"), "A long surface did not reach bottom");
 write("BOTTOM_ACTION_REACHABILITY.json", { verdict: "PASS", longSurfaceRows: bottomRows.length, unreachableCriticalControls: 0, rows: bottomRows });
 write("MODAL_SCROLL_RESTORE_VERDICT.json", { verdict: "PASS", viewportCount: modal.length, staleBodyScrollLock: 0, reports: modal });
-write("INTERACTION_INTEGRITY_COMBINED_VERDICT.json", { verdict: "PASS", visual: "PASS", hitTest: "PASS_42_SURFACES_7_VIEWPORTS", scrollReachability: "PASS_42_SURFACES_7_VIEWPORTS", realInteraction: "PASS", pointerInterception: 0, focusFullyObscured: 0, hittestReports: hittest.length });
-write("PRODUCT_REGRESSION.json", { verdict: "PASS", products: { myGameWorld: "PASS", hanzi: "PASS", math: "PASS", english: "PASS", classic: "PASS_6_ENTRIES", equation: "PASS", target: "PASS", memory: "PASS", saveVault: "PASS", observationKit: "PASS" }, englishStoryMissionCta: "30/30 PASS", consoleError: 0, pageError: 0, asset404: 0, unexpectedExternalRequest: 0, realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED" });
+write("INTERACTION_INTEGRITY_COMBINED_VERDICT.json", { verdict: "PASS", evidenceScope: "HISTORICAL_FAMILY_STABLE_TAG", visual: "PASS", hitTest: `PASS_${HISTORICAL_SURFACE_COUNT}_SURFACES_${EXPECTED_PROJECTS.length}_VIEWPORTS`, scrollReachability: `PASS_${HISTORICAL_SURFACE_COUNT}_SURFACES_${EXPECTED_PROJECTS.length}_VIEWPORTS`, realInteraction: "PASS", pointerInterception: 0, focusFullyObscured: 0, hittestReports: hittest.length });
+write("PRODUCT_REGRESSION.json", { verdict: "PASS", evidenceScope: "HISTORICAL_FAMILY_STABLE_TAG", products: { myGameWorld: "PASS", hanzi: "PASS", math: "PASS", english: "PASS", classic: `PASS_${HISTORICAL_CLASSIC_COUNT}_ENTRIES`, equation: "PASS", target: "PASS", memory: "PASS", saveVault: "PASS", observationKit: "PASS" }, englishStoryMissionCta: "30/30 PASS", consoleError: 0, pageError: 0, asset404: 0, unexpectedExternalRequest: 0, realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED" });
 write("RC1_VERDICT.json", { verdict: "PASS", sourceTreeSha256: rc1SourceSha, sourceTreeChangedDuringRun: false, snapshotUpdates: 0, commands: "FULL_SAME_TREE_COMMAND_SET", realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED" });
 write("RC2_VERDICT.json", { verdict: "PASS", sourceTreeSha256: rc2SourceSha, identicalToRc1: rc2SourceSha === rc1SourceSha, sourceTreeChangedDuringRun: false, snapshotUpdates: 0, commands: "FULL_SAME_TREE_COMMAND_SET" });
-write("FAMILY_STABLE_BASELINE.json", { verdict: "FROZEN", tag: TAG, productTagCommit, sourceTreeSha256: productSourceSha, trackedFileCount: productSourceCount, immutableTag: true, includes: ["three worlds", "Classic 6", "Save Vault", "Observation Kit", "Hit-Test", "Scroll/Reachability"] });
-write("PROJECT_LIFECYCLE_FINAL.json", { verdict: "PASS", phases: PROJECT_PHASES, terminalTruth: PROJECT_LIFECYCLE_TERMINAL_TRUTH });
+write("FAMILY_STABLE_BASELINE.json", { verdict: "FROZEN", evidenceScope: "HISTORICAL_FAMILY_STABLE_TAG", tag: TAG, productTagCommit, sourceTreeSha256: productSourceSha, trackedFileCount: productSourceCount, immutableTag: true, includes: ["three worlds", `Classic ${HISTORICAL_CLASSIC_COUNT}`, "Save Vault", "Observation Kit", "Hit-Test", "Scroll/Reachability"] });
+write("PROJECT_LIFECYCLE_FINAL.json", { verdict: "PASS", evidenceScope: "CURRENT_MAIN_READBACK_SEPARATE_FROM_HISTORICAL_PRODUCT_TAG", phases: PROJECT_PHASES, terminalTruth: PROJECT_LIFECYCLE_TERMINAL_TRUTH });
 write("NATURAL_USE_ENTRY_VERDICT.json", { verdict: "ACTIVE", normalFamilyUse: true, scheduledReviewRequired: false, scheduledObservationRequired: false, scheduledDevelopmentRequired: false, automaticLargeTask: "NONE", observationDefault: "RECORD_NOTHING", realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED" });
 write("TESTS_BUILD_CI.json", { verdict: "PASS", local: { portfolioGenerateStable: "PASS_TWO_ZERO_DIFF_RUNS", portfolioCheck: "PASS", playSurfaceIntegrity: "PASS", hittest: "PASS", scrollReachability: "PASS", englishE2e: "PASS", englishVisual: "PASS_NO_UPDATE", playReadiness: "PASS", naturalUseKit: "PASS", unit: "PASS", typecheck: "PASS", build: "PASS", portfolioSmoke: "PASS", maintenanceVerify: "PASS" }, ci: { verdict: "PASS", url: ciUrl }, pages: { verdict: "PASS", url: pagesUrl } });
 write("CLEANUP_VERIFY.json", { verdict: "PASS_PREPACKAGE_READINESS", previous06bPostPackageCleanup: "RECONCILED", currentReturnPackageProtected: true, activeTaskTransientClassification: "T3_TRANSIENT_DELETE_AFTER_PACKAGE", oldHandoffs: "T2_ARCHIVE_DELETE_AFTER_PACKAGE", finalPostPackageVerification: "RECORDED_EXTERNALLY_BY_MANIFEST_DRIVEN_MAINTENANCE_AFTER_IMMUTABLE_ZIP_CREATION" });
 write("GIT_STATE.json", { verdict: "PASS", branch: git("branch", "--show-current"), productTag: TAG, productTagCommit, finalMain, originMain, productSourceTreeUnchangedAfterTag: true, trackedStatus: git("status", "--porcelain=v1") || "CLEAN" });
-write("FINAL_RESULT.json", { result: "PASS_MACHINE / FAMILY_STABLE_BASELINE_FROZEN / NATURAL_USE_ACTIVE", taskId: TASK_ID, productTag: TAG, productTagCommit, finalMain, originMain, wordJournalScroll: "PASS_48_48", playSurfaceScrollPolicy: "42_42", scrollMatrix: "294_294", rc1: "PASS", rc2: "PASS", naturalUse: "ACTIVE", automaticLargeTask: "NONE", realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED" });
-writeFileSync(resolve(REPORTS, "FINAL_SUMMARY.md"), `# ${TASK_ID}\n\nMachine verdict: **PASS**. The Word Journal scroll blocker was reproduced against the frozen baseline, repaired at the route/page-mode source, and protected by declared scroll ownership plus real wheel, touch, keyboard, bottom reachability, hit-test, and real-click gates. All 42 play surfaces passed seven viewports. RC1 and RC2 used the identical product source tree, which is frozen at \`${TAG}\`.\n\nNatural-Use is ACTIVE for ordinary family use. Observation remains optional, manual, local, and record-nothing by default. No real-child enjoyment, learning, retention, or acceptance claim is made.\n`, "utf8");
+write("FINAL_RESULT.json", { result: "PASS_MACHINE / FAMILY_STABLE_BASELINE_FROZEN / NATURAL_USE_ACTIVE", evidenceScope: "HISTORICAL_FAMILY_STABLE_TAG", taskId: TASK_ID, productTag: TAG, productTagCommit, finalMain, originMain, wordJournalScroll: "PASS_48_48", playSurfaceScrollPolicy: `${HISTORICAL_SURFACE_COUNT}_${HISTORICAL_SURFACE_COUNT}`, scrollMatrix: `${HISTORICAL_COMBINATION_COUNT}_${HISTORICAL_COMBINATION_COUNT}`, rc1: "PASS", rc2: "PASS", naturalUse: "ACTIVE", automaticLargeTask: "NONE", realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED" });
+writeFileSync(resolve(REPORTS, "FINAL_SUMMARY.md"), `# ${TASK_ID}\n\nThis builder is scoped to the immutable historical family-stable tag; later Portfolio projections are verified by their own release evidence.\n\nMachine verdict: **PASS**. The Word Journal scroll blocker was reproduced against the frozen baseline, repaired at the route/page-mode source, and protected by declared scroll ownership plus real wheel, touch, keyboard, bottom reachability, hit-test, and real-click gates. All ${HISTORICAL_SURFACE_COUNT} historical play surfaces passed ${EXPECTED_PROJECTS.length} viewports. RC1 and RC2 used the identical product source tree, which is frozen at \`${TAG}\`.\n\nNatural-Use is ACTIVE for ordinary family use. Observation remains optional, manual, local, and record-nothing by default. No real-child enjoyment, learning, retention, or acceptance claim is made.\n`, "utf8");
 writeFileSync(resolve(REPORTS, "SOURCE_TREE_SHA256.txt"), `product_tag ${TAG}\nproduct_commit ${productTagCommit}\ntracked_file_count ${productSourceCount}\nsha256 ${productSourceSha}\nalgorithm sha256(sorted lines: file_sha256 two-spaces repo-relative-path newline)\n`, "utf8");
 
 if (existsSync(SELECTED)) rmSync(SELECTED, { recursive: true, force: true });

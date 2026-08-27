@@ -205,7 +205,7 @@ test("@scroll @representative representative worlds, Classic, internal and locke
   writeReport(`SCROLL_REACHABILITY_REPRESENTATIVE.${testInfo.project.name}.json`, { verdict: "PASS", project: testInfo.project.name, surfaceCount: rows.length, rows });
 });
 
-test("@scroll @full all 42 manifest surfaces obey declared scroll ownership", async ({ page }, testInfo) => {
+test("@scroll @full all manifest surfaces obey declared scroll ownership", async ({ page }, testInfo) => {
   await installEnglishVoice(page);
   const runtime = runtimeObserver(page);
   const rows = [];

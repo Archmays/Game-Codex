@@ -95,7 +95,7 @@ function exactBlockFor(source: string, selector: string): string {
 
 function validateKnownContracts(entries: readonly RiskEntry[]): string[] {
   const issues: string[] = [];
-  if (PLAY_SURFACE_MANIFEST.length !== 42) issues.push(`Expected 42 play surfaces, found ${PLAY_SURFACE_MANIFEST.length}`);
+  if (PLAY_SURFACE_MANIFEST.length !== 40) issues.push(`Expected 40 play surfaces, found ${PLAY_SURFACE_MANIFEST.length}`);
   if (entries.some((entry) => !entry.testedSurfaceIds.length)) issues.push("Every risk entry must map to at least one browser-tested surface");
   const cssPath = resolve(ROOT, "games/english-spell-battle/v2/world/styles.css");
   const css = readFileSync(cssPath, "utf8");

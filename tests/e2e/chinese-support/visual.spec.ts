@@ -7,14 +7,20 @@ test("visual and geometry states", async ({ page }, testInfo) => {
     ["pinyin-tone", "/?play=hanzi-magic-complete&view=pinyin&mode=tone&seed=visual", "sound-rhyme-trial"],
     ["pinyin-contrast", "/?play=hanzi-magic-complete&view=pinyin&mode=contrast&seed=visual", "sound-rhyme-trial"],
     ["memory-glyph-pinyin", "/?play=hanzi-magic-complete&view=memory&pack=glyph-pinyin&seed=visual", "memory-match"],
-    ["classic-six", "/?hub=classic", null],
+    ["classic-four", "/?hub=classic", null],
   ] as const;
   for (const [name, route, testId] of routes) {
     await page.goto(route);
-    if (testId) await expect(page.getByTestId(testId)).toBeVisible(); else await expect(page.locator(".game-card")).toHaveCount(6);
-    const geometry = await page.evaluate(() => ({ client: document.documentElement.clientWidth, scroll: document.documentElement.scrollWidth, bodyHeight: document.body.getBoundingClientRect().height }));
+    if (testId) await expect(page.getByTestId(testId)).toBeVisible(); else await expect(page.locator(".game-card")).toHaveCount(4);
+    const geometry = await page.evaluate(() => ({
+      client: document.documentElement.clientWidth,
+      scroll: document.documentElement.scrollWidth,
+      pageHeight: document.documentElement.scrollHeight,
+      bodyHeight: document.body.getBoundingClientRect().height,
+    }));
     expect(geometry.scroll - geometry.client, `${name} horizontal overflow`).toBeLessThanOrEqual(1);
     expect(geometry.bodyHeight, `${name} body height`).toBeGreaterThan(300);
+    if (name === "world") expect(geometry.pageHeight - Math.ceil(geometry.bodyHeight), "world decorative bottom overflow").toBeLessThanOrEqual(1);
     await expect(page).toHaveScreenshot(`${name}.png`, { fullPage: true });
   }
   await page.goto("/?play=hanzi-magic-complete&view=memory&pack=glyph-pinyin&seed=visual-complete");

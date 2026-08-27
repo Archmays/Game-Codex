@@ -85,7 +85,7 @@ async function closeIntentionalModal(page: Page): Promise<boolean> {
   return true;
 }
 
-test("@hittest @representative @portfolio all 42 manifest surfaces expose topmost critical controls and real actions", async ({ page }, testInfo) => {
+test("@hittest @representative @portfolio all manifest surfaces expose topmost critical controls and real actions", async ({ page }, testInfo) => {
   const runtime = observe(page);
   const rows: unknown[] = [];
   const startAt = process.env.HITTEST_START_SURFACE;
@@ -129,6 +129,13 @@ test("@hittest @representative @portfolio all 42 manifest surfaces expose topmos
         await expectHitTarget(returnControl!, { minimumRatio: 1, minimumSize: 1 });
         await returnControl!.click({ trial: true });
         await activateAndExpectStateChange(page, returnControl!, "pointer");
+        if (record.kind === "classic-hub" && routeMatches(page.url(), record.route) && !routeMatches(page.url(), record.returnRoute)) {
+          const parentReturn = await findReturnControl(page, record);
+          expect(parentReturn, `${record.id} must expose its parent-world return after the played product returns to Classic`).not.toBeNull();
+          await expectHitTarget(parentReturn!, { minimumRatio: 1, minimumSize: 1 });
+          await parentReturn!.click({ trial: true });
+          await activateAndExpectStateChange(page, parentReturn!, "pointer");
+        }
         await expect.poll(() => routeMatches(page.url(), record.returnRoute), { message: `${record.id} return must reach ${record.returnRoute}` }).toBe(true);
       } else if (returnResult === "PRIMARY_ACTION_WAS_RETURN") {
         await expect.poll(() => routeMatches(page.url(), record.returnRoute), { message: `${record.id} primary return must reach ${record.returnRoute}` }).toBe(true);

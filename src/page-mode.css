@@ -35,6 +35,10 @@ body.game-scrollable-page #app {
   overflow: visible;
 }
 
+body.game-scrollable-page .game-stage {
+  overscroll-behavior: auto;
+}
+
 html.adult-tool-page,
 body.adult-tool-page {
   height: auto;
