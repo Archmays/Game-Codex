@@ -1,4 +1,4 @@
-import { solveLevel, validatePublishedLevel } from "./solver";
+import { getMovableReels, solveLevel, validatePublishedLevel } from "./solver";
 import type { PublishedEquationSliderLevel, QualitySignatures } from "./types";
 
 export interface NearDuplicateFinding {
@@ -22,6 +22,28 @@ export interface StationDiversityAudit {
   readonly passesFirstFourActionMinimum: boolean;
 }
 
+export interface SameVisibleMoveFinding {
+  readonly reelId: string;
+  readonly reelIndex: number;
+  readonly direction: "up" | "down";
+  readonly fromIndex: number;
+  readonly toIndex: number;
+  readonly fromTileId: string;
+  readonly toTileId: string;
+  readonly value: string;
+  readonly alternativeDirection: "up" | "down";
+  readonly alternativeSteps: 2;
+  readonly hasVisibleAlternative: boolean;
+}
+
+export interface SameVisibleCompletionPathAudit {
+  readonly initialSameVisibleMove: boolean;
+  readonly shortestMovesWithSameVisibleEdges: number;
+  readonly shortestMovesWithoutSameVisibleEdges: number | null;
+  readonly shortestPathDelta: number | null;
+  readonly solvableWithoutSameVisibleEdges: boolean;
+}
+
 export interface EquationSliderLevelAudit {
   readonly schemaVersion: 3;
   readonly generatedAt: string;
@@ -40,6 +62,16 @@ export interface EquationSliderLevelAudit {
   readonly repeatedValueTileCount: number;
   readonly coverableRepeatedValueTileCount: number;
   readonly uncoverableRepeatedValueTiles: Readonly<Record<string, readonly string[]>>;
+  readonly sameVisibleTransitionCount: number;
+  readonly sameVisibleTransitionLevelCount: number;
+  readonly sameVisibleTransitions: Readonly<Record<string, readonly SameVisibleMoveFinding[]>>;
+  readonly initialSameVisibleMoveLevelCount: number;
+  readonly initialSameVisibleMoves: Readonly<Record<string, readonly SameVisibleMoveFinding[]>>;
+  readonly sameVisibleCompletionPaths: Readonly<Record<string, SameVisibleCompletionPathAudit>>;
+  readonly sameVisibleShortestPathBenefitLevelIds: readonly string[];
+  readonly initialSameVisibleShortestPathBenefitLevelIds: readonly string[];
+  readonly canonicalPlanSameExpressionIdentityLevelIds: readonly string[];
+  readonly requiredSameVisibleMoveLevelIds: readonly string[];
   readonly numberTileValueDistribution: Readonly<Record<string, number>>;
   readonly chapterNumberTileValueDistribution: Readonly<Record<string, Readonly<Record<string, number>>>>;
   readonly stationNumberTileValueDistribution: Readonly<Record<string, Readonly<Record<string, number>>>>;
@@ -93,6 +125,13 @@ export function auditEquationSliderLevels(
   const repeatedValueReelKindDistribution: Record<string, number> = {};
   const repeatedValueLevelIds = new Set<string>();
   const uncoverableRepeatedValueTiles: Record<string, string[]> = {};
+  const sameVisibleTransitions: Record<string, SameVisibleMoveFinding[]> = {};
+  const initialSameVisibleMoves: Record<string, SameVisibleMoveFinding[]> = {};
+  const sameVisibleCompletionPaths: Record<string, SameVisibleCompletionPathAudit> = {};
+  const sameVisibleShortestPathBenefitLevelIds: string[] = [];
+  const initialSameVisibleShortestPathBenefitLevelIds: string[] = [];
+  const canonicalPlanSameExpressionIdentityLevelIds: string[] = [];
+  const requiredSameVisibleMoveLevelIds: string[] = [];
   const numberTileValueDistribution: Record<string, number> = {};
   const chapterNumberTileValueDistribution: Record<string, Record<string, number>> = {};
   const stationNumberTileValueDistribution: Record<string, Record<string, number>> = {};
@@ -118,6 +157,28 @@ export function auditEquationSliderLevels(
     const movableSlots = level.slots.filter((slot) => slot.kind === "movable-reel");
     increment(movableReelCountDistribution, String(movableSlots.length));
     if (level.provenance.kind === "hand-authored-gold") goldCount += 1;
+    const sameVisible = findSameVisibleTransitions(level);
+    if (sameVisible.length > 0) {
+      sameVisibleTransitions[level.id] = sameVisible;
+      const initial = sameVisible.filter(
+        (finding) => level.initialIndexes[finding.reelIndex] === finding.fromIndex
+      );
+      if (initial.length > 0) initialSameVisibleMoves[level.id] = initial;
+      const completionPaths = auditSameVisibleCompletionPaths(level, initial.length > 0);
+      sameVisibleCompletionPaths[level.id] = completionPaths;
+      if (!completionPaths.solvableWithoutSameVisibleEdges) {
+        requiredSameVisibleMoveLevelIds.push(level.id);
+      }
+      if ((completionPaths.shortestPathDelta ?? 0) > 0) {
+        sameVisibleShortestPathBenefitLevelIds.push(level.id);
+        if (completionPaths.initialSameVisibleMove) {
+          initialSameVisibleShortestPathBenefitLevelIds.push(level.id);
+        }
+      }
+      if (canonicalPlanRepeatsExpressionAcrossIdentities(level)) {
+        canonicalPlanSameExpressionIdentityLevelIds.push(level.id);
+      }
+    }
 
     for (const target of level.targets) {
       increment(targetDistribution, target.kind === "value" ? String(target.value) : `=${target.rightExpression.join(" ")}`);
@@ -224,6 +285,7 @@ export function auditEquationSliderLevels(
     && Object.keys(orphanTiles).length === 0
     && Object.keys(missingTargets).length === 0
     && Object.keys(uncoverableRepeatedValueTiles).length === 0
+    && requiredSameVisibleMoveLevelIds.length === 0
     && stationDiversityPass;
 
   return {
@@ -244,6 +306,19 @@ export function auditEquationSliderLevels(
     repeatedValueTileCount,
     coverableRepeatedValueTileCount,
     uncoverableRepeatedValueTiles: sortNestedStringRecords(uncoverableRepeatedValueTiles),
+    sameVisibleTransitionCount: Object.values(sameVisibleTransitions).reduce(
+      (total, findings) => total + findings.length,
+      0
+    ),
+    sameVisibleTransitionLevelCount: Object.keys(sameVisibleTransitions).length,
+    sameVisibleTransitions: sortFindingRecords(sameVisibleTransitions),
+    initialSameVisibleMoveLevelCount: Object.keys(initialSameVisibleMoves).length,
+    initialSameVisibleMoves: sortFindingRecords(initialSameVisibleMoves),
+    sameVisibleCompletionPaths: sortRecord(sameVisibleCompletionPaths),
+    sameVisibleShortestPathBenefitLevelIds: [...sameVisibleShortestPathBenefitLevelIds].sort(),
+    initialSameVisibleShortestPathBenefitLevelIds: [...initialSameVisibleShortestPathBenefitLevelIds].sort(),
+    canonicalPlanSameExpressionIdentityLevelIds: [...canonicalPlanSameExpressionIdentityLevelIds].sort(),
+    requiredSameVisibleMoveLevelIds: [...requiredSameVisibleMoveLevelIds].sort(),
     numberTileValueDistribution: sortNumericRecord(numberTileValueDistribution),
     chapterNumberTileValueDistribution: sortNestedRecords(chapterNumberTileValueDistribution),
     stationNumberTileValueDistribution: sortNestedRecords(stationNumberTileValueDistribution),
@@ -275,6 +350,127 @@ export function auditEquationSliderLevels(
     deterministicHash: hashLevels(levels),
     passes
   };
+}
+
+function findSameVisibleTransitions(
+  level: PublishedEquationSliderLevel
+): SameVisibleMoveFinding[] {
+  const findings: SameVisibleMoveFinding[] = [];
+  for (const [reelIndex, reel] of getMovableReels(level).entries()) {
+    for (let fromIndex = 0; fromIndex < 3; fromIndex += 1) {
+      for (const direction of ["up", "down"] as const) {
+        const toIndex = wrapThree(fromIndex + (direction === "up" ? -1 : 1));
+        const fromTile = reel.tiles[fromIndex];
+        const toTile = reel.tiles[toIndex];
+        if (fromTile.value !== toTile.value) continue;
+        const alternativeIndex = 3 - fromIndex - toIndex;
+        findings.push({
+          reelId: reel.id,
+          reelIndex,
+          direction,
+          fromIndex,
+          toIndex,
+          fromTileId: fromTile.id,
+          toTileId: toTile.id,
+          value: String(fromTile.value),
+          alternativeDirection: direction === "up" ? "down" : "up",
+          alternativeSteps: 2,
+          hasVisibleAlternative: reel.tiles[alternativeIndex]?.value !== fromTile.value
+        });
+      }
+    }
+  }
+  return findings.sort((left, right) =>
+    left.reelIndex - right.reelIndex
+      || left.fromIndex - right.fromIndex
+      || left.direction.localeCompare(right.direction));
+}
+
+function canonicalPlanRepeatsExpressionAcrossIdentities(
+  level: PublishedEquationSliderLevel
+): boolean {
+  const canonical = level.analysis.canonicalPlan
+    .map((arrangement) => level.analysis.validArrangements.find(
+      (candidate) => candidate.key === arrangement.indexes.join(".")
+    ))
+    .filter((arrangement): arrangement is PublishedEquationSliderLevel["analysis"]["validArrangements"][number] => Boolean(arrangement));
+  for (let leftIndex = 0; leftIndex < canonical.length; leftIndex += 1) {
+    for (let rightIndex = leftIndex + 1; rightIndex < canonical.length; rightIndex += 1) {
+      const left = canonical[leftIndex];
+      const right = canonical[rightIndex];
+      if (
+        left.expressionText === right.expressionText
+        && left.selectedTileIds.some((tileId, index) => right.selectedTileIds[index] !== tileId)
+      ) return true;
+    }
+  }
+  return false;
+}
+
+function auditSameVisibleCompletionPaths(
+  level: PublishedEquationSliderLevel,
+  initialSameVisibleMove: boolean
+): SameVisibleCompletionPathAudit {
+  const shortestMovesWithSameVisibleEdges = shortestCompletionPath(level, false);
+  const shortestMovesWithoutSameVisibleEdges = shortestCompletionPath(level, true);
+  if (shortestMovesWithSameVisibleEdges === null) {
+    throw new Error(`${level.id}: published solvable level has no completion path`);
+  }
+  return {
+    initialSameVisibleMove,
+    shortestMovesWithSameVisibleEdges,
+    shortestMovesWithoutSameVisibleEdges,
+    shortestPathDelta: shortestMovesWithoutSameVisibleEdges === null
+      ? null
+      : shortestMovesWithoutSameVisibleEdges - shortestMovesWithSameVisibleEdges,
+    solvableWithoutSameVisibleEdges: shortestMovesWithoutSameVisibleEdges !== null
+  };
+}
+
+function shortestCompletionPath(
+  level: PublishedEquationSliderLevel,
+  rejectSameVisibleEdges: boolean
+): number | null {
+  const reels = getMovableReels(level);
+  const validByIndexes = new Map(
+    level.analysis.validArrangements.map((arrangement) => [arrangement.indexes.join(","), arrangement])
+  );
+  const fullTileMask = (1 << level.requiredTileIds.length) - 1;
+  const fullTargetMask = (1 << level.targets.length) - 1;
+  const queue: Array<{
+    readonly indexes: readonly number[];
+    readonly tileMask: number;
+    readonly targetMask: number;
+    readonly distance: number;
+  }> = [{ indexes: [...level.initialIndexes], tileMask: 0, targetMask: 0, distance: 0 }];
+  const seen = new Set([`${level.initialIndexes.join(",")}|0|0`]);
+  for (let cursor = 0; cursor < queue.length; cursor += 1) {
+    const state = queue[cursor];
+    for (let reelIndex = 0; reelIndex < reels.length; reelIndex += 1) {
+      for (const step of [-1, 1] as const) {
+        const nextIndexes = [...state.indexes];
+        nextIndexes[reelIndex] = wrapThree(nextIndexes[reelIndex] + step);
+        if (
+          rejectSameVisibleEdges
+          && reels[reelIndex].tiles[state.indexes[reelIndex]].value
+            === reels[reelIndex].tiles[nextIndexes[reelIndex]].value
+        ) continue;
+        const arrangement = validByIndexes.get(nextIndexes.join(","));
+        const tileMask = state.tileMask | (arrangement?.tileMask ?? 0);
+        const targetMask = state.targetMask | (arrangement?.targetMask ?? 0);
+        if (tileMask === fullTileMask && targetMask === fullTargetMask) return state.distance + 1;
+        const key = `${nextIndexes.join(",")}|${tileMask}|${targetMask}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        queue.push({ indexes: nextIndexes, tileMask, targetMask, distance: state.distance + 1 });
+      }
+    }
+  }
+  return null;
+}
+
+function wrapThree(index: number): number {
+  return ((index % 3) + 3) % 3;
 }
 
 function groupExactDuplicates(levels: readonly PublishedEquationSliderLevel[]): readonly (readonly string[])[] {
@@ -437,4 +633,10 @@ function sortNestedStringRecords(
       .sort(([left], [right]) => left.localeCompare(right))
       .map(([key, value]) => [key, [...value].sort()])
   );
+}
+
+function sortFindingRecords(
+  record: Record<string, SameVisibleMoveFinding[]>
+): Record<string, readonly SameVisibleMoveFinding[]> {
+  return Object.fromEntries(Object.entries(record).sort(([left], [right]) => left.localeCompare(right)));
 }

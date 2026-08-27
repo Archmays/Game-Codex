@@ -1,7 +1,7 @@
 # 算式滑轨
 
 > **当前状态：PLAYABLE / V3。**
-> 4 章共 200 关已按 V3 schema 重建；正式棋盘教程、统一 board state、稳定三格 reel、40 个手工金标准、160 个确定性生成关、真实浏览器 E2E 与 25 关 UI-only agent 试玩均已完成。完整证据见 `../../docs/equation-slider/rebuild-v3/`。
+> 4 章共 200 关已按 V3 schema 重建；正式棋盘教程、统一 board state、稳定三格 reel、40 个手工金标准、160 个确定性生成关、真实浏览器 E2E 与 25 关 UI-only agent 试玩均已完成。Portfolio Evolution 又完成了全量“tile identity 改变但中央显示不变”审计与可见动作修复；完整当前证据见 `levels/generated-audit.json` 和 `../../docs/portfolio-evolution/portfolio-audit.md`。
 
 ## 游戏目标
 
@@ -35,6 +35,7 @@
 - 所有输入共享同一 state reducer；
 - tile ID 在 DOM 中正好出现一次；
 - 正确关系点亮本次使用的新 tile；
+- 若相邻 tile 与当前 tile 显示相同值，该尝试不会改变状态或计步；界面解释中央算式不会变化，并引导改走能产生可见数学变化的方向；
 - 全部 required tile/target 完成后过关。
 
 具体合同：
@@ -54,6 +55,7 @@
 - 每章 10 个手工金标准，共 40 个；
 - 其余 160 关从金标准模板确定性生成；
 - 全部纳入 solver、内容审计、Playwright 和 agent/browser playtest。
+- 82 关含同显示相邻边、45 关初始可触发；删除这些边后 82/82 仍可完成，0 关依赖，39 关最短路径仅增加 1 步；solver 与提示现按可见移动距离工作。
 
 机器可读质量证据见 `levels/generated-audit.json`，人工与浏览器证据见 V3 报告目录。
 
@@ -99,7 +101,7 @@ V3 已纳入自动化验证：
 
 ## 后续改进建议
 
-按 `10-child-playtest-checklist.md` 做去身份化真人儿童观察，重点确认重复值 tile identity、一级提示理解、窄屏触控和 5–10 分钟持续兴趣；结果不得由 agent 试玩代替。
+未来如明确授权真人儿童观察，可按 `10-child-playtest-checklist.md` 重点确认同显示移动的解释是否易懂、一级提示理解、窄屏触控和 5–10 分钟持续使用；结果不得由 agent 试玩代替。
 
 ## 接入方式
 

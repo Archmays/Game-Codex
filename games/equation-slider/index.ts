@@ -452,7 +452,19 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
         source,
         useFeedbackLock: !reducedMotion
       });
-      if (!transition.committed) return;
+      if (!transition.committed) {
+        session = transition.session;
+        if (transition.rejectionReason === "same-visible-value") {
+          hint = null;
+          hintDepth = 0;
+          feedback = {
+            kind: "info",
+            text: `相邻方块也是 ${transition.rejectedValue ?? "同一个值"}，中央算式不会改变。向另一方向移动，让数学关系发生变化。`
+          };
+          updateBoard();
+        }
+        return;
+      }
       session = transition.session;
       hint = null;
       hintDepth = 0;
@@ -619,7 +631,19 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
         const dom = reelDoms.get(slot.reel.id);
         if (!dom) continue;
         dom.root.classList.toggle("is-hinted", hint?.reelId === slot.reel.id);
-        for (const control of dom.controls) control.disabled = locked;
+        const currentIndex = session.present.indexes[slot.movableIndex];
+        for (const [controlIndex, control] of dom.controls.entries()) {
+          const direction: MoveDirection = controlIndex === 0 ? "up" : "down";
+          const nextIndex = wrapThree(currentIndex + (direction === "up" ? -1 : 1));
+          const sameVisibleValue = slot.reel.tiles[currentIndex]?.value === slot.reel.tiles[nextIndex]?.value;
+          control.disabled = locked;
+          control.dataset.sameVisibleValue = String(sameVisibleValue);
+          control.setAttribute(
+            "aria-label",
+            `第 ${slot.movableIndex + 1} 列向${direction === "up" ? "上" : "下"}移动${sameVisibleValue ? "；相邻方块数值相同，按下会提示改走另一方向" : ""}`
+          );
+          control.title = sameVisibleValue ? "相邻方块数值相同；改走另一方向会改变算式" : "";
+        }
         dom.window.setAttribute("aria-disabled", String(locked));
         const current = slot.tiles.find((tile) => tile.position === "current");
         const reelStateDescription = slot.tiles

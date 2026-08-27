@@ -393,7 +393,7 @@ export function solveLevel(
   }
 
   const minimumMovesToFirstSuccess = Math.min(
-    ...validArrangements.map((arrangement) => cyclicMoveDistance(level.initialIndexes, arrangement.indexes))
+    ...validArrangements.map((arrangement) => visibleMoveDistance(level, level.initialIndexes, arrangement.indexes))
   );
   const metrics = buildDifficultyMetrics(
     level,
@@ -481,7 +481,7 @@ export function findHintContinuation(
   const candidates = level.analysis.validArrangements
     .map((arrangement) => ({
       arrangement,
-      distance: cyclicMoveDistance(indexes, arrangement.indexes),
+      distance: visibleMoveDistance(level, indexes, arrangement.indexes),
       novel: arrangement.selectedTileIds.filter((id) => !coveredTileIds.has(id)).length
         + arrangement.satisfiedTargetIds.filter((id) => !completedTargetIds.has(id)).length
     }))
@@ -497,7 +497,11 @@ export function findHintContinuation(
       expressionText: next.arrangement.expressionText
     };
   }
-  const direction = shortestDirection(indexes[reelIndex], next.arrangement.indexes[reelIndex]);
+  const direction = visibleDirection(
+    getMovableReels(level)[reelIndex],
+    indexes[reelIndex],
+    next.arrangement.indexes[reelIndex]
+  );
   return {
     targetIndexes: next.arrangement.indexes,
     reelId: getMovableReels(level)[reelIndex].id,
@@ -704,7 +708,7 @@ function buildQualitySignatures(
     return match ? `${match.expressionText}->${match.satisfiedTargetIds.map((id) => targetSignature(level, id)).join("+")}` : arrangement.indexes.join(".");
   }).join(";");
   const first = [...validArrangements]
-    .sort((a, b) => cyclicMoveDistance(level.initialIndexes, a.indexes) - cyclicMoveDistance(level.initialIndexes, b.indexes) || a.key.localeCompare(b.key))[0];
+    .sort((a, b) => visibleMoveDistance(level, level.initialIndexes, a.indexes) - visibleMoveDistance(level, level.initialIndexes, b.indexes) || a.key.localeCompare(b.key))[0];
   return {
     slotStructure: slotStructure(level),
     valueStructure: `${goal}|${level.slots.map(slotValueSignature).join("|")}`,
@@ -716,7 +720,7 @@ function buildQualitySignatures(
         : "number").join("|"),
     validArrangements: validSignature,
     canonicalCoverage: planSignature,
-    firstSuccessAction: first ? first.indexes.map((target, index) => shortestActionCode(level.initialIndexes[index], target)).join(".") : "none",
+    firstSuccessAction: first ? first.indexes.map((target, index) => visibleActionCode(reels[index], level.initialIndexes[index], target)).join(".") : "none",
     numberMultiset: numberValues.join(","),
     learningBand: `${level.learning.primarySkill}|${Math.min(...numberValues)}-${Math.max(...numberValues)}`
   };
@@ -738,11 +742,18 @@ function canonicalCircularSequence(values: readonly string[]): string {
   return rotations.sort()[0] ?? "";
 }
 
-function cyclicMoveDistance(from: readonly number[], to: readonly number[]): number {
+export function visibleMoveDistance(
+  level: EquationSliderLevelDefinition,
+  from: readonly number[],
+  to: readonly number[]
+): number {
+  const reels = getMovableReels(level);
   return from.reduce((total, current, index) => {
     const target = to[index] ?? current;
-    const direct = Math.abs(target - current);
-    return total + Math.min(direct, 3 - direct);
+    if (current === target) return total;
+    const reel = reels[index];
+    const sameVisibleValue = reel?.tiles[current]?.value === reel?.tiles[target]?.value;
+    return total + (sameVisibleValue ? 2 : 1);
   }, 0);
 }
 
@@ -752,9 +763,15 @@ function shortestDirection(current: number, target: number): MoveDirection {
   return upSteps <= downSteps ? "up" : "down";
 }
 
-function shortestActionCode(current: number, target: number): string {
+function visibleDirection(reel: ReelDefinition, current: number, target: number): MoveDirection {
+  const direct = shortestDirection(current, target);
+  if (reel.tiles[current]?.value !== reel.tiles[target]?.value) return direct;
+  return direct === "up" ? "down" : "up";
+}
+
+function visibleActionCode(reel: ReelDefinition, current: number, target: number): string {
   if (current === target) return "stay";
-  return shortestDirection(current, target);
+  return visibleDirection(reel, current, target);
 }
 
 function stateKey(tileMask: number, targetMask: number): string {

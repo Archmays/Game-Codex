@@ -49,6 +49,8 @@ export type BoardAction =
 export interface BoardTransition {
   readonly session: BoardSession;
   readonly committed: boolean;
+  readonly rejectionReason?: "same-visible-value";
+  readonly rejectedValue?: string;
   readonly outcome?: ArrangementOutcome;
   readonly newlyCoveredTileIds: readonly string[];
   readonly newlyCompletedTargetIds: readonly string[];
@@ -145,7 +147,23 @@ export function commitMove(
 
   const snapshot = createSnapshot(session.present);
   const indexes = [...session.present.indexes];
-  indexes[reelIndex] = wrapThree(indexes[reelIndex] + (action.direction === "up" ? -1 : 1));
+  const currentIndex = indexes[reelIndex];
+  const nextIndex = wrapThree(currentIndex + (action.direction === "up" ? -1 : 1));
+  const currentValue = reels[reelIndex].tiles[currentIndex]?.value;
+  const nextValue = reels[reelIndex].tiles[nextIndex]?.value;
+  if (currentValue === nextValue) {
+    return {
+      session: session.present.status === "dragging"
+        ? { ...session, present: { ...session.present, status: "ready" } }
+        : session,
+      committed: false,
+      rejectionReason: "same-visible-value",
+      rejectedValue: String(currentValue),
+      newlyCoveredTileIds: [],
+      newlyCompletedTargetIds: []
+    };
+  }
+  indexes[reelIndex] = nextIndex;
   const outcome = evaluateArrangementOutcome(level, indexes);
   const coveredTileIds = new Set(session.present.coveredTileIds);
   const completedTargetIds = new Set(session.present.completedTargetIds);

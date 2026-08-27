@@ -63,6 +63,4406 @@
   "repeatedValueTileCount": 216,
   "coverableRepeatedValueTileCount": 216,
   "uncoverableRepeatedValueTiles": {},
+  "sameVisibleTransitionCount": 216,
+  "sameVisibleTransitionLevelCount": 82,
+  "sameVisibleTransitions": {
+    "es-1-10": [
+      {
+        "reelId": "es-1-10-number-d",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-1-10-number-d-n2",
+        "toTileId": "es-1-10-number-d-n3",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-1-10-number-d",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-1-10-number-d-n3",
+        "toTileId": "es-1-10-number-d-n2",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-1-20": [
+      {
+        "reelId": "es-1-20-number-d",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-1-20-number-d-n2",
+        "toTileId": "es-1-20-number-d-n3",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-1-20-number-d",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-1-20-number-d-n3",
+        "toTileId": "es-1-20-number-d-n2",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-1-30": [
+      {
+        "reelId": "es-1-30-number-d",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-1-30-number-d-n2",
+        "toTileId": "es-1-30-number-d-n3",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-1-30-number-d",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-1-30-number-d-n3",
+        "toTileId": "es-1-30-number-d-n2",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-1-40": [
+      {
+        "reelId": "es-1-40-number-d",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-1-40-number-d-n2",
+        "toTileId": "es-1-40-number-d-n3",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-1-40-number-d",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-1-40-number-d-n3",
+        "toTileId": "es-1-40-number-d-n2",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-1-50": [
+      {
+        "reelId": "es-1-50-number-d",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-1-50-number-d-n2",
+        "toTileId": "es-1-50-number-d-n3",
+        "value": "4",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-1-50-number-d",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-1-50-number-d-n3",
+        "toTileId": "es-1-50-number-d-n2",
+        "value": "4",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-01": [
+      {
+        "reelId": "es-2-01-operator",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-01-operator-o1",
+        "toTileId": "es-2-01-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-01-operator",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-01-operator-o3",
+        "toTileId": "es-2-01-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-05": [
+      {
+        "reelId": "es-2-05-operator",
+        "reelIndex": 0,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-05-operator-o1",
+        "toTileId": "es-2-05-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-05-operator",
+        "reelIndex": 0,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-05-operator-o3",
+        "toTileId": "es-2-05-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-06": [
+      {
+        "reelId": "es-2-06-adjustment",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-06-adjustment-n1",
+        "toTileId": "es-2-06-adjustment-n3",
+        "value": "1",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-06-adjustment",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-06-adjustment-n3",
+        "toTileId": "es-2-06-adjustment-n1",
+        "value": "1",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-07": [
+      {
+        "reelId": "es-2-07-operator",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-07-operator-o1",
+        "toTileId": "es-2-07-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-07-operator",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-07-operator-o3",
+        "toTileId": "es-2-07-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-08": [
+      {
+        "reelId": "es-2-08-operator",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-2-08-operator-o2",
+        "toTileId": "es-2-08-operator-o3",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-08-operator",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-2-08-operator-o3",
+        "toTileId": "es-2-08-operator-o2",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-09": [
+      {
+        "reelId": "es-2-09-adjustment",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-09-adjustment-n1",
+        "toTileId": "es-2-09-adjustment-n3",
+        "value": "1",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-09-adjustment",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-09-adjustment-n3",
+        "toTileId": "es-2-09-adjustment-n1",
+        "value": "1",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-10": [
+      {
+        "reelId": "es-2-10-operator",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-10-operator-o1",
+        "toTileId": "es-2-10-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-10-operator",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-10-operator-o3",
+        "toTileId": "es-2-10-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-11": [
+      {
+        "reelId": "es-2-11-operator",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-11-operator-o1",
+        "toTileId": "es-2-11-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-11-operator",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-11-operator-o3",
+        "toTileId": "es-2-11-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-15": [
+      {
+        "reelId": "es-2-15-operator",
+        "reelIndex": 0,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-15-operator-o1",
+        "toTileId": "es-2-15-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-15-operator",
+        "reelIndex": 0,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-15-operator-o3",
+        "toTileId": "es-2-15-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-16": [
+      {
+        "reelId": "es-2-16-adjustment",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-16-adjustment-n1",
+        "toTileId": "es-2-16-adjustment-n3",
+        "value": "2",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-16-adjustment",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-16-adjustment-n3",
+        "toTileId": "es-2-16-adjustment-n1",
+        "value": "2",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-17": [
+      {
+        "reelId": "es-2-17-operator",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-17-operator-o1",
+        "toTileId": "es-2-17-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-17-operator",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-17-operator-o3",
+        "toTileId": "es-2-17-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-18": [
+      {
+        "reelId": "es-2-18-operator",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-2-18-operator-o2",
+        "toTileId": "es-2-18-operator-o3",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-18-operator",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-2-18-operator-o3",
+        "toTileId": "es-2-18-operator-o2",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-19": [
+      {
+        "reelId": "es-2-19-adjustment",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-19-adjustment-n1",
+        "toTileId": "es-2-19-adjustment-n3",
+        "value": "2",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-19-adjustment",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-19-adjustment-n3",
+        "toTileId": "es-2-19-adjustment-n1",
+        "value": "2",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-20": [
+      {
+        "reelId": "es-2-20-operator",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-20-operator-o1",
+        "toTileId": "es-2-20-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-20-operator",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-20-operator-o3",
+        "toTileId": "es-2-20-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-21": [
+      {
+        "reelId": "es-2-21-operator",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-21-operator-o1",
+        "toTileId": "es-2-21-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-21-operator",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-21-operator-o3",
+        "toTileId": "es-2-21-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-25": [
+      {
+        "reelId": "es-2-25-operator",
+        "reelIndex": 0,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-25-operator-o1",
+        "toTileId": "es-2-25-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-25-operator",
+        "reelIndex": 0,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-25-operator-o3",
+        "toTileId": "es-2-25-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-26": [
+      {
+        "reelId": "es-2-26-adjustment",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-26-adjustment-n1",
+        "toTileId": "es-2-26-adjustment-n3",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-26-adjustment",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-26-adjustment-n3",
+        "toTileId": "es-2-26-adjustment-n1",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-27": [
+      {
+        "reelId": "es-2-27-operator",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-27-operator-o1",
+        "toTileId": "es-2-27-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-27-operator",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-27-operator-o3",
+        "toTileId": "es-2-27-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-28": [
+      {
+        "reelId": "es-2-28-operator",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-2-28-operator-o2",
+        "toTileId": "es-2-28-operator-o3",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-28-operator",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-2-28-operator-o3",
+        "toTileId": "es-2-28-operator-o2",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-29": [
+      {
+        "reelId": "es-2-29-adjustment",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-29-adjustment-n1",
+        "toTileId": "es-2-29-adjustment-n3",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-29-adjustment",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-29-adjustment-n3",
+        "toTileId": "es-2-29-adjustment-n1",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-30": [
+      {
+        "reelId": "es-2-30-operator",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-30-operator-o1",
+        "toTileId": "es-2-30-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-30-operator",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-30-operator-o3",
+        "toTileId": "es-2-30-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-31": [
+      {
+        "reelId": "es-2-31-operator",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-31-operator-o1",
+        "toTileId": "es-2-31-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-31-operator",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-31-operator-o3",
+        "toTileId": "es-2-31-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-35": [
+      {
+        "reelId": "es-2-35-operator",
+        "reelIndex": 0,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-35-operator-o1",
+        "toTileId": "es-2-35-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-35-operator",
+        "reelIndex": 0,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-35-operator-o3",
+        "toTileId": "es-2-35-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-36": [
+      {
+        "reelId": "es-2-36-adjustment",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-36-adjustment-n1",
+        "toTileId": "es-2-36-adjustment-n3",
+        "value": "4",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-36-adjustment",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-36-adjustment-n3",
+        "toTileId": "es-2-36-adjustment-n1",
+        "value": "4",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-37": [
+      {
+        "reelId": "es-2-37-operator",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-37-operator-o1",
+        "toTileId": "es-2-37-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-37-operator",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-37-operator-o3",
+        "toTileId": "es-2-37-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-38": [
+      {
+        "reelId": "es-2-38-operator",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-2-38-operator-o2",
+        "toTileId": "es-2-38-operator-o3",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-38-operator",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-2-38-operator-o3",
+        "toTileId": "es-2-38-operator-o2",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-39": [
+      {
+        "reelId": "es-2-39-adjustment",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-39-adjustment-n1",
+        "toTileId": "es-2-39-adjustment-n3",
+        "value": "4",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-39-adjustment",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-39-adjustment-n3",
+        "toTileId": "es-2-39-adjustment-n1",
+        "value": "4",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-40": [
+      {
+        "reelId": "es-2-40-operator",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-40-operator-o1",
+        "toTileId": "es-2-40-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-40-operator",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-40-operator-o3",
+        "toTileId": "es-2-40-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-41": [
+      {
+        "reelId": "es-2-41-operator",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-41-operator-o1",
+        "toTileId": "es-2-41-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-41-operator",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-41-operator-o3",
+        "toTileId": "es-2-41-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-45": [
+      {
+        "reelId": "es-2-45-operator",
+        "reelIndex": 0,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-45-operator-o1",
+        "toTileId": "es-2-45-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-45-operator",
+        "reelIndex": 0,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-45-operator-o3",
+        "toTileId": "es-2-45-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-46": [
+      {
+        "reelId": "es-2-46-adjustment",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-46-adjustment-n1",
+        "toTileId": "es-2-46-adjustment-n3",
+        "value": "5",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-46-adjustment",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-46-adjustment-n3",
+        "toTileId": "es-2-46-adjustment-n1",
+        "value": "5",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-47": [
+      {
+        "reelId": "es-2-47-operator",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-47-operator-o1",
+        "toTileId": "es-2-47-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-47-operator",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-47-operator-o3",
+        "toTileId": "es-2-47-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-48": [
+      {
+        "reelId": "es-2-48-operator",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-2-48-operator-o2",
+        "toTileId": "es-2-48-operator-o3",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-48-operator",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-2-48-operator-o3",
+        "toTileId": "es-2-48-operator-o2",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-49": [
+      {
+        "reelId": "es-2-49-adjustment",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-49-adjustment-n1",
+        "toTileId": "es-2-49-adjustment-n3",
+        "value": "5",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-49-adjustment",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-49-adjustment-n3",
+        "toTileId": "es-2-49-adjustment-n1",
+        "value": "5",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-50": [
+      {
+        "reelId": "es-2-50-operator",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-50-operator-o1",
+        "toTileId": "es-2-50-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-2-50-operator",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-2-50-operator-o3",
+        "toTileId": "es-2-50-operator-o1",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-04": [
+      {
+        "reelId": "es-3-04-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-3-04-factor-b-n1",
+        "toTileId": "es-3-04-factor-b-n3",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-04-factor-b",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-3-04-factor-b-n3",
+        "toTileId": "es-3-04-factor-b-n1",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-04-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-04-factor-c-n1",
+        "toTileId": "es-3-04-factor-c-n2",
+        "value": "4",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-04-factor-c",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-04-factor-c-n2",
+        "toTileId": "es-3-04-factor-c-n1",
+        "value": "4",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-07": [
+      {
+        "reelId": "es-3-07-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-3-07-factor-b-n1",
+        "toTileId": "es-3-07-factor-b-n3",
+        "value": "2",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-07-factor-b",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-3-07-factor-b-n3",
+        "toTileId": "es-3-07-factor-b-n1",
+        "value": "2",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-07-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-07-factor-c-n1",
+        "toTileId": "es-3-07-factor-c-n2",
+        "value": "5",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-07-factor-c",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-07-factor-c-n2",
+        "toTileId": "es-3-07-factor-c-n1",
+        "value": "5",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-08": [
+      {
+        "reelId": "es-3-08-remainder-part",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-08-remainder-part-n1",
+        "toTileId": "es-3-08-remainder-part-n2",
+        "value": "1",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-08-remainder-part",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-08-remainder-part-n2",
+        "toTileId": "es-3-08-remainder-part-n1",
+        "value": "1",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-09": [
+      {
+        "reelId": "es-3-09-middle",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-3-09-middle-n1",
+        "toTileId": "es-3-09-middle-n3",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-09-middle",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-3-09-middle-n3",
+        "toTileId": "es-3-09-middle-n1",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-09-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-09-operator-b-o1",
+        "toTileId": "es-3-09-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-09-operator-b",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-09-operator-b-o2",
+        "toTileId": "es-3-09-operator-b-o1",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-10": [
+      {
+        "reelId": "es-3-10-factor-b",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-10-factor-b-n1",
+        "toTileId": "es-3-10-factor-b-n2",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-10-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-10-factor-b-n2",
+        "toTileId": "es-3-10-factor-b-n1",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-10-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-3-10-factor-c-n2",
+        "toTileId": "es-3-10-factor-c-n3",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-10-factor-c",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-3-10-factor-c-n3",
+        "toTileId": "es-3-10-factor-c-n2",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-14": [
+      {
+        "reelId": "es-3-14-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-3-14-factor-b-n1",
+        "toTileId": "es-3-14-factor-b-n3",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-14-factor-b",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-3-14-factor-b-n3",
+        "toTileId": "es-3-14-factor-b-n1",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-14-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-14-factor-c-n1",
+        "toTileId": "es-3-14-factor-c-n2",
+        "value": "4",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-14-factor-c",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-14-factor-c-n2",
+        "toTileId": "es-3-14-factor-c-n1",
+        "value": "4",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-17": [
+      {
+        "reelId": "es-3-17-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-3-17-factor-b-n1",
+        "toTileId": "es-3-17-factor-b-n3",
+        "value": "2",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-17-factor-b",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-3-17-factor-b-n3",
+        "toTileId": "es-3-17-factor-b-n1",
+        "value": "2",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-17-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-17-factor-c-n1",
+        "toTileId": "es-3-17-factor-c-n2",
+        "value": "5",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-17-factor-c",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-17-factor-c-n2",
+        "toTileId": "es-3-17-factor-c-n1",
+        "value": "5",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-18": [
+      {
+        "reelId": "es-3-18-remainder-part",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-18-remainder-part-n1",
+        "toTileId": "es-3-18-remainder-part-n2",
+        "value": "2",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-18-remainder-part",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-18-remainder-part-n2",
+        "toTileId": "es-3-18-remainder-part-n1",
+        "value": "2",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-19": [
+      {
+        "reelId": "es-3-19-middle",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-3-19-middle-n2",
+        "toTileId": "es-3-19-middle-n3",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-19-middle",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-3-19-middle-n3",
+        "toTileId": "es-3-19-middle-n2",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-19-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-19-operator-b-o1",
+        "toTileId": "es-3-19-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-19-operator-b",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-19-operator-b-o2",
+        "toTileId": "es-3-19-operator-b-o1",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-19-right",
+        "reelIndex": 4,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-19-right-n1",
+        "toTileId": "es-3-19-right-n2",
+        "value": "5",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-19-right",
+        "reelIndex": 4,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-19-right-n2",
+        "toTileId": "es-3-19-right-n1",
+        "value": "5",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-20": [
+      {
+        "reelId": "es-3-20-factor-b",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-20-factor-b-n1",
+        "toTileId": "es-3-20-factor-b-n2",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-20-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-20-factor-b-n2",
+        "toTileId": "es-3-20-factor-b-n1",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-20-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-3-20-factor-c-n2",
+        "toTileId": "es-3-20-factor-c-n3",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-20-factor-c",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-3-20-factor-c-n3",
+        "toTileId": "es-3-20-factor-c-n2",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-24": [
+      {
+        "reelId": "es-3-24-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-3-24-factor-b-n1",
+        "toTileId": "es-3-24-factor-b-n3",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-24-factor-b",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-3-24-factor-b-n3",
+        "toTileId": "es-3-24-factor-b-n1",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-24-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-24-factor-c-n1",
+        "toTileId": "es-3-24-factor-c-n2",
+        "value": "4",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-24-factor-c",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-24-factor-c-n2",
+        "toTileId": "es-3-24-factor-c-n1",
+        "value": "4",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-27": [
+      {
+        "reelId": "es-3-27-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-3-27-factor-b-n1",
+        "toTileId": "es-3-27-factor-b-n3",
+        "value": "2",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-27-factor-b",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-3-27-factor-b-n3",
+        "toTileId": "es-3-27-factor-b-n1",
+        "value": "2",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-27-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-27-factor-c-n1",
+        "toTileId": "es-3-27-factor-c-n2",
+        "value": "5",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-27-factor-c",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-27-factor-c-n2",
+        "toTileId": "es-3-27-factor-c-n1",
+        "value": "5",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-28": [
+      {
+        "reelId": "es-3-28-remainder-part",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-28-remainder-part-n1",
+        "toTileId": "es-3-28-remainder-part-n2",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-28-remainder-part",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-28-remainder-part-n2",
+        "toTileId": "es-3-28-remainder-part-n1",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-29": [
+      {
+        "reelId": "es-3-29-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-29-operator-b-o1",
+        "toTileId": "es-3-29-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-29-operator-b",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-29-operator-b-o2",
+        "toTileId": "es-3-29-operator-b-o1",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-30": [
+      {
+        "reelId": "es-3-30-factor-b",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-30-factor-b-n1",
+        "toTileId": "es-3-30-factor-b-n2",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-30-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-30-factor-b-n2",
+        "toTileId": "es-3-30-factor-b-n1",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-30-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-3-30-factor-c-n2",
+        "toTileId": "es-3-30-factor-c-n3",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-30-factor-c",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-3-30-factor-c-n3",
+        "toTileId": "es-3-30-factor-c-n2",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-34": [
+      {
+        "reelId": "es-3-34-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-3-34-factor-b-n1",
+        "toTileId": "es-3-34-factor-b-n3",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-34-factor-b",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-3-34-factor-b-n3",
+        "toTileId": "es-3-34-factor-b-n1",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-34-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-34-factor-c-n1",
+        "toTileId": "es-3-34-factor-c-n2",
+        "value": "4",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-34-factor-c",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-34-factor-c-n2",
+        "toTileId": "es-3-34-factor-c-n1",
+        "value": "4",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-37": [
+      {
+        "reelId": "es-3-37-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-3-37-factor-b-n1",
+        "toTileId": "es-3-37-factor-b-n3",
+        "value": "2",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-37-factor-b",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-3-37-factor-b-n3",
+        "toTileId": "es-3-37-factor-b-n1",
+        "value": "2",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-37-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-37-factor-c-n1",
+        "toTileId": "es-3-37-factor-c-n2",
+        "value": "5",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-37-factor-c",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-37-factor-c-n2",
+        "toTileId": "es-3-37-factor-c-n1",
+        "value": "5",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-38": [
+      {
+        "reelId": "es-3-38-remainder-part",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-38-remainder-part-n1",
+        "toTileId": "es-3-38-remainder-part-n2",
+        "value": "4",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-38-remainder-part",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-38-remainder-part-n2",
+        "toTileId": "es-3-38-remainder-part-n1",
+        "value": "4",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-39": [
+      {
+        "reelId": "es-3-39-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-39-operator-b-o1",
+        "toTileId": "es-3-39-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-39-operator-b",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-39-operator-b-o2",
+        "toTileId": "es-3-39-operator-b-o1",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-39-right",
+        "reelIndex": 4,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-3-39-right-n1",
+        "toTileId": "es-3-39-right-n3",
+        "value": "5",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-39-right",
+        "reelIndex": 4,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-3-39-right-n3",
+        "toTileId": "es-3-39-right-n1",
+        "value": "5",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-40": [
+      {
+        "reelId": "es-3-40-factor-b",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-40-factor-b-n1",
+        "toTileId": "es-3-40-factor-b-n2",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-40-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-40-factor-b-n2",
+        "toTileId": "es-3-40-factor-b-n1",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-40-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-3-40-factor-c-n2",
+        "toTileId": "es-3-40-factor-c-n3",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-40-factor-c",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-3-40-factor-c-n3",
+        "toTileId": "es-3-40-factor-c-n2",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-44": [
+      {
+        "reelId": "es-3-44-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-3-44-factor-b-n1",
+        "toTileId": "es-3-44-factor-b-n3",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-44-factor-b",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-3-44-factor-b-n3",
+        "toTileId": "es-3-44-factor-b-n1",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-44-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-44-factor-c-n1",
+        "toTileId": "es-3-44-factor-c-n2",
+        "value": "4",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-44-factor-c",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-44-factor-c-n2",
+        "toTileId": "es-3-44-factor-c-n1",
+        "value": "4",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-47": [
+      {
+        "reelId": "es-3-47-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-3-47-factor-b-n1",
+        "toTileId": "es-3-47-factor-b-n3",
+        "value": "2",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-47-factor-b",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-3-47-factor-b-n3",
+        "toTileId": "es-3-47-factor-b-n1",
+        "value": "2",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-47-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-47-factor-c-n1",
+        "toTileId": "es-3-47-factor-c-n2",
+        "value": "5",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-47-factor-c",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-47-factor-c-n2",
+        "toTileId": "es-3-47-factor-c-n1",
+        "value": "5",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-48": [
+      {
+        "reelId": "es-3-48-remainder-part",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-48-remainder-part-n1",
+        "toTileId": "es-3-48-remainder-part-n2",
+        "value": "5",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-48-remainder-part",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-48-remainder-part-n2",
+        "toTileId": "es-3-48-remainder-part-n1",
+        "value": "5",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-49": [
+      {
+        "reelId": "es-3-49-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-49-operator-b-o1",
+        "toTileId": "es-3-49-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-49-operator-b",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-49-operator-b-o2",
+        "toTileId": "es-3-49-operator-b-o1",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-50": [
+      {
+        "reelId": "es-3-50-factor-b",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-50-factor-b-n1",
+        "toTileId": "es-3-50-factor-b-n2",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-50-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-3-50-factor-b-n2",
+        "toTileId": "es-3-50-factor-b-n1",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-50-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-3-50-factor-c-n2",
+        "toTileId": "es-3-50-factor-c-n3",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-50-factor-c",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-3-50-factor-c-n3",
+        "toTileId": "es-3-50-factor-c-n2",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-01": [
+      {
+        "reelId": "es-4-01-right",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-4-01-right-n2",
+        "toTileId": "es-4-01-right-n3",
+        "value": "8",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-01-right",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-4-01-right-n3",
+        "toTileId": "es-4-01-right-n2",
+        "value": "8",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-02": [
+      {
+        "reelId": "es-4-02-middle",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-4-02-middle-n2",
+        "toTileId": "es-4-02-middle-n3",
+        "value": "2",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-02-middle",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-4-02-middle-n3",
+        "toTileId": "es-4-02-middle-n2",
+        "value": "2",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-03": [
+      {
+        "reelId": "es-4-03-middle",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-4-03-middle-n1",
+        "toTileId": "es-4-03-middle-n3",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-03-middle",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-4-03-middle-n3",
+        "toTileId": "es-4-03-middle-n1",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-03-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-03-operator-b-o1",
+        "toTileId": "es-4-03-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-03-operator-b",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-4-03-operator-b-o2",
+        "toTileId": "es-4-03-operator-b-o1",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-09": [
+      {
+        "reelId": "es-4-09-middle",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-4-09-middle-n2",
+        "toTileId": "es-4-09-middle-n3",
+        "value": "2",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-09-middle",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-4-09-middle-n3",
+        "toTileId": "es-4-09-middle-n2",
+        "value": "2",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-10": [
+      {
+        "reelId": "es-4-10-middle",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-4-10-middle-n1",
+        "toTileId": "es-4-10-middle-n3",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-10-middle",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-4-10-middle-n3",
+        "toTileId": "es-4-10-middle-n1",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-10-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-10-operator-b-o1",
+        "toTileId": "es-4-10-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-10-operator-b",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-4-10-operator-b-o2",
+        "toTileId": "es-4-10-operator-b-o1",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-11": [
+      {
+        "reelId": "es-4-11-right",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-4-11-right-n2",
+        "toTileId": "es-4-11-right-n3",
+        "value": "8",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-11-right",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-4-11-right-n3",
+        "toTileId": "es-4-11-right-n2",
+        "value": "8",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-13": [
+      {
+        "reelId": "es-4-13-middle",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-4-13-middle-n2",
+        "toTileId": "es-4-13-middle-n3",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-13-middle",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-4-13-middle-n3",
+        "toTileId": "es-4-13-middle-n2",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-13-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-13-operator-b-o1",
+        "toTileId": "es-4-13-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-13-operator-b",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-4-13-operator-b-o2",
+        "toTileId": "es-4-13-operator-b-o1",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-20": [
+      {
+        "reelId": "es-4-20-middle",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-4-20-middle-n2",
+        "toTileId": "es-4-20-middle-n3",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-20-middle",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-4-20-middle-n3",
+        "toTileId": "es-4-20-middle-n2",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-20-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-20-operator-b-o1",
+        "toTileId": "es-4-20-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-20-operator-b",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-4-20-operator-b-o2",
+        "toTileId": "es-4-20-operator-b-o1",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-20-right",
+        "reelIndex": 4,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-20-right-n1",
+        "toTileId": "es-4-20-right-n2",
+        "value": "5",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-20-right",
+        "reelIndex": 4,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-4-20-right-n2",
+        "toTileId": "es-4-20-right-n1",
+        "value": "5",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-21": [
+      {
+        "reelId": "es-4-21-right",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-4-21-right-n2",
+        "toTileId": "es-4-21-right-n3",
+        "value": "9",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-21-right",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-4-21-right-n3",
+        "toTileId": "es-4-21-right-n2",
+        "value": "9",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-23": [
+      {
+        "reelId": "es-4-23-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-23-operator-b-o1",
+        "toTileId": "es-4-23-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-23-operator-b",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-4-23-operator-b-o2",
+        "toTileId": "es-4-23-operator-b-o1",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-23-right",
+        "reelIndex": 4,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-23-right-n1",
+        "toTileId": "es-4-23-right-n2",
+        "value": "6",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-23-right",
+        "reelIndex": 4,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-4-23-right-n2",
+        "toTileId": "es-4-23-right-n1",
+        "value": "6",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-30": [
+      {
+        "reelId": "es-4-30-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-30-operator-b-o1",
+        "toTileId": "es-4-30-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-30-operator-b",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-4-30-operator-b-o2",
+        "toTileId": "es-4-30-operator-b-o1",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-31": [
+      {
+        "reelId": "es-4-31-right",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-4-31-right-n2",
+        "toTileId": "es-4-31-right-n3",
+        "value": "9",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-31-right",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-4-31-right-n3",
+        "toTileId": "es-4-31-right-n2",
+        "value": "9",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-33": [
+      {
+        "reelId": "es-4-33-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-33-operator-b-o1",
+        "toTileId": "es-4-33-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-33-operator-b",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-4-33-operator-b-o2",
+        "toTileId": "es-4-33-operator-b-o1",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-40": [
+      {
+        "reelId": "es-4-40-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-40-operator-b-o1",
+        "toTileId": "es-4-40-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-40-operator-b",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-4-40-operator-b-o2",
+        "toTileId": "es-4-40-operator-b-o1",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-40-right",
+        "reelIndex": 4,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-4-40-right-n1",
+        "toTileId": "es-4-40-right-n3",
+        "value": "5",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-40-right",
+        "reelIndex": 4,
+        "direction": "down",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "fromTileId": "es-4-40-right-n3",
+        "toTileId": "es-4-40-right-n1",
+        "value": "5",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-41": [
+      {
+        "reelId": "es-4-41-right",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-4-41-right-n2",
+        "toTileId": "es-4-41-right-n3",
+        "value": "9",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-41-right",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-4-41-right-n3",
+        "toTileId": "es-4-41-right-n2",
+        "value": "9",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-43": [
+      {
+        "reelId": "es-4-43-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-43-operator-b-o1",
+        "toTileId": "es-4-43-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-43-operator-b",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-4-43-operator-b-o2",
+        "toTileId": "es-4-43-operator-b-o1",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-50": [
+      {
+        "reelId": "es-4-50-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-50-operator-b-o1",
+        "toTileId": "es-4-50-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-50-operator-b",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 1,
+        "toIndex": 0,
+        "fromTileId": "es-4-50-operator-b-o2",
+        "toTileId": "es-4-50-operator-b-o1",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ]
+  },
+  "initialSameVisibleMoveLevelCount": 45,
+  "initialSameVisibleMoves": {
+    "es-1-20": [
+      {
+        "reelId": "es-1-20-number-d",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-1-20-number-d-n2",
+        "toTileId": "es-1-20-number-d-n3",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-1-40": [
+      {
+        "reelId": "es-1-40-number-d",
+        "reelIndex": 3,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-1-40-number-d-n3",
+        "toTileId": "es-1-40-number-d-n2",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-1-50": [
+      {
+        "reelId": "es-1-50-number-d",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-1-50-number-d-n2",
+        "toTileId": "es-1-50-number-d-n3",
+        "value": "4",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-08": [
+      {
+        "reelId": "es-2-08-operator",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-2-08-operator-o3",
+        "toTileId": "es-2-08-operator-o2",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-10": [
+      {
+        "reelId": "es-2-10-operator",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-10-operator-o1",
+        "toTileId": "es-2-10-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-11": [
+      {
+        "reelId": "es-2-11-operator",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-11-operator-o1",
+        "toTileId": "es-2-11-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-15": [
+      {
+        "reelId": "es-2-15-operator",
+        "reelIndex": 0,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-15-operator-o1",
+        "toTileId": "es-2-15-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-17": [
+      {
+        "reelId": "es-2-17-operator",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-17-operator-o1",
+        "toTileId": "es-2-17-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-18": [
+      {
+        "reelId": "es-2-18-operator",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-2-18-operator-o2",
+        "toTileId": "es-2-18-operator-o3",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-19": [
+      {
+        "reelId": "es-2-19-adjustment",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-19-adjustment-n1",
+        "toTileId": "es-2-19-adjustment-n3",
+        "value": "2",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-25": [
+      {
+        "reelId": "es-2-25-operator",
+        "reelIndex": 0,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-25-operator-o1",
+        "toTileId": "es-2-25-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-28": [
+      {
+        "reelId": "es-2-28-operator",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-2-28-operator-o2",
+        "toTileId": "es-2-28-operator-o3",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-29": [
+      {
+        "reelId": "es-2-29-adjustment",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-29-adjustment-n1",
+        "toTileId": "es-2-29-adjustment-n3",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-35": [
+      {
+        "reelId": "es-2-35-operator",
+        "reelIndex": 0,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-35-operator-o1",
+        "toTileId": "es-2-35-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-36": [
+      {
+        "reelId": "es-2-36-adjustment",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-36-adjustment-n1",
+        "toTileId": "es-2-36-adjustment-n3",
+        "value": "4",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-37": [
+      {
+        "reelId": "es-2-37-operator",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-37-operator-o1",
+        "toTileId": "es-2-37-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-39": [
+      {
+        "reelId": "es-2-39-adjustment",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-39-adjustment-n1",
+        "toTileId": "es-2-39-adjustment-n3",
+        "value": "4",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-41": [
+      {
+        "reelId": "es-2-41-operator",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-41-operator-o1",
+        "toTileId": "es-2-41-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-47": [
+      {
+        "reelId": "es-2-47-operator",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-2-47-operator-o1",
+        "toTileId": "es-2-47-operator-o3",
+        "value": "+",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-2-48": [
+      {
+        "reelId": "es-2-48-operator",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-2-48-operator-o2",
+        "toTileId": "es-2-48-operator-o3",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-07": [
+      {
+        "reelId": "es-3-07-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-3-07-factor-b-n1",
+        "toTileId": "es-3-07-factor-b-n3",
+        "value": "2",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-09": [
+      {
+        "reelId": "es-3-09-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-09-operator-b-o1",
+        "toTileId": "es-3-09-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-14": [
+      {
+        "reelId": "es-3-14-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-14-factor-c-n1",
+        "toTileId": "es-3-14-factor-c-n2",
+        "value": "4",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-19": [
+      {
+        "reelId": "es-3-19-middle",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-3-19-middle-n2",
+        "toTileId": "es-3-19-middle-n3",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-19-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-19-operator-b-o1",
+        "toTileId": "es-3-19-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-24": [
+      {
+        "reelId": "es-3-24-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-3-24-factor-b-n1",
+        "toTileId": "es-3-24-factor-b-n3",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-27": [
+      {
+        "reelId": "es-3-27-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-3-27-factor-b-n1",
+        "toTileId": "es-3-27-factor-b-n3",
+        "value": "2",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-28": [
+      {
+        "reelId": "es-3-28-remainder-part",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-28-remainder-part-n1",
+        "toTileId": "es-3-28-remainder-part-n2",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-29": [
+      {
+        "reelId": "es-3-29-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-29-operator-b-o1",
+        "toTileId": "es-3-29-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-30": [
+      {
+        "reelId": "es-3-30-factor-b",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-30-factor-b-n1",
+        "toTileId": "es-3-30-factor-b-n2",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-30-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-3-30-factor-c-n2",
+        "toTileId": "es-3-30-factor-c-n3",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-34": [
+      {
+        "reelId": "es-3-34-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-34-factor-c-n1",
+        "toTileId": "es-3-34-factor-c-n2",
+        "value": "4",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-39": [
+      {
+        "reelId": "es-3-39-right",
+        "reelIndex": 4,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-3-39-right-n1",
+        "toTileId": "es-3-39-right-n3",
+        "value": "5",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-44": [
+      {
+        "reelId": "es-3-44-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-3-44-factor-b-n1",
+        "toTileId": "es-3-44-factor-b-n3",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-47": [
+      {
+        "reelId": "es-3-47-factor-b",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-3-47-factor-b-n1",
+        "toTileId": "es-3-47-factor-b-n3",
+        "value": "2",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-48": [
+      {
+        "reelId": "es-3-48-remainder-part",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-48-remainder-part-n1",
+        "toTileId": "es-3-48-remainder-part-n2",
+        "value": "5",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-49": [
+      {
+        "reelId": "es-3-49-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-49-operator-b-o1",
+        "toTileId": "es-3-49-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-3-50": [
+      {
+        "reelId": "es-3-50-factor-b",
+        "reelIndex": 1,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-3-50-factor-b-n1",
+        "toTileId": "es-3-50-factor-b-n2",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-3-50-factor-c",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-3-50-factor-c-n2",
+        "toTileId": "es-3-50-factor-c-n3",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-03": [
+      {
+        "reelId": "es-4-03-middle",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-4-03-middle-n1",
+        "toTileId": "es-4-03-middle-n3",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-03-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-03-operator-b-o1",
+        "toTileId": "es-4-03-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-09": [
+      {
+        "reelId": "es-4-09-middle",
+        "reelIndex": 1,
+        "direction": "up",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "fromTileId": "es-4-09-middle-n3",
+        "toTileId": "es-4-09-middle-n2",
+        "value": "2",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-10": [
+      {
+        "reelId": "es-4-10-middle",
+        "reelIndex": 2,
+        "direction": "up",
+        "fromIndex": 0,
+        "toIndex": 2,
+        "fromTileId": "es-4-10-middle-n1",
+        "toTileId": "es-4-10-middle-n3",
+        "value": "3",
+        "alternativeDirection": "down",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-10-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-10-operator-b-o1",
+        "toTileId": "es-4-10-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-11": [
+      {
+        "reelId": "es-4-11-right",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-4-11-right-n2",
+        "toTileId": "es-4-11-right-n3",
+        "value": "8",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-13": [
+      {
+        "reelId": "es-4-13-middle",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-4-13-middle-n2",
+        "toTileId": "es-4-13-middle-n3",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-13-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-13-operator-b-o1",
+        "toTileId": "es-4-13-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-20": [
+      {
+        "reelId": "es-4-20-middle",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-4-20-middle-n2",
+        "toTileId": "es-4-20-middle-n3",
+        "value": "3",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-20-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-20-operator-b-o1",
+        "toTileId": "es-4-20-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-23": [
+      {
+        "reelId": "es-4-23-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-23-operator-b-o1",
+        "toTileId": "es-4-23-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      },
+      {
+        "reelId": "es-4-23-right",
+        "reelIndex": 4,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-23-right-n1",
+        "toTileId": "es-4-23-right-n2",
+        "value": "6",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-41": [
+      {
+        "reelId": "es-4-41-right",
+        "reelIndex": 2,
+        "direction": "down",
+        "fromIndex": 1,
+        "toIndex": 2,
+        "fromTileId": "es-4-41-right-n2",
+        "toTileId": "es-4-41-right-n3",
+        "value": "9",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ],
+    "es-4-50": [
+      {
+        "reelId": "es-4-50-operator-b",
+        "reelIndex": 3,
+        "direction": "down",
+        "fromIndex": 0,
+        "toIndex": 1,
+        "fromTileId": "es-4-50-operator-b-o1",
+        "toTileId": "es-4-50-operator-b-o2",
+        "value": "+",
+        "alternativeDirection": "up",
+        "alternativeSteps": 2,
+        "hasVisibleAlternative": true
+      }
+    ]
+  },
+  "sameVisibleCompletionPaths": {
+    "es-1-10": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 9,
+      "shortestMovesWithoutSameVisibleEdges": 10,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-1-20": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 9,
+      "shortestMovesWithoutSameVisibleEdges": 9,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-1-30": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 9,
+      "shortestMovesWithoutSameVisibleEdges": 10,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-1-40": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 9,
+      "shortestMovesWithoutSameVisibleEdges": 10,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-1-50": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 9,
+      "shortestMovesWithoutSameVisibleEdges": 10,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-01": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-05": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 5,
+      "shortestMovesWithoutSameVisibleEdges": 5,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-06": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 8,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-07": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 9,
+      "shortestMovesWithoutSameVisibleEdges": 9,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-08": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-09": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 8,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-10": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 9,
+      "shortestMovesWithoutSameVisibleEdges": 9,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-11": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 7,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-15": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 5,
+      "shortestMovesWithoutSameVisibleEdges": 5,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-16": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 7,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-17": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 9,
+      "shortestMovesWithoutSameVisibleEdges": 9,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-18": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-19": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 7,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-20": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 10,
+      "shortestMovesWithoutSameVisibleEdges": 11,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-21": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 8,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-25": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 5,
+      "shortestMovesWithoutSameVisibleEdges": 5,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-26": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 8,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-27": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 10,
+      "shortestMovesWithoutSameVisibleEdges": 10,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-28": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 7,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-29": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 7,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-30": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 10,
+      "shortestMovesWithoutSameVisibleEdges": 11,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-31": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 8,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-35": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 5,
+      "shortestMovesWithoutSameVisibleEdges": 5,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-36": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-37": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 10,
+      "shortestMovesWithoutSameVisibleEdges": 10,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-38": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-39": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 7,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-40": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 10,
+      "shortestMovesWithoutSameVisibleEdges": 10,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-41": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 7,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-45": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 5,
+      "shortestMovesWithoutSameVisibleEdges": 5,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-46": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 8,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-47": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 10,
+      "shortestMovesWithoutSameVisibleEdges": 10,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-48": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 7,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-49": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 8,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-2-50": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 10,
+      "shortestMovesWithoutSameVisibleEdges": 10,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-04": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 8,
+      "shortestMovesWithoutSameVisibleEdges": 9,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-07": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-08": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 8,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-09": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 11,
+      "shortestMovesWithoutSameVisibleEdges": 12,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-10": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-14": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-17": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 8,
+      "shortestMovesWithoutSameVisibleEdges": 9,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-18": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 8,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-19": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 11,
+      "shortestMovesWithoutSameVisibleEdges": 12,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-20": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 8,
+      "shortestMovesWithoutSameVisibleEdges": 9,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-24": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-27": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-28": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 7,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-29": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 11,
+      "shortestMovesWithoutSameVisibleEdges": 11,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-30": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-34": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-37": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 8,
+      "shortestMovesWithoutSameVisibleEdges": 9,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-38": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 8,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-39": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 11,
+      "shortestMovesWithoutSameVisibleEdges": 12,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-40": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 8,
+      "shortestMovesWithoutSameVisibleEdges": 9,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-44": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-47": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-48": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 7,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-49": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 11,
+      "shortestMovesWithoutSameVisibleEdges": 11,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-3-50": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-4-01": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-4-02": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 10,
+      "shortestMovesWithoutSameVisibleEdges": 10,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-4-03": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 11,
+      "shortestMovesWithoutSameVisibleEdges": 12,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-4-09": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 10,
+      "shortestMovesWithoutSameVisibleEdges": 10,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-4-10": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 11,
+      "shortestMovesWithoutSameVisibleEdges": 12,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-4-11": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 7,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-4-13": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 11,
+      "shortestMovesWithoutSameVisibleEdges": 12,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-4-20": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 11,
+      "shortestMovesWithoutSameVisibleEdges": 12,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-4-21": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-4-23": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 11,
+      "shortestMovesWithoutSameVisibleEdges": 11,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-4-30": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 12,
+      "shortestMovesWithoutSameVisibleEdges": 13,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-4-31": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 8,
+      "shortestMovesWithoutSameVisibleEdges": 8,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-4-33": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 12,
+      "shortestMovesWithoutSameVisibleEdges": 13,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-4-40": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 12,
+      "shortestMovesWithoutSameVisibleEdges": 13,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-4-41": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 7,
+      "shortestMovesWithoutSameVisibleEdges": 7,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-4-43": {
+      "initialSameVisibleMove": false,
+      "shortestMovesWithSameVisibleEdges": 12,
+      "shortestMovesWithoutSameVisibleEdges": 13,
+      "shortestPathDelta": 1,
+      "solvableWithoutSameVisibleEdges": true
+    },
+    "es-4-50": {
+      "initialSameVisibleMove": true,
+      "shortestMovesWithSameVisibleEdges": 12,
+      "shortestMovesWithoutSameVisibleEdges": 12,
+      "shortestPathDelta": 0,
+      "solvableWithoutSameVisibleEdges": true
+    }
+  },
+  "sameVisibleShortestPathBenefitLevelIds": [
+    "es-1-10",
+    "es-1-30",
+    "es-1-40",
+    "es-1-50",
+    "es-2-01",
+    "es-2-08",
+    "es-2-18",
+    "es-2-20",
+    "es-2-30",
+    "es-2-36",
+    "es-2-38",
+    "es-3-04",
+    "es-3-07",
+    "es-3-09",
+    "es-3-10",
+    "es-3-14",
+    "es-3-17",
+    "es-3-19",
+    "es-3-20",
+    "es-3-24",
+    "es-3-27",
+    "es-3-30",
+    "es-3-34",
+    "es-3-37",
+    "es-3-39",
+    "es-3-40",
+    "es-3-44",
+    "es-3-47",
+    "es-3-50",
+    "es-4-01",
+    "es-4-03",
+    "es-4-10",
+    "es-4-13",
+    "es-4-20",
+    "es-4-21",
+    "es-4-30",
+    "es-4-33",
+    "es-4-40",
+    "es-4-43"
+  ],
+  "initialSameVisibleShortestPathBenefitLevelIds": [
+    "es-1-40",
+    "es-1-50",
+    "es-2-08",
+    "es-2-18",
+    "es-2-36",
+    "es-3-07",
+    "es-3-09",
+    "es-3-14",
+    "es-3-19",
+    "es-3-24",
+    "es-3-27",
+    "es-3-30",
+    "es-3-34",
+    "es-3-39",
+    "es-3-44",
+    "es-3-47",
+    "es-3-50",
+    "es-4-03",
+    "es-4-10",
+    "es-4-13",
+    "es-4-20"
+  ],
+  "canonicalPlanSameExpressionIdentityLevelIds": [],
+  "requiredSameVisibleMoveLevelIds": [],
   "numberTileValueDistribution": {
     "1": 28,
     "2": 136,

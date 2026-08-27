@@ -131,7 +131,7 @@ async function scrollStageOutsideReel(page: Page, context: BrowserContext): Prom
   if (!box) throw new Error("Game stage has no bounding box");
   const start = {
     x: box.x + 8,
-    y: Math.min(box.y + box.height - 32, page.viewportSize()?.height ?? 520)
+    y: Math.min(box.y + box.height - 32, (page.viewportSize()?.height ?? 520) - 24)
   };
   const startsOutsideReel = await page.evaluate(({ x, y }) => {
     return !document.elementFromPoint(x, y)?.closest("[data-reel-window]");
@@ -334,6 +334,27 @@ test.describe("@gate-a equation slider V3 board and tutorial", () => {
     await expect(page.locator(COVERAGE_SELECTOR)).toHaveText("0/6");
   });
 
+  test("same-display adjacent tiles are rejected with a visible mathematical explanation", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await openLevel(page, "chapter-1", "es-1-20");
+
+    const fourthReel = page.locator("[data-reel-id='es-1-20-number-d']");
+    const sameDisplayControl = fourthReel.locator("[data-control-direction='down']");
+    await expect(page.locator(EXPRESSION_SELECTOR)).toHaveText("2 + 3 + 4 + 3 = 12");
+    await expect(sameDisplayControl).toHaveAttribute("data-same-visible-value", "true");
+
+    await sameDisplayControl.click();
+    await expect(page.locator(EXPRESSION_SELECTOR)).toHaveText("2 + 3 + 4 + 3 = 12");
+    await expectMoveCount(page, 0);
+    await expect(page.locator(".equation-slider__feedback")).toHaveText(
+      "相邻方块也是 3，中央算式不会改变。向另一方向移动，让数学关系发生变化。"
+    );
+
+    await fourthReel.locator("[data-control-direction='up']").click();
+    await expect(page.locator(EXPRESSION_SELECTOR)).toHaveText("2 + 3 + 4 + 6 = 15");
+    await expectMoveCount(page, 1);
+  });
+
   test("fixed operator is semantic, immovable, and excluded from coverage", async ({ page }) => {
     await openFirstLevel(page);
     const fixed = page.locator("[data-fixed-token]");
@@ -430,24 +451,30 @@ test.describe("@gate-a equation slider V3 board and tutorial", () => {
     await page.setViewportSize({ width: 390, height: 560 });
     await openFirstLevel(page);
     const stage = page.locator(".game-stage");
-    const dimensions = await stage.evaluate((element) => ({
-      clientHeight: element.clientHeight,
-      overflowY: getComputedStyle(element).overflowY,
-      scrollHeight: element.scrollHeight,
-      scrollTop: element.scrollTop
-    }));
-    expect(["auto", "scroll"]).toContain(dimensions.overflowY);
-    expect(dimensions.scrollHeight).toBeGreaterThan(dimensions.clientHeight);
+    const dimensions = await page.evaluate(() => {
+      const stageElement = document.querySelector<HTMLElement>(".game-stage")!;
+      const documentElement = document.scrollingElement!;
+      return {
+        stage: { clientHeight: stageElement.clientHeight, overflowY: getComputedStyle(stageElement).overflowY, scrollHeight: stageElement.scrollHeight, scrollTop: stageElement.scrollTop },
+        document: { clientHeight: documentElement.clientHeight, scrollHeight: documentElement.scrollHeight, scrollTop: documentElement.scrollTop }
+      };
+    });
+    expect(["auto", "scroll"]).toContain(dimensions.stage.overflowY);
+    const scrollOwner = dimensions.stage.scrollHeight > dimensions.stage.clientHeight ? "stage" : "document";
+    expect(dimensions[scrollOwner].scrollHeight).toBeGreaterThan(dimensions[scrollOwner].clientHeight);
     expect(await reelWindow(page, 0).evaluate((element) => getComputedStyle(element).touchAction))
       .toBe("pan-x");
 
     await touchPreview(page, context, 0, 55);
-    expect(await stage.evaluate((element) => element.scrollTop)).toBe(dimensions.scrollTop);
+    expect(await stage.evaluate((element) => element.scrollTop)).toBe(dimensions.stage.scrollTop);
+    expect(await page.evaluate(() => document.scrollingElement!.scrollTop)).toBe(dimensions.document.scrollTop);
 
     await scrollStageOutsideReel(page, context);
     await expect.poll(
-      () => stage.evaluate((element) => element.scrollTop)
-    ).toBeGreaterThan(dimensions.scrollTop);
+      () => scrollOwner === "stage"
+        ? stage.evaluate((element) => element.scrollTop)
+        : page.evaluate(() => document.scrollingElement!.scrollTop)
+    ).toBeGreaterThan(dimensions[scrollOwner].scrollTop);
   });
 
   test("reduced motion never waits for feedback animation to unlock", async ({ page }) => {

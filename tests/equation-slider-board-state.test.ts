@@ -142,6 +142,65 @@ describe("equation slider V3 board state", () => {
     expect(committedDrag.session.present.status).toBe("ready");
   });
 
+  it("rejects value-identical reel moves while preserving a visible two-step route", () => {
+    const level = EQUATION_SLIDER_V3_LEVELS.find((candidate) => {
+      const reels = getMovableReels(candidate);
+      return reels.some((reel, reelIndex) => {
+        const current = candidate.initialIndexes[reelIndex];
+        return (["up", "down"] as const).some((direction) => {
+          const next = wrapThree(current + (direction === "up" ? -1 : 1));
+          return reel.tiles[current].value === reel.tiles[next].value;
+        });
+      });
+    });
+    if (!level) throw new Error("Expected a published same-visible-value fixture");
+    const reels = getMovableReels(level);
+    const reelIndex = reels.findIndex((reel, index) => {
+      const current = level.initialIndexes[index];
+      return (["up", "down"] as const).some((direction) => {
+        const next = wrapThree(current + (direction === "up" ? -1 : 1));
+        return reel.tiles[current].value === reel.tiles[next].value;
+      });
+    });
+    const reel = reels[reelIndex];
+    const current = level.initialIndexes[reelIndex];
+    const blockedDirection = (["up", "down"] as const).find((direction) => {
+      const next = wrapThree(current + (direction === "up" ? -1 : 1));
+      return reel.tiles[current].value === reel.tiles[next].value;
+    });
+    if (!blockedDirection) throw new Error("Expected a blocked direction");
+
+    const initial = createInitialBoardSession(level);
+    const rejected = transitionBoardSession(level, initial, {
+      type: "commit-move",
+      reelId: reel.id,
+      direction: blockedDirection,
+      useFeedbackLock: false
+    });
+    expect(rejected).toMatchObject({ committed: false, rejectionReason: "same-visible-value" });
+    expect(rejected.session.present.indexes).toEqual(initial.present.indexes);
+    expect(rejected.session.present.moveCount).toBe(0);
+
+    const visibleDirection = blockedDirection === "up" ? "down" : "up";
+    const firstVisible = transitionBoardSession(level, initial, {
+      type: "commit-move",
+      reelId: reel.id,
+      direction: visibleDirection,
+      useFeedbackLock: false
+    });
+    const secondVisible = transitionBoardSession(level, firstVisible.session, {
+      type: "commit-move",
+      reelId: reel.id,
+      direction: visibleDirection,
+      useFeedbackLock: false
+    });
+    expect(firstVisible.committed).toBe(true);
+    expect(secondVisible.committed).toBe(true);
+    expect(secondVisible.session.present.indexes[reelIndex]).toBe(
+      wrapThree(current + (blockedDirection === "up" ? -1 : 1))
+    );
+  });
+
   it("preserves board invariants after 1000 deterministic mixed actions", () => {
     let randomState = 0x45_53_56_33;
     let session = createInitialBoardSession(EQUATION_SLIDER_V3_LEVELS[0]);
@@ -213,4 +272,8 @@ function commit(
     direction,
     useFeedbackLock: false
   }).session;
+}
+
+function wrapThree(index: number): number {
+  return ((index % 3) + 3) % 3;
 }
