@@ -1,0 +1,820 @@
+{
+  "schemaVersion": 2,
+  "goalId": "GAME-CODEX-PORTFOLIO-EVOLUTION-GOAL-01",
+  "auditDate": "2026-08-27",
+  "sourceBoundStartSha": "73ae9d6be140c9e8294781b9f8e6ed296590c438",
+  "evidenceBoundary": {
+    "engineeringEvidence": "Repository facts, deterministic audits, unit tests, browser tests, CI and exact-commit deployment checks.",
+    "productEvidence": "Machine first-use inspection and rubric-based product inference; useful for design decisions but not a child outcome claim.",
+    "authenticChildEvidence": "UNKNOWN / NOT PERFORMED / NOT CLAIMED",
+    "realChildValidation": "NOT_PERFORMED_AND_NOT_CLAIMED"
+  },
+  "baseline": {
+    "mountDefinitions": 9,
+    "classicCards": 6,
+    "playSurfaces": 42,
+    "primarySurfaces": 8,
+    "knownSaveKeys": 37,
+    "formalWorlds": ["chinese", "math", "english"],
+    "mathStations": ["lab", "clock", "array", "target", "slider"],
+    "familyStableTag": "game-codex-family-stable-v1.0.0",
+    "familyStableCommit": "8b890ff14880bcb576dd1ced37e14e6e3df28af1"
+  },
+  "resultingTruth": {
+    "mountDefinitions": 9,
+    "activeChildProducts": [
+      "hanzi-radical-battle",
+      "math-lab",
+      "english-spell-battle",
+      "equation-slider"
+    ],
+    "classicCards": 4,
+    "worldModules": 11,
+    "compatibilitySurfaces": 6,
+    "sharedEngines": 2,
+    "playSurfaces": 40,
+    "primarySurfaces": 6,
+    "knownSaveKeys": 37,
+    "contentFrozenDefinitions": 9,
+    "newGameCreated": false
+  },
+  "benchmarkAccessDate": "2026-08-27",
+  "benchmarkCases": [
+    {
+      "name": "DragonBox Algebra",
+      "category": "intrinsic-integration",
+      "url": "https://apps.apple.com/us/app/kahoot-algebra-by-dragonbox/id1550574178",
+      "evidenceLevel": "P1_FIRST_PARTY_PRODUCT",
+      "mechanism": "Manipulating cards to isolate a box gradually becomes manipulation of numbers and variables; the mathematical transformation is the puzzle action.",
+      "adopt": "Require every Equation Slider move to express visible mathematical meaning.",
+      "exclude": "Hidden identity progress and a commercial subscription wrapper.",
+      "uncertainty": "Vendor description; no independent current playtest or transfer evidence."
+    },
+    {
+      "name": "DragonBox Numbers",
+      "category": "intrinsic-integration",
+      "url": "https://apps.apple.com/us/app/kahoot-numbers-by-dragonbox/id1529174508",
+      "evidenceLevel": "P1_FIRST_PARTY_PRODUCT",
+      "mechanism": "Visible quantities can be stacked, sliced, combined, sorted and compared across open and challenge modes.",
+      "adopt": "Reuse stable visible quantity models across Math World interactions.",
+      "exclude": "Decorative operations, daily cadence and subscription mechanics.",
+      "uncertainty": "Advertised learning effects were not independently established."
+    },
+    {
+      "name": "DragonBox Big Numbers",
+      "category": "intrinsic-integration",
+      "url": "https://apps.apple.com/us/app/kahoot-big-numbers-dragonbox/id1529174828",
+      "evidenceLevel": "P1_FIRST_PARTY_PRODUCT",
+      "mechanism": "Gathering and trading resources requires arithmetic while visible quantities and operations grow in complexity.",
+      "adopt": "Let mathematical operations cause visible world consequences and representations.",
+      "exclude": "Operation grind and collectible furnishing as the primary reason to calculate.",
+      "uncertainty": "Product listing, not outcome evidence; pacing was not independently tested."
+    },
+    {
+      "name": "Osmo Numbers",
+      "category": "manipulation-first",
+      "url": "https://www.playosmo.com/products/genius-number",
+      "evidenceLevel": "P1_FIRST_PARTY_PRODUCT",
+      "mechanism": "Physical dots and digits are arranged, added, removed or connected while the screen responds in real time and accepts multiple solutions.",
+      "adopt": "Recognize several valid strategies and give immediate causal feedback in Math modules.",
+      "exclude": "Proprietary hardware and sensor assumptions in an offline browser portfolio.",
+      "uncertainty": "Hardware accessibility, recognition reliability and transfer are not established by the sales page."
+    },
+    {
+      "name": "Pokemon Smile",
+      "category": "real-action-input",
+      "url": "https://smile.pokemon.com/en-us/",
+      "evidenceLevel": "P1_FIRST_PARTY_PRODUCT",
+      "mechanism": "Camera-detected brushing drives the game action, with bounded session timing and stated no-upload handling of live video.",
+      "adopt": "Use it only as a strong conceptual example that the real or learning action can be the game input.",
+      "exclude": "Camera tracking, reminders, daily collection, awards and sensor-dependent success.",
+      "uncertainty": "Recognition can fail; the official site does not guarantee habit or preference outcomes."
+    },
+    {
+      "name": "Toca Boca World",
+      "category": "open-world-agency",
+      "url": "https://www.tocaboca.com/toca-boca-world",
+      "evidenceLevel": "P1_FIRST_PARTY_PRODUCT",
+      "mechanism": "A persistent open world supports child-authored stories, characters and homes across a large connected catalogue.",
+      "adopt": "Describe My Game World honestly as a hub until it has a meaningful child-authored core loop.",
+      "exclude": "Content-volume race, storefront framing, weekly gifts, scarcity and limited-time packs.",
+      "uncertainty": "Scale and brand strength confound comparison; no transfer evidence."
+    },
+    {
+      "name": "Sago Mini World",
+      "category": "open-world-agency",
+      "url": "https://sagomini.com/world/",
+      "evidenceLevel": "P1_FIRST_PARTY_PRODUCT",
+      "mechanism": "Many small creative and tinkering activities sit in one calm, offline-capable app without points or time limits.",
+      "adopt": "Merge small experiences into discoverable world modules while retaining calm self-chosen replay.",
+      "exclude": "Subscription/content treadmill and activity count as a proxy for depth.",
+      "uncertainty": "Developmental claims are vendor claims."
+    },
+    {
+      "name": "Pok Pok",
+      "category": "open-world-agency",
+      "url": "https://playpokpok.com/faqs/",
+      "evidenceLevel": "P1_FIRST_PARTY_PRODUCT",
+      "mechanism": "An open-ended digital playroom emphasizes calm toys, low-language affordances and no winning, losing or child-facing purchases.",
+      "adopt": "Use low-language affordances, experimentation, co-play and pressure-free stations.",
+      "exclude": "Turning the whole portfolio into an unstructured toybox or importing cloud storage patterns.",
+      "uncertainty": "Intuitiveness and non-addictive language are first-party claims."
+    },
+    {
+      "name": "Khan Academy Kids",
+      "category": "path-and-free-choice",
+      "url": "https://learn.khanacademy.org/khan-academy-kids/",
+      "evidenceLevel": "P1_FIRST_PARTY_PRODUCT",
+      "mechanism": "A recommended adaptive path coexists with an independently browsable library of activities and creative material.",
+      "adopt": "Keep a recommended next action separate from free exploration, without overstating mastery.",
+      "exclude": "Opaque cloud personalization, accounts and parent metrics dominating the child surface.",
+      "uncertainty": "Adaptation quality and transfer were not audited."
+    },
+    {
+      "name": "PBS KIDS Games",
+      "category": "path-and-free-choice",
+      "url": "https://pbskids.org/apps/play-pbs-kids-games",
+      "evidenceLevel": "P1_FIRST_PARTY_PRODUCT",
+      "mechanism": "A broad free, ad-free and offline-capable catalogue uses familiar world and character entry points.",
+      "adopt": "Use curated world continuity and a few intelligible entry lenses instead of exposing the compatibility registry as a card wall.",
+      "exclude": "Catalogue size as proof of quality or licensed-character appeal as the core mechanic.",
+      "uncertainty": "Individual game integration and accessibility vary."
+    },
+    {
+      "name": "Sesame Street App",
+      "category": "path-and-free-choice",
+      "url": "https://sesameworkshop.org/resources/sesame-street-app/",
+      "evidenceLevel": "P1_FIRST_PARTY_PRODUCT",
+      "mechanism": "A child-safe games catalogue can be filtered by character or learning area.",
+      "adopt": "Support child-facing world navigation and parent-facing learning lenses from one truth source.",
+      "exclude": "Video catalogue logic in the play loop or account requirements for local play.",
+      "uncertainty": "Aggregate platform claim; individual games differ."
+    },
+    {
+      "name": "Prodigy Math",
+      "category": "counter-reference",
+      "url": "https://www.prodigygame.com/main-en/blog/what-is-prodigy-math-game",
+      "evidenceLevel": "P1_FIRST_PARTY_PRODUCT",
+      "mechanism": "A coherent fantasy world and adaptive curriculum surround questions that power battles, pets, quests and reward layers.",
+      "adopt": "Keep only coherent world framing and carefully bounded adaptation.",
+      "exclude": "Detached question/battle loop, daily and seasonal quests, PvP, rare collections, paid reward asymmetry and FOMO.",
+      "uncertainty": "The separation judgment is a design inference from official mechanics, not an outcome study."
+    },
+    {
+      "name": "ABCmouse Classic",
+      "category": "counter-reference",
+      "url": "https://support.abcmouse.com/hc/en-us/articles/1500005417641-Main-Features-and-Benefits-of-ABCmouse-Classic",
+      "evidenceLevel": "P1_FIRST_PARTY_PRODUCT",
+      "mechanism": "A sequenced learning path and broad curriculum are surrounded by tickets, rooms, avatars, pets and lesson prizes.",
+      "adopt": "A recommended path may coexist with free choice and voiced instructions.",
+      "exclude": "Ticket currency, shopping/pet unlock loops, surprise rewards, activity-volume targets and premium gates.",
+      "uncertainty": "Breadth and sequencing may help, but this source does not establish causal outcomes."
+    }
+  ],
+  "researchSources": [
+    {
+      "citation": "Habgood & Ainsworth (2011), Motivating Children to Learn Effectively: Exploring the Value of Intrinsic Integration in Educational Games",
+      "url": "https://doi.org/10.1080/10508406.2010.508029",
+      "evidenceLevel": "R1_PEER_REVIEWED_EMPIRICAL",
+      "supportedClaim": "In two studies, an intrinsically integrated game produced better fixed-time learning and substantially more free-choice play than an extrinsic version.",
+      "implication": "The curriculum operation should be the core game mechanic; this directly motivates the Equation visible-change repair.",
+      "boundary": "Small, specific studies with ages 7-11; not a portfolio-wide causal guarantee."
+    },
+    {
+      "citation": "Plass, Homer & Kinzer (2015), Foundations of Game-Based Learning",
+      "url": "https://doi.org/10.1080/00461520.2015.1122533",
+      "evidenceLevel": "R2_PEER_REVIEWED_FRAMEWORK",
+      "supportedClaim": "Game-based learning depends on interacting cognitive, motivational, affective and sociocultural processes and is distinct from adding gamification.",
+      "implication": "Audit mechanics, feedback, affect and choice separately; playful styling is not learning evidence.",
+      "boundary": "An integrative framework, not a single causal intervention."
+    },
+    {
+      "citation": "Wouters et al. (2013), A Meta-Analysis of the Cognitive and Motivational Effects of Serious Games",
+      "url": "https://doi.org/10.1037/a0031311",
+      "evidenceLevel": "R1_PEER_REVIEWED_META_ANALYSIS",
+      "supportedClaim": "Across 77 comparisons, serious games had small learning and retention advantages but no significant motivation advantage; supplementation and repeated sessions mattered.",
+      "implication": "Expect modest conditional effects and use replay/contextual support rather than assuming game format motivates or teaches by itself.",
+      "boundary": "Heterogeneous older studies; not specific to this family portfolio."
+    },
+    {
+      "citation": "Mayer (2019), Computer Games in Education",
+      "url": "https://doi.org/10.1146/annurev-psych-010418-102744",
+      "evidenceLevel": "R2_PEER_REVIEWED_REVIEW",
+      "supportedClaim": "Modality, personalization, pretraining, coaching and self-explanation can add value while irrelevant decoration consumes limited processing.",
+      "implication": "Prefer micro-demonstration, contextual coaching and concise reflection; reduce decoration during difficult actions.",
+      "boundary": "Findings vary by task and setting."
+    },
+    {
+      "citation": "Ryan, Rigby & Przybylski (2006), The Motivational Pull of Video Games",
+      "url": "https://doi.org/10.1007/s11031-006-9051-8",
+      "evidenceLevel": "R1_PEER_REVIEWED_EMPIRICAL",
+      "supportedClaim": "Perceived autonomy and competence related to enjoyment and preference; relatedness also mattered in multiplayer contexts.",
+      "implication": "Offer bounded meaningful choice, interpretable competence feedback and optional family co-play without prize pressure.",
+      "boundary": "Mostly general-game and non-child evidence; not a learning-effect proof."
+    },
+    {
+      "citation": "Shute (2008), Focus on Formative Feedback",
+      "url": "https://doi.org/10.3102/0034654307313795",
+      "evidenceLevel": "R2_PEER_REVIEWED_REVIEW",
+      "supportedClaim": "Effective formative feedback is supportive, specific, credible and timely, with manageable elaboration focused on learning.",
+      "implication": "Explain what changed, why it did not work and one calm next action without revealing the full solution.",
+      "boundary": "Broad educational review; timing still needs mechanic-specific validation."
+    },
+    {
+      "citation": "Wood, Bruner & Ross (1976), The Role of Tutoring in Problem Solving",
+      "url": "https://doi.org/10.1111/j.1469-7610.1976.tb00381.x",
+      "evidenceLevel": "R1_PEER_REVIEWED_EMPIRICAL",
+      "supportedClaim": "Scaffolding can control difficult elements while preserving the child's meaningful work.",
+      "implication": "Use a fading hint ladder and return control for the final meaningful action.",
+      "boundary": "Small classic tutor-child task; design model rather than automatic digital effect."
+    },
+    {
+      "citation": "Skene et al. (2022), Can Guidance During Play Enhance Children's Learning and Development in Educational Contexts?",
+      "url": "https://doi.org/10.1111/cdev.13730",
+      "evidenceLevel": "R1_PEER_REVIEWED_SYSTEMATIC_REVIEW_META_ANALYSIS",
+      "supportedClaim": "Guided play exceeded direct instruction for some early-math, shape and task-switching outcomes, but not many others; implementation was heterogeneous.",
+      "implication": "Combine clear goals with child choice and flexible prompts, especially in Math World.",
+      "boundary": "Results differed by outcome and comparator; no universal child-outcome claim."
+    }
+  ],
+  "designPrinciples": [
+    { "id": "intrinsic-action", "principle": "Learning action must be game action.", "portfolioMeaning": "Inspect Equation, Make Target, Clock, Array, Pinyin and Memory for detached answer/reward wrappers." },
+    { "id": "visible-causality", "principle": "Every legal action needs a perceptible causal consequence.", "portfolioMeaning": "State identity, representation, feedback and world response must agree." },
+    { "id": "bounded-agency", "principle": "Use bounded agency.", "portfolioMeaning": "Offer a recommended next action plus real alternatives, replay and retreat without loss." },
+    { "id": "semantic-feedback", "principle": "Feedback teaches; rewards decorate.", "portfolioMeaning": "Use immediate semantic feedback and one calm recovery action, not rarity or currency pressure." },
+    { "id": "scaffold-fade", "principle": "Scaffold and fade.", "portfolioMeaning": "Micro-demo, critical-feature cue, partial hint and optional worked support must preserve the final meaningful action." },
+    { "id": "honest-world", "principle": "A world product needs child-authored consequences.", "portfolioMeaning": "My Game World remains a hub until it has a learning/play loop; do not invent V2 progression in this cycle." },
+    { "id": "pressure-free", "principle": "Keep replay pressure-free.", "portfolioMeaning": "No daily quests, streaks, FOMO, battle passes, loot rarity or paid advantage." },
+    { "id": "truth-layers", "principle": "Separate products, modules, compatibility and engines.", "portfolioMeaning": "A retained GameDefinition or save key does not imply a child-facing card." },
+    { "id": "offline-private", "principle": "Stay offline, anonymous and sensor-minimal.", "portfolioMeaning": "Do not import cameras, accounts, cloud profiles, telemetry or proprietary hardware assumptions." },
+    { "id": "evidence-boundary", "principle": "Maintain the evidence boundary.", "portfolioMeaning": "Machine review cannot establish child enjoyment, comprehension, retention or learning effect." }
+  ],
+  "scoreDimensions": [
+    { "id": "coreLoopClarity", "label": "core-loop clarity", "weight": 8 },
+    { "id": "intrinsicIntegration", "label": "intrinsic learning-game integration", "weight": 12 },
+    { "id": "meaningfulChoice", "label": "meaningful choice", "weight": 8 },
+    { "id": "feedbackGameFeel", "label": "feedback and game feel", "weight": 10 },
+    { "id": "scaffoldingFairness", "label": "challenge, scaffolding and fairness", "weight": 8 },
+    { "id": "depthVariation", "label": "depth and content variation", "weight": 8 },
+    { "id": "pressureFreeReplay", "label": "pressure-free replay / return value", "weight": 8 },
+    { "id": "worldCohesion", "label": "world identity and portfolio cohesion", "weight": 8 },
+    { "id": "visibleGrowth", "label": "learning feedback / visible growth", "weight": 7 },
+    { "id": "accessibility", "label": "accessibility / input / responsive", "weight": 7 },
+    { "id": "portfolioUniqueness", "label": "portfolio uniqueness", "weight": 10 },
+    { "id": "maintenanceCost", "label": "maintenance / asset / compatibility cost", "weight": 6 }
+  ],
+  "independentReviews": [
+    {
+      "id": "GAMEPLAY_REVIEW",
+      "reviewerId": "/root/final_gameplay_review",
+      "reviewRunId": "GAMEPLAY_REVIEW_FINAL_2026-08-27_R4",
+      "finalTreeBinding": "RELEASE_TAG_TARGET",
+      "identityContract": "Reviewed against the current release candidate; any later tracked mutation invalidates this review; the release tag and exact-SHA readback bind the immutable final tree.",
+      "sourceTreeAlgorithm": "sha256-git-clean-filter-tree-with-self-normalized-evidence-v1",
+      "sourceTreeSha256": "30d8f58ea3135882a2e905f4b93c4b40ff2a2b0d19cc4c66a87d608e429da415",
+      "sourceTreeFileCount": 1470,
+      "reviewRound": "FINAL_CANDIDATE",
+      "reviewedAt": "2026-08-27",
+      "verdict": "PASS_MACHINE",
+      "scope": ["core loop", "game feel", "pacing", "world identity", "replay", "visual feedback", "input recovery"],
+      "reviewerIndependence": "Read-only subagent; no product edits; separate browser origin and gameplay-first rubric.",
+      "keyFinding": "Keep four active products; converge Make Target and Memory duplicate cards; reject Equation Slider actions whose mathematical display does not change while retaining every level and compatibility contract.",
+      "findings": [
+        {
+          "id": "GPR-01",
+          "severity": "SEV_2",
+          "disposition": "FIXED",
+          "evidence": ["games/equation-slider/board-state.ts", "games/equation-slider/solver.ts", "games/equation-slider/levels/generated-audit.json", "tests/e2e/equation-slider.spec.ts"],
+          "resolution": "Same-visible adjacent moves are rejected without mutating moves or state, calm feedback explains why, and solver/hints use the visible-move graph; all 82 affected levels remain solvable."
+        },
+        {
+          "id": "GPR-02",
+          "severity": "SEV_2",
+          "disposition": "FIXED",
+          "evidence": ["packages/data/gamePortfolio.ts", "packages/data/gameCatalog.ts", "apps/my-game-world/index.ts", "tests/e2e/play-readiness/portfolio.spec.ts"],
+          "resolution": "Classic and My Game World now project the four active products from one truth while duplicate Make Target and Memory cards retire without deleting their playable implementations."
+        },
+        {
+          "id": "GPR-03",
+          "severity": "SEV_2",
+          "disposition": "FIXED",
+          "evidence": ["games/make-target/index.ts", "packages/data/saveKeyInventory.ts", "tests/e2e/math-world.spec.ts", "tests/save-vault/save-vault.test.ts"],
+          "resolution": "Make Target legacy state migrates to version 1 only on a safe write boundary, reload restores it, and a future-version save remains byte-exact and read-only through interaction."
+        },
+        {
+          "id": "GPR-04",
+          "severity": "SEV_3",
+          "disposition": "FIXED",
+          "evidence": ["tools/portfolio/affected-gates.ts", "tests/e2e/hanzi-v2/wheel-workshop.spec.ts", "tests/e2e/interaction-integrity/portfolio-hittest.spec.ts"],
+          "resolution": "Affected-gate routing now selects the Equation S release, level, visual/geometry and playtest profiles plus the changed Hanzi wheel profile."
+        },
+        {
+          "id": "GPR-05",
+          "severity": "SEV_2",
+          "disposition": "FIXED",
+          "evidence": ["tests/equation-slider-solver.test.ts", "tests/equation-slider-level-audit-v3.test.ts", "games/equation-slider/levels/generated-audit.json"],
+          "resolution": "Two redundant whole-catalog audit recomputations that made the 445-test gate timeout were removed; the dedicated live audit still matches the generated deterministic hash, targeted tests pass 16/16, and the complete unit suite passes 445/445."
+        },
+        {
+          "id": "GPR-06",
+          "severity": "SEV_2",
+          "disposition": "FIXED",
+          "evidence": ["games/hanzi-radical-battle/complete/ui/complete-world.css", "tests/e2e/chinese-support/visual.spec.ts", "tests/e2e/hanzi-complete/visual.spec.ts-snapshots/world-mobile-390x844.png"],
+          "resolution": "The decorative Hanzi path light now reproduces its intended in-bounds appearance without adding an invisible 8% document tail; its aria-hidden wrapper uses overflow:hidden instead of the globally unauthorized overflow:clip, and the static scroll contract plus strict desktop, mobile and tablet screenshots pass."
+        }
+      ],
+      "validationEvidence": ["docs/portfolio-evolution/evidence/local-validation-evidence.json", "tests/equation-slider-solver.test.ts", "tests/e2e/equation-slider.spec.ts", "tests/e2e/math-world.spec.ts"],
+      "unresolvedBlockers": [],
+      "authenticChildEvidence": "UNKNOWN_NOT_PERFORMED_NOT_CLAIMED"
+    },
+    {
+      "id": "LEARNING_PORTFOLIO_REVIEW",
+      "reviewerId": "/root/final_learning_review",
+      "reviewRunId": "LEARNING_PORTFOLIO_REVIEW_FINAL_2026-08-27_R4",
+      "finalTreeBinding": "RELEASE_TAG_TARGET",
+      "identityContract": "Reviewed against the current release candidate; any later tracked mutation invalidates this review; the release tag and exact-SHA readback bind the immutable final tree.",
+      "sourceTreeAlgorithm": "sha256-git-clean-filter-tree-with-self-normalized-evidence-v1",
+      "sourceTreeSha256": "30d8f58ea3135882a2e905f4b93c4b40ff2a2b0d19cc4c66a87d608e429da415",
+      "sourceTreeFileCount": 1470,
+      "reviewRound": "FINAL_CANDIDATE",
+      "reviewedAt": "2026-08-27",
+      "verdict": "PASS_MACHINE",
+      "scope": ["intrinsic integration", "learning progression", "scaffolding", "portfolio uniqueness", "duplication", "maintenance", "route/save/privacy"],
+      "reviewerIndependence": "Read-only subagent; no product edits; learning/portfolio-first rubric independent from gameplay review.",
+      "keyFinding": "Separate mount definitions, active products, world modules, compatibility surfaces and shared engines; keep routes and saves independent from card visibility and retain authentic-child outcomes as unknown.",
+      "findings": [
+        {
+          "id": "LPR-01",
+          "severity": "SEV_2",
+          "disposition": "FIXED",
+          "evidence": ["packages/data/gamePortfolio.ts", "packages/data/playSurfaceManifest.ts", "docs/project-status/portfolio-status.md"],
+          "resolution": "The durable truth now distinguishes 9 mount definitions, 4 active products, 11 world modules, 6 compatibility surfaces and 2 shared engines."
+        },
+        {
+          "id": "LPR-02",
+          "severity": "SEV_2",
+          "disposition": "FIXED",
+          "evidence": ["packages/data/projectLifecycle.ts", "docs/project-status/portfolio-roadmap.md", "docs/project-status/portfolio-status.md"],
+          "resolution": "Portfolio Evolution remains RELEASE_BOUND until exact tag, CI and Pages readback; Natural-use Observation remains ACTIVE and no child or family acceptance is inferred."
+        },
+        {
+          "id": "LPR-03",
+          "severity": "SEV_2",
+          "disposition": "FIXED",
+          "evidence": ["tools/portfolio/portfolio-evolution-docs.ts", "tools/portfolio/check-portfolio-evolution.ts", ".github/workflows/ci.yml", ".github/workflows/pages.yml"],
+          "resolution": "Portfolio evidence now has runtime structural validation, substantive review findings and dispositions, and the evolution checker is enforced by CI, Pages and the full readiness workflow."
+        },
+        {
+          "id": "LPR-04",
+          "severity": "SEV_2",
+          "disposition": "FIXED",
+          "evidence": ["docs/portfolio-evolution/six-hats-and-decision-record.md", "tools/portfolio/check-portfolio-evolution.ts"],
+          "resolution": "The six-hats decision record now states 6 compatibility surfaces and the checker binds that count to the canonical layer truth."
+        },
+        {
+          "id": "LPR-05",
+          "severity": "SEV_3",
+          "disposition": "ACCEPTED",
+          "evidence": ["docs/portfolio-evolution/portfolio-audit.md", "docs/portfolio-evolution/next-roadmap.md", "packages/data/projectLifecycle.ts"],
+          "resolution": "Real-child comprehension, preference, learning and retention remain explicit unknowns and are future observation inputs, not blockers or synthetic claims in this release."
+        },
+        {
+          "id": "LPR-06",
+          "severity": "SEV_2",
+          "disposition": "FIXED",
+          "evidence": [".github/workflows/ci.yml", "tools/portfolio/affected-gates.ts"],
+          "resolution": "CI now installs Chromium and executes, rather than merely resolves, the full affected-gate closure selected from the exact push or pull-request range."
+        },
+        {
+          "id": "LPR-07",
+          "severity": "SEV_2",
+          "disposition": "FIXED",
+          "evidence": ["tools/english-v2/build-release-reports.ts", "tools/chinese-support/build-release-reports.ts"],
+          "resolution": "The historical English V2 release builder keeps its six-card proof isolated from later Portfolio projections, while validating product-tag ancestry and only the English evidence inputs it actually consumes."
+        }
+      ],
+      "validationEvidence": ["docs/portfolio-evolution/evidence/local-validation-evidence.json", "tests/portfolio-governance.test.ts", "tests/e2e/portfolio-smoke.spec.ts", "tests/save-vault/save-vault.test.ts"],
+      "unresolvedBlockers": [],
+      "authenticChildEvidence": "UNKNOWN_NOT_PERFORMED_NOT_CLAIMED"
+    }
+  ],
+  "definitions": [
+    {
+      "id": "hanzi-radical-battle",
+      "title": "汉字魔法战 / 墨迹森林",
+      "routeState": "?play=hanzi-magic-complete; three chapters, 72-character truth, component families, word order, Pinyin, Memory, archive and postgame; V1/V2 compatibility retained.",
+      "score": {
+        "coreLoopClarity": 4,
+        "intrinsicIntegration": 5,
+        "meaningfulChoice": 5,
+        "feedbackGameFeel": 5,
+        "scaffoldingFairness": 4,
+        "depthVariation": 5,
+        "pressureFreeReplay": 4,
+        "worldCohesion": 5,
+        "visibleGrowth": 4,
+        "accessibility": 5,
+        "portfolioUniqueness": 5,
+        "maintenanceCost": 1,
+        "weightedTotal": 89.0
+      },
+      "evidence": [
+        "docs/hanzi-radical-battle-v3/README.md",
+        "tests/hanzi-complete",
+        "tests/e2e/hanzi-complete",
+        "docs/portfolio-evolution/evidence/first-use-hanzi.png"
+      ],
+      "confidence": "B",
+      "classification": "FACT_AND_INFERENCE",
+      "topStrength": "Component placement, word ordering and family connections are the learning actions and visibly repair one coherent world.",
+      "topProblem": "The compatibility/content/asset surface is large, and machine evidence cannot establish child pacing or return value.",
+      "unknowns": [
+        "Whether a child independently understands the first objective within 30 seconds.",
+        "Whether chapter pacing, return value or long-term learning is effective in family use."
+      ],
+      "decision": { "primary": "KEEP", "modifiers": ["POLISH", "CONTENT_FREEZE", "ROUTE_KEEP", "SAVE_KEEP"] },
+      "implementation": "No content expansion; retain the canonical product and all compatibility contracts while converging portfolio truth around it.",
+      "routeImpact": "No route removed or redirected.",
+      "saveImpact": "All existing namespaces retained byte-compatibly.",
+      "sharedEngineImpact": "Continues consuming memory-match through Chinese Memory.",
+      "tests": ["Hanzi content/simulation gates", "representative browser routes", "portfolio compatibility smoke"],
+      "rollback": "Revert only portfolio metadata/projection; canonical game bytes and routes remain independently mountable.",
+      "notDo": ["No fourth chapter", "No character-count expansion", "No real-child outcome claim"],
+      "authenticChildEvidence": "UNKNOWN_NOT_PERFORMED_NOT_CLAIMED"
+    },
+    {
+      "id": "equation-slider",
+      "title": "算式滑轨",
+      "routeState": "?world=math-world&station=slider and Classic alternate launcher; 200 deterministic levels across four chapters.",
+      "score": {
+        "coreLoopClarity": 3,
+        "intrinsicIntegration": 4,
+        "meaningfulChoice": 4,
+        "feedbackGameFeel": 4,
+        "scaffoldingFairness": 4,
+        "depthVariation": 5,
+        "pressureFreeReplay": 4,
+        "worldCohesion": 3,
+        "visibleGrowth": 3,
+        "accessibility": 5,
+        "portfolioUniqueness": 5,
+        "maintenanceCost": 2,
+        "weightedTotal": 78.0
+      },
+      "evidence": [
+        "games/equation-slider/levels/generated-audit.json",
+        "tests/equation-slider-level-audit-v3.test.ts",
+        "tests/equation-slider-board-state.test.ts",
+        "tests/e2e/equation-slider.spec.ts",
+        "docs/portfolio-evolution/evidence/equation-same-display-rejection.png"
+      ],
+      "confidence": "A",
+      "classification": "FACT_AND_INFERENCE",
+      "topStrength": "A deep deterministic manipulation puzzle with solver-backed content, undo/reset, hints and multiple representations.",
+      "topProblem": "82 levels contained a legal adjacent tile-identity change with no visible mathematical change; 45 exposed it initially.",
+      "unknowns": [
+        "Whether children understand the new rejection explanation without adult help.",
+        "Whether rejecting the edge is preferable in lived play to reauthoring the affected reels."
+      ],
+      "decision": { "primary": "KEEP", "modifiers": ["POLISH", "CONTENT_FREEZE", "ROUTE_KEEP", "SAVE_KEEP"] },
+      "implementation": "Reject same-display adjacent moves without incrementing state, explain why, direct the player toward a visible mathematical change, and make solver/hints use visible-move distance.",
+      "routeImpact": "Both canonical Math World and Classic alternate routes retained.",
+      "saveImpact": "Existing save namespace and published level IDs retained.",
+      "sharedEngineImpact": "Game-owned reducer, evaluator, solver and generator retained.",
+      "tests": ["200-level deterministic audit", "board-state rejection and alternate path", "real-browser same-display rejection", "S release profile"],
+      "rollback": "Revert rejection/visible-distance changes and regenerated audit; level source JSON remains unchanged.",
+      "notDo": ["No threshold weakening", "No level-ID rewrite", "No hidden identity requirement", "No content expansion"],
+      "authenticChildEvidence": "UNKNOWN_NOT_PERFORMED_NOT_CLAIMED"
+    },
+    {
+      "id": "math-lab",
+      "title": "数学世界 / 数感实验城",
+      "routeState": "?world=math-world; five open stations: lab, clock, array, target and slider.",
+      "score": {
+        "coreLoopClarity": 4,
+        "intrinsicIntegration": 4,
+        "meaningfulChoice": 5,
+        "feedbackGameFeel": 4,
+        "scaffoldingFairness": 4,
+        "depthVariation": 5,
+        "pressureFreeReplay": 4,
+        "worldCohesion": 5,
+        "visibleGrowth": 3,
+        "accessibility": 4,
+        "portfolioUniqueness": 4,
+        "maintenanceCost": 2,
+        "weightedTotal": 81.0
+      },
+      "evidence": [
+        "games/math-lab/world/activity-registry.ts",
+        "games/math-lab/world/world-save.ts",
+        "tests/e2e/math-world.spec.ts",
+        "docs/portfolio-evolution/evidence/first-use-math.png"
+      ],
+      "confidence": "B",
+      "classification": "FACT_AND_INFERENCE",
+      "topStrength": "Five freely accessible, mechanically distinct stations form a coherent choice-rich world.",
+      "topProblem": "Station settings and progress are fragmented; a visit is not evidence of mastery or a basis for cross-station recommendations.",
+      "unknowns": [
+        "Whether children can choose and re-enter stations without adult explanation.",
+        "Whether any cross-station mastery or recommendation model would be valid."
+      ],
+      "decision": { "primary": "KEEP", "modifiers": ["POLISH", "CONTENT_FREEZE", "ROUTE_KEEP", "SAVE_KEEP", "RESEARCH_ONLY"] },
+      "implementation": "Retain the five-station world; converge Make Target as station-only and record equal-sharing/partition as a future specification, not a new game.",
+      "routeImpact": "Canonical world and all five station routes retained.",
+      "saveImpact": "World and station namespaces retained; no cross-station mastery inference added.",
+      "sharedEngineImpact": "Station-owned implementations remain in games/; no speculative package abstraction.",
+      "tests": ["Math unit/content gates", "desktop/mobile browser world gate", "station compatibility routes"],
+      "rollback": "Restore Classic projection metadata; Math World and station routes remain unchanged.",
+      "notDo": ["No sixth station in this cycle", "No world-wide mastery claim from visits", "No reward economy"],
+      "authenticChildEvidence": "UNKNOWN_NOT_PERFORMED_NOT_CLAIMED"
+    },
+    {
+      "id": "english-spell-battle",
+      "title": "英语世界 / 词光岛",
+      "routeState": "?world=english-world; five regions, 48-word corpus, 30 story-core missions, journal, sentence loop and English Memory; legacy route retained.",
+      "score": {
+        "coreLoopClarity": 5,
+        "intrinsicIntegration": 5,
+        "meaningfulChoice": 4,
+        "feedbackGameFeel": 4,
+        "scaffoldingFairness": 5,
+        "depthVariation": 4,
+        "pressureFreeReplay": 4,
+        "worldCohesion": 5,
+        "visibleGrowth": 4,
+        "accessibility": 5,
+        "portfolioUniqueness": 5,
+        "maintenanceCost": 2,
+        "weightedTotal": 88.2
+      },
+      "evidence": [
+        "games/english-spell-battle/README.md",
+        "games/english-spell-battle/v2/core/machine.ts",
+        "tests/e2e/english-v2/slice.spec.ts",
+        "docs/portfolio-evolution/evidence/first-use-english.png"
+      ],
+      "confidence": "B",
+      "classification": "FACT_AND_INFERENCE",
+      "topStrength": "Meaning, grapheme building, sentence placement and visible world response form one intrinsic chain.",
+      "topProblem": "The core mission path is mostly linear and content/assets are expensive; replay value is not established by machine evidence.",
+      "unknowns": [
+        "Whether the meaning-spelling-sentence-world chain is understood by children without help.",
+        "Whether TTS fallback quality and replay value are adequate on actual family devices."
+      ],
+      "decision": { "primary": "KEEP", "modifiers": ["POLISH", "CONTENT_FREEZE", "ROUTE_KEEP", "SAVE_KEEP"] },
+      "implementation": "No corpus expansion; retain world, journal, memory, language help and TTS fallback while aligning product truth.",
+      "routeImpact": "Canonical and legacy routes retained.",
+      "saveImpact": "Both English namespaces retained.",
+      "sharedEngineImpact": "Continues consuming memory-match through English Memory.",
+      "tests": ["English content/machine gates", "region/journal/memory browser routes", "portfolio smoke"],
+      "rollback": "Revert portfolio metadata/projection only; English routes and saves remain independent.",
+      "notDo": ["No large vocabulary expansion", "No cloud profile", "No inferred learning outcome"],
+      "authenticChildEvidence": "UNKNOWN_NOT_PERFORMED_NOT_CLAIMED"
+    },
+    {
+      "id": "make-target",
+      "title": "目标工坊",
+      "routeState": "?world=math-world&station=target; 12 deterministic puzzles; mount definition retained, duplicate Classic card retired.",
+      "score": {
+        "coreLoopClarity": 4,
+        "intrinsicIntegration": 5,
+        "meaningfulChoice": 5,
+        "feedbackGameFeel": 3,
+        "scaffoldingFairness": 5,
+        "depthVariation": 3,
+        "pressureFreeReplay": 4,
+        "worldCohesion": 3,
+        "visibleGrowth": 4,
+        "accessibility": 4,
+        "portfolioUniqueness": 5,
+        "maintenanceCost": 4,
+        "weightedTotal": 82.4
+      },
+      "evidence": ["games/make-target/index.ts", "games/make-target/solver.ts", "tests/math-world-target.test.ts", "tests/e2e/math-world.spec.ts"],
+      "confidence": "B",
+      "classification": "FACT_AND_INFERENCE",
+      "topStrength": "Exact arithmetic composition is the game action, with order control, undo and graduated solver hints.",
+      "topProblem": "Only 12 puzzles and the same implementation appeared in both Classic and Math World; the save lacked a schema version.",
+      "unknowns": [
+        "Whether children discover and revisit the station after removal of the duplicate Classic card.",
+        "How many family saves still use the unversioned legacy shape."
+      ],
+      "decision": { "primary": "MERGE", "modifiers": ["RETIRE_STANDALONE", "ENGINE_KEEP", "CONTENT_FREEZE", "ROUTE_KEEP", "SAVE_KEEP"] },
+      "implementation": "Remove the duplicate Classic card, keep the Math World station, add deterministic migration from the legacy unversioned save and preserve future-save read-only behavior.",
+      "routeImpact": "Canonical Math station retained; mount definition remains available for compatibility code.",
+      "saveImpact": "Legacy wins/completedPuzzleIds migrate to v1; future versions are never overwritten.",
+      "sharedEngineImpact": "AST/solver/manifest remain game-owned.",
+      "tests": ["legacy and future save migration", "12-puzzle solvability", "Math route/return browser gate"],
+      "rollback": "Restore the Classic projection; v1 loader remains backward compatible with old bytes.",
+      "notDo": ["No puzzle-count expansion", "No code deletion", "No save-key rename"],
+      "authenticChildEvidence": "UNKNOWN_NOT_PERFORMED_NOT_CLAIMED"
+    },
+    {
+      "id": "clock-reader",
+      "title": "时钟塔",
+      "routeState": "?world=math-world&station=clock; world-module mount only.",
+      "score": {
+        "coreLoopClarity": 5,
+        "intrinsicIntegration": 5,
+        "meaningfulChoice": 4,
+        "feedbackGameFeel": 3,
+        "scaffoldingFairness": 4,
+        "depthVariation": 3,
+        "pressureFreeReplay": 4,
+        "worldCohesion": 4,
+        "visibleGrowth": 4,
+        "accessibility": 5,
+        "portfolioUniqueness": 5,
+        "maintenanceCost": 5,
+        "weightedTotal": 85.0
+      },
+      "evidence": ["games/clock-reader/index.ts", "games/clock-reader/model.ts", "tests/math-world-clock.test.ts", "tests/e2e/math-world.spec.ts"],
+      "confidence": "B",
+      "classification": "FACT_AND_INFERENCE",
+      "topStrength": "Direct clock manipulation synchronizes hands, digital time, exact language and relative language.",
+      "topProblem": "Bounded challenge depth and no independent growth record do not justify a separate child product.",
+      "unknowns": [
+        "Whether children transfer the manipulation to independent time-reading language.",
+        "Whether its current challenge depth supports voluntary replay."
+      ],
+      "decision": { "primary": "MERGE", "modifiers": ["ENGINE_KEEP", "CONTENT_FREEZE", "ROUTE_KEEP", "SAVE_KEEP"] },
+      "implementation": "Keep as a Math World module mount with no Classic card.",
+      "routeImpact": "Math station route unchanged.",
+      "saveImpact": "Clock namespace retained.",
+      "sharedEngineImpact": "Remains game-owned because it has one canonical consumer.",
+      "tests": ["clock model/content", "pointer/keyboard route browser gate"],
+      "rollback": "Portfolio metadata can be reverted without touching module code or save bytes.",
+      "notDo": ["No speculative package extraction", "No standalone card", "No pressure mechanics"],
+      "authenticChildEvidence": "UNKNOWN_NOT_PERFORMED_NOT_CLAIMED"
+    },
+    {
+      "id": "multiplication-adventure",
+      "title": "阵列工坊",
+      "routeState": "?world=math-world&station=array; world-module mount only.",
+      "score": {
+        "coreLoopClarity": 5,
+        "intrinsicIntegration": 5,
+        "meaningfulChoice": 3,
+        "feedbackGameFeel": 3,
+        "scaffoldingFairness": 4,
+        "depthVariation": 3,
+        "pressureFreeReplay": 3,
+        "worldCohesion": 4,
+        "visibleGrowth": 5,
+        "accessibility": 4,
+        "portfolioUniqueness": 5,
+        "maintenanceCost": 5,
+        "weightedTotal": 81.8
+      },
+      "evidence": ["games/multiplication-adventure/index.ts", "games/multiplication-adventure/model.ts", "tests/math-world-array.test.ts", "tests/e2e/math-world.spec.ts"],
+      "confidence": "B",
+      "classification": "FACT_AND_INFERENCE",
+      "topStrength": "Rows, columns, cell count, expression and transpose invariant change together without a detached answer layer.",
+      "topProblem": "Three-mode loop is shallow and lacks an independent progression reason for standalone status.",
+      "unknowns": [
+        "Whether children connect transpose invariance to multiplication structure.",
+        "Whether three modes provide sufficient variety for repeat family use."
+      ],
+      "decision": { "primary": "MERGE", "modifiers": ["ENGINE_KEEP", "CONTENT_FREEZE", "ROUTE_KEEP", "SAVE_KEEP"] },
+      "implementation": "Keep as a Math World module mount with no Classic card.",
+      "routeImpact": "Math station route unchanged.",
+      "saveImpact": "Array namespace retained.",
+      "sharedEngineImpact": "Remains game-owned because it has one canonical consumer.",
+      "tests": ["array model/content", "pointer/keyboard route browser gate"],
+      "rollback": "Portfolio metadata can be reverted without touching module code or save bytes.",
+      "notDo": ["No speculative package extraction", "No standalone card", "No content expansion"],
+      "authenticChildEvidence": "UNKNOWN_NOT_PERFORMED_NOT_CLAIMED"
+    },
+    {
+      "id": "memory-card",
+      "title": "记忆配对共享定义",
+      "routeState": "Chinese Memory and English Memory remain canonical world activities; the generic mount definition and both save namespaces remain, while the duplicate Classic card is retired.",
+      "score": {
+        "coreLoopClarity": 5,
+        "intrinsicIntegration": 4,
+        "meaningfulChoice": 2,
+        "feedbackGameFeel": 3,
+        "scaffoldingFairness": 3,
+        "depthVariation": 4,
+        "pressureFreeReplay": 4,
+        "worldCohesion": 2,
+        "visibleGrowth": 3,
+        "accessibility": 5,
+        "portfolioUniqueness": 2,
+        "maintenanceCost": 5,
+        "weightedTotal": 68.8
+      },
+      "evidence": ["packages/activity-engines/memory-match/app.ts", "tests/chinese-support/memory.test.ts", "tests/e2e/chinese-support/support.spec.ts", "tests/e2e/english-v2/slice.spec.ts"],
+      "confidence": "B",
+      "classification": "FACT_AND_INFERENCE",
+      "topStrength": "A validated calm shared relation engine with deterministic decks and robust keyboard/touch recovery.",
+      "topProblem": "The generic Classic wrapper added no distinct world, progression or content beyond canonical Chinese and English uses.",
+      "unknowns": [
+        "Whether families valued the generic Classic entry as a direct shortcut.",
+        "Whether repeated matching produces durable vocabulary or character learning."
+      ],
+      "decision": { "primary": "RETIRE_STANDALONE", "modifiers": ["MERGE", "ENGINE_KEEP", "CONTENT_FREEZE", "SAVE_KEEP"] },
+      "implementation": "Remove only the duplicate Classic card and play-surface projection; retain definition adapter, world activities, engine and saves.",
+      "routeImpact": "Chinese/English canonical routes retained; definition adapter remains registered.",
+      "saveImpact": "Both legacy and shared-engine namespaces retained.",
+      "sharedEngineImpact": "memory-match remains a first-class shared engine for Chinese and English.",
+      "tests": ["shared-engine state/content", "Chinese/English memory browser routes", "save inventory exact-key gate"],
+      "rollback": "Restore the Classic projection without changing the engine or stored data.",
+      "notDo": ["No engine deletion", "No save deletion", "No generic card duplication"],
+      "authenticChildEvidence": "UNKNOWN_NOT_PERFORMED_NOT_CLAIMED"
+    },
+    {
+      "id": "pinyin-magic-battle",
+      "title": "拼音旧定义适配层",
+      "routeState": "?play=pinyin-magic-battle legacy route and mount definition retained; canonical activity is ?play=hanzi-magic-complete&view=pinyin.",
+      "score": {
+        "coreLoopClarity": 4,
+        "intrinsicIntegration": 4,
+        "meaningfulChoice": 3,
+        "feedbackGameFeel": 4,
+        "scaffoldingFairness": 4,
+        "depthVariation": 4,
+        "pressureFreeReplay": 4,
+        "worldCohesion": 5,
+        "visibleGrowth": 4,
+        "accessibility": 5,
+        "portfolioUniqueness": 1,
+        "maintenanceCost": 3,
+        "weightedTotal": 74.2
+      },
+      "evidence": ["games/pinyin-magic-battle/index.ts", "games/hanzi-radical-battle/complete/support/pinyin/app.ts", "tests/chinese-support/pinyin.test.ts", "tests/e2e/chinese-support/support.spec.ts"],
+      "confidence": "B",
+      "classification": "FACT_AND_INFERENCE",
+      "topStrength": "The canonical Sound-Rhyme activity has three deterministic modes, calm feedback, hints, optional speech and versioned save.",
+      "topProblem": "The nine-definition entry is an alias/wrapper and contributes no independent product identity.",
+      "unknowns": [
+        "Whether children hear and apply the targeted sound distinctions without adult support.",
+        "Whether any family still depends on the legacy standalone route as its primary entry."
+      ],
+      "decision": { "primary": "COMPATIBILITY_ONLY", "modifiers": ["ENGINE_KEEP", "CONTENT_FREEZE", "ROUTE_KEEP", "SAVE_KEEP"] },
+      "implementation": "Keep the old definition/route as compatibility while exposing the canonical Chinese-world activity only.",
+      "routeImpact": "Legacy and canonical routes retained.",
+      "saveImpact": "Both Pinyin namespaces retained.",
+      "sharedEngineImpact": "Canonical Pinyin machine remains Chinese-world-owned.",
+      "tests": ["72-record content gate", "legacy/canonical route browser gate", "save compatibility"],
+      "rollback": "Compatibility metadata can be reverted without changing routes or bytes.",
+      "notDo": ["No separate Classic card", "No duplicated engine", "No corpus expansion"],
+      "authenticChildEvidence": "UNKNOWN_NOT_PERFORMED_NOT_CLAIMED"
+    }
+  ],
+  "surfaceCoverage": {
+    "manifestSource": "packages/data/playSurfaceManifest.ts",
+    "manifestValidatedCount": 40,
+    "primaryRealBrowserSurfaceIds": [
+      "my-game-world",
+      "classic-hub",
+      "hanzi-world",
+      "math-world",
+      "english-world",
+      "classic-equation"
+    ],
+    "decisionRelevantSecondaryRealBrowserSurfaceIds": [
+      "hanzi-pinyin-assemble",
+      "hanzi-memory-glyph-pinyin",
+      "hanzi-v2-compat",
+      "hanzi-v1-compat",
+      "math-lab",
+      "math-clock",
+      "math-array",
+      "math-target",
+      "math-slider",
+      "english-journal",
+      "english-memory"
+    ],
+    "remainingCoverage": "All remaining manifest surfaces are covered by the affected content/simulation, portfolio smoke, hit-test, scroll, accessibility, save and product profile suites; no manifest surface is intentionally excluded.",
+    "uncoveredSurfaceIds": []
+  },
+  "equationVisibleChangeAudit": {
+    "catalogLevels": 200,
+    "sameDisplayTransitions": 216,
+    "affectedLevels": 82,
+    "initiallyExposedLevels": 45,
+    "shortestPathBenefitLevels": 39,
+    "initialAndBenefitLevels": 21,
+    "solvableWithoutSameDisplayEdges": 82,
+    "requiredSameDisplayMoveLevels": 0,
+    "maximumShortestPathDelta": 1,
+    "catalogHash": "fnv1a32-2b6c450b",
+    "algorithm": "BFS over (reel indexes, required-tile bitmask, target bitmask), comparing all edges with a graph that removes moves whose selected visible value does not change.",
+    "authoritativePerLevelEvidence": "games/equation-slider/levels/generated-audit.json",
+    "childVisibleDecision": "Reject a same-display adjacent attempt without state or move-count mutation; explain the absent mathematical change and direct the player to the opposite visible move."
+  },
+  "reviewReconciliation": {
+    "agreements": [
+      "Four active products: Hanzi, Math World, English World and Equation Slider.",
+      "Make Target belongs in Math World and should not keep a duplicate Classic card.",
+      "Memory is a shared engine/world activity and should not keep a generic Classic card.",
+      "Clock and Array remain Math World modules; Pinyin definition is compatibility-only.",
+      "Classic remains a four-card alternate launcher, not product truth.",
+      "My Game World remains a hub, not a learning product."
+    ],
+    "resolvedDifference": "Gameplay review preferred reauthoring repeated reels; exhaustive engineering evidence showed no required same-display edge and a maximum one-move cost. The implemented minimum compatible repair rejects only the invisible edge, preserves all published levels/IDs/saves, provides explicit causal feedback, and binds solver/hints to visible moves. Level reauthoring is therefore deferred unless later evidence shows the rejection itself is confusing.",
+    "humanAcceptanceInferred": false
+  }
+}

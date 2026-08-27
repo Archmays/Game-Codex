@@ -71,6 +71,8 @@
     "package:chinese-support": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File tools/chinese-support/package-chinese-support.ps1",
     "portfolio:generate": "tsx tools/portfolio/generate-portfolio-docs.ts",
     "portfolio:check": "tsx tools/portfolio/check-portfolio.ts",
+    "portfolio:evolution:generate": "tsx tools/portfolio/generate-portfolio-evolution.ts",
+    "portfolio:evolution:check": "tsx tools/portfolio/check-portfolio-evolution.ts",
     "test:portfolio:smoke": "playwright test --config playwright.portfolio.config.ts",
     "test:portfolio:affected": "tsx tools/portfolio/affected-gates.ts",
     "validate:play-readiness": "tsx tools/play-readiness/validate-play-readiness.ts",

@@ -4,12 +4,19 @@ import { resolve } from "node:path";
 export interface GateCommand { readonly program: string; readonly args: readonly string[]; readonly label: string }
 
 const PORTFOLIO_CHECK: GateCommand = { program: "pnpm", args: ["run", "portfolio:check"], label: "portfolio consistency" };
+const PORTFOLIO_EVOLUTION_CHECK: GateCommand = { program: "pnpm", args: ["run", "portfolio:evolution:check"], label: "Portfolio Evolution evidence and generated audit" };
+const EQUATION_LEVELS: GateCommand = { program: "pnpm", args: ["run", "levels:check"], label: "Equation Slider deterministic 200-level audit" };
+const EQUATION_E2E: GateCommand = { program: "pnpm", args: ["run", "test:e2e:equation-slider"], label: "Equation Slider core browser profile" };
+const EQUATION_RELEASE: GateCommand = { program: "pnpm", args: ["run", "test:e2e:equation-slider:release"], label: "Equation Slider S release browser profile" };
+const EQUATION_VISUAL: GateCommand = { program: "pnpm", args: ["run", "test:e2e:equation-slider:visual"], label: "Equation Slider visual and geometry profile" };
+const EQUATION_PLAYTEST: GateCommand = { program: "pnpm", args: ["run", "test:e2e:equation-slider:playtest"], label: "Equation Slider bounded agent playtest" };
+const HANZI_WHEEL_E2E: GateCommand = { program: "pnpm", args: ["run", "test:e2e:hanzi-v2:wheel"], label: "Hanzi wheel compatibility browser profile" };
 const UNIT: GateCommand = { program: "pnpm", args: ["test"], label: "unit and content tests" };
 const TYPECHECK: GateCommand = { program: "pnpm", args: ["exec", "tsc", "--noEmit"], label: "typecheck" };
 const BUILD: GateCommand = { program: "pnpm", args: ["build"], label: "production build" };
 const SMOKE: GateCommand = { program: "pnpm", args: ["run", "test:portfolio:smoke"], label: "all-game portfolio smoke" };
 const INTERACTION_STATIC: GateCommand = { program: "pnpm", args: ["run", "validate:interaction-integrity"], label: "UI occlusion inventory and interaction-integrity contracts" };
-const INTERACTION_HITTEST: GateCommand = { program: "pnpm", args: ["run", "test:e2e:hittest:representative"], label: "representative 42-surface browser hit-test matrix" };
+const INTERACTION_HITTEST: GateCommand = { program: "pnpm", args: ["run", "test:e2e:hittest:representative"], label: "representative play-surface browser hit-test matrix" };
 const SCROLL_STATIC: GateCommand = { program: "pnpm", args: ["run", "validate:scroll-integrity"], label: "play-surface scroll ownership contracts" };
 const SCROLL_REACHABILITY: GateCommand = { program: "pnpm", args: ["run", "test:e2e:scroll-reachability:representative"], label: "representative scroll and bottom reachability matrix" };
 const ENGLISH_E2E: GateCommand = { program: "pnpm", args: ["run", "test:e2e:english-v2"], label: "English World routes, interactions, and geometry" };
@@ -33,8 +40,12 @@ export function affectedGateCommands(changedFiles: readonly string[]): GateComma
   if (!files.length) return [PORTFOLIO_CHECK];
   const full = files.some((file) => /^(src\/main\.ts|src\/app-route\.ts|package\.json|pnpm-lock\.yaml|tsconfig\.json|vite\.config\.ts|vitest\.config\.ts|playwright.*\.config\.ts)$/.test(file)
     || file.startsWith("packages/game-core/") || file.startsWith("apps/my-game-world/") || file === "<unknown>");
-  if (full) return [PORTFOLIO_CHECK, INTERACTION_STATIC, SCROLL_STATIC, UNIT, MATH_WORLD_VALIDATE, CHINESE_SUPPORT_VALIDATE, TYPECHECK, BUILD, MATH_WORLD_E2E, CHINESE_SUPPORT_E2E, ENGLISH_E2E, INTERACTION_HITTEST, SCROLL_REACHABILITY, SMOKE];
-  const commands: GateCommand[] = [PORTFOLIO_CHECK];
+  const equationAffected = files.some((file) => file.startsWith("games/equation-slider/") || file.startsWith("tests/equation-slider-") || file.startsWith("tests/e2e/equation-slider"));
+  const hanziWheelAffected = files.some((file) => file === "tests/e2e/hanzi-v2/wheel-workshop.spec.ts" || file.includes("wheel-workshop"));
+  const equationCommands = equationAffected ? [EQUATION_LEVELS, EQUATION_E2E, EQUATION_RELEASE, EQUATION_VISUAL, EQUATION_PLAYTEST] : [];
+  const hanziCommands = hanziWheelAffected ? [HANZI_WHEEL_E2E] : [];
+  if (full) return unique([PORTFOLIO_CHECK, PORTFOLIO_EVOLUTION_CHECK, ...equationCommands, ...hanziCommands, INTERACTION_STATIC, SCROLL_STATIC, UNIT, MATH_WORLD_VALIDATE, CHINESE_SUPPORT_VALIDATE, TYPECHECK, BUILD, MATH_WORLD_E2E, CHINESE_SUPPORT_E2E, ENGLISH_E2E, INTERACTION_HITTEST, SCROLL_REACHABILITY, SMOKE]);
+  const commands: GateCommand[] = [PORTFOLIO_CHECK, PORTFOLIO_EVOLUTION_CHECK];
   for (const file of files) {
     const game = /^games\/([^/]+)\//.exec(file)?.[1];
     if (/^(?:apps|games|packages|src)\/.+\.css$/.test(file)) commands.push(INTERACTION_STATIC, SCROLL_STATIC, INTERACTION_HITTEST, SCROLL_REACHABILITY);
@@ -43,10 +54,12 @@ export function affectedGateCommands(changedFiles: readonly string[]): GateComma
     else if (game && ["math-lab", "clock-reader", "multiplication-adventure", "make-target"].includes(game)) commands.push(MATH_WORLD_UNIT, MATH_WORLD_VALIDATE, MATH_WORLD_E2E);
     else if (game === "pinyin-magic-battle") commands.push(CHINESE_SUPPORT_VALIDATE, CHINESE_SUPPORT_E2E, SMOKE);
     else if (game === "memory-card") commands.push(CHINESE_SUPPORT_VALIDATE, CHINESE_SUPPORT_E2E, gameSmoke(game));
+    else if (game === "equation-slider") commands.push(UNIT, ...equationCommands, gameSmoke(game));
     else if (game) commands.push(UNIT, gameSmoke(game));
     else if (file.startsWith("apps/hub/") || file.startsWith("packages/ui/") || file.startsWith("packages/data/") || file.startsWith("public/assets/")) commands.push(INTERACTION_STATIC, SCROLL_STATIC, UNIT, MATH_WORLD_VALIDATE, INTERACTION_HITTEST, SCROLL_REACHABILITY, SMOKE);
     else if (!file.startsWith("docs/") && file !== "README.md" && file !== "AGENTS.md") commands.push(UNIT, TYPECHECK, BUILD, SMOKE);
   }
+  commands.push(...hanziCommands);
   return unique(commands);
 }
 

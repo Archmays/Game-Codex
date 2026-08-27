@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "goalId": "GAME-CODEX-PORTFOLIO-EVOLUTION-GOAL-01",
+  "evidenceKind": "LOCAL_CANDIDATE_PREFLIGHT",
+  "executedOn": "2026-08-27",
+  "testedSourceTree": {
+    "algorithm": "sha256-git-clean-filter-tree-with-self-normalized-evidence-v1",
+    "sha256": "99aded772ed253f8b31bd884ba2b7a47d0c0e10412a41baba07f25b712566993",
+    "fileCount": 1469
+  },
+  "scopeBoundary": "This record captures the broad local candidate preflight that completed before this evidence-only file was added. It is not the final unchanged-tree gate, CI result, Pages identity, real-child evidence, or family acceptance.",
+  "finalGatePolicy": "After this record is added and the review source identity is refreshed, run one final comprehensive gate on the unchanged candidate. Preserve the exact command outcome in the return package and require exact-commit CI and Pages readback before release completion.",
+  "realChildValidation": "NOT_PERFORMED_AND_NOT_CLAIMED",
+  "gates": [
+    {
+      "id": "portfolio-affected-closure",
+      "command": "pnpm run test:portfolio:affected -- --run",
+      "status": "PASS",
+      "exitCode": 0,
+      "result": "Portfolio truth, 200-level Equation audit, Equation S profiles, Hanzi wheel, 40-surface interaction and scroll validators, 62 Vitest files with 445 tests, typecheck, build, Math/Chinese/English browser profiles, representative hit-testing and scroll, and 14 portfolio smoke tests passed."
+    },
+    {
+      "id": "play-readiness-static",
+      "command": "pnpm run validate:play-readiness",
+      "status": "PASS",
+      "exitCode": 0,
+      "result": "40 play surfaces, 37 known save keys, and 247 runtime files passed the readiness validator."
+    },
+    {
+      "id": "play-surface-integrity",
+      "command": "pnpm run validate:play-surface-integrity",
+      "status": "PASS",
+      "exitCode": 0,
+      "result": "Interaction integrity passed for 40 surfaces and 342 controls; scroll reachability passed for all 40 surfaces."
+    },
+    {
+      "id": "play-readiness-browser",
+      "command": "pnpm run test:e2e:play-readiness",
+      "status": "PASS",
+      "exitCode": 0,
+      "result": "13 browser scenarios passed; 5 project-matrix exclusions were configuration-level and are enumerated below."
+    },
+    {
+      "id": "accessibility-browser",
+      "command": "pnpm run test:a11y:play-readiness",
+      "status": "PASS",
+      "exitCode": 0,
+      "result": "6 accessibility browser scenarios passed."
+    },
+    {
+      "id": "save-vault",
+      "command": "pnpm run test:save-vault",
+      "status": "PASS",
+      "exitCode": 0,
+      "result": "5 Save Vault unit tests and 2 desktop/mobile browser scenarios passed."
+    },
+    {
+      "id": "portfolio-performance",
+      "command": "pnpm run test:performance:portfolio",
+      "status": "PASS",
+      "exitCode": 0,
+      "result": "2 portfolio performance browser scenarios passed."
+    },
+    {
+      "id": "natural-use-privacy",
+      "command": "pnpm run test:privacy:natural-use-kit",
+      "status": "PASS",
+      "exitCode": 0,
+      "result": "8 schema/store tests passed; 247 runtime files contained zero prohibited privacy patterns."
+    },
+    {
+      "id": "natural-use-browser",
+      "command": "pnpm run test:e2e:natural-use-kit",
+      "status": "PASS",
+      "exitCode": 0,
+      "result": "5 browser scenarios passed; 1 project-matrix exclusion was configuration-level and is enumerated below."
+    },
+    {
+      "id": "portfolio-visual",
+      "command": "pnpm run test:visual:play-readiness",
+      "status": "PASS",
+      "exitCode": 0,
+      "result": "2 current portfolio visual baselines passed on desktop 1440 and mobile 390."
+    },
+    {
+      "id": "chinese-visual",
+      "command": "pnpm run test:visual:chinese-support",
+      "status": "PASS",
+      "exitCode": 0,
+      "result": "3 Chinese-world visual and geometry profiles passed."
+    },
+    {
+      "id": "math-visual",
+      "command": "pnpm run test:visual:math-world",
+      "status": "PASS",
+      "exitCode": 0,
+      "result": "6 Math World visual scenarios passed across desktop, mobile, and tablet; 3 project-matrix exclusions were configuration-level."
+    },
+    {
+      "id": "math-geometry",
+      "command": "pnpm run test:geometry:math-world",
+      "status": "PASS",
+      "exitCode": 0,
+      "result": "4 Math World overflow, control-geometry, and semantic-control scenarios passed."
+    },
+    {
+      "id": "english-visual",
+      "command": "pnpm run test:visual:english-v2",
+      "status": "PASS",
+      "exitCode": 0,
+      "result": "9 English-world visual scenarios passed; 3 project-matrix exclusions were configuration-level."
+    }
+  ],
+  "configurationSkips": [
+    {
+      "profile": "Hanzi wheel workshop",
+      "count": 6,
+      "reason": "The Playwright project matrix intentionally excludes non-matching browser/viewport projects; no selected-project test was skipped."
+    },
+    {
+      "profile": "Math World affected browser",
+      "count": 4,
+      "reason": "The configured project matrix selects the applicable device projects; excluded project combinations are reported by Playwright at collection time."
+    },
+    {
+      "profile": "English affected browser",
+      "count": 19,
+      "reason": "Scenario annotations select their supported browser/viewport projects; every selected project passed."
+    },
+    {
+      "profile": "Play readiness",
+      "count": 5,
+      "reason": "Scenario annotations select the applicable desktop/mobile project matrix; every selected project passed."
+    },
+    {
+      "profile": "Natural-use kit",
+      "count": 1,
+      "reason": "The one excluded project is outside the scenario's declared project matrix; every selected project passed."
+    },
+    {
+      "profile": "Math and English visual baselines",
+      "count": 6,
+      "reason": "Three Math and three English cases exclude non-applicable viewport projects by project annotation; all selected baselines passed without update."
+    }
+  ],
+  "unresolvedFailures": []
+}

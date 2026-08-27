@@ -38,6 +38,9 @@ jobs:
       - name: Verify portfolio manifest and generated documentation
         run: pnpm run portfolio:check
 
+      - name: Verify Portfolio Evolution evidence schema and generated audit
+        run: pnpm run portfolio:evolution:check
+
       - name: Validate play-readiness lifecycle, surfaces, saves, assets, and privacy
         run: pnpm run validate:play-readiness
 
@@ -72,7 +75,7 @@ jobs:
       - name: Exercise portfolio first-use, return, reload, and resume smoke
         run: pnpm run test:e2e:play-readiness:smoke
 
-      - name: Exercise representative 42-surface hit-test matrix
+      - name: Exercise representative 40-surface hit-test matrix
         run: pnpm run test:e2e:hittest:representative
         env:
           INTERACTION_INTEGRITY_PREVIEW: "1"

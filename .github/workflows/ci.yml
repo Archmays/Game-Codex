@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       full_scroll_matrix:
-        description: Run the full 42-surface scroll matrix across all seven viewports
+        description: Run the full 40-surface scroll matrix across all seven viewports
         required: false
         default: false
         type: boolean
@@ -40,8 +40,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Install Chromium for affected browser profiles
+        run: pnpm exec playwright install --with-deps chromium
+
       - name: Verify portfolio manifest and generated documentation
         run: pnpm run portfolio:check
+
+      - name: Verify Portfolio Evolution evidence schema and generated audit
+        run: pnpm run portfolio:evolution:check
 
       - name: Validate play-readiness lifecycle, surfaces, saves, assets, and privacy
         run: pnpm run validate:play-readiness
@@ -52,8 +58,8 @@ jobs:
       - name: Prove natural-use observation privacy defaults and storage isolation
         run: pnpm run test:privacy:natural-use-kit
 
-      - name: Resolve affected gate tier
-        run: pnpm run test:portfolio:affected -- --base "${{ github.event.pull_request.base.sha || github.event.before }}" --head "${{ github.sha }}"
+      - name: Run affected gate tier
+        run: pnpm run test:portfolio:affected -- --base "${{ github.event.pull_request.base.sha || github.event.before }}" --head "${{ github.sha }}" --run
 
       - name: Run unit, content, and maintenance safety tests
         run: pnpm test
@@ -95,7 +101,7 @@ jobs:
       - name: Exercise portfolio first-use, return, reload, and resume smoke
         run: pnpm run test:e2e:play-readiness:smoke
 
-      - name: Exercise representative 42-surface hit-test matrix
+      - name: Exercise representative 40-surface hit-test matrix
         run: pnpm run test:e2e:hittest:representative
 
       - name: Exercise representative scroll ownership, reachability, and modal restoration
@@ -152,7 +158,7 @@ jobs:
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
 
-      - name: Exercise all 42 surfaces across all seven viewports
+      - name: Exercise all 40 surfaces across all seven viewports
         run: pnpm exec playwright test --config playwright.scroll-reachability.config.ts --grep @full
 
       - name: Upload failure evidence only
