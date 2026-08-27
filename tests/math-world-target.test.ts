@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { calculate } from "../games/make-target";
+import { calculate, loadMakeTargetSave, MAKE_TARGET_SAVE_VERSION } from "../games/make-target";
 import {
   applyTargetOperation,
   cloneExpr,
@@ -32,6 +32,25 @@ describe("Math World target workshop", () => {
     expect(restored).toEqual(first);
     expect(restored).not.toBe(first);
     expect(sourceCardIds(restored)).toEqual(["undo-proof-source-1", "undo-proof-source-2"]);
+  });
+
+  it("migrates the legacy save shape and refuses to overwrite future versions", () => {
+    expect(loadMakeTargetSave({ wins: 3, completedPuzzleIds: ["target-24-a", "target-10-a"] }))
+      .toEqual({
+        save: {
+          version: MAKE_TARGET_SAVE_VERSION,
+          wins: 3,
+          completedPuzzleIds: ["target-10-a", "target-24-a"]
+        },
+        canPersist: true,
+        migrated: true
+      });
+    expect(loadMakeTargetSave({ version: 99, wins: 88, completedPuzzleIds: ["future"] }))
+      .toEqual({
+        save: { version: MAKE_TARGET_SAVE_VERSION, wins: 0, completedPuzzleIds: [] },
+        canPersist: false,
+        migrated: false
+      });
   });
 
   it("publishes only deterministic four-card puzzles with solver-backed first hints", () => {

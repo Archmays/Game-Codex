@@ -56,7 +56,7 @@ function sha(value: string): string { return createHash("sha256").update(value).
 
 describe("Natural-use observation schema and local store", () => {
   it("uses only manifest surfaces and the separate non-family-games key", () => {
-    expect(PLAY_SURFACE_MANIFEST).toHaveLength(42);
+    expect(PLAY_SURFACE_MANIFEST).toHaveLength(40);
     expect(OBSERVATION_STORAGE_KEY).toBe("game-codex/parent-observation/v1");
     expect(OBSERVATION_STORAGE_KEY.startsWith("family-games/")).toBe(false);
     expect(KNOWN_SAVE_KEYS.some((entry) => entry.key === OBSERVATION_STORAGE_KEY)).toBe(false);

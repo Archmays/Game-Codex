@@ -133,8 +133,6 @@ export const PLAY_SURFACE_MANIFEST: readonly PlaySurfaceRecord[] = [
     ["classic-math", "math-lab", "数学世界", "a-core-world", false],
     ["classic-english", "english-spell-battle", "英文魔法战", "a-core-world", false],
     ["classic-equation", "equation-slider", "算式滑轨", "s-equation-release", true],
-    ["classic-target", "make-target", "目标工坊", "b-independent-puzzle", true],
-    ["classic-memory", "memory-card", "记忆配对", "c-module", true],
   ] as const).map(([id, productId, title, qualityProfile, primaryEntry]) => {
     const product = GAME_PORTFOLIO.find((record) => record.id === productId);
     if (!product) throw new Error(`Classic play surface references unknown product: ${productId}`);

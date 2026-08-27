@@ -67,13 +67,19 @@ describe("Parent Save Vault", () => {
     const future = "{\"version\":99,\"future\":true}";
     const text = await backupWithEntries([
       await entry("family-games/english-world/v2", future),
+      await entry("family-games/make-target/progress", future),
       await entry("unknown-project/save", "untouched"),
     ]);
     const validated = await validateSaveVaultText(text);
     expect(current.getItem(SAVE_VAULT_PRE_IMPORT_BACKUP_KEY)).toBeNull();
-    expect(validated.preview).toMatchObject({ checksum: "PASS", unknownKeys: ["unknown-project/save"], futureKeys: ["family-games/english-world/v2"] });
+    expect(validated.preview).toMatchObject({
+      checksum: "PASS",
+      unknownKeys: ["unknown-project/save"],
+      futureKeys: ["family-games/english-world/v2", "family-games/make-target/progress"],
+    });
     const result = restoreSaveVault(current, validated, new Date("2026-08-22T00:01:00Z"));
     expect(current.getItem("family-games/english-world/v2")).toBe(future);
+    expect(current.getItem("family-games/make-target/progress")).toBe(future);
     expect(current.getItem("unknown-project/save")).toBeNull();
     expect(current.getItem(SAVE_VAULT_PRE_IMPORT_BACKUP_KEY)).toContain("current");
     expect(result).toMatchObject({ skippedUnknownKeys: ["unknown-project/save"], readbackVerified: true, reloadRequired: true });

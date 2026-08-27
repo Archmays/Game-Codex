@@ -19,9 +19,18 @@ interface ActionSnapshot {
   nextCardNumber: number;
 }
 
-interface MakeTargetSave {
+export const MAKE_TARGET_SAVE_VERSION = 1;
+
+export interface MakeTargetSaveV1 {
+  readonly version: 1;
   wins: number;
-  completedPuzzleIds?: string[];
+  completedPuzzleIds: string[];
+}
+
+export interface LoadedMakeTargetSave {
+  readonly save: MakeTargetSaveV1;
+  readonly canPersist: boolean;
+  readonly migrated: boolean;
 }
 
 const OPERATORS: readonly TargetOperator[] = ["+", "-", "×", "÷"];
@@ -57,7 +66,8 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
   let equations: string[] = [];
   let hintLevel = 0;
   let nextCardNumber = 1;
-  const save = context.storage.get<MakeTargetSave>("progress", { wins: 0 });
+  const loadedSave = loadMakeTargetSave(context.storage.get<unknown>("progress", null));
+  const save = loadedSave.save;
 
   const render = (): void => {
     clearElement(root);
@@ -211,7 +221,7 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
         completed.add(puzzle.id);
         save.wins += 1;
         save.completedPuzzleIds = [...completed].sort();
-        context.storage.set("progress", save);
+        if (loadedSave.canPersist) context.storage.set("progress", save);
       }
       feedback = { kind: "success", text: `成功凑出 ${target}。可以看看完整算式，或换一组继续。` };
       playFeedbackSound("success");
@@ -327,6 +337,31 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
       root.remove();
     },
   };
+}
+
+export function loadMakeTargetSave(value: unknown): LoadedMakeTargetSave {
+  if (!isRecord(value)) return { save: emptyMakeTargetSave(), canPersist: true, migrated: false };
+  if ("version" in value && value.version !== MAKE_TARGET_SAVE_VERSION) {
+    return { save: emptyMakeTargetSave(), canPersist: false, migrated: false };
+  }
+  const wins = Number.isInteger(value.wins) && Number(value.wins) >= 0 ? Number(value.wins) : 0;
+  const completedPuzzleIds = Array.isArray(value.completedPuzzleIds)
+    ? [...new Set(value.completedPuzzleIds.filter((id): id is string => typeof id === "string" && id.trim().length > 0))].sort()
+    : [];
+  const migrated = value.version !== MAKE_TARGET_SAVE_VERSION;
+  return {
+    save: { version: MAKE_TARGET_SAVE_VERSION, wins, completedPuzzleIds },
+    canPersist: true,
+    migrated
+  };
+}
+
+function emptyMakeTargetSave(): MakeTargetSaveV1 {
+  return { version: MAKE_TARGET_SAVE_VERSION, wins: 0, completedPuzzleIds: [] };
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
 function createHeader(titleText: string, introText: string): HTMLElement {

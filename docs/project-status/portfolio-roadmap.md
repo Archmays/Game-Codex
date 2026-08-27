@@ -41,6 +41,12 @@ Portfolio 真源、分级门禁、安全维护事务、CI 与 Pages 组合验证
 - 发布 tag：`game-codex-observation-kit-v1.0.0`
 - 当前 route：`?world=my-game-world&parent=observation`
 
+## 明确授权的有界开发周期
+
+- `portfolio-evolution-01`：`RELEASE-BOUND`；触发为 `EXPLICIT_USER_AUTHORIZATION`；发布 tag 为 `game-codex-portfolio-evolution-v1.0.0`。
+- 完成条件：`RELEASE_TAG_TARGET`；只有 tag、CI 与 Pages 同 SHA 回读后才对外成立。
+- Natural-use 影响：`ONGOING_NOT_CLOSED`；真人儿童验证：`NOT_PERFORMED_AND_NOT_CLAIMED`。
+
 ## 终态边界
 
 - `NEXT: Normal family use. New development only when real evidence or a reproducible defect exists.`

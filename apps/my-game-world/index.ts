@@ -1,14 +1,12 @@
 import "./styles.css";
 import { mountHub } from "../hub";
 import type { MountedGame } from "../../packages/game-core";
+import { ACTIVE_CHILD_PRODUCTS } from "../../packages/data/gamePortfolio";
 import { createWorldHome, type WorldHomeCanvasHandle } from "./phaser/create-world-home";
 import { mountWorldSettings, type WorldSettingsHandle } from "./ui/WorldSettings";
 import { WORLD_COPY } from "./world-copy";
 import {
   CLASSIC_HUB_FROM_WORLD_ROUTE,
-  ENGLISH_WORLD_ROUTE,
-  HANZI_MAGIC_COMPLETE_ROUTE,
-  MATH_WORLD_ROUTE,
   MY_GAME_WORLD_ROUTE,
 } from "./world-routes";
 import {
@@ -40,6 +38,12 @@ function removePageClass(name: string): void {
   document.body.classList.remove(name);
 }
 
+function activeProductRoute(id: string): string {
+  const product = ACTIVE_CHILD_PRODUCTS.find((record) => record.id === id);
+  if (!product?.canonicalRoute) throw new Error(`My Game World active product route is missing: ${id}`);
+  return product.canonicalRoute.replace(/([?&])from=hub(?:&|$)/, "$1from=world&").replace(/&$/, "");
+}
+
 export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions = {}): MyGameWorldHandle {
   const storage = options.storage ?? browserStorage();
   let state = readWorldHomeState(storage);
@@ -49,7 +53,8 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
 
   addPageClass("my-game-world-page");
   root.className = "my-game-world-mount";
-  root.innerHTML = `<main class="my-game-world" data-testid="my-game-world" data-recovered="${String(state.recoveredCalmly)}">
+  const activeProductIds = ACTIVE_CHILD_PRODUCTS.map((record) => record.id).join(" ");
+  root.innerHTML = `<main class="my-game-world" data-testid="my-game-world" data-recovered="${String(state.recoveredCalmly)}" data-active-child-products="${activeProductIds}">
     <header class="world-header">
       <div><span class="world-kicker">三个世界 · 一个百宝箱</span><h1>${WORLD_COPY.title}</h1><p>${WORLD_COPY.subtitle}</p></div>
       <button class="world-icon-button" type="button" data-world-settings-open>${WORLD_COPY.settingsAction}</button>
@@ -60,19 +65,19 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
       <section class="world-object world-object--forest is-active" data-testid="world-forest-portal">
         <span aria-hidden="true" class="world-object__mark world-object__mark--forest"></span>
         <h2>${WORLD_COPY.forestTitle}</h2>
-        <a class="world-primary-link" href="${HANZI_MAGIC_COMPLETE_ROUTE}" data-world-forest-link>${WORLD_COPY.forestFreshAction}</a>
+        <a class="world-primary-link" href="${activeProductRoute("hanzi-radical-battle")}" data-world-forest-link>${WORLD_COPY.forestFreshAction}</a>
       </section>
       <section class="world-object world-object--math" data-testid="world-math-portal">
         <span aria-hidden="true" class="world-object__mark world-object__mark--math"></span>
         <h2>${WORLD_COPY.mathTitle}</h2>
         <p>钟楼、阵列、数字牌与算式轨道</p>
-        <a class="world-secondary-link" href="${MATH_WORLD_ROUTE}" data-world-math-link>${WORLD_COPY.mathAction}</a>
+        <a class="world-secondary-link" href="${activeProductRoute("math-lab")}" data-world-math-link>${WORLD_COPY.mathAction}</a>
       </section>
       <section class="world-object world-object--english" data-testid="world-english-portal">
         <span aria-hidden="true" class="world-object__mark world-object__mark--english"></span>
         <h2>${WORLD_COPY.englishTitle}</h2>
         <p>词义、拼词、句子与世界回应</p>
-        <a class="world-secondary-link" href="${ENGLISH_WORLD_ROUTE}" data-world-english-link>${WORLD_COPY.englishAction}</a>
+        <a class="world-secondary-link" href="${activeProductRoute("english-spell-battle")}" data-world-english-link>${WORLD_COPY.englishAction}</a>
       </section>
       <section class="world-object world-object--treasure" data-testid="world-treasure-box">
         <span aria-hidden="true" class="world-object__mark world-object__mark--treasure"></span>

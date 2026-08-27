@@ -12,6 +12,7 @@ interface SmokeGame {
   readonly id: string;
   readonly title: string;
   readonly surface: string;
+  readonly canonicalRoute?: string;
   interact(page: Page): Promise<Locator | null>;
 }
 
@@ -57,6 +58,7 @@ async function expectUsableTarget(locator: Locator): Promise<void> {
 const GAMES: readonly SmokeGame[] = [
   {
     id: "memory-card", title: "记忆配对", surface: '[data-testid="memory-match"]',
+    canonicalRoute: "/?play=hanzi-magic-complete&view=memory&pack=same-glyph",
     async interact(page) {
       const card = page.locator("[data-card-id]").first();
       await expectUsableTarget(card);
@@ -103,6 +105,7 @@ const GAMES: readonly SmokeGame[] = [
   },
   {
     id: "make-target", title: "目标工坊", surface: ".make-target-game",
+    canonicalRoute: "/?world=math-world&station=target",
     async interact(page) {
       const cards = page.locator(".make-target-card");
       await cards.nth(0).click();
@@ -131,22 +134,26 @@ const GAMES: readonly SmokeGame[] = [
 for (const game of GAMES) {
   test(`@game:${game.id} enters, completes one primary interaction, and returns`, async ({ page }) => {
     const runtime = observeRuntime(page);
-    await page.goto("/?hub=classic", { waitUntil: "domcontentloaded" });
+    await page.goto(game.canonicalRoute ?? "/?hub=classic", { waitUntil: "domcontentloaded" });
     await page.evaluate(() => localStorage.clear());
     await page.reload({ waitUntil: "domcontentloaded" });
-    await expect(page.locator(".game-card")).toHaveCount(6);
-    const card = page.locator(`.game-card[data-game-id="${game.id}"]`);
-    await expect(card.getByRole("heading", { name: game.title, exact: true })).toBeVisible();
-    const entry = card.getByRole("button");
-    await expectUsableTarget(entry);
-    await entry.focus();
-    await expect(entry).toBeFocused();
-    await page.keyboard.press("Enter");
+    if (!game.canonicalRoute) {
+      await expect(page.locator(".game-card")).toHaveCount(4);
+      const card = page.locator(`.game-card[data-game-id="${game.id}"]`);
+      await expect(card.getByRole("heading", { name: game.title, exact: true })).toBeVisible();
+      const entry = card.getByRole("button");
+      await expectUsableTarget(entry);
+      await entry.focus();
+      await expect(entry).toBeFocused();
+      await page.keyboard.press("Enter");
+    }
     await expect(page.locator(game.surface)).toBeVisible({ timeout: 30_000 });
     await game.interact(page);
     await expectNoFatalOverflow(page);
 
-    if (game.id === "hanzi-radical-battle") {
+    if (game.canonicalRoute) {
+      await page.goto("/?hub=classic", { waitUntil: "domcontentloaded" });
+    } else if (game.id === "hanzi-radical-battle") {
       const returnLink = page.locator('a[href*="hub=classic"]').first();
       await expectUsableTarget(returnLink);
       await returnLink.click();
@@ -164,7 +171,7 @@ for (const game of GAMES) {
       await returnButton.focus();
       await page.keyboard.press("Enter");
     }
-    await expect(page.locator(".game-card")).toHaveCount(6);
+    await expect(page.locator(".game-card")).toHaveCount(4);
     await expectRuntimeClean(runtime);
   });
 }

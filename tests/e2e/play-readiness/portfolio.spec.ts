@@ -36,7 +36,6 @@ async function visiblePrimary(page: Page, kind: string): Promise<Locator> {
   if (kind === "english-world") return page.locator(".wordlight-region button").first();
   if (kind === "classic-hub") return page.locator(".game-card__button").first();
   if (kind === "classic-equation") return page.getByRole("button", { name: "跳过教程" });
-  if (kind === "classic-target") return page.locator(".make-target-card").first();
   return page.locator("[data-card-id]").first();
 }
 
@@ -47,11 +46,9 @@ const primary: readonly { id: string; route: string; surface: string; gameId?: s
   { id: "english-world", route: "/?world=english-world", surface: "[data-testid=english-world-map]" },
   { id: "classic-hub", route: "/?hub=classic&from=world", surface: "[data-testid=classic-hub-from-world]" },
   { id: "classic-equation", route: "/?hub=classic&from=world", surface: ".equation-slider", gameId: "equation-slider" },
-  { id: "classic-target", route: "/?hub=classic&from=world", surface: ".make-target-game", gameId: "make-target" },
-  { id: "classic-memory", route: "/?hub=classic&from=world", surface: "[data-testid=memory-match]", gameId: "memory-card" },
 ] as const;
 
-test("@play-ready all eight primary first actions are visible and child-facing", async ({ page }, testInfo) => {
+test("@play-ready all six primary first actions are visible and child-facing", async ({ page }, testInfo) => {
   const runtime = observe(page);
   const observations: unknown[] = [];
   for (const item of primary) {
@@ -105,11 +102,12 @@ test("@play-ready world, support, Classic, back, reload and resume routes stay c
   await page.goBack();
   await expect(page.locator("body")).toBeVisible();
 
-  await page.goto("/?hub=classic&from=world", { waitUntil: "domcontentloaded" });
-  await page.locator('.game-card[data-game-id="memory-card"] .game-card__button').click();
+  await page.goto("/?play=hanzi-magic-complete&view=memory&pack=same-glyph", { waitUntil: "domcontentloaded" });
+  await expect(page.getByTestId("memory-match")).toBeVisible();
   await page.locator("[data-card-id]").first().click();
-  await page.getByRole("button", { name: "返回大厅", exact: true }).click();
-  await expect(page.locator(".game-card")).toHaveCount(6);
+  await page.goto("/?hub=classic&from=world", { waitUntil: "domcontentloaded" });
+  await expect(page.locator(".game-card")).toHaveCount(4);
+  await expect(page.locator('.game-card[data-game-id="memory-card"], .game-card[data-game-id="make-target"]')).toHaveCount(0);
   expectClean(runtime);
 });
 
@@ -159,6 +157,10 @@ test("@a11y modal focus, language parts, target sizes and 200% zoom stay operabl
   await expect(settings).toBeFocused();
   await page.evaluate(() => { document.documentElement.style.zoom = "200%"; });
   await expect(page.locator("[data-world-forest-link]")).toBeVisible();
+  await expect(page.getByTestId("my-game-world")).toHaveAttribute(
+    "data-active-child-products",
+    "hanzi-radical-battle math-lab english-spell-battle equation-slider"
+  );
   await page.locator("[data-world-forest-link]").focus();
   await expect(page.locator("[data-world-forest-link]")).toBeFocused();
 

@@ -22,7 +22,7 @@
 
 ## 当前完成度
 
-V1.0.0，共享关系引擎、三包、Classic 与墨迹森林包装均已接入机器门禁。
+V1.0.0，共享关系引擎、中文三包、English Memory 与兼容定义均已接入机器门禁。独立 Classic 卡片已退役；引擎、世界活动、旧定义和存档均保留。
 
 ## 后续改进建议
 
@@ -30,9 +30,9 @@ V1.0.0，共享关系引擎、三包、Classic 与墨迹森林包装均已接入
 
 ## 接入方式
 
-Classic 使用 `memory-card` 定义；墨迹森林使用 `?play=hanzi-magic-complete&view=memory`。
+墨迹森林使用 `?play=hanzi-magic-complete&view=memory`；词光岛使用 `?world=english-world&view=memory`；`memory-card` 仍是可挂载的兼容定义。
 
-Classic 的 `memory-card` 独立入口继续保留，现由 `packages/activity-engines/memory-match/` 的共享关系配对引擎驱动。墨迹森林的“字光配对”使用同一引擎。
+`packages/activity-engines/memory-match/` 是长期保留的共享关系配对引擎。取消重复儿童卡片不删除代码、route、engine 或 save namespace。
 
 首批内容包：
 

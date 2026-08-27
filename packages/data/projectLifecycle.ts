@@ -17,6 +17,19 @@ export interface ProjectPhaseRecord {
   readonly summary: string;
 }
 
+export interface AuthorizedDevelopmentCycleRecord {
+  readonly id: "portfolio-evolution-01";
+  readonly title: string;
+  readonly trigger: "EXPLICIT_USER_AUTHORIZATION";
+  readonly status: "release-bound";
+  readonly completionCondition: "RELEASE_TAG_TARGET";
+  readonly startCommit: string;
+  readonly releaseTag: string;
+  readonly summary: string;
+  readonly naturalUseObservationImpact: "ONGOING_NOT_CLOSED";
+  readonly realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED";
+}
+
 export const ACTIVE_PROJECT_PHASE: ProjectPhaseId = "natural-use-observation";
 export const NEXT_PROJECT_PHASE: ProjectPhaseId | null = null;
 export const PRIMARY_WORLDS = ["chinese", "math", "english"] as const;
@@ -70,6 +83,26 @@ export const PROJECT_PHASES: readonly ProjectPhaseRecord[] = [
   },
 ] as const;
 
+/**
+ * Explicit bounded development cycles are recorded separately from the
+ * long-running family-use operating mode. Completing one of these cycles does
+ * not close Natural-use Observation and does not create an automatic next job.
+ */
+export const AUTHORIZED_DEVELOPMENT_CYCLES: readonly AuthorizedDevelopmentCycleRecord[] = [
+  {
+    id: "portfolio-evolution-01",
+    title: "Portfolio Evolution",
+    trigger: "EXPLICIT_USER_AUTHORIZATION",
+    status: "release-bound",
+    completionCondition: "RELEASE_TAG_TARGET",
+    startCommit: "73ae9d6be140c9e8294781b9f8e6ed296590c438",
+    releaseTag: "game-codex-portfolio-evolution-v1.0.0",
+    summary: "组合真源分层、重复独立入口收敛、算式滑轨可见动作修复、兼容与发布验证。",
+    naturalUseObservationImpact: "ONGOING_NOT_CLOSED",
+    realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED",
+  },
+] as const;
+
 export const PROJECT_PHASE_BY_ID: ReadonlyMap<ProjectPhaseId, ProjectPhaseRecord> = new Map(
   PROJECT_PHASES.map((phase) => [phase.id, phase]),
 );
@@ -88,6 +121,8 @@ export const PROJECT_LIFECYCLE_TERMINAL_TRUTH = {
   realEvidencePatchCount: 2,
   interactionIntegrity: "HITTEST_AND_REACHABILITY_GUARD_ACTIVE",
   automaticLargeTask: "NONE",
+  authorizedBoundedDevelopmentCycle: "portfolio-evolution-01",
+  authorizedBoundedDevelopmentCycleStatus: "RELEASE_BOUND",
   realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED",
   next: "Normal family use. New development only when real evidence or a reproducible defect exists.",
 } as const;

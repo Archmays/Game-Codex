@@ -29,6 +29,8 @@
 
 V1.0.0 支持目标 10、12、24、完整撤销和四层提示。提示来自 solver graph，只逐层展示关系、牌对、运算或第一步，不直接给完整答案。
 
+当前定位为 Math World 的世界模块，不再投影重复的 Classic 独立卡片。存档 schema 为 `version: 1`：旧 `{wins, completedPuzzleIds}` 字节可确定性迁移；未知 future version 只读且不会被当前版本覆盖。
+
 ## 后续改进建议
 
 - 发布 manifest 为每个目标提供 4 题，并记录解数量、难度、canonical solution 与合法第一步。
@@ -37,5 +39,5 @@ V1.0.0 支持目标 10、12、24、完整撤销和四层提示。提示来自 so
 ## 接入方式
 
 - 导出：`makeTargetGame`。
-- 同一 AST、solver、manifest 和 `family-games/make-target` save 同时服务 Classic 与 Math World。
+- 同一 AST、solver、manifest 和 `family-games/make-target` save 服务 Math World station；mount definition 继续保留兼容能力。
 - Math World station：`?world=math-world&station=target`。

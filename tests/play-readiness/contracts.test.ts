@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { PLAY_SURFACE_MANIFEST, PRIMARY_PLAY_SURFACES } from "../../packages/data/playSurfaceManifest";
-import { PROJECT_LIFECYCLE_TERMINAL_TRUTH, PROJECT_PHASES } from "../../packages/data/projectLifecycle";
+import { AUTHORIZED_DEVELOPMENT_CYCLES, PROJECT_LIFECYCLE_TERMINAL_TRUTH, PROJECT_PHASES } from "../../packages/data/projectLifecycle";
 import { EXPORTABLE_SAVE_KEYS, KNOWN_SAVE_KEYS } from "../../packages/data/saveKeyInventory";
 
 describe("portfolio play-readiness contracts", () => {
@@ -23,12 +23,22 @@ describe("portfolio play-readiness contracts", () => {
     expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.realEvidencePatchCount).toBe(2);
     expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.interactionIntegrity).toBe("HITTEST_AND_REACHABILITY_GUARD_ACTIVE");
     expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.automaticLargeTask).toBe("NONE");
+    expect(AUTHORIZED_DEVELOPMENT_CYCLES).toEqual([
+      expect.objectContaining({
+        id: "portfolio-evolution-01",
+        trigger: "EXPLICIT_USER_AUTHORIZATION",
+        status: "release-bound",
+        completionCondition: "RELEASE_TAG_TARGET",
+        naturalUseObservationImpact: "ONGOING_NOT_CLOSED",
+        realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED",
+      }),
+    ]);
   });
 
-  it("covers every primary first-use surface and keeps Classic at six", () => {
-    expect(PLAY_SURFACE_MANIFEST).toHaveLength(42);
-    expect(PRIMARY_PLAY_SURFACES).toHaveLength(8);
-    expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.kind === "classic-entry")).toHaveLength(6);
+  it("covers every primary first-use surface and keeps Classic aligned to the four active child products", () => {
+    expect(PLAY_SURFACE_MANIFEST).toHaveLength(40);
+    expect(PRIMARY_PLAY_SURFACES).toHaveLength(6);
+    expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.kind === "classic-entry")).toHaveLength(4);
     expect(PLAY_SURFACE_MANIFEST.every((surface) => surface.expectedInputs.includes("keyboard"))).toBe(true);
   });
 

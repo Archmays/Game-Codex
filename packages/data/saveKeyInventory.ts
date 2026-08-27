@@ -42,7 +42,7 @@ export const KNOWN_SAVE_KEYS: readonly KnownSaveKey[] = [
   { key: "math-battle-web/save-v1", owner: "math", purpose: "progress", exportable: true, maxVersion: 1 },
   { key: "family-games/equation-slider/progress-v3", owner: "math", purpose: "progress", exportable: true, maxVersion: 3 },
   { key: "family-games/equation-slider/progress", owner: "legacy", purpose: "compatibility", exportable: true, maxVersion: 1 },
-  { key: "family-games/make-target/progress", owner: "math", purpose: "progress", exportable: true },
+  { key: "family-games/make-target/progress", owner: "math", purpose: "progress", exportable: true, maxVersion: 1 },
   { key: "family-games/clock-reader/progress", owner: "legacy", purpose: "compatibility", exportable: true },
   { key: "family-games/multiplication-adventure/progress", owner: "legacy", purpose: "compatibility", exportable: true },
   { key: "family-games/english-world/v2", owner: "english", purpose: "progress", exportable: true, maxVersion: 2 },

@@ -39,6 +39,20 @@ async function openStation(page: Page, station: string): Promise<void> {
   await expect(page.locator(`[data-station-id="${station}"]`)).toBeVisible();
 }
 
+async function solveFirstTargetTen(page: Page): Promise<void> {
+  const combine = page.getByRole("button", { name: "合并", exact: true });
+  for (const [left, right] of [
+    ["target-10-01-source-1", "target-10-01-source-2"],
+    ["target-10-01-source-3", "target-10-01-source-4"],
+    ["target-10-01-combined-1", "target-10-01-combined-2"],
+  ] as const) {
+    await page.locator(`[data-card-id="${left}"]`).click();
+    await page.locator(`[data-card-id="${right}"]`).click();
+    await combine.click();
+  }
+  await expect(page.getByText("成功凑出 10。可以看看完整算式，或换一组继续。")).toBeVisible();
+}
+
 test("@e2e top world exposes only the three real destinations and Math World has five free stations", async ({ page }) => {
   const log = observe(page);
   await page.goto("/?world=my-game-world");
@@ -138,6 +152,26 @@ test("@e2e legacy module bytes remain exact when the replacement stations mount 
   expect(await page.evaluate((keys) => Object.fromEntries(keys.map((key) => [key, localStorage.getItem(key)])), Object.keys(legacy))).toEqual(legacy);
 });
 
+test("@e2e Make Target migrates legacy progress on a completed puzzle and never overwrites a future save", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-1440");
+  const key = "family-games/make-target/progress";
+  await page.goto("/");
+  await page.evaluate(([storageKey, value]) => localStorage.setItem(storageKey, value), [key, '{"wins":5}']);
+  await openStation(page, "target");
+  await solveFirstTargetTen(page);
+  const migrated = '{"version":1,"wins":6,"completedPuzzleIds":["target-10-01"]}';
+  expect(await page.evaluate((storageKey) => localStorage.getItem(storageKey), key)).toBe(migrated);
+  await page.reload();
+  await expect(page.locator(".make-target-game")).toBeVisible();
+  expect(await page.evaluate((storageKey) => localStorage.getItem(storageKey), key)).toBe(migrated);
+
+  const future = '{"version":99,"wins":88,"completedPuzzleIds":["future"]}';
+  await page.evaluate(([storageKey, value]) => localStorage.setItem(storageKey, value), [key, future]);
+  await openStation(page, "target");
+  await solveFirstTargetTen(page);
+  expect(await page.evaluate((storageKey) => localStorage.getItem(storageKey), key)).toBe(future);
+});
+
 test("@e2e Math Lab reset requires confirmation and both Escape and Cancel return safely", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-1440");
   await openStation(page, "lab");
@@ -188,8 +222,8 @@ test("@e2e direct station refresh, motion setting, keyboard order, and final cla
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("math-world-station")).toHaveAttribute("data-station-id", "clock");
   await page.goto("/?hub=classic");
-  await expect(page.locator(".game-card")).toHaveCount(6);
-  await expect(page.locator('[data-game-id="clock-reader"], [data-game-id="multiplication-adventure"], [data-game-id="pinyin-magic-battle"]')).toHaveCount(0);
-  await expect(page.locator('[data-game-id="math-lab"], [data-game-id="equation-slider"], [data-game-id="make-target"]')).toHaveCount(3);
+  await expect(page.locator(".game-card")).toHaveCount(4);
+  await expect(page.locator('[data-game-id="clock-reader"], [data-game-id="multiplication-adventure"], [data-game-id="pinyin-magic-battle"], [data-game-id="make-target"], [data-game-id="memory-card"]')).toHaveCount(0);
+  await expect(page.locator('[data-game-id="math-lab"], [data-game-id="equation-slider"]')).toHaveCount(2);
   await expectNoOverflow(page);
 });

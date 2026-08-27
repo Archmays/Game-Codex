@@ -1,5 +1,13 @@
 import { existsSync, readFileSync } from "node:fs";
-import { GAME_PORTFOLIO, PORTFOLIO_TEST_PROFILES } from "../packages/data/gamePortfolio";
+import {
+  ACTIVE_CHILD_PRODUCTS,
+  CLASSIC_CARD_PRODUCTS,
+  COMPATIBILITY_SURFACES,
+  GAME_PORTFOLIO,
+  PORTFOLIO_TEST_PROFILES,
+  SHARED_ENGINES,
+  WORLD_MODULES
+} from "../packages/data/gamePortfolio";
 import { PLAY_SURFACE_MANIFEST, PRIMARY_PLAY_SURFACES } from "../packages/data/playSurfaceManifest";
 import { ACTIVE_PROJECT_PHASE, NEXT_PROJECT_PHASE, PROJECT_LIFECYCLE_TERMINAL_TRUTH, PROJECT_PHASES } from "../packages/data/projectLifecycle";
 import { KNOWN_SAVE_KEYS, portfolioNamespacesWithoutKnownKey } from "../packages/data/saveKeyInventory";
@@ -9,7 +17,7 @@ import { loadGameCatalogMetadata } from "../tools/portfolio/load-game-catalog-me
 
 describe("game portfolio governance", () => {
   const gameCatalog = loadGameCatalogMetadata();
-  const currentClassicGameCatalog = gameCatalog.filter((game) => GAME_PORTFOLIO.find((record) => record.id === game.id)?.currentStandaloneVisible);
+  const currentClassicGameCatalog = gameCatalog.filter((game) => GAME_PORTFOLIO.find((record) => record.id === game.id)?.classicCardVisible);
 
   it("represents the live catalog one-to-one with valid governance identities", () => {
     expect(validatePortfolio(gameCatalog, currentClassicGameCatalog)).toEqual([]);
@@ -19,9 +27,20 @@ describe("game portfolio governance", () => {
       GAME_PORTFOLIO.flatMap((record) => record.saveNamespaces).length,
     );
     expect(new Set(GAME_PORTFOLIO.map((record) => record.qualityTier))).toEqual(new Set(["S", "A", "B", "C"]));
-    expect(currentClassicGameCatalog).toHaveLength(6);
-    expect(GAME_PORTFOLIO.filter((record) => !record.currentStandaloneVisible).map((record) => record.id).sort()).toEqual([
+    expect(ACTIVE_CHILD_PRODUCTS.map((record) => record.id)).toEqual([
+      "hanzi-radical-battle", "math-lab", "english-spell-battle", "equation-slider"
+    ]);
+    expect(CLASSIC_CARD_PRODUCTS.map((record) => record.id)).toEqual([
+      "hanzi-radical-battle", "math-lab", "english-spell-battle", "equation-slider"
+    ]);
+    expect(WORLD_MODULES).toHaveLength(11);
+    expect(COMPATIBILITY_SURFACES).toHaveLength(6);
+    expect(SHARED_ENGINES).toHaveLength(2);
+    expect(currentClassicGameCatalog).toHaveLength(4);
+    expect(GAME_PORTFOLIO.filter((record) => !record.classicCardVisible).map((record) => record.id).sort()).toEqual([
       "clock-reader",
+      "make-target",
+      "memory-card",
       "multiplication-adventure",
       "pinyin-magic-battle",
     ]);
@@ -38,7 +57,8 @@ describe("game portfolio governance", () => {
   it("keeps generated portfolio documents byte-deterministic and drift-free", () => {
     expect(checkGeneratedDocs()).toEqual([]);
     const status = readFileSync("docs/project-status/portfolio-status.md", "utf8");
-    expect(status).toContain("9/9");
+    expect(status).toContain("Mount definitions：`9`");
+    expect(status).toContain("Active child products：`4`");
     expect(status).toContain("NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE");
   });
 
@@ -50,7 +70,7 @@ describe("game portfolio governance", () => {
     expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.automaticLargeTask).toBe("NONE");
     expect(new Set(PLAY_SURFACE_MANIFEST.map((surface) => surface.id)).size).toBe(PLAY_SURFACE_MANIFEST.length);
     expect(PRIMARY_PLAY_SURFACES.map((surface) => surface.id)).toEqual([
-      "my-game-world", "classic-hub", "hanzi-world", "math-world", "english-world", "classic-equation", "classic-target", "classic-memory",
+      "my-game-world", "classic-hub", "hanzi-world", "math-world", "english-world", "classic-equation",
     ]);
     expect(new Set(KNOWN_SAVE_KEYS.map((record) => record.key)).size).toBe(KNOWN_SAVE_KEYS.length);
     expect(portfolioNamespacesWithoutKnownKey()).toEqual([]);
@@ -58,19 +78,37 @@ describe("game portfolio governance", () => {
 
   it("maps shared and unknown changes to fail-safe gates", () => {
     const docs = affectedGateCommands(["docs/project-status/portfolio-status.md"]);
-    expect(docs.map((command) => command.label)).toEqual(["portfolio consistency"]);
+    expect(docs.map((command) => command.label)).toEqual([
+      "portfolio consistency",
+      "Portfolio Evolution evidence and generated audit",
+    ]);
 
     const game = affectedGateCommands(["games/clock-reader/index.ts"]);
     expect(game.map((command) => command.label)).toEqual([
       "portfolio consistency",
+      "Portfolio Evolution evidence and generated audit",
       "Math World model, content, and save gates",
       "Math World portfolio and replacement contract",
       "Math World routes, interactions, and lifecycle",
     ]);
 
+    const equation = affectedGateCommands(["games/equation-slider/board-state.ts"]);
+    expect(equation.map((command) => command.label)).toEqual([
+      "portfolio consistency",
+      "Portfolio Evolution evidence and generated audit",
+      "unit and content tests",
+      "Equation Slider deterministic 200-level audit",
+      "Equation Slider core browser profile",
+      "Equation Slider S release browser profile",
+      "Equation Slider visual and geometry profile",
+      "Equation Slider bounded agent playtest",
+      "equation-slider entry/interaction/return smoke",
+    ]);
+
     const shared = affectedGateCommands(["packages/game-core/index.ts"]);
     expect(shared.map((command) => command.label)).toEqual([
       "portfolio consistency",
+      "Portfolio Evolution evidence and generated audit",
       "UI occlusion inventory and interaction-integrity contracts",
       "play-surface scroll ownership contracts",
       "unit and content tests",
@@ -81,7 +119,7 @@ describe("game portfolio governance", () => {
       "Math World routes, interactions, and lifecycle",
       "Chinese support routes, inputs, saves, and fallbacks",
       "English World routes, interactions, and geometry",
-      "representative 42-surface browser hit-test matrix",
+      "representative play-surface browser hit-test matrix",
       "representative scroll and bottom reachability matrix",
       "all-game portfolio smoke",
     ]);
@@ -94,7 +132,7 @@ describe("game portfolio governance", () => {
       expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === id)?.returnRoute).toBe("?play=hanzi-magic-complete&from=world");
     }
     expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === "classic-math")?.returnRoute).toBe("?world=my-game-world");
-    for (const id of ["classic-hanzi", "classic-english", "classic-equation", "classic-target", "classic-memory"]) {
+    for (const id of ["classic-hanzi", "classic-english", "classic-equation"]) {
       expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === id)?.returnRoute).toBe("?hub=classic&from=world");
     }
   });
