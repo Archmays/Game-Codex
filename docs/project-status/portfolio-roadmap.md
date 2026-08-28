@@ -47,7 +47,7 @@ Portfolio 真源、分级门禁、安全维护事务、CI 与 Pages 组合验证
 - 完成条件：`RELEASE_TAG_TARGET`；只有 tag、CI 与 Pages 同 SHA 回读后才对外成立。
 - Natural-use 影响：`ONGOING_NOT_CLOSED`；真人儿童验证：`NOT_PERFORMED_AND_NOT_CLAIMED`。
 
-- `gameplay-coherence-02`：`RELEASE-BOUND`；触发为 `EXPLICIT_USER_AUTHORIZATION`；发布 tag 为 `game-codex-gameplay-coherence-v1.0.0`。
+- `gameplay-coherence-02`：`RELEASE-BOUND`；触发为 `EXPLICIT_USER_AUTHORIZATION`；发布 tag 为 `game-codex-gameplay-coherence-v1.0.1`。
 - 完成条件：`RELEASE_TAG_TARGET`；只有 tag、CI 与 Pages 同 SHA 回读后才对外成立。
 - Natural-use 影响：`ONGOING_NOT_CLOSED`；真人儿童验证：`NOT_PERFORMED_AND_NOT_CLAIMED`。
 

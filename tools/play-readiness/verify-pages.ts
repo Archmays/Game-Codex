@@ -3,7 +3,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { chromium, type Page } from "@playwright/test";
 
-const TASK_ID = "GAME-CODEX-PLAY-READINESS-POLISH-05";
+const TASK_ID = "GAME-CODEX-WORLD-COHERENCE-AND-GAMEPLAY-LIFT-02";
 const pagesBase = new URL(process.argv[2] ?? process.env.PLAY_READINESS_PAGES_BASE ?? "https://archmays.github.io/Game-Codex/");
 const expectedCommit = (process.argv[3] ?? process.env.PLAY_READINESS_EXPECTED_COMMIT ?? execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" })).trim();
 const output = resolve(`tmp/tasks/${TASK_ID}/reports/PAGES_VERDICT.json`);
@@ -60,6 +60,7 @@ try {
     ["?play=hanzi-magic-complete", '[data-testid="hanzi-magic-complete"]'],
     ["?world=math-world", '[data-testid="math-world-map"]'],
     ["?world=math-world&station=target", ".make-target-game"],
+    ["?world=math-world&station=slider", ".equation-slider"],
     ["?world=english-world", '[data-testid="english-world-map"]'],
     ["?hub=classic&from=world", ".hub-grid"],
     ["?play=hanzi-magic-complete&view=pinyin", '[data-testid="sound-rhyme-trial"]'],
@@ -70,14 +71,15 @@ try {
 
   await route(page, "?hub=classic&from=world", ".hub-grid");
   requireValue(await page.locator(".game-card").count() === 3, "Classic does not contain exactly three world-product cards");
-  requireValue(await page.locator('[data-game-id="make-target"], [data-game-id="memory-card"], [data-game-id="pinyin-magic-battle"]').count() === 0, "Classic still exposes a converged module or compatibility card");
-  for (const [id, selector] of [["equation-slider", ".equation-slider"]] as const) {
-    await page.locator(`.game-card[data-game-id="${id}"] .game-card__button`).click();
-    await page.locator(selector).waitFor({ state: "visible" });
-    await page.getByRole("button", { name: "返回大厅", exact: true }).click();
-    await page.locator(".hub-grid").waitFor({ state: "visible" });
-    checked.push(`classic-${id}-return`);
-  }
+  requireValue(await page.locator('[data-game-id="make-target"], [data-game-id="memory-card"], [data-game-id="pinyin-magic-battle"], [data-game-id="equation-slider"]').count() === 0, "Classic still exposes a converged module, compatibility card, or nested flagship module");
+  checked.push("classic-3-active-products");
+
+  await route(page, "?world=math-world&station=slider", ".equation-slider");
+  await page.getByRole("button", { name: "关卡列表", exact: true }).click();
+  await page.getByRole("button", { name: "线路地图", exact: true }).click();
+  await page.getByRole("button", { name: "回数学世界地图", exact: true }).click();
+  await page.locator('[data-testid="math-world-map"]').waitFor({ state: "visible" });
+  checked.push("math-slider-world-return");
 
   await page.goto(new URL("?world=english-world&region=animals", pagesBase).href, { waitUntil: "networkidle" });
   await page.locator('[data-testid="english-region"]').waitFor({ state: "visible" });

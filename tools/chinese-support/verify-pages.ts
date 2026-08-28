@@ -35,7 +35,7 @@ export async function verifyChineseSupportPages() {
         routes[`${viewport.name}:${name}`] = "PASS";
       };
       await check("top-world", "?world=my-game-world", '[data-testid="my-game-world"]');
-      await check("classic-four", "?hub=classic", ".hub-grid");
+      await check("classic-three", "?hub=classic", ".hub-grid");
       requireValue(await page.locator(".game-card").count() === 3, "Classic does not contain exactly three world-product cards");
       await check("math-world", "?world=math-world", '[data-testid="math-world-map"]');
       await check("hanzi-world", "?play=hanzi-magic-complete&from=hub", '[data-testid="hanzi-magic-complete"]');

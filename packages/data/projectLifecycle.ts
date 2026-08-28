@@ -108,7 +108,7 @@ export const AUTHORIZED_DEVELOPMENT_CYCLES: readonly AuthorizedDevelopmentCycleR
     status: "release-bound",
     completionCondition: "RELEASE_TAG_TARGET",
     startCommit: "90eb3b242b38b1d7a8cd98c8e0cafce14a6984a0",
-    releaseTag: "game-codex-gameplay-coherence-v1.0.0",
+    releaseTag: "game-codex-gameplay-coherence-v1.0.1",
     summary: "三世界层级真值、Equation 数学世界归位、运行时归属/质量档/存档分层，以及五个数学站点的继续、焦点与游戏体验修复。",
     naturalUseObservationImpact: "ONGOING_NOT_CLOSED",
     realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED",

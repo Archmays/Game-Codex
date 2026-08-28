@@ -3,7 +3,7 @@
 ## Current candidate boundary
 
 - Source-bound start: `90eb3b242b38b1d7a8cd98c8e0cafce14a6984a0` on `main`.
-- Release target: `game-codex-gameplay-coherence-v1.0.0` (patch suffix only if the tag already exists).
+- Final release target: `game-codex-gameplay-coherence-v1.0.1`; v1.0.0 is preserved as the first release commit and was superseded before closeout when its Pages verifier was found to retain a removed Classic-card action.
 - Historical `docs/portfolio-evolution/evidence/**` remains byte-preserved and its 4-product/40-surface checker runs in historical mode.
 - Current lifecycle remains Natural-use `ACTIVE`; real-child validation is `NOT_PERFORMED_AND_NOT_CLAIMED`.
 

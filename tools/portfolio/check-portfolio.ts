@@ -119,7 +119,7 @@ export function validatePortfolio(catalog: readonly GameCatalogMetadata[], curre
   if (portfolioEvolution?.realChildValidation !== "NOT_PERFORMED_AND_NOT_CLAIMED") issues.push("Portfolio Evolution child-evidence boundary drifted");
   const gameplayCoherence = AUTHORIZED_DEVELOPMENT_CYCLES.find((cycle) => cycle.id === "gameplay-coherence-02");
   if (!gameplayCoherence || gameplayCoherence.status !== "release-bound" || gameplayCoherence.trigger !== "EXPLICIT_USER_AUTHORIZATION") issues.push("Gameplay Coherence authorization truth is incomplete");
-  if (gameplayCoherence?.releaseTag !== "game-codex-gameplay-coherence-v1.0.0" || gameplayCoherence.realChildValidation !== "NOT_PERFORMED_AND_NOT_CLAIMED") issues.push("Gameplay Coherence release or child-evidence boundary drifted");
+  if (gameplayCoherence?.releaseTag !== "game-codex-gameplay-coherence-v1.0.1" || gameplayCoherence.realChildValidation !== "NOT_PERFORMED_AND_NOT_CLAIMED") issues.push("Gameplay Coherence release or child-evidence boundary drifted");
   if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.realChildValidation !== "NOT_PERFORMED_AND_NOT_CLAIMED") issues.push("Real-child validation boundary drifted");
   if (PRIMARY_WORLDS.length !== 3) issues.push(`Expected three primary worlds, found ${PRIMARY_WORLDS.length}`);
   for (const id of duplicates(PLAY_SURFACE_MANIFEST.map((record) => record.id))) issues.push(`Duplicate play surface id: ${id}`);

@@ -5,7 +5,7 @@ import { chromium, type Page } from "@playwright/test";
 
 const pagesBase = new URL(process.argv[2] ?? process.env.MATH_WORLD_PAGES_BASE ?? "https://archmays.github.io/Game-Codex/");
 const expectedCommit = (process.argv[3] ?? process.env.MATH_WORLD_EXPECTED_COMMIT ?? execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" })).trim();
-const output = resolve(process.env.MATH_WORLD_PAGES_OUTPUT ?? "tmp/tasks/GAME-CODEX-MATH-WORLD-02-R2/reports/PAGES_VERDICT.json");
+const output = resolve(process.env.MATH_WORLD_PAGES_OUTPUT ?? "tmp/tasks/GAME-CODEX-WORLD-COHERENCE-AND-GAMEPLAY-LIFT-02/reports/MATH_WORLD_PAGES_VERDICT.json");
 
 function requireValue(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);
@@ -61,13 +61,15 @@ try {
 
   await route(page, "?hub=classic", ".hub-grid");
   requireValue(await page.locator(".game-card").count() === 3, "Pages classic catalog is not the three active world products");
-  requireValue(await page.locator('[data-game-id="clock-reader"], [data-game-id="multiplication-adventure"], [data-game-id="make-target"], [data-game-id="memory-card"], [data-game-id="pinyin-magic-battle"]').count() === 0, "Converged module or compatibility cards remain on Pages");
-  for (const id of ["equation-slider"] as const) {
-    await page.locator(`[data-game-id="${id}"] button`).click();
-    await page.locator(id === "make-target" ? ".make-target-game" : ".equation-slider").waitFor({ state: "visible" });
-    await page.getByRole("button", { name: "返回大厅", exact: true }).first().click();
-  }
-  checked.push("classic-4-active-products");
+  requireValue(await page.locator('[data-game-id="clock-reader"], [data-game-id="multiplication-adventure"], [data-game-id="make-target"], [data-game-id="memory-card"], [data-game-id="pinyin-magic-battle"], [data-game-id="equation-slider"]').count() === 0, "Converged module, compatibility card, or nested flagship module remains on Pages");
+  checked.push("classic-3-active-products");
+
+  await route(page, "?world=math-world&station=slider", ".equation-slider");
+  await page.getByRole("button", { name: "关卡列表", exact: true }).click();
+  await page.getByRole("button", { name: "线路地图", exact: true }).click();
+  await page.getByRole("button", { name: "回数学世界地图", exact: true }).click();
+  await page.locator('[data-testid="math-world-map"]').waitFor({ state: "visible" });
+  checked.push("slider-world-return");
 
   await page.setViewportSize({ width: 390, height: 844 });
   await route(page, "?world=math-world", '[data-testid="math-world-map"]');

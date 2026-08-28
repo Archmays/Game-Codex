@@ -59,7 +59,7 @@ try {
   requireValue(await page.locator(".game-card").count() === 3, "Classic catalog is not the three active world products");
   await page.locator('[data-game-id="english-spell-battle"] button').click();
   await page.locator('[data-testid="english-world-map"]').waitFor({ state: "visible" });
-  checked.push("classic-english-to-world", "classic-4-active-products");
+  checked.push("classic-english-to-world", "classic-3-active-products");
 
   await page.setViewportSize({ width: 360, height: 800 });
   await route(page, "?world=english-world", '[data-testid="english-world-map"]');

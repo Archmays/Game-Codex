@@ -80,7 +80,7 @@
 | 周期 | 触发 | 状态 | 起点 / 发布 tag | Natural-use 影响 | 真人儿童验证 |
 | --- | --- | --- | --- | --- | --- |
 | Portfolio Evolution | `EXPLICIT_USER_AUTHORIZATION` | `RELEASE-BOUND` | `73ae9d6be140c9e8294781b9f8e6ed296590c438`<br>`game-codex-portfolio-evolution-v1.0.0` | `ONGOING_NOT_CLOSED` | `NOT_PERFORMED_AND_NOT_CLAIMED` |
-| World Coherence and Gameplay Lift | `EXPLICIT_USER_AUTHORIZATION` | `RELEASE-BOUND` | `90eb3b242b38b1d7a8cd98c8e0cafce14a6984a0`<br>`game-codex-gameplay-coherence-v1.0.0` | `ONGOING_NOT_CLOSED` | `NOT_PERFORMED_AND_NOT_CLAIMED` |
+| World Coherence and Gameplay Lift | `EXPLICIT_USER_AUTHORIZATION` | `RELEASE-BOUND` | `90eb3b242b38b1d7a8cd98c8e0cafce14a6984a0`<br>`game-codex-gameplay-coherence-v1.0.1` | `ONGOING_NOT_CLOSED` | `NOT_PERFORMED_AND_NOT_CLAIMED` |
 
 - 当前有界周期：`gameplay-coherence-02`；完成条件：`RELEASE_TAG_TARGET`；最终完成由发布 tag、CI 与 Pages 同 SHA 回读证明，不由源码预先宣告。
 - 当前收敛阶段：`natural-use-observation`
