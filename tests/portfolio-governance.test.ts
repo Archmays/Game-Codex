@@ -4,6 +4,7 @@ import {
   CLASSIC_CARD_PRODUCTS,
   COMPATIBILITY_SURFACES,
   GAME_PORTFOLIO,
+  isClassicCardExposureAllowed,
   PORTFOLIO_TEST_PROFILES,
   SHARED_ENGINES,
   WORLD_MODULES
@@ -28,17 +29,18 @@ describe("game portfolio governance", () => {
     );
     expect(new Set(GAME_PORTFOLIO.map((record) => record.qualityTier))).toEqual(new Set(["S", "A", "B", "C"]));
     expect(ACTIVE_CHILD_PRODUCTS.map((record) => record.id)).toEqual([
-      "hanzi-radical-battle", "math-lab", "english-spell-battle", "equation-slider"
+      "hanzi-radical-battle", "math-lab", "english-spell-battle"
     ]);
     expect(CLASSIC_CARD_PRODUCTS.map((record) => record.id)).toEqual([
-      "hanzi-radical-battle", "math-lab", "english-spell-battle", "equation-slider"
+      "hanzi-radical-battle", "math-lab", "english-spell-battle"
     ]);
     expect(WORLD_MODULES).toHaveLength(11);
     expect(COMPATIBILITY_SURFACES).toHaveLength(6);
     expect(SHARED_ENGINES).toHaveLength(2);
-    expect(currentClassicGameCatalog).toHaveLength(4);
+    expect(currentClassicGameCatalog).toHaveLength(3);
     expect(GAME_PORTFOLIO.filter((record) => !record.classicCardVisible).map((record) => record.id).sort()).toEqual([
       "clock-reader",
+      "equation-slider",
       "make-target",
       "memory-card",
       "multiplication-adventure",
@@ -54,11 +56,24 @@ describe("game portfolio governance", () => {
     }
   });
 
+  it("rejects a nested world module Classic card unless its exception is explicit and identity-bound", () => {
+    const equation = GAME_PORTFOLIO.find((record) => record.id === "equation-slider");
+    if (!equation) throw new Error("Equation definition is missing");
+    const exposed = { ...equation, classicCardVisible: true };
+    expect(isClassicCardExposureAllowed(exposed, [])).toBe(false);
+    expect(isClassicCardExposureAllowed(exposed, [{
+      definitionId: "equation-slider",
+      worldModuleIds: ["math-equation-slider"],
+      rationale: "Bounded exception example",
+      evidenceRef: "docs/gameplay-coherence/README.md",
+    }])).toBe(true);
+  });
+
   it("keeps generated portfolio documents byte-deterministic and drift-free", () => {
     expect(checkGeneratedDocs()).toEqual([]);
     const status = readFileSync("docs/project-status/portfolio-status.md", "utf8");
     expect(status).toContain("Mount definitions：`9`");
-    expect(status).toContain("Active child products：`4`");
+    expect(status).toContain("Active child products：`3`");
     expect(status).toContain("NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE");
   });
 
@@ -70,7 +85,7 @@ describe("game portfolio governance", () => {
     expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.automaticLargeTask).toBe("NONE");
     expect(new Set(PLAY_SURFACE_MANIFEST.map((surface) => surface.id)).size).toBe(PLAY_SURFACE_MANIFEST.length);
     expect(PRIMARY_PLAY_SURFACES.map((surface) => surface.id)).toEqual([
-      "my-game-world", "classic-hub", "hanzi-world", "math-world", "english-world", "classic-equation",
+      "my-game-world", "classic-hub", "hanzi-world", "math-world", "english-world",
     ]);
     expect(new Set(KNOWN_SAVE_KEYS.map((record) => record.key)).size).toBe(KNOWN_SAVE_KEYS.length);
     expect(portfolioNamespacesWithoutKnownKey()).toEqual([]);
@@ -132,8 +147,18 @@ describe("game portfolio governance", () => {
       expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === id)?.returnRoute).toBe("?play=hanzi-magic-complete&from=world");
     }
     expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === "classic-math")?.returnRoute).toBe("?world=my-game-world");
-    for (const id of ["classic-hanzi", "classic-english", "classic-equation"]) {
+    for (const id of ["classic-hanzi", "classic-english"]) {
       expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === id)?.returnRoute).toBe("?hub=classic&from=world");
     }
+    expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === "math-slider")).toMatchObject({
+      mountDefinitionId: "equation-slider",
+      runtimeOwnerDefinitionId: "equation-slider",
+      topLevelProductId: "math-lab",
+      worldModuleId: "math-equation-slider",
+      hostWorldId: "math",
+      qualityProfile: "s-equation-release",
+      runtimeSaveNamespaces: ["family-games/equation-slider"],
+      hostSaveNamespaces: ["family-games/math-world/v1"],
+    });
   });
 });

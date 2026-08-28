@@ -60,7 +60,7 @@ try {
   }
 
   await route(page, "?hub=classic", ".hub-grid");
-  requireValue(await page.locator(".game-card").count() === 4, "Pages classic catalog is not the four active child products");
+  requireValue(await page.locator(".game-card").count() === 3, "Pages classic catalog is not the three active world products");
   requireValue(await page.locator('[data-game-id="clock-reader"], [data-game-id="multiplication-adventure"], [data-game-id="make-target"], [data-game-id="memory-card"], [data-game-id="pinyin-magic-battle"]').count() === 0, "Converged module or compatibility cards remain on Pages");
   for (const id of ["equation-slider"] as const) {
     await page.locator(`[data-game-id="${id}"] button`).click();

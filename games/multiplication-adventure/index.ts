@@ -9,6 +9,7 @@ import {
   type ArrayModel,
   type ArrayWorkshopMode,
 } from "./model";
+import "./styles.css";
 
 export { getMultiplicationGridCount, getNumberBlockCount } from "./model";
 
@@ -42,7 +43,18 @@ function mountArrayWorkshop(context: MountGameContext): MountedGame {
   let feedback: FeedbackState = { kind: "info", text: `请搭出 ${task.rows} 行 × ${task.columns} 列。` };
   let readChoices: readonly ArrayModel[] = createReadChoices(task.rows, task.columns);
 
-  const render = (): void => {
+  const actionButton = (
+    label: string,
+    actionKey: string,
+    onClick: () => void,
+    options?: Parameters<typeof createButton>[2],
+  ): HTMLButtonElement => {
+    const control = createButton(label, onClick, options);
+    control.dataset.arrayAction = actionKey;
+    return control;
+  };
+
+  const render = (focusKey?: string): void => {
     clearElement(root);
     root.append(createHeader("阵列工坊", "方格有几行、每行有几列，都能从阵列本身看见。"));
 
@@ -53,7 +65,7 @@ function mountArrayWorkshop(context: MountGameContext): MountedGame {
       { id: "read", label: "看阵列" },
       { id: "transpose", label: "翻转阵列" },
     ] as const) {
-      toolbar.append(createButton(item.label, () => switchMode(item.id), {
+      toolbar.append(actionButton(item.label, `mode-${item.id}`, () => switchMode(item.id, `mode-${item.id}`), {
         className: mode === item.id ? "ui-button learning-game__pill is-active" : "ui-button learning-game__pill",
       }));
     }
@@ -75,34 +87,36 @@ function mountArrayWorkshop(context: MountGameContext): MountedGame {
     controls.className = "array-workshop__controls";
     if (mode === "build") {
       controls.append(
-        dimensionControl("行", model.rows, (delta) => setDimensions(model.rows + delta, model.columns)),
-        dimensionControl("列", model.columns, (delta) => setDimensions(model.rows, model.columns + delta)),
-        createButton("检查阵列", checkBuild),
+        dimensionControl("行", "rows", model.rows, (delta, actionKey) => setDimensions(model.rows + delta, model.columns, actionKey)),
+        dimensionControl("列", "columns", model.columns, (delta, actionKey) => setDimensions(model.rows, model.columns + delta, actionKey)),
+        actionButton("检查阵列", "check", checkBuild),
       );
     } else if (mode === "read") {
       for (const choice of readChoices) {
-        controls.append(createButton(`${choice.rows} × ${choice.columns} = ${choice.product}`, () => checkRead(choice)));
+        const key = `read-${choice.rows}-${choice.columns}`;
+        controls.append(actionButton(`${choice.rows} × ${choice.columns} = ${choice.product}`, key, () => checkRead(choice, key)));
       }
     } else {
-      controls.append(createButton("翻转阵列", rotateArray), createButton("换一个阵列", nextTask, {
+      controls.append(actionButton("翻转阵列", "transpose", rotateArray), actionButton("换一个阵列", "next", nextTask, {
         className: "ui-button ui-button--secondary",
       }));
     }
 
     const actions = document.createElement("div");
     actions.className = "learning-game__actions";
-    if (mode !== "transpose") actions.append(createButton("换一个任务", nextTask, { className: "ui-button ui-button--secondary" }));
+    if (mode !== "transpose") actions.append(actionButton("换一个任务", "next", nextTask, { className: "ui-button ui-button--secondary" }));
 
     root.append(toolbar, prompt, workbench, controls, actions, createFeedbackBanner(feedback));
+    if (focusKey) queueMicrotask(() => root.querySelector<HTMLButtonElement>(`[data-array-action="${focusKey}"]`)?.focus());
   };
 
-  const switchMode = (nextMode: ArrayWorkshopMode): void => {
+  const switchMode = (nextMode: ArrayWorkshopMode, focusKey: string): void => {
     mode = nextMode;
     taskIndex = 0;
-    loadTask();
+    loadTask(focusKey);
   };
 
-  const loadTask = (): void => {
+  const loadTask = (focusKey?: string): void => {
     task = createArrayTask("math-world-array-v1", taskIndex, mode);
     model = mode === "build"
       ? createArrayModel(task.rows === 1 ? 2 : task.rows - 1, task.columns)
@@ -113,18 +127,18 @@ function mountArrayWorkshop(context: MountGameContext): MountedGame {
       : mode === "read"
         ? { kind: "info", text: "先数行和列，再选择算式。" }
         : { kind: "info", text: `${model.expression}。试着把行和列交换。` };
-    render();
+    render(focusKey);
   };
 
   const nextTask = (): void => {
     taskIndex += 1;
-    loadTask();
+    loadTask("next");
   };
 
-  const setDimensions = (rows: number, columns: number): void => {
+  const setDimensions = (rows: number, columns: number, focusKey: string): void => {
     model = createArrayModel(clampArrayFactor(rows), clampArrayFactor(columns));
     feedback = { kind: "info", text: model.rowText };
-    render();
+    render(focusKey);
   };
 
   const checkBuild = (): void => {
@@ -133,16 +147,16 @@ function mountArrayWorkshop(context: MountGameContext): MountedGame {
       ? { kind: "success", text: `你搭出了 ${model.rowText}。` }
       : { kind: "info", text: `现在是 ${model.rows} 行 × ${model.columns} 列；目标是 ${task.rows} 行 × ${task.columns} 列。` };
     playFeedbackSound(correct ? "success" : "info");
-    render();
+    render("check");
   };
 
-  const checkRead = (choice: ArrayModel): void => {
+  const checkRead = (choice: ArrayModel, focusKey: string): void => {
     const correct = choice.rows === model.rows && choice.columns === model.columns;
     feedback = correct
       ? { kind: "success", text: `对：${model.rowText}。` }
       : { kind: "info", text: `再看看：横着数是 ${model.rows} 行，每行 ${model.columns} 个。` };
     playFeedbackSound(correct ? "success" : "info");
-    render();
+    render(focusKey);
   };
 
   const rotateArray = (): void => {
@@ -153,7 +167,7 @@ function mountArrayWorkshop(context: MountGameContext): MountedGame {
       text: `${before.rows} × ${before.columns} 变成 ${model.rows} × ${model.columns}；方向变了，总数仍是 ${model.product}。`,
     };
     playFeedbackSound("success");
-    render();
+    render("transpose");
   };
 
   render();
@@ -189,13 +203,17 @@ function createArrayDescription(model: ArrayModel): HTMLElement {
   return description;
 }
 
-function dimensionControl(label: string, value: number, onChange: (delta: number) => void): HTMLElement {
+function dimensionControl(label: string, key: string, value: number, onChange: (delta: number, actionKey: string) => void): HTMLElement {
   const control = document.createElement("div");
   control.className = "array-workshop__dimension";
+  const decrease = createButton(`${label} -`, () => onChange(-1, `${key}-decrease`), { className: "ui-button ui-button--secondary", disabled: value <= 1 });
+  const increase = createButton(`${label} +`, () => onChange(1, `${key}-increase`), { disabled: value >= 9 });
+  decrease.dataset.arrayAction = `${key}-decrease`;
+  increase.dataset.arrayAction = `${key}-increase`;
   control.append(
-    createButton(`${label} -`, () => onChange(-1), { className: "ui-button ui-button--secondary", disabled: value <= 1 }),
+    decrease,
     Object.assign(document.createElement("output"), { textContent: `${label} ${value}` }),
-    createButton(`${label} +`, () => onChange(1), { disabled: value >= 9 }),
+    increase,
   );
   return control;
 }

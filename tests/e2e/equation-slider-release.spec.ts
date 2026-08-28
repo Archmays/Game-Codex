@@ -10,12 +10,11 @@ const PROGRESS_V3_KEY = "family-games/equation-slider/progress-v3";
 const LEGACY_PROGRESS_KEY = "family-games/equation-slider/progress";
 
 async function enterSlider(page: Page, clearStorage = true): Promise<void> {
-  await page.goto("/?hub=classic");
+  await page.goto("/?world=math-world&station=slider");
   if (clearStorage) {
     await page.evaluate(() => localStorage.clear());
     await page.reload();
   }
-  await page.getByRole("button", { name: "进入轨道站" }).click();
   await expect(page.locator(`${BOARD}[data-level-id='es-1-01']`)).toBeVisible();
   const skipTutorial = page.getByRole("button", { name: "跳过教程" });
   if (await skipTutorial.isVisible()) await skipTutorial.click();
@@ -178,10 +177,9 @@ test.describe("@release equation slider browser-only release gaps", () => {
   });
 
   test("Tab, Enter, and arrow keys complete, replay, advance, and return without pointer input", async ({ page }) => {
-    await page.goto("/?hub=classic");
+    await page.goto("/?world=math-world&station=slider");
     await page.evaluate(() => localStorage.clear());
     await page.reload();
-    await activateWithKeyboard(page, page.getByRole("button", { name: "进入轨道站" }));
     await expect(page.locator(`${BOARD}[data-level-id='es-1-01']`)).toBeVisible();
     await activateWithKeyboard(page, page.getByRole("button", { name: "跳过教程" }));
     await finishFirstLevelWithKeyboard(page, true);
@@ -198,8 +196,8 @@ test.describe("@release equation slider browser-only release gaps", () => {
     await expect(page.locator(`${BOARD}[data-level-id='es-1-02']`)).toBeVisible();
     await expect(page.locator(COVERAGE)).toHaveText(/^0\/\d+$/);
     await expect(page.locator(MOVES)).toHaveText("0");
-    await activateWithKeyboard(page, page.locator(".game-topbar").getByRole("button", { name: "返回大厅" }));
-    await expect(page.getByRole("heading", { name: "游戏百宝箱" })).toBeVisible();
+    await activateWithKeyboard(page, page.getByRole("button", { name: "← 回城市地图" }));
+    await expect(page.getByTestId("math-world-map")).toBeVisible();
   });
 
   test("chapter loading, chapter map, route map, and return to hub remain connected", async ({ page }) => {
@@ -212,15 +210,15 @@ test.describe("@release equation slider browser-only release gaps", () => {
     await page.getByRole("button", { name: "线路地图" }).click();
     await expect(page.locator("[data-chapter-id]")).toHaveCount(4);
 
-    await page.locator(".equation-slider").getByRole("button", { name: "返回大厅" }).click();
-    await expect(page.getByRole("heading", { name: "游戏百宝箱" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "进入轨道站" })).toBeVisible();
+    await page.locator(".equation-slider").getByRole("button", { name: "回数学世界地图" }).click();
+    await expect(page.getByTestId("math-world-map")).toBeVisible();
+    await expect(page.locator('[data-station-id="slider"] button')).toBeFocused();
   });
 
   test("completion UI exposes rest, station, and chapter checkpoints", async ({ page }) => {
     test.setTimeout(180_000);
     const startWithCompleted = async (levelIds: readonly string[]): Promise<void> => {
-      await page.goto("/?hub=classic");
+      await page.goto("/?world=math-world");
       await page.evaluate(
         ({ key, ids, record }) => {
           localStorage.clear();
@@ -235,8 +233,7 @@ test.describe("@release equation slider browser-only release gaps", () => {
         },
         { key: PROGRESS_V3_KEY, ids: levelIds, record: completedRecord() }
       );
-      await page.reload();
-      await page.getByRole("button", { name: "进入轨道站" }).click();
+      await page.goto("/?world=math-world&station=slider");
       await expect(page.locator(BOARD)).toBeVisible();
     };
 
@@ -294,17 +291,14 @@ test.describe("@release equation slider browser-only release gaps", () => {
     }
   ] as const) {
     test(`legacy ${legacyCase.name} storage keeps sound only in active V3 progress and shows the upgrade notice`, async ({ page }) => {
-      await page.goto("/?hub=classic");
-      await page.evaluate(
+      await page.addInitScript(
         ({ key, value }) => {
           localStorage.clear();
           localStorage.setItem(key, JSON.stringify(value));
         },
         { key: LEGACY_PROGRESS_KEY, value: legacyCase.value }
       );
-      await page.reload();
-      await page.getByRole("button", { name: "进入轨道站" }).click();
-
+      await page.goto("/?world=math-world&station=slider");
       await expect(page.locator(".equation-slider__upgrade-notice")).toContainText("滑轨游戏已升级");
       const saved = await page.evaluate((key) => JSON.parse(localStorage.getItem(key) ?? "null"), PROGRESS_V3_KEY);
       expect(saved.saveVersion).toBe(2);
@@ -334,8 +328,8 @@ test.describe("@release equation slider browser-only release gaps", () => {
     await sound.click();
     await expect(page.locator(".equation-slider").getByRole("button", { name: "开启声音" })).toBeVisible();
 
-    await page.locator(".game-topbar").getByRole("button", { name: "返回大厅" }).click();
-    await page.getByRole("button", { name: "进入轨道站" }).click();
+    await page.getByRole("button", { name: "← 回城市地图" }).click();
+    await page.locator('[data-station-id="slider"] button').click();
     await expect(page.locator(".equation-slider").getByRole("button", { name: "开启声音" })).toBeVisible();
     const saved = await page.evaluate((key) => JSON.parse(localStorage.getItem(key) ?? "null"), PROGRESS_V3_KEY);
     expect(saved.soundEnabled).toBe(false);
@@ -411,16 +405,16 @@ test.describe("@release equation slider browser-only release gaps", () => {
     await page.mouse.move(reelBox.x + reelBox.width / 2, reelBox.y + reelBox.height / 2);
     await page.mouse.down();
     await page.mouse.move(reelBox.x + reelBox.width / 2, reelBox.y + reelBox.height / 2 + 55);
-    await page.locator(".game-topbar").getByRole("button", { name: "返回大厅" }).focus();
+    await page.getByRole("button", { name: "← 回城市地图" }).focus();
     await page.keyboard.press("Enter");
     await page.mouse.up();
-    await expect(page.getByRole("heading", { name: "游戏百宝箱" })).toBeVisible();
+    await expect(page.getByTestId("math-world-map")).toBeVisible();
 
     for (let iteration = 0; iteration < 4; iteration += 1) {
-      await page.getByRole("button", { name: "进入轨道站" }).click();
+      await page.locator('[data-station-id="slider"] button').click();
       await expect(page.locator(BOARD)).toBeVisible();
-      await page.locator(".game-topbar").getByRole("button", { name: "返回大厅" }).click();
-      await expect(page.getByRole("heading", { name: "游戏百宝箱" })).toBeVisible();
+      await page.getByRole("button", { name: "← 回城市地图" }).click();
+      await expect(page.getByTestId("math-world-map")).toBeVisible();
     }
     expect(pageErrors).toEqual([]);
   });

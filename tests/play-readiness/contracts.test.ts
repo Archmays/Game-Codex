@@ -32,13 +32,21 @@ describe("portfolio play-readiness contracts", () => {
         naturalUseObservationImpact: "ONGOING_NOT_CLOSED",
         realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED",
       }),
+      expect.objectContaining({
+        id: "gameplay-coherence-02",
+        trigger: "EXPLICIT_USER_AUTHORIZATION",
+        status: "release-bound",
+        completionCondition: "RELEASE_TAG_TARGET",
+        naturalUseObservationImpact: "ONGOING_NOT_CLOSED",
+        realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED",
+      }),
     ]);
   });
 
-  it("covers every primary first-use surface and keeps Classic aligned to the four active child products", () => {
-    expect(PLAY_SURFACE_MANIFEST).toHaveLength(40);
-    expect(PRIMARY_PLAY_SURFACES).toHaveLength(6);
-    expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.kind === "classic-entry")).toHaveLength(4);
+  it("covers every primary first-use surface and keeps Classic aligned to the three world products", () => {
+    expect(PLAY_SURFACE_MANIFEST).toHaveLength(39);
+    expect(PRIMARY_PLAY_SURFACES).toHaveLength(5);
+    expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.kind === "classic-entry")).toHaveLength(3);
     expect(PLAY_SURFACE_MANIFEST.every((surface) => surface.expectedInputs.includes("keyboard"))).toBe(true);
   });
 

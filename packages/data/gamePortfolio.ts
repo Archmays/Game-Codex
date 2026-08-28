@@ -1,5 +1,5 @@
 export type WorldId = "chinese" | "math" | "english" | "shared";
-export type ProductRole = "flagship" | "core-world" | "independent-puzzle" | "module";
+export type ProductRole = "flagship" | "flagship-module" | "core-world" | "independent-puzzle" | "module";
 export type DefinitionRole = "active-child-product" | "world-module-mount" | "compatibility-adapter";
 export type QualityTier = "S" | "A" | "B" | "C";
 export type LifecycleStatus = "active" | "active-module" | "active-maintenance" | "compatibility-only";
@@ -43,10 +43,21 @@ export interface WorldModuleRecord {
   readonly id: string;
   readonly world: Exclude<WorldId, "shared">;
   readonly title: string;
-  readonly ownerDefinitionId: string;
+  readonly mountDefinitionId: string;
+  readonly runtimeOwnerDefinitionId: string;
+  readonly hostProductId: string;
+  readonly qualityProfile: TestProfileId;
+  readonly runtimeSaveNamespaces: readonly string[];
   readonly route: string;
   readonly engineId?: string;
   readonly status: "active-module";
+}
+
+export interface ClassicCardExceptionRecord {
+  readonly definitionId: string;
+  readonly worldModuleIds: readonly string[];
+  readonly rationale: string;
+  readonly evidenceRef: string;
 }
 
 export interface CompatibilitySurfaceRecord {
@@ -82,8 +93,8 @@ export const GAME_PORTFOLIO: readonly GamePortfolioRecord[] = [
     canonicalDocs: ["docs/hanzi-radical-battle-v3/README.md", "docs/hanzi-radical-battle-v2/README.md"],
   },
   {
-    id: "equation-slider", targetWorld: "math", productRole: "flagship", definitionRole: "active-child-product", activeChildProduct: true, classicCardVisible: true, childProductOrder: 4, qualityTier: "S", lifecycleStatus: "active",
-    canonicalRoute: "?world=math-world&station=slider", worldModuleIds: ["math-equation-slider"], compatibilitySurfaceIds: [], sharedEngineIds: ["game-core-local-storage"], saveNamespaces: ["family-games/equation-slider"],
+    id: "equation-slider", targetWorld: "math", productRole: "flagship-module", definitionRole: "world-module-mount", activeChildProduct: false, classicCardVisible: false, qualityTier: "S", lifecycleStatus: "active-module",
+    mergeTarget: "math-world/slider-station", canonicalRoute: "?world=math-world&station=slider", worldModuleIds: ["math-equation-slider"], compatibilitySurfaceIds: [], sharedEngineIds: ["game-core-local-storage"], saveNamespaces: ["family-games/equation-slider"],
     testProfile: "s-equation-release", loadingPolicy: "current-eager", contentStatus: "frozen",
     canonicalDocs: ["docs/equation-slider/rebuild-v3/11-final-acceptance-report.md", "docs/equation-slider/rebuild-v3/12-final-reflection.md", "docs/portfolio-evolution/portfolio-audit.md"],
   },
@@ -125,18 +136,39 @@ export const GAME_PORTFOLIO: readonly GamePortfolioRecord[] = [
 ] as const;
 
 export const WORLD_MODULES: readonly WorldModuleRecord[] = [
-  { id: "chinese-story", world: "chinese", title: "墨迹森林主故事", ownerDefinitionId: "hanzi-radical-battle", route: "?play=hanzi-magic-complete", status: "active-module" },
-  { id: "chinese-pinyin", world: "chinese", title: "声韵试炼", ownerDefinitionId: "hanzi-radical-battle", route: "?play=hanzi-magic-complete&view=pinyin", status: "active-module" },
-  { id: "chinese-memory", world: "chinese", title: "字光配对", ownerDefinitionId: "hanzi-radical-battle", route: "?play=hanzi-magic-complete&view=memory", engineId: "memory-match", status: "active-module" },
-  { id: "math-lab-core", world: "math", title: "数感实验室", ownerDefinitionId: "math-lab", route: "?world=math-world&station=lab", status: "active-module" },
-  { id: "math-clock", world: "math", title: "时钟塔", ownerDefinitionId: "clock-reader", route: "?world=math-world&station=clock", status: "active-module" },
-  { id: "math-array", world: "math", title: "阵列工坊", ownerDefinitionId: "multiplication-adventure", route: "?world=math-world&station=array", status: "active-module" },
-  { id: "math-make-target", world: "math", title: "目标工坊", ownerDefinitionId: "make-target", route: "?world=math-world&station=target", status: "active-module" },
-  { id: "math-equation-slider", world: "math", title: "算式滑轨站", ownerDefinitionId: "equation-slider", route: "?world=math-world&station=slider", status: "active-module" },
-  { id: "english-core", world: "english", title: "词光岛五区域", ownerDefinitionId: "english-spell-battle", route: "?world=english-world", status: "active-module" },
-  { id: "english-journal", world: "english", title: "词光册", ownerDefinitionId: "english-spell-battle", route: "?world=english-world&view=journal", status: "active-module" },
-  { id: "english-memory", world: "english", title: "English Memory", ownerDefinitionId: "english-spell-battle", route: "?world=english-world&view=memory", engineId: "memory-match", status: "active-module" },
+  { id: "chinese-story", world: "chinese", title: "墨迹森林主故事", mountDefinitionId: "hanzi-radical-battle", runtimeOwnerDefinitionId: "hanzi-radical-battle", hostProductId: "hanzi-radical-battle", qualityProfile: "s-hanzi-release", runtimeSaveNamespaces: ["family-games/hanzi-magic-complete/v3", "family-games/hanzi-magic-v2/chapter-one", "family-games/hanzi-magic-v2/wheel-workshop/v1", "family-games/hanzi-radical-battle-v2/golden-slice/state"], route: "?play=hanzi-magic-complete", status: "active-module" },
+  { id: "chinese-pinyin", world: "chinese", title: "声韵试炼", mountDefinitionId: "hanzi-radical-battle", runtimeOwnerDefinitionId: "hanzi-radical-battle", hostProductId: "hanzi-radical-battle", qualityProfile: "s-hanzi-release", runtimeSaveNamespaces: ["family-games/hanzi-magic-complete/v3", "family-games/hanzi-magic-v2/chapter-one", "family-games/hanzi-magic-v2/wheel-workshop/v1", "family-games/hanzi-radical-battle-v2/golden-slice/state"], route: "?play=hanzi-magic-complete&view=pinyin", status: "active-module" },
+  { id: "chinese-memory", world: "chinese", title: "字光配对", mountDefinitionId: "hanzi-radical-battle", runtimeOwnerDefinitionId: "hanzi-radical-battle", hostProductId: "hanzi-radical-battle", qualityProfile: "s-hanzi-release", runtimeSaveNamespaces: ["family-games/hanzi-magic-complete/v3", "family-games/hanzi-magic-v2/chapter-one", "family-games/hanzi-magic-v2/wheel-workshop/v1", "family-games/hanzi-radical-battle-v2/golden-slice/state"], route: "?play=hanzi-magic-complete&view=memory", engineId: "memory-match", status: "active-module" },
+  { id: "math-lab-core", world: "math", title: "数感实验室", mountDefinitionId: "math-lab", runtimeOwnerDefinitionId: "math-lab", hostProductId: "math-lab", qualityProfile: "a-core-world", runtimeSaveNamespaces: ["math-battle-web/save-v1"], route: "?world=math-world&station=lab", status: "active-module" },
+  { id: "math-clock", world: "math", title: "时钟塔", mountDefinitionId: "clock-reader", runtimeOwnerDefinitionId: "clock-reader", hostProductId: "math-lab", qualityProfile: "c-module", runtimeSaveNamespaces: ["family-games/clock-reader"], route: "?world=math-world&station=clock", status: "active-module" },
+  { id: "math-array", world: "math", title: "阵列工坊", mountDefinitionId: "multiplication-adventure", runtimeOwnerDefinitionId: "multiplication-adventure", hostProductId: "math-lab", qualityProfile: "c-module", runtimeSaveNamespaces: ["family-games/multiplication-adventure"], route: "?world=math-world&station=array", status: "active-module" },
+  { id: "math-make-target", world: "math", title: "目标工坊", mountDefinitionId: "make-target", runtimeOwnerDefinitionId: "make-target", hostProductId: "math-lab", qualityProfile: "b-independent-puzzle", runtimeSaveNamespaces: ["family-games/make-target"], route: "?world=math-world&station=target", status: "active-module" },
+  { id: "math-equation-slider", world: "math", title: "算式滑轨站", mountDefinitionId: "equation-slider", runtimeOwnerDefinitionId: "equation-slider", hostProductId: "math-lab", qualityProfile: "s-equation-release", runtimeSaveNamespaces: ["family-games/equation-slider"], route: "?world=math-world&station=slider", status: "active-module" },
+  { id: "english-core", world: "english", title: "词光岛五区域", mountDefinitionId: "english-spell-battle", runtimeOwnerDefinitionId: "english-spell-battle", hostProductId: "english-spell-battle", qualityProfile: "a-core-world", runtimeSaveNamespaces: ["family-games/english-spell-battle", "family-games/english-world/v2"], route: "?world=english-world", status: "active-module" },
+  { id: "english-journal", world: "english", title: "词光册", mountDefinitionId: "english-spell-battle", runtimeOwnerDefinitionId: "english-spell-battle", hostProductId: "english-spell-battle", qualityProfile: "a-core-world", runtimeSaveNamespaces: ["family-games/english-spell-battle", "family-games/english-world/v2"], route: "?world=english-world&view=journal", status: "active-module" },
+  { id: "english-memory", world: "english", title: "English Memory", mountDefinitionId: "english-spell-battle", runtimeOwnerDefinitionId: "english-spell-battle", hostProductId: "english-spell-battle", qualityProfile: "a-core-world", runtimeSaveNamespaces: ["family-games/english-spell-battle", "family-games/english-world/v2"], route: "?world=english-world&view=memory", engineId: "memory-match", status: "active-module" },
 ] as const;
+
+/**
+ * Nested world modules are not Classic products by default. Any future
+ * exception must be explicit, source-bound, and reviewed by the checker.
+ */
+export const CLASSIC_CARD_EXCEPTIONS: readonly ClassicCardExceptionRecord[] = [];
+
+export function isClassicCardExposureAllowed(
+  record: GamePortfolioRecord,
+  exceptions: readonly ClassicCardExceptionRecord[] = CLASSIC_CARD_EXCEPTIONS,
+): boolean {
+  if (!record.classicCardVisible) return true;
+  if (record.definitionRole !== "world-module-mount") return record.activeChildProduct;
+  const exception = exceptions.find((candidate) => candidate.definitionId === record.id);
+  return Boolean(
+    exception
+    && exception.rationale.trim()
+    && exception.evidenceRef.trim()
+    && JSON.stringify([...exception.worldModuleIds].sort()) === JSON.stringify([...record.worldModuleIds].sort()),
+  );
+}
 
 export const COMPATIBILITY_SURFACES: readonly CompatibilitySurfaceRecord[] = [
   { id: "classic-hub", title: "游戏百宝箱", route: "?hub=classic", purpose: "alternate-launcher" },
@@ -161,5 +193,5 @@ export const CLASSIC_CARD_PRODUCTS = GAME_PORTFOLIO
   .sort((left, right) => (left.childProductOrder ?? Number.MAX_SAFE_INTEGER) - (right.childProductOrder ?? Number.MAX_SAFE_INTEGER));
 
 export const WORLD_LABELS: Readonly<Record<WorldId, string>> = { chinese: "中文世界", math: "数学世界", english: "英语世界", shared: "共享模块" };
-export const PRODUCT_ROLE_LABELS: Readonly<Record<ProductRole, string>> = { flagship: "旗舰", "core-world": "核心世界", "independent-puzzle": "独立谜题", module: "模块" };
+export const PRODUCT_ROLE_LABELS: Readonly<Record<ProductRole, string>> = { flagship: "旗舰", "flagship-module": "旗舰模块", "core-world": "核心世界", "independent-puzzle": "独立谜题", module: "模块" };
 export const DEFINITION_ROLE_LABELS: Readonly<Record<DefinitionRole, string>> = { "active-child-product": "活跃儿童产品", "world-module-mount": "世界模块挂载", "compatibility-adapter": "兼容适配定义" };

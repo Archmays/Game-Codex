@@ -56,7 +56,7 @@ try {
   checked.push("english-memory");
 
   await route(page, "?hub=classic&from=world", ".hub-grid");
-  requireValue(await page.locator(".game-card").count() === 4, "Classic catalog is not the four active child products");
+  requireValue(await page.locator(".game-card").count() === 3, "Classic catalog is not the three active world products");
   await page.locator('[data-game-id="english-spell-battle"] button').click();
   await page.locator('[data-testid="english-world-map"]').waitFor({ state: "visible" });
   checked.push("classic-english-to-world", "classic-4-active-products");

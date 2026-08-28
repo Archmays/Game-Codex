@@ -2,9 +2,11 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import {
   ACTIVE_CHILD_PRODUCTS,
+  CLASSIC_CARD_EXCEPTIONS,
   CLASSIC_CARD_PRODUCTS,
   COMPATIBILITY_SURFACES,
   GAME_PORTFOLIO,
+  isClassicCardExposureAllowed,
   PORTFOLIO_TEST_PROFILES,
   SHARED_ENGINES,
   WORLD_MODULES
@@ -45,12 +47,14 @@ export function validatePortfolio(catalog: readonly GameCatalogMetadata[], curre
     if (!profile) issues.push(`${record.id} uses unknown test profile ${record.testProfile}`);
     else if (profile.qualityTier !== record.qualityTier) issues.push(`${record.id} tier/profile mismatch`);
     if (record.activeChildProduct !== (record.definitionRole === "active-child-product")) issues.push(`${record.id} active-product role mismatch`);
-    if (record.classicCardVisible && !record.activeChildProduct) issues.push(`${record.id} exposes a Classic card without active-child-product status`);
+    const classicException = CLASSIC_CARD_EXCEPTIONS.find((exception) => exception.definitionId === record.id);
+    if (!isClassicCardExposureAllowed(record)) issues.push(`${record.id} exposes a Classic card without top-level product status or an auditable nested-module exception`);
+    if (classicException && (!classicException.rationale.trim() || !classicException.evidenceRef.trim() || JSON.stringify([...classicException.worldModuleIds].sort()) !== JSON.stringify([...record.worldModuleIds].sort()))) issues.push(`${record.id} has an incomplete or mismatched Classic-card exception`);
     if (record.activeChildProduct && !record.childProductOrder) issues.push(`${record.id} active child product needs an order`);
     if (record.definitionRole === "world-module-mount" && record.worldModuleIds.length === 0) issues.push(`${record.id} world-module mount has no module`);
     if (record.definitionRole === "compatibility-adapter" && record.compatibilitySurfaceIds.length === 0) issues.push(`${record.id} compatibility adapter has no compatibility surface`);
     if (record.contentStatus !== "frozen") issues.push(`${record.id} content must remain frozen during portfolio convergence`);
-    for (const moduleId of record.worldModuleIds) if (!WORLD_MODULES.some((module) => module.id === moduleId && module.ownerDefinitionId === record.id)) issues.push(`${record.id} references an unknown or foreign world module: ${moduleId}`);
+    for (const moduleId of record.worldModuleIds) if (!WORLD_MODULES.some((module) => module.id === moduleId && module.mountDefinitionId === record.id)) issues.push(`${record.id} references an unknown or foreign world module: ${moduleId}`);
     for (const surfaceId of record.compatibilitySurfaceIds) if (!COMPATIBILITY_SURFACES.some((surface) => surface.id === surfaceId)) issues.push(`${record.id} references an unknown compatibility surface: ${surfaceId}`);
     for (const engineId of record.sharedEngineIds) {
       const engine = SHARED_ENGINES.find((candidate) => candidate.id === engineId);
@@ -59,10 +63,24 @@ export function validatePortfolio(catalog: readonly GameCatalogMetadata[], curre
     }
     for (const doc of record.canonicalDocs) if (!existsSync(resolve(root, doc))) issues.push(`${record.id} canonical doc does not exist: ${doc}`);
   }
-  const expectedActiveProducts = ["english-spell-battle", "equation-slider", "hanzi-radical-battle", "math-lab"];
-  if (JSON.stringify(ACTIVE_CHILD_PRODUCTS.map((record) => record.id).sort()) !== JSON.stringify(expectedActiveProducts)) issues.push("Active child product truth must contain the four converged products");
-  if (JSON.stringify(CLASSIC_CARD_PRODUCTS.map((record) => record.id).sort()) !== JSON.stringify(expectedActiveProducts)) issues.push("Classic Hall must project only the four active child products");
-  for (const module of WORLD_MODULES) if (!portfolioIds.has(module.ownerDefinitionId)) issues.push(`${module.id} owner definition is missing: ${module.ownerDefinitionId}`);
+  const expectedActiveProducts = ["english-spell-battle", "hanzi-radical-battle", "math-lab"];
+  if (JSON.stringify(ACTIVE_CHILD_PRODUCTS.map((record) => record.id).sort()) !== JSON.stringify(expectedActiveProducts)) issues.push("Active child product truth must contain the three world products");
+  if (JSON.stringify(CLASSIC_CARD_PRODUCTS.map((record) => record.id).sort()) !== JSON.stringify(expectedActiveProducts)) issues.push("Classic Hall must project only the three world products");
+  for (const exception of CLASSIC_CARD_EXCEPTIONS) if (!portfolioIds.has(exception.definitionId)) issues.push(`Classic-card exception references unknown definition: ${exception.definitionId}`);
+  for (const module of WORLD_MODULES) {
+    const mount = GAME_PORTFOLIO.find((record) => record.id === module.mountDefinitionId);
+    const runtimeOwner = GAME_PORTFOLIO.find((record) => record.id === module.runtimeOwnerDefinitionId);
+    const hostProduct = GAME_PORTFOLIO.find((record) => record.id === module.hostProductId);
+    if (!mount) issues.push(`${module.id} mount definition is missing: ${module.mountDefinitionId}`);
+    else if (!mount.worldModuleIds.includes(module.id)) issues.push(`${module.id} is not reciprocally declared by mount ${mount.id}`);
+    if (!runtimeOwner) issues.push(`${module.id} runtime owner is missing: ${module.runtimeOwnerDefinitionId}`);
+    else {
+      if (runtimeOwner.testProfile !== module.qualityProfile) issues.push(`${module.id} runtime quality profile differs from owner ${runtimeOwner.id}`);
+      for (const namespace of module.runtimeSaveNamespaces) if (!runtimeOwner.saveNamespaces.includes(namespace)) issues.push(`${module.id} runtime save is not owned by ${runtimeOwner.id}: ${namespace}`);
+    }
+    if (!hostProduct?.activeChildProduct) issues.push(`${module.id} host is not a top-level child product: ${module.hostProductId}`);
+    if (hostProduct && hostProduct.targetWorld !== module.world) issues.push(`${module.id} host world differs from ${hostProduct.id}`);
+  }
   const validEngineConsumers = new Set([...portfolioIds, ...WORLD_MODULES.map((module) => module.id)]);
   for (const module of WORLD_MODULES) {
     if (module.engineId && !SHARED_ENGINES.find((engine) => engine.id === module.engineId)?.consumers.includes(module.id)) issues.push(`${module.id} is missing from ${module.engineId} consumers`);
@@ -93,20 +111,37 @@ export function validatePortfolio(catalog: readonly GameCatalogMetadata[], curre
   if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.realEvidencePatchCount !== 2) issues.push("Expected two evidence-driven patches");
   if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.interactionIntegrity !== "HITTEST_AND_REACHABILITY_GUARD_ACTIVE") issues.push("Hit-test and reachability guards are not active");
   if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.automaticLargeTask !== "NONE") issues.push("Natural-use must not schedule an automatic large task");
-  if (AUTHORIZED_DEVELOPMENT_CYCLES.length !== 1) issues.push("Expected one explicitly authorized bounded development cycle");
+  if (AUTHORIZED_DEVELOPMENT_CYCLES.length !== 2) issues.push("Expected two explicitly authorized bounded development cycles");
   const portfolioEvolution = AUTHORIZED_DEVELOPMENT_CYCLES.find((cycle) => cycle.id === "portfolio-evolution-01");
   if (!portfolioEvolution || portfolioEvolution.status !== "release-bound" || portfolioEvolution.trigger !== "EXPLICIT_USER_AUTHORIZATION") issues.push("Portfolio Evolution authorization truth is incomplete");
   if (portfolioEvolution?.completionCondition !== "RELEASE_TAG_TARGET") issues.push("Portfolio Evolution completion condition drifted");
   if (portfolioEvolution?.releaseTag !== "game-codex-portfolio-evolution-v1.0.0" || portfolioEvolution.naturalUseObservationImpact !== "ONGOING_NOT_CLOSED") issues.push("Portfolio Evolution release or Natural-use boundary drifted");
   if (portfolioEvolution?.realChildValidation !== "NOT_PERFORMED_AND_NOT_CLAIMED") issues.push("Portfolio Evolution child-evidence boundary drifted");
+  const gameplayCoherence = AUTHORIZED_DEVELOPMENT_CYCLES.find((cycle) => cycle.id === "gameplay-coherence-02");
+  if (!gameplayCoherence || gameplayCoherence.status !== "release-bound" || gameplayCoherence.trigger !== "EXPLICIT_USER_AUTHORIZATION") issues.push("Gameplay Coherence authorization truth is incomplete");
+  if (gameplayCoherence?.releaseTag !== "game-codex-gameplay-coherence-v1.0.0" || gameplayCoherence.realChildValidation !== "NOT_PERFORMED_AND_NOT_CLAIMED") issues.push("Gameplay Coherence release or child-evidence boundary drifted");
   if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.realChildValidation !== "NOT_PERFORMED_AND_NOT_CLAIMED") issues.push("Real-child validation boundary drifted");
   if (PRIMARY_WORLDS.length !== 3) issues.push(`Expected three primary worlds, found ${PRIMARY_WORLDS.length}`);
   for (const id of duplicates(PLAY_SURFACE_MANIFEST.map((record) => record.id))) issues.push(`Duplicate play surface id: ${id}`);
-  if (PLAY_SURFACE_MANIFEST.length !== 40) issues.push(`Expected 40 retained play surfaces, found ${PLAY_SURFACE_MANIFEST.length}`);
-  if (PRIMARY_PLAY_SURFACES.length !== 6) issues.push(`Expected six primary first-use surfaces, found ${PRIMARY_PLAY_SURFACES.length}`);
+  if (PLAY_SURFACE_MANIFEST.length !== 39) issues.push(`Expected 39 retained play surfaces, found ${PLAY_SURFACE_MANIFEST.length}`);
+  if (PRIMARY_PLAY_SURFACES.length !== 5) issues.push(`Expected five primary first-use surfaces, found ${PRIMARY_PLAY_SURFACES.length}`);
   for (const surface of PLAY_SURFACE_MANIFEST) {
     if (!surface.route || !surface.returnRoute || !surface.primaryActionSelector) issues.push(`Incomplete play surface contract: ${surface.id}`);
+    if (surface.kind === "station") {
+      const module = WORLD_MODULES.find((record) => record.id === surface.worldModuleId);
+      if (!module) issues.push(`${surface.id} is missing a declared world-module identity`);
+      else {
+        if (surface.mountDefinitionId !== module.mountDefinitionId) issues.push(`${surface.id} mount differs from ${module.id}`);
+        if (surface.runtimeOwnerDefinitionId !== module.runtimeOwnerDefinitionId) issues.push(`${surface.id} runtime owner differs from ${module.id}`);
+        if (surface.topLevelProductId !== module.hostProductId || surface.hostWorldId !== module.world) issues.push(`${surface.id} host identity differs from ${module.id}`);
+        if (surface.qualityProfile !== module.qualityProfile) issues.push(`${surface.id} quality profile differs from ${module.id}`);
+        if (JSON.stringify(surface.runtimeSaveNamespaces) !== JSON.stringify(module.runtimeSaveNamespaces)) issues.push(`${surface.id} runtime saves differ from ${module.id}`);
+      }
+    }
+    if (surface.kind === "classic-entry" && (!surface.topLevelProductId || !ACTIVE_CHILD_PRODUCTS.some((record) => record.id === surface.topLevelProductId))) issues.push(`${surface.id} Classic entry is not a top-level child product`);
   }
+  const slider = PLAY_SURFACE_MANIFEST.find((surface) => surface.id === "math-slider");
+  if (!slider || slider.route !== "?world=math-world&station=slider" || slider.runtimeOwnerDefinitionId !== "equation-slider" || slider.qualityProfile !== "s-equation-release" || JSON.stringify(slider.runtimeSaveNamespaces) !== JSON.stringify(["family-games/equation-slider"])) issues.push("Math Slider runtime/route/profile/save contract drifted");
   for (const key of duplicates(KNOWN_SAVE_KEYS.map((record) => record.key))) issues.push(`Duplicate known save key: ${key}`);
   for (const namespace of portfolioNamespacesWithoutKnownKey()) issues.push(`Portfolio namespace missing from Save Vault inventory: ${namespace}`);
   return issues;
@@ -141,6 +176,6 @@ if (process.argv[1] && resolve(process.argv[1]) === resolve(import.meta.filename
     process.stderr.write(`${issues.map((issue) => `- ${issue}`).join("\n")}\n`);
     process.exitCode = 1;
   } else {
-    process.stdout.write(`Portfolio consistency, 4 active products / 9 mount definitions, ${PLAY_SURFACE_MANIFEST.length} play surfaces, ${KNOWN_SAVE_KEYS.length} save keys, and generated-doc drift: PASS.\n`);
+    process.stdout.write(`Portfolio consistency, 3 active products / 9 mount definitions, ${PLAY_SURFACE_MANIFEST.length} play surfaces, ${KNOWN_SAVE_KEYS.length} save keys, and generated-doc drift: PASS.\n`);
   }
 }

@@ -44,7 +44,18 @@ function mountClockReader(context: MountGameContext): MountedGame {
   let activeDial: { left: number; top: number; width: number; height: number } | null = null;
   let destroyed = false;
 
-  const render = (): void => {
+  const actionButton = (
+    label: string,
+    actionKey: string,
+    onClick: () => void,
+    options?: Parameters<typeof createButton>[2],
+  ): HTMLButtonElement => {
+    const control = createButton(label, onClick, options);
+    control.dataset.clockAction = actionKey;
+    return control;
+  };
+
+  const render = (focusKey?: string): void => {
     if (destroyed) return;
     clearElement(root);
     const view = deriveClockView(minutesSinceMidnight);
@@ -57,7 +68,7 @@ function mountClockReader(context: MountGameContext): MountedGame {
       { id: "exact", label: "精确时间" },
       { id: "relative", label: "相对时间" },
     ] as const) {
-      toolbar.append(createButton(item.label, () => switchMode(item.id), {
+      toolbar.append(actionButton(item.label, `mode-${item.id}`, () => switchMode(item.id, `mode-${item.id}`), {
         className: mode === item.id ? "ui-button learning-game__pill is-active" : "ui-button learning-game__pill",
       }));
     }
@@ -75,34 +86,42 @@ function mountClockReader(context: MountGameContext): MountedGame {
 
     const actions = document.createElement("div");
     actions.className = "learning-game__actions";
-    actions.append(createButton("听时间", () => speakText(clockTtsText(minutesSinceMidnight, mode), "zh-CN", 0.9), {
+    actions.append(actionButton("听时间", "listen", () => speakText(clockTtsText(minutesSinceMidnight, mode), "zh-CN", 0.9), {
       className: "ui-button ui-button--secondary",
     }));
     if (mode !== "explore") {
       actions.append(
-        createButton("我拨好了", checkAnswer),
-        createButton("换一题", nextChallenge, { className: "ui-button ui-button--secondary" }),
+        actionButton("我拨好了", "check", checkAnswer),
+        actionButton("换一题", "next", nextChallenge, { className: "ui-button ui-button--secondary" }),
       );
     }
 
     root.append(toolbar, stats, stage, actions, createFeedbackBanner(feedback));
+    if (focusKey) {
+      queueMicrotask(() => {
+        const target = focusKey === "dial"
+          ? root.querySelector<HTMLElement>(".clock-face")
+          : root.querySelector<HTMLButtonElement>(`[data-clock-action="${focusKey}"]`);
+        target?.focus();
+      });
+    }
   };
 
-  const switchMode = (nextMode: ClockMode): void => {
+  const switchMode = (nextMode: ClockMode, focusKey: string): void => {
     mode = nextMode;
     activePointerId = null;
     activeDial = null;
     if (mode === "explore") {
       targetMinutes = null;
       feedback = { kind: "info", text: "自由拨钟：拖动长针，或用按钮慢慢看看时间怎样变化。" };
-      render();
+      render(focusKey);
       return;
     }
     challengeIndex = 0;
-    loadChallenge();
+    loadChallenge(focusKey);
   };
 
-  const loadChallenge = (): void => {
+  const loadChallenge = (focusKey?: string): void => {
     if (mode === "explore") return;
     const challenge = createClockChallenge("math-world-clock-v1", challengeIndex, mode);
     targetMinutes = challenge.targetMinutes;
@@ -114,18 +133,18 @@ function mountClockReader(context: MountGameContext): MountedGame {
         ? `请拨到 ${target.digitalText}（${target.exactText}）。`
         : `请拨到“${target.relativeText}”。这一轮只练相对表达。`,
     };
-    render();
+    render(focusKey);
   };
 
   const nextChallenge = (): void => {
     challengeIndex += 1;
-    loadChallenge();
+    loadChallenge("next");
   };
 
-  const changeTime = (delta: number): void => {
+  const changeTime = (delta: number, focusKey?: string): void => {
     minutesSinceMidnight = addClockMinutes(minutesSinceMidnight, delta);
     if (mode === "explore") feedback = { kind: "info", text: `现在是 ${deriveClockView(minutesSinceMidnight).exactText}。` };
-    render();
+    render(focusKey);
   };
 
   const checkAnswer = (): void => {
@@ -138,17 +157,17 @@ function mountClockReader(context: MountGameContext): MountedGame {
       feedback = { kind: "info", text: getClockMismatchHint(targetMinutes, minutesSinceMidnight) };
       playFeedbackSound("info");
     }
-    render();
+    render("check");
   };
 
   const createControls = (): HTMLElement => {
     const controls = document.createElement("div");
     controls.className = "clock-controls";
     controls.append(
-      createButton("时针 -", () => changeTime(-60), { className: "ui-button ui-button--secondary" }),
-      createButton("时针 +", () => changeTime(60)),
-      createButton("分针 -5", () => changeTime(-5), { className: "ui-button ui-button--secondary" }),
-      createButton("分针 +5", () => changeTime(5)),
+      actionButton("时针 -", "hour-decrease", () => changeTime(-60, "hour-decrease"), { className: "ui-button ui-button--secondary" }),
+      actionButton("时针 +", "hour-increase", () => changeTime(60, "hour-increase")),
+      actionButton("分针 -5", "minute-decrease", () => changeTime(-5, "minute-decrease"), { className: "ui-button ui-button--secondary" }),
+      actionButton("分针 +5", "minute-increase", () => changeTime(5, "minute-increase")),
     );
     return controls;
   };
@@ -179,8 +198,7 @@ function mountClockReader(context: MountGameContext): MountedGame {
       const delta = deltas[event.key];
       if (delta === undefined) return;
       event.preventDefault();
-      changeTime(delta);
-      root.querySelector<HTMLElement>(".clock-face")?.focus();
+      changeTime(delta, "dial");
     });
 
     for (let minute = 0; minute < 60; minute += 1) {

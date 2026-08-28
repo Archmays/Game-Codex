@@ -135,6 +135,18 @@
   line-height: 1.35;
 }
 
+.math-world-card__visit {
+  display: block;
+  margin: -2px 0 9px;
+  color: #52685f !important;
+  font-size: 12px !important;
+  letter-spacing: 0.02em;
+}
+
+.math-world-card.is-visited {
+  border-color: #477a55;
+}
+
 .math-world-card button {
   width: 100%;
   min-height: 42px;
@@ -205,9 +217,16 @@
   font-weight: 900;
 }
 
-.math-world-station__bar strong {
+.math-world-station__bar h1 {
+  margin: 0;
   color: #214a3b;
   font-size: clamp(18px, 2vw, 26px);
+}
+
+.math-world-station__bar h1:focus-visible {
+  border-radius: 8px;
+  outline: 3px solid rgba(34, 102, 138, 0.42);
+  outline-offset: 4px;
 }
 
 .math-world-station__stage {
@@ -264,6 +283,17 @@
 
 .make-target-card__order:empty {
   display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .make-target-card.is-new {
+    animation: target-card-arrive 260ms ease-out;
+  }
+
+  @keyframes target-card-arrive {
+    from { opacity: 0.45; transform: translateY(8px) scale(0.94); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
 }
 
 [data-reduced-motion="true"] *,

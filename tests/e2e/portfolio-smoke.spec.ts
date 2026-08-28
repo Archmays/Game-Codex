@@ -120,6 +120,7 @@ const GAMES: readonly SmokeGame[] = [
   },
   {
     id: "equation-slider", title: "算式滑轨", surface: ".equation-slider",
+    canonicalRoute: "/?world=math-world&station=slider",
     async interact(page) {
       await page.getByRole("button", { name: "跳过教程" }).click();
       const action = page.getByRole("button", { name: "第 2 列向上移动" });
@@ -138,7 +139,7 @@ for (const game of GAMES) {
     await page.evaluate(() => localStorage.clear());
     await page.reload({ waitUntil: "domcontentloaded" });
     if (!game.canonicalRoute) {
-      await expect(page.locator(".game-card")).toHaveCount(4);
+      await expect(page.locator(".game-card")).toHaveCount(3);
       const card = page.locator(`.game-card[data-game-id="${game.id}"]`);
       await expect(card.getByRole("heading", { name: game.title, exact: true })).toBeVisible();
       const entry = card.getByRole("button");
@@ -171,7 +172,7 @@ for (const game of GAMES) {
       await returnButton.focus();
       await page.keyboard.press("Enter");
     }
-    await expect(page.locator(".game-card")).toHaveCount(4);
+    await expect(page.locator(".game-card")).toHaveCount(3);
     await expectRuntimeClean(runtime);
   });
 }

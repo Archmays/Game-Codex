@@ -11,7 +11,7 @@ test("visual and geometry states", async ({ page }, testInfo) => {
   ] as const;
   for (const [name, route, testId] of routes) {
     await page.goto(route);
-    if (testId) await expect(page.getByTestId(testId)).toBeVisible(); else await expect(page.locator(".game-card")).toHaveCount(4);
+    if (testId) await expect(page.getByTestId(testId)).toBeVisible(); else await expect(page.locator(".game-card")).toHaveCount(3);
     const geometry = await page.evaluate(() => ({
       client: document.documentElement.clientWidth,
       scroll: document.documentElement.scrollWidth,

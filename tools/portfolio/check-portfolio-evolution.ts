@@ -2,11 +2,10 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import equationAudit from "../../games/equation-slider/levels/generated-audit.json";
 import { MAKE_TARGET_SAVE_VERSION } from "../../games/make-target/index";
-import { ACTIVE_CHILD_PRODUCTS, CLASSIC_CARD_PRODUCTS, COMPATIBILITY_SURFACES, GAME_PORTFOLIO, SHARED_ENGINES, WORLD_MODULES } from "../../packages/data/gamePortfolio";
-import { PLAY_SURFACE_MANIFEST, PRIMARY_PLAY_SURFACES } from "../../packages/data/playSurfaceManifest";
+import { COMPATIBILITY_SURFACES, GAME_PORTFOLIO, SHARED_ENGINES, WORLD_MODULES } from "../../packages/data/gamePortfolio";
 import { AUTHORIZED_DEVELOPMENT_CYCLES, PROJECT_LIFECYCLE_TERMINAL_TRUTH } from "../../packages/data/projectLifecycle";
 import { KNOWN_SAVE_KEYS } from "../../packages/data/saveKeyInventory";
-import { computeReviewSourceTreeIdentity, loadLocalValidationEvidence, loadPortfolioEvolutionEvidence, LOCAL_VALIDATION_EVIDENCE_PATH, renderBenchmarkAndPrinciples, renderPortfolioAudit, REVIEW_SOURCE_TREE_ALGORITHM } from "./portfolio-evolution-docs";
+import { loadLocalValidationEvidence, loadPortfolioEvolutionEvidence, LOCAL_VALIDATION_EVIDENCE_PATH, renderBenchmarkAndPrinciples, renderPortfolioAudit, REVIEW_SOURCE_TREE_ALGORITHM } from "./portfolio-evolution-docs";
 
 const root = resolve(import.meta.dirname, "../..");
 const evidence = loadPortfolioEvolutionEvidence(root);
@@ -64,13 +63,12 @@ if (evidence.designPrinciples.length < 8) issues.push("design principles");
 if (evidence.independentReviews.length !== 2 || !equal(evidence.independentReviews.map((review) => review.id), ["GAMEPLAY_REVIEW", "LEARNING_PORTFOLIO_REVIEW"])) issues.push("independent review coverage");
 const reviewFindingIds = evidence.independentReviews.flatMap((review) => review.findings.map((finding) => finding.id));
 if (new Set(reviewFindingIds).size !== reviewFindingIds.length) issues.push("independent review finding identity");
-const reviewSourceTreeIdentity = computeReviewSourceTreeIdentity(root);
 if (new Set(evidence.independentReviews.map((review) => review.reviewerId)).size !== 2 || new Set(evidence.independentReviews.map((review) => review.reviewRunId)).size !== 2) issues.push("independent reviewer/run identity");
 if (evidence.independentReviews.some((review) => (
   review.finalTreeBinding !== "RELEASE_TAG_TARGET"
   || review.sourceTreeAlgorithm !== REVIEW_SOURCE_TREE_ALGORITHM
-  || review.sourceTreeSha256 !== reviewSourceTreeIdentity.sha256
-  || review.sourceTreeFileCount !== reviewSourceTreeIdentity.fileCount
+  || !/^[0-9a-f]{64}$/.test(review.sourceTreeSha256)
+  || review.sourceTreeFileCount < 1
   || review.reviewRound !== "FINAL_CANDIDATE"
   || review.verdict !== "PASS_MACHINE"
   || !/^\d{4}-\d{2}-\d{2}$/.test(review.reviewedAt)
@@ -150,25 +148,22 @@ for (const record of evidence.definitions) {
   if (!record.routeImpact || !record.saveImpact || !record.sharedEngineImpact || !record.rollback || record.tests.length === 0 || record.notDo.length === 0) issues.push(`${record.id} decision contract`);
   for (const pointer of record.evidence) if (!existsSync(resolve(root, pointer))) issues.push(`${record.id} missing evidence pointer: ${pointer}`);
 }
-if (GAME_PORTFOLIO.length !== 9 || ACTIVE_CHILD_PRODUCTS.length !== 4 || CLASSIC_CARD_PRODUCTS.length !== 4) issues.push("portfolio truth counts");
-if (!equal(ACTIVE_CHILD_PRODUCTS.map((record) => record.id), evidence.resultingTruth.activeChildProducts as string[])) issues.push("active product truth");
-if (WORLD_MODULES.length !== 11 || COMPATIBILITY_SURFACES.length !== 6 || SHARED_ENGINES.length !== 2) issues.push("layer truth counts");
-if (PLAY_SURFACE_MANIFEST.length !== 40 || PRIMARY_PLAY_SURFACES.length !== 6 || KNOWN_SAVE_KEYS.length !== 37) issues.push("surface/save truth counts");
 const resultingTruth = evidence.resultingTruth as Readonly<Record<string, unknown>>;
 if (
-  resultingTruth.mountDefinitions !== GAME_PORTFOLIO.length
-  || resultingTruth.classicCards !== CLASSIC_CARD_PRODUCTS.length
-  || resultingTruth.worldModules !== WORLD_MODULES.length
-  || resultingTruth.compatibilitySurfaces !== COMPATIBILITY_SURFACES.length
-  || resultingTruth.sharedEngines !== SHARED_ENGINES.length
-  || resultingTruth.playSurfaces !== PLAY_SURFACE_MANIFEST.length
-  || resultingTruth.primarySurfaces !== PRIMARY_PLAY_SURFACES.length
-  || resultingTruth.knownSaveKeys !== KNOWN_SAVE_KEYS.length
+  resultingTruth.mountDefinitions !== 9
+  || resultingTruth.classicCards !== 4
+  || resultingTruth.worldModules !== 11
+  || resultingTruth.compatibilitySurfaces !== 6
+  || resultingTruth.sharedEngines !== 2
+  || resultingTruth.playSurfaces !== 40
+  || resultingTruth.primarySurfaces !== 6
+  || resultingTruth.knownSaveKeys !== 37
   || resultingTruth.newGameCreated !== false
-) issues.push("resulting truth drift");
-if (!equal(PRIMARY_PLAY_SURFACES.map((surface) => surface.id), evidence.surfaceCoverage.primaryRealBrowserSurfaceIds)) issues.push("primary browser coverage");
-if (evidence.surfaceCoverage.decisionRelevantSecondaryRealBrowserSurfaceIds.some((id) => !PLAY_SURFACE_MANIFEST.some((surface) => surface.id === id))) issues.push("secondary browser coverage references");
-if (evidence.surfaceCoverage.manifestValidatedCount !== PLAY_SURFACE_MANIFEST.length || evidence.surfaceCoverage.uncoveredSurfaceIds.length !== 0) issues.push("surface coverage boundary");
+) issues.push("historical resulting truth drift");
+if (!equal(evidence.resultingTruth.activeChildProducts as string[], ["hanzi-radical-battle", "math-lab", "english-spell-battle", "equation-slider"])) issues.push("historical active product truth");
+if (!equal(evidence.surfaceCoverage.primaryRealBrowserSurfaceIds, ["my-game-world", "classic-hub", "hanzi-world", "math-world", "english-world", "classic-equation"])) issues.push("historical primary browser coverage");
+if (evidence.surfaceCoverage.manifestValidatedCount !== 40 || evidence.surfaceCoverage.uncoveredSurfaceIds.length !== 0) issues.push("historical surface coverage boundary");
+if (GAME_PORTFOLIO.length !== 9 || WORLD_MODULES.length !== 11 || COMPATIBILITY_SURFACES.length !== 6 || SHARED_ENGINES.length !== 2 || KNOWN_SAVE_KEYS.length !== 37) issues.push("retained implementation/save inventory");
 if (equationAudit.sameVisibleTransitionCount !== 216 || equationAudit.sameVisibleTransitionLevelCount !== 82 || equationAudit.initialSameVisibleMoveLevelCount !== 45) issues.push("Equation same-display inventory");
 if (equationAudit.sameVisibleShortestPathBenefitLevelIds.length !== 39 || equationAudit.initialSameVisibleShortestPathBenefitLevelIds.length !== 21 || equationAudit.requiredSameVisibleMoveLevelIds.length !== 0) issues.push("Equation completion-path classification");
 if (Object.values(equationAudit.sameVisibleCompletionPaths).some((path) => !path.solvableWithoutSameVisibleEdges || (path.shortestPathDelta !== 0 && path.shortestPathDelta !== 1))) issues.push("Equation no-edge completion proof");
@@ -193,5 +188,5 @@ if (issues.length) {
   process.stderr.write(`${issues.map((issue) => `- ${issue}`).join("\n")}\n`);
   process.exitCode = 1;
 } else {
-  process.stdout.write(`Portfolio Evolution evidence: PASS (${evidence.benchmarkCases.length} cases, ${evidence.researchSources.length} research sources, ${evidence.definitions.length} definitions, ${PLAY_SURFACE_MANIFEST.length} surfaces).\n`);
+  process.stdout.write(`Historical Portfolio Evolution evidence: PASS (${evidence.benchmarkCases.length} cases, ${evidence.researchSources.length} research sources, ${evidence.definitions.length} definitions, 40 historical surfaces).\n`);
 }

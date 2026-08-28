@@ -147,7 +147,8 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
     currentLevel = null;
     root.replaceChildren();
     const header = createPageHeader("算式滑轨线路图", "四条线路、二十个学习站，按自己的节奏出发。");
-    const exit = button("返回大厅", context.onExit, "ui-button ui-button--secondary");
+    const exit = button("回数学世界地图", context.onExit, "ui-button ui-button--secondary");
+    exit.dataset.returnDestination = "math-world";
     header.append(exit);
     const routes = element("div", "equation-slider__routes");
     for (const chapter of equationSliderChapterManifest) {
@@ -740,7 +741,11 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
     };
   };
 
-  void openLevelById("chapter-1", "es-1-01", !progress.tutorialCompleted);
+  const savedLevelId = progress.lastLevelId;
+  const savedChapterNumber = savedLevelId?.match(/^es-(\d+)-/)?.[1];
+  const savedChapter = equationSliderChapterManifest.find((chapter) => String(chapter.number) === savedChapterNumber);
+  const initialLevelId = savedChapter && savedLevelId ? savedLevelId : "es-1-01";
+  void openLevelById(savedChapter?.id ?? "chapter-1", initialLevelId, !progress.tutorialCompleted && initialLevelId === "es-1-01");
 
   return {
     destroy(): void {

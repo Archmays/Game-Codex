@@ -78,18 +78,25 @@ test("@e2e Clock, Array, Target, Lab, and Slider share navigation without sharin
   await openStation(page, "clock");
   await expect(page.locator(".clock-face")).toHaveAttribute("role", "slider");
   const beforeClock = await page.locator(".clock-face").getAttribute("aria-valuenow");
-  await page.getByRole("button", { name: "分针 +5" }).click();
+  const minuteIncrease = page.getByRole("button", { name: "分针 +5" });
+  await minuteIncrease.click();
+  await expect(minuteIncrease).toBeFocused();
   await expect(page.locator(".clock-face")).not.toHaveAttribute("aria-valuenow", beforeClock!);
-  await page.getByRole("button", { name: "精确时间" }).click();
+  const exactMode = page.getByRole("button", { name: "精确时间" });
+  await exactMode.click();
+  await expect(exactMode).toBeFocused();
   await expect(page.getByRole("button", { name: "我拨好了" })).toBeVisible();
   await page.getByRole("button", { name: "← 回城市地图" }).click();
+  await expect(page.locator('[data-station-id="clock"] button')).toBeFocused();
 
   await page.locator('[data-station-id="array"] button').click();
   await expect(page.locator(".array-workshop")).toBeVisible();
   await page.getByRole("button", { name: "翻转阵列", exact: true }).first().click();
   const grid = page.locator(".array-workshop__grid");
   const before = await grid.evaluate((element) => ({ rows: element.getAttribute("data-rows"), columns: element.getAttribute("data-columns"), product: element.getAttribute("data-product") }));
-  await page.getByRole("button", { name: "翻转阵列", exact: true }).last().click();
+  const transpose = page.getByRole("button", { name: "翻转阵列", exact: true }).last();
+  await transpose.click();
+  await expect(transpose).toBeFocused();
   await expect(grid).toHaveAttribute("data-rows", before.columns!);
   await expect(grid).toHaveAttribute("data-columns", before.rows!);
   await expect(grid).toHaveAttribute("data-product", before.product!);
@@ -97,12 +104,15 @@ test("@e2e Clock, Array, Target, Lab, and Slider share navigation without sharin
 
   await page.locator('[data-station-id="target"] button').click();
   await expect(page.getByTestId("target-workshop")).toBeVisible();
-  await page.getByRole("button", { name: "给我一点提示" }).click();
+  const hint = page.getByRole("button", { name: "给我一点提示" });
+  await hint.click();
+  await expect(hint).toBeFocused();
   await expect(page.getByTestId("target-hint").locator("li")).toHaveCount(1);
   await page.locator('[data-card-id="target-10-01-source-1"]').click();
   await page.locator('[data-card-id="target-10-01-source-2"]').click();
   await page.getByRole("button", { name: "+", exact: true }).click();
   await page.getByRole("button", { name: "合并" }).click();
+  await expect(page.locator('[data-card-id="target-10-01-combined-1"]')).toBeFocused();
   await page.locator('[data-card-id="target-10-01-combined-1"]').click();
   await page.locator('[data-card-id="target-10-01-source-3"]').click();
   await page.getByRole("button", { name: "+", exact: true }).click();
@@ -222,8 +232,46 @@ test("@e2e direct station refresh, motion setting, keyboard order, and final cla
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("math-world-station")).toHaveAttribute("data-station-id", "clock");
   await page.goto("/?hub=classic");
-  await expect(page.locator(".game-card")).toHaveCount(4);
+  await expect(page.locator(".game-card")).toHaveCount(3);
   await expect(page.locator('[data-game-id="clock-reader"], [data-game-id="multiplication-adventure"], [data-game-id="pinyin-magic-battle"], [data-game-id="make-target"], [data-game-id="memory-card"]')).toHaveCount(0);
-  await expect(page.locator('[data-game-id="math-lab"], [data-game-id="equation-slider"]')).toHaveCount(2);
+  await expect(page.locator('[data-game-id="math-lab"]')).toHaveCount(1);
+  await expect(page.locator('[data-game-id="equation-slider"]')).toHaveCount(0);
   await expectNoOverflow(page);
+});
+
+test("@e2e Slider canonical route, history focus, world return, and saved-level re-entry stay coherent", async ({ page }, testInfo) => {
+  test.skip(!["desktop-1440", "mobile-390"].includes(testInfo.project.name));
+  const log = observe(page);
+  await page.goto("/?world=math-world");
+  await page.evaluate(() => localStorage.clear());
+  const sliderStation = page.locator('[data-station-id="slider"] button');
+  await sliderStation.focus();
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/\?world=math-world&station=slider$/);
+  await expect(page.locator("[data-station-heading]")).toBeFocused();
+
+  const tutorialSkip = page.getByRole("button", { name: "跳过教程" });
+  if (await tutorialSkip.isVisible()) await tutorialSkip.click();
+  await page.getByRole("button", { name: "关卡列表" }).click();
+  await page.locator('[data-level-id="es-1-11"]').click();
+  const board = page.getByRole("region", { name: "算式滑轨棋盘" });
+  await expect(board).toHaveAttribute("data-level-id", "es-1-11");
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("family-games/equation-slider/progress-v3") ?? "null")?.lastLevelId)).toBe("es-1-11");
+
+  await page.reload();
+  await expect(board).toHaveAttribute("data-level-id", "es-1-11");
+  await page.goBack();
+  await expect(page.getByTestId("math-world-map")).toBeVisible();
+  await expect(page.locator('[data-station-id="slider"] button')).toBeFocused();
+  await expect(page.locator('[data-station-id="slider"] button')).toHaveText("继续这里");
+  await page.goForward();
+  await expect(page.locator('[data-station-id="slider"] .equation-slider')).toBeVisible();
+  await expect(page.locator("[data-station-heading]")).toBeFocused();
+
+  await page.getByRole("button", { name: "关卡列表" }).click();
+  await page.getByRole("button", { name: "线路地图" }).click();
+  await page.getByRole("button", { name: "回数学世界地图" }).click();
+  await expect(page.getByTestId("math-world-map")).toBeVisible();
+  await expect(page.locator('[data-station-id="slider"] button')).toBeFocused();
+  await expectClean(log);
 });

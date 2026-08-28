@@ -134,10 +134,9 @@ test.describe("@gate-d @agent-playtest equation slider UI-only agent playtest", 
 });
 
 async function completeFormalBoardTutorial(page: Page): Promise<TutorialResult> {
-  await page.goto("/?hub=classic");
+  await page.goto("/?world=math-world&station=slider");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  await page.getByRole("button", { name: "进入轨道站" }).click();
   await expect(page.locator(`${BOARD}[data-level-id='es-1-01']`)).toBeVisible();
   await expect(page.locator(".equation-slider__coach[data-tutorial-step='move-target']")).toBeVisible();
   await expect(page.locator(".equation-slider__coach[data-tutorial-step='move-target']")).toContainText(

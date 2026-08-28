@@ -75,8 +75,8 @@ function option(name: string): string | undefined {
 const entries = riskInventory();
 const issues: string[] = [];
 const policyCounts = Object.fromEntries(["document", "internal", "locked"].map((policy) => [policy, PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === policy).length]));
-if (PLAY_SURFACE_MANIFEST.length !== 40) issues.push(`Expected 40 play surfaces, found ${PLAY_SURFACE_MANIFEST.length}`);
-if (policyCounts.document !== 36 || policyCounts.internal !== 2 || policyCounts.locked !== 2) issues.push(`Unexpected scroll classification: ${JSON.stringify(policyCounts)}`);
+if (PLAY_SURFACE_MANIFEST.length !== 39) issues.push(`Expected 39 play surfaces, found ${PLAY_SURFACE_MANIFEST.length}`);
+if (policyCounts.document !== 35 || policyCounts.internal !== 2 || policyCounts.locked !== 2) issues.push(`Unexpected scroll classification: ${JSON.stringify(policyCounts)}`);
 for (const surface of PLAY_SURFACE_MANIFEST) {
   if (surface.scrollPolicy === "internal") {
     if (!surface.scrollContainerSelector) issues.push(`${surface.id}: internal policy requires scrollContainerSelector`);
@@ -98,7 +98,7 @@ if (!/hmc-shell[^`]*tabindex=\\?"0\\?"[^`]*role=\\?"region\\?"/s.test(sliceApp))
 if (entries.some((entry) => entry.kind === "overflow-clip")) issues.push("Runtime overflow:clip requires an explicit interactive-content exception; none is currently authorized");
 
 const report = {
-  taskId: "GAME-CODEX-STABLE-NATURAL-USE-ENTRY-07",
+  taskId: "GAME-CODEX-WORLD-COHERENCE-AND-GAMEPLAY-LIFT-02",
   verdict: issues.length ? "FAIL" : "PASS",
   surfaceCount: PLAY_SURFACE_MANIFEST.length,
   policyCounts,

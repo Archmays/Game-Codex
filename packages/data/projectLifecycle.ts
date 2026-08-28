@@ -18,7 +18,7 @@ export interface ProjectPhaseRecord {
 }
 
 export interface AuthorizedDevelopmentCycleRecord {
-  readonly id: "portfolio-evolution-01";
+  readonly id: "portfolio-evolution-01" | "gameplay-coherence-02";
   readonly title: string;
   readonly trigger: "EXPLICIT_USER_AUTHORIZATION";
   readonly status: "release-bound";
@@ -101,6 +101,18 @@ export const AUTHORIZED_DEVELOPMENT_CYCLES: readonly AuthorizedDevelopmentCycleR
     naturalUseObservationImpact: "ONGOING_NOT_CLOSED",
     realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED",
   },
+  {
+    id: "gameplay-coherence-02",
+    title: "World Coherence and Gameplay Lift",
+    trigger: "EXPLICIT_USER_AUTHORIZATION",
+    status: "release-bound",
+    completionCondition: "RELEASE_TAG_TARGET",
+    startCommit: "90eb3b242b38b1d7a8cd98c8e0cafce14a6984a0",
+    releaseTag: "game-codex-gameplay-coherence-v1.0.0",
+    summary: "三世界层级真值、Equation 数学世界归位、运行时归属/质量档/存档分层，以及五个数学站点的继续、焦点与游戏体验修复。",
+    naturalUseObservationImpact: "ONGOING_NOT_CLOSED",
+    realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED",
+  },
 ] as const;
 
 export const PROJECT_PHASE_BY_ID: ReadonlyMap<ProjectPhaseId, ProjectPhaseRecord> = new Map(
@@ -121,7 +133,7 @@ export const PROJECT_LIFECYCLE_TERMINAL_TRUTH = {
   realEvidencePatchCount: 2,
   interactionIntegrity: "HITTEST_AND_REACHABILITY_GUARD_ACTIVE",
   automaticLargeTask: "NONE",
-  authorizedBoundedDevelopmentCycle: "portfolio-evolution-01",
+  authorizedBoundedDevelopmentCycle: "gameplay-coherence-02",
   authorizedBoundedDevelopmentCycleStatus: "RELEASE_BOUND",
   realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED",
   next: "Normal family use. New development only when real evidence or a reproducible defect exists.",

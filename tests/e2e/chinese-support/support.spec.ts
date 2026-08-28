@@ -81,10 +81,10 @@ test("memory relation packs switch, preserve old save bytes, and complete", asyn
   expectClean(log);
 });
 
-test("Classic projects four active products while Memory and legacy Pinyin stay off the card wall", async ({ page }) => {
+test("Classic projects three world products while modules and legacy Pinyin stay off the card wall", async ({ page }) => {
   await page.goto("/?hub=classic");
-  await expect(page.locator(".game-card")).toHaveCount(4);
-  await expect(page.locator('[data-game-id="memory-card"], [data-game-id="pinyin-magic-battle"]')).toHaveCount(0);
+  await expect(page.locator(".game-card")).toHaveCount(3);
+  await expect(page.locator('[data-game-id="memory-card"], [data-game-id="pinyin-magic-battle"], [data-game-id="equation-slider"]')).toHaveCount(0);
 });
 
 test("the retired public Pinyin definition remains a canonical compatibility wrapper", async ({ page }) => {

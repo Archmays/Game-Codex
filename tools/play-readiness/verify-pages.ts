@@ -69,7 +69,7 @@ try {
   for (const [query, selector] of routes) await route(page, query, selector);
 
   await route(page, "?hub=classic&from=world", ".hub-grid");
-  requireValue(await page.locator(".game-card").count() === 4, "Classic does not contain exactly four active-product cards");
+  requireValue(await page.locator(".game-card").count() === 3, "Classic does not contain exactly three world-product cards");
   requireValue(await page.locator('[data-game-id="make-target"], [data-game-id="memory-card"], [data-game-id="pinyin-magic-battle"]').count() === 0, "Classic still exposes a converged module or compatibility card");
   for (const [id, selector] of [["equation-slider", ".equation-slider"]] as const) {
     await page.locator(`.game-card[data-game-id="${id}"] .game-card__button`).click();

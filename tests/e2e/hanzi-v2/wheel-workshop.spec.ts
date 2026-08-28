@@ -255,7 +255,7 @@ test("all playable target and component glyphs render as distinct ink rather tha
   expect(new Set(signatures.map((entry) => `${entry.hash}:${entry.ink}`)).size).toBe(glyphs.length);
 });
 
-test("workshop remains usable at all required viewports and the classic hub has four active-product cards without a standalone wheel", async ({ browser }, testInfo) => {
+test("workshop remains usable at all required viewports and the classic hub has three world-product cards without a standalone wheel", async ({ browser }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium");
   for (const viewport of [{ width: 390, height: 844 }, { width: 768, height: 1024 }, { width: 1366, height: 768 }, { width: 1600, height: 900 }]) {
     const context = await (browser as Browser).newContext({ viewport }); const page = await context.newPage();
@@ -265,7 +265,7 @@ test("workshop remains usable at all required viewports and the classic hub has 
   }
   const context = await (browser as Browser).newContext({ viewport: { width: 1280, height: 720 } }); const page = await context.newPage();
   await page.goto("/?hub=classic");
-  await expect(page.locator(".game-card")).toHaveCount(4);
+  await expect(page.locator(".game-card")).toHaveCount(3);
   await expect(page.getByRole("heading", { name: "汉字大转盘" })).toHaveCount(0);
   await expect(page.locator(".game-card--ink-forest")).toBeVisible();
   await page.goto("/?play=hanzi-v2-chapter-one&from=hub&fresh=1&seed=wheel-hub-v2");

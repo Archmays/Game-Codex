@@ -35,7 +35,6 @@ async function visiblePrimary(page: Page, kind: string): Promise<Locator> {
   if (kind === "math-world") return page.locator('[data-station-id="lab"] button');
   if (kind === "english-world") return page.locator(".wordlight-region button").first();
   if (kind === "classic-hub") return page.locator(".game-card__button").first();
-  if (kind === "classic-equation") return page.getByRole("button", { name: "跳过教程" });
   return page.locator("[data-card-id]").first();
 }
 
@@ -45,10 +44,9 @@ const primary: readonly { id: string; route: string; surface: string; gameId?: s
   { id: "math-world", route: "/?world=math-world", surface: "[data-testid=math-world-map]" },
   { id: "english-world", route: "/?world=english-world", surface: "[data-testid=english-world-map]" },
   { id: "classic-hub", route: "/?hub=classic&from=world", surface: "[data-testid=classic-hub-from-world]" },
-  { id: "classic-equation", route: "/?hub=classic&from=world", surface: ".equation-slider", gameId: "equation-slider" },
 ] as const;
 
-test("@play-ready all six primary first actions are visible and child-facing", async ({ page }, testInfo) => {
+test("@play-ready all five primary first actions are visible and child-facing", async ({ page }, testInfo) => {
   const runtime = observe(page);
   const observations: unknown[] = [];
   for (const item of primary) {
@@ -106,7 +104,7 @@ test("@play-ready world, support, Classic, back, reload and resume routes stay c
   await expect(page.getByTestId("memory-match")).toBeVisible();
   await page.locator("[data-card-id]").first().click();
   await page.goto("/?hub=classic&from=world", { waitUntil: "domcontentloaded" });
-  await expect(page.locator(".game-card")).toHaveCount(4);
+  await expect(page.locator(".game-card")).toHaveCount(3);
   await expect(page.locator('.game-card[data-game-id="memory-card"], .game-card[data-game-id="make-target"]')).toHaveCount(0);
   expectClean(runtime);
 });
@@ -159,7 +157,7 @@ test("@a11y modal focus, language parts, target sizes and 200% zoom stay operabl
   await expect(page.locator("[data-world-forest-link]")).toBeVisible();
   await expect(page.getByTestId("my-game-world")).toHaveAttribute(
     "data-active-child-products",
-    "hanzi-radical-battle math-lab english-spell-battle equation-slider"
+    "hanzi-radical-battle math-lab english-spell-battle"
   );
   await page.locator("[data-world-forest-link]").focus();
   await expect(page.locator("[data-world-forest-link]")).toBeFocused();
@@ -175,8 +173,7 @@ test("@a11y modal focus, language parts, target sizes and 200% zoom stay operabl
   await page.keyboard.press("Escape");
   await expect(englishSettings).toBeFocused();
 
-  await page.goto("/?hub=classic", { waitUntil: "domcontentloaded" });
-  await page.locator('.game-card[data-game-id="equation-slider"] .game-card__button').click();
+  await page.goto("/?world=math-world&station=slider", { waitUntil: "domcontentloaded" });
   await page.getByRole("button", { name: "跳过教程" }).click();
   await expect(page.getByRole("button", { name: "第 2 列向上移动" })).toBeVisible();
   expectClean(runtime);
@@ -211,17 +208,16 @@ test("@performance local production performance sample", async ({ page }, testIn
     new PerformanceObserver((list) => { for (const entry of list.getEntries() as (PerformanceEntry & { value: number; hadRecentInput: boolean })[]) if (!entry.hadRecentInput) state.cls += entry.value; }).observe({ type: "layout-shift", buffered: true });
     new PerformanceObserver((list) => { for (const entry of list.getEntries()) state.inp = Math.max(state.inp, entry.duration); }).observe({ type: "event", buffered: true, durationThreshold: 16 } as PerformanceObserverInit & { durationThreshold: number });
   });
-  const routes = ["/?world=my-game-world", "/?play=hanzi-magic-complete", "/?world=math-world", "/?world=english-world", "/?hub=classic", "/?hub=classic&from=world"];
+  const routes = ["/?world=my-game-world", "/?play=hanzi-magic-complete", "/?world=math-world", "/?world=english-world", "/?hub=classic", "/?world=math-world&station=slider"];
   const samples: unknown[] = [];
   for (const route of routes) {
     const start = Date.now();
     await page.goto(route, { waitUntil: "networkidle" });
-    if (route.endsWith("from=world")) await page.locator('.game-card[data-game-id="equation-slider"] .game-card__button').click();
     const action = route.includes("my-game-world") ? page.getByRole("button", { name: /家长角/ })
       : route.includes("hanzi-magic") ? page.getByRole("button", { name: "家长角" })
+      : route.includes("station=slider") ? page.getByRole("button", { name: "跳过教程" })
       : route.includes("math-world") ? page.locator('[data-station-id="lab"] button')
       : route.includes("english-world") ? page.locator(".wordlight-region button").first()
-      : route.endsWith("from=world") ? page.getByRole("button", { name: "跳过教程" })
       : page.getByRole("button", { name: "数学", exact: true });
     const interactionStarted = performance.now();
     await action.click();

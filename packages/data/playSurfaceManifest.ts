@@ -28,6 +28,14 @@ export interface PlaySurfaceRecord {
   readonly settingsAvailable: boolean;
   readonly destructiveActionAvailable: boolean;
   readonly saveNamespaces: readonly string[];
+  readonly hostSaveNamespaces: readonly string[];
+  readonly runtimeSaveNamespaces: readonly string[];
+  readonly mountDefinitionId?: string;
+  readonly topLevelProductId?: string;
+  readonly worldModuleId?: string;
+  readonly runtimeOwnerDefinitionId?: string;
+  readonly hostWorldId?: "chinese" | "math" | "english";
+  readonly compatibilitySurfaceId?: string;
   readonly expectedInputs: readonly PlayInput[];
   readonly qualityProfile: PlaySurfaceQualityProfile;
   readonly scrollPolicy: ScrollPolicy;
@@ -59,13 +67,19 @@ export const APP_ROUTE_QUERY_MANIFEST = [
 
 const ALL_INPUTS = ["pointer", "touch", "keyboard"] as const;
 const HANZI_SAVE = ["family-games/hanzi-magic-complete/v3"] as const;
-const MATH_SAVE = ["family-games/math-world/v1", "math-battle-web/save-v1"] as const;
+const MATH_HOST_SAVE = ["family-games/math-world/v1"] as const;
+const MATH_LAB_SAVE = ["math-battle-web/save-v1"] as const;
 const ENGLISH_SAVE = ["family-games/english-world/v2"] as const;
 
-type SurfaceInput = Omit<PlaySurfaceRecord, "scrollPolicy"> & { readonly scrollPolicy?: ScrollPolicy };
+type SurfaceInput = Omit<PlaySurfaceRecord, "scrollPolicy" | "hostSaveNamespaces" | "runtimeSaveNamespaces"> & {
+  readonly scrollPolicy?: ScrollPolicy;
+  readonly hostSaveNamespaces?: readonly string[];
+  readonly runtimeSaveNamespaces?: readonly string[];
+};
 
 function surface(record: SurfaceInput): PlaySurfaceRecord {
-  return { scrollPolicy: "document", ...record };
+  const { hostSaveNamespaces = [], runtimeSaveNamespaces = record.saveNamespaces, ...rest } = record;
+  return { scrollPolicy: "document", ...rest, hostSaveNamespaces, runtimeSaveNamespaces };
 }
 
 type ProductSurfaceInput = Omit<
@@ -76,6 +90,10 @@ type ProductSurfaceInput = Omit<
 const hanzi = (record: ProductSurfaceInput): PlaySurfaceRecord => surface({
   ...record,
   productId: "hanzi-radical-battle",
+  mountDefinitionId: "hanzi-radical-battle",
+  topLevelProductId: "hanzi-radical-battle",
+  runtimeOwnerDefinitionId: "hanzi-radical-battle",
+  hostWorldId: "chinese",
   expectedInputs: ALL_INPUTS,
   qualityProfile: "s-hanzi-release",
   settingsAvailable: true,
@@ -83,19 +101,30 @@ const hanzi = (record: ProductSurfaceInput): PlaySurfaceRecord => surface({
   saveNamespaces: HANZI_SAVE,
 });
 
-const math = (record: ProductSurfaceInput): PlaySurfaceRecord => surface({
+const mathWorld = (record: ProductSurfaceInput): PlaySurfaceRecord => surface({
   ...record,
   productId: "math-lab",
+  mountDefinitionId: "math-lab",
+  topLevelProductId: "math-lab",
+  runtimeOwnerDefinitionId: "math-lab",
+  hostWorldId: "math",
+  worldModuleId: "math-lab-core",
   expectedInputs: ALL_INPUTS,
   qualityProfile: "a-core-world",
   settingsAvailable: record.kind === "product-world",
   destructiveActionAvailable: false,
-  saveNamespaces: MATH_SAVE,
+  saveNamespaces: [...MATH_HOST_SAVE, ...MATH_LAB_SAVE],
+  hostSaveNamespaces: MATH_HOST_SAVE,
+  runtimeSaveNamespaces: MATH_LAB_SAVE,
 });
 
 const english = (record: ProductSurfaceInput): PlaySurfaceRecord => surface({
   ...record,
   productId: "english-spell-battle",
+  mountDefinitionId: "english-spell-battle",
+  topLevelProductId: "english-spell-battle",
+  runtimeOwnerDefinitionId: "english-spell-battle",
+  hostWorldId: "english",
   expectedInputs: ALL_INPUTS,
   qualityProfile: "a-core-world",
   settingsAvailable: record.kind !== "support-activity",
@@ -103,9 +132,43 @@ const english = (record: ProductSurfaceInput): PlaySurfaceRecord => surface({
   saveNamespaces: ENGLISH_SAVE,
 });
 
+const MATH_STATION_CONTRACTS = {
+  lab: { moduleId: "math-lab-core", ownerId: "math-lab", qualityProfile: "a-core-world", runtimeSaves: MATH_LAB_SAVE },
+  clock: { moduleId: "math-clock", ownerId: "clock-reader", qualityProfile: "c-module", runtimeSaves: ["family-games/clock-reader"] },
+  array: { moduleId: "math-array", ownerId: "multiplication-adventure", qualityProfile: "c-module", runtimeSaves: ["family-games/multiplication-adventure"] },
+  target: { moduleId: "math-make-target", ownerId: "make-target", qualityProfile: "b-independent-puzzle", runtimeSaves: ["family-games/make-target"] },
+  slider: { moduleId: "math-equation-slider", ownerId: "equation-slider", qualityProfile: "s-equation-release", runtimeSaves: ["family-games/equation-slider"] },
+} as const;
+
+const mathStation = (station: keyof typeof MATH_STATION_CONTRACTS): PlaySurfaceRecord => {
+  const contract = MATH_STATION_CONTRACTS[station];
+  return surface({
+    id: `math-${station}`,
+    title: `数学站点 · ${station}`,
+    route: `?world=math-world&station=${station}`,
+    productId: "math-lab",
+    kind: "station",
+    parentSurfaceId: "math-world",
+    returnRoute: "?world=math-world",
+    primaryActionSelector: "[data-return-map], button:not([disabled]), a",
+    settingsAvailable: false,
+    destructiveActionAvailable: false,
+    saveNamespaces: [...MATH_HOST_SAVE, ...contract.runtimeSaves],
+    hostSaveNamespaces: MATH_HOST_SAVE,
+    runtimeSaveNamespaces: contract.runtimeSaves,
+    mountDefinitionId: contract.ownerId,
+    topLevelProductId: "math-lab",
+    worldModuleId: contract.moduleId,
+    runtimeOwnerDefinitionId: contract.ownerId,
+    hostWorldId: "math",
+    expectedInputs: ALL_INPUTS,
+    qualityProfile: contract.qualityProfile,
+  });
+};
+
 export const PLAY_SURFACE_MANIFEST: readonly PlaySurfaceRecord[] = [
   surface({ id: "my-game-world", title: "我的游戏世界", route: "?world=my-game-world", productId: "portfolio", kind: "portfolio-world", returnRoute: "?world=my-game-world", primaryActionSelector: "[data-world-forest-link]", settingsAvailable: true, destructiveActionAvailable: false, saveNamespaces: ["family-games/my-game-world/v1"], expectedInputs: ALL_INPUTS, qualityProfile: "portfolio-play-ready", scrollPolicy: "locked", lockedReason: "The responsive family-world stage is a fixed viewport canvas with viewport-safe portal controls and internally scrolling parent overlays.", primaryEntry: true }),
-  surface({ id: "classic-hub", title: "游戏百宝箱", route: "?hub=classic&from=world", productId: "portfolio", kind: "classic-hub", parentSurfaceId: "my-game-world", returnRoute: "?world=my-game-world", primaryActionSelector: ".game-card__button", settingsAvailable: false, destructiveActionAvailable: false, saveNamespaces: [], expectedInputs: ALL_INPUTS, qualityProfile: "portfolio-play-ready", primaryEntry: true }),
+  surface({ id: "classic-hub", title: "游戏百宝箱", route: "?hub=classic&from=world", productId: "portfolio", kind: "classic-hub", parentSurfaceId: "my-game-world", returnRoute: "?world=my-game-world", primaryActionSelector: ".game-card__button", settingsAvailable: false, destructiveActionAvailable: false, saveNamespaces: [], expectedInputs: ALL_INPUTS, qualityProfile: "portfolio-play-ready", compatibilitySurfaceId: "classic-hub", primaryEntry: true }),
 
   hanzi({ id: "hanzi-world", title: "墨迹森林", route: "?play=hanzi-magic-complete&from=world", kind: "product-world", parentSurfaceId: "my-game-world", returnRoute: "?world=my-game-world", primaryActionSelector: "[data-primary-focus], button:not([disabled]), a", primaryEntry: true }),
   ...(["one", "two", "three"] as const).map((chapter, index) => hanzi({ id: `hanzi-chapter-${chapter}`, title: `墨迹森林第${["一", "二", "三"][index]}章`, route: `?play=hanzi-magic-complete&from=hub&chapter=${chapter}`, kind: "chapter", parentSurfaceId: "hanzi-world", returnRoute: "?play=hanzi-magic-complete&from=hub", primaryActionSelector: "[data-primary-focus], button:not([disabled]), a" })),
@@ -120,8 +183,8 @@ export const PLAY_SURFACE_MANIFEST: readonly PlaySurfaceRecord[] = [
   hanzi({ id: "hanzi-v2-compat", title: "墨迹森林 V2", route: "?play=hanzi-v2-chapter-one&from=world", kind: "chapter", parentSurfaceId: "hanzi-world", returnRoute: "?world=my-game-world", primaryActionSelector: "[data-primary-focus], button:not([disabled]), a" }),
   hanzi({ id: "hanzi-v1-compat", title: "墨迹森林 V1", route: "?play=hanzi-v2-v1&from=world", kind: "chapter", parentSurfaceId: "hanzi-world", returnRoute: "?world=my-game-world", primaryActionSelector: "button:not([disabled]), a", scrollPolicy: "locked", lockedReason: "The compatibility edition is a fixed inset Phaser scene with its own viewport-safe overlays." }),
 
-  math({ id: "math-world", title: "数感实验城", route: "?world=math-world&from=world", kind: "product-world", parentSurfaceId: "my-game-world", returnRoute: "?world=my-game-world", primaryActionSelector: "[data-station-id] button", primaryEntry: true }),
-  ...(["lab", "clock", "array", "target", "slider"] as const).map((station) => math({ id: `math-${station}`, title: `数学站点 · ${station}`, route: `?world=math-world&station=${station}`, kind: "station", parentSurfaceId: "math-world", returnRoute: "?world=math-world", primaryActionSelector: "[data-return-map], button:not([disabled]), a" })),
+  mathWorld({ id: "math-world", title: "数感实验城", route: "?world=math-world&from=world", kind: "product-world", parentSurfaceId: "my-game-world", returnRoute: "?world=my-game-world", primaryActionSelector: "[data-station-id] button", primaryEntry: true }),
+  ...(["lab", "clock", "array", "target", "slider"] as const).map(mathStation),
 
   english({ id: "english-world", title: "词光岛", route: "?world=english-world&from=world", kind: "product-world", parentSurfaceId: "my-game-world", returnRoute: "?world=my-game-world", primaryActionSelector: "[data-theme-id]", primaryEntry: true }),
   ...(["animals", "home", "food", "actions", "colors"] as const).map((region) => english({ id: `english-region-${region}`, title: `词光岛区域 · ${region}`, route: `?world=english-world&region=${region}`, kind: "region", parentSurfaceId: "english-world", returnRoute: "?world=english-world", primaryActionSelector: "[data-word-id], [data-action=map]" })),
@@ -132,11 +195,10 @@ export const PLAY_SURFACE_MANIFEST: readonly PlaySurfaceRecord[] = [
     ["classic-hanzi", "hanzi-radical-battle", "汉字魔法战", "s-hanzi-release", false],
     ["classic-math", "math-lab", "数学世界", "a-core-world", false],
     ["classic-english", "english-spell-battle", "英文魔法战", "a-core-world", false],
-    ["classic-equation", "equation-slider", "算式滑轨", "s-equation-release", true],
   ] as const).map(([id, productId, title, qualityProfile, primaryEntry]) => {
     const product = GAME_PORTFOLIO.find((record) => record.id === productId);
     if (!product) throw new Error(`Classic play surface references unknown product: ${productId}`);
-    return surface({ id, title, route: "?hub=classic&from=world", productId, kind: "classic-entry", parentSurfaceId: "classic-hub", returnRoute: productId === "math-lab" ? "?world=my-game-world" : "?hub=classic&from=world", primaryActionSelector: `[data-game-id="${productId}"] .game-card__button`, settingsAvailable: false, destructiveActionAvailable: false, saveNamespaces: product.saveNamespaces, expectedInputs: ALL_INPUTS, qualityProfile, primaryEntry });
+    return surface({ id, title, route: "?hub=classic&from=world", productId, kind: "classic-entry", parentSurfaceId: "classic-hub", returnRoute: productId === "math-lab" ? "?world=my-game-world" : "?hub=classic&from=world", primaryActionSelector: `[data-game-id="${productId}"] .game-card__button`, settingsAvailable: false, destructiveActionAvailable: false, saveNamespaces: product.saveNamespaces, mountDefinitionId: productId, topLevelProductId: productId, runtimeOwnerDefinitionId: productId, hostWorldId: product.targetWorld === "shared" ? undefined : product.targetWorld, compatibilitySurfaceId: "classic-hub", expectedInputs: ALL_INPUTS, qualityProfile, primaryEntry });
   }),
 ] as const;
 

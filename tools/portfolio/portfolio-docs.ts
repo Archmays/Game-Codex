@@ -32,9 +32,16 @@ function gamesById(catalog: readonly GameCatalogMetadata[]): ReadonlyMap<string,
   return new Map(catalog.map((game) => [game.id, game]));
 }
 
+function currentAuthorizedCycle() {
+  const cycle = AUTHORIZED_DEVELOPMENT_CYCLES.at(-1);
+  if (!cycle) throw new Error("Missing authorized development cycle");
+  return cycle;
+}
+
 export function renderReadmePortfolio(catalog: readonly GameCatalogMetadata[]): string {
   const catalogById = gamesById(catalog);
   const classicCount = CLASSIC_CARD_PRODUCTS.length;
+  const currentCycle = currentAuthorizedCycle();
   const rows = GAME_PORTFOLIO.map((record) => {
     const game = catalogById.get(record.id);
     if (!game) throw new Error(`Missing GameDefinition for ${record.id}`);
@@ -48,10 +55,10 @@ export function renderReadmePortfolio(catalog: readonly GameCatalogMetadata[]): 
     "| --- | --- | --- | --- | --- | --- | --- |",
     ...rows,
     "",
-    `三个正式世界（${PRIMARY_WORLDS.join(" / ")}）包含 ${WORLD_MODULES.length} 个显式世界模块；${COMPATIBILITY_SURFACES.length} 个兼容表面与 ${SHARED_ENGINES.length} 个共享引擎独立登记。目标工坊与记忆配对的重复 Classic 卡已退役，模块、引擎、存档和既有规范 route 均保留。`,
+    `三个正式世界（${PRIMARY_WORLDS.join(" / ")}）包含 ${WORLD_MODULES.length} 个显式世界模块；${COMPATIBILITY_SURFACES.length} 个兼容表面与 ${SHARED_ENGINES.length} 个共享引擎独立登记。算式滑轨只作为数学世界旗舰模块进入；目标工坊与记忆配对也不再占用重复 Classic 卡，模块、引擎、存档和既有规范 route 均保留。`,
     "",
     `项目阶段：Foundation、Math World、Chinese Consolidation、English V2 与 Play Readiness 均为 COMPLETE；Natural-use Observation 为 ACTIVE；家庭稳定基线已冻结在 \`${PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineTag}\`；下一自动阶段为 \`${NEXT_PROJECT_PHASE ?? "NONE"}\`。`,
-    `本次 \`${AUTHORIZED_DEVELOPMENT_CYCLES[0].id}\` 是用户明确授权、由发布 tag 目标闭合的独立 bounded development cycle；源码不提前冒充外部发布完成。它不关闭 Natural-use Observation，也不创建自动后续任务。`,
+    `本次 \`${currentCycle.id}\` 是用户明确授权、由发布 tag 目标闭合的独立 bounded development cycle；源码不提前冒充外部发布完成。它不关闭 Natural-use Observation，也不创建自动后续任务。`,
     "家庭使用入口、可选 Observation Kit 与重新开发边界见 `docs/project-status/natural-use.md`。",
     README_PORTFOLIO_END,
   ].join("\n");
@@ -67,6 +74,7 @@ export function replaceMarkedSection(source: string, rendered: string): string {
 export function renderPortfolioStatus(catalog: readonly GameCatalogMetadata[]): string {
   const catalogById = gamesById(catalog);
   const classicCount = CLASSIC_CARD_PRODUCTS.length;
+  const currentCycle = currentAuthorizedCycle();
   const rows = GAME_PORTFOLIO.map((record) => {
     const game = catalogById.get(record.id);
     if (!game) throw new Error(`Missing GameDefinition for ${record.id}`);
@@ -103,9 +111,9 @@ export function renderPortfolioStatus(catalog: readonly GameCatalogMetadata[]): 
     `- 活跃儿童产品：${ACTIVE_CHILD_PRODUCTS.map((record) => `\`${record.id}\``).join(" / ")}`,
     `- Classic 投影：${CLASSIC_CARD_PRODUCTS.map((record) => `\`${record.id}\``).join(" / ")}`,
     "",
-    "| 世界模块 | 所属世界 | 所有者定义 | 规范 route | 引擎 |",
-    "| --- | --- | --- | --- | --- |",
-    ...WORLD_MODULES.map((module) => `| ${cell(module.title)} | ${WORLD_LABELS[module.world]} | \`${module.ownerDefinitionId}\` | ${cell(module.route)} | ${module.engineId ? `\`${module.engineId}\`` : "game-owned"} |`),
+    "| 世界模块 | Host 世界 / 产品 | Mount 定义 | Runtime owner | 质量档 | Runtime save | 规范 route | 引擎 |",
+    "| --- | --- | --- | --- | --- | --- | --- | --- |",
+    ...WORLD_MODULES.map((module) => `| ${cell(module.title)} | ${WORLD_LABELS[module.world]}<br>\`${module.hostProductId}\` | \`${module.mountDefinitionId}\` | \`${module.runtimeOwnerDefinitionId}\` | \`${module.qualityProfile}\` | ${module.runtimeSaveNamespaces.map((namespace) => `\`${namespace}\``).join("<br>")} | ${cell(module.route)} | ${module.engineId ? `\`${module.engineId}\`` : "game-owned"} |`),
     "",
     "| 兼容表面 | 用途 | route |",
     "| --- | --- | --- |",
@@ -127,7 +135,7 @@ export function renderPortfolioStatus(catalog: readonly GameCatalogMetadata[]): 
     "| --- | --- | --- | --- | --- | --- |",
     ...AUTHORIZED_DEVELOPMENT_CYCLES.map((cycle) => `| ${cell(cycle.title)} | \`${cycle.trigger}\` | \`${cycle.status.toUpperCase()}\` | \`${cycle.startCommit}\`<br>\`${cycle.releaseTag}\` | \`${cycle.naturalUseObservationImpact}\` | \`${cycle.realChildValidation}\` |`),
     "",
-    `- 有界周期完成条件：\`${AUTHORIZED_DEVELOPMENT_CYCLES[0].completionCondition}\`；最终完成由发布 tag、CI 与 Pages 同 SHA 回读证明，不由源码预先宣告。`,
+    `- 当前有界周期：\`${currentCycle.id}\`；完成条件：\`${currentCycle.completionCondition}\`；最终完成由发布 tag、CI 与 Pages 同 SHA 回读证明，不由源码预先宣告。`,
     `- 当前收敛阶段：\`${ACTIVE_PROJECT_PHASE}\`` ,
     `- 下一自动阶段：\`${NEXT_PROJECT_PHASE ?? "NONE"}\`` ,
     `- 三个正式世界：\`${PRIMARY_WORLDS.join(" / ")}\`` ,

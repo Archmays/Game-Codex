@@ -7,11 +7,11 @@
 - 实际起点：`12c86dc22b7219a23baeb26efbe7eab9fb0a2da2`
 - 起点 tracked 文件：`708232522` bytes
 - Mount definitions：`9` 保留
-- Active child products：`4`
+- Active child products：`3`
 - World modules：`11`
 - Compatibility surfaces：`6`
 - Shared engines：`2`
-- 经典大厅：`4` 活跃产品入口
+- 经典大厅：`3` 活跃产品入口
 - 数学世界：`5/5` 自由开放站点
 - 历史治理：本阶段不重写 Git 历史、不强推、不移动或覆盖 tag
 - 家庭稳定基线：`FROZEN`（`game-codex-family-stable-v1.0.0` / `8b890ff14880bcb576dd1ced37e14e6e3df28af1`）
@@ -22,7 +22,7 @@
 | 游戏 | 稳定 ID | 目标世界 | 定义角色 | 产品角色 | 等级 | 生命周期 | 活跃儿童产品 | Classic 卡片 | 规范 route | save namespace |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 汉字魔法战 | `hanzi-radical-battle` | 中文世界 | 活跃儿童产品 | 旗舰 | S | `active-maintenance` | 是 | 是 | ?play=hanzi-magic-complete&from=hub | `family-games/hanzi-magic-complete/v3`<br>`family-games/hanzi-magic-v2/chapter-one`<br>`family-games/hanzi-magic-v2/wheel-workshop/v1`<br>`family-games/hanzi-radical-battle-v2/golden-slice/state` |
-| 算式滑轨 | `equation-slider` | 数学世界 | 活跃儿童产品 | 旗舰 | S | `active` | 是 | 是 | ?world=math-world&station=slider | `family-games/equation-slider` |
+| 算式滑轨 | `equation-slider` | 数学世界 | 世界模块挂载 | 旗舰模块 | S | `active-module` | 否 | 否 | ?world=math-world&station=slider | `family-games/equation-slider` |
 | 数学世界 | `math-lab` | 数学世界 | 活跃儿童产品 | 核心世界 | A | `active` | 是 | 是 | ?world=math-world&from=hub | `family-games/math-world/v1`<br>`math-battle-web/save-v1` |
 | 英语世界 | `english-spell-battle` | 英语世界 | 活跃儿童产品 | 核心世界 | A | `active` | 是 | 是 | ?world=english-world&from=hub | `family-games/english-spell-battle`<br>`family-games/english-world/v2` |
 | 目标工坊 | `make-target` | 数学世界 | 世界模块挂载 | 独立谜题 | B | `active-module` | 否 | 否 | ?world=math-world&station=target | `family-games/make-target` |
@@ -33,22 +33,22 @@
 
 ## 分层组合真源
 
-- 活跃儿童产品：`hanzi-radical-battle` / `math-lab` / `english-spell-battle` / `equation-slider`
-- Classic 投影：`hanzi-radical-battle` / `math-lab` / `english-spell-battle` / `equation-slider`
+- 活跃儿童产品：`hanzi-radical-battle` / `math-lab` / `english-spell-battle`
+- Classic 投影：`hanzi-radical-battle` / `math-lab` / `english-spell-battle`
 
-| 世界模块 | 所属世界 | 所有者定义 | 规范 route | 引擎 |
-| --- | --- | --- | --- | --- |
-| 墨迹森林主故事 | 中文世界 | `hanzi-radical-battle` | ?play=hanzi-magic-complete | game-owned |
-| 声韵试炼 | 中文世界 | `hanzi-radical-battle` | ?play=hanzi-magic-complete&view=pinyin | game-owned |
-| 字光配对 | 中文世界 | `hanzi-radical-battle` | ?play=hanzi-magic-complete&view=memory | `memory-match` |
-| 数感实验室 | 数学世界 | `math-lab` | ?world=math-world&station=lab | game-owned |
-| 时钟塔 | 数学世界 | `clock-reader` | ?world=math-world&station=clock | game-owned |
-| 阵列工坊 | 数学世界 | `multiplication-adventure` | ?world=math-world&station=array | game-owned |
-| 目标工坊 | 数学世界 | `make-target` | ?world=math-world&station=target | game-owned |
-| 算式滑轨站 | 数学世界 | `equation-slider` | ?world=math-world&station=slider | game-owned |
-| 词光岛五区域 | 英语世界 | `english-spell-battle` | ?world=english-world | game-owned |
-| 词光册 | 英语世界 | `english-spell-battle` | ?world=english-world&view=journal | game-owned |
-| English Memory | 英语世界 | `english-spell-battle` | ?world=english-world&view=memory | `memory-match` |
+| 世界模块 | Host 世界 / 产品 | Mount 定义 | Runtime owner | 质量档 | Runtime save | 规范 route | 引擎 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 墨迹森林主故事 | 中文世界<br>`hanzi-radical-battle` | `hanzi-radical-battle` | `hanzi-radical-battle` | `s-hanzi-release` | `family-games/hanzi-magic-complete/v3`<br>`family-games/hanzi-magic-v2/chapter-one`<br>`family-games/hanzi-magic-v2/wheel-workshop/v1`<br>`family-games/hanzi-radical-battle-v2/golden-slice/state` | ?play=hanzi-magic-complete | game-owned |
+| 声韵试炼 | 中文世界<br>`hanzi-radical-battle` | `hanzi-radical-battle` | `hanzi-radical-battle` | `s-hanzi-release` | `family-games/hanzi-magic-complete/v3`<br>`family-games/hanzi-magic-v2/chapter-one`<br>`family-games/hanzi-magic-v2/wheel-workshop/v1`<br>`family-games/hanzi-radical-battle-v2/golden-slice/state` | ?play=hanzi-magic-complete&view=pinyin | game-owned |
+| 字光配对 | 中文世界<br>`hanzi-radical-battle` | `hanzi-radical-battle` | `hanzi-radical-battle` | `s-hanzi-release` | `family-games/hanzi-magic-complete/v3`<br>`family-games/hanzi-magic-v2/chapter-one`<br>`family-games/hanzi-magic-v2/wheel-workshop/v1`<br>`family-games/hanzi-radical-battle-v2/golden-slice/state` | ?play=hanzi-magic-complete&view=memory | `memory-match` |
+| 数感实验室 | 数学世界<br>`math-lab` | `math-lab` | `math-lab` | `a-core-world` | `math-battle-web/save-v1` | ?world=math-world&station=lab | game-owned |
+| 时钟塔 | 数学世界<br>`math-lab` | `clock-reader` | `clock-reader` | `c-module` | `family-games/clock-reader` | ?world=math-world&station=clock | game-owned |
+| 阵列工坊 | 数学世界<br>`math-lab` | `multiplication-adventure` | `multiplication-adventure` | `c-module` | `family-games/multiplication-adventure` | ?world=math-world&station=array | game-owned |
+| 目标工坊 | 数学世界<br>`math-lab` | `make-target` | `make-target` | `b-independent-puzzle` | `family-games/make-target` | ?world=math-world&station=target | game-owned |
+| 算式滑轨站 | 数学世界<br>`math-lab` | `equation-slider` | `equation-slider` | `s-equation-release` | `family-games/equation-slider` | ?world=math-world&station=slider | game-owned |
+| 词光岛五区域 | 英语世界<br>`english-spell-battle` | `english-spell-battle` | `english-spell-battle` | `a-core-world` | `family-games/english-spell-battle`<br>`family-games/english-world/v2` | ?world=english-world | game-owned |
+| 词光册 | 英语世界<br>`english-spell-battle` | `english-spell-battle` | `english-spell-battle` | `a-core-world` | `family-games/english-spell-battle`<br>`family-games/english-world/v2` | ?world=english-world&view=journal | game-owned |
+| English Memory | 英语世界<br>`english-spell-battle` | `english-spell-battle` | `english-spell-battle` | `a-core-world` | `family-games/english-spell-battle`<br>`family-games/english-world/v2` | ?world=english-world&view=memory | `memory-match` |
 
 | 兼容表面 | 用途 | route |
 | --- | --- | --- |
@@ -80,8 +80,9 @@
 | 周期 | 触发 | 状态 | 起点 / 发布 tag | Natural-use 影响 | 真人儿童验证 |
 | --- | --- | --- | --- | --- | --- |
 | Portfolio Evolution | `EXPLICIT_USER_AUTHORIZATION` | `RELEASE-BOUND` | `73ae9d6be140c9e8294781b9f8e6ed296590c438`<br>`game-codex-portfolio-evolution-v1.0.0` | `ONGOING_NOT_CLOSED` | `NOT_PERFORMED_AND_NOT_CLAIMED` |
+| World Coherence and Gameplay Lift | `EXPLICIT_USER_AUTHORIZATION` | `RELEASE-BOUND` | `90eb3b242b38b1d7a8cd98c8e0cafce14a6984a0`<br>`game-codex-gameplay-coherence-v1.0.0` | `ONGOING_NOT_CLOSED` | `NOT_PERFORMED_AND_NOT_CLAIMED` |
 
-- 有界周期完成条件：`RELEASE_TAG_TARGET`；最终完成由发布 tag、CI 与 Pages 同 SHA 回读证明，不由源码预先宣告。
+- 当前有界周期：`gameplay-coherence-02`；完成条件：`RELEASE_TAG_TARGET`；最终完成由发布 tag、CI 与 Pages 同 SHA 回读证明，不由源码预先宣告。
 - 当前收敛阶段：`natural-use-observation`
 - 下一自动阶段：`NONE`
 - 三个正式世界：`chinese / math / english`

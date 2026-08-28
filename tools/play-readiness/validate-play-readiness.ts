@@ -64,10 +64,10 @@ if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.observationTooling !== "READY") issues.push
 if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineTag !== "game-codex-family-stable-v1.0.0" || PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineCommit !== "8b890ff14880bcb576dd1ced37e14e6e3df28af1") issues.push("family stable baseline identity");
 if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.realEvidencePatchCount !== 2) issues.push("evidence patch count");
 if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.interactionIntegrity !== "HITTEST_AND_REACHABILITY_GUARD_ACTIVE") issues.push("interaction-integrity boundary");
-if (AUTHORIZED_DEVELOPMENT_CYCLES.length !== 1 || AUTHORIZED_DEVELOPMENT_CYCLES[0]?.id !== "portfolio-evolution-01" || AUTHORIZED_DEVELOPMENT_CYCLES[0]?.naturalUseObservationImpact !== "ONGOING_NOT_CLOSED") issues.push("bounded development cycle boundary");
+if (AUTHORIZED_DEVELOPMENT_CYCLES.length !== 2 || AUTHORIZED_DEVELOPMENT_CYCLES.at(-1)?.id !== "gameplay-coherence-02" || AUTHORIZED_DEVELOPMENT_CYCLES.some((cycle) => cycle.naturalUseObservationImpact !== "ONGOING_NOT_CLOSED")) issues.push("bounded development cycle boundary");
 if (GAME_PORTFOLIO.length !== 9) issues.push("portfolio count");
-if (PLAY_SURFACE_MANIFEST.length !== 40 || PRIMARY_PLAY_SURFACES.length !== 6) issues.push("play surface inventory");
-if (PLAY_SURFACE_MANIFEST.filter((surface) => surface.kind === "classic-entry").length !== 4) issues.push("Classic count");
+if (PLAY_SURFACE_MANIFEST.length !== 39 || PRIMARY_PLAY_SURFACES.length !== 5) issues.push("play surface inventory");
+if (PLAY_SURFACE_MANIFEST.filter((surface) => surface.kind === "classic-entry").length !== 3) issues.push("Classic count");
 if (KNOWN_SAVE_KEYS.length !== 37 || EXPORTABLE_SAVE_KEYS.length !== 36 || portfolioNamespacesWithoutKnownKey().length) issues.push("save key inventory");
 if (prohibitedRuntimeTransmission.length) issues.push("prohibited runtime transmission");
 if (duplicateTrackedLargeBinaryGroups.length) issues.push("duplicate tracked large binaries");

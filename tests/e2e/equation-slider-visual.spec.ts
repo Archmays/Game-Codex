@@ -13,10 +13,9 @@ const VIEWPORTS = [
 ] as const;
 
 async function openFreshSlider(page: Page): Promise<void> {
-  await page.goto("/?hub=classic");
+  await page.goto("/?world=math-world&station=slider");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  await page.getByRole("button", { name: "进入轨道站" }).click();
   await expect(page.locator(`${BOARD}[data-level-id='es-1-01']`)).toBeVisible();
 }
 

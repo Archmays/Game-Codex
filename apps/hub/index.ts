@@ -21,7 +21,7 @@ export function mountHub(root: HTMLElement): MountedGame {
     const title = document.createElement("h1");
     title.textContent = "游戏百宝箱";
     const subtitle = document.createElement("p");
-    subtitle.textContent = "挑一个想玩的小游戏，玩完随时回来换一个。";
+    subtitle.textContent = "三个游戏世界的备用入口；平时也可以从“我的游戏世界”出发。";
     titleGroup.append(title, subtitle);
     header.append(titleGroup);
 

@@ -13,12 +13,12 @@
 ## 当前游戏
 
 <!-- GAME_PORTFOLIO:START -->
-`allGameDefinitions` 保留 9 个可挂载定义，但儿童产品组合已明确收敛为 4 个活跃产品；经典大厅只投影这 4 个产品。世界模块、兼容入口和共享引擎分别维护，不再拿定义数冒充产品数。
+`allGameDefinitions` 保留 9 个可挂载定义，但儿童产品组合已明确收敛为 3 个活跃产品；经典大厅只投影这 3 个产品。世界模块、兼容入口和共享引擎分别维护，不再拿定义数冒充产品数。
 
 | 游戏 | 学科 | 目标世界 | 定义角色 | 活跃儿童产品 | 质量等级 | 当前状态 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 汉字魔法战 | 识字 | 中文世界 | 活跃儿童产品 | 是 | S | 墨迹森林完整篇 |
-| 算式滑轨 | 数学 | 数学世界 | 活跃儿童产品 | 是 | S | 可玩 |
+| 算式滑轨 | 数学 | 数学世界 | 世界模块挂载 | 否 | S | 可玩 |
 | 数学世界 | 数学 | 数学世界 | 活跃儿童产品 | 是 | A | 可玩 |
 | 英语世界 | 英语 | 英语世界 | 活跃儿童产品 | 是 | A | 英语世界 V2 |
 | 目标工坊 | 数学 | 数学世界 | 世界模块挂载 | 否 | B | 数学世界模块 |
@@ -27,14 +27,14 @@
 | 记忆配对 | 识字 | 共享模块 | 兼容适配定义 | 否 | C | 可玩 |
 | 声韵试炼 | 识字 | 中文世界 | 兼容适配定义 | 否 | C | 已并入墨迹森林 |
 
-三个正式世界（chinese / math / english）包含 11 个显式世界模块；6 个兼容表面与 2 个共享引擎独立登记。目标工坊与记忆配对的重复 Classic 卡已退役，模块、引擎、存档和既有规范 route 均保留。
+三个正式世界（chinese / math / english）包含 11 个显式世界模块；6 个兼容表面与 2 个共享引擎独立登记。算式滑轨只作为数学世界旗舰模块进入；目标工坊与记忆配对也不再占用重复 Classic 卡，模块、引擎、存档和既有规范 route 均保留。
 
 项目阶段：Foundation、Math World、Chinese Consolidation、English V2 与 Play Readiness 均为 COMPLETE；Natural-use Observation 为 ACTIVE；家庭稳定基线已冻结在 `game-codex-family-stable-v1.0.0`；下一自动阶段为 `NONE`。
-本次 `portfolio-evolution-01` 是用户明确授权、由发布 tag 目标闭合的独立 bounded development cycle；源码不提前冒充外部发布完成。它不关闭 Natural-use Observation，也不创建自动后续任务。
+本次 `gameplay-coherence-02` 是用户明确授权、由发布 tag 目标闭合的独立 bounded development cycle；源码不提前冒充外部发布完成。它不关闭 Natural-use Observation，也不创建自动后续任务。
 家庭使用入口、可选 Observation Kit 与重新开发边界见 `docs/project-status/natural-use.md`。
 <!-- GAME_PORTFOLIO:END -->
 
-> **算式滑轨 V3：**4 章共 200 关已按新 schema 重建；正式棋盘教程、统一状态机、40 个手工金标准、确定性生成、真实 pointer/键盘 E2E 与 25 关 UI-only agent 试玩均已纳入发布门禁。验收与后续儿童观察边界见 `docs/equation-slider/rebuild-v3/`。
+> **算式滑轨 V3：**4 章共 200 关已按新 schema 重建；正式棋盘教程、统一状态机、40 个手工金标准、确定性生成、真实 pointer/键盘 E2E 与 25 关 UI-only agent 试玩均已纳入发布门禁。它现在只作为数学世界 S 级旗舰模块进入；当前组合真值见 `docs/gameplay-coherence/README.md`，关卡验收与后续儿童观察边界见 `docs/equation-slider/rebuild-v3/`。
 
 ## 本地运行
 
@@ -67,7 +67,7 @@ pnpm run play:my-game-world
 路由约定：
 
 - `/` 或 `?world=my-game-world`：我的游戏世界；
-- `?hub=classic`：4 个活跃儿童产品的备用入口；目标工坊归入数学世界，记忆配对归入中文/英语世界，旧定义与存档兼容继续保留；
+- `?hub=classic`：3 个正式世界的备用入口；算式滑轨、目标工坊、时钟塔和阵列工坊归入数学世界，记忆配对归入中文/英语世界，旧定义、route 与存档兼容继续保留；
 - `?world=math-world`：数学世界 · 数感实验城；支持 `station=lab|clock|array|target|slider` 直接进入并刷新恢复；
 - 世界、森林与经典大厅之间使用 query-only 返回链接，兼容 GitHub Pages 项目子路径。
 

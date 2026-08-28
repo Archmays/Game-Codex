@@ -11,10 +11,9 @@ const MOVE_COUNT_SELECTOR = "[data-move-count]";
 const LIVE_COACH_SELECTOR = ".equation-slider__coach[data-tutorial-step='move-target']";
 
 async function openFreshSlider(page: Page): Promise<void> {
-  await page.goto("/?hub=classic");
+  await page.goto("/?world=math-world&station=slider");
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  await page.getByRole("button", { name: "进入轨道站" }).click();
 
   await expect(page.locator(FIRST_BOARD_SELECTOR)).toBeVisible();
   await expect(page.locator(EXPRESSION_SELECTOR)).toHaveText("4 + 5 = 9");
@@ -125,8 +124,8 @@ async function touchPreview(
   );
 }
 
-async function scrollStageOutsideReel(page: Page, context: BrowserContext): Promise<void> {
-  const stage = page.locator(".game-stage");
+async function scrollPageOutsideReel(page: Page, context: BrowserContext): Promise<void> {
+  const stage = page.locator(".math-world-station__stage");
   const box = await stage.boundingBox();
   if (!box) throw new Error("Game stage has no bounding box");
   const start = {
@@ -450,18 +449,17 @@ test.describe("@gate-a equation slider V3 board and tutorial", () => {
   test("reel vertical gestures stay local while a gesture outside the reel scrolls the stage", async ({ page, context }) => {
     await page.setViewportSize({ width: 390, height: 560 });
     await openFirstLevel(page);
-    const stage = page.locator(".game-stage");
+    const stage = page.locator(".math-world-station__stage");
     const dimensions = await page.evaluate(() => {
-      const stageElement = document.querySelector<HTMLElement>(".game-stage")!;
+      const stageElement = document.querySelector<HTMLElement>(".math-world-station__stage")!;
       const documentElement = document.scrollingElement!;
       return {
         stage: { clientHeight: stageElement.clientHeight, overflowY: getComputedStyle(stageElement).overflowY, scrollHeight: stageElement.scrollHeight, scrollTop: stageElement.scrollTop },
         document: { clientHeight: documentElement.clientHeight, scrollHeight: documentElement.scrollHeight, scrollTop: documentElement.scrollTop }
       };
     });
-    expect(["auto", "scroll"]).toContain(dimensions.stage.overflowY);
-    const scrollOwner = dimensions.stage.scrollHeight > dimensions.stage.clientHeight ? "stage" : "document";
-    expect(dimensions[scrollOwner].scrollHeight).toBeGreaterThan(dimensions[scrollOwner].clientHeight);
+    expect(dimensions.stage.overflowY).toBe("visible");
+    expect(dimensions.document.scrollHeight).toBeGreaterThan(dimensions.document.clientHeight);
     expect(await reelWindow(page, 0).evaluate((element) => getComputedStyle(element).touchAction))
       .toBe("pan-x");
 
@@ -469,12 +467,10 @@ test.describe("@gate-a equation slider V3 board and tutorial", () => {
     expect(await stage.evaluate((element) => element.scrollTop)).toBe(dimensions.stage.scrollTop);
     expect(await page.evaluate(() => document.scrollingElement!.scrollTop)).toBe(dimensions.document.scrollTop);
 
-    await scrollStageOutsideReel(page, context);
+    await scrollPageOutsideReel(page, context);
     await expect.poll(
-      () => scrollOwner === "stage"
-        ? stage.evaluate((element) => element.scrollTop)
-        : page.evaluate(() => document.scrollingElement!.scrollTop)
-    ).toBeGreaterThan(dimensions[scrollOwner].scrollTop);
+      () => page.evaluate(() => document.scrollingElement!.scrollTop)
+    ).toBeGreaterThan(dimensions.document.scrollTop);
   });
 
   test("reduced motion never waits for feedback animation to unlock", async ({ page }) => {

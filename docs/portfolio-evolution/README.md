@@ -1,5 +1,7 @@
 # Game-Codex Portfolio Evolution
 
+> **Historical cycle, superseded for current truth.** This directory remains immutable evidence for the 2026-08-27 four-product/40-surface release. Current three-world/39-surface truth starts at [`docs/gameplay-coherence/README.md`](../gameplay-coherence/README.md). Statements below remain accurate only for their frozen cycle.
+
 本目录记录 `GAME-CODEX-PORTFOLIO-EVOLUTION-GOAL-01` 的长期真源与公开发布证明合同；精确 CI、Pages、tag、回传包与清理实例在发布闭合后写入最终回传包。本轮没有增加第十个游戏，也没有把自动化结果写成儿童兴趣、理解、学习或家庭验收。
 
 ## 结论先行

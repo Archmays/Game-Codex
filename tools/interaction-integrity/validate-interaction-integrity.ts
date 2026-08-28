@@ -49,7 +49,9 @@ function risks(body: string): RiskType[] {
 function surfacesFor(path: string): string[] {
   const ids = (predicate: (productId: string) => boolean): string[] => PLAY_SURFACE_MANIFEST.filter((record) => predicate(record.productId)).map((record) => record.id);
   if (path.includes("english-spell-battle") || path.includes("memory-match")) return ids((id) => id === "english-spell-battle" || id === "memory-card");
-  if (path.includes("math-lab") || path.includes("clock-reader") || path.includes("equation-slider")) return ids((id) => ["math-lab", "equation-slider"].includes(id));
+  if (["math-lab", "clock-reader", "multiplication-adventure", "make-target", "equation-slider"].some((segment) => path.includes(segment))) {
+    return ids((id) => ["math-lab", "equation-slider"].includes(id));
+  }
   if (path.includes("hanzi-radical-battle") || path.includes("pinyin")) return ids((id) => id === "hanzi-radical-battle");
   if (path.startsWith("apps/") || path.startsWith("packages/") || path.startsWith("src/")) return PLAY_SURFACE_MANIFEST.map((record) => record.id);
   const game = /^games\/([^/]+)/.exec(path)?.[1];
@@ -95,7 +97,7 @@ function exactBlockFor(source: string, selector: string): string {
 
 function validateKnownContracts(entries: readonly RiskEntry[]): string[] {
   const issues: string[] = [];
-  if (PLAY_SURFACE_MANIFEST.length !== 40) issues.push(`Expected 40 play surfaces, found ${PLAY_SURFACE_MANIFEST.length}`);
+  if (PLAY_SURFACE_MANIFEST.length !== 39) issues.push(`Expected 39 play surfaces, found ${PLAY_SURFACE_MANIFEST.length}`);
   if (entries.some((entry) => !entry.testedSurfaceIds.length)) issues.push("Every risk entry must map to at least one browser-tested surface");
   const cssPath = resolve(ROOT, "games/english-spell-battle/v2/world/styles.css");
   const css = readFileSync(cssPath, "utf8");

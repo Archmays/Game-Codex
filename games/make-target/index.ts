@@ -66,10 +66,22 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
   let equations: string[] = [];
   let hintLevel = 0;
   let nextCardNumber = 1;
+  let latestCombinedCardId: string | null = null;
   const loadedSave = loadMakeTargetSave(context.storage.get<unknown>("progress", null));
   const save = loadedSave.save;
 
-  const render = (): void => {
+  const actionButton = (
+    label: string,
+    actionKey: string,
+    onClick: () => void,
+    options?: Parameters<typeof createButton>[2],
+  ): HTMLButtonElement => {
+    const control = createButton(label, onClick, options);
+    control.dataset.targetAction = actionKey;
+    return control;
+  };
+
+  const render = (focusKey?: string): void => {
     clearElement(root);
     root.append(createHeader("目标工坊", "四张牌每张只用一次。减法看顺序，除法必须整除。"));
 
@@ -77,10 +89,11 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
     toolbar.className = "learning-game__toolbar";
     toolbar.setAttribute("aria-label", "选择目标数");
     for (const value of [10, 12, 24] as TargetMode[]) {
-      const targetButton = createButton(`目标 ${value}`, () => {
+      const actionKey = `target-${value}`;
+      const targetButton = actionButton(`目标 ${value}`, actionKey, () => {
         if (value === target) return;
         target = value;
-        startPuzzle(false);
+        startPuzzle(false, actionKey);
       }, {
         className: value === target ? "ui-button learning-game__pill is-active" : "ui-button learning-game__pill",
       });
@@ -105,16 +118,19 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
     cardGrid.dataset.testid = "target-cards";
     for (const card of cards) {
       const position = selectedIds.indexOf(card.id);
-      cardGrid.append(createNumberCardButton(card, position, () => toggleCard(card.id)));
+      const cardButton = createNumberCardButton(card, position, () => toggleCard(card.id));
+      cardButton.classList.toggle("is-new", card.id === latestCombinedCardId);
+      cardGrid.append(cardButton);
     }
 
     const ops = document.createElement("div");
     ops.className = "make-target-ops";
     ops.setAttribute("aria-label", "选择运算符");
     for (const op of OPERATORS) {
-      const operatorButton = createButton(op, () => {
+      const actionKey = `operator-${op}`;
+      const operatorButton = actionButton(op, actionKey, () => {
         operator = op;
-        render();
+        render(actionKey);
       }, {
         className: op === operator ? "ui-button learning-game__pill is-active" : "ui-button learning-game__pill",
       });
@@ -125,14 +141,14 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
     const actions = document.createElement("div");
     actions.className = "learning-game__actions";
     actions.append(
-      createButton("合并", combineSelected),
-      createButton("交换左右", swapSelection, {
+      actionButton("合并", "combine", combineSelected),
+      actionButton("交换左右", "swap", swapSelection, {
         className: "ui-button ui-button--secondary",
         disabled: selectedIds.length !== 2,
       }),
-      createButton("撤销一步", undo, { className: "ui-button ui-button--secondary", disabled: history.length === 0 }),
-      createButton("给我一点提示", revealHint, { className: "ui-button ui-button--secondary" }),
-      createButton("换一组牌", nextPuzzle, { className: "ui-button ui-button--secondary" }),
+      actionButton("撤销一步", "undo", undo, { className: "ui-button ui-button--secondary", disabled: history.length === 0 }),
+      actionButton("给我一点提示", "hint", revealHint, { className: "ui-button ui-button--secondary" }),
+      actionButton("换一组牌", "next", nextPuzzle, { className: "ui-button ui-button--secondary" }),
     );
 
     root.append(
@@ -147,9 +163,17 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
       createHistoryList(),
       createFeedbackBanner(feedback),
     );
+    if (focusKey) {
+      queueMicrotask(() => {
+        const targetElement = focusKey.startsWith("card:")
+          ? [...root.querySelectorAll<HTMLButtonElement>("[data-card-id]")].find((button) => button.dataset.cardId === focusKey.slice(5))
+          : root.querySelector<HTMLButtonElement>(`[data-target-action="${focusKey}"]`);
+        targetElement?.focus();
+      });
+    }
   };
 
-  const startPuzzle = (advance: boolean): void => {
+  const startPuzzle = (advance: boolean, focusKey?: string): void => {
     const candidates = puzzlesForTarget(target);
     if (advance) puzzleIndexByTarget[target] = (puzzleIndexByTarget[target] + 1) % candidates.length;
     puzzle = candidates[puzzleIndexByTarget[target]];
@@ -160,11 +184,12 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
     equations = [];
     hintLevel = 0;
     nextCardNumber = 1;
+    latestCombinedCardId = null;
     feedback = { kind: "info", text: "按顺序选两张牌，再选择运算。" };
-    render();
+    render(focusKey);
   };
 
-  const nextPuzzle = (): void => startPuzzle(true);
+  const nextPuzzle = (): void => startPuzzle(true, "next");
 
   const toggleCard = (id: string): void => {
     if (selectedIds.includes(id)) {
@@ -172,20 +197,21 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
     } else if (selectedIds.length < 2) {
       selectedIds = [...selectedIds, id];
     }
-    render();
+    latestCombinedCardId = null;
+    render(`card:${id}`);
   };
 
   const swapSelection = (): void => {
     if (selectedIds.length !== 2) return;
     selectedIds = [selectedIds[1], selectedIds[0]];
     feedback = { kind: "info", text: "左右顺序已经交换。" };
-    render();
+    render("swap");
   };
 
   const combineSelected = (): void => {
     if (selectedIds.length !== 2) {
       feedback = { kind: "info", text: "需要按顺序选两张牌。" };
-      render();
+      render("combine");
       return;
     }
 
@@ -199,7 +225,7 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
         ? { kind: "error", text: "左边的数要不小于右边；可以交换左右再试。" }
         : { kind: "error", text: "这一步不能整除；可以换顺序、换运算或撤销。" };
       playFeedbackSound("error");
-      render();
+      render("combine");
       return;
     }
 
@@ -210,7 +236,8 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
     }, ...history];
     equations = [...equations, formatOperationEquation(result)];
     cards = cards.filter((card) => !selectedIds.includes(card.id));
-    cards.push({ id: `${puzzle.id}-combined-${nextCardNumber}`, expr: result });
+    latestCombinedCardId = `${puzzle.id}-combined-${nextCardNumber}`;
+    cards.push({ id: latestCombinedCardId, expr: result });
     nextCardNumber += 1;
     selectedIds = [];
     hintLevel = 0;
@@ -232,7 +259,7 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
       feedback = { kind: "success", text: `这一步得到 ${result.value}。继续想想下一对。` };
       playFeedbackSound("info");
     }
-    render();
+    render(`card:${latestCombinedCardId}`);
   };
 
   const undo = (): void => {
@@ -243,19 +270,20 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
     nextCardNumber = previous.nextCardNumber;
     selectedIds = [];
     hintLevel = 0;
+    latestCombinedCardId = null;
     feedback = { kind: "info", text: "已回到合并前，牌和算式都恢复了。" };
-    render();
+    render("undo");
   };
 
   const revealHint = (): void => {
     const solved = solveTarget(cards.map((card) => card.expr), target);
     if (!solved.solvable || !solved.legalNextMoves[0]) {
       feedback = { kind: "info", text: history.length > 0 ? "这里没有通路了，撤销一步会更有帮助。" : "换一组牌再试试。" };
-      render();
+      render("hint");
       return;
     }
     hintLevel = Math.min(4, hintLevel + 1);
-    render();
+    render("hint");
   };
 
   const createPreview = (): HTMLElement => {
