@@ -205,3 +205,39 @@ test("@portfolio public route registry preserves world, classic, and Hanzi legac
   }
   await expectRuntimeClean(runtime);
 });
+
+test("@portfolio bare public URL has the same fullscreen geometry as the explicit world route", async ({ page }, testInfo) => {
+  const runtime = observeRuntime(page);
+  if (testInfo.project.name === "desktop-1440") await page.setViewportSize({ width: 2560, height: 1440 });
+
+  const readWorldGeometry = async () => page.evaluate(() => {
+    const app = document.querySelector<HTMLElement>("#app");
+    const world = document.querySelector<HTMLElement>("[data-testid=my-game-world]");
+    const stage = document.querySelector<HTMLElement>(".world-stage");
+    if (!app || !world || !stage) throw new Error("My Game World geometry is unavailable");
+    return {
+      pageMode: [...document.body.classList].find((name) => name.endsWith("-page") && name.startsWith("game-")) ?? "none",
+      viewportHeight: window.innerHeight,
+      appHeight: app.getBoundingClientRect().height,
+      worldHeight: world.getBoundingClientRect().height,
+      stageHeight: stage.getBoundingClientRect().height,
+      documentScrollHeight: document.documentElement.scrollHeight,
+    };
+  });
+
+  await page.goto("/", { waitUntil: "networkidle" });
+  await expect(page.getByTestId("my-game-world")).toBeVisible();
+  const firstLoad = await readWorldGeometry();
+
+  await page.goto("/?world=my-game-world", { waitUntil: "networkidle" });
+  await expect(page.getByTestId("my-game-world")).toBeVisible();
+  const explicitRoute = await readWorldGeometry();
+
+  expect(firstLoad.pageMode).toBe("game-fullscreen-page");
+  expect(firstLoad.appHeight).toBeCloseTo(firstLoad.viewportHeight, 0);
+  expect(firstLoad.worldHeight).toBeCloseTo(firstLoad.viewportHeight, 0);
+  expect(firstLoad.documentScrollHeight).toBeLessThanOrEqual(firstLoad.viewportHeight + 1);
+  expect(firstLoad.stageHeight).toBeCloseTo(explicitRoute.stageHeight, 0);
+  expect(firstLoad.worldHeight).toBeCloseTo(explicitRoute.worldHeight, 0);
+  await expectRuntimeClean(runtime);
+});

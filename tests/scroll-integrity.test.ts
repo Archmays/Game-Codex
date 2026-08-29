@@ -45,7 +45,8 @@ describe("play-surface scroll integrity", () => {
     expect(pageModeForSearch(familyWorld)).toBe("game-fullscreen");
 
     expect(pageModeForSearch(new URLSearchParams("world=english-world"))).toBe("game-scrollable");
-    expect(pageModeForSearch(new URLSearchParams())).toBe("game-scrollable");
+    expect(pageModeForSearch(new URLSearchParams())).toBe("game-fullscreen");
+    expect(pageModeForSearch(new URLSearchParams("utm_source=bookmark"))).toBe("game-fullscreen");
   });
 
   it("resets scrollable and fullscreen page classes without leaving stale locks", () => {

@@ -57,5 +57,13 @@ export function pageModeForSearch(search: URLSearchParams): PageMode {
   const surface = playSurfaceForSearch(search);
   if (surface) return pageModeForScrollPolicy(surface.scrollPolicy);
   const registration = APP_ROUTE_QUERY_REGISTRY.find((route) => search.get(route.queryKey) === route.queryValue);
-  return registration?.pageMode ?? "game-scrollable";
+  if (registration) return registration.pageMode;
+
+  // Unknown or absent query parameters render My Game World in mountApp, so
+  // they must use that surface's locked viewport contract as well. Previously
+  // the bare public URL rendered the world with document-page sizing, leaving
+  // its percentage-height stage at the minimum height until a return link added
+  // ?world=my-game-world and triggered the correct fullscreen mode.
+  const defaultSurface = PLAY_SURFACE_MANIFEST.find((record) => record.id === "my-game-world");
+  return pageModeForScrollPolicy(defaultSurface?.scrollPolicy ?? "locked");
 }
