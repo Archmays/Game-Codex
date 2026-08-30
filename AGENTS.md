@@ -27,27 +27,21 @@ Automated validation proves technical/content contracts only. Do not claim it pr
 - Prefer current approved runtime assets.
 - Use simple SVG/CSS for genuinely simple graphical UI; for concrete/illustrative imagery, use approved assets or available image/search/generation tools and verify the result in the actual game.
 - Do not hand a solvable visual task back to the user merely because higher-quality art takes more work.
-- Never delete user-provided assets or move formal runtime assets without checking references and identity.
+- Never delete user-provided assets or move current shipped/accepted runtime assets without checking references and identity.
 - Hanzi content changes must follow `docs/hanzi-radical-battle-v2/CONTENT-RULES.md` and use `hanzi-structure-quality`.
 
-## Skills and task routing
+## Task lanes
 
-For a nontrivial learning-game/product task, read `.agents/skills/SKILL_INDEX.md` and use the smallest relevant Skill. Do not perform broad Skill discovery for ordinary Git/docs/localized maintenance.
+The root selects one lane. `.agents/skills/SKILL_INDEX.md` and the selected Skill own full-route procedure; the five-line nested game instructions remain sufficient local additions in the bounded lane.
 
-Do not print a boilerplate Skill audit at the start and end of every response. Mention the Skill only when it materially affects the work, validation, or handoff.
+1. **Read/retrieval:** Read only the requested game/current source context. Do not create task roots, acceptance evidence, freezes, packages, cleanup transactions, or commits.
+2. **Bounded correction:** Use for an isolated wording, answer, equation, diagram, layout/style, or local bug with a known affected surface when it does not alter learning objectives, progression/sequence, content/question set, interaction model, assessment design, shared hub/routes/persistence/runtime/schema, child privacy, or release state. Run directly affected tests and exercise the affected page/interaction in a representative browser. Check hub/entry/return only when navigation can be affected.
+3. **New/substantial:** Use for a new game or a change to learning objectives, progression/sequence, content/question set, interaction model, assessment design, or child-facing control/accessibility behavior across screens. Read the Skill index, select the smallest relevant Skill, and run its full development and machine-review route.
+4. **Shared/high-risk/release:** Use for shared hub/routes/persistence/runtime/schema/state, migrations, child privacy or real family data, deployment/release, destructive asset/state work, or another shared contract. Run machine acceptance plus only the required affected-consumer, migration, privacy, and release gates.
 
-## Machine-first review
+Routine UX, visual, accessibility, interaction, and regression review belongs to Codex first. Include real-browser validation when pointer, touch, keyboard, tutorial, responsive, or navigation behavior changes. On failure, fix the cause and rerun the affected check; broaden only when the failure shows wider impact.
 
-Routine UX, visual, accessibility, interaction, and regression review belongs to Codex first, not to the user.
-
-- For nontrivial game behavior/content/UI changes, use `machine-first-game-review` with the project’s current discovery/acceptance route.
-- For a small localized fix with a known failure and no new product/learning behavior, a targeted test plus affected-page/browser check is sufficient unless the project’s current quality gate requires more.
-- Run the affected game/page and directly affected tests. Check the hub/entry/return flow when the change can affect navigation.
-- If pointer/touch/tutorial/responsive behavior changes, include real-browser validation.
-- On failure, identify the root cause, revise, and rerun the affected check. Do not stop merely because a fixed number of attempts was exhausted.
-- Escalate only genuine safety/privacy risk, irreversible publication, missing credential/permission, an unresolved value choice, or an inherently real-human behavior question.
-
-Keep final evidence proportional to risk; do not generate large process packs for ordinary fixes.
+Use `machine-first-game-review` for lane 3, lane 4, or an explicit readiness/acceptance request. A bounded correction does not enter acceptance merely because it changes game files. Keep evidence proportional to the selected route.
 
 ## Git
 
@@ -55,8 +49,6 @@ Stay on the current branch, preserve unrelated work, and normally make one final
 
 ## Task closure and cleanup
 
-- Use `tmp/tasks/<TASK_ID>/` for non-trivial task discovery, working files, tests, screenshots, reports, and package staging; none of these process files enter Git.
-- Validate the final source tree before creating one return package. Then run the maintenance cleanup plan, apply, and verify stages.
-- Confirm the final return ZIP bytes and SHA-256 are unchanged by cleanup, remove every task T3 transient, and retain only the current handoff.
-- A blocked task may retain only the minimum recovery diagnostics and one blocked ZIP. Never accumulate round, retry, or changed-only packages.
-- Maintenance deletion uses explicit manifest paths and hashes, never broad globs. Routine QA remains Codex's responsibility.
+- Use `tmp/tasks/<TASK_ID>/`, source freezes, return ZIPs, manifests, retention tiers, and cleanup plan/apply/verify only when the selected route or requested handoff requires them.
+- Validate source before packaging. When a ZIP is required, preserve its final bytes/hash through cleanup and retain only the required handoff or minimum blocked diagnostics.
+- Clean only task-created scratch unless an authorized maintenance route names exact additional targets. Deletion uses explicit validated paths, never broad globs.
