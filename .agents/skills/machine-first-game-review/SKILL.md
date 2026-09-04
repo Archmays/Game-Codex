@@ -21,7 +21,7 @@ Use this Skill for implementation acceptance or formal readiness work involving 
 - Read applicable guardrails and discover the real source/evidence shape before relying on expected paths.
 - Do not fail fast on a missing historical artifact when safe reconnaissance can establish the actual state.
 - Complete semantic reconnaissance before the first product mutation.
-- Freeze a closure charter containing every known finding, disposition, allowed dependency closure, stop condition, and repair limit.
+- Freeze a closure charter containing every known finding, disposition, allowed dependency closure, stop condition, and authorized repair scope.
 - Treat references and candidates as non-accepted until exact-source acceptance proves otherwise.
 
 See [recovery-and-source-freeze.md](references/recovery-and-source-freeze.md).
@@ -41,8 +41,8 @@ See [lifecycle-and-evidence.md](references/lifecycle-and-evidence.md).
 Emit exactly one:
 
 - `PASS_MACHINE`: every hard gate passes, no Sev-1/2 or blocker remains, required profiles and matrices pass, no critical reviewer conflict exists, and final tests/build pass on the same tree.
-- `AUTO_REVISE`: an in-scope deterministic repair remains within the frozen limit.
-- `ESCALATE_HUMAN`: the remaining decision genuinely requires human authority or the bounded repair limit is exhausted.
+- `AUTO_REVISE`: an authorized deterministic repair remains within the frozen dependency scope.
+- `ESCALATE_HUMAN`: the remaining decision meets the evidence-based Human escalation conditions below; exhausting a fixed retry count is not sufficient.
 
 ## Auto-repair
 
