@@ -44,7 +44,7 @@ describe("portfolio play-readiness contracts", () => {
   });
 
   it("covers every primary first-use surface and keeps Classic aligned to the three world products", () => {
-    expect(PLAY_SURFACE_MANIFEST).toHaveLength(39);
+    expect(PLAY_SURFACE_MANIFEST.filter(surface => surface.kind === "station").map(surface => surface.id)).toEqual(["math-slider", "math-target"]);
     expect(PRIMARY_PLAY_SURFACES).toHaveLength(5);
     expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.kind === "classic-entry")).toHaveLength(3);
     expect(PLAY_SURFACE_MANIFEST.every((surface) => surface.expectedInputs.includes("keyboard"))).toBe(true);

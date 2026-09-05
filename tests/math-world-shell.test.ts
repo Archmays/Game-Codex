@@ -21,22 +21,22 @@ class MemoryStorage implements Storage {
 }
 
 describe("Math World shell", () => {
-  it("registers the direct-refresh world route and five lazy activities", () => {
+  it("registers only Slider then Target as lazy activities", () => {
     expect(APP_ROUTE_QUERY_REGISTRY).toContainEqual(expect.objectContaining({ query: "?world=math-world" }));
     expect(resolveAppRoute(new URLSearchParams("world=math-world"))).toEqual({ kind: "world", explicit: true });
-    expect(MATH_WORLD_ACTIVITIES.map((activity) => activity.id)).toEqual(["lab", "clock", "array", "target", "slider"]);
-    expect(new Set(MATH_WORLD_ACTIVITIES.map((activity) => activity.load)).size).toBe(5);
+    expect(MATH_WORLD_ACTIVITIES.map((activity) => activity.id)).toEqual(["slider", "target"]);
+    expect(new Set(MATH_WORLD_ACTIVITIES.map((activity) => activity.load)).size).toBe(2);
   });
 
   it("stores only shell navigation and motion preference under the versioned key", () => {
     const storage = new MemoryStorage();
-    const visited = visitMathWorldStation(EMPTY_MATH_WORLD_SAVE, "clock");
+    const visited = visitMathWorldStation(EMPTY_MATH_WORLD_SAVE, "slider");
     expect(writeMathWorldSave({ ...visited, reducedMotionOverride: true }, storage)).toBe(true);
     expect([...Array(storage.length)].map((_, index) => storage.key(index))).toEqual([MATH_WORLD_SAVE_KEY]);
     expect(JSON.parse(storage.getItem(MATH_WORLD_SAVE_KEY)!)).toEqual({
       version: 1,
-      lastStation: "clock",
-      visitedStations: ["clock"],
+      lastStation: "slider",
+      visitedStations: ["slider"],
       reducedMotionOverride: true,
     });
   });
@@ -50,11 +50,10 @@ describe("Math World shell", () => {
       reducedMotionOverride: "yes",
       moduleProgress: { forbidden: true },
     }));
-    expect(readMathWorldSave(storage)).toEqual({
-      version: 1,
-      lastStation: null,
-      visitedStations: ["lab", "clock"],
-    });
+    const original = storage.getItem(MATH_WORLD_SAVE_KEY);
+    expect(readMathWorldSave(storage)).toEqual(EMPTY_MATH_WORLD_SAVE);
+    expect(writeMathWorldSave(visitMathWorldStation(EMPTY_MATH_WORLD_SAVE, "slider"), storage)).toBe(false);
+    expect(storage.getItem(MATH_WORLD_SAVE_KEY)).toBe(original);
     storage.setItem(MATH_WORLD_SAVE_KEY, "{broken");
     expect(readMathWorldSave(storage)).toEqual(EMPTY_MATH_WORLD_SAVE);
   });

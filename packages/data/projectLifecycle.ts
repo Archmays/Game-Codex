@@ -47,7 +47,7 @@ export const PROJECT_PHASES: readonly ProjectPhaseRecord[] = [
     status: "complete",
     releaseTag: "math-world-v1.0.0",
     canonicalRoute: "?world=math-world",
-    summary: "数感实验城与五个自由开放站点。",
+    summary: "历史 Math World 发布完成；当前仅保留算式滑轨、目标工坊，退役处置见 docs/portfolio-retirement-step1.md。",
   },
   {
     id: "chinese-consolidation",

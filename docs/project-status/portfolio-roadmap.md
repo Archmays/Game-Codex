@@ -1,6 +1,6 @@
 # Game-Codex Portfolio 长期路线
 
-> 路线只描述产品阶段，不创建空的儿童世界占位页；每个替代入口必须成熟并验证后，才退役对应经典大厅独立入口。
+> 当前授权的第一步减法见 `docs/portfolio-retirement-step1.md`；下列阶段与发布 tag 保留历史身份，不要求为已退役玩法开发替代游戏。
 
 ## 1. Foundation — COMPLETE
 
@@ -8,7 +8,7 @@ Portfolio 真源、分级门禁、安全维护事务、CI 与 Pages 组合验证
 
 ## 2. Math World — COMPLETE
 
-数感实验城与五个自由开放站点。
+历史 Math World 发布完成；当前仅保留算式滑轨、目标工坊，退役处置见 docs/portfolio-retirement-step1.md。
 
 - 发布 tag：`math-world-v1.0.0`
 - 当前 route：`?world=math-world`

@@ -10,12 +10,14 @@ Use the Parent Save Vault occasionally when a local backup is useful. It exports
 
 The Observation Kit at `?world=my-game-world&parent=observation` is optional, parent-initiated, local-only, and record-nothing by default. It has no required frequency. Open it only when a naturally occurring observation is worth preserving.
 
+Current explicit authorization: [portfolio retirement step 1](../portfolio-retirement-step1.md) supersedes prior freezes for Clock, Array and the old Lab only. Existing historical release identities remain unchanged.
+
 ## When development resumes
 
 Normal family use is the default. Start a new bounded change only for:
 
 - a reproducible defect;
 - concrete evidence that naturally arises during family use; or
-- an explicitly chosen major expansion.
+- an explicitly authorized bounded change, including product retirement.
 
 Do not infer child enjoyment, learning, retention, preference, or acceptance from machine tests. Real-child validation remains `NOT_PERFORMED_AND_NOT_CLAIMED`.

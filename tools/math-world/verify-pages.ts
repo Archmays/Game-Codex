@@ -5,7 +5,7 @@ import { chromium, type Page } from "@playwright/test";
 
 const pagesBase = new URL(process.argv[2] ?? process.env.MATH_WORLD_PAGES_BASE ?? "https://archmays.github.io/Game-Codex/");
 const expectedCommit = (process.argv[3] ?? process.env.MATH_WORLD_EXPECTED_COMMIT ?? execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" })).trim();
-const output = resolve(process.env.MATH_WORLD_PAGES_OUTPUT ?? "tmp/tasks/GAME-CODEX-WORLD-COHERENCE-AND-GAMEPLAY-LIFT-02/reports/MATH_WORLD_PAGES_VERDICT.json");
+const output = resolve(process.env.MATH_WORLD_PAGES_OUTPUT ?? "tmp/tasks/GAME-CODEX-STEP1-PORTFOLIO-RETIREMENT/reports/MATH_WORLD_PAGES_VERDICT.json");
 
 function requireValue(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);
@@ -45,9 +45,9 @@ try {
     ["./", '[data-testid="my-game-world"]'],
     ["?world=my-game-world", '[data-testid="world-math-portal"]'],
     ["?world=math-world", '[data-testid="math-world-map"]'],
-    ["?world=math-world&station=lab", '[data-station-id="lab"] canvas'],
-    ["?world=math-world&station=clock", '[data-station-id="clock"] .clock-game'],
-    ["?world=math-world&station=array", '[data-station-id="array"] .array-workshop'],
+    ["?world=math-world&station=lab", '[data-testid="math-world-map"]'],
+    ["?world=math-world&station=clock", '[data-testid="math-world-map"]'],
+    ["?world=math-world&station=array", '[data-testid="math-world-map"]'],
     ["?world=math-world&station=target", '[data-station-id="target"] .make-target-game'],
     ["?world=math-world&station=slider", '[data-station-id="slider"] .equation-slider'],
     ["?play=hanzi-magic-complete&from=hub", '[data-testid="hanzi-magic-complete"]'],
@@ -56,6 +56,11 @@ try {
   ] as const;
   for (const [query, selector] of routes) {
     await route(page, query, selector);
+    if (/station=(lab|clock|array)$/.test(query)) {
+      requireValue(await page.getByText("这个小游戏已收起，可以选择下面的游戏。").isVisible(), "Retired station notice is missing");
+      requireValue(new URL(page.url()).searchParams.get("station") === null, "Retired station URL was not normalized");
+      requireValue(await page.locator("#game-root, .clock-game, .array-workshop, canvas").count() === 0, "Retired runtime mounted on Pages");
+    }
     checked.push(query);
   }
 
@@ -73,7 +78,7 @@ try {
 
   await page.setViewportSize({ width: 390, height: 844 });
   await route(page, "?world=math-world", '[data-testid="math-world-map"]');
-  requireValue(await page.locator(".math-world-card").count() === 5, "Mobile Pages map is missing stations");
+  requireValue(await page.locator(".math-world-card").count() === 2, "Mobile Pages map must contain only Slider and Target");
   checked.push("mobile-map");
 
   requireValue(errors.length === 0 && failed.length === 0 && external.length === 0, "Pages emitted browser, HTTP, request, or external-network errors");

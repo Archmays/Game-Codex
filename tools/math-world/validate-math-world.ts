@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { resolve } from "node:path";
 import { GAME_PORTFOLIO } from "../../packages/data/gamePortfolio";
 import { MATH_WORLD_ACTIVITIES } from "../../games/math-lab/world/activity-registry";
@@ -18,15 +18,16 @@ function source(relative: string): string {
 const catalogMetadata = loadGameCatalogMetadata(root);
 const definitionIds = catalogMetadata.map((game) => game.id);
 const classicIds = GAME_PORTFOLIO.filter((record) => record.classicCardVisible).map((record) => record.id);
-requireValue(GAME_PORTFOLIO.length === 9, "Portfolio must retain nine records");
-requireValue(catalogMetadata.length === 9 && new Set(definitionIds).size === 9, "allGameDefinitions must contain nine unique games");
+requireValue(JSON.stringify([...definitionIds].sort()) === JSON.stringify(GAME_PORTFOLIO.map(record => record.id).sort()), "Catalog and portfolio definitions must agree");
+requireValue(new Set(definitionIds).size === definitionIds.length, "Definitions must be unique");
 requireValue(classicIds.length === 3 && new Set(classicIds).size === 3, "classicGameCatalog must contain the three active world products");
 requireValue(!classicIds.includes("equation-slider"), "Equation Slider must be a Math World module rather than a Classic card");
 requireValue(!classicIds.includes("clock-reader") && !classicIds.includes("multiplication-adventure"), "Replaced modules must be hidden from the classic catalog");
 requireValue(!classicIds.includes("pinyin-magic-battle"), "Consolidated Pinyin must be hidden from the classic catalog");
 requireValue(!classicIds.includes("make-target") && !classicIds.includes("memory-card"), "Converged Math Target and Memory cards must be hidden from the classic catalog");
-requireValue(definitionIds.includes("clock-reader") && definitionIds.includes("multiplication-adventure"), "Replaced modules must remain mountable definitions");
-requireValue(MATH_WORLD_ACTIVITIES.length === 5, "Math World must register five activities");
+requireValue(!definitionIds.includes("clock-reader") && !definitionIds.includes("multiplication-adventure"), "Retired definitions must not remain mountable");
+for (const path of ["games/clock-reader/index.ts", "games/multiplication-adventure/index.ts", "src/game/config.ts", "src/game/scenes/BootScene.ts", "public/data/levels/add-sub-mvp.json", "public/assets/generated/math-lab-stage-garden.png"]) requireValue(!existsSync(resolve(root, path)), `Retired runtime remains: ${path}`);
+requireValue(JSON.stringify(MATH_WORLD_ACTIVITIES.map(activity => activity.id)) === JSON.stringify(["slider", "target"]), "Math World must register Slider then Target only");
 requireValue(MATH_WORLD_SAVE_KEY === "family-games/math-world/v1", "Math World save key drifted");
 requireValue(TARGET_PUZZLE_MANIFEST.length === 12 && [10, 12, 24].every((target) => TARGET_PUZZLE_MANIFEST.filter((puzzle) => puzzle.target === target).length === 4), "Target manifest must publish four puzzles per target");
 const equationAudit = JSON.parse(source("games/equation-slider/levels/generated-audit.json")) as {
@@ -43,10 +44,6 @@ requireValue(equationAudit.initialSameVisibleShortestPathBenefitLevelIds.length 
 requireValue(equationAudit.requiredSameVisibleMoveLevelIds.length === 0, "Equation Slider unexpectedly requires a no-visible-change move");
 
 for (const relative of [
-  "games/clock-reader/index.ts",
-  "games/clock-reader/model.ts",
-  "games/multiplication-adventure/index.ts",
-  "games/multiplication-adventure/model.ts",
   "games/make-target/index.ts",
   "games/make-target/model.ts",
   "games/make-target/solver.ts",
@@ -55,16 +52,8 @@ for (const relative of [
   requireValue(!source(relative).includes("Math.random("), `${relative} contains nondeterministic formal content`);
 }
 
-const clockSource = source("games/clock-reader/index.ts");
-requireValue(!/连对|最佳/.test(clockSource), "Clock pressure copy returned");
-const arraySource = source("games/multiplication-adventure/index.ts");
-requireValue(!/bestScore|plays|import\.meta\.glob|source\//.test(arraySource), "Array workshop still contains the retired score/eager-source loop");
 const targetSource = source("games/make-target/model.ts");
 requireValue(!targetSource.includes("Math.abs"), "Target subtraction may not hide operand order");
-const menuSource = source("src/game/scenes/MenuScene.ts");
-requireValue(!/总星星|连续记录|今日练习：/.test(menuSource), "Math Lab pressure summary returned to the UI");
-requireValue(!source("src/game/domain/progression/progression.ts").includes("updateStreak("), "Math Lab still updates streaks");
-
 const assetRoot = resolve(root, "public/assets/math-world");
 const runtimeAssets = readdirSync(assetRoot).filter((name) => statSync(resolve(assetRoot, name)).isFile());
 const runtimeAssetBytes = runtimeAssets.reduce((total, name) => total + statSync(resolve(assetRoot, name)).size, 0);

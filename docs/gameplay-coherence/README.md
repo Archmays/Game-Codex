@@ -1,6 +1,6 @@
 # Game-Codex World Coherence and Gameplay Lift
 
-`GAME-CODEX-WORLD-COHERENCE-AND-GAMEPLAY-LIFT-02` is the current portfolio truth and validation entrypoint.
+`GAME-CODEX-WORLD-COHERENCE-AND-GAMEPLAY-LIFT-02` is historical release evidence. Current retirement scope and portfolio truth are in [portfolio-retirement-step1.md](../portfolio-retirement-step1.md); the reports below retain their original release conclusions.
 
 ## Outcome
 

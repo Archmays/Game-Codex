@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 import { expect, test, type Page } from "@playwright/test";
 import { OBSERVATION_STORAGE_KEY } from "../../../packages/observation/natural-use";
 
-const TASK_ID = "GAME-CODEX-NATURAL-USE-OBSERVATION-KIT-06A";
+const TASK_ID = process.env.GAME_CODEX_TASK_ID ?? "GAME-CODEX-NATURAL-USE-OBSERVATION-KIT-06A";
 const SCREENSHOTS = resolve(process.cwd(), `tmp/tasks/${TASK_ID}/selected-screenshots`);
 
 interface RuntimeObservation { pageErrors: string[]; consoleErrors: string[]; failedResponses: string[]; failedRequests: string[]; externalRequests: string[]; }

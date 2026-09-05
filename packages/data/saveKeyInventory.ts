@@ -39,7 +39,7 @@ export const KNOWN_SAVE_KEYS: readonly KnownSaveKey[] = [
   { key: "family-games/chinese-support/pinyin/v1", owner: "hanzi", purpose: "progress", exportable: true, maxVersion: 1 },
   { key: "family-games/pinyin-magic-battle/progress", owner: "legacy", purpose: "compatibility", exportable: true },
   { key: "family-games/math-world/v1", owner: "math", purpose: "progress", exportable: true, maxVersion: 1 },
-  { key: "math-battle-web/save-v1", owner: "math", purpose: "progress", exportable: true, maxVersion: 1 },
+  { key: "math-battle-web/save-v1", owner: "legacy", purpose: "compatibility", exportable: true, maxVersion: 1 },
   { key: "family-games/equation-slider/progress-v3", owner: "math", purpose: "progress", exportable: true, maxVersion: 3 },
   { key: "family-games/equation-slider/progress", owner: "legacy", purpose: "compatibility", exportable: true, maxVersion: 1 },
   { key: "family-games/make-target/progress", owner: "math", purpose: "progress", exportable: true, maxVersion: 1 },

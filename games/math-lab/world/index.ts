@@ -1,5 +1,6 @@
 import type { MountedGame } from "../../../packages/game-core";
 import { createLocalStorageStore } from "../../../packages/game-core";
+import { normalizeRetiredMathRoute } from "../../../src/app-route";
 import { MATH_WORLD_ACTIVITIES, findMathWorldActivity, type MathWorldActivity } from "./activity-registry";
 import {
   readMathWorldSave,
@@ -44,12 +45,13 @@ export function mountMathWorld(root: HTMLElement): MountedGame {
         <div><span class="math-world__kicker">数学世界</span><h1>数感实验城</h1><p>选择一座开放的工坊，用眼睛、双手和算式去发现关系。</p></div>
         <nav aria-label="数学世界导航"><a href="${HOME_ROUTE}">回我的游戏世界</a></nav>
       </header>
-      <section class="math-world__city" aria-label="数学世界五个开放站点">
+      ${new URLSearchParams(window.location.search).get("notice") === "retired-game" ? '<p class="math-world__notice" role="status">这个小游戏已收起，可以选择下面的游戏。</p>' : ""}
+      <section class="math-world__city" aria-label="数学世界两个开放站点">
         <img class="math-world__art" src="./assets/math-world/math-world-city-background.webp" alt="温暖的数学实验城市，苹果园、小河、钟楼、方格工坊、数字牌屋和火车站围绕中央广场" />
         <div class="math-world__stations" data-math-world-stations></div>
       </section>
       <footer class="math-world__footer">
-        <p>五个地方都可以自由进入，没有顺序，也不会因为离开而失去进度。</p>
+        <p>两个地方都可以自由进入，也不会因为离开而失去进度。</p>
         <button type="button" class="math-world__motion" data-motion-setting></button>
       </footer>
     </main>`;
@@ -69,12 +71,7 @@ export function mountMathWorld(root: HTMLElement): MountedGame {
           : save.reducedMotionOverride
             ? false
             : undefined;
-        save = {
-          version: 1,
-          lastStation: save.lastStation,
-          visitedStations: save.visitedStations,
-          ...(nextOverride === undefined ? {} : { reducedMotionOverride: nextOverride }),
-        };
+        save = { ...save, reducedMotionOverride: nextOverride };
         writeMathWorldSave(save);
         applyMotionPreference(root, save);
         updateMotionButton(motionButton, save);
@@ -90,8 +87,6 @@ export function mountMathWorld(root: HTMLElement): MountedGame {
     lastMapFocusStationId = activity.id;
     mountedStation?.destroy();
     mountedStation = null;
-    save = visitMathWorldStation(save, activity.id);
-    writeMathWorldSave(save);
     root.className = "math-world-station-mount";
     root.innerHTML = `<div class="math-world-station" data-testid="math-world-station" data-station-id="${activity.id}">
       <header class="math-world-station__bar">
@@ -115,6 +110,8 @@ export function mountMathWorld(root: HTMLElement): MountedGame {
         onExit: navigateToMap,
         storage: createLocalStorageStore(game.id),
       });
+      save = visitMathWorldStation(save, activity.id);
+      writeMathWorldSave(save);
     } catch (error) {
       if (destroyed || token !== navigationToken) return;
       stage.innerHTML = `<section class="math-world-station__error"><h2>这里暂时没有打开</h2><p>进度没有改变，可以回地图再试一次。</p><button type="button" data-error-return>回城市地图</button></section>`;
@@ -135,9 +132,11 @@ export function mountMathWorld(root: HTMLElement): MountedGame {
   }
 
   const syncFromLocation = (restoreFocus = false): void => {
+    const url = new URL(window.location.href);
+    if (normalizeRetiredMathRoute(url)) window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);
     const activity = findMathWorldActivity(new URLSearchParams(window.location.search).get("station"));
     if (activity) void renderStation(activity, restoreFocus);
-    else renderMap(restoreFocus ? lastMapFocusStationId ?? save.lastStation ?? undefined : undefined);
+    else renderMap(restoreFocus ? lastMapFocusStationId ?? findMathWorldActivity(save.lastStation)?.id : undefined);
   };
 
   const handlePopState = (): void => syncFromLocation(true);

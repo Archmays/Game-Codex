@@ -53,7 +53,7 @@ async function solveFirstTargetTen(page: Page): Promise<void> {
   await expect(page.getByText("成功凑出 10。可以看看完整算式，或换一组继续。")).toBeVisible();
 }
 
-test("@e2e top world exposes only the three real destinations and Math World has five free stations", async ({ page }) => {
+test("@e2e top world exposes only the three real destinations and Math World has two free stations", async ({ page }) => {
   const log = observe(page);
   await page.goto("/?world=my-game-world");
   await expect(page.getByTestId("world-forest-portal")).toBeVisible();
@@ -64,44 +64,17 @@ test("@e2e top world exposes only the three real destinations and Math World has
   await expect(page.getByTestId("world-math-portal").getByRole("link")).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("math-world-map")).toBeVisible();
-  await expect(page.locator(".math-world-card")).toHaveCount(5);
+  await expect(page.locator(".math-world-card")).toHaveCount(2);
   await expect(page.locator(".math-world-card button:disabled")).toHaveCount(0);
   await expectNoOverflow(page);
   await expectClean(log);
 });
 
-test("@e2e Clock, Array, Target, Lab, and Slider share navigation without sharing progress", async ({ page }, testInfo) => {
+test("@e2e Slider and Target share navigation without sharing progress", async ({ page }, testInfo) => {
   test.skip(!["desktop-1440", "mobile-390"].includes(testInfo.project.name));
   const log = observe(page);
-  await page.addInitScript(() => localStorage.clear());
 
-  await openStation(page, "clock");
-  await expect(page.locator(".clock-face")).toHaveAttribute("role", "slider");
-  const beforeClock = await page.locator(".clock-face").getAttribute("aria-valuenow");
-  const minuteIncrease = page.getByRole("button", { name: "分针 +5" });
-  await minuteIncrease.click();
-  await expect(minuteIncrease).toBeFocused();
-  await expect(page.locator(".clock-face")).not.toHaveAttribute("aria-valuenow", beforeClock!);
-  const exactMode = page.getByRole("button", { name: "精确时间" });
-  await exactMode.click();
-  await expect(exactMode).toBeFocused();
-  await expect(page.getByRole("button", { name: "我拨好了" })).toBeVisible();
-  await page.getByRole("button", { name: "← 回城市地图" }).click();
-  await expect(page.locator('[data-station-id="clock"] button')).toBeFocused();
-
-  await page.locator('[data-station-id="array"] button').click();
-  await expect(page.locator(".array-workshop")).toBeVisible();
-  await page.getByRole("button", { name: "翻转阵列", exact: true }).first().click();
-  const grid = page.locator(".array-workshop__grid");
-  const before = await grid.evaluate((element) => ({ rows: element.getAttribute("data-rows"), columns: element.getAttribute("data-columns"), product: element.getAttribute("data-product") }));
-  const transpose = page.getByRole("button", { name: "翻转阵列", exact: true }).last();
-  await transpose.click();
-  await expect(transpose).toBeFocused();
-  await expect(grid).toHaveAttribute("data-rows", before.columns!);
-  await expect(grid).toHaveAttribute("data-columns", before.rows!);
-  await expect(grid).toHaveAttribute("data-product", before.product!);
-  await page.getByRole("button", { name: "← 回城市地图" }).click();
-
+  await page.goto("/?world=math-world");
   await page.locator('[data-station-id="target"] button').click();
   await expect(page.getByTestId("target-workshop")).toBeVisible();
   const hint = page.getByRole("button", { name: "给我一点提示" });
@@ -124,11 +97,6 @@ test("@e2e Clock, Array, Target, Lab, and Slider share navigation without sharin
   await expect(page.locator(".learning-feedback")).toContainText("成功凑出 10");
   await page.getByRole("button", { name: "← 回城市地图" }).click();
 
-  await page.locator('[data-station-id="lab"] button').click();
-  await expect(page.locator("#game-root canvas")).toBeVisible({ timeout: 30_000 });
-  await page.getByRole("button", { name: "← 回城市地图" }).click();
-  await expect(page.locator("#game-root, canvas")).toHaveCount(0);
-
   await page.locator('[data-station-id="slider"] button').click();
   await expect(page.locator(".equation-slider")).toBeVisible({ timeout: 30_000 });
   const tutorialSkip = page.getByRole("button", { name: "跳过教程" });
@@ -140,7 +108,7 @@ test("@e2e Clock, Array, Target, Lab, and Slider share navigation without sharin
   await page.getByRole("button", { name: "← 回城市地图" }).click();
 
   const shellSave = await page.evaluate(() => JSON.parse(localStorage.getItem("family-games/math-world/v1") ?? "null"));
-  expect(shellSave).toEqual(expect.objectContaining({ version: 1, lastStation: "slider", visitedStations: ["lab", "clock", "array", "target", "slider"] }));
+  expect(shellSave).toEqual(expect.objectContaining({ version: 1, lastStation: "slider", visitedStations: ["target", "slider"] }));
   expect(Object.keys(shellSave).sort()).toEqual(["lastStation", "version", "visitedStations"]);
   await expectNoOverflow(page);
   await expectClean(log);
@@ -155,10 +123,14 @@ test("@e2e legacy module bytes remain exact when the replacement stations mount 
     "math-battle-web/save-v1": '{"currentStreak":3,"lastPlayDate":"2026-08-20"}',
   };
   await page.addInitScript((values) => { for (const [key, value] of Object.entries(values)) localStorage.setItem(key, value); }, legacy);
-  for (const station of ["clock", "array", "target", "lab"] as const) {
-    await openStation(page, station);
-    await page.getByRole("button", { name: "← 回城市地图" }).click();
+  for (const station of ["clock", "array", "lab"] as const) {
+    await page.goto(`/?world=math-world&station=${station}`);
+    await expect(page.getByTestId("math-world-map")).toBeVisible();
+    await expect(page.getByText("这个小游戏已收起，可以选择下面的游戏。")).toBeVisible();
+    await expect(page.locator("#game-root, .clock-game, .array-workshop")).toHaveCount(0);
   }
+  await openStation(page, "target");
+  await page.getByRole("button", { name: "← 回城市地图" }).click();
   expect(await page.evaluate((keys) => Object.fromEntries(keys.map((key) => [key, localStorage.getItem(key)])), Object.keys(legacy))).toEqual(legacy);
 });
 
@@ -182,29 +154,11 @@ test("@e2e Make Target migrates legacy progress on a completed puzzle and never 
   expect(await page.evaluate((storageKey) => localStorage.getItem(storageKey), key)).toBe(future);
 });
 
-test("@e2e Math Lab reset requires confirmation and both Escape and Cancel return safely", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "desktop-1440");
-  await openStation(page, "lab");
-  const canvas = page.locator("#game-root canvas");
-  const box = await canvas.boundingBox();
-  if (!box) throw new Error("Math Lab canvas has no box");
-  await canvas.click({ position: { x: box.width * 0.61, y: 116 } });
-  const settings = await canvas.screenshot();
-  await canvas.click({ position: { x: box.width * 0.62, y: 414 } });
-  const confirmation = await canvas.screenshot();
-  expect(confirmation.equals(settings)).toBe(false);
-  await page.keyboard.press("Escape");
-  expect((await canvas.screenshot()).equals(settings)).toBe(true);
-  await canvas.click({ position: { x: box.width * 0.62, y: 414 } });
-  await canvas.click({ position: { x: box.width * 0.57, y: 466 } });
-  expect((await canvas.screenshot()).equals(settings)).toBe(true);
-});
-
 test("@e2e twenty station lifecycle cycles leave one shell, no canvas, and no stale activity", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-1440");
   const log = observe(page);
   await page.goto("/?world=math-world");
-  const sequence = ["clock", "array", "target", "slider", "lab"] as const;
+  const sequence = ["slider", "target"] as const;
   for (let index = 0; index < 20; index += 1) {
     const station = sequence[index % sequence.length];
     await page.locator(`[data-station-id="${station}"] button`).click();
@@ -218,7 +172,7 @@ test("@e2e twenty station lifecycle cycles leave one shell, no canvas, and no st
 
 test("@e2e direct station refresh, motion setting, keyboard order, and final classic catalog stay coherent", async ({ page }, testInfo) => {
   test.skip(!["desktop-1440", "mobile-390"].includes(testInfo.project.name));
-  for (const station of ["lab", "clock", "array", "target", "slider"] as const) {
+  for (const station of ["slider", "target"] as const) {
     await openStation(page, station);
     await page.reload();
     await expect(page.getByTestId("math-world-station")).toHaveAttribute("data-station-id", station);
@@ -226,11 +180,11 @@ test("@e2e direct station refresh, motion setting, keyboard order, and final cla
   await page.goto("/?world=math-world");
   await page.getByRole("button", { name: "动态效果：跟随设备" }).click();
   await expect(page.getByTestId("math-world-map").locator("xpath=..")).toHaveAttribute("data-reduced-motion", "true");
-  const keyboardStation = page.locator('[data-station-id="clock"] button');
+  const keyboardStation = page.locator('[data-station-id="slider"] button');
   await keyboardStation.focus();
   await expect(keyboardStation).toBeFocused();
   await page.keyboard.press("Enter");
-  await expect(page.getByTestId("math-world-station")).toHaveAttribute("data-station-id", "clock");
+  await expect(page.getByTestId("math-world-station")).toHaveAttribute("data-station-id", "slider");
   await page.goto("/?hub=classic");
   await expect(page.locator(".game-card")).toHaveCount(3);
   await expect(page.locator('[data-game-id="clock-reader"], [data-game-id="multiplication-adventure"], [data-game-id="pinyin-magic-battle"], [data-game-id="make-target"], [data-game-id="memory-card"]')).toHaveCount(0);
@@ -243,7 +197,6 @@ test("@e2e Slider canonical route, history focus, world return, and saved-level 
   test.skip(!["desktop-1440", "mobile-390"].includes(testInfo.project.name));
   const log = observe(page);
   await page.goto("/?world=math-world");
-  await page.evaluate(() => localStorage.clear());
   const sliderStation = page.locator('[data-station-id="slider"] button');
   await sliderStation.focus();
   await page.keyboard.press("Enter");

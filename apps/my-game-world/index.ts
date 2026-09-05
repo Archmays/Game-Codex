@@ -70,7 +70,7 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
       <section class="world-object world-object--math" data-testid="world-math-portal">
         <span aria-hidden="true" class="world-object__mark world-object__mark--math"></span>
         <h2>${WORLD_COPY.mathTitle}</h2>
-        <p>钟楼、阵列、数字牌与算式轨道</p>
+        <p>算式轨道与数字牌工坊</p>
         <a class="world-secondary-link" href="${activeProductRoute("math-lab")}" data-world-math-link>${WORLD_COPY.mathAction}</a>
       </section>
       <section class="world-object world-object--english" data-testid="world-english-portal">

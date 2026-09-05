@@ -26,8 +26,8 @@ function duplicates(values: readonly string[]): string[] {
 
 export function validatePortfolio(catalog: readonly GameCatalogMetadata[], currentCatalog: readonly GameCatalogMetadata[], root = resolve(import.meta.dirname, "../..")): string[] {
   const issues: string[] = [];
-  if (GAME_PORTFOLIO.length !== 9) issues.push(`Expected 9 portfolio records, found ${GAME_PORTFOLIO.length}`);
-  if (catalog.length !== 9) issues.push(`Expected 9 catalog games, found ${catalog.length}`);
+  const expectedIds = ["hanzi-radical-battle", "equation-slider", "math-lab", "english-spell-battle", "make-target", "memory-card", "pinyin-magic-battle"].sort();
+  if (JSON.stringify(GAME_PORTFOLIO.map(record => record.id).sort()) !== JSON.stringify(expectedIds)) issues.push("Active and compatibility definition inventory differs from retirement contract");
   for (const id of duplicates(GAME_PORTFOLIO.map((record) => record.id))) issues.push(`Duplicate portfolio id: ${id}`);
   const portfolioIds = new Set(GAME_PORTFOLIO.map((record) => record.id));
   const catalogIds = new Set(catalog.map((game) => game.id));
@@ -123,7 +123,7 @@ export function validatePortfolio(catalog: readonly GameCatalogMetadata[], curre
   if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.realChildValidation !== "NOT_PERFORMED_AND_NOT_CLAIMED") issues.push("Real-child validation boundary drifted");
   if (PRIMARY_WORLDS.length !== 3) issues.push(`Expected three primary worlds, found ${PRIMARY_WORLDS.length}`);
   for (const id of duplicates(PLAY_SURFACE_MANIFEST.map((record) => record.id))) issues.push(`Duplicate play surface id: ${id}`);
-  if (PLAY_SURFACE_MANIFEST.length !== 39) issues.push(`Expected 39 retained play surfaces, found ${PLAY_SURFACE_MANIFEST.length}`);
+  if (JSON.stringify(PLAY_SURFACE_MANIFEST.filter(surface => surface.kind === "station").map(surface => surface.id)) !== JSON.stringify(["math-slider", "math-target"])) issues.push("Math station surfaces differ from retirement contract");
   if (PRIMARY_PLAY_SURFACES.length !== 5) issues.push(`Expected five primary first-use surfaces, found ${PRIMARY_PLAY_SURFACES.length}`);
   for (const surface of PLAY_SURFACE_MANIFEST) {
     if (!surface.route || !surface.returnRoute || !surface.primaryActionSelector) issues.push(`Incomplete play surface contract: ${surface.id}`);
@@ -176,6 +176,6 @@ if (process.argv[1] && resolve(process.argv[1]) === resolve(import.meta.filename
     process.stderr.write(`${issues.map((issue) => `- ${issue}`).join("\n")}\n`);
     process.exitCode = 1;
   } else {
-    process.stdout.write(`Portfolio consistency, 3 active products / 9 mount definitions, ${PLAY_SURFACE_MANIFEST.length} play surfaces, ${KNOWN_SAVE_KEYS.length} save keys, and generated-doc drift: PASS.\n`);
+    process.stdout.write(`Portfolio consistency, ${ACTIVE_CHILD_PRODUCTS.length} active products / ${GAME_PORTFOLIO.length} mount definitions, ${PLAY_SURFACE_MANIFEST.length} play surfaces, ${KNOWN_SAVE_KEYS.length} save keys, and generated-doc drift: PASS.\n`);
   }
 }

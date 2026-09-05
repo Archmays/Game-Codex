@@ -75,7 +75,7 @@ jobs:
       - name: Exercise portfolio first-use, return, reload, and resume smoke
         run: pnpm run test:e2e:play-readiness:smoke
 
-      - name: Exercise representative 40-surface hit-test matrix
+      - name: Exercise representative registered-surface hit-test matrix
         run: pnpm run test:e2e:hittest:representative
         env:
           INTERACTION_INTEGRITY_PREVIEW: "1"

@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import equationAudit from "../../games/equation-slider/levels/generated-audit.json";
@@ -12,7 +13,11 @@ const evidence = loadPortfolioEvolutionEvidence(root);
 const localValidation = loadLocalValidationEvidence(root);
 const issues: string[] = [];
 const equal = (left: readonly string[], right: readonly string[]): boolean => JSON.stringify([...left].sort()) === JSON.stringify([...right].sort());
-const expectedDefinitionIds = GAME_PORTFOLIO.map((record) => record.id);
+const expectedDefinitionIds = ["hanzi-radical-battle", "equation-slider", "math-lab", "english-spell-battle", "make-target", "clock-reader", "multiplication-adventure", "memory-card", "pinyin-magic-battle"];
+const historicalCommit = "90eb3b242b38b1d7a8cd98c8e0cafce14a6984a0";
+function historicalPointerExists(pointer: string): boolean {
+  try { execFileSync("git", ["cat-file", "-e", `${historicalCommit}:${pointer}`], { cwd: root, stdio: "ignore" }); return true; } catch { return false; }
+}
 const evidenceIds = evidence.definitions.map((record) => record.id);
 const allowedDecisions = new Set(["KEEP", "EXPAND", "MERGE", "REBUILD", "RETIRE_STANDALONE", "COMPATIBILITY_ONLY"]);
 const exactDecisions: Readonly<Record<string, string>> = {
@@ -90,11 +95,11 @@ if (evidence.independentReviews.some((review) => review.findings.some((finding) 
 for (const review of evidence.independentReviews) {
   for (const finding of review.findings) {
     for (const pointer of finding.evidence) {
-      if (/^(?:[A-Za-z]:[\\/]|[\\/])/.test(pointer) || !existsSync(resolve(root, pointer))) issues.push(`${finding.id} invalid evidence pointer: ${pointer}`);
+      if (/^(?:[A-Za-z]:[\\/]|[\\/])/.test(pointer) || !historicalPointerExists(pointer)) issues.push(`${finding.id} invalid evidence pointer: ${pointer}`);
     }
   }
   for (const pointer of review.validationEvidence) {
-    if (/^(?:[A-Za-z]:[\\/]|[\\/])/.test(pointer) || !existsSync(resolve(root, pointer))) issues.push(`${review.id} invalid validation evidence pointer: ${pointer}`);
+    if (/^(?:[A-Za-z]:[\\/]|[\\/])/.test(pointer) || !historicalPointerExists(pointer)) issues.push(`${review.id} invalid validation evidence pointer: ${pointer}`);
   }
 }
 const requiredPreflightGateIds = [
@@ -146,7 +151,7 @@ for (const record of evidence.definitions) {
   if (record.authenticChildEvidence !== "UNKNOWN_NOT_PERFORMED_NOT_CLAIMED") issues.push(`${record.id} child-evidence boundary`);
   if (record.unknowns.length === 0 || record.unknowns.some((unknown) => !unknown.trim())) issues.push(`${record.id} unknowns`);
   if (!record.routeImpact || !record.saveImpact || !record.sharedEngineImpact || !record.rollback || record.tests.length === 0 || record.notDo.length === 0) issues.push(`${record.id} decision contract`);
-  for (const pointer of record.evidence) if (!existsSync(resolve(root, pointer))) issues.push(`${record.id} missing evidence pointer: ${pointer}`);
+  for (const pointer of record.evidence) if (!historicalPointerExists(pointer)) issues.push(`${record.id} missing evidence pointer: ${pointer}`);
 }
 const resultingTruth = evidence.resultingTruth as Readonly<Record<string, unknown>>;
 if (
@@ -163,7 +168,7 @@ if (
 if (!equal(evidence.resultingTruth.activeChildProducts as string[], ["hanzi-radical-battle", "math-lab", "english-spell-battle", "equation-slider"])) issues.push("historical active product truth");
 if (!equal(evidence.surfaceCoverage.primaryRealBrowserSurfaceIds, ["my-game-world", "classic-hub", "hanzi-world", "math-world", "english-world", "classic-equation"])) issues.push("historical primary browser coverage");
 if (evidence.surfaceCoverage.manifestValidatedCount !== 40 || evidence.surfaceCoverage.uncoveredSurfaceIds.length !== 0) issues.push("historical surface coverage boundary");
-if (GAME_PORTFOLIO.length !== 9 || WORLD_MODULES.length !== 11 || COMPATIBILITY_SURFACES.length !== 6 || SHARED_ENGINES.length !== 2 || KNOWN_SAVE_KEYS.length !== 37) issues.push("retained implementation/save inventory");
+if (COMPATIBILITY_SURFACES.length !== 6 || SHARED_ENGINES.length !== 2 || KNOWN_SAVE_KEYS.length !== 37) issues.push("protected compatibility/save inventory");
 if (equationAudit.sameVisibleTransitionCount !== 216 || equationAudit.sameVisibleTransitionLevelCount !== 82 || equationAudit.initialSameVisibleMoveLevelCount !== 45) issues.push("Equation same-display inventory");
 if (equationAudit.sameVisibleShortestPathBenefitLevelIds.length !== 39 || equationAudit.initialSameVisibleShortestPathBenefitLevelIds.length !== 21 || equationAudit.requiredSameVisibleMoveLevelIds.length !== 0) issues.push("Equation completion-path classification");
 if (Object.values(equationAudit.sameVisibleCompletionPaths).some((path) => !path.solvableWithoutSameVisibleEdges || (path.shortestPathDelta !== 0 && path.shortestPathDelta !== 1))) issues.push("Equation no-edge completion proof");

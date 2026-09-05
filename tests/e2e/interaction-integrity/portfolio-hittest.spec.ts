@@ -4,7 +4,7 @@ import { expect, test, type Locator, type Page } from "@playwright/test";
 import { PLAY_SURFACE_MANIFEST, type PlaySurfaceRecord } from "../../../packages/data/playSurfaceManifest";
 import { activateAndExpectStateChange, expectHitTarget } from "../helpers/hit-target";
 
-const REPORTS = resolve("test-results/interaction-integrity/reports");
+const REPORTS = resolve(process.env.GAME_CODEX_EVIDENCE_ROOT ?? "test-results", "interaction-integrity/reports");
 const RETURN_WORDS = /^(?:←\s*)?(?:回|返回|退出)|回到|回我的|回游戏|回城市|回地图|返回/;
 
 interface RuntimeObservation {

@@ -8,7 +8,7 @@ import { ACTIVE_PROJECT_PHASE, AUTHORIZED_DEVELOPMENT_CYCLES, NEXT_PROJECT_PHASE
 import { EXPORTABLE_SAVE_KEYS, KNOWN_SAVE_KEYS, portfolioNamespacesWithoutKnownKey } from "../../packages/data/saveKeyInventory";
 
 const ROOT = resolve(import.meta.dirname, "../..");
-const TASK_ID = "GAME-CODEX-PLAY-READINESS-POLISH-05";
+const TASK_ID = process.env.GAME_CODEX_TASK_ID ?? "GAME-CODEX-PLAY-READINESS-POLISH-05";
 const REPORTS = resolve(ROOT, `tmp/tasks/${TASK_ID}/reports`);
 
 function stableJson(value: unknown): string { return `${JSON.stringify(value, null, 2)}\n`; }
@@ -30,16 +30,13 @@ const feedbackSamples = [
   ["hanzi-character", "Chinese", "outcome-specific", "scaffolded", "部件/结构状态说明后给可尝试位置或提示，不评价能力。"],
   ["pinyin-assemble-tone", "Chinese", "outcome-specific", "actionable-hint", "声母、韵母或声调状态后给下一步按钮/选项。"],
   ["memory-match", "Shared", "outcome-specific", "actionable-hint", "翻牌状态保持可见，可继续选择另一张，不扣分。"],
-  ["math-lab", "Math", "outcome-specific", "scaffolded", "操作结果由场景变化呈现，并保留重试。"],
-  ["clock", "Math", "outcome-specific", "actionable-hint", "指针调整既可拖动也可用按钮，反馈指向下一次调整。"],
-  ["array", "Math", "outcome-specific", "scaffolded", "行列变化与乘法关系同步显示，可撤销/重来。"],
   ["make-target", "Math", "outcome-specific", "actionable-hint", "不可用组合说明当前结果并保留卡片，可换运算。"],
   ["equation-slider", "Math", "outcome-specific", "scaffolded", "覆盖进度与算式状态同步；加载失败回线路图，不显示内部错误。"],
   ["english-build", "English", "outcome-specific", "scaffolded", "图片/拼写块提示下一步；错误后给一个可执行拼写线索。"],
   ["english-sentence", "English", "outcome-specific", "actionable-hint", "先选完整词再点空位，完成后世界回应。"],
 ] as const;
 
-const tracked = gitFiles();
+const tracked = gitFiles().filter(path => existsSync(resolve(ROOT, path)));
 const large = tracked.flatMap((path) => {
   const absolute = resolve(ROOT, path);
   if (!existsSync(absolute) || !statSync(absolute).isFile() || statSync(absolute).size < 1024 * 1024) return [];
@@ -65,8 +62,8 @@ if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineTag !== "game-codex-fam
 if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.realEvidencePatchCount !== 2) issues.push("evidence patch count");
 if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.interactionIntegrity !== "HITTEST_AND_REACHABILITY_GUARD_ACTIVE") issues.push("interaction-integrity boundary");
 if (AUTHORIZED_DEVELOPMENT_CYCLES.length !== 2 || AUTHORIZED_DEVELOPMENT_CYCLES.at(-1)?.id !== "gameplay-coherence-02" || AUTHORIZED_DEVELOPMENT_CYCLES.some((cycle) => cycle.naturalUseObservationImpact !== "ONGOING_NOT_CLOSED")) issues.push("bounded development cycle boundary");
-if (GAME_PORTFOLIO.length !== 9) issues.push("portfolio count");
-if (PLAY_SURFACE_MANIFEST.length !== 39 || PRIMARY_PLAY_SURFACES.length !== 5) issues.push("play surface inventory");
+if (JSON.stringify(GAME_PORTFOLIO.map(record => record.id).sort()) !== JSON.stringify(["hanzi-radical-battle", "equation-slider", "math-lab", "english-spell-battle", "make-target", "memory-card", "pinyin-magic-battle"].sort())) issues.push("portfolio retirement inventory");
+if (JSON.stringify(PLAY_SURFACE_MANIFEST.filter(surface => surface.kind === "station").map(surface => surface.id)) !== JSON.stringify(["math-slider", "math-target"]) || PRIMARY_PLAY_SURFACES.length !== 5) issues.push("play surface inventory");
 if (PLAY_SURFACE_MANIFEST.filter((surface) => surface.kind === "classic-entry").length !== 3) issues.push("Classic count");
 if (KNOWN_SAVE_KEYS.length !== 37 || EXPORTABLE_SAVE_KEYS.length !== 36 || portfolioNamespacesWithoutKnownKey().length) issues.push("save key inventory");
 if (prohibitedRuntimeTransmission.length) issues.push("prohibited runtime transmission");

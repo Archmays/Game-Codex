@@ -1,4 +1,5 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
+import { getChapterOneCharacter } from "../../games/hanzi-radical-battle/v2/chapter-one";
 
 interface RuntimeObservation {
   readonly pageErrors: string[];
@@ -70,10 +71,10 @@ const GAMES: readonly SmokeGame[] = [
   {
     id: "math-lab", title: "数学世界", surface: '[data-testid="math-world-map"]',
     async interact(page) {
-      const station = page.locator('[data-station-id="clock"] button');
+      const station = page.locator('[data-station-id="slider"] button');
       await expectUsableTarget(station);
       await station.click();
-      await expect(page.locator('[data-station-id="clock"] .clock-game')).toBeVisible({ timeout: 30_000 });
+      await expect(page.locator('[data-station-id="slider"] .equation-slider')).toBeVisible({ timeout: 30_000 });
       await page.getByRole("button", { name: "← 回城市地图" }).click();
       await expect(page.getByTestId("math-world-map")).toBeVisible();
       return station;
@@ -86,6 +87,24 @@ const GAMES: readonly SmokeGame[] = [
       await expectUsableTarget(primary);
       await primary.click();
       await expect(page.locator('[data-testid="hanzi-magic-chapter-one-m3"]')).toBeVisible({ timeout: 30_000 });
+      const chapter = page.getByTestId("hanzi-magic-chapter-one-m3");
+      for (let step = 0; step < 8; step += 1) {
+        const phase = await chapter.getAttribute("data-phase");
+        if (phase === "composition") break;
+        if (phase === "encounter") {
+          const id = await page.getByTestId("chapter-one-m3-encounter").getAttribute("data-character-id");
+          for (const component of getChapterOneCharacter(id!).orderedComponents) {
+            await page.locator(`[data-card-id="${component.id}"]`).click();
+            await page.locator(`[data-slot-id="${component.slotId}"]`).click();
+          }
+        } else {
+          const phaseActions: Record<string, string> = { camp: "start-run", "route-choice": "choose-route", "behavior-telegraph": "begin-behavior", "behavior-effect": "recover-behavior" };
+          const action = phaseActions[phase ?? ""];
+          if (!action) throw new Error(`Unexpected first-chapter phase: ${phase}`);
+          await page.locator(`[data-action="${action}"]`).first().click();
+        }
+      }
+      await expect(chapter).toHaveAttribute("data-phase", "composition");
       await page.locator('a[href*="play=hanzi-magic-complete"]').first().click();
       await expect(page.locator('[data-testid="hanzi-magic-complete"]')).toBeVisible();
       return primary;
@@ -136,8 +155,6 @@ for (const game of GAMES) {
   test(`@game:${game.id} enters, completes one primary interaction, and returns`, async ({ page }) => {
     const runtime = observeRuntime(page);
     await page.goto(game.canonicalRoute ?? "/?hub=classic", { waitUntil: "domcontentloaded" });
-    await page.evaluate(() => localStorage.clear());
-    await page.reload({ waitUntil: "domcontentloaded" });
     if (!game.canonicalRoute) {
       await expect(page.locator(".game-card")).toHaveCount(3);
       const card = page.locator(`.game-card[data-game-id="${game.id}"]`);
@@ -186,9 +203,9 @@ test("@portfolio public route registry preserves world, classic, and Hanzi legac
     ["/?world=english-world", '[data-testid="english-world-map"]'],
     ["/?play=english-spell-battle-legacy&from=hub", ".english-spell-game"],
     ["/?world=math-world", '[data-testid="math-world-map"]'],
-    ["/?world=math-world&station=lab", '[data-station-id="lab"] canvas'],
-    ["/?world=math-world&station=clock", '[data-station-id="clock"] .clock-game'],
-    ["/?world=math-world&station=array", '[data-station-id="array"] .array-workshop'],
+    ["/?world=math-world&station=lab", '[data-testid="math-world-map"]'],
+    ["/?world=math-world&station=clock", '[data-testid="math-world-map"]'],
+    ["/?world=math-world&station=array", '[data-testid="math-world-map"]'],
     ["/?world=math-world&station=target", '[data-station-id="target"] .make-target-game'],
     ["/?world=math-world&station=slider", '[data-station-id="slider"] .equation-slider'],
     ["/?play=hanzi-magic-complete&from=hub", '[data-testid="hanzi-magic-complete"]'],

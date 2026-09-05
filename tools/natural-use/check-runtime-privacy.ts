@@ -1,10 +1,10 @@
 import { execFileSync } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const ROOT = resolve(import.meta.dirname, "../..");
 const runtimeFiles = execFileSync("git", ["ls-files", "--cached", "--others", "--exclude-standard", "--", "apps", "games", "packages", "src"], { cwd: ROOT, encoding: "utf8" })
-  .split(/\r?\n/).filter((path) => /\.(?:ts|tsx|js|html)$/.test(path));
+  .split(/\r?\n/).filter((path) => /\.(?:ts|tsx|js|html)$/.test(path) && existsSync(resolve(ROOT, path)));
 const denylistDefinitionFiles = new Set([
   "packages/observation/natural-use/types.ts",
   "games/hanzi-radical-battle/v2/golden-slice/first-use/privacy.ts",

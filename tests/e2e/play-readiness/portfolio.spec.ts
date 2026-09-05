@@ -2,7 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { expect, test, type Locator, type Page, type TestInfo } from "@playwright/test";
 
-const TASK_ID = "GAME-CODEX-NATURAL-USE-OBSERVATION-KIT-06A";
+const TASK_ID = process.env.GAME_CODEX_TASK_ID ?? "GAME-CODEX-NATURAL-USE-OBSERVATION-KIT-06A";
 const REPORTS = resolve(process.cwd(), `tmp/tasks/${TASK_ID}/reports`);
 const SCREENSHOTS = resolve(REPORTS, "selected-screenshots");
 
@@ -32,7 +32,7 @@ function expectClean(runtime: RuntimeObservation): void {
 async function visiblePrimary(page: Page, kind: string): Promise<Locator> {
   if (kind === "my-game-world") return page.locator("[data-world-forest-link]");
   if (kind === "hanzi-world") return page.getByTestId("complete-primary-action");
-  if (kind === "math-world") return page.locator('[data-station-id="lab"] button');
+  if (kind === "math-world") return page.locator('[data-station-id="slider"] button');
   if (kind === "english-world") return page.locator(".wordlight-region button").first();
   if (kind === "classic-hub") return page.locator(".game-card__button").first();
   return page.locator("[data-card-id]").first();
@@ -88,8 +88,8 @@ test("@play-ready world, support, Classic, back, reload and resume routes stay c
   await page.getByRole("link", { name: /回.*游戏世界/ }).first().click();
   await expect(page.getByTestId("my-game-world")).toBeVisible();
 
-  await page.goto("/?world=math-world&station=clock", { waitUntil: "domcontentloaded" });
-  await expect(page.locator('[data-station-id="clock"] .clock-game')).toBeVisible();
+  await page.goto("/?world=math-world&station=slider", { waitUntil: "domcontentloaded" });
+  await expect(page.locator('[data-station-id="slider"] .equation-slider')).toBeVisible();
   await page.getByRole("button", { name: "← 回城市地图" }).click();
   await expect(page.getByTestId("math-world-map")).toBeVisible();
 
@@ -109,15 +109,20 @@ test("@play-ready world, support, Classic, back, reload and resume routes stay c
   expectClean(runtime);
 });
 
-test("@save-vault export, preview, unknown skip, restore and exact-key clear UI", async ({ page }, testInfo) => {
+test("@save-vault export, preview and restore preserve retired exact keys and unrelated bytes", async ({ page }, testInfo) => {
   test.skip(!["desktop-1440", "mobile-390"].includes(testInfo.project.name));
   const runtime = observe(page);
   await page.goto("/?world=my-game-world", { waitUntil: "domcontentloaded" });
-  await page.evaluate(() => {
-    localStorage.clear();
-    localStorage.setItem("family-games/math-world/v1", JSON.stringify({ version: 1, glow: "kept" }));
+  const fixture = {
+    "family-games/math-world/v1": '{ "version":1,"lastStation":"lab","visitedStations":["clock","array","lab"],"reducedMotionOverride":true,"extension":{"kept":7} }',
+    "math-battle-web/save-v1": "{synthetic-broken-legacy",
+    "family-games/clock-reader/progress": '{"version":99,"future":{"synthetic":true}}',
+    "family-games/multiplication-adventure/progress": '{ "bestScore":9,"plays":12 }',
+  };
+  await page.evaluate(values => {
+    for (const [key, value] of Object.entries(values)) localStorage.setItem(key, value);
     localStorage.setItem("other-localhost-app/save", "do-not-touch");
-  });
+  }, fixture);
   await page.getByRole("button", { name: /家长角/ }).click();
   await page.getByRole("button", { name: "打开游戏进度保险箱" }).click();
   const vault = page.getByTestId("save-vault");
@@ -128,14 +133,17 @@ test("@save-vault export, preview, unknown skip, restore and exact-key clear UI"
   const path = await download.path();
   expect(path).not.toBeNull();
   const text = await (await import("node:fs/promises")).readFile(path!, "utf8");
-  expect(text).toContain("family-games/math-world/v1");
+  const entries = JSON.parse(text).entries as { key: string; value: string }[];
+  for (const [key, value] of Object.entries(fixture)) expect(entries.find(entry => entry.key === key)?.value).toBe(value);
   expect(text).not.toContain("other-localhost-app/save");
   await page.locator("[data-vault-file]").setInputFiles({ name: "backup.json", mimeType: "application/json", buffer: Buffer.from(text) });
   await expect(page.locator("[data-vault-preview]")).toBeVisible();
   await expect(page.locator("[data-vault-preview-checksum]")).toHaveText("PASS");
+  expect(await page.evaluate(keys => Object.fromEntries(keys.map(key => [key, localStorage.getItem(key)])), Object.keys(fixture))).toEqual(fixture);
   page.once("dialog", (dialog) => void dialog.accept());
   await page.getByRole("button", { name: "恢复这些已知进度" }).click();
   await expect(page.locator("[data-vault-status]")).toContainText("已恢复");
+  expect(await page.evaluate(keys => Object.fromEntries(keys.map(key => [key, localStorage.getItem(key)])), Object.keys(fixture))).toEqual(fixture);
   expect(await page.evaluate(() => localStorage.getItem("other-localhost-app/save"))).toBe("do-not-touch");
   mkdirSync(SCREENSHOTS, { recursive: true });
   await page.screenshot({ path: resolve(SCREENSHOTS, `save-vault-import-preview-${testInfo.project.name}.png`), fullPage: true, animations: "disabled" });
@@ -184,7 +192,7 @@ test("@long-session 100 cross-surface transitions do not accumulate mounts", asy
   const runtime = observe(page);
   const routes = [
     "/?world=my-game-world", "/?play=hanzi-magic-complete", "/?play=hanzi-magic-complete&view=pinyin", "/?play=hanzi-magic-complete",
-    "/?world=math-world", "/?world=math-world&station=clock", "/?world=math-world", "/?world=english-world", "/?world=english-world&region=animals", "/?hub=classic",
+    "/?world=math-world", "/?world=math-world&station=slider", "/?world=math-world", "/?world=english-world", "/?world=english-world&region=animals", "/?hub=classic",
   ];
   const samples: number[] = [];
   for (let transition = 0; transition < 100; transition += 1) {
@@ -216,7 +224,7 @@ test("@performance local production performance sample", async ({ page }, testIn
     const action = route.includes("my-game-world") ? page.getByRole("button", { name: /家长角/ })
       : route.includes("hanzi-magic") ? page.getByRole("button", { name: "家长角" })
       : route.includes("station=slider") ? page.getByRole("button", { name: "跳过教程" })
-      : route.includes("math-world") ? page.locator('[data-station-id="lab"] button')
+      : route.includes("math-world") ? page.locator('[data-station-id="slider"] button')
       : route.includes("english-world") ? page.locator(".wordlight-region button").first()
       : page.getByRole("button", { name: "数学", exact: true });
     const interactionStarted = performance.now();

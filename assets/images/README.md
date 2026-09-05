@@ -2,4 +2,4 @@
 
 长期共享的图片源文件放在这里。
 
-现有 Phaser 数学游戏仍从 `public/assets/` 加载运行时图片，暂时不要移动。
+`target-guardian-source.png` 为旧实验室受保护原始图，已从 public 移出且字节不变；不属于发布运行资源。详见 `docs/portfolio-retirement-step1.md`。

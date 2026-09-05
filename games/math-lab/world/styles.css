@@ -76,7 +76,7 @@
 .math-world__city {
   position: relative;
   width: min(1500px, calc(100% - 32px));
-  min-height: min(72vw, 790px);
+  min-height: min(50vw, 600px);
   margin: 0 auto;
   overflow: hidden;
   border: 4px solid #315f51;
@@ -100,7 +100,7 @@
 
 .math-world-card {
   position: absolute;
-  width: min(250px, 19vw);
+  width: min(310px, 30vw);
   border: 3px solid #315f51;
   border-radius: 20px;
   background: rgba(255, 250, 240, 0.94);
@@ -109,11 +109,18 @@
   backdrop-filter: blur(6px);
 }
 
-.math-world-card--lab { top: 5%; left: 3%; }
-.math-world-card--clock { top: 5%; right: 3%; }
-.math-world-card--array { top: 42%; left: 2%; }
-.math-world-card--target { top: 43%; right: 2%; }
-.math-world-card--slider { bottom: 3%; left: 50%; transform: translateX(-50%); }
+
+.math-world-card--slider { bottom: 8%; left: 12%; }
+.math-world-card--target { bottom: 8%; right: 12%; }
+
+.math-world__notice {
+  width: min(1500px, calc(100% - 32px));
+  margin: 0 auto 16px;
+  border-left: 4px solid #315f51;
+  background: #fffaf0;
+  padding: 12px 16px;
+  font-weight: 700;
+}
 
 .math-world-card > span {
   color: #7a5130;
@@ -159,8 +166,6 @@
   cursor: pointer;
 }
 
-.math-world-card--sky button { background: #22668a; }
-.math-world-card--clay button { background: #9a513b; }
 .math-world-card--gold button { background: #8b5a19; }
 .math-world-card--rail button { background: #4c536b; }
 
@@ -334,9 +339,6 @@
     transform: none;
   }
 
-  .math-world-card--slider {
-    grid-column: 1 / -1;
-  }
 }
 
 @media (max-width: 620px) {
@@ -362,9 +364,6 @@
     grid-template-columns: 1fr;
   }
 
-  .math-world-card--slider {
-    grid-column: auto;
-  }
 
   .math-world-station__bar {
     grid-template-columns: 1fr 1fr;

@@ -97,7 +97,7 @@ function exactBlockFor(source: string, selector: string): string {
 
 function validateKnownContracts(entries: readonly RiskEntry[]): string[] {
   const issues: string[] = [];
-  if (PLAY_SURFACE_MANIFEST.length !== 39) issues.push(`Expected 39 play surfaces, found ${PLAY_SURFACE_MANIFEST.length}`);
+  if (JSON.stringify(PLAY_SURFACE_MANIFEST.filter(surface => surface.kind === "station").map(surface => surface.id)) !== JSON.stringify(["math-slider", "math-target"])) issues.push("Math station retirement contract");
   if (entries.some((entry) => !entry.testedSurfaceIds.length)) issues.push("Every risk entry must map to at least one browser-tested surface");
   const cssPath = resolve(ROOT, "games/english-spell-battle/v2/world/styles.css");
   const css = readFileSync(cssPath, "utf8");

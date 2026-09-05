@@ -11,7 +11,7 @@ import { HANZI_MAGIC_COMPLETE_SAVE_KEY } from "../../../games/hanzi-radical-batt
 import { createCompleteWorkshopState, getCompleteWorkshopPool, reduceCompleteWorkshopState } from "../../../games/hanzi-radical-battle/complete/workshop-adapter/engine";
 import { getCompleteWheelRecord } from "../../../games/hanzi-radical-battle/complete/wheel-adapter/selection";
 
-const output = resolve("test-results/hanzi-complete/world-features");
+const output = resolve(process.env.GAME_CODEX_EVIDENCE_ROOT ?? "test-results", "hanzi-complete/world-features");
 mkdirSync(output, { recursive: true });
 type InputMode = "mouse" | "keyboard" | "touch";
 

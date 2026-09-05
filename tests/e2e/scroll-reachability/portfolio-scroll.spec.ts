@@ -18,8 +18,8 @@ import {
 } from "../helpers/scroll-reachability";
 
 const ROOT = resolve(import.meta.dirname, "../../..");
-const REPORTS = resolve(ROOT, "test-results/scroll-reachability/reports");
-const SCREENSHOTS = resolve(ROOT, "test-results/scroll-reachability/screenshots");
+const REPORTS = resolve(process.env.GAME_CODEX_EVIDENCE_ROOT ?? resolve(ROOT, "test-results"), "scroll-reachability/reports");
+const SCREENSHOTS = resolve(process.env.GAME_CODEX_EVIDENCE_ROOT ?? resolve(ROOT, "test-results"), "scroll-reachability/screenshots");
 const TOUCH_PROJECTS = new Set(["mobile-360", "mobile-390", "tablet-768", "landscape-1024"]);
 const REPRESENTATIVE_IDS = new Set([
   "my-game-world",

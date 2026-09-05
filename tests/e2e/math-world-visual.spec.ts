@@ -21,17 +21,6 @@ test("@visual Math World map desktop, tablet, and mobile", async ({ page }, test
 test("@visual representative station states", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-1440");
 
-  await open(page, "/?world=math-world&station=clock", ".clock-game");
-  await expect(page.locator(".clock-game")).toHaveScreenshot("clock-explore-desktop.png");
-  await page.getByRole("button", { name: "精确时间" }).click();
-  await expect(page.locator(".clock-game")).toHaveScreenshot("clock-precise-desktop.png");
-
-  await open(page, "/?world=math-world&station=array", ".array-workshop");
-  await expect(page.locator(".array-workshop")).toHaveScreenshot("array-build-desktop.png");
-  await page.getByRole("button", { name: "翻转阵列", exact: true }).first().click();
-  await page.getByRole("button", { name: "翻转阵列", exact: true }).last().click();
-  await expect(page.locator(".array-workshop")).toHaveScreenshot("array-transpose-desktop.png");
-
   await open(page, "/?world=math-world&station=target", ".make-target-game");
   await expect(page.locator(".make-target-game")).toHaveScreenshot("target-base-desktop.png");
   await page.getByRole("button", { name: "给我一点提示" }).click();
@@ -40,25 +29,15 @@ test("@visual representative station states", async ({ page }, testInfo) => {
   await open(page, "/?world=math-world&station=slider", ".equation-slider");
   await expect(page.locator(".equation-slider")).toHaveScreenshot("slider-adapter-desktop.png");
 
-  await open(page, "/?world=math-world&station=lab", "#game-root canvas");
-  await expect(page.locator("#game-root canvas")).toHaveScreenshot("math-lab-entry-desktop.png");
-  const canvas = page.locator("#game-root canvas");
-  const box = await canvas.boundingBox();
-  if (!box) throw new Error("Math Lab canvas has no box");
-  await canvas.click({ position: { x: box.width * 0.61, y: 116 } });
-  await canvas.click({ position: { x: box.width * 0.62, y: 414 } });
-  await expect(canvas).toHaveScreenshot("math-lab-reset-confirmation-desktop.png");
+
 });
 
 test("@geometry routes are overflow-free with usable semantic controls", async ({ page }, testInfo) => {
   const routes = [
     ["/?world=my-game-world", '[data-testid="my-game-world"]'],
     ["/?world=math-world", '[data-testid="math-world-map"]'],
-    ["/?world=math-world&station=clock", ".clock-game"],
-    ["/?world=math-world&station=array", ".array-workshop"],
     ["/?world=math-world&station=target", ".make-target-game"],
     ["/?world=math-world&station=slider", ".equation-slider"],
-    ["/?world=math-world&station=lab", "#game-root canvas"],
   ] as const;
   for (const [route, selector] of routes) {
     await open(page, route, selector);

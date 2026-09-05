@@ -1,5 +1,7 @@
 # Math Lab Deep Research Brief
 
+> 历史任务说明，已由 [第一步产品减法](portfolio-retirement-step1.md) 替代。旧数感实验室已退役；`math-lab` 现在只保留数学世界导航身份。下文不构成本轮或后续自动玩法开发授权。
+
 ## 研究目的
 
 `math-lab` 的第一阶段先实现本地玩法增强；后续 deep research 用来制定长期产品路线，重点是让 6-9 岁儿童持续愿意练习数学，同时保持低压力、可解释、家长能理解。

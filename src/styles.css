@@ -1687,12 +1687,6 @@ canvas {
   touch-action: none;
 }
 
-#game-root {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
 button {
   font: inherit;
 }
@@ -2242,7 +2236,6 @@ button {
   background: #e8f6ff;
 }
 
-.multiplication-table,
 .english-word-grid,
 .pinyin-option-grid {
   display: grid;
@@ -2250,166 +2243,6 @@ button {
   width: min(840px, 100%);
   margin: 0 auto;
   gap: 10px;
-}
-
-.multiplication-card {
-  border: 3px solid #2f78b8;
-  border-radius: 8px;
-  background: #e8f6ff;
-  padding: 16px;
-  text-align: center;
-  color: #25313b;
-  font-size: 22px;
-  font-weight: 900;
-}
-
-.multiplication-table--visual {
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-}
-
-.multiplication-card--visual {
-  display: grid;
-  align-content: start;
-  justify-items: center;
-  gap: 10px;
-  min-height: 178px;
-  padding: 14px;
-}
-
-.multiplication-card--visual strong {
-  color: #1f5fa8;
-  font-size: 22px;
-}
-
-.multiplication-card--visual span {
-  color: #4d5b63;
-  font-size: 15px;
-  line-height: 1.35;
-}
-
-.multiplication-question {
-  width: min(420px, 100%);
-  margin: 0 auto;
-  border: 4px solid #25313b;
-  border-radius: 8px;
-  background: #ffcf6a;
-  padding: 24px;
-  text-align: center;
-  color: #25313b;
-  font-size: clamp(44px, 8vw, 78px);
-  font-weight: 900;
-}
-
-.multiplication-process {
-  display: grid;
-  grid-template-columns: minmax(72px, 120px) auto minmax(72px, 120px) auto minmax(180px, 1fr);
-  align-items: center;
-  width: min(880px, 100%);
-  margin: 0 auto;
-  gap: 10px;
-}
-
-.multiplication-factor-panel,
-.multiplication-result-panel {
-  display: grid;
-  justify-items: center;
-  gap: 8px;
-  min-height: 126px;
-  border: 3px solid #25313b;
-  border-radius: 8px;
-  background: #fffdf6;
-  padding: 10px;
-}
-
-.multiplication-factor-panel strong {
-  color: #1f5fa8;
-  font-size: 28px;
-}
-
-.multiplication-operator {
-  color: #6b3f15;
-  font-size: 32px;
-  font-weight: 900;
-}
-
-.number-block-model {
-  display: grid;
-  grid-template-columns: repeat(var(--number-block-columns), 18px);
-  justify-content: center;
-  gap: 4px;
-}
-
-.number-block-model i,
-.multiplication-array i {
-  display: block;
-  width: 16px;
-  aspect-ratio: 1;
-  border: 2px solid #25313b;
-  border-radius: 3px;
-  background: #ffcf6a;
-}
-
-.multiplication-array {
-  display: grid;
-  grid-template-columns: repeat(var(--array-columns), 14px);
-  justify-content: center;
-  max-width: 100%;
-  gap: 3px;
-  opacity: 0.45;
-}
-
-.multiplication-array--character {
-  grid-template-columns: 1fr;
-  align-content: center;
-  justify-items: center;
-  padding: 3px;
-  gap: 4px;
-}
-
-.multiplication-array.is-revealed {
-  opacity: 1;
-  animation: feedback-pop 260ms ease-out;
-}
-
-.multiplication-array.is-revealed i {
-  background: #8bd39e;
-}
-
-.multiplication-array--character i {
-  width: 28px;
-  aspect-ratio: 1;
-  border: 2px solid #25313b;
-  border-radius: 3px;
-  background: #ffcf6a;
-}
-
-.multiplication-array--character .multiplication-number-character {
-  display: block;
-  width: clamp(58px, 12vw, 80px);
-  height: clamp(58px, 12vw, 80px);
-  aspect-ratio: 1;
-  object-fit: contain;
-  border-radius: 12px;
-  background: #fffdf6;
-  box-shadow: 0 2px 0 rgba(37, 49, 59, 0.15), 0 0 0 2px rgba(255, 253, 246, 0.9);
-}
-
-.multiplication-array--character .multiplication-number-character--single {
-  width: clamp(84px, 16vw, 132px);
-  height: clamp(84px, 16vw, 132px);
-  border-radius: 18px;
-  object-fit: contain;
-  box-shadow: 0 4px 0 rgba(37, 49, 59, 0.2), 0 0 0 3px rgba(255, 253, 246, 0.92);
-}
-
-.multiplication-array--character.is-revealed .multiplication-number-character {
-  opacity: 1;
-}
-
-.multiplication-result-panel span {
-  color: #4d5b63;
-  font-size: 16px;
-  font-weight: 900;
 }
 
 .number-pad {
@@ -2512,116 +2345,6 @@ button {
 
 .letter-tile.is-used {
   opacity: 0.35;
-}
-
-.clock-stage {
-  display: grid;
-  grid-template-columns: minmax(220px, 360px) minmax(180px, 260px);
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
-}
-
-.clock-face {
-  position: relative;
-  width: min(78vw, 340px);
-  aspect-ratio: 1;
-  --clock-number-offset: -138px;
-  --clock-minute-label-offset: -106px;
-  --clock-tick-offset: -156px;
-  border: 6px solid #25313b;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at center, #fffdf6 0 58%, #e8f6ff 59% 100%);
-  box-shadow: 4px 6px 0 rgba(107, 79, 31, 0.14);
-}
-
-.clock-face__tick {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 2px;
-  height: 8px;
-  margin: -4px 0 0 -1px;
-  border-radius: 999px;
-  background: #6b7a84;
-  transform: rotate(var(--clock-angle)) translateY(var(--clock-tick-offset));
-  transform-origin: center center;
-}
-
-.clock-face__tick--major {
-  width: 4px;
-  height: 16px;
-  margin: -8px 0 0 -2px;
-  background: #25313b;
-}
-
-.clock-face__minute-label {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 34px;
-  height: 20px;
-  margin: -10px 0 0 -17px;
-  color: #6b3f15;
-  font-size: 12px;
-  font-weight: 900;
-  line-height: 20px;
-  text-align: center;
-  transform: rotate(var(--clock-angle)) translateY(var(--clock-minute-label-offset)) rotate(var(--clock-angle-reverse));
-}
-
-.clock-face__number {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 38px;
-  height: 38px;
-  margin: -19px 0 0 -19px;
-  color: #25313b;
-  font-size: 20px;
-  font-weight: 900;
-  line-height: 38px;
-  text-align: center;
-  transform: rotate(var(--clock-angle)) translateY(var(--clock-number-offset)) rotate(var(--clock-angle-reverse));
-}
-
-.clock-hand {
-  position: absolute;
-  left: 50%;
-  bottom: 50%;
-  display: block;
-  width: 6px;
-  border-radius: 999px;
-  transform-origin: center bottom;
-}
-
-.clock-hand--hour {
-  height: 82px;
-  margin-left: -3px;
-  background: #1f5fa8;
-}
-
-.clock-hand--minute {
-  height: 118px;
-  margin-left: -3px;
-  background: #c23b22;
-}
-
-.clock-face__center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 18px;
-  height: 18px;
-  margin: -9px 0 0 -9px;
-  border-radius: 50%;
-  background: #25313b;
-}
-
-.clock-controls {
-  display: grid;
-  gap: 10px;
 }
 
 .make-target-cards,
@@ -3043,7 +2766,6 @@ button {
 
 @media (prefers-reduced-motion: reduce) {
   .learning-feedback,
-  .multiplication-array,
   .pinyin-damage-pop,
   .pinyin-monster-art,
   .pinyin-monster-health__fill {
@@ -3115,30 +2837,6 @@ button {
 
   .learning-game {
     padding: 16px;
-  }
-
-  .clock-stage {
-    grid-template-columns: 1fr;
-  }
-
-  .multiplication-process {
-    grid-template-columns: 1fr;
-    width: min(100%, 360px);
-  }
-
-  .multiplication-operator {
-    font-size: 24px;
-  }
-
-  .multiplication-array--character .multiplication-number-character {
-    width: clamp(58px, 20vw, 86px);
-    height: clamp(58px, 20vw, 86px);
-  }
-
-  .clock-face {
-    --clock-number-offset: max(-34vw, -138px);
-    --clock-minute-label-offset: max(-26vw, -106px);
-    --clock-tick-offset: max(-38vw, -156px);
   }
 
   .make-target-card {

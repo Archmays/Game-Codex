@@ -1,6 +1,6 @@
 import "./styles.css";
 import "./page-mode.css";
-import { pageModeForSearch, resolveAppRoute } from "./app-route";
+import { normalizeRetiredMathRoute, pageModeForSearch, resolveAppRoute } from "./app-route";
 import { activatePageMode } from "./page-mode";
 
 const WORLD_THEME_COLOR = "#071c2a";
@@ -52,7 +52,8 @@ function preserveHanziReturnContext(root: HTMLElement, from: string | null): voi
 }
 
 async function mountApp(root: HTMLElement): Promise<void> {
-
+  const url = new URL(window.location.href);
+  if (normalizeRetiredMathRoute(url)) window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);
   const search = new URLSearchParams(window.location.search);
   const route = resolveAppRoute(search);
   const play = search.get("play");

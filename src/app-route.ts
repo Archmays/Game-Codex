@@ -1,4 +1,5 @@
 import type { PageMode } from "./page-mode";
+import { RETIRED_MATH_WORLD_STATION_IDS } from "../games/math-lab/world/world-save";
 import {
   APP_ROUTE_QUERY_MANIFEST,
   PLAY_SURFACE_MANIFEST,
@@ -19,6 +20,19 @@ export const APP_ROUTE_QUERY_REGISTRY = APP_ROUTE_QUERY_MANIFEST.map((route) => 
   ...route,
   pageMode: pageModeForScrollPolicy(route.defaultScrollPolicy),
 }));
+
+/** Exact retired entries only; replacement preserves Pages subpaths and history. */
+export function normalizeRetiredMathRoute(url: URL): boolean {
+  const search = url.searchParams;
+  // Preserve the existing precedence of supported Chinese and English play routes.
+  if (APP_ROUTE_QUERY_MANIFEST.some((route) => route.kind === "play" && search.get("play") === route.queryValue)) return false;
+  if (search.get("world") !== "math-world" || search.getAll("station").length !== 1
+    || !RETIRED_MATH_WORLD_STATION_IDS.some((id) => id === search.get("station"))) return false;
+  search.delete("station");
+  search.delete("hub");
+  search.set("notice", "retired-game");
+  return true;
+}
 
 function pageModeForScrollPolicy(policy: ScrollPolicy): PageMode {
   return policy === "document" ? "game-scrollable" : "game-fullscreen";

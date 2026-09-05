@@ -5,8 +5,8 @@ import { ENGLISH_V2_THEMES, ENGLISH_V2_WORDS } from "../../../games/english-spel
 import { expectHitTarget } from "../helpers/hit-target";
 
 const CORE_WORDS = ENGLISH_V2_WORDS.filter((word) => word.storyBand === "story-core");
-const REPORTS = resolve("test-results/interaction-integrity/reports");
-const SELECTED_SCREENSHOTS = resolve("test-results/interaction-integrity/selected-screenshots");
+const REPORTS = resolve(process.env.GAME_CODEX_EVIDENCE_ROOT ?? "test-results", "interaction-integrity/reports");
+const SELECTED_SCREENSHOTS = resolve(process.env.GAME_CODEX_EVIDENCE_ROOT ?? "test-results", "interaction-integrity/selected-screenshots");
 
 async function settleImages(page: Page, allowBroken = false): Promise<void> {
   await page.waitForFunction((brokenAllowed) => Array.from(document.images).every((image) => image.complete && (brokenAllowed || image.naturalWidth > 0)), allowBroken);

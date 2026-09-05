@@ -1,42 +1,14 @@
 # 数学世界 · 数感实验城
 
-## 游戏目标
+稳定定义 `mathLabGame` / `math-lab` 只挂载 `world/` 导航壳，提供按需加载的两个站点：
 
-通过五个可自由进入的站点直接操作数学对象：数感实验室、时钟塔、阵列工坊、目标工坊和算式滑轨站。
+1. 算式滑轨站（`?world=math-world&station=slider`），保留原 200 关及全部规则和存档语义。
+2. 目标工坊（`?world=math-world&station=target`），保留原题库、提示和存档语义。
 
-## 适合对象
+地图沿用现有插画，支持桌面、平板、窄屏、键盘、触控和减少动画。地图只保存访问站点及动态效果设置。
 
-- 年龄：6-9 岁。
-- 适合亲子共玩：家长可以陪孩子读题、复述数量关系，并观察孩子是否需要提示。
+旧 `station=lab|clock|array` 被识别后使用 replaceState 规范化到数学世界，显示“这个小游戏已收起，可以选择下面的游戏。”，不自动进入站点。退役 lastStation 不作为继续提示；旧访问记录、设置和扩展字段保留。损坏、未来版本或不可识别存档不覆盖。
 
-## 玩法说明
+`math-battle-web/save-v1`、旧时钟和阵列精确键继续由 `packages/data/saveKeyInventory.ts` 和 Save Vault 导出 / 恢复保护。
 
-世界地图使用语义 DOM，站点按需加载且各自保存进度。探索实验室继续复用原有 Phaser 场景；其儿童表面不再显示总星星、连续天数、今日总数或失误总数。
-
-## 涉及知识点
-
-- 加法、减法和数量调整。
-- 多步骤计划。
-- 场景化问题理解。
-- 内容数据位于 `public/data/levels/` 和 `src/game/domain/`。
-
-## 设备适配
-
-- 支持鼠标和触控。
-- 适合手机、平板和电脑。
-- 包含图片资源和音效反馈，运行资源位于 `public/assets/` 和 `public/data/`。
-
-## 当前完成度
-
-V1.0.0 已完成。公开 route 为 `?world=math-world`，五个 station deep link 支持刷新与返回。世界壳只保存访问站点和 reduced-motion 选择，不复制模块进度。
-
-## 后续改进建议
-
-- Math Lab 真正实现仍保留在 `src/game/`；后续迁移必须单独评估，不能借世界壳改写核心。
-- `math-battle-web/save-v1` 继续容错读取；旧 streak 字段保留但不再更新或驱动界面。
-
-## 接入方式
-
-- 导出：`mathLabGame`。
-- Classic 稳定 ID：`math-lab`；canonical route：`?world=math-world&from=hub`。
-- 世界活动注册：`games/math-lab/world/activity-registry.ts`。
+处置与验证见 [第一步退役报告](../../docs/portfolio-retirement-step1.md)。

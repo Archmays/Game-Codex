@@ -22,8 +22,8 @@ describe("game portfolio governance", () => {
 
   it("represents the live catalog one-to-one with valid governance identities", () => {
     expect(validatePortfolio(gameCatalog, currentClassicGameCatalog)).toEqual([]);
-    expect(GAME_PORTFOLIO).toHaveLength(9);
-    expect(new Set(GAME_PORTFOLIO.map((record) => record.id)).size).toBe(9);
+    expect(GAME_PORTFOLIO.map(record => record.id)).toEqual(["hanzi-radical-battle", "equation-slider", "math-lab", "english-spell-battle", "make-target", "memory-card", "pinyin-magic-battle"]);
+    expect(new Set(GAME_PORTFOLIO.map((record) => record.id)).size).toBe(GAME_PORTFOLIO.length);
     expect(new Set(GAME_PORTFOLIO.flatMap((record) => record.saveNamespaces)).size).toBe(
       GAME_PORTFOLIO.flatMap((record) => record.saveNamespaces).length,
     );
@@ -34,16 +34,14 @@ describe("game portfolio governance", () => {
     expect(CLASSIC_CARD_PRODUCTS.map((record) => record.id)).toEqual([
       "hanzi-radical-battle", "math-lab", "english-spell-battle"
     ]);
-    expect(WORLD_MODULES).toHaveLength(11);
+    expect(WORLD_MODULES.filter(module => module.world === "math").map(module => module.id)).toEqual(["math-equation-slider", "math-make-target"]);
     expect(COMPATIBILITY_SURFACES).toHaveLength(6);
     expect(SHARED_ENGINES).toHaveLength(2);
     expect(currentClassicGameCatalog).toHaveLength(3);
     expect(GAME_PORTFOLIO.filter((record) => !record.classicCardVisible).map((record) => record.id).sort()).toEqual([
-      "clock-reader",
       "equation-slider",
       "make-target",
       "memory-card",
-      "multiplication-adventure",
       "pinyin-magic-battle",
     ]);
   });
@@ -72,7 +70,7 @@ describe("game portfolio governance", () => {
   it("keeps generated portfolio documents byte-deterministic and drift-free", () => {
     expect(checkGeneratedDocs()).toEqual([]);
     const status = readFileSync("docs/project-status/portfolio-status.md", "utf8");
-    expect(status).toContain("Mount definitions：`9`");
+    expect(status).toContain(`Mount definitions：\`${GAME_PORTFOLIO.length}\``);
     expect(status).toContain("Active child products：`3`");
     expect(status).toContain("NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE");
   });
