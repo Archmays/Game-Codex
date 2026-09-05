@@ -13,6 +13,9 @@ import {
   syncCompleteSaveFromEngine,
   updateCompleteSave,
   writeCompleteSave,
+  completeBrowserStorage,
+  isCompleteSaveWritable,
+  restartChapterTwoSave,
   type CompleteSaveState,
   type CompleteStorageLike,
 } from "../../save/complete-save";
@@ -26,7 +29,9 @@ import {
   type ChapterTwoAbilityId,
 } from "./contracts";
 import type { ChapterTwoAction, ChapterTwoState } from "./engine";
+import { fitPilotScene, isPilotSurface, renderPilotSix, retainPilotImages, pilotAssetUrl } from "./pilot-view";
 import "../../ui/chapter-two.css";
+import "../../ui/pilot-six.css";
 
 export interface MountChapterTwoOptions {
   readonly storage?: CompleteStorageLike;
@@ -42,16 +47,7 @@ export interface MountedChapterTwo extends MountedGame {
   dispatch(action: ChapterTwoAction): void;
 }
 
-const MEMORY_STORAGE = new Map<string, string>();
-function browserStorage(): CompleteStorageLike {
-  try {
-    const key = "family-games/hanzi-complete-chapter-two-storage-test";
-    localStorage.setItem(key, "1"); localStorage.removeItem(key);
-    return localStorage;
-  } catch {
-    return { getItem: (key) => MEMORY_STORAGE.get(key) ?? null, setItem: (key, value) => { MEMORY_STORAGE.set(key, value); }, removeItem: (key) => { MEMORY_STORAGE.delete(key); } };
-  }
-}
+
 
 function escapeHtml(value: string): string { return value.replace(/[&<>\"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[character]!); }
 function character(id: string) { return COMPLETE_CORE_CHARACTER_NODES.find((candidate) => candidate.id === id)!; }
@@ -160,6 +156,7 @@ function renderSummary(state: ChapterTwoState): string {
 }
 
 function renderPhase(state: ChapterTwoState): string {
+  if (isPilotSurface(state)) return renderPilotSix(state);
   if (state.phase === "chapter-intro") return renderIntro(state);
   if (state.phase === "ability-choice") return renderAbilityChoice(state);
   if (state.phase === "behavior-telegraph" || state.phase === "behavior-effect") return renderBehavior(state);
@@ -176,8 +173,8 @@ function renderPhase(state: ChapterTwoState): string {
   return renderSummary(state);
 }
 
-function renderLocked(returnHref: string): string {
-  return `<main class="hmc2-shell hmc2-locked" data-testid="chapter-two-locked"><section class="hmc2-panel"><p class="hmc2-kicker">这条林路还在沉睡</p><h1>字脉苏醒</h1><p>先完成第一章；已有发现与修复都不会丢失。</p><a class="hmc2-primary" href="?play=hanzi-magic-complete&from=hub">回到墨迹森林</a><a href="${escapeHtml(returnHref)}">返回游戏世界</a></section></main>`;
+function renderLocked(returnHref: string, protectedSave = false): string {
+  return `<main class="hmc2-shell hmc2-locked" data-testid="chapter-two-locked"><section class="hmc2-panel"><p class="hmc2-kicker">${protectedSave ? "本机存档已保护" : "这条林路还在沉睡"}</p><h1>字脉苏醒</h1><p>${protectedSave ? "暂时无法安全读取本机进度。原记录没有被覆盖，请回到森林重新读取。" : "先完成第一章；已有发现与修复都不会丢失。"}</p><a class="hmc2-primary" href="?play=hanzi-magic-complete&from=hub">回到墨迹森林</a><a href="${escapeHtml(returnHref)}">返回游戏世界</a></section></main>`;
 }
 
 function speak(text: string, muted: boolean) {
@@ -186,19 +183,27 @@ function speak(text: string, muted: boolean) {
 }
 
 export function mountHanziMagicChapterTwo(root: HTMLElement, options: MountChapterTwoOptions = {}): MountedChapterTwo {
-  const storage = options.storage ?? browserStorage();
+  const storage = options.storage ?? completeBrowserStorage();
   let read = readCompleteSave(storage);
   let save = read.state;
   const returnHref = options.returnHref ?? "?play=hanzi-magic-complete&from=hub";
+  let restartNotice = "";
   const unlocked = save.unlockedChapterIds.includes("chapter-two");
   if (!unlocked) {
-    root.innerHTML = renderLocked(returnHref);
+    root.innerHTML = renderLocked(returnHref, !isCompleteSaveWritable(save));
     return { getState: () => null, getSave: () => save, dispatch: () => {}, destroy: () => root.replaceChildren() };
   }
-  if (options.fresh && read.writable) {
-    save = updateCompleteSave(save, { chapterTwoReplay: null, activeResume: { screen: "world", chapterId: "chapter-two", episodeId: null, phase: "world", seed: options.seed ?? "component-roots-return", actionCount: 0 } });
-    writeCompleteSave(storage, save);
+  if (options.fresh && isCompleteSaveWritable(save)) {
+    try {
+      const restarted = restartChapterTwoSave(save, options.seed ?? "component-roots-return");
+      if (writeCompleteSave(storage, restarted)) save = restarted;
+      else { save = readCompleteSave(storage).state; restartNotice = "重玩暂未开始，已保留原记录。"; }
+    } catch { restartNotice = "本机已保留许多旅程，这次先继续原来的旅程。"; }
     const consumed = new URL(location.href); consumed.searchParams.delete("fresh"); history.replaceState(history.state, "", `${consumed.pathname}${consumed.search}${consumed.hash}`);
+  }
+  if (!save.unlockedChapterIds.includes("chapter-two")) {
+    root.innerHTML = renderLocked(returnHref, !isCompleteSaveWritable(save));
+    return { getState: () => null, getSave: () => save, dispatch: () => {}, destroy: () => root.replaceChildren() };
   }
   let master: CompleteEngineState = createCompleteEngineState(options.seed ?? save.activeResume.seed, progressSeedFromCompleteSave(save));
   master = reduceCompleteEngineState(master, { type: "enter-chapter", chapterId: "chapter-two" });
@@ -207,15 +212,37 @@ export function mountHanziMagicChapterTwo(root: HTMLElement, options: MountChapt
   let destroyed = false;
 
   const persist = () => {
-    if (!read.writable) return;
+    if (!isCompleteSaveWritable(save)) return;
     save = syncCompleteSaveFromEngine(save, master);
     writeCompleteSave(storage, save);
   };
-  const focusNext = () => root.querySelector<HTMLElement>(state.phase === "build" && state.selectedCardId ? ".hmc2-slot:not(.is-filled)" : "[data-primary-focus], button:not([disabled]), a")?.focus({ preventScroll: true });
+  const focusNext = () => root.querySelector<HTMLElement>(state.phase === "build" && state.selectedCardId ? ".hmc2-slot:not(.is-filled),.pilot-slot:not(.is-filled)" : isPilotSurface(state) ? ".pilot-adventure [data-primary-focus],.pilot-magic-target,.pilot-expression-options button,.pilot-waypoint.is-available,.pilot-hand button:not(:disabled)" : "[data-primary-focus], button:not([disabled]), a")?.focus({ preventScroll: true });
   const render = () => {
+    const previousImages = [...root.querySelectorAll<HTMLImageElement>(".pilot-stage img")];
+    const active = document.activeElement instanceof HTMLElement && root.contains(document.activeElement) ? document.activeElement : null;
+    const previousPhase = root.querySelector<HTMLElement>("[data-phase]")?.dataset.phase;
+    const focusAttribute = ["data-family-character-id", "data-card-id", "data-action", "data-pref"].find((name) => active?.hasAttribute(name));
+    const focusValue = focusAttribute ? active?.getAttribute(focusAttribute) : null;
     const scene = CHAPTER_TWO_EPISODES[state.episodeIndex].sceneKey;
-    root.innerHTML = `<main class="hmc2-shell" data-testid="hanzi-complete-chapter-two" data-phase="${state.phase}" data-episode-index="${state.episodeIndex}" data-encounter-index="${state.encounterIndex}" data-action-count="${state.actionCount}" data-current-character-id="${state.currentCharacterId ?? "none"}" data-current-family-id="${state.currentFamilyId ?? "none"}" data-discovered-count="${state.discoveredCharacterIds.length}" data-family-count="${state.discoveredFamilyIds.length}" data-repair-count="${state.repairedObjectIds.length}" data-boss-count="${state.completedBossIds.length}" data-selected-ability-count="${state.selectedAbilityIds.length}" data-triggered-ability-count="${state.triggeredAbilityIds.length}" data-muted="${String(save.settings.muted)}" data-reduced-motion="${String(save.settings.reducedMotion)}" data-save-read-only="${String(!read.writable)}" style="--hmc2-scene:url('${m5AssetUrl(scene)}')"><div class="hmc2-world" aria-hidden="true"><i></i><span></span><b></b></div><header class="hmc2-header"><a href="${escapeHtml(returnHref)}" aria-label="返回墨迹森林">← 森林</a><div><span>汉字魔法战 · 字光归林</span><h1>字脉苏醒</h1></div><div><button type="button" data-pref="muted" aria-pressed="${String(save.settings.muted)}">${save.settings.muted ? "打开声音" : "静音"}</button><button type="button" data-pref="reduced-motion" aria-pressed="${String(save.settings.reducedMotion)}">${save.settings.reducedMotion ? "恢复动画" : "减少动画"}</button></div></header>${!read.writable ? `<p class="hmc2-save-note" role="status">发现较新版本存档：当前只读，不会覆盖。</p>` : ""}<div class="hmc2-layout">${renderPath(state)}<div class="hmc2-phase" aria-live="polite">${renderPhase(state)}</div></div><footer class="hmc2-footer"><span>本地匿名保存 · 无登录 · 无排名</span><span>12 个故事字脉 · ${CHAPTER_TWO_OPTIONAL_CHARACTER_IDS.length} 个可选新字不阻塞通关</span></footer></main>`;
-    focusNext(); options.onStateChange?.(state);
+    root.innerHTML = `<main class="hmc2-shell" data-testid="hanzi-complete-chapter-two" data-phase="${state.phase}" data-episode-index="${state.episodeIndex}" data-encounter-index="${state.encounterIndex}" data-action-count="${state.actionCount}" data-current-character-id="${state.currentCharacterId ?? "none"}" data-current-family-id="${state.currentFamilyId ?? "none"}" data-discovered-count="${state.discoveredCharacterIds.length}" data-family-count="${state.discoveredFamilyIds.length}" data-repair-count="${state.repairedObjectIds.length}" data-boss-count="${state.completedBossIds.length}" data-selected-ability-count="${state.selectedAbilityIds.length}" data-triggered-ability-count="${state.triggeredAbilityIds.length}" data-muted="${String(save.settings.muted)}" data-reduced-motion="${String(save.settings.reducedMotion)}" data-save-read-only="${String(!isCompleteSaveWritable(save))}" style="--hmc2-scene:url('${m5AssetUrl(scene)}')"><div class="hmc2-world" aria-hidden="true"><i></i><span></span><b></b></div><header class="hmc2-header"><a href="${escapeHtml(returnHref)}" aria-label="返回墨迹森林">← 森林</a><div><span>汉字魔法战 · 字光归林</span><h1>字脉苏醒</h1></div><div><button type="button" data-pref="muted" aria-pressed="${String(save.settings.muted)}">${save.settings.muted ? "打开声音" : "静音"}</button><button type="button" data-pref="reduced-motion" aria-pressed="${String(save.settings.reducedMotion)}">${save.settings.reducedMotion ? "恢复动画" : "减少动画"}</button></div></header>${!isCompleteSaveWritable(save) ? `<p class="hmc2-save-note" role="status">本机存档已保护，当前进展暂未保存。回到森林后可以重新读取。</p>` : ""}<div class="hmc2-layout">${renderPath(state)}<div class="hmc2-phase" aria-live="polite">${renderPhase(state)}</div></div><footer class="hmc2-footer"><span>本地匿名保存 · 无登录 · 无排名</span><span>12 个故事字脉 · ${CHAPTER_TWO_OPTIONAL_CHARACTER_IDS.length} 个可选新字不阻塞通关</span></footer></main>`;
+    root.querySelector(".hmc2-shell")?.classList.toggle("hmc2-shell--pilot", isPilotSurface(state));
+    if (restartNotice) {
+      const notice = document.createElement("p"); notice.className = "hmc2-save-note"; notice.setAttribute("role", "status"); notice.textContent = restartNotice;
+      root.querySelector(".hmc2-header")?.after(notice);
+    }
+    if (isPilotSurface(state)) {
+      for (const button of root.querySelectorAll<HTMLButtonElement>(".hmc2-header [data-pref]")) {
+        const muted = button.dataset.pref === "muted";
+        button.setAttribute("aria-label", muted ? save.settings.muted ? "打开声音" : "静音" : save.settings.reducedMotion ? "恢复动画" : "减少动画");
+        button.textContent = muted ? save.settings.muted ? "声音关" : "声音开" : save.settings.reducedMotion ? "少动态" : "有动画";
+      }
+    }
+    retainPilotImages(previousImages, root);
+    if (isPilotSurface(state) && state.phase === "family-connect") { const image = new Image(); image.src = pilotAssetUrl(state.episodeIndex === 0 ? "bridge" : "stone-path"); void image.decode().catch(() => {}); }
+    fitPilotScene(root);
+    const restoredFocus = previousPhase === state.phase && focusAttribute && focusValue ? root.querySelector<HTMLElement>(`[${focusAttribute}="${CSS.escape(focusValue)}"]:not(:disabled)`) : null;
+    if (restoredFocus) restoredFocus.focus({ preventScroll: true }); else focusNext();
+    options.onStateChange?.(state);
   };
   const dispatch = (action: ChapterTwoAction) => {
     if (destroyed) return;
@@ -231,8 +258,12 @@ export function mountHanziMagicChapterTwo(root: HTMLElement, options: MountChapt
     if (target.dataset.cardId) dispatch({ type: "select-card", cardId: target.dataset.cardId });
     if (target.dataset.slotId) dispatch({ type: "place-selected", slotId: target.dataset.slotId as CompleteSlotId });
     if (target.dataset.familyCharacterId) dispatch({ type: "toggle-family-character", characterId: target.dataset.familyCharacterId });
+    if (action === "pilot-magic") dispatch({ type: "pilot-magic" });
+    if (action === "pilot-observe") dispatch({ type: "pilot-observe" });
+    if (target.dataset.pilotExpression) dispatch({ type: "pilot-magic", expression: target.dataset.pilotExpression as "quiet" | "talk" });
+    if (target.dataset.pilotMove) dispatch({ type: "pilot-move", nodeId: target.dataset.pilotMove });
     if (action === "speak-character" && state.currentCharacterId) { const targetCharacter = character(state.currentCharacterId); speak(`${targetCharacter.glyph}，${reading(targetCharacter.id).fixedPhrase}`, save.settings.muted); }
-    if (target.dataset.pref && read.writable) {
+    if (target.dataset.pref && isCompleteSaveWritable(save)) {
       const field = target.dataset.pref === "muted" ? "muted" : "reducedMotion";
       save = updateCompleteSave(save, { settings: { ...save.settings, [field]: !save.settings[field] } }); writeCompleteSave(storage, save); render();
     }
@@ -241,8 +272,9 @@ export function mountHanziMagicChapterTwo(root: HTMLElement, options: MountChapt
   const dragOver = (event: DragEvent) => { if ((event.target as HTMLElement).closest("[data-slot-id]")) event.preventDefault(); };
   const drop = (event: DragEvent) => { const slot = (event.target as HTMLElement).closest<HTMLElement>("[data-slot-id]"); const cardId = event.dataTransfer?.getData("text/plain") || draggedCardId; if (slot?.dataset.slotId && cardId) { event.preventDefault(); dispatch({ type: "place-card", cardId, slotId: slot.dataset.slotId as CompleteSlotId }); } draggedCardId = null; };
   root.addEventListener("click", click); root.addEventListener("dragstart", dragStart); root.addEventListener("dragover", dragOver); root.addEventListener("drop", drop);
+  const resizeObserver = new ResizeObserver(() => fitPilotScene(root)); resizeObserver.observe(root);
   persist(); render();
-  return { getState: () => state, getSave: () => save, dispatch, destroy() { destroyed = true; root.removeEventListener("click", click); root.removeEventListener("dragstart", dragStart); root.removeEventListener("dragover", dragOver); root.removeEventListener("drop", drop); if (typeof speechSynthesis !== "undefined") speechSynthesis.cancel(); root.replaceChildren(); } };
+  return { getState: () => state, getSave: () => save, dispatch, destroy() { destroyed = true; resizeObserver.disconnect(); root.removeEventListener("click", click); root.removeEventListener("dragstart", dragStart); root.removeEventListener("dragover", dragOver); root.removeEventListener("drop", drop); if (typeof speechSynthesis !== "undefined") speechSynthesis.cancel(); root.replaceChildren(); } };
 }
 
 export function createFreshChapterTwoSave(): CompleteSaveState {

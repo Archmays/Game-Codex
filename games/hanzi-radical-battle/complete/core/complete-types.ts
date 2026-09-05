@@ -29,6 +29,7 @@ export interface CompleteEngineProgressSeed {
     readonly actions: readonly M3Action[];
   } | null;
   readonly chapterTwoReplay: {
+    readonly ruleset?: import("../chapters/chapter-two/pilot-six").ChapterTwoRuleset;
     readonly seed: string;
     readonly initialHeroId: M3HeroId;
     readonly actions: readonly ChapterTwoAction[];

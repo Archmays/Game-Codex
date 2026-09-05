@@ -531,7 +531,7 @@
       "id": "save-corrupt-backup-recovery",
       "category": "world",
       "viewport": "1600x900",
-      "ariaSha256": "fe8c6d07df7d12f0c07a740a616d09ac09ce330d78d1a16c8683d13e30ba8bd8",
+      "ariaSha256": "773cf59971b9a87840c19d5fe5936907fef36f78f504d76c9ed365dd043da564",
       "visibleControlCount": 16
     },
     {
@@ -689,7 +689,7 @@
       "visibleControlCount": 16
     }
   ],
-  "snapshotCombinedSha256": "fe1ad06ec7a7a43af4a45661743dbf736721f518bdb89766544bed7b0e9e47dd",
+  "snapshotCombinedSha256": "acb50235250c5b13b918da3fd2c8f0d920d827e5e19d79e4b4646699f059574d",
   "snapshotHashes": [
     {
       "name": "boss-book-harbor-guardian-stage-0.png",
@@ -933,11 +933,11 @@
     },
     {
       "name": "save-corrupt-backup-recovery.png",
-      "sha256": "de130d5e3e25545a7a53e77dbeadb2df892355554f058bdb0ae9d5af669c13fe"
+      "sha256": "df251684aa9030b4b0d18ae09606b70aac0fd004a7e1b857d84018abc366f892"
     },
     {
       "name": "save-future-read-only.png",
-      "sha256": "8c9d9358eb11e4f31e2a40cbc8040790c2dc31917313d05bd076bdd78a6cf579"
+      "sha256": "5bd8cb217840a43f2426ec6632cc31704b22b53ca4b5b8b24f7851269ae963fc"
     },
     {
       "name": "spellbook-01-char-u660e.png",
@@ -985,11 +985,11 @@
     },
     {
       "name": "world-complete-hotspots.png",
-      "sha256": "ed9e3c3f91468b90f188635760d5aa78359d796b8c8b64a9b59d7b327b94f5e3"
+      "sha256": "56eabce3114d416a6bee9c93aea9b78e6bf0dac44f4eeeb6a5ddbf9ff8784dea"
     },
     {
       "name": "world-fresh-desktop.png",
-      "sha256": "1ebf9be9428780f503b98f10a298ede9e16686cc7c9f9fc977acb56579a8a3ab"
+      "sha256": "6c8e6f22b033a84ed4ff7577b6d5ccda56a27dd108a3b5acbd7527b0bffe1e94"
     },
     {
       "name": "world-hero-forest-speaker.png",
@@ -1005,23 +1005,23 @@
     },
     {
       "name": "world-mobile-390x844.png",
-      "sha256": "e81f8b5537701f256dcfcaec5773305f9f2ec264abb24fad706e8d6557178f57"
+      "sha256": "799bccd7ed562b51df274dca1c07443dffa4fbcd176d07bbdfff563d15bc4532"
     },
     {
       "name": "world-muted-toggle.png",
-      "sha256": "192255622184af2d2166092c9ae16e7286b9c9827fd50c5fe5239e5304f182a5"
+      "sha256": "b374dbec5c768949e5677a680d3a5d1c2e19aece86ca13d2068648fff8df96c7"
     },
     {
       "name": "world-reduced-motion.png",
-      "sha256": "480986de46cc40589c0c2058f22feff31add9f2ae27d9a1356cd2bf4f83a1837"
+      "sha256": "8e14c0142eb10af30d76f3141d1051eb66432988543ad76e2bc44fa875d16204"
     },
     {
       "name": "world-tablet-768x1024.png",
-      "sha256": "f2ae34efa68d5701b8999b15e3af33eeeb8dd0367ec753777e5c176e5bea3d8f"
+      "sha256": "b26775ef5275e14495466bb3ac96fd76cd0587a4274f34b0d3ebe13587b04ab4"
     },
     {
       "name": "world-wide-1600x900.png",
-      "sha256": "95c39c12e9cd2245a1fcec4c8a41bf1e6ed7090695786f70a3296b9e43268901"
+      "sha256": "84300f308e29de110dbeb21e9b081e01a827464fd9a3fcf0b38131535787f2eb"
     }
   ],
   "noUpdateRequirement": {

@@ -13,6 +13,8 @@ import {
   syncCompleteSaveFromEngine,
   updateCompleteSave,
   writeCompleteSave,
+  completeBrowserStorage,
+  isCompleteSaveWritable,
   type CompleteSaveState,
   type CompleteStorageLike,
 } from "../save/complete-save";
@@ -39,8 +41,7 @@ export interface MountCompletePostgameOptions {
   readonly returnHref?: string;
 }
 
-const MEMORY_STORAGE = new Map<string, string>();
-function browserStorage(): CompleteStorageLike { try { return window.localStorage; } catch { return { getItem: (key) => MEMORY_STORAGE.get(key) ?? null, setItem: (key, value) => { MEMORY_STORAGE.set(key, value); }, removeItem: (key) => { MEMORY_STORAGE.delete(key); } }; } }
+
 function escapeHtml(value: string): string { return value.replace(/[&<>\"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[character]!); }
 function slotLabel(slotId: CompleteSlotId): string { return ({ left: "左边", right: "右边", top: "上边", bottom: "下边", outer: "外框", inner: "里面" })[slotId]; }
 function character(id: string) { return COMPLETE_CORE_CHARACTER_NODES.find((candidate) => candidate.id === id)!; }
@@ -101,23 +102,23 @@ function renderPhase(run: CompletePostgameRun): string {
 }
 
 export function mountCompletePostgame(root: HTMLElement, options: MountCompletePostgameOptions): MountedGame & { getRun(): CompletePostgameRun | null; getSave(): CompleteSaveState; dispatch(action: CompletePostgameAction): void } {
-  const storage = options.storage ?? browserStorage(); let read = readCompleteSave(storage); let save = read.state;
+  const storage = options.storage ?? completeBrowserStorage(); let read = readCompleteSave(storage); let save = read.state;
   const returnHref = options.returnHref ?? "?play=hanzi-magic-complete&from=hub";
   if (!save.completedChapterIds.includes("chapter-three")) {
     root.innerHTML = `<main class="hmcp-shell hmcp-locked" data-testid="complete-postgame-locked"><section><p>归林后的远路还在沉睡</p><h1>先让三章字光回到森林</h1><p>不需要收集全部字；故事通关后，三条自由林路会一起亮起。</p><a class="hmcp-primary" href="${escapeHtml(returnHref)}">回到墨迹森林</a></section></main>`;
     return { getRun: () => null, getSave: () => save, dispatch: () => {}, destroy() { root.replaceChildren(); } };
   }
-  if (options.restart && read.writable) {
+  if (options.restart && isCompleteSaveWritable(save)) {
     save = updateCompleteSave(save, { postgameResume: null }); writeCompleteSave(storage, save);
     const consumed = new URL(location.href); consumed.searchParams.delete("new"); history.replaceState(history.state, "", `${consumed.pathname}${consumed.search}${consumed.hash}`);
   }
   let master: CompleteEngineState = createCompleteEngineState(save.activeResume.seed, progressSeedFromCompleteSave(save));
   master = reduceCompleteEngineState(master, { type: "enter-postgame", mode: options.mode, seed: options.seed, band: options.band ?? "whole-forest", restart: options.restart });
   let run = master.postgameRun!; let draggedCardId: string | null = null; let destroyed = false;
-  const persist = () => { if (!read.writable) return; save = syncCompleteSaveFromEngine(save, master); writeCompleteSave(storage, save); };
+  const persist = () => { if (!isCompleteSaveWritable(save)) return; save = syncCompleteSaveFromEngine(save, master); writeCompleteSave(storage, save); };
   const render = () => {
     const hero = M3_HEROES.find((candidate) => candidate.id === master.heroId)!;
-    root.innerHTML = `<main class="hmcp-shell" data-testid="complete-postgame" data-mode="${run.mode}" data-band="${run.band}" data-phase="${run.state.phase}" data-round-index="${run.state.roundIndex}" data-action-count="${run.state.actionCount}" data-character-count="${run.state.discoveredCharacterIds.length}" data-family-count="${run.state.discoveredFamilyIds.length}" data-word-count="${run.state.discoveredWordIds.length}" data-completed-offer-count="${run.state.completedOfferIds.length}" data-muted="${String(save.settings.muted)}" data-reduced-motion="${String(save.settings.reducedMotion)}" style="--hmcp-scene:url('${m5AssetUrl(run.mode === "word-resonance" ? "region-echo-garden" : run.mode === "component-trails" ? "region-glimmer-grove" : "region-wind-trail")}')"><div class="hmcp-world" aria-hidden="true"></div><header><a href="${escapeHtml(returnHref)}">← 森林</a><div><span>${hero.name}同行</span><h1>${getCompletePostgameMode(run.mode).name}</h1></div><div><button type="button" data-pref="muted" aria-pressed="${String(save.settings.muted)}">${save.settings.muted ? "打开声音" : "静音"}</button><button type="button" data-pref="reduced-motion" aria-pressed="${String(save.settings.reducedMotion)}">${save.settings.reducedMotion ? "恢复动画" : "减少动画"}</button></div></header>${!read.writable ? `<p class="hmcp-save-note" role="status">发现较新版本存档：当前只读，不会覆盖。</p>` : ""}<div class="hmcp-layout">${renderPath(run)}<div class="hmcp-phase" aria-live="polite">${renderPhase(run)}</div></div><footer>本地匿名保存 · 无稀有度 · 无损失 · 无倒计时</footer></main>`;
+    root.innerHTML = `<main class="hmcp-shell" data-testid="complete-postgame" data-mode="${run.mode}" data-band="${run.band}" data-phase="${run.state.phase}" data-round-index="${run.state.roundIndex}" data-action-count="${run.state.actionCount}" data-character-count="${run.state.discoveredCharacterIds.length}" data-family-count="${run.state.discoveredFamilyIds.length}" data-word-count="${run.state.discoveredWordIds.length}" data-completed-offer-count="${run.state.completedOfferIds.length}" data-muted="${String(save.settings.muted)}" data-reduced-motion="${String(save.settings.reducedMotion)}" style="--hmcp-scene:url('${m5AssetUrl(run.mode === "word-resonance" ? "region-echo-garden" : run.mode === "component-trails" ? "region-glimmer-grove" : "region-wind-trail")}')"><div class="hmcp-world" aria-hidden="true"></div><header><a href="${escapeHtml(returnHref)}">← 森林</a><div><span>${hero.name}同行</span><h1>${getCompletePostgameMode(run.mode).name}</h1></div><div><button type="button" data-pref="muted" aria-pressed="${String(save.settings.muted)}">${save.settings.muted ? "打开声音" : "静音"}</button><button type="button" data-pref="reduced-motion" aria-pressed="${String(save.settings.reducedMotion)}">${save.settings.reducedMotion ? "恢复动画" : "减少动画"}</button></div></header>${!isCompleteSaveWritable(save) ? `<p class="hmcp-save-note" role="status">本机存档已保护，当前进展暂未保存。回到森林后可以重新读取。</p>` : ""}<div class="hmcp-layout">${renderPath(run)}<div class="hmcp-phase" aria-live="polite">${renderPhase(run)}</div></div><footer>本地匿名保存 · 无稀有度 · 无损失 · 无倒计时</footer></main>`;
     root.querySelector<HTMLElement>(["character-build", "family-build", "word-build-a", "word-build-b"].includes(run.state.phase) && run.state.selectedCardId ? ".hmcp-board button:not([disabled]):not(.is-filled)" : "[data-primary-focus], [data-offer-id], [data-card-id], [data-family-id], [data-word-character-id], [data-context-word-id], button, a")?.focus({ preventScroll: true });
   };
   const dispatch = (action: CompletePostgameAction) => { if (destroyed) return; const next = reduceCompleteEngineState(master, { type: "postgame-action", action }); if (next === master) return; master = next; run = master.postgameRun!; persist(); render(); };
@@ -135,7 +136,7 @@ export function mountCompletePostgame(root: HTMLElement, options: MountCompleteP
       const targetCharacter = character(run.state.currentCharacterId); const targetReading = reading(targetCharacter.id);
       if (!save.settings.muted && typeof speechSynthesis !== "undefined" && typeof SpeechSynthesisUtterance !== "undefined") { speechSynthesis.cancel(); const utterance = new SpeechSynthesisUtterance(`${targetCharacter.glyph}，${targetReading.fixedPhrase}`); utterance.lang = "zh-CN"; utterance.rate = .86; speechSynthesis.speak(utterance); }
     }
-    if (target.dataset.pref && read.writable) { const field = target.dataset.pref === "muted" ? "muted" : "reducedMotion"; save = updateCompleteSave(save, { settings: { ...save.settings, [field]: !save.settings[field] } }); writeCompleteSave(storage, save); render(); }
+    if (target.dataset.pref && isCompleteSaveWritable(save)) { const field = target.dataset.pref === "muted" ? "muted" : "reducedMotion"; save = updateCompleteSave(save, { settings: { ...save.settings, [field]: !save.settings[field] } }); writeCompleteSave(storage, save); render(); }
   };
   const dragStart = (event: DragEvent) => { draggedCardId = (event.target as HTMLElement).closest<HTMLElement>("[data-card-id]")?.dataset.cardId ?? null; };
   const dragOver = (event: DragEvent) => { if ((event.target as HTMLElement).closest("[data-slot-id]") && draggedCardId) event.preventDefault(); };

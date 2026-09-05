@@ -1,0 +1,183 @@
+.hmc2-shell--pilot{padding:12px 24px 18px;background:#091f28}
+.hmc2-shell--pilot .hmc2-world{display:none}
+.hmc2-shell--pilot .hmc2-header{max-width:1120px;grid-template-columns:auto 1fr auto;margin-bottom:10px}
+.hmc2-shell--pilot .hmc2-header>a{width:auto;min-width:72px;min-height:48px}
+.hmc2-shell--pilot .hmc2-header h1{font-size:22px}
+.hmc2-shell--pilot .hmc2-header>div:last-child{flex-direction:row}
+.hmc2-shell--pilot .hmc2-header button{min-width:48px;min-height:48px}
+.hmc2-shell--pilot .hmc2-layout{display:block;max-width:1120px;margin:0 auto}
+.hmc2-shell--pilot .hmc2-path,.hmc2-shell--pilot .hmc2-footer{display:none}
+.pilot-adventure{border:1px solid #436b69;border-radius:24px;overflow:hidden;background:#f5efda;color:#193d3b;box-shadow:0 12px 48px #0005}
+.pilot-adventure button,.pilot-adventure summary{box-sizing:border-box;min-width:48px;min-height:48px;font:inherit;cursor:pointer}
+.pilot-adventure button{border:2px solid #447b70;border-radius:13px;background:#fff9e8;color:#173c37;padding:8px 14px}
+.pilot-adventure button:disabled{cursor:default}
+.pilot-adventure button:focus-visible,.pilot-adventure summary:focus-visible{outline:4px solid #b44b19;outline-offset:3px}
+.pilot-goal{display:flex;align-items:center;gap:20px;min-height:62px;padding:8px 24px;box-sizing:border-box;background:#fff5d6;border-bottom:1px solid #c4c3a0}
+.pilot-goal>span{flex:0 0 auto;font-size:13px;letter-spacing:.08em;color:#425f52}
+.pilot-goal h2{font-size:21px;line-height:1.45;margin:0;font-weight:700}
+.pilot-stage{position:relative;height:430px;overflow:hidden;background:#102d3b;isolation:isolate;--pilot-scale:1}
+.pilot-world-plane{position:absolute;left:50%;top:50%;width:1000px;height:620px;transform:translate(-50%,-50%) scale(var(--pilot-scale));transform-origin:center;pointer-events:none}
+.pilot-environment{position:absolute;width:100%;height:100%;inset:0;object-fit:cover}
+.pilot-art{position:absolute;max-width:none;height:auto;transform:translate(-50%,-50%);object-fit:contain;pointer-events:none}
+.pilot-vine-spanning{object-fit:fill;filter:drop-shadow(0 3px 4px #e6e39866)}
+.pilot-bridge{filter:drop-shadow(0 9px 6px #011a1c88)}
+.pilot-ink-cover{filter:drop-shadow(0 8px 10px #0c142577)}
+.pilot-ink-cleared{opacity:.8}
+.pilot-root-mist{opacity:.72;filter:blur(2px)}
+.pilot-path-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.pilot-path-lines path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.pilot-path-lines .pilot-footprint{fill:#ffdb79;stroke:#755426;stroke-width:1}
+.pilot-vine-route{stroke:#dddf90;stroke-width:12}
+.pilot-channel-bank{stroke:#235c5c;stroke-width:25}
+.pilot-water-channel{stroke:#b1f6ed;stroke-width:11;filter:drop-shadow(0 0 5px #a6e2db)}
+.pilot-road-outline{stroke:#f7d783;stroke-width:4;stroke-dasharray:8 16}
+.pilot-revealed-root{stroke:#ffd789;stroke-width:5;stroke-dasharray:7 13}
+.pilot-hand-light{fill:#fff0b94d;stroke:#fff1b3;stroke-width:3;filter:drop-shadow(0 0 10px #fff0ad)}
+.pilot-companion{position:absolute;left:12px;top:12px;display:flex;align-items:center;gap:7px;padding:5px 9px 5px 5px;background:#102d31e8;border:1px solid #6c9d8d;border-radius:15px;color:#fff0c5;font-size:12px}
+.pilot-companion img{width:44px;height:44px;border-radius:10px;object-fit:cover}
+.pilot-keeper{position:absolute;right:12px;top:12px;display:flex;align-items:center;gap:7px;color:#fff0c5;background:#102d31e8;border-radius:15px;padding:5px 9px}
+.pilot-keeper img{width:52px;height:52px;object-fit:contain;border-radius:10px}
+.pilot-magic-target,.pilot-waypoint,.pilot-family-node,.pilot-expression-options button{position:absolute;transform:translate(-50%,-50%);z-index:2}
+.pilot-adventure .pilot-magic-target{display:flex;flex-direction:column;align-items:center;gap:4px;max-width:220px;padding:9px 16px;color:#203e31;background:#fff3bded;border-color:#fed77b;box-shadow:0 5px 0 #4d513b,0 0 24px #f5d35c55}
+.pilot-magic-target>span{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;font-size:36px;background:#e6b85b}
+.pilot-magic-target>b{font-size:16px;line-height:1.4;font-weight:600}
+.pilot-family-node,.pilot-waypoint{width:88px;min-height:104px;display:flex;flex-direction:column;align-items:center;gap:1px;padding:5px!important;box-shadow:0 5px 0 #253e35}
+.pilot-family-node b,.pilot-waypoint b{font-size:36px;line-height:1.25}
+.pilot-family-node small,.pilot-waypoint small{font-size:11px;color:#435d48}
+.pilot-family-node span{font-size:12px}
+.pilot-adventure .pilot-family-node.is-selected{border-color:#bd521e;border-width:4px;background:#ffe3a1}
+.pilot-adventure .pilot-family-node.is-selected::after{content:"已选";position:absolute;top:-22px;padding:2px 7px;border-radius:8px;font-size:12px;background:#8b3818;color:#fff9dc}
+.pilot-family-node.is-reachable{box-shadow:0 5px 0 #314c3b,0 0 0 3px #bcead47a}
+.pilot-family-node:disabled{opacity:1}
+.pilot-waypoint.is-available{background:#fff1b4;border-color:#bd7023}
+.pilot-expression-options button{width:180px;padding:8px 12px;background:#fff5d9ed}
+.pilot-expression-options span,.pilot-expression-options small{display:block;line-height:1.4}
+.pilot-expression-options span{font-size:20px;font-weight:700}
+.pilot-expression-options small{font-size:12px}
+.pilot-adventure .pilot-observe{position:absolute;bottom:10px;left:12px;max-width:200px;background:#fdf0c4;font-size:13px;z-index:3}
+.pilot-leaf-door{position:absolute;width:210px;height:270px;transform:translate(-50%,-50%)}
+.pilot-leaf-door img{position:absolute;width:100%;height:100%;object-fit:contain;transition:transform .25s ease}
+.pilot-door-left{clip-path:inset(0 50% 0 0);transform-origin:15% 50%}
+.pilot-door-right{clip-path:inset(0 0 0 50%);transform-origin:85% 50%}
+.pilot-leaf-door.is-open .pilot-door-left{transform:translateX(-40px) rotate(-12deg)}
+.pilot-leaf-door.is-open .pilot-door-right{transform:translateX(40px) rotate(12deg)}
+.pilot-lamp-tired{filter:brightness(.55) saturate(.55);transform:translate(-50%,-50%) rotate(-12deg)}
+.pilot-lamp-lit{filter:drop-shadow(0 0 25px #ffe596)}
+.pilot-lamp-light{position:absolute;transform:translate(-50%,-50%);width:95px;height:95px;background:radial-gradient(#ffffbbcc,#ffdf7933 50%,transparent 70%);border-radius:50%;mix-blend-mode:screen}
+.pilot-stones-hidden{opacity:.32;filter:brightness(.5)}
+.pilot-stones-revealed{opacity:.8;filter:drop-shadow(0 0 9px #fce290)}
+.pilot-dock{padding:18px 24px 12px;border-top:2px solid #829c80}
+.pilot-build{display:grid;grid-template-columns:250px minmax(0,1fr);gap:28px;align-items:center;max-width:820px;margin:auto}
+.pilot-board{display:grid;width:240px;height:154px;gap:8px;position:relative}
+.pilot-board--left-right{grid-template-columns:1fr 1fr}
+.pilot-board--top-bottom{grid-template-rows:1fr 1fr}
+.pilot-adventure .pilot-slot{border:2px dashed #557767;background:#e1e8d0;font-size:16px;padding:4px;color:#36584b}
+.pilot-adventure .pilot-slot.is-filled{border-style:solid;background:#fff3c2;color:#174634}
+.pilot-slot b{font-family:"Microsoft YaHei","Noto Sans CJK SC",sans-serif;font-size:66px;font-weight:500}
+.pilot-board--semi-enclosure{width:200px;height:180px}
+.pilot-board--semi-enclosure .pilot-slot[data-slot-id=outer]{position:absolute;inset:0;clip-path:polygon(0 0,31% 0,31% 69%,100% 69%,100% 100%,0 100%);border-style:solid;border-radius:0 0 18px 18px;text-align:left}
+.pilot-board--semi-enclosure .pilot-slot[data-slot-id=outer] b{position:absolute;left:0;bottom:-10px;font-size:164px;line-height:1.15;width:100%;font-weight:400}
+.pilot-board--semi-enclosure .pilot-slot[data-slot-id=outer] span{position:absolute;left:12px;top:20px;width:20px;line-height:1.3}
+.pilot-board--semi-enclosure .pilot-slot[data-slot-id=inner]{position:absolute;left:37%;top:3%;width:60%;height:65%;border-radius:12px}
+.pilot-board--semi-enclosure .pilot-slot[data-slot-id=inner] b{font-size:80px;font-weight:400}
+.pilot-hand-area p{margin:0 0 10px;font-size:17px}
+.pilot-hand{display:grid;grid-template-columns:repeat(5,minmax(48px,1fr));gap:7px}
+.pilot-adventure .pilot-hand button{height:68px;padding:2px;background:#fffae9;box-shadow:0 3px 0 #bac5ae}
+.pilot-hand span{font-size:38px;font-family:"Microsoft YaHei","Noto Sans CJK SC",sans-serif}
+.pilot-adventure .pilot-hand button[aria-pressed=true]{background:#ffe095;border:3px solid #a14b21}
+.pilot-hand button:disabled{opacity:.36}
+.pilot-build-tools{display:flex;gap:12px;align-items:center;margin-top:11px}
+.pilot-build-tools small{font-size:13px}
+.pilot-variant-shadow{display:flex;gap:10px;align-items:center;margin:8px 0 0!important;font-size:26px!important}
+.pilot-variant-shadow span:first-child{transform:translateY(-6px)}
+.pilot-variant-shadow span:nth-child(3){transform:translateY(6px)}
+.pilot-variant-shadow[data-recovered=true] span{transform:none}
+.pilot-variant-shadow small{font-size:12px}
+.pilot-meaning{display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:center;max-width:850px;margin:auto}
+.pilot-meaning-word{display:flex;align-items:center;gap:16px}
+.pilot-meaning-word>b{font-size:88px;font-weight:500;line-height:1.15}
+.pilot-meaning-word strong{display:block;font-size:24px}
+.pilot-meaning-word em{display:block;font-size:20px;font-style:normal;margin-top:7px}
+.pilot-meaning p{margin:0 0 8px;font-size:17px;line-height:1.5}
+.pilot-meaning button{font-size:14px}
+.pilot-family-dock{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.pilot-family-dock h2{font-size:21px;margin:0 0 7px}
+.pilot-family-dock p{margin:5px 0;line-height:1.5;font-size:16px}
+.pilot-family-dock details{font-size:14px;max-width:700px}
+.pilot-family-dock summary{display:flex;align-items:center;width:max-content;color:#315e51;text-decoration:underline;text-underline-offset:3px}
+.pilot-family-dock summary::before{content:"＋";margin-right:7px}
+.pilot-family-dock details[open] summary::before{content:"－"}
+.pilot-family-dock details p{padding:8px 12px;background:#e4e6cb;border-radius:8px}
+.pilot-adventure .pilot-primary{min-width:180px;padding:13px 22px;background:#f9d779;border-color:#a3752b;box-shadow:0 4px 0 #896333;font-weight:700;white-space:nowrap}
+.pilot-feedback{margin:0;padding:8px 24px 14px;color:#314f42;font-size:14px;line-height:1.5}
+.pilot-intro{display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:110px}
+.pilot-intro p{font-size:22px;max-width:540px;line-height:1.6}
+@media(max-width:800px){
+ .hmc2-shell--pilot{padding:10px}
+ .pilot-stage{height:350px}
+ .pilot-goal{display:block;padding:9px 17px}
+ .pilot-goal h2{font-size:19px;margin-top:4px}
+ .pilot-build{grid-template-columns:220px minmax(0,1fr);gap:17px}
+ .pilot-board{width:210px}
+ .pilot-dock{padding:16px}
+ .pilot-family-dock{gap:12px}
+ .pilot-adventure .pilot-primary{min-width:150px}
+}
+@media(max-width:480px){
+ .hmc2-shell--pilot{padding:6px}
+ .hmc2-shell--pilot .hmc2-header{grid-template-columns:48px 1fr auto;gap:5px;margin-bottom:6px}
+ .hmc2-shell--pilot .hmc2-header>a{width:48px;min-width:48px;padding:6px;display:grid;place-items:center}
+ .hmc2-shell--pilot .hmc2-header>a::after{content:"←";font-size:25px;line-height:1}
+ .hmc2-shell--pilot .hmc2-header h1{font-size:17px}
+ .hmc2-shell--pilot .hmc2-header button{width:52px;font-size:12px;padding:5px}
+ .pilot-adventure{border-radius:18px}
+ .pilot-goal{padding:8px 12px;min-height:66px}
+ .pilot-goal>span{font-size:11px}
+ .pilot-goal h2{font-size:17px;line-height:1.35;margin:3px 0 0}
+ .pilot-stage{height:282px}
+ .pilot-companion{left:7px;top:7px;padding:3px;border-radius:10px}
+ .pilot-companion img{width:34px;height:34px}
+ .pilot-companion span{display:none}
+ .pilot-keeper{top:7px;right:7px;padding:3px;font-size:10px}
+ .pilot-keeper img{width:34px;height:34px}
+ .pilot-family-node,.pilot-waypoint{width:67px;min-height:84px;border-radius:12px!important}
+ .pilot-family-node b,.pilot-waypoint b{font-size:30px}
+ .pilot-family-node small,.pilot-waypoint small{font-size:10px}
+ .pilot-family-node span{font-size:11px}
+ .pilot-adventure .pilot-magic-target{width:168px;max-width:185px;min-height:66px;padding:7px 10px;flex-direction:row;gap:7px}
+ .pilot-magic-target>b{font-size:14px;max-width:105px}
+ .pilot-magic-target>span{flex:0 0 40px;width:40px;height:44px;font-size:30px}
+ .pilot-expression-options button{width:150px;padding:6px}
+ .pilot-expression-options span{font-size:17px}
+ .pilot-expression-options small{font-size:11px}
+ .pilot-adventure .pilot-observe{left:7px;bottom:6px;max-width:142px;font-size:11px;padding:5px 8px}
+ .pilot-dock{padding:12px 13px 7px}
+ .pilot-build{grid-template-columns:1fr;gap:11px}
+ .pilot-board{width:232px;height:117px;margin:auto;gap:8px}
+ .pilot-slot b{font-size:57px}
+ .pilot-board--semi-enclosure{width:184px;height:155px}
+ .pilot-board--semi-enclosure .pilot-slot[data-slot-id=outer] b{font-size:150px}
+ .pilot-board--semi-enclosure .pilot-slot[data-slot-id=inner] b{font-size:68px}
+ .pilot-hand-area p{font-size:14px;margin-bottom:7px}
+ .pilot-hand{gap:5px}
+ .pilot-adventure .pilot-hand button{height:54px;min-width:48px}
+ .pilot-hand span{font-size:32px}
+ .pilot-build-tools{gap:8px;margin-top:8px}
+ .pilot-build-tools button{font-size:12px;padding:6px 10px}
+ .pilot-build-tools small{font-size:11px}
+ .pilot-meaning{grid-template-columns:1fr;gap:9px}
+ .pilot-meaning-word{gap:12px}
+ .pilot-meaning-word>b{font-size:66px}
+ .pilot-meaning-word strong{display:inline;font-size:22px;margin-right:16px}
+ .pilot-meaning-word em{display:inline;font-size:20px}
+ .pilot-meaning p{font-size:16px}
+ .pilot-family-dock{display:block}
+ .pilot-family-dock h2{font-size:18px}
+ .pilot-family-dock p{font-size:14px}
+ .pilot-family-dock summary{font-size:13px}
+ .pilot-adventure .pilot-family-dock>.pilot-primary{width:100%;min-height:50px;margin:3px 0 5px}
+ .pilot-feedback{padding:8px 13px 12px;font-size:13px}
+ .pilot-intro{display:block;min-height:0;padding:0 0 14px}
+ .pilot-intro p{font-size:18px;margin:4px 0 14px}
+ .pilot-intro .pilot-primary{width:100%}
+}

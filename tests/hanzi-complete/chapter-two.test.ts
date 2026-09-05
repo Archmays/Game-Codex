@@ -104,7 +104,8 @@ describe("Chapter Two deterministic adventure", () => {
   });
 
   test("integrates Chapter Two progress into the complete engine and V3 save", () => {
-    const unlocked = updateCompleteSave(createFreshCompleteSave(), { unlockedChapterIds: ["chapter-one", "chapter-two"] });
+    // This fixture deliberately exercises the unversioned historical action stream.
+    const unlocked = updateCompleteSave(createFreshCompleteSave(), { unlockedChapterIds: ["chapter-one", "chapter-two"], chapterTwoReplay: { seed: "chapter-two-master:chapter-two", initialHeroId: "light-speaker", actions: [] } });
     const progress = progressSeedFromCompleteSave(unlocked);
     let complete = createCompleteEngineState("chapter-two-master", progress);
     complete = reduceCompleteEngineState(complete, { type: "enter-chapter", chapterId: "chapter-two" });

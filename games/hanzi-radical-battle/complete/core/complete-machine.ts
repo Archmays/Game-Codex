@@ -42,7 +42,7 @@ export function createCompleteEngineState(seed = "character-light-return", progr
     ? replayCompleteChapterOneRun(progress.chapterOneReplay.seed, progress.chapterOneReplay.initialHeroId, progress.chapterOneReplay.actions, progress.chapterOneReplay.mode)
     : null;
   const chapterTwoRun = progress.chapterTwoReplay
-    ? replayChapterTwoRun(progress.chapterTwoReplay.seed, progress.chapterTwoReplay.initialHeroId, progress.chapterTwoReplay.actions)
+    ? replayChapterTwoRun(progress.chapterTwoReplay.seed, progress.chapterTwoReplay.initialHeroId, progress.chapterTwoReplay.actions, progress.chapterTwoReplay.ruleset)
     : null;
   const chapterThreeRun = progress.chapterThreeReplay
     ? replayChapterThreeRun(progress.chapterThreeReplay.seed, progress.chapterThreeReplay.initialHeroId, progress.chapterThreeReplay.actions)

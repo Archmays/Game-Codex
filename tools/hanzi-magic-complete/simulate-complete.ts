@@ -232,7 +232,7 @@ function main(): void {
   COMPLETE_EPISODE_IDS.slice(0, 4).forEach((id) => reachedEpisodes.add(id));
 
   const chapterTwoResume = simulateChapterTwo("complete-resume-ch2");
-  const chapterTwoBase = updateCompleteSave(createFreshCompleteSave(), { unlockedChapterIds: ["chapter-one", "chapter-two"] });
+  const chapterTwoBase = updateCompleteSave(createFreshCompleteSave(), { unlockedChapterIds: ["chapter-one", "chapter-two"], chapterTwoReplay: { seed: "complete-resume-ch2", initialHeroId: "light-speaker", actions: [] } });
   let chapterTwoMaster = createCompleteEngineState("complete-resume-ch2", progressSeedFromCompleteSave(chapterTwoBase));
   chapterTwoMaster = reduceCompleteEngineState(chapterTwoMaster, { type: "enter-chapter", chapterId: "chapter-two" });
   for (const action of chapterTwoResume.actions.slice(0, Math.floor(chapterTwoResume.actions.length / 2))) chapterTwoMaster = reduceCompleteEngineState(chapterTwoMaster, { type: "chapter-two-action", action });

@@ -2,6 +2,11 @@ import type { M3HeroId } from "../../../v2/chapter-one/builds";
 import { COMPLETE_CORE_CHARACTER_NODES } from "../../content-graph/core-characters";
 import { COMPLETE_COMPONENT_FAMILIES } from "../../content-graph/families";
 import type { CompleteSlotId } from "../../content-graph/types";
+import {
+  PILOT_SIX_RULESET, PILOT_SIX_DEFINITIONS, freshPilotProgress, getPilotSixDefinition,
+  pilotEncounterKey, pilotReachable, samePilotEdge,
+  type ChapterTwoRuleset, type PilotEncounterProgress, type PilotExpression,
+} from "./pilot-six";
 import { createCompleteCharacterHand, type CompleteHandCard } from "../../core/content-solvers";
 import {
   CHAPTER_TWO_EPISODES,
@@ -13,7 +18,7 @@ import {
 
 export type ChapterTwoPhase =
   | "chapter-intro" | "ability-choice" | "behavior-telegraph" | "behavior-effect"
-  | "build" | "composition" | "meaning" | "family-inspect" | "family-connect" | "family-result"
+  | "build" | "composition" | "meaning" | "pilot-meaning" | "family-inspect" | "family-connect" | "family-result"
   | "episode-repair" | "episode-complete" | "core-intro" | "ending" | "chapter-summary";
 
 export interface ChapterTwoPlacement { readonly cardId: string; readonly slotId: CompleteSlotId }
@@ -21,6 +26,8 @@ export interface ChapterTwoBossEvidence { readonly bossId: ChapterTwoBossId; rea
 
 export interface ChapterTwoState {
   readonly schemaVersion: 1;
+  readonly ruleset?: ChapterTwoRuleset;
+  readonly pilotProgress?: Readonly<Record<string, PilotEncounterProgress>>;
   readonly seed: string;
   readonly heroId: M3HeroId;
   readonly phase: ChapterTwoPhase;
@@ -62,6 +69,9 @@ export type ChapterTwoAction =
   | { readonly type: "continue" }
   | { readonly type: "toggle-family-character"; readonly characterId: string }
   | { readonly type: "connect-family" }
+  | { readonly type: "pilot-magic"; readonly expression?: PilotExpression }
+  | { readonly type: "pilot-move"; readonly nodeId: string }
+  | { readonly type: "pilot-observe" }
   | { readonly type: "start-core" }
   | { readonly type: "finish-ending" };
 
@@ -73,6 +83,7 @@ export interface ChapterTwoSimulationResult {
 }
 
 export interface ChapterTwoRun {
+  readonly ruleset?: ChapterTwoRuleset;
   readonly seed: string;
   readonly initialHeroId: M3HeroId;
   readonly actions: readonly ChapterTwoAction[];
@@ -95,6 +106,7 @@ function currentEncounter(episodeIndex: number, encounterIndex: number) {
 
 function prepareBuild(state: ChapterTwoState, encounterIndex: number): ChapterTwoState {
   const encounter = currentEncounter(state.episodeIndex, encounterIndex);
+  const pilot = getPilotSixDefinition({ ...state, encounterIndex });
   return {
     ...state,
     phase: "build",
@@ -105,11 +117,16 @@ function prepareBuild(state: ChapterTwoState, encounterIndex: number): ChapterTw
     placements: [],
     selectedCardId: null,
     familySelectedCharacterIds: [],
+    ...(pilot ? {
+      pilotProgress: { ...state.pilotProgress, [pilotEncounterKey(pilot)]: state.pilotProgress?.[pilotEncounterKey(pilot)] ?? freshPilotProgress() },
+      introducedBehaviorIds: unique([...state.introducedBehaviorIds, ...(pilot.object === "ink-leaves" || pilot.object === "leaf-gate" ? ["family-root-mist" as const] : pilot.object === "stone-path" ? ["family-variant-shadow" as const] : [])]),
+    } : {}),
     gentleMessage: "把字灵送回真实位置；点选和拖动都可以。",
   };
 }
 
 function prepareAbilityChoice(state: ChapterTwoState, episodeIndex: 0 | 1 | 2): ChapterTwoState {
+  if (state.ruleset === PILOT_SIX_RULESET && episodeIndex < 2) return prepareBuild({ ...state, episodeIndex, currentBossId: null, activeBehaviorIds: CHAPTER_TWO_EPISODES[episodeIndex].behaviorIds }, 0);
   const offer = CHAPTER_TWO_NEW_ABILITY_IDS.filter((id) => !state.selectedAbilityIds.includes(id));
   return {
     ...state,
@@ -140,6 +157,7 @@ function prepareBoss(state: ChapterTwoState, encounterIndex: number): ChapterTwo
     allPreviouslyIntroduced: definition.behaviorIds.every((id) => state.introducedBehaviorIds.includes(id)),
   } satisfies ChapterTwoBossEvidence;
   const encounter = currentEncounter(state.episodeIndex, encounterIndex);
+  if (getPilotSixDefinition({ ...state, encounterIndex })) return prepareBuild({ ...state, currentBossId: definition.bossId, activeBehaviorIds: definition.behaviorIds, bossEvidence: [...state.bossEvidence, evidence] }, encounterIndex);
   return {
     ...state,
     phase: "behavior-telegraph",
@@ -153,9 +171,11 @@ function prepareBoss(state: ChapterTwoState, encounterIndex: number): ChapterTwo
   };
 }
 
-export function createChapterTwoState(seed = "component-roots-return", heroId: M3HeroId = "light-speaker"): ChapterTwoState {
+export function createChapterTwoState(seed = "component-roots-return", heroId: M3HeroId = "light-speaker", ruleset?: ChapterTwoRuleset): ChapterTwoState {
+  if (ruleset !== undefined && ruleset !== PILOT_SIX_RULESET) throw new Error("UNKNOWN_CHAPTER_TWO_RULESET");
   return {
     schemaVersion: 1,
+    ...(ruleset ? { ruleset, pilotProgress: {} } : {}),
     seed,
     heroId,
     phase: "chapter-intro",
@@ -186,12 +206,12 @@ export function createChapterTwoState(seed = "component-roots-return", heroId: M
   };
 }
 
-export function createChapterTwoRun(seed: string, heroId: M3HeroId): ChapterTwoRun {
-  return { seed, initialHeroId: heroId, actions: [], state: createChapterTwoState(seed, heroId) };
+export function createChapterTwoRun(seed: string, heroId: M3HeroId, ruleset: ChapterTwoRuleset = PILOT_SIX_RULESET): ChapterTwoRun {
+  return { seed, initialHeroId: heroId, ruleset, actions: [], state: createChapterTwoState(seed, heroId, ruleset) };
 }
 
-export function replayChapterTwoRun(seed: string, heroId: M3HeroId, actions: readonly ChapterTwoAction[]): ChapterTwoRun {
-  return { seed, initialHeroId: heroId, actions: [...actions], state: replayChapterTwoActions(seed, heroId, actions) };
+export function replayChapterTwoRun(seed: string, heroId: M3HeroId, actions: readonly ChapterTwoAction[], ruleset?: ChapterTwoRuleset): ChapterTwoRun {
+  return { seed, initialHeroId: heroId, ...(ruleset ? { ruleset } : {}), actions: [...actions], state: replayChapterTwoActions(seed, heroId, actions, ruleset) };
 }
 
 export function reduceChapterTwoRun(run: ChapterTwoRun, action: ChapterTwoAction): ChapterTwoRun {
@@ -209,10 +229,11 @@ function placeCard(state: ChapterTwoState, cardId: string, slotId: CompleteSlotI
   if (placements.length < target.components.length) return { ...state, placements, selectedCardId: null, gentleMessage: "位置正确，下一道字灵也有自己的家。" };
   return {
     ...state,
-    phase: "composition",
+    phase: getPilotSixDefinition(state) ? "pilot-meaning" : "composition",
     placements,
     selectedCardId: null,
     discoveredCharacterIds: unique([...state.discoveredCharacterIds, target.id]),
+    ...(getPilotSixDefinition(state)?.object === "stone-path" ? { completedBehaviorIds: unique([...state.completedBehaviorIds, "family-variant-shadow" as const]) } : {}),
     gentleMessage: `${target.glyph}已经完整合起来。`,
   };
 }
@@ -237,7 +258,65 @@ function finishFamilyResult(state: ChapterTwoState): ChapterTwoState {
   };
 }
 
+export function getPilotProgress(state: ChapterTwoState): PilotEncounterProgress {
+  const pilot = getPilotSixDefinition(state);
+  return pilot ? state.pilotProgress?.[pilotEncounterKey(pilot)] ?? freshPilotProgress() : freshPilotProgress();
+}
+
+function reducePilotAction(state: ChapterTwoState, action: ChapterTwoAction): ChapterTwoState | undefined {
+  const pilot = getPilotSixDefinition(state);
+  if (!pilot || !["build", "pilot-meaning", "family-connect", "family-result"].includes(state.phase)) return action.type.startsWith("pilot-") ? state : undefined;
+  const current = getPilotProgress(state);
+  const progress = (patch: Partial<PilotEncounterProgress>, other: Partial<ChapterTwoState> = {}): ChapterTwoState => ({
+    ...state, ...other, pilotProgress: { ...state.pilotProgress, [pilotEncounterKey(pilot)]: { ...current, ...patch } },
+  });
+  const finish = (next: ChapterTwoState): ChapterTwoState => {
+    const done = getPilotProgress(next);
+    return pilotReachable(pilot.startId, done.edges).has(pilot.endId) && (pilot.object !== "leaf-gate" || done.mistCleared)
+      ? triggerAbility({ ...next, phase: "family-result", discoveredFamilyIds: unique([...next.discoveredFamilyIds, pilot.familyId]), gentleMessage: "入口和终点接通了！你接出的通路已经留在这里。" }, "family-root-link")
+      : next;
+  };
+  if (action.type === "pilot-magic") {
+    if (state.phase !== "pilot-meaning" || pilot.object === "waterwheel" || current.magicApplied) return state;
+    if (pilot.object === "vine" ? !["quiet", "talk"].includes(String(action.expression)) : action.expression !== undefined) return state;
+    return progress({ magicApplied: true, expression: action.expression ?? null, mistCleared: pilot.object === "ink-leaves" }, {
+      phase: "family-connect", gentleMessage: pilot.afterMessage,
+      ...(pilot.object === "ink-leaves" ? { completedBehaviorIds: unique([...state.completedBehaviorIds, "family-root-mist" as const]) } : {}),
+    });
+  }
+  if (action.type === "pilot-move") {
+    if (pilot.object !== "waterwheel" || state.phase !== "pilot-meaning") return state;
+    const road = PILOT_SIX_DEFINITIONS[4];
+    const roadProgress = state.pilotProgress?.[pilotEncounterKey(road)];
+    if (!road.nodeIds.includes(action.nodeId) || !roadProgress?.edges.some((edge) => samePilotEdge(edge, current.wheelNodeId, action.nodeId))) return { ...state, gentleMessage: "那里还没有相连的路。请选小水轮旁边已经接通的落脚点。" };
+    const arrived = action.nodeId === road.endId;
+    return progress({ wheelNodeId: action.nodeId, magicApplied: arrived }, { phase: arrived ? "family-connect" : "pilot-meaning", gentleMessage: arrived ? pilot.afterMessage : "小水轮沿已有道路前进了一步。再选一个相邻的落脚点。" });
+  }
+  if (action.type === "pilot-observe") {
+    if (pilot.object !== "leaf-gate" || current.mistCleared || !state.discoveredCharacterIds.includes(PILOT_SIX_DEFINITIONS[0].characterId) || !["pilot-meaning", "family-connect"].includes(state.phase)) return state;
+    return finish(progress({ mistCleared: true }, { completedBehaviorIds: unique([...state.completedBehaviorIds, "family-root-mist" as const]), gentleMessage: "指光把守护者的根雾照开了。已经接好的线完整显回。" }));
+  }
+  if (action.type === "toggle-family-character" && state.phase === "family-connect") {
+    if (![...pilot.nodeIds, pilot.decoyId].includes(action.characterId)) return state;
+    const selected = state.familySelectedCharacterIds.includes(action.characterId) ? state.familySelectedCharacterIds.filter((id) => id !== action.characterId) : [...state.familySelectedCharacterIds, action.characterId].slice(-2);
+    return { ...state, familySelectedCharacterIds: selected, gentleMessage: selected.length === 2 ? "看看这两个字里的部件，再把它们连接。" : "再选一个字碑，看看部件是否属于这条字脉。" };
+  }
+  if (action.type === "connect-family" && state.phase === "family-connect") {
+    const selected = state.familySelectedCharacterIds;
+    if (selected.length !== 2) return { ...state, gentleMessage: "先选两个字碑，再连接它们。" };
+    if (!selected.every((id) => family(pilot.familyId).memberCharacterIds.includes(id))) {
+      const decoy = character(pilot.decoyId);
+      return { ...state, familySelectedCharacterIds: [], gentleMessage: `${decoy.glyph}里的${decoy.components[0].glyph}和这条字脉的部件不同。已接好的路都在，再找找。` };
+    }
+    if (current.edges.some((edge) => samePilotEdge(edge, selected[0], selected[1]))) return { ...state, gentleMessage: "这段已经接好了。看看入口和终点是否相通。" };
+    return finish(progress({ edges: [...current.edges, [selected[0], selected[1]]] }, { familySelectedCharacterIds: [], gentleMessage: pilot.object === "leaf-gate" && !current.mistCleared ? "这段路接好了。用已学的指光照开根雾，再看看入口能否通到叶门。" : "这段路接好了；还要把入口和终点接通。" }));
+  }
+  return undefined;
+}
+
 export function reduceChapterTwoState(state: ChapterTwoState, action: ChapterTwoAction): ChapterTwoState {
+  const pilotNext = reducePilotAction(state, action);
+  if (pilotNext !== undefined) return counted(state, pilotNext);
   let next = state;
   switch (action.type) {
     case "start":
@@ -323,14 +402,21 @@ export function reduceChapterTwoState(state: ChapterTwoState, action: ChapterTwo
   return counted(state, next);
 }
 
-export function replayChapterTwoActions(seed: string, heroId: M3HeroId, actions: readonly ChapterTwoAction[]): ChapterTwoState {
-  return actions.reduce(reduceChapterTwoState, createChapterTwoState(seed, heroId));
+export function replayChapterTwoActions(seed: string, heroId: M3HeroId, actions: readonly ChapterTwoAction[], ruleset?: ChapterTwoRuleset): ChapterTwoState {
+  return actions.reduce(reduceChapterTwoState, createChapterTwoState(seed, heroId, ruleset));
 }
 
-export function isChapterTwoAction(value: unknown): value is ChapterTwoAction {
+export function isChapterTwoAction(value: unknown, ruleset?: ChapterTwoRuleset): value is ChapterTwoAction {
   if (!value || typeof value !== "object" || Array.isArray(value)) return false;
   const action = value as Record<string, unknown>;
   if (typeof action.type !== "string") return false;
+  if (action.type.startsWith("pilot-")) {
+    if (ruleset !== PILOT_SIX_RULESET) return false;
+    if (action.type === "pilot-observe") return Object.keys(action).length === 1;
+    if (action.type === "pilot-move") return Object.keys(action).sort().join("|") === "nodeId|type" && typeof action.nodeId === "string" && action.nodeId.length <= 80;
+    if (action.type === "pilot-magic") return Object.keys(action).sort().join("|") === "type" || (Object.keys(action).sort().join("|") === "expression|type" && ["quiet", "talk"].includes(String(action.expression)));
+    return false;
+  }
   if (["start", "begin-behavior", "recover-behavior", "undo", "continue", "connect-family", "start-core", "finish-ending"].includes(action.type)) return Object.keys(action).length === 1;
   if (action.type === "choose-ability") return Object.keys(action).sort().join("|") === "abilityId|type" && CHAPTER_TWO_NEW_ABILITY_IDS.includes(action.abilityId as ChapterTwoAbilityId);
   if (action.type === "select-card") return Object.keys(action).sort().join("|") === "cardId|type" && typeof action.cardId === "string";

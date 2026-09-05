@@ -146,6 +146,10 @@ export function writeCompleteSliceSave(storage: CompleteSliceStorage, state: Com
   const serialized = JSON.stringify(valid);
   if (new TextEncoder().encode(serialized).byteLength >= SAVE_HARD_MAX_BYTES) throw new Error("HANZI_MAGIC_COMPLETE_SAVE_EXCEEDS_500_KIB");
   const previous = storage.getItem(HANZI_MAGIC_COMPLETE_SAVE_KEY);
+  // A mounted historical slice must not replace a newer chapter replay (or corrupt bytes).
+  if (previous !== null) {
+    try { if (!validateCompleteSliceSave(JSON.parse(previous))) return; } catch { return; }
+  }
   if (previous !== null) {
     try { if (validateCompleteSliceSave(JSON.parse(previous))) storage.setItem(HANZI_MAGIC_COMPLETE_BACKUP_KEY, previous); } catch { /* malformed raw is captured by read */ }
   }

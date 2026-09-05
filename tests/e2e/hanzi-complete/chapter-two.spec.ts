@@ -32,6 +32,7 @@ async function activate(page: Page, locator: Locator, mode: InputMode) {
 async function seedUnlockedSave(page: Page) {
   const save = updateCompleteSave(createFreshCompleteSave(), {
     unlockedChapterIds: ["chapter-one", "chapter-two"],
+    chapterTwoReplay: { seed: "chapter-two-browser", initialHeroId: "light-speaker", actions: [] },
     activeResume: { screen: "world", chapterId: "chapter-two", episodeId: null, phase: "world", seed: "component-roots-return", actionCount: 0 },
   });
   await page.addInitScript(({ key, value }) => {
@@ -44,7 +45,8 @@ async function seedUnlockedSave(page: Page) {
 
 async function gotoFreshChapterTwo(page: Page) {
   await seedUnlockedSave(page);
-  await page.goto("/?play=hanzi-magic-complete&from=hub&chapter=two&fresh=1&seed=chapter-two-browser");
+  // Exercise the unchanged unversioned replay route; the pilot has its own suite.
+  await page.goto("/?play=hanzi-magic-complete&from=hub&chapter=two&seed=chapter-two-browser");
   await expect(page.getByTestId("hanzi-complete-chapter-two")).toHaveAttribute("data-phase", "chapter-intro");
   await expect(page.getByTestId("chapter-two-intro")).toBeVisible();
 }

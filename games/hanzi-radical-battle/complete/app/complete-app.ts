@@ -15,6 +15,9 @@ import {
   syncCompleteSaveFromEngine,
   updateCompleteSave,
   writeCompleteSave,
+  completeBrowserStorage,
+  isCompleteSaveWritable,
+  isCompleteSaveCurrent,
   type CompleteSaveState,
   type CompleteStorageLike,
 } from "../save/complete-save";
@@ -35,21 +38,7 @@ export interface MountedCompleteApp extends MountedGame {
   dispatch(action: CompleteEngineAction): void;
 }
 
-const MEMORY_STORAGE = new Map<string, string>();
-function browserStorage(): CompleteStorageLike {
-  try {
-    const key = "family-games/hanzi-complete-storage-test";
-    window.localStorage.setItem(key, "1");
-    window.localStorage.removeItem(key);
-    return window.localStorage;
-  } catch {
-    return {
-      getItem: (key) => MEMORY_STORAGE.get(key) ?? null,
-      setItem: (key, value) => { MEMORY_STORAGE.set(key, value); },
-      removeItem: (key) => { MEMORY_STORAGE.delete(key); },
-    };
-  }
-}
+
 
 function escapeHtml(value: string): string {
   return value.replace(/[&<>\"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[character]!);
@@ -132,7 +121,7 @@ function renderWorld(state: CompleteEngineState, save: CompleteSaveState, readSo
   return `<main class="hmc3-shell" data-testid="hanzi-magic-complete" data-screen="world" data-story-complete="${String(storyComplete)}" data-hero-id="${state.heroId}" data-active-chapter="${state.activeChapterId}" data-save-source="${readSource}" data-save-read-only="${String(readOnly)}" data-discovered-count="${save.discoveredCharacterIds.length}" data-repair-count="${save.repairedObjectIds.length}" data-migration-sources="${save.migration.sources.join(",")}" style="--world-image:url('${m5AssetUrl(storyComplete ? "chapter-one-restored" : "region-glimmer-grove")}')">
     <div class="hmc3-world-art" aria-hidden="true"><div class="hmc3-canopy"></div><div class="hmc3-lights"></div><div class="hmc3-path-light"></div></div>
     <header class="hmc3-header"><a href="${escapeHtml(returnHref)}">← ${returnLabel}</a><div><span>汉字魔法战</span><h1>墨迹森林 · 字光归林</h1></div><button type="button" data-action="toggle-parent" aria-label="打开家长角" aria-expanded="${String(parentClearArmed)}">家长角</button></header>
-    ${readOnly ? `<div class="hmc3-save-note" role="status">发现较新版本存档：当前只读，不会覆盖。</div>` : readSource.includes("migrated") || readSource === "legacy-merged" ? `<div class="hmc3-save-note" role="status">旧冒险的字光已安全接回；原存档字节仍保留。</div>` : ""}
+    ${readOnly ? `<div class="hmc3-save-note" role="status">${readSource === "future-read-only" ? "发现较新版本存档：当前只读，不会覆盖。" : "本机存档已保护，原记录不会覆盖。当前进展暂未保存，回到森林后可重新读取。"}</div>` : readSource.includes("migrated") || readSource === "legacy-merged" ? `<div class="hmc3-save-note" role="status">旧冒险的字光已安全接回；原存档字节仍保留。</div>` : ""}
     <section class="hmc3-world-panel" aria-label="当前森林场景">
       <div class="hmc3-story"><p class="hmc3-place">${storyComplete ? "字光归林后的墨迹森林" : "墨迹森林营地"}</p><h2>${storyComplete ? "森林会写光，也会记得每一处修复" : state.completedChapterIds.includes("chapter-one") ? "树冠上又亮起了一条路" : "营地灯在等第一道完整字光"}</h2><p>${storyComplete ? "三章故事已经完整收束。现在可以自由重走、连接字脉、探索词语；没有收集门槛。" : escapeHtml(state.gentleMessage)}</p>${worldPrimary(state)}<small>本地保存 · 无登录 · 无排名 · 随时可以停下</small></div>
       ${heroCard(state.heroId)}
@@ -161,8 +150,7 @@ function renderChapterPreview(state: CompleteEngineState, requested: "chapter-tw
 }
 
 export function mountHanziMagicComplete(root: HTMLElement, options: MountCompleteAppOptions = {}): MountedCompleteApp {
-  const storage = options.storage ?? browserStorage();
-  if (options.fresh) clearCompleteSave(storage);
+  const storage = options.storage ?? completeBrowserStorage();
   let read = readCompleteSave(storage);
   let save = read.state;
   let state = createCompleteEngineState(save.activeResume.seed, progressSeedFromCompleteSave(save));
@@ -174,7 +162,7 @@ export function mountHanziMagicComplete(root: HTMLElement, options: MountComplet
   const returnHref = options.returnHref ?? "?world=my-game-world";
 
   const persist = () => {
-    if (!read.writable) return;
+    if (!isCompleteSaveWritable(save)) return;
     save = syncCompleteSaveFromEngine(save, state);
     writeCompleteSave(storage, save);
   };
@@ -183,7 +171,7 @@ export function mountHanziMagicComplete(root: HTMLElement, options: MountComplet
       ? renderChapterPreview(state, options.requestedChapter, returnHref)
       : options.view === "archive"
         ? renderArchive(state, save, selectedBossId, bossStage, selectedRepairId, "?play=hanzi-magic-complete&from=hub")
-        : renderWorld(state, save, read.source, !read.writable, parentClearArmed, returnHref);
+        : renderWorld(state, save, read.source, !isCompleteSaveWritable(save), parentClearArmed, returnHref);
     options.onStateChange?.(state);
   };
   const dispatch = (action: CompleteEngineAction) => {
@@ -204,13 +192,14 @@ export function mountHanziMagicComplete(root: HTMLElement, options: MountComplet
     if (target.dataset.action === "archive-close-detail") { selectedBossId = null; selectedRepairId = null; bossStage = 0; render(); return; }
     const preference = target.dataset.pref;
     if (preference === "muted" || preference === "reduced-motion") {
-      if (!read.writable) return;
+      if (!isCompleteSaveWritable(save)) return;
       save = updateCompleteSave(save, { settings: { ...save.settings, [preference === "muted" ? "muted" : "reducedMotion"]: !save.settings[preference === "muted" ? "muted" : "reducedMotion"] } });
       writeCompleteSave(storage, save);
       render();
     }
     if (target.dataset.action === "toggle-parent") { parentClearArmed = !parentClearArmed; render(); }
     if (target.dataset.action === "clear-v3") {
+      if (!isCompleteSaveCurrent(storage, save)) { render(); return; }
       clearCompleteSave(storage);
       save = createFreshCompleteSave();
       state = createCompleteEngineState();
@@ -220,6 +209,7 @@ export function mountHanziMagicComplete(root: HTMLElement, options: MountComplet
       render();
     }
     if (target.dataset.action === "confirm-clear-all") {
+      if (!isCompleteSaveCurrent(storage, save)) { render(); return; }
       clearAllHanziProgress(storage, true);
       save = createFreshCompleteSave();
       state = createCompleteEngineState();
@@ -231,7 +221,7 @@ export function mountHanziMagicComplete(root: HTMLElement, options: MountComplet
   };
 
   root.addEventListener("click", click);
-  if (read.writable) persist();
+  if (isCompleteSaveWritable(save)) persist();
   render();
   return {
     getState: () => state,

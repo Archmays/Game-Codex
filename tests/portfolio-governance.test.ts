@@ -118,6 +118,8 @@ describe("game portfolio governance", () => {
       "equation-slider entry/interaction/return smoke",
     ]);
 
+    expect(affectedGateCommands(["games/hanzi-radical-battle/complete/save/complete-save.ts"]).some((command) => command.args.includes("tests/e2e/hanzi-complete/pilot-six.spec.ts"))).toBe(true);
+    expect(affectedGateCommands(["public/assets/hanzi-radical-battle/pilot-six/r1/bridge.webp"]).some((command) => command.args.includes("tests/e2e/hanzi-complete/pilot-six.spec.ts"))).toBe(true);
     const shared = affectedGateCommands(["packages/game-core/index.ts"]);
     expect(shared.map((command) => command.label)).toEqual([
       "portfolio consistency",

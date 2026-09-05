@@ -14,6 +14,8 @@ import {
   syncCompleteSaveFromEngine,
   updateCompleteSave,
   writeCompleteSave,
+  completeBrowserStorage,
+  isCompleteSaveWritable,
   type CompleteSaveState,
   type CompleteStorageLike,
 } from "../../save/complete-save";
@@ -46,15 +48,7 @@ export interface MountedChapterThree extends MountedGame {
   dispatch(action: ChapterThreeAction): void;
 }
 
-const MEMORY_STORAGE = new Map<string, string>();
-function browserStorage(): CompleteStorageLike {
-  try {
-    const key = "family-games/hanzi-complete-chapter-three-storage-test";
-    localStorage.setItem(key, "1"); localStorage.removeItem(key); return localStorage;
-  } catch {
-    return { getItem: (key) => MEMORY_STORAGE.get(key) ?? null, setItem: (key, value) => { MEMORY_STORAGE.set(key, value); }, removeItem: (key) => { MEMORY_STORAGE.delete(key); } };
-  }
-}
+
 
 function escapeHtml(value: string): string { return value.replace(/[&<>\"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[character]!); }
 function character(id: string) { return COMPLETE_CORE_CHARACTER_NODES.find((candidate) => candidate.id === id)!; }
@@ -200,14 +194,14 @@ function speak(text: string, muted: boolean) {
 }
 
 export function mountHanziMagicChapterThree(root: HTMLElement, options: MountChapterThreeOptions = {}): MountedChapterThree {
-  const storage = options.storage ?? browserStorage();
+  const storage = options.storage ?? completeBrowserStorage();
   let read = readCompleteSave(storage); let save = read.state;
   const returnHref = options.returnHref ?? "?play=hanzi-magic-complete&from=hub";
   if (!save.unlockedChapterIds.includes("chapter-three")) {
     root.innerHTML = renderLocked(returnHref);
     return { getState: () => null, getSave: () => save, dispatch: () => {}, destroy: () => root.replaceChildren() };
   }
-  if (options.fresh && read.writable) {
+  if (options.fresh && isCompleteSaveWritable(save)) {
     save = updateCompleteSave(save, { chapterThreeReplay: null, activeResume: { screen: "world", chapterId: "chapter-three", episodeId: null, phase: "world", seed: options.seed ?? "word-light-return", actionCount: 0 } });
     writeCompleteSave(storage, save);
     const consumed = new URL(location.href); consumed.searchParams.delete("fresh"); history.replaceState(history.state, "", `${consumed.pathname}${consumed.search}${consumed.hash}`);
@@ -216,13 +210,13 @@ export function mountHanziMagicChapterThree(root: HTMLElement, options: MountCha
   master = reduceCompleteEngineState(master, { type: "enter-chapter", chapterId: "chapter-three" });
   let state = master.chapterThreeRun!.state;
   let draggedCardId: string | null = null; let destroyed = false;
-  const persist = () => { if (!read.writable) return; save = syncCompleteSaveFromEngine(save, master); writeCompleteSave(storage, save); };
+  const persist = () => { if (!isCompleteSaveWritable(save)) return; save = syncCompleteSaveFromEngine(save, master); writeCompleteSave(storage, save); };
   const focusNext = () => root.querySelector<HTMLElement>(["discovery-build", "word-build-a", "word-build-b"].includes(state.phase) && state.selectedCardId ? ".hmc3-slot:not(.is-filled)" : "[data-primary-focus], button:not([disabled]), a")?.focus({ preventScroll: true });
   const render = () => {
     const epilogue = ["ending", "epilogue-forest", "epilogue-companions", "epilogue-home", "chapter-summary"].includes(state.phase);
     const scene = epilogue ? "chapter-one-restored" : CHAPTER_THREE_EPISODES[state.episodeIndex].sceneKey;
     const storyNewCount = CHAPTER_THREE_STORY_CHARACTER_IDS.filter((id) => state.discoveredCharacterIds.includes(id)).length;
-    root.innerHTML = `<main class="hmc3-shell" data-testid="hanzi-complete-chapter-three" data-phase="${state.phase}" data-episode-index="${state.episodeIndex}" data-encounter-index="${state.encounterIndex}" data-action-count="${state.actionCount}" data-current-character-id="${state.currentBuildCharacterId ?? "none"}" data-current-word-id="${state.currentWordId ?? "none"}" data-story-new-count="${storyNewCount}" data-word-count="${state.discoveredWordIds.length}" data-repair-count="${state.repairedObjectIds.length}" data-boss-count="${state.completedBossIds.length}" data-selected-ability-count="${state.selectedAbilityIds.length}" data-triggered-ability-count="${state.triggeredAbilityIds.length}" data-muted="${String(save.settings.muted)}" data-reduced-motion="${String(save.settings.reducedMotion)}" data-save-read-only="${String(!read.writable)}" style="--hmc3-scene:url('${m5AssetUrl(scene)}')"><div class="hmc3-world" aria-hidden="true"><i></i><span></span><b></b><em></em></div><header class="hmc3-header"><a href="${escapeHtml(returnHref)}" aria-label="返回墨迹森林">← 森林</a><div><span>汉字魔法战 · 字光归林</span><h1>${epilogue ? CHAPTER_THREE_EPILOGUE_TITLE : "万象共鸣"}</h1></div><div><button type="button" data-pref="muted" aria-pressed="${String(save.settings.muted)}">${save.settings.muted ? "打开声音" : "静音"}</button><button type="button" data-pref="reduced-motion" aria-pressed="${String(save.settings.reducedMotion)}">${save.settings.reducedMotion ? "恢复动画" : "减少动画"}</button></div></header>${!read.writable ? `<p class="hmc3-save-note" role="status">发现较新版本存档：当前只读，不会覆盖。</p>` : ""}<div class="hmc3-layout">${renderPath(state)}<div class="hmc3-phase" aria-live="polite">${renderPhase(state)}</div></div><footer class="hmc3-footer"><span>本地匿名保存 · 无登录 · 无排名</span><span>${CHAPTER_THREE_OPTIONAL_CHARACTER_IDS.length} 个可选新字 · ${CHAPTER_THREE_OPTIONAL_WORD_IDS.length} 个可选词不阻塞通关</span></footer></main>`;
+    root.innerHTML = `<main class="hmc3-shell" data-testid="hanzi-complete-chapter-three" data-phase="${state.phase}" data-episode-index="${state.episodeIndex}" data-encounter-index="${state.encounterIndex}" data-action-count="${state.actionCount}" data-current-character-id="${state.currentBuildCharacterId ?? "none"}" data-current-word-id="${state.currentWordId ?? "none"}" data-story-new-count="${storyNewCount}" data-word-count="${state.discoveredWordIds.length}" data-repair-count="${state.repairedObjectIds.length}" data-boss-count="${state.completedBossIds.length}" data-selected-ability-count="${state.selectedAbilityIds.length}" data-triggered-ability-count="${state.triggeredAbilityIds.length}" data-muted="${String(save.settings.muted)}" data-reduced-motion="${String(save.settings.reducedMotion)}" data-save-read-only="${String(!isCompleteSaveWritable(save))}" style="--hmc3-scene:url('${m5AssetUrl(scene)}')"><div class="hmc3-world" aria-hidden="true"><i></i><span></span><b></b><em></em></div><header class="hmc3-header"><a href="${escapeHtml(returnHref)}" aria-label="返回墨迹森林">← 森林</a><div><span>汉字魔法战 · 字光归林</span><h1>${epilogue ? CHAPTER_THREE_EPILOGUE_TITLE : "万象共鸣"}</h1></div><div><button type="button" data-pref="muted" aria-pressed="${String(save.settings.muted)}">${save.settings.muted ? "打开声音" : "静音"}</button><button type="button" data-pref="reduced-motion" aria-pressed="${String(save.settings.reducedMotion)}">${save.settings.reducedMotion ? "恢复动画" : "减少动画"}</button></div></header>${!isCompleteSaveWritable(save) ? `<p class="hmc3-save-note" role="status">本机存档已保护，当前进展暂未保存。回到森林后可以重新读取。</p>` : ""}<div class="hmc3-layout">${renderPath(state)}<div class="hmc3-phase" aria-live="polite">${renderPhase(state)}</div></div><footer class="hmc3-footer"><span>本地匿名保存 · 无登录 · 无排名</span><span>${CHAPTER_THREE_OPTIONAL_CHARACTER_IDS.length} 个可选新字 · ${CHAPTER_THREE_OPTIONAL_WORD_IDS.length} 个可选词不阻塞通关</span></footer></main>`;
     focusNext(); options.onStateChange?.(state);
   };
   const dispatch = (action: ChapterThreeAction) => {
@@ -242,7 +236,7 @@ export function mountHanziMagicChapterThree(root: HTMLElement, options: MountCha
     if (target.dataset.wordCharacterId) dispatch({ type: "place-word-character", characterId: target.dataset.wordCharacterId });
     if (action === "speak-character" && state.currentBuildCharacterId) { const entry = character(state.currentBuildCharacterId); speak(`${entry.glyph}，${reading(entry.id).fixedPhrase}`, save.settings.muted); }
     if (action === "speak-word" && state.currentWordId) speak(word(state.currentWordId).glyphs.join(""), save.settings.muted);
-    if (target.dataset.pref && read.writable) {
+    if (target.dataset.pref && isCompleteSaveWritable(save)) {
       const field = target.dataset.pref === "muted" ? "muted" : "reducedMotion";
       save = updateCompleteSave(save, { settings: { ...save.settings, [field]: !save.settings[field] } }); writeCompleteSave(storage, save); render();
     }

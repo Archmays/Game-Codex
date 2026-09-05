@@ -1,0 +1,373 @@
+{
+  "version": "pilot-six-r1",
+  "runtimeNamespace": "assets/hanzi-radical-battle/pilot-six/r1",
+  "sourceOnly": true,
+  "assets": [
+    {
+      "name": "canopy-environment",
+      "version": "r1",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/pilot-six/r1/canopy-environment.png",
+        "width": 1586,
+        "height": 992,
+        "bytes": 2553348,
+        "sha256": "5affcbfb99f7b6053950a6cc4e493aed9c1fe0a15fa99cc12d35243a59ffd211"
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/pilot-six/r1/canopy-environment.webp",
+        "width": 1280,
+        "height": 801,
+        "bytes": 171284,
+        "sha256": "9ab301a4c4ea3f528ba327f0727163a1df7bd2f42f282b66b2cce66a0bc6c119",
+        "hasAlpha": false,
+        "transparent": 0,
+        "partial": 0,
+        "opaque": 1025280,
+        "decodedRgbaBytes": 4101120,
+        "borderAlphaAbove20": 4158
+      },
+      "origin": {
+        "tool": "OpenAI image_gen",
+        "generated": "2026-09-05",
+        "authorization": "User STEP3 explicitly authorized generation and use of pilot illustrations",
+        "transformation": "Source-native crop when recorded, then Sharp resize and WebP quality82 alphaQuality100; no background substitution or alpha removal"
+      }
+    },
+    {
+      "name": "ink-leaves",
+      "version": "r1",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/pilot-six/r1/ink-leaves.png",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 2080170,
+        "sha256": "6037414395330fa83479ec034bf5cefd3af9fc0a9f8f0c877945776ff9c851cf"
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/pilot-six/r1/ink-leaves.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 52590,
+        "sha256": "7e859a87b462ac937bd6da401368b58b39f992a0e3edba7772720e2384deabb4",
+        "hasAlpha": true,
+        "transparent": 160826,
+        "partial": 111087,
+        "opaque": 1367,
+        "decodedRgbaBytes": 1093120,
+        "borderAlphaAbove20": 0
+      },
+      "origin": {
+        "tool": "OpenAI image_gen",
+        "generated": "2026-09-05",
+        "authorization": "User STEP3 explicitly authorized generation and use of pilot illustrations",
+        "transformation": "Source-native crop when recorded, then Sharp resize and WebP quality82 alphaQuality100; no background substitution or alpha removal"
+      }
+    },
+    {
+      "name": "bridge",
+      "version": "r1",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/pilot-six/r1/bridge.png",
+        "width": 1774,
+        "height": 887,
+        "bytes": 1342247,
+        "sha256": "860257eb72de7049660a1fbc163940e0d15a461a75fe72f766fcdf95b0bfa7c1"
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/pilot-six/r1/bridge.webp",
+        "width": 960,
+        "height": 480,
+        "bytes": 110958,
+        "sha256": "bc8ab7ce8d6f79eb6a13ad7ec839add5c42e4bb56372e61c14ed54cc068e94bb",
+        "hasAlpha": true,
+        "transparent": 301771,
+        "partial": 157939,
+        "opaque": 1090,
+        "decodedRgbaBytes": 1843200,
+        "borderAlphaAbove20": 0
+      },
+      "origin": {
+        "tool": "OpenAI image_gen",
+        "generated": "2026-09-05",
+        "authorization": "User STEP3 explicitly authorized generation and use of pilot illustrations",
+        "transformation": "Source-native crop when recorded, then Sharp resize and WebP quality82 alphaQuality100; no background substitution or alpha removal"
+      }
+    },
+    {
+      "name": "valley-environment",
+      "version": "r1",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/pilot-six/r1/valley-environment.png",
+        "width": 1586,
+        "height": 992,
+        "bytes": 2893786,
+        "sha256": "97b2134f048823b37927670ca1a2c32fbad47ce7016e37fd6160f0c506f50eb6"
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/pilot-six/r1/valley-environment.webp",
+        "width": 1280,
+        "height": 801,
+        "bytes": 225160,
+        "sha256": "a85a3909a1eb321d3b11a5d2d2b2b22279e9166fe16128513b138260080f9226",
+        "hasAlpha": false,
+        "transparent": 0,
+        "partial": 0,
+        "opaque": 1025280,
+        "borderNonzero": 4158,
+        "decodedRgbaBytes": 4101120,
+        "borderAlphaAbove20": 4158
+      },
+      "origin": {
+        "tool": "OpenAI image_gen",
+        "generated": "2026-09-05",
+        "authorization": "User STEP3 explicitly authorized generation and use of pilot illustrations",
+        "transformation": "Source-native crop when recorded, then Sharp resize and WebP quality82 alphaQuality100; no background substitution or alpha removal"
+      }
+    },
+    {
+      "name": "lamp",
+      "version": "r1",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/pilot-six/r1/lamp.png",
+        "width": 485,
+        "height": 420,
+        "bytes": 385225,
+        "sha256": "6b10cd381200ff7441633057c340532a8e52e629a82a1ac935653ad2b4db2040",
+        "atlas": "object-atlas.png",
+        "crop": {
+          "left": 0,
+          "top": 0,
+          "width": 485,
+          "height": 420
+        }
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/pilot-six/r1/lamp.webp",
+        "width": 360,
+        "height": 312,
+        "bytes": 22712,
+        "sha256": "f13c09befcbb0937e4af3f708d2b058e43c26a165f449dac636aed6f31b0fac3",
+        "hasAlpha": true,
+        "transparent": 84314,
+        "partial": 27706,
+        "opaque": 300,
+        "borderNonzero": 0,
+        "decodedRgbaBytes": 449280,
+        "borderAlphaAbove20": 0
+      },
+      "origin": {
+        "tool": "OpenAI image_gen",
+        "generated": "2026-09-05",
+        "authorization": "User STEP3 explicitly authorized generation and use of pilot illustrations",
+        "transformation": "Source-native crop when recorded, then Sharp resize and WebP quality82 alphaQuality100; no background substitution or alpha removal"
+      }
+    },
+    {
+      "name": "vine-coiled",
+      "version": "r1",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/pilot-six/r1/vine-coiled.png",
+        "width": 504,
+        "height": 340,
+        "bytes": 398358,
+        "sha256": "7a4115b2d58a6d8fa00d516bd238d3a4d9700038a397f883567e84542f184c71",
+        "atlas": "object-atlas.png",
+        "crop": {
+          "left": 520,
+          "top": 55,
+          "width": 504,
+          "height": 340
+        }
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/pilot-six/r1/vine-coiled.webp",
+        "width": 420,
+        "height": 283,
+        "bytes": 35904,
+        "sha256": "cec8c7f06aafe3b6a537af0e8e242361942de245408bf4f56e2d262f08d83bf4",
+        "hasAlpha": true,
+        "transparent": 66261,
+        "partial": 52352,
+        "opaque": 247,
+        "borderNonzero": 0,
+        "decodedRgbaBytes": 475440,
+        "borderAlphaAbove20": 0
+      },
+      "origin": {
+        "tool": "OpenAI image_gen",
+        "generated": "2026-09-05",
+        "authorization": "User STEP3 explicitly authorized generation and use of pilot illustrations",
+        "transformation": "Source-native crop when recorded, then Sharp resize and WebP quality82 alphaQuality100; no background substitution or alpha removal"
+      }
+    },
+    {
+      "name": "vine-open",
+      "version": "r1",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/pilot-six/r1/vine-open.png",
+        "width": 1774,
+        "height": 887,
+        "bytes": 565482,
+        "sha256": "bb93c540349b44cf37f720671448d428ac7e2bf96419c9b218e4d3caaf90cc18"
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/pilot-six/r1/vine-open.webp",
+        "width": 640,
+        "height": 320,
+        "bytes": 31508,
+        "sha256": "85681a35f116a60711ce72898247ffc8cfb6807f569cdd5b0818e76efdf0b9e7",
+        "hasAlpha": true,
+        "transparent": 177442,
+        "partial": 26257,
+        "opaque": 1101,
+        "borderNonzero": 0,
+        "decodedRgbaBytes": 819200,
+        "borderAlphaAbove20": 0
+      },
+      "origin": {
+        "tool": "OpenAI image_gen",
+        "generated": "2026-09-05",
+        "authorization": "User STEP3 explicitly authorized generation and use of pilot illustrations",
+        "transformation": "Source-native crop when recorded, then Sharp resize and WebP quality82 alphaQuality100; no background substitution or alpha removal"
+      }
+    },
+    {
+      "name": "leaf-gate",
+      "version": "r1",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/pilot-six/r1/leaf-gate.png",
+        "width": 1182,
+        "height": 1330,
+        "bytes": 2251075,
+        "sha256": "a9cf22d9c16123d898c94aeea0259c0c066425149dc999dec8478fafd59e361f"
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/pilot-six/r1/leaf-gate.webp",
+        "width": 440,
+        "height": 495,
+        "bytes": 69012,
+        "sha256": "e0b8cc0f2fc93182af83985518c620106df691972d5506e363ad621fec0e2418",
+        "hasAlpha": true,
+        "transparent": 86054,
+        "partial": 130726,
+        "opaque": 1020,
+        "borderNonzero": 0,
+        "decodedRgbaBytes": 871200,
+        "borderAlphaAbove20": 0
+      },
+      "origin": {
+        "tool": "OpenAI image_gen",
+        "generated": "2026-09-05",
+        "authorization": "User STEP3 explicitly authorized generation and use of pilot illustrations",
+        "transformation": "Source-native crop when recorded, then Sharp resize and WebP quality82 alphaQuality100; no background substitution or alpha removal"
+      }
+    },
+    {
+      "name": "waterwheel",
+      "version": "r1",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/pilot-six/r1/waterwheel.png",
+        "width": 430,
+        "height": 390,
+        "bytes": 445712,
+        "sha256": "294162b5f1954ab041acad536a132fa4e7cc5e93ba9fb88a392568fb247c5029",
+        "atlas": "object-atlas.png",
+        "crop": {
+          "left": 582,
+          "top": 790,
+          "width": 430,
+          "height": 390
+        }
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/pilot-six/r1/waterwheel.webp",
+        "width": 360,
+        "height": 327,
+        "bytes": 43524,
+        "sha256": "bbd1b01e94b9ad671890d6ca4978bba932b9f9028304ded84a213c603b2161c7",
+        "hasAlpha": true,
+        "transparent": 51784,
+        "partial": 65510,
+        "opaque": 426,
+        "borderNonzero": 0,
+        "decodedRgbaBytes": 470880,
+        "borderAlphaAbove20": 0
+      },
+      "origin": {
+        "tool": "OpenAI image_gen",
+        "generated": "2026-09-05",
+        "authorization": "User STEP3 explicitly authorized generation and use of pilot illustrations",
+        "transformation": "Source-native crop when recorded, then Sharp resize and WebP quality82 alphaQuality100; no background substitution or alpha removal"
+      }
+    },
+    {
+      "name": "bowl",
+      "version": "r1",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/pilot-six/r1/bowl.png",
+        "width": 480,
+        "height": 364,
+        "bytes": 405434,
+        "sha256": "218eccfec7f06661594641447f28b01eace490f2526611661d8f648358f974f1",
+        "atlas": "object-atlas.png",
+        "crop": {
+          "left": 45,
+          "top": 1172,
+          "width": 480,
+          "height": 364
+        }
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/pilot-six/r1/bowl.webp",
+        "width": 240,
+        "height": 182,
+        "bytes": 11820,
+        "sha256": "e7c4a466f7c0c4a3ead1e07fcd88a5f3a8caadd9bb7fa6112db5c22aa9656aba",
+        "hasAlpha": true,
+        "transparent": 21596,
+        "partial": 21749,
+        "opaque": 335,
+        "borderNonzero": 0,
+        "decodedRgbaBytes": 174720,
+        "borderAlphaAbove20": 0
+      },
+      "origin": {
+        "tool": "OpenAI image_gen",
+        "generated": "2026-09-05",
+        "authorization": "User STEP3 explicitly authorized generation and use of pilot illustrations",
+        "transformation": "Source-native crop when recorded, then Sharp resize and WebP quality82 alphaQuality100; no background substitution or alpha removal"
+      }
+    },
+    {
+      "name": "stone-path",
+      "version": "r1",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/pilot-six/r1/stone-path.png",
+        "width": 1774,
+        "height": 887,
+        "bytes": 650305,
+        "sha256": "aa93a0d132c51c98d0ca3de72d4e62a4900705704ae3acb00c99114c32d14a41"
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/pilot-six/r1/stone-path.webp",
+        "width": 960,
+        "height": 480,
+        "bytes": 43390,
+        "sha256": "685e8657ed795965646146ed5b0791f4b44f7c87414fdcba584d831304c19efc",
+        "hasAlpha": true,
+        "transparent": 370789,
+        "partial": 89405,
+        "opaque": 606,
+        "borderNonzero": 0,
+        "decodedRgbaBytes": 1843200,
+        "borderAlphaAbove20": 0
+      },
+      "origin": {
+        "tool": "OpenAI image_gen",
+        "generated": "2026-09-05",
+        "authorization": "User STEP3 explicitly authorized generation and use of pilot illustrations",
+        "transformation": "Source-native crop when recorded, then Sharp resize and WebP quality82 alphaQuality100; no background substitution or alpha removal"
+      }
+    }
+  ]
+}

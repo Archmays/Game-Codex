@@ -20,7 +20,9 @@ import {
   validateCompleteSave,
   validateCompleteSaveDetailed,
   withCompleteSaveChecksum,
+  hasUnknownChapterTwoRuleset,
 } from "./complete-save-schema";
+import { PILOT_SIX_RULESET } from "../chapters/chapter-two/pilot-six";
 import {
   COMPLETE_LEGACY_SAVE_KEYS,
   HANZI_MAGIC_COMPLETE_MIGRATION_RAW_KEYS,
@@ -32,15 +34,36 @@ import {
 
 export interface CompleteSaveReadResult {
   readonly state: CompleteSaveState;
-  readonly source: "fresh" | "v3" | "v3-backup" | "slice-v1-migrated" | "v1-migrated" | "v2-migrated" | "wheel-migrated" | "legacy-merged" | "content-migrated" | "future-read-only";
+  readonly source: "fresh" | "v3" | "v3-backup" | "slice-v1-migrated" | "v1-migrated" | "v2-migrated" | "wheel-migrated" | "legacy-merged" | "content-migrated" | "future-read-only" | "storage-unavailable";
   readonly recovered: boolean;
   readonly recoveryReason: "NONE" | "MALFORMED_JSON" | "INVALID_SHAPE" | "CHECKSUM_MISMATCH";
   readonly futureVersionProtected: boolean;
   readonly writable: boolean;
 }
 
+interface SaveLineage { storage: CompleteStorageLike; expectedRaw: string | null; writable: boolean }
+const saveLineage = new WeakMap<CompleteSaveState, SaveLineage>();
+function bindSave(state: CompleteSaveState, storage: CompleteStorageLike, expectedRaw: string | null, writable: boolean): CompleteSaveState {
+  saveLineage.set(state, { storage, expectedRaw, writable }); return state;
+}
+export function isCompleteSaveWritable(state: CompleteSaveState): boolean { return saveLineage.get(state)?.writable ?? true; }
+export function isCompleteSaveCurrent(storage: CompleteStorageLike, state: CompleteSaveState): boolean {
+  const lineage = saveLineage.get(state);
+  if (!lineage || !lineage.writable || lineage.storage !== storage) return false;
+  try { if (storage.getItem(HANZI_MAGIC_COMPLETE_SAVE_KEY) === lineage.expectedRaw) return true; } catch { /* Refuse mutation when reads are denied. */ }
+  lineage.writable = false; return false;
+}
+
+/** Do not probe with extra keys or pretend an unavailable browser store is durable. */
+export function completeBrowserStorage(): CompleteStorageLike {
+  try { return window.localStorage; } catch {
+    const unavailable = () => { throw new Error("COMPLETE_STORAGE_UNAVAILABLE"); };
+    return { getItem: unavailable, setItem: unavailable, removeItem: unavailable };
+  }
+}
+
 function captureRecovery(storage: CompleteStorageLike, raw: string, reason: string): void {
-  storage.setItem(HANZI_MAGIC_COMPLETE_SAVE_RECOVERY_KEY, JSON.stringify({ schemaVersion: 1, reason, raw }));
+  try { storage.setItem(HANZI_MAGIC_COMPLETE_SAVE_RECOVERY_KEY, JSON.stringify({ schemaVersion: 1, reason, raw })); } catch { /* Primary bytes remain untouched; recovery is read-only. */ }
 }
 
 function readBackup(storage: CompleteStorageLike): CompleteSaveState | null {
@@ -58,6 +81,17 @@ function migrationSource(state: CompleteSaveState, fallback: CompleteSaveReadRes
 }
 
 export function readCompleteSave(storage: CompleteStorageLike): CompleteSaveReadResult {
+  try {
+    const result = readCompleteSaveAvailable(storage);
+    // Successful migration writes may already have advanced this identity.
+    if (!saveLineage.has(result.state)) bindSave(result.state, storage, storage.getItem(HANZI_MAGIC_COMPLETE_SAVE_KEY), result.writable);
+    return { ...result, writable: isCompleteSaveWritable(result.state) };
+  } catch {
+    return { state: bindSave(createFreshCompleteSave(), storage, null, false), source: "storage-unavailable", recovered: false, recoveryReason: "NONE", futureVersionProtected: false, writable: false };
+  }
+}
+
+function readCompleteSaveAvailable(storage: CompleteStorageLike): CompleteSaveReadResult {
   const raw = storage.getItem(HANZI_MAGIC_COMPLETE_SAVE_KEY);
   let state = createFreshCompleteSave();
   let source: CompleteSaveReadResult["source"] = "fresh";
@@ -78,8 +112,8 @@ export function readCompleteSave(storage: CompleteStorageLike): CompleteSaveRead
     }
     if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
       const schemaVersion = Number((parsed as Record<string, unknown>).schemaVersion);
-      if (Number.isFinite(schemaVersion) && schemaVersion > HANZI_MAGIC_COMPLETE_SAVE_SCHEMA_VERSION) {
-        return { state, source: "future-read-only", recovered: false, recoveryReason: "NONE", futureVersionProtected: true, writable: false };
+      if ((Number.isFinite(schemaVersion) && schemaVersion > HANZI_MAGIC_COMPLETE_SAVE_SCHEMA_VERSION) || hasUnknownChapterTwoRuleset((parsed as Record<string, unknown>).chapterTwoReplay)) {
+        return { state: bindSave(state, storage, raw, false), source: "future-read-only", recovered: false, recoveryReason: "NONE", futureVersionProtected: true, writable: false };
       }
       if (schemaVersion === 1 && (parsed as Record<string, unknown>).gameVersion === "3.0.0-slices") {
         const migrated = migrateCompleteSliceV1(storage, raw, state);
@@ -118,28 +152,52 @@ export function readCompleteSave(storage: CompleteStorageLike): CompleteSaveRead
         recovered = true;
         recoveryReason = "INVALID_SHAPE";
       }
+    } else if (!recovered) {
+      captureRecovery(storage, raw, "INVALID_SHAPE");
+      const backup = readBackup(storage); state = backup ?? state; source = backup ? "v3-backup" : "fresh";
+      recovered = true; recoveryReason = "INVALID_SHAPE";
     }
   }
+
+  if (recovered) return { state: bindSave(state, storage, raw, false), source, recovered, recoveryReason, futureVersionProtected: false, writable: false };
 
   const merged = mergeCompleteLegacyProgress(storage, state);
   const changed = !hasSameCompleteSavePayload(state, merged);
   state = merged;
   source = migrationSource(state, source);
-  if (changed || normalizedPrimary || source === "content-migrated" || source.endsWith("-migrated") || recovered) writeCompleteSave(storage, state);
+  bindSave(state, storage, raw, true);
+  if (changed || normalizedPrimary || source === "content-migrated" || source.endsWith("-migrated")) writeCompleteSave(storage, state);
   return { state, source, recovered, recoveryReason, futureVersionProtected: false, writable: true };
 }
 
-export function writeCompleteSave(storage: CompleteStorageLike, state: CompleteSaveState, writable = true): void {
+export function writeCompleteSave(storage: CompleteStorageLike, state: CompleteSaveState, writable = true): boolean {
   if (!writable) throw new Error("FUTURE_VERSION_SAVE_IS_READ_ONLY");
   const checked = validateCompleteSave(state);
   if (!checked) throw new Error("Refusing to write invalid Hanzi Magic Complete save");
   const serialized = JSON.stringify(checked);
-  if (new TextEncoder().encode(serialized).byteLength >= HANZI_MAGIC_COMPLETE_SAVE_MAX_BYTES) throw new Error("HANZI_MAGIC_COMPLETE_SAVE_EXCEEDS_500_KIB");
-  const previous = storage.getItem(HANZI_MAGIC_COMPLETE_SAVE_KEY);
-  if (previous !== null) {
-    try { if (validateCompleteSave(JSON.parse(previous))) storage.setItem(HANZI_MAGIC_COMPLETE_SAVE_BACKUP_KEY, previous); } catch { /* corrupt raw is already captured before recovery */ }
+  const lineage = saveLineage.get(state);
+  if (new TextEncoder().encode(serialized).byteLength >= HANZI_MAGIC_COMPLETE_SAVE_MAX_BYTES) {
+    bindSave(state, storage, lineage?.expectedRaw ?? null, false); return false;
   }
-  storage.setItem(HANZI_MAGIC_COMPLETE_SAVE_KEY, serialized);
+  if (lineage && (!lineage.writable || lineage.storage !== storage)) return false;
+  try {
+    const previous = storage.getItem(HANZI_MAGIC_COMPLETE_SAVE_KEY);
+    if ((lineage && previous !== lineage.expectedRaw) || (!lineage && previous !== null)) {
+      bindSave(state, storage, lineage?.expectedRaw ?? previous, false); return false;
+    }
+    if (previous !== null) {
+      let previousSave: CompleteSaveState | null = null;
+      try { previousSave = validateCompleteSave(JSON.parse(previous)); } catch { /* A validated migration may start from schema 1. */ }
+      if (previousSave) storage.setItem(HANZI_MAGIC_COMPLETE_SAVE_BACKUP_KEY, previous);
+    }
+    // A replacement arriving while backup was written must also win.
+    if (storage.getItem(HANZI_MAGIC_COMPLETE_SAVE_KEY) !== previous) { bindSave(state, storage, previous, false); return false; }
+    storage.setItem(HANZI_MAGIC_COMPLETE_SAVE_KEY, serialized);
+    const saved = storage.getItem(HANZI_MAGIC_COMPLETE_SAVE_KEY) === serialized;
+    bindSave(state, storage, serialized, saved); return saved;
+  } catch {
+    bindSave(state, storage, lineage?.expectedRaw ?? null, false); return false;
+  }
 }
 
 export function updateCompleteSave(
@@ -147,7 +205,22 @@ export function updateCompleteSave(
   patch: Partial<Omit<CompleteSaveState, "schemaVersion" | "gameVersion" | "contentRevisionHash" | "validation" | "privacy">>,
 ): CompleteSaveState {
   const { validation: _validation, ...payload } = previous;
-  return withCompleteSaveChecksum({ ...payload, ...patch });
+  const next = withCompleteSaveChecksum({ ...payload, ...patch });
+  const lineage = saveLineage.get(previous);
+  if (lineage) saveLineage.set(next, { ...lineage });
+  return next;
+}
+
+export function restartChapterTwoSave(previous: CompleteSaveState, seed: string): CompleteSaveState {
+  const old = previous.chapterTwoReplay;
+  const { priorRuns = [], ...record } = old ?? { seed, initialHeroId: previous.selectedHeroId, actions: [] };
+  const next = updateCompleteSave(previous, {
+    chapterTwoReplay: { seed, initialHeroId: previous.selectedHeroId, ruleset: PILOT_SIX_RULESET, actions: [], ...(old ? { priorRuns: [...priorRuns, record] } : {}) },
+    activeResume: { screen: "world", chapterId: "chapter-two", episodeId: null, phase: "world", seed, actionCount: 0 },
+  });
+  // Refuse a full archive; never discard an earlier run to make room.
+  if (!validateCompleteSave(next) || new TextEncoder().encode(JSON.stringify(next)).byteLength >= HANZI_MAGIC_COMPLETE_SAVE_MAX_BYTES) throw new Error("CHAPTER_TWO_REPLAY_ARCHIVE_FULL");
+  return next;
 }
 
 export function progressSeedFromCompleteSave(save: CompleteSaveState): CompleteEngineProgressSeed {
@@ -202,7 +275,7 @@ export function syncCompleteSaveFromEngine(previous: CompleteSaveState, state: C
   const nextEligibleAt = new Date(Date.parse(nowUtc) + 24 * 60 * 60 * 1000).toISOString();
   const newReviewRecords = [...newCharacterIds, ...newFamilyIds, ...newWordIds].map((recordId) => ({ recordId, state: "independent" as const, lastEncounteredAt: nowUtc, nextEligibleAt }));
   const chapterOneReplay = state.chapterOneRun ? { seed: state.chapterOneRun.seed, initialHeroId: state.chapterOneRun.initialHeroId, mode: state.chapterOneRun.mode, actions: state.chapterOneRun.actions } : previous.chapterOneReplay;
-  const chapterTwoReplay = state.chapterTwoRun ? { seed: state.chapterTwoRun.seed, initialHeroId: state.chapterTwoRun.initialHeroId, actions: state.chapterTwoRun.actions } : previous.chapterTwoReplay;
+  const chapterTwoReplay = state.chapterTwoRun ? { seed: state.chapterTwoRun.seed, initialHeroId: state.chapterTwoRun.initialHeroId, actions: state.chapterTwoRun.actions, ...(state.chapterTwoRun.ruleset ? { ruleset: state.chapterTwoRun.ruleset } : {}), ...(previous.chapterTwoReplay?.priorRuns ? { priorRuns: previous.chapterTwoReplay.priorRuns } : {}) } : previous.chapterTwoReplay;
   const chapterThreeReplay = state.chapterThreeRun ? { seed: state.chapterThreeRun.seed, initialHeroId: state.chapterThreeRun.initialHeroId, actions: state.chapterThreeRun.actions } : previous.chapterThreeReplay;
   const postgameResume = state.postgameRun ? {
     mode: state.postgameRun.mode,

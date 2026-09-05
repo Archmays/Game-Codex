@@ -6,6 +6,8 @@ import {
   readCompleteSave,
   updateCompleteSave,
   writeCompleteSave,
+  completeBrowserStorage,
+  isCompleteSaveWritable,
   type CompleteSaveState,
   type CompleteStorageLike,
 } from "../save/complete-save";
@@ -25,10 +27,7 @@ export interface MountCompleteWorkshopOptions {
   readonly returnHref?: string;
 }
 
-const MEMORY_STORAGE = new Map<string, string>();
-function browserStorage(): CompleteStorageLike {
-  try { return window.localStorage; } catch { return { getItem: (key) => MEMORY_STORAGE.get(key) ?? null, setItem: (key, value) => { MEMORY_STORAGE.set(key, value); }, removeItem: (key) => { MEMORY_STORAGE.delete(key); } }; }
-}
+
 function escapeHtml(value: string): string { return value.replace(/[&<>\"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[character]!); }
 function slotLabel(slotId: WheelSlotId): string { return ({ left: "左边", right: "右边", top: "上边", bottom: "下边", outer: "外框", inner: "里面" } as Record<string, string>)[slotId] ?? "空位"; }
 
@@ -57,7 +56,7 @@ function renderPhase(state: CompleteWorkshopState): string {
 }
 
 export function mountCompleteWorkshop(root: HTMLElement, options: MountCompleteWorkshopOptions = {}): MountedGame {
-  const storage = options.storage ?? browserStorage(); const read = readCompleteSave(storage); let save = read.state;
+  const storage = options.storage ?? completeBrowserStorage(); const read = readCompleteSave(storage); let save = read.state;
   const returnHref = options.returnHref ?? "?play=hanzi-magic-complete&from=hub";
   if (!save.repairedObjectIds.includes("magic-tree")) {
     root.innerHTML = `<main class="hmcw-shell hmcw-locked" data-testid="complete-workshop-locked"><section><p>魔法树的字轮还在沉睡</p><h1>先完成第一章的一段冒险</h1><p>旧字轮存档和已发现字光都不会丢失。</p><a class="hmcw-primary" href="${escapeHtml(returnHref)}">回到墨迹森林</a></section></main>`;
@@ -65,12 +64,12 @@ export function mountCompleteWorkshop(root: HTMLElement, options: MountCompleteW
   }
   let state = createCompleteWorkshopState(options.seed ?? "complete-wheel-return"); let draggedCardId: string | null = null; let destroyed = false;
   const render = () => {
-    root.innerHTML = `<main class="hmcw-shell" data-testid="complete-workshop" data-phase="${state.phase}" data-record-count="72" data-grade-pool-count="${getCompleteWorkshopPool(state.selectedGradeId).length}" data-discovered-count="${save.discoveredCharacterIds.length}" data-muted="${String(save.settings.muted)}"><header><a href="${escapeHtml(returnHref)}">← 森林</a><div><span>魔法树热点</span><h1>七十二字轮工坊</h1></div><button type="button" data-pref="muted" aria-pressed="${String(save.settings.muted)}">${save.settings.muted ? "打开声音" : "静音"}</button></header>${!read.writable ? `<p class="hmcw-save-note" role="status">发现较新版本存档：当前只读，不会覆盖。</p>` : ""}<nav class="hmcw-grades" aria-label="选择字卷">${COMPLETE_WHEEL_GRADE_OPTIONS.map((grade) => `<button type="button" data-grade-id="${grade.id}" aria-pressed="${String(state.selectedGradeId === grade.id)}">${grade.worldName}</button>`).join("")}</nav><div aria-live="polite">${renderPhase(state)}</div><footer>本地匿名保存 · 无排名 · 熟悉词只在完整合字后出现</footer></main>`;
+    root.innerHTML = `<main class="hmcw-shell" data-testid="complete-workshop" data-phase="${state.phase}" data-record-count="72" data-grade-pool-count="${getCompleteWorkshopPool(state.selectedGradeId).length}" data-discovered-count="${save.discoveredCharacterIds.length}" data-muted="${String(save.settings.muted)}"><header><a href="${escapeHtml(returnHref)}">← 森林</a><div><span>魔法树热点</span><h1>七十二字轮工坊</h1></div><button type="button" data-pref="muted" aria-pressed="${String(save.settings.muted)}">${save.settings.muted ? "打开声音" : "静音"}</button></header>${!isCompleteSaveWritable(save) ? `<p class="hmcw-save-note" role="status">本机存档已保护，当前进展暂未保存。回到森林后可以重新读取。</p>` : ""}<nav class="hmcw-grades" aria-label="选择字卷">${COMPLETE_WHEEL_GRADE_OPTIONS.map((grade) => `<button type="button" data-grade-id="${grade.id}" aria-pressed="${String(state.selectedGradeId === grade.id)}">${grade.worldName}</button>`).join("")}</nav><div aria-live="polite">${renderPhase(state)}</div><footer>本地匿名保存 · 无排名 · 熟悉词只在完整合字后出现</footer></main>`;
     root.querySelector<HTMLElement>(state.phase === "place-card" ? "[data-slot-id]:not(.is-filled)" : "[data-primary-focus], [data-card-id], button, a")?.focus({ preventScroll: true });
   };
   const dispatch = (action: CompleteWorkshopAction) => {
     if (destroyed) return; const before = state; state = reduceCompleteWorkshopState(state, action); if (state === before) return;
-    if (state.phase === "success" && state.currentRound && before.phase !== "success" && read.writable) {
+    if (state.phase === "success" && state.currentRound && before.phase !== "success" && isCompleteSaveWritable(save)) {
       save = saveDiscovery(save, getCompleteWheelRecord(state.currentRound.recordId).characterNodeId); writeCompleteSave(storage, save);
     }
     render();
@@ -85,7 +84,7 @@ export function mountCompleteWorkshop(root: HTMLElement, options: MountCompleteW
       const record = getCompleteWheelRecord(state.currentRound.recordId);
       if (!save.settings.muted && typeof speechSynthesis !== "undefined" && typeof SpeechSynthesisUtterance !== "undefined") { speechSynthesis.cancel(); const utterance = new SpeechSynthesisUtterance(record.spokenPhrase); utterance.lang = "zh-CN"; utterance.rate = .86; speechSynthesis.speak(utterance); }
     }
-    if (target.dataset.pref === "muted" && read.writable) { save = updateCompleteSave(save, { settings: { ...save.settings, muted: !save.settings.muted } }); writeCompleteSave(storage, save); render(); }
+    if (target.dataset.pref === "muted" && isCompleteSaveWritable(save)) { save = updateCompleteSave(save, { settings: { ...save.settings, muted: !save.settings.muted } }); writeCompleteSave(storage, save); render(); }
   };
   const dragStart = (event: DragEvent) => { draggedCardId = (event.target as HTMLElement).closest<HTMLElement>("[data-card-id]")?.dataset.cardId ?? null; };
   const dragOver = (event: DragEvent) => { if ((event.target as HTMLElement).closest("[data-slot-id]") && draggedCardId) event.preventDefault(); };

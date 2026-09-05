@@ -1,0 +1,1235 @@
+{
+  "baseline": "4befee72178e89ad4e0c155f8fbdbc9f65891767",
+  "original": "games/hanzi-radical-battle/complete/chapters/chapter-two/engine.ts",
+  "engineSha256": "f30a36cc4bca080a5f9b7469a0320c47cc8fabb3c80466b5bf75f060f1fc8ae4",
+  "seed": "legacy-oracle-4befee7",
+  "initialHeroId": "light-speaker",
+  "actions": [
+    {
+      "type": "start"
+    },
+    {
+      "type": "choose-ability",
+      "abilityId": "family-root-link"
+    },
+    {
+      "type": "begin-behavior"
+    },
+    {
+      "type": "recover-behavior"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u6307-target-1",
+      "slotId": "left"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u6307-target-2",
+      "slotId": "right"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u770b"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u6307"
+    },
+    {
+      "type": "connect-family"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u9971-target-1",
+      "slotId": "left"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u9971-target-2",
+      "slotId": "right"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u60c5"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u601d"
+    },
+    {
+      "type": "connect-family"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u60c5-target-1",
+      "slotId": "left"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u60c5-target-2",
+      "slotId": "right"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u8bf7"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u8bed"
+    },
+    {
+      "type": "connect-family"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "begin-behavior"
+    },
+    {
+      "type": "recover-behavior"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u8bf7-target-1",
+      "slotId": "left"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u8bf7-target-2",
+      "slotId": "right"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u8dd1"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u8def"
+    },
+    {
+      "type": "connect-family"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "choose-ability",
+      "abilityId": "family-variant-lantern"
+    },
+    {
+      "type": "begin-behavior"
+    },
+    {
+      "type": "recover-behavior"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u8def-target-1",
+      "slotId": "left"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u8def-target-2",
+      "slotId": "right"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u8fdb"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u8ff7"
+    },
+    {
+      "type": "connect-family"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u8fdb-target-1",
+      "slotId": "outer"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u8fdb-target-2",
+      "slotId": "inner"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u6e05"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u6cb3"
+    },
+    {
+      "type": "connect-family"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u8ff7-target-1",
+      "slotId": "outer"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u8ff7-target-2",
+      "slotId": "inner"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u6e05"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u6674"
+    },
+    {
+      "type": "connect-family"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "begin-behavior"
+    },
+    {
+      "type": "recover-behavior"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u601d-target-1",
+      "slotId": "top"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u601d-target-2",
+      "slotId": "bottom"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u6797"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u677e"
+    },
+    {
+      "type": "connect-family"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "choose-ability",
+      "abilityId": "family-echo-trace"
+    },
+    {
+      "type": "begin-behavior"
+    },
+    {
+      "type": "recover-behavior"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u8bed-target-1",
+      "slotId": "left"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u8bed-target-2",
+      "slotId": "right"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u82b1"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u8349"
+    },
+    {
+      "type": "connect-family"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u996d-target-1",
+      "slotId": "left"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u996d-target-2",
+      "slotId": "right"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u95ea"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u95ee"
+    },
+    {
+      "type": "connect-family"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u949f-target-1",
+      "slotId": "left"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u949f-target-2",
+      "slotId": "right"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u56ed"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u56de"
+    },
+    {
+      "type": "connect-family"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "begin-behavior"
+    },
+    {
+      "type": "recover-behavior"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u94b1-target-1",
+      "slotId": "left"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u94b1-target-2",
+      "slotId": "right"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u5b89"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u5bb6"
+    },
+    {
+      "type": "connect-family"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "start-core"
+    },
+    {
+      "type": "begin-behavior"
+    },
+    {
+      "type": "recover-behavior"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u60c5-target-1",
+      "slotId": "left"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u60c5-target-2",
+      "slotId": "right"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u6e05"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u6674"
+    },
+    {
+      "type": "connect-family"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u8fdb-target-1",
+      "slotId": "outer"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u8fdb-target-2",
+      "slotId": "inner"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u8fdb"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u8ff7"
+    },
+    {
+      "type": "connect-family"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u6307-target-1",
+      "slotId": "left"
+    },
+    {
+      "type": "place-card",
+      "cardId": "char-u6307-target-2",
+      "slotId": "right"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u770b"
+    },
+    {
+      "type": "toggle-family-character",
+      "characterId": "char-u6307"
+    },
+    {
+      "type": "connect-family"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "continue"
+    },
+    {
+      "type": "finish-ending"
+    }
+  ],
+  "states": [
+    {
+      "phase": "chapter-intro",
+      "sha256": "792facdc73a7cbedf1e5ed9a6e448c7fd45866d31394cafe96c3fc3566944515"
+    },
+    {
+      "phase": "ability-choice",
+      "sha256": "b0a175ab7975b0364f04cc5bff1872d968de30a222dfe5efbe733f2bce800577"
+    },
+    {
+      "phase": "behavior-telegraph",
+      "sha256": "a10ea9153df7f19f1877439ac93580bae1432429f3ea235677bdadd2d86f261a"
+    },
+    {
+      "phase": "behavior-effect",
+      "sha256": "1620f582bf29b80a1b188e811323cf4535a2461611b2154f12633257ee73bd55"
+    },
+    {
+      "phase": "build",
+      "sha256": "f9d077dc60bf3b31ff1bea5055711d30186655946f0ba8848b8ce530013ada8f"
+    },
+    {
+      "phase": "build",
+      "sha256": "42797e57e147d3f64d2b8db999f7cd0765b17db099a8af50a05457f65852dfba"
+    },
+    {
+      "phase": "composition",
+      "sha256": "713e71f3ab49f3b7bb02c6f51bde1d5d7aa60c8743b3318d59e8756946a28309"
+    },
+    {
+      "phase": "meaning",
+      "sha256": "a34b7292c8e4200d0960e3f1ef3867836f6a44f8a5a76b505ccf69dc0d90f4a0"
+    },
+    {
+      "phase": "family-inspect",
+      "sha256": "299a0e0f76a4eb3bc65c5dc7f2e3da1b891b2c2e827e9eaf13738635aba3290a"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "794d1c3ebdde5774e632a1ee6dc443d1f2acbdffd7e2a97762a1a9e3c6aae606"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "1d0cf1d0c27bba88b2d1378d3af7e08ca44ee613d51c14de5ce0fc58924a327e"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "eadbc1537897187d6367e5685d91b4676fa183b2b55caccb49574ae63434f285"
+    },
+    {
+      "phase": "family-result",
+      "sha256": "985ad92b64081457e475b703e3a47b3c0d6abc7f0b84107ba9f8707dd15bbc17"
+    },
+    {
+      "phase": "build",
+      "sha256": "72ea12c8dd81f1152692d054c397ad95c637a30f1189bca0ce1e275d26ceede1"
+    },
+    {
+      "phase": "build",
+      "sha256": "9f12fe9f07672e4c42a4631bfe1f9110c812328d1dbd5550b52a9ef51cd044fa"
+    },
+    {
+      "phase": "composition",
+      "sha256": "ef63962163443cd86464e14bed679a32cb5bd0aecd3b1293fc2f67b9097d820c"
+    },
+    {
+      "phase": "meaning",
+      "sha256": "ee7eeba2d07302ff475243c851153d7bd0cbe24082434d9a90071e4a8096e86a"
+    },
+    {
+      "phase": "family-inspect",
+      "sha256": "e145850e1a5873adcfdfb0f88c2d5035e8c87d9678568246cbf5965b35d69085"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "3669a092f62cbff844440b6c99824d6e7ede293e7c7cb3846f7e36c5023401ca"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "f907a370faa7fe497ec96def8088545de374cd0f7702b826f3fd7651804fe1d7"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "b08beeec598b8be56d0766fd965109cc867aaf41622c956049d55eb205a5d686"
+    },
+    {
+      "phase": "family-result",
+      "sha256": "b78d641cd08bc2d8d0ba6469f0a420c28746bb229216c028d23edd781933c445"
+    },
+    {
+      "phase": "build",
+      "sha256": "9f4aa316876008e1c2dbfcf173fd61a8ba8f0573ff7d120dbe608f024ab01566"
+    },
+    {
+      "phase": "build",
+      "sha256": "2c244e5e999c71f9fd4fcc9abcfc0cadfae99a7fabb1b5364c68f2603648a1cc"
+    },
+    {
+      "phase": "composition",
+      "sha256": "317e7e69b4dacf24401e81087c76e4516d127eca584c96df35a06e1ae7f4e4d1"
+    },
+    {
+      "phase": "meaning",
+      "sha256": "0fa35fb7cfb8f40b57fc1fbe1ee53c7460a52d370aba3ab702a4ab8695f05099"
+    },
+    {
+      "phase": "family-inspect",
+      "sha256": "44d2bb890e6976d8529d389e11fceae61e6c8879a929f4dd29391c4b2442986e"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "42e2009a948be5de3e677212f080b2d2cc8b43e86d3cdc68716e29d7b987545b"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "de3844697ee2157d297c9053c69615f029fc503a0b600211ab64dd69ccce91f2"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "a0209c693e74755d3248439da38e629c941aa548cda5c6d9b202beb85b756fc2"
+    },
+    {
+      "phase": "family-result",
+      "sha256": "5c947a9d0638d112ccb9535acf98e536c3af65f00f0391e993e75a43171f0f47"
+    },
+    {
+      "phase": "behavior-telegraph",
+      "sha256": "c7330059adb53e89da0b3750724f9ddaa758c06fc508a911e006691bc49a01a5"
+    },
+    {
+      "phase": "behavior-effect",
+      "sha256": "a5829811f764504087af846afd1d72eaca06c22b12ea6734b6081f3274ceffdb"
+    },
+    {
+      "phase": "build",
+      "sha256": "5d7291b02f3f9e6a9321c7bc480c47979e508d86a19aef6a98454fc90041e8c1"
+    },
+    {
+      "phase": "build",
+      "sha256": "3a3615c5a8ea3bb115936c6bffdee567fd7bfb68791eec26b17af9e6a23df750"
+    },
+    {
+      "phase": "composition",
+      "sha256": "a8b28fefa3ede766efc8fda3757f7093b2d28b2140f986c9a309f2bf7e1986e8"
+    },
+    {
+      "phase": "meaning",
+      "sha256": "466346f8474edfde3c3f822f540ba4062eb5b670668d129042b9a98c6bc2db1d"
+    },
+    {
+      "phase": "family-inspect",
+      "sha256": "33ee4487c9ae4caafe9d26cd76ef311771a0dee08d7a001855a4d07c12b26d4b"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "1b76427f09c96cb953b81d452ae3e4d0924ef49de7fc36f04989290b9619a7b3"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "671f08d30418fb8da6403f54a89ed149070717f7f3d077184f185ebf1eb3c47a"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "6e89f9a8998fce483aca6924e86cc19c1cf4faa96fa846deca90fdcdf281de81"
+    },
+    {
+      "phase": "family-result",
+      "sha256": "328acc8cfaddecaca325bb43bd8b4f6ca1432c53c13871cb1213c20dc44e1091"
+    },
+    {
+      "phase": "episode-repair",
+      "sha256": "868478b45cf3702e6f213d593bc4e6a7875f74151eb90d7beaff4c5606009cbe"
+    },
+    {
+      "phase": "episode-complete",
+      "sha256": "e8511e104fa5f0f8958cefb548aee99ef329655a88035923ad1cc7b17c197ef8"
+    },
+    {
+      "phase": "ability-choice",
+      "sha256": "a2c166627712996a55a7ea1247ba21fee9a2f9eba76008d52b49b3279610066e"
+    },
+    {
+      "phase": "behavior-telegraph",
+      "sha256": "c21499144385bd084b10aa1d200c474116debf9bf38c52de16d45ca252df5bd7"
+    },
+    {
+      "phase": "behavior-effect",
+      "sha256": "f1aced98a385e49735c321fb59244b14cbdd18a9367627e91469476edfc2c495"
+    },
+    {
+      "phase": "build",
+      "sha256": "0a3d001d74ac85aa05f7b0ce821ad39ec6fef7121dc274c57fcac9f999d584c2"
+    },
+    {
+      "phase": "build",
+      "sha256": "8c0bcc7c448f62280eb3f0f158bf1851fc359f6697c075f1e5071b01704765bc"
+    },
+    {
+      "phase": "composition",
+      "sha256": "f05ad09346ac6013545afaa8bdd91869ab2268ce8129ecc0ab8c887bc68bcacc"
+    },
+    {
+      "phase": "meaning",
+      "sha256": "55ae6494988940da97f2e0c7701e9c34b656bf58eab9b7dcba8358c7c492e006"
+    },
+    {
+      "phase": "family-inspect",
+      "sha256": "e3584259ea23bf9354c0e6cd178b709da8420771f1841be9151e2df895167b9d"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "a85399b1d30effc0d5c8361c02532a29f4a865d2601753073bc1a25764abf589"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "faba167f6934b790f292fcaaa2dd46b000d29a5e66bf864be19d7861b40a7c25"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "026878007a03294020d02321f48d0762ebc582d9086b9df8429757be2136d82a"
+    },
+    {
+      "phase": "family-result",
+      "sha256": "f478dd06729052f1850983e7d2bd15882c9e50d469d29f13289bc45211b549d9"
+    },
+    {
+      "phase": "build",
+      "sha256": "335498e547dfa2467ce7d78533fa90585e4bc5be22476abf8926834e24c142a5"
+    },
+    {
+      "phase": "build",
+      "sha256": "0ca9d94a66851e234e0bbbc7a5f1a9629ce18d41317fc96f5bfbe19ec6b560bd"
+    },
+    {
+      "phase": "composition",
+      "sha256": "213341c175b20ec192cfbb30ce077f42893ecbf1c607e82c9d539e9dfca6e430"
+    },
+    {
+      "phase": "meaning",
+      "sha256": "c7af6296c4aeba7556e331dfb0830dd382d40afcb9513bfea3f26ab58b206e5c"
+    },
+    {
+      "phase": "family-inspect",
+      "sha256": "61549221efdd99a31fe57444112f6dcd02ed6474c91f17dc3761de54aa1ad647"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "db8596b69f6fbe16596cf59c92f38eea03e402c22824dbe180541f94d18a8cf9"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "2656bc3b873c9993b1c1e969933112f19726fd8276360b53e5f8286868d03e76"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "b1744be3c0e5c35b38e02052697748fa0cfe4f3c58fb996505f69c55f9b25137"
+    },
+    {
+      "phase": "family-result",
+      "sha256": "25474bef4a9dd062505c9891fbfdb4307b9a5442048f2036e0281f37cdf39cf1"
+    },
+    {
+      "phase": "build",
+      "sha256": "3c5dc27fff6401568859d2b4166364b7e38c7ad5ad08f488398c89d45294abd5"
+    },
+    {
+      "phase": "build",
+      "sha256": "c9c12f270067300e9dd070b17d732ed1e5e6a9119d53cd02a5c8f6adf3a29d43"
+    },
+    {
+      "phase": "composition",
+      "sha256": "8fde73fa765a5e81ea1764ab775987a8b45fe54a8cb104975914498a1ab921d0"
+    },
+    {
+      "phase": "meaning",
+      "sha256": "a84cd7295685702351c080d0385d10732f092aed604eb00b774cdc1b44214d7d"
+    },
+    {
+      "phase": "family-inspect",
+      "sha256": "af0fa12e5b063d1dcb04b2713d505421a3f61ef52e4c480a4a54d088d2d3d6d5"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "586b0fc85e98acb2757ddd76554277632c93372394e678dd642b959351ac3ba0"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "3569c9aed1e9ff9ed8f445de0d544a55263bc127b56d214ba58cd7bef5e64415"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "2eb7fd56a5bce9fb67fb211e4f8f221d7960fd508365f489eebe3d30cd38f933"
+    },
+    {
+      "phase": "family-result",
+      "sha256": "a342edea488bed4e81cc312d0825ef149eaca250494bc68b54d4f84f05fc1a7f"
+    },
+    {
+      "phase": "behavior-telegraph",
+      "sha256": "ac3bd63d1294fa87a6c768b01f434291db70026a5351feab04f7f0f19c30a1ec"
+    },
+    {
+      "phase": "behavior-effect",
+      "sha256": "3a3ca92a19588f4245ec949e787151c2f9a68055e3180db822bcad95cd637f64"
+    },
+    {
+      "phase": "build",
+      "sha256": "e78cce9f2c3d5786d7b7bbc744fd575e75d36c4511a3c2696c17f7ed3e2e1642"
+    },
+    {
+      "phase": "build",
+      "sha256": "7e287d49cfeff4bbf77e1cb0286ed64a2d2084251b48da0980c6ddb09848db1e"
+    },
+    {
+      "phase": "composition",
+      "sha256": "015d98787b5cc75d3380739dccd61318bbed8680eac0ed6ada5207f5b414b471"
+    },
+    {
+      "phase": "meaning",
+      "sha256": "61b5dbd9b3ee59ffb6554ae11a3ce47708aff7ed2238886a85c6cd9547d79429"
+    },
+    {
+      "phase": "family-inspect",
+      "sha256": "6373e86b5569e8fc45e09e3d85d6421eb13c13d18c21f85431dbbbc179cfb523"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "1cda07a69c922efddd88d1c67dd1ad56d0b40bc7ba5c4f2057c0315cf417e989"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "29c6522f9cc3dc2788ab88cd63070373d81c03c49271f5ca5fbc76eda80ba788"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "491deafe30b6bae42f70c8c671d7cd04ce38e3366c2c6291da567de50b3d3d8a"
+    },
+    {
+      "phase": "family-result",
+      "sha256": "ffa1021d720ca5c3a6a318c25deec863f971be87119ce7027127daf33000f9ae"
+    },
+    {
+      "phase": "episode-repair",
+      "sha256": "e84d6fcbfc0a64221d2f729ff36a309a575320d51414e0e6358ad5dd926367c9"
+    },
+    {
+      "phase": "episode-complete",
+      "sha256": "9b6aed736f10760e587179bc77230b90fc03f0adc523c1b6d90df3f0cb6ed266"
+    },
+    {
+      "phase": "ability-choice",
+      "sha256": "101807508512d297f7c0b56ec917fe723bcd697b21f48794ff88067a07de0d83"
+    },
+    {
+      "phase": "behavior-telegraph",
+      "sha256": "451265fd9ddbd178174b3da3b4766d0e0bee8a490de8acd5da22b85803fa104e"
+    },
+    {
+      "phase": "behavior-effect",
+      "sha256": "6bcae2d2008e71299b8044f8f2af1bcbcb97046112e4afc6f17e0670cc8fe54f"
+    },
+    {
+      "phase": "build",
+      "sha256": "f6f4847f8784b92117523afba22352633c80ffd6d8d638ec98f130d5a7e55e73"
+    },
+    {
+      "phase": "build",
+      "sha256": "7470c30818d5e4b9abfa1d432cf5b6768467f4da5d8e6768fd55930b352eab7a"
+    },
+    {
+      "phase": "composition",
+      "sha256": "6a933931ae48bcd8cd82f3177eeb4cde4f985052c80f30cd2e88a442ad61b746"
+    },
+    {
+      "phase": "meaning",
+      "sha256": "6a4fb98702f7ccdf65c1a332a357ab56c0b6c4695e770a0731f5f74b69804b29"
+    },
+    {
+      "phase": "family-inspect",
+      "sha256": "93b4532b4b9c8b918d39bb699af6cd21a787d6c4f4d6f788dcdcbb03594cea8f"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "e82b2f43af0fed90d282a83e46b6b65ba1557e723daed8db633aabc6a1bfcb09"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "d36235e8e327734a35724cf1fcd989af69cba4d566a04b26a7c800ef2f50e599"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "368c383f650d08299dd8f59c57e87cd2f72e274dbf5e33630592466ad8568be2"
+    },
+    {
+      "phase": "family-result",
+      "sha256": "dff30966c3e94ba789aa04a450fd19785c6be358e8bd2ad4a6d6ba080fe78ba6"
+    },
+    {
+      "phase": "build",
+      "sha256": "0cb525fde2b87f8358d6075d630c7037fb33a07226802e1d3f48734ddcce9bd7"
+    },
+    {
+      "phase": "build",
+      "sha256": "c9d0920ecc8a39ad1ebae4719f96afb147fee5449f81854d906879d073157e32"
+    },
+    {
+      "phase": "composition",
+      "sha256": "493468a1fd4d3be853cc8b79826afcc9a0228acbaeedb551416b6ecf1d4e6f24"
+    },
+    {
+      "phase": "meaning",
+      "sha256": "d37da10d85ea9f65e3739d0fb7b6a8f4030b8e015e8e6279ab640234609dde85"
+    },
+    {
+      "phase": "family-inspect",
+      "sha256": "efdaebcdd4f7fe9a0eb2e4773a96762e391f8780374c6b4c396eb7c78eff26d4"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "ecba786b0370b92370549766e51d5fc3c041024645b599b805ceef69be61e5fa"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "06bb730b328fafc7c3240b3e8ed3461bf47c9e209fe3cc9d619d7a2094f36979"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "cc4d3cf78c8a77052699ecd3efa3e9584e91530d5303c566d0cff9f848156d1e"
+    },
+    {
+      "phase": "family-result",
+      "sha256": "6d6d554a4ffdd0f837b0e739fd7a16effe8777dd6ebdf3761566e6b058e39835"
+    },
+    {
+      "phase": "build",
+      "sha256": "671cd82b71051f76dc987864832240c93810cd6f639aa0a10d79b0c68532db0f"
+    },
+    {
+      "phase": "build",
+      "sha256": "e9abb15301a34fbe939cac521c118bd81052e0df0e5ef7c905281e1a57c58c09"
+    },
+    {
+      "phase": "composition",
+      "sha256": "3fdb1618dd7fd7633f5463b730f5436765dc9b92c66047de58694ae2a6166a07"
+    },
+    {
+      "phase": "meaning",
+      "sha256": "d7f82c4ca02c2c4208df4b63aea23e7515e1fb82741e6f1f14f8a7a693543043"
+    },
+    {
+      "phase": "family-inspect",
+      "sha256": "f7f8a523b8686ee75ab05f14277f5246654d3b1487da75001bb0a2560a7bdb4c"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "1d0cb50c4c9fb0146dea762ff57e7256670e06e64eb3b3e9148263ebf5849d0a"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "da8e35834d5174e9e5f2bebc26cbad6ed5f7198f9aa2ae5c507b37df1b4561ed"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "4e77362e8a6af486c05552f456067396dd8c92c762488f0c965f2a4ba3be00c0"
+    },
+    {
+      "phase": "family-result",
+      "sha256": "f629743c46b8c3071037dd9351d614bf79ad3e27a6b28b0a50d8c2660d67122f"
+    },
+    {
+      "phase": "behavior-telegraph",
+      "sha256": "fbaaea265a0ad0546fc20e4afa052ddc57ee5aa9a8de2f1dc5c5c2c14e8948e1"
+    },
+    {
+      "phase": "behavior-effect",
+      "sha256": "dfaccf6210248e0c175958c7d2486eb303706c76c158d98d480e0140831bca11"
+    },
+    {
+      "phase": "build",
+      "sha256": "70e8216a4d1e6de4e7a7139b513cb7718b964d8bde8f2d26b8c9f82c48610f24"
+    },
+    {
+      "phase": "build",
+      "sha256": "1faa5db681e05f3fb14d9aac71b60e47f821410301542af7ccc6b33eaf7541ae"
+    },
+    {
+      "phase": "composition",
+      "sha256": "e88ae45590ef654398611fbe3421f21552650c1005b13c8e24f24d44c0e47526"
+    },
+    {
+      "phase": "meaning",
+      "sha256": "0d8695f672408b61b641d0f651e21059d01893ae44dd44b5c2e8fb431f88326d"
+    },
+    {
+      "phase": "family-inspect",
+      "sha256": "ee15fc2be6cd6bf99eba6267101024d4219e97daca149f8fa6c390cadc6a977c"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "33608aa3bd3297feca9e7aaf93bafcd5643c1837db21b667d0c85d9ace497f85"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "e12d90e03f73921385a4c081f0b15d3824b3a08201fa608a9692de0194294b69"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "7612185aa0c2b84c41ff294d396ffbefb692f8ee61a0e7cff1a67da1b9569e2c"
+    },
+    {
+      "phase": "family-result",
+      "sha256": "01c69da1c54d6c563620cc93ef6c2f543392ca8ddfcf63a8c1563a0db1abab9f"
+    },
+    {
+      "phase": "episode-repair",
+      "sha256": "69fa22328fb018f0e87969d0013d3e3503ff8fdc190a10720f5cd59f84756128"
+    },
+    {
+      "phase": "core-intro",
+      "sha256": "8c56d054beac04e1c84b42263fde29e3da755c3c97cf5748e7964c0dcec73e1a"
+    },
+    {
+      "phase": "behavior-telegraph",
+      "sha256": "160e0217852e984ede9e990d21ae90ee8954960c25f31a41686f6e15bbf21cec"
+    },
+    {
+      "phase": "behavior-effect",
+      "sha256": "ee8ec9b87108c758cf317a2826ce5a7fa54776bf9cb3c8080e65f5e9334ead4f"
+    },
+    {
+      "phase": "build",
+      "sha256": "3e5ac1ddff53e86ac271a490d0d4f076ff4604d5b4323d7b7dbcd0932ffe1bb9"
+    },
+    {
+      "phase": "build",
+      "sha256": "d502146c5350e0986bebe024b5960a79e290391967fdd4f257386e48f3ca3076"
+    },
+    {
+      "phase": "composition",
+      "sha256": "4e549d1bfbdbd6113172883233dff4f791ac283714a13e4745de97cd7f7898c5"
+    },
+    {
+      "phase": "meaning",
+      "sha256": "3bd27b4cd0e442d8d547b745937b9c146fc154692da3abf816603367cedda056"
+    },
+    {
+      "phase": "family-inspect",
+      "sha256": "edcf8d4e4c62604fa1c5948e2fbacf503c4a34d7d8e9fccb34964220eb5bedf4"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "5ebdc48ddf8a9a9217979223b4fab0761ca6e974936924b8e84b2b5c001d7e41"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "c01c97fb284cf59b26f61fab9b5e41b99149ceba573cd50a3a0accb844adb192"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "933d64c692a20c3d33f1dbffad028fe642b2c9a8f17e536131cb10bb8f1b5a9c"
+    },
+    {
+      "phase": "family-result",
+      "sha256": "f6c5ba1382ad14a6510b861be2b616a7e99c79041cbf0c0c7504d3effe60d043"
+    },
+    {
+      "phase": "build",
+      "sha256": "fb560d1e6e320da55608b84f37b6795acee59a298de213382f0c6be137192946"
+    },
+    {
+      "phase": "build",
+      "sha256": "a936d603d4c35a8726ab901e54854f4221ae213c4b2585f57bfc49ca131efb45"
+    },
+    {
+      "phase": "composition",
+      "sha256": "33709070faec0f7a33216bdfb0aa9d0bac0224ff79357f2a99a99c7c131e28fb"
+    },
+    {
+      "phase": "meaning",
+      "sha256": "222745373b792c91542568ed7ddb051a74b01ec01d3a5f3f576c072e84885e05"
+    },
+    {
+      "phase": "family-inspect",
+      "sha256": "66af17d2ffbea944f8d179ecdb16dc68d32089b3e7bc688daeab5623414101c9"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "810b1613b6405539cff468939e5b606a86e9af0507fc43fc758c67e52f1e30c6"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "4221637fded2da95e70189c17c66a00a52836101e0a7124b63af99d510d9915d"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "903d988ea17dc269feb07e6ccfc41b23c3d375b50fcfe46e4e67600986453f71"
+    },
+    {
+      "phase": "family-result",
+      "sha256": "58493d6b4f961ecdd3b3f07f0cb30ac3066d2b2d10eb0c3d500cb552f23fde57"
+    },
+    {
+      "phase": "build",
+      "sha256": "f2bc838d7c0c3b52ab0e40b5f570801b8109c49af7a53801d956a2a2a05469a9"
+    },
+    {
+      "phase": "build",
+      "sha256": "43fc972f5603efb4c4e0d582c5ed0df7c3955897b9a72af9778b428b01ded1f9"
+    },
+    {
+      "phase": "composition",
+      "sha256": "dbb2fb378ffa17a7c7a22b4a94138dbc931699f7be11d7024a512fe9ad080bc6"
+    },
+    {
+      "phase": "meaning",
+      "sha256": "41a53882377f9c7bae07b6d8581e147f6c0195dd0fea42b6855b99f2de60b32f"
+    },
+    {
+      "phase": "family-inspect",
+      "sha256": "b313a02f421b039258554941050a4af5b10940f5bed17b48f5993a289fc367a1"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "874db3fd45d758c31eac666b27115e2474294e68eb18c9fda7b2dd46f1844d14"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "eac8b017e3a207e0e45dc51842f50c09c147fe2baaf132edb8275417582ba643"
+    },
+    {
+      "phase": "family-connect",
+      "sha256": "6084c245fa9bf13b311f4bae2565658d459f8aafcfdac34dc96550d46e7ef828"
+    },
+    {
+      "phase": "family-result",
+      "sha256": "d341919e03958e124315b4eea94f980fc503cb4cbf121a8020f3dc29321f2697"
+    },
+    {
+      "phase": "episode-repair",
+      "sha256": "af08d8c8aa9875b80803a56a9fd694e0129c4ff9c90ea4d77ece5e7ef1ea8a69"
+    },
+    {
+      "phase": "ending",
+      "sha256": "a2f620d13ba62690f29480eac1355dabce4ed9c3009eb05790a1dfb9fa44896e"
+    },
+    {
+      "phase": "chapter-summary",
+      "sha256": "16e2f50bb3dfa8e3965f8d0d418a38a7bbb5f8a77b5bbc83e5728687e59f6233"
+    }
+  ]
+}
