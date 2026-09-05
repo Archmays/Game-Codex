@@ -101,7 +101,7 @@ test("@e2e Slider and Target share navigation without sharing progress", async (
   await expect(page.locator(".equation-slider")).toBeVisible({ timeout: 30_000 });
   const tutorialSkip = page.getByRole("button", { name: "跳过教程" });
   if (await tutorialSkip.isVisible()) await tutorialSkip.click();
-  const move = page.getByRole("button", { name: "第 2 列向上移动" });
+  const move = page.getByRole("button", { name: "第 2 列选上方格" });
   await expect(move).toBeVisible();
   await move.click();
   await expect(page.locator("[data-coverage-progress]")).toContainText("/");

@@ -72,7 +72,7 @@ describe("equation slider V3 progression catalog", () => {
     });
   });
 
-  it("sanitizes current V2 records and refuses to overwrite a future save", () => {
+  it("provides sanitized V2 views but refuses to overwrite unknown current or future records", () => {
     const current = loadEquationSliderProgress({
       saveVersion: 2,
       tutorialCompleted: true,
@@ -94,7 +94,7 @@ describe("equation slider V3 progression catalog", () => {
     });
     const future = loadEquationSliderProgress({ saveVersion: 99, levels: { future: true } });
 
-    expect(current).toMatchObject({ migrated: false, canPersist: true });
+    expect(current).toMatchObject({ migrated: false, canPersist: false });
     expect(current.progress).toEqual({
       saveVersion: 2,
       tutorialCompleted: true,

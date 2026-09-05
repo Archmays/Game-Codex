@@ -274,7 +274,7 @@ export function auditEquationSliderLevels(
     (station) => station.passesStructureMinimum && station.passesFirstFourActionMinimum
   );
   const passes = levels.length === 200
-    && goldCount === 40
+    && goldCount === 42
     && structuralCountsPass
     && (firstTenZeroCountByChapter["chapter-1"] ?? 0) === 0
     && exactDuplicateGroups.length === 0

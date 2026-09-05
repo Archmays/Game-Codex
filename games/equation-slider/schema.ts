@@ -109,6 +109,9 @@ function isHints(value: unknown): boolean {
 
 function isProvenance(value: unknown): boolean {
   if (!isRecord(value) || !isString(value.generatorVersion)) return false;
+  if (value.contentRevision !== undefined && !isString(value.contentRevision)) return false;
+  if (value.revisionSource !== undefined && !isString(value.revisionSource)) return false;
+  if ((value.contentRevision === undefined) !== (value.revisionSource === undefined)) return false;
   if (value.kind === "hand-authored-gold") return true;
   return value.kind === "generated-from-gold" && isString(value.templateId) && isString(value.seed);
 }

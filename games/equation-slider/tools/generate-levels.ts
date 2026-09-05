@@ -3,7 +3,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { auditEquationSliderLevels, type EquationSliderLevelAudit } from "../level-audit";
 import { EQUATION_SLIDER_V3_LEVELS } from "../levels/v3/catalog";
-import { V3_GENERATOR_VERSION } from "../levels/v3/generator";
+import { CURRENT_EQUATION_SLIDER_CONTENT_VERSION } from "../levels/v3/gameplay-pilot-12";
 import type { PublishedEquationSliderLevel } from "../types";
 
 const TOOL_DIR = dirname(fileURLToPath(import.meta.url));
@@ -29,7 +29,7 @@ export function generatePublishedLevels(): readonly PublishedEquationSliderLevel
 export function buildGeneratedAudit(
   levels: readonly PublishedEquationSliderLevel[] = EQUATION_SLIDER_V3_LEVELS
 ): EquationSliderLevelAudit {
-  return auditEquationSliderLevels(levels, V3_GENERATOR_VERSION);
+  return auditEquationSliderLevels(levels, CURRENT_EQUATION_SLIDER_CONTENT_VERSION);
 }
 
 export function createMaterializedFiles(): readonly MaterializedFile[] {

@@ -153,6 +153,9 @@ describe("equation slider V3 feedback", () => {
     expect(hint.direction).toMatch(/^(up|down)$/);
     expect(hint.targetIndexes).not.toEqual([2, 2]);
     expect(hint.text).not.toContain("找不到");
+    // A continuation can leave a valid arrangement before reaching new coverage.
+    // Tell the player this is preparation without leaking the later direction.
+    expect(hint.text).toContain("这一步先准备");
   });
 
   it("fails closed for malformed state and for an incomplete state without a solver continuation", () => {

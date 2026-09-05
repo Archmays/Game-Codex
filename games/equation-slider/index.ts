@@ -1,4 +1,5 @@
 import type { GameDefinition, MountGameContext, MountedGame } from "../../packages/game-core";
+import { EQUATION_SLIDER_CONTENT_REVISIONS } from "./content-revisions";
 import {
   createInitialBoardSession,
   reduceBoardSession,
@@ -18,8 +19,10 @@ import {
 } from "./levels/manifest";
 import {
   completeLevelProgress,
+  createEquationSliderProgressStore,
+  getLevelRevisionProgress,
   levelMapState,
-  loadEquationSliderProgress,
+  levelRevisionState,
   markCompletionCheckpointSeen,
   markTutorialCompleted,
   markUpgradeNoticeSeen,
@@ -83,11 +86,14 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
   root.dataset.gameRuntime = "equation-slider-v3";
   context.container.append(root);
 
-  const v3Value = context.storage.get<unknown>("progress-v3", null);
-  const legacyValue = v3Value ?? context.storage.get<unknown>("progress", null);
-  const loaded = loadEquationSliderProgress(legacyValue);
+  const progressStore = createEquationSliderProgressStore({
+    // Resolve the browser getter inside the store's guarded operations too.
+    getItem: (key) => window.localStorage.getItem(key),
+    setItem: (key, value) => window.localStorage.setItem(key, value)
+  });
+  const loaded = progressStore.loaded;
   let progress = loaded.progress;
-  const canPersist = loaded.canPersist;
+  let canPersist = loaded.canPersist;
   let showUpgradeNotice = progress.legacy !== undefined && !progress.upgradeNoticeSeen;
   let destroyed = false;
   let requestId = 0;
@@ -98,7 +104,9 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
   const audio = createAudioController();
 
   const persist = (): void => {
-    if (canPersist) context.storage.set("progress-v3", progress);
+    if (canPersist) canPersist = progressStore.persist(progress);
+    const notice = root.querySelector<HTMLElement>("[data-save-notice]");
+    if (notice) notice.hidden = canPersist;
   };
   if (loaded.migrated) persist();
 
@@ -120,7 +128,7 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
     clearActiveBoard();
     currentLevel = level;
     currentChapterId = level.chapterId;
-    progress = recordLevelStart(progress, level.id);
+    progress = recordLevelStart(progress, level.id, EQUATION_SLIDER_CONTENT_REVISIONS[level.id]);
     persist();
     disposeActiveBoard = renderBoard(level, tutorial);
     const stage = root.parentElement;
@@ -198,8 +206,15 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
         const lamps = element("div", "equation-slider__level-lamps");
         for (const level of stationLevels) {
           const state = levelMapState(progress.levels[level.id]);
+          const revision = EQUATION_SLIDER_CONTENT_REVISIONS[level.id];
+          const revisionState = levelRevisionState(progress.levels[level.id], revision);
+          const revisionLabel = revision === undefined ? "" : revisionState === "previously-played"
+            ? "旧版已玩 · 可试新版"
+            : revisionState === "completed" || revisionState === "review-suggested"
+              ? "新版已玩"
+              : revisionState === "in-progress" ? "新版在玩" : "";
           const levelButton = button(
-            `第 ${level.order} 关，${level.learning.objective}`,
+            `第 ${level.order} 关，目标 ${targetValue(level)}，点亮全部要求的格${revisionLabel ? `，${revisionLabel}` : ""}`,
             () => openLevel(level, !progress.tutorialCompleted && level.id === "es-1-01"),
             `equation-slider__level-button is-${state}`
           );
@@ -208,6 +223,7 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
             element("span", "equation-slider__lamp-bulb", ""),
             element("small", "", String(level.order))
           );
+          if (revisionLabel) levelButton.append(element("span", "equation-slider__revision-label", revisionLabel));
           lamps.append(levelButton);
         }
         if (stationLevels.length === 0) {
@@ -251,11 +267,14 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
     let resetCount = 0;
     let tutorialStep: TutorialStep = startTutorial ? "move-target" : null;
     let pointer: ActivePointer | null = null;
-    let feedbackTimer: number | undefined;
+    let lastMovedReelId: string | undefined;
+    let lastMoveText = "";
     let suppressClickUntil = 0;
     let completionRecorded = false;
     let completionCheckpoint: CompletionCheckpoint = { kind: "normal" };
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const saveNotice = element("p", "equation-slider__save-notice", "本次可以玩；现有记录保持不动，暂不保存。");
+    saveNotice.dataset.saveNotice = "true";
+    saveNotice.hidden = canPersist;
 
     const header = element("header", "equation-slider__compact-header");
     const heading = element("div", "equation-slider__heading");
@@ -298,12 +317,15 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
     const coverageProgress = element("strong", "", `0/${level.requiredTileIds.length}`);
     coverageProgress.dataset.coverageProgress = "true";
     coverageSummary.append(coverageProgress);
-    const moveCount = element("span", "equation-slider__move-count", "0");
+    const moveCount = element("span", "equation-slider__move-count equation-slider__sr-only", "0");
     moveCount.dataset.moveCount = "true";
     moveCount.setAttribute("aria-label", "移动次数");
     const requiredTileCount = element("span", "equation-slider__sr-only", String(level.requiredTileIds.length));
     requiredTileCount.dataset.requiredTileCount = "true";
     statusStrip.append(targetCard, expression, coverageSummary, moveCount, requiredTileCount);
+
+    const goalLine = element("p", "equation-slider__goal-line");
+    const moveChange = element("span", "equation-slider__move-change");
 
     const board = element("section", "equation-slider__track");
     board.dataset.equationBoard = "true";
@@ -325,9 +347,9 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
       const reelRoot = element("div", "equation-slider__reel");
       reelRoot.dataset.reelId = slot.reel.id;
       reelRoot.dataset.movableIndex = String(movableIndex);
-      const up = button("↑", () => dispatchMove(slot.reel.id, "up"), "equation-slider__reel-control", signal);
+      const up = button("↑ 选上格", () => dispatchMove(slot.reel.id, "up"), "equation-slider__reel-control", signal);
       up.dataset.controlDirection = "up";
-      up.setAttribute("aria-label", `第 ${reelNumber} 列向上移动`);
+      up.setAttribute("aria-label", `第 ${reelNumber} 列选上方格`);
       const reelWindow = element("div", "equation-slider__reel-window");
       reelWindow.dataset.reelWindow = "true";
       reelWindow.tabIndex = 0;
@@ -349,9 +371,9 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
         tileElements.set(tile.id, tileButton);
         reelWindow.append(tileButton);
       }
-      const down = button("↓", () => dispatchMove(slot.reel.id, "down"), "equation-slider__reel-control", signal);
+      const down = button("↓ 选下格", () => dispatchMove(slot.reel.id, "down"), "equation-slider__reel-control", signal);
       down.dataset.controlDirection = "down";
-      down.setAttribute("aria-label", `第 ${reelNumber} 列向下移动`);
+      down.setAttribute("aria-label", `第 ${reelNumber} 列选下方格`);
       reelRoot.append(up, reelWindow, down);
       board.append(reelRoot);
       const reelDom: ReelDom = {
@@ -382,9 +404,11 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
     const actions = element("div", "equation-slider__actions");
     actions.dataset.primaryActions = "true";
     const undoButton = button("撤销", () => {
-      window.clearTimeout(feedbackTimer);
       session = reduceBoardSession(level, session, { type: "undo" });
       hint = null;
+      hintDepth = 0;
+      lastMovedReelId = undefined;
+      lastMoveText = "";
       feedback = { kind: "info", text: "已回到上一步。" };
       if (tutorialStep === "coverage" && session.present.completedTargetIds.size === 0) tutorialStep = "move-target";
       updateBoard();
@@ -392,17 +416,18 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
     const hintButton = button("提示", () => {
       hintDepth = Math.min(3, hintDepth + 1);
       hintsThisSession += 1;
-      progress = recordHintUse(progress, level.id);
+      progress = recordHintUse(progress, level.id, EQUATION_SLIDER_CONTENT_REVISIONS[level.id]);
       persist();
       hint = getDynamicHint(level, session.present, hintDepth);
       updateBoard();
     }, "ui-button ui-button--secondary", signal);
     const resetButton = button("重置", () => {
-      window.clearTimeout(feedbackTimer);
       session = reduceBoardSession(level, session, { type: "reset" });
       resetCount += 1;
       hint = null;
       hintDepth = 0;
+      lastMovedReelId = undefined;
+      lastMoveText = "";
       feedback = { kind: "info", text: "轨道已回到本关起点。" };
       if (tutorialStep !== null) tutorialStep = "move-target";
       updateBoard();
@@ -420,7 +445,13 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
     const liveRegion = element("div", "equation-slider__sr-only");
     liveRegion.setAttribute("aria-live", "polite");
 
-    root.append(header, statusStrip, board, coverageDock, actions, feedbackPanel, hintPanel, tutorialPanel, completionPanel, liveRegion);
+    root.append(header, saveNotice, statusStrip, goalLine, board, coverageDock, actions, moveChange, feedbackPanel, hintPanel, tutorialPanel, completionPanel, liveRegion);
+    const revision = EQUATION_SLIDER_CONTENT_REVISIONS[level.id];
+    if (revision && progress.levels[level.id]?.completed
+      && !getLevelRevisionProgress(progress.levels[level.id], revision)?.completed) {
+      const revisionNotice = element("p", "equation-slider__revision-notice", "旧版已完成的记录还在。这次可以试试新棋盘。");
+      header.after(revisionNotice);
+    }
 
     if (showUpgradeNotice) {
       const notice = element("aside", "equation-slider__upgrade-notice");
@@ -446,12 +477,17 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
       if (source === "direct" && pointer !== null) return;
       if (source === "direct" && session.present.status !== "ready") return;
       if (source === "drag" && session.present.status !== "dragging") return;
+      const movedIndex = getMovableReels(level).findIndex((reel) => reel.id === reelId);
+      const movedReel = getMovableReels(level)[movedIndex];
+      const previousValue = movedReel?.tiles[session.present.indexes[movedIndex]]?.value;
       const transition = transitionBoardSession(level, session, {
         type: "commit-move",
         reelId,
         direction,
         source,
-        useFeedbackLock: !reducedMotion
+        // Feedback never waits to unlock input. The synchronous reducer and
+        // active-pointer guard already serialize one committed action.
+        useFeedbackLock: false
       });
       if (!transition.committed) {
         session = transition.session;
@@ -467,6 +503,8 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
         return;
       }
       session = transition.session;
+      lastMovedReelId = reelId;
+      lastMoveText = `第 ${movedIndex + 1} 轨：${String(previousValue)} → ${String(movedReel.tiles[session.present.indexes[movedIndex]].value)}`;
       hint = null;
       hintDepth = 0;
       feedback = createArrangementFeedback(level, session.present);
@@ -474,7 +512,7 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
         const newTileCount = transition.newlyCoveredTileIds.length;
         const newTargetCount = transition.newlyCompletedTargetIds.length;
         if (session.present.status === "complete") {
-          feedback = { kind: "success", text: "全部目标和信号都完成了。" };
+          feedback = { kind: "complete", text: "全部目标和信号都完成了。" };
         } else if (newTargetCount > 0 && newTileCount > 0) {
           feedback = {
             kind: "success",
@@ -485,29 +523,23 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
         } else if (newTileCount > 0) {
           feedback = { kind: "success", text: `目标已经命中过，这次又点亮 ${newTileCount} 个新方块。` };
         } else {
-          feedback = { kind: "success", text: "算式成立，但这些目标和方块已经亮了；试试另一组。" };
+          feedback = { kind: "repeat", text: session.present.coveredTileIds.size === level.requiredTileIds.length
+            ? "算式成立，格子已经全部点亮。看看还有哪个目标没到过。"
+            : "算式成立，这些格已经亮了，没有新增。找一格没亮的再试。" };
         }
       }
       if (
         tutorialStep === "move-target"
         && transition.outcome?.valid
-        && session.present.indexes[0] === 2
-        && session.present.indexes[1] === 2
       ) {
         tutorialStep = "coverage";
         progress = markTutorialCompleted(progress);
         persist();
-        liveRegion.textContent = "做到了，4 加 2 等于 6。现在把六个数字都点亮。";
-      }
-      if (session.present.status === "feedback-lock") {
-        window.clearTimeout(feedbackTimer);
-        feedbackTimer = window.setTimeout(() => {
-          session = reduceBoardSession(level, session, { type: "feedback-unlock" });
-          updateBoard();
-        }, 280);
+        liveRegion.textContent = "做到了，中央算式得到6。现在把六个数字都点亮。";
       }
       if (progress.soundEnabled) {
-        audio.play(session.present.status === "complete" ? "complete" : transition.outcome?.valid ? "success" : "move");
+        const madeProgress = transition.newlyCoveredTileIds.length > 0 || transition.newlyCompletedTargetIds.length > 0;
+        audio.play(session.present.status === "complete" ? "complete" : madeProgress ? "success" : "move");
       }
       if (session.present.status === "complete") recordCompletion();
       updateBoard();
@@ -609,7 +641,7 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
         independent,
         moves: session.present.moveCount,
         badges: independent ? ["independent", "all-new"] : ["review-complete"]
-      });
+      }, EQUATION_SLIDER_CONTENT_REVISIONS[level.id]);
       completionCheckpoint = resolveCompletionCheckpoint(
         progress,
         level,
@@ -624,6 +656,28 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
       expression.textContent = displayExpression(level, session.present.indexes);
       expression.removeAttribute("data-preview");
       coverageProgress.textContent = `${session.present.coveredTileIds.size}/${level.requiredTileIds.length}`;
+      const remaining = level.requiredTileIds.length - session.present.coveredTileIds.size;
+      goalLine.textContent = remaining === 0 && session.present.status === "complete"
+        ? "✓ 全部点亮，可以去下一关，也可以回地图。"
+        : remaining === 0
+          ? "格子已经全部点亮，再让中央算式得到还没到过的目标。"
+        : level.mode === "multi-target"
+          ? `得到任一目标就能点灯；每个目标都要到过，把 ${level.requiredTileIds.length} 个格都点亮。`
+          : level.mode === "equality"
+            ? `让两边一样大，把 ${level.requiredTileIds.length} 个格都点亮。`
+            : `让中央算式得到 ${targetValue(level)}，把 ${level.requiredTileIds.length} 个格都点亮。`;
+      if (remaining > 0 && session.present.coveredTileIds.size > 0) {
+        goalLine.textContent = `还剩 ${remaining} 格没亮。让它们也参加成立的算式。${level.mode === "multi-target" ? "每个目标都要到过。" : ""}`;
+      }
+      moveChange.textContent = lastMoveText || "点上方或下方的格，也能把它放到中央。";
+      if (level.mode === "multi-target") {
+        targetCard.querySelector("strong")?.replaceChildren(...level.targets.map((target) => {
+          const reached = session.present.completedTargetIds.has(target.id);
+          const chip = element("span", "equation-slider__target-chip", `${reached ? "✓" : "○"} ${target.value}`);
+          chip.setAttribute("aria-label", `目标 ${target.value}，${reached ? "已到过" : "还没到过"}`);
+          return chip;
+        }));
+      }
       moveCount.textContent = String(session.present.moveCount);
       board.dataset.boardStatus = session.present.status;
       const locked = session.present.status !== "ready";
@@ -632,6 +686,7 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
         const dom = reelDoms.get(slot.reel.id);
         if (!dom) continue;
         dom.root.classList.toggle("is-hinted", hint?.reelId === slot.reel.id);
+        dom.root.classList.toggle("is-last-moved", lastMovedReelId === slot.reel.id);
         const currentIndex = session.present.indexes[slot.movableIndex];
         for (const [controlIndex, control] of dom.controls.entries()) {
           const direction: MoveDirection = controlIndex === 0 ? "up" : "down";
@@ -641,7 +696,7 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
           control.dataset.sameVisibleValue = String(sameVisibleValue);
           control.setAttribute(
             "aria-label",
-            `第 ${slot.movableIndex + 1} 列向${direction === "up" ? "上" : "下"}移动${sameVisibleValue ? "；相邻方块数值相同，按下会提示改走另一方向" : ""}`
+            `第 ${slot.movableIndex + 1} 列选${direction === "up" ? "上" : "下"}方格${sameVisibleValue ? "；相邻方块数值相同，按下会提示改走另一方向" : ""}`
           );
           control.title = sameVisibleValue ? "相邻方块数值相同；改走另一方向会改变算式" : "";
         }
@@ -669,7 +724,7 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
           tile.removeAttribute("data-tutorial-target");
         }
       }
-      if (tutorialStep === "move-target") {
+      if (tutorialStep === "move-target" && session.present.indexes[0] === 2) {
         const tutorialTile = reelDoms.get("es-1-01-right")?.tileElements.get("es-1-01-right-2");
         if (tutorialTile) tutorialTile.dataset.tutorialTarget = "true";
       }
@@ -679,8 +734,10 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
       undoButton.disabled = locked || session.undoStack.length === 0;
       hintButton.disabled = locked;
       resetButton.disabled = locked;
-      feedbackPanel.textContent = feedback.text;
+      feedbackPanel.textContent = `${feedback.kind === "complete" ? "★ " : feedback.kind === "success" ? "✦ " : feedback.kind === "repeat" ? "✓ " : ""}${feedback.text}`;
+      feedbackPanel.dataset.feedbackKind = feedback.kind;
       feedbackPanel.classList.toggle("is-success", feedback.kind === "success");
+      feedbackPanel.classList.toggle("is-complete", feedback.kind === "complete");
       hintPanel.hidden = hint === null;
       hintPanel.textContent = hint?.text ?? "";
       renderTutorial();
@@ -694,7 +751,9 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
       if (tutorialStep === null) return;
       tutorialPanel.dataset.tutorialStep = tutorialStep;
       const copy = tutorialStep === "move-target"
-        ? "把右边滑轨上方的 2 移到中央，让中央算式得到 6。"
+        ? session.present.indexes[0] === 2
+          ? "把右边滑轨上的 2 移到中央（可以直接点 2），让中央算式得到 6。"
+          : "让中央两个数合起来是6，上方或下方的数字都可以试。"
         : "正确关系会点亮用到的数字。把六个数字都点亮。";
       tutorialPanel.append(
         element("p", "", copy),
@@ -733,7 +792,6 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
 
     return () => {
       abortController.abort();
-      window.clearTimeout(feedbackTimer);
       if (pointer?.window.hasPointerCapture(pointer.gesture.pointerId)) {
         pointer.window.releasePointerCapture(pointer.gesture.pointerId);
       }
@@ -779,7 +837,14 @@ function targetValue(level: PublishedEquationSliderLevel): string {
 
 function displayExpression(level: PublishedEquationSliderLevel, indexes: readonly number[]): string {
   const outcome = evaluateArrangementOutcome(level, indexes);
-  if (level.mode === "equality") return outcome.expressionText;
+  if (level.mode === "equality") {
+    // An equation is an achieved relationship, not an assertion about every
+    // attempted board. Never display a false equality as mathematical fact.
+    const relation = outcome.result === undefined || outcome.rightResult === undefined
+      ? " ? "
+      : outcome.valid ? " = " : " ≠ ";
+    return outcome.expressionText.replace(" = ", relation);
+  }
   return `${outcome.expressionText} = ${outcome.result ?? "?"}`;
 }
 

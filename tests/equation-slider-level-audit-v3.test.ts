@@ -38,22 +38,22 @@ describe("equation slider V3 release audit", () => {
         "chapter-3": 50,
         "chapter-4": 50
       },
-      gold: 40,
-      generated: 160,
+      gold: 42,
+      generated: 158,
       exactDuplicates: [],
       adjacentRepetitions: [],
       overusedActions: {},
       invalid: {},
       unsolved: [],
       orphanTiles: {},
-      repeatedValueReels: 108,
-      repeatedValueLevels: 82,
-      repeatedValueKinds: { number: 68, operator: 40 },
-      repeatedValueTiles: 216,
-      coverableRepeatedValueTiles: 216,
+      repeatedValueReels: 107,
+      repeatedValueLevels: 81,
+      repeatedValueKinds: { number: 67, operator: 40 },
+      repeatedValueTiles: 214,
+      coverableRepeatedValueTiles: 214,
       uncoverableRepeatedValueTiles: {},
-      sameVisibleTransitions: 216,
-      sameVisibleTransitionLevels: 82,
+      sameVisibleTransitions: 214,
+      sameVisibleTransitionLevels: 81,
       initialSameVisibleMoveLevels: 45,
       requiredSameVisibleMoveLevels: [],
       missingTargets: {}
@@ -62,10 +62,10 @@ describe("equation slider V3 release audit", () => {
   });
 
   it("enumerates every same-display identity transition and proves a visible two-step alternative", () => {
-    expect(Object.keys(audit.sameVisibleTransitions)).toHaveLength(82);
+    expect(Object.keys(audit.sameVisibleTransitions)).toHaveLength(81);
     expect(Object.keys(audit.initialSameVisibleMoves)).toHaveLength(45);
-    expect(Object.keys(audit.sameVisibleCompletionPaths)).toHaveLength(82);
-    expect(audit.sameVisibleShortestPathBenefitLevelIds).toHaveLength(39);
+    expect(Object.keys(audit.sameVisibleCompletionPaths)).toHaveLength(81);
+    expect(audit.sameVisibleShortestPathBenefitLevelIds).toHaveLength(38);
     expect(audit.initialSameVisibleShortestPathBenefitLevelIds).toHaveLength(21);
     expect(audit.requiredSameVisibleMoveLevelIds).toEqual([]);
     expect(

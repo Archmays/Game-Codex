@@ -90,13 +90,13 @@ async function completeCurrentLevelFromVisibleHints(page: Page): Promise<void> {
       await page.getByRole("button", { name: "提示", exact: true }).click();
     }
     const hint = (await page.locator(".equation-slider__hint").textContent())?.trim() ?? "";
-    const direction = hint.match(/第\s*(\d+)\s*条滑轨向(上|下)移动一格/);
+    const direction = hint.match(/第\s*(\d+)\s*条滑轨：选(上|下)方格/);
     if (!direction) {
-      await page.getByRole("button", { name: "第 1 列向上移动" }).click();
+      await page.getByRole("button", { name: "第 1 列选上方格" }).click();
       continue;
     }
     await page.getByRole("button", {
-      name: `第 ${Number(direction[1])} 列向${direction[2]}移动`
+      name: `第 ${Number(direction[1])} 列选${direction[2]}方格`
     }).click();
   }
   await expect(page.locator("[data-completion-card]")).toBeVisible();
@@ -135,7 +135,7 @@ test.describe("@release equation slider browser-only release gaps", () => {
         const beforeFeedback = await page.locator(".equation-slider__feedback").textContent();
         const { reelCount, tileIds } = await expectStableBoardContract(page, levelId);
 
-        await page.getByRole("button", { name: "第 1 列向上移动" }).click();
+        await page.getByRole("button", { name: "第 1 列选上方格" }).click();
         await expect(page.locator(MOVES)).toHaveText("1");
         await expect(page.locator(".equation-slider__feedback")).not.toHaveText(beforeFeedback ?? "");
         await expect(currentBoard(page).locator(TILE)).toHaveCount(reelCount * 3);
@@ -155,8 +155,8 @@ test.describe("@release equation slider browser-only release gaps", () => {
 
   test("repeating an already-correct expression never grows coverage twice", async ({ page }) => {
     await enterSlider(page);
-    const rightUp = page.getByRole("button", { name: "第 2 列向上移动" });
-    const rightDown = page.getByRole("button", { name: "第 2 列向下移动" });
+    const rightUp = page.getByRole("button", { name: "第 2 列选上方格" });
+    const rightDown = page.getByRole("button", { name: "第 2 列选下方格" });
 
     await rightUp.click();
     await expect(page.locator(COVERAGE)).toHaveText("2/6");
@@ -170,7 +170,7 @@ test.describe("@release equation slider browser-only release gaps", () => {
   test("wrong-move feedback describes the committed expression rather than the prior state", async ({ page }) => {
     await enterSlider(page);
 
-    await page.getByRole("button", { name: "第 1 列向上移动" }).click();
+    await page.getByRole("button", { name: "第 1 列选上方格" }).click();
 
     await expect(page.locator(".equation-slider__current-expression")).toHaveText("2 + 5 = 7");
     await expect(page.locator(".equation-slider__feedback")).toHaveText("比目标 6 大 1。");
@@ -368,13 +368,13 @@ test.describe("@release equation slider browser-only release gaps", () => {
     });
     await enterSlider(page);
 
-    await page.getByRole("button", { name: "第 1 列向上移动" }).click();
+    await page.getByRole("button", { name: "第 1 列选上方格" }).click();
     await expect.poll(() => page.evaluate(
       () => (window as unknown as { __equationAudioProbe: { starts: number } }).__equationAudioProbe.starts
     )).toBe(1);
 
     await page.getByRole("button", { name: "关闭声音" }).click();
-    await page.getByRole("button", { name: "第 1 列向下移动" }).click();
+    await page.getByRole("button", { name: "第 1 列选下方格" }).click();
     await expect.poll(() => page.evaluate(
       () => (window as unknown as { __equationAudioProbe: { starts: number } }).__equationAudioProbe.starts
     )).toBe(1);
@@ -383,7 +383,7 @@ test.describe("@release equation slider browser-only release gaps", () => {
     await expect.poll(() => page.evaluate(
       () => (window as unknown as { __equationAudioProbe: { starts: number } }).__equationAudioProbe.starts
     )).toBe(2);
-    await page.getByRole("button", { name: "第 2 列向上移动" }).click();
+    await page.getByRole("button", { name: "第 2 列选上方格" }).click();
     await expect.poll(() => page.evaluate(
       () => (window as unknown as { __equationAudioProbe: { starts: number } }).__equationAudioProbe.starts
     )).toBeGreaterThan(2);
@@ -395,7 +395,7 @@ test.describe("@release equation slider browser-only release gaps", () => {
     page.on("pageerror", (error) => pageErrors.push(error.message));
     await enterSlider(page);
 
-    await page.getByRole("button", { name: "第 2 列向上移动" }).click();
+    await page.getByRole("button", { name: "第 2 列选上方格" }).click();
     await page.getByRole("button", { name: "关卡列表" }).click();
     await expect(page.locator("[data-station-id]").first()).toBeVisible();
     await openLevelFromCurrentChapter(page, "es-1-02");
@@ -432,10 +432,10 @@ test.describe("@release equation slider browser-only release gaps", () => {
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2 + 42, { steps: 4 });
     await expect(page.locator(".equation-slider__reel.is-dragging")).toHaveCount(1);
     await expect(currentBoard(page)).toHaveAttribute("data-board-status", "dragging");
-    await expect(page.getByRole("button", { name: "第 2 列向上移动" })).toBeDisabled();
+    await expect(page.getByRole("button", { name: "第 2 列选上方格" })).toBeDisabled();
     await expect(page.getByRole("button", { name: "撤销" })).toBeDisabled();
     await expect(page.getByRole("button", { name: "重置" })).toBeDisabled();
-    await page.getByRole("button", { name: "第 2 列向上移动" }).evaluate(
+    await page.getByRole("button", { name: "第 2 列选上方格" }).evaluate(
       (button: HTMLButtonElement) => button.click()
     );
     await expect(page.locator(MOVES)).toHaveText("0");
@@ -460,7 +460,7 @@ test.describe("@release equation slider browser-only release gaps", () => {
 
     for (let move = 0; move < 120; move += 1) {
       const reelNumber = (move % 3) + 1;
-      const direction = move % 2 === 0 ? "向上移动" : "向下移动";
+      const direction = move % 2 === 0 ? "选上方格" : "选下方格";
       await page.getByRole("button", { name: `第 ${reelNumber} 列${direction}` }).click();
     }
 

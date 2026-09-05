@@ -1,7 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import equationAudit from "../../games/equation-slider/levels/generated-audit.json";
+import type { EquationSliderLevelAudit } from "../../games/equation-slider/level-audit";
 import { MAKE_TARGET_SAVE_VERSION } from "../../games/make-target/index";
 import { COMPATIBILITY_SURFACES, GAME_PORTFOLIO, SHARED_ENGINES, WORLD_MODULES } from "../../packages/data/gamePortfolio";
 import { AUTHORIZED_DEVELOPMENT_CYCLES, PROJECT_LIFECYCLE_TERMINAL_TRUTH } from "../../packages/data/projectLifecycle";
@@ -15,6 +15,11 @@ const issues: string[] = [];
 const equal = (left: readonly string[], right: readonly string[]): boolean => JSON.stringify([...left].sort()) === JSON.stringify([...right].sort());
 const expectedDefinitionIds = ["hanzi-radical-battle", "equation-slider", "math-lab", "english-spell-battle", "make-target", "clock-reader", "multiplication-adventure", "memory-card", "pinyin-magic-battle"];
 const historicalCommit = "90eb3b242b38b1d7a8cd98c8e0cafce14a6984a0";
+// This gate verifies immutable release evidence. Current level content has its
+// own levels:check gate; it must not be forced back to this historical hash.
+const equationAudit: EquationSliderLevelAudit = JSON.parse(execFileSync("git", [
+  "show", `${historicalCommit}:games/equation-slider/levels/generated-audit.json`
+], { cwd: root, encoding: "utf8" }));
 function historicalPointerExists(pointer: string): boolean {
   try { execFileSync("git", ["cat-file", "-e", `${historicalCommit}:${pointer}`], { cwd: root, stdio: "ignore" }); return true; } catch { return false; }
 }

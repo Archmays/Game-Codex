@@ -1,5 +1,6 @@
 import type { PublishedEquationSliderLevel } from "../../types";
 import { FIRST_GOLD_LEVEL } from "./gold-levels";
+import { applyGameplayPilot12 } from "./gameplay-pilot-12";
 import {
   buildCompleteV3Catalog,
   type GoldTemplateSpec
@@ -544,7 +545,7 @@ export const HAND_AUTHORED_GOLD_TEMPLATES = [
 ] as const satisfies readonly GoldTemplateSpec[];
 
 export const EQUATION_SLIDER_V3_LEVELS: readonly PublishedEquationSliderLevel[] =
-  buildCompleteV3Catalog(HAND_AUTHORED_GOLD_TEMPLATES, FIRST_GOLD_LEVEL);
+  applyGameplayPilot12(buildCompleteV3Catalog(HAND_AUTHORED_GOLD_TEMPLATES, FIRST_GOLD_LEVEL));
 
 export const HAND_AUTHORED_V3_GOLD_LEVELS: readonly PublishedEquationSliderLevel[] =
   EQUATION_SLIDER_V3_LEVELS.filter(

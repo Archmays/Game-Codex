@@ -16,12 +16,17 @@ import {
   V3_GENERATOR_VERSION
 } from "../games/equation-slider/levels/v3/generator";
 import { FIRST_GOLD_LEVEL } from "../games/equation-slider/levels/v3/gold-levels";
+import {
+  applyGameplayPilot12,
+  PILOT_AUTHORING_VERSION,
+  PILOT_REVISION_SOURCE
+} from "../games/equation-slider/levels/v3/gameplay-pilot-12";
 
 describe("equation slider V3 200-level catalog", () => {
   it("contains four 50-level chapters and five 10-level stations per chapter", () => {
     expect(EQUATION_SLIDER_V3_LEVELS).toHaveLength(200);
-    expect(HAND_AUTHORED_V3_GOLD_LEVELS).toHaveLength(40);
-    expect(GENERATED_V3_LEVELS).toHaveLength(160);
+    expect(HAND_AUTHORED_V3_GOLD_LEVELS).toHaveLength(42);
+    expect(GENERATED_V3_LEVELS).toHaveLength(158);
 
     for (let chapter = 1; chapter <= 4; chapter += 1) {
       const chapterLevels = EQUATION_SLIDER_V3_LEVELS.filter(
@@ -42,9 +47,16 @@ describe("equation slider V3 200-level catalog", () => {
     }
   });
 
-  it("keeps exactly ten authored gold levels per chapter and auditable generated lineage", () => {
+  it("keeps original template lineage and distinguishes the eleven authored pilot revisions", () => {
     for (const level of EQUATION_SLIDER_V3_LEVELS) {
-      if (level.order <= 10) {
+      if (level.provenance.contentRevision) {
+        expect(level.provenance).toEqual({
+          kind: "hand-authored-gold",
+          generatorVersion: PILOT_AUTHORING_VERSION,
+          contentRevision: level.id === "es-1-11" ? "slider-pilot-12-copy-r1" : "slider-pilot-12-r1",
+          revisionSource: PILOT_REVISION_SOURCE
+        });
+      } else if (level.order <= 10) {
         expect(level.provenance).toMatchObject({
           kind: "hand-authored-gold"
         });
@@ -124,10 +136,10 @@ describe("equation slider V3 200-level catalog", () => {
   });
 
   it("is byte-for-byte deterministic for the same authored templates", () => {
-    const regenerated = buildCompleteV3Catalog(
+    const regenerated = applyGameplayPilot12(buildCompleteV3Catalog(
       HAND_AUTHORED_GOLD_TEMPLATES,
       FIRST_GOLD_LEVEL
-    );
+    ));
     expect(JSON.stringify(regenerated)).toBe(JSON.stringify(EQUATION_SLIDER_V3_LEVELS));
   }, 120_000);
 
@@ -201,18 +213,18 @@ describe("equation slider V3 200-level catalog", () => {
     expect(modes).toEqual(new Set(["target", "multi-target", "equality"]));
     expect(operators).toEqual(new Set(["+", "−", "×", "÷"]));
     expect(countByMode).toEqual({
-      target: 130,
-      "multi-target": 30,
-      equality: 40
+      target: 129,
+      "multi-target": 32,
+      equality: 39
     });
     expect(countByReelCount).toEqual({
-      2: 60,
+      2: 61,
       3: 100,
-      4: 25,
+      4: 24,
       5: 15
     });
     expect(primarySkills.size).toBeGreaterThanOrEqual(32);
-    expect(authoredObjectives.size).toBe(40);
+    expect(authoredObjectives.size).toBe(42);
     expect(authoredStructures.size).toBeGreaterThanOrEqual(9);
     expect(
       all.every((level) =>

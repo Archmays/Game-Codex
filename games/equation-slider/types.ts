@@ -68,6 +68,9 @@ export interface LevelProvenance {
   readonly templateId?: string;
   readonly seed?: string;
   readonly generatorVersion: string;
+  /** Absent for boards whose original content is unchanged. */
+  readonly contentRevision?: string;
+  readonly revisionSource?: string;
 }
 
 export interface QualitySignatures {
@@ -235,13 +238,18 @@ export const EQUATION_SLIDER_SAVE_VERSION = 2;
 
 export type EquationSliderBadge = "independent" | "all-new" | "review-complete" | "try-again";
 
-export interface LevelProgressRecord {
+export interface LevelRevisionProgressRecord {
   readonly startedCount: number;
   readonly completed: boolean;
   readonly independent: boolean;
   readonly hintCount: number;
   readonly badges: readonly EquationSliderBadge[];
   readonly bestMoves?: number;
+}
+
+export interface LevelProgressRecord extends LevelRevisionProgressRecord {
+  /** Statistics for revised boards never inherit an earlier board's best/hints. */
+  readonly revisions?: Readonly<Record<string, LevelRevisionProgressRecord>>;
 }
 
 export interface LegacyProgressArchive {
@@ -268,6 +276,7 @@ export interface LoadedEquationSliderProgress {
 }
 
 export type LevelMapState = "unstarted" | "in-progress" | "completed" | "review-suggested";
+export type LevelRevisionState = LevelMapState | "previously-played";
 export type EquationSliderCheckpointKind = "normal" | "rest" | "station-review" | "chapter-review";
 
 export interface CheckpointLevelDescriptor {

@@ -21,7 +21,7 @@ async function openFreshSlider(page: Page): Promise<void> {
   await expect(page.locator(MOVE_COUNT_SELECTOR)).toHaveText("0");
   await expect(page.locator(LIVE_COACH_SELECTOR)).toBeVisible();
   await expect(page.locator(LIVE_COACH_SELECTOR)).toContainText(
-    "把右边滑轨上方的 2 移到中央"
+    "把右边滑轨上的 2 移到中央"
   );
 }
 
@@ -170,7 +170,7 @@ test.describe("@gate-a equation slider V3 board and tutorial", () => {
 
   test("tutorial advances only after the requested real board move", async ({ page }) => {
     await openFreshSlider(page);
-    await page.getByRole("button", { name: "第 2 列向上移动" }).click();
+    await page.getByRole("button", { name: "第 2 列选上方格" }).click();
 
     await expect(page.locator(EXPRESSION_SELECTOR)).toHaveText("4 + 2 = 6");
     await expect(page.locator(COVERAGE_SELECTOR)).toHaveText("2/6");
@@ -181,7 +181,7 @@ test.describe("@gate-a equation slider V3 board and tutorial", () => {
 
   test("a wrong tutorial move changes the board but cannot advance the coach", async ({ page }) => {
     await openFreshSlider(page);
-    await page.getByRole("button", { name: "第 2 列向下移动" }).click();
+    await page.getByRole("button", { name: "第 2 列选下方格" }).click();
 
     await expect(page.locator(EXPRESSION_SELECTOR)).toHaveText("4 + 4 = 8");
     await expect(page.locator(COVERAGE_SELECTOR)).toHaveText("0/6");
@@ -254,7 +254,7 @@ test.describe("@gate-a equation slider V3 board and tutorial", () => {
     await expect(controls).toHaveCount(4);
 
     for (let index = 0; index < 100; index += 1) {
-      const direction = index % 2 === 0 ? "向上移动" : "向下移动";
+      const direction = index % 2 === 0 ? "选上方格" : "选下方格";
       await page.getByRole("button", { name: `第 1 列${direction}` }).click();
     }
 
@@ -322,7 +322,7 @@ test.describe("@gate-a equation slider V3 board and tutorial", () => {
     await expect(page.locator(FIRST_BOARD_SELECTOR)).toBeVisible();
     await expectMoveCount(page, 0);
 
-    await page.getByRole("button", { name: "第 1 列向上移动" }).click();
+    await page.getByRole("button", { name: "第 1 列选上方格" }).click();
     await expectMoveCount(page, 1);
   });
 
@@ -370,7 +370,7 @@ test.describe("@gate-a equation slider V3 board and tutorial", () => {
     await openFirstLevel(page);
     const initialIds = (await formalTileIds(page)).sort();
 
-    await page.getByRole("button", { name: "第 2 列向上移动" }).click();
+    await page.getByRole("button", { name: "第 2 列选上方格" }).click();
     await expect(page.locator(EXPRESSION_SELECTOR)).toHaveText("4 + 2 = 6");
     await expect(page.locator(COVERAGE_SELECTOR)).toHaveText("2/6");
     await expectMoveCount(page, 1);
@@ -380,7 +380,7 @@ test.describe("@gate-a equation slider V3 board and tutorial", () => {
     await expectMoveCount(page, 0);
     expect((await formalTileIds(page)).sort()).toEqual(initialIds);
 
-    await page.getByRole("button", { name: "第 2 列向上移动" }).click();
+    await page.getByRole("button", { name: "第 2 列选上方格" }).click();
     await expect(page.locator(COVERAGE_SELECTOR)).toHaveText("2/6");
     await page.getByRole("button", { name: "重置" }).click();
     await expect(page.locator(EXPRESSION_SELECTOR)).toHaveText("4 + 5 = 9");
@@ -393,8 +393,8 @@ test.describe("@gate-a equation slider V3 board and tutorial", () => {
   test("three distinct valid combinations light all six tiles and show completion", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await openFirstLevel(page);
-    const leftUp = page.getByRole("button", { name: "第 1 列向上移动" });
-    const rightUp = page.getByRole("button", { name: "第 2 列向上移动" });
+    const leftUp = page.getByRole("button", { name: "第 1 列选上方格" });
+    const rightUp = page.getByRole("button", { name: "第 2 列选上方格" });
 
     await rightUp.click();
     await expect(page.locator(EXPRESSION_SELECTOR)).toHaveText("4 + 2 = 6");
@@ -416,7 +416,7 @@ test.describe("@gate-a equation slider V3 board and tutorial", () => {
 
   test("reopen tutorial restarts the exact first board with live coaching", async ({ page }) => {
     await openFirstLevel(page);
-    await page.getByRole("button", { name: "第 2 列向下移动" }).click();
+    await page.getByRole("button", { name: "第 2 列选下方格" }).click();
     await expectMoveCount(page, 1);
     await page.getByRole("button", { name: "重新教程" }).click();
 
@@ -476,11 +476,11 @@ test.describe("@gate-a equation slider V3 board and tutorial", () => {
   test("reduced motion never waits for feedback animation to unlock", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await openFirstLevel(page);
-    await page.getByRole("button", { name: "第 2 列向上移动" }).click();
-    await page.getByRole("button", { name: "第 1 列向上移动" }).click();
+    await page.getByRole("button", { name: "第 2 列选上方格" }).click();
+    await page.getByRole("button", { name: "第 1 列选上方格" }).click();
 
     await expectMoveCount(page, 2);
-    await expect(page.getByRole("button", { name: "第 1 列向上移动" })).toBeEnabled();
+    await expect(page.getByRole("button", { name: "第 1 列选上方格" })).toBeEnabled();
   });
 });
 
@@ -512,7 +512,7 @@ test.describe("@gate-a equation slider input adapters", () => {
 
   test("visible up control commits exactly one move", async ({ page }) => {
     await openFirstLevel(page);
-    await page.getByRole("button", { name: "第 2 列向上移动" }).click();
+    await page.getByRole("button", { name: "第 2 列选上方格" }).click();
 
     await expectMoveCount(page, 1);
     await expect(page.locator(EXPRESSION_SELECTOR)).toHaveText("4 + 2 = 6");

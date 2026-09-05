@@ -37,9 +37,9 @@ const equationAudit = JSON.parse(source("games/equation-slider/levels/generated-
   initialSameVisibleShortestPathBenefitLevelIds: string[];
   requiredSameVisibleMoveLevelIds: string[];
 };
-requireValue(equationAudit.sameVisibleTransitionLevelCount === 82, "Equation Slider same-display transition audit drifted");
+requireValue(equationAudit.sameVisibleTransitionLevelCount === 81, "Equation Slider same-display transition audit drifted");
 requireValue(equationAudit.initialSameVisibleMoveLevelCount === 45, "Equation Slider initial same-display transition audit drifted");
-requireValue(equationAudit.sameVisibleShortestPathBenefitLevelIds.length === 39, "Equation Slider shortest-path benefit classification drifted");
+requireValue(equationAudit.sameVisibleShortestPathBenefitLevelIds.length === 38, "Equation Slider shortest-path benefit classification drifted");
 requireValue(equationAudit.initialSameVisibleShortestPathBenefitLevelIds.length === 21, "Equation Slider initial shortest-path benefit classification drifted");
 requireValue(equationAudit.requiredSameVisibleMoveLevelIds.length === 0, "Equation Slider unexpectedly requires a no-visible-change move");
 
@@ -68,7 +68,7 @@ const result = {
   stations: MATH_WORLD_ACTIVITIES.map((activity) => activity.id),
   targetPuzzles: TARGET_PUZZLE_MANIFEST.length,
   equationSameVisiblePolicy: "REJECT_NO_VISIBLE_CHANGE_WITH_EXPLANATION",
-  equationSameVisibleAudit: { transitionLevels: 82, initialLevels: 45, shortestPathBenefitLevels: 39, requiredLevels: 0 },
+  equationSameVisibleAudit: { transitionLevels: equationAudit.sameVisibleTransitionLevelCount, initialLevels: equationAudit.initialSameVisibleMoveLevelCount, shortestPathBenefitLevels: equationAudit.sameVisibleShortestPathBenefitLevelIds.length, requiredLevels: equationAudit.requiredSameVisibleMoveLevelIds.length },
   runtimeAssets,
   runtimeAssetBytes,
 };

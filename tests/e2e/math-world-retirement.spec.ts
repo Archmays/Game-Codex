@@ -99,7 +99,7 @@ test("@retirement real visits preserve old history and restore keyboard focus, w
       await expect(page.locator(".equation-slider")).toBeVisible();
       const skip = page.getByRole("button", { name: "跳过教程" });
       if (await skip.isVisible()) await activate(skip, touch);
-      const move = page.getByRole("button", { name: "第 2 列向上移动" });
+      const move = page.getByRole("button", { name: "第 2 列选上方格" });
       const before = await page.locator("[data-coverage-progress]").innerText();
       await activate(move, touch);
       await expect(page.locator("[data-coverage-progress]")).not.toHaveText(before);

@@ -142,7 +142,7 @@ const GAMES: readonly SmokeGame[] = [
     canonicalRoute: "/?world=math-world&station=slider",
     async interact(page) {
       await page.getByRole("button", { name: "跳过教程" }).click();
-      const action = page.getByRole("button", { name: "第 2 列向上移动" });
+      const action = page.getByRole("button", { name: "第 2 列选上方格" });
       await expectUsableTarget(action);
       await action.click();
       await expect(page.locator("[data-coverage-progress]")).toHaveText("2/6");

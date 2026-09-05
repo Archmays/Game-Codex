@@ -234,7 +234,6 @@
     "stationId": "chapter-1-station-1",
     "order": 2,
     "stationOrder": 2,
-    "mode": "target",
     "challenge": "standard",
     "slots": [
       {
@@ -251,21 +250,21 @@
             {
               "id": "es-1-02-left-n2",
               "kind": "number",
-              "value": 3
+              "value": 2
             },
             {
               "id": "es-1-02-left-n3",
               "kind": "number",
-              "value": 5
+              "value": 3
             }
           ]
         }
       },
       {
         "kind": "fixed-token",
-        "id": "es-1-02-plus",
+        "id": "es-1-02-plus-1",
         "token": "+",
-        "ariaLabel": "固定运算符：加号"
+        "ariaLabel": "固定运算符：第 1 个加号"
       },
       {
         "kind": "movable-reel",
@@ -276,17 +275,17 @@
             {
               "id": "es-1-02-right-n1",
               "kind": "number",
-              "value": 6
+              "value": 3
             },
             {
               "id": "es-1-02-right-n2",
               "kind": "number",
-              "value": 4
+              "value": 2
             },
             {
               "id": "es-1-02-right-n3",
               "kind": "number",
-              "value": 2
+              "value": 4
             }
           ]
         }
@@ -294,7 +293,7 @@
     ],
     "initialIndexes": [
       0,
-      2
+      0
     ],
     "requiredTileIds": [
       "es-1-02-left-n1",
@@ -304,133 +303,138 @@
       "es-1-02-right-n2",
       "es-1-02-right-n3"
     ],
-    "targets": [
-      {
-        "kind": "value",
-        "id": "es-1-02-target-7",
-        "value": 7
-      }
-    ],
     "learning": {
-      "objective": "找出三组不同的 7 的数对，建立奇数分合表象。",
-      "primarySkill": "odd-number-bonds",
+      "objective": "观察中央数字怎样随滑轨移动变化，并用不同数对合成 5。",
+      "primarySkill": "visible-addend-change",
       "skillTags": [
         "addition",
-        "number-bonds",
-        "odd-numbers"
+        "visible-addend-change",
+        "number-bonds"
       ],
       "prerequisiteTags": [
-        "recognize-1-to-20",
-        "count-forward"
+        "recognize-1-to-10",
+        "addition-within-10"
       ],
       "misconceptionTags": [
-        "count-all-instead-of-compose",
-        "treat-plus-as-a-tile"
+        "repeat-same-pair",
+        "first-success-means-complete"
       ],
-      "scaffold": "guided",
-      "reviewOf": [],
-      "reflection": "离 7 越近的第一个加数，另一个加数怎样变化？",
+      "scaffold": "supported",
+      "reviewOf": [
+        "es-1-01"
+      ],
+      "reflection": "移动一格后，中央的哪一个数变了？",
       "recommendedAgeBand": "约 6–7 岁"
     },
     "hints": [
       {
         "kind": "concept",
-        "text": "先找总数不变时，两个部分怎样配对。"
+        "text": "让中央两个数合起来是 5；上方或下方的格都可以点。"
       },
       {
         "kind": "position",
-        "text": "观察中央数字和还没点亮的滑轨格。"
+        "text": "看看值得留意的那条滑轨里，哪些格还没亮。"
       },
       {
         "kind": "direction",
-        "text": "每次只移动一格，再读一遍完整算式。"
+        "text": "按当前棋盘的下一步提示移动一格，再看中央算式。"
       }
     ],
     "provenance": {
       "kind": "hand-authored-gold",
-      "generatorVersion": "authored-v3.0.0"
+      "generatorVersion": "authored-slider-pilot-12-r1",
+      "contentRevision": "slider-pilot-12-r1",
+      "revisionSource": "games/equation-slider/levels/v3/gameplay-pilot-12.ts"
     },
+    "mode": "target",
+    "targets": [
+      {
+        "kind": "value",
+        "id": "es-1-02-target-5",
+        "value": 5
+      }
+    ],
     "analysis": {
       "solverVersion": "3.0.0",
       "validArrangements": [
         {
           "indexes": [
             0,
-            0
+            2
           ],
-          "key": "0.0",
+          "key": "0.2",
           "selectedTileIds": [
             "es-1-02-left-n1",
-            "es-1-02-right-n1"
+            "es-1-02-right-n3"
           ],
-          "tileMask": 9,
+          "tileMask": 33,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-02-target-7"
+            "es-1-02-target-5"
           ],
-          "expressionText": "1 + 6",
-          "result": 7
+          "expressionText": "1 + 4",
+          "result": 5
         },
         {
           "indexes": [
             1,
-            1
+            0
           ],
-          "key": "1.1",
+          "key": "1.0",
           "selectedTileIds": [
             "es-1-02-left-n2",
-            "es-1-02-right-n2"
+            "es-1-02-right-n1"
           ],
-          "tileMask": 18,
+          "tileMask": 10,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-02-target-7"
+            "es-1-02-target-5"
           ],
-          "expressionText": "3 + 4",
-          "result": 7
+          "expressionText": "2 + 3",
+          "result": 5
         },
         {
           "indexes": [
             2,
-            2
+            1
           ],
-          "key": "2.2",
+          "key": "2.1",
           "selectedTileIds": [
             "es-1-02-left-n3",
-            "es-1-02-right-n3"
+            "es-1-02-right-n2"
           ],
-          "tileMask": 36,
+          "tileMask": 20,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-02-target-7"
+            "es-1-02-target-5"
           ],
-          "expressionText": "5 + 2",
-          "result": 7
+          "expressionText": "3 + 2",
+          "result": 5
         }
       ],
       "canonicalPlan": [
         {
           "indexes": [
             0,
-            0
+            2
           ]
         },
         {
           "indexes": [
             1,
-            1
+            0
           ]
         },
         {
           "indexes": [
             2,
-            2
+            1
           ]
         }
       ],
       "minimumMovesToFirstSuccess": 1,
       "minimumCorrectArrangements": 3,
-      "difficulty": 20.158,
+      "difficulty": 19.551,
       "metrics": {
         "arrangementCount": 9,
         "validArrangementCount": 3,
@@ -440,19 +444,19 @@
         "minimumMovesToFirstSuccess": 1,
         "reachableCoverageStates": 8,
         "operatorComplexity": 1,
-        "numericMagnitude": 6,
-        "difficulty": 20.158
+        "numericMagnitude": 4,
+        "difficulty": 19.551
       },
       "signatures": {
         "slotStructure": "R:N-F:+-R:N",
-        "valueStructure": "target:7|number:1,3,5|fixed:+|number:6,4,2",
-        "rotationNormalized": "target:7|1,3,5|2,6,4",
+        "valueStructure": "target:5|number:1,2,3|fixed:+|number:3,2,4",
+        "rotationNormalized": "target:5|1,2,3|2,4,3",
         "operatorPattern": "number|fixed:+|number",
-        "validArrangements": "1 + 6->value:7;3 + 4->value:7;5 + 2->value:7",
-        "canonicalCoverage": "1 + 6->value:7;3 + 4->value:7;5 + 2->value:7",
-        "firstSuccessAction": "stay.down",
-        "numberMultiset": "1,2,3,4,5,6",
-        "learningBand": "odd-number-bonds|1-6"
+        "validArrangements": "1 + 4->value:5;2 + 3->value:5;3 + 2->value:5",
+        "canonicalCoverage": "1 + 4->value:5;2 + 3->value:5;3 + 2->value:5",
+        "firstSuccessAction": "stay.up",
+        "numberMultiset": "1,2,2,3,3,4",
+        "learningBand": "visible-addend-change|1-4"
       }
     }
   },
@@ -463,7 +467,6 @@
     "stationId": "chapter-1-station-1",
     "order": 3,
     "stationOrder": 3,
-    "mode": "target",
     "challenge": "standard",
     "slots": [
       {
@@ -485,16 +488,16 @@
             {
               "id": "es-1-03-left-n3",
               "kind": "number",
-              "value": 5
+              "value": 3
             }
           ]
         }
       },
       {
         "kind": "fixed-token",
-        "id": "es-1-03-plus",
+        "id": "es-1-03-plus-1",
         "token": "+",
-        "ariaLabel": "固定运算符：加号"
+        "ariaLabel": "固定运算符：第 1 个加号"
       },
       {
         "kind": "movable-reel",
@@ -505,17 +508,17 @@
             {
               "id": "es-1-03-right-n1",
               "kind": "number",
-              "value": 7
+              "value": 3
             },
             {
               "id": "es-1-03-right-n2",
               "kind": "number",
-              "value": 6
+              "value": 5
             },
             {
               "id": "es-1-03-right-n3",
               "kind": "number",
-              "value": 3
+              "value": 4
             }
           ]
         }
@@ -523,7 +526,7 @@
     ],
     "initialIndexes": [
       0,
-      1
+      0
     ],
     "requiredTileIds": [
       "es-1-03-left-n1",
@@ -533,133 +536,138 @@
       "es-1-03-right-n2",
       "es-1-03-right-n3"
     ],
-    "targets": [
-      {
-        "kind": "value",
-        "id": "es-1-03-target-8",
-        "value": 8
-      }
-    ],
     "learning": {
-      "objective": "用补数关系凑成 8，并区分相邻数与补数。",
-      "primarySkill": "complements-to-eight",
+      "objective": "区分算式成立与全关完成，让未亮数字也参加合成 6。",
+      "primarySkill": "success-and-coverage",
       "skillTags": [
         "addition",
-        "complements",
-        "mental-math"
+        "success-and-coverage",
+        "number-bonds"
       ],
       "prerequisiteTags": [
-        "recognize-1-to-20",
-        "count-forward"
+        "recognize-1-to-10",
+        "addition-within-10"
       ],
       "misconceptionTags": [
-        "count-all-instead-of-compose",
-        "treat-plus-as-a-tile"
+        "repeat-same-pair",
+        "first-success-means-complete"
       ],
-      "scaffold": "guided",
-      "reviewOf": [],
-      "reflection": "你能不逐个数，直接说出 5 还缺几吗？",
+      "scaffold": "supported",
+      "reviewOf": [
+        "es-1-01"
+      ],
+      "reflection": "算式成立一次后，棋盘上还有哪些格没亮？",
       "recommendedAgeBand": "约 6–7 岁"
     },
     "hints": [
       {
         "kind": "concept",
-        "text": "先找总数不变时，两个部分怎样配对。"
+        "text": "得到 6 以后，还要让没亮的数字也参加成立的算式。"
       },
       {
         "kind": "position",
-        "text": "观察中央数字和还没点亮的滑轨格。"
+        "text": "看看值得留意的那条滑轨里，哪些格还没亮。"
       },
       {
         "kind": "direction",
-        "text": "每次只移动一格，再读一遍完整算式。"
+        "text": "按当前棋盘的下一步提示移动一格，再看中央算式。"
       }
     ],
     "provenance": {
       "kind": "hand-authored-gold",
-      "generatorVersion": "authored-v3.0.0"
+      "generatorVersion": "authored-slider-pilot-12-r1",
+      "contentRevision": "slider-pilot-12-r1",
+      "revisionSource": "games/equation-slider/levels/v3/gameplay-pilot-12.ts"
     },
+    "mode": "target",
+    "targets": [
+      {
+        "kind": "value",
+        "id": "es-1-03-target-6",
+        "value": 6
+      }
+    ],
     "analysis": {
       "solverVersion": "3.0.0",
       "validArrangements": [
         {
           "indexes": [
             0,
-            0
+            1
           ],
-          "key": "0.0",
+          "key": "0.1",
           "selectedTileIds": [
             "es-1-03-left-n1",
-            "es-1-03-right-n1"
+            "es-1-03-right-n2"
           ],
-          "tileMask": 9,
+          "tileMask": 17,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-03-target-8"
+            "es-1-03-target-6"
           ],
-          "expressionText": "1 + 7",
-          "result": 8
+          "expressionText": "1 + 5",
+          "result": 6
         },
         {
           "indexes": [
             1,
-            1
+            2
           ],
-          "key": "1.1",
+          "key": "1.2",
           "selectedTileIds": [
             "es-1-03-left-n2",
-            "es-1-03-right-n2"
+            "es-1-03-right-n3"
           ],
-          "tileMask": 18,
+          "tileMask": 34,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-03-target-8"
+            "es-1-03-target-6"
           ],
-          "expressionText": "2 + 6",
-          "result": 8
+          "expressionText": "2 + 4",
+          "result": 6
         },
         {
           "indexes": [
             2,
-            2
+            0
           ],
-          "key": "2.2",
+          "key": "2.0",
           "selectedTileIds": [
             "es-1-03-left-n3",
-            "es-1-03-right-n3"
+            "es-1-03-right-n1"
           ],
-          "tileMask": 36,
+          "tileMask": 12,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-03-target-8"
+            "es-1-03-target-6"
           ],
-          "expressionText": "5 + 3",
-          "result": 8
+          "expressionText": "3 + 3",
+          "result": 6
         }
       ],
       "canonicalPlan": [
         {
           "indexes": [
             0,
-            0
-          ]
-        },
-        {
-          "indexes": [
-            1,
             1
           ]
         },
         {
           "indexes": [
-            2,
+            1,
             2
+          ]
+        },
+        {
+          "indexes": [
+            2,
+            0
           ]
         }
       ],
       "minimumMovesToFirstSuccess": 1,
       "minimumCorrectArrangements": 3,
-      "difficulty": 20.398,
+      "difficulty": 19.88,
       "metrics": {
         "arrangementCount": 9,
         "validArrangementCount": 3,
@@ -669,19 +677,19 @@
         "minimumMovesToFirstSuccess": 1,
         "reachableCoverageStates": 8,
         "operatorComplexity": 1,
-        "numericMagnitude": 7,
-        "difficulty": 20.398
+        "numericMagnitude": 5,
+        "difficulty": 19.88
       },
       "signatures": {
         "slotStructure": "R:N-F:+-R:N",
-        "valueStructure": "target:8|number:1,2,5|fixed:+|number:7,6,3",
-        "rotationNormalized": "target:8|1,2,5|3,7,6",
+        "valueStructure": "target:6|number:1,2,3|fixed:+|number:3,5,4",
+        "rotationNormalized": "target:6|1,2,3|3,5,4",
         "operatorPattern": "number|fixed:+|number",
-        "validArrangements": "1 + 7->value:8;2 + 6->value:8;5 + 3->value:8",
-        "canonicalCoverage": "1 + 7->value:8;2 + 6->value:8;5 + 3->value:8",
-        "firstSuccessAction": "stay.up",
-        "numberMultiset": "1,2,3,5,6,7",
-        "learningBand": "complements-to-eight|1-7"
+        "validArrangements": "1 + 5->value:6;2 + 4->value:6;3 + 3->value:6",
+        "canonicalCoverage": "1 + 5->value:6;2 + 4->value:6;3 + 3->value:6",
+        "firstSuccessAction": "stay.down",
+        "numberMultiset": "1,2,3,3,4,5",
+        "learningBand": "success-and-coverage|1-5"
       }
     }
   },
@@ -692,7 +700,6 @@
     "stationId": "chapter-1-station-1",
     "order": 4,
     "stationOrder": 4,
-    "mode": "target",
     "challenge": "standard",
     "slots": [
       {
@@ -709,21 +716,21 @@
             {
               "id": "es-1-04-left-n2",
               "kind": "number",
-              "value": 3
+              "value": 4
             },
             {
               "id": "es-1-04-left-n3",
               "kind": "number",
-              "value": 6
+              "value": 7
             }
           ]
         }
       },
       {
         "kind": "fixed-token",
-        "id": "es-1-04-plus",
+        "id": "es-1-04-plus-1",
         "token": "+",
-        "ariaLabel": "固定运算符：加号"
+        "ariaLabel": "固定运算符：第 1 个加号"
       },
       {
         "kind": "movable-reel",
@@ -734,17 +741,17 @@
             {
               "id": "es-1-04-right-n1",
               "kind": "number",
-              "value": 7
+              "value": 3
             },
             {
               "id": "es-1-04-right-n2",
               "kind": "number",
-              "value": 6
+              "value": 8
             },
             {
               "id": "es-1-04-right-n3",
               "kind": "number",
-              "value": 3
+              "value": 6
             }
           ]
         }
@@ -762,69 +769,536 @@
       "es-1-04-right-n2",
       "es-1-04-right-n3"
     ],
-    "targets": [
-      {
-        "kind": "value",
-        "id": "es-1-04-target-9",
-        "value": 9
-      }
-    ],
     "learning": {
-      "objective": "借助已知的 10 的分合，推想 9 的数对。",
-      "primarySkill": "near-ten-bonds",
+      "objective": "从一个部分反推另一个部分，发现 10 的互补数。",
+      "primarySkill": "make-ten-complements",
       "skillTags": [
         "addition",
-        "near-ten",
+        "make-ten-complements",
         "number-bonds"
       ],
       "prerequisiteTags": [
-        "recognize-1-to-20",
-        "count-forward"
+        "recognize-1-to-10",
+        "addition-within-10"
       ],
       "misconceptionTags": [
-        "count-all-instead-of-compose",
-        "treat-plus-as-a-tile"
+        "repeat-same-pair",
+        "first-success-means-complete"
       ],
-      "scaffold": "guided",
+      "scaffold": "supported",
       "reviewOf": [],
-      "reflection": "哪一组最接近 5 和 5？为什么？",
+      "reflection": "看到一个部分，怎样想到另一个部分？",
       "recommendedAgeBand": "约 6–7 岁"
     },
     "hints": [
       {
         "kind": "concept",
-        "text": "先找总数不变时，两个部分怎样配对。"
+        "text": "选一个数，想想它离 10 还差多少。"
       },
       {
         "kind": "position",
-        "text": "观察中央数字和还没点亮的滑轨格。"
+        "text": "看看值得留意的那条滑轨里，哪些格还没亮。"
       },
       {
         "kind": "direction",
-        "text": "每次只移动一格，再读一遍完整算式。"
+        "text": "按当前棋盘的下一步提示移动一格，再看中央算式。"
       }
     ],
     "provenance": {
       "kind": "hand-authored-gold",
-      "generatorVersion": "authored-v3.0.0"
+      "generatorVersion": "authored-slider-pilot-12-r1",
+      "contentRevision": "slider-pilot-12-r1",
+      "revisionSource": "games/equation-slider/levels/v3/gameplay-pilot-12.ts"
     },
+    "mode": "target",
+    "targets": [
+      {
+        "kind": "value",
+        "id": "es-1-04-target-10",
+        "value": 10
+      }
+    ],
     "analysis": {
       "solverVersion": "3.0.0",
       "validArrangements": [
         {
           "indexes": [
             0,
-            0
+            1
           ],
-          "key": "0.0",
+          "key": "0.1",
           "selectedTileIds": [
             "es-1-04-left-n1",
-            "es-1-04-right-n1"
+            "es-1-04-right-n2"
           ],
-          "tileMask": 9,
+          "tileMask": 17,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-04-target-9"
+            "es-1-04-target-10"
+          ],
+          "expressionText": "2 + 8",
+          "result": 10
+        },
+        {
+          "indexes": [
+            1,
+            2
+          ],
+          "key": "1.2",
+          "selectedTileIds": [
+            "es-1-04-left-n2",
+            "es-1-04-right-n3"
+          ],
+          "tileMask": 34,
+          "targetMask": 1,
+          "satisfiedTargetIds": [
+            "es-1-04-target-10"
+          ],
+          "expressionText": "4 + 6",
+          "result": 10
+        },
+        {
+          "indexes": [
+            2,
+            0
+          ],
+          "key": "2.0",
+          "selectedTileIds": [
+            "es-1-04-left-n3",
+            "es-1-04-right-n1"
+          ],
+          "tileMask": 12,
+          "targetMask": 1,
+          "satisfiedTargetIds": [
+            "es-1-04-target-10"
+          ],
+          "expressionText": "7 + 3",
+          "result": 10
+        }
+      ],
+      "canonicalPlan": [
+        {
+          "indexes": [
+            0,
+            1
+          ]
+        },
+        {
+          "indexes": [
+            1,
+            2
+          ]
+        },
+        {
+          "indexes": [
+            2,
+            0
+          ]
+        }
+      ],
+      "minimumMovesToFirstSuccess": 1,
+      "minimumCorrectArrangements": 3,
+      "difficulty": 20.611,
+      "metrics": {
+        "arrangementCount": 9,
+        "validArrangementCount": 3,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectArrangements": 3,
+        "minimumCoverSetCountCapped": 1,
+        "minimumMovesToFirstSuccess": 1,
+        "reachableCoverageStates": 8,
+        "operatorComplexity": 1,
+        "numericMagnitude": 8,
+        "difficulty": 20.611
+      },
+      "signatures": {
+        "slotStructure": "R:N-F:+-R:N",
+        "valueStructure": "target:10|number:2,4,7|fixed:+|number:3,8,6",
+        "rotationNormalized": "target:10|2,4,7|3,8,6",
+        "operatorPattern": "number|fixed:+|number",
+        "validArrangements": "2 + 8->value:10;4 + 6->value:10;7 + 3->value:10",
+        "canonicalCoverage": "2 + 8->value:10;4 + 6->value:10;7 + 3->value:10",
+        "firstSuccessAction": "stay.up",
+        "numberMultiset": "2,3,4,6,7,8",
+        "learningBand": "make-ten-complements|2-8"
+      }
+    }
+  },
+  {
+    "schemaVersion": 3,
+    "id": "es-1-05",
+    "chapterId": "chapter-1",
+    "stationId": "chapter-1-station-1",
+    "order": 5,
+    "stationOrder": 5,
+    "challenge": "standard",
+    "slots": [
+      {
+        "kind": "movable-reel",
+        "reel": {
+          "id": "es-1-05-left",
+          "kind": "number",
+          "tiles": [
+            {
+              "id": "es-1-05-left-n1",
+              "kind": "number",
+              "value": 2
+            },
+            {
+              "id": "es-1-05-left-n2",
+              "kind": "number",
+              "value": 4
+            },
+            {
+              "id": "es-1-05-left-n3",
+              "kind": "number",
+              "value": 6
+            }
+          ]
+        }
+      },
+      {
+        "kind": "fixed-token",
+        "id": "es-1-05-plus-1",
+        "token": "+",
+        "ariaLabel": "固定运算符：第 1 个加号"
+      },
+      {
+        "kind": "movable-reel",
+        "reel": {
+          "id": "es-1-05-right",
+          "kind": "number",
+          "tiles": [
+            {
+              "id": "es-1-05-right-n1",
+              "kind": "number",
+              "value": 4
+            },
+            {
+              "id": "es-1-05-right-n2",
+              "kind": "number",
+              "value": 2
+            },
+            {
+              "id": "es-1-05-right-n3",
+              "kind": "number",
+              "value": 6
+            }
+          ]
+        }
+      }
+    ],
+    "initialIndexes": [
+      2,
+      2
+    ],
+    "requiredTileIds": [
+      "es-1-05-left-n1",
+      "es-1-05-left-n2",
+      "es-1-05-left-n3",
+      "es-1-05-right-n1",
+      "es-1-05-right-n2",
+      "es-1-05-right-n3"
+    ],
+    "learning": {
+      "objective": "比较 2+6、6+2 和 4+4，发现交换加数不改变和。",
+      "primarySkill": "exchange-addends",
+      "skillTags": [
+        "addition",
+        "exchange-addends",
+        "number-bonds"
+      ],
+      "prerequisiteTags": [
+        "recognize-1-to-10",
+        "addition-within-10"
+      ],
+      "misconceptionTags": [
+        "repeat-same-pair",
+        "first-success-means-complete"
+      ],
+      "scaffold": "supported",
+      "reviewOf": [],
+      "reflection": "哪些不同位置的数字组成了相同的和？",
+      "recommendedAgeBand": "约 6–7 岁"
+    },
+    "hints": [
+      {
+        "kind": "concept",
+        "text": "两个加数换个位置，总数会怎样？"
+      },
+      {
+        "kind": "position",
+        "text": "看看值得留意的那条滑轨里，哪些格还没亮。"
+      },
+      {
+        "kind": "direction",
+        "text": "按当前棋盘的下一步提示移动一格，再看中央算式。"
+      }
+    ],
+    "provenance": {
+      "kind": "hand-authored-gold",
+      "generatorVersion": "authored-slider-pilot-12-r1",
+      "contentRevision": "slider-pilot-12-r1",
+      "revisionSource": "games/equation-slider/levels/v3/gameplay-pilot-12.ts"
+    },
+    "mode": "target",
+    "targets": [
+      {
+        "kind": "value",
+        "id": "es-1-05-target-8",
+        "value": 8
+      }
+    ],
+    "analysis": {
+      "solverVersion": "3.0.0",
+      "validArrangements": [
+        {
+          "indexes": [
+            0,
+            2
+          ],
+          "key": "0.2",
+          "selectedTileIds": [
+            "es-1-05-left-n1",
+            "es-1-05-right-n3"
+          ],
+          "tileMask": 33,
+          "targetMask": 1,
+          "satisfiedTargetIds": [
+            "es-1-05-target-8"
+          ],
+          "expressionText": "2 + 6",
+          "result": 8
+        },
+        {
+          "indexes": [
+            1,
+            0
+          ],
+          "key": "1.0",
+          "selectedTileIds": [
+            "es-1-05-left-n2",
+            "es-1-05-right-n1"
+          ],
+          "tileMask": 10,
+          "targetMask": 1,
+          "satisfiedTargetIds": [
+            "es-1-05-target-8"
+          ],
+          "expressionText": "4 + 4",
+          "result": 8
+        },
+        {
+          "indexes": [
+            2,
+            1
+          ],
+          "key": "2.1",
+          "selectedTileIds": [
+            "es-1-05-left-n3",
+            "es-1-05-right-n2"
+          ],
+          "tileMask": 20,
+          "targetMask": 1,
+          "satisfiedTargetIds": [
+            "es-1-05-target-8"
+          ],
+          "expressionText": "6 + 2",
+          "result": 8
+        }
+      ],
+      "canonicalPlan": [
+        {
+          "indexes": [
+            0,
+            2
+          ]
+        },
+        {
+          "indexes": [
+            1,
+            0
+          ]
+        },
+        {
+          "indexes": [
+            2,
+            1
+          ]
+        }
+      ],
+      "minimumMovesToFirstSuccess": 1,
+      "minimumCorrectArrangements": 3,
+      "difficulty": 20.158,
+      "metrics": {
+        "arrangementCount": 9,
+        "validArrangementCount": 3,
+        "invalidArrangementRatio": 0.667,
+        "minimumCorrectArrangements": 3,
+        "minimumCoverSetCountCapped": 1,
+        "minimumMovesToFirstSuccess": 1,
+        "reachableCoverageStates": 8,
+        "operatorComplexity": 1,
+        "numericMagnitude": 6,
+        "difficulty": 20.158
+      },
+      "signatures": {
+        "slotStructure": "R:N-F:+-R:N",
+        "valueStructure": "target:8|number:2,4,6|fixed:+|number:4,2,6",
+        "rotationNormalized": "target:8|2,4,6|2,6,4",
+        "operatorPattern": "number|fixed:+|number",
+        "validArrangements": "2 + 6->value:8;4 + 4->value:8;6 + 2->value:8",
+        "canonicalCoverage": "2 + 6->value:8;4 + 4->value:8;6 + 2->value:8",
+        "firstSuccessAction": "down.stay",
+        "numberMultiset": "2,2,4,4,6,6",
+        "learningBand": "exchange-addends|2-6"
+      }
+    }
+  },
+  {
+    "schemaVersion": 3,
+    "id": "es-1-06",
+    "chapterId": "chapter-1",
+    "stationId": "chapter-1-station-1",
+    "order": 6,
+    "stationOrder": 6,
+    "challenge": "standard",
+    "slots": [
+      {
+        "kind": "movable-reel",
+        "reel": {
+          "id": "es-1-06-left",
+          "kind": "number",
+          "tiles": [
+            {
+              "id": "es-1-06-left-n1",
+              "kind": "number",
+              "value": 2
+            },
+            {
+              "id": "es-1-06-left-n2",
+              "kind": "number",
+              "value": 3
+            },
+            {
+              "id": "es-1-06-left-n3",
+              "kind": "number",
+              "value": 4
+            }
+          ]
+        }
+      },
+      {
+        "kind": "fixed-token",
+        "id": "es-1-06-plus-1",
+        "token": "+",
+        "ariaLabel": "固定运算符：第 1 个加号"
+      },
+      {
+        "kind": "movable-reel",
+        "reel": {
+          "id": "es-1-06-right",
+          "kind": "number",
+          "tiles": [
+            {
+              "id": "es-1-06-right-n1",
+              "kind": "number",
+              "value": 5
+            },
+            {
+              "id": "es-1-06-right-n2",
+              "kind": "number",
+              "value": 7
+            },
+            {
+              "id": "es-1-06-right-n3",
+              "kind": "number",
+              "value": 6
+            }
+          ]
+        }
+      }
+    ],
+    "initialIndexes": [
+      1,
+      0
+    ],
+    "requiredTileIds": [
+      "es-1-06-left-n1",
+      "es-1-06-left-n2",
+      "es-1-06-left-n3",
+      "es-1-06-right-n1",
+      "es-1-06-right-n2",
+      "es-1-06-right-n3"
+    ],
+    "learning": {
+      "objective": "比较 2+7、3+6、4+5，发现一增一减保持和不变。",
+      "primarySkill": "constant-sum-compensation",
+      "skillTags": [
+        "addition",
+        "constant-sum-compensation",
+        "number-bonds"
+      ],
+      "prerequisiteTags": [
+        "recognize-1-to-10",
+        "addition-within-10"
+      ],
+      "misconceptionTags": [
+        "repeat-same-pair",
+        "first-success-means-complete"
+      ],
+      "scaffold": "independent",
+      "reviewOf": [
+        "es-1-04"
+      ],
+      "reflection": "两个部分怎样一起变化，才能保持总数不变？",
+      "recommendedAgeBand": "约 6–7 岁"
+    },
+    "hints": [
+      {
+        "kind": "concept",
+        "text": "总数不变时，一边多 1，另一边怎样变？"
+      },
+      {
+        "kind": "position",
+        "text": "看看值得留意的那条滑轨里，哪些格还没亮。"
+      },
+      {
+        "kind": "direction",
+        "text": "按当前棋盘的下一步提示移动一格，再看中央算式。"
+      }
+    ],
+    "provenance": {
+      "kind": "hand-authored-gold",
+      "generatorVersion": "authored-slider-pilot-12-r1",
+      "contentRevision": "slider-pilot-12-r1",
+      "revisionSource": "games/equation-slider/levels/v3/gameplay-pilot-12.ts"
+    },
+    "mode": "target",
+    "targets": [
+      {
+        "kind": "value",
+        "id": "es-1-06-target-9",
+        "value": 9
+      }
+    ],
+    "analysis": {
+      "solverVersion": "3.0.0",
+      "validArrangements": [
+        {
+          "indexes": [
+            0,
+            1
+          ],
+          "key": "0.1",
+          "selectedTileIds": [
+            "es-1-06-left-n1",
+            "es-1-06-right-n2"
+          ],
+          "tileMask": 17,
+          "targetMask": 1,
+          "satisfiedTargetIds": [
+            "es-1-06-target-9"
           ],
           "expressionText": "2 + 7",
           "result": 9
@@ -832,17 +1306,17 @@
         {
           "indexes": [
             1,
-            1
+            2
           ],
-          "key": "1.1",
+          "key": "1.2",
           "selectedTileIds": [
-            "es-1-04-left-n2",
-            "es-1-04-right-n2"
+            "es-1-06-left-n2",
+            "es-1-06-right-n3"
           ],
-          "tileMask": 18,
+          "tileMask": 34,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-04-target-9"
+            "es-1-06-target-9"
           ],
           "expressionText": "3 + 6",
           "result": 9
@@ -850,19 +1324,19 @@
         {
           "indexes": [
             2,
-            2
+            0
           ],
-          "key": "2.2",
+          "key": "2.0",
           "selectedTileIds": [
-            "es-1-04-left-n3",
-            "es-1-04-right-n3"
+            "es-1-06-left-n3",
+            "es-1-06-right-n1"
           ],
-          "tileMask": 36,
+          "tileMask": 12,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-04-target-9"
+            "es-1-06-target-9"
           ],
-          "expressionText": "6 + 3",
+          "expressionText": "4 + 5",
           "result": 9
         }
       ],
@@ -870,19 +1344,19 @@
         {
           "indexes": [
             0,
-            0
-          ]
-        },
-        {
-          "indexes": [
-            1,
             1
           ]
         },
         {
           "indexes": [
-            2,
+            1,
             2
+          ]
+        },
+        {
+          "indexes": [
+            2,
+            0
           ]
         }
       ],
@@ -903,555 +1377,14 @@
       },
       "signatures": {
         "slotStructure": "R:N-F:+-R:N",
-        "valueStructure": "target:9|number:2,3,6|fixed:+|number:7,6,3",
-        "rotationNormalized": "target:9|2,3,6|3,7,6",
+        "valueStructure": "target:9|number:2,3,4|fixed:+|number:5,7,6",
+        "rotationNormalized": "target:9|2,3,4|5,7,6",
         "operatorPattern": "number|fixed:+|number",
-        "validArrangements": "2 + 7->value:9;3 + 6->value:9;6 + 3->value:9",
-        "canonicalCoverage": "2 + 7->value:9;3 + 6->value:9;6 + 3->value:9",
-        "firstSuccessAction": "up.stay",
-        "numberMultiset": "2,3,3,6,6,7",
-        "learningBand": "near-ten-bonds|2-7"
-      }
-    }
-  },
-  {
-    "schemaVersion": 3,
-    "id": "es-1-05",
-    "chapterId": "chapter-1",
-    "stationId": "chapter-1-station-1",
-    "order": 5,
-    "stationOrder": 5,
-    "mode": "target",
-    "challenge": "standard",
-    "slots": [
-      {
-        "kind": "movable-reel",
-        "reel": {
-          "id": "es-1-05-left",
-          "kind": "number",
-          "tiles": [
-            {
-              "id": "es-1-05-left-n1",
-              "kind": "number",
-              "value": 1
-            },
-            {
-              "id": "es-1-05-left-n2",
-              "kind": "number",
-              "value": 4
-            },
-            {
-              "id": "es-1-05-left-n3",
-              "kind": "number",
-              "value": 7
-            }
-          ]
-        }
-      },
-      {
-        "kind": "fixed-token",
-        "id": "es-1-05-plus",
-        "token": "+",
-        "ariaLabel": "固定运算符：加号"
-      },
-      {
-        "kind": "movable-reel",
-        "reel": {
-          "id": "es-1-05-right",
-          "kind": "number",
-          "tiles": [
-            {
-              "id": "es-1-05-right-n1",
-              "kind": "number",
-              "value": 9
-            },
-            {
-              "id": "es-1-05-right-n2",
-              "kind": "number",
-              "value": 6
-            },
-            {
-              "id": "es-1-05-right-n3",
-              "kind": "number",
-              "value": 3
-            }
-          ]
-        }
-      }
-    ],
-    "initialIndexes": [
-      2,
-      0
-    ],
-    "requiredTileIds": [
-      "es-1-05-left-n1",
-      "es-1-05-left-n2",
-      "es-1-05-left-n3",
-      "es-1-05-right-n1",
-      "es-1-05-right-n2",
-      "es-1-05-right-n3"
-    ],
-    "targets": [
-      {
-        "kind": "value",
-        "id": "es-1-05-target-10",
-        "value": 10
-      }
-    ],
-    "learning": {
-      "objective": "熟练识别三组 10 的互补数并用语言说明。",
-      "primarySkill": "complements-to-ten",
-      "skillTags": [
-        "addition",
-        "make-ten",
-        "fluency"
-      ],
-      "prerequisiteTags": [
-        "recognize-1-to-20",
-        "count-forward"
-      ],
-      "misconceptionTags": [
-        "count-all-instead-of-compose",
-        "treat-plus-as-a-tile"
-      ],
-      "scaffold": "guided",
-      "reviewOf": [],
-      "reflection": "看到 7 时，你怎样最快想到另一个数？",
-      "recommendedAgeBand": "约 6–7 岁"
-    },
-    "hints": [
-      {
-        "kind": "concept",
-        "text": "先找总数不变时，两个部分怎样配对。"
-      },
-      {
-        "kind": "position",
-        "text": "观察中央数字和还没点亮的滑轨格。"
-      },
-      {
-        "kind": "direction",
-        "text": "每次只移动一格，再读一遍完整算式。"
-      }
-    ],
-    "provenance": {
-      "kind": "hand-authored-gold",
-      "generatorVersion": "authored-v3.0.0"
-    },
-    "analysis": {
-      "solverVersion": "3.0.0",
-      "validArrangements": [
-        {
-          "indexes": [
-            0,
-            0
-          ],
-          "key": "0.0",
-          "selectedTileIds": [
-            "es-1-05-left-n1",
-            "es-1-05-right-n1"
-          ],
-          "tileMask": 9,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-05-target-10"
-          ],
-          "expressionText": "1 + 9",
-          "result": 10
-        },
-        {
-          "indexes": [
-            1,
-            1
-          ],
-          "key": "1.1",
-          "selectedTileIds": [
-            "es-1-05-left-n2",
-            "es-1-05-right-n2"
-          ],
-          "tileMask": 18,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-05-target-10"
-          ],
-          "expressionText": "4 + 6",
-          "result": 10
-        },
-        {
-          "indexes": [
-            2,
-            2
-          ],
-          "key": "2.2",
-          "selectedTileIds": [
-            "es-1-05-left-n3",
-            "es-1-05-right-n3"
-          ],
-          "tileMask": 36,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-05-target-10"
-          ],
-          "expressionText": "7 + 3",
-          "result": 10
-        }
-      ],
-      "canonicalPlan": [
-        {
-          "indexes": [
-            0,
-            0
-          ]
-        },
-        {
-          "indexes": [
-            1,
-            1
-          ]
-        },
-        {
-          "indexes": [
-            2,
-            2
-          ]
-        }
-      ],
-      "minimumMovesToFirstSuccess": 1,
-      "minimumCorrectArrangements": 3,
-      "difficulty": 20.801,
-      "metrics": {
-        "arrangementCount": 9,
-        "validArrangementCount": 3,
-        "invalidArrangementRatio": 0.667,
-        "minimumCorrectArrangements": 3,
-        "minimumCoverSetCountCapped": 1,
-        "minimumMovesToFirstSuccess": 1,
-        "reachableCoverageStates": 8,
-        "operatorComplexity": 1,
-        "numericMagnitude": 9,
-        "difficulty": 20.801
-      },
-      "signatures": {
-        "slotStructure": "R:N-F:+-R:N",
-        "valueStructure": "target:10|number:1,4,7|fixed:+|number:9,6,3",
-        "rotationNormalized": "target:10|1,4,7|3,9,6",
-        "operatorPattern": "number|fixed:+|number",
-        "validArrangements": "1 + 9->value:10;4 + 6->value:10;7 + 3->value:10",
-        "canonicalCoverage": "1 + 9->value:10;4 + 6->value:10;7 + 3->value:10",
-        "firstSuccessAction": "down.stay",
-        "numberMultiset": "1,3,4,6,7,9",
-        "learningBand": "complements-to-ten|1-9"
-      }
-    }
-  },
-  {
-    "schemaVersion": 3,
-    "id": "es-1-06",
-    "chapterId": "chapter-1",
-    "stationId": "chapter-1-station-1",
-    "order": 6,
-    "stationOrder": 6,
-    "mode": "target",
-    "challenge": "standard",
-    "slots": [
-      {
-        "kind": "movable-reel",
-        "reel": {
-          "id": "es-1-06-left",
-          "kind": "number",
-          "tiles": [
-            {
-              "id": "es-1-06-left-n1",
-              "kind": "number",
-              "value": 1
-            },
-            {
-              "id": "es-1-06-left-n2",
-              "kind": "number",
-              "value": 2
-            },
-            {
-              "id": "es-1-06-left-n3",
-              "kind": "number",
-              "value": 3
-            }
-          ]
-        }
-      },
-      {
-        "kind": "fixed-token",
-        "id": "es-1-06-plus-a",
-        "token": "+",
-        "ariaLabel": "固定运算符：第一个加号"
-      },
-      {
-        "kind": "movable-reel",
-        "reel": {
-          "id": "es-1-06-middle",
-          "kind": "number",
-          "tiles": [
-            {
-              "id": "es-1-06-middle-n1",
-              "kind": "number",
-              "value": 4
-            },
-            {
-              "id": "es-1-06-middle-n2",
-              "kind": "number",
-              "value": 5
-            },
-            {
-              "id": "es-1-06-middle-n3",
-              "kind": "number",
-              "value": 6
-            }
-          ]
-        }
-      },
-      {
-        "kind": "fixed-token",
-        "id": "es-1-06-plus-b",
-        "token": "+",
-        "ariaLabel": "固定运算符：第二个加号"
-      },
-      {
-        "kind": "movable-reel",
-        "reel": {
-          "id": "es-1-06-right",
-          "kind": "number",
-          "tiles": [
-            {
-              "id": "es-1-06-right-n1",
-              "kind": "number",
-              "value": 7
-            },
-            {
-              "id": "es-1-06-right-n2",
-              "kind": "number",
-              "value": 5
-            },
-            {
-              "id": "es-1-06-right-n3",
-              "kind": "number",
-              "value": 3
-            }
-          ]
-        }
-      }
-    ],
-    "initialIndexes": [
-      1,
-      2,
-      2
-    ],
-    "requiredTileIds": [
-      "es-1-06-left-n1",
-      "es-1-06-left-n2",
-      "es-1-06-left-n3",
-      "es-1-06-middle-n1",
-      "es-1-06-middle-n2",
-      "es-1-06-middle-n3",
-      "es-1-06-right-n1",
-      "es-1-06-right-n2",
-      "es-1-06-right-n3"
-    ],
-    "targets": [
-      {
-        "kind": "value",
-        "id": "es-1-06-target-12",
-        "value": 12
-      }
-    ],
-    "learning": {
-      "objective": "把 12 分成三个部分，比较平衡与不平衡的分法。",
-      "primarySkill": "three-part-composition",
-      "skillTags": [
-        "addition",
-        "three-addends",
-        "composition"
-      ],
-      "prerequisiteTags": [
-        "recognize-1-to-20",
-        "count-forward"
-      ],
-      "misconceptionTags": [
-        "count-all-instead-of-compose",
-        "treat-plus-as-a-tile"
-      ],
-      "scaffold": "guided",
-      "reviewOf": [],
-      "reflection": "三个部分中哪一组最平均？",
-      "recommendedAgeBand": "约 6–7 岁"
-    },
-    "hints": [
-      {
-        "kind": "concept",
-        "text": "先找总数不变时，两个部分怎样配对。"
-      },
-      {
-        "kind": "position",
-        "text": "观察中央数字和还没点亮的滑轨格。"
-      },
-      {
-        "kind": "direction",
-        "text": "每次只移动一格，再读一遍完整算式。"
-      }
-    ],
-    "provenance": {
-      "kind": "hand-authored-gold",
-      "generatorVersion": "authored-v3.0.0"
-    },
-    "analysis": {
-      "solverVersion": "3.0.0",
-      "validArrangements": [
-        {
-          "indexes": [
-            0,
-            0,
-            0
-          ],
-          "key": "0.0.0",
-          "selectedTileIds": [
-            "es-1-06-left-n1",
-            "es-1-06-middle-n1",
-            "es-1-06-right-n1"
-          ],
-          "tileMask": 73,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-06-target-12"
-          ],
-          "expressionText": "1 + 4 + 7",
-          "result": 12
-        },
-        {
-          "indexes": [
-            0,
-            2,
-            1
-          ],
-          "key": "0.2.1",
-          "selectedTileIds": [
-            "es-1-06-left-n1",
-            "es-1-06-middle-n3",
-            "es-1-06-right-n2"
-          ],
-          "tileMask": 161,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-06-target-12"
-          ],
-          "expressionText": "1 + 6 + 5",
-          "result": 12
-        },
-        {
-          "indexes": [
-            1,
-            1,
-            1
-          ],
-          "key": "1.1.1",
-          "selectedTileIds": [
-            "es-1-06-left-n2",
-            "es-1-06-middle-n2",
-            "es-1-06-right-n2"
-          ],
-          "tileMask": 146,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-06-target-12"
-          ],
-          "expressionText": "2 + 5 + 5",
-          "result": 12
-        },
-        {
-          "indexes": [
-            2,
-            0,
-            1
-          ],
-          "key": "2.0.1",
-          "selectedTileIds": [
-            "es-1-06-left-n3",
-            "es-1-06-middle-n1",
-            "es-1-06-right-n2"
-          ],
-          "tileMask": 140,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-06-target-12"
-          ],
-          "expressionText": "3 + 4 + 5",
-          "result": 12
-        },
-        {
-          "indexes": [
-            2,
-            2,
-            2
-          ],
-          "key": "2.2.2",
-          "selectedTileIds": [
-            "es-1-06-left-n3",
-            "es-1-06-middle-n3",
-            "es-1-06-right-n3"
-          ],
-          "tileMask": 292,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-06-target-12"
-          ],
-          "expressionText": "3 + 6 + 3",
-          "result": 12
-        }
-      ],
-      "canonicalPlan": [
-        {
-          "indexes": [
-            0,
-            0,
-            0
-          ]
-        },
-        {
-          "indexes": [
-            1,
-            1,
-            1
-          ]
-        },
-        {
-          "indexes": [
-            2,
-            2,
-            2
-          ]
-        }
-      ],
-      "minimumMovesToFirstSuccess": 1,
-      "minimumCorrectArrangements": 3,
-      "difficulty": 24.214,
-      "metrics": {
-        "arrangementCount": 27,
-        "validArrangementCount": 5,
-        "invalidArrangementRatio": 0.815,
-        "minimumCorrectArrangements": 3,
-        "minimumCoverSetCountCapped": 1,
-        "minimumMovesToFirstSuccess": 1,
-        "reachableCoverageStates": 26,
-        "operatorComplexity": 3,
-        "numericMagnitude": 7,
-        "difficulty": 24.214
-      },
-      "signatures": {
-        "slotStructure": "R:N-F:+-R:N-F:+-R:N",
-        "valueStructure": "target:12|number:1,2,3|fixed:+|number:4,5,6|fixed:+|number:7,5,3",
-        "rotationNormalized": "target:12|1,2,3|4,5,6|3,7,5",
-        "operatorPattern": "number|fixed:+|number|fixed:+|number",
-        "validArrangements": "1 + 4 + 7->value:12;1 + 6 + 5->value:12;2 + 5 + 5->value:12;3 + 4 + 5->value:12;3 + 6 + 3->value:12",
-        "canonicalCoverage": "1 + 4 + 7->value:12;2 + 5 + 5->value:12;3 + 6 + 3->value:12",
-        "firstSuccessAction": "down.stay.stay",
-        "numberMultiset": "1,2,3,3,4,5,5,6,7",
-        "learningBand": "three-part-composition|1-7"
+        "validArrangements": "2 + 7->value:9;3 + 6->value:9;4 + 5->value:9",
+        "canonicalCoverage": "2 + 7->value:9;3 + 6->value:9;4 + 5->value:9",
+        "firstSuccessAction": "stay.up",
+        "numberMultiset": "2,3,4,5,6,7",
+        "learningBand": "constant-sum-compensation|2-7"
       }
     }
   },
@@ -1462,7 +1395,6 @@
     "stationId": "chapter-1-station-1",
     "order": 7,
     "stationOrder": 7,
-    "mode": "target",
     "challenge": "standard",
     "slots": [
       {
@@ -1491,39 +1423,9 @@
       },
       {
         "kind": "fixed-token",
-        "id": "es-1-07-plus-a",
+        "id": "es-1-07-plus-1",
         "token": "+",
-        "ariaLabel": "固定运算符：第一个加号"
-      },
-      {
-        "kind": "movable-reel",
-        "reel": {
-          "id": "es-1-07-middle",
-          "kind": "number",
-          "tiles": [
-            {
-              "id": "es-1-07-middle-n1",
-              "kind": "number",
-              "value": 4
-            },
-            {
-              "id": "es-1-07-middle-n2",
-              "kind": "number",
-              "value": 5
-            },
-            {
-              "id": "es-1-07-middle-n3",
-              "kind": "number",
-              "value": 7
-            }
-          ]
-        }
-      },
-      {
-        "kind": "fixed-token",
-        "id": "es-1-07-plus-b",
-        "token": "+",
-        "ariaLabel": "固定运算符：第二个加号"
+        "ariaLabel": "固定运算符：第 1 个加号"
       },
       {
         "kind": "movable-reel",
@@ -1534,216 +1436,235 @@
             {
               "id": "es-1-07-right-n1",
               "kind": "number",
-              "value": 8
+              "value": 3
             },
             {
               "id": "es-1-07-right-n2",
               "kind": "number",
-              "value": 6
+              "value": 4
             },
             {
               "id": "es-1-07-right-n3",
               "kind": "number",
-              "value": 3
+              "value": 5
             }
           ]
         }
       }
     ],
     "initialIndexes": [
-      0,
       2,
-      0
+      2
     ],
     "requiredTileIds": [
       "es-1-07-left-n1",
       "es-1-07-left-n2",
       "es-1-07-left-n3",
-      "es-1-07-middle-n1",
-      "es-1-07-middle-n2",
-      "es-1-07-middle-n3",
       "es-1-07-right-n1",
       "es-1-07-right-n2",
       "es-1-07-right-n3"
     ],
-    "targets": [
-      {
-        "kind": "value",
-        "id": "es-1-07-target-13",
-        "value": 13
-      }
-    ],
     "learning": {
-      "objective": "用三个部分组成 13，巩固较大数的部分与整体关系。",
-      "primarySkill": "three-part-thirteen",
+      "objective": "围绕未亮数字选择能合成 6 或 7 的伙伴，并分别命中两个目标。",
+      "primarySkill": "unlit-partner-choice",
       "skillTags": [
         "addition",
-        "three-addends",
-        "part-whole"
+        "unlit-partner-choice",
+        "number-bonds"
       ],
       "prerequisiteTags": [
-        "recognize-1-to-20",
-        "count-forward"
+        "recognize-1-to-10",
+        "addition-within-10"
       ],
       "misconceptionTags": [
-        "count-all-instead-of-compose",
-        "treat-plus-as-a-tile"
+        "repeat-same-pair",
+        "first-success-means-complete"
       ],
-      "scaffold": "guided",
-      "reviewOf": [],
-      "reflection": "哪一组可以先把两个数凑成 10？",
+      "scaffold": "supported",
+      "reviewOf": [
+        "es-1-03"
+      ],
+      "reflection": "同一个数字可以参加哪些不同的成立组合？",
       "recommendedAgeBand": "约 6–7 岁"
     },
     "hints": [
       {
         "kind": "concept",
-        "text": "先找总数不变时，两个部分怎样配对。"
+        "text": "6 和 7 都能点灯，找一个没亮的数字给它配伙伴。"
       },
       {
         "kind": "position",
-        "text": "观察中央数字和还没点亮的滑轨格。"
+        "text": "看看值得留意的那条滑轨里，哪些格还没亮。"
       },
       {
         "kind": "direction",
-        "text": "每次只移动一格，再读一遍完整算式。"
+        "text": "按当前棋盘的下一步提示移动一格，再看中央算式。"
       }
     ],
     "provenance": {
       "kind": "hand-authored-gold",
-      "generatorVersion": "authored-v3.0.0"
+      "generatorVersion": "authored-slider-pilot-12-r1",
+      "contentRevision": "slider-pilot-12-r1",
+      "revisionSource": "games/equation-slider/levels/v3/gameplay-pilot-12.ts"
     },
+    "mode": "multi-target",
+    "targets": [
+      {
+        "kind": "value",
+        "id": "es-1-07-target-6",
+        "value": 6
+      },
+      {
+        "kind": "value",
+        "id": "es-1-07-target-7",
+        "value": 7
+      }
+    ],
     "analysis": {
       "solverVersion": "3.0.0",
       "validArrangements": [
         {
           "indexes": [
             0,
-            0,
-            0
-          ],
-          "key": "0.0.0",
-          "selectedTileIds": [
-            "es-1-07-left-n1",
-            "es-1-07-middle-n1",
-            "es-1-07-right-n1"
-          ],
-          "tileMask": 73,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-07-target-13"
-          ],
-          "expressionText": "1 + 4 + 8",
-          "result": 13
-        },
-        {
-          "indexes": [
-            1,
-            1,
-            1
-          ],
-          "key": "1.1.1",
-          "selectedTileIds": [
-            "es-1-07-left-n2",
-            "es-1-07-middle-n2",
-            "es-1-07-right-n2"
-          ],
-          "tileMask": 146,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-07-target-13"
-          ],
-          "expressionText": "2 + 5 + 6",
-          "result": 13
-        },
-        {
-          "indexes": [
-            2,
-            0,
-            1
-          ],
-          "key": "2.0.1",
-          "selectedTileIds": [
-            "es-1-07-left-n3",
-            "es-1-07-middle-n1",
-            "es-1-07-right-n2"
-          ],
-          "tileMask": 140,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-07-target-13"
-          ],
-          "expressionText": "3 + 4 + 6",
-          "result": 13
-        },
-        {
-          "indexes": [
-            2,
-            2,
             2
           ],
-          "key": "2.2.2",
+          "key": "0.2",
           "selectedTileIds": [
-            "es-1-07-left-n3",
-            "es-1-07-middle-n3",
+            "es-1-07-left-n1",
             "es-1-07-right-n3"
           ],
-          "tileMask": 292,
+          "tileMask": 33,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-07-target-13"
+            "es-1-07-target-6"
           ],
-          "expressionText": "3 + 7 + 3",
-          "result": 13
+          "expressionText": "1 + 5",
+          "result": 6
+        },
+        {
+          "indexes": [
+            1,
+            1
+          ],
+          "key": "1.1",
+          "selectedTileIds": [
+            "es-1-07-left-n2",
+            "es-1-07-right-n2"
+          ],
+          "tileMask": 18,
+          "targetMask": 1,
+          "satisfiedTargetIds": [
+            "es-1-07-target-6"
+          ],
+          "expressionText": "2 + 4",
+          "result": 6
+        },
+        {
+          "indexes": [
+            1,
+            2
+          ],
+          "key": "1.2",
+          "selectedTileIds": [
+            "es-1-07-left-n2",
+            "es-1-07-right-n3"
+          ],
+          "tileMask": 34,
+          "targetMask": 2,
+          "satisfiedTargetIds": [
+            "es-1-07-target-7"
+          ],
+          "expressionText": "2 + 5",
+          "result": 7
+        },
+        {
+          "indexes": [
+            2,
+            0
+          ],
+          "key": "2.0",
+          "selectedTileIds": [
+            "es-1-07-left-n3",
+            "es-1-07-right-n1"
+          ],
+          "tileMask": 12,
+          "targetMask": 1,
+          "satisfiedTargetIds": [
+            "es-1-07-target-6"
+          ],
+          "expressionText": "3 + 3",
+          "result": 6
+        },
+        {
+          "indexes": [
+            2,
+            1
+          ],
+          "key": "2.1",
+          "selectedTileIds": [
+            "es-1-07-left-n3",
+            "es-1-07-right-n2"
+          ],
+          "tileMask": 20,
+          "targetMask": 2,
+          "satisfiedTargetIds": [
+            "es-1-07-target-7"
+          ],
+          "expressionText": "3 + 4",
+          "result": 7
         }
       ],
       "canonicalPlan": [
         {
           "indexes": [
             0,
-            0,
-            0
+            2
           ]
         },
         {
           "indexes": [
-            1,
             1,
             1
           ]
         },
         {
           "indexes": [
-            2,
-            2,
+            1,
             2
+          ]
+        },
+        {
+          "indexes": [
+            2,
+            0
           ]
         }
       ],
       "minimumMovesToFirstSuccess": 1,
-      "minimumCorrectArrangements": 3,
-      "difficulty": 24.722,
+      "minimumCorrectArrangements": 4,
+      "difficulty": 23.102,
       "metrics": {
-        "arrangementCount": 27,
-        "validArrangementCount": 4,
-        "invalidArrangementRatio": 0.852,
-        "minimumCorrectArrangements": 3,
-        "minimumCoverSetCountCapped": 1,
+        "arrangementCount": 9,
+        "validArrangementCount": 5,
+        "invalidArrangementRatio": 0.444,
+        "minimumCorrectArrangements": 4,
+        "minimumCoverSetCountCapped": 2,
         "minimumMovesToFirstSuccess": 1,
-        "reachableCoverageStates": 15,
+        "reachableCoverageStates": 25,
         "operatorComplexity": 3,
-        "numericMagnitude": 8,
-        "difficulty": 24.722
+        "numericMagnitude": 5,
+        "difficulty": 23.102
       },
       "signatures": {
-        "slotStructure": "R:N-F:+-R:N-F:+-R:N",
-        "valueStructure": "target:13|number:1,2,3|fixed:+|number:4,5,7|fixed:+|number:8,6,3",
-        "rotationNormalized": "target:13|1,2,3|4,5,7|3,8,6",
-        "operatorPattern": "number|fixed:+|number|fixed:+|number",
-        "validArrangements": "1 + 4 + 8->value:13;2 + 5 + 6->value:13;3 + 4 + 6->value:13;3 + 7 + 3->value:13",
-        "canonicalCoverage": "1 + 4 + 8->value:13;2 + 5 + 6->value:13;3 + 7 + 3->value:13",
-        "firstSuccessAction": "stay.down.stay",
-        "numberMultiset": "1,2,3,3,4,5,6,7,8",
-        "learningBand": "three-part-thirteen|1-8"
+        "slotStructure": "R:N-F:+-R:N",
+        "valueStructure": "targets:6,7|number:1,2,3|fixed:+|number:3,4,5",
+        "rotationNormalized": "targets:6,7|1,2,3|3,4,5",
+        "operatorPattern": "number|fixed:+|number",
+        "validArrangements": "1 + 5->value:6;2 + 4->value:6;2 + 5->value:7;3 + 3->value:6;3 + 4->value:7",
+        "canonicalCoverage": "1 + 5->value:6;2 + 4->value:6;2 + 5->value:7;3 + 3->value:6",
+        "firstSuccessAction": "down.stay",
+        "numberMultiset": "1,2,3,3,4,5",
+        "learningBand": "unlit-partner-choice|1-5"
       }
     }
   },
@@ -1754,7 +1675,6 @@
     "stationId": "chapter-1-station-1",
     "order": 8,
     "stationOrder": 8,
-    "mode": "equality",
     "challenge": "standard",
     "slots": [
       {
@@ -1783,9 +1703,9 @@
       },
       {
         "kind": "fixed-token",
-        "id": "es-1-08-plus-a",
+        "id": "es-1-08-plus-1",
         "token": "+",
-        "ariaLabel": "固定运算符：第一个加号"
+        "ariaLabel": "固定运算符：第 1 个加号"
       },
       {
         "kind": "movable-reel",
@@ -1796,26 +1716,26 @@
             {
               "id": "es-1-08-middle-n1",
               "kind": "number",
-              "value": 3
+              "value": 1
             },
             {
               "id": "es-1-08-middle-n2",
               "kind": "number",
-              "value": 4
+              "value": 2
             },
             {
               "id": "es-1-08-middle-n3",
               "kind": "number",
-              "value": 6
+              "value": 3
             }
           ]
         }
       },
       {
         "kind": "fixed-token",
-        "id": "es-1-08-plus-b",
+        "id": "es-1-08-plus-2",
         "token": "+",
-        "ariaLabel": "固定运算符：第二个加号"
+        "ariaLabel": "固定运算符：第 2 个加号"
       },
       {
         "kind": "movable-reel",
@@ -1826,17 +1746,17 @@
             {
               "id": "es-1-08-right-n1",
               "kind": "number",
-              "value": 7
+              "value": 1
             },
             {
               "id": "es-1-08-right-n2",
               "kind": "number",
-              "value": 5
+              "value": 2
             },
             {
               "id": "es-1-08-right-n3",
               "kind": "number",
-              "value": 2
+              "value": 3
             }
           ]
         }
@@ -1844,8 +1764,8 @@
     ],
     "initialIndexes": [
       0,
-      0,
-      2
+      1,
+      0
     ],
     "requiredTileIds": [
       "es-1-08-left-n1",
@@ -1858,79 +1778,119 @@
       "es-1-08-right-n2",
       "es-1-08-right-n3"
     ],
-    "targets": [
-      {
-        "kind": "equality",
-        "id": "es-1-08-equality",
-        "rightExpression": [
-          5,
-          "+",
-          6
-        ]
-      }
-    ],
     "learning": {
-      "objective": "用三个加数跨过 10，并验证它们与 5+6 等值。",
-      "primarySkill": "bridge-through-ten-equality",
+      "objective": "用三个小数合成 6，比较不同位置的 1、2、3 与三个 2。",
+      "primarySkill": "three-small-parts",
       "skillTags": [
         "addition",
-        "bridge-ten",
-        "equality"
+        "three-small-parts",
+        "three-addends"
       ],
       "prerequisiteTags": [
-        "recognize-1-to-20",
-        "count-forward"
+        "recognize-1-to-10",
+        "addition-within-10"
       ],
       "misconceptionTags": [
-        "count-all-instead-of-compose",
-        "treat-plus-as-a-tile"
+        "repeat-same-pair",
+        "first-success-means-complete"
       ],
-      "scaffold": "guided",
-      "reviewOf": [],
-      "reflection": "哪一组最适合先凑十再添一？",
+      "scaffold": "supported",
+      "reviewOf": [
+        "es-1-05"
+      ],
+      "reflection": "保持和为 6 时，哪些数字可以交换位置？",
       "recommendedAgeBand": "约 6–7 岁"
     },
     "hints": [
       {
         "kind": "concept",
-        "text": "先找总数不变时，两个部分怎样配对。"
+        "text": "先合起两个数，再看第三个数还差多少。"
       },
       {
         "kind": "position",
-        "text": "观察中央数字和还没点亮的滑轨格。"
+        "text": "看看值得留意的那条滑轨里，哪些格还没亮。"
       },
       {
         "kind": "direction",
-        "text": "每次只移动一格，再读一遍完整算式。"
+        "text": "按当前棋盘的下一步提示移动一格，再看中央算式。"
       }
     ],
     "provenance": {
       "kind": "hand-authored-gold",
-      "generatorVersion": "authored-v3.0.0"
+      "generatorVersion": "authored-slider-pilot-12-r1",
+      "contentRevision": "slider-pilot-12-r1",
+      "revisionSource": "games/equation-slider/levels/v3/gameplay-pilot-12.ts"
     },
+    "mode": "target",
+    "targets": [
+      {
+        "kind": "value",
+        "id": "es-1-08-target-6",
+        "value": 6
+      }
+    ],
     "analysis": {
       "solverVersion": "3.0.0",
       "validArrangements": [
         {
           "indexes": [
             0,
-            0,
-            0
+            1,
+            2
           ],
-          "key": "0.0.0",
+          "key": "0.1.2",
           "selectedTileIds": [
             "es-1-08-left-n1",
-            "es-1-08-middle-n1",
-            "es-1-08-right-n1"
+            "es-1-08-middle-n2",
+            "es-1-08-right-n3"
           ],
-          "tileMask": 73,
+          "tileMask": 273,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-08-equality"
+            "es-1-08-target-6"
           ],
-          "expressionText": "1 + 3 + 7 = 5 + 6",
-          "result": 11,
-          "rightResult": 11
+          "expressionText": "1 + 2 + 3",
+          "result": 6
+        },
+        {
+          "indexes": [
+            0,
+            2,
+            1
+          ],
+          "key": "0.2.1",
+          "selectedTileIds": [
+            "es-1-08-left-n1",
+            "es-1-08-middle-n3",
+            "es-1-08-right-n2"
+          ],
+          "tileMask": 161,
+          "targetMask": 1,
+          "satisfiedTargetIds": [
+            "es-1-08-target-6"
+          ],
+          "expressionText": "1 + 3 + 2",
+          "result": 6
+        },
+        {
+          "indexes": [
+            1,
+            0,
+            2
+          ],
+          "key": "1.0.2",
+          "selectedTileIds": [
+            "es-1-08-left-n2",
+            "es-1-08-middle-n1",
+            "es-1-08-right-n3"
+          ],
+          "tileMask": 266,
+          "targetMask": 1,
+          "satisfiedTargetIds": [
+            "es-1-08-target-6"
+          ],
+          "expressionText": "2 + 1 + 3",
+          "result": 6
         },
         {
           "indexes": [
@@ -1947,11 +1907,30 @@
           "tileMask": 146,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-08-equality"
+            "es-1-08-target-6"
           ],
-          "expressionText": "2 + 4 + 5 = 5 + 6",
-          "result": 11,
-          "rightResult": 11
+          "expressionText": "2 + 2 + 2",
+          "result": 6
+        },
+        {
+          "indexes": [
+            1,
+            2,
+            0
+          ],
+          "key": "1.2.0",
+          "selectedTileIds": [
+            "es-1-08-left-n2",
+            "es-1-08-middle-n3",
+            "es-1-08-right-n1"
+          ],
+          "tileMask": 98,
+          "targetMask": 1,
+          "satisfiedTargetIds": [
+            "es-1-08-target-6"
+          ],
+          "expressionText": "2 + 3 + 1",
+          "result": 6
         },
         {
           "indexes": [
@@ -1968,82 +1947,80 @@
           "tileMask": 140,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-08-equality"
+            "es-1-08-target-6"
           ],
-          "expressionText": "3 + 3 + 5 = 5 + 6",
-          "result": 11,
-          "rightResult": 11
+          "expressionText": "3 + 1 + 2",
+          "result": 6
         },
         {
           "indexes": [
             2,
-            2,
-            2
+            1,
+            0
           ],
-          "key": "2.2.2",
+          "key": "2.1.0",
           "selectedTileIds": [
             "es-1-08-left-n3",
-            "es-1-08-middle-n3",
-            "es-1-08-right-n3"
+            "es-1-08-middle-n2",
+            "es-1-08-right-n1"
           ],
-          "tileMask": 292,
+          "tileMask": 84,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-08-equality"
+            "es-1-08-target-6"
           ],
-          "expressionText": "3 + 6 + 2 = 5 + 6",
-          "result": 11,
-          "rightResult": 11
+          "expressionText": "3 + 2 + 1",
+          "result": 6
         }
       ],
       "canonicalPlan": [
         {
           "indexes": [
             0,
-            0,
+            1,
+            2
+          ]
+        },
+        {
+          "indexes": [
+            1,
+            2,
             0
           ]
         },
         {
           "indexes": [
-            1,
-            1,
+            2,
+            0,
             1
-          ]
-        },
-        {
-          "indexes": [
-            2,
-            2,
-            2
           ]
         }
       ],
       "minimumMovesToFirstSuccess": 1,
       "minimumCorrectArrangements": 3,
-      "difficulty": 26.51,
+      "difficulty": 22.371,
       "metrics": {
         "arrangementCount": 27,
-        "validArrangementCount": 4,
-        "invalidArrangementRatio": 0.852,
+        "validArrangementCount": 7,
+        "invalidArrangementRatio": 0.741,
         "minimumCorrectArrangements": 3,
-        "minimumCoverSetCountCapped": 1,
+        "minimumCoverSetCountCapped": 2,
         "minimumMovesToFirstSuccess": 1,
-        "reachableCoverageStates": 15,
-        "operatorComplexity": 5,
-        "numericMagnitude": 7,
-        "difficulty": 26.51
+        "reachableCoverageStates": 63,
+        "operatorComplexity": 3,
+        "numericMagnitude": 3,
+        "difficulty": 22.371
       },
       "signatures": {
         "slotStructure": "R:N-F:+-R:N-F:+-R:N",
-        "valueStructure": "right:5 + 6|number:1,2,3|fixed:+|number:3,4,6|fixed:+|number:7,5,2",
-        "rotationNormalized": "right:5 + 6|1,2,3|3,4,6|2,7,5",
+        "valueStructure": "target:6|number:1,2,3|fixed:+|number:1,2,3|fixed:+|number:1,2,3",
+        "rotationNormalized": "target:6|1,2,3|1,2,3|1,2,3",
         "operatorPattern": "number|fixed:+|number|fixed:+|number",
-        "validArrangements": "1 + 3 + 7 = 5 + 6->equality:5 + 6;2 + 4 + 5 = 5 + 6->equality:5 + 6;3 + 3 + 5 = 5 + 6->equality:5 + 6;3 + 6 + 2 = 5 + 6->equality:5 + 6",
-        "canonicalCoverage": "1 + 3 + 7 = 5 + 6->equality:5 + 6;2 + 4 + 5 = 5 + 6->equality:5 + 6;3 + 6 + 2 = 5 + 6->equality:5 + 6",
-        "firstSuccessAction": "stay.stay.down",
-        "numberMultiset": "1,2,2,3,3,4,5,6,7",
-        "learningBand": "bridge-through-ten-equality|1-7"
+        "validArrangements": "1 + 2 + 3->value:6;1 + 3 + 2->value:6;2 + 1 + 3->value:6;2 + 2 + 2->value:6;2 + 3 + 1->value:6;3 + 1 + 2->value:6;3 + 2 + 1->value:6",
+        "canonicalCoverage": "1 + 2 + 3->value:6;2 + 3 + 1->value:6;3 + 1 + 2->value:6",
+        "firstSuccessAction": "stay.stay.up",
+        "numberMultiset": "1,1,1,2,2,2,3,3,3",
+        "learningBand": "three-small-parts|1-3"
       }
     }
   },
@@ -2054,7 +2031,6 @@
     "stationId": "chapter-1-station-1",
     "order": 9,
     "stationOrder": 9,
-    "mode": "target",
     "challenge": "standard",
     "slots": [
       {
@@ -2066,26 +2042,26 @@
             {
               "id": "es-1-09-left-n1",
               "kind": "number",
-              "value": 2
+              "value": 1
             },
             {
               "id": "es-1-09-left-n2",
               "kind": "number",
-              "value": 3
+              "value": 2
             },
             {
               "id": "es-1-09-left-n3",
               "kind": "number",
-              "value": 4
+              "value": 3
             }
           ]
         }
       },
       {
         "kind": "fixed-token",
-        "id": "es-1-09-plus-a",
+        "id": "es-1-09-plus-1",
         "token": "+",
-        "ariaLabel": "固定运算符：第一个加号"
+        "ariaLabel": "固定运算符：第 1 个加号"
       },
       {
         "kind": "movable-reel",
@@ -2096,26 +2072,26 @@
             {
               "id": "es-1-09-middle-n1",
               "kind": "number",
-              "value": 5
+              "value": 1
             },
             {
               "id": "es-1-09-middle-n2",
               "kind": "number",
-              "value": 6
+              "value": 2
             },
             {
               "id": "es-1-09-middle-n3",
               "kind": "number",
-              "value": 7
+              "value": 3
             }
           ]
         }
       },
       {
         "kind": "fixed-token",
-        "id": "es-1-09-plus-b",
+        "id": "es-1-09-plus-2",
         "token": "+",
-        "ariaLabel": "固定运算符：第二个加号"
+        "ariaLabel": "固定运算符：第 2 个加号"
       },
       {
         "kind": "movable-reel",
@@ -2126,12 +2102,12 @@
             {
               "id": "es-1-09-right-n1",
               "kind": "number",
-              "value": 8
+              "value": 1
             },
             {
               "id": "es-1-09-right-n2",
               "kind": "number",
-              "value": 6
+              "value": 2
             },
             {
               "id": "es-1-09-right-n3",
@@ -2143,9 +2119,9 @@
       }
     ],
     "initialIndexes": [
-      0,
-      0,
-      1
+      2,
+      2,
+      2
     ],
     "requiredTileIds": [
       "es-1-09-left-n1",
@@ -2158,52 +2134,63 @@
       "es-1-09-right-n2",
       "es-1-09-right-n3"
     ],
-    "targets": [
-      {
-        "kind": "value",
-        "id": "es-1-09-target-15",
-        "value": 15
-      }
-    ],
     "learning": {
-      "objective": "用三个加数合成 15，并寻找成对简算机会。",
-      "primarySkill": "three-addend-strategy",
+      "objective": "从未亮格和未命中的目标出发，选择合成 6 或 8 的三部分组合。",
+      "primarySkill": "three-part-coverage-choice",
       "skillTags": [
         "addition",
-        "three-addends",
-        "associative-strategy"
+        "three-part-coverage-choice",
+        "three-addends"
       ],
       "prerequisiteTags": [
-        "recognize-1-to-20",
-        "count-forward"
+        "recognize-1-to-10",
+        "addition-within-10"
       ],
       "misconceptionTags": [
-        "count-all-instead-of-compose",
-        "treat-plus-as-a-tile"
+        "repeat-same-pair",
+        "first-success-means-complete"
       ],
-      "scaffold": "guided",
-      "reviewOf": [],
-      "reflection": "你会先把哪两个数合起来？",
+      "scaffold": "independent",
+      "reviewOf": [
+        "es-1-07",
+        "es-1-08"
+      ],
+      "reflection": "下一组怎样同时照顾未亮格和还没命中的目标？",
       "recommendedAgeBand": "约 6–7 岁"
     },
     "hints": [
       {
         "kind": "concept",
-        "text": "先找总数不变时，两个部分怎样配对。"
+        "text": "先看没亮的格，再试它能组成 6 还是 8。"
       },
       {
         "kind": "position",
-        "text": "观察中央数字和还没点亮的滑轨格。"
+        "text": "看看值得留意的那条滑轨里，哪些格还没亮。"
       },
       {
         "kind": "direction",
-        "text": "每次只移动一格，再读一遍完整算式。"
+        "text": "按当前棋盘的下一步提示移动一格，再看中央算式。"
       }
     ],
     "provenance": {
       "kind": "hand-authored-gold",
-      "generatorVersion": "authored-v3.0.0"
+      "generatorVersion": "authored-slider-pilot-12-r1",
+      "contentRevision": "slider-pilot-12-r1",
+      "revisionSource": "games/equation-slider/levels/v3/gameplay-pilot-12.ts"
     },
+    "mode": "multi-target",
+    "targets": [
+      {
+        "kind": "value",
+        "id": "es-1-09-target-6",
+        "value": 6
+      },
+      {
+        "kind": "value",
+        "id": "es-1-09-target-8",
+        "value": 8
+      }
+    ],
     "analysis": {
       "solverVersion": "3.0.0",
       "validArrangements": [
@@ -2211,21 +2198,21 @@
           "indexes": [
             0,
             0,
-            0
+            2
           ],
-          "key": "0.0.0",
+          "key": "0.0.2",
           "selectedTileIds": [
             "es-1-09-left-n1",
             "es-1-09-middle-n1",
-            "es-1-09-right-n1"
+            "es-1-09-right-n3"
           ],
-          "tileMask": 73,
+          "tileMask": 265,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-09-target-15"
+            "es-1-09-target-6"
           ],
-          "expressionText": "2 + 5 + 8",
-          "result": 15
+          "expressionText": "1 + 1 + 4",
+          "result": 6
         },
         {
           "indexes": [
@@ -2242,10 +2229,30 @@
           "tileMask": 161,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-09-target-15"
+            "es-1-09-target-6"
           ],
-          "expressionText": "2 + 7 + 6",
-          "result": 15
+          "expressionText": "1 + 3 + 2",
+          "result": 6
+        },
+        {
+          "indexes": [
+            0,
+            2,
+            2
+          ],
+          "key": "0.2.2",
+          "selectedTileIds": [
+            "es-1-09-left-n1",
+            "es-1-09-middle-n3",
+            "es-1-09-right-n3"
+          ],
+          "tileMask": 289,
+          "targetMask": 2,
+          "satisfiedTargetIds": [
+            "es-1-09-target-8"
+          ],
+          "expressionText": "1 + 3 + 4",
+          "result": 8
         },
         {
           "indexes": [
@@ -2262,10 +2269,50 @@
           "tileMask": 146,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-09-target-15"
+            "es-1-09-target-6"
           ],
-          "expressionText": "3 + 6 + 6",
-          "result": 15
+          "expressionText": "2 + 2 + 2",
+          "result": 6
+        },
+        {
+          "indexes": [
+            1,
+            1,
+            2
+          ],
+          "key": "1.1.2",
+          "selectedTileIds": [
+            "es-1-09-left-n2",
+            "es-1-09-middle-n2",
+            "es-1-09-right-n3"
+          ],
+          "tileMask": 274,
+          "targetMask": 2,
+          "satisfiedTargetIds": [
+            "es-1-09-target-8"
+          ],
+          "expressionText": "2 + 2 + 4",
+          "result": 8
+        },
+        {
+          "indexes": [
+            1,
+            2,
+            0
+          ],
+          "key": "1.2.0",
+          "selectedTileIds": [
+            "es-1-09-left-n2",
+            "es-1-09-middle-n3",
+            "es-1-09-right-n1"
+          ],
+          "tileMask": 98,
+          "targetMask": 1,
+          "satisfiedTargetIds": [
+            "es-1-09-target-6"
+          ],
+          "expressionText": "2 + 3 + 1",
+          "result": 6
         },
         {
           "indexes": [
@@ -2282,30 +2329,70 @@
           "tileMask": 140,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-09-target-15"
+            "es-1-09-target-6"
           ],
-          "expressionText": "4 + 5 + 6",
-          "result": 15
+          "expressionText": "3 + 1 + 2",
+          "result": 6
+        },
+        {
+          "indexes": [
+            2,
+            0,
+            2
+          ],
+          "key": "2.0.2",
+          "selectedTileIds": [
+            "es-1-09-left-n3",
+            "es-1-09-middle-n1",
+            "es-1-09-right-n3"
+          ],
+          "tileMask": 268,
+          "targetMask": 2,
+          "satisfiedTargetIds": [
+            "es-1-09-target-8"
+          ],
+          "expressionText": "3 + 1 + 4",
+          "result": 8
+        },
+        {
+          "indexes": [
+            2,
+            1,
+            0
+          ],
+          "key": "2.1.0",
+          "selectedTileIds": [
+            "es-1-09-left-n3",
+            "es-1-09-middle-n2",
+            "es-1-09-right-n1"
+          ],
+          "tileMask": 84,
+          "targetMask": 1,
+          "satisfiedTargetIds": [
+            "es-1-09-target-6"
+          ],
+          "expressionText": "3 + 2 + 1",
+          "result": 6
         },
         {
           "indexes": [
             2,
             2,
-            2
+            1
           ],
-          "key": "2.2.2",
+          "key": "2.2.1",
           "selectedTileIds": [
             "es-1-09-left-n3",
             "es-1-09-middle-n3",
-            "es-1-09-right-n3"
+            "es-1-09-right-n2"
           ],
-          "tileMask": 292,
-          "targetMask": 1,
+          "tileMask": 164,
+          "targetMask": 2,
           "satisfiedTargetIds": [
-            "es-1-09-target-15"
+            "es-1-09-target-8"
           ],
-          "expressionText": "4 + 7 + 4",
-          "result": 15
+          "expressionText": "3 + 3 + 2",
+          "result": 8
         }
       ],
       "canonicalPlan": [
@@ -2313,49 +2400,56 @@
           "indexes": [
             0,
             0,
-            0
+            2
           ]
         },
         {
           "indexes": [
-            1,
-            1,
+            0,
+            2,
             1
           ]
         },
         {
           "indexes": [
-            2,
-            2,
+            1,
+            1,
             2
+          ]
+        },
+        {
+          "indexes": [
+            2,
+            1,
+            0
           ]
         }
       ],
       "minimumMovesToFirstSuccess": 1,
-      "minimumCorrectArrangements": 3,
-      "difficulty": 24.426,
+      "minimumCorrectArrangements": 4,
+      "difficulty": 26.884,
       "metrics": {
         "arrangementCount": 27,
-        "validArrangementCount": 5,
-        "invalidArrangementRatio": 0.815,
-        "minimumCorrectArrangements": 3,
-        "minimumCoverSetCountCapped": 1,
+        "validArrangementCount": 10,
+        "invalidArrangementRatio": 0.63,
+        "minimumCorrectArrangements": 4,
+        "minimumCoverSetCountCapped": 2,
         "minimumMovesToFirstSuccess": 1,
-        "reachableCoverageStates": 26,
-        "operatorComplexity": 3,
-        "numericMagnitude": 8,
-        "difficulty": 24.426
+        "reachableCoverageStates": 138,
+        "operatorComplexity": 5,
+        "numericMagnitude": 4,
+        "difficulty": 26.884
       },
       "signatures": {
         "slotStructure": "R:N-F:+-R:N-F:+-R:N",
-        "valueStructure": "target:15|number:2,3,4|fixed:+|number:5,6,7|fixed:+|number:8,6,4",
-        "rotationNormalized": "target:15|2,3,4|5,6,7|4,8,6",
+        "valueStructure": "targets:6,8|number:1,2,3|fixed:+|number:1,2,3|fixed:+|number:1,2,4",
+        "rotationNormalized": "targets:6,8|1,2,3|1,2,3|1,2,4",
         "operatorPattern": "number|fixed:+|number|fixed:+|number",
-        "validArrangements": "2 + 5 + 8->value:15;2 + 7 + 6->value:15;3 + 6 + 6->value:15;4 + 5 + 6->value:15;4 + 7 + 4->value:15",
-        "canonicalCoverage": "2 + 5 + 8->value:15;3 + 6 + 6->value:15;4 + 7 + 4->value:15",
-        "firstSuccessAction": "stay.stay.up",
-        "numberMultiset": "2,3,4,4,5,6,6,7,8",
-        "learningBand": "three-addend-strategy|2-8"
+        "validArrangements": "1 + 1 + 4->value:6;1 + 3 + 2->value:6;1 + 3 + 4->value:8;2 + 2 + 2->value:6;2 + 2 + 4->value:8;2 + 3 + 1->value:6;3 + 1 + 2->value:6;3 + 1 + 4->value:8;3 + 2 + 1->value:6;3 + 3 + 2->value:8",
+        "canonicalCoverage": "1 + 1 + 4->value:6;1 + 3 + 2->value:6;2 + 2 + 4->value:8;3 + 2 + 1->value:6",
+        "firstSuccessAction": "down.stay.stay",
+        "numberMultiset": "1,1,1,2,2,2,3,3,4",
+        "learningBand": "three-part-coverage-choice|1-4"
       }
     }
   },
@@ -2366,57 +2460,26 @@
     "stationId": "chapter-1-station-1",
     "order": 10,
     "stationOrder": 10,
-    "mode": "target",
     "challenge": "standard",
     "slots": [
       {
         "kind": "movable-reel",
         "reel": {
-          "id": "es-1-10-number-a",
+          "id": "es-1-10-left",
           "kind": "number",
           "tiles": [
             {
-              "id": "es-1-10-number-a-n1",
+              "id": "es-1-10-left-n1",
               "kind": "number",
               "value": 1
             },
             {
-              "id": "es-1-10-number-a-n2",
+              "id": "es-1-10-left-n2",
               "kind": "number",
               "value": 2
             },
             {
-              "id": "es-1-10-number-a-n3",
-              "kind": "number",
-              "value": 3
-            }
-          ]
-        }
-      },
-      {
-        "kind": "fixed-token",
-        "id": "es-1-10-plus-a",
-        "token": "+",
-        "ariaLabel": "固定运算符：第一个加号"
-      },
-      {
-        "kind": "movable-reel",
-        "reel": {
-          "id": "es-1-10-number-b",
-          "kind": "number",
-          "tiles": [
-            {
-              "id": "es-1-10-number-b-n1",
-              "kind": "number",
-              "value": 2
-            },
-            {
-              "id": "es-1-10-number-b-n2",
-              "kind": "number",
-              "value": 3
-            },
-            {
-              "id": "es-1-10-number-b-n3",
+              "id": "es-1-10-left-n3",
               "kind": "number",
               "value": 4
             }
@@ -2425,516 +2488,305 @@
       },
       {
         "kind": "fixed-token",
-        "id": "es-1-10-plus-b",
+        "id": "es-1-10-plus-1",
         "token": "+",
-        "ariaLabel": "固定运算符：第二个加号"
+        "ariaLabel": "固定运算符：第 1 个加号"
       },
       {
         "kind": "movable-reel",
         "reel": {
-          "id": "es-1-10-number-c",
+          "id": "es-1-10-middle",
           "kind": "number",
           "tiles": [
             {
-              "id": "es-1-10-number-c-n1",
+              "id": "es-1-10-middle-n1",
               "kind": "number",
-              "value": 3
+              "value": 1
             },
             {
-              "id": "es-1-10-number-c-n2",
-              "kind": "number",
-              "value": 4
-            },
-            {
-              "id": "es-1-10-number-c-n3",
+              "id": "es-1-10-middle-n2",
               "kind": "number",
               "value": 2
+            },
+            {
+              "id": "es-1-10-middle-n3",
+              "kind": "number",
+              "value": 4
             }
           ]
         }
       },
       {
         "kind": "fixed-token",
-        "id": "es-1-10-plus-c",
+        "id": "es-1-10-plus-2",
         "token": "+",
-        "ariaLabel": "固定运算符：第三个加号"
+        "ariaLabel": "固定运算符：第 2 个加号"
       },
       {
         "kind": "movable-reel",
         "reel": {
-          "id": "es-1-10-number-d",
+          "id": "es-1-10-right",
           "kind": "number",
           "tiles": [
             {
-              "id": "es-1-10-number-d-n1",
+              "id": "es-1-10-right-n1",
               "kind": "number",
-              "value": 6
+              "value": 2
             },
             {
-              "id": "es-1-10-number-d-n2",
+              "id": "es-1-10-right-n2",
               "kind": "number",
               "value": 3
             },
             {
-              "id": "es-1-10-number-d-n3",
+              "id": "es-1-10-right-n3",
               "kind": "number",
-              "value": 3
+              "value": 5
             }
           ]
         }
       }
     ],
     "initialIndexes": [
-      2,
       0,
       0,
       0
     ],
     "requiredTileIds": [
-      "es-1-10-number-a-n1",
-      "es-1-10-number-a-n2",
-      "es-1-10-number-a-n3",
-      "es-1-10-number-b-n1",
-      "es-1-10-number-b-n2",
-      "es-1-10-number-b-n3",
-      "es-1-10-number-c-n1",
-      "es-1-10-number-c-n2",
-      "es-1-10-number-c-n3",
-      "es-1-10-number-d-n1",
-      "es-1-10-number-d-n2",
-      "es-1-10-number-d-n3"
-    ],
-    "targets": [
-      {
-        "kind": "value",
-        "id": "es-1-10-target-12",
-        "value": 12
-      }
+      "es-1-10-left-n1",
+      "es-1-10-left-n2",
+      "es-1-10-left-n3",
+      "es-1-10-middle-n1",
+      "es-1-10-middle-n2",
+      "es-1-10-middle-n3",
+      "es-1-10-right-n1",
+      "es-1-10-right-n2",
+      "es-1-10-right-n3"
     ],
     "learning": {
-      "objective": "用四个部分组成 12，综合运用补数与凑十策略。",
-      "primarySkill": "four-part-composition",
+      "objective": "选择未亮数字，把其余两部分配成需要的补数，合成 8。",
+      "primarySkill": "three-part-complement-choice",
       "skillTags": [
         "addition",
-        "four-addends",
-        "strategy-choice"
+        "three-part-complement-choice",
+        "three-addends"
       ],
       "prerequisiteTags": [
-        "recognize-1-to-20",
-        "count-forward"
+        "recognize-1-to-10",
+        "addition-within-10"
       ],
       "misconceptionTags": [
-        "count-all-instead-of-compose",
-        "treat-plus-as-a-tile"
+        "repeat-same-pair",
+        "first-success-means-complete"
       ],
-      "scaffold": "guided",
-      "reviewOf": [],
-      "reflection": "四个数中，你会先合并哪一对？",
+      "scaffold": "review",
+      "reviewOf": [
+        "es-1-04",
+        "es-1-08"
+      ],
+      "reflection": "哪两部分先合起来能帮助你找到另一部分？",
       "recommendedAgeBand": "约 6–7 岁"
     },
     "hints": [
       {
         "kind": "concept",
-        "text": "先找总数不变时，两个部分怎样配对。"
+        "text": "找一个还没亮的数字，另外两部分怎样配？"
       },
       {
         "kind": "position",
-        "text": "观察中央数字和还没点亮的滑轨格。"
+        "text": "看看值得留意的那条滑轨里，哪些格还没亮。"
       },
       {
         "kind": "direction",
-        "text": "每次只移动一格，再读一遍完整算式。"
+        "text": "按当前棋盘的下一步提示移动一格，再看中央算式。"
       }
     ],
     "provenance": {
       "kind": "hand-authored-gold",
-      "generatorVersion": "authored-v3.0.0"
+      "generatorVersion": "authored-slider-pilot-12-r1",
+      "contentRevision": "slider-pilot-12-r1",
+      "revisionSource": "games/equation-slider/levels/v3/gameplay-pilot-12.ts"
     },
+    "mode": "target",
+    "targets": [
+      {
+        "kind": "value",
+        "id": "es-1-10-target-8",
+        "value": 8
+      }
+    ],
     "analysis": {
       "solverVersion": "3.0.0",
       "validArrangements": [
         {
           "indexes": [
             0,
-            0,
-            0,
-            0
-          ],
-          "key": "0.0.0.0",
-          "selectedTileIds": [
-            "es-1-10-number-a-n1",
-            "es-1-10-number-b-n1",
-            "es-1-10-number-c-n1",
-            "es-1-10-number-d-n1"
-          ],
-          "tileMask": 585,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-10-target-12"
-          ],
-          "expressionText": "1 + 2 + 3 + 6",
-          "result": 12
-        },
-        {
-          "indexes": [
-            0,
-            1,
-            2,
-            0
-          ],
-          "key": "0.1.2.0",
-          "selectedTileIds": [
-            "es-1-10-number-a-n1",
-            "es-1-10-number-b-n2",
-            "es-1-10-number-c-n3",
-            "es-1-10-number-d-n1"
-          ],
-          "tileMask": 785,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-10-target-12"
-          ],
-          "expressionText": "1 + 3 + 2 + 6",
-          "result": 12
-        },
-        {
-          "indexes": [
-            0,
-            2,
-            1,
-            1
-          ],
-          "key": "0.2.1.1",
-          "selectedTileIds": [
-            "es-1-10-number-a-n1",
-            "es-1-10-number-b-n3",
-            "es-1-10-number-c-n2",
-            "es-1-10-number-d-n2"
-          ],
-          "tileMask": 1185,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-10-target-12"
-          ],
-          "expressionText": "1 + 4 + 4 + 3",
-          "result": 12
-        },
-        {
-          "indexes": [
-            0,
-            2,
             1,
             2
           ],
-          "key": "0.2.1.2",
+          "key": "0.1.2",
           "selectedTileIds": [
-            "es-1-10-number-a-n1",
-            "es-1-10-number-b-n3",
-            "es-1-10-number-c-n2",
-            "es-1-10-number-d-n3"
+            "es-1-10-left-n1",
+            "es-1-10-middle-n2",
+            "es-1-10-right-n3"
           ],
-          "tileMask": 2209,
+          "tileMask": 273,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-10-target-12"
+            "es-1-10-target-8"
           ],
-          "expressionText": "1 + 4 + 4 + 3",
-          "result": 12
+          "expressionText": "1 + 2 + 5",
+          "result": 8
+        },
+        {
+          "indexes": [
+            0,
+            2,
+            1
+          ],
+          "key": "0.2.1",
+          "selectedTileIds": [
+            "es-1-10-left-n1",
+            "es-1-10-middle-n3",
+            "es-1-10-right-n2"
+          ],
+          "tileMask": 161,
+          "targetMask": 1,
+          "satisfiedTargetIds": [
+            "es-1-10-target-8"
+          ],
+          "expressionText": "1 + 4 + 3",
+          "result": 8
         },
         {
           "indexes": [
             1,
             0,
+            2
+          ],
+          "key": "1.0.2",
+          "selectedTileIds": [
+            "es-1-10-left-n2",
+            "es-1-10-middle-n1",
+            "es-1-10-right-n3"
+          ],
+          "tileMask": 266,
+          "targetMask": 1,
+          "satisfiedTargetIds": [
+            "es-1-10-target-8"
+          ],
+          "expressionText": "2 + 1 + 5",
+          "result": 8
+        },
+        {
+          "indexes": [
+            1,
             2,
             0
           ],
-          "key": "1.0.2.0",
+          "key": "1.2.0",
           "selectedTileIds": [
-            "es-1-10-number-a-n2",
-            "es-1-10-number-b-n1",
-            "es-1-10-number-c-n3",
-            "es-1-10-number-d-n1"
+            "es-1-10-left-n2",
+            "es-1-10-middle-n3",
+            "es-1-10-right-n1"
           ],
-          "tileMask": 778,
+          "tileMask": 98,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-10-target-12"
+            "es-1-10-target-8"
           ],
-          "expressionText": "2 + 2 + 2 + 6",
-          "result": 12
+          "expressionText": "2 + 4 + 2",
+          "result": 8
         },
         {
           "indexes": [
-            1,
-            1,
-            1,
-            1
-          ],
-          "key": "1.1.1.1",
-          "selectedTileIds": [
-            "es-1-10-number-a-n2",
-            "es-1-10-number-b-n2",
-            "es-1-10-number-c-n2",
-            "es-1-10-number-d-n2"
-          ],
-          "tileMask": 1170,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-10-target-12"
-          ],
-          "expressionText": "2 + 3 + 4 + 3",
-          "result": 12
-        },
-        {
-          "indexes": [
-            1,
-            1,
-            1,
-            2
-          ],
-          "key": "1.1.1.2",
-          "selectedTileIds": [
-            "es-1-10-number-a-n2",
-            "es-1-10-number-b-n2",
-            "es-1-10-number-c-n2",
-            "es-1-10-number-d-n3"
-          ],
-          "tileMask": 2194,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-10-target-12"
-          ],
-          "expressionText": "2 + 3 + 4 + 3",
-          "result": 12
-        },
-        {
-          "indexes": [
-            1,
             2,
             0,
             1
           ],
-          "key": "1.2.0.1",
+          "key": "2.0.1",
           "selectedTileIds": [
-            "es-1-10-number-a-n2",
-            "es-1-10-number-b-n3",
-            "es-1-10-number-c-n1",
-            "es-1-10-number-d-n2"
+            "es-1-10-left-n3",
+            "es-1-10-middle-n1",
+            "es-1-10-right-n2"
           ],
-          "tileMask": 1122,
+          "tileMask": 140,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-10-target-12"
+            "es-1-10-target-8"
           ],
-          "expressionText": "2 + 4 + 3 + 3",
-          "result": 12
-        },
-        {
-          "indexes": [
-            1,
-            2,
-            0,
-            2
-          ],
-          "key": "1.2.0.2",
-          "selectedTileIds": [
-            "es-1-10-number-a-n2",
-            "es-1-10-number-b-n3",
-            "es-1-10-number-c-n1",
-            "es-1-10-number-d-n3"
-          ],
-          "tileMask": 2146,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-10-target-12"
-          ],
-          "expressionText": "2 + 4 + 3 + 3",
-          "result": 12
-        },
-        {
-          "indexes": [
-            2,
-            0,
-            1,
-            1
-          ],
-          "key": "2.0.1.1",
-          "selectedTileIds": [
-            "es-1-10-number-a-n3",
-            "es-1-10-number-b-n1",
-            "es-1-10-number-c-n2",
-            "es-1-10-number-d-n2"
-          ],
-          "tileMask": 1164,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-10-target-12"
-          ],
-          "expressionText": "3 + 2 + 4 + 3",
-          "result": 12
-        },
-        {
-          "indexes": [
-            2,
-            0,
-            1,
-            2
-          ],
-          "key": "2.0.1.2",
-          "selectedTileIds": [
-            "es-1-10-number-a-n3",
-            "es-1-10-number-b-n1",
-            "es-1-10-number-c-n2",
-            "es-1-10-number-d-n3"
-          ],
-          "tileMask": 2188,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-10-target-12"
-          ],
-          "expressionText": "3 + 2 + 4 + 3",
-          "result": 12
+          "expressionText": "4 + 1 + 3",
+          "result": 8
         },
         {
           "indexes": [
             2,
             1,
-            0,
-            1
+            0
           ],
-          "key": "2.1.0.1",
+          "key": "2.1.0",
           "selectedTileIds": [
-            "es-1-10-number-a-n3",
-            "es-1-10-number-b-n2",
-            "es-1-10-number-c-n1",
-            "es-1-10-number-d-n2"
+            "es-1-10-left-n3",
+            "es-1-10-middle-n2",
+            "es-1-10-right-n1"
           ],
-          "tileMask": 1108,
+          "tileMask": 84,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-10-target-12"
+            "es-1-10-target-8"
           ],
-          "expressionText": "3 + 3 + 3 + 3",
-          "result": 12
-        },
-        {
-          "indexes": [
-            2,
-            1,
-            0,
-            2
-          ],
-          "key": "2.1.0.2",
-          "selectedTileIds": [
-            "es-1-10-number-a-n3",
-            "es-1-10-number-b-n2",
-            "es-1-10-number-c-n1",
-            "es-1-10-number-d-n3"
-          ],
-          "tileMask": 2132,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-10-target-12"
-          ],
-          "expressionText": "3 + 3 + 3 + 3",
-          "result": 12
-        },
-        {
-          "indexes": [
-            2,
-            2,
-            2,
-            1
-          ],
-          "key": "2.2.2.1",
-          "selectedTileIds": [
-            "es-1-10-number-a-n3",
-            "es-1-10-number-b-n3",
-            "es-1-10-number-c-n3",
-            "es-1-10-number-d-n2"
-          ],
-          "tileMask": 1316,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-10-target-12"
-          ],
-          "expressionText": "3 + 4 + 2 + 3",
-          "result": 12
-        },
-        {
-          "indexes": [
-            2,
-            2,
-            2,
-            2
-          ],
-          "key": "2.2.2.2",
-          "selectedTileIds": [
-            "es-1-10-number-a-n3",
-            "es-1-10-number-b-n3",
-            "es-1-10-number-c-n3",
-            "es-1-10-number-d-n3"
-          ],
-          "tileMask": 2340,
-          "targetMask": 1,
-          "satisfiedTargetIds": [
-            "es-1-10-target-12"
-          ],
-          "expressionText": "3 + 4 + 2 + 3",
-          "result": 12
+          "expressionText": "4 + 2 + 2",
+          "result": 8
         }
       ],
       "canonicalPlan": [
         {
           "indexes": [
             0,
-            0,
-            0,
+            1,
+            2
+          ]
+        },
+        {
+          "indexes": [
+            1,
+            2,
             0
           ]
         },
         {
           "indexes": [
-            1,
-            1,
-            1,
+            2,
+            0,
             1
-          ]
-        },
-        {
-          "indexes": [
-            2,
-            2,
-            2,
-            2
           ]
         }
       ],
-      "minimumMovesToFirstSuccess": 1,
+      "minimumMovesToFirstSuccess": 2,
       "minimumCorrectArrangements": 3,
-      "difficulty": 27.863,
+      "difficulty": 24.398,
       "metrics": {
-        "arrangementCount": 81,
-        "validArrangementCount": 15,
-        "invalidArrangementRatio": 0.815,
+        "arrangementCount": 27,
+        "validArrangementCount": 6,
+        "invalidArrangementRatio": 0.778,
         "minimumCorrectArrangements": 3,
         "minimumCoverSetCountCapped": 2,
-        "minimumMovesToFirstSuccess": 1,
-        "reachableCoverageStates": 321,
-        "operatorComplexity": 5,
-        "numericMagnitude": 6,
-        "difficulty": 27.863
+        "minimumMovesToFirstSuccess": 2,
+        "reachableCoverageStates": 47,
+        "operatorComplexity": 3,
+        "numericMagnitude": 5,
+        "difficulty": 24.398
       },
       "signatures": {
-        "slotStructure": "R:N-F:+-R:N-F:+-R:N-F:+-R:N",
-        "valueStructure": "target:12|number:1,2,3|fixed:+|number:2,3,4|fixed:+|number:3,4,2|fixed:+|number:6,3,3",
-        "rotationNormalized": "target:12|1,2,3|2,3,4|2,3,4|3,3,6",
-        "operatorPattern": "number|fixed:+|number|fixed:+|number|fixed:+|number",
-        "validArrangements": "1 + 2 + 3 + 6->value:12;1 + 3 + 2 + 6->value:12;1 + 4 + 4 + 3->value:12;1 + 4 + 4 + 3->value:12;2 + 2 + 2 + 6->value:12;2 + 3 + 4 + 3->value:12;2 + 3 + 4 + 3->value:12;2 + 4 + 3 + 3->value:12;2 + 4 + 3 + 3->value:12;3 + 2 + 4 + 3->value:12;3 + 2 + 4 + 3->value:12;3 + 3 + 3 + 3->value:12;3 + 3 + 3 + 3->value:12;3 + 4 + 2 + 3->value:12;3 + 4 + 2 + 3->value:12",
-        "canonicalCoverage": "1 + 2 + 3 + 6->value:12;2 + 3 + 4 + 3->value:12;3 + 4 + 2 + 3->value:12",
-        "firstSuccessAction": "down.stay.stay.stay",
-        "numberMultiset": "1,2,2,2,3,3,3,3,3,4,4,6",
-        "learningBand": "four-part-composition|1-6"
+        "slotStructure": "R:N-F:+-R:N-F:+-R:N",
+        "valueStructure": "target:8|number:1,2,4|fixed:+|number:1,2,4|fixed:+|number:2,3,5",
+        "rotationNormalized": "target:8|1,2,4|1,2,4|2,3,5",
+        "operatorPattern": "number|fixed:+|number|fixed:+|number",
+        "validArrangements": "1 + 2 + 5->value:8;1 + 4 + 3->value:8;2 + 1 + 5->value:8;2 + 4 + 2->value:8;4 + 1 + 3->value:8;4 + 2 + 2->value:8",
+        "canonicalCoverage": "1 + 2 + 5->value:8;2 + 4 + 2->value:8;4 + 1 + 3->value:8",
+        "firstSuccessAction": "stay.down.up",
+        "numberMultiset": "1,1,2,2,2,3,4,4,5",
+        "learningBand": "three-part-complement-choice|1-5"
       }
     }
   },
@@ -3023,7 +2875,7 @@
       }
     ],
     "learning": {
-      "objective": "用不同的两个数合成 6，并观察加法中的部分与整体。（第 2 站迁移练习）",
+      "objective": "用不同的两个数合成 8，并观察加法中的部分与整体。（第 2 站迁移练习）",
       "primarySkill": "part-whole-addition",
       "skillTags": [
         "addition",
@@ -3042,7 +2894,7 @@
       "reviewOf": [
         "es-1-01"
       ],
-      "reflection": "哪两组数字交换了位置，但仍然得到 6？",
+      "reflection": "哪两组数字交换了位置，但仍然得到 8？",
       "recommendedAgeBand": "约 6–7 岁"
     },
     "hints": [
@@ -3060,10 +2912,10 @@
       }
     ],
     "provenance": {
-      "kind": "generated-from-gold",
-      "templateId": "es-1-01",
-      "seed": "chapter-1:template-1:station-2",
-      "generatorVersion": "equation-slider-v3.0.0"
+      "kind": "hand-authored-gold",
+      "generatorVersion": "authored-slider-pilot-12-r1",
+      "contentRevision": "slider-pilot-12-copy-r1",
+      "revisionSource": "games/equation-slider/levels/v3/gameplay-pilot-12.ts"
     },
     "analysis": {
       "solverVersion": "3.0.0",
@@ -3178,7 +3030,6 @@
     "stationId": "chapter-1-station-2",
     "order": 12,
     "stationOrder": 2,
-    "mode": "target",
     "challenge": "standard",
     "slots": [
       {
@@ -3190,26 +3041,56 @@
             {
               "id": "es-1-12-left-n1",
               "kind": "number",
-              "value": 2
+              "value": 1
             },
             {
               "id": "es-1-12-left-n2",
               "kind": "number",
-              "value": 4
+              "value": 3
             },
             {
               "id": "es-1-12-left-n3",
               "kind": "number",
-              "value": 6
+              "value": 4
             }
           ]
         }
       },
       {
         "kind": "fixed-token",
-        "id": "es-1-12-plus",
+        "id": "es-1-12-plus-1",
         "token": "+",
-        "ariaLabel": "固定运算符：加号"
+        "ariaLabel": "固定运算符：第 1 个加号"
+      },
+      {
+        "kind": "movable-reel",
+        "reel": {
+          "id": "es-1-12-middle",
+          "kind": "number",
+          "tiles": [
+            {
+              "id": "es-1-12-middle-n1",
+              "kind": "number",
+              "value": 1
+            },
+            {
+              "id": "es-1-12-middle-n2",
+              "kind": "number",
+              "value": 2
+            },
+            {
+              "id": "es-1-12-middle-n3",
+              "kind": "number",
+              "value": 3
+            }
+          ]
+        }
+      },
+      {
+        "kind": "fixed-token",
+        "id": "es-1-12-plus-2",
+        "token": "+",
+        "ariaLabel": "固定运算符：第 2 个加号"
       },
       {
         "kind": "movable-reel",
@@ -3220,17 +3101,17 @@
             {
               "id": "es-1-12-right-n1",
               "kind": "number",
-              "value": 7
+              "value": 3
             },
             {
               "id": "es-1-12-right-n2",
               "kind": "number",
-              "value": 5
+              "value": 4
             },
             {
               "id": "es-1-12-right-n3",
               "kind": "number",
-              "value": 3
+              "value": 6
             }
           ]
         }
@@ -3238,133 +3119,195 @@
     ],
     "initialIndexes": [
       0,
-      1
+      0,
+      0
     ],
     "requiredTileIds": [
       "es-1-12-left-n1",
       "es-1-12-left-n2",
       "es-1-12-left-n3",
+      "es-1-12-middle-n1",
+      "es-1-12-middle-n2",
+      "es-1-12-middle-n3",
       "es-1-12-right-n1",
       "es-1-12-right-n2",
       "es-1-12-right-n3"
     ],
-    "targets": [
-      {
-        "kind": "value",
-        "id": "es-1-12-target-9",
-        "value": 9
-      }
-    ],
     "learning": {
-      "objective": "找出三组不同的 7 的数对，建立奇数分合表象。（第 2 站迁移练习）",
-      "primarySkill": "odd-number-bonds",
+      "objective": "把两数补数经验迁移到三个部分，逐步让未亮格参加合成 10。",
+      "primarySkill": "three-part-make-ten-transfer",
       "skillTags": [
         "addition",
-        "number-bonds",
-        "odd-numbers"
+        "three-part-make-ten-transfer",
+        "three-addends"
       ],
       "prerequisiteTags": [
-        "recognize-1-to-20",
-        "count-forward"
+        "recognize-1-to-10",
+        "addition-within-10"
       ],
       "misconceptionTags": [
-        "count-all-instead-of-compose",
-        "treat-plus-as-a-tile"
+        "repeat-same-pair",
+        "first-success-means-complete"
       ],
-      "scaffold": "supported",
+      "scaffold": "transfer",
       "reviewOf": [
-        "es-1-02"
+        "es-1-04",
+        "es-1-10",
+        "es-1-11"
       ],
-      "reflection": "离 7 越近的第一个加数，另一个加数怎样变化？",
+      "reflection": "怎样用已经会的两数补数帮助三个部分凑 10？",
       "recommendedAgeBand": "约 6–7 岁"
     },
     "hints": [
       {
         "kind": "concept",
-        "text": "先找总数不变时，两个部分怎样配对。 数字变了，关系没有变。"
+        "text": "试着让没亮的格也参加凑 10。"
       },
       {
         "kind": "position",
-        "text": "观察中央数字和还没点亮的滑轨格。"
+        "text": "看看值得留意的那条滑轨里，哪些格还没亮。"
       },
       {
         "kind": "direction",
-        "text": "每次只移动一格，再读一遍完整算式。"
+        "text": "按当前棋盘的下一步提示移动一格，再看中央算式。"
       }
     ],
     "provenance": {
-      "kind": "generated-from-gold",
-      "templateId": "es-1-02",
-      "seed": "chapter-1:template-2:station-2",
-      "generatorVersion": "equation-slider-v3.0.0"
+      "kind": "hand-authored-gold",
+      "generatorVersion": "authored-slider-pilot-12-r1",
+      "contentRevision": "slider-pilot-12-r1",
+      "revisionSource": "games/equation-slider/levels/v3/gameplay-pilot-12.ts"
     },
+    "mode": "target",
+    "targets": [
+      {
+        "kind": "value",
+        "id": "es-1-12-target-10",
+        "value": 10
+      }
+    ],
     "analysis": {
       "solverVersion": "3.0.0",
       "validArrangements": [
         {
           "indexes": [
             0,
-            0
+            2,
+            2
           ],
-          "key": "0.0",
+          "key": "0.2.2",
           "selectedTileIds": [
             "es-1-12-left-n1",
-            "es-1-12-right-n1"
+            "es-1-12-middle-n3",
+            "es-1-12-right-n3"
           ],
-          "tileMask": 9,
+          "tileMask": 289,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-12-target-9"
+            "es-1-12-target-10"
           ],
-          "expressionText": "2 + 7",
-          "result": 9
+          "expressionText": "1 + 3 + 6",
+          "result": 10
         },
         {
           "indexes": [
             1,
-            1
+            0,
+            2
           ],
-          "key": "1.1",
+          "key": "1.0.2",
           "selectedTileIds": [
             "es-1-12-left-n2",
-            "es-1-12-right-n2"
+            "es-1-12-middle-n1",
+            "es-1-12-right-n3"
           ],
-          "tileMask": 18,
+          "tileMask": 266,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-12-target-9"
+            "es-1-12-target-10"
           ],
-          "expressionText": "4 + 5",
-          "result": 9
+          "expressionText": "3 + 1 + 6",
+          "result": 10
+        },
+        {
+          "indexes": [
+            1,
+            2,
+            1
+          ],
+          "key": "1.2.1",
+          "selectedTileIds": [
+            "es-1-12-left-n2",
+            "es-1-12-middle-n3",
+            "es-1-12-right-n2"
+          ],
+          "tileMask": 162,
+          "targetMask": 1,
+          "satisfiedTargetIds": [
+            "es-1-12-target-10"
+          ],
+          "expressionText": "3 + 3 + 4",
+          "result": 10
         },
         {
           "indexes": [
             2,
-            2
+            1,
+            1
           ],
-          "key": "2.2",
+          "key": "2.1.1",
           "selectedTileIds": [
             "es-1-12-left-n3",
-            "es-1-12-right-n3"
+            "es-1-12-middle-n2",
+            "es-1-12-right-n2"
           ],
-          "tileMask": 36,
+          "tileMask": 148,
           "targetMask": 1,
           "satisfiedTargetIds": [
-            "es-1-12-target-9"
+            "es-1-12-target-10"
           ],
-          "expressionText": "6 + 3",
-          "result": 9
+          "expressionText": "4 + 2 + 4",
+          "result": 10
+        },
+        {
+          "indexes": [
+            2,
+            2,
+            0
+          ],
+          "key": "2.2.0",
+          "selectedTileIds": [
+            "es-1-12-left-n3",
+            "es-1-12-middle-n3",
+            "es-1-12-right-n1"
+          ],
+          "tileMask": 100,
+          "targetMask": 1,
+          "satisfiedTargetIds": [
+            "es-1-12-target-10"
+          ],
+          "expressionText": "4 + 3 + 3",
+          "result": 10
         }
       ],
       "canonicalPlan": [
         {
           "indexes": [
             0,
-            0
+            2,
+            2
           ]
         },
         {
           "indexes": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "indexes": [
+            2,
             1,
             1
           ]
@@ -3372,35 +3315,36 @@
         {
           "indexes": [
             2,
-            2
+            2,
+            0
           ]
         }
       ],
-      "minimumMovesToFirstSuccess": 1,
-      "minimumCorrectArrangements": 3,
-      "difficulty": 20.398,
+      "minimumMovesToFirstSuccess": 2,
+      "minimumCorrectArrangements": 4,
+      "difficulty": 27.973,
       "metrics": {
-        "arrangementCount": 9,
-        "validArrangementCount": 3,
-        "invalidArrangementRatio": 0.667,
-        "minimumCorrectArrangements": 3,
+        "arrangementCount": 27,
+        "validArrangementCount": 5,
+        "invalidArrangementRatio": 0.815,
+        "minimumCorrectArrangements": 4,
         "minimumCoverSetCountCapped": 1,
-        "minimumMovesToFirstSuccess": 1,
-        "reachableCoverageStates": 8,
-        "operatorComplexity": 1,
-        "numericMagnitude": 7,
-        "difficulty": 20.398
+        "minimumMovesToFirstSuccess": 2,
+        "reachableCoverageStates": 29,
+        "operatorComplexity": 3,
+        "numericMagnitude": 6,
+        "difficulty": 27.973
       },
       "signatures": {
-        "slotStructure": "R:N-F:+-R:N",
-        "valueStructure": "target:9|number:2,4,6|fixed:+|number:7,5,3",
-        "rotationNormalized": "target:9|2,4,6|3,7,5",
-        "operatorPattern": "number|fixed:+|number",
-        "validArrangements": "2 + 7->value:9;4 + 5->value:9;6 + 3->value:9",
-        "canonicalCoverage": "2 + 7->value:9;4 + 5->value:9;6 + 3->value:9",
-        "firstSuccessAction": "stay.up",
-        "numberMultiset": "2,3,4,5,6,7",
-        "learningBand": "odd-number-bonds|2-7"
+        "slotStructure": "R:N-F:+-R:N-F:+-R:N",
+        "valueStructure": "target:10|number:1,3,4|fixed:+|number:1,2,3|fixed:+|number:3,4,6",
+        "rotationNormalized": "target:10|1,3,4|1,2,3|3,4,6",
+        "operatorPattern": "number|fixed:+|number|fixed:+|number",
+        "validArrangements": "1 + 3 + 6->value:10;3 + 1 + 6->value:10;3 + 3 + 4->value:10;4 + 2 + 4->value:10;4 + 3 + 3->value:10",
+        "canonicalCoverage": "1 + 3 + 6->value:10;3 + 1 + 6->value:10;4 + 2 + 4->value:10;4 + 3 + 3->value:10",
+        "firstSuccessAction": "stay.up.up",
+        "numberMultiset": "1,1,2,3,3,3,4,4,6",
+        "learningBand": "three-part-make-ten-transfer|1-6"
       }
     }
   },

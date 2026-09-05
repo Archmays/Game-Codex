@@ -15,7 +15,7 @@ import type {
 export { evaluateArrangementOutcome } from "./solver";
 
 export interface FeedbackMessage {
-  readonly kind: "info" | "success";
+  readonly kind: "info" | "success" | "repeat" | "complete";
   readonly text: string;
 }
 
@@ -119,8 +119,9 @@ export function getDynamicHint(
     return {
       depth,
       kind: "concept",
-      text: level.hints[0].text,
-      targetIndexes: continuation.targetIndexes
+      text: level.requiredTileIds.every((id) => state.coveredTileIds.has(id))
+        ? "格子已经全部点亮，看看还有哪个目标没到过。"
+        : level.hints[0].text
     };
   }
 
@@ -143,15 +144,14 @@ export function getDynamicHint(
       kind: "position",
       text: `看看第 ${continuation.reelIndex + 1} 条滑轨。`,
       reelId: continuation.reelId,
-      reelIndex: continuation.reelIndex,
-      targetIndexes: continuation.targetIndexes
+      reelIndex: continuation.reelIndex
     };
   }
 
   return {
     depth,
     kind: "direction",
-    text: `把第 ${continuation.reelIndex + 1} 条滑轨向${continuation.direction === "up" ? "上" : "下"}移动一格。`,
+    text: `第 ${continuation.reelIndex + 1} 条滑轨：选${continuation.direction === "up" ? "上" : "下"}方格，把它放到中央。${continuation.remainingMoves > 1 ? "这一步先准备，再看看还要调哪条轨。" : ""}`,
     reelId: continuation.reelId,
     reelIndex: continuation.reelIndex,
     direction: continuation.direction,

@@ -51,7 +51,7 @@ const PLAYTEST_LEVELS: readonly PlaytestLevel[] = [
   { id: "es-1-30", chapterId: "chapter-1", station: 3, expectedMode: "target", expectedReels: 4, inputMode: "tile" },
   { id: "es-1-31", chapterId: "chapter-1", station: 4, expectedMode: "target", expectedReels: 2, inputMode: "drag" },
   { id: "es-1-50", chapterId: "chapter-1", station: 5, expectedMode: "target", expectedReels: 4, inputMode: "control" },
-  { id: "es-1-06", chapterId: "chapter-1", station: 1, expectedMode: "target", expectedReels: 3, inputMode: "keyboard" },
+  { id: "es-1-06", chapterId: "chapter-1", station: 1, expectedMode: "target", expectedReels: 2, inputMode: "keyboard" },
 
   { id: "es-2-01", chapterId: "chapter-2", station: 1, expectedMode: "multi-target", expectedReels: 3, inputMode: "tile", wrongPathProbe: true },
   { id: "es-2-16", chapterId: "chapter-2", station: 2, expectedMode: "equality", expectedReels: 3, inputMode: "drag" },
@@ -140,14 +140,14 @@ async function completeFormalBoardTutorial(page: Page): Promise<TutorialResult> 
   await expect(page.locator(`${BOARD}[data-level-id='es-1-01']`)).toBeVisible();
   await expect(page.locator(".equation-slider__coach[data-tutorial-step='move-target']")).toBeVisible();
   await expect(page.locator(".equation-slider__coach[data-tutorial-step='move-target']")).toContainText(
-    "把右边滑轨上方的 2 移到中央"
+    "把右边滑轨上的 2 移到中央"
   );
   await expect(page.locator(`${BOARD}[inert]`)).toHaveCount(0);
   await expect(page.locator(`${BOARD} [inert]`)).toHaveCount(0);
   await expect(page.locator(COVERAGE)).toHaveText("0/6");
   await expect(page.locator("[data-move-count]")).toHaveText("0");
 
-  await page.getByRole("button", { name: "第 2 列向上移动" }).click();
+  await page.getByRole("button", { name: "第 2 列选上方格" }).click();
 
   await expect(page.locator(".equation-slider__coach[data-tutorial-step='coverage']")).toBeVisible();
   await expect(page.locator(COVERAGE)).toHaveText("2/6");
@@ -245,7 +245,7 @@ async function requestThreeVisibleHints(page: Page): Promise<readonly [string, s
 function parseVisibleDirection(
   text: string
 ): { readonly reelIndex: number; readonly direction: "up" | "down" } | null {
-  const match = text.match(/第\s*(\d+)\s*条滑轨向(上|下)移动一格/);
+  const match = text.match(/第\s*(\d+)\s*条滑轨：选(上|下)方格/);
   if (!match) return null;
   return {
     reelIndex: Number(match[1]) - 1,
@@ -280,7 +280,7 @@ async function performVisibleMove(
 
   if (mode === "control") {
     await page.getByRole("button", {
-      name: `第 ${reelIndex + 1} 列向${direction === "up" ? "上" : "下"}移动`
+      name: `第 ${reelIndex + 1} 列选${direction === "up" ? "上" : "下"}方格`
     }).click();
   } else if (mode === "tile") {
     await reel.locator(`[data-position='${direction === "up" ? "previous" : "next"}']`).click();
@@ -311,7 +311,7 @@ async function readMoveCount(page: Page): Promise<number> {
 }
 
 async function readVisibleMode(page: Page): Promise<VisibleMode> {
-  const label = (await page.locator(".equation-slider__target-card span").textContent())?.trim();
+  const label = (await page.locator(".equation-slider__target-card > span").textContent())?.trim();
   if (label === "多目标") return "multi-target";
   if (label === "平衡目标") return "equality";
   if (label === "目标") return "target";

@@ -54,7 +54,7 @@ describe("game catalog", () => {
     expect(equationSliderSource).toContain('id: "equation-slider"');
     expect(equationSliderSource).toContain('title: "算式滑轨"');
     expect(equationSliderReadme).toContain("200 份 V3 schema 关卡");
-    expect(equationSliderReadme).toContain("40 个手工金标准");
+    expect(equationSliderReadme).toContain("42个手工关与158个生成关");
     const rootReadme = readFileSync("README.md", "utf8");
     expect(rootReadme).toContain(`保留 ${GAME_PORTFOLIO.length} 个可挂载定义`);
     expect(rootReadme).toContain("收敛为 3 个活跃产品");

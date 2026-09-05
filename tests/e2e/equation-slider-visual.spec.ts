@@ -102,15 +102,15 @@ async function completeFirstLevelThroughUi(page: Page): Promise<void> {
   await openFirstLevelWithoutCoach(page);
 
   // Starting at 4 + 5, visit the three visible valid pairs using only reel controls.
-  await page.getByRole("button", { name: "第 2 列向上移动" }).click();
+  await page.getByRole("button", { name: "第 2 列选上方格" }).click();
   await expect(page.locator("[data-coverage-progress]")).toHaveText("2/6");
 
-  await page.getByRole("button", { name: "第 1 列向下移动" }).click();
-  await page.getByRole("button", { name: "第 2 列向下移动" }).click();
+  await page.getByRole("button", { name: "第 1 列选下方格" }).click();
+  await page.getByRole("button", { name: "第 2 列选下方格" }).click();
   await expect(page.locator("[data-coverage-progress]")).toHaveText("4/6");
 
-  await page.getByRole("button", { name: "第 1 列向下移动" }).click();
-  await page.getByRole("button", { name: "第 2 列向下移动" }).click();
+  await page.getByRole("button", { name: "第 1 列选下方格" }).click();
+  await page.getByRole("button", { name: "第 2 列选下方格" }).click();
   await expect(page.locator("[data-coverage-progress]")).toHaveText("6/6");
   await expect(page.locator("[data-completion-card]")).toBeVisible();
 }
@@ -196,12 +196,12 @@ test.describe("@visual equation slider V3 responsive and formal evidence", () =>
     await expect(page.locator("[data-coverage-progress]")).toHaveText("0/6");
     await page.screenshot({ path: `${AFTER_DIR}/first-level-initial-es-1-01-390x844.png` });
 
-    await page.getByRole("button", { name: "第 2 列向上移动" }).click();
+    await page.getByRole("button", { name: "第 2 列选上方格" }).click();
     await expect(page.locator("[data-coverage-progress]")).toHaveText("2/6");
     await page.screenshot({ path: `${AFTER_DIR}/first-light-es-1-01-390x844.png` });
 
-    await page.getByRole("button", { name: "第 1 列向下移动" }).click();
-    await page.getByRole("button", { name: "第 2 列向下移动" }).click();
+    await page.getByRole("button", { name: "第 1 列选下方格" }).click();
+    await page.getByRole("button", { name: "第 2 列选下方格" }).click();
     await expect(page.locator("[data-coverage-progress]")).toHaveText("4/6");
     await page.screenshot({ path: `${AFTER_DIR}/partial-coverage-es-1-01-390x844.png` });
   });

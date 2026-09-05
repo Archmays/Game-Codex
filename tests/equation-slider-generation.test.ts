@@ -13,6 +13,7 @@ import {
   V3_GENERATOR_VERSION
 } from "../games/equation-slider/levels/v3/generator";
 import { FIRST_GOLD_LEVEL } from "../games/equation-slider/levels/v3/gold-levels";
+import { applyGameplayPilot12 } from "../games/equation-slider/levels/v3/gameplay-pilot-12";
 import {
   buildGeneratedAudit,
   createMaterializedFiles
@@ -33,7 +34,9 @@ describe("equation slider V3 deterministic generation", () => {
 
     expect(first).toHaveLength(160);
     expect(JSON.stringify(first)).toBe(JSON.stringify(second));
-    expect(sortByCatalogOrder(first).map(withoutInitialStateProof)).toEqual(
+    expect(sortByCatalogOrder(first)
+      .filter((level) => level.id !== "es-1-11" && level.id !== "es-1-12")
+      .map(withoutInitialStateProof)).toEqual(
       GENERATED_V3_LEVELS.map(withoutInitialStateProof)
     );
     expect(
@@ -56,10 +59,10 @@ describe("equation slider V3 deterministic generation", () => {
   }, 120_000);
 
   it("rebuilds the complete diversified catalog byte-for-byte", () => {
-    const rebuilt = buildCompleteV3Catalog(
+    const rebuilt = applyGameplayPilot12(buildCompleteV3Catalog(
       HAND_AUTHORED_GOLD_TEMPLATES,
       FIRST_GOLD_LEVEL
-    );
+    ));
 
     expect(JSON.stringify(rebuilt)).toBe(JSON.stringify(EQUATION_SLIDER_V3_LEVELS));
   }, 120_000);

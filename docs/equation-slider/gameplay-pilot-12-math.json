@@ -1,0 +1,5956 @@
+{
+  "evidenceKind": "ENGINEERING_MATHEMATICS_NOT_UI_BLIND_OR_CHILD_PLAY",
+  "contentVersion": "equation-slider-v3.0.0+slider-pilot-12-r1",
+  "limits": [
+    "Coverage incidence ignores the actual numbers; equal signatures alone do not prove equally interesting play.",
+    "Seeded and cyclic actions are diagnostics, not evidence of child enjoyment or learning.",
+    "Before/after use identical action schedules and matched reel indexes; values differ because the boards changed.",
+    "A requested column absent from the smaller board is recorded as absent and still consumes one attempt; completion rates across different reel counts are not a fair difficulty score.",
+    "Coverage accumulates; a minimum cover set does not impose a unique order or create dead ends."
+  ],
+  "totalLevels": 200,
+  "invalid": [],
+  "retained188": {
+    "count": 188,
+    "beforeSha256": "2c01404e63c3a627c8d7ce966b7cced980826ed769b11894741846d60d476bbe",
+    "afterSha256": "2c01404e63c3a627c8d7ce966b7cced980826ed769b11894741846d60d476bbe"
+  },
+  "unchangedIdentityAndOrder": true,
+  "changedDefinitions": [
+    "es-1-02",
+    "es-1-03",
+    "es-1-04",
+    "es-1-05",
+    "es-1-06",
+    "es-1-07",
+    "es-1-08",
+    "es-1-09",
+    "es-1-10",
+    "es-1-11",
+    "es-1-12"
+  ],
+  "changedBoards": [
+    "es-1-02",
+    "es-1-03",
+    "es-1-04",
+    "es-1-05",
+    "es-1-06",
+    "es-1-07",
+    "es-1-08",
+    "es-1-09",
+    "es-1-10",
+    "es-1-12"
+  ],
+  "boardRevisionIds": [
+    "es-1-02",
+    "es-1-03",
+    "es-1-04",
+    "es-1-05",
+    "es-1-06",
+    "es-1-07",
+    "es-1-08",
+    "es-1-09",
+    "es-1-10",
+    "es-1-12"
+  ],
+  "currentSourceCounts": {
+    "originalTemplates": 40,
+    "authored": 42,
+    "generated": 158,
+    "boardRevisions": 10,
+    "copyOnlyRevisions": 1
+  },
+  "beforeCoverageFamilies": [
+    [
+      "es-1-01",
+      "es-1-02",
+      "es-1-03",
+      "es-1-04",
+      "es-1-05",
+      "es-1-11",
+      "es-1-12"
+    ],
+    [
+      "es-1-06",
+      "es-1-09"
+    ],
+    [
+      "es-1-07"
+    ],
+    [
+      "es-1-08"
+    ],
+    [
+      "es-1-10"
+    ]
+  ],
+  "afterCoverageFamilies": [
+    [
+      "es-1-01",
+      "es-1-02",
+      "es-1-03",
+      "es-1-04",
+      "es-1-05",
+      "es-1-06",
+      "es-1-11"
+    ],
+    [
+      "es-1-07"
+    ],
+    [
+      "es-1-08"
+    ],
+    [
+      "es-1-09"
+    ],
+    [
+      "es-1-10"
+    ],
+    [
+      "es-1-12"
+    ]
+  ],
+  "pilot": [
+    {
+      "id": "es-1-01",
+      "before": {
+        "columns": [
+          [
+            1,
+            2,
+            4
+          ],
+          [
+            5,
+            4,
+            2
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          6
+        ],
+        "initialIndexes": [
+          2,
+          0
+        ],
+        "initialEquation": "4 + 5",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              0
+            ],
+            "expression": "1 + 5",
+            "result": 6
+          },
+          {
+            "indexes": [
+              1,
+              1
+            ],
+            "expression": "2 + 4",
+            "result": 6
+          },
+          {
+            "indexes": [
+              2,
+              2
+            ],
+            "expression": "4 + 2",
+            "result": 6
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "target/2/1/00:0|11:0|22:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "1 + 5",
+            "result": 6,
+            "newCoverage": 2,
+            "covered": 2
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "2 + 5",
+            "result": 7,
+            "newCoverage": 0,
+            "covered": 2
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "2 + 4",
+            "result": 6,
+            "newCoverage": 2,
+            "covered": 4
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "4 + 4",
+            "result": 8,
+            "newCoverage": 0,
+            "covered": 4
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "4 + 2",
+            "result": 6,
+            "newCoverage": 2,
+            "covered": 6
+          }
+        ]
+      },
+      "after": {
+        "columns": [
+          [
+            1,
+            2,
+            4
+          ],
+          [
+            5,
+            4,
+            2
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          6
+        ],
+        "initialIndexes": [
+          2,
+          0
+        ],
+        "initialEquation": "4 + 5",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              0
+            ],
+            "expression": "1 + 5",
+            "result": 6
+          },
+          {
+            "indexes": [
+              1,
+              1
+            ],
+            "expression": "2 + 4",
+            "result": 6
+          },
+          {
+            "indexes": [
+              2,
+              2
+            ],
+            "expression": "4 + 2",
+            "result": 6
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "target/2/1/00:0|11:0|22:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "1 + 5",
+            "result": 6,
+            "newCoverage": 2,
+            "covered": 2
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "2 + 5",
+            "result": 7,
+            "newCoverage": 0,
+            "covered": 2
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "2 + 4",
+            "result": 6,
+            "newCoverage": 2,
+            "covered": 4
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "4 + 4",
+            "result": 8,
+            "newCoverage": 0,
+            "covered": 4
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "4 + 2",
+            "result": 6,
+            "newCoverage": 2,
+            "covered": 6
+          }
+        ]
+      },
+      "definitionChanged": false,
+      "boardChanged": false,
+      "diagnostics": {
+        "seed": 72693010,
+        "commonInitialIndexes": [
+          0,
+          1
+        ],
+        "policies": [
+          {
+            "name": "seeded-visible-input",
+            "actions": [
+              "2D",
+              "1D",
+              "2U",
+              "2U",
+              "2U",
+              "2D",
+              "1D",
+              "2U",
+              "1D",
+              "2D",
+              "2D",
+              "1D",
+              "2U",
+              "1U",
+              "2D",
+              "2D",
+              "2U",
+              "2U",
+              "1D",
+              "2U",
+              "2D",
+              "2D",
+              "2U",
+              "2D",
+              "2U",
+              "2D",
+              "2U",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1U",
+              "1U",
+              "1D",
+              "2D",
+              "1U",
+              "2U",
+              "2D",
+              "1U",
+              "2U",
+              "2D",
+              "2D",
+              "2U",
+              "2D",
+              "2D",
+              "2D",
+              "1D",
+              "2D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                1
+              ],
+              "initialEquation": "1 + 4",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 10,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 10
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 10,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 10
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                1
+              ],
+              "initialEquation": "1 + 4",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 10,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 10
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 10,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 10
+                }
+              ]
+            }
+          },
+          {
+            "name": "repeat-column-cycle",
+            "actions": [
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                1
+              ],
+              "initialEquation": "1 + 4",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 5,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 5
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 5,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 5
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                1
+              ],
+              "initialEquation": "1 + 4",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 5,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 5
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 5,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 5
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "es-1-02",
+      "before": {
+        "columns": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            6,
+            4,
+            2
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          7
+        ],
+        "initialIndexes": [
+          0,
+          2
+        ],
+        "initialEquation": "1 + 2",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              0
+            ],
+            "expression": "1 + 6",
+            "result": 7
+          },
+          {
+            "indexes": [
+              1,
+              1
+            ],
+            "expression": "3 + 4",
+            "result": 7
+          },
+          {
+            "indexes": [
+              2,
+              2
+            ],
+            "expression": "5 + 2",
+            "result": 7
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "target/2/1/00:0|11:0|22:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "1 + 6",
+            "result": 7,
+            "newCoverage": 2,
+            "covered": 2
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "3 + 6",
+            "result": 9,
+            "newCoverage": 0,
+            "covered": 2
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "3 + 4",
+            "result": 7,
+            "newCoverage": 2,
+            "covered": 4
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "5 + 4",
+            "result": 9,
+            "newCoverage": 0,
+            "covered": 4
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "5 + 2",
+            "result": 7,
+            "newCoverage": 2,
+            "covered": 6
+          }
+        ]
+      },
+      "after": {
+        "columns": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            3,
+            2,
+            4
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          5
+        ],
+        "initialIndexes": [
+          0,
+          0
+        ],
+        "initialEquation": "1 + 3",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              2
+            ],
+            "expression": "1 + 4",
+            "result": 5
+          },
+          {
+            "indexes": [
+              1,
+              0
+            ],
+            "expression": "2 + 3",
+            "result": 5
+          },
+          {
+            "indexes": [
+              2,
+              1
+            ],
+            "expression": "3 + 2",
+            "result": 5
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "target/2/1/00:0|11:0|22:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "1 + 4",
+            "result": 5,
+            "newCoverage": 2,
+            "covered": 2
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "2 + 4",
+            "result": 6,
+            "newCoverage": 0,
+            "covered": 2
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "2 + 3",
+            "result": 5,
+            "newCoverage": 2,
+            "covered": 4
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "3 + 3",
+            "result": 6,
+            "newCoverage": 0,
+            "covered": 4
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "3 + 2",
+            "result": 5,
+            "newCoverage": 2,
+            "covered": 6
+          }
+        ]
+      },
+      "definitionChanged": true,
+      "boardChanged": true,
+      "diagnostics": {
+        "seed": 72693010,
+        "commonInitialIndexes": [
+          0,
+          1
+        ],
+        "policies": [
+          {
+            "name": "seeded-visible-input",
+            "actions": [
+              "2D",
+              "1D",
+              "2U",
+              "2U",
+              "2U",
+              "2D",
+              "1D",
+              "2U",
+              "1D",
+              "2D",
+              "2D",
+              "1D",
+              "2U",
+              "1U",
+              "2D",
+              "2D",
+              "2U",
+              "2U",
+              "1D",
+              "2U",
+              "2D",
+              "2D",
+              "2U",
+              "2D",
+              "2U",
+              "2D",
+              "2U",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1U",
+              "1U",
+              "1D",
+              "2D",
+              "1U",
+              "2U",
+              "2D",
+              "1U",
+              "2U",
+              "2D",
+              "2D",
+              "2U",
+              "2D",
+              "2D",
+              "2D",
+              "1D",
+              "2D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                1
+              ],
+              "initialEquation": "1 + 4",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 10,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 10
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 10,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 10
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                1
+              ],
+              "initialEquation": "1 + 2",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 24,
+                  "covered": 4,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 7,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 29,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 9,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 29
+                }
+              ]
+            }
+          },
+          {
+            "name": "repeat-column-cycle",
+            "actions": [
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                1
+              ],
+              "initialEquation": "1 + 4",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 5,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 5
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 5,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 5
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                1
+              ],
+              "initialEquation": "1 + 2",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 24,
+                  "covered": 0,
+                  "required": 6,
+                  "targetsHit": 0,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 48,
+                  "covered": 0,
+                  "required": 6,
+                  "targetsHit": 0,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "es-1-03",
+      "before": {
+        "columns": [
+          [
+            1,
+            2,
+            5
+          ],
+          [
+            7,
+            6,
+            3
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          8
+        ],
+        "initialIndexes": [
+          0,
+          1
+        ],
+        "initialEquation": "1 + 6",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              0
+            ],
+            "expression": "1 + 7",
+            "result": 8
+          },
+          {
+            "indexes": [
+              1,
+              1
+            ],
+            "expression": "2 + 6",
+            "result": 8
+          },
+          {
+            "indexes": [
+              2,
+              2
+            ],
+            "expression": "5 + 3",
+            "result": 8
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "target/2/1/00:0|11:0|22:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "1 + 7",
+            "result": 8,
+            "newCoverage": 2,
+            "covered": 2
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "2 + 7",
+            "result": 9,
+            "newCoverage": 0,
+            "covered": 2
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "2 + 6",
+            "result": 8,
+            "newCoverage": 2,
+            "covered": 4
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "5 + 6",
+            "result": 11,
+            "newCoverage": 0,
+            "covered": 4
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "5 + 3",
+            "result": 8,
+            "newCoverage": 2,
+            "covered": 6
+          }
+        ]
+      },
+      "after": {
+        "columns": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            3,
+            5,
+            4
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          6
+        ],
+        "initialIndexes": [
+          0,
+          0
+        ],
+        "initialEquation": "1 + 3",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              1
+            ],
+            "expression": "1 + 5",
+            "result": 6
+          },
+          {
+            "indexes": [
+              1,
+              2
+            ],
+            "expression": "2 + 4",
+            "result": 6
+          },
+          {
+            "indexes": [
+              2,
+              0
+            ],
+            "expression": "3 + 3",
+            "result": 6
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "target/2/1/00:0|11:0|22:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "1 + 5",
+            "result": 6,
+            "newCoverage": 2,
+            "covered": 2
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "2 + 5",
+            "result": 7,
+            "newCoverage": 0,
+            "covered": 2
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "2 + 4",
+            "result": 6,
+            "newCoverage": 2,
+            "covered": 4
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "3 + 4",
+            "result": 7,
+            "newCoverage": 0,
+            "covered": 4
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "3 + 3",
+            "result": 6,
+            "newCoverage": 2,
+            "covered": 6
+          }
+        ]
+      },
+      "definitionChanged": true,
+      "boardChanged": true,
+      "diagnostics": {
+        "seed": 72693010,
+        "commonInitialIndexes": [
+          0,
+          2
+        ],
+        "policies": [
+          {
+            "name": "seeded-visible-input",
+            "actions": [
+              "2D",
+              "1D",
+              "2U",
+              "2U",
+              "2U",
+              "2D",
+              "1D",
+              "2U",
+              "1D",
+              "2D",
+              "2D",
+              "1D",
+              "2U",
+              "1U",
+              "2D",
+              "2D",
+              "2U",
+              "2U",
+              "1D",
+              "2U",
+              "2D",
+              "2D",
+              "2U",
+              "2D",
+              "2U",
+              "2D",
+              "2U",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1U",
+              "1U",
+              "1D",
+              "2D",
+              "1U",
+              "2U",
+              "2D",
+              "1U",
+              "2U",
+              "2D",
+              "2D",
+              "2U",
+              "2D",
+              "2D",
+              "2D",
+              "1D",
+              "2D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                2
+              ],
+              "initialEquation": "1 + 3",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 24,
+                  "covered": 4,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 7,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 29,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 9,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 29
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                2
+              ],
+              "initialEquation": "1 + 4",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 10,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 10
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 10,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 10
+                }
+              ]
+            }
+          },
+          {
+            "name": "repeat-column-cycle",
+            "actions": [
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                2
+              ],
+              "initialEquation": "1 + 3",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 24,
+                  "covered": 0,
+                  "required": 6,
+                  "targetsHit": 0,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 48,
+                  "covered": 0,
+                  "required": 6,
+                  "targetsHit": 0,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                2
+              ],
+              "initialEquation": "1 + 4",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 5,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 5
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 5,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 5
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "es-1-04",
+      "before": {
+        "columns": [
+          [
+            2,
+            3,
+            6
+          ],
+          [
+            7,
+            6,
+            3
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          9
+        ],
+        "initialIndexes": [
+          1,
+          0
+        ],
+        "initialEquation": "3 + 7",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              0
+            ],
+            "expression": "2 + 7",
+            "result": 9
+          },
+          {
+            "indexes": [
+              1,
+              1
+            ],
+            "expression": "3 + 6",
+            "result": 9
+          },
+          {
+            "indexes": [
+              2,
+              2
+            ],
+            "expression": "6 + 3",
+            "result": 9
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "target/2/1/00:0|11:0|22:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 1,
+            "direction": "up",
+            "equation": "2 + 7",
+            "result": 9,
+            "newCoverage": 2,
+            "covered": 2
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "3 + 7",
+            "result": 10,
+            "newCoverage": 0,
+            "covered": 2
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "3 + 6",
+            "result": 9,
+            "newCoverage": 2,
+            "covered": 4
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "6 + 6",
+            "result": 12,
+            "newCoverage": 0,
+            "covered": 4
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "6 + 3",
+            "result": 9,
+            "newCoverage": 2,
+            "covered": 6
+          }
+        ]
+      },
+      "after": {
+        "columns": [
+          [
+            2,
+            4,
+            7
+          ],
+          [
+            3,
+            8,
+            6
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          10
+        ],
+        "initialIndexes": [
+          1,
+          0
+        ],
+        "initialEquation": "4 + 3",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              1
+            ],
+            "expression": "2 + 8",
+            "result": 10
+          },
+          {
+            "indexes": [
+              1,
+              2
+            ],
+            "expression": "4 + 6",
+            "result": 10
+          },
+          {
+            "indexes": [
+              2,
+              0
+            ],
+            "expression": "7 + 3",
+            "result": 10
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "target/2/1/00:0|11:0|22:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "4 + 6",
+            "result": 10,
+            "newCoverage": 2,
+            "covered": 2
+          },
+          {
+            "reel": 1,
+            "direction": "up",
+            "equation": "2 + 6",
+            "result": 8,
+            "newCoverage": 0,
+            "covered": 2
+          },
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "2 + 8",
+            "result": 10,
+            "newCoverage": 2,
+            "covered": 4
+          },
+          {
+            "reel": 1,
+            "direction": "up",
+            "equation": "7 + 8",
+            "result": 15,
+            "newCoverage": 0,
+            "covered": 4
+          },
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "7 + 3",
+            "result": 10,
+            "newCoverage": 2,
+            "covered": 6
+          }
+        ]
+      },
+      "definitionChanged": true,
+      "boardChanged": true,
+      "diagnostics": {
+        "seed": 72693010,
+        "commonInitialIndexes": [
+          0,
+          2
+        ],
+        "policies": [
+          {
+            "name": "seeded-visible-input",
+            "actions": [
+              "2D",
+              "1D",
+              "2U",
+              "2U",
+              "2U",
+              "2D",
+              "1D",
+              "2U",
+              "1D",
+              "2D",
+              "2D",
+              "1D",
+              "2U",
+              "1U",
+              "2D",
+              "2D",
+              "2U",
+              "2U",
+              "1D",
+              "2U",
+              "2D",
+              "2D",
+              "2U",
+              "2D",
+              "2U",
+              "2D",
+              "2U",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1U",
+              "1U",
+              "1D",
+              "2D",
+              "1U",
+              "2U",
+              "2D",
+              "1U",
+              "2U",
+              "2D",
+              "2D",
+              "2U",
+              "2D",
+              "2D",
+              "2D",
+              "1D",
+              "2D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                2
+              ],
+              "initialEquation": "2 + 3",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 24,
+                  "covered": 4,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 7,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 29,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 9,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 29
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                2
+              ],
+              "initialEquation": "2 + 6",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 10,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 10
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 10,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 10
+                }
+              ]
+            }
+          },
+          {
+            "name": "repeat-column-cycle",
+            "actions": [
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                2
+              ],
+              "initialEquation": "2 + 3",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 24,
+                  "covered": 0,
+                  "required": 6,
+                  "targetsHit": 0,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 48,
+                  "covered": 0,
+                  "required": 6,
+                  "targetsHit": 0,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                2
+              ],
+              "initialEquation": "2 + 6",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 5,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 5
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 5,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 5
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "es-1-05",
+      "before": {
+        "columns": [
+          [
+            1,
+            4,
+            7
+          ],
+          [
+            9,
+            6,
+            3
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          10
+        ],
+        "initialIndexes": [
+          2,
+          0
+        ],
+        "initialEquation": "7 + 9",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              0
+            ],
+            "expression": "1 + 9",
+            "result": 10
+          },
+          {
+            "indexes": [
+              1,
+              1
+            ],
+            "expression": "4 + 6",
+            "result": 10
+          },
+          {
+            "indexes": [
+              2,
+              2
+            ],
+            "expression": "7 + 3",
+            "result": 10
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "target/2/1/00:0|11:0|22:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "1 + 9",
+            "result": 10,
+            "newCoverage": 2,
+            "covered": 2
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "4 + 9",
+            "result": 13,
+            "newCoverage": 0,
+            "covered": 2
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "4 + 6",
+            "result": 10,
+            "newCoverage": 2,
+            "covered": 4
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "7 + 6",
+            "result": 13,
+            "newCoverage": 0,
+            "covered": 4
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "7 + 3",
+            "result": 10,
+            "newCoverage": 2,
+            "covered": 6
+          }
+        ]
+      },
+      "after": {
+        "columns": [
+          [
+            2,
+            4,
+            6
+          ],
+          [
+            4,
+            2,
+            6
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          8
+        ],
+        "initialIndexes": [
+          2,
+          2
+        ],
+        "initialEquation": "6 + 6",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              2
+            ],
+            "expression": "2 + 6",
+            "result": 8
+          },
+          {
+            "indexes": [
+              1,
+              0
+            ],
+            "expression": "4 + 4",
+            "result": 8
+          },
+          {
+            "indexes": [
+              2,
+              1
+            ],
+            "expression": "6 + 2",
+            "result": 8
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "target/2/1/00:0|11:0|22:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "2 + 6",
+            "result": 8,
+            "newCoverage": 2,
+            "covered": 2
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "4 + 6",
+            "result": 10,
+            "newCoverage": 0,
+            "covered": 2
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "4 + 4",
+            "result": 8,
+            "newCoverage": 2,
+            "covered": 4
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "6 + 4",
+            "result": 10,
+            "newCoverage": 0,
+            "covered": 4
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "6 + 2",
+            "result": 8,
+            "newCoverage": 2,
+            "covered": 6
+          }
+        ]
+      },
+      "definitionChanged": true,
+      "boardChanged": true,
+      "diagnostics": {
+        "seed": 72693010,
+        "commonInitialIndexes": [
+          0,
+          1
+        ],
+        "policies": [
+          {
+            "name": "seeded-visible-input",
+            "actions": [
+              "2D",
+              "1D",
+              "2U",
+              "2U",
+              "2U",
+              "2D",
+              "1D",
+              "2U",
+              "1D",
+              "2D",
+              "2D",
+              "1D",
+              "2U",
+              "1U",
+              "2D",
+              "2D",
+              "2U",
+              "2U",
+              "1D",
+              "2U",
+              "2D",
+              "2D",
+              "2U",
+              "2D",
+              "2U",
+              "2D",
+              "2U",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1U",
+              "1U",
+              "1D",
+              "2D",
+              "1U",
+              "2U",
+              "2D",
+              "1U",
+              "2U",
+              "2D",
+              "2D",
+              "2U",
+              "2D",
+              "2D",
+              "2D",
+              "1D",
+              "2D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                1
+              ],
+              "initialEquation": "1 + 6",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 10,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 10
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 10,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 10
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                1
+              ],
+              "initialEquation": "2 + 2",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 24,
+                  "covered": 4,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 7,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 29,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 9,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 29
+                }
+              ]
+            }
+          },
+          {
+            "name": "repeat-column-cycle",
+            "actions": [
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                1
+              ],
+              "initialEquation": "1 + 6",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 5,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 5
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 5,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 5
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                1
+              ],
+              "initialEquation": "2 + 2",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 24,
+                  "covered": 0,
+                  "required": 6,
+                  "targetsHit": 0,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 48,
+                  "covered": 0,
+                  "required": 6,
+                  "targetsHit": 0,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "es-1-06",
+      "before": {
+        "columns": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            5,
+            6
+          ],
+          [
+            7,
+            5,
+            3
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          12
+        ],
+        "initialIndexes": [
+          1,
+          2,
+          2
+        ],
+        "initialEquation": "2 + 6 + 3",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              0,
+              0
+            ],
+            "expression": "1 + 4 + 7",
+            "result": 12
+          },
+          {
+            "indexes": [
+              0,
+              2,
+              1
+            ],
+            "expression": "1 + 6 + 5",
+            "result": 12
+          },
+          {
+            "indexes": [
+              1,
+              1,
+              1
+            ],
+            "expression": "2 + 5 + 5",
+            "result": 12
+          },
+          {
+            "indexes": [
+              2,
+              0,
+              1
+            ],
+            "expression": "3 + 4 + 5",
+            "result": 12
+          },
+          {
+            "indexes": [
+              2,
+              2,
+              2
+            ],
+            "expression": "3 + 6 + 3",
+            "result": 12
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "target/3/1/000:0|011:0|022:0|101:0|210:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "3 + 6 + 3",
+            "result": 12,
+            "newCoverage": 3,
+            "covered": 3
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "1 + 6 + 3",
+            "result": 10,
+            "newCoverage": 0,
+            "covered": 3
+          },
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "1 + 6 + 5",
+            "result": 12,
+            "newCoverage": 2,
+            "covered": 5
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "1 + 4 + 5",
+            "result": 10,
+            "newCoverage": 0,
+            "covered": 5
+          },
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "1 + 4 + 7",
+            "result": 12,
+            "newCoverage": 2,
+            "covered": 7
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "2 + 4 + 7",
+            "result": 13,
+            "newCoverage": 0,
+            "covered": 7
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "2 + 5 + 7",
+            "result": 14,
+            "newCoverage": 0,
+            "covered": 7
+          },
+          {
+            "reel": 3,
+            "direction": "down",
+            "equation": "2 + 5 + 5",
+            "result": 12,
+            "newCoverage": 2,
+            "covered": 9
+          }
+        ]
+      },
+      "after": {
+        "columns": [
+          [
+            2,
+            3,
+            4
+          ],
+          [
+            5,
+            7,
+            6
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          9
+        ],
+        "initialIndexes": [
+          1,
+          0
+        ],
+        "initialEquation": "3 + 5",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              1
+            ],
+            "expression": "2 + 7",
+            "result": 9
+          },
+          {
+            "indexes": [
+              1,
+              2
+            ],
+            "expression": "3 + 6",
+            "result": 9
+          },
+          {
+            "indexes": [
+              2,
+              0
+            ],
+            "expression": "4 + 5",
+            "result": 9
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "target/2/1/00:0|11:0|22:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "3 + 6",
+            "result": 9,
+            "newCoverage": 2,
+            "covered": 2
+          },
+          {
+            "reel": 1,
+            "direction": "up",
+            "equation": "2 + 6",
+            "result": 8,
+            "newCoverage": 0,
+            "covered": 2
+          },
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "2 + 7",
+            "result": 9,
+            "newCoverage": 2,
+            "covered": 4
+          },
+          {
+            "reel": 1,
+            "direction": "up",
+            "equation": "4 + 7",
+            "result": 11,
+            "newCoverage": 0,
+            "covered": 4
+          },
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "4 + 5",
+            "result": 9,
+            "newCoverage": 2,
+            "covered": 6
+          }
+        ]
+      },
+      "definitionChanged": true,
+      "boardChanged": true,
+      "diagnostics": {
+        "seed": 72693010,
+        "commonInitialIndexes": [
+          0,
+          0,
+          1
+        ],
+        "policies": [
+          {
+            "name": "seeded-visible-input",
+            "actions": [
+              "2D",
+              "1D",
+              "3U",
+              "2U",
+              "3U",
+              "3D",
+              "2D",
+              "2U",
+              "2D",
+              "2D",
+              "2D",
+              "1D",
+              "3U",
+              "1U",
+              "3D",
+              "2D",
+              "3U",
+              "2U",
+              "1D",
+              "2U",
+              "3D",
+              "2D",
+              "3U",
+              "3D",
+              "3U",
+              "3D",
+              "3U",
+              "2D",
+              "3D",
+              "1D",
+              "3D",
+              "1U",
+              "2U",
+              "2D",
+              "3D",
+              "1U",
+              "3U",
+              "3D",
+              "1U",
+              "3U",
+              "2D",
+              "3D",
+              "3U",
+              "3D",
+              "2D",
+              "3D",
+              "2D",
+              "2D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                0,
+                1
+              ],
+              "initialEquation": "1 + 4 + 5",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 24,
+                  "covered": 6,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 46,
+                  "covered": 9,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 2,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 46
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                0
+              ],
+              "initialEquation": "2 + 5",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 9,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 9,
+                  "firstCompletionAttempt": 12
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 9,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 22,
+                  "firstCompletionAttempt": 12
+                }
+              ]
+            }
+          },
+          {
+            "name": "repeat-column-cycle",
+            "actions": [
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                0,
+                1
+              ],
+              "initialEquation": "1 + 4 + 5",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 8,
+                  "covered": 9,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 8
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 8,
+                  "covered": 9,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 8
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                0
+              ],
+              "initialEquation": "2 + 5",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 16,
+                  "covered": 0,
+                  "required": 6,
+                  "targetsHit": 0,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 8,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 32,
+                  "covered": 0,
+                  "required": 6,
+                  "targetsHit": 0,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 16,
+                  "firstCompletionAttempt": null
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "es-1-07",
+      "before": {
+        "columns": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            5,
+            7
+          ],
+          [
+            8,
+            6,
+            3
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          13
+        ],
+        "initialIndexes": [
+          0,
+          2,
+          0
+        ],
+        "initialEquation": "1 + 7 + 8",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              0,
+              0
+            ],
+            "expression": "1 + 4 + 8",
+            "result": 13
+          },
+          {
+            "indexes": [
+              1,
+              1,
+              1
+            ],
+            "expression": "2 + 5 + 6",
+            "result": 13
+          },
+          {
+            "indexes": [
+              2,
+              0,
+              1
+            ],
+            "expression": "3 + 4 + 6",
+            "result": 13
+          },
+          {
+            "indexes": [
+              2,
+              2,
+              2
+            ],
+            "expression": "3 + 7 + 3",
+            "result": 13
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "target/3/1/000:0|011:0|102:0|220:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "1 + 4 + 8",
+            "result": 13,
+            "newCoverage": 3,
+            "covered": 3
+          },
+          {
+            "reel": 1,
+            "direction": "up",
+            "equation": "3 + 4 + 8",
+            "result": 15,
+            "newCoverage": 0,
+            "covered": 3
+          },
+          {
+            "reel": 3,
+            "direction": "down",
+            "equation": "3 + 4 + 6",
+            "result": 13,
+            "newCoverage": 2,
+            "covered": 5
+          },
+          {
+            "reel": 1,
+            "direction": "up",
+            "equation": "2 + 4 + 6",
+            "result": 12,
+            "newCoverage": 0,
+            "covered": 5
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "2 + 5 + 6",
+            "result": 13,
+            "newCoverage": 2,
+            "covered": 7
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "3 + 5 + 6",
+            "result": 14,
+            "newCoverage": 0,
+            "covered": 7
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "3 + 7 + 6",
+            "result": 16,
+            "newCoverage": 0,
+            "covered": 7
+          },
+          {
+            "reel": 3,
+            "direction": "down",
+            "equation": "3 + 7 + 3",
+            "result": 13,
+            "newCoverage": 2,
+            "covered": 9
+          }
+        ]
+      },
+      "after": {
+        "columns": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            3,
+            4,
+            5
+          ]
+        ],
+        "mode": "multi-target",
+        "targets": [
+          6,
+          7
+        ],
+        "initialIndexes": [
+          2,
+          2
+        ],
+        "initialEquation": "3 + 5",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              2
+            ],
+            "expression": "1 + 5",
+            "result": 6
+          },
+          {
+            "indexes": [
+              1,
+              1
+            ],
+            "expression": "2 + 4",
+            "result": 6
+          },
+          {
+            "indexes": [
+              1,
+              2
+            ],
+            "expression": "2 + 5",
+            "result": 7
+          },
+          {
+            "indexes": [
+              2,
+              0
+            ],
+            "expression": "3 + 3",
+            "result": 6
+          },
+          {
+            "indexes": [
+              2,
+              1
+            ],
+            "expression": "3 + 4",
+            "result": 7
+          }
+        ],
+        "minimumCover": 4,
+        "minimumCoverSetCountCapped": 2,
+        "coverageIncidence": "multi-target/2/2/00:0|01:1|10:1|12:0|21:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "1 + 5",
+            "result": 6,
+            "newCoverage": 2,
+            "covered": 2
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "2 + 5",
+            "result": 7,
+            "newCoverage": 1,
+            "covered": 3
+          },
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "2 + 4",
+            "result": 6,
+            "newCoverage": 1,
+            "covered": 4
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "3 + 4",
+            "result": 7,
+            "newCoverage": 1,
+            "covered": 5
+          },
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "3 + 3",
+            "result": 6,
+            "newCoverage": 1,
+            "covered": 6
+          }
+        ]
+      },
+      "definitionChanged": true,
+      "boardChanged": true,
+      "diagnostics": {
+        "seed": 72693010,
+        "commonInitialIndexes": [
+          0,
+          0,
+          1
+        ],
+        "policies": [
+          {
+            "name": "seeded-visible-input",
+            "actions": [
+              "2D",
+              "1D",
+              "3U",
+              "2U",
+              "3U",
+              "3D",
+              "2D",
+              "2U",
+              "2D",
+              "2D",
+              "2D",
+              "1D",
+              "3U",
+              "1U",
+              "3D",
+              "2D",
+              "3U",
+              "2U",
+              "1D",
+              "2U",
+              "3D",
+              "2D",
+              "3U",
+              "3D",
+              "3U",
+              "3D",
+              "3U",
+              "2D",
+              "3D",
+              "1D",
+              "3D",
+              "1U",
+              "2U",
+              "2D",
+              "3D",
+              "1U",
+              "3U",
+              "3D",
+              "1U",
+              "3U",
+              "2D",
+              "3D",
+              "3U",
+              "3D",
+              "2D",
+              "3D",
+              "2D",
+              "2D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                0,
+                1
+              ],
+              "initialEquation": "1 + 4 + 6",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 24,
+                  "covered": 6,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 46,
+                  "covered": 9,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 1,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 46
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                0
+              ],
+              "initialEquation": "1 + 3",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 15,
+                  "covered": 5,
+                  "required": 6,
+                  "targetsHit": 2,
+                  "noNewSuccesses": 5,
+                  "absentReelAttempts": 9,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 23,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 2,
+                  "noNewSuccesses": 10,
+                  "absentReelAttempts": 22,
+                  "firstCompletionAttempt": 41
+                }
+              ]
+            }
+          },
+          {
+            "name": "repeat-column-cycle",
+            "actions": [
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                0,
+                1
+              ],
+              "initialEquation": "1 + 4 + 6",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 8,
+                  "covered": 9,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 8
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 8,
+                  "covered": 9,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 8
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                0
+              ],
+              "initialEquation": "1 + 3",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 16,
+                  "covered": 5,
+                  "required": 6,
+                  "targetsHit": 2,
+                  "noNewSuccesses": 5,
+                  "absentReelAttempts": 8,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 32,
+                  "covered": 5,
+                  "required": 6,
+                  "targetsHit": 2,
+                  "noNewSuccesses": 13,
+                  "absentReelAttempts": 16,
+                  "firstCompletionAttempt": null
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "es-1-08",
+      "before": {
+        "columns": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            3,
+            4,
+            6
+          ],
+          [
+            7,
+            5,
+            2
+          ]
+        ],
+        "mode": "equality",
+        "targets": [
+          [
+            5,
+            "+",
+            6
+          ]
+        ],
+        "initialIndexes": [
+          0,
+          0,
+          2
+        ],
+        "initialEquation": "1 + 3 + 2 = 5 + 6",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              0,
+              0
+            ],
+            "expression": "1 + 3 + 7 = 5 + 6",
+            "result": 11
+          },
+          {
+            "indexes": [
+              1,
+              1,
+              1
+            ],
+            "expression": "2 + 4 + 5 = 5 + 6",
+            "result": 11
+          },
+          {
+            "indexes": [
+              2,
+              0,
+              1
+            ],
+            "expression": "3 + 3 + 5 = 5 + 6",
+            "result": 11
+          },
+          {
+            "indexes": [
+              2,
+              2,
+              2
+            ],
+            "expression": "3 + 6 + 2 = 5 + 6",
+            "result": 11
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "equality/3/1/000:0|011:0|102:0|220:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 3,
+            "direction": "down",
+            "equation": "1 + 3 + 7 = 5 + 6",
+            "result": 11,
+            "newCoverage": 3,
+            "covered": 3
+          },
+          {
+            "reel": 1,
+            "direction": "up",
+            "equation": "3 + 3 + 7 = 5 + 6",
+            "result": 13,
+            "newCoverage": 0,
+            "covered": 3
+          },
+          {
+            "reel": 3,
+            "direction": "down",
+            "equation": "3 + 3 + 5 = 5 + 6",
+            "result": 11,
+            "newCoverage": 2,
+            "covered": 5
+          },
+          {
+            "reel": 1,
+            "direction": "up",
+            "equation": "2 + 3 + 5 = 5 + 6",
+            "result": 10,
+            "newCoverage": 0,
+            "covered": 5
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "2 + 4 + 5 = 5 + 6",
+            "result": 11,
+            "newCoverage": 2,
+            "covered": 7
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "3 + 4 + 5 = 5 + 6",
+            "result": 12,
+            "newCoverage": 0,
+            "covered": 7
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "3 + 6 + 5 = 5 + 6",
+            "result": 14,
+            "newCoverage": 0,
+            "covered": 7
+          },
+          {
+            "reel": 3,
+            "direction": "down",
+            "equation": "3 + 6 + 2 = 5 + 6",
+            "result": 11,
+            "newCoverage": 2,
+            "covered": 9
+          }
+        ]
+      },
+      "after": {
+        "columns": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          6
+        ],
+        "initialIndexes": [
+          0,
+          1,
+          0
+        ],
+        "initialEquation": "1 + 2 + 1",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              1,
+              2
+            ],
+            "expression": "1 + 2 + 3",
+            "result": 6
+          },
+          {
+            "indexes": [
+              0,
+              2,
+              1
+            ],
+            "expression": "1 + 3 + 2",
+            "result": 6
+          },
+          {
+            "indexes": [
+              1,
+              0,
+              2
+            ],
+            "expression": "2 + 1 + 3",
+            "result": 6
+          },
+          {
+            "indexes": [
+              1,
+              1,
+              1
+            ],
+            "expression": "2 + 2 + 2",
+            "result": 6
+          },
+          {
+            "indexes": [
+              1,
+              2,
+              0
+            ],
+            "expression": "2 + 3 + 1",
+            "result": 6
+          },
+          {
+            "indexes": [
+              2,
+              0,
+              1
+            ],
+            "expression": "3 + 1 + 2",
+            "result": 6
+          },
+          {
+            "indexes": [
+              2,
+              1,
+              0
+            ],
+            "expression": "3 + 2 + 1",
+            "result": 6
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 2,
+        "coverageIncidence": "target/3/1/000:0|011:0|022:0|101:0|112:0|210:0|221:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "1 + 2 + 3",
+            "result": 6,
+            "newCoverage": 3,
+            "covered": 3
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "1 + 3 + 3",
+            "result": 7,
+            "newCoverage": 0,
+            "covered": 3
+          },
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "1 + 3 + 2",
+            "result": 6,
+            "newCoverage": 2,
+            "covered": 5
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "2 + 3 + 2",
+            "result": 7,
+            "newCoverage": 0,
+            "covered": 5
+          },
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "2 + 3 + 1",
+            "result": 6,
+            "newCoverage": 2,
+            "covered": 7
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "2 + 1 + 1",
+            "result": 4,
+            "newCoverage": 0,
+            "covered": 7
+          },
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "2 + 1 + 3",
+            "result": 6,
+            "newCoverage": 1,
+            "covered": 8
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "3 + 1 + 3",
+            "result": 7,
+            "newCoverage": 0,
+            "covered": 8
+          },
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "3 + 1 + 2",
+            "result": 6,
+            "newCoverage": 1,
+            "covered": 9
+          }
+        ]
+      },
+      "definitionChanged": true,
+      "boardChanged": true,
+      "diagnostics": {
+        "seed": 72693010,
+        "commonInitialIndexes": [
+          0,
+          0,
+          1
+        ],
+        "policies": [
+          {
+            "name": "seeded-visible-input",
+            "actions": [
+              "2D",
+              "1D",
+              "3U",
+              "2U",
+              "3U",
+              "3D",
+              "2D",
+              "2U",
+              "2D",
+              "2D",
+              "2D",
+              "1D",
+              "3U",
+              "1U",
+              "3D",
+              "2D",
+              "3U",
+              "2U",
+              "1D",
+              "2U",
+              "3D",
+              "2D",
+              "3U",
+              "3D",
+              "3U",
+              "3D",
+              "3U",
+              "2D",
+              "3D",
+              "1D",
+              "3D",
+              "1U",
+              "2U",
+              "2D",
+              "3D",
+              "1U",
+              "3U",
+              "3D",
+              "1U",
+              "3U",
+              "2D",
+              "3D",
+              "3U",
+              "3D",
+              "2D",
+              "3D",
+              "2D",
+              "2D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                0,
+                1
+              ],
+              "initialEquation": "1 + 3 + 5 = 5 + 6",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 24,
+                  "covered": 6,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 46,
+                  "covered": 9,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 1,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 46
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                0,
+                1
+              ],
+              "initialEquation": "1 + 1 + 2",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 24,
+                  "covered": 7,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 2,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 39,
+                  "covered": 9,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 4,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 39
+                }
+              ]
+            }
+          },
+          {
+            "name": "repeat-column-cycle",
+            "actions": [
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                0,
+                1
+              ],
+              "initialEquation": "1 + 3 + 5 = 5 + 6",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 8,
+                  "covered": 9,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 8
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 8,
+                  "covered": 9,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 8
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                0,
+                1
+              ],
+              "initialEquation": "1 + 1 + 2",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 24,
+                  "covered": 3,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 2,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 48,
+                  "covered": 3,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 5,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "es-1-09",
+      "before": {
+        "columns": [
+          [
+            2,
+            3,
+            4
+          ],
+          [
+            5,
+            6,
+            7
+          ],
+          [
+            8,
+            6,
+            4
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          15
+        ],
+        "initialIndexes": [
+          0,
+          0,
+          1
+        ],
+        "initialEquation": "2 + 5 + 6",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              0,
+              0
+            ],
+            "expression": "2 + 5 + 8",
+            "result": 15
+          },
+          {
+            "indexes": [
+              0,
+              2,
+              1
+            ],
+            "expression": "2 + 7 + 6",
+            "result": 15
+          },
+          {
+            "indexes": [
+              1,
+              1,
+              1
+            ],
+            "expression": "3 + 6 + 6",
+            "result": 15
+          },
+          {
+            "indexes": [
+              2,
+              0,
+              1
+            ],
+            "expression": "4 + 5 + 6",
+            "result": 15
+          },
+          {
+            "indexes": [
+              2,
+              2,
+              2
+            ],
+            "expression": "4 + 7 + 4",
+            "result": 15
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "target/3/1/000:0|011:0|022:0|101:0|210:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "2 + 5 + 8",
+            "result": 15,
+            "newCoverage": 3,
+            "covered": 3
+          },
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "2 + 7 + 8",
+            "result": 17,
+            "newCoverage": 0,
+            "covered": 3
+          },
+          {
+            "reel": 3,
+            "direction": "down",
+            "equation": "2 + 7 + 6",
+            "result": 15,
+            "newCoverage": 2,
+            "covered": 5
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "3 + 7 + 6",
+            "result": 16,
+            "newCoverage": 0,
+            "covered": 5
+          },
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "3 + 6 + 6",
+            "result": 15,
+            "newCoverage": 2,
+            "covered": 7
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "4 + 6 + 6",
+            "result": 16,
+            "newCoverage": 0,
+            "covered": 7
+          },
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "4 + 5 + 6",
+            "result": 15,
+            "newCoverage": 1,
+            "covered": 8
+          },
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "4 + 7 + 6",
+            "result": 17,
+            "newCoverage": 0,
+            "covered": 8
+          },
+          {
+            "reel": 3,
+            "direction": "down",
+            "equation": "4 + 7 + 4",
+            "result": 15,
+            "newCoverage": 1,
+            "covered": 9
+          }
+        ]
+      },
+      "after": {
+        "columns": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            2,
+            4
+          ]
+        ],
+        "mode": "multi-target",
+        "targets": [
+          6,
+          8
+        ],
+        "initialIndexes": [
+          2,
+          2,
+          2
+        ],
+        "initialEquation": "3 + 3 + 4",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              0,
+              2
+            ],
+            "expression": "1 + 1 + 4",
+            "result": 6
+          },
+          {
+            "indexes": [
+              0,
+              2,
+              1
+            ],
+            "expression": "1 + 3 + 2",
+            "result": 6
+          },
+          {
+            "indexes": [
+              0,
+              2,
+              2
+            ],
+            "expression": "1 + 3 + 4",
+            "result": 8
+          },
+          {
+            "indexes": [
+              1,
+              1,
+              1
+            ],
+            "expression": "2 + 2 + 2",
+            "result": 6
+          },
+          {
+            "indexes": [
+              1,
+              1,
+              2
+            ],
+            "expression": "2 + 2 + 4",
+            "result": 8
+          },
+          {
+            "indexes": [
+              1,
+              2,
+              0
+            ],
+            "expression": "2 + 3 + 1",
+            "result": 6
+          },
+          {
+            "indexes": [
+              2,
+              0,
+              1
+            ],
+            "expression": "3 + 1 + 2",
+            "result": 6
+          },
+          {
+            "indexes": [
+              2,
+              0,
+              2
+            ],
+            "expression": "3 + 1 + 4",
+            "result": 8
+          },
+          {
+            "indexes": [
+              2,
+              1,
+              0
+            ],
+            "expression": "3 + 2 + 1",
+            "result": 6
+          },
+          {
+            "indexes": [
+              2,
+              2,
+              1
+            ],
+            "expression": "3 + 3 + 2",
+            "result": 8
+          }
+        ],
+        "minimumCover": 4,
+        "minimumCoverSetCountCapped": 2,
+        "coverageIncidence": "multi-target/3/2/000:0|001:1|010:1|022:0|101:0|110:0|111:1|202:0|212:1|221:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "1 + 3 + 4",
+            "result": 8,
+            "newCoverage": 3,
+            "covered": 3
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "1 + 1 + 4",
+            "result": 6,
+            "newCoverage": 1,
+            "covered": 4
+          },
+          {
+            "reel": 1,
+            "direction": "up",
+            "equation": "3 + 1 + 4",
+            "result": 8,
+            "newCoverage": 1,
+            "covered": 5
+          },
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "3 + 1 + 2",
+            "result": 6,
+            "newCoverage": 1,
+            "covered": 6
+          },
+          {
+            "reel": 1,
+            "direction": "up",
+            "equation": "2 + 1 + 2",
+            "result": 5,
+            "newCoverage": 0,
+            "covered": 6
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "2 + 2 + 2",
+            "result": 6,
+            "newCoverage": 2,
+            "covered": 8
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "2 + 3 + 2",
+            "result": 7,
+            "newCoverage": 0,
+            "covered": 8
+          },
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "2 + 3 + 1",
+            "result": 6,
+            "newCoverage": 1,
+            "covered": 9
+          }
+        ]
+      },
+      "definitionChanged": true,
+      "boardChanged": true,
+      "diagnostics": {
+        "seed": 72693010,
+        "commonInitialIndexes": [
+          0,
+          0,
+          1
+        ],
+        "policies": [
+          {
+            "name": "seeded-visible-input",
+            "actions": [
+              "2D",
+              "1D",
+              "3U",
+              "2U",
+              "3U",
+              "3D",
+              "2D",
+              "2U",
+              "2D",
+              "2D",
+              "2D",
+              "1D",
+              "3U",
+              "1U",
+              "3D",
+              "2D",
+              "3U",
+              "2U",
+              "1D",
+              "2U",
+              "3D",
+              "2D",
+              "3U",
+              "3D",
+              "3U",
+              "3D",
+              "3U",
+              "2D",
+              "3D",
+              "1D",
+              "3D",
+              "1U",
+              "2U",
+              "2D",
+              "3D",
+              "1U",
+              "3U",
+              "3D",
+              "1U",
+              "3U",
+              "2D",
+              "3D",
+              "3U",
+              "3D",
+              "2D",
+              "3D",
+              "2D",
+              "2D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                0,
+                1
+              ],
+              "initialEquation": "2 + 5 + 6",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 24,
+                  "covered": 6,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 46,
+                  "covered": 9,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 2,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 46
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                0,
+                1
+              ],
+              "initialEquation": "1 + 1 + 2",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 24,
+                  "covered": 8,
+                  "required": 9,
+                  "targetsHit": 2,
+                  "noNewSuccesses": 3,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 41,
+                  "covered": 9,
+                  "required": 9,
+                  "targetsHit": 2,
+                  "noNewSuccesses": 10,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 41
+                }
+              ]
+            }
+          },
+          {
+            "name": "repeat-column-cycle",
+            "actions": [
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                0,
+                1
+              ],
+              "initialEquation": "2 + 5 + 6",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 8,
+                  "covered": 9,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 8
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 8,
+                  "covered": 9,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 8
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                0,
+                1
+              ],
+              "initialEquation": "1 + 1 + 2",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 24,
+                  "covered": 4,
+                  "required": 9,
+                  "targetsHit": 2,
+                  "noNewSuccesses": 4,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 48,
+                  "covered": 4,
+                  "required": 9,
+                  "targetsHit": 2,
+                  "noNewSuccesses": 10,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "es-1-10",
+      "before": {
+        "columns": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            2,
+            3,
+            4
+          ],
+          [
+            3,
+            4,
+            2
+          ],
+          [
+            6,
+            3,
+            3
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          12
+        ],
+        "initialIndexes": [
+          2,
+          0,
+          0,
+          0
+        ],
+        "initialEquation": "3 + 2 + 3 + 6",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "expression": "1 + 2 + 3 + 6",
+            "result": 12
+          },
+          {
+            "indexes": [
+              0,
+              1,
+              2,
+              0
+            ],
+            "expression": "1 + 3 + 2 + 6",
+            "result": 12
+          },
+          {
+            "indexes": [
+              0,
+              2,
+              1,
+              1
+            ],
+            "expression": "1 + 4 + 4 + 3",
+            "result": 12
+          },
+          {
+            "indexes": [
+              0,
+              2,
+              1,
+              2
+            ],
+            "expression": "1 + 4 + 4 + 3",
+            "result": 12
+          },
+          {
+            "indexes": [
+              1,
+              0,
+              2,
+              0
+            ],
+            "expression": "2 + 2 + 2 + 6",
+            "result": 12
+          },
+          {
+            "indexes": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "expression": "2 + 3 + 4 + 3",
+            "result": 12
+          },
+          {
+            "indexes": [
+              1,
+              1,
+              1,
+              2
+            ],
+            "expression": "2 + 3 + 4 + 3",
+            "result": 12
+          },
+          {
+            "indexes": [
+              1,
+              2,
+              0,
+              1
+            ],
+            "expression": "2 + 4 + 3 + 3",
+            "result": 12
+          },
+          {
+            "indexes": [
+              1,
+              2,
+              0,
+              2
+            ],
+            "expression": "2 + 4 + 3 + 3",
+            "result": 12
+          },
+          {
+            "indexes": [
+              2,
+              0,
+              1,
+              1
+            ],
+            "expression": "3 + 2 + 4 + 3",
+            "result": 12
+          },
+          {
+            "indexes": [
+              2,
+              0,
+              1,
+              2
+            ],
+            "expression": "3 + 2 + 4 + 3",
+            "result": 12
+          },
+          {
+            "indexes": [
+              2,
+              1,
+              0,
+              1
+            ],
+            "expression": "3 + 3 + 3 + 3",
+            "result": 12
+          },
+          {
+            "indexes": [
+              2,
+              1,
+              0,
+              2
+            ],
+            "expression": "3 + 3 + 3 + 3",
+            "result": 12
+          },
+          {
+            "indexes": [
+              2,
+              2,
+              2,
+              1
+            ],
+            "expression": "3 + 4 + 2 + 3",
+            "result": 12
+          },
+          {
+            "indexes": [
+              2,
+              2,
+              2,
+              2
+            ],
+            "expression": "3 + 4 + 2 + 3",
+            "result": 12
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 2,
+        "coverageIncidence": "target/4/1/0000:0|0001:0|0110:0|0111:0|0220:0|0221:0|1010:0|1011:0|1120:0|1121:0|1202:0|2020:0|2021:0|2102:0|2212:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "1 + 2 + 3 + 6",
+            "result": 12,
+            "newCoverage": 4,
+            "covered": 4
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "1 + 3 + 3 + 6",
+            "result": 13,
+            "newCoverage": 0,
+            "covered": 4
+          },
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "1 + 3 + 2 + 6",
+            "result": 12,
+            "newCoverage": 2,
+            "covered": 6
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "2 + 3 + 2 + 6",
+            "result": 13,
+            "newCoverage": 0,
+            "covered": 6
+          },
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "2 + 2 + 2 + 6",
+            "result": 12,
+            "newCoverage": 1,
+            "covered": 7
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "3 + 2 + 2 + 6",
+            "result": 13,
+            "newCoverage": 0,
+            "covered": 7
+          },
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "3 + 2 + 4 + 6",
+            "result": 15,
+            "newCoverage": 0,
+            "covered": 7
+          },
+          {
+            "reel": 4,
+            "direction": "down",
+            "equation": "3 + 2 + 4 + 3",
+            "result": 12,
+            "newCoverage": 3,
+            "covered": 10
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "1 + 2 + 4 + 3",
+            "result": 10,
+            "newCoverage": 0,
+            "covered": 10
+          },
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "1 + 4 + 4 + 3",
+            "result": 12,
+            "newCoverage": 1,
+            "covered": 11
+          },
+          {
+            "reel": 4,
+            "direction": "up",
+            "equation": "1 + 4 + 4 + 6",
+            "result": 15,
+            "newCoverage": 0,
+            "covered": 11
+          },
+          {
+            "reel": 4,
+            "direction": "up",
+            "equation": "1 + 4 + 4 + 3",
+            "result": 12,
+            "newCoverage": 1,
+            "covered": 12
+          }
+        ]
+      },
+      "after": {
+        "columns": [
+          [
+            1,
+            2,
+            4
+          ],
+          [
+            1,
+            2,
+            4
+          ],
+          [
+            2,
+            3,
+            5
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          8
+        ],
+        "initialIndexes": [
+          0,
+          0,
+          0
+        ],
+        "initialEquation": "1 + 1 + 2",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              1,
+              2
+            ],
+            "expression": "1 + 2 + 5",
+            "result": 8
+          },
+          {
+            "indexes": [
+              0,
+              2,
+              1
+            ],
+            "expression": "1 + 4 + 3",
+            "result": 8
+          },
+          {
+            "indexes": [
+              1,
+              0,
+              2
+            ],
+            "expression": "2 + 1 + 5",
+            "result": 8
+          },
+          {
+            "indexes": [
+              1,
+              2,
+              0
+            ],
+            "expression": "2 + 4 + 2",
+            "result": 8
+          },
+          {
+            "indexes": [
+              2,
+              0,
+              1
+            ],
+            "expression": "4 + 1 + 3",
+            "result": 8
+          },
+          {
+            "indexes": [
+              2,
+              1,
+              0
+            ],
+            "expression": "4 + 2 + 2",
+            "result": 8
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 2,
+        "coverageIncidence": "target/3/1/000:0|011:0|102:0|121:0|212:0|220:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "1 + 2 + 2",
+            "result": 5,
+            "newCoverage": 0,
+            "covered": 0
+          },
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "1 + 2 + 5",
+            "result": 8,
+            "newCoverage": 3,
+            "covered": 3
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "1 + 4 + 5",
+            "result": 10,
+            "newCoverage": 0,
+            "covered": 3
+          },
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "1 + 4 + 3",
+            "result": 8,
+            "newCoverage": 2,
+            "covered": 5
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "2 + 4 + 3",
+            "result": 9,
+            "newCoverage": 0,
+            "covered": 5
+          },
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "2 + 4 + 2",
+            "result": 8,
+            "newCoverage": 2,
+            "covered": 7
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "2 + 1 + 2",
+            "result": 5,
+            "newCoverage": 0,
+            "covered": 7
+          },
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "2 + 1 + 5",
+            "result": 8,
+            "newCoverage": 1,
+            "covered": 8
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "4 + 1 + 5",
+            "result": 10,
+            "newCoverage": 0,
+            "covered": 8
+          },
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "4 + 1 + 3",
+            "result": 8,
+            "newCoverage": 1,
+            "covered": 9
+          }
+        ]
+      },
+      "definitionChanged": true,
+      "boardChanged": true,
+      "diagnostics": {
+        "seed": 72693010,
+        "commonInitialIndexes": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "policies": [
+          {
+            "name": "seeded-visible-input",
+            "actions": [
+              "3D",
+              "1D",
+              "3U",
+              "3U",
+              "4U",
+              "4D",
+              "2D",
+              "3U",
+              "2D",
+              "3D",
+              "3D",
+              "1D",
+              "3U",
+              "2U",
+              "4D",
+              "3D",
+              "4U",
+              "3U",
+              "2D",
+              "3U",
+              "3D",
+              "3D",
+              "4U",
+              "4D",
+              "4U",
+              "4D",
+              "4U",
+              "2D",
+              "4D",
+              "1D",
+              "4D",
+              "1U",
+              "2U",
+              "2D",
+              "3D",
+              "1U",
+              "4U",
+              "4D",
+              "2U",
+              "4U",
+              "3D",
+              "4D",
+              "4U",
+              "4D",
+              "3D",
+              "4D",
+              "2D",
+              "3D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "initialEquation": "1 + 2 + 3 + 3",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 23,
+                  "covered": 10,
+                  "required": 12,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 1,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 46,
+                  "covered": 11,
+                  "required": 12,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 3,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                0,
+                0
+              ],
+              "initialEquation": "1 + 1 + 2",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 18,
+                  "covered": 7,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 6,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 30,
+                  "covered": 8,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 1,
+                  "absentReelAttempts": 18,
+                  "firstCompletionAttempt": null
+                }
+              ]
+            }
+          },
+          {
+            "name": "repeat-column-cycle",
+            "actions": [
+              "1D",
+              "2D",
+              "3D",
+              "4D",
+              "1D",
+              "2D",
+              "3D",
+              "4D",
+              "1D",
+              "2D",
+              "3D",
+              "4D",
+              "1D",
+              "2D",
+              "3D",
+              "4D",
+              "1D",
+              "2D",
+              "3D",
+              "4D",
+              "1D",
+              "2D",
+              "3D",
+              "4D",
+              "1D",
+              "2D",
+              "3D",
+              "4D",
+              "1D",
+              "2D",
+              "3D",
+              "4D",
+              "1D",
+              "2D",
+              "3D",
+              "4D",
+              "1D",
+              "2D",
+              "3D",
+              "4D",
+              "1D",
+              "2D",
+              "3D",
+              "4D",
+              "1D",
+              "2D",
+              "3D",
+              "4D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "initialEquation": "1 + 2 + 3 + 3",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 18,
+                  "covered": 7,
+                  "required": 12,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 2,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 36,
+                  "covered": 7,
+                  "required": 12,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 6,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                0,
+                0
+              ],
+              "initialEquation": "1 + 1 + 2",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 18,
+                  "covered": 0,
+                  "required": 9,
+                  "targetsHit": 0,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 6,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 36,
+                  "covered": 0,
+                  "required": 9,
+                  "targetsHit": 0,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 12,
+                  "firstCompletionAttempt": null
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "es-1-11",
+      "before": {
+        "columns": [
+          [
+            2,
+            3,
+            5
+          ],
+          [
+            6,
+            5,
+            3
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          8
+        ],
+        "initialIndexes": [
+          0,
+          2
+        ],
+        "initialEquation": "2 + 3",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              0
+            ],
+            "expression": "2 + 6",
+            "result": 8
+          },
+          {
+            "indexes": [
+              1,
+              1
+            ],
+            "expression": "3 + 5",
+            "result": 8
+          },
+          {
+            "indexes": [
+              2,
+              2
+            ],
+            "expression": "5 + 3",
+            "result": 8
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "target/2/1/00:0|11:0|22:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "2 + 6",
+            "result": 8,
+            "newCoverage": 2,
+            "covered": 2
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "3 + 6",
+            "result": 9,
+            "newCoverage": 0,
+            "covered": 2
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "3 + 5",
+            "result": 8,
+            "newCoverage": 2,
+            "covered": 4
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "5 + 5",
+            "result": 10,
+            "newCoverage": 0,
+            "covered": 4
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "5 + 3",
+            "result": 8,
+            "newCoverage": 2,
+            "covered": 6
+          }
+        ]
+      },
+      "after": {
+        "columns": [
+          [
+            2,
+            3,
+            5
+          ],
+          [
+            6,
+            5,
+            3
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          8
+        ],
+        "initialIndexes": [
+          0,
+          2
+        ],
+        "initialEquation": "2 + 3",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              0
+            ],
+            "expression": "2 + 6",
+            "result": 8
+          },
+          {
+            "indexes": [
+              1,
+              1
+            ],
+            "expression": "3 + 5",
+            "result": 8
+          },
+          {
+            "indexes": [
+              2,
+              2
+            ],
+            "expression": "5 + 3",
+            "result": 8
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "target/2/1/00:0|11:0|22:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "2 + 6",
+            "result": 8,
+            "newCoverage": 2,
+            "covered": 2
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "3 + 6",
+            "result": 9,
+            "newCoverage": 0,
+            "covered": 2
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "3 + 5",
+            "result": 8,
+            "newCoverage": 2,
+            "covered": 4
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "5 + 5",
+            "result": 10,
+            "newCoverage": 0,
+            "covered": 4
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "5 + 3",
+            "result": 8,
+            "newCoverage": 2,
+            "covered": 6
+          }
+        ]
+      },
+      "definitionChanged": true,
+      "boardChanged": false,
+      "diagnostics": {
+        "seed": 72693010,
+        "commonInitialIndexes": [
+          0,
+          1
+        ],
+        "policies": [
+          {
+            "name": "seeded-visible-input",
+            "actions": [
+              "2D",
+              "1D",
+              "2U",
+              "2U",
+              "2U",
+              "2D",
+              "1D",
+              "2U",
+              "1D",
+              "2D",
+              "2D",
+              "1D",
+              "2U",
+              "1U",
+              "2D",
+              "2D",
+              "2U",
+              "2U",
+              "1D",
+              "2U",
+              "2D",
+              "2D",
+              "2U",
+              "2D",
+              "2U",
+              "2D",
+              "2U",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1U",
+              "1U",
+              "1D",
+              "2D",
+              "1U",
+              "2U",
+              "2D",
+              "1U",
+              "2U",
+              "2D",
+              "2D",
+              "2U",
+              "2D",
+              "2D",
+              "2D",
+              "1D",
+              "2D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                1
+              ],
+              "initialEquation": "2 + 5",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 10,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 10
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 10,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 10
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                1
+              ],
+              "initialEquation": "2 + 5",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 10,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 10
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 10,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 10
+                }
+              ]
+            }
+          },
+          {
+            "name": "repeat-column-cycle",
+            "actions": [
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D",
+              "1D",
+              "2D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                1
+              ],
+              "initialEquation": "2 + 5",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 5,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 5
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 5,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 5
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                1
+              ],
+              "initialEquation": "2 + 5",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 5,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 5
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 5,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 5
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "es-1-12",
+      "before": {
+        "columns": [
+          [
+            2,
+            4,
+            6
+          ],
+          [
+            7,
+            5,
+            3
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          9
+        ],
+        "initialIndexes": [
+          0,
+          1
+        ],
+        "initialEquation": "2 + 5",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              0
+            ],
+            "expression": "2 + 7",
+            "result": 9
+          },
+          {
+            "indexes": [
+              1,
+              1
+            ],
+            "expression": "4 + 5",
+            "result": 9
+          },
+          {
+            "indexes": [
+              2,
+              2
+            ],
+            "expression": "6 + 3",
+            "result": 9
+          }
+        ],
+        "minimumCover": 3,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "target/2/1/00:0|11:0|22:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "2 + 7",
+            "result": 9,
+            "newCoverage": 2,
+            "covered": 2
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "4 + 7",
+            "result": 11,
+            "newCoverage": 0,
+            "covered": 2
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "4 + 5",
+            "result": 9,
+            "newCoverage": 2,
+            "covered": 4
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "6 + 5",
+            "result": 11,
+            "newCoverage": 0,
+            "covered": 4
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "6 + 3",
+            "result": 9,
+            "newCoverage": 2,
+            "covered": 6
+          }
+        ]
+      },
+      "after": {
+        "columns": [
+          [
+            1,
+            3,
+            4
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            3,
+            4,
+            6
+          ]
+        ],
+        "mode": "target",
+        "targets": [
+          10
+        ],
+        "initialIndexes": [
+          0,
+          0,
+          0
+        ],
+        "initialEquation": "1 + 1 + 3",
+        "valid": [
+          {
+            "indexes": [
+              0,
+              2,
+              2
+            ],
+            "expression": "1 + 3 + 6",
+            "result": 10
+          },
+          {
+            "indexes": [
+              1,
+              0,
+              2
+            ],
+            "expression": "3 + 1 + 6",
+            "result": 10
+          },
+          {
+            "indexes": [
+              1,
+              2,
+              1
+            ],
+            "expression": "3 + 3 + 4",
+            "result": 10
+          },
+          {
+            "indexes": [
+              2,
+              1,
+              1
+            ],
+            "expression": "4 + 2 + 4",
+            "result": 10
+          },
+          {
+            "indexes": [
+              2,
+              2,
+              0
+            ],
+            "expression": "4 + 3 + 3",
+            "result": 10
+          }
+        ],
+        "minimumCover": 4,
+        "minimumCoverSetCountCapped": 1,
+        "coverageIncidence": "target/3/1/000:0|011:0|022:0|101:0|212:0",
+        "nativeSolverTrace": [
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "1 + 3 + 3",
+            "result": 7,
+            "newCoverage": 0,
+            "covered": 0
+          },
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "1 + 3 + 6",
+            "result": 10,
+            "newCoverage": 3,
+            "covered": 3
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "3 + 3 + 6",
+            "result": 12,
+            "newCoverage": 0,
+            "covered": 3
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "3 + 1 + 6",
+            "result": 10,
+            "newCoverage": 2,
+            "covered": 5
+          },
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "3 + 3 + 6",
+            "result": 12,
+            "newCoverage": 0,
+            "covered": 5
+          },
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "3 + 3 + 4",
+            "result": 10,
+            "newCoverage": 1,
+            "covered": 6
+          },
+          {
+            "reel": 1,
+            "direction": "down",
+            "equation": "4 + 3 + 4",
+            "result": 11,
+            "newCoverage": 0,
+            "covered": 6
+          },
+          {
+            "reel": 2,
+            "direction": "up",
+            "equation": "4 + 2 + 4",
+            "result": 10,
+            "newCoverage": 2,
+            "covered": 8
+          },
+          {
+            "reel": 2,
+            "direction": "down",
+            "equation": "4 + 3 + 4",
+            "result": 11,
+            "newCoverage": 0,
+            "covered": 8
+          },
+          {
+            "reel": 3,
+            "direction": "up",
+            "equation": "4 + 3 + 3",
+            "result": 10,
+            "newCoverage": 1,
+            "covered": 9
+          }
+        ]
+      },
+      "definitionChanged": true,
+      "boardChanged": true,
+      "diagnostics": {
+        "seed": 72693010,
+        "commonInitialIndexes": [
+          0,
+          1,
+          0
+        ],
+        "policies": [
+          {
+            "name": "seeded-visible-input",
+            "actions": [
+              "2D",
+              "1D",
+              "3U",
+              "2U",
+              "3U",
+              "3D",
+              "2D",
+              "2U",
+              "2D",
+              "2D",
+              "2D",
+              "1D",
+              "3U",
+              "1U",
+              "3D",
+              "2D",
+              "3U",
+              "2U",
+              "1D",
+              "2U",
+              "3D",
+              "2D",
+              "3U",
+              "3D",
+              "3U",
+              "3D",
+              "3U",
+              "2D",
+              "3D",
+              "1D",
+              "3D",
+              "1U",
+              "2U",
+              "2D",
+              "3D",
+              "1U",
+              "3U",
+              "3D",
+              "1U",
+              "3U",
+              "2D",
+              "3D",
+              "3U",
+              "3D",
+              "2D",
+              "3D",
+              "2D",
+              "2D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                1
+              ],
+              "initialEquation": "2 + 5",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 15,
+                  "covered": 2,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 4,
+                  "absentReelAttempts": 9,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 23,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 6,
+                  "absentReelAttempts": 22,
+                  "firstCompletionAttempt": 41
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                1,
+                0
+              ],
+              "initialEquation": "1 + 2 + 3",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 24,
+                  "covered": 7,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 2,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 32,
+                  "covered": 9,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 4,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": 32
+                }
+              ]
+            }
+          },
+          {
+            "name": "repeat-column-cycle",
+            "actions": [
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D",
+              "1D",
+              "2D",
+              "3D"
+            ],
+            "before": {
+              "initialIndexes": [
+                0,
+                1
+              ],
+              "initialEquation": "2 + 5",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 5,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 8,
+                  "firstCompletionAttempt": 7
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 5,
+                  "covered": 6,
+                  "required": 6,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 0,
+                  "absentReelAttempts": 16,
+                  "firstCompletionAttempt": 7
+                }
+              ]
+            },
+            "after": {
+              "initialIndexes": [
+                0,
+                1,
+                0
+              ],
+              "initialEquation": "1 + 2 + 3",
+              "checkpoints": [
+                {
+                  "attempts": 24,
+                  "committedMoves": 24,
+                  "covered": 3,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 2,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                },
+                {
+                  "attempts": 48,
+                  "committedMoves": 48,
+                  "covered": 3,
+                  "required": 9,
+                  "targetsHit": 1,
+                  "noNewSuccesses": 5,
+                  "absentReelAttempts": 0,
+                  "firstCompletionAttempt": null
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -183,7 +183,7 @@ test("@a11y modal focus, language parts, target sizes and 200% zoom stay operabl
 
   await page.goto("/?world=math-world&station=slider", { waitUntil: "domcontentloaded" });
   await page.getByRole("button", { name: "跳过教程" }).click();
-  await expect(page.getByRole("button", { name: "第 2 列向上移动" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "第 2 列选上方格" })).toBeVisible();
   expectClean(runtime);
 });
 

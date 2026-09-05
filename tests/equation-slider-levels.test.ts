@@ -28,17 +28,17 @@ describe("equation slider V3 formal levels", () => {
   it("publishes 200 levels as four 50-level chapters with five 10-level stations each", () => {
     expect(EQUATION_SLIDER_V3_LEVELS).toHaveLength(200);
     expect(HAND_AUTHORED_GOLD_TEMPLATES).toHaveLength(40);
-    expect(HAND_AUTHORED_V3_GOLD_LEVELS).toHaveLength(40);
-    expect(GENERATED_V3_LEVELS).toHaveLength(160);
+    expect(HAND_AUTHORED_V3_GOLD_LEVELS).toHaveLength(42);
+    expect(GENERATED_V3_LEVELS).toHaveLength(158);
 
     for (const chapterId of CHAPTER_IDS) {
       const chapterLevels = levelsInChapter(chapterId);
       expect(chapterLevels).toHaveLength(50);
       expect(chapterLevels.map((level) => level.order)).toEqual(sequence(1, 50));
       expect(chapterLevels.filter((level) => level.provenance.kind === "hand-authored-gold"))
-        .toHaveLength(10);
+        .toHaveLength(chapterId === "chapter-1" ? 12 : 10);
       expect(chapterLevels.filter((level) => level.provenance.kind === "generated-from-gold"))
-        .toHaveLength(40);
+        .toHaveLength(chapterId === "chapter-1" ? 38 : 40);
 
       for (let station = 1; station <= 5; station += 1) {
         const stationLevels = chapterLevels.filter(
@@ -175,8 +175,8 @@ describe("equation slider V3 formal levels", () => {
         "chapter-3": 50,
         "chapter-4": 50
       },
-      goldCount: 40,
-      generatedCount: 160,
+      goldCount: 42,
+      generatedCount: 158,
       exactDuplicateGroups: [],
       adjacentRepetitions: [],
       overusedCanonicalActionPatterns: {},
