@@ -28,7 +28,7 @@ describe("Chapter Two replay preservation and guarded writers", () => {
     const previous = updateCompleteSave(createFreshCompleteSave(), { chapterTwoReplay: old, unlockedChapterIds: ["chapter-one", "chapter-two", "chapter-three"], completedChapterIds: ["chapter-one", "chapter-two"], completedEpisodeIds: result.finalState.completedEpisodeIds, repairedObjectIds: result.finalState.repairedObjectIds });
     const restarted = restartChapterTwoSave(previous, "replay");
     expect(restarted.chapterTwoReplay?.priorRuns).toEqual([old]);
-    expect(restarted.chapterTwoReplay?.ruleset).toBe("pilot-six-r1");
+    expect(restarted.chapterTwoReplay?.ruleset).toBe("chapter-two-r2");
     for (const field of ["unlockedChapterIds", "completedChapterIds", "completedEpisodeIds", "repairedObjectIds"] as const) expect(restarted[field]).toEqual(previous[field]);
     let engine = createCompleteEngineState("replay", progressSeedFromCompleteSave(restarted));
     engine = reduceCompleteEngineState(engine, { type: "enter-chapter", chapterId: "chapter-two" });

@@ -30,8 +30,10 @@ import {
 } from "./contracts";
 import type { ChapterTwoAction, ChapterTwoState } from "./engine";
 import { fitPilotScene, isPilotSurface, renderPilotSix, retainPilotImages, pilotAssetUrl } from "./pilot-view";
+import { getR2Definition, type R2Target } from "./chapter-two-r2";
 import "../../ui/chapter-two.css";
 import "../../ui/pilot-six.css";
+import "../../ui/chapter-two-r2.css";
 
 export interface MountChapterTwoOptions {
   readonly storage?: CompleteStorageLike;
@@ -216,12 +218,12 @@ export function mountHanziMagicChapterTwo(root: HTMLElement, options: MountChapt
     save = syncCompleteSaveFromEngine(save, master);
     writeCompleteSave(storage, save);
   };
-  const focusNext = () => root.querySelector<HTMLElement>(state.phase === "build" && state.selectedCardId ? ".hmc2-slot:not(.is-filled),.pilot-slot:not(.is-filled)" : isPilotSurface(state) ? ".pilot-adventure [data-primary-focus],.pilot-magic-target,.pilot-expression-options button,.pilot-waypoint.is-available,.pilot-hand button:not(:disabled)" : "[data-primary-focus], button:not([disabled]), a")?.focus({ preventScroll: true });
+  const focusNext = () => root.querySelector<HTMLElement>(state.phase === "build" && state.selectedCardId ? ".hmc2-slot:not(.is-filled),.pilot-slot:not(.is-filled)" : isPilotSurface(state) ? ".pilot-adventure [data-primary-focus],.pilot-magic-target,.r2-object-target:not(:disabled),.pilot-expression-options button,.pilot-waypoint.is-available,.pilot-hand button:not(:disabled)" : "[data-primary-focus], button:not([disabled]), a")?.focus({ preventScroll: true });
   const render = () => {
     const previousImages = [...root.querySelectorAll<HTMLImageElement>(".pilot-stage img")];
     const active = document.activeElement instanceof HTMLElement && root.contains(document.activeElement) ? document.activeElement : null;
     const previousPhase = root.querySelector<HTMLElement>("[data-phase]")?.dataset.phase;
-    const focusAttribute = ["data-family-character-id", "data-card-id", "data-action", "data-pref"].find((name) => active?.hasAttribute(name));
+    const focusAttribute = ["data-family-character-id", "data-card-id", "data-action", "data-pref", "data-r2-target"].find((name) => active?.hasAttribute(name));
     const focusValue = focusAttribute ? active?.getAttribute(focusAttribute) : null;
     const scene = CHAPTER_TWO_EPISODES[state.episodeIndex].sceneKey;
     root.innerHTML = `<main class="hmc2-shell" data-testid="hanzi-complete-chapter-two" data-phase="${state.phase}" data-episode-index="${state.episodeIndex}" data-encounter-index="${state.encounterIndex}" data-action-count="${state.actionCount}" data-current-character-id="${state.currentCharacterId ?? "none"}" data-current-family-id="${state.currentFamilyId ?? "none"}" data-discovered-count="${state.discoveredCharacterIds.length}" data-family-count="${state.discoveredFamilyIds.length}" data-repair-count="${state.repairedObjectIds.length}" data-boss-count="${state.completedBossIds.length}" data-selected-ability-count="${state.selectedAbilityIds.length}" data-triggered-ability-count="${state.triggeredAbilityIds.length}" data-muted="${String(save.settings.muted)}" data-reduced-motion="${String(save.settings.reducedMotion)}" data-save-read-only="${String(!isCompleteSaveWritable(save))}" style="--hmc2-scene:url('${m5AssetUrl(scene)}')"><div class="hmc2-world" aria-hidden="true"><i></i><span></span><b></b></div><header class="hmc2-header"><a href="${escapeHtml(returnHref)}" aria-label="返回墨迹森林">← 森林</a><div><span>汉字魔法战 · 字光归林</span><h1>字脉苏醒</h1></div><div><button type="button" data-pref="muted" aria-pressed="${String(save.settings.muted)}">${save.settings.muted ? "打开声音" : "静音"}</button><button type="button" data-pref="reduced-motion" aria-pressed="${String(save.settings.reducedMotion)}">${save.settings.reducedMotion ? "恢复动画" : "减少动画"}</button></div></header>${!isCompleteSaveWritable(save) ? `<p class="hmc2-save-note" role="status">本机存档已保护，当前进展暂未保存。回到森林后可以重新读取。</p>` : ""}<div class="hmc2-layout">${renderPath(state)}<div class="hmc2-phase" aria-live="polite">${renderPhase(state)}</div></div><footer class="hmc2-footer"><span>本地匿名保存 · 无登录 · 无排名</span><span>12 个故事字脉 · ${CHAPTER_TWO_OPTIONAL_CHARACTER_IDS.length} 个可选新字不阻塞通关</span></footer></main>`;
@@ -238,7 +240,7 @@ export function mountHanziMagicChapterTwo(root: HTMLElement, options: MountChapt
       }
     }
     retainPilotImages(previousImages, root);
-    if (isPilotSurface(state) && state.phase === "family-connect") { const image = new Image(); image.src = pilotAssetUrl(state.episodeIndex === 0 ? "bridge" : "stone-path"); void image.decode().catch(() => {}); }
+    if (isPilotSurface(state) && !getR2Definition(state) && state.phase === "family-connect") { const image = new Image(); image.src = pilotAssetUrl(state.episodeIndex === 0 ? "bridge" : "stone-path"); void image.decode().catch(() => {}); }
     fitPilotScene(root);
     const restoredFocus = previousPhase === state.phase && focusAttribute && focusValue ? root.querySelector<HTMLElement>(`[${focusAttribute}="${CSS.escape(focusValue)}"]:not(:disabled)`) : null;
     if (restoredFocus) restoredFocus.focus({ preventScroll: true }); else focusNext();
@@ -253,7 +255,8 @@ export function mountHanziMagicChapterTwo(root: HTMLElement, options: MountChapt
   const click = (event: MouseEvent) => {
     const target = (event.target as HTMLElement).closest<HTMLElement>("button, a"); if (!target || !root.contains(target) || target.tagName === "A") return;
     const action = target.dataset.action;
-    if (["start", "begin-behavior", "recover-behavior", "undo", "continue", "connect-family", "start-core", "finish-ending"].includes(String(action))) dispatch({ type: action } as ChapterTwoAction);
+    if (["start", "begin-behavior", "recover-behavior", "undo", "continue", "connect-family", "start-core", "finish-ending", "r2-root"].includes(String(action))) dispatch({ type: action } as ChapterTwoAction);
+    if (target.dataset.r2Target) dispatch({ type: "r2-target", targetId: target.dataset.r2Target as R2Target });
     if (target.dataset.abilityId) dispatch({ type: "choose-ability", abilityId: target.dataset.abilityId as ChapterTwoState["abilityOfferIds"][number] });
     if (target.dataset.cardId) dispatch({ type: "select-card", cardId: target.dataset.cardId });
     if (target.dataset.slotId) dispatch({ type: "place-selected", slotId: target.dataset.slotId as CompleteSlotId });

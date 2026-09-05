@@ -4,7 +4,7 @@ import { completeCharacterId } from "../../content-graph/ids";
 import { CHAPTER_TWO_EPISODES } from "./contracts";
 
 export const PILOT_SIX_RULESET = "pilot-six-r1" as const;
-export type ChapterTwoRuleset = typeof PILOT_SIX_RULESET;
+export type ChapterTwoRuleset = typeof PILOT_SIX_RULESET | "chapter-two-r2";
 export type PilotExpression = "quiet" | "talk";
 export type PilotEdge = readonly [string, string];
 

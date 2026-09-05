@@ -22,7 +22,7 @@ import {
   withCompleteSaveChecksum,
   hasUnknownChapterTwoRuleset,
 } from "./complete-save-schema";
-import { PILOT_SIX_RULESET } from "../chapters/chapter-two/pilot-six";
+import { CHAPTER_TWO_R2_RULESET } from "../chapters/chapter-two/chapter-two-r2";
 import {
   COMPLETE_LEGACY_SAVE_KEYS,
   HANZI_MAGIC_COMPLETE_MIGRATION_RAW_KEYS,
@@ -215,7 +215,7 @@ export function restartChapterTwoSave(previous: CompleteSaveState, seed: string)
   const old = previous.chapterTwoReplay;
   const { priorRuns = [], ...record } = old ?? { seed, initialHeroId: previous.selectedHeroId, actions: [] };
   const next = updateCompleteSave(previous, {
-    chapterTwoReplay: { seed, initialHeroId: previous.selectedHeroId, ruleset: PILOT_SIX_RULESET, actions: [], ...(old ? { priorRuns: [...priorRuns, record] } : {}) },
+    chapterTwoReplay: { seed, initialHeroId: previous.selectedHeroId, ruleset: CHAPTER_TWO_R2_RULESET, actions: [], ...(old ? { priorRuns: [...priorRuns, record] } : {}) },
     activeResume: { screen: "world", chapterId: "chapter-two", episodeId: null, phase: "world", seed, actionCount: 0 },
   });
   // Refuse a full archive; never discard an earlier run to make room.

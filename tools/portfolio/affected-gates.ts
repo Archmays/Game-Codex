@@ -12,6 +12,7 @@ const EQUATION_VISUAL: GateCommand = { program: "pnpm", args: ["run", "test:e2e:
 const EQUATION_PLAYTEST: GateCommand = { program: "pnpm", args: ["run", "test:e2e:equation-slider:playtest"], label: "Equation Slider bounded agent playtest" };
 const HANZI_WHEEL_E2E: GateCommand = { program: "pnpm", args: ["run", "test:e2e:hanzi-v2:wheel"], label: "Hanzi wheel compatibility browser profile" };
 const HANZI_PILOT_E2E: GateCommand = { program: "pnpm", args: ["exec", "playwright", "test", "tests/e2e/hanzi-complete/pilot-six.spec.ts", "--config", "playwright.hanzi-complete.config.ts"], label: "Hanzi six-encounter pilot input, replay, and chapter linkage" };
+const HANZI_CHAPTER_TWO_R2_E2E: GateCommand = { program: "pnpm", args: ["exec", "playwright", "test", "tests/e2e/hanzi-complete/chapter-two-r2.spec.ts", "--config", "playwright.hanzi-complete.config.ts"], label: "Hanzi chapter-two-r2 full input, object state, roots, and save linkage" };
 const UNIT: GateCommand = { program: "pnpm", args: ["test"], label: "unit and content tests" };
 const TYPECHECK: GateCommand = { program: "pnpm", args: ["exec", "tsc", "--noEmit"], label: "typecheck" };
 const BUILD: GateCommand = { program: "pnpm", args: ["build"], label: "production build" };
@@ -47,6 +48,7 @@ export function affectedGateCommands(changedFiles: readonly string[]): GateComma
   const hanziCommands = [
     ...(hanziWheelAffected ? [HANZI_WHEEL_E2E] : []),
     ...(files.some((file) => file.startsWith("games/hanzi-radical-battle/complete/") || file.startsWith("public/assets/hanzi-radical-battle/pilot-six/") || file === "tests/e2e/hanzi-complete/pilot-six.spec.ts") ? [HANZI_PILOT_E2E] : []),
+    ...(files.some((file) => file.startsWith("games/hanzi-radical-battle/complete/") || file.startsWith("public/assets/hanzi-radical-battle/chapter-two/") || file.startsWith("assets/images/hanzi-radical-battle/chapter-two/") || file === "tests/e2e/hanzi-complete/chapter-two-r2.spec.ts") ? [HANZI_CHAPTER_TWO_R2_E2E] : []),
   ];
   if (full) return unique([PORTFOLIO_CHECK, PORTFOLIO_EVOLUTION_CHECK, ...equationCommands, ...hanziCommands, INTERACTION_STATIC, SCROLL_STATIC, UNIT, MATH_WORLD_VALIDATE, CHINESE_SUPPORT_VALIDATE, TYPECHECK, BUILD, MATH_WORLD_E2E, CHINESE_SUPPORT_E2E, ENGLISH_E2E, INTERACTION_HITTEST, SCROLL_REACHABILITY, SMOKE]);
   const commands: GateCommand[] = [PORTFOLIO_CHECK, PORTFOLIO_EVOLUTION_CHECK];

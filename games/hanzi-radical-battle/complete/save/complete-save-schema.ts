@@ -2,6 +2,7 @@ import { M3_BUILD_ABILITIES, M3_HEROES, type M3HeroId } from "../../v2/chapter-o
 import type { M3Action, M5AdventureMode } from "../../v2/chapter-one/m3-types";
 import { createChapterTwoState, reduceChapterTwoState, isChapterTwoAction, type ChapterTwoAction } from "../chapters/chapter-two/engine";
 import { PILOT_SIX_RULESET, type ChapterTwoRuleset } from "../chapters/chapter-two/pilot-six";
+import { CHAPTER_TWO_R2_RULESET } from "../chapters/chapter-two/chapter-two-r2";
 import { isChapterThreeAction, type ChapterThreeAction } from "../chapters/chapter-three/engine";
 import { COMPLETE_COMPONENT_FAMILIES } from "../content-graph/families";
 import { COMPLETE_CHARACTER_NODES, COMPLETE_CONTENT_GRAPH_REVISION } from "../content-graph/manifest";
@@ -255,14 +256,14 @@ function validChapterTwoReplay(value: unknown): value is CompleteChapterTwoRepla
   const keys = ["seed", "initialHeroId", "actions", ...("ruleset" in replay ? ["ruleset"] : []), ...("priorRuns" in replay ? ["priorRuns"] : [])];
   return exactKeys(replay, keys)
     && boundedString(replay.seed) && typeof replay.initialHeroId === "string" && HERO_IDS.has(replay.initialHeroId)
-    && (!("ruleset" in replay) || replay.ruleset === PILOT_SIX_RULESET)
+    && (!("ruleset" in replay) || replay.ruleset === PILOT_SIX_RULESET || replay.ruleset === CHAPTER_TWO_R2_RULESET)
     && Array.isArray(replay.actions) && replay.actions.length <= 900 && replay.actions.every((action) => isChapterTwoAction(action, replay.ruleset as ChapterTwoRuleset | undefined))
-    && (replay.ruleset !== PILOT_SIX_RULESET || validPilotActionStream(replay as unknown as CompleteChapterTwoRunRecord))
+    && (replay.ruleset === undefined || validPilotActionStream(replay as unknown as CompleteChapterTwoRunRecord))
     && (!("priorRuns" in replay) || (Array.isArray(replay.priorRuns) && replay.priorRuns.length <= 64 && replay.priorRuns.every((run) => run !== null && typeof run === "object" && !("priorRuns" in run) && validChapterTwoReplay(run))));
 }
 
 function validPilotActionStream(replay: CompleteChapterTwoRunRecord): boolean {
-  let state = createChapterTwoState(replay.seed, replay.initialHeroId, PILOT_SIX_RULESET);
+  let state = createChapterTwoState(replay.seed, replay.initialHeroId, replay.ruleset);
   for (const action of replay.actions) {
     const next = reduceChapterTwoState(state, action);
     if (next.actionCount !== state.actionCount + 1) return false;
@@ -274,7 +275,7 @@ function validPilotActionStream(replay: CompleteChapterTwoRunRecord): boolean {
 export function hasUnknownChapterTwoRuleset(value: unknown): boolean {
   if (!value || typeof value !== "object" || Array.isArray(value)) return false;
   const replay = value as Record<string, unknown>;
-  return ("ruleset" in replay && replay.ruleset !== PILOT_SIX_RULESET)
+  return ("ruleset" in replay && replay.ruleset !== PILOT_SIX_RULESET && replay.ruleset !== CHAPTER_TWO_R2_RULESET)
     || (Array.isArray(replay.priorRuns) && replay.priorRuns.some(hasUnknownChapterTwoRuleset));
 }
 

@@ -1,0 +1,64 @@
+/* Scoped to the promoted 07–12 and tree-heart surfaces; pilot-six-r1 is untouched. */
+.pilot-adventure--r2 .pilot-stage{height:540px}
+.pilot-adventure--r2 .r2-object-target{position:absolute;z-index:2;transform:translate(-50%,-50%);width:195px;min-height:64px;padding:10px 14px;background:#fff3c8f5;color:#213f32;border:2px solid #bb8737;box-shadow:0 4px 0 #5b5635;line-height:1.4;font-size:16px}
+.pilot-adventure--r2 .r2-object-target b,.pilot-adventure--r2 .r2-object-target small{display:block}
+.pilot-adventure--r2 .r2-object-target.is-done{opacity:1;background:#d8edd5;box-shadow:none;border-style:dashed}
+.pilot-adventure--r2 .r2-root-connect{width:200px;min-height:70px}
+.r2-object-status{display:flex;justify-content:center;flex-wrap:wrap;gap:10px 26px;margin:0;padding:9px 14px;list-style:none;background:#dde7cf;color:#214738;font-size:14px;border-top:1px solid #93ac89}
+.r2-lines .r2-edge-bed{stroke:#214d3c;stroke-width:23}
+.r2-lines .r2-edge-bed--voice-bridge{stroke:#98e6dfb8;stroke-width:24}
+.r2-lines .r2-edge-bed--rice-lamps{stroke:#bd8d447d;stroke-width:25}
+.r2-lines .r2-edge-bed--metal-lock{stroke:#65715e;stroke-width:20}
+.r2-lines .r2-edge{stroke:#ffe4a0;stroke-width:5;filter:drop-shadow(0 0 3px #fdc865)}
+.r2-lines .r2-edge--qualified{stroke-dasharray:12 9}
+.r2-lines .r2-safe-path{stroke:#445e4de0;stroke-width:9;stroke-dasharray:8 15}
+.r2-lines .r2-safe-path.is-lit{stroke:#e3c76a;stroke-width:12;stroke-dasharray:none}
+.r2-lines .r2-star{fill:#fff4bb;stroke:#947433;stroke-width:1;filter:drop-shadow(0 0 3px #fff0a2)}
+.r2-lines .r2-exit path{stroke:#fff3b8;stroke-width:6;fill:#244b49}
+.r2-lines .r2-exit text{fill:#fff7d9;text-anchor:middle;font:26px "Microsoft YaHei",sans-serif;paint-order:stroke;stroke:#264c42;stroke-width:5}
+.r2-clue-leaf{position:absolute;width:156px;height:115px;display:grid;place-items:center}
+.r2-clue-leaf img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.r2-clue-leaf span{position:relative;font:600 26px "Microsoft YaHei",sans-serif;color:#1b4034;text-shadow:0 1px 2px #fff5be}
+.r2-clue-leaf.is-resting{opacity:.35}
+.r2-clue-leaf.is-arranged{filter:drop-shadow(0 2px 5px #ddcb78)}
+.pilot-adventure--r2 .r2-observation{position:absolute;top:62px;left:50%;transform:translateX(-50%);width:calc(100% - 40px);max-width:380px;margin:0;padding:8px 12px;box-sizing:border-box;text-align:center;font-size:17px;line-height:1.45;color:#fff6d8;background:#143e36ed;border-radius:12px}
+.r2-lines .r2-sound-wave{stroke:#a1eee7;stroke-width:9;filter:drop-shadow(0 0 5px #86e5de)}
+.r2-lines .r2-sound-wave--inner{stroke:#ffe7a8;stroke-width:5}
+.r2-lines .r2-echo-knot{stroke:#c6bdded4;stroke-width:12}
+.r2-lines .r2-warm-mist{stroke:#ffe6ac88;stroke-width:38;filter:blur(7px)}
+.r2-lines .r2-lamp-lane{stroke:#ffe399;stroke-width:16;filter:drop-shadow(0 0 6px #e8ba57)}
+.r2-door-shadow{opacity:.38;filter:grayscale(1) brightness(.45);transform:translate(-50%,-50%) skewY(9deg)}
+.r2-door-unsettled{transform:translate(-50%,-50%) skewY(-5deg)}
+.r2-door-stable{filter:drop-shadow(0 0 8px #b9e5cf)}
+.r2-lines .r2-clock-dial path{stroke:#234539;stroke-width:4}
+.r2-lines .r2-clock-dial circle{fill:#234539}
+.r2-lines .r2-clock-wave{fill:none;stroke:#ffe5ac;stroke-width:6;stroke-dasharray:12 10;filter:drop-shadow(0 0 4px #d9b85d)}
+.r2-lines .r2-lock-socket{stroke:#dca751;stroke-width:4;fill:#152e35}
+.r2-lines .r2-lock-bolt{stroke:#8f9e89;stroke-width:17}
+.r2-lines .r2-lock-bolt.is-connected{stroke:#f0c46d}
+.r2-tooth-fitted{filter:drop-shadow(0 0 4px #e4cd7e)}
+.r2-lines .r2-region-root{stroke:#172e30;stroke-width:18;stroke-dasharray:12 12}
+.r2-lines .r2-region-root.is-connected{stroke:#f1cf7d;stroke-width:17;stroke-dasharray:none;filter:drop-shadow(0 0 4px #80dacc)}
+.r2-lines .r2-root-socket{stroke:#bcdad0;stroke-width:3;fill:#203b3b}
+.r2-lines .r2-root-socket.is-connected{fill:#f3d482}
+.r2-heart-waiting{filter:brightness(.37) saturate(.45)}
+.r2-heart-restored{filter:drop-shadow(0 0 20px #87ead0)}
+.r2-lines .r2-core-stone-road{stroke:#b6b78d;stroke-width:26;stroke-dasharray:24 7}
+.r2-lines .r2-travel-light{fill:#fff4b4;stroke:#446b58;stroke-width:3;filter:drop-shadow(0 0 8px #fff1a6)}
+.r2-lines .r2-guide-light{stroke:#fff0b0;stroke-width:9;stroke-dasharray:8 12;filter:drop-shadow(0 0 5px #ffe9a0)}
+.r2-lines .r2-water-feed{stroke:#91ebdf;stroke-width:18;filter:drop-shadow(0 0 5px #94ebed)}
+.r2-corridor-open-left{transform:translate(-50%,-50%) rotate(-18deg)}
+.r2-corridor-open-right{transform:translate(-50%,-50%) rotate(18deg)}
+.pilot-adventure--r2 .pilot-intro a{display:flex;align-items:center;justify-content:center;min-height:48px;box-sizing:border-box;color:#274937}
+@media(max-width:800px){.pilot-adventure--r2 .pilot-stage{height:460px}}
+@media(max-width:480px){
+ .pilot-adventure--r2 .pilot-stage{height:376px}
+ .pilot-adventure--r2 .r2-object-target{width:144px;min-height:66px;font-size:14px;padding:8px}
+ .pilot-adventure--r2 .r2-root-connect{width:160px;min-height:74px}
+ .r2-object-status{gap:5px 12px;padding:8px 10px;font-size:12px}
+ .r2-root-status li{flex:1 1 28%;text-align:center}
+ .pilot-adventure--r2 .pilot-intro a{margin-top:8px}
+ .pilot-adventure--r2 .r2-observation{top:51px;max-width:260px;font-size:14px;padding:6px 8px}
+}
+@media(prefers-reduced-motion:reduce){.pilot-adventure--r2 *{animation:none!important;transition:none!important}}
+.hmc2-shell[data-reduced-motion=true] .pilot-adventure--r2 *{animation:none!important;transition:none!important}

@@ -21,7 +21,8 @@ test.beforeEach(async ({ context }) => {
 async function seed(page:Page, replay?:ReturnType<typeof pilotRun>) {
  const save = updateCompleteSave(createFreshCompleteSave(), {
   unlockedChapterIds:["chapter-one","chapter-two"], settings:{muted:true,reducedMotion:true,inputMode:"auto"},
-  ...(replay?{chapterTwoReplay:{seed:replay.seed,initialHeroId:replay.initialHeroId,ruleset:replay.ruleset,actions:replay.actions}}:{}),
+  // This published-r1 regression stays on its original interpreter after new-run promotion.
+  chapterTwoReplay:replay?{seed:replay.seed,initialHeroId:replay.initialHeroId,ruleset:replay.ruleset,actions:replay.actions}:{seed:"pilot-six-browser",initialHeroId:"light-speaker",ruleset:"pilot-six-r1",actions:[]},
  });
  await page.addInitScript(({key,value})=>{if(!localStorage.getItem(key))localStorage.setItem(key,value);},{key:HANZI_MAGIC_COMPLETE_SAVE_KEY,value:JSON.stringify(save)});
 }

@@ -3,10 +3,11 @@ import { COMPLETE_CORE_CHARACTER_NODES } from "../../content-graph/core-characte
 import { COMPLETE_COMPONENT_FAMILIES } from "../../content-graph/families";
 import type { CompleteSlotId } from "../../content-graph/types";
 import {
-  PILOT_SIX_RULESET, PILOT_SIX_DEFINITIONS, freshPilotProgress, getPilotSixDefinition,
+  PILOT_SIX_RULESET, PILOT_SIX_DEFINITIONS, freshPilotProgress,
   pilotEncounterKey, pilotReachable, samePilotEdge,
   type ChapterTwoRuleset, type PilotEncounterProgress, type PilotExpression,
 } from "./pilot-six";
+import { CHAPTER_TWO_R2_RULESET, CHAPTER_TWO_R2_DEFINITIONS, getChapterTwoSceneDefinition, getR2Definition, freshR2Progress, isR2Target, type R2EncounterProgress, type R2Target } from "./chapter-two-r2";
 import { createCompleteCharacterHand, type CompleteHandCard } from "../../core/content-solvers";
 import {
   CHAPTER_TWO_EPISODES,
@@ -28,6 +29,7 @@ export interface ChapterTwoState {
   readonly schemaVersion: 1;
   readonly ruleset?: ChapterTwoRuleset;
   readonly pilotProgress?: Readonly<Record<string, PilotEncounterProgress>>;
+  readonly r2Progress?: Readonly<Record<string, R2EncounterProgress>>;
   readonly seed: string;
   readonly heroId: M3HeroId;
   readonly phase: ChapterTwoPhase;
@@ -72,6 +74,8 @@ export type ChapterTwoAction =
   | { readonly type: "pilot-magic"; readonly expression?: PilotExpression }
   | { readonly type: "pilot-move"; readonly nodeId: string }
   | { readonly type: "pilot-observe" }
+  | { readonly type: "r2-target"; readonly targetId: R2Target }
+  | { readonly type: "r2-root" }
   | { readonly type: "start-core" }
   | { readonly type: "finish-ending" };
 
@@ -106,7 +110,8 @@ function currentEncounter(episodeIndex: number, encounterIndex: number) {
 
 function prepareBuild(state: ChapterTwoState, encounterIndex: number): ChapterTwoState {
   const encounter = currentEncounter(state.episodeIndex, encounterIndex);
-  const pilot = getPilotSixDefinition({ ...state, encounterIndex });
+  const pilot = getChapterTwoSceneDefinition({ ...state, encounterIndex });
+  const promotion = getR2Definition({ ...state, encounterIndex });
   return {
     ...state,
     phase: "build",
@@ -121,12 +126,16 @@ function prepareBuild(state: ChapterTwoState, encounterIndex: number): ChapterTw
       pilotProgress: { ...state.pilotProgress, [pilotEncounterKey(pilot)]: state.pilotProgress?.[pilotEncounterKey(pilot)] ?? freshPilotProgress() },
       introducedBehaviorIds: unique([...state.introducedBehaviorIds, ...(pilot.object === "ink-leaves" || pilot.object === "leaf-gate" ? ["family-root-mist" as const] : pilot.object === "stone-path" ? ["family-variant-shadow" as const] : [])]),
     } : {}),
+    ...(promotion ? {
+      r2Progress: { ...state.r2Progress, [pilotEncounterKey(promotion)]: state.r2Progress?.[pilotEncounterKey(promotion)] ?? freshR2Progress() },
+      ...(promotion.object === "voice-bridge" ? { introducedBehaviorIds: unique([...state.introducedBehaviorIds, "family-echo-knot" as const]) } : {}),
+    } : {}),
     gentleMessage: "把字灵送回真实位置；点选和拖动都可以。",
   };
 }
 
 function prepareAbilityChoice(state: ChapterTwoState, episodeIndex: 0 | 1 | 2): ChapterTwoState {
-  if (state.ruleset === PILOT_SIX_RULESET && episodeIndex < 2) return prepareBuild({ ...state, episodeIndex, currentBossId: null, activeBehaviorIds: CHAPTER_TWO_EPISODES[episodeIndex].behaviorIds }, 0);
+  if ((state.ruleset === PILOT_SIX_RULESET && episodeIndex < 2) || state.ruleset === CHAPTER_TWO_R2_RULESET) return prepareBuild({ ...state, episodeIndex, currentBossId: null, activeBehaviorIds: CHAPTER_TWO_EPISODES[episodeIndex].behaviorIds }, 0);
   const offer = CHAPTER_TWO_NEW_ABILITY_IDS.filter((id) => !state.selectedAbilityIds.includes(id));
   return {
     ...state,
@@ -157,7 +166,7 @@ function prepareBoss(state: ChapterTwoState, encounterIndex: number): ChapterTwo
     allPreviouslyIntroduced: definition.behaviorIds.every((id) => state.introducedBehaviorIds.includes(id)),
   } satisfies ChapterTwoBossEvidence;
   const encounter = currentEncounter(state.episodeIndex, encounterIndex);
-  if (getPilotSixDefinition({ ...state, encounterIndex })) return prepareBuild({ ...state, currentBossId: definition.bossId, activeBehaviorIds: definition.behaviorIds, bossEvidence: [...state.bossEvidence, evidence] }, encounterIndex);
+  if (getChapterTwoSceneDefinition({ ...state, encounterIndex })) return prepareBuild({ ...state, currentBossId: definition.bossId, activeBehaviorIds: definition.behaviorIds, bossEvidence: [...state.bossEvidence, evidence] }, encounterIndex);
   return {
     ...state,
     phase: "behavior-telegraph",
@@ -172,7 +181,7 @@ function prepareBoss(state: ChapterTwoState, encounterIndex: number): ChapterTwo
 }
 
 export function createChapterTwoState(seed = "component-roots-return", heroId: M3HeroId = "light-speaker", ruleset?: ChapterTwoRuleset): ChapterTwoState {
-  if (ruleset !== undefined && ruleset !== PILOT_SIX_RULESET) throw new Error("UNKNOWN_CHAPTER_TWO_RULESET");
+  if (ruleset !== undefined && ruleset !== PILOT_SIX_RULESET && ruleset !== CHAPTER_TWO_R2_RULESET) throw new Error("UNKNOWN_CHAPTER_TWO_RULESET");
   return {
     schemaVersion: 1,
     ...(ruleset ? { ruleset, pilotProgress: {} } : {}),
@@ -206,7 +215,7 @@ export function createChapterTwoState(seed = "component-roots-return", heroId: M
   };
 }
 
-export function createChapterTwoRun(seed: string, heroId: M3HeroId, ruleset: ChapterTwoRuleset = PILOT_SIX_RULESET): ChapterTwoRun {
+export function createChapterTwoRun(seed: string, heroId: M3HeroId, ruleset: ChapterTwoRuleset = CHAPTER_TWO_R2_RULESET): ChapterTwoRun {
   return { seed, initialHeroId: heroId, ruleset, actions: [], state: createChapterTwoState(seed, heroId, ruleset) };
 }
 
@@ -229,11 +238,11 @@ function placeCard(state: ChapterTwoState, cardId: string, slotId: CompleteSlotI
   if (placements.length < target.components.length) return { ...state, placements, selectedCardId: null, gentleMessage: "位置正确，下一道字灵也有自己的家。" };
   return {
     ...state,
-    phase: getPilotSixDefinition(state) ? "pilot-meaning" : "composition",
+    phase: getChapterTwoSceneDefinition(state) ? "pilot-meaning" : "composition",
     placements,
     selectedCardId: null,
     discoveredCharacterIds: unique([...state.discoveredCharacterIds, target.id]),
-    ...(getPilotSixDefinition(state)?.object === "stone-path" ? { completedBehaviorIds: unique([...state.completedBehaviorIds, "family-variant-shadow" as const]) } : {}),
+    ...(getChapterTwoSceneDefinition(state)?.object === "stone-path" ? { completedBehaviorIds: unique([...state.completedBehaviorIds, "family-variant-shadow" as const]) } : {}),
     gentleMessage: `${target.glyph}已经完整合起来。`,
   };
 }
@@ -244,6 +253,7 @@ function finishFamilyResult(state: ChapterTwoState): ChapterTwoState {
   if (state.encounterIndex < encounterCount - 2) return prepareBuild(state, state.encounterIndex + 1);
   if (state.encounterIndex === encounterCount - 2 && state.episodeIndex < 3) return prepareBoss(state, state.encounterIndex + 1);
   if (state.encounterIndex < encounterCount - 1) return prepareBuild(state, state.encounterIndex + 1);
+  if (state.ruleset === CHAPTER_TWO_R2_RULESET && state.episodeIndex === 3 && !allR2RootsConnected(state)) return state;
   return {
     ...state,
     phase: "episode-repair",
@@ -259,12 +269,53 @@ function finishFamilyResult(state: ChapterTwoState): ChapterTwoState {
 }
 
 export function getPilotProgress(state: ChapterTwoState): PilotEncounterProgress {
-  const pilot = getPilotSixDefinition(state);
+  const pilot = getChapterTwoSceneDefinition(state);
   return pilot ? state.pilotProgress?.[pilotEncounterKey(pilot)] ?? freshPilotProgress() : freshPilotProgress();
 }
 
+export function getR2Progress(state: ChapterTwoState): R2EncounterProgress {
+  const definition = getR2Definition(state);
+  return definition ? state.r2Progress?.[pilotEncounterKey(definition)] ?? freshR2Progress() : freshR2Progress();
+}
+
+export function allR2RootsConnected(state: ChapterTwoState): boolean {
+  return CHAPTER_TWO_EPISODES.slice(0, 3).every(episode => state.repairedObjectIds.includes(episode.repairId))
+    && CHAPTER_TWO_R2_DEFINITIONS.filter(definition => definition.rootSource !== undefined).every(definition => state.r2Progress?.[pilotEncounterKey(definition)]?.rootConnected);
+}
+
+function reduceR2Action(state: ChapterTwoState, action: ChapterTwoAction): ChapterTwoState | undefined {
+  if (!action.type.startsWith("r2-")) return undefined;
+  const definition = getR2Definition(state);
+  if (!definition) return state;
+  const current = getR2Progress(state), pilot = getPilotProgress(state), key = pilotEncounterKey(definition);
+  if (action.type === "r2-root") {
+    if (definition.rootSource === undefined || state.phase !== "family-connect" || current.rootConnected || !pilot.magicApplied || !pilotReachable(definition.startId, pilot.edges).has(definition.endId)
+      || !CHAPTER_TWO_EPISODES.slice(0, 3).every(episode => state.repairedObjectIds.includes(episode.repairId))) return state;
+    return { ...state, phase: "family-result", r2Progress: { ...state.r2Progress, [key]: { ...current, rootConnected: true } }, discoveredFamilyIds: unique([...state.discoveredFamilyIds, definition.familyId]), gentleMessage: `${CHAPTER_TWO_EPISODES[definition.rootSource].name}的根线已经真正接入树心。` };
+  }
+  if (action.type !== "r2-target" || state.phase !== "pilot-meaning" || current.targets.includes(action.targetId)) return state;
+  const target = definition.targets.find(target => target.id === action.targetId);
+  if (!target) return state;
+  if (definition.object === "root-road") {
+    const road = PILOT_SIX_DEFINITIONS[4];
+    if (!pilotReachable(road.startId, state.pilotProgress?.[pilotEncounterKey(road)]?.edges ?? []).has(road.endId)) return state;
+  }
+  const targets = [...current.targets, target.id];
+  const ready = definition.choice || definition.targets.every(target => targets.includes(target.id));
+  const after = ready && !definition.choice && definition.targets.length > 1
+    ? definition.object === "voice-bridge" ? "两端都回应了，声纹已经相遇。把草字头的字碑接通，让光桥稳稳连起来。"
+      : definition.object === "rice-lamps" ? "两组小灯都亮起来了。再把门形字脉连通，让灯光照过整条通路。"
+      : "两个锁齿都补齐了。再连接宝盖头的字碑，让锁闩接通。"
+    : target.after;
+  return { ...state, phase: ready ? "family-connect" : "pilot-meaning", gentleMessage: after,
+    r2Progress: { ...state.r2Progress, [key]: { ...current, targets, choice: definition.choice ? target.id : null } },
+    pilotProgress: { ...state.pilotProgress, [key]: { ...pilot, magicApplied: ready } },
+    ...(definition.object === "voice-bridge" && ready ? { completedBehaviorIds: unique([...state.completedBehaviorIds, "family-echo-knot" as const]) } : {}),
+  };
+}
+
 function reducePilotAction(state: ChapterTwoState, action: ChapterTwoAction): ChapterTwoState | undefined {
-  const pilot = getPilotSixDefinition(state);
+  const pilot = getChapterTwoSceneDefinition(state);
   if (!pilot || !["build", "pilot-meaning", "family-connect", "family-result"].includes(state.phase)) return action.type.startsWith("pilot-") ? state : undefined;
   const current = getPilotProgress(state);
   const progress = (patch: Partial<PilotEncounterProgress>, other: Partial<ChapterTwoState> = {}): ChapterTwoState => ({
@@ -272,10 +323,12 @@ function reducePilotAction(state: ChapterTwoState, action: ChapterTwoAction): Ch
   });
   const finish = (next: ChapterTwoState): ChapterTwoState => {
     const done = getPilotProgress(next);
-    return pilotReachable(pilot.startId, done.edges).has(pilot.endId) && (pilot.object !== "leaf-gate" || done.mistCleared)
+    if (getR2Definition(state)?.rootSource !== undefined && pilotReachable(pilot.startId, done.edges).has(pilot.endId) && !getR2Progress(next).rootConnected) return { ...next, gentleMessage: "这条字脉已经连通。点树心，把区域根线接入。" };
+    return pilotReachable(pilot.startId, done.edges).has(pilot.endId) && (pilot.object !== "leaf-gate" || done.mistCleared) && (getR2Definition(state)?.rootSource === undefined || getR2Progress(next).rootConnected)
       ? triggerAbility({ ...next, phase: "family-result", discoveredFamilyIds: unique([...next.discoveredFamilyIds, pilot.familyId]), gentleMessage: "入口和终点接通了！你接出的通路已经留在这里。" }, "family-root-link")
       : next;
   };
+  if (getR2Definition(state) && action.type.startsWith("pilot-")) return state;
   if (action.type === "pilot-magic") {
     if (state.phase !== "pilot-meaning" || pilot.object === "waterwheel" || current.magicApplied) return state;
     if (pilot.object === "vine" ? !["quiet", "talk"].includes(String(action.expression)) : action.expression !== undefined) return state;
@@ -315,6 +368,8 @@ function reducePilotAction(state: ChapterTwoState, action: ChapterTwoAction): Ch
 }
 
 export function reduceChapterTwoState(state: ChapterTwoState, action: ChapterTwoAction): ChapterTwoState {
+  const r2Next = reduceR2Action(state, action);
+  if (r2Next !== undefined) return counted(state, r2Next);
   const pilotNext = reducePilotAction(state, action);
   if (pilotNext !== undefined) return counted(state, pilotNext);
   let next = state;
@@ -410,8 +465,13 @@ export function isChapterTwoAction(value: unknown, ruleset?: ChapterTwoRuleset):
   if (!value || typeof value !== "object" || Array.isArray(value)) return false;
   const action = value as Record<string, unknown>;
   if (typeof action.type !== "string") return false;
+  if (action.type.startsWith("r2-")) {
+    if (ruleset !== CHAPTER_TWO_R2_RULESET) return false;
+    if (action.type === "r2-root") return Object.keys(action).length === 1;
+    return action.type === "r2-target" && Object.keys(action).sort().join("|") === "targetId|type" && isR2Target(action.targetId);
+  }
   if (action.type.startsWith("pilot-")) {
-    if (ruleset !== PILOT_SIX_RULESET) return false;
+    if (ruleset !== PILOT_SIX_RULESET && ruleset !== CHAPTER_TWO_R2_RULESET) return false;
     if (action.type === "pilot-observe") return Object.keys(action).length === 1;
     if (action.type === "pilot-move") return Object.keys(action).sort().join("|") === "nodeId|type" && typeof action.nodeId === "string" && action.nodeId.length <= 80;
     if (action.type === "pilot-magic") return Object.keys(action).sort().join("|") === "type" || (Object.keys(action).sort().join("|") === "expression|type" && ["quiet", "talk"].includes(String(action.expression)));

@@ -1,0 +1,349 @@
+{
+  "version": "chapter-two-r2",
+  "runtimeNamespace": "assets/hanzi-radical-battle/chapter-two/r2",
+  "sourceOnly": true,
+  "assets": [
+    {
+      "name": "corridor-environment",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/chapter-two/r2/corridor-environment.png",
+        "width": 1586,
+        "height": 992,
+        "bytes": 2268230,
+        "sha256": "994494e513adb11bd4266fa58b1455f0a0511e987b3397b453058469dc5e86b7",
+        "hasAlpha": false,
+        "transparent": 0,
+        "partial": 0,
+        "opaque": 1573312,
+        "borderAbove20": 5152,
+        "borderMax": 255,
+        "decodedRgbaBytes": 6293248
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/chapter-two/r2/corridor-environment.webp",
+        "width": 1280,
+        "height": 801,
+        "bytes": 122592,
+        "sha256": "6fb8c84b81dfcec890d089d01987b51f7bcd2be836762f224ede1396af595222",
+        "hasAlpha": false,
+        "transparent": 0,
+        "partial": 0,
+        "opaque": 1025280,
+        "borderAbove20": 4158,
+        "borderMax": 255,
+        "decodedRgbaBytes": 4101120
+      },
+      "origin": {
+        "tool": "OpenAI image_gen (built-in)",
+        "generated": "2026-09-06",
+        "authorization": "User GAME-CODEX-STEP4-HANZI-CHAPTER2-FULL-PROMOTION authorized generation and project use",
+        "promptId": "corridor-environment",
+        "transformation": "Original PNG retained; Sharp proportional resize and WebP quality82 alphaQuality100. No background substitution or alpha removal."
+      }
+    },
+    {
+      "name": "clue-leaf",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/chapter-two/r2/clue-leaf.png",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 2323935,
+        "sha256": "f9d7f2e741fb1a63b86228feca85076796f3bf8ffa5f23c5191f61af9c8d20a2",
+        "hasAlpha": true,
+        "transparent": 797106,
+        "partial": 775758,
+        "opaque": 0,
+        "borderAbove20": 0,
+        "borderMax": 0,
+        "decodedRgbaBytes": 6291456
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/chapter-two/r2/clue-leaf.webp",
+        "width": 280,
+        "height": 187,
+        "bytes": 13788,
+        "sha256": "75a6e2da6912bea9705d1dd052662ddf424724a7ed9d96ad14230b9cb5c5a35f",
+        "hasAlpha": true,
+        "transparent": 25947,
+        "partial": 25985,
+        "opaque": 428,
+        "borderAbove20": 0,
+        "borderMax": 0,
+        "decodedRgbaBytes": 209440
+      },
+      "origin": {
+        "tool": "OpenAI image_gen (built-in)",
+        "generated": "2026-09-06",
+        "authorization": "User GAME-CODEX-STEP4-HANZI-CHAPTER2-FULL-PROMOTION authorized generation and project use",
+        "promptId": "clue-leaf",
+        "transformation": "Original PNG retained; Sharp proportional resize and WebP quality82 alphaQuality100. No background substitution or alpha removal."
+      }
+    },
+    {
+      "name": "voice-terminal",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/chapter-two/r2/voice-terminal.png",
+        "width": 1230,
+        "height": 1278,
+        "bytes": 1232159,
+        "sha256": "5e671ef7f53eb4e9176712659e679436bc64fc93aac49500f6e77229a438ceab",
+        "hasAlpha": true,
+        "transparent": 1065461,
+        "partial": 506067,
+        "opaque": 412,
+        "borderAbove20": 0,
+        "borderMax": 1,
+        "decodedRgbaBytes": 6287760
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/chapter-two/r2/voice-terminal.webp",
+        "width": 300,
+        "height": 312,
+        "bytes": 23198,
+        "sha256": "b6d6dedc366c1b87000923b98b627c49292b33fbdf25386628f78414edd83f7b",
+        "hasAlpha": true,
+        "transparent": 62962,
+        "partial": 29941,
+        "opaque": 697,
+        "borderAbove20": 0,
+        "borderMax": 1,
+        "decodedRgbaBytes": 374400
+      },
+      "origin": {
+        "tool": "OpenAI image_gen (built-in)",
+        "generated": "2026-09-06",
+        "authorization": "User GAME-CODEX-STEP4-HANZI-CHAPTER2-FULL-PROMOTION authorized generation and project use",
+        "promptId": "voice-terminal",
+        "transformation": "Original PNG retained; Sharp proportional resize and WebP quality82 alphaQuality100. No background substitution or alpha removal."
+      }
+    },
+    {
+      "name": "rice-bowl",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/chapter-two/r2/rice-bowl.png",
+        "width": 1312,
+        "height": 1199,
+        "bytes": 1209955,
+        "sha256": "396215e85351e4b882173b01d18bca12faaf3ad92aa6698854473448ddcee81d",
+        "hasAlpha": true,
+        "transparent": 997920,
+        "partial": 575129,
+        "opaque": 39,
+        "borderAbove20": 0,
+        "borderMax": 1,
+        "decodedRgbaBytes": 6292352
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/chapter-two/r2/rice-bowl.webp",
+        "width": 280,
+        "height": 256,
+        "bytes": 16790,
+        "sha256": "35c2ae9e6b418bbe266b95f30b1a909346083ea98d8d585299e0b510b200351a",
+        "hasAlpha": true,
+        "transparent": 45001,
+        "partial": 26352,
+        "opaque": 327,
+        "borderAbove20": 0,
+        "borderMax": 0,
+        "decodedRgbaBytes": 286720
+      },
+      "origin": {
+        "tool": "OpenAI image_gen (built-in)",
+        "generated": "2026-09-06",
+        "authorization": "User GAME-CODEX-STEP4-HANZI-CHAPTER2-FULL-PROMOTION authorized generation and project use",
+        "promptId": "rice-bowl",
+        "transformation": "Original PNG retained; Sharp proportional resize and WebP quality82 alphaQuality100. No background substitution or alpha removal."
+      }
+    },
+    {
+      "name": "clock-case",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/chapter-two/r2/clock-case.png",
+        "width": 1254,
+        "height": 1254,
+        "bytes": 1055724,
+        "sha256": "3b4b26fd9e6c49b4a2cb6dee3d796184c7a46f12aed9129b15e489ee99478b8e",
+        "hasAlpha": true,
+        "transparent": 1099388,
+        "partial": 472729,
+        "opaque": 399,
+        "borderAbove20": 0,
+        "borderMax": 0,
+        "decodedRgbaBytes": 6290064
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/chapter-two/r2/clock-case.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 17344,
+        "sha256": "f950e771e314ce3acfff6711779d58a0b44773e0d87d98db9c4477f4f0e0e488",
+        "hasAlpha": true,
+        "transparent": 71162,
+        "partial": 30655,
+        "opaque": 583,
+        "borderAbove20": 0,
+        "borderMax": 0,
+        "decodedRgbaBytes": 409600
+      },
+      "origin": {
+        "tool": "OpenAI image_gen (built-in)",
+        "generated": "2026-09-06",
+        "authorization": "User GAME-CODEX-STEP4-HANZI-CHAPTER2-FULL-PROMOTION authorized generation and project use",
+        "promptId": "clock-case",
+        "transformation": "Original PNG retained; Sharp proportional resize and WebP quality82 alphaQuality100. No background substitution or alpha removal."
+      }
+    },
+    {
+      "name": "shadow-door",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/chapter-two/r2/shadow-door.png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 3034088,
+        "sha256": "ed04600192cab42622402105bf4b2f934f7940b78179034d791d21d1e8833fac",
+        "hasAlpha": true,
+        "transparent": 470092,
+        "partial": 1102772,
+        "opaque": 0,
+        "borderAbove20": 0,
+        "borderMax": 5,
+        "decodedRgbaBytes": 6291456
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/chapter-two/r2/shadow-door.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 56902,
+        "sha256": "199561e59da756f2238b7cf84eed8b2bb6370c2cbc3c5a9717c6f6ccfc864ca2",
+        "hasAlpha": true,
+        "transparent": 45734,
+        "partial": 107159,
+        "opaque": 707,
+        "borderAbove20": 0,
+        "borderMax": 7,
+        "decodedRgbaBytes": 614400
+      },
+      "origin": {
+        "tool": "OpenAI image_gen (built-in)",
+        "generated": "2026-09-06",
+        "authorization": "User GAME-CODEX-STEP4-HANZI-CHAPTER2-FULL-PROMOTION authorized generation and project use",
+        "promptId": "shadow-door",
+        "transformation": "Original PNG retained; Sharp proportional resize and WebP quality82 alphaQuality100. No background substitution or alpha removal."
+      }
+    },
+    {
+      "name": "lock-body",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/chapter-two/r2/lock-body.png",
+        "width": 1254,
+        "height": 1254,
+        "bytes": 1435669,
+        "sha256": "8f9c23f2cbde7892cefced47407473afd46774175c2e54ff6567045a77607abf",
+        "hasAlpha": true,
+        "transparent": 1018912,
+        "partial": 553227,
+        "opaque": 377,
+        "borderAbove20": 0,
+        "borderMax": 1,
+        "decodedRgbaBytes": 6290064
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/chapter-two/r2/lock-body.webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 42364,
+        "sha256": "cac58ef0b5e96b471abbe71569d90b3c45e0a862f355578511a74762e38b2a3d",
+        "hasAlpha": true,
+        "transparent": 148877,
+        "partial": 80937,
+        "opaque": 586,
+        "borderAbove20": 0,
+        "borderMax": 0,
+        "decodedRgbaBytes": 921600
+      },
+      "origin": {
+        "tool": "OpenAI image_gen (built-in)",
+        "generated": "2026-09-06",
+        "authorization": "User GAME-CODEX-STEP4-HANZI-CHAPTER2-FULL-PROMOTION authorized generation and project use",
+        "promptId": "lock-body",
+        "transformation": "Original PNG retained; Sharp proportional resize and WebP quality82 alphaQuality100. No background substitution or alpha removal."
+      }
+    },
+    {
+      "name": "metal-shard",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/chapter-two/r2/metal-shard.png",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 2013185,
+        "sha256": "0665e498ffb914328644de429b7f63d0b9c7927a1aac0035b2a688ffcd34148b",
+        "hasAlpha": true,
+        "transparent": 1034493,
+        "partial": 538371,
+        "opaque": 0,
+        "borderAbove20": 0,
+        "borderMax": 1,
+        "decodedRgbaBytes": 6291456
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/chapter-two/r2/metal-shard.webp",
+        "width": 180,
+        "height": 120,
+        "bytes": 6622,
+        "sha256": "96103b1304638132e140768f35eaeab88afa8c5e930130f6201094ba02780860",
+        "hasAlpha": true,
+        "transparent": 13571,
+        "partial": 7711,
+        "opaque": 318,
+        "borderAbove20": 0,
+        "borderMax": 0,
+        "decodedRgbaBytes": 86400
+      },
+      "origin": {
+        "tool": "OpenAI image_gen (built-in)",
+        "generated": "2026-09-06",
+        "authorization": "User GAME-CODEX-STEP4-HANZI-CHAPTER2-FULL-PROMOTION authorized generation and project use",
+        "promptId": "metal-shard",
+        "transformation": "Original PNG retained; Sharp proportional resize and WebP quality82 alphaQuality100. No background substitution or alpha removal."
+      }
+    },
+    {
+      "name": "root-heart",
+      "source": {
+        "file": "assets/images/hanzi-radical-battle/chapter-two/r2/root-heart.png",
+        "width": 1230,
+        "height": 1278,
+        "bytes": 1775668,
+        "sha256": "7c0b9af2c6626d1a60ff25b228cb47d261ad68813b1698133af30e06310a4710",
+        "hasAlpha": true,
+        "transparent": 859990,
+        "partial": 711535,
+        "opaque": 415,
+        "borderAbove20": 0,
+        "borderMax": 1,
+        "decodedRgbaBytes": 6287760
+      },
+      "runtime": {
+        "file": "public/assets/hanzi-radical-battle/chapter-two/r2/root-heart.webp",
+        "width": 480,
+        "height": 499,
+        "bytes": 71504,
+        "sha256": "d39bb2d242a93dd74022f7c1ad0ee61b96efcf94e8da69b9d50f6946db0d182e",
+        "hasAlpha": true,
+        "transparent": 131586,
+        "partial": 106421,
+        "opaque": 1513,
+        "borderAbove20": 0,
+        "borderMax": 0,
+        "decodedRgbaBytes": 958080
+      },
+      "origin": {
+        "tool": "OpenAI image_gen (built-in)",
+        "generated": "2026-09-06",
+        "authorization": "User GAME-CODEX-STEP4-HANZI-CHAPTER2-FULL-PROMOTION authorized generation and project use",
+        "promptId": "root-heart",
+        "transformation": "Original PNG retained; Sharp proportional resize and WebP quality82 alphaQuality100. No background substitution or alpha removal."
+      }
+    }
+  ]
+}

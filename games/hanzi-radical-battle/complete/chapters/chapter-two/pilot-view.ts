@@ -3,16 +3,19 @@ import { m5AssetUrl } from "../../../v2/chapter-one/m5-assets";
 import { COMPLETE_CORE_CHARACTER_NODES, COMPLETE_CORE_READING_SENSES } from "../../content-graph/core-characters";
 import { COMPLETE_COMPONENT_FAMILIES, COMPLETE_COMPONENT_RELATIONS } from "../../content-graph/families";
 import { getPilotProgress, type ChapterTwoState } from "./engine";
-import { PILOT_SIX_DEFINITIONS, getPilotSixDefinition, pilotEncounterKey, pilotReachable, samePilotEdge, type PilotSixDefinition, type PilotEdge } from "./pilot-six";
+import { PILOT_SIX_DEFINITIONS, pilotEncounterKey, pilotReachable, samePilotEdge, type PilotEdge } from "./pilot-six";
+import { CHAPTER_TWO_R2_DEFINITIONS, getChapterTwoSceneDefinition, getR2Definition, type ChapterTwoSceneDefinition } from "./chapter-two-r2";
+import { r2EnvironmentUrl, r2NodePoint, renderR2Controls, renderR2Edge, renderR2SceneObjects, renderR2Status, renderR2Transition } from "./chapter-two-r2-view";
 
 const glyph = (id: string) => COMPLETE_CORE_CHARACTER_NODES.find((character) => character.id === id)!;
 const escape = (text: string) => text.replace(/[&<>\"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[char]!);
 export const pilotAssetUrl = (name: string) => `${import.meta.env.BASE_URL}assets/hanzi-radical-battle/pilot-six/r1/${name}.webp`;
-export const isPilotSurface = (state: ChapterTwoState) => Boolean(getPilotSixDefinition(state) && ["chapter-intro", "build", "pilot-meaning", "family-connect", "family-result"].includes(state.phase));
+export const isPilotSurface = (state: ChapterTwoState) => Boolean(getChapterTwoSceneDefinition(state) && (["chapter-intro", "build", "pilot-meaning", "family-connect", "family-result"].includes(state.phase) || getR2Definition(state) && ["episode-repair", "episode-complete", "core-intro", "ending", "chapter-summary"].includes(state.phase)));
 
 interface Point { x: number; y: number }
 function pointStyle(point: Point): string { return `left:calc(50% + ${point.x - 500}px * var(--pilot-scale));top:calc(50% + ${point.y - 310}px * var(--pilot-scale))`; }
-function nodePoint(definition: PilotSixDefinition, id: string): Point {
+function nodePoint(definition: ChapterTwoSceneDefinition, id: string): Point {
+  if ("targets" in definition) return r2NodePoint(definition, id);
   if (id === definition.startId) return { x: 260, y: 335 };
   if (id === definition.endId) return { x: 740, y: 335 };
   return { x: 500, y: id === definition.decoyId && definition.nodeIds.length > 2 ? 445 : 185 };
@@ -20,7 +23,7 @@ function nodePoint(definition: PilotSixDefinition, id: string): Point {
 function art(name: string, point: Point, width: number, className = ""): string {
   return `<img class="pilot-art ${className}" src="${pilotAssetUrl(name)}" alt="" draggable="false" style="left:${point.x}px;top:${point.y}px;width:${width}px" decoding="async">`;
 }
-function edgeArt(definition: PilotSixDefinition, edge: PilotEdge, expression: string | null): string {
+function edgeArt(definition: ChapterTwoSceneDefinition, edge: PilotEdge, expression: string | null): string {
   const a = nodePoint(definition, edge[0]); const b = nodePoint(definition, edge[1]);
   const angle = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
   const distance = Math.hypot(b.x - a.x, b.y - a.y);
@@ -33,7 +36,7 @@ function edgeArt(definition: PilotSixDefinition, edge: PilotEdge, expression: st
   return `<img class="pilot-art pilot-bridge" src="${pilotAssetUrl(name)}" alt="" draggable="false" style="left:${midpoint.x}px;top:${midpoint.y}px;width:${distance + 35}px;transform:translate(-50%,-50%) rotate(${angle}deg)" decoding="async">`;
 }
 
-function roadFootprints(definition: PilotSixDefinition, edges: readonly PilotEdge[]): string {
+function roadFootprints(definition: ChapterTwoSceneDefinition, edges: readonly PilotEdge[]): string {
   const middle = definition.nodeIds[1];
   const directions: PilotEdge[] = [[definition.startId, definition.endId], [definition.startId, middle], [middle, definition.endId]];
   return `<svg class="pilot-path-lines" viewBox="0 0 1000 620" aria-hidden="true">${directions.map((edge) => {
@@ -48,7 +51,8 @@ function roadFootprints(definition: PilotSixDefinition, edges: readonly PilotEdg
   }).join("")}</svg>`;
 }
 
-function sceneObject(state: ChapterTwoState, definition: PilotSixDefinition): string {
+function sceneObject(state: ChapterTwoState, definition: ChapterTwoSceneDefinition): string {
+  if ("targets" in definition) return renderR2SceneObjects(state, definition);
   const current = getPilotProgress(state); const active = current.magicApplied;
   if (definition.object === "ink-leaves") return art("ink-leaves", { x: active ? 810 : 500, y: active ? 430 : 330 }, active ? 175 : 450, active ? "pilot-ink-cleared" : "pilot-ink-cover") + (active ? `<svg class="pilot-path-lines" viewBox="0 0 1000 620" aria-hidden="true"><path class="pilot-revealed-root" d="M260 365 Q500 420 740 365"/><g class="pilot-hand-light" transform="translate(432 283) rotate(70 32 32)"><path d="M26 31V11q0-6 5-6t5 6v14l4-2q5-2 8 2l8 9q3 5 0 11L48 56H28L17 42q-4-5 0-8t9 3"/></g></svg>` : "");
   if (definition.object === "lamp") return `${art("bowl", { x: 340, y: 425 }, 115)}${art("lamp", { x: 380, y: 255 }, 160, active ? "pilot-lamp-lit" : "pilot-lamp-tired")}${active ? `<span class="pilot-lamp-light" style="left:380px;top:199px"></span>` : ""}`;
@@ -65,7 +69,8 @@ function sceneObject(state: ChapterTwoState, definition: PilotSixDefinition): st
   return `${(roadProgress?.edges ?? []).map((edge) => edgeArt(road, edge, null)).join("")}${art("waterwheel", { x: wheelPoint.x + (parked ? 80 : 0), y: wheelPoint.y - (parked ? 120 : 40) }, 150, "pilot-moving-wheel")}`;
 }
 
-function objectControls(state: ChapterTwoState, definition: PilotSixDefinition): string {
+function objectControls(state: ChapterTwoState, definition: ChapterTwoSceneDefinition): string {
+  if ("targets" in definition) return renderR2Controls(state, definition, pointStyle);
   if (state.phase !== "pilot-meaning") return "";
   if (definition.object === "vine") return `<div class="pilot-expression-options" aria-label="给故事伙伴表达心情"><button type="button" data-pilot-expression="quiet" style="${pointStyle({ x: 500, y: 215 })}"><span>想静静</span><small>把心灯送到上方藤弯</small></button><button type="button" data-pilot-expression="talk" style="${pointStyle({ x: 500, y: 465 })}"><span>想聊聊</span><small>把心灯送到下方藤弯</small></button></div>`;
   if (definition.object === "waterwheel") {
@@ -75,7 +80,7 @@ function objectControls(state: ChapterTwoState, definition: PilotSixDefinition):
   return `<button type="button" class="pilot-magic-target" data-action="pilot-magic" style="${pointStyle({ x: definition.object === "leaf-gate" ? 700 : 500, y: definition.object === "leaf-gate" ? 295 : 440 })}"><span aria-hidden="true">${glyph(definition.characterId).glyph}</span><b>${definition.magicLabel}</b></button>`;
 }
 
-function familyNodes(state: ChapterTwoState, definition: PilotSixDefinition): string {
+function familyNodes(state: ChapterTwoState, definition: ChapterTwoSceneDefinition): string {
   if (!["family-connect", "family-result"].includes(state.phase)) return "";
   const current = getPilotProgress(state); const reached = pilotReachable(definition.startId, current.edges);
   return [...definition.nodeIds, definition.decoyId].map((id) => {
@@ -93,14 +98,16 @@ function renderBuild(state: ChapterTwoState): string {
   }).join("")}</div><div class="pilot-hand-area"><p>把“${target.familiarWord}”里的字合起来</p><div class="pilot-hand" aria-label="字灵手牌" role="group">${state.hand.map((card) => {
     const used = state.placements.some((placement) => placement.cardId === card.id); const selected = state.selectedCardId === card.id;
     return `<button type="button" draggable="${!used}" data-card-id="${card.id}" aria-pressed="${selected}" ${used ? "disabled" : ""}><span>${card.glyph}</span></button>`;
-  }).join("")}</div><div class="pilot-build-tools"><button type="button" data-action="undo" ${state.placements.length ? "" : "disabled"}>收回一步</button><small>点字灵，再点它的位置</small></div>${getPilotSixDefinition(state)?.object === "stone-path" ? `<p class="pilot-variant-shadow" data-recovered="${state.placements.some((placement) => placement.slotId === "left")}"><span>足</span><span aria-hidden="true">→</span><span>⻊</span><small>足字旁在左边会变形</small></p>` : ""}</div></section>`;
+  }).join("")}</div><div class="pilot-build-tools"><button type="button" data-action="undo" ${state.placements.length ? "" : "disabled"}>收回一步</button><small>点字灵，再点它的位置</small></div>${getChapterTwoSceneDefinition(state)?.object === "stone-path" ? `<p class="pilot-variant-shadow" data-recovered="${state.placements.some((placement) => placement.slotId === "left")}"><span>足</span><span aria-hidden="true">→</span><span>⻊</span><small>足字旁在左边会变形</small></p>` : ""}</div></section>`;
 }
 
-function renderDock(state: ChapterTwoState, definition: PilotSixDefinition): string {
+function renderDock(state: ChapterTwoState, definition: ChapterTwoSceneDefinition): string {
+  if ("targets" in definition) { const transition = renderR2Transition(state, definition); if (transition) return transition; }
   if (state.phase === "chapter-intro") return `<div class="pilot-intro"><p>树冠上的根线断开了。先合字，再用字光找路。</p><button type="button" class="pilot-primary" data-action="start" data-primary-focus>走上木语树冠</button></div>`;
   if (state.phase === "build") return renderBuild(state);
   const target = glyph(definition.characterId); const sense = COMPLETE_CORE_READING_SENSES.find((entry) => entry.id === target.readingSenseIds[0])!;
-  if (state.phase === "pilot-meaning") return `<section class="pilot-meaning" data-testid="chapter-two-meaning"><div class="pilot-meaning-word"><b>${target.glyph}</b><span><strong>${sense.pinyin}</strong><em>${sense.fixedPhrase}</em></span></div><div><p>${target.shortMeaning}</p><p>${definition.object === "lamp" ? "伙伴吃饱了，放下碗。把饱足暖光送给灯苗吧。" : definition.object === "vine" ? "伙伴想表达现在的心情。两种表达都可以。" : target.magicEffect}</p><button type="button" data-action="speak-character">听“${sense.fixedPhrase}”</button></div></section>`;
+  const coreMagic = "targets" in definition && definition.rootSource !== undefined ? ["把已学的心灯送到一弯根藤，再让树冠根线入心。", "让字光沿先前接好的踏石前进，再把清泉根线接入树心。", "用已学指光照清最后的根线，再接通手形字脉。"][definition.rootSource] : undefined;
+  if (state.phase === "pilot-meaning") return `<section class="pilot-meaning" data-testid="chapter-two-meaning"><div class="pilot-meaning-word"><b>${target.glyph}</b><span><strong>${sense.pinyin}</strong><em>${sense.fixedPhrase}</em></span></div><div><p>${target.shortMeaning}</p><p>${coreMagic ?? (definition.object === "lamp" ? "伙伴吃饱了，放下碗。把饱足暖光送给灯苗吧。" : definition.object === "vine" ? "伙伴想表达现在的心情。两种表达都可以。" : target.magicEffect)}</p><button type="button" data-action="speak-character">听“${sense.fixedPhrase}”</button></div></section>`;
   const family = COMPLETE_COMPONENT_FAMILIES.find((candidate) => candidate.id === definition.familyId)!;
   return `<section class="pilot-family-dock" data-testid="chapter-two-${state.phase}" data-family-id="${definition.familyId}"><div><h2>${state.phase === "family-result" ? "通路接通了" : family.name}</h2><p>${family.childFacingExplanation}</p><details><summary>看看部件线索</summary>${[...definition.nodeIds, definition.decoyId].map((id) => {
     const relation = COMPLETE_COMPONENT_RELATIONS.find((entry) => entry.characterId === id && (id === definition.decoyId || entry.familyId === definition.familyId))!;
@@ -109,11 +116,14 @@ function renderDock(state: ChapterTwoState, definition: PilotSixDefinition): str
 }
 
 export function renderPilotSix(state: ChapterTwoState): string {
-  const definition = getPilotSixDefinition(state)!; const current = getPilotProgress(state); const hero = M3_HEROES.find((candidate) => candidate.id === state.heroId)!;
+  const definition = getChapterTwoSceneDefinition(state)!; const current = getPilotProgress(state); const hero = M3_HEROES.find((candidate) => candidate.id === state.heroId)!;
+  const r2 = getR2Definition(state);
   const intro = state.phase === "chapter-intro";
-  const step = PILOT_SIX_DEFINITIONS.indexOf(definition) + 1;
-  const phaseGoal = intro ? "一起把树冠上的通路找回来" : state.phase === "build" ? `合好“${glyph(definition.characterId).glyph}”，${definition.goal}` : state.phase === "family-result" ? "通路已经接好，随时可以继续" : state.phase === "family-connect" ? "连接同一字脉，让入口通到终点" : definition.goal;
-  return `<div class="pilot-adventure"><div class="pilot-goal"><span>${String(step).padStart(2, "0")} · ${definition.scene === "canopy" ? "木语树冠" : "清泉石谷"}</span><h2>${phaseGoal}</h2></div><section class="pilot-stage" aria-label="${definition.scene === "canopy" ? "木语树冠" : "清泉石谷"}可操作场景" data-testid="pilot-stage"><div class="pilot-world-plane" aria-hidden="true"><img class="pilot-environment" src="${pilotAssetUrl(`${definition.scene}-environment`)}" alt="" decoding="async">${current.edges.map((edge) => edgeArt(definition, edge, current.expression)).join("")}${sceneObject(state, definition)}</div>${!intro ? objectControls(state, definition) + familyNodes(state, definition) : ""}<div class="pilot-companion"><img src="${m5AssetUrl(hero.iconKey)}" alt=""><span>${hero.name}</span></div>${definition.object === "leaf-gate" ? `<div class="pilot-keeper"><img src="${m5AssetUrl("boss-lantern-root")}" alt="树冠守护者"><small>树冠守护者</small></div>${!current.mistCleared && ["pilot-meaning", "family-connect"].includes(state.phase) ? `<button type="button" class="pilot-observe" data-action="pilot-observe">用已学的指光看清根线</button>` : ""}` : ""}</section><div class="pilot-dock">${renderDock(state, definition)}</div>${!intro ? `<p class="pilot-feedback" role="status">${escape(state.gentleMessage)}</p>` : ""}</div>`;
+  const step = r2 ? CHAPTER_TWO_R2_DEFINITIONS.indexOf(r2) + 7 : PILOT_SIX_DEFINITIONS.indexOf(definition as typeof PILOT_SIX_DEFINITIONS[number]) + 1;
+  const sceneName = definition.scene === "canopy" ? "木语树冠" : definition.scene === "valley" ? "清泉石谷" : definition.scene === "corridor" ? "门影长廊" : "字脉树心";
+  const transitionGoal = r2 ? ({ "core-intro": "把三片区域的根线接回树心", "episode-repair": r2.scene === "core" ? "三条根线入心，字光回到森林" : "这片区域恢复了", "episode-complete": "沿恢复的通路继续探索", ending: "森林的字光传向家灯小镇", "chapter-summary": "第二章修复完成，前往家灯小镇" } as Record<string, string>)[state.phase] : undefined;
+  const phaseGoal = transitionGoal ?? (intro ? "一起把树冠上的通路找回来" : state.phase === "build" ? `合好“${glyph(definition.characterId).glyph}”，${definition.goal}` : state.phase === "family-result" ? "通路已经接好，随时可以继续" : state.phase === "family-connect" ? "连接同一字脉，让入口通到终点" : definition.goal);
+  return `<div class="pilot-adventure${r2 ? " pilot-adventure--r2" : ""}"><div class="pilot-goal"><span>${definition.scene === "core" ? "树心" : String(step).padStart(2, "0")} · ${sceneName}</span><h2>${phaseGoal}</h2></div><section class="pilot-stage" ${r2 ? `data-r2-object="${r2.object}" data-dense-family="${["family-connect", "family-result"].includes(state.phase) && r2.nodeIds.length > 3}"` : ""} aria-label="${sceneName}可操作场景" data-testid="pilot-stage"><div class="pilot-world-plane" aria-hidden="true"><img class="pilot-environment" src="${r2 ? r2EnvironmentUrl(r2) : pilotAssetUrl(`${definition.scene}-environment`)}" alt="" decoding="async">${current.edges.map((edge) => r2 ? renderR2Edge(state, r2, edge) : edgeArt(definition, edge, current.expression)).join("")}${sceneObject(state, definition)}</div>${!intro ? objectControls(state, definition) + familyNodes(state, definition) : ""}<div class="pilot-companion"><img src="${m5AssetUrl(hero.iconKey)}" alt=""><span>${hero.name}</span></div>${definition.object === "leaf-gate" ? `<div class="pilot-keeper"><img src="${m5AssetUrl("boss-lantern-root")}" alt="树冠守护者"><small>树冠守护者</small></div>${!current.mistCleared && ["pilot-meaning", "family-connect"].includes(state.phase) ? `<button type="button" class="pilot-observe" data-action="pilot-observe">用已学的指光看清根线</button>` : ""}` : ""}${r2 && state.currentBossId ? `<div class="pilot-keeper"><img src="${m5AssetUrl("boss-lantern-root")}" alt=""><small>${r2.scene === "core" ? "字脉树心" : r2.scene === "valley" ? "清泉轮" : "门影"}守护者</small></div>` : ""}</section>${r2 ? renderR2Status(state, r2) : ""}<div class="pilot-dock">${renderDock(state, definition)}</div>${!intro ? `<p class="pilot-feedback" role="status">${escape(state.gentleMessage)}</p>` : ""}</div>`;
 }
 
 /** Images and semantic controls share the same centred, uniformly scaled camera. */
