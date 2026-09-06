@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { EquationSliderLevelAudit } from "../../games/equation-slider/level-audit";
-import { MAKE_TARGET_SAVE_VERSION } from "../../games/make-target/index";
+import { MAKE_TARGET_SAVE_VERSION } from "../../games/make-target/progress";
 import { COMPATIBILITY_SURFACES, GAME_PORTFOLIO, SHARED_ENGINES, WORLD_MODULES } from "../../packages/data/gamePortfolio";
 import { AUTHORIZED_DEVELOPMENT_CYCLES, PROJECT_LIFECYCLE_TERMINAL_TRUTH } from "../../packages/data/projectLifecycle";
 import { KNOWN_SAVE_KEYS } from "../../packages/data/saveKeyInventory";

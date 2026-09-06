@@ -1,0 +1,61 @@
+.math-map {
+  overflow: visible;
+  background: linear-gradient(#f3f9ee, #e4efdb);
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+.math-map .math-world__header { max-width: 1180px; padding: 24px 28px 18px; gap: 20px; }
+.math-map .math-world__header h1 { font-size: clamp(30px, 3.5vw, 42px); margin: 5px 0 8px; line-height: 1.1; }
+.math-map .math-world__header p { font-size: 16px; font-weight: 500; line-height: 1.5; }
+.math-map .math-world__header a, .math-map .math-world__motion { display: inline-flex; align-items: center; justify-content: center; min-width: 48px; min-height: 48px; font-size: 14px; }
+.math-map .math-world__city { width: min(1120px, calc(100% - 48px)); min-height: 0; overflow: visible; border: 2px solid #73967d; border-radius: 22px; background: #fffaf0; box-shadow: 0 7px 0 #becdb5; }
+.math-map .math-world__stations { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; padding: 0; background: none; }
+.math-map .math-world-card { position: static; inset: auto; width: auto; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; backdrop-filter: none; min-width: 0; }
+.math-map .math-world-card button { display: flex; flex-direction: column; width: 100%; height: 100%; min-height: 48px; border: 0; border-radius: 20px; background: none; color: #284838; padding: 0; text-align: left; font: inherit; cursor: pointer; touch-action: manipulation; }
+.math-map .math-map__scene { display: block; position: relative; width: 100%; aspect-ratio: 1; overflow: hidden; }
+.math-map .math-map__scene img { position: absolute; width: 200%; max-width: none; height: 100%; top: 0; left: 0; object-fit: fill; }
+.math-map .math-world-card--slider .math-map__scene { border-top-left-radius: 20px; }
+.math-map .math-world-card--target .math-map__scene { border-top-right-radius: 20px; }
+.math-map .math-world-card--target .math-map__scene img { left: -100%; }
+.math-map .math-map__scene[hidden] { display: none; }
+.math-map .math-map__info { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 5px 18px; width: 100%; padding: 18px 26px 20px; }
+.math-map .math-map__place { font-size: 12px; font-weight: 700; color: #78603b; }
+.math-map .math-map__name { grid-row: 2; font-size: 26px; line-height: 1.25; }
+.math-map .math-map__description { grid-column: 1 / -1; grid-row: 3; font-size: 14px; font-weight: 500; color: #4e6656; line-height: 1.5; }
+.math-map .math-world-card__visit { grid-column: 2; grid-row: 1; margin: 0; font-weight: 500; font-size: 12px; color: #52685f; }
+.math-map .math-map__enter { grid-column: 2; grid-row: 2; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; border-radius: 12px; padding: 8px 14px; background: #315f51; color: #fffdf2; font-size: 16px; font-weight: 700; }
+.math-map .math-world-card--target .math-map__enter { background: #835719; }
+.math-map .math-world-card button:hover { box-shadow: inset 0 0 0 3px #557c62; outline: none; }
+.math-map .math-world-card button:focus-visible { outline: 4px solid #176d99; outline-offset: 5px; box-shadow: none; }
+.math-map :is(a, button):focus-visible { outline: 3px solid #176d99; outline-offset: 4px; }
+.math-map .math-world__footer { max-width: 1180px; padding: 22px 28px; }
+.math-map .math-world__footer p { font-size: 14px; font-weight: 500; line-height: 1.5; }
+.math-map .math-world__notice { max-width: 1120px; }
+
+@media (max-width: 900px) {
+  .math-map .math-world__header { padding: 20px 22px 16px; }
+  .math-map .math-world__city { width: calc(100% - 40px); }
+  .math-map .math-map__info { grid-template-columns: minmax(0, 1fr); padding: 15px 18px; gap: 7px; }
+  .math-map .math-map__name { font-size: 24px; }
+  .math-map .math-world-card__visit { grid-row: 4; grid-column: 1; }
+  .math-map .math-map__enter { grid-row: 5; grid-column: 1; }
+}
+@media (max-width: 620px) {
+  .math-map .math-world__header { align-items: flex-start; padding: 18px 18px 14px; gap: 12px; }
+  .math-map .math-world__header h1 { font-size: 30px; }
+  .math-map .math-world__header p { font-size: 14px; }
+  .math-map .math-world__header nav, .math-map .math-world__header a { width: auto; }
+  .math-map .math-world__city { width: calc(100% - 28px); border: 0; background: none; box-shadow: none; }
+  .math-map .math-world__stations { grid-template-columns: 1fr; gap: 14px; }
+  .math-map .math-world-card { border: 2px solid #73967d; border-radius: 18px; background: #fffaf0; box-shadow: 0 4px 0 #c4cfb9; }
+  .math-map .math-world-card button { display: grid; grid-template-columns: 43% minmax(0, 1fr); align-items: center; border-radius: 16px; }
+  .math-map .math-world-card .math-map__scene { border-radius: 14px; }
+  .math-map .math-map__info { padding: 14px 12px; gap: 6px; }
+  .math-map .math-map__place { display: none; }
+  .math-map .math-map__name { grid-row: 1; font-size: 21px; }
+  .math-map .math-map__description { grid-row: 2; font-size: 13px; }
+  .math-map .math-world-card__visit { grid-row: 3; }
+  .math-map .math-map__enter { grid-row: 4; padding: 8px; font-size: 15px; }
+  .math-map .math-world__footer { padding: 22px 18px; gap: 14px; }
+  .math-map .math-world__motion { width: 100%; }
+  .math-map .is-art-unavailable .math-map__info { grid-column: 1 / -1; }
+}

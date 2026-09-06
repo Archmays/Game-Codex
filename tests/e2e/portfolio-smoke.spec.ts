@@ -126,14 +126,14 @@ const GAMES: readonly SmokeGame[] = [
     id: "make-target", title: "目标工坊", surface: ".make-target-game",
     canonicalRoute: "/?world=math-world&station=target",
     async interact(page) {
-      const cards = page.locator(".make-target-card");
+      const cards = page.getByTestId("target-cards").locator("button");
       await cards.nth(0).click();
       await cards.nth(1).click();
       await page.getByRole("button", { name: "+", exact: true }).click();
       const action = page.getByRole("button", { name: "合并" });
       await expectUsableTarget(action);
       await action.click();
-      await expect(page.locator(".make-target-history li")).toHaveCount(1);
+      await expect(page.getByTestId("target-history")).toContainText("1 + 2 = 3");
       return action;
     },
   },

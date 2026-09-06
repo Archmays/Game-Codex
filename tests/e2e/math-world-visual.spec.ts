@@ -22,9 +22,11 @@ test("@visual representative station states", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-1440");
 
   await open(page, "/?world=math-world&station=target", ".make-target-game");
-  await expect(page.locator(".make-target-game")).toHaveScreenshot("target-base-desktop.png");
+  await expect(page).toHaveScreenshot("target-base-desktop.png", { fullPage: true });
   await page.getByRole("button", { name: "给我一点提示" }).click();
-  await expect(page.locator(".make-target-game")).toHaveScreenshot("target-hint-desktop.png");
+  await page.evaluate(() => scrollTo(0, 0));
+  await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
+  await expect(page).toHaveScreenshot("target-hint-desktop.png", { fullPage: true });
 
   await open(page, "/?world=math-world&station=slider", ".equation-slider");
   await expect(page.locator(".equation-slider")).toHaveScreenshot("slider-adapter-desktop.png");

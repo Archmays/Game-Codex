@@ -119,7 +119,7 @@ test("@retirement real visits preserve old history and restore keyboard focus, w
     await activate(page.getByRole("button", { name: "← 回城市地图" }), touch);
     await expect(page.getByTestId("math-world-map")).toBeVisible();
     await expect(action).toBeFocused();
-    await expect(action).toHaveText("继续这里");
+    await expect(page.locator(`[data-station-id="${station}"] .math-world-card__visit`)).toHaveText("上次到访");
     await exactLegacy(page);
   }
   expect(await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), SHELL_KEY)).toEqual({ version: 1, lastStation: "target", visitedStations: ["array", "lab", "clock", "slider", "target"], reducedMotionOverride: true, extension: { synthetic: 7 } });
@@ -189,10 +189,19 @@ test("@retirement invalid station and a cancelled lazy load never mount a stale 
   let release!: () => void;
   let requestStarted = false;
   const held = new Promise<void>(done => { release = done; });
-  await page.route("**/games/equation-slider/index.ts*", async route => {
+  const preview = process.env.MATH_WORLD_PREVIEW === "1";
+  await page.route(preview ? "**/assets/*.js" : "**/games/equation-slider/index.ts*", async route => {
+    const response = preview ? await route.fetch() : undefined;
+    // Production chunk names are hashed. Identify the existing Slider UI marker,
+    // then hold delivery of that chunk without modifying its contents.
+    if (response && !(await response.text()).includes("coverageProgress")) {
+      await route.fulfill({ response });
+      return;
+    }
     requestStarted = true;
     await held;
-    await route.continue();
+    if (response) await route.fulfill({ response });
+    else await route.continue();
   });
   await page.locator('[data-station-id="slider"] button').click();
   await expect.poll(() => requestStarted).toBe(true);
@@ -219,7 +228,7 @@ test("@retirement two-card layout has no overlap and retains a minimal visual re
   const [a, b] = cards;
   expect(a.right <= b.left || b.right <= a.left || a.bottom <= b.top || b.bottom <= a.top).toBe(true);
   expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
-  const output = resolve("tmp/tasks/GAME-CODEX-STEP1-PORTFOLIO-RETIREMENT/final-screenshots");
+  const output = resolve(testInfo.outputPath("math-world-layout"));
   mkdirSync(output, { recursive: true });
   await page.screenshot({ path: resolve(output, `math-world-${testInfo.project.name}.png`), fullPage: true, animations: "disabled" });
 });

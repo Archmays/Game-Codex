@@ -216,7 +216,7 @@ test("@e2e Slider canonical route, history focus, world return, and saved-level 
   await page.goBack();
   await expect(page.getByTestId("math-world-map")).toBeVisible();
   await expect(page.locator('[data-station-id="slider"] button')).toBeFocused();
-  await expect(page.locator('[data-station-id="slider"] button')).toHaveText("继续这里");
+  await expect(page.locator('[data-station-id="slider"] .math-world-card__visit')).toHaveText("上次到访");
   await page.goForward();
   await expect(page.locator('[data-station-id="slider"] .equation-slider')).toBeVisible();
   await expect(page.locator("[data-station-heading]")).toBeFocused();

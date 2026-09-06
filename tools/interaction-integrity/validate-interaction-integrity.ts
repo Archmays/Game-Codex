@@ -112,9 +112,9 @@ function validateKnownContracts(entries: readonly RiskEntry[]): string[] {
   for (const selector of [".wordlight-island::before", ".wordlight-island::after", ".wordlight-region::before", ".wordlight-shell::after", ".wordlight-response__ripple"]) {
     if (!/pointer-events\s*:\s*none\b/.test(blockFor(css, selector))) issues.push(`${selector} must be pointer-transparent`);
   }
-  const mathCss = readFileSync(resolve(ROOT, "games/math-lab/world/styles.css"), "utf8");
-  if (!/min-height\s*:\s*42px\b/.test(exactBlockFor(mathCss, ".math-world-card button"))) issues.push("Math World station buttons must remain near the 44px target at 42px or larger");
-  if (/transform\s*:/.test(blockFor(mathCss, ".math-world-card button:hover"))) issues.push("Math World hover/focus feedback must not move the click target");
+  const mathCss = readFileSync(resolve(ROOT, "games/math-lab/world/math-map.css"), "utf8");
+  if (!/min-height\s*:\s*48px\b/.test(exactBlockFor(mathCss, ".math-map .math-world-card button"))) issues.push("Math World station entrances must retain the 48px minimum target");
+  if (/transform\s*:/.test(blockFor(mathCss, ".math-map .math-world-card button:hover"))) issues.push("Math World hover/focus feedback must not move the click target");
   const sharedCss = readFileSync(resolve(ROOT, "src/styles.css"), "utf8");
   if (!/min-height\s*:\s*42px\b/.test(exactBlockFor(sharedCss, ".learning-game__pill"))) issues.push("Shared learning-game pills must remain near the 44px target at 42px or larger");
   if (/transform\s*:/.test(exactBlockFor(sharedCss, ".ui-button:hover:not(:disabled)"))) issues.push("Shared button hover feedback must not move the click target");

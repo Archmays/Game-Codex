@@ -153,11 +153,22 @@ async function auditSurface(page: Page, surface: PlaySurfaceRecord, touch: boole
     wheelBottomReached = bottom.reachableMaxScroll - bottom.scrollTop <= 2;
     const action = await lastMeaningfulAction(page, surface);
     if (action && await actionNearBottom(page, surface, action)) {
-      await expectFullyVisibleInScrollport(page, surface, action);
-      const evidence = await sampleHitTarget(action);
+      // The math entry is one semantic button containing both artwork and its
+      // labelled action area. At document bottom, the action area must be fully
+      // reachable; the decorative roof may already have scrolled above it.
+      const actionArea = surface.id === "math-world" ? action.locator(".math-map__info") : action;
+      await expectFullyVisibleInScrollport(page, surface, actionArea);
+      const evidence = await sampleHitTarget(actionArea);
       expect(evidence.hitSuccessRatio, JSON.stringify(evidence, null, 2)).toBe(1);
       bottomCriticalAction = evidence.label || evidence.selector;
       hitTest = "PASS";
+      if (surface.id === "math-world") {
+        const station = await action.evaluate(element => element.closest<HTMLElement>("[data-station-id]")!.dataset.stationId);
+        await actionArea.locator(".math-map__enter").click();
+        await expect(page).toHaveURL(new RegExp(`station=${station}(?:&|$)`));
+        await page.goBack();
+        await expect(page.locator(".math-map")).toBeVisible();
+      }
     } else {
       bottomCriticalAction = "NONE_NEAR_BOTTOM";
       hitTest = "NOT_APPLICABLE";

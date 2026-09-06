@@ -1,6 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const port = 5292;
+const preview = process.env.MATH_WORLD_PREVIEW === "1";
 
 export default defineConfig({
   testDir: "./tests/e2e",
@@ -27,7 +28,7 @@ export default defineConfig({
     { name: "mobile-360", use: { ...devices["Galaxy S9+"], viewport: { width: 360, height: 800 } } },
   ],
   webServer: {
-    command: `pnpm exec vite --host 127.0.0.1 --port ${port} --strictPort`,
+    command: `pnpm exec vite ${preview ? "preview " : ""}--host 127.0.0.1 --port ${port} --strictPort`,
     url: `http://127.0.0.1:${port}`,
     reuseExistingServer: false,
     timeout: 120_000,

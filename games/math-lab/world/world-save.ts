@@ -78,3 +78,41 @@ export function visitMathWorldStation(save: MathWorldSaveV1, station: MathWorldS
     visitedStations: save.visitedStations.includes(station) ? save.visitedStations : [...save.visitedStations, station],
   };
 }
+
+/** Keep a mounted map from writing over another page or a Vault restore. */
+export function createMathWorldSaveSession(storage?: Storage): {
+  readonly save: MathWorldSaveV1;
+  write: (next: MathWorldSaveV1) => boolean;
+} {
+  let target: Storage | undefined;
+  let expectedRaw: string | null = null;
+  let writable = false;
+  let save = EMPTY_MATH_WORLD_SAVE;
+  try {
+    target = storage ?? window.localStorage;
+    expectedRaw = target.getItem(MATH_WORLD_SAVE_KEY);
+    const parsed = expectedRaw === null ? EMPTY_MATH_WORLD_SAVE : parseSave(expectedRaw);
+    if (parsed) { save = parsed; writable = true; }
+  } catch { /* Reading never changes any stored bytes. */ }
+  return {
+    get save() { return save; },
+    write(next): boolean {
+      if (!writable || !target) return false;
+      try {
+        if (target.getItem(MATH_WORLD_SAVE_KEY) !== expectedRaw) {
+          writable = false;
+          return false;
+        }
+        const raw = JSON.stringify(next);
+        if (!parseSave(raw)) return false;
+        if (raw !== expectedRaw) target.setItem(MATH_WORLD_SAVE_KEY, raw);
+        expectedRaw = raw;
+        save = next;
+        return true;
+      } catch {
+        writable = false;
+        return false;
+      }
+    },
+  };
+}

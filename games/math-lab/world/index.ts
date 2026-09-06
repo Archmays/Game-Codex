@@ -3,12 +3,12 @@ import { createLocalStorageStore } from "../../../packages/game-core";
 import { normalizeRetiredMathRoute } from "../../../src/app-route";
 import { MATH_WORLD_ACTIVITIES, findMathWorldActivity, type MathWorldActivity } from "./activity-registry";
 import {
-  readMathWorldSave,
+  createMathWorldSaveSession,
   visitMathWorldStation,
-  writeMathWorldSave,
   type MathWorldSaveV1,
 } from "./world-save";
 import "./styles.css";
+import "./math-map.css";
 
 const HOME_ROUTE = "?world=my-game-world";
 
@@ -28,7 +28,8 @@ function stationHref(id: string): string {
 
 export function mountMathWorld(root: HTMLElement): MountedGame {
   let mountedStation: MountedGame | null = null;
-  let save = readMathWorldSave();
+  const saveSession = createMathWorldSaveSession();
+  let save = saveSession.save;
   let navigationToken = 0;
   let destroyed = false;
   let lastMapFocusStationId: string | undefined;
@@ -40,18 +41,17 @@ export function mountMathWorld(root: HTMLElement): MountedGame {
     mountedStation?.destroy();
     mountedStation = null;
     root.className = "math-world-mount";
-    root.innerHTML = `<main class="math-world" data-testid="math-world-map">
+    root.innerHTML = `<main class="math-world math-map" data-testid="math-world-map">
       <header class="math-world__header">
-        <div><span class="math-world__kicker">数学世界</span><h1>数感实验城</h1><p>选择一座开放的工坊，用眼睛、双手和算式去发现关系。</p></div>
+        <div><span class="math-world__kicker">数学世界</span><h1>数感实验城</h1><p>去滑轨站移动算式，或到工坊组合数字牌。</p></div>
         <nav aria-label="数学世界导航"><a href="${HOME_ROUTE}">回我的游戏世界</a></nav>
       </header>
       ${new URLSearchParams(window.location.search).get("notice") === "retired-game" ? '<p class="math-world__notice" role="status">这个小游戏已收起，可以选择下面的游戏。</p>' : ""}
       <section class="math-world__city" aria-label="数学世界两个开放站点">
-        <img class="math-world__art" src="./assets/math-world/math-world-city-background.webp" alt="温暖的数学实验城市，苹果园、小河、钟楼、方格工坊、数字牌屋和火车站围绕中央广场" />
         <div class="math-world__stations" data-math-world-stations></div>
       </section>
       <footer class="math-world__footer">
-        <p>两个地方都可以自由进入，也不会因为离开而失去进度。</p>
+        <p>两站都可以自由进入。完成记录会留在这里。</p>
         <button type="button" class="math-world__motion" data-motion-setting></button>
       </footer>
     </main>`;
@@ -72,7 +72,7 @@ export function mountMathWorld(root: HTMLElement): MountedGame {
             ? false
             : undefined;
         save = { ...save, reducedMotionOverride: nextOverride };
-        writeMathWorldSave(save);
+        saveSession.write(save);
         applyMotionPreference(root, save);
         updateMotionButton(motionButton, save);
       });
@@ -101,6 +101,7 @@ export function mountMathWorld(root: HTMLElement): MountedGame {
     applyMotionPreference(root, save);
     const stage = root.querySelector<HTMLElement>("[data-station-stage]");
     if (!stage) throw new Error("Math World station stage is missing");
+    if (activity.id === "target") stage.removeAttribute("aria-live");
     try {
       const game = await activity.load();
       if (destroyed || token !== navigationToken) return;
@@ -111,7 +112,7 @@ export function mountMathWorld(root: HTMLElement): MountedGame {
         storage: createLocalStorageStore(game.id),
       });
       save = visitMathWorldStation(save, activity.id);
-      writeMathWorldSave(save);
+      saveSession.write(save);
     } catch (error) {
       if (destroyed || token !== navigationToken) return;
       stage.innerHTML = `<section class="math-world-station__error"><h2>这里暂时没有打开</h2><p>进度没有改变，可以回地图再试一次。</p><button type="button" data-error-return>回城市地图</button></section>`;
@@ -168,20 +169,43 @@ function createStationCard(
   article.className = `math-world-card math-world-card--${activity.id} math-world-card--${activity.accent}`;
   article.classList.toggle("is-visited", visited);
   article.dataset.stationId = activity.id;
+  const art = document.createElement("span");
+  art.className = "math-map__scene";
+  const image = document.createElement("img");
+  image.src = "./assets/math-world/two-station-city.webp";
+  image.alt = "";
+  image.width = 1600;
+  image.height = 800;
+  image.decoding = "async";
+  image.addEventListener("error", () => {
+    art.hidden = true;
+    article.classList.add("is-art-unavailable");
+  });
+  art.append(image);
+  const info = document.createElement("span");
+  info.className = "math-map__info";
   const place = document.createElement("span");
+  place.className = "math-map__place";
   place.textContent = activity.place;
-  const title = document.createElement("h2");
+  const title = document.createElement("strong");
+  title.className = "math-map__name";
   title.textContent = activity.title;
-  const description = document.createElement("p");
+  const description = document.createElement("span");
+  description.className = "math-map__description";
   description.textContent = activity.description;
   const status = document.createElement("span");
   status.className = "math-world-card__visit";
-  status.textContent = isLastStation ? "上次停在这里" : visited ? "上次来过" : "新的工坊";
+  status.textContent = isLastStation ? "上次到访" : visited ? "来过这里" : "随时可以来玩";
   const button = document.createElement("button");
   button.type = "button";
-  button.textContent = isLastStation ? "继续这里" : visited ? "再去看看" : "进去看看";
+  button.setAttribute("aria-label", "进入" + activity.title);
+  const cta = document.createElement("span");
+  cta.className = "math-map__enter";
+  cta.textContent = activity.id === "slider" ? "进入滑轨站 →" : "进入工坊 →";
+  info.append(place, title, description, status, cta);
+  button.append(art, info);
   button.addEventListener("click", () => onOpen(activity));
-  article.append(place, title, description, status, button);
+  article.append(button);
   return article;
 }
 

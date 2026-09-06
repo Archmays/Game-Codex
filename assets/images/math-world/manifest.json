@@ -1,0 +1,33 @@
+{
+  "task": "GAME-CODEX-STEP5-MATH-WORLD-TARGET-WORKBENCH",
+  "source": "ChatGPT image built-in image_gen, successful generation in this task",
+  "authorization": "User explicitly authorized generation, project use and normal public release in the active task. No third-party game asset.",
+  "reference": "public/assets/math-world/math-world-city-background.webp (style only, existing project asset)",
+  "prompt": "assets/images/math-world/PROMPTS.md",
+  "generatedOutput": "exec-8408b516-3660-4d2f-9228-1b60e76e2f6c.png",
+  "processing": "Resize to width 1600 without enlargement; WebP quality 84 effort 6. No redrawing. Each responsive station uses the corresponding half of this single image.",
+  "assets": [
+    {
+      "path": "assets/images/math-world/two-station-city-source.png",
+      "width": 1774,
+      "height": 887,
+      "bytes": 2571907,
+      "hasAlpha": false,
+      "transparentPixels": 0,
+      "partialAlphaPixels": 0,
+      "decodedRgbaBytes": 6294152,
+      "sha256": "6baa69a9a9a257a739f7305a06e8c5181330f10f59fa56d094b96da1d87b5db2"
+    },
+    {
+      "path": "public/assets/math-world/two-station-city.webp",
+      "width": 1600,
+      "height": 800,
+      "bytes": 227448,
+      "hasAlpha": false,
+      "transparentPixels": 0,
+      "partialAlphaPixels": 0,
+      "decodedRgbaBytes": 5120000,
+      "sha256": "e73d6bebd12e30eaf4d840f1869d706335cf3f48799399a380f4991cf43d026b"
+    }
+  ]
+}

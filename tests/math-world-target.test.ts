@@ -10,6 +10,7 @@ import {
 } from "../games/make-target/model";
 import { TARGET_PUZZLE_MANIFEST } from "../games/make-target/puzzles";
 import { solveTarget } from "../games/make-target/solver";
+import { createTargetProgressSession, MAKE_TARGET_SAVE_KEY } from "../games/make-target/progress";
 
 describe("Math World target workshop", () => {
   it("keeps subtraction order and exact division instead of silently reversing operands", () => {
@@ -102,4 +103,70 @@ describe("Math World target workshop", () => {
     }
     expect(evaluated).toBe(2_145);
   }, 15_000);
+});
+
+describe("Target progress generation guards", () => {
+  function storageWith(raw: string | null) {
+    let value = raw;
+    const writes: string[] = [];
+    return {
+      storage: {
+        getItem: () => value,
+        setItem: (_key: string, next: string) => { value = next; writes.push(next); },
+      } as unknown as Storage,
+      get value() { return value; },
+      restore: (next: string | null) => { value = next; },
+      writes,
+    };
+  }
+
+  it("preserves legacy wins, historical IDs and unknown fields, and completes idempotently", () => {
+    const fixture = storageWith('{"wins":7,"completedPuzzleIds":["historical"],"extension":{"keep":[1,2]}}');
+    const session = createTargetProgressSession(fixture.storage);
+    expect(fixture.writes).toEqual([]);
+    expect(session.complete("target-10-01")).toBe("saved");
+    expect(JSON.parse(fixture.value!)).toEqual({
+      version: 1, wins: 8, completedPuzzleIds: ["historical", "target-10-01"], extension: { keep: [1, 2] },
+    });
+    expect(session.complete("target-10-01")).toBe("already-saved");
+    expect(fixture.writes).toHaveLength(1);
+    const remounted = createTargetProgressSession(fixture.storage);
+    expect(remounted.complete("target-10-01")).toBe("already-saved");
+    expect(fixture.writes).toHaveLength(1);
+    expect(MAKE_TARGET_SAVE_KEY).toBe("family-games/make-target/progress");
+  });
+
+  it.each(["", "{broken", "null", "[]", "4", "false", '{"version":99,"wins":88}',
+    '{"version":1,"wins":2,"completedPuzzleIds":"bad"}', '{"mystery":true}',
+    '{"version":1,"wins":-1,"completedPuzzleIds":[]}'])("does not repair or overwrite unrecognized bytes: %s", (raw) => {
+    const fixture = storageWith(raw);
+    const session = createTargetProgressSession(fixture.storage);
+    expect(session.complete("target-10-01")).toBe("unavailable");
+    expect(fixture.value).toBe(raw);
+    expect(fixture.writes).toEqual([]);
+  });
+
+  it.each([null, '{"version":1,"wins":9,"completedPuzzleIds":[],"restored":true}', '{"version":99,"wins":88}', "{broken"])(
+    "blocks a stale page after a storage generation changes to %s", (restored) => {
+      const fixture = storageWith('{"version":1,"wins":3,"completedPuzzleIds":[]}');
+      const session = createTargetProgressSession(fixture.storage);
+      fixture.restore(restored);
+      expect(session.complete("target-10-01")).toBe("changed");
+      expect(fixture.value).toBe(restored);
+      expect(fixture.writes).toEqual([]);
+    },
+  );
+
+  it("keeps read and write rejection local and never probes storage", () => {
+    let writes = 0;
+    const deniedRead = { getItem() { throw new Error("denied"); }, setItem() { writes += 1; } } as unknown as Storage;
+    expect(createTargetProgressSession(deniedRead).complete("target-10-01")).toBe("unavailable");
+    expect(writes).toBe(0);
+    const deniedWrite = { getItem() { return null; }, setItem() { writes += 1; throw new Error("quota"); } } as unknown as Storage;
+    const session = createTargetProgressSession(deniedWrite);
+    expect(writes).toBe(0);
+    expect(session.complete("target-10-01")).toBe("unavailable");
+    expect(session.complete("target-10-01")).toBe("unavailable");
+    expect(writes).toBe(1);
+  });
 });
