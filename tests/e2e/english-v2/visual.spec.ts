@@ -1,5 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import { ENGLISH_V2_WORDS } from "../../../games/english-spell-battle/v2/content/manifest";
+import { isPilotTask } from "../../../games/english-spell-battle/v2/pilot/model";
 
 async function settle(page: Page): Promise<void> {
   await page.addStyleTag({ content: "*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}" });
@@ -33,8 +34,13 @@ async function expectAccessibleSurface(page: Page): Promise<void> {
 async function openBuild(page: Page, wordId: string): Promise<void> {
   const word = ENGLISH_V2_WORDS.find((candidate) => candidate.id === wordId)!;
   await page.goto(`/?world=english-world&region=${word.themeId}&word=${word.id}&seed=visual-v2`);
-  await page.getByRole("button", { name: "看看它怎么拼" }).click();
-  await expect(page.getByTestId("english-mission")).toHaveAttribute("data-phase", "build");
+  if (isPilotTask(wordId)) {
+    await page.locator('[data-pilot-action="spelling"]').click();
+    await expect(page.locator('.pilot-spelling')).toBeVisible();
+  } else {
+    await page.getByRole("button", { name: "看看它怎么拼" }).click();
+    await expect(page.getByTestId("english-mission")).toHaveAttribute("data-phase", "build");
+  }
   await settle(page);
 }
 

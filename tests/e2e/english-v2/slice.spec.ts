@@ -1,5 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { ENGLISH_V2_SENTENCE_BY_ID, ENGLISH_V2_WORDS } from "../../../games/english-spell-battle/v2/content/manifest";
+import { isPilotTask } from "../../../games/english-spell-battle/v2/pilot/model";
+import { buildPilotWord, applyCanonicalPilot } from "./pilot-helpers";
 
 const ORIGIN = "http://127.0.0.1:5322";
 const CORE_WORDS = ENGLISH_V2_WORDS.filter((word) => word.storyBand === "story-core");
@@ -31,7 +33,7 @@ async function openWord(page: Page, wordId: string): Promise<void> {
   const word = ENGLISH_V2_WORDS.find((candidate) => candidate.id === wordId)!;
   await page.goto(`/?world=english-world&region=${word.themeId}&word=${word.id}&seed=e2e`);
   await expect(page.getByTestId("english-mission")).toHaveAttribute("data-word-id", word.id);
-  await expect(page.getByTestId("english-mission")).toHaveAttribute("data-phase", "meaning");
+  await expect(page.getByTestId("english-mission")).toHaveAttribute("data-phase", isPilotTask(wordId) ? "interactive" : "meaning");
 }
 
 async function completeWord(page: Page, wordId: string, input: "click" | "keyboard" | "tap" = "click"): Promise<void> {
@@ -42,6 +44,11 @@ async function completeWord(page: Page, wordId: string, input: "click" | "keyboa
     else await locator.click();
   };
   await openWord(page, wordId);
+  if (isPilotTask(wordId)) {
+    await buildPilotWord(page, wordId, input);
+    await applyCanonicalPilot(page, wordId, input);
+    return;
+  }
   await activate(page.getByRole("button", { name: "看看它怎么拼" }));
   await expect(page.getByTestId("english-mission")).toHaveAttribute("data-phase", "build");
   for (const unit of word.graphemeUnits) {
@@ -67,14 +74,14 @@ test("shadow English World route is a real five-region game world without score 
   expectClean(log);
 });
 
-test("all 30 story words complete meaning, audited build, sentence, response, save, and journal", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "desktop-1440");
+test("all 30 canonical tasks retain real build/use completion, including all 24 unchanged task flows", async ({ page }, testInfo) => {
+  test.skip(!["desktop-1440", "mobile-390"].includes(testInfo.project.name));
   const log = observe(page);
   await page.goto("/?world=english-world");
   await page.evaluate(() => localStorage.clear());
-  for (const word of CORE_WORDS) await completeWord(page, word.id);
+  for (const word of CORE_WORDS) await completeWord(page, word.id, testInfo.project.name === "mobile-390" ? "tap" : "click");
   const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("family-games/english-world/v2") ?? "null"));
-  expect(saved.version).toBe(2);
+  expect(saved.version).toBe(3);
   expect(saved.completedStoryWordIds.sort()).toEqual(CORE_WORDS.map((word) => word.id).sort());
   expect(saved.completedSentenceIds).toHaveLength(30);
   expect(saved.checksum).toMatch(/^[0-9a-f]{8}$/);
@@ -204,6 +211,16 @@ test("optional words stay journal-only and DOM quantities are exact", async ({ p
   const ten = page.locator('[data-word-id="word-ten"] .wordlight-quantity');
   await expect(ten).toHaveAttribute("data-quantity", "10");
   await expect(ten.locator(".wordlight-shell")).toHaveCount(10);
+  for (const [word, count] of [["one", 1], ["two", 2], ["three", 3], ["ten", 10]] as const) {
+    await expect(page.locator(`[data-word-id="word-${word}"] .wordlight-shell`)).toHaveCount(count);
+  }
+  for (const [word, rgb] of [["red", "rgb(255, 0, 0)"], ["blue", "rgb(0, 0, 255)"], ["green", "rgb(0, 128, 0)"], ["yellow", "rgb(255, 255, 0)"]] as const) {
+    const paint = await page.locator(`[data-word-id="word-${word}"] .wordlight-color`).evaluate(el => {
+      const style = getComputedStyle(el, "::before");
+      return { color: style.backgroundColor, width: parseFloat(style.width), height: parseFloat(style.height), container: el.getBoundingClientRect().height };
+    });
+    expect(paint.color).toBe(rgb); expect(paint.width).toBeGreaterThan(48); expect(paint.height).toBeLessThanOrEqual(paint.container);
+  }
 });
 
 test("Classic English card promotes V2 while the frozen legacy game and bytes remain directly accessible", async ({ page }, testInfo) => {

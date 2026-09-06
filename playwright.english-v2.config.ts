@@ -12,7 +12,7 @@ export default defineConfig({
   timeout: 75_000,
   workers: 1,
   reporter: [["line"]],
-  outputDir: "test-results/english-v2",
+  outputDir: process.env.ENGLISH_V2_OUTPUT_DIR ?? "test-results/english-v2",
   snapshotPathTemplate: "{testDir}/{testFilePath}-snapshots/{arg}-{projectName}{ext}",
   expect: { timeout: 12_000, toHaveScreenshot: { animations: "disabled", caret: "hide", scale: "css", maxDiffPixelRatio: 0 } },
   use: { baseURL, locale: "zh-CN", timezoneId: "Asia/Shanghai", trace: "retain-on-failure", screenshot: "only-on-failure", video: "off" },
@@ -22,5 +22,5 @@ export default defineConfig({
     { name: "tablet-768", use: { ...devices["Desktop Chrome"], viewport: { width: 768, height: 1024 } } },
     { name: "mobile-360", use: { ...devices["Galaxy S9+"], viewport: { width: 360, height: 800 } } },
   ],
-  webServer: { command: `pnpm exec vite --host 127.0.0.1 --port ${port} --strictPort`, url: baseURL, reuseExistingServer: false, timeout: 120_000 },
+  webServer: { command: `pnpm exec vite ${process.env.ENGLISH_V2_PREVIEW === "1" ? "preview" : ""} --host 127.0.0.1 --port ${port} --strictPort`, url: baseURL, reuseExistingServer: false, timeout: 120_000 },
 });

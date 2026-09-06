@@ -45,7 +45,7 @@ export const KNOWN_SAVE_KEYS: readonly KnownSaveKey[] = [
   { key: "family-games/make-target/progress", owner: "math", purpose: "progress", exportable: true, maxVersion: 1 },
   { key: "family-games/clock-reader/progress", owner: "legacy", purpose: "compatibility", exportable: true },
   { key: "family-games/multiplication-adventure/progress", owner: "legacy", purpose: "compatibility", exportable: true },
-  { key: "family-games/english-world/v2", owner: "english", purpose: "progress", exportable: true, maxVersion: 2 },
+  { key: "family-games/english-world/v2", owner: "english", purpose: "progress", exportable: true, maxVersion: 3 },
   { key: "family-games/english-spell-battle/progress", owner: "legacy", purpose: "compatibility", exportable: true },
   { key: "family-games/memory-match/v1", owner: "shared", purpose: "progress", exportable: true, maxVersion: 1 },
   { key: "family-games/memory-card/progress", owner: "legacy", purpose: "compatibility", exportable: true },

@@ -26,9 +26,12 @@ import {
   readEnglishWorldSave,
   updateEnglishWorldSave,
   writeEnglishWorldSave,
-  type EnglishWorldSaveV2,
+  ENGLISH_WORLD_SAVE_KEY,
+  type EnglishWorldSaveV3,
 } from "../save/save";
+import { isPilotTask, initialPilotRecord, transitionPilot, type PilotTaskId, type PilotInput } from "../pilot/model";
 import "../world/styles.css";
+import { pilotMarkup, animatePilotMove, animatePilotObjects } from "../pilot/view";
 
 export interface MountEnglishWorldOptions {
   readonly storage?: Storage;
@@ -96,11 +99,18 @@ function themeById(id: string | null) {
 }
 
 export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldOptions = {}): MountedGame {
-  const storage = options.storage ?? window.localStorage;
+  let storage: Storage;
+  try { storage = options.storage ?? window.localStorage; }
+  catch { storage = { getItem() { throw new Error("Storage unavailable"); } } as unknown as Storage; }
   const read = readEnglishWorldSave(storage);
   const seed = options.seed?.trim() || "wordlight-island";
   const returnHref = options.returnHref ?? DEFAULT_RETURN;
-  let save: EnglishWorldSaveV2 = read.save;
+  let save: EnglishWorldSaveV3 = read.save;
+  let expectedRaw = read.raw;
+  let saveNotice = "";
+  let pilotHelpLevel = 0;
+  let pilotSpellingOpen = false;
+  let cancelPresentation: () => void = () => {};
   let writable = read.writable;
   let view: WorldView = "map";
   let activeThemeId: EnglishThemeId | null = null;
@@ -116,7 +126,10 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
 
   const persist = (): void => {
     if (!writable) return;
-    if (!writeEnglishWorldSave(save, storage)) announcement = "这次进度没有写入；仍可继续探索。";
+    if (!writeEnglishWorldSave(save, storage, expectedRaw)) {
+      writable = false;
+      saveNotice = "本机记录已变化或无法写入。为保护它，这次只读游玩；刷新后可读取当前记录。";
+    } else expectedRaw = JSON.stringify(save);
   };
 
   const applySettings = (): void => {
@@ -141,8 +154,10 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
   </header>`;
 
   const renderNotice = (): string => {
+    if (saveNotice) return `<p class="wordlight-notice" role="status">${saveNotice}</p>`;
+    if (read.status === "storage-readonly") return '<p class="wordlight-notice" role="status">本机存储不可用，这次只读游玩，仍可探索全部场景。</p>';
     if (read.status === "future-readonly") return `<p class="wordlight-notice" role="status">发现更新版本的本机记录。为保护它，这次只读游玩，不会覆盖。</p>`;
-    if (read.status === "corrupt-recovered") return `<p class="wordlight-notice" role="status">本机记录没有读完整，词光岛已从安静的新旅程开始；原始记录没有被当作学习进度。</p>`;
+    if (read.status === "corrupt-recovered") return `<p class="wordlight-notice" role="status">本机记录没有读完整。为保护原始记录，这次只读游玩；这些探索不会覆盖原档。</p>`;
     if (read.legacyRaw !== null && read.status === "fresh") return `<p class="wordlight-notice" role="status" data-testid="legacy-upgrade-notice">旧版记录仍保存在本机。V2 从新的岛屿旅程开始。</p>`;
     return "";
   };
@@ -168,7 +183,7 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
     if (!theme) { view = "map"; renderMap(); return; }
     const words = storyWordsForTheme(theme.id);
     const optionalWords = optionalWordsForTheme(theme.id);
-    root.innerHTML = `<main class="wordlight" data-testid="english-region" data-region="${theme.id}">${renderHeader(true)}
+    root.innerHTML = `<main class="wordlight" data-testid="english-region" data-region="${theme.id}">${renderHeader(true)}${renderNotice()}
       <section class="wordlight-region-page" style="--region-accent:${theme.accent}"><button type="button" class="wordlight-back" data-action="map">← 回岛屿地图</button><div class="wordlight-region-page__title"><span>${theme.subtitle}</span><h2>${theme.title}</h2><p>${theme.transformationCopy}</p></div>
       <div class="wordlight-mission-list">${words.map((word) => `<article data-complete="${String(save.completedStoryWordIds.includes(word.id))}">${visualMarkup(word, save.completedStoryWordIds.includes(word.id))}<h3>${word.displayWord}</h3>${save.settings.chineseScaffold ? `<p>${word.childGlossZh}</p>` : ""}<button type="button" data-word-id="${word.id}">${save.completedStoryWordIds.includes(word.id) ? "再让它亮一次" : "跟着词光走"}</button></article>`).join("")}</div>
       <aside class="wordlight-optional"><div><span>Optional word shelf</span><h3>想多看几个词？</h3><p>这些词只放在词光册里，不挡住岛屿故事。</p></div><div>${optionalWords.map((word) => `<button type="button" data-action="journal">${word.displayWord}</button>`).join("")}</div></aside></section>
@@ -177,7 +192,7 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
   };
 
   const renderJournal = (): void => {
-    root.innerHTML = `<main class="wordlight" data-testid="english-journal">${renderHeader(true)}<section class="wordlight-journal"><button type="button" class="wordlight-back" data-action="map">← 回岛屿地图</button><header><span>Word Journal</span><h2>词光册</h2><p>看图片、单词和声音块。这里没有正确率或错误次数。</p></header><div class="wordlight-journal__grid">${ENGLISH_V2_WORDS.map((word) => {
+    root.innerHTML = `<main class="wordlight" data-testid="english-journal">${renderHeader(true)}${renderNotice()}<section class="wordlight-journal"><button type="button" class="wordlight-back" data-action="map">← 回岛屿地图</button><header><span>Word Journal</span><h2>词光册</h2><p>看图片、单词和声音块。这里没有正确率或错误次数。</p></header><div class="wordlight-journal__grid">${ENGLISH_V2_WORDS.map((word) => {
       const sentence = ENGLISH_V2_SENTENCE_BY_ID.get(word.sentenceIds[0]);
       const status = word.storyBand === "optional" ? "拓展词" : save.completedStoryWordIds.includes(word.id) ? "已遇见" : "还没遇见";
       return `<article data-testid="journal-word" data-word-id="${word.id}" data-story-band="${word.storyBand}">${visualMarkup(word)}<div><span>${status}</span><h3 lang="en-US">${word.displayWord}</h3>${save.settings.chineseScaffold ? `<p>${word.childGlossZh}</p>` : ""}<p lang="en-US">${word.childDefinitionEn}</p><div class="wordlight-chunks" aria-label="${word.displayWord} 的拼写块" lang="en-US">${word.graphemeUnits.map((unit) => `<span data-role="${unit.role}">${unit.letters}</span>`).join("")}</div>${sentence ? `<p class="wordlight-journal__sentence" lang="en-US">${sentence.text}</p>` : `<p class="wordlight-journal__sentence"><span lang="en-US">Optional word</span> · 可以只看图、词义和拼写块。</p>`}${save.settings.soundEnabled && canSpeakEnglish() ? `<button type="button" data-speak="${escapeHtml(word.displayWord)}">听整个单词</button>` : ""}</div></article>`;
@@ -186,21 +201,37 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
 
   const targetUnitForSlot = (word: EnglishWordRecord, index: number): GraphemeUnit => word.graphemeUnits[index];
 
-  const renderMission = (): void => {
-    if (!mission) { view = "map"; renderMap(); return; }
-    const { word, sentence } = mission;
-    const availableTiles = mission.tiles.filter((tile) => !build.hiddenDistractorIds.includes(tile.id));
+  const renderBuildPanel = (): string => {
+    if (!mission) return "";
+    const { word } = mission;
+    const availableTiles = mission.tiles.filter(tile => !build.hiddenDistractorIds.includes(tile.id));
     const slotTiles = buildSlotTiles(build, mission);
-    const blankTokens = sentenceWithBlank(sentence, word);
-    root.innerHTML = `<main class="wordlight wordlight-mission" data-testid="english-mission" data-word-id="${word.id}" data-phase="${phase}">${renderHeader(true)}
-      <section class="wordlight-mission__stage"><button type="button" class="wordlight-back" data-action="region">← 回到这个地方</button>
-      <div class="wordlight-stepper" aria-label="任务步骤"><span data-current="${String(phase === "meaning")}">看懂</span><span data-current="${String(phase === "build")}">拼词</span><span data-current="${String(phase === "sentence")}">放进句子</span><span data-current="${String(phase === "response")}">世界回应</span></div>
-      ${phase === "meaning" ? `<section class="wordlight-meaning"><div>${visualMarkup(word)}<div class="wordlight-scene-glow" aria-hidden="true"></div></div><div><span class="wordlight-phase-label">先看懂它</span><h2 lang="en-US">${word.displayWord}</h2>${save.settings.chineseScaffold ? `<p class="wordlight-gloss">${word.childGlossZh}</p>` : ""}<p lang="en-US">${word.childDefinitionEn}</p>${save.settings.soundEnabled && canSpeakEnglish() ? `<button type="button" data-speak="${escapeHtml(word.displayWord)}">听整个单词</button>` : `<p class="wordlight-audio-note">没有可用英文声音也没关系，图片和文字会陪你走完。</p>`}<button type="button" data-action="to-build">看看它怎么拼</button></div></section>` : ""}
-      ${phase === "build" ? `<section class="wordlight-build"><header><span class="wordlight-phase-label">把词光放到一起</span><h2>Build ${word.displayWord}</h2><p>${word.decodingBand === "irregular-supported" ? "心形部分需要记住；它不是假装规则的声音。" : "同一个拼写块里的字母会一起发光。"}</p></header><div class="wordlight-sound-map" aria-label="${word.displayWord} 的声音与拼写块">${word.graphemeUnits.map((unit) => `<span data-role="${unit.role}" title="${escapeHtml(unitHint(unit))}">${unit.letters}</span>`).join("")}</div><div class="wordlight-build__slots" aria-label="拼词槽位">${word.graphemeUnits.map((unit, index) => {
+    return `<section class="wordlight-build"><header><span class="wordlight-phase-label">把词光放到一起</span><h2>Build ${word.displayWord}</h2><p>${word.decodingBand === "irregular-supported" ? "心形部分需要记住；它不是假装规则的声音。" : "同一个拼写块里的字母会一起发光。"}</p></header><div class="wordlight-sound-map" aria-label="${word.displayWord} 的声音与拼写块">${word.graphemeUnits.map((unit) => `<span data-role="${unit.role}" title="${escapeHtml(unitHint(unit))}">${unit.letters}</span>`).join("")}</div><div class="wordlight-build__slots" aria-label="拼词槽位">${word.graphemeUnits.map((unit, index) => {
         const selected = slotTiles[index];
         const fixed = build.fixedTargetUnitIds.includes(unit.id);
         return `<span data-slot-index="${index}" data-fixed="${String(fixed)}">${escapeHtml(fixed ? targetUnitForSlot(word, index).letters : selected?.letters ?? "")}</span>`;
-      }).join("")}</div><div class="wordlight-tile-bank" aria-label="可选拼写块">${availableTiles.map((tile) => `<button type="button" data-tile-id="${escapeHtml(tile.id)}" aria-pressed="${String(build.selectedTileIds.includes(tile.id))}" ${build.selectedTileIds.includes(tile.id) || (tile.targetUnitId ? build.fixedTargetUnitIds.includes(tile.targetUnitId) : false) ? "disabled" : ""}>${escapeHtml(tile.letters)}</button>`).join("")}</div><div class="wordlight-controls"><button type="button" data-action="undo" ${build.selectedTileIds.length ? "" : "disabled"}>撤销</button><button type="button" data-action="reset">重新摆</button><button type="button" data-action="hint">给一点提示</button><button type="button" data-action="check-build">放好这个词</button></div>${build.hintLevel ? `<p class="wordlight-hint" role="status">${build.hintLevel === 1 ? "先看亮起的槽位。" : build.hintLevel === 2 ? "一个多余拼写块已经轻轻退开。" : build.hintLevel === 4 ? word.graphemeUnits.find((unit) => unit.role === "irregular-heart")?.childHint ?? "心形部分已经亮起。" : "一个正确拼写块已经固定。"}</p>` : ""}</section>` : ""}
+      }).join("")}</div><div class="wordlight-tile-bank" aria-label="可选拼写块">${availableTiles.map((tile) => `<button type="button" data-tile-id="${escapeHtml(tile.id)}" aria-pressed="${String(build.selectedTileIds.includes(tile.id))}" ${build.selectedTileIds.includes(tile.id) || (tile.targetUnitId ? build.fixedTargetUnitIds.includes(tile.targetUnitId) : false) ? "disabled" : ""}>${escapeHtml(tile.letters)}</button>`).join("")}</div><div class="wordlight-controls"><button type="button" data-action="undo" ${build.selectedTileIds.length ? "" : "disabled"}>撤销</button><button type="button" data-action="reset">重新摆</button><button type="button" data-action="hint">给一点提示</button><button type="button" data-action="check-build">放好这个词</button></div>${build.hintLevel ? `<p class="wordlight-hint" role="status">${build.hintLevel === 1 ? "先看亮起的槽位。" : build.hintLevel === 2 ? "一个多余拼写块已经轻轻退开。" : build.hintLevel === 4 ? word.graphemeUnits.find((unit) => unit.role === "irregular-heart")?.childHint ?? "心形部分已经亮起。" : "一个正确拼写块已经固定。"}</p>` : ""}</section>`;
+  };
+
+  const activePilotId = (): PilotTaskId | null => view === "mission" && mission && isPilotTask(mission.word.id) ? mission.word.id : null;
+  const renderPilot = (id: PilotTaskId): void => {
+    root.innerHTML = pilotMarkup({ id, record: save.interactions[id] ?? initialPilotRecord(id), chinese: save.settings.chineseScaffold,
+      notice: renderNotice(), announcement, helpLevel: pilotHelpLevel, spellingOpen: pilotSpellingOpen,
+      spellingMarkup: pilotSpellingOpen ? renderBuildPanel() : "", audioAvailable: save.settings.soundEnabled && canSpeakEnglish() });
+    applySettings();
+  };
+  const renderMission = (): void => {
+    cancelPresentation();
+    const pilotId = activePilotId();
+    if (pilotId) { renderPilot(pilotId); return; }
+    if (!mission) { view = "map"; renderMap(); return; }
+    const { word, sentence } = mission;
+    const blankTokens = sentenceWithBlank(sentence, word);
+    root.innerHTML = `<main class="wordlight wordlight-mission" data-testid="english-mission" data-word-id="${word.id}" data-phase="${phase}">${renderHeader(true)}${renderNotice()}
+      <section class="wordlight-mission__stage"><button type="button" class="wordlight-back" data-action="region">← 回到这个地方</button>
+      <div class="wordlight-stepper" aria-label="任务步骤"><span data-current="${String(phase === "meaning")}">看懂</span><span data-current="${String(phase === "build")}">拼词</span><span data-current="${String(phase === "sentence")}">放进句子</span><span data-current="${String(phase === "response")}">世界回应</span></div>
+      ${phase === "meaning" ? `<section class="wordlight-meaning"><div>${visualMarkup(word)}<div class="wordlight-scene-glow" aria-hidden="true"></div></div><div><span class="wordlight-phase-label">先看懂它</span><h2 lang="en-US">${word.displayWord}</h2>${save.settings.chineseScaffold ? `<p class="wordlight-gloss">${word.childGlossZh}</p>` : ""}<p lang="en-US">${word.childDefinitionEn}</p>${save.settings.soundEnabled && canSpeakEnglish() ? `<button type="button" data-speak="${escapeHtml(word.displayWord)}">听整个单词</button>` : `<p class="wordlight-audio-note">没有可用英文声音也没关系，图片和文字会陪你走完。</p>`}<button type="button" data-action="to-build">看看它怎么拼</button></div></section>` : ""}
+      ${phase === "build" ? renderBuildPanel() : ""}
       ${phase === "sentence" ? `<section class="wordlight-sentence"><div>${visualMarkup(word)}<p lang="en-US">${word.childDefinitionEn}</p></div><div><span class="wordlight-phase-label">把完整单词放进句子</span><h2 lang="en-US">${blankTokens.map((token, index) => token.startsWith("__") ? `<button type="button" class="wordlight-sentence__slot" data-action="sentence-slot" aria-label="句子中的空位">${sentenceTileSelected ? word.displayWord : "_____"}</button>` : `<span>${escapeHtml(token)}${index === blankTokens.length - 1 ? "." : ""}</span>`).join(" ")}</h2>${save.settings.chineseScaffold && sentence.scaffoldZh ? `<p class="wordlight-gloss">${sentence.scaffoldZh}</p>` : ""}<button type="button" class="wordlight-word-tile" data-action="sentence-tile" aria-pressed="${String(sentenceTileSelected)}" lang="en-US">${word.displayWord}</button><p>先选单词，再点句子里的空位。拖动不是必需的。</p></div></section>` : ""}
       ${phase === "response" ? `<section class="wordlight-response" data-world-action="${sentence.worldActionId}"><div>${visualMarkup(word, true)}<span class="wordlight-response__ripple" aria-hidden="true"></span></div><div><span class="wordlight-phase-label">世界听懂了</span><h2 lang="en-US">${sentence.text}</h2><p lang="en-US">${word.displayWord} fits here. ${responseCopy(word.id)}</p><button type="button" data-action="next-word">再找一个词光</button></div></section>` : ""}
       </section><div data-settings-layer></div><div class="wordlight-live" aria-live="polite">${escapeHtml(announcement)}</div></main>`;
@@ -215,7 +246,8 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
 
   const closeSettings = (): void => {
     root.querySelector<HTMLElement>("[data-settings-layer]")?.replaceChildren();
-    settingsReturnFocus?.focus();
+    if (settingsReturnFocus?.isConnected) settingsReturnFocus.focus();
+    else root.querySelector<HTMLElement>('[data-action="settings"]')?.focus();
     settingsReturnFocus = null;
   };
 
@@ -228,6 +260,8 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
     sentenceTileSelected = false;
     announcement = `先看看 ${word.displayWord} 是什么意思。`;
     view = "mission";
+    pilotSpellingOpen = false; pilotHelpLevel = 0;
+    if (activePilotId()) announcement = ["word-run", "word-jump"].includes(word.id) ? "Choose a word and a landing. Then try it." : "Choose a word and objects. Then try it.";
     navigate("mission", { region: word.themeId, word: word.id });
   };
 
@@ -265,11 +299,14 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
     build = initialBuildState();
     sentenceTileSelected = false;
     view = "mission";
+    pilotSpellingOpen = false; pilotHelpLevel = 0;
+    if (activePilotId()) announcement = ["word-run", "word-jump"].includes(word.id) ? "Choose a word and a landing. Then try it." : "Choose a word and objects. Then try it.";
     render();
   };
 
   const render = (): void => {
     if (destroyed) return;
+    cancelPresentation();
     window.speechSynthesis?.cancel();
     applySettings();
     if (view === "map") renderMap();
@@ -279,9 +316,42 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
     applySettings();
   };
 
+  const applyPilotInput = (input: PilotInput): void => {
+    const id = activePilotId();
+    if (!id || !mission) return;
+    const old = save.interactions[id] ?? initialPilotRecord(id);
+    const result = transitionPilot(id, old.state, input);
+    const record = { ...old, state: result.state, interactionCompleted: old.interactionCompleted || result.canonical, canonicalUsed: old.canonicalUsed || result.canonical };
+    save = updateEnglishWorldSave(save, { interactions: { ...save.interactions, [id]: record },
+      ...(result.canonical && record.spellingVerified ? {
+        completedStoryWordIds: [...new Set([...save.completedStoryWordIds, id])],
+        completedSentenceIds: [...new Set([...save.completedSentenceIds, mission.sentence.id])],
+      } : {}),
+    });
+    persist();
+    announcement = result.message;
+    const focused = document.activeElement as HTMLElement | null;
+    const focusWord = focused?.dataset.pilotWord, focusObject = focused?.dataset.pilotObject, focusAction = focused?.dataset.pilotAction;
+    renderMission();
+    const selector = focusWord ? `[data-pilot-word="${focusWord}"]` : focusObject ? `[data-pilot-object="${focusObject}"]` : focusAction ? `[data-pilot-action="${focusAction}"]` : null;
+    if (selector) root.querySelector<HTMLElement>(selector)?.focus({ preventScroll: true });
+    if (result.move) cancelPresentation = animatePilotMove(root, result.move, save.settings.reducedMotion);
+    else if (id === "word-two" && (result.executed || input.type === "reset")) cancelPresentation = animatePilotObjects(root, old.state, result.state, save.settings.reducedMotion);
+    if (result.executed && save.settings.soundEnabled) speakEnglish(result.message);
+  };
   const click = (event: MouseEvent): void => {
     const target = (event.target as HTMLElement).closest<HTMLElement>("button, [data-speak]");
     if (!target) return;
+    if (activePilotId()) {
+      if (target.dataset.pilotWord) { applyPilotInput({ type: "word", word: target.dataset.pilotWord }); return; }
+      if (target.dataset.pilotObject) { applyPilotInput({ type: "object", id: target.dataset.pilotObject }); return; }
+      if (target.dataset.pilotAction === "help") { pilotHelpLevel = Math.min(3, pilotHelpLevel + 1); renderMission(); root.querySelector<HTMLElement>('[data-pilot-action="help"]')?.focus({ preventScroll: true }); return; }
+      if (target.dataset.pilotAction === "spelling-reset") { build = initialBuildState(); announcement = "Look at the spelling blocks and try again."; renderMission(); root.querySelector<HTMLElement>('.pilot-spelling button[data-tile-id]')?.focus(); return; }
+      if (target.dataset.pilotAction === "spelling") { pilotSpellingOpen = !pilotSpellingOpen; renderMission(); root.querySelector<HTMLElement>(pilotSpellingOpen ? '.pilot-spelling button' : '[data-pilot-action="spelling"]')?.focus(); return; }
+      if (["execute", "cancel", "reset"].includes(target.dataset.pilotAction ?? "")) {
+        applyPilotInput({ type: target.dataset.pilotAction as "execute" | "cancel" | "reset" }); return;
+      }
+    }
     if (target.dataset.speak) { if (save.settings.soundEnabled) speakEnglish(target.dataset.speak); return; }
     if (target.dataset.themeId) {
       const theme = themeById(target.dataset.themeId);
@@ -293,7 +363,11 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
       return;
     }
     if (target.dataset.wordId) { const word = ENGLISH_V2_WORD_BY_ID.get(target.dataset.wordId); if (word) startMission(word); return; }
-    if (target.dataset.tileId && mission) { build = selectBuildTile(build, mission, target.dataset.tileId); announcement = "拼写块放进槽位了。"; renderMission(); return; }
+    if (target.dataset.tileId && mission) {
+      build = selectBuildTile(build, mission, target.dataset.tileId); announcement = "拼写块放进槽位了。"; renderMission();
+      if (activePilotId()) root.querySelector<HTMLElement>('.wordlight-tile-bank button:not([disabled]), [data-action="check-build"]')?.focus({ preventScroll: true });
+      return;
+    }
     switch (target.dataset.action) {
       case "map": activeThemeId = null; navigate("map"); break;
       case "region": if (mission) { activeThemeId = mission.word.themeId; navigate("region", { region: mission.word.themeId }); } break;
@@ -306,6 +380,20 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
       case "hint": if (mission) { build = applyBuildHint(build, mission); renderMission(); } break;
       case "check-build":
         if (!mission) break;
+        if (activePilotId()) {
+          const id = activePilotId()!;
+          if (buildIsComplete(build, mission)) {
+            const independent = build.fixedTargetUnitIds.length === 0;
+            const record = save.interactions[id] ?? initialPilotRecord(id);
+            save = updateEnglishWorldSave(save, { interactions: { ...save.interactions, [id]: { ...record, spellingVerified: record.spellingVerified || independent } } });
+            persist();
+            announcement = independent ? "Word built. Now use the sentence in the scene." : "Built with help. You can keep exploring, or build it yourself without fixed tiles.";
+            if (independent) pilotSpellingOpen = false;
+          } else announcement = "Look at the spelling blocks and try again.";
+          renderMission();
+          root.querySelector<HTMLElement>(pilotSpellingOpen ? '[data-action="check-build"]' : '[data-pilot-action="execute"]')?.focus();
+          break;
+        }
         if (buildIsComplete(build, mission)) { phase = "sentence"; sentenceTileSelected = false; announcement = `${mission.word.displayWord} fits here.`; renderMission(); }
         else { announcement = `Look at the picture again. Try ${mission.word.graphemeUnits.map((unit) => unit.letters).join(" · ")}.`; renderMission(); }
         break;
@@ -318,16 +406,17 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
   const change = (event: Event): void => {
     const input = (event.target as HTMLElement).closest<HTMLInputElement>("input[data-setting]");
     if (!input) return;
-    const key = input.dataset.setting as keyof EnglishWorldSaveV2["settings"];
+    const key = input.dataset.setting as "soundEnabled" | "chineseScaffold" | "reducedMotion";
     save = updateEnglishWorldSave(save, { settings: { ...save.settings, [key]: input.checked } });
     persist();
     if (key === "soundEnabled" && !input.checked) window.speechSynthesis?.cancel();
-    announcement = "设置已保存在本机。";
+    announcement = writable ? "设置已保存在本机。" : "本次设置仅用于这次探索，未覆盖本机记录。";
     render();
     renderSettings();
   };
 
   const keydown = (event: KeyboardEvent): void => {
+    if (event.key === "Escape" && activePilotId() && !root.querySelector('.wordlight-dialog')) { event.preventDefault(); applyPilotInput({ type: "cancel" }); return; }
     const dialog = root.querySelector<HTMLElement>(".wordlight-dialog[role=dialog]");
     if (!dialog) return;
     if (event.key === "Escape") { event.preventDefault(); closeSettings(); return; }
@@ -341,6 +430,15 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
     else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
   };
 
+  const storageChanged = (event: StorageEvent): void => {
+    if (event.storageArea === storage && (event.key === ENGLISH_WORLD_SAVE_KEY || event.key === null) && event.newValue !== expectedRaw) {
+      writable = false;
+      saveNotice = "另一页的本机记录已变化。这次只读游玩；刷新可读取当前记录。";
+      render();
+    }
+  };
+  if (read.status === "migrated") persist();
+  window.addEventListener("storage", storageChanged);
   root.addEventListener("click", click);
   root.addEventListener("change", change);
   root.addEventListener("keydown", keydown);
@@ -351,6 +449,8 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
     destroy(): void {
       if (destroyed) return;
       destroyed = true;
+      cancelPresentation();
+      window.removeEventListener("storage", storageChanged);
       window.speechSynthesis?.cancel();
       root.removeEventListener("click", click);
       root.removeEventListener("change", change);

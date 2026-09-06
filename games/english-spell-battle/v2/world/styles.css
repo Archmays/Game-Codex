@@ -440,8 +440,10 @@ body.english-world-page #app {
 }
 
 .wordlight-journal__grid article > .wordlight-meaning__art,
-.wordlight-journal__grid article > .wordlight-quantity {
+.wordlight-journal__grid article > .wordlight-quantity,
+.wordlight-journal__grid article > .wordlight-color {
   height: 150px;
+  min-height: 0;
 }
 
 .wordlight-journal__grid h3 {
@@ -575,6 +577,43 @@ body.english-world-page #app {
   object-fit: contain;
   filter: drop-shadow(0 18px 24px rgba(21,56,76,.14));
   pointer-events: none;
+}
+
+/* A definite media box prevents intrinsic image height from expanding a grid row
+   behind the fixed region/journal crop window. Word subjects must remain whole. */
+.wordlight-meaning__art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 360px;
+  min-height: 0;
+}
+
+.wordlight-meaning__art img {
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 360px;
+  max-height: 360px;
+  padding: 6px;
+  box-sizing: border-box;
+  object-fit: contain;
+}
+
+.wordlight-mission-list .wordlight-meaning__art.is-transformed img {
+  animation: none;
+}
+
+.wordlight-color::before {
+  content: "";
+  display: block;
+  width: min(80%, 120px);
+  aspect-ratio: 1;
+  border: 2px solid #536270;
+  border-radius: 45%;
+  background: var(--word-color);
 }
 
 .wordlight-meaning__art.is-transformed img {
@@ -1053,7 +1092,8 @@ body.english-world-page #app {
   }
 
   .wordlight-journal__grid article > .wordlight-meaning__art,
-  .wordlight-journal__grid article > .wordlight-quantity {
+  .wordlight-journal__grid article > .wordlight-quantity,
+  .wordlight-journal__grid article > .wordlight-color {
     height: 92px;
     min-height: 92px;
   }
@@ -1161,7 +1201,8 @@ body.english-world-page #app {
   }
 
   .wordlight-journal__grid article > .wordlight-meaning__art,
-  .wordlight-journal__grid article > .wordlight-quantity {
+  .wordlight-journal__grid article > .wordlight-quantity,
+  .wordlight-journal__grid article > .wordlight-color {
     width: min(100%, 120px);
     justify-self: center;
   }

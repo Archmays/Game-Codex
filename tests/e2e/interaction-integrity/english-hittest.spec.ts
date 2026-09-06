@@ -2,6 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { expect, test, type Page } from "@playwright/test";
 import { ENGLISH_V2_THEMES, ENGLISH_V2_WORDS } from "../../../games/english-spell-battle/v2/content/manifest";
+import { isPilotTask } from "../../../games/english-spell-battle/v2/pilot/model";
 import { expectHitTarget } from "../helpers/hit-target";
 
 const CORE_WORDS = ENGLISH_V2_WORDS.filter((word) => word.storyBand === "story-core");
@@ -31,9 +32,14 @@ test("@hittest @representative @english-story all 30 story CTAs are topmost and 
       await button.click({ trial: true });
       await button.click();
       await expect(page.getByTestId("english-mission")).toHaveAttribute("data-word-id", wordId!);
-      await expect(page.getByTestId("english-mission")).toHaveAttribute("data-phase", "meaning");
+      const interactive = isPilotTask(wordId!);
+      await expect(page.getByTestId("english-mission")).toHaveAttribute("data-phase", interactive ? "interactive" : "meaning");
+      if (interactive) {
+        await expect(page.getByTestId("pilot-scene")).toBeVisible();
+        await expect(page.locator('.pilot-word-cards button')).toHaveCount(2);
+      }
       rows.push({ project: testInfo.project.name, region: theme.id, missionNumber: index + 1, wordId, hitSuccessRatio: evidence.hitSuccessRatio, trialClick: "PASS", realClick: "PASS" });
-      await page.locator('[data-action="region"]').click();
+      await page.locator('[data-action="region"]').first().click();
       await expect(page.getByTestId("english-region")).toHaveAttribute("data-region", theme.id);
     }
   }

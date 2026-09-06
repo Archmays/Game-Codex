@@ -1,0 +1,87 @@
+{
+  "source": "Built-in ChatGPT image generation requested for this task; fictional character, no real person or downloaded artwork.",
+  "authorization": "User Step6 objective sections 4-5 authorizes production image generation and project use. No purchase or external upload.",
+  "prompts": "assets/images/english-world/pilot-six/PROMPTS.md",
+  "files": [
+    {
+      "path": "assets/images/english-world/pilot-six/action-park-source.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 2319601,
+      "alphaRange": [
+        255,
+        255
+      ],
+      "sha256": "411f39f5b3e5bd6edae5fdeac633fe45a8de0151435ae06e798554b67e89304e"
+    },
+    {
+      "path": "assets/images/english-world/pilot-six/character-poses-source.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1954448,
+      "alphaRange": [
+        0,
+        254
+      ],
+      "sha256": "f2943355554798ff0b60878741a83eea52da0be4fa379672c1b39d62b88319a6"
+    },
+    {
+      "path": "assets/images/english-world/pilot-six/color-number-pier-source.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1981234,
+      "alphaRange": [
+        255,
+        255
+      ],
+      "sha256": "f898adedd5c634151bd701d6fc9398d7bf23315bdcd63960020cdc548c3dad2f"
+    },
+    {
+      "path": "public/assets/english-world/pilot-six/action-park.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 61304,
+      "alphaRange": [
+        255,
+        255
+      ],
+      "sha256": "482fea34f290f2246653ab3e258fc27bab0bdd7d64aa81dae6dd593fb55c9dd4"
+    },
+    {
+      "path": "public/assets/english-world/pilot-six/character-poses.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 85218,
+      "alphaRange": [
+        0,
+        254
+      ],
+      "sha256": "9525247c4b5166e6097d5a2ce88680690e542c789e09b4e682ccfe5ff90877fc"
+    },
+    {
+      "path": "public/assets/english-world/pilot-six/color-number-pier.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 49068,
+      "alphaRange": [
+        255,
+        255
+      ],
+      "sha256": "3bb67b83b9035e0e1f47253fab0c6df04c1ca28b75f5ec3e01613e0f03c10448"
+    }
+  ],
+  "runtimePreparation": {
+    "environments": "Resize complete source frame to 1200x800 and WebP encode; no baked text or countable objects.",
+    "character": "Six poses in source 1536x1024; alpha gutter split y=496 preserves airborne hair; shared-scale normalization to 240px content; 8px padding into 256px cells, 3x2 atlas 768x512; common grounded anchor (128,248). No pose warped or redrawn during packing.",
+    "poseOrder": [
+      "idle",
+      "run-a",
+      "run-b",
+      "takeoff",
+      "air",
+      "landing"
+    ],
+    "rejectedCandidates": "Earlier sheet/edit prompts retained for provenance; baked-checkerboard candidates were rejected and are not runtime assets."
+  },
+  "preservedWordImages": 40
+}
