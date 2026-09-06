@@ -32,6 +32,7 @@ import {
 import { isPilotTask, initialPilotRecord, transitionPilot, type PilotTaskId, type PilotInput } from "../pilot/model";
 import "../world/styles.css";
 import { pilotMarkup, animatePilotMove, animatePilotObjects } from "../pilot/view";
+import { activityAction, activityHistory, regionActivityCopy } from "./activity-copy";
 
 export interface MountEnglishWorldOptions {
   readonly storage?: Storage;
@@ -96,6 +97,11 @@ function visualMarkup(word: EnglishWordRecord, transformed = false): string {
 
 function themeById(id: string | null) {
   return ENGLISH_V2_THEMES.find((theme) => theme.id === id) ?? null;
+}
+
+function graphemeMarkup(unit: GraphemeUnit): string {
+  const heart = unit.role === "irregular-heart";
+  return `<span data-role="${unit.role}" title="${escapeHtml(unitHint(unit))}"${heart ? ` aria-label="${unit.letters}，心形部分：这里需要特别记住"` : ""}>${heart ? '<b class="wordlight-heart" aria-hidden="true">♥</b>' : ""}${unit.letters}</span>`;
 }
 
 export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldOptions = {}): MountedGame {
@@ -169,8 +175,10 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
         <div class="wordlight-island__intro"><h2 id="island-heading">今天先点亮哪里？</h2><p>五个地方都可以自由进入，没有倒计时，也不会因为离开失去已经点亮的词。</p></div>
         <div class="wordlight-regions">${ENGLISH_V2_THEMES.map((theme, index) => {
           const words = storyWordsForTheme(theme.id);
-          const completed = words.filter((word) => save.completedStoryWordIds.includes(word.id)).length;
-          return `<article class="wordlight-region wordlight-region--${theme.id}" style="--region-accent:${theme.accent}"><span class="wordlight-region__number">${String(index + 1).padStart(2, "0")}</span><h3>${theme.title}</h3><p>${theme.subtitle}</p><span>${words.length ? `${completed} 个词光已亮起` : "完整世界扩展后开放词光"}</span><button type="button" data-theme-id="${theme.id}">${index === 0 ? "从这里看看" : "进去看看"}</button></article>`;
+          const scenePlayed = words.some(word => isPilotTask(word.id) && save.interactions[word.id]?.interactionCompleted);
+          const wordCardPlayed = words.some(word => save.completedStoryWordIds.includes(word.id) || word.sentenceIds.some(id => save.completedSentenceIds.includes(id)));
+          const history = [scenePlayed ? "这里有玩过的场景" : "", wordCardPlayed ? "这里有完成过的词卡活动" : ""].filter(Boolean).join(" · ") || "选一个活动试一试";
+          return `<article class="wordlight-region wordlight-region--${theme.id}" style="--region-accent:${theme.accent}"><span class="wordlight-region__number">${String(index + 1).padStart(2, "0")}</span><h3>${theme.title}</h3><p>${theme.subtitle}</p><p class="wordlight-activity-description">${regionActivityCopy(theme.id)}</p><span class="wordlight-activity-history">${history}</span><button type="button" data-theme-id="${theme.id}">${index === 0 ? "从这里看看" : "进去看看"}</button></article>`;
         }).join("")}</div>
       </section>
       <footer class="wordlight-footer"><p>声音是可选的；没有声音也能完成每一步。</p></footer>
@@ -184,18 +192,18 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
     const words = storyWordsForTheme(theme.id);
     const optionalWords = optionalWordsForTheme(theme.id);
     root.innerHTML = `<main class="wordlight" data-testid="english-region" data-region="${theme.id}">${renderHeader(true)}${renderNotice()}
-      <section class="wordlight-region-page" style="--region-accent:${theme.accent}"><button type="button" class="wordlight-back" data-action="map">← 回岛屿地图</button><div class="wordlight-region-page__title"><span>${theme.subtitle}</span><h2>${theme.title}</h2><p>${theme.transformationCopy}</p></div>
-      <div class="wordlight-mission-list">${words.map((word) => `<article data-complete="${String(save.completedStoryWordIds.includes(word.id))}">${visualMarkup(word, save.completedStoryWordIds.includes(word.id))}<h3>${word.displayWord}</h3>${save.settings.chineseScaffold ? `<p>${word.childGlossZh}</p>` : ""}<button type="button" data-word-id="${word.id}">${save.completedStoryWordIds.includes(word.id) ? "再让它亮一次" : "跟着词光走"}</button></article>`).join("")}</div>
+      <section class="wordlight-region-page" style="--region-accent:${theme.accent}"><button type="button" class="wordlight-back" data-action="map">← 回岛屿地图</button><div class="wordlight-region-page__title"><span>${theme.subtitle}</span><h2>${theme.title}</h2><p>${regionActivityCopy(theme.id)}</p></div>
+      <div class="wordlight-mission-list">${words.map((word) => `<article data-complete="${String(save.completedStoryWordIds.includes(word.id))}">${visualMarkup(word, save.completedStoryWordIds.includes(word.id))}<h3>${word.displayWord}</h3>${save.settings.chineseScaffold ? `<p>${word.childGlossZh}</p>` : ""}<p class="wordlight-activity-history">${activityHistory(word.id, save)}</p><button type="button" data-word-id="${word.id}">${activityAction(word.id)}</button></article>`).join("")}</div>
       <aside class="wordlight-optional"><div><span>Optional word shelf</span><h3>想多看几个词？</h3><p>这些词只放在词光册里，不挡住岛屿故事。</p></div><div>${optionalWords.map((word) => `<button type="button" data-action="journal">${word.displayWord}</button>`).join("")}</div></aside></section>
       <div data-settings-layer></div><div class="wordlight-live" aria-live="polite">${escapeHtml(announcement)}</div>
     </main>`;
   };
 
   const renderJournal = (): void => {
-    root.innerHTML = `<main class="wordlight" data-testid="english-journal">${renderHeader(true)}${renderNotice()}<section class="wordlight-journal"><button type="button" class="wordlight-back" data-action="map">← 回岛屿地图</button><header><span>Word Journal</span><h2>词光册</h2><p>看图片、单词和声音块。这里没有正确率或错误次数。</p></header><div class="wordlight-journal__grid">${ENGLISH_V2_WORDS.map((word) => {
+    root.innerHTML = `<main class="wordlight" data-testid="english-journal">${renderHeader(true)}${renderNotice()}<section class="wordlight-journal"><button type="button" class="wordlight-back" data-action="map">← 回岛屿地图</button><header><span>Word Journal</span><h2>词光册</h2><p>看图片、单词和声音块。♥ 标记的部分需要特别记住。</p></header><div class="wordlight-journal__grid">${ENGLISH_V2_WORDS.map((word) => {
       const sentence = ENGLISH_V2_SENTENCE_BY_ID.get(word.sentenceIds[0]);
-      const status = word.storyBand === "optional" ? "拓展词" : save.completedStoryWordIds.includes(word.id) ? "已遇见" : "还没遇见";
-      return `<article data-testid="journal-word" data-word-id="${word.id}" data-story-band="${word.storyBand}">${visualMarkup(word)}<div><span>${status}</span><h3 lang="en-US">${word.displayWord}</h3>${save.settings.chineseScaffold ? `<p>${word.childGlossZh}</p>` : ""}<p lang="en-US">${word.childDefinitionEn}</p><div class="wordlight-chunks" aria-label="${word.displayWord} 的拼写块" lang="en-US">${word.graphemeUnits.map((unit) => `<span data-role="${unit.role}">${unit.letters}</span>`).join("")}</div>${sentence ? `<p class="wordlight-journal__sentence" lang="en-US">${sentence.text}</p>` : `<p class="wordlight-journal__sentence"><span lang="en-US">Optional word</span> · 可以只看图、词义和拼写块。</p>`}${save.settings.soundEnabled && canSpeakEnglish() ? `<button type="button" data-speak="${escapeHtml(word.displayWord)}">听整个单词</button>` : ""}</div></article>`;
+      const status = activityHistory(word.id, save);
+      return `<article data-testid="journal-word" data-word-id="${word.id}" data-story-band="${word.storyBand}">${visualMarkup(word)}<div><span class="wordlight-activity-history">${status}</span><h3 lang="en-US">${word.displayWord}</h3>${save.settings.chineseScaffold ? `<p>${word.childGlossZh}</p>` : ""}<p lang="en-US">${word.childDefinitionEn}</p><div class="wordlight-chunks" aria-label="${word.displayWord} 的拼写块" lang="en-US">${word.graphemeUnits.map(graphemeMarkup).join("")}</div>${sentence ? `<p class="wordlight-journal__sentence" lang="en-US">${sentence.text}</p>` : `<p class="wordlight-journal__sentence"><span lang="en-US">Optional word</span> · 可以只看图、词义和拼写块。</p>`}${save.settings.soundEnabled && canSpeakEnglish() ? `<button type="button" data-speak="${escapeHtml(word.displayWord)}">听整个单词</button>` : ""}</div></article>`;
     }).join("")}</div></section><div data-settings-layer></div><div class="wordlight-live" aria-live="polite">${escapeHtml(announcement)}</div></main>`;
   };
 
@@ -206,7 +214,7 @@ export function mountEnglishWorld(root: HTMLElement, options: MountEnglishWorldO
     const { word } = mission;
     const availableTiles = mission.tiles.filter(tile => !build.hiddenDistractorIds.includes(tile.id));
     const slotTiles = buildSlotTiles(build, mission);
-    return `<section class="wordlight-build"><header><span class="wordlight-phase-label">把词光放到一起</span><h2>Build ${word.displayWord}</h2><p>${word.decodingBand === "irregular-supported" ? "心形部分需要记住；它不是假装规则的声音。" : "同一个拼写块里的字母会一起发光。"}</p></header><div class="wordlight-sound-map" aria-label="${word.displayWord} 的声音与拼写块">${word.graphemeUnits.map((unit) => `<span data-role="${unit.role}" title="${escapeHtml(unitHint(unit))}">${unit.letters}</span>`).join("")}</div><div class="wordlight-build__slots" aria-label="拼词槽位">${word.graphemeUnits.map((unit, index) => {
+    return `<section class="wordlight-build"><header><span class="wordlight-phase-label">把词光放到一起</span><h2>Build ${word.displayWord}</h2><p>${word.decodingBand === "irregular-supported" ? "有 ♥ 的心形部分：这里需要特别记住。" : "同一个拼写块里的字母会一起发光。"}</p></header><div class="wordlight-sound-map" aria-label="${word.displayWord} 的声音与拼写块">${word.graphemeUnits.map(graphemeMarkup).join("")}</div><div class="wordlight-build__slots" aria-label="拼词槽位">${word.graphemeUnits.map((unit, index) => {
         const selected = slotTiles[index];
         const fixed = build.fixedTargetUnitIds.includes(unit.id);
         return `<span data-slot-index="${index}" data-fixed="${String(fixed)}">${escapeHtml(fixed ? targetUnitForSlot(word, index).letters : selected?.letters ?? "")}</span>`;

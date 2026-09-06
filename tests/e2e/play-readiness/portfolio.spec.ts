@@ -1,6 +1,9 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { expect, test, type Locator, type Page, type TestInfo } from "@playwright/test";
+import { homeDiscoveryTests } from "./home-discovery-cases";
+
+homeDiscoveryTests();
 
 const TASK_ID = process.env.GAME_CODEX_TASK_ID ?? "GAME-CODEX-NATURAL-USE-OBSERVATION-KIT-06A";
 const REPORTS = resolve(process.cwd(), `tmp/tasks/${TASK_ID}/reports`);

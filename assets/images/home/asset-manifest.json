@@ -1,0 +1,67 @@
+{
+  "task": "GAME-CODEX-STEP7-HOME-DISCOVERY-POLISH",
+  "authorization": "Current user explicitly authorizes deriving home entries from formally used project assets and normal public release. Existing source assets preserved unchanged.",
+  "process": "Pillow crop of existing forest matte; centered crop to 12:7 and Lanczos resize to 720x420; WebP quality 84 method 6. No generated image and no UI screenshot.",
+  "assets": [
+    {
+      "id": "ink-forest",
+      "source": "public/assets/hanzi-radical-battle/v2/theme-c/chapter-one/hub-ink-forest.webp",
+      "sourceSize": [
+        720,
+        405
+      ],
+      "sourceSha256": "a276a1e2e9f9ea0e2e23cb8f136b2869c1145a134f04cab00efa9362ffd8184a",
+      "crop": [
+        50,
+        28,
+        670,
+        377
+      ],
+      "path": "public/assets/home/ink-forest.webp",
+      "width": 720,
+      "height": 420,
+      "bytes": 34996,
+      "sha256": "cf00f3879a818dd44981defa3f24517e1c972069820391386323847ded1e54a4"
+    },
+    {
+      "id": "math-world",
+      "source": "public/assets/math-world/two-station-city.webp",
+      "sourceSize": [
+        1600,
+        800
+      ],
+      "sourceSha256": "e73d6bebd12e30eaf4d840f1869d706335cf3f48799399a380f4991cf43d026b",
+      "crop": [
+        0,
+        0,
+        1600,
+        800
+      ],
+      "path": "public/assets/home/math-world.webp",
+      "width": 720,
+      "height": 420,
+      "bytes": 70888,
+      "sha256": "6f87515ee4115e95730a72367a270c41c21fc4242253b22747e948fb96b9ddd5"
+    },
+    {
+      "id": "wordlight-island",
+      "source": "public/assets/english-world/pilot-six/color-number-pier.webp",
+      "sourceSize": [
+        1200,
+        800
+      ],
+      "sourceSha256": "3bb67b83b9035e0e1f47253fab0c6df04c1ca28b75f5ec3e01613e0f03c10448",
+      "crop": [
+        0,
+        0,
+        1200,
+        800
+      ],
+      "path": "public/assets/home/wordlight-island.webp",
+      "width": 720,
+      "height": 420,
+      "bytes": 17818,
+      "sha256": "56b68ee5e25a32c635624cbe4d05563923bf4ad436cf70bddefc7db59e26de71"
+    }
+  ]
+}

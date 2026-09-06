@@ -2884,3 +2884,10 @@ button {
 .game-card--math-world h2 { position: absolute; z-index: 2; top: 18px; left: 20px; margin: 0; color: #214a3b; text-shadow: 0 1px 10px #fffaf0; }
 .game-card--math-world > p { padding: 14px 16px 0; }
 .game-card--math-world .game-card__button { width: calc(100% - 32px); margin: 14px 16px 16px; border-color: #315f51; background: #477a55; color: #fffaf0; }
+.game-card--wordlight { position: relative; overflow: hidden; padding: 0; border-color: #4d8e99; background: #d4eeec; }
+.game-card--wordlight h2 { position: absolute; z-index: 2; top: 18px; left: 20px; margin: 0; color: #183f4b; text-shadow: 0 1px 10px #f2ffff; }
+.game-card--wordlight > p { padding: 14px 16px 0; color: #183f4b; }
+.game-card--wordlight .game-card__button { width: calc(100% - 32px); margin: 14px 16px 16px; border-color: #216879; background: #216879; color: #f2ffff; }
+.game-card--world > p { flex: 1; }
+.game-card--world .game-card__world-art { flex: 0 0 220px; }
+.game-card--world .game-card__button { min-height: 48px; }

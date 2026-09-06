@@ -182,8 +182,10 @@ test("My Game World exposes a physical English island portal and the route retur
   await page.goto("/?world=my-game-world");
   const portal = page.getByTestId("world-english-portal");
   await expect(portal).toBeVisible();
-  await expect(portal.locator(".world-object__mark--english")).toBeVisible();
-  await portal.getByRole("link", { name: "走进英语世界" }).click();
+  await expect(portal.locator("img")).toBeVisible();
+  await expect(portal.locator("img")).toHaveAttribute("src", "./assets/home/wordlight-island.webp");
+  await expect(portal.getByRole("link")).toHaveCount(1);
+  await portal.getByRole("link", { name: /走进词光岛/ }).click();
   await expect(page.getByTestId("english-world-map")).toBeVisible();
   await page.getByRole("link", { name: "回我的游戏世界" }).click();
   await expect(page.getByTestId("world-english-portal")).toBeVisible();

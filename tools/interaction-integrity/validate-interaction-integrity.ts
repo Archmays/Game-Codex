@@ -104,7 +104,7 @@ function validateKnownContracts(entries: readonly RiskEntry[]): string[] {
   const artImage = blockFor(css, ".wordlight-mission-list .wordlight-meaning__art img");
   const pointerTransparentArt = exactBlockFor(css, ".wordlight-meaning__art img");
   const media = blockFor(css, ".wordlight-mission-list .wordlight-meaning__art");
-  const live = blockFor(css, ".wordlight-live");
+  const live = exactBlockFor(css, ".wordlight-live");
   if (!/pointer-events\s*:\s*none\b/.test(pointerTransparentArt)) issues.push("English mission art images must be pointer-transparent");
   if (!["width", "height", "max-height"].every((name) => new RegExp(`${name}\\s*:\\s*100%`).test(artImage))) issues.push("English mission art images must stay within their media box");
   if (!/overflow\s*:\s*hidden\b/.test(media) || !/height\s*:\s*150px\b/.test(media)) issues.push("English mission media must use a fixed clipped box");

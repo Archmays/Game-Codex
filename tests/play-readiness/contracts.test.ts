@@ -63,7 +63,8 @@ describe("portfolio play-readiness contracts", () => {
   it("keeps top and Classic child surfaces free of adult catalog metadata", () => {
     const top = readFileSync("apps/my-game-world/index.ts", "utf8");
     const classic = readFileSync("apps/hub/index.ts", "utf8");
-    expect(top).toContain("三个世界 · 一个百宝箱");
+    expect(top).toContain('aria-label="三个游戏世界"');
+    expect(top).toContain('class="world-more" aria-label="游戏列表"');
     expect(top).not.toContain("夜光墨林");
     for (const forbidden of ["recommendedAge", "learningGoal", "qualityTier", "statusBadge"]) expect(classic).not.toContain(forbidden);
   });

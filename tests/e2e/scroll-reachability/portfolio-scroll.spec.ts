@@ -324,13 +324,13 @@ test("@scroll @representative modal close restores each surface's declared scrol
   await expect(page.getByRole("dialog")).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(parent).toBeFocused();
-  expect(familyWorld.scrollPolicy).toBe("locked");
-  expect(await page.locator("body").evaluate((body) => getComputedStyle(body).overflowY)).toBe("hidden");
+  expect(familyWorld.scrollPolicy).toBe("document");
+  expect(await page.locator("body").evaluate((body) => getComputedStyle(body).overflowY)).toBe("auto");
 
   await page.goto("/?world=my-game-world&parent=observation", { waitUntil: "domcontentloaded" });
   await expect(page.getByTestId("observation-notebook")).toBeVisible();
   await page.keyboard.press("Escape");
-  expect(await page.locator("body").evaluate((body) => getComputedStyle(body).overflowY)).toBe("hidden");
+  expect(await page.locator("body").evaluate((body) => getComputedStyle(body).overflowY)).toBe("auto");
   expect(runtime.errors).toEqual([]);
-  writeReport(`MODAL_SCROLL_RESTORE.${testInfo.project.name}.json`, { verdict: "PASS", project: testInfo.project.name, englishSettings: "PASS_DOCUMENT_OWNER_RESTORED", worldSettingsAndSaveVaultHost: "PASS_LOCKED_OWNER_RESTORED", observationNotebook: "PASS_LOCKED_OWNER_RESTORED", staleBodyScrollLock: 0 });
+  writeReport(`MODAL_SCROLL_RESTORE.${testInfo.project.name}.json`, { verdict: "PASS", project: testInfo.project.name, englishSettings: "PASS_DOCUMENT_OWNER_RESTORED", worldSettingsAndSaveVaultHost: "PASS_DOCUMENT_OWNER_RESTORED", observationNotebook: "PASS_DOCUMENT_OWNER_RESTORED", staleBodyScrollLock: 0 });
 });

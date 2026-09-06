@@ -20,7 +20,11 @@ test('V2 migrates once with exact old payload, extensions, grades and settings t
  await applyCanonicalPilot(page,'word-jump',info.project.name==='mobile-390'?'tap':'click');
  save=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!),key);expect(save.interactions['word-jump'].spellingVerified).toBe(false);
  await page.locator('[data-action="settings"]').click();await page.getByRole('checkbox',{name:'减少动态效果'}).uncheck();await page.keyboard.press('Escape');
- await page.locator('[data-action="journal"]').click();await page.goBack();await page.locator('[data-action="region"]').first().click();await page.goto('/?world=english-world');await page.reload();
+ await page.locator('[data-action="journal"]').click();
+ await expect(page.locator('[data-testid="journal-word"][data-word-id="word-cat"] .wordlight-activity-history')).toHaveText('词卡活动完成过');
+ await expect(page.locator('[data-testid="journal-word"][data-word-id="word-jump"] .wordlight-activity-history')).toHaveText('场景玩过 · 词卡活动完成过');
+ await expect(page.getByTestId('english-journal')).not.toContainText(/独立拼写成功|已掌握英语/);
+ await page.goBack();await page.locator('[data-action="region"]').first().click();await page.goto('/?world=english-world');await page.reload();
  save=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!),key);expect(save.migratedFromV2Raw).toBe(raw);expect(save.extension).toEqual({keep:['synthetic',1]});expect(save.settings.extraPreference).toEqual({keep:true});expect(save.completedStoryWordIds).toEqual(['word-jump','word-cat']);
  expect(await page.evaluate(k=>localStorage.getItem(k),LEGACY_ENGLISH_SAVE_KEY)).toBe(legacy);
 });

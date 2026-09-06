@@ -100,7 +100,7 @@ function createGameCard(game: GameDefinition, onPlay: () => void): HTMLElement {
   card.dataset.gameId = game.id;
 
   if (game.id === "hanzi-radical-battle") {
-    card.classList.add("game-card--ink-forest");
+    card.classList.add("game-card--world", "game-card--ink-forest");
     const title = document.createElement("h2");
     title.textContent = game.title;
     const worldArt = document.createElement("img");
@@ -115,7 +115,7 @@ function createGameCard(game: GameDefinition, onPlay: () => void): HTMLElement {
   }
 
   if (game.id === "math-lab") {
-    card.classList.add("game-card--math-world");
+    card.classList.add("game-card--world", "game-card--math-world");
     const title = document.createElement("h2");
     title.textContent = game.title;
     const worldArt = document.createElement("img");
@@ -125,6 +125,21 @@ function createGameCard(game: GameDefinition, onPlay: () => void): HTMLElement {
     const description = document.createElement("p");
     description.textContent = game.description;
     const button = createButton(game.playLabel ?? "进入数学世界", onPlay, { className: "ui-button game-card__button" });
+    card.append(title, worldArt, description, button);
+    return card;
+  }
+
+  if (game.id === "english-spell-battle") {
+    card.classList.add("game-card--world", "game-card--wordlight");
+    const title = document.createElement("h2");
+    title.textContent = game.title;
+    const worldArt = document.createElement("img");
+    worldArt.className = "game-card__world-art";
+    worldArt.src = "./assets/home/wordlight-island.webp";
+    worldArt.alt = "词光岛的浅蓝海面与木码头";
+    const description = document.createElement("p");
+    description.textContent = game.description;
+    const button = createButton(game.playLabel ?? "进入词光岛", onPlay, { className: "ui-button game-card__button" });
     card.append(title, worldArt, description, button);
     return card;
   }

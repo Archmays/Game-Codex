@@ -45,14 +45,14 @@ export function mountWorldSettings(
     const input = event.currentTarget as HTMLInputElement;
     if (!onChange({ muted: input.checked })) {
       input.checked = !input.checked;
-      if (status) status.textContent = "这次没有改动，本机记录仍然安全。";
+      if (status) status.textContent = "这次没有保存设置。为保护本机记录，请刷新后再试。";
     }
   });
   root.querySelector<HTMLInputElement>("[data-world-reduced-motion]")?.addEventListener("change", (event) => {
     const input = event.currentTarget as HTMLInputElement;
     if (!onChange({ reducedMotion: input.checked })) {
       input.checked = !input.checked;
-      if (status) status.textContent = "这次没有改动，本机记录仍然安全。";
+      if (status) status.textContent = "这次没有保存设置。为保护本机记录，请刷新后再试。";
     }
   });
   root.querySelector<HTMLButtonElement>("[data-world-vault-open]")?.addEventListener("click", async (event) => {

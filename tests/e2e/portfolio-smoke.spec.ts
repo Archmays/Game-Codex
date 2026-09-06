@@ -223,7 +223,7 @@ test("@portfolio public route registry preserves world, classic, and Hanzi legac
   await expectRuntimeClean(runtime);
 });
 
-test("@portfolio bare public URL has the same fullscreen geometry as the explicit world route", async ({ page }, testInfo) => {
+test("@portfolio bare public URL has the same document-scroll geometry as the explicit world route", async ({ page }, testInfo) => {
   const runtime = observeRuntime(page);
   if (testInfo.project.name === "desktop-1440") await page.setViewportSize({ width: 2560, height: 1440 });
 
@@ -239,6 +239,9 @@ test("@portfolio bare public URL has the same fullscreen geometry as the explici
       worldHeight: world.getBoundingClientRect().height,
       stageHeight: stage.getBoundingClientRect().height,
       documentScrollHeight: document.documentElement.scrollHeight,
+      documentScrollWidth: document.documentElement.scrollWidth,
+      viewportWidth: document.documentElement.clientWidth,
+      overflowY: getComputedStyle(document.body).overflowY,
     };
   });
 
@@ -250,10 +253,12 @@ test("@portfolio bare public URL has the same fullscreen geometry as the explici
   await expect(page.getByTestId("my-game-world")).toBeVisible();
   const explicitRoute = await readWorldGeometry();
 
-  expect(firstLoad.pageMode).toBe("game-fullscreen-page");
-  expect(firstLoad.appHeight).toBeCloseTo(firstLoad.viewportHeight, 0);
-  expect(firstLoad.worldHeight).toBeCloseTo(firstLoad.viewportHeight, 0);
-  expect(firstLoad.documentScrollHeight).toBeLessThanOrEqual(firstLoad.viewportHeight + 1);
+  expect(firstLoad.pageMode).toBe("game-scrollable-page");
+  expect(firstLoad.overflowY).toBe("auto");
+  expect(firstLoad.worldHeight).toBeGreaterThanOrEqual(firstLoad.viewportHeight);
+  expect(firstLoad.documentScrollWidth).toBe(firstLoad.viewportWidth);
+  expect(firstLoad.documentScrollHeight).toBe(explicitRoute.documentScrollHeight);
+  expect(firstLoad.appHeight).toBeCloseTo(explicitRoute.appHeight, 0);
   expect(firstLoad.stageHeight).toBeCloseTo(explicitRoute.stageHeight, 0);
   expect(firstLoad.worldHeight).toBeCloseTo(explicitRoute.worldHeight, 0);
   await expectRuntimeClean(runtime);

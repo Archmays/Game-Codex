@@ -2,7 +2,6 @@ import "./styles.css";
 import { mountHub } from "../hub";
 import type { MountedGame } from "../../packages/game-core";
 import { ACTIVE_CHILD_PRODUCTS } from "../../packages/data/gamePortfolio";
-import { createWorldHome, type WorldHomeCanvasHandle } from "./phaser/create-world-home";
 import { mountWorldSettings, type WorldSettingsHandle } from "./ui/WorldSettings";
 import { WORLD_COPY } from "./world-copy";
 import {
@@ -25,7 +24,9 @@ export interface MyGameWorldHandle extends MountedGame {
 }
 
 function browserStorage(): WorldHomeStorageLike {
-  return window.localStorage;
+  // Access to localStorage itself can be denied, before getItem is called.
+  try { return window.localStorage; }
+  catch { return { getItem() { throw new Error("Storage unavailable"); }, setItem() { throw new Error("Storage unavailable"); } }; }
 }
 
 function addPageClass(name: string): void {
@@ -47,7 +48,6 @@ function activeProductRoute(id: string): string {
 export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions = {}): MyGameWorldHandle {
   const storage = options.storage ?? browserStorage();
   let state = readWorldHomeState(storage);
-  let canvas: WorldHomeCanvasHandle | null = null;
   let settings: WorldSettingsHandle | null = null;
   let destroyed = false;
 
@@ -56,42 +56,73 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
   const activeProductIds = ACTIVE_CHILD_PRODUCTS.map((record) => record.id).join(" ");
   root.innerHTML = `<main class="my-game-world" data-testid="my-game-world" data-recovered="${String(state.recoveredCalmly)}" data-active-child-products="${activeProductIds}">
     <header class="world-header">
-      <div><span class="world-kicker">三个世界 · 一个百宝箱</span><h1>${WORLD_COPY.title}</h1><p>${WORLD_COPY.subtitle}</p></div>
+      <div><p class="world-kicker">选一个地方，开始玩</p><h1>${WORLD_COPY.title}</h1><p>${WORLD_COPY.subtitle}</p></div>
       <button class="world-icon-button" type="button" data-world-settings-open>${WORLD_COPY.settingsAction}</button>
     </header>
-    <section class="world-stage" aria-label="墨迹森林、数学世界、英语世界和游戏百宝箱入口">
-      <div class="world-canvas" data-world-canvas></div>
-      <div class="world-vignette" aria-hidden="true"></div>
-      <section class="world-object world-object--forest is-active" data-testid="world-forest-portal">
-        <span aria-hidden="true" class="world-object__mark world-object__mark--forest"></span>
-        <h2>${WORLD_COPY.forestTitle}</h2>
-        <a class="world-primary-link" href="${activeProductRoute("hanzi-radical-battle")}" data-world-forest-link>${WORLD_COPY.forestFreshAction}</a>
+    <section class="world-stage" aria-label="三个游戏世界">
+      <section class="world-object world-object--forest" data-testid="world-forest-portal">
+        <a class="world-entry" href="${activeProductRoute("hanzi-radical-battle")}" data-world-forest-link>
+          <img src="./assets/home/ink-forest.webp" width="720" height="420" alt="" decoding="async">
+          <div class="world-entry__body"><h2>${WORLD_COPY.forestTitle}</h2><p>把部件送回汉字里，修好森林小路。</p>
+          <span class="world-entry__action">${WORLD_COPY.forestFreshAction}<span aria-hidden="true">↗</span></span></div>
+        </a>
       </section>
       <section class="world-object world-object--math" data-testid="world-math-portal">
-        <span aria-hidden="true" class="world-object__mark world-object__mark--math"></span>
-        <h2>${WORLD_COPY.mathTitle}</h2>
-        <p>算式轨道与数字牌工坊</p>
-        <a class="world-secondary-link" href="${activeProductRoute("math-lab")}" data-world-math-link>${WORLD_COPY.mathAction}</a>
+        <a class="world-entry" href="${activeProductRoute("math-lab")}" data-world-math-link>
+          <img src="./assets/home/math-world.webp" width="720" height="420" alt="" decoding="async">
+          <div class="world-entry__body"><h2>${WORLD_COPY.mathTitle}</h2><p>滑动算式格，或用数字牌凑出目标。</p>
+          <span class="world-entry__action">${WORLD_COPY.mathAction}<span aria-hidden="true">↗</span></span></div>
+        </a>
       </section>
       <section class="world-object world-object--english" data-testid="world-english-portal">
-        <span aria-hidden="true" class="world-object__mark world-object__mark--english"></span>
-        <h2>${WORLD_COPY.englishTitle}</h2>
-        <p>词义、拼词、句子与世界回应</p>
-        <a class="world-secondary-link" href="${activeProductRoute("english-spell-battle")}" data-world-english-link>${WORLD_COPY.englishAction}</a>
-      </section>
-      <section class="world-object world-object--treasure" data-testid="world-treasure-box">
-        <span aria-hidden="true" class="world-object__mark world-object__mark--treasure"></span>
-        <h2>${WORLD_COPY.treasureTitle}</h2>
-        <a class="world-secondary-link" href="${CLASSIC_HUB_FROM_WORLD_ROUTE}" data-world-treasure-link>${WORLD_COPY.treasureAction}</a>
+        <a class="world-entry" href="${activeProductRoute("english-spell-battle")}" data-world-english-link>
+          <img src="./assets/home/wordlight-island.webp" width="720" height="420" alt="" decoding="async">
+          <div class="world-entry__body"><h2>${WORLD_COPY.englishTitle}</h2><p>拼一拼单词，用词卡让场景动起来。</p>
+          <span class="world-entry__action">${WORLD_COPY.englishAction}<span aria-hidden="true">↗</span></span></div>
+        </a>
       </section>
     </section>
+    <nav class="world-more" aria-label="游戏列表" data-testid="world-treasure-box"><span>也可以打开游戏列表</span><a href="${CLASSIC_HUB_FROM_WORLD_ROUTE}" data-world-treasure-link>${WORLD_COPY.treasureTitle}<span aria-hidden="true">→</span></a></nav>
     <div class="world-modal-layer" data-world-modal-layer></div>
   </main>`;
 
-  const canvasHost = root.querySelector<HTMLElement>("[data-world-canvas]");
   const modalHost = root.querySelector<HTMLElement>("[data-world-modal-layer]");
-  if (!canvasHost || !modalHost) throw new Error("My Game World mount surface is incomplete");
-  canvas = createWorldHome(canvasHost, state);
+  if (!modalHost) throw new Error("My Game World mount surface is incomplete");
+  const applySettings = (): void => {
+    root.dataset.reducedMotion = String(state.settings.reducedMotion);
+  };
+  applySettings();
+
+  // Navigation-only state belongs to this history entry, never to a save key.
+  const entries = ["forest", "math", "english", "treasure"] as const;
+  for (const entry of entries) {
+    root.querySelector(`[data-world-${entry}-link]`)?.addEventListener("click", () => {
+      window.history.replaceState({ ...window.history.state, worldHomeReturn: { entry, scrollY: window.scrollY } }, "");
+    });
+  }
+  const restoreEntry = (): void => {
+    if (destroyed || settings) return;
+    const saved = window.history.state?.worldHomeReturn;
+    let entry = entries.includes(saved?.entry) ? saved.entry as typeof entries[number] : null;
+    if (!entry && document.referrer) {
+      const referrer = new URL(document.referrer);
+      if (referrer.origin === window.location.origin && referrer.pathname === window.location.pathname) {
+        const query = referrer.searchParams;
+        if (query.get("hub") === "classic") entry = "treasure";
+        else if (query.get("world") === "math-world") entry = "math";
+        else if (query.get("world") === "english-world") entry = "english";
+        else if (query.get("play")?.startsWith("hanzi-")) entry = "forest";
+      }
+    }
+    if (!entry) return;
+    const link = root.querySelector<HTMLElement>(`[data-world-${entry}-link]`);
+    link?.focus({ preventScroll: true });
+    if (Number.isFinite(saved?.scrollY) && saved.scrollY >= 0) window.scrollTo(0, saved.scrollY);
+    else link?.scrollIntoView({ block: "nearest" });
+  };
+  const restoreAfterLayout = (): void => { requestAnimationFrame(restoreEntry); };
+  window.addEventListener("pageshow", restoreAfterLayout);
+  restoreAfterLayout();
 
   const closeModal = (): void => {
     settings?.destroy();
@@ -105,7 +136,7 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
     settings = mountWorldSettings(modalHost, state.settings, (patch) => {
       const update = updateWorldSettings(storage, state, patch);
       state = update.state;
-      canvas?.setView(state);
+      applySettings();
       return update.ok;
     }, closeModal);
   });
@@ -115,7 +146,7 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
     settings = mountWorldSettings(modalHost, state.settings, (patch) => {
       const update = updateWorldSettings(storage, state, patch);
       state = update.state;
-      canvas?.setView(state);
+      applySettings();
       return update.ok;
     }, closeModal, { openObservation: true });
   }
@@ -126,7 +157,7 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
       if (destroyed) return;
       destroyed = true;
       settings?.destroy();
-      canvas?.destroy();
+      window.removeEventListener("pageshow", restoreAfterLayout);
       removePageClass("my-game-world-page");
       root.replaceChildren();
     },

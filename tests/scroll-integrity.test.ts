@@ -16,15 +16,15 @@ function classTarget() {
 describe("play-surface scroll integrity", () => {
   it("classifies the current surfaces with explicit internal and locked exceptions", () => {
     expect(PLAY_SURFACE_MANIFEST.filter(surface => surface.kind === "station").map(surface => surface.id)).toEqual(["math-slider", "math-target"]);
-    expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === "document")).toHaveLength(PLAY_SURFACE_MANIFEST.length - 4);
+    expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === "document")).toHaveLength(PLAY_SURFACE_MANIFEST.length - 3);
     expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === "internal").map((surface) => surface.id)).toEqual([
       "hanzi-family-slice",
       "hanzi-word-slice",
     ]);
-    expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === "locked").map((surface) => surface.id)).toEqual(["my-game-world", "hanzi-v1-compat"]);
+    expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === "locked").map((surface) => surface.id)).toEqual(["hanzi-v1-compat"]);
     expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === "internal").every((surface) => surface.scrollContainerSelector === ".hmc-shell")).toBe(true);
     expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === "hanzi-v1-compat")?.lockedReason).toMatch(/fixed inset Phaser/);
-    expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === "my-game-world")?.lockedReason).toMatch(/fixed viewport canvas/);
+    expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === "my-game-world")?.scrollPolicy).toBe("document");
   });
 
   it("uses the most specific surface query instead of a route-family fullscreen default", () => {
@@ -42,11 +42,11 @@ describe("play-surface scroll integrity", () => {
 
     const familyWorld = new URLSearchParams("world=my-game-world&parent=observation");
     expect(playSurfaceForSearch(familyWorld)?.id).toBe("my-game-world");
-    expect(pageModeForSearch(familyWorld)).toBe("game-fullscreen");
+    expect(pageModeForSearch(familyWorld)).toBe("game-scrollable");
 
     expect(pageModeForSearch(new URLSearchParams("world=english-world"))).toBe("game-scrollable");
-    expect(pageModeForSearch(new URLSearchParams())).toBe("game-fullscreen");
-    expect(pageModeForSearch(new URLSearchParams("utm_source=bookmark"))).toBe("game-fullscreen");
+    expect(pageModeForSearch(new URLSearchParams())).toBe("game-scrollable");
+    expect(pageModeForSearch(new URLSearchParams("utm_source=bookmark"))).toBe("game-scrollable");
   });
 
   it("resets scrollable and fullscreen page classes without leaving stale locks", () => {
