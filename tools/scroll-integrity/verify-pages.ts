@@ -93,7 +93,6 @@ try {
 
   const desktop = await browser.newContext({ viewport: { width: 1366, height: 768 }, reducedMotion: "reduce" });
   observe(desktop);
-  await installVoice(desktop);
   const page = await desktop.newPage();
   observePage(page);
   page.setDefaultTimeout(120_000);
@@ -124,7 +123,6 @@ try {
 
   const mobile = await browser.newContext({ ...devices["Pixel 7"], viewport: { width: 390, height: 844 }, reducedMotion: "reduce" });
   observe(mobile);
-  await installVoice(mobile);
   const mobilePage = await mobile.newPage();
   observePage(mobilePage);
   mobilePage.setDefaultTimeout(120_000);
