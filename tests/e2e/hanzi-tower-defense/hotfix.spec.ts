@@ -82,6 +82,18 @@ for (const recipe of RECIPES) test(`${recipe.id} uses ordinary selection and exp
 });
 });
 
+test('a fresh result combines directly with its highlighted partner and unrelated materials start a new pair', async ({ page }, info) => {
+  const input=info.project.name;
+  await setup(page,[{id:1,kind:'wood',slot:null},{id:2,kind:'wood',slot:null},{id:3,kind:'mountain',slot:null},{id:4,kind:'water',slot:0}]);
+  await activate(page,'[data-core="1"]',input);await activate(page,'[data-core="2"]',input);await activate(page,'[data-td-fuse]',input);
+  await expect(page.locator('[data-core="5"]')).toHaveAttribute('aria-pressed','true');await expect(page.locator('[data-core="3"]')).toHaveClass(/td-partner/);
+  await activate(page,'[data-core="3"]',input);await expect(page.locator('[data-structure] b')).toHaveText(['山','林']);
+  await expect(page.locator('[data-td-selection] .has-core')).toHaveCount(2);await activate(page,'[data-td-fuse]',input);
+  expect(await savedCores(page)).toEqual([{id:4,kind:'water',slot:0,cooldown:0},{id:6,kind:'wildwood',slot:null,cooldown:0}]);
+  await activate(page,'[data-slot="0"]',input);await expect(page.locator('[data-td-selection] .has-core')).toHaveCount(1);
+  await expect(page.locator('[data-td-selection]')).toContainText('氵');await expect(page.locator('[data-td-fuse]')).toBeDisabled();
+});
+
 test('invalid pairs, missing materials, cancellation, replacement and duplicate ID never consume', async ({ page }, info) => {
   const input = info.project.name; const items: Item[] = [{id:1,kind:'water',slot:null},{id:2,kind:'mountain',slot:0},{id:3,kind:'wood',slot:null}];
   await setup(page,items); const before = await savedCores(page);

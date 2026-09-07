@@ -46,7 +46,10 @@ test("six waves with ordinary deployment, synthesis, and replay", async ({ page 
         if (a && b) { pair = [a,b]; break; }
       }
       if (!pair) break;
-      await activate(page.locator(pair[0].selector)); await activate(page.locator(pair[1].selector));
+      for (const item of pair) {
+        const control = page.locator(item.selector);
+        if (await control.getAttribute("aria-pressed") !== "true") await activate(control);
+      }
       await expect(page.locator("[data-td-fuse]")).toBeEnabled();
       await activate(page.locator("[data-td-fuse]"));
     }

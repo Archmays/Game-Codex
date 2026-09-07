@@ -75,7 +75,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     if (state.phase === "lost" || state.phase === "won") return;
     const item = state.cores.find(c => c.id === id); if (!item) return;
     if (item.slot !== null) inspectedId = id;
-    if (freshResult) selection = [];
+    if (freshResult && (selection.includes(id) || !isPartner(item))) selection = [];
     const next = selection.includes(id) ? selection.filter(x => x !== id) : selection.length >= 2 ? [selection[0], id] : [...selection, id];
     prepare(next);
     const selected = selectedCores();
