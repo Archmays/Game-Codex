@@ -54,6 +54,7 @@ export interface AppRouteQueryRegistration {
 }
 
 export const APP_ROUTE_QUERY_MANIFEST = [
+  { kind: "play", queryKey: "play", queryValue: "hanzi-word-adventure", query: "?play=hanzi-word-adventure", defaultScrollPolicy: "document" },
   { kind: "play", queryKey: "play", queryValue: "hanzi-tower-defense", query: "?play=hanzi-tower-defense", defaultScrollPolicy: "document" },
   { kind: "classic-hub", queryKey: "hub", queryValue: "classic", query: "?hub=classic", defaultScrollPolicy: "document" },
   { kind: "world", queryKey: "world", queryValue: "math-world", query: "?world=math-world", defaultScrollPolicy: "document" },
@@ -127,6 +128,7 @@ const mathStation = (station: keyof typeof MATH_STATION_CONTRACTS): PlaySurfaceR
 };
 
 export const PLAY_SURFACE_MANIFEST: readonly PlaySurfaceRecord[] = [
+  surface({ id: "hanzi-word-adventure", title: "字间行者 · 借字归途", route: "?play=hanzi-word-adventure", productId: "hanzi-word-adventure", kind: "product-world", parentSurfaceId: "my-game-world", returnRoute: "?world=my-game-world", primaryActionSelector: "[data-hway-move=right]", settingsAvailable: true, destructiveActionAvailable: true, saveNamespaces: ["family-games/hanzi-word-adventure/v1"], expectedInputs: ALL_INPUTS, qualityProfile: "s-hanzi-release", mountDefinitionId: "hanzi-word-adventure", runtimeOwnerDefinitionId: "hanzi-word-adventure", topLevelProductId: "hanzi-word-adventure", hostWorldId: "chinese", primaryEntry: true }),
   surface({ id: "my-game-world", title: "我的游戏世界", route: "?world=my-game-world", productId: "portfolio", kind: "portfolio-world", returnRoute: "?world=my-game-world", primaryActionSelector: ".world-entry", settingsAvailable: true, destructiveActionAvailable: false, saveNamespaces: ["family-games/my-game-world/v1"], expectedInputs: ALL_INPUTS, qualityProfile: "portfolio-play-ready", scrollPolicy: "document", primaryEntry: true }),
   surface({ id: "classic-hub", title: "游戏百宝箱", route: "?hub=classic&from=world", productId: "portfolio", kind: "classic-hub", parentSurfaceId: "my-game-world", returnRoute: "?world=my-game-world", primaryActionSelector: ".game-card__button", settingsAvailable: false, destructiveActionAvailable: false, saveNamespaces: [], expectedInputs: ALL_INPUTS, qualityProfile: "portfolio-play-ready", compatibilitySurfaceId: "classic-hub", primaryEntry: true }),
 
@@ -138,6 +140,7 @@ export const PLAY_SURFACE_MANIFEST: readonly PlaySurfaceRecord[] = [
 
   ...([
     ["classic-defense", "hanzi-tower-defense", "字阵守城", "s-hanzi-release", false],
+    ["classic-adventure", "hanzi-word-adventure", "字间行者", "s-hanzi-release", false],
     ["classic-math", "math-lab", "数学世界", "a-core-world", false],
   ] as const).map(([id, productId, title, qualityProfile, primaryEntry]) => {
     const product = GAME_PORTFOLIO.find((record) => record.id === productId);

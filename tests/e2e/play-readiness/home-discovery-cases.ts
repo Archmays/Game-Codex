@@ -6,18 +6,19 @@ const entrySelector = (id: string) => `[data-world-${id}-link]`;
 const raw = (page: Page) => page.evaluate(key => localStorage.getItem(key), KEY);
 
 export function homeDiscoveryTests(): void {
-  test("@play-ready @home-discovery two unified entries preserve history, explicit return and focus", async ({ page }, info) => {
+  test("@play-ready @home-discovery unified entries preserve history, explicit return and focus", async ({ page }, info) => {
     const activate = async (selector: string) => info.project.use.hasTouch ? page.locator(selector).tap() : page.locator(selector).click();
     const errors: string[] = [], images: string[] = [];
     page.on("pageerror", error => errors.push(error.message));
     page.on("request", request => { if (request.resourceType() === "image") images.push(request.url()); });
     await page.goto("/");
     await expect(page.locator(".world-stage .world-entry")).toHaveCount(2);
+    await expect(page.locator(".world-entry")).toHaveCount(3);
     await expect(page.locator(".world-stage a a,.world-stage button,canvas")).toHaveCount(0);
     await expect(page.locator(".world-more a")).toHaveCount(1);
     await expect(page.locator(".world-stage")).not.toContainText(/72字|48词|200关|完成率|试点|版本|最新升级/);
     await page.waitForLoadState("networkidle");
-    expect(images.filter(url => !url.includes("/assets/home/") && !url.includes("/assets/hanzi-tower-defense/meadow.png"))).toEqual([]);
+    expect(images.filter(url => !url.includes("/assets/home/") && !url.includes("/assets/hanzi-tower-defense/meadow.png") && !url.includes("/assets/hanzi-word-adventure/scene.png"))).toEqual([]);
 
     for (const [id, surface] of [["forest", '[data-testid="hanzi-tower-defense"]'], ["math", '[data-testid="math-world-map"]'], ["treasure", '[data-testid="classic-hub-from-world"]']]) {
       const entry = page.locator(entrySelector(id));
@@ -99,7 +100,7 @@ export function homeDiscoveryTests(): void {
     await expect(page.locator('[data-world-muted]')).not.toBeChecked();
     await expect(page.locator('[data-world-settings-status]')).toContainText("这次没有保存设置");
     await page.keyboard.press("Escape"); await page.locator(entrySelector("treasure")).click();
-    await expect(page.locator('.game-card')).toHaveCount(2);
+    await expect(page.locator('.game-card')).toHaveCount(3);
   });
 
   test("@play-ready @home-discovery cross-page and same-page Vault replacement stop stale writes", async ({ page, context }) => {

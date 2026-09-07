@@ -20,7 +20,7 @@ const definitionIds = catalogMetadata.map((game) => game.id);
 const classicIds = GAME_PORTFOLIO.filter((record) => record.classicCardVisible).map((record) => record.id);
 requireValue(JSON.stringify([...definitionIds].sort()) === JSON.stringify(GAME_PORTFOLIO.map(record => record.id).sort()), "Catalog and portfolio definitions must agree");
 requireValue(new Set(definitionIds).size === definitionIds.length, "Definitions must be unique");
-requireValue(classicIds.length === 2 && new Set(classicIds).size === 2, "classicGameCatalog must contain the two active products");
+requireValue(classicIds.length === 3 && new Set(classicIds).size === 3, "classicGameCatalog must contain the three active products");
 requireValue(!classicIds.includes("equation-slider"), "Equation Slider must be a Math World module rather than a Classic card");
 requireValue(!classicIds.includes("clock-reader") && !classicIds.includes("multiplication-adventure"), "Replaced modules must be hidden from the classic catalog");
 requireValue(!classicIds.includes("pinyin-magic-battle"), "Consolidated Pinyin must be hidden from the classic catalog");

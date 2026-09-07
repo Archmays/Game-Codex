@@ -41,6 +41,13 @@ async function mountApp(root: HTMLElement): Promise<void> {
   const play = search.get("play");
   activatePageMode(pageModeForSearch(search));
 
+  if (route.kind === "play" && play === "hanzi-word-adventure") {
+    setBrowserIdentity("字间行者 · 借字归途", "#f5f0e4");
+    const { mountHanziWordAdventure } = await import("../games/hanzi-word-adventure");
+    mountHanziWordAdventure(root);
+    return;
+  }
+
   if (route.kind === "play" && play === "hanzi-tower-defense") {
     setBrowserIdentity("字阵守城 · 青岚关", "#102f2d");
     const { mountHanziTowerDefense } = await import("../games/hanzi-tower-defense");

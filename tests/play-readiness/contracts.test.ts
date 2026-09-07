@@ -45,14 +45,14 @@ describe("portfolio play-readiness contracts", () => {
 
   it("covers every primary first-use surface and keeps Classic aligned to the two current products", () => {
     expect(PLAY_SURFACE_MANIFEST.filter(surface => surface.kind === "station").map(surface => surface.id)).toEqual(["math-slider", "math-target"]);
-    expect(PRIMARY_PLAY_SURFACES).toHaveLength(4);
-    expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.kind === "classic-entry")).toHaveLength(2);
+    expect(PRIMARY_PLAY_SURFACES).toHaveLength(5);
+    expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.kind === "classic-entry")).toHaveLength(3);
     expect(PLAY_SURFACE_MANIFEST.every((surface) => surface.expectedInputs.includes("keyboard"))).toBe(true);
   });
 
   it("keeps Save Vault exact-key-only and excludes its rollback key from exports", () => {
-    expect(KNOWN_SAVE_KEYS).toHaveLength(38);
-    expect(EXPORTABLE_SAVE_KEYS).toHaveLength(37);
+    expect(KNOWN_SAVE_KEYS).toHaveLength(39);
+    expect(EXPORTABLE_SAVE_KEYS).toHaveLength(38);
     expect(KNOWN_SAVE_KEYS.filter((record) => !record.exportable).map((record) => record.key)).toEqual(["save-vault/pre-import-backup/v1"]);
     const source = readFileSync("packages/save-vault/index.ts", "utf8");
     expect(source).not.toContain("localStorage.clear(");

@@ -25,6 +25,7 @@ const REPRESENTATIVE_IDS = new Set([
   "my-game-world",
   "classic-hub",
   "hanzi-tower-defense",
+  "hanzi-word-adventure",
   "math-world",
   "math-slider",
   "math-target",

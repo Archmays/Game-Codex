@@ -99,6 +99,16 @@ function createGameCard(game: GameDefinition, onPlay: () => void): HTMLElement {
   const card = createPanel("game-card");
   card.dataset.gameId = game.id;
 
+  if (game.id === "hanzi-word-adventure") {
+    card.classList.add("game-card--world", "game-card--word-adventure");
+    const link = document.createElement("a"); link.className = "game-card__adventure-link"; link.href = game.route!;
+    const title = document.createElement("h2"); title.textContent = game.title;
+    const art = document.createElement("img"); art.className = "game-card__world-art"; art.src = "./assets/hanzi-word-adventure/scene.png"; art.alt = "";
+    const description = document.createElement("p"); description.textContent = game.description;
+    const action = document.createElement("span"); action.className = "ui-button game-card__button"; action.textContent = game.playLabel!;
+    link.append(title, art, description, action); card.append(link); return card;
+  }
+
   if (game.id === "hanzi-tower-defense") {
     card.classList.add("game-card--world", "game-card--hanzi-defense");
     const title = document.createElement("h2");

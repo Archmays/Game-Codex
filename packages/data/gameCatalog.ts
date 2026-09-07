@@ -1,6 +1,7 @@
 import type { GameDefinition } from "../game-core";
 import { equationSliderGame } from "../../games/equation-slider";
 import { hanziTowerDefenseGame } from "../../games/hanzi-tower-defense";
+import { hanziWordAdventureGame } from "../../games/hanzi-word-adventure";
 import { makeTargetGame } from "../../games/make-target";
 import { mathLabGame } from "../../games/math-lab";
 import { memoryCardGame } from "../../games/memory-card";
@@ -10,6 +11,7 @@ export const allGameDefinitions: GameDefinition[] = [
   memoryCardGame,
   mathLabGame,
   hanziTowerDefenseGame,
+  hanziWordAdventureGame,
   makeTargetGame,
   equationSliderGame
 ];

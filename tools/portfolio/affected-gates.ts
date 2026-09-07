@@ -24,6 +24,8 @@ const MATH_WORLD_E2E: GateCommand = { program: "pnpm", args: ["run", "test:e2e:m
 
 const DEFENSE: GateCommand = { program: "pnpm", args: ["run", "validate:hanzi-tower-defense"], label: "Hanzi tower defense deterministic balance" };
 const DEFENSE_E2E: GateCommand = { program: "pnpm", args: ["run", "test:e2e:hanzi-tower-defense"], label: "Hanzi tower defense full browser battle" };
+const ADVENTURE: GateCommand = { program: "pnpm", args: ["run", "validate:hanzi-word-adventure"], label: "Word adventure bounded state search and replay" };
+const ADVENTURE_E2E: GateCommand = { program: "pnpm", args: ["run", "test:e2e:hanzi-word-adventure"], label: "Word adventure five-room keyboard and touch play" };
 const MEMORY: GateCommand = { program: "pnpm", args: ["run", "test:memory-match"], label: "Independent memory-match content and save contracts" };
 function gameSmoke(id: string): GateCommand {
   return { program: "pnpm", args: ["run", "test:portfolio:smoke", "--", "--grep", `@game:${id}`], label: `${id} entry/interaction/return smoke` };
@@ -42,7 +44,7 @@ export function affectedGateCommands(changedFiles: readonly string[]): GateComma
   const equationAffected = files.some((file) => file.startsWith("games/equation-slider/") || file.startsWith("tests/equation-slider-") || file.startsWith("tests/e2e/equation-slider"));
   const equationCommands = equationAffected ? [EQUATION_LEVELS, EQUATION_E2E, EQUATION_RELEASE, EQUATION_VISUAL, EQUATION_PLAYTEST] : [];
   const hanziCommands = files.some(file => file.includes("hanzi-tower-defense")) ? [DEFENSE, DEFENSE_E2E] : [];
-  if (full) return unique([PORTFOLIO_CHECK, PORTFOLIO_EVOLUTION_CHECK, ...equationCommands, ...hanziCommands, INTERACTION_STATIC, SCROLL_STATIC, UNIT, MATH_WORLD_VALIDATE, MEMORY, TYPECHECK, BUILD, MATH_WORLD_E2E, DEFENSE_E2E, INTERACTION_HITTEST, SCROLL_REACHABILITY, SMOKE]);
+  if (full) return unique([PORTFOLIO_CHECK, PORTFOLIO_EVOLUTION_CHECK, ...equationCommands, ...hanziCommands, INTERACTION_STATIC, SCROLL_STATIC, UNIT, MATH_WORLD_VALIDATE, MEMORY, TYPECHECK, BUILD, MATH_WORLD_E2E, DEFENSE_E2E, ADVENTURE, ADVENTURE_E2E, INTERACTION_HITTEST, SCROLL_REACHABILITY, SMOKE]);
   const commands: GateCommand[] = [PORTFOLIO_CHECK, PORTFOLIO_EVOLUTION_CHECK];
   for (const file of files) {
     const game = /^games\/([^/]+)\//.exec(file)?.[1];
@@ -51,6 +53,7 @@ export function affectedGateCommands(changedFiles: readonly string[]): GateComma
     else if (game && ["math-lab", "clock-reader", "multiplication-adventure", "make-target"].includes(game)) commands.push(MATH_WORLD_UNIT, MATH_WORLD_VALIDATE, MATH_WORLD_E2E);
     else if (game === "memory-card") commands.push(MEMORY);
     else if (game === "equation-slider") commands.push(UNIT, ...equationCommands, gameSmoke(game));
+    else if (game === "hanzi-word-adventure") commands.push(UNIT, ADVENTURE, ADVENTURE_E2E, gameSmoke(game));
     else if (game) commands.push(UNIT, gameSmoke(game));
     else if (file.startsWith("apps/hub/") || file.startsWith("packages/ui/") || file.startsWith("packages/data/") || file.startsWith("public/assets/")) commands.push(INTERACTION_STATIC, SCROLL_STATIC, UNIT, MATH_WORLD_VALIDATE, INTERACTION_HITTEST, SCROLL_REACHABILITY, SMOKE);
     else if (!file.startsWith("docs/") && file !== "README.md" && file !== "AGENTS.md") commands.push(UNIT, TYPECHECK, BUILD, SMOKE);

@@ -57,6 +57,18 @@ async function expectUsableTarget(locator: Locator): Promise<void> {
 
 const GAMES: readonly SmokeGame[] = [
   {
+    id: "hanzi-word-adventure", title: "字间行者", surface: '[data-testid="hanzi-word-adventure"]',
+    canonicalRoute: "/?play=hanzi-word-adventure",
+    async interact(page) {
+      await expect(page.locator('[data-hway-canvas]')).toHaveAttribute('data-ready', 'true');
+      const move = page.locator('[data-hway-move="right"]'); await expectUsableTarget(move); await move.click();
+      await expect(page.locator('.hway')).toHaveAttribute('data-player', '9');
+      await page.locator('[data-hway-undo]').click(); await expect(page.locator('.hway')).toHaveAttribute('data-player', '8');
+      await page.locator('[data-hway-exit]').click(); await expect(page.getByTestId('my-game-world')).toBeVisible();
+      return null;
+    },
+  },
+  {
     id: "math-lab", title: "数学世界", surface: '[data-testid="math-world-map"]',
     async interact(page) {
       const station = page.locator('[data-station-id="slider"] button');
@@ -115,7 +127,7 @@ for (const game of GAMES) {
     const runtime = observeRuntime(page);
     await page.goto(game.canonicalRoute ?? "/?hub=classic", { waitUntil: "domcontentloaded" });
     if (!game.canonicalRoute) {
-      await expect(page.locator(".game-card")).toHaveCount(2);
+      await expect(page.locator(".game-card")).toHaveCount(3);
       const card = page.locator(`.game-card[data-game-id="${game.id}"]`);
       await expect(card.getByRole("heading", { name: game.title, exact: true })).toBeVisible();
       const entry = card.getByRole("button");
@@ -142,7 +154,7 @@ for (const game of GAMES) {
       await returnButton.focus();
       await page.keyboard.press("Enter");
     }
-    await expect(page.locator(".game-card")).toHaveCount(2);
+    await expect(page.locator(".game-card")).toHaveCount(3);
     await expectRuntimeClean(runtime);
   });
 }
@@ -156,6 +168,7 @@ test("@portfolio public route registry preserves current routes and retires old 
     ["/?world=english-world", '[data-testid="my-game-world"]'],
     ["/?play=english-spell-battle-legacy&from=hub", '[data-testid="my-game-world"]'],
     ["/?play=hanzi-tower-defense", '[data-testid="hanzi-tower-defense"]'],
+    ["/?play=hanzi-word-adventure", '[data-testid="hanzi-word-adventure"]'],
     ["/?world=math-world", '[data-testid="math-world-map"]'],
     ["/?world=math-world&station=lab", '[data-testid="math-world-map"]'],
     ["/?world=math-world&station=clock", '[data-testid="math-world-map"]'],

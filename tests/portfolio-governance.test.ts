@@ -22,22 +22,22 @@ describe("game portfolio governance", () => {
 
   it("represents the live catalog one-to-one with valid governance identities", () => {
     expect(validatePortfolio(gameCatalog, currentClassicGameCatalog)).toEqual([]);
-    expect(GAME_PORTFOLIO.map(record => record.id)).toEqual(["hanzi-tower-defense", "equation-slider", "math-lab", "make-target", "memory-card"]);
+    expect(GAME_PORTFOLIO.map(record => record.id)).toEqual(["hanzi-word-adventure", "hanzi-tower-defense", "equation-slider", "math-lab", "make-target", "memory-card"]);
     expect(new Set(GAME_PORTFOLIO.map((record) => record.id)).size).toBe(GAME_PORTFOLIO.length);
     expect(new Set(GAME_PORTFOLIO.flatMap((record) => record.saveNamespaces)).size).toBe(
       GAME_PORTFOLIO.flatMap((record) => record.saveNamespaces).length,
     );
     expect(new Set(GAME_PORTFOLIO.map((record) => record.qualityTier))).toEqual(new Set(["S", "A", "B", "C"]));
     expect(ACTIVE_CHILD_PRODUCTS.map((record) => record.id)).toEqual([
-      "hanzi-tower-defense", "math-lab"
+      "hanzi-tower-defense", "math-lab", "hanzi-word-adventure"
     ]);
     expect(CLASSIC_CARD_PRODUCTS.map((record) => record.id)).toEqual([
-      "hanzi-tower-defense", "math-lab"
+      "hanzi-tower-defense", "math-lab", "hanzi-word-adventure"
     ]);
     expect(WORLD_MODULES.filter(module => module.world === "math").map(module => module.id)).toEqual(["math-equation-slider", "math-make-target"]);
     expect(COMPATIBILITY_SURFACES).toHaveLength(2);
     expect(SHARED_ENGINES).toHaveLength(2);
-    expect(currentClassicGameCatalog).toHaveLength(2);
+    expect(currentClassicGameCatalog).toHaveLength(3);
     expect(GAME_PORTFOLIO.filter((record) => !record.classicCardVisible).map((record) => record.id).sort()).toEqual([
       "equation-slider",
       "make-target",
@@ -70,7 +70,7 @@ describe("game portfolio governance", () => {
     expect(checkGeneratedDocs()).toEqual([]);
     const status = readFileSync("docs/project-status/portfolio-status.md", "utf8");
     expect(status).toContain(`Mount definitions：\`${GAME_PORTFOLIO.length}\``);
-    expect(status).toContain("Active child products：`2`");
+    expect(status).toContain("Active child products：`3`");
     expect(status).toContain("NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE");
   });
 
@@ -82,7 +82,7 @@ describe("game portfolio governance", () => {
     expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.automaticLargeTask).toBe("NONE");
     expect(new Set(PLAY_SURFACE_MANIFEST.map((surface) => surface.id)).size).toBe(PLAY_SURFACE_MANIFEST.length);
     expect(PRIMARY_PLAY_SURFACES.map((surface) => surface.id)).toEqual([
-      "my-game-world", "classic-hub", "hanzi-tower-defense", "math-world",
+      "hanzi-word-adventure", "my-game-world", "classic-hub", "hanzi-tower-defense", "math-world",
     ]);
     expect(new Set(KNOWN_SAVE_KEYS.map((record) => record.key)).size).toBe(KNOWN_SAVE_KEYS.length);
     expect(portfolioNamespacesWithoutKnownKey()).toEqual([]);
@@ -130,6 +130,8 @@ describe("game portfolio governance", () => {
       "production build",
       "Math World routes, interactions, and lifecycle",
       "Hanzi tower defense full browser battle",
+      "Word adventure bounded state search and replay",
+      "Word adventure five-room keyboard and touch play",
       "representative play-surface browser hit-test matrix",
       "representative scroll and bottom reachability matrix",
       "all-game portfolio smoke",

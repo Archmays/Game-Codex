@@ -186,7 +186,7 @@ test("@e2e direct station refresh, motion setting, keyboard order, and final cla
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("math-world-station")).toHaveAttribute("data-station-id", "slider");
   await page.goto("/?hub=classic");
-  await expect(page.locator(".game-card")).toHaveCount(2);
+  await expect(page.locator(".game-card")).toHaveCount(3);
   await expect(page.locator('[data-game-id="clock-reader"], [data-game-id="multiplication-adventure"], [data-game-id="pinyin-magic-battle"], [data-game-id="make-target"], [data-game-id="memory-card"]')).toHaveCount(0);
   await expect(page.locator('[data-game-id="math-lab"]')).toHaveCount(1);
   await expect(page.locator('[data-game-id="equation-slider"]')).toHaveCount(0);

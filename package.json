@@ -10,6 +10,8 @@
     "build": "tsc --noEmit && vite build",
     "test": "vitest run --no-file-parallelism",
     "test:e2e": "playwright test",
+    "test:e2e:hanzi-word-adventure": "playwright test --config playwright.hanzi-word-adventure.config.ts",
+    "validate:hanzi-word-adventure": "tsx games/hanzi-word-adventure/tools/solve-rooms.ts",
     "test:e2e:equation-slider": "playwright test tests/e2e/equation-slider.spec.ts",
     "test:e2e:equation-slider:gate-a": "playwright test tests/e2e/equation-slider.spec.ts --grep @gate-a",
     "test:e2e:equation-slider:gate-c": "playwright test tests/e2e/equation-slider.spec.ts --grep @gate-c",

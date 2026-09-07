@@ -1,0 +1,86 @@
+.hway-mount { min-height: 100vh; background: #f5f0e4; color: #28473f; font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif; }
+.hway { max-width: 1080px; margin: 0 auto; padding: 24px 32px 40px; }
+.hway * { box-sizing: border-box; }
+.hway button, .hway summary { font: inherit; color: inherit; min-width: 44px; min-height: 44px; cursor: pointer; touch-action: manipulation; }
+.hway button { border: 1px solid #bac2b0; border-radius: 8px; background: #fffaf0; padding: 8px 12px; }
+.hway button:hover { border-color: #7a8e73; background: #f2ead6; }
+.hway button:focus-visible, .hway summary:focus-visible { outline: 3px solid #a94f3c; outline-offset: 3px; }
+.hway button[aria-pressed=true] { border-color: #a94f3c; box-shadow: inset 0 0 0 1px #a94f3c; }
+.hway button:disabled { color: #8b948b; background: #eaeadd; cursor: default; }
+.hway [hidden] { display: none !important; }
+.hway-header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid #cdd0b9; }
+.hway-header p { margin: 0 0 7px; font-size: 14px; letter-spacing: .16em; }
+.hway-header p span { color: #7b8172; }
+.hway h1 { margin: 0; font-size: 32px; font-weight: 500; letter-spacing: .13em; }
+.hway-layout { display: grid; grid-template-columns: minmax(0, 560px) minmax(270px, 1fr); gap: 36px; padding-top: 18px; align-items: start; }
+.hway-subtitle { margin: 0 0 14px; font-size: 15px; line-height: 1.5; color: #687663; }
+.hway-board { position: relative; width: 100%; background: #f5f0e4; overflow: hidden; border-radius: 9px; box-shadow: 0 12px 32px #50613c10; }
+.hway-canvas, .hway-grid { position: absolute; inset: 0; }
+.hway-canvas canvas { display: block; width: 100% !important; height: 100% !important; touch-action: pan-y !important; }
+.hway-grid { display: grid; }
+.hway button.hway-cell { background: transparent; border: 0; border-radius: 3px; padding: 0; min-width: 0; min-height: 0; box-shadow: none; touch-action: pan-y; }
+.hway button.hway-cell:focus-visible { outline-offset: -3px; }
+.hway button.hway-cell:hover { background: #4e634408; }
+.hway-legend { display: flex; gap: 14px; margin: 10px 0 0; font-size: 12px; color: #727d6d; }
+.hway-hand { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #cbd1bd; padding: 0 0 12px; margin: 0 0 12px; }
+.hway-hand > span:last-child { font-size: 12px; color: #77806e; line-height: 1.5; }
+.hway-hand strong { display: inline-flex; min-width: 44px; justify-content: center; font-size: 32px; margin-left: 12px; color: #a94f3c; font-weight: 400; }
+.hway-direction { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 12px 0; }
+.hway-direction button { font-size: 27px; padding: 0; min-height: 50px; }
+.hway-inspect { padding: 12px 0; border-bottom: 1px solid #cbd1bd; min-height: 118px; }
+.hway-inspect > p { margin: 0 0 10px; font-size: 14px; line-height: 1.65; }
+.hway-actions { display: flex; flex-wrap: wrap; gap: 7px; }
+.hway-actions p { width: 100%; margin: 3px 0 0; font-size: 13px; line-height: 1.5; }
+.hway-actions > button:first-of-type { background: #e2e9d7; }
+.hway-feedback { min-height: 52px; font-size: 14px; line-height: 1.7; color: #7c513d; margin: 12px 0; }
+.hway-toolbar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.hway-toolbar button { font-size: 13px; padding: 6px 4px; }
+.hway-sentences { display: flex; flex-wrap: wrap; gap: 7px; margin: 14px 0; }
+.hway-sentences button { letter-spacing: .1em; }
+.hway-sentences small { display: block; letter-spacing: 0; font-size: 10px; color: #677e70; }
+.hway-structure { display: flex; align-items: center; border: 1px solid #b4bea3; padding: 3px 7px; background: #edf0df; gap: 3px; }
+.hway-structure span { font-size: 25px; }
+.hway-structure b { margin-left: 9px; font-size: 20px; font-weight: 400; }
+.hway-split-sides { display: flex; gap: 4px; }
+.hway-hint, .hway-ending { padding: 14px; margin: 12px 0; background: #e8eddd; border-left: 3px solid #758769; border-radius: 3px; font-size: 14px; line-height: 1.7; }
+.hway-hint p, .hway-ending p { margin: 0 0 10px; }
+.hway-hint button { margin: 0 5px 5px 0; }
+.hway-ending { background: #f1e5cf; border-color: #b9794e; }
+.hway-help { font-size: 13px; color: #6c7968; margin-top: 15px; }
+.hway-help summary { display: flex; align-items: center; border-top: 1px solid #cbd1bd; }
+.hway-help summary::before { content: '+'; margin-right: 9px; }
+.hway-help[open] summary::before { content: '−'; }
+.hway-help p, .hway-help li { line-height: 1.8; }
+.hway-help ol { padding-left: 20px; }
+.hway-help li { margin-bottom: 8px; }
+.hway-modal { position: fixed; inset: 0; z-index: 50; background: #1e342d99; display: grid; place-items: center; padding: 20px; }
+.hway-modal > div { max-width: 380px; padding: 28px; background: #f7f1e4; border-radius: 12px; }
+.hway-modal h2 { font-size: 22px; margin-top: 0; }
+.hway-modal p { line-height: 1.7; }
+.hway-modal button { margin: 3px; }
+@media (max-width: 760px) {
+  .hway { padding: 12px 14px 28px; max-width: 560px; }
+  .hway-header { padding-bottom: 10px; }
+  .hway-header p { margin: 0 0 3px; font-size: 11px; }
+  .hway h1 { font-size: 24px; }
+  .hway-layout { display: flex; flex-direction: column; gap: 8px; padding-top: 10px; }
+  .hway-land, .hway-controls { width: 100%; }
+  .hway-board { max-width: 308px; margin-inline: auto; }
+  .hway-subtitle { font-size: 13px; margin-bottom: 8px; }
+  .hway-legend { font-size: 10px; justify-content: space-between; gap: 3px; margin-top: 5px; }
+  .hway-controls { display: flex; flex-wrap: wrap; column-gap: 8px; }
+  .hway-hand { width: 100%; padding: 3px 0 6px; margin: 0; min-height: 45px; }
+  .hway-hand strong { font-size: 27px; }
+  .hway-hand > span:last-child br { display: none; }
+  .hway-hand > span:last-child { font-size: 11px; }
+  .hway-direction { width: 100%; margin: 7px 0; }
+  .hway-direction button { min-height: 46px; }
+  .hway-inspect { width: 100%; min-height: 55px; padding: 3px 0 7px; }
+  .hway-inspect > p { font-size: 12px; line-height: 1.5; margin-bottom: 6px; }
+  .hway-actions { gap: 5px; }
+  .hway-actions button { font-size: 13px; padding: 6px 9px; }
+  .hway-feedback { width: 100%; min-height: 0; font-size: 12px; margin: 6px 0 9px; line-height: 1.55; }
+  .hway-toolbar, .hway-help, .hway-hint, .hway-ending { width: 100%; }
+  .hway-help { margin-top: 2px; }
+  .hway-sentences { margin: 8px 0; }
+}

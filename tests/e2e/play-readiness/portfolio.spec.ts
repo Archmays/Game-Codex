@@ -35,19 +35,21 @@ function expectClean(runtime: RuntimeObservation): void {
 async function visiblePrimary(page: Page, kind: string): Promise<Locator> {
   if (kind === "my-game-world") return page.locator("[data-world-forest-link]");
   if (kind === "hanzi-tower-defense") return page.locator("[data-td-pause]");
+  if (kind === "hanzi-word-adventure") return page.locator('[data-hway-move="right"]');
   if (kind === "math-world") return page.locator('[data-station-id="slider"] button');
   if (kind === "classic-hub") return page.locator(".game-card__button").first();
   return page.locator("[data-card-id]").first();
 }
 
 const primary: readonly { id: string; route: string; surface: string; gameId?: string }[] = [
+  { id: "hanzi-word-adventure", route: "/?play=hanzi-word-adventure", surface: "[data-testid=hanzi-word-adventure]" },
   { id: "my-game-world", route: "/?world=my-game-world", surface: "[data-testid=my-game-world]" },
   { id: "hanzi-tower-defense", route: "/?play=hanzi-tower-defense", surface: "[data-testid=hanzi-tower-defense]" },
   { id: "math-world", route: "/?world=math-world", surface: "[data-testid=math-world-map]" },
   { id: "classic-hub", route: "/?hub=classic&from=world", surface: "[data-testid=classic-hub-from-world]" },
 ] as const;
 
-test("@play-ready all four primary first actions are visible and child-facing", async ({ page }, testInfo) => {
+test("@play-ready all five primary first actions are visible and child-facing", async ({ page }, testInfo) => {
   const runtime = observe(page);
   const observations: unknown[] = [];
   for (const item of primary) {
@@ -94,7 +96,7 @@ test("@play-ready world, support, Classic, back, reload and resume routes stay c
   await expect(page.getByTestId("my-game-world")).toBeVisible();
   await page.reload(); await expect(page.getByTestId("my-game-world")).toBeVisible();
   await page.goto("/?hub=classic&from=world", { waitUntil: "domcontentloaded" });
-  await expect(page.locator(".game-card")).toHaveCount(2);
+  await expect(page.locator(".game-card")).toHaveCount(3);
   await expect(page.locator('.game-card[data-game-id="memory-card"], .game-card[data-game-id="make-target"]')).toHaveCount(0);
   expectClean(runtime);
 });
@@ -155,7 +157,7 @@ test("@a11y modal focus, language parts, target sizes and 200% zoom stay operabl
   await expect(page.locator("[data-world-forest-link]")).toBeVisible();
   await expect(page.getByTestId("my-game-world")).toHaveAttribute(
     "data-active-child-products",
-    "hanzi-tower-defense math-lab"
+    "hanzi-tower-defense math-lab hanzi-word-adventure"
   );
   await page.locator("[data-world-forest-link]").focus();
   await expect(page.locator("[data-world-forest-link]")).toBeFocused();

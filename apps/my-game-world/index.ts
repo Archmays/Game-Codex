@@ -76,6 +76,12 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
         </a>
       </section>
     </section>
+    <section class="world-object world-object--adventure" data-testid="world-adventure-portal">
+      <a class="world-entry" href="${activeProductRoute("hanzi-word-adventure")}" data-world-adventure-link>
+        <img src="./assets/hanzi-word-adventure/scene.png" width="560" height="560" alt="" decoding="async">
+        <div class="world-entry__body"><h2>字间行者</h2><p>挪一枚字，变一段路。借来木与不，走回家。</p><span class="world-entry__action">踏上归途<span aria-hidden="true">↗</span></span></div>
+      </a>
+    </section>
     <nav class="world-more" aria-label="游戏列表" data-testid="world-treasure-box"><span>也可以打开游戏列表</span><a href="${CLASSIC_HUB_FROM_WORLD_ROUTE}" data-world-treasure-link>${WORLD_COPY.treasureTitle}<span aria-hidden="true">→</span></a></nav>
     <div class="world-modal-layer" data-world-modal-layer></div>
   </main>`;
@@ -88,7 +94,7 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
   applySettings();
 
   // Navigation-only state belongs to this history entry, never to a save key.
-  const entries = ["forest", "math", "treasure"] as const;
+  const entries = ["forest", "math", "adventure", "treasure"] as const;
   for (const entry of entries) {
     root.querySelector(`[data-world-${entry}-link]`)?.addEventListener("click", () => {
       window.history.replaceState({ ...window.history.state, worldHomeReturn: { entry, scrollY: window.scrollY } }, "");
@@ -105,6 +111,7 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
         if (query.get("hub") === "classic") entry = "treasure";
         else if (query.get("world") === "math-world") entry = "math";
         else if (query.get("play") === "hanzi-tower-defense") entry = "forest";
+        else if (query.get("play") === "hanzi-word-adventure") entry = "adventure";
       }
     }
     if (!entry) return;

@@ -8,12 +8,12 @@
 
 - 实际起点：`12c86dc22b7219a23baeb26efbe7eab9fb0a2da2`
 - 起点 tracked 文件：`708232522` bytes
-- Mount definitions：`5` 保留
-- Active child products：`2`
+- Mount definitions：`6` 保留
+- Active child products：`3`
 - World modules：`2`
 - Compatibility surfaces：`2`
 - Shared engines：`2`
-- 经典大厅：`2` 活跃产品入口
+- 经典大厅：`3` 活跃产品入口
 - 数学世界：`slider / target` 两个自由开放站点，slider 排前
 - 历史治理：本阶段不重写 Git 历史、不强推、不移动或覆盖 tag
 - 家庭稳定基线：`FROZEN`（`game-codex-family-stable-v1.0.0` / `8b890ff14880bcb576dd1ced37e14e6e3df28af1`）
@@ -23,6 +23,7 @@
 
 | 游戏 | 稳定 ID | 目标世界 | 定义角色 | 产品角色 | 等级 | 生命周期 | 活跃儿童产品 | Classic 卡片 | 规范 route | save namespace |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 字间行者 | `hanzi-word-adventure` | 中文世界 | 活跃儿童产品 | 独立谜题 | S | `active` | 是 | 是 | ?play=hanzi-word-adventure | `family-games/hanzi-word-adventure/v1` |
 | 字阵守城 | `hanzi-tower-defense` | 中文世界 | 活跃儿童产品 | 旗舰 | S | `active` | 是 | 是 | ?play=hanzi-tower-defense | `family-games/hanzi-tower-defense/v1` |
 | 算式滑轨 | `equation-slider` | 数学世界 | 世界模块挂载 | 旗舰模块 | S | `active-module` | 否 | 否 | ?world=math-world&station=slider | `family-games/equation-slider` |
 | 数学世界 | `math-lab` | 数学世界 | 活跃儿童产品 | 核心世界 | A | `active` | 是 | 是 | ?world=math-world&from=hub | `family-games/math-world/v1` |
@@ -31,8 +32,8 @@
 
 ## 分层组合真源
 
-- 活跃儿童产品：`hanzi-tower-defense` / `math-lab`
-- Classic 投影：`hanzi-tower-defense` / `math-lab`
+- 活跃儿童产品：`hanzi-tower-defense` / `math-lab` / `hanzi-word-adventure`
+- Classic 投影：`hanzi-tower-defense` / `math-lab` / `hanzi-word-adventure`
 
 | 世界模块 | Host 世界 / 产品 | Mount 定义 | Runtime owner | 质量档 | Runtime save | 规范 route | 引擎 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
