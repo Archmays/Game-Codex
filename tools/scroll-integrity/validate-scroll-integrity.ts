@@ -76,7 +76,7 @@ const entries = riskInventory();
 const issues: string[] = [];
 const policyCounts = Object.fromEntries(["document", "internal", "locked"].map((policy) => [policy, PLAY_SURFACE_MANIFEST.filter((surface) => surface.scrollPolicy === policy).length]));
 if (JSON.stringify(PLAY_SURFACE_MANIFEST.filter(surface => surface.kind === "station").map(surface => surface.id)) !== JSON.stringify(["math-slider", "math-target"])) issues.push("Math station retirement contract");
-if (policyCounts.document !== PLAY_SURFACE_MANIFEST.length - 3 || policyCounts.internal !== 2 || policyCounts.locked !== 1) issues.push(`Unexpected scroll classification: ${JSON.stringify(policyCounts)}`);
+if (policyCounts.document !== PLAY_SURFACE_MANIFEST.length || policyCounts.internal !== 0 || policyCounts.locked !== 0) issues.push(`Unexpected scroll classification: ${JSON.stringify(policyCounts)}`);
 if (PLAY_SURFACE_MANIFEST.find(surface => surface.id === "my-game-world")?.scrollPolicy !== "document") issues.push("Home world entries must use natural document scrolling");
 for (const surface of PLAY_SURFACE_MANIFEST) {
   if (surface.scrollPolicy === "internal") {
@@ -88,14 +88,12 @@ for (const surface of PLAY_SURFACE_MANIFEST) {
 }
 if (APP_ROUTE_QUERY_MANIFEST.every((route) => route.defaultScrollPolicy === "locked")) issues.push("Route registry still locks every route family");
 const lockedRouteDefaults = APP_ROUTE_QUERY_MANIFEST.filter((route) => route.defaultScrollPolicy === "locked").map((route) => route.queryValue).sort();
-if (JSON.stringify(lockedRouteDefaults) !== JSON.stringify(["hanzi-v2-v1"])) issues.push("Only the verified Hanzi V1 fixed-viewport route may default to locked");
+if (JSON.stringify(lockedRouteDefaults) !== JSON.stringify([])) issues.push("Current public routes must retain document scrolling");
 const appRoute = readFileSync(resolve(ROOT, "src/app-route.ts"), "utf8");
 const pageMode = readFileSync(resolve(ROOT, "src/page-mode.css"), "utf8");
-const sliceApp = readFileSync(resolve(ROOT, "games/hanzi-radical-battle/complete/app/slice-app.ts"), "utf8");
 if (!appRoute.includes("pageModeForSearch") || !appRoute.includes("playSurfaceForSearch")) issues.push("Page mode must resolve the most specific play surface search contract");
 if (/APP_ROUTE_QUERY_MANIFEST\.map\([^)]*game-fullscreen/s.test(appRoute)) issues.push("Route registry must not hardcode every route to game-fullscreen");
 if (!/body\.game-scrollable-page\s*\{[^}]*overflow-y:\s*auto/s.test(pageMode)) issues.push("game-scrollable must expose document vertical scrolling");
-if (!/hmc-shell[^`]*tabindex=\\?"0\\?"[^`]*role=\\?"region\\?"/s.test(sliceApp)) issues.push("Internal Hanzi scroll owner must be keyboard focusable and named");
 if (entries.some((entry) => entry.kind === "overflow-clip")) issues.push("Runtime overflow:clip requires an explicit interactive-content exception; none is currently authorized");
 
 const report = {

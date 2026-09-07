@@ -43,16 +43,16 @@ describe("portfolio play-readiness contracts", () => {
     ]);
   });
 
-  it("covers every primary first-use surface and keeps Classic aligned to the three world products", () => {
+  it("covers every primary first-use surface and keeps Classic aligned to the two current products", () => {
     expect(PLAY_SURFACE_MANIFEST.filter(surface => surface.kind === "station").map(surface => surface.id)).toEqual(["math-slider", "math-target"]);
-    expect(PRIMARY_PLAY_SURFACES).toHaveLength(5);
-    expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.kind === "classic-entry")).toHaveLength(3);
+    expect(PRIMARY_PLAY_SURFACES).toHaveLength(4);
+    expect(PLAY_SURFACE_MANIFEST.filter((surface) => surface.kind === "classic-entry")).toHaveLength(2);
     expect(PLAY_SURFACE_MANIFEST.every((surface) => surface.expectedInputs.includes("keyboard"))).toBe(true);
   });
 
   it("keeps Save Vault exact-key-only and excludes its rollback key from exports", () => {
-    expect(KNOWN_SAVE_KEYS).toHaveLength(37);
-    expect(EXPORTABLE_SAVE_KEYS).toHaveLength(36);
+    expect(KNOWN_SAVE_KEYS).toHaveLength(38);
+    expect(EXPORTABLE_SAVE_KEYS).toHaveLength(37);
     expect(KNOWN_SAVE_KEYS.filter((record) => !record.exportable).map((record) => record.key)).toEqual(["save-vault/pre-import-backup/v1"]);
     const source = readFileSync("packages/save-vault/index.ts", "utf8");
     expect(source).not.toContain("localStorage.clear(");
@@ -63,7 +63,7 @@ describe("portfolio play-readiness contracts", () => {
   it("keeps top and Classic child surfaces free of adult catalog metadata", () => {
     const top = readFileSync("apps/my-game-world/index.ts", "utf8");
     const classic = readFileSync("apps/hub/index.ts", "utf8");
-    expect(top).toContain('aria-label="三个游戏世界"');
+    expect(top).toContain('aria-label="选择游戏世界"');
     expect(top).toContain('class="world-more" aria-label="游戏列表"');
     expect(top).not.toContain("夜光墨林");
     for (const forbidden of ["recommendedAge", "learningGoal", "qualityTier", "statusBadge"]) expect(classic).not.toContain(forbidden);
@@ -71,11 +71,11 @@ describe("portfolio play-readiness contracts", () => {
 
   it("uses semantic loading recovery and language/focus affordances", () => {
     const main = readFileSync("src/main.ts", "utf8");
-    const english = readFileSync("games/english-spell-battle/v2/app/index.ts", "utf8");
+    const defense = readFileSync("games/hanzi-tower-defense/index.ts", "utf8");
     expect(main).toContain("renderRouteLoading");
     expect(main).toContain("renderRouteError");
     expect(main).not.toContain("error.message");
-    expect(english).toContain('lang="en-US"');
-    expect(english).toContain('event.key === "Escape"');
+    expect(defense).toContain("data-td-pause");
+    expect(defense).toContain('event.key === "Escape"');
   });
 });

@@ -7,7 +7,6 @@ const runtimeFiles = execFileSync("git", ["ls-files", "--cached", "--others", "-
   .split(/\r?\n/).filter((path) => /\.(?:ts|tsx|js|html)$/.test(path) && existsSync(resolve(ROOT, path)));
 const denylistDefinitionFiles = new Set([
   "packages/observation/natural-use/types.ts",
-  "games/hanzi-radical-battle/v2/golden-slice/first-use/privacy.ts",
 ]);
 const collectionPatterns = [
   /navigator\.sendBeacon/i,

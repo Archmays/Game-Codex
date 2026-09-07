@@ -19,7 +19,7 @@ function writeJson(name: string, value: unknown): void {
 }
 
 function gitFiles(): string[] {
-  const result = spawnSync("git", ["ls-files", "-z"], { cwd: ROOT, encoding: "buffer", maxBuffer: 128 * 1024 * 1024 });
+  const result = spawnSync("git", ["ls-files", "--cached", "--others", "--exclude-standard", "-z"], { cwd: ROOT, encoding: "buffer", maxBuffer: 128 * 1024 * 1024 });
   if (result.status !== 0) throw new Error(result.stderr?.toString("utf8") || "git ls-files failed");
   return result.stdout.toString("utf8").split("\0").filter(Boolean);
 }
@@ -27,13 +27,10 @@ function gitFiles(): string[] {
 function sha256File(path: string): string { return createHash("sha256").update(readFileSync(path)).digest("hex"); }
 
 const feedbackSamples = [
-  ["hanzi-character", "Chinese", "outcome-specific", "scaffolded", "部件/结构状态说明后给可尝试位置或提示，不评价能力。"],
-  ["pinyin-assemble-tone", "Chinese", "outcome-specific", "actionable-hint", "声母、韵母或声调状态后给下一步按钮/选项。"],
+  ["hanzi-tower-defense", "Chinese", "outcome-specific", "scaffolded", "错误组合保留材料并提示换顺序；合字预览真实结构，失败可重玩。"],
   ["memory-match", "Shared", "outcome-specific", "actionable-hint", "翻牌状态保持可见，可继续选择另一张，不扣分。"],
   ["make-target", "Math", "outcome-specific", "actionable-hint", "不可用组合说明当前结果并保留卡片，可换运算。"],
   ["equation-slider", "Math", "outcome-specific", "scaffolded", "覆盖进度与算式状态同步；加载失败回线路图，不显示内部错误。"],
-  ["english-build", "English", "outcome-specific", "scaffolded", "图片/拼写块提示下一步；错误后给一个可执行拼写线索。"],
-  ["english-sentence", "English", "outcome-specific", "actionable-hint", "先选完整词再点空位，完成后世界回应。"],
 ] as const;
 
 const tracked = gitFiles().filter(path => existsSync(resolve(ROOT, path)));
@@ -62,10 +59,10 @@ if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineTag !== "game-codex-fam
 if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.realEvidencePatchCount !== 2) issues.push("evidence patch count");
 if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.interactionIntegrity !== "HITTEST_AND_REACHABILITY_GUARD_ACTIVE") issues.push("interaction-integrity boundary");
 if (AUTHORIZED_DEVELOPMENT_CYCLES.length !== 2 || AUTHORIZED_DEVELOPMENT_CYCLES.at(-1)?.id !== "gameplay-coherence-02" || AUTHORIZED_DEVELOPMENT_CYCLES.some((cycle) => cycle.naturalUseObservationImpact !== "ONGOING_NOT_CLOSED")) issues.push("bounded development cycle boundary");
-if (JSON.stringify(GAME_PORTFOLIO.map(record => record.id).sort()) !== JSON.stringify(["hanzi-radical-battle", "equation-slider", "math-lab", "english-spell-battle", "make-target", "memory-card", "pinyin-magic-battle"].sort())) issues.push("portfolio retirement inventory");
-if (JSON.stringify(PLAY_SURFACE_MANIFEST.filter(surface => surface.kind === "station").map(surface => surface.id)) !== JSON.stringify(["math-slider", "math-target"]) || PRIMARY_PLAY_SURFACES.length !== 5) issues.push("play surface inventory");
-if (PLAY_SURFACE_MANIFEST.filter((surface) => surface.kind === "classic-entry").length !== 3) issues.push("Classic count");
-if (KNOWN_SAVE_KEYS.length !== 37 || EXPORTABLE_SAVE_KEYS.length !== 36 || portfolioNamespacesWithoutKnownKey().length) issues.push("save key inventory");
+if (JSON.stringify(GAME_PORTFOLIO.map(record => record.id).sort()) !== JSON.stringify(["hanzi-tower-defense", "equation-slider", "math-lab", "make-target", "memory-card"].sort())) issues.push("portfolio retirement inventory");
+if (JSON.stringify(PLAY_SURFACE_MANIFEST.filter(surface => surface.kind === "station").map(surface => surface.id)) !== JSON.stringify(["math-slider", "math-target"]) || PRIMARY_PLAY_SURFACES.length !== 4) issues.push("play surface inventory");
+if (PLAY_SURFACE_MANIFEST.filter((surface) => surface.kind === "classic-entry").length !== 2) issues.push("Classic count");
+if (KNOWN_SAVE_KEYS.length !== 38 || EXPORTABLE_SAVE_KEYS.length !== 37 || portfolioNamespacesWithoutKnownKey().length) issues.push("save key inventory");
 if (prohibitedRuntimeTransmission.length) issues.push("prohibited runtime transmission");
 if (duplicateTrackedLargeBinaryGroups.length) issues.push("duplicate tracked large binaries");
 if (issues.length) throw new Error(`Play-readiness validation failed: ${issues.join(", ")}`);

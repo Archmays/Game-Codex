@@ -21,11 +21,27 @@ export const APP_ROUTE_QUERY_REGISTRY = APP_ROUTE_QUERY_MANIFEST.map((route) => 
   pageMode: pageModeForScrollPolicy(route.defaultScrollPolicy),
 }));
 
+export const RETIRED_LANGUAGE_PLAY_IDS = [
+  "hanzi-magic-complete", "hanzi-v2-chapter-one", "hanzi-v2-v1", "hanzi-radical-battle",
+  "hanzi-magic-battle", "hanzi-magic-v2", "pinyin-magic-battle", "english-spell-battle-legacy", "english-spell-battle",
+] as const;
+export const RETIRED_LANGUAGE_WORLD_IDS = ["english-world", "chinese-world", "ink-forest", "wordlight-island"] as const;
+
+/** Retired links have no runtime/save side effects. Clear conflicting query/hash state while keeping the Pages subpath. */
+export function normalizeRetiredLanguageRoute(url: URL): boolean {
+  const isRetired = ["play", "game"].some(key => url.searchParams.getAll(key).some(value => RETIRED_LANGUAGE_PLAY_IDS.some(id => id === value)))
+    || url.searchParams.getAll("world").some(value => RETIRED_LANGUAGE_WORLD_IDS.some(id => id === value));
+  if (!isRetired) return false;
+  url.search = "?world=my-game-world&notice=retired-language";
+  url.hash = "";
+  return true;
+}
+
 /** Exact retired entries only; replacement preserves Pages subpaths and history. */
 export function normalizeRetiredMathRoute(url: URL): boolean {
   const search = url.searchParams;
-  // Preserve the existing precedence of supported Chinese and English play routes.
-  if (APP_ROUTE_QUERY_MANIFEST.some((route) => route.kind === "play" && search.get("play") === route.queryValue)) return false;
+  // Language retirement is resolved first; recognized play routes keep precedence over a stale station parameter.
+  if (RETIRED_LANGUAGE_PLAY_IDS.some(id => id === search.get("play")) || APP_ROUTE_QUERY_MANIFEST.some((route) => route.kind === "play" && search.get("play") === route.queryValue)) return false;
   if (search.get("world") !== "math-world" || search.getAll("station").length !== 1
     || !RETIRED_MATH_WORLD_STATION_IDS.some((id) => id === search.get("station"))) return false;
   search.delete("station");

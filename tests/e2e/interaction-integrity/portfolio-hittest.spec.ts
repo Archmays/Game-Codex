@@ -70,7 +70,7 @@ async function findReturnControl(page: Page, record: PlaySurfaceRecord): Promise
 }
 
 async function closeIntentionalModal(page: Page): Promise<boolean> {
-  const dialogs = page.locator('[role="dialog"][aria-modal="true"]:visible');
+  const dialogs = page.locator('[role="dialog"][aria-modal="true"]:visible, dialog[open]');
   if (!await dialogs.count()) return false;
   const controls = await visibleEnabled(dialogs.last().locator("button, a[href]"));
   let close: Locator | null = null;
@@ -176,15 +176,10 @@ test("@hittest @representative modal close, fixed-layer, and destructive cancel 
   await closeWorld.click();
   await expect(settings).toBeFocused();
 
-  await page.goto("/?play=hanzi-magic-complete", { waitUntil: "domcontentloaded" });
-  const parent = page.getByRole("button", { name: "打开家长角" });
-  await expectHitTarget(parent, { minimumRatio: 1, minimumSize: 44 });
-  await parent.click();
-  const closeParent = page.getByRole("button", { name: "返回森林" });
-  await expectHitTarget(closeParent, { minimumRatio: 1, minimumSize: 44 });
-  await closeParent.click();
-  await expect(page.getByTestId("complete-parent-panel")).toHaveCount(0);
-
+  await page.goto("/?play=hanzi-tower-defense");
+  const restart = page.locator("[data-td-restart]"); await expectHitTarget(restart, { minimumRatio: 1, minimumSize: 44 }); await restart.click();
+  const cancel = page.locator("[data-td-cancel-restart]"); await expectHitTarget(cancel, { minimumRatio: 1, minimumSize: 44 }); await cancel.click();
+  await expect(page.locator("[data-td-restart-dialog]")).not.toBeVisible();
   await page.goto("/?world=my-game-world&parent=observation", { waitUntil: "domcontentloaded" });
   await expect(page.getByTestId("observation-notebook")).toBeVisible();
   const destructive = page.locator("[data-observation-delete-all]");
@@ -207,7 +202,7 @@ test("@hittest @full 100 transitions leave no stale overlay before primary hit t
     const actions = await expect.poll(async () => (await visibleEnabled(page.locator(record.primaryActionSelector))).length).toBeGreaterThan(0).then(() => visibleEnabled(page.locator(record.primaryActionSelector)));
     const evidence = await expectHitTarget(actions[0], { minimumRatio: 1, minimumSize: 24 });
     expect(await page.locator("#app > *").count()).toBe(1);
-    expect(await page.locator(".wordlight-dialog-backdrop:visible, .world-modal:visible, [aria-modal=true]:visible").count()).toBe(0);
+    expect(await page.locator(".world-modal:visible, [aria-modal=true]:visible").count()).toBe(0);
     expect(await page.locator("canvas").count()).toBeLessThanOrEqual(1);
     rows.push({ transition: transition + 1, surfaceId: record.id, hitSuccessRatio: evidence.hitSuccessRatio });
   }

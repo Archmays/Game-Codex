@@ -22,27 +22,26 @@ describe("game portfolio governance", () => {
 
   it("represents the live catalog one-to-one with valid governance identities", () => {
     expect(validatePortfolio(gameCatalog, currentClassicGameCatalog)).toEqual([]);
-    expect(GAME_PORTFOLIO.map(record => record.id)).toEqual(["hanzi-radical-battle", "equation-slider", "math-lab", "english-spell-battle", "make-target", "memory-card", "pinyin-magic-battle"]);
+    expect(GAME_PORTFOLIO.map(record => record.id)).toEqual(["hanzi-tower-defense", "equation-slider", "math-lab", "make-target", "memory-card"]);
     expect(new Set(GAME_PORTFOLIO.map((record) => record.id)).size).toBe(GAME_PORTFOLIO.length);
     expect(new Set(GAME_PORTFOLIO.flatMap((record) => record.saveNamespaces)).size).toBe(
       GAME_PORTFOLIO.flatMap((record) => record.saveNamespaces).length,
     );
     expect(new Set(GAME_PORTFOLIO.map((record) => record.qualityTier))).toEqual(new Set(["S", "A", "B", "C"]));
     expect(ACTIVE_CHILD_PRODUCTS.map((record) => record.id)).toEqual([
-      "hanzi-radical-battle", "math-lab", "english-spell-battle"
+      "hanzi-tower-defense", "math-lab"
     ]);
     expect(CLASSIC_CARD_PRODUCTS.map((record) => record.id)).toEqual([
-      "hanzi-radical-battle", "math-lab", "english-spell-battle"
+      "hanzi-tower-defense", "math-lab"
     ]);
     expect(WORLD_MODULES.filter(module => module.world === "math").map(module => module.id)).toEqual(["math-equation-slider", "math-make-target"]);
-    expect(COMPATIBILITY_SURFACES).toHaveLength(6);
+    expect(COMPATIBILITY_SURFACES).toHaveLength(2);
     expect(SHARED_ENGINES).toHaveLength(2);
-    expect(currentClassicGameCatalog).toHaveLength(3);
+    expect(currentClassicGameCatalog).toHaveLength(2);
     expect(GAME_PORTFOLIO.filter((record) => !record.classicCardVisible).map((record) => record.id).sort()).toEqual([
       "equation-slider",
       "make-target",
       "memory-card",
-      "pinyin-magic-battle",
     ]);
   });
 
@@ -71,7 +70,7 @@ describe("game portfolio governance", () => {
     expect(checkGeneratedDocs()).toEqual([]);
     const status = readFileSync("docs/project-status/portfolio-status.md", "utf8");
     expect(status).toContain(`Mount definitions：\`${GAME_PORTFOLIO.length}\``);
-    expect(status).toContain("Active child products：`3`");
+    expect(status).toContain("Active child products：`2`");
     expect(status).toContain("NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE");
   });
 
@@ -83,7 +82,7 @@ describe("game portfolio governance", () => {
     expect(PROJECT_LIFECYCLE_TERMINAL_TRUTH.automaticLargeTask).toBe("NONE");
     expect(new Set(PLAY_SURFACE_MANIFEST.map((surface) => surface.id)).size).toBe(PLAY_SURFACE_MANIFEST.length);
     expect(PRIMARY_PLAY_SURFACES.map((surface) => surface.id)).toEqual([
-      "my-game-world", "classic-hub", "hanzi-world", "math-world", "english-world",
+      "my-game-world", "classic-hub", "hanzi-tower-defense", "math-world",
     ]);
     expect(new Set(KNOWN_SAVE_KEYS.map((record) => record.key)).size).toBe(KNOWN_SAVE_KEYS.length);
     expect(portfolioNamespacesWithoutKnownKey()).toEqual([]);
@@ -118,8 +117,6 @@ describe("game portfolio governance", () => {
       "equation-slider entry/interaction/return smoke",
     ]);
 
-    expect(affectedGateCommands(["games/hanzi-radical-battle/complete/save/complete-save.ts"]).some((command) => command.args.includes("tests/e2e/hanzi-complete/pilot-six.spec.ts"))).toBe(true);
-    expect(affectedGateCommands(["public/assets/hanzi-radical-battle/pilot-six/r1/bridge.webp"]).some((command) => command.args.includes("tests/e2e/hanzi-complete/pilot-six.spec.ts"))).toBe(true);
     const shared = affectedGateCommands(["packages/game-core/index.ts"]);
     expect(shared.map((command) => command.label)).toEqual([
       "portfolio consistency",
@@ -128,12 +125,11 @@ describe("game portfolio governance", () => {
       "play-surface scroll ownership contracts",
       "unit and content tests",
       "Math World portfolio and replacement contract",
-      "canonical Pinyin, source audit, and memory relation contracts",
+      "Independent memory-match content and save contracts",
       "typecheck",
       "production build",
       "Math World routes, interactions, and lifecycle",
-      "Chinese support routes, inputs, saves, and fallbacks",
-      "English World routes, interactions, and geometry",
+      "Hanzi tower defense full browser battle",
       "representative play-surface browser hit-test matrix",
       "representative scroll and bottom reachability matrix",
       "all-game portfolio smoke",
@@ -143,11 +139,8 @@ describe("game portfolio governance", () => {
   });
 
   it("keeps consolidated support and Classic return routes aligned with runtime context", () => {
-    for (const id of ["hanzi-pinyin-assemble", "hanzi-pinyin-tone", "hanzi-pinyin-contrast", "hanzi-memory-same-glyph", "hanzi-memory-glyph-pinyin", "hanzi-memory-glyph-phrase"]) {
-      expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === id)?.returnRoute).toBe("?play=hanzi-magic-complete&from=world");
-    }
     expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === "classic-math")?.returnRoute).toBe("?world=my-game-world");
-    for (const id of ["classic-hanzi", "classic-english"]) {
+    for (const id of ["classic-defense"]) {
       expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === id)?.returnRoute).toBe("?hub=classic&from=world");
     }
     expect(PLAY_SURFACE_MANIFEST.find((surface) => surface.id === "math-slider")).toMatchObject({

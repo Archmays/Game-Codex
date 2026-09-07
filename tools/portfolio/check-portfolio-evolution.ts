@@ -173,7 +173,7 @@ if (
 if (!equal(evidence.resultingTruth.activeChildProducts as string[], ["hanzi-radical-battle", "math-lab", "english-spell-battle", "equation-slider"])) issues.push("historical active product truth");
 if (!equal(evidence.surfaceCoverage.primaryRealBrowserSurfaceIds, ["my-game-world", "classic-hub", "hanzi-world", "math-world", "english-world", "classic-equation"])) issues.push("historical primary browser coverage");
 if (evidence.surfaceCoverage.manifestValidatedCount !== 40 || evidence.surfaceCoverage.uncoveredSurfaceIds.length !== 0) issues.push("historical surface coverage boundary");
-if (COMPATIBILITY_SURFACES.length !== 6 || SHARED_ENGINES.length !== 2 || KNOWN_SAVE_KEYS.length !== 37) issues.push("protected compatibility/save inventory");
+if (COMPATIBILITY_SURFACES.length !== 2 || SHARED_ENGINES.length !== 2 || KNOWN_SAVE_KEYS.length !== 38) issues.push("current compatibility/save inventory after authorized language retirement");
 if (equationAudit.sameVisibleTransitionCount !== 216 || equationAudit.sameVisibleTransitionLevelCount !== 82 || equationAudit.initialSameVisibleMoveLevelCount !== 45) issues.push("Equation same-display inventory");
 if (equationAudit.sameVisibleShortestPathBenefitLevelIds.length !== 39 || equationAudit.initialSameVisibleShortestPathBenefitLevelIds.length !== 21 || equationAudit.requiredSameVisibleMoveLevelIds.length !== 0) issues.push("Equation completion-path classification");
 if (Object.values(equationAudit.sameVisibleCompletionPaths).some((path) => !path.solvableWithoutSameVisibleEdges || (path.shortestPathDelta !== 0 && path.shortestPathDelta !== 1))) issues.push("Equation no-edge completion proof");
@@ -192,7 +192,8 @@ for (const document of requiredDurableDocuments) {
 }
 if (!existsSync(benchmarkPath) || readFileSync(benchmarkPath, "utf8") !== `${renderBenchmarkAndPrinciples(evidence)}\n`) issues.push("generated benchmark doc drift");
 if (!existsSync(auditPath) || readFileSync(auditPath, "utf8") !== `${renderPortfolioAudit(evidence)}\n`) issues.push("generated portfolio audit drift");
-if (!existsSync(sixHatsPath) || !readFileSync(sixHatsPath, "utf8").includes(`11 world modules、${COMPATIBILITY_SURFACES.length} compatibility surfaces、${SHARED_ENGINES.length} shared engines`)) issues.push("six-hats layered truth drift");
+// This document describes the immutable historical release, not the live catalog.
+if (!existsSync(sixHatsPath) || !readFileSync(sixHatsPath, "utf8").includes("11 world modules、6 compatibility surfaces、2 shared engines")) issues.push("historical six-hats layered truth drift");
 
 if (issues.length) {
   process.stderr.write(`${issues.map((issue) => `- ${issue}`).join("\n")}\n`);

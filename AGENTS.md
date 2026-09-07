@@ -12,7 +12,7 @@ Keep the child interface clear, feedback understandable, and controls simple. Se
 - Reuse the existing Vite/TypeScript/Phaser/DOM-overlay/local-storage architecture.
 - Do not rewrite stable simulation/save/presentation code merely for cleanup.
 - Do not modify unrelated games, duplicate shared logic, create abstractions for one-off use, or split small games into new repositories.
-- For Hanzi Magic Battle V2, use `docs/hanzi-radical-battle-v2/README.md` as the current route and read only the related architecture/content/quality/status docs needed by the task.
+- For 字阵守城, use `games/hanzi-tower-defense/README.md` and `docs/hanzi-tower-defense/step1-report.md` as current sources. 墨迹森林 and 词光岛 are retired; do not restore their runtime or playable compatibility routes. Preserve language rigor, raw sources, privacy and math contracts.
 
 ## Child safety and privacy
 

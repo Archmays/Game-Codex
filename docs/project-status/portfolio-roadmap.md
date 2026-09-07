@@ -15,14 +15,14 @@ Portfolio 真源、分级门禁、安全维护事务、CI 与 Pages 组合验证
 
 ## 3. Chinese Consolidation — COMPLETE
 
-墨迹森林、声韵试炼与字光配对完成收拢。
+历史收拢已完成；GAME-CODEX-STEP1 已退役旧语言运行产品，原存档保留。
 
 - 发布 tag：`chinese-consolidation-v1.0.0`
 - 当前 route：`?play=hanzi-magic-complete`
 
 ## 4. English V2 — COMPLETE
 
-词光岛五个区域、词光册、句子任务与 English Memory。
+历史英语产品已于 GAME-CODEX-STEP1 退役，原存档保留。
 
 - 发布 tag：`english-world-v2.0.0`
 - 当前 route：`?world=english-world`

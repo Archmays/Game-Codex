@@ -6,26 +6,24 @@
 
 ## 汉字魔法战 V3 完整篇
 
-《汉字魔法战 · 墨迹森林完整篇：字光归林》V3.0.0 是当前正式中文旗舰，入口为 `?play=hanzi-magic-complete&from=hub`。V1、V2 路由、存档与冻结 tag 继续兼容；当前机器发布状态见 `docs/hanzi-radical-battle-v3/README.md`，legacy 边界见 `docs/hanzi-radical-battle-v2/README.md`。
+当前中文产品为《字阵守城》，入口 `?play=hanzi-tower-defense`。墨迹森林全线和词光岛全线已退役，旧链接只回现有首页；历史通过 Git 保留，旧语言存档原值保留，数学玩法与存档不变。当前报告：`docs/hanzi-tower-defense/step1-report.md`。
 
 真人儿童验证由用户明确设为 `NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE`；机器通过不代表儿童乐趣、学习效果、偏好或保持度。
 
 ## 当前游戏
 
 <!-- GAME_PORTFOLIO:START -->
-`allGameDefinitions` 保留 7 个可挂载定义，但儿童产品组合已明确收敛为 3 个活跃产品；经典大厅只投影这 3 个产品。世界模块、兼容入口和共享引擎分别维护，不再拿定义数冒充产品数。
+`allGameDefinitions` 保留 5 个可挂载定义，但儿童产品组合已明确收敛为 2 个活跃产品；经典大厅只投影这 2 个产品。世界模块、兼容入口和共享引擎分别维护，不再拿定义数冒充产品数。
 
 | 游戏 | 学科 | 目标世界 | 定义角色 | 活跃儿童产品 | 质量等级 | 当前状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| 汉字魔法战 | 识字 | 中文世界 | 活跃儿童产品 | 是 | S | 墨迹森林完整篇 |
+| 字阵守城 | 识字 | 中文世界 | 活跃儿童产品 | 是 | S | 可玩 |
 | 算式滑轨 | 数学 | 数学世界 | 世界模块挂载 | 否 | S | 可玩 |
 | 数学世界 | 数学 | 数学世界 | 活跃儿童产品 | 是 | A | 可玩 |
-| 英语世界 | 英语 | 英语世界 | 活跃儿童产品 | 是 | A | 英语世界 V2 |
 | 目标工坊 | 数学 | 数学世界 | 世界模块挂载 | 否 | B | 数学世界模块 |
 | 记忆配对 | 识字 | 共享模块 | 兼容适配定义 | 否 | C | 可玩 |
-| 声韵试炼 | 识字 | 中文世界 | 兼容适配定义 | 否 | C | 已并入墨迹森林 |
 
-三个正式世界（chinese / math / english）包含 8 个显式世界模块；6 个兼容表面与 2 个共享引擎独立登记。算式滑轨只作为数学世界旗舰模块进入；目标工坊与记忆配对也不再占用重复 Classic 卡，模块、引擎、存档和既有规范 route 均保留。
+当前两个产品领域（chinese / math）包含 2 个显式世界模块；2 个兼容表面与 2 个共享引擎独立登记。算式滑轨只作为数学世界旗舰模块进入；目标工坊与记忆配对也不再占用重复 Classic 卡，数学模块、独立配对引擎与原存档保留；旧语言产品已实际退役，旧链接仅返回首页。
 
 项目阶段：Foundation、Math World、Chinese Consolidation、English V2 与 Play Readiness 均为 COMPLETE；Natural-use Observation 为 ACTIVE；家庭稳定基线已冻结在 `game-codex-family-stable-v1.0.0`；下一自动阶段为 `NONE`。
 历史周期 `gameplay-coherence-02` 是用户明确授权、由发布 tag 目标闭合的独立 bounded development cycle；源码不提前冒充外部发布完成。它不关闭 Natural-use Observation，也不创建自动后续任务。

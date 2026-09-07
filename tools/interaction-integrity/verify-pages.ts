@@ -17,7 +17,7 @@ function requireValue(condition: unknown, message: string): asserts condition {
 
 const pagesBase = new URL(option("--base") ?? "https://archmays.github.io/Game-Codex/");
 const expectedCommit = (option("--commit") ?? execFileSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" })).trim();
-const output = resolve(root, option("--output") ?? "tmp/tasks/GAME-CODEX-EVIDENCE-DRIVEN-UI-POLISH-06B/reports/PAGES_VERDICT.json");
+const output = resolve(root, option("--output") ?? "tmp/tasks/GAME-CODEX-STEP1/reports/PAGES_INTERACTION.json");
 const errors: string[] = [];
 const failed: string[] = [];
 const external: string[] = [];
@@ -49,36 +49,34 @@ try {
 
   for (const [query, selector] of [
     ["./", '[data-testid="my-game-world"]'],
-    ["?world=my-game-world", '[data-testid="world-english-portal"]'],
-    ["?play=hanzi-magic-complete&from=world", '[data-testid="hanzi-magic-complete"]'],
+    ["?world=my-game-world", '[data-testid="my-game-world"]'],
+    ["?play=hanzi-magic-complete&from=world", '[data-testid="my-game-world"]'],
     ["?world=math-world&from=world", '[data-testid="math-world-map"]'],
     ["?hub=classic&from=world", ".hub-grid"],
-    ["?world=english-world", '[data-testid="english-world-map"]'],
+    ["?world=english-world", '[data-testid="my-game-world"]'],
   ] as const) await route(page, query, selector);
-  requireValue(await page.locator(".wordlight-region").count() === 5, "English World must expose five regions");
-
-  await route(page, "?world=english-world&region=animals", '[data-testid="english-region"][data-region="animals"]');
-  for (const wordId of ["word-cat", "word-dog", "word-fish", "word-duck"] as const) {
-    const control = page.locator(`[data-word-id="${wordId}"]`);
-    await control.scrollIntoViewIfNeeded();
-    const evidence = await sampleHitTarget(control);
-    requireValue(evidence.rect.width >= 44 && evidence.rect.height >= 44, `${wordId} deployed target is smaller than 44px`);
-    requireValue(evidence.hitSuccessRatio === 1, `${wordId} deployed target is occluded: ${JSON.stringify(evidence.samples.filter((sample) => !sample.pass))}`);
-    await control.click({ trial: true });
-    checks.push({ type: "hit-test", wordId, ratio: evidence.hitSuccessRatio, rect: evidence.rect, verdict: "PASS" });
+  for (const width of [1366, 390]) {
+    await page.setViewportSize({ width, height: 844 });
+    await route(page, "?play=hanzi-tower-defense", '[data-testid="hanzi-tower-defense"]');
+    await page.locator('[data-td-canvas][data-ready="true"]').waitFor();
+    const pause = page.locator('[data-td-pause]');
+    if (await page.locator('.td-game').getAttribute('data-phase') === 'battle') await pause.click();
+    for (let slot=0; slot<8; slot++) {
+      const control = page.locator('[data-slot="'+slot+'"]');
+      await control.scrollIntoViewIfNeeded();
+      const evidence = await sampleHitTarget(control);
+      requireValue(evidence.rect.width >= 44 && evidence.rect.height >= 44, 'Tower target below 44px');
+      requireValue(evidence.hitSuccessRatio === 1, 'Tower target is occluded');
+      await control.click({ trial: true });
+      checks.push({ type: 'hit-test', width, slot, ratio: evidence.hitSuccessRatio, verdict: 'PASS' });
+    }
+    await page.locator('[data-core="2"]').click();
+    await page.locator('[data-slot="1"]').click();
+    requireValue((await page.locator('[data-slot="1"]').getAttribute('aria-label'))?.includes('火'), 'Normal deployment click failed');
+    requireValue(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth+1), 'Tower game overflows horizontally');
+    await page.locator('[data-td-restart]').click();
+    await page.locator('[data-td-confirm-restart]').click();
   }
-  await page.locator('[data-word-id="word-cat"]').click();
-  await page.locator('[data-testid="english-mission"][data-word-id="word-cat"]').waitFor({ state: "visible" });
-  checks.push({ type: "real-click", wordId: "word-cat", verdict: "PASS" });
-
-  await page.setViewportSize({ width: 390, height: 844 });
-  await route(page, "?world=english-world&region=animals", '[data-testid="english-region"][data-region="animals"]');
-  const mobileCatControl = page.locator('[data-word-id="word-cat"]');
-  await mobileCatControl.scrollIntoViewIfNeeded();
-  const mobileCat = await sampleHitTarget(mobileCatControl);
-  requireValue(mobileCat.hitSuccessRatio === 1, "Mobile deployed word-cat target is occluded");
-  requireValue(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1), "Mobile English region overflows horizontally");
-  checks.push({ type: "mobile-hit-test", wordId: "word-cat", ratio: mobileCat.hitSuccessRatio, verdict: "PASS" });
 
   requireValue(errors.length === 0 && failed.length === 0 && external.length === 0, "Pages emitted browser, HTTP, request, or external-network errors");
   const report = { verdict: "PASS_MACHINE", canonicalUrl: pagesBase.href, expectedCommit, deployedCommit: expectedCommit, checks, errors, failed, external, verifiedAtUtc: new Date().toISOString(), realChildValidation: "NOT_PERFORMED_AND_NOT_CLAIMED" };

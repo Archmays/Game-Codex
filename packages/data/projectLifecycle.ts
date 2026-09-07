@@ -32,7 +32,7 @@ export interface AuthorizedDevelopmentCycleRecord {
 
 export const ACTIVE_PROJECT_PHASE: ProjectPhaseId = "natural-use-observation";
 export const NEXT_PROJECT_PHASE: ProjectPhaseId | null = null;
-export const PRIMARY_WORLDS = ["chinese", "math", "english"] as const;
+export const PRIMARY_WORLDS = ["chinese", "math"] as const;
 
 export const PROJECT_PHASES: readonly ProjectPhaseRecord[] = [
   {
@@ -55,7 +55,7 @@ export const PROJECT_PHASES: readonly ProjectPhaseRecord[] = [
     status: "complete",
     releaseTag: "chinese-consolidation-v1.0.0",
     canonicalRoute: "?play=hanzi-magic-complete",
-    summary: "墨迹森林、声韵试炼与字光配对完成收拢。",
+    summary: "历史收拢已完成；GAME-CODEX-STEP1 已退役旧语言运行产品，原存档保留。",
   },
   {
     id: "english-v2",
@@ -63,7 +63,7 @@ export const PROJECT_PHASES: readonly ProjectPhaseRecord[] = [
     status: "complete",
     releaseTag: "english-world-v2.0.0",
     canonicalRoute: "?world=english-world",
-    summary: "词光岛五个区域、词光册、句子任务与 English Memory。",
+    summary: "历史英语产品已于 GAME-CODEX-STEP1 退役，原存档保留。",
   },
   {
     id: "play-readiness",

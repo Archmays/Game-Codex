@@ -1,21 +1,17 @@
 import type { GameDefinition } from "../game-core";
 import { equationSliderGame } from "../../games/equation-slider";
-import { englishSpellBattleGame } from "../../games/english-spell-battle/v2";
-import { hanziRadicalBattleGame } from "../../games/hanzi-radical-battle";
+import { hanziTowerDefenseGame } from "../../games/hanzi-tower-defense";
 import { makeTargetGame } from "../../games/make-target";
 import { mathLabGame } from "../../games/math-lab";
 import { memoryCardGame } from "../../games/memory-card";
-import { pinyinMagicBattleGame } from "../../games/pinyin-magic-battle";
 import { GAME_PORTFOLIO_BY_ID } from "./gamePortfolio";
 
 export const allGameDefinitions: GameDefinition[] = [
   memoryCardGame,
   mathLabGame,
-  hanziRadicalBattleGame,
-  englishSpellBattleGame,
+  hanziTowerDefenseGame,
   makeTargetGame,
-  equationSliderGame,
-  pinyinMagicBattleGame
+  equationSliderGame
 ];
 
 export const classicGameCatalog: GameDefinition[] = allGameDefinitions

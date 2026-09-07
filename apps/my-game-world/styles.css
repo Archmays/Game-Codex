@@ -14,10 +14,9 @@
 .world-header h1 { margin:0; font-size:44px; line-height:1.25; }
 .world-header p { margin:12px 0 0; font-size:20px; color:#bce9dd; }
 .world-icon-button { min-height:48px; padding:10px 16px; border:1px solid #70908e; border-radius:14px; background:#102e38; color:var(--world-paper); font:inherit; font-size:15px; cursor:pointer; }
-.world-stage { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; align-items:stretch; }
+.world-stage { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; align-items:stretch; }
 .world-object { min-width:0; --entry-bg:#103d42; --entry-text:#f7f5df; --entry-action:#9fe5c7; --entry-action-text:#123c3e; --entry-border:#599d87; }
 .world-object--math { --entry-bg:#f2e4be; --entry-text:#49391e; --entry-action:#6b4b22; --entry-action-text:#fff6dd; --entry-border:#c3a76d; }
-.world-object--english { --entry-bg:#d4eeec; --entry-text:#183f4b; --entry-action:#216879; --entry-action-text:#f2ffff; --entry-border:#83bbb9; }
 .world-entry { display:flex; flex-direction:column; height:100%; border:2px solid var(--entry-border); border-radius:24px; color:var(--entry-text); background:var(--entry-bg); text-decoration:none; box-shadow:0 14px 32px #03151e44; transition:transform 150ms ease,box-shadow 150ms ease; }
 .world-entry > img { display:block; width:100%; height:auto; aspect-ratio:12/7; object-fit:cover; border-radius:22px 22px 0 0; background:var(--entry-bg); }
 .world-entry__body { display:flex; flex:1; flex-direction:column; align-items:flex-start; padding:24px; }
@@ -119,3 +118,5 @@
 @media (prefers-reduced-motion: reduce) {
   .my-game-world *, .my-game-world *::before, .my-game-world *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
+
+.world-retired-notice { padding:12px 16px; border:1px solid #819578; border-radius:12px; background:#dbe6c7; color:#263f34; font-size:15px; line-height:1.7; }

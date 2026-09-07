@@ -71,9 +71,8 @@ function buildCommit(): string {
 
 function surfaceGroup(surface: PlaySurfaceRecord): string {
   if (surface.kind === "classic-hub" || surface.kind === "classic-entry") return "游戏百宝箱（Classic）";
-  if (surface.productId === "hanzi-radical-battle") return "墨迹森林";
+  if (surface.productId === "hanzi-tower-defense") return "字阵守城";
   if (surface.productId === "math-lab") return "数学世界";
-  if (surface.productId === "english-spell-battle") return "英语世界";
   return "我的游戏世界";
 }
 

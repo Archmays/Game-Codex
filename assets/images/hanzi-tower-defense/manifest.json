@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "generated-meadow",
+      "kind": "OpenAI image generation",
+      "date": "2026-09-07",
+      "prompt": "Create a polished landscape 1536x1024 background painting for a child-friendly Chinese fantasy tower-defense game, WITHOUT TEXT. View from high above at 70 degrees, nearly top down with shallow perspective, consistent scale throughout. The entire central 85% of the image is quiet open flat mossy jade grass meadow, low contrast, very little texture so software will overlay roads, towers and moving monsters. A rich handcrafted storybook painted game environment frames the outside edges only: rounded dark emerald bushes, bamboo and pine clusters at extreme top and left corners, smooth rocks, little amber flowers, a narrow turquoise stream along the bottom-left edge. One small ornate Chinese fortified stone gate with a teal tiled roof and closed warm wooden doors positioned at normalized coordinate x=0.925,y=0.80, facing LEFT toward the meadow, about 11% of image width. Gate must be fully inside image. The rest of the center stays blank grass, NO roads, NO winding trail, NO circles, NO towers, NO monsters, NO interface, NO labels, no letters, NO grid. Calm early evening dappled light, pastel golden glints, saturated inviting emerald and turquoise, rich border silhouettes with tasteful depth and soft shadows, avoid photorealism. This is one complete opaque game landscape, no transparency. Keep open space readable, professional finished painted game art, not a mockup.",
+      "notes": "Opaque background only. No generated lettering or character glyphs. Rejected monster atlas attempts were not used."
+    },
+    {
+      "id": "kenney-monsters",
+      "author": "Kenney",
+      "page": "https://kenney.nl/assets/monster-builder-pack",
+      "license": "CC0 1.0",
+      "licenseFile": "assets/images/hanzi-tower-defense/Kenney-Monster-License.txt",
+      "download": "https://kenney.nl/media/pages/assets/monster-builder-pack/663e4ef6de-1677495438/kenney_monster-builder-pack.zip",
+      "adaptation": "Selected original transparent parts assembled into three visibly different enemies in Phaser."
+    },
+    {
+      "id": "kenney-tower",
+      "author": "Kenney",
+      "page": "https://kenney.nl/assets/tower-defense-top-down",
+      "license": "CC0 1.0",
+      "licenseFile": "assets/images/hanzi-tower-defense/Kenney-Tower-License.txt",
+      "download": "https://kenney.nl/media/pages/assets/tower-defense-top-down/729844df28-1677693738/kenney_tower-defense-top-down.zip",
+      "adaptation": "towerDefense_tile180.png copied as tower-base.png; browser-rendered glyph plaque above."
+    }
+  ],
+  "files": [
+    {
+      "path": "public/assets/hanzi-tower-defense/body_blueA.png",
+      "bytes": 1862,
+      "sha256": "7ae191f8b841a743b6d5de74209033c73255af8cc705f76120a6ff25f137b8d2",
+      "source": "kenney-monsters",
+      "use": "assembled enemy sprite part",
+      "review": "Source pixels inspected and integrated in desktop and narrow-screen game; glyphs are browser-rendered text."
+    },
+    {
+      "path": "public/assets/hanzi-tower-defense/body_greenC.png",
+      "bytes": 3572,
+      "sha256": "4216e300f5627627bfbaf0148c59c37ee103336b20f5cb2546fa5c4315e1a843",
+      "source": "kenney-monsters",
+      "use": "assembled enemy sprite part",
+      "review": "Source pixels inspected and integrated in desktop and narrow-screen game; glyphs are browser-rendered text."
+    },
+    {
+      "path": "public/assets/hanzi-tower-defense/body_redF.png",
+      "bytes": 4020,
+      "sha256": "7c96b6efdcb7c9b17ba73000ca87da51c637ffb5559c76eb4006c014a7e26467",
+      "source": "kenney-monsters",
+      "use": "assembled enemy sprite part",
+      "review": "Source pixels inspected and integrated in desktop and narrow-screen game; glyphs are browser-rendered text."
+    },
+    {
+      "path": "public/assets/hanzi-tower-defense/detail_green_horn_small.png",
+      "bytes": 760,
+      "sha256": "026083304ed2287d488fde5a20762dce17b2931ad30853c045f62a9f4b4f8b5d",
+      "source": "kenney-monsters",
+      "use": "assembled enemy sprite part",
+      "review": "Source pixels inspected and integrated in desktop and narrow-screen game; glyphs are browser-rendered text."
+    },
+    {
+      "path": "public/assets/hanzi-tower-defense/detail_red_ear.png",
+      "bytes": 1177,
+      "sha256": "4bff86c369d45b8da8e30b45d06ae39656176a42952487e8deeb243388681010",
+      "source": "kenney-monsters",
+      "use": "assembled enemy sprite part",
+      "review": "Source pixels inspected and integrated in desktop and narrow-screen game; glyphs are browser-rendered text."
+    },
+    {
+      "path": "public/assets/hanzi-tower-defense/detail_white_horn_large.png",
+      "bytes": 995,
+      "sha256": "f2145c2e8be9297eee8da9550940df96c06b850b6da75d40e4f770ec4b27865b",
+      "source": "kenney-monsters",
+      "use": "assembled enemy sprite part",
+      "review": "Source pixels inspected and integrated in desktop and narrow-screen game; glyphs are browser-rendered text."
+    },
+    {
+      "path": "public/assets/hanzi-tower-defense/eye_cute_light.png",
+      "bytes": 2471,
+      "sha256": "a68a1f71e1eef32015078bd070025ae01b9aa57b07b363f80ebce7b456c6797b",
+      "source": "kenney-monsters",
+      "use": "assembled enemy sprite part",
+      "review": "Source pixels inspected and integrated in desktop and narrow-screen game; glyphs are browser-rendered text."
+    },
+    {
+      "path": "public/assets/hanzi-tower-defense/leg_blueE.png",
+      "bytes": 2025,
+      "sha256": "ed9e63ac5b3eccf9319552fae8bea2fa6790b05e6e4c3b24eb9f95c7ce6b58ab",
+      "source": "kenney-monsters",
+      "use": "assembled enemy sprite part",
+      "review": "Source pixels inspected and integrated in desktop and narrow-screen game; glyphs are browser-rendered text."
+    },
+    {
+      "path": "public/assets/hanzi-tower-defense/leg_greenE.png",
+      "bytes": 2025,
+      "sha256": "eab354b0b2ff0f4e64ebe658725f56d7b56338a5bdb2d899e07b76495ae1dd03",
+      "source": "kenney-monsters",
+      "use": "assembled enemy sprite part",
+      "review": "Source pixels inspected and integrated in desktop and narrow-screen game; glyphs are browser-rendered text."
+    },
+    {
+      "path": "public/assets/hanzi-tower-defense/leg_redE.png",
+      "bytes": 2025,
+      "sha256": "5e856c66947cd8f0a43bf0ae069c255ff4b8212ac224e1f93365c95cbedd4fc8",
+      "source": "kenney-monsters",
+      "use": "assembled enemy sprite part",
+      "review": "Source pixels inspected and integrated in desktop and narrow-screen game; glyphs are browser-rendered text."
+    },
+    {
+      "path": "public/assets/hanzi-tower-defense/meadow.png",
+      "bytes": 2461164,
+      "sha256": "a4a03cf89378211867dc9a6ff1cee2fb496c65ee1261791db55caf881fe754a9",
+      "source": "generated-meadow",
+      "use": "background and home cover",
+      "review": "Source pixels inspected and integrated in desktop and narrow-screen game; glyphs are browser-rendered text."
+    },
+    {
+      "path": "public/assets/hanzi-tower-defense/mouth_closed_happy.png",
+      "bytes": 765,
+      "sha256": "87e081751c9d0a9fd36c389215bf86ffaa394b5dc5ac0bb6f4944884fa7bc120",
+      "source": "kenney-monsters",
+      "use": "assembled enemy sprite part",
+      "review": "Source pixels inspected and integrated in desktop and narrow-screen game; glyphs are browser-rendered text."
+    },
+    {
+      "path": "public/assets/hanzi-tower-defense/tower-base.png",
+      "bytes": 1921,
+      "sha256": "477cca9e002b7eaa107f72d8b59a976cfc492df66f64ba41a181e311a17eb4ca",
+      "source": "kenney-tower",
+      "use": "tower foundation",
+      "review": "Source pixels inspected and integrated in desktop and narrow-screen game; glyphs are browser-rendered text."
+    }
+  ]
+}

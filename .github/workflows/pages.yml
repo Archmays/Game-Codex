@@ -53,11 +53,8 @@ jobs:
       - name: Run unit, content, and maintenance safety tests
         run: pnpm test
 
-      - name: Validate canonical Pinyin and shared memory contracts
-        run: pnpm run validate:chinese-support
-
-      - name: Validate English V2 content reports
-        run: pnpm run reports:english-v2 && git diff --exit-code -- docs/english-v2/release public/assets/english-world/asset-manifest.json
+      - name: Validate independent memory and tower defense balance
+        run: pnpm run test:memory-match && pnpm run validate:hanzi-tower-defense
 
       - name: Build static site
         run: pnpm build
@@ -86,11 +83,8 @@ jobs:
       - name: Validate Math World models, catalog replacement, and browser lifecycle
         run: pnpm run validate:math-world && pnpm run test:e2e:math-world
 
-      - name: Validate Chinese support routes and interactions
-        run: pnpm run test:e2e:chinese-support
-
-      - name: Validate English World routes, missions, saves, and geometry
-        run: pnpm run test:e2e:english-v2
+      - name: Validate Hanzi tower defense full battle and controls
+        run: pnpm run test:e2e:hanzi-tower-defense
 
       - name: Upload failure evidence only
         if: failure()
@@ -100,8 +94,7 @@ jobs:
           path: |
             test-results/portfolio-smoke
             test-results/math-world
-            test-results/chinese-support
-            test-results/english-v2
+            test-results/hanzi-tower-defense
             test-results/play-readiness
             test-results/interaction-integrity
           if-no-files-found: ignore

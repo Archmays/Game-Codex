@@ -55,15 +55,16 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
   root.className = "my-game-world-mount";
   const activeProductIds = ACTIVE_CHILD_PRODUCTS.map((record) => record.id).join(" ");
   root.innerHTML = `<main class="my-game-world" data-testid="my-game-world" data-recovered="${String(state.recoveredCalmly)}" data-active-child-products="${activeProductIds}">
+    ${new URLSearchParams(window.location.search).get("notice") === "retired-language" ? '<p class="world-retired-notice" role="status">这个旧游戏已退役。可以从这里选一个游戏；原有存档保留在本机。</p>' : ""}
     <header class="world-header">
       <div><p class="world-kicker">选一个地方，开始玩</p><h1>${WORLD_COPY.title}</h1><p>${WORLD_COPY.subtitle}</p></div>
       <button class="world-icon-button" type="button" data-world-settings-open>${WORLD_COPY.settingsAction}</button>
     </header>
-    <section class="world-stage" aria-label="三个游戏世界">
+    <section class="world-stage" aria-label="选择游戏世界">
       <section class="world-object world-object--forest" data-testid="world-forest-portal">
-        <a class="world-entry" href="${activeProductRoute("hanzi-radical-battle")}" data-world-forest-link>
-          <img src="./assets/home/ink-forest.webp" width="720" height="420" alt="" decoding="async">
-          <div class="world-entry__body"><h2>${WORLD_COPY.forestTitle}</h2><p>把部件送回汉字里，修好森林小路。</p>
+        <a class="world-entry" href="${activeProductRoute("hanzi-tower-defense")}" data-world-forest-link>
+          <img src="./assets/hanzi-tower-defense/meadow.png" width="720" height="420" alt="" decoding="async">
+          <div class="world-entry__body"><h2>${WORLD_COPY.forestTitle}</h2><p>摆下字塔，合出更强的字阵，守住城门。</p>
           <span class="world-entry__action">${WORLD_COPY.forestFreshAction}<span aria-hidden="true">↗</span></span></div>
         </a>
       </section>
@@ -72,13 +73,6 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
           <img src="./assets/home/math-world.webp" width="720" height="420" alt="" decoding="async">
           <div class="world-entry__body"><h2>${WORLD_COPY.mathTitle}</h2><p>滑动算式格，或用数字牌凑出目标。</p>
           <span class="world-entry__action">${WORLD_COPY.mathAction}<span aria-hidden="true">↗</span></span></div>
-        </a>
-      </section>
-      <section class="world-object world-object--english" data-testid="world-english-portal">
-        <a class="world-entry" href="${activeProductRoute("english-spell-battle")}" data-world-english-link>
-          <img src="./assets/home/wordlight-island.webp" width="720" height="420" alt="" decoding="async">
-          <div class="world-entry__body"><h2>${WORLD_COPY.englishTitle}</h2><p>拼一拼单词，用词卡让场景动起来。</p>
-          <span class="world-entry__action">${WORLD_COPY.englishAction}<span aria-hidden="true">↗</span></span></div>
         </a>
       </section>
     </section>
@@ -94,7 +88,7 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
   applySettings();
 
   // Navigation-only state belongs to this history entry, never to a save key.
-  const entries = ["forest", "math", "english", "treasure"] as const;
+  const entries = ["forest", "math", "treasure"] as const;
   for (const entry of entries) {
     root.querySelector(`[data-world-${entry}-link]`)?.addEventListener("click", () => {
       window.history.replaceState({ ...window.history.state, worldHomeReturn: { entry, scrollY: window.scrollY } }, "");
@@ -110,8 +104,7 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
         const query = referrer.searchParams;
         if (query.get("hub") === "classic") entry = "treasure";
         else if (query.get("world") === "math-world") entry = "math";
-        else if (query.get("world") === "english-world") entry = "english";
-        else if (query.get("play")?.startsWith("hanzi-")) entry = "forest";
+        else if (query.get("play") === "hanzi-tower-defense") entry = "forest";
       }
     }
     if (!entry) return;
@@ -183,5 +176,5 @@ export function mountClassicHubFromWorld(root: HTMLElement): MountedGame {
   };
 }
 
-export { CLASSIC_HUB_FROM_WORLD_ROUTE, ENGLISH_WORLD_ROUTE, HANZI_MAGIC_COMPLETE_ROUTE, HANZI_MAGIC_V1_ROUTE, MATH_WORLD_ROUTE, MY_GAME_WORLD_ROUTE } from "./world-routes";
+export { CLASSIC_HUB_FROM_WORLD_ROUTE, HANZI_TOWER_DEFENSE_ROUTE, MATH_WORLD_ROUTE, MY_GAME_WORLD_ROUTE } from "./world-routes";
 export { MY_GAME_WORLD_SETTINGS_KEY, readWorldHomeState, updateWorldSettings } from "./world-state";

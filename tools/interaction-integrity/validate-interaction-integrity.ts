@@ -48,11 +48,10 @@ function risks(body: string): RiskType[] {
 
 function surfacesFor(path: string): string[] {
   const ids = (predicate: (productId: string) => boolean): string[] => PLAY_SURFACE_MANIFEST.filter((record) => predicate(record.productId)).map((record) => record.id);
-  if (path.includes("english-spell-battle") || path.includes("memory-match")) return ids((id) => id === "english-spell-battle" || id === "memory-card");
+  if (path.includes("memory-match") || path.includes("memory-card")) return ["test-only:memory-card-mount"];
   if (["math-lab", "clock-reader", "multiplication-adventure", "make-target", "equation-slider"].some((segment) => path.includes(segment))) {
     return ids((id) => ["math-lab", "equation-slider"].includes(id));
   }
-  if (path.includes("hanzi-radical-battle") || path.includes("pinyin")) return ids((id) => id === "hanzi-radical-battle");
   if (path.startsWith("apps/") || path.startsWith("packages/") || path.startsWith("src/")) return PLAY_SURFACE_MANIFEST.map((record) => record.id);
   const game = /^games\/([^/]+)/.exec(path)?.[1];
   return game ? ids((id) => id === game) : PLAY_SURFACE_MANIFEST.map((record) => record.id);
@@ -99,19 +98,11 @@ function validateKnownContracts(entries: readonly RiskEntry[]): string[] {
   const issues: string[] = [];
   if (JSON.stringify(PLAY_SURFACE_MANIFEST.filter(surface => surface.kind === "station").map(surface => surface.id)) !== JSON.stringify(["math-slider", "math-target"])) issues.push("Math station retirement contract");
   if (entries.some((entry) => !entry.testedSurfaceIds.length)) issues.push("Every risk entry must map to at least one browser-tested surface");
-  const cssPath = resolve(ROOT, "games/english-spell-battle/v2/world/styles.css");
-  const css = readFileSync(cssPath, "utf8");
-  const artImage = blockFor(css, ".wordlight-mission-list .wordlight-meaning__art img");
-  const pointerTransparentArt = exactBlockFor(css, ".wordlight-meaning__art img");
-  const media = blockFor(css, ".wordlight-mission-list .wordlight-meaning__art");
-  const live = exactBlockFor(css, ".wordlight-live");
-  if (!/pointer-events\s*:\s*none\b/.test(pointerTransparentArt)) issues.push("English mission art images must be pointer-transparent");
-  if (!["width", "height", "max-height"].every((name) => new RegExp(`${name}\\s*:\\s*100%`).test(artImage))) issues.push("English mission art images must stay within their media box");
-  if (!/overflow\s*:\s*hidden\b/.test(media) || !/height\s*:\s*150px\b/.test(media)) issues.push("English mission media must use a fixed clipped box");
-  if (!/pointer-events\s*:\s*none\b/.test(live)) issues.push("English live status must not intercept controls");
-  for (const selector of [".wordlight-island::before", ".wordlight-island::after", ".wordlight-region::before", ".wordlight-shell::after", ".wordlight-response__ripple"]) {
-    if (!/pointer-events\s*:\s*none\b/.test(blockFor(css, selector))) issues.push(`${selector} must be pointer-transparent`);
+  const css = readFileSync(resolve(ROOT, "games/hanzi-tower-defense/styles.css"), "utf8");
+  for (const selector of [".td-slots", ".td-drops", ".td-synthesis", ".td-field-message"]) {
+    if (!/pointer-events\s*:\s*none\b/.test(blockFor(css, selector))) issues.push(selector + " must not intercept controls");
   }
+  if (!/pointer-events\s*:\s*auto\b/.test(exactBlockFor(css, ".td-slot"))) issues.push("Tower controls must accept pointer input");
   const mathCss = readFileSync(resolve(ROOT, "games/math-lab/world/math-map.css"), "utf8");
   if (!/min-height\s*:\s*48px\b/.test(exactBlockFor(mathCss, ".math-map .math-world-card button"))) issues.push("Math World station entrances must retain the 48px minimum target");
   if (/transform\s*:/.test(blockFor(mathCss, ".math-map .math-world-card button:hover"))) issues.push("Math World hover/focus feedback must not move the click target");

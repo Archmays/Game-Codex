@@ -2,8 +2,9 @@ import { execFileSync } from "node:child_process";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { chromium, type Page } from "@playwright/test";
+import { RETIRED_LANGUAGE_PLAY_IDS, RETIRED_LANGUAGE_WORLD_IDS } from "../../src/app-route";
 
-const TASK_ID = "GAME-CODEX-WORLD-COHERENCE-AND-GAMEPLAY-LIFT-02";
+const TASK_ID = "GAME-CODEX-STEP1";
 const pagesBase = new URL(process.argv[2] ?? process.env.PLAY_READINESS_PAGES_BASE ?? "https://archmays.github.io/Game-Codex/");
 const expectedCommit = (process.argv[3] ?? process.env.PLAY_READINESS_EXPECTED_COMMIT ?? execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" })).trim();
 const output = resolve(`tmp/tasks/${TASK_ID}/reports/PAGES_VERDICT.json`);
@@ -22,6 +23,12 @@ async function route(page: Page, query: string, selector: string): Promise<void>
   await page.goto(new URL(query, pagesBase).href, { waitUntil: "networkidle" });
   await page.locator(selector).waitFor({ state: "visible" });
   await page.waitForFunction((commit) => document.documentElement.dataset.buildCommit === commit, expectedCommit);
+  const input = new URL(query, pagesBase).searchParams;
+  if (RETIRED_LANGUAGE_PLAY_IDS.some(id => input.get("play") === id) || RETIRED_LANGUAGE_WORLD_IDS.some(id => input.get("world") === id)) {
+    const actual = new URL(page.url());
+    requireValue(actual.pathname === pagesBase.pathname && actual.search === "?world=my-game-world&notice=retired-language" && !actual.hash, "Retired Pages route did not preserve subpath and clear conflicting state");
+    requireValue(await page.locator("canvas").count() === 0, "Retired Pages route mounted a game canvas");
+  }
   performanceSamples.push(await page.evaluate(({ query, elapsed }) => {
     const resources = performance.getEntriesByType("resource") as PerformanceResourceTiming[];
     const raster = resources.filter((entry) => /\.(png|webp|jpe?g)(\?|$)/i.test(entry.name));
@@ -54,25 +61,39 @@ try {
     if (/^https?:$/.test(url.protocol) && url.origin !== pagesBase.origin) external.push(request.url());
   });
 
+  await route(page, "./", '[data-testid="my-game-world"]');
+  const protectedSaves = {
+    "family-games/math-world/v1": '{"version":99,"synthetic":"preserve raw"}',
+    "family-games/equation-slider/progress": '{"saveVersion":99,"synthetic":"preserve raw"}',
+    "family-games/make-target/progress": '{"version":99,"synthetic":"preserve raw"}',
+    "family-games/hanzi-magic-complete/v3": '{ "version":99,"synthetic":"legacy raw" }',
+    "family-games/english-world/v2": '{"version":99,"synthetic":"legacy raw"}',
+  };
+  await page.evaluate(values => Object.entries(values).forEach(([key,value]) => localStorage.setItem(key,value)), protectedSaves);
   const routes = [
     ["./", '[data-testid="my-game-world"]'],
     ["?world=my-game-world", '[data-testid="my-game-world"]'],
-    ["?play=hanzi-magic-complete", '[data-testid="hanzi-magic-complete"]'],
+    ["?play=hanzi-tower-defense", '[data-testid="hanzi-tower-defense"]'],
     ["?world=math-world", '[data-testid="math-world-map"]'],
     ["?world=math-world&station=target", ".make-target-game"],
     ["?world=math-world&station=slider", ".equation-slider"],
-    ["?world=english-world", '[data-testid="english-world-map"]'],
+    ["?world=english-world", '[data-testid="my-game-world"]'],
     ["?hub=classic&from=world", ".hub-grid"],
-    ["?play=hanzi-magic-complete&view=pinyin", '[data-testid="sound-rhyme-trial"]'],
-    ["?play=hanzi-magic-complete&view=memory", '[data-testid="memory-match"]'],
-    ["?world=english-world&view=memory", '[data-testid="memory-match"]'],
+    ["?play=hanzi-magic-complete&view=pinyin", '[data-testid="my-game-world"]'],
+    ["?play=hanzi-magic-complete&view=memory", '[data-testid="my-game-world"]'],
+    ["?world=english-world&view=memory", '[data-testid="my-game-world"]'],
+    ...RETIRED_LANGUAGE_PLAY_IDS.map(id => [`?play=${id}&view=archive&chapter=2&mode=word&hub=classic&station=slider#old`, '[data-testid="my-game-world"]']),
+    ...RETIRED_LANGUAGE_WORLD_IDS.map(id => [`?world=${id}&view=journal&region=animals&hub=classic`, '[data-testid="my-game-world"]']),
   ] as const;
   for (const [query, selector] of routes) await route(page, query, selector);
+  const afterSaves = await page.evaluate(keys => Object.fromEntries(keys.map(key => [key,localStorage.getItem(key)])), Object.keys(protectedSaves));
+  requireValue(JSON.stringify(afterSaves) === JSON.stringify(protectedSaves), "Pages changed protected math or retired-language raw saves");
+  checked.push("math-and-retired-language-raw-saves-preserved");
 
   await route(page, "?hub=classic&from=world", ".hub-grid");
-  requireValue(await page.locator(".game-card").count() === 3, "Classic does not contain exactly three world-product cards");
+  requireValue(await page.locator(".game-card").count() === 2, "Classic does not contain exactly two current product cards");
   requireValue(await page.locator('[data-game-id="make-target"], [data-game-id="memory-card"], [data-game-id="pinyin-magic-battle"], [data-game-id="equation-slider"]').count() === 0, "Classic still exposes a converged module, compatibility card, or nested flagship module");
-  checked.push("classic-3-active-products");
+  checked.push("classic-2-active-products");
 
   await route(page, "?world=math-world&station=slider", ".equation-slider");
   await page.getByRole("button", { name: "关卡列表", exact: true }).click();
@@ -81,10 +102,10 @@ try {
   await page.locator('[data-testid="math-world-map"]').waitFor({ state: "visible" });
   checked.push("math-slider-world-return");
 
-  await page.goto(new URL("?world=english-world&region=animals", pagesBase).href, { waitUntil: "networkidle" });
-  await page.locator('[data-testid="english-region"]').waitFor({ state: "visible" });
+  await page.goto(new URL("?play=hanzi-tower-defense", pagesBase).href, { waitUntil: "networkidle" });
+  await page.locator('[data-testid="hanzi-tower-defense"]').waitFor({ state: "visible" });
   await page.reload({ waitUntil: "networkidle" });
-  await page.locator('[data-testid="english-region"]').waitFor({ state: "visible" });
+  await page.locator('[data-testid="hanzi-tower-defense"]').waitFor({ state: "visible" });
   await page.goBack({ waitUntil: "networkidle" });
   checked.push("refresh-back");
 
@@ -109,6 +130,7 @@ try {
   checked.push("mobile-keyboard");
 
   requireValue(errors.length === 0 && failed.length === 0 && external.length === 0, "Pages emitted browser, HTTP, request, or external-network errors");
+  await page.screenshot({ path: resolve("tmp/tasks/GAME-CODEX-STEP1/pages-home-mobile.png"), fullPage: true });
   const result = { verdict: "PASS_MACHINE", canonicalUrl: pagesBase.href, expectedCommit, deployedCommit: expectedCommit, checked, errors, failed, external, verifiedAtUtc: new Date().toISOString() };
   mkdirSync(dirname(output), { recursive: true });
   writeFileSync(output, `${JSON.stringify(result, null, 2)}\n`, "utf8");

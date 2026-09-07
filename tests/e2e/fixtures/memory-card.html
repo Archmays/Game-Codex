@@ -1,0 +1,5 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Independent memory mount test</title><link rel="stylesheet" href="/src/styles.css"><div id="test-mount"></div><script type="module">
+import { memoryCardGame } from '/games/memory-card/index.ts';
+import { createLocalStorageStore } from '/packages/game-core/index.ts';
+memoryCardGame.mount({container:document.getElementById('test-mount'),storage:createLocalStorageStore('memory-card'),onExit:()=>{}});
+</script></html>

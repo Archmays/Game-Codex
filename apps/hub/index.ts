@@ -21,7 +21,7 @@ export function mountHub(root: HTMLElement): MountedGame {
     const title = document.createElement("h1");
     title.textContent = "游戏百宝箱";
     const subtitle = document.createElement("p");
-    subtitle.textContent = "三个游戏世界的备用入口；平时也可以从“我的游戏世界”出发。";
+    subtitle.textContent = "游戏世界的备用入口；平时也可以从“我的游戏世界”出发。";
     titleGroup.append(title, subtitle);
     header.append(titleGroup);
 
@@ -99,17 +99,17 @@ function createGameCard(game: GameDefinition, onPlay: () => void): HTMLElement {
   const card = createPanel("game-card");
   card.dataset.gameId = game.id;
 
-  if (game.id === "hanzi-radical-battle") {
-    card.classList.add("game-card--world", "game-card--ink-forest");
+  if (game.id === "hanzi-tower-defense") {
+    card.classList.add("game-card--world", "game-card--hanzi-defense");
     const title = document.createElement("h2");
     title.textContent = game.title;
     const worldArt = document.createElement("img");
     worldArt.className = "game-card__world-art";
-    worldArt.src = "./assets/hanzi-radical-battle/v2/theme-c/chapter-one/hub-ink-forest.webp";
-    worldArt.alt = "夜色墨迹森林里有发光小径、魔法树和温和的墨点伙伴";
+    worldArt.src = "./assets/hanzi-tower-defense/meadow.png";
+    worldArt.alt = "青岚关前的草地与城门";
     const description = document.createElement("p");
     description.textContent = game.description;
-    const button = createButton(game.playLabel ?? "进入墨迹森林", onPlay, { className: "ui-button game-card__button" });
+    const button = createButton(game.playLabel ?? "开始守城", onPlay, { className: "ui-button game-card__button" });
     card.append(title, worldArt, description, button);
     return card;
   }
@@ -125,21 +125,6 @@ function createGameCard(game: GameDefinition, onPlay: () => void): HTMLElement {
     const description = document.createElement("p");
     description.textContent = game.description;
     const button = createButton(game.playLabel ?? "进入数学世界", onPlay, { className: "ui-button game-card__button" });
-    card.append(title, worldArt, description, button);
-    return card;
-  }
-
-  if (game.id === "english-spell-battle") {
-    card.classList.add("game-card--world", "game-card--wordlight");
-    const title = document.createElement("h2");
-    title.textContent = game.title;
-    const worldArt = document.createElement("img");
-    worldArt.className = "game-card__world-art";
-    worldArt.src = "./assets/home/wordlight-island.webp";
-    worldArt.alt = "词光岛的浅蓝海面与木码头";
-    const description = document.createElement("p");
-    description.textContent = game.description;
-    const button = createButton(game.playLabel ?? "进入词光岛", onPlay, { className: "ui-button game-card__button" });
     card.append(title, worldArt, description, button);
     return card;
   }

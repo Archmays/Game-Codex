@@ -134,7 +134,7 @@ test("@natural-use parent creates, lists, previews, exports and purpose-separate
   expect(await page.evaluate(() => localStorage.getItem("family-games/math-world/v1"))).toContain("preserve");
 
   await notebook.getByRole("button", { name: "记录一条" }).click();
-  await notebook.locator("[data-observation-surface]").selectOption("english-world");
+  await notebook.locator("[data-observation-surface]").selectOption("hanzi-tower-defense");
   await notebook.getByRole("checkbox", { name: "自主开始" }).check();
   await notebook.getByRole("button", { name: "保存这条观察" }).click();
   expect(await observationCount(page)).toBe(1);
@@ -151,7 +151,7 @@ test("@security 240 Unicode characters save, 241 reject, keyboard, 200% zoom and
   const runtime = observe(page);
   await page.goto("/?world=my-game-world&parent=observation", { waitUntil: "domcontentloaded" });
   const notebook = page.getByTestId("observation-notebook");
-  await notebook.locator("[data-observation-surface]").selectOption("hanzi-world");
+  await notebook.locator("[data-observation-surface]").selectOption("hanzi-tower-defense");
   await notebook.getByRole("checkbox", { name: "很快找到主要操作" }).check();
   await notebook.locator("[data-observation-note]").fill("🙂".repeat(240));
   await expect(notebook.locator("[data-observation-note-count]")).toHaveText("240 / 240");

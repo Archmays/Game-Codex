@@ -1,5 +1,4 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
-import { getChapterOneCharacter } from "../../games/hanzi-radical-battle/v2/chapter-one";
 
 interface RuntimeObservation {
   readonly pageErrors: string[];
@@ -58,17 +57,6 @@ async function expectUsableTarget(locator: Locator): Promise<void> {
 
 const GAMES: readonly SmokeGame[] = [
   {
-    id: "memory-card", title: "记忆配对", surface: '[data-testid="memory-match"]',
-    canonicalRoute: "/?play=hanzi-magic-complete&view=memory&pack=same-glyph",
-    async interact(page) {
-      const card = page.locator("[data-card-id]").first();
-      await expectUsableTarget(card);
-      await card.click();
-      await expect(card).toHaveAttribute("data-open", "true");
-      return card;
-    },
-  },
-  {
     id: "math-lab", title: "数学世界", surface: '[data-testid="math-world-map"]',
     async interact(page) {
       const station = page.locator('[data-station-id="slider"] button');
@@ -81,45 +69,16 @@ const GAMES: readonly SmokeGame[] = [
     },
   },
   {
-    id: "hanzi-radical-battle", title: "汉字魔法战", surface: '[data-testid="hanzi-magic-complete"]',
+    id: "hanzi-tower-defense", title: "字阵守城", surface: '[data-testid="hanzi-tower-defense"]',
     async interact(page) {
-      const primary = page.locator('[data-testid="complete-primary-action"]');
-      await expectUsableTarget(primary);
-      await primary.click();
-      await expect(page.locator('[data-testid="hanzi-magic-chapter-one-m3"]')).toBeVisible({ timeout: 30_000 });
-      const chapter = page.getByTestId("hanzi-magic-chapter-one-m3");
-      for (let step = 0; step < 8; step += 1) {
-        const phase = await chapter.getAttribute("data-phase");
-        if (phase === "composition") break;
-        if (phase === "encounter") {
-          const id = await page.getByTestId("chapter-one-m3-encounter").getAttribute("data-character-id");
-          for (const component of getChapterOneCharacter(id!).orderedComponents) {
-            await page.locator(`[data-card-id="${component.id}"]`).click();
-            await page.locator(`[data-slot-id="${component.slotId}"]`).click();
-          }
-        } else {
-          const phaseActions: Record<string, string> = { camp: "start-run", "route-choice": "choose-route", "behavior-telegraph": "begin-behavior", "behavior-effect": "recover-behavior" };
-          const action = phaseActions[phase ?? ""];
-          if (!action) throw new Error(`Unexpected first-chapter phase: ${phase}`);
-          await page.locator(`[data-action="${action}"]`).first().click();
-        }
-      }
-      await expect(chapter).toHaveAttribute("data-phase", "composition");
-      await page.locator('a[href*="play=hanzi-magic-complete"]').first().click();
-      await expect(page.locator('[data-testid="hanzi-magic-complete"]')).toBeVisible();
-      return primary;
-    },
-  },
-  {
-    id: "english-spell-battle", title: "英语世界", surface: '[data-testid="english-world-map"]',
-    async interact(page) {
-      const region = page.locator(".wordlight-region button").first();
-      await expectUsableTarget(region);
-      await region.click();
-      await expect(page.getByTestId("english-region")).toBeVisible();
-      await page.getByRole("button", { name: "← 回岛屿地图" }).click();
-      await expect(page.getByTestId("english-world-map")).toBeVisible();
-      return region;
+      const pause = page.locator("[data-td-pause]");
+      await expect(pause).toBeEnabled(); await pause.click();
+      await expect(page.locator(".td-game")).toHaveAttribute("data-paused", "true");
+      await page.locator('[data-core="2"]').click(); await page.locator('[data-slot="0"]').click();
+      await expect(page.locator('[data-structure="top-bottom"]')).toBeVisible();
+      await page.locator('[data-td-fuse]').click();
+      await expect(page.locator('[data-slot="0"]')).toContainText("炎");
+      return pause;
     },
   },
   {
@@ -156,7 +115,7 @@ for (const game of GAMES) {
     const runtime = observeRuntime(page);
     await page.goto(game.canonicalRoute ?? "/?hub=classic", { waitUntil: "domcontentloaded" });
     if (!game.canonicalRoute) {
-      await expect(page.locator(".game-card")).toHaveCount(3);
+      await expect(page.locator(".game-card")).toHaveCount(2);
       const card = page.locator(`.game-card[data-game-id="${game.id}"]`);
       await expect(card.getByRole("heading", { name: game.title, exact: true })).toBeVisible();
       const entry = card.getByRole("button");
@@ -171,49 +130,44 @@ for (const game of GAMES) {
 
     if (game.canonicalRoute) {
       await page.goto("/?hub=classic", { waitUntil: "domcontentloaded" });
-    } else if (game.id === "hanzi-radical-battle") {
-      const returnLink = page.locator('a[href*="hub=classic"]').first();
-      await expectUsableTarget(returnLink);
-      await returnLink.click();
+    } else if (game.id === "hanzi-tower-defense") {
+      await page.locator('[data-td-home]').click();
     } else if (game.id === "math-lab") {
       await page.getByRole("link", { name: "回我的游戏世界" }).click();
       await expect(page.getByTestId("world-treasure-box")).toBeVisible();
       await page.getByTestId("world-treasure-box").getByRole("link").click();
-    } else if (game.id === "english-spell-battle") {
-      const returnLink = page.getByRole("link", { name: "回我的游戏世界" });
-      await expectUsableTarget(returnLink);
-      await returnLink.click();
     } else {
       const returnButton = page.getByRole("button", { name: "返回大厅", exact: true });
       await expectUsableTarget(returnButton);
       await returnButton.focus();
       await page.keyboard.press("Enter");
     }
-    await expect(page.locator(".game-card")).toHaveCount(3);
+    await expect(page.locator(".game-card")).toHaveCount(2);
     await expectRuntimeClean(runtime);
   });
 }
 
-test("@portfolio public route registry preserves world, classic, and Hanzi legacy routes", async ({ page }) => {
+test("@portfolio public route registry preserves current routes and retires old language links", async ({ page }) => {
   const runtime = observeRuntime(page);
   const routes = [
     ["/", '[data-testid="my-game-world"]'],
     ["/?world=my-game-world", '[data-testid="my-game-world"]'],
     ["/?hub=classic", ".hub-grid"],
-    ["/?world=english-world", '[data-testid="english-world-map"]'],
-    ["/?play=english-spell-battle-legacy&from=hub", ".english-spell-game"],
+    ["/?world=english-world", '[data-testid="my-game-world"]'],
+    ["/?play=english-spell-battle-legacy&from=hub", '[data-testid="my-game-world"]'],
+    ["/?play=hanzi-tower-defense", '[data-testid="hanzi-tower-defense"]'],
     ["/?world=math-world", '[data-testid="math-world-map"]'],
     ["/?world=math-world&station=lab", '[data-testid="math-world-map"]'],
     ["/?world=math-world&station=clock", '[data-testid="math-world-map"]'],
     ["/?world=math-world&station=array", '[data-testid="math-world-map"]'],
     ["/?world=math-world&station=target", '[data-station-id="target"] .make-target-game'],
     ["/?world=math-world&station=slider", '[data-station-id="slider"] .equation-slider'],
-    ["/?play=hanzi-magic-complete&from=hub", '[data-testid="hanzi-magic-complete"]'],
-    ["/?play=hanzi-magic-complete&view=pinyin", '[data-testid="sound-rhyme-trial"]'],
-    ["/?play=hanzi-magic-complete&view=memory", '[data-testid="memory-match"]'],
-    ["/?play=pinyin-magic-battle", '[data-testid="sound-rhyme-trial"]'],
-    ["/?play=hanzi-v2-chapter-one&from=hub", '[data-testid="hanzi-magic-chapter-one-m3"]'],
-    ["/?play=hanzi-v2-v1&from=hub", '[data-testid="hanzi-magic-v1"]'],
+    ["/?play=hanzi-magic-complete&from=hub", '[data-testid="my-game-world"]'],
+    ["/?play=hanzi-magic-complete&view=pinyin", '[data-testid="my-game-world"]'],
+    ["/?play=hanzi-magic-complete&view=memory", '[data-testid="my-game-world"]'],
+    ["/?play=pinyin-magic-battle", '[data-testid="my-game-world"]'],
+    ["/?play=hanzi-v2-chapter-one&from=hub", '[data-testid="my-game-world"]'],
+    ["/?play=hanzi-v2-v1&from=hub", '[data-testid="my-game-world"]'],
   ] as const;
   for (const [route, selector] of routes) {
     await page.goto(route, { waitUntil: "domcontentloaded" });

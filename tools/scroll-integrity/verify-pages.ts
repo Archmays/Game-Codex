@@ -12,7 +12,7 @@ import {
 } from "../../tests/e2e/helpers/scroll-reachability";
 
 const ROOT = resolve(import.meta.dirname, "../..");
-const JOURNAL = PLAY_SURFACE_MANIFEST.find((surface) => surface.id === "english-journal")!;
+const DEFENSE = PLAY_SURFACE_MANIFEST.find((surface) => surface.id === "hanzi-tower-defense")!;
 
 function option(name: string): string | undefined {
   const index = process.argv.indexOf(name);
@@ -25,7 +25,7 @@ function requireValue(condition: unknown, message: string): asserts condition {
 
 const pagesBase = new URL(option("--base") ?? "https://archmays.github.io/Game-Codex/");
 const expectedCommit = (option("--commit") ?? execFileSync("git", ["rev-parse", "HEAD"], { cwd: ROOT, encoding: "utf8" })).trim();
-const output = resolve(ROOT, option("--output") ?? "tmp/tasks/GAME-CODEX-STABLE-NATURAL-USE-ENTRY-07/reports/PAGES_VERDICT.json");
+const output = resolve(ROOT, option("--output") ?? "tmp/tasks/GAME-CODEX-STEP1/reports/PAGES_SCROLL.json");
 const errors: string[] = [];
 const failed: string[] = [];
 const external: string[] = [];
@@ -44,18 +44,6 @@ function observePage(page: Page): void {
     const url = new URL(request.url());
     if (/^https?:$/.test(url.protocol) && url.origin !== pagesBase.origin) external.push(request.url());
   });
-}
-
-async function installVoice(context: BrowserContext): Promise<void> {
-  await context.addInitScript({ content: `
-    window.__pagesScrollSpeakCalls = [];
-    Object.defineProperty(window, "speechSynthesis", { configurable: true, value: {
-      speak(utterance) { window.__pagesScrollSpeakCalls.push(String(utterance.text)); },
-      cancel() {},
-      getVoices() { return [{ lang: "en-US", name: "Synthetic Pages scroll voice" }]; }
-    } });
-    window.SpeechSynthesisUtterance = function SpeechSynthesisUtterance(text) { this.text = text; this.lang = ""; this.rate = 1; this.voice = null; };
-  ` });
 }
 
 async function route(page: Page, query: string, selector: string): Promise<void> {
@@ -90,12 +78,12 @@ async function touchToBottom(page: Page): Promise<{ start: number; end: number; 
       swipes += 1;
       await page.waitForTimeout(80);
       const after = await page.evaluate(() => document.scrollingElement!.scrollTop);
-      requireValue(after > before || reachableMax - after <= 2, `Pages Journal touch stalled at ${after}/${reachableMax}`);
+      requireValue(after > before || reachableMax - after <= 2, `Pages tower defense touch stalled at ${after}/${reachableMax}`);
     }
   } finally {
     await session.detach();
   }
-  throw new Error(`Pages Journal touch did not reach bottom after ${swipes} swipes`);
+  throw new Error(`Pages tower defense touch did not reach bottom after ${swipes} swipes`);
 }
 
 const browser = await chromium.launch({ headless: true });
@@ -111,32 +99,27 @@ try {
   page.setDefaultTimeout(120_000);
   for (const [query, selector] of [
     ["./", '[data-testid="my-game-world"]'],
-    ["?world=my-game-world", '[data-testid="world-english-portal"]'],
-    ["?world=english-world", '[data-testid="english-world-map"]'],
-    ["?world=english-world&view=journal", '[data-testid="english-journal"]'],
+    ["?world=my-game-world", '[data-testid="my-game-world"]'],
+    ["?world=english-world", '[data-testid="my-game-world"]'],
+    ["?world=english-world&view=journal", '[data-testid="my-game-world"]'],
     ["?world=math-world", '[data-testid="math-world-map"]'],
-    ["?play=hanzi-magic-complete", '[data-testid="hanzi-magic-complete"]'],
+    ["?play=hanzi-magic-complete", '[data-testid="my-game-world"]'],
     ["?hub=classic", ".hub-grid"],
     ["?world=my-game-world&parent=observation", '[data-testid="observation-notebook"]'],
   ] as const) await route(page, query, selector);
 
-  await route(page, "?world=english-world&view=journal", '[data-testid="english-journal"]');
-  const wheel = await wheelToBottom(page, JOURNAL);
-  const lastCard = page.locator('[data-testid="journal-word"]').last();
-  const lastAction = page.locator("[data-speak]").last();
-  await expectMeaningfullyVisibleInScrollport(page, JOURNAL, lastCard);
-  await expectFullyVisibleInScrollport(page, JOURNAL, lastAction);
+  await route(page, "?play=hanzi-tower-defense", '[data-testid="hanzi-tower-defense"]');
+  await page.locator('[data-td-canvas][data-ready="true"]').waitFor();
+  await page.locator('[data-td-pause]').click();
+  const wheel = await wheelToBottom(page, DEFENSE);
+  const lastAction = page.locator('.td-help summary');
+  await expectFullyVisibleInScrollport(page, DEFENSE, lastAction);
   const hit = await sampleHitTarget(lastAction);
-  requireValue(hit.hitSuccessRatio === 1, `Pages Journal bottom action is occluded: ${JSON.stringify(hit)}`);
-  const beforeSpeak = await page.evaluate(() => ((window as Window & { __pagesScrollSpeakCalls?: string[] }).__pagesScrollSpeakCalls ?? []).length);
-  const box = await lastAction.boundingBox();
-  requireValue(box, "Pages Journal bottom action has no geometry");
-  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
-  const afterSpeak = await page.evaluate(() => ((window as Window & { __pagesScrollSpeakCalls?: string[] }).__pagesScrollSpeakCalls ?? []).length);
-  requireValue(afterSpeak === beforeSpeak + 1, "Pages Journal bottom real click did not invoke speech");
-  const keyboard = await keyboardMoves(page, JOURNAL, "End");
-  await expectFullyVisibleInScrollport(page, JOURNAL, lastAction);
-  checks.push({ type: "journal-desktop", wheel, keyboard, lastCard: "VISIBLE", bottomAction: { hitRatio: hit.hitSuccessRatio, realClick: "PASS" }, verdict: "PASS" });
+  requireValue(hit.hitSuccessRatio === 1, 'Bottom help action is occluded');
+  await lastAction.click();
+  requireValue(await page.locator('.td-help').getAttribute('open') !== null, 'Bottom real click failed');
+  const keyboard = await keyboardMoves(page, DEFENSE, 'End');
+  checks.push({ type: 'defense-desktop', wheel, keyboard, bottomAction: 'REAL_CLICK_PASS', verdict: 'PASS' });
   await desktop.close();
 
   const mobile = await browser.newContext({ ...devices["Pixel 7"], viewport: { width: 390, height: 844 }, reducedMotion: "reduce" });
@@ -145,11 +128,12 @@ try {
   const mobilePage = await mobile.newPage();
   observePage(mobilePage);
   mobilePage.setDefaultTimeout(120_000);
-  await route(mobilePage, "?world=english-world&view=journal", '[data-testid="english-journal"]');
+  await route(mobilePage, "?play=hanzi-tower-defense", '[data-testid="hanzi-tower-defense"]');
+  await mobilePage.locator('[data-td-canvas][data-ready="true"]').waitFor();
+  await mobilePage.locator('[data-td-pause]').tap();
   const touch = await touchToBottom(mobilePage);
-  await expectMeaningfullyVisibleInScrollport(mobilePage, JOURNAL, mobilePage.locator('[data-testid="journal-word"]').last());
-  await expectFullyVisibleInScrollport(mobilePage, JOURNAL, mobilePage.locator("[data-speak]").last());
-  checks.push({ type: "journal-mobile-touch", touch, lastCard: "VISIBLE", bottomAction: "FULLY_VISIBLE", verdict: "PASS" });
+  await expectMeaningfullyVisibleInScrollport(mobilePage, DEFENSE, mobilePage.locator('.td-help summary'));
+  checks.push({ type: 'defense-mobile-touch', touch, bottomAction: 'FULLY_VISIBLE', verdict: 'PASS' });
   await mobile.close();
 
   requireValue(errors.length === 0 && failed.length === 0 && external.length === 0, "Pages emitted browser, HTTP, request, or external-network errors");

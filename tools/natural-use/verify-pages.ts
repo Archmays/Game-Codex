@@ -44,8 +44,8 @@ try {
     ["?world=my-game-world", '[data-testid="my-game-world"]'],
     ["?world=my-game-world&parent=observation", '[data-testid="observation-notebook"]'],
     ["?world=math-world", '[data-testid="math-world-map"]'],
-    ["?world=english-world", '[data-testid="english-world-map"]'],
-    ["?play=hanzi-magic-complete", '[data-testid="hanzi-magic-complete"]'],
+    ["?world=english-world", '[data-testid="my-game-world"]'],
+    ["?play=hanzi-magic-complete", '[data-testid="my-game-world"]'],
     ["?hub=classic", ".hub-grid"],
   ] as const) await route(page, query, selector);
 

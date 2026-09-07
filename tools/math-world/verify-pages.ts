@@ -50,9 +50,9 @@ try {
     ["?world=math-world&station=array", '[data-testid="math-world-map"]'],
     ["?world=math-world&station=target", '[data-station-id="target"] .make-target-game'],
     ["?world=math-world&station=slider", '[data-station-id="slider"] .equation-slider'],
-    ["?play=hanzi-magic-complete&from=hub", '[data-testid="hanzi-magic-complete"]'],
-    ["?play=hanzi-v2-chapter-one&from=hub", '[data-testid="hanzi-magic-chapter-one-m3"]'],
-    ["?play=hanzi-v2-v1&from=hub", '[data-testid="hanzi-magic-v1"]'],
+    ["?play=hanzi-magic-complete&from=hub", '[data-testid="my-game-world"]'],
+    ["?play=hanzi-v2-chapter-one&from=hub", '[data-testid="my-game-world"]'],
+    ["?play=hanzi-v2-v1&from=hub", '[data-testid="my-game-world"]'],
   ] as const;
   for (const [query, selector] of routes) {
     await route(page, query, selector);
@@ -65,9 +65,9 @@ try {
   }
 
   await route(page, "?hub=classic", ".hub-grid");
-  requireValue(await page.locator(".game-card").count() === 3, "Pages classic catalog is not the three active world products");
+  requireValue(await page.locator(".game-card").count() === 2, "Pages classic catalog is not the two current products");
   requireValue(await page.locator('[data-game-id="clock-reader"], [data-game-id="multiplication-adventure"], [data-game-id="make-target"], [data-game-id="memory-card"], [data-game-id="pinyin-magic-battle"], [data-game-id="equation-slider"]').count() === 0, "Converged module, compatibility card, or nested flagship module remains on Pages");
-  checked.push("classic-3-active-products");
+  checked.push("classic-2-active-products");
 
   await route(page, "?world=math-world&station=slider", ".equation-slider");
   await page.getByRole("button", { name: "关卡列表", exact: true }).click();

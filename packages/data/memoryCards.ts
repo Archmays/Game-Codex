@@ -1,4 +1,4 @@
-import { LEGACY_WHEEL_SOURCE } from "../../games/hanzi-radical-battle/v2/wheel-workshop/library/legacy-wheel-source";
+import { LEGACY_WHEEL_SOURCE } from "./hanzi-reference/legacy-wheel-source";
 
 export interface MemoryCardPair {
   id: string;
