@@ -23,6 +23,9 @@ async function inventory(page: Page) {
   })));
 }
 test("six waves with ordinary deployment, synthesis, and replay", async ({ page }, info) => {
+  // Six real-time waves retain their 120s progress checks; allow 180s for ordinary UI and capture work.
+  // CI reached the 600s total deadline while still progressing, then captured the 122-kill win state.
+  test.setTimeout(6 * 120_000 + 180_000);
   const runtime = observe(page), started = Date.now(); mkdirSync(evidence, { recursive: true });
   let actionCount = 0;
   const activate = async (locator: Locator) => {
