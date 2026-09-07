@@ -52,4 +52,11 @@ export const RECIPES: readonly Recipe[] = [
   { id: "mountain-grove", inputs: ["mountain", "grove"], result: "wildwood", structure: "word" },
 ];
 export const CORE_ORDER = Object.keys(CORES) as CoreKind[];
-export function recipeFor(a: CoreKind, b: CoreKind): Recipe | undefined { return RECIPES.find(r => r.inputs[0] === a && r.inputs[1] === b); }
+/** Ingredients are an unordered multiset; the registered recipe owns structure and word order. */
+export function recipeCandidates(a: CoreKind, b: CoreKind, recipes: readonly Recipe[] = RECIPES): Recipe[] {
+  return recipes.filter(r => (r.inputs[0] === a && r.inputs[1] === b) || (r.inputs[0] === b && r.inputs[1] === a));
+}
+export function recipeFor(a: CoreKind, b: CoreKind, recipeId?: string, recipes: readonly Recipe[] = RECIPES): Recipe | undefined {
+  const candidates = recipeCandidates(a, b, recipes);
+  return recipeId ? candidates.find(r => r.id === recipeId) : candidates.length === 1 ? candidates[0] : undefined;
+}

@@ -8,7 +8,6 @@ const PARTS = ["body_greenC", "body_redF", "body_blueA", "eye_cute_light", "mout
 interface SceneHooks {
   state(): BattleState;
   preferences(): Preferences;
-  selected(): number | null;
   events(events: BattleEvent[]): void;
   tick(): void;
   ready(): void;
@@ -17,7 +16,6 @@ interface SceneHooks {
 export class DefenseScene extends Phaser.Scene {
   private terrain!: Phaser.GameObjects.Image;
   private road!: Phaser.GameObjects.Graphics;
-  private range!: Phaser.GameObjects.Graphics;
   private trails!: Phaser.GameObjects.Graphics;
   private monsters = new Map<number, Phaser.GameObjects.Container>();
   private lifeBars = new Map<number, Phaser.GameObjects.Graphics>();
@@ -31,7 +29,7 @@ export class DefenseScene extends Phaser.Scene {
   }
   create(): void {
     this.terrain = this.add.image(0, 0, "td-meadow").setOrigin(0);
-    this.road = this.add.graphics(); this.range = this.add.graphics(); this.trails = this.add.graphics().setDepth(500);
+    this.road = this.add.graphics(); this.trails = this.add.graphics().setDepth(500);
     this.drawTerrain(); this.scale.on("resize", this.drawTerrain, this); this.hooks.ready();
   }
   private point(p: Point): Point { return { x: p.x * this.scale.width / MAP.width, y: p.y * this.scale.height / MAP.height }; }
@@ -87,12 +85,7 @@ export class DefenseScene extends Phaser.Scene {
       life.fillStyle(enemy.slow ? 0x82f2f4 : 0xf5da80).fillRoundedRect(p.x - 17 * scale, p.y - 35 * scale, Math.max(0, 34 * scale * enemy.hp / enemy.maxHp), 4, 2);
       if (enemy.slow) life.lineStyle(2, 0x77dfe8, .9).strokeEllipse(p.x, p.y + 9 * scale, 42 * scale, 14 * scale);
     }
-    this.range.clear(); const selected = state.cores.find(c => c.id === this.hooks.selected());
-    if (selected?.slot !== null && selected?.slot !== undefined) {
-      const p = this.point(SLOTS[selected.slot]), r = CORES[selected.kind].range;
-      this.range.fillStyle(CORES[selected.kind].color, .13).fillEllipse(p.x, p.y, r * 2 * this.scale.width / MAP.width, r * 2 * this.scale.height / MAP.height);
-      this.range.lineStyle(2, 0xfff0b0, .8).strokeEllipse(p.x, p.y, r * 2 * this.scale.width / MAP.width, r * 2 * this.scale.height / MAP.height);
-    }
+    // Attack ranges live in the non-interactive SVG overlay using this same MAP coordinate transform.
     this.trails.clear();
     for (const effect of this.effects) {
       effect.age += Math.min(delta / 1000, .05); const event = effect.event;

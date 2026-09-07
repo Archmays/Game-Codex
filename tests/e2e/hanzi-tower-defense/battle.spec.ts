@@ -3,7 +3,7 @@ import { expect, test, type Locator, type Page } from "@playwright/test";
 import { CORES, RECIPES } from "../../../games/hanzi-tower-defense/content";
 import { SAVE_KEY } from "../../../games/hanzi-tower-defense/save";
 
-const evidence = "tmp/tasks/GAME-CODEX-STEP1";
+const evidence = process.env.TD_EVIDENCE_DIR ?? "tmp/tasks/GAME-CODEX-STEP1-HOTFIX";
 function observe(page: Page) {
   const errors: string[] = [], requests: string[] = [];
   page.on("pageerror", e => errors.push(e.message));

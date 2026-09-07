@@ -89,12 +89,14 @@ export function stow(state: BattleState, id: number): boolean {
   if (!item || item.slot === null) return false;
   item.slot = null; return true;
 }
-export function fuse(state: BattleState, first: number, second: number, target: number | null): Core | null {
+export function fuse(state: BattleState, first: number, second: number, target: number | null, recipeId?: string): Core | null {
   if (state.phase === "won" || state.phase === "lost" || first === second) return null;
   const a = state.cores.find(c => c.id === first), b = state.cores.find(c => c.id === second);
   if (!a || !b) return null;
-  const recipe = recipeFor(a.kind, b.kind);
-  if (!recipe || (target !== null && (!Number.isInteger(target) || !SLOTS[target]
+  const recipe = recipeFor(a.kind, b.kind, recipeId);
+  const sourceSlots = [a.slot, b.slot].filter((slot): slot is number => slot !== null);
+  if (!recipe || (sourceSlots.length ? !sourceSlots.includes(target as number) : target !== null)
+    || (target !== null && (!Number.isInteger(target) || !SLOTS[target]
     || state.cores.some(c => c.slot === target && c.id !== first && c.id !== second)))) return null;
   const result: Core = { id: state.nextCoreId++, kind: recipe.result, slot: target, cooldown: Math.max(a.cooldown, b.cooldown) };
   state.cores = [...state.cores.filter(c => c.id !== first && c.id !== second), result];

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { CORES, CORE_ORDER, RECIPES } from "../games/hanzi-tower-defense/content";
-import { DEFAULT_SEED, deploy, ENEMIES, firingRange, fuse, newBattle, plannedDrops, recycle, resumeCheckpoint, SLOTS, startWave, stow, updateBattle, WAVES } from "../games/hanzi-tower-defense/model";
+import { CORES, CORE_ORDER, recipeCandidates, recipeFor, RECIPES } from "../games/hanzi-tower-defense/content";
+import { DEFAULT_SEED, deploy, distanceBetween, ENEMIES, firingRange, fuse, newBattle, PATH, plannedDrops, pointOnPath, recycle, resumeCheckpoint, SLOTS, startWave, stow, updateBattle, WAVES } from "../games/hanzi-tower-defense/model";
 import { openSave, SAVE_KEY, validCheckpoint } from "../games/hanzi-tower-defense/save";
 
 describe("字阵守城 content and minimal battle loop", () => {
@@ -36,9 +36,9 @@ describe("字阵守城 content and minimal battle loop", () => {
     expect(s.cores.filter(c => c.slot === 1)).toEqual([result]); expect(s.cores).toHaveLength(5);
     expect(fuse(s, 1, 2, 1)).toBeNull(); expect(s.unlocked).toEqual(["fire-fire"]);
   });
-  it("keeps word order, supports bag/tower sources and does not burn wrong materials", () => {
-    const s = newBattle(); expect(fuse(s, 6, 1, 0)).toBeNull(); expect(s.cores).toHaveLength(6);
-    expect(fuse(s, 1, 6, 0)?.kind).toBe("volcano"); expect(fuse(s, 3, 4, null)?.kind).toBe("grove");
+  it("keeps canonical word order when bag/tower ingredients are selected in reverse", () => {
+    const s = newBattle(); expect(fuse(s, 6, 1, 0)?.kind).toBe("volcano");
+    expect(CORES.volcano.components).toEqual(["火", "山"]); expect(fuse(s, 3, 4, null)?.kind).toBe("grove");
     expect(stow(s, s.cores.find(c => c.kind === "volcano")!.id)).toBe(true); expect(s.cores.every(c => c.slot === null)).toBe(true);
   });
   it("guarantees base-kind reachability across many seeds without imposing a full inventory", () => {
@@ -62,6 +62,56 @@ describe("字阵守城 content and minimal battle loop", () => {
     expect(recycle(retry, 2)).toBe(0); expect(retry.cores).toHaveLength(6); retry.health = 10;
     expect(recycle(retry, 2)).toBe(1); expect(recycle(retry, 2)).toBe(0);
     for (const recipe of RECIPES) expect(CORES[recipe.result].recycle).toBeLessThanOrEqual(recipe.inputs.reduce((sum, k) => sum + CORES[k].recycle, 0));
+  });
+});
+
+describe("hotfix ingredient identity, destination and real targeting boundaries", () => {
+  for (const recipe of RECIPES) for (const reversed of [false, true]) for (const slots of [[null, null], [null, 0], [0, null], [0, 1]] as const) {
+    it(`${recipe.id} reverse=${reversed} sources=${slots.join('/')} consumes only distinct sources`, () => {
+      const s = newBattle();
+      s.cores = [{ id: 11, kind: recipe.inputs[0], slot: slots[0], cooldown: .3 }, { id: 12, kind: recipe.inputs[1], slot: slots[1], cooldown: .7 }, { id: 13, kind: "water", slot: 7, cooldown: .9 }]; s.nextCoreId = 14;
+      const ids = reversed ? [12, 11] : [11, 12], target = slots[1] ?? slots[0];
+      const before = JSON.stringify(s);
+      for (const invalid of [7, 3, -1, 8, .5, NaN, ...(target !== null ? [null] : [])]) {
+        expect(fuse(s, ids[0], ids[1], invalid)).toBeNull(); expect(JSON.stringify(s)).toBe(before);
+      }
+      expect(fuse(s, ids[0], ids[0], target)).toBeNull(); expect(fuse(s, ids[0], 99, target)).toBeNull(); expect(fuse(s, ids[0], ids[1], target, 'unknown')).toBeNull(); expect(JSON.stringify(s)).toBe(before);
+      const result = fuse(s, ids[0], ids[1], target)!;
+      expect(result).toEqual({ id: 14, kind: recipe.result, slot: target, cooldown: .7 });
+      expect(s.cores).toEqual([{ id: 13, kind: "water", slot: 7, cooldown: .9 }, result]); expect(s.nextCoreId).toBe(15);
+      expect(s.unlocked).toEqual([recipe.id]); const after = JSON.stringify(s);
+      expect(fuse(s, ids[0], ids[1], target)).toBeNull(); expect(JSON.stringify(s)).toBe(after);
+    });
+  }
+  it("never invents a nearest match and leaves ambiguous registered candidates to explicit choice", () => {
+    expect(recipeCandidates('water', 'mountain')).toEqual([]);
+    const s = newBattle(), before = JSON.stringify(s); expect(fuse(s, 5, 6, null)).toBeNull(); expect(JSON.stringify(s)).toBe(before);
+    const candidates = [RECIPES[3], { ...RECIPES[3], id: 'future-distinct-result', result: 'wildwood' as const }];
+    expect(recipeCandidates('mountain', 'fire', candidates)).toHaveLength(2);
+    expect(recipeFor('mountain', 'fire', undefined, candidates)).toBeUndefined();
+    expect(recipeFor('mountain', 'fire', 'future-distinct-result', candidates)).toBe(candidates[1]);
+  });
+  for (const kind of CORE_ORDER) it(`${kind}: actual model shoots only within its displayed range, with live single target and ready cooldown`, () => {
+    const radius = CORES[kind].range, origin = SLOTS[0];
+    // Find an actual path/circle crossing analytically, independent of the targeting implementation.
+    let travelled = 0, boundary = -1;
+    for (let i = 0; i < PATH.length - 1; i++) {
+      const p = PATH[i], q = PATH[i + 1], dx = q.x - p.x, dy = q.y - p.y, length = Math.hypot(dx, dy);
+      const a = length * length, b = 2 * ((p.x - origin.x) * dx + (p.y - origin.y) * dy), c = (p.x - origin.x) ** 2 + (p.y - origin.y) ** 2 - radius ** 2;
+      const discriminant = b * b - 4 * a * c;
+      if (discriminant >= 0) for (const t of [(-b - Math.sqrt(discriminant)) / (2 * a), (-b + Math.sqrt(discriminant)) / (2 * a)]) if (t > .0001 && t < .9999) { boundary = travelled + t * length; break; }
+      if (boundary >= 0) break; travelled += length;
+    }
+    expect(boundary).toBeGreaterThan(0);
+    const probes = [boundary - .02, boundary + .02]; expect(probes.map(d => distanceBetween(origin, pointOnPath(d)) <= radius).sort()).toEqual([false, true]);
+    for (const distance of probes) {
+      const within = distanceBetween(origin, pointOnPath(distance)) <= radius, s = newBattle(); startWave(s);
+      s.spawned = WAVES[0].foes.length; s.waveTime = 2; s.cores = [{ id: 1, kind, slot: 0, cooldown: 0 }];
+      s.enemies = [{ id: 99, kind: 'swarm', distance: distance - ENEMIES.swarm.speed * .001, hp: 100000, maxHp: 100000, slow: 0, slowUntil: 0 }];
+      const shots = updateBattle(s, .001).filter(e => e.type === 'shot'); expect(shots).toHaveLength(within ? 1 : 0);
+      expect(s.enemies[0].hp).toBe(within ? 100000 - CORES[kind].damage : 100000);
+      if (within) { expect(shots[0]).toMatchObject({ from: origin, core: kind, enemyId: 99 }); expect(distanceBetween(origin, (shots[0] as { to: {x:number;y:number} }).to)).toBeLessThanOrEqual(radius); }
+    }
   });
 });
 

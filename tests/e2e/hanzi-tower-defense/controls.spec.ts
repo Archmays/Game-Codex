@@ -1,7 +1,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
 import { SAVE_KEY } from "../../../games/hanzi-tower-defense/save";
-const evidence="tmp/tasks/GAME-CODEX-STEP1";
+const evidence=process.env.TD_EVIDENCE_DIR ?? "tmp/tasks/GAME-CODEX-STEP1-HOTFIX";
 
 test("readable targets, correct structure, click/drag alternatives, mute and reduced motion",async({page},info)=>{
   const errors:string[]=[];page.on("pageerror",e=>errors.push(e.message));
@@ -34,7 +34,7 @@ test("readable targets, correct structure, click/drag alternatives, mute and red
   await act('[data-core="6"]');await act('[data-core="3"]');await expect(page.locator('[data-td-fuse]')).toBeDisabled();await act('[data-td-clear]');
   await act('[data-core="3"]');await act('[data-core="4"]');await expect(page.locator('[data-structure="left-right"]')).toBeVisible();await act('[data-td-fuse]');
   const grove=page.locator('[data-core]').filter({has:page.locator('strong',{hasText:/^林$/})});
-  await grove.click();await act('[data-core="6"]');await expect(page.locator('[data-td-fuse]')).toBeDisabled();await act('[data-td-swap]');await expect(page.locator('[data-structure="word"]')).toContainText("山");await expect(page.locator('[data-td-preview]')).toContainText("山林");await act('[data-td-fuse]');
+  await act(await grove.evaluate(e=>`[data-core="${e.getAttribute('data-core')}"]`));await act('[data-core="6"]');await expect(page.locator('[data-td-fuse]')).toBeEnabled();await expect(page.locator('[data-structure="word"] b')).toHaveText(['山','林']);await expect(page.locator('[data-td-preview]')).toContainText("山林");await act('[data-td-fuse]');
   const audible=await page.evaluate(()=>(window as unknown as {audioQa:{oscillators:number}}).audioQa.oscillators);expect(audible).toBeGreaterThan(0);
   await act('[data-td-mute]');await expect(page.locator('[data-td-mute]')).toHaveAttribute('aria-pressed','true');
   await expect.poll(()=>page.evaluate(()=>(window as unknown as {audioQa:{contexts:AudioContext[]}}).audioQa.contexts.every(c=>c.state==="suspended"))).toBe(true);
