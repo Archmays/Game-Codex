@@ -25,6 +25,34 @@
       "licenseFile": "assets/images/hanzi-tower-defense/Kenney-Tower-License.txt",
       "download": "https://kenney.nl/media/pages/assets/tower-defense-top-down/729844df28-1677693738/kenney_tower-defense-top-down.zip",
       "adaptation": "towerDefense_tile180.png copied as tower-base.png; browser-rendered glyph plaque above."
+    },
+    {
+      "notes": "STEP3 generated transparent word-tower illustration. Real text is rendered by the browser. Mountain-forest alpha-fix/final prompts describe rejected intermediates; only regenerated prompt produced the shipped resonant forest.",
+      "date": "2026-09-08",
+      "kind": "OpenAI image generation",
+      "id": "generated-volcano-base",
+      "promptFile": "assets/images/hanzi-tower-defense/step3-volcano-base-prompt.md"
+    },
+    {
+      "notes": "STEP3 generated transparent word-tower illustration. Real text is rendered by the browser. Mountain-forest alpha-fix/final prompts describe rejected intermediates; only regenerated prompt produced the shipped resonant forest.",
+      "date": "2026-09-08",
+      "kind": "OpenAI image generation",
+      "id": "generated-volcano-resonant",
+      "promptFile": "assets/images/hanzi-tower-defense/step3-volcano-resonant-prompt.md"
+    },
+    {
+      "notes": "STEP3 generated transparent word-tower illustration. Real text is rendered by the browser. Mountain-forest alpha-fix/final prompts describe rejected intermediates; only regenerated prompt produced the shipped resonant forest.",
+      "date": "2026-09-08",
+      "kind": "OpenAI image generation",
+      "id": "generated-mountain-forest-base",
+      "promptFile": "assets/images/hanzi-tower-defense/step3-mountain-forest-base-prompt.md"
+    },
+    {
+      "notes": "STEP3 generated transparent word-tower illustration. Real text is rendered by the browser. Mountain-forest alpha-fix/final prompts describe rejected intermediates; only regenerated prompt produced the shipped resonant forest.",
+      "date": "2026-09-08",
+      "kind": "OpenAI image generation",
+      "id": "generated-mountain-forest-resonant",
+      "promptFile": "assets/images/hanzi-tower-defense/step3-mountain-forest-resonant-regenerated-prompt.md"
     }
   ],
   "files": [
@@ -131,6 +159,38 @@
       "source": "kenney-tower",
       "use": "tower foundation",
       "review": "Source pixels inspected and integrated in desktop and narrow-screen game; glyphs are browser-rendered text."
+    },
+    {
+      "bytes": 1741349,
+      "source": "generated-volcano-base",
+      "review": "Transparent channel inspected; final source-bound browser review recorded in STEP3 evidence.",
+      "sha256": "edd9cf98b15a327d7171de137610afbb7958a1aaf673b3a218332b199f1c7065",
+      "path": "public/assets/hanzi-tower-defense/volcano-base.png",
+      "use": "ordinary or resonant word tower"
+    },
+    {
+      "bytes": 1521798,
+      "source": "generated-volcano-resonant",
+      "review": "Transparent channel inspected; final source-bound browser review recorded in STEP3 evidence.",
+      "sha256": "e3aa7ba954b1db73f79413eaeae6c06e151e0698b9a6f762bbba29e219a84874",
+      "path": "public/assets/hanzi-tower-defense/volcano-resonant.png",
+      "use": "ordinary or resonant word tower"
+    },
+    {
+      "bytes": 1819074,
+      "source": "generated-mountain-forest-base",
+      "review": "Transparent channel inspected; final source-bound browser review recorded in STEP3 evidence.",
+      "sha256": "8cf7c67d6d7d4afbe85b03b4704b0bb97fafd116891fa119a3b331bc466cc8a2",
+      "path": "public/assets/hanzi-tower-defense/mountain-forest-base.png",
+      "use": "ordinary or resonant word tower"
+    },
+    {
+      "bytes": 1946424,
+      "source": "generated-mountain-forest-resonant",
+      "review": "Transparent channel inspected; final source-bound browser review recorded in STEP3 evidence.",
+      "sha256": "5558fbda4bd5e4d2c406522779d6f56d06ab765fd94a72d4fea423718bad82e9",
+      "path": "public/assets/hanzi-tower-defense/mountain-forest-resonant.png",
+      "use": "ordinary or resonant word tower"
     }
   ]
 }

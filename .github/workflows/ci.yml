@@ -66,6 +66,8 @@ jobs:
 
       - name: Validate independent memory and tower defense content and balance
         run: pnpm run test:memory-match && pnpm run validate:hanzi-tower-defense
+        env:
+          TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP3/tower
 
       - name: Typecheck and production build
         run: pnpm build
@@ -112,6 +114,8 @@ jobs:
 
       - name: Exercise tower defense battles, inputs, saves, and retired-language fallbacks
         run: pnpm run test:e2e:hanzi-tower-defense
+        env:
+          TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP3/tower
 
       - name: Upload failure evidence only
         if: failure()
@@ -122,6 +126,7 @@ jobs:
             test-results/portfolio-smoke
             test-results/math-world
             test-results/hanzi-tower-defense
+            tmp/tasks/GAME-CODEX-STEP3/tower/browser-failures
             test-results/play-readiness
             test-results/interaction-integrity
             test-results/scroll-reachability

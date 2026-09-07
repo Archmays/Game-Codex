@@ -429,9 +429,9 @@ for (const denied of ["read", "write"] as const) {
   });
 }
 
-test("@workbench all 39 exact keys survive the public Vault roundtrip and the mounted old page cannot overwrite restored records", async ({ page, context }, info) => {
-  expect(KNOWN_SAVE_KEYS).toHaveLength(39);
-  expect(EXPORTABLE_SAVE_KEYS).toHaveLength(38);
+test("@workbench all 40 exact keys survive the public Vault roundtrip and the mounted old page cannot overwrite restored records", async ({ page, context }, info) => {
+  expect(KNOWN_SAVE_KEYS).toHaveLength(40);
+  expect(EXPORTABLE_SAVE_KEYS).toHaveLength(39);
   await page.goto(origin);
   const fixture: Record<string, string> = Object.fromEntries(KNOWN_SAVE_KEYS.map((record, index) => [
     record.key, JSON.stringify({ version: record.maxVersion ?? 1, syntheticOnly: true, fixture: index }),
@@ -463,11 +463,11 @@ test("@workbench all 39 exact keys survive the public Vault roundtrip and the mo
   await vaultPage.evaluate(keys => {
     for (const key of keys) localStorage.setItem(key, '{"syntheticBeforeRestore":true}');
   }, EXPORTABLE_SAVE_KEYS.map(record => record.key));
-  await vaultPage.locator("[data-vault-file]").setInputFiles({ name: "synthetic-38-keys.json", mimeType: "application/json", buffer: Buffer.from(exportText) });
+  await vaultPage.locator("[data-vault-file]").setInputFiles({ name: "synthetic-39-keys.json", mimeType: "application/json", buffer: Buffer.from(exportText) });
   await expect(vaultPage.locator("[data-vault-preview-checksum]")).toHaveText("PASS");
   vaultPage.once("dialog", dialog => { void dialog.accept(); });
   await vaultPage.locator("[data-vault-restore]").click();
-  await expect(vaultPage.locator("[data-vault-status]")).toContainText("已恢复 38");
+  await expect(vaultPage.locator("[data-vault-status]")).toContainText("已恢复 39");
   const restored = await vaultPage.evaluate(keys => Object.fromEntries(keys.map(key => [key, localStorage.getItem(key)])), KNOWN_SAVE_KEYS.map(record => record.key));
   for (const record of EXPORTABLE_SAVE_KEYS) expect(restored[record.key]).toBe(fixture[record.key]);
   expect(restored[SAVE_VAULT_PRE_IMPORT_BACKUP_KEY]).toContain("syntheticBeforeRestore");

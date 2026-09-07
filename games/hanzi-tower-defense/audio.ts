@@ -1,4 +1,4 @@
-type Sound = "shot" | "heavy" | "defeat" | "drop" | "fusion" | "leak" | "wave" | "deploy";
+type Sound = "shot" | "heavy" | "defeat" | "drop" | "fusion" | "leak" | "wave" | "deploy" | "echo" | "equip" | "roots";
 const db = (value: number) => 10 ** (value / 20);
 
 /** A small synthesized SFX instrument, with bounded voices and separate UI/combat buses. No microphone. */
@@ -35,7 +35,7 @@ export class BattleAudio {
     const time = ctx.currentTime;
     if ((sound === "shot" || sound === "heavy") && time - this.lastShot < .11) return;
     if (sound === "shot" || sound === "heavy") this.lastShot = time;
-    const frequencies: Record<Sound, number[]> = { shot: [480], heavy: [145], defeat: [760, 450], drop: [880, 1174], fusion: [523, 659, 784, 1047], leak: [185, 140], wave: [523, 784, 1047], deploy: [620, 830] };
+    const frequencies: Record<Sound, number[]> = { shot: [480], heavy: [145], defeat: [760, 450], drop: [880, 1174], fusion: [523, 659, 784, 1047], leak: [185, 140], wave: [523, 784, 1047], deploy: [620, 830], echo: [110, 175], equip: [392, 587, 784], roots:[246,369,492] };
     const important = sound === "fusion" || sound === "wave";
     if (important && this.combat) { this.combat.gain.setValueAtTime(db(-17), time); this.combat.gain.linearRampToValueAtTime(db(-7), time + .6); }
     for (const [index, frequency] of frequencies[sound].entries()) {

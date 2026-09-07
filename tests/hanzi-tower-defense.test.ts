@@ -143,7 +143,7 @@ describe("wave checkpoints and protected local storage", () => {
   it("rejects duplicate identities, invalid slots and preserves unknown same-version fields", () => {
     const cp = newBattle().checkpoint; expect(validCheckpoint(cp)).toBe(true); expect(validCheckpoint({ ...cp, cores: [cp.cores[0], cp.cores[0]] })).toBe(false);
     expect(validCheckpoint({ ...cp, cores: [{ ...cp.cores[0], slot: SLOTS.length }] })).toBe(false);
-    const store = memory({ [SAVE_KEY]: JSON.stringify({ version: 1, note: "keep", checkpoint: { ...cp, extra: "keep too" }, unlocked: [], preferences: { ...prefs, extra: 1 } }) });
+    const store = memory({ [SAVE_KEY]: JSON.stringify({ version: 2, note: "keep", checkpoint: { ...cp, extra: "keep too" }, unlocked: [], preferences: { ...prefs, extra: 1 } }) });
     const save = openSave(store, prefs); save.write(save.state, prefs); const raw = JSON.parse(store.getItem(SAVE_KEY)!);
     expect(raw.note).toBe("keep"); expect(raw.checkpoint.extra).toBe("keep too"); expect(raw.preferences.extra).toBe(1);
   });

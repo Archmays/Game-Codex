@@ -14,7 +14,8 @@ export const SAVE_VAULT_PRE_IMPORT_BACKUP_KEY = "save-vault/pre-import-backup/v1
 
 export const KNOWN_SAVE_KEYS: readonly KnownSaveKey[] = [
   { key: "family-games/hanzi-word-adventure/v1", owner: "hanzi", purpose: "progress", exportable: true, maxVersion: 1 },
-  { key: "family-games/hanzi-tower-defense/v1", owner: "hanzi", purpose: "progress", exportable: true, maxVersion: 1 },
+  { key: "family-games/hanzi-tower-defense/v2", owner: "hanzi", purpose: "progress", exportable: true, maxVersion: 2 },
+  { key: "family-games/hanzi-tower-defense/v1", owner: "hanzi", purpose: "compatibility", exportable: true, maxVersion: 1 },
   { key: "family-games/my-game-world/v1", owner: "portfolio", purpose: "settings", exportable: true, maxVersion: 1 },
   { key: "family-games/hanzi-magic-complete/v3", owner: "hanzi", purpose: "progress", exportable: true, maxVersion: 3 },
   { key: "family-games/hanzi-magic-complete/v3.backup", owner: "hanzi", purpose: "backup", exportable: true, maxVersion: 3 },

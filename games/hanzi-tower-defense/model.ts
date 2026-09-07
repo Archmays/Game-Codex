@@ -1,4 +1,5 @@
 import { CORES, recipeFor, type CoreKind } from "./content";
+import { ECHO, ROOTS, englishMapping, RESONANCES, type EnglishCore, type GrantId, type EffectId } from "./resonance";
 
 export interface Point { x: number; y: number; }
 export const MAP = { width: 960, height: 640 } as const;
@@ -38,17 +39,31 @@ export const WAVES: readonly { label: string; hint: string; foes: readonly Enemy
   { label: "守住最后一弯", hint: "最后一波！先部署好，再打开城外的路。", foes: Array.from({ length: 28 }, (_, i) => i % 4 === 0 ? "stone" : i % 3 === 0 ? "swift" : "swarm"), interval: 1.55, strength: 2.1 },
 ];
 export interface Core { id: number; kind: CoreKind; slot: number | null; cooldown: number; }
-export interface Enemy { id: number; kind: EnemyKind; distance: number; hp: number; maxHp: number; slow: number; slowUntil: number; }
+export interface Enemy { id: number; kind: EnemyKind; distance: number; hp: number; maxHp: number; slow: number; slowUntil: number; zoneSlow?: number; }
 export type Phase = "ready" | "battle" | "won" | "lost";
 export interface Checkpoint {
   seed: number; wave: number; health: number; cores: Core[]; nextCoreId: number; kills: number; leaks: number; elapsed: number;
+  englishCores: EnglishCore[]; englishClaims: GrantId[]; englishSkipped: GrantId[]; nextEnglishId: number;
+}
+export interface Echo {
+  id: number; effectId: EffectId; sourceCoreId: number; sourceEnglishId: number;
+  at: Point; due: number; damage: number; radius: number;
+}
+export interface RootZone {
+  id: number; effectId: 'spreading-roots'; sourceCoreId: number; sourceEnglishId: number;
+  at: Point; born: number; expires: number; damage: number; radius: number; slow: number;
 }
 export interface BattleState extends Checkpoint {
   phase: Phase; paused: boolean; waveTime: number; spawned: number; enemies: Enemy[]; unlocked: string[];
   checkpoint: Checkpoint; waveKills: number; waveDrops: number; nextEnemyId: number;
+  echoes: Echo[]; nextEffectId: number; visuals: { event: BattleEvent; age: number }[];
+  rootZones: RootZone[]; rootPulseAt: number;
 }
 export type BattleEvent =
-  | { type: "shot"; from: Point; to: Point; core: CoreKind; enemyId: number }
+  | { type: "shot"; from: Point; to: Point; core: CoreKind; coreId: number; enemyId: number; resonance?: EffectId }
+  | { type: "echo"; at: Point; radius: number; damage: number; sourceCoreId: number }
+  | { type: "roots"; at: Point; radius: number; sourceCoreId: number }
+  | { type: "english-drop"; at: Point; englishId: number; grantId: GrantId }
   | { type: "defeat"; at: Point; kind: EnemyKind }
   | { type: "drop"; at: Point; core: CoreKind }
   | { type: "leak"; at: Point; harm: number }
@@ -56,24 +71,26 @@ export type BattleEvent =
 export const DEFAULT_SEED = 20260907;
 export const START_HEALTH = 16;
 export function checkpointOf(state: Checkpoint): Checkpoint {
-  return { seed: state.seed, wave: state.wave, health: state.health, cores: state.cores.map(c => ({ ...c, cooldown: 0 })), nextCoreId: state.nextCoreId, kills: state.kills, leaks: state.leaks, elapsed: state.elapsed };
+  return { seed: state.seed, wave: state.wave, health: state.health, cores: state.cores.map(c => ({ ...c })), nextCoreId: state.nextCoreId, kills: state.kills, leaks: state.leaks, elapsed: state.elapsed,
+    englishCores: state.englishCores.map(c => ({ ...c })), englishClaims: [...state.englishClaims], englishSkipped: [...state.englishSkipped], nextEnglishId: state.nextEnglishId };
 }
 export function newBattle(seed = DEFAULT_SEED, unlocked: string[] = []): BattleState {
   const base: Checkpoint = { seed: seed >>> 0, wave: 0, health: START_HEALTH, cores: [
     { id: 1, kind: "fire", slot: 0, cooldown: 0 }, { id: 2, kind: "fire", slot: null, cooldown: 0 },
     { id: 3, kind: "wood", slot: null, cooldown: 0 }, { id: 4, kind: "wood", slot: null, cooldown: 0 },
     { id: 5, kind: "water", slot: null, cooldown: 0 }, { id: 6, kind: "mountain", slot: null, cooldown: 0 },
-  ], nextCoreId: 7, kills: 0, leaks: 0, elapsed: 0 };
+  ], nextCoreId: 7, kills: 0, leaks: 0, elapsed: 0, englishCores: [], englishClaims: [], englishSkipped: [], nextEnglishId: 1 };
   return resumeCheckpoint(base, unlocked);
 }
 export function resumeCheckpoint(checkpoint: Checkpoint, unlocked: string[]): BattleState {
   const base = checkpointOf(checkpoint);
-  return { ...base, phase: base.wave >= WAVES.length ? "won" : "ready", paused: false, waveTime: 0, spawned: 0, enemies: [], unlocked: [...unlocked], checkpoint: checkpointOf(base), waveKills: 0, waveDrops: 0, nextEnemyId: 1 };
+  return { ...base, phase: base.wave >= WAVES.length ? "won" : "ready", paused: false, waveTime: 0, spawned: 0, enemies: [], unlocked: [...unlocked], checkpoint: checkpointOf(base), waveKills: 0, waveDrops: 0, nextEnemyId: 1, echoes: [], nextEffectId: 1, visuals: [], rootZones: [], rootPulseAt: ROOTS.tick };
 }
 export function startWave(state: BattleState): boolean {
   if (state.phase !== "ready" || state.wave >= WAVES.length) return false;
   state.checkpoint = checkpointOf(state);
   state.phase = "battle"; state.paused = false; state.waveTime = 0; state.spawned = 0; state.waveKills = 0; state.waveDrops = 0;
+  state.echoes = []; state.visuals = []; state.rootZones = []; state.rootPulseAt = ROOTS.tick;
   return true;
 }
 export function deploy(state: BattleState, id: number, slot: number): boolean {
@@ -108,8 +125,53 @@ export function recycle(state: BattleState, id: number): number {
   if (state.phase === "won" || state.phase === "lost" || state.health >= START_HEALTH) return 0;
   const item = state.cores.find(c => c.id === id);
   if (!item || item.slot !== null) return 0;
+  const attachment = attachedEnglish(state, id);
+  if (attachment && state.phase === "battle") return 0;
   const gain = Math.min(START_HEALTH - state.health, CORES[item.kind].recycle);
+  if (attachment) attachment.attachedTo = null;
   state.cores = state.cores.filter(c => c.id !== id); state.health += gain; return gain;
+}
+export function attachedEnglish(state: Checkpoint, coreId: number): EnglishCore | undefined {
+  return state.englishCores.find(e => e.attachedTo === coreId);
+}
+export function activeResonance(state: Checkpoint, core: Core) {
+  const english = attachedEnglish(state, core.id), mapping = english && englishMapping(english);
+  return english && mapping?.coreId === core.kind && state.englishClaims.includes(mapping.grantId) ? { english, mapping } : undefined;
+}
+export interface EquipmentPreview { ok: boolean; reason: string; englishId: number; targetId: number; fromId: number | null; }
+export function previewEquipment(state: BattleState, englishId: number, targetId: number): EquipmentPreview {
+  const english = state.englishCores.find(e => e.id === englishId), target = state.cores.find(c => c.id === targetId);
+  const mapping = english && englishMapping(english);
+  const result = (ok: boolean, reason: string): EquipmentPreview => ({ ok, reason, englishId, targetId, fromId: english?.attachedTo ?? null });
+  if (!english || !mapping || !state.englishClaims.includes(mapping.grantId) || !target) return result(false, "词核或字塔已变化，没有消耗材料。");
+  if (state.phase === "won" || state.phase === "lost") return result(false, "这一局已结束。");
+  if (mapping.coreId !== target.kind) return result(false, `这枚 ${mapping.text} 用于${CORES[mapping.coreId].glyph}。${mapping.recipe}；可以先保留。`);
+  if (english.attachedTo === target.id) return result(false, "这枚英文核已经在这座塔上。");
+  if (attachedEnglish(state, target.id)) return result(false, "这座塔已经有一枚英文核。每塔只能装备一枚。");
+  if (english.attachedTo !== null && state.phase === "battle") return result(false, "战中可首次装备；卸下和转移要等这一波结束，暂停仍在战中。");
+  return result(true, `${CORES[target.kind].glyph}将获得${mapping.effectName}，保留原有基础攻击。`);
+}
+/** Both selection directions and drag/drop confirm this same atomic transaction. */
+export function equipEnglish(state: BattleState, preview: EquipmentPreview): boolean {
+  const current = previewEquipment(state, preview.englishId, preview.targetId);
+  if (!preview.ok || !current.ok || current.fromId !== preview.fromId) return false;
+  state.englishCores.find(e => e.id === preview.englishId)!.attachedTo = preview.targetId; return true;
+}
+export function unequipEnglish(state: BattleState, englishId: number, expectedCoreId: number): boolean {
+  const english = state.englishCores.find(e => e.id === englishId);
+  if (state.phase !== "ready" || !english || english.attachedTo !== expectedCoreId) return false;
+  english.attachedTo = null; return true;
+}
+/** Kill drop and wave-end guarantee share the exact grant identity, independent of Chinese RNG. */
+function grantEnglish(state: BattleState, at: Point, waveEnd = false): BattleEvent[] {
+  const events: BattleEvent[] = [];
+  for (const r of RESONANCES) {
+    if (r.dropWave !== state.wave || (!waveEnd && state.waveKills < r.dropKill) || state.englishClaims.includes(r.grantId) || state.englishSkipped.includes(r.grantId)) continue;
+    const english: EnglishCore = { id: state.nextEnglishId++, lexemeId: r.lexemeId, senseId: r.senseId, grantId: r.grantId, attachedTo: null };
+    state.englishCores.push(english); state.englishClaims.push(r.grantId);
+    events.push({ type: "english-drop", at: { ...at }, englishId: english.id, grantId: r.grantId });
+  }
+  return events;
 }
 function mix(seed: number): number { let x = seed >>> 0; x ^= x << 13; x ^= x >>> 17; x ^= x << 5; return x >>> 0; }
 export function plannedDrops(seed: number, wave: number): CoreKind[] {
@@ -124,6 +186,8 @@ export function updateBattle(state: BattleState, dt: number): BattleEvent[] {
   if (state.phase !== "battle" || state.paused || !Number.isFinite(dt) || dt <= 0) return events;
   // Callers use 50 ms fixed steps. Long hidden frames never fast-forward a battle.
   dt = Math.min(dt, .1); state.elapsed += dt; state.waveTime += dt;
+  state.visuals = state.visuals.map(v => ({ ...v, age: v.age + dt })).filter(v => v.age < .6);
+  state.rootZones = state.rootZones.filter(z => z.expires > state.waveTime + .000001);
   const wave = WAVES[state.wave];
   while (state.spawned < wave.foes.length && state.waveTime >= .8 + state.spawned * wave.interval) {
     const kind = wave.foes[state.spawned++], hp = ENEMIES[kind].hp * wave.strength;
@@ -131,8 +195,25 @@ export function updateBattle(state: BattleState, dt: number): BattleEvent[] {
   }
   for (const enemy of state.enemies) {
     if (enemy.slowUntil <= state.waveTime) enemy.slow = 0;
-    enemy.distance += ENEMIES[enemy.kind].speed * (1 - enemy.slow) * dt;
+    // Zone slow exists only while inside a live area; no additive or persistent root-lock.
+    const zones = state.rootZones.filter(z => distanceBetween(pointOnPath(enemy.distance), z.at) <= z.radius);
+    if (zones.length) enemy.zoneSlow = Math.max(...zones.map(z=>z.slow)); else delete enemy.zoneSlow;
+    enemy.distance += ENEMIES[enemy.kind].speed * (1 - Math.max(enemy.slow, enemy.zoneSlow ?? 0)) * dt;
   }
+  if (state.waveTime + .000001 >= state.rootPulseAt) {
+    state.rootPulseAt += ROOTS.tick;
+    // One global pulse clock: staggered zones cannot multiply damage. Strongest covering snapshot wins.
+    for (const foe of state.enemies) {
+      if (foe.hp <= 0 || foe.distance >= PATH_LENGTH) continue;
+      const zones=state.rootZones.filter(z=>distanceBetween(pointOnPath(foe.distance),z.at)<=z.radius);
+      if (zones.length) foe.hp -= Math.max(...zones.map(z=>z.damage));
+    }
+  }
+  for (const echo of state.echoes.filter(e => e.due <= state.waveTime + .000001)) {
+    for (const foe of state.enemies) if (foe.hp > 0 && foe.distance < PATH_LENGTH && distanceBetween(pointOnPath(foe.distance), echo.at) <= echo.radius) foe.hp -= echo.damage;
+    events.push({ type: "echo", at: { ...echo.at }, radius: echo.radius, damage: echo.damage, sourceCoreId: echo.sourceCoreId });
+  }
+  state.echoes = state.echoes.filter(e => e.due > state.waveTime + .000001);
   for (const tower of state.cores) {
     tower.cooldown = Math.max(0, tower.cooldown - dt);
     if (tower.slot === null || tower.cooldown > .000001) continue;
@@ -141,7 +222,18 @@ export function updateBattle(state: BattleState, dt: number): BattleEvent[] {
     const target = targets[0]; if (!target) continue;
     tower.cooldown = definition.interval;
     const hit = pointOnPath(target.distance);
-    events.push({ type: "shot", from: { ...origin }, to: hit, core: tower.kind, enemyId: target.id });
+    const resonance = activeResonance(state, tower);
+    events.push({ type: "shot", from: { ...origin }, to: hit, core: tower.kind, coreId: tower.id, enemyId: target.id, resonance: resonance?.mapping.effectId });
+    if (resonance?.mapping.effectId === "echo-eruption" && state.echoes.length < ECHO.maxPending) state.echoes.push({
+      id: state.nextEffectId++, effectId: "echo-eruption", sourceCoreId: tower.id, sourceEnglishId: resonance.english.id,
+      at: { ...hit }, due: state.waveTime + ECHO.delay, damage: definition.damage * ECHO.multiplier, radius: ECHO.radius,
+    });
+    if (resonance?.mapping.effectId === 'spreading-roots') {
+      if (state.rootZones.length >= ROOTS.maxZones) state.rootZones.shift();
+      state.rootZones.push({ id: state.nextEffectId++, effectId: 'spreading-roots', sourceCoreId: tower.id, sourceEnglishId: resonance.english.id,
+        at: { ...hit }, born: state.waveTime, expires: state.waveTime+ROOTS.duration, damage: definition.damage*ROOTS.multiplier, radius: ROOTS.radius, slow: ROOTS.slow });
+      events.push({type:'roots',at:{...hit},radius:ROOTS.radius,sourceCoreId:tower.id});
+    }
     for (const foe of state.enemies) {
       if (foe.hp <= 0 || foe.distance >= PATH_LENGTH || (foe.id !== target.id && (!definition.splash || distanceBetween(pointOnPath(foe.distance), hit) > definition.splash))) continue;
       foe.hp -= definition.damage;
@@ -159,17 +251,20 @@ export function updateBattle(state: BattleState, dt: number): BattleEvent[] {
         state.cores.push({ id: state.nextCoreId++, kind, slot: null, cooldown: 0 });
         events.push({ type: "drop", at, core: kind });
       }
+      events.push(...grantEnglish(state, at));
     } else if (enemy.distance >= PATH_LENGTH) {
       state.health = Math.max(0, state.health - ENEMIES[enemy.kind].harm); state.leaks++;
       events.push({ type: "leak", at, harm: ENEMIES[enemy.kind].harm });
     }
   }
   state.enemies = state.enemies.filter(e => e.hp > 0 && e.distance < PATH_LENGTH);
-  if (state.health <= 0) { state.phase = "lost"; state.paused = false; return events; }
+  if (state.health <= 0) { state.phase = "lost"; state.paused = false; state.echoes = []; state.rootZones=[]; state.visuals = []; return events; }
   if (state.spawned === wave.foes.length && !state.enemies.length) {
+    events.push(...grantEnglish(state, PATH[PATH.length - 1], true)); state.echoes = []; state.rootZones=[];
     state.wave++; state.phase = state.wave >= WAVES.length ? "won" : "ready"; state.paused = false;
     state.checkpoint = checkpointOf(state); events.push({ type: "wave-end", won: state.phase === "won" });
   }
+  state.visuals = state.phase === 'battle' ? [...state.visuals, ...events.map(event=>({event,age:0}))].slice(-90) : [];
   return events;
 }
 

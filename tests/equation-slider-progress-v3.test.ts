@@ -501,7 +501,7 @@ describe("equation slider exact-key storage protection", () => {
     const destination = new SliderMemoryStorage();
     destination.values.set("other-localhost-app/save", "destination unknown remains");
     const result = restoreSaveVault(destination, validated);
-    expect(KNOWN_SAVE_KEYS).toHaveLength(39);
+    expect(KNOWN_SAVE_KEYS).toHaveLength(40);
     expect(result.readbackVerified).toBe(true);
     expect(destination.getItem(PROGRESS_KEY)).toBe(raw);
     expect(destination.getItem("family-games/clock-reader/progress")).toBe(retired);

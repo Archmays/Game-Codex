@@ -173,7 +173,7 @@ if (
 if (!equal(evidence.resultingTruth.activeChildProducts as string[], ["hanzi-radical-battle", "math-lab", "english-spell-battle", "equation-slider"])) issues.push("historical active product truth");
 if (!equal(evidence.surfaceCoverage.primaryRealBrowserSurfaceIds, ["my-game-world", "classic-hub", "hanzi-world", "math-world", "english-world", "classic-equation"])) issues.push("historical primary browser coverage");
 if (evidence.surfaceCoverage.manifestValidatedCount !== 40 || evidence.surfaceCoverage.uncoveredSurfaceIds.length !== 0) issues.push("historical surface coverage boundary");
-if (COMPATIBILITY_SURFACES.length !== 2 || SHARED_ENGINES.length !== 2 || KNOWN_SAVE_KEYS.length !== 39) issues.push("current compatibility/save inventory after authorized adventure addition");
+if (COMPATIBILITY_SURFACES.length !== 2 || SHARED_ENGINES.length !== 2 || KNOWN_SAVE_KEYS.length !== 40) issues.push("current compatibility/save inventory after authorized tower defense v2 addition");
 if (equationAudit.sameVisibleTransitionCount !== 216 || equationAudit.sameVisibleTransitionLevelCount !== 82 || equationAudit.initialSameVisibleMoveLevelCount !== 45) issues.push("Equation same-display inventory");
 if (equationAudit.sameVisibleShortestPathBenefitLevelIds.length !== 39 || equationAudit.initialSameVisibleShortestPathBenefitLevelIds.length !== 21 || equationAudit.requiredSameVisibleMoveLevelIds.length !== 0) issues.push("Equation completion-path classification");
 if (Object.values(equationAudit.sameVisibleCompletionPaths).some((path) => !path.solvableWithoutSameVisibleEdges || (path.shortestPathDelta !== 0 && path.shortestPathDelta !== 1))) issues.push("Equation no-edge completion proof");

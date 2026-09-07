@@ -11,7 +11,7 @@ async function setup(page: Page, items: Item[], wave = 0) {
   await page.goto(new URL('.', new URL(gameURL, page.url().startsWith('http') ? page.url() : 'http://127.0.0.1:5299')).href);
   const checkpoint = newBattle().checkpoint;
   checkpoint.cores = items.map(c => ({ ...c, cooldown: 0 })); checkpoint.nextCoreId = Math.max(...items.map(c => c.id)) + 1; checkpoint.wave = wave;
-  await page.evaluate(({ checkpoint, key }) => localStorage.setItem(key, JSON.stringify({ version: 1, checkpoint, unlocked: [], preferences: { muted: true, reducedMotion: true } })), { checkpoint, key: SAVE_KEY });
+  await page.evaluate(({ checkpoint, key }) => localStorage.setItem(key, JSON.stringify({ version: 2, checkpoint, unlocked: [], preferences: { muted: true, reducedMotion: true } })), { checkpoint, key: SAVE_KEY });
   await page.goto(gameURL); await expect(page.locator('[data-td-canvas]')).toHaveAttribute('data-ready', 'true');
   await expect(page.locator('.td-game')).toHaveAttribute('data-phase', wave === 6 ? 'won' : 'ready');
 }

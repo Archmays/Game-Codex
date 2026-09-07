@@ -19,7 +19,6 @@ export class DefenseScene extends Phaser.Scene {
   private trails!: Phaser.GameObjects.Graphics;
   private monsters = new Map<number, Phaser.GameObjects.Container>();
   private lifeBars = new Map<number, Phaser.GameObjects.Graphics>();
-  private effects: { event: BattleEvent; age: number }[] = [];
   private accumulator = 0;
   private uiElapsed = 0;
   constructor(private readonly hooks: SceneHooks) { super("hanzi-defense"); }
@@ -71,7 +70,7 @@ export class DefenseScene extends Phaser.Scene {
     const state = this.hooks.state(), preferences = this.hooks.preferences();
     if (state.phase === "battle" && !state.paused && !document.hidden) {
       this.accumulator += Math.min(delta / 1000, .1);
-      while (this.accumulator >= .05) { const events = updateBattle(state, .05); this.accumulator -= .05; this.effects.push(...events.map(event => ({ event, age: 0 }))); this.hooks.events(events); }
+      while (this.accumulator >= .05) { const events = updateBattle(state, .05); this.accumulator -= .05; this.hooks.events(events); }
     } else this.accumulator = 0;
     this.uiElapsed += delta; if (this.uiElapsed > 150) { this.uiElapsed = 0; this.hooks.tick(); }
     const alive = new Set(state.enemies.map(e => e.id));
@@ -82,13 +81,31 @@ export class DefenseScene extends Phaser.Scene {
       const bob = preferences.reducedMotion || state.paused ? 0 : Math.sin(state.elapsed * (enemy.kind === "swift" ? 17 : 8) + enemy.id) * 1.2;
       container.setPosition(p.x, p.y - 10 * scale + bob).setScale(scale * (enemy.kind === "stone" ? 1.25 : 1)).setDepth(100 + p.y / 10);
       const life = this.lifeBars.get(enemy.id)!; life.clear().fillStyle(0x142e29, .9).fillRoundedRect(p.x - 17 * scale, p.y - 35 * scale, 34 * scale, 4, 2);
-      life.fillStyle(enemy.slow ? 0x82f2f4 : 0xf5da80).fillRoundedRect(p.x - 17 * scale, p.y - 35 * scale, Math.max(0, 34 * scale * enemy.hp / enemy.maxHp), 4, 2);
+      life.fillStyle(enemy.zoneSlow ? 0xd5f58c : enemy.slow ? 0x82f2f4 : 0xf5da80).fillRoundedRect(p.x - 17 * scale, p.y - 35 * scale, Math.max(0, 34 * scale * enemy.hp / enemy.maxHp), 4, 2);
       if (enemy.slow) life.lineStyle(2, 0x77dfe8, .9).strokeEllipse(p.x, p.y + 9 * scale, 42 * scale, 14 * scale);
     }
     // Attack ranges live in the non-interactive SVG overlay using this same MAP coordinate transform.
     this.trails.clear();
-    for (const effect of this.effects) {
-      effect.age += Math.min(delta / 1000, .05); const event = effect.event;
+    for (const zone of state.rootZones) {
+      const p=this.point(zone.at), sx=this.scale.width/MAP.width, sy=this.scale.height/MAP.height;
+      const grow=preferences.reducedMotion?1:Math.min(1,(state.waveTime-zone.born)/.25), alpha=Math.min(1,(zone.expires-state.waveTime)/.3);
+      this.trails.fillStyle(0x98bd54,.16*alpha).fillEllipse(p.x,p.y,zone.radius*2*sx,zone.radius*2*sy);
+      for(let i=0;i<7;i++) {
+        const angle=i*Math.PI*2/7, radius=zone.radius*grow;
+        const tip={x:p.x+Math.cos(angle)*radius*sx,y:p.y+Math.sin(angle)*radius*sy};
+        const bend={x:p.x+Math.cos(angle+.35)*radius*.55*sx,y:p.y+Math.sin(angle+.35)*radius*.55*sy};
+        this.trails.lineStyle(3,0x64552b,.85*alpha).beginPath().moveTo(p.x,p.y).lineTo(bend.x,bend.y).lineTo(tip.x,tip.y).strokePath();
+        this.trails.lineStyle(1,0xdae99a,alpha).lineBetween(bend.x,bend.y,tip.x,tip.y);
+        this.trails.fillStyle(0xc9e58c,alpha).fillEllipse(tip.x,tip.y,6,3);
+      }
+    }
+    for (const echo of state.echoes) {
+      const p=this.point(echo.at), w=echo.radius*2*this.scale.width/MAP.width, h=echo.radius*2*this.scale.height/MAP.height;
+      this.trails.lineStyle(2,0xffd071,.7).strokeEllipse(p.x,p.y,w,h);
+      this.trails.fillStyle(0xff8b36,.12).fillEllipse(p.x,p.y,w,h);
+    }
+    for (const effect of state.visuals) {
+      const event = effect.event;
       if (event.type === "shot") {
         const c = CORES[event.core], from = this.point(event.from), to = this.point(event.to), t = Math.min(1, effect.age / .2);
         const x = from.x + (to.x - from.x) * t, y = from.y + (to.y - from.y) * t;
@@ -103,12 +120,16 @@ export class DefenseScene extends Phaser.Scene {
           this.trails.lineStyle(event.core === "volcano" ? 4 : 2, c.color, Math.max(0, 1 - age)).strokeCircle(to.x, to.y, preferences.reducedMotion ? 8 : r * Math.max(.2, age));
           if (event.core === "wash" || event.core === "wildwood") this.trails.lineStyle(2, 0xb7f8e5, .6).strokeEllipse(to.x, to.y, r * 1.7, r * .8);
         }
+      } else if (event.type === 'echo') {
+        const p=this.point(event.at), t=Math.min(1,effect.age/.6), w=event.radius*2*this.scale.width/MAP.width, h=event.radius*2*this.scale.height/MAP.height;
+        this.trails.fillStyle(0xffac3e,.28*(1-t)).fillEllipse(p.x,p.y,w,h);
+        this.trails.lineStyle(4,0xffe5a0,1-t).strokeEllipse(p.x,p.y,w*(preferences.reducedMotion?1:.4+.6*t),h*(preferences.reducedMotion?1:.4+.6*t));
+        for(let i=0;i<5;i++) { const a=i*Math.PI*2/5; this.trails.fillStyle(0xffb448,1-t).fillCircle(p.x+Math.cos(a)*w*.35*t,p.y+Math.sin(a)*h*.35*t-(preferences.reducedMotion?0:14*Math.sin(t*Math.PI)),3); }
       } else if (event.type === "defeat" && !preferences.reducedMotion) {
         const p = this.point(event.at); this.trails.fillStyle(0xffec9d, Math.max(0, 1 - effect.age * 2));
         for (let i = 0; i < 4; i++) this.trails.fillCircle(p.x + Math.cos(i * Math.PI / 2) * effect.age * 30, p.y + Math.sin(i * Math.PI / 2) * effect.age * 30, 2);
       }
     }
-    this.effects = this.effects.filter(e => e.age < .43).slice(-90);
   }
-  reset(): void { this.effects = []; this.accumulator = 0; }
+  reset(): void { this.accumulator = 0; this.trails?.clear(); }
 }

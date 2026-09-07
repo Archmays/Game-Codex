@@ -55,6 +55,8 @@ jobs:
 
       - name: Validate independent memory and tower defense balance
         run: pnpm run test:memory-match && pnpm run validate:hanzi-tower-defense
+        env:
+          TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP3/tower
 
       - name: Build static site
         run: pnpm build
@@ -86,7 +88,7 @@ jobs:
       - name: Validate Hanzi tower defense full battle and controls
         run: pnpm run test:e2e:hanzi-tower-defense
         env:
-          TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP2/tower
+          TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP3/tower
 
       - name: Validate word adventure solvability and ordinary five-room play
         run: pnpm run validate:hanzi-word-adventure && pnpm run test:e2e:hanzi-word-adventure
@@ -100,6 +102,7 @@ jobs:
             test-results/portfolio-smoke
             test-results/math-world
             test-results/hanzi-tower-defense
+            tmp/tasks/GAME-CODEX-STEP3/tower/browser-failures
             test-results/play-readiness
             test-results/interaction-integrity
             tmp/tasks/GAME-CODEX-STEP2/browser-failures

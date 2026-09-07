@@ -2,7 +2,8 @@ import Phaser from "phaser";
 import type { GameDefinition, MountedGame } from "../../packages/game-core";
 import { BattleAudio } from "./audio";
 import { CORES, CORE_ORDER, recipeCandidates, recipeFor, RECIPES, type CoreKind, type Recipe } from "./content";
-import { DEFAULT_SEED, deploy, ENEMIES, fuse, MAP, newBattle, recycle, SLOTS, startWave, stow, WAVES, type BattleEvent, type Core } from "./model";
+import { activeResonance, attachedEnglish, DEFAULT_SEED, deploy, equipEnglish, fuse, MAP, newBattle, previewEquipment, recycle, SLOTS, startWave, stow, unequipEnglish, WAVES, type BattleEvent, type Core, type EquipmentPreview } from "./model";
+import { englishMapping, resonanceFor, RESONANCES } from "./resonance";
 import { openSave, type StorageLike } from "./save";
 import { DefenseScene } from "./scene";
 import "./styles.css";
@@ -25,6 +26,8 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
   let inspectedId: number | null = null, hoveredSlot: number | null = null, focusedSlot: number | null = null;
   let viewSource: "hover" | "focus" = "hover";
   let draggedId: number | null = null, showAllRanges = false, rangeSignature = "";
+  let englishSelected: number | null = null, equipmentTarget: number | null = null, englishDragged: number | null = null;
+  let equipmentPreview: EquipmentPreview | null = null, pendingRecycle: number | null = null, englishSignature = "";
   const audio = new BattleAudio(); audio.muted = preferences.muted;
   const timers = new Set<number>();
   root.className = "td-mount";
@@ -36,20 +39,24 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     <div class="td-layout"><section class="td-battle-column" aria-label="守城战场">
       <div class="td-board" data-td-board><div class="td-canvas" data-td-canvas aria-hidden="true"></div>
         <svg class="td-ranges" data-td-ranges viewBox="0 0 ${MAP.width} ${MAP.height}" preserveAspectRatio="none" aria-hidden="true"></svg>
-        <div class="td-slots" aria-label="八个塔位">${SLOTS.map((slot, index) => `<button type="button" class="td-slot" data-slot="${index}" style="left:${slot.x / MAP.width * 100}%;top:${slot.y / MAP.height * 100}%" aria-label="塔位${index + 1} ${slot.name}，空位"><span class="td-slot-glyph">＋</span><small>${index + 1}</small></button>`).join("")}</div>
+        <div class="td-slots" aria-label="八个塔位">${SLOTS.map((slot, index) => `<button type="button" class="td-slot" data-slot="${index}" style="left:${slot.x / MAP.width * 100}%;top:${slot.y / MAP.height * 100}%" aria-label="塔位${index + 1} ${slot.name}，空位"><img class="td-tower-art" alt="" hidden><span class="td-slot-glyph">＋</span><small>${index + 1}</small></button>`).join("")}</div>
         <span class="td-road-entry" aria-hidden="true">来路 →</span><div class="td-field-message" data-td-field-message hidden></div><div class="td-drops" data-td-drops aria-hidden="true"></div><div class="td-synthesis" data-td-synthesis aria-hidden="true" hidden></div>
       </div>
       <div class="td-range-tools"><span data-td-range-caption>指向或点选字塔，查看攻击范围</span><button type="button" data-td-all-ranges aria-pressed="false">显示全部射程</button></div>
+      <button type="button" class="td-english-notice" data-td-english-notice hidden></button>
       <div class="td-wave-action"><p data-td-wave-hint></p><button type="button" class="td-primary" data-td-next>开始这一波</button></div>
       <p class="td-feedback" role="status" aria-live="polite" data-td-feedback>火塔已就位。点一枚材料，再点空塔位。也可以先暂停。</p>
       <div class="td-enemy-key" aria-label="怪物特点"><span><i class="td-monster-dot td-monster-dot--swarm"></i>团团怪 · 成群</span><span><i class="td-monster-dot td-monster-dot--swift"></i>疾风怪 · 快速</span><span><i class="td-monster-dot td-monster-dot--stone"></i>石甲怪 · 耐打</span></div>
     </section>
     <aside class="td-workbench" aria-label="部署与组合">
       <section class="td-inventory"><div class="td-section-head"><h2>字核材料</h2><span>掉落自动收好</span></div><div class="td-bag" data-td-bag></div><p class="td-bag-empty" data-td-bag-empty hidden>材料都在塔上。点塔也能组合。</p></section>
+      <section class="td-english" aria-label="英文共鸣装备"><div class="td-section-head"><h2>共鸣词核</h2><span>完整英文 · 装入同义词塔</span></div><div data-td-english-bag></div><p class="td-english-empty" data-td-english-empty>战利品会带来英文词核。拾得后，点英文和字塔，预览再装备。</p>
+        <div class="td-equipment-detail" data-td-equipment-detail hidden><p data-td-equipment-copy></p><div class="td-equipment-actions"><button type="button" class="td-primary" data-td-equip hidden>确认装备</button><button type="button" data-td-unequip hidden>卸下到背包</button><button type="button" data-td-confirm-recycle hidden>确认回收并返还英文</button><button type="button" data-td-cancel-equipment>取消共鸣选择</button></div></div>
+      </section>
       <section class="td-composer" aria-label="合字与组词"><div class="td-section-head"><h2>组合台</h2><button type="button" class="td-text-button" data-td-clear>取消选择</button></div><div class="td-selection" data-td-selection></div><div class="td-recipe-preview" data-td-preview></div><div class="td-partners" data-td-partners></div><div class="td-fusion-target" data-td-target></div><div class="td-compose-actions"><button type="button" class="td-primary" data-td-fuse disabled>选两枚字核</button></div>
       <div class="td-item-actions"><button type="button" data-td-stow hidden>收回材料栏</button><button type="button" data-td-recycle hidden>回收修城</button></div></section>
       <details class="td-recipes"><summary>看看能怎样组合</summary><div class="td-recipe-list">${RECIPES.map(r => `<button type="button" data-recipe="${r.id}"><span>${r.inputs.map(k => CORES[k].glyph).join(" ＋ ")} <b>→ ${CORES[r.result].glyph}</b></span><small>${r.structure === "word" ? "组词 · 保留词序" : r.structure === "top-bottom" ? "合字 · 上下" : "合字 · 左右"}</small></button>`).join("")}</div></details>
-      <details class="td-help"><summary>操作小提示</summary><p>点材料或塔上的字，再点空位部署。选两枚字核，先看结构和去向，再确认组合；材料先选谁都可以。点亮的字核能搭配，选满两枚后点另一枚可换搭档。</p><p>指向或聚焦字塔只查看攻击范围；范围圈表示能选择攻击目标的距离，命中后的爆炸或减速扩散另算。选一枚字核，指向空位可先看覆盖，触屏直接点空位即可部署。</p><p>键盘用 Tab 与 Enter，P 暂停，Esc 取消选择。鼠标可拖字核到空位部署，拖到字塔则先预览组合；触屏点两枚字核，再确认即可。</p><p>刷新回到这一波开始前，已完成波次保留。未完成波次的掉落随本波重来。多余材料可回收修补本局城门。</p><p>法术是游戏想象，不是字源。“氵”叫三点水，是非成字部件。</p></details>
+      <details class="td-help"><summary>操作小提示</summary><p>点材料或塔上的字，再点空位部署。选两枚字核，先看结构和去向，再确认组合；材料先选谁都可以。点亮的字核能搭配，选满两枚后点另一枚可换搭档。</p><p>英文核是装备，每枚只强化一座同义中文词塔。先点英文再点塔、先点塔再点英文，或把英文拖到塔上，都先预览再确认。材料栏里的完整中文词核也能装备，再部署。还没合出对应词塔，可以先保留英文核。</p><p>战中可以首次装备；卸下、转移和回收带附件的字核，等这一波结束再做。暂停仍在战中。移动或收回字塔，英文会跟随。</p><p>指向或聚焦字塔只查看攻击范围；范围圈表示能选择攻击目标的距离，命中后的爆炸或减速扩散另算。选一枚字核，指向空位可先看覆盖，触屏直接点空位即可部署。</p><p>键盘用 Tab 与 Enter，P 暂停，Esc 取消选择。鼠标可拖字核到空位部署，拖到字塔则先预览组合；触屏点两枚字核，再确认即可。</p><p>刷新回到这一波开始前，已完成波次保留。未完成波次的中英文掉落、装备和材料消耗一起重来。多余材料可回收修补本局城门。</p><p>法术是游戏想象，不是字源。“氵”叫三点水，是非成字部件。</p></details>
       <p class="td-save-note" data-td-save-note></p>
     </aside></div>
     <dialog class="td-dialog" data-td-restart-dialog aria-labelledby="td-restart-title"><h2 id="td-restart-title">重新守一次青岚关？</h2><p>从第一波重新布阵，已经发现的配方会留下。</p><div><button type="button" data-td-cancel-restart>继续这一局</button><button type="button" class="td-primary" data-td-confirm-restart>重新开始</button></div></dialog>
@@ -75,6 +82,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     if (state.phase === "lost" || state.phase === "won") return;
     const item = state.cores.find(c => c.id === id); if (!item) return;
     if (item.slot !== null) inspectedId = id;
+    if (englishSelected !== null) { equipmentTarget = id; selection = [id]; pendingRecycle = null; renderInventory(); renderEquipment(); renderRanges(); return; }
     if (freshResult && (selection.includes(id) || !isPartner(item))) selection = [];
     const next = selection.includes(id) ? selection.filter(x => x !== id) : selection.length >= 2 ? [selection[0], id] : [...selection, id];
     prepare(next);
@@ -82,6 +90,10 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     if (selected.length === 1) { const c = CORES[selected[0].kind]; message(`${c.glyph} · ${c.pinyin}。${c.attack}。点空塔位部署，或再选一枚字核。`); }
   }
   function isPartner(core: Core): boolean {
+    if (englishSelected !== null) {
+      const english = state.englishCores.find(e => e.id === englishSelected), mapping = english && englishMapping(english);
+      return !!mapping && mapping.coreId === core.kind && english.attachedTo !== core.id && !attachedEnglish(state, core.id);
+    }
     const a = selectedCores()[0]; return !!a && a.id !== core.id && recipeCandidates(a.kind, core.kind).length > 0;
   }
   function renderRanges(): void {
@@ -93,15 +105,16 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     const preview = pointerSlot !== null && !hovered && material ? { ...material, slot: pointerSlot } : undefined;
     const active = hovered ?? preview ?? inspected;
     const circles = showAllRanges ? state.cores.filter(c => c.slot !== null && (preview || c.id !== active?.id)) : [];
-    const signature = `${showAllRanges}:${circles.map(c => `${c.id}:${c.kind}:${c.slot}`).join('|')}/${active?.id}:${active?.kind}:${active?.slot}:${!!preview}`;
+    const resonance=active && activeResonance(state,active);
+    const signature = `${showAllRanges}:${circles.map(c => `${c.id}:${c.kind}:${c.slot}`).join('|')}/${active?.id}:${active?.kind}:${active?.slot}:${!!preview}:${resonance?.english.id}`;
     if (signature === rangeSignature) return; rangeSignature = signature;
     const circle = (c: Core, mode: string) => `<circle data-range-id="${c.id}" data-range-kind="${c.kind}" data-range-slot="${c.slot}" data-range-mode="${mode}" cx="${SLOTS[c.slot!].x}" cy="${SLOTS[c.slot!].y}" r="${CORES[c.kind].range}" class="td-range td-range--${mode}" vector-effect="non-scaling-stroke"/>`;
     el("[data-td-ranges]").innerHTML = circles.map(c => circle(c, 'all')).join('') + (active ? circle(active, preview ? 'preview' : 'inspect') : '');
-    el("[data-td-range-caption]").textContent = active ? `${CORES[active.kind].glyph} · 攻击范围${preview ? `预览 · 塔位 ${active.slot! + 1}` : ` · 塔位 ${active.slot! + 1}`}` : showAllRanges ? '全部字塔 · 攻击范围' : '指向或点选字塔，查看攻击范围';
+    el("[data-td-range-caption]").textContent = active ? `${CORES[active.kind].glyph} · 攻击范围${preview ? `预览 · 塔位 ${active.slot! + 1}` : ` · 塔位 ${active.slot! + 1}`}${resonance ? ` · ${resonance.mapping.text} · ${resonance.mapping.effectName}` : ''}` : showAllRanges ? '全部字塔 · 攻击范围' : '指向或点选字塔，查看攻击范围';
   }
   function renderInventory(): void {
     selection = selection.filter(id => state.cores.some(c => c.id === id));
-    const signature = state.cores.map(c => `${c.id}:${c.kind}:${c.slot}`).join("|") + `:${selection.join()}`;
+    const signature = state.cores.map(c => `${c.id}:${c.kind}:${c.slot}`).join("|") + `:${selection.join()}:${englishSelected}:${state.englishCores.map(e=>`${e.id}:${e.attachedTo}`).join('|')}`;
     if (signature === inventorySignature) return; inventorySignature = signature;
     const inBag = state.cores.filter(c => c.slot === null).sort((a, b) => CORE_ORDER.indexOf(a.kind) - CORE_ORDER.indexOf(b.kind) || a.id - b.id);
     for (const old of [...bag.querySelectorAll<HTMLElement>("[data-core]")]) if (!inBag.some(c => c.id === Number(old.dataset.core))) old.remove();
@@ -114,7 +127,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
         item.addEventListener("dragend", endDrag);
       }
       const definition = CORES[c.kind]; item.style.setProperty("--core-color", color(c.kind));
-      item.innerHTML = `<strong${definition.glyph.length > 1 ? ' class="td-word"' : ""}>${definition.glyph}</strong><small>${isPartner(c) ? "可搭配" : definition.role === "非成字部件" ? "三点水" : definition.pinyin}</small>`;
+      item.innerHTML = `<strong${definition.glyph.length > 1 ? ' class="td-word"' : ""}>${definition.glyph}</strong><small>${attachedEnglish(state,c.id) ? "已共鸣" : isPartner(c) ? englishSelected !== null ? "可共鸣" : "可搭配" : definition.role === "非成字部件" ? "三点水" : definition.pinyin}</small>`;
       item.classList.toggle("td-partner", isPartner(c));
       item.setAttribute("aria-label", `材料 ${definition.glyph} ${definition.pinyin}，${definition.attack}${isPartner(c) ? "，可搭配" : ""}`); item.setAttribute("aria-pressed", String(selection.includes(c.id)));
       // Appending an existing node preserves its identity and event handlers; restore focus below if browsers blur a moved node.
@@ -126,6 +139,10 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
       slot.classList.toggle("td-slot--occupied", !!c); slot.classList.toggle("td-slot--selected", !!c && selection.includes(c.id));
       slot.classList.toggle("td-partner", !!c && isPartner(c)); slot.draggable = !!c;
       slot.dataset.towerId = c ? String(c.id) : "";
+      slot.dataset.kind = c?.kind ?? ""; slot.dataset.resonant = String(!!c && !!activeResonance(state,c));
+      const art = slot.querySelector<HTMLImageElement>('.td-tower-art')!, illustrated = c?.kind === 'volcano' || c?.kind==='wildwood';
+      slot.classList.toggle('td-slot--illustrated', illustrated); art.hidden = !illustrated;
+      if (illustrated) { const src = `./assets/hanzi-tower-defense/${c?.kind==='wildwood'?'mountain-forest':'volcano'}-${activeResonance(state,c!) ? 'resonant' : 'base'}.png`; if (art.getAttribute('src') !== src) art.setAttribute('src',src); }
       slot.classList.toggle("td-slot--available", !c && selection.length === 1);
       slot.style.setProperty("--core-color", c ? color(c.kind) : "#c8ceba");
       slot.querySelector(".td-slot-glyph")!.textContent = c ? CORES[c.kind].glyph : "＋";
@@ -135,7 +152,12 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     }
   }
   function renderComposer(): void {
+    el('.td-composer').hidden = englishSelected !== null || pendingRecycle !== null;
     const selected = selectedCores(), a = selected[0], b = selected[1];
+    const completeWord=selected.length===1 && CORES[a.kind].structure==='word';
+    el('.td-composer').dataset.wordDetail=String(completeWord);
+    el('.td-composer h2').textContent=completeWord?'字塔详情':'组合台';
+    el('[data-td-selection]').hidden=completeWord; el('.td-compose-actions').hidden=completeWord;
     const candidates = a && b ? recipeCandidates(a.kind, b.kind) : [];
     const recipe = a && b ? recipeFor(a.kind, b.kind, chosenRecipe) : undefined;
     el("[data-td-selection]").innerHTML = [0, 1].map((index) => { const item = selected[index]; return `<span class="td-selected-core${item ? " has-core" : ""}">${item ? `${CORES[item.kind].glyph}<small>${item.slot === null ? "材料栏" : `塔位 ${item.slot + 1}`}</small>` : `<small>第${index + 1}枚字核</small>`}</span>`; }).join('<span class="td-plus">＋</span>');
@@ -145,7 +167,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     } else if (candidates.length > 1) {
       preview.innerHTML = '<p>这些材料能组合出不同结果，选一个：</p>' + candidates.map(r => `<button type="button" data-result-recipe="${r.id}">${CORES[r.result].glyph}</button>`).join('');
     } else if (a && b) preview.innerHTML = '<p class="td-invalid">暂无配方。点亮的字核可换搭档，或取消选择；材料和字塔都还在。</p>';
-    else if (a) { const c = CORES[a.kind]; preview.innerHTML = `<p><b>${c.glyph} · ${c.pinyin}</b><br>${escape(c.meaning)}<br>${c.attack}</p>`; }
+    else if (a) { const c = CORES[a.kind], resonance = activeResonance(state,a), mapping = resonanceFor(a.kind); preview.innerHTML = `<p><b>${c.glyph} · ${c.pinyin}</b><br>${escape(c.meaning)}<br>${c.attack}${resonance ? `<br><strong lang="en">${resonance.mapping.text}</strong><br>${resonance.mapping.effectName}：${resonance.mapping.effectText}` : mapping ? `<br>拾得 <span lang="en">${mapping.text}</span> 后，点英文核可预览共鸣。` : ''}</p>`; }
     else preview.innerHTML = '<p>点塔上的字或栏里的材料。<br>两枚字核在这里先预览，再组合。</p>';
     const partners = el("[data-td-partners]");
     const availableRecipes = a ? RECIPES.filter(r => CORE_ORDER.some(k => recipeCandidates(a.kind, k).includes(r))) : [];
@@ -153,15 +175,61 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
       const other = r.inputs[r.inputs[0] === a.kind ? 1 : 0];
       const available = state.cores.some(c => c.id !== a.id && c.kind === other);
       return `<p>${CORES[a.kind].glyph} ＋ ${CORES[other].glyph} → <b>${CORES[r.result].glyph}</b> · ${available ? "点亮的搭档可组合" : `还缺 ${CORES[other].glyph}`}</p>`;
-    }).join('') || (a ? '<p>这枚字核暂无组合配方，可先部署。</p>' : '') : '';
+    }).join('') || (a ? completeWord ? `<p>完整中文词核${a.slot===null?'可部署到空塔位':'已在塔位 '+(a.slot+1)}。${attachedEnglish(state,a.id)?'点英文词核可查看卸下或转移。':'点同义英文词核，可预览装备。'}</p>` : '<p>这枚字核暂无组合配方，可先部署。</p>' : '') : '';
     const destination = el("[data-td-target]"), towers = selected.filter(c => c.slot !== null);
     destination.innerHTML = recipe ? fusionTarget === null ? '<p>产物放入材料栏</p>' : `<p>保留塔位 ${fusionTarget + 1}${towers.length === 2 ? `，释放塔位 ${towers.find(c => c.slot !== fusionTarget)!.slot! + 1}` : ''}</p>${towers.length === 2 ? towers.map(c => `<button type="button" data-fusion-target="${c.slot}" aria-pressed="${fusionTarget === c.slot}">留在塔位 ${c.slot! + 1}</button>`).join('') : ''}` : '';
     const confirm = button("[data-td-fuse]"); confirm.disabled = !recipe || state.phase === "won" || state.phase === "lost";
     confirm.textContent = recipe ? (fusionTarget !== null ? "组合并替换字塔" : "组合放入材料栏") : a && b ? candidates.length ? "先选组合结果" : "暂无配方" : "选两枚字核";
     button("[data-td-stow]").hidden = selected.length !== 1 || a.slot === null;
     button("[data-td-recycle]").hidden = selected.length !== 1 || a.slot !== null;
-    button("[data-td-recycle]").disabled = state.health >= 16;
-    button("[data-td-recycle]").textContent = state.health >= 16 ? "城门完好，无需回收" : `回收修城 ＋${Math.min(16 - state.health, a ? CORES[a.kind].recycle : 0)}`;
+    const attached = a && attachedEnglish(state,a.id);
+    button("[data-td-recycle]").disabled = state.health >= 16 || !!attached && state.phase === 'battle';
+    button("[data-td-recycle]").textContent = state.health >= 16 ? "城门完好，无需回收" : attached && state.phase === 'battle' ? '带英文核，波间再回收' : `回收修城 ＋${Math.min(16 - state.health, a ? CORES[a.kind].recycle : 0)}${attached ? ' · 先预览' : ''}`;
+  }
+  function chooseEnglish(id: number): void {
+    audio.unlock(); if (!state.englishCores.some(e => e.id === id)) return;
+    englishSelected = id; equipmentTarget = selectedCores().length === 1 ? selectedCores()[0].id : null;
+    selection = equipmentTarget === null ? [] : [equipmentTarget]; pendingRecycle = null; freshResult = false;
+    renderEquipment(); renderInventory(); renderComposer();
+    message('点亮的完整中文词核可以共鸣。选好塔位或背包字核，再确认装备。');
+  }
+  function renderEquipment(): void {
+    const signature = `${englishSelected}:${equipmentTarget}:${pendingRecycle}:${state.phase}:${state.health}:${state.englishCores.map(e=>`${e.id}:${e.attachedTo}`).join('|')}:${state.cores.map(c=>`${c.id}:${c.slot}`).join('|')}`;
+    if (englishSignature === signature) return; englishSignature = signature;
+    const list = el('[data-td-english-bag]');
+    for (const old of list.querySelectorAll<HTMLElement>('[data-english]')) if (!state.englishCores.some(e=>e.id===Number(old.dataset.english))) old.remove();
+    for (const e of state.englishCores) {
+      const mapping = englishMapping(e); if (!mapping) continue;
+      let node = list.querySelector<HTMLButtonElement>(`[data-english="${e.id}"]`);
+      if (!node) { node=document.createElement('button'); node.type='button'; node.className='td-english-core'; node.dataset.english=String(e.id); node.draggable=true;
+        node.addEventListener('click',()=>chooseEnglish(e.id));
+        node.addEventListener('dragstart',event=>{ englishDragged=e.id; chooseEnglish(e.id); event.dataTransfer?.setData('text/plain',`english:${e.id}`); });
+        node.addEventListener('dragend',()=>{englishDragged=null;endDrag();}); list.append(node); }
+      const owner=state.cores.find(c=>c.id===e.attachedTo);
+      node.innerHTML=`<strong lang="en">${mapping.text}</strong><span>${CORES[mapping.coreId].glyph} · ${owner ? owner.slot===null ? '已装备 · 材料栏' : `已装备 · 塔位 ${owner.slot+1}` : '可装备'}</span>`;
+      node.setAttribute('aria-pressed',String(englishSelected===e.id)); node.dataset.attachedTo=String(e.attachedTo ?? '');
+    }
+    el('[data-td-english-empty]').hidden=state.englishCores.length>0;
+    const unequipped=state.englishCores.filter(e=>e.attachedTo===null), notice=button('[data-td-english-notice]'); notice.hidden=!unequipped.length;
+    notice.textContent=unequipped.map(e=>{const r=englishMapping(e)!;return `${r.text} → ${CORES[r.coreId].glyph}`;}).join('；')+' · 已收好，查看装备';
+    const english=state.englishCores.find(e=>e.id===englishSelected), mapping=english && englishMapping(english), target=state.cores.find(c=>c.id===equipmentTarget);
+    equipmentPreview = english && target ? previewEquipment(state,english.id,target.id) : null;
+    const detail=el('[data-td-equipment-detail]'); detail.hidden=!english && pendingRecycle===null;
+    button('[data-td-equip]').hidden=!english || !target || pendingRecycle!==null;
+    button('[data-td-equip]').disabled=!equipmentPreview?.ok;
+    button('[data-td-equip]').textContent=english?.attachedTo!==null && english?.attachedTo!==target?.id ? '确认转移到这里' : '确认装备';
+    button('[data-td-unequip]').hidden=!english || english.attachedTo===null || pendingRecycle!==null;
+    button('[data-td-unequip]').disabled=state.phase!=='ready';
+    button('[data-td-unequip]').textContent=state.phase==='battle'?'卸下要等波间':'卸下到背包';
+    button('[data-td-confirm-recycle]').hidden=pendingRecycle===null;
+    const copy=el('[data-td-equipment-copy]');
+    if (pendingRecycle!==null) {
+      const c=state.cores.find(c=>c.id===pendingRecycle), attachment=c && attachedEnglish(state,c.id), r=attachment && englishMapping(attachment);
+      button('[data-td-confirm-recycle]').disabled=!c || c.slot!==null || state.health>=16 || state.phase!=='ready';
+      copy.textContent=c && r ? `回收 ${CORES[c.kind].glyph} 修城 ＋${Math.min(16-state.health,CORES[c.kind].recycle)}，${r.text} 原枚返还背包。确认后才会改变材料。`:'材料已变化，没有消耗。';
+    } else if (mapping) {
+      copy.innerHTML=`<b>${CORES[mapping.coreId].glyph} ↔ <span lang="en">${mapping.text}</span></b><br>${mapping.meaning} · ${mapping.form==='word'?'英文词':'英文短语'}<br><strong>${mapping.effectName}</strong> · ${mapping.effectText}<br>${target ? `目标：${CORES[target.kind].glyph} · ${target.slot===null?'材料栏':`塔位 ${target.slot+1}`}<br>${escape(equipmentPreview!.reason)}` : `点一座亮起的${CORES[mapping.coreId].glyph}塔，或材料栏里的完整${CORES[mapping.coreId].glyph}。<br>${mapping.recipe}`}${english?.attachedTo!==null ? '<br>这枚已装备。波间可选另一座同义词塔转移；战中只能查看。' : ''}`;
+    }
   }
   function updateStatus(): void {
     if (destroyed) return;
@@ -179,7 +247,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     button("[data-td-mute]").setAttribute("aria-pressed", String(preferences.muted)); button("[data-td-mute]").textContent = preferences.muted ? "开启声音" : "静音";
     button("[data-td-motion]").setAttribute("aria-pressed", String(preferences.reducedMotion));
     const signature = `${state.health}:${state.phase}`; if (signature !== statusSignature) { statusSignature = signature; renderComposer(); }
-    renderInventory(); renderRanges();
+    renderInventory(); renderEquipment(); renderRanges();
     if ((state.phase === "won" || state.phase === "lost") && !resultDialog.open) {
       el("#td-result-title").textContent = state.phase === "won" ? "青岚关，守住了！" : "这次先退回城里";
       el("[data-td-result-copy]").textContent = state.phase === "won" ? `六波都已结束。城门还有 ${state.health} 点耐久，你的字阵挡住了 ${state.kills} 只怪物。` : `守到了第 ${state.wave + 1} 波。把范围塔放在弯道，减速塔留在来路，再试一次。`;
@@ -195,6 +263,16 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
   function handleEvents(events: BattleEvent[]): void {
     for (const event of events) {
       if (event.type === "shot") audio.play(["volcano", "mountain", "wildwood"].includes(event.core) ? "heavy" : "shot");
+      if (event.type === "shot") {
+        const tower = root.querySelector<HTMLElement>(`[data-tower-id="${event.coreId}"]`);
+        if (tower && !preferences.reducedMotion) { tower.classList.remove('td-firing'); void tower.offsetWidth; tower.classList.add('td-firing'); }
+      }
+      if (event.type === "echo") { audio.play('echo'); gameRoot.dataset.echoes = String(Number(gameRoot.dataset.echoes ?? 0)+1); }
+      if (event.type === 'roots') { audio.play('roots'); gameRoot.dataset.rootBursts=String(Number(gameRoot.dataset.rootBursts??0)+1); }
+      if (event.type === "english-drop") {
+        const mapping=RESONANCES.find(r=>r.grantId===event.grantId)!; audio.play('drop'); renderEquipment(); renderInventory();
+        message(`拾得 ${mapping.text}，已自动收好。可装入${CORES[mapping.coreId].glyph}，得到${mapping.effectName}；还没合成也可以先保留。`);
+      }
       if (event.type === "defeat") audio.play("defeat");
       if (event.type === "drop") {
         audio.play("drop"); const drop = document.createElement("span"); drop.className = "td-drop"; drop.textContent = CORES[event.core].glyph;
@@ -224,11 +302,14 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
   game.events.once(Phaser.Core.Events.READY, resizeCanvas);
   function clearSelection(): void {
     inspectedId = null; hoveredSlot = null; focusedSlot = null; draggedId = null;
+    englishSelected = null; equipmentTarget = null; englishDragged=null; equipmentPreview=null; pendingRecycle=null;
+    renderEquipment();
     prepare([]);
   }
   function place(slot: number): void {
     audio.unlock(); const item = state.cores.find(c => c.slot === slot);
     if (item) { choose(item.id); return; }
+    if (englishSelected!==null) { message('英文核装入完整中文词塔。先点亮起的字塔或背包词核；空位不能单独部署英文。'); return; }
     const selected = selectedCores();
     if (selected.length === 1 && deploy(state, selected[0].id, slot)) { message(`${CORES[selected[0].kind].glyph}已部署到${SLOTS[slot].name}。`); audio.play("deploy"); prepare([]); inspectedId = selected[0].id; persist(); }
     else message("先选一枚材料，再点这个塔位。选了两枚时，先在组合台确认。");
@@ -249,7 +330,14 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     slot.addEventListener("dragover", event => { event.preventDefault(); hoveredSlot = index; viewSource = "hover"; renderRanges(); });
     slot.addEventListener("dragleave", event => { if (!slot.contains(event.relatedTarget as Node | null)) { hoveredSlot = null; renderRanges(); } });
     slot.addEventListener("drop", event => {
-      event.preventDefault(); const id = Number(event.dataTransfer?.getData("text/plain"));
+      event.preventDefault(); const text = event.dataTransfer?.getData("text/plain");
+      if (englishDragged!==null && text===`english:${englishDragged}`) {
+        const target=state.cores.find(c=>c.slot===index);
+        if (target) { inspectedId=target.id; equipmentTarget=target.id; selection=[target.id]; renderEquipment(); renderInventory(); renderComposer(); message('已准备共鸣，请看实际效果再确认。'); }
+        else message('英文核用于完整中文词塔，不能单独放在空塔位。');
+        englishDragged=null; endDrag(); return;
+      }
+      const id = Number(text);
       if (!Number.isSafeInteger(id) || !state.cores.some(c => c.id === id)) { message("没有可用的源材料，字塔和材料都未改变。"); return; }
       const target = state.cores.find(c => c.slot === index);
       if (target) {
@@ -265,7 +353,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
   }
   function restart(): void {
     restartDialog.close(); resultDialog.close(); state = newBattle(DEFAULT_SEED, state.unlocked); clearSelection(); scene.reset();
-    inventorySignature = ""; statusSignature = ""; startWave(state); persist(); audio.unlock(); updateStatus(); message("新一局开始。火塔已就位，这次也可以试另一条组合路线。");
+    inventorySignature = ""; statusSignature = ""; englishSignature=""; delete gameRoot.dataset.echoes; delete gameRoot.dataset.rootBursts; startWave(state); persist(); audio.unlock(); updateStatus(); message("新一局开始。火塔已就位，这次也可以试另一条组合路线。");
   }
   button("[data-td-fuse]").addEventListener("click", () => {
     const [a, b] = selectedCores(); if (!a || !b) return;
@@ -291,7 +379,30 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     showAllRanges = !showAllRanges; button("[data-td-all-ranges]").setAttribute("aria-pressed", String(showAllRanges)); renderRanges();
   });
   button("[data-td-stow]").addEventListener("click", () => { const item = selectedCores()[0]; if (item && stow(state, item.id)) { clearSelection(); persist(); message("字核已收回，原塔位可以重新部署。"); } });
-  button("[data-td-recycle]").addEventListener("click", () => { const item = selectedCores()[0]; if (item) { const gain = recycle(state, item.id); if (gain) { clearSelection(); persist(); updateStatus(); message(`材料已回收，城门修补 ${gain} 点。`); } } });
+  button("[data-td-recycle]").addEventListener("click", () => { const item = selectedCores()[0]; if (item) {
+    if (attachedEnglish(state,item.id)) { pendingRecycle=item.id; renderEquipment(); renderComposer(); return; }
+    const gain = recycle(state, item.id); if (gain) { clearSelection(); persist(); updateStatus(); message(`材料已回收，城门修补 ${gain} 点。`); }
+  } });
+  button('[data-td-equip]').addEventListener('click',()=>{
+    if (!equipmentPreview || !equipEnglish(state,equipmentPreview)) return;
+    const c=state.cores.find(c=>c.id===equipmentPreview!.targetId)!; audio.unlock(); audio.play('equip');
+    message(`${CORES[c.kind].glyph}已装备 ${englishMapping(attachedEnglish(state,c.id)!)!.text}，共鸣开始。`);
+    englishSelected=null; equipmentTarget=null; equipmentPreview=null; prepare([c.id]); inspectedId=c.slot!==null?c.id:null;
+    persist(); renderEquipment(); updateStatus();
+  });
+  button('[data-td-unequip]').addEventListener('click',()=>{
+    const e=state.englishCores.find(e=>e.id===englishSelected); if (!e || e.attachedTo===null || !unequipEnglish(state,e.id,e.attachedTo)) return;
+    message('英文核已回到背包。可以选择另一座同义词塔，预览再装备。'); persist(); renderEquipment(); renderInventory(); renderComposer();
+  });
+  button('[data-td-confirm-recycle]').addEventListener('click',()=>{
+    if (pendingRecycle===null) return; const gain=recycle(state,pendingRecycle); if (!gain) { renderEquipment(); return; }
+    clearSelection(); persist(); updateStatus(); message(`字核已回收修城 ＋${gain}，英文核原枚返还背包。`);
+  });
+  button('[data-td-cancel-equipment]').addEventListener('click',()=>{clearSelection();message('已取消预览，所有字核与装备都还在。');});
+  button('[data-td-english-notice]').addEventListener('click',()=>{
+    const e=state.englishCores.find(e=>e.attachedTo===null); if (!e) return;
+    chooseEnglish(e.id); const control=button(`[data-english="${e.id}"]`); control.scrollIntoView({block:'center'});control.focus({preventScroll:true});
+  });
   for (const recipeButton of root.querySelectorAll<HTMLButtonElement>("[data-recipe]")) recipeButton.addEventListener("click", () => {
     const recipe = RECIPES.find(r => r.id === recipeButton.dataset.recipe)!;
     const candidates = [...state.cores].sort((a, b) => Number(a.slot !== null) - Number(b.slot !== null) || a.id - b.id);

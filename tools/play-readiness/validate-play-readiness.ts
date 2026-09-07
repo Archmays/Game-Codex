@@ -62,7 +62,7 @@ if (AUTHORIZED_DEVELOPMENT_CYCLES.length !== 2 || AUTHORIZED_DEVELOPMENT_CYCLES.
 if (JSON.stringify(GAME_PORTFOLIO.map(record => record.id).sort()) !== JSON.stringify(["hanzi-word-adventure", "hanzi-tower-defense", "equation-slider", "math-lab", "make-target", "memory-card"].sort())) issues.push("portfolio retirement inventory");
 if (JSON.stringify(PLAY_SURFACE_MANIFEST.filter(surface => surface.kind === "station").map(surface => surface.id)) !== JSON.stringify(["math-slider", "math-target"]) || PRIMARY_PLAY_SURFACES.length !== 5) issues.push("play surface inventory");
 if (PLAY_SURFACE_MANIFEST.filter((surface) => surface.kind === "classic-entry").length !== 3) issues.push("Classic count");
-if (KNOWN_SAVE_KEYS.length !== 39 || EXPORTABLE_SAVE_KEYS.length !== 38 || portfolioNamespacesWithoutKnownKey().length) issues.push("save key inventory");
+if (KNOWN_SAVE_KEYS.length !== 40 || EXPORTABLE_SAVE_KEYS.length !== 39 || portfolioNamespacesWithoutKnownKey().length) issues.push("save key inventory");
 if (prohibitedRuntimeTransmission.length) issues.push("prohibited runtime transmission");
 if (duplicateTrackedLargeBinaryGroups.length) issues.push("duplicate tracked large binaries");
 if (issues.length) throw new Error(`Play-readiness validation failed: ${issues.join(", ")}`);
