@@ -1,47 +1,32 @@
+import { DEFENSE_MAPS, mapFor, PATH, pathLength, type MapId, type Point, type EnemyKind } from "./maps";
 import { CORES, recipeFor, type CoreKind } from "./content";
 import { ECHO, ROOTS, englishMapping, RESONANCES, type EnglishCore, type GrantId, type EffectId } from "./resonance";
 
-export interface Point { x: number; y: number; }
+export type { Point } from "./maps";
 export const MAP = { width: 960, height: 640 } as const;
-export const PATH: readonly Point[] = [{ x: -25, y: 115 }, { x: 255, y: 115 }, { x: 255, y: 395 }, { x: 505, y: 395 }, { x: 505, y: 170 }, { x: 750, y: 170 }, { x: 750, y: 480 }, { x: 870, y: 435 }];
-export const SLOTS = [
-  { x: 150, y: 220, name: "入口弯内" }, { x: 365, y: 250, name: "双弯中心" },
-  { x: 390, y: 510, name: "下弯回射" }, { x: 620, y: 300, name: "三路交汇" },
-  { x: 630, y: 80, name: "上路远射" }, { x: 865, y: 270, name: "后路侧翼" },
-  { x: 640, y: 530, name: "末弯内侧" }, { x: 870, y: 555, name: "城门守卫" },
-] as const;
-const lengths = PATH.slice(1).map((p, i) => Math.hypot(p.x - PATH[i].x, p.y - PATH[i].y));
-export const PATH_LENGTH = lengths.reduce((a, b) => a + b, 0);
-export function pointOnPath(distance: number): Point {
-  let remaining = Math.max(0, distance);
-  for (let i = 0; i < lengths.length; i++) {
-    if (remaining <= lengths[i]) {
-      const t = remaining / lengths[i];
-      return { x: PATH[i].x + (PATH[i + 1].x - PATH[i].x) * t, y: PATH[i].y + (PATH[i + 1].y - PATH[i].y) * t };
-    }
-    remaining -= lengths[i];
-  }
-  return { ...PATH[PATH.length - 1] };
+export { PATH, SLOTS } from "./maps";
+export const WAVES = DEFENSE_MAPS["qinglan-pass"].waves;
+export const PATH_LENGTH = pathLength(PATH);
+export function pointOnPath(distance: number, mapId: MapId = "qinglan-pass", lane = 0): Point {
+ const path=mapFor(mapId).paths[lane]??mapFor(mapId).paths[0]; let remaining=Math.max(0,distance);
+ for(let i=1;i<path.length;i++) { const length=Math.hypot(path[i].x-path[i-1].x,path[i].y-path[i-1].y); if(remaining<=length) {const t=remaining/length;return {x:path[i-1].x+(path[i].x-path[i-1].x)*t,y:path[i-1].y+(path[i].y-path[i-1].y)*t};} remaining-=length; }
+ return {...path[path.length-1]};
 }
-export const distanceBetween = (a: Point, b: Point): number => Math.hypot(a.x - b.x, a.y - b.y);
-export type EnemyKind = "swarm" | "swift" | "stone";
+export const enemyPosition=(state:Checkpoint,enemy:Enemy):Point=>pointOnPath(enemy.distance,state.mapId,enemy.lane??0);
+export const remainingDistance=(state:Checkpoint,enemy:Enemy):number=>pathLength(mapFor(state.mapId).paths[enemy.lane??0])-enemy.distance;
+export const distanceBetween = (a:Point,b:Point):number=>Math.hypot(a.x-b.x,a.y-b.y);
 export const ENEMIES = {
-  swarm: { label: "团团怪", hp: 46, speed: 40, harm: 1, frame: 0 },
-  swift: { label: "疾风怪", hp: 60, speed: 77, harm: 1, frame: 1 },
-  stone: { label: "石甲怪", hp: 245, speed: 27, harm: 3, frame: 2 },
+ swarm:{label:"团团怪",hp:46,speed:40,harm:1,frame:0},
+ swift:{label:"疾风怪",hp:60,speed:77,harm:1,frame:1},
+ stone:{label:"石甲怪",hp:245,speed:27,harm:3,frame:2},
+ captain:{label:"烽台首领",hp:1650,speed:22,harm:6,frame:2},
 } as const;
-export const WAVES: readonly { label: string; hint: string; foes: readonly EnemyKind[]; interval: number; strength: number }[] = [
-  { label: "林口来客", hint: "团团怪结伴而来，弯道能多打几下。", foes: Array(12).fill("swarm"), interval: 2.3, strength: 1 },
-  { label: "风中的脚步", hint: "疾风怪跑得快，试试氵的减速。", foes: ["swarm", "swift", "swarm", "swarm", "swift", "swarm", "swift", "swarm", "swarm", "swift", "swarm", "swarm", "swift", "swarm", "swarm", "swift"], interval: 2.0, strength: 1.2 },
-  { label: "石头的回声", hint: "石甲怪走得慢、耐打，让重击塔覆盖长弯。", foes: ["stone", "swarm", "swarm", "swift", "stone", "swarm", "swarm", "swift", "stone", "swarm", "swarm", "swift", "stone", "swarm", "swift", "swarm", "stone", "swarm"], interval: 1.9, strength: 1.3 },
-  { label: "成群穿林", hint: "一大群挤在路上，范围攻击能同时击中它们。", foes: Array.from({ length: 24 }, (_, i) => i % 8 === 0 ? "stone" : i % 5 === 0 ? "swift" : "swarm"), interval: 1.45, strength: 1.5 },
-  { label: "两面来风", hint: "快慢混合，前路清群，后路接住疾风怪。", foes: Array.from({ length: 24 }, (_, i) => i % 5 === 0 ? "stone" : i % 2 === 0 ? "swift" : "swarm"), interval: 1.55, strength: 1.8 },
-  { label: "守住最后一弯", hint: "最后一波！先部署好，再打开城外的路。", foes: Array.from({ length: 28 }, (_, i) => i % 4 === 0 ? "stone" : i % 3 === 0 ? "swift" : "swarm"), interval: 1.55, strength: 2.1 },
-];
+export type { EnemyKind } from "./maps";
 export interface Core { id: number; kind: CoreKind; slot: number | null; cooldown: number; }
-export interface Enemy { id: number; kind: EnemyKind; distance: number; hp: number; maxHp: number; slow: number; slowUntil: number; zoneSlow?: number; }
+export interface Enemy { id: number; kind: EnemyKind; distance: number; hp: number; maxHp: number; slow: number; slowUntil: number; zoneSlow?: number; lane?: number; summons?: number; summonAt?: number; }
 export type Phase = "ready" | "battle" | "won" | "lost";
 export interface Checkpoint {
+  mapId?: MapId;
   seed: number; wave: number; health: number; cores: Core[]; nextCoreId: number; kills: number; leaks: number; elapsed: number;
   englishCores: EnglishCore[]; englishClaims: GrantId[]; englishSkipped: GrantId[]; nextEnglishId: number;
 }
@@ -71,30 +56,26 @@ export type BattleEvent =
 export const DEFAULT_SEED = 20260907;
 export const START_HEALTH = 16;
 export function checkpointOf(state: Checkpoint): Checkpoint {
-  return { seed: state.seed, wave: state.wave, health: state.health, cores: state.cores.map(c => ({ ...c })), nextCoreId: state.nextCoreId, kills: state.kills, leaks: state.leaks, elapsed: state.elapsed,
+  return { mapId: state.mapId ?? "qinglan-pass", seed: state.seed, wave: state.wave, health: state.health, cores: state.cores.map(c => ({ ...c })), nextCoreId: state.nextCoreId, kills: state.kills, leaks: state.leaks, elapsed: state.elapsed,
     englishCores: state.englishCores.map(c => ({ ...c })), englishClaims: [...state.englishClaims], englishSkipped: [...state.englishSkipped], nextEnglishId: state.nextEnglishId };
 }
-export function newBattle(seed = DEFAULT_SEED, unlocked: string[] = []): BattleState {
-  const base: Checkpoint = { seed: seed >>> 0, wave: 0, health: START_HEALTH, cores: [
-    { id: 1, kind: "fire", slot: 0, cooldown: 0 }, { id: 2, kind: "fire", slot: null, cooldown: 0 },
-    { id: 3, kind: "wood", slot: null, cooldown: 0 }, { id: 4, kind: "wood", slot: null, cooldown: 0 },
-    { id: 5, kind: "water", slot: null, cooldown: 0 }, { id: 6, kind: "mountain", slot: null, cooldown: 0 },
-  ], nextCoreId: 7, kills: 0, leaks: 0, elapsed: 0, englishCores: [], englishClaims: [], englishSkipped: [], nextEnglishId: 1 };
+export function newBattle(seed = DEFAULT_SEED, unlocked: string[] = [], mapId: MapId = "qinglan-pass"): BattleState {
+  const base: Checkpoint = { seed: seed >>> 0, wave: 0, health: START_HEALTH, mapId, cores: mapFor(mapId).starting.map((item,i)=>({id:i+1,...item,cooldown:0})), nextCoreId: mapFor(mapId).starting.length+1, kills: 0, leaks: 0, elapsed: 0, englishCores: [], englishClaims: [], englishSkipped: [], nextEnglishId: 1 };
   return resumeCheckpoint(base, unlocked);
 }
 export function resumeCheckpoint(checkpoint: Checkpoint, unlocked: string[]): BattleState {
   const base = checkpointOf(checkpoint);
-  return { ...base, phase: base.wave >= WAVES.length ? "won" : "ready", paused: false, waveTime: 0, spawned: 0, enemies: [], unlocked: [...unlocked], checkpoint: checkpointOf(base), waveKills: 0, waveDrops: 0, nextEnemyId: 1, echoes: [], nextEffectId: 1, visuals: [], rootZones: [], rootPulseAt: ROOTS.tick };
+  return { ...base, phase: base.wave >= mapFor(base.mapId).waves.length ? "won" : "ready", paused: false, waveTime: 0, spawned: 0, enemies: [], unlocked: [...unlocked], checkpoint: checkpointOf(base), waveKills: 0, waveDrops: 0, nextEnemyId: 1, echoes: [], nextEffectId: 1, visuals: [], rootZones: [], rootPulseAt: ROOTS.tick };
 }
 export function startWave(state: BattleState): boolean {
-  if (state.phase !== "ready" || state.wave >= WAVES.length) return false;
+  if (state.phase !== "ready" || state.wave >= mapFor(state.mapId).waves.length) return false;
   state.checkpoint = checkpointOf(state);
   state.phase = "battle"; state.paused = false; state.waveTime = 0; state.spawned = 0; state.waveKills = 0; state.waveDrops = 0;
   state.echoes = []; state.visuals = []; state.rootZones = []; state.rootPulseAt = ROOTS.tick;
   return true;
 }
 export function deploy(state: BattleState, id: number, slot: number): boolean {
-  if (state.phase === "won" || state.phase === "lost" || !Number.isInteger(slot) || !SLOTS[slot]) return false;
+  if (state.phase === "won" || state.phase === "lost" || !Number.isInteger(slot) || !mapFor(state.mapId).slots[slot]) return false;
   const item = state.cores.find(c => c.id === id);
   if (!item || state.cores.some(c => c.slot === slot && c.id !== id)) return false;
   item.slot = slot;
@@ -112,8 +93,8 @@ export function fuse(state: BattleState, first: number, second: number, target: 
   if (!a || !b) return null;
   const recipe = recipeFor(a.kind, b.kind, recipeId);
   const sourceSlots = [a.slot, b.slot].filter((slot): slot is number => slot !== null);
-  if (!recipe || (sourceSlots.length ? !sourceSlots.includes(target as number) : target !== null)
-    || (target !== null && (!Number.isInteger(target) || !SLOTS[target]
+  if (!recipe || (!mapFor(state.mapId).expanded && ["wood-grove", "canopy-grove"].includes(recipe.id)) || (sourceSlots.length ? !sourceSlots.includes(target as number) : target !== null)
+    || (target !== null && (!Number.isInteger(target) || !mapFor(state.mapId).slots[target]
     || state.cores.some(c => c.slot === target && c.id !== first && c.id !== second)))) return null;
   const result: Core = { id: state.nextCoreId++, kind: recipe.result, slot: target, cooldown: Math.max(a.cooldown, b.cooldown) };
   state.cores = [...state.cores.filter(c => c.id !== first && c.id !== second), result];
@@ -165,8 +146,9 @@ export function unequipEnglish(state: BattleState, englishId: number, expectedCo
 /** Kill drop and wave-end guarantee share the exact grant identity, independent of Chinese RNG. */
 function grantEnglish(state: BattleState, at: Point, waveEnd = false): BattleEvent[] {
   const events: BattleEvent[] = [];
-  for (const r of RESONANCES) {
-    if (r.dropWave !== state.wave || (!waveEnd && state.waveKills < r.dropKill) || state.englishClaims.includes(r.grantId) || state.englishSkipped.includes(r.grantId)) continue;
+  for (const drop of mapFor(state.mapId).drops.english) {
+    const r=RESONANCES.find(r=>r.grantId===drop.grantId)!;
+    if (drop.wave !== state.wave || (!waveEnd && state.waveKills < drop.kill) || state.englishClaims.includes(r.grantId) || state.englishSkipped.includes(r.grantId)) continue;
     const english: EnglishCore = { id: state.nextEnglishId++, lexemeId: r.lexemeId, senseId: r.senseId, grantId: r.grantId, attachedTo: null };
     state.englishCores.push(english); state.englishClaims.push(r.grantId);
     events.push({ type: "english-drop", at: { ...at }, englishId: english.id, grantId: r.grantId });
@@ -174,12 +156,12 @@ function grantEnglish(state: BattleState, at: Point, waveEnd = false): BattleEve
   return events;
 }
 function mix(seed: number): number { let x = seed >>> 0; x ^= x << 13; x ^= x >>> 17; x ^= x << 5; return x >>> 0; }
-export function plannedDrops(seed: number, wave: number): CoreKind[] {
-  const pool: CoreKind[] = ["fire", "wood", "water", "mountain"];
+export function plannedDrops(seed: number, wave: number, mapId:MapId="qinglan-pass"): CoreKind[] {
+  const pool = mapFor(mapId).drops.baseKinds;
   const bag = [...pool]; let random = mix(seed + 701 * (wave + 1));
-  for (let i = 3; i > 0; i--) { random = mix(random + i); const j = random % (i + 1); [bag[i], bag[j]] = [bag[j], bag[i]]; }
+  for (let i = pool.length-1; i > 0; i--) { random = mix(random + i); const j = random % (i + 1); [bag[i], bag[j]] = [bag[j], bag[i]]; }
   // Every wave supplies all four base kinds once, with one extra from the seed. No indefinitely missing ingredient.
-  return [...bag, pool[mix(random + 93) % 4]];
+  return [...bag, pool[mix(random + 93) % pool.length]];
 }
 export function updateBattle(state: BattleState, dt: number): BattleEvent[] {
   const events: BattleEvent[] = [];
@@ -188,15 +170,23 @@ export function updateBattle(state: BattleState, dt: number): BattleEvent[] {
   dt = Math.min(dt, .1); state.elapsed += dt; state.waveTime += dt;
   state.visuals = state.visuals.map(v => ({ ...v, age: v.age + dt })).filter(v => v.age < .6);
   state.rootZones = state.rootZones.filter(z => z.expires > state.waveTime + .000001);
-  const wave = WAVES[state.wave];
+  const wave = mapFor(state.mapId).waves[state.wave];
   while (state.spawned < wave.foes.length && state.waveTime >= .8 + state.spawned * wave.interval) {
-    const kind = wave.foes[state.spawned++], hp = ENEMIES[kind].hp * wave.strength;
-    state.enemies.push({ id: state.nextEnemyId++, kind, hp, maxHp: hp, distance: 0, slow: 0, slowUntil: 0 });
+    const index=state.spawned++, kind = wave.foes[index], hp = ENEMIES[kind].hp * wave.strength;
+    state.enemies.push({ id: state.nextEnemyId++, kind, hp, maxHp: hp, distance: 0, slow: 0, slowUntil: 0, lane:wave.lanes?.[index]??0, ...(kind==="captain"?{summons:0}:{}) });
   }
   for (const enemy of state.enemies) {
+    if(enemy.kind==='captain'&&(enemy.summons??0)<2) {
+      const threshold=(enemy.summons??0)===0?.75:.4;
+      if(enemy.hp/enemy.maxHp<=threshold&&enemy.summonAt===undefined) enemy.summonAt=state.waveTime+2;
+      if(enemy.summonAt!==undefined&&state.waveTime>=enemy.summonAt) {
+        for(let n=0;n<2;n++) {const hp=ENEMIES.swarm.hp*wave.strength;state.enemies.push({id:state.nextEnemyId++,kind:'swarm',hp,maxHp:hp,distance:Math.max(0,enemy.distance-35-n*40),slow:0,slowUntil:0,lane:enemy.lane??0});}
+        enemy.summons=(enemy.summons??0)+1;delete enemy.summonAt;
+      }
+    }
     if (enemy.slowUntil <= state.waveTime) enemy.slow = 0;
     // Zone slow exists only while inside a live area; no additive or persistent root-lock.
-    const zones = state.rootZones.filter(z => distanceBetween(pointOnPath(enemy.distance), z.at) <= z.radius);
+    const zones = state.rootZones.filter(z => distanceBetween(enemyPosition(state,enemy), z.at) <= z.radius);
     if (zones.length) enemy.zoneSlow = Math.max(...zones.map(z=>z.slow)); else delete enemy.zoneSlow;
     enemy.distance += ENEMIES[enemy.kind].speed * (1 - Math.max(enemy.slow, enemy.zoneSlow ?? 0)) * dt;
   }
@@ -204,24 +194,24 @@ export function updateBattle(state: BattleState, dt: number): BattleEvent[] {
     state.rootPulseAt += ROOTS.tick;
     // One global pulse clock: staggered zones cannot multiply damage. Strongest covering snapshot wins.
     for (const foe of state.enemies) {
-      if (foe.hp <= 0 || foe.distance >= PATH_LENGTH) continue;
-      const zones=state.rootZones.filter(z=>distanceBetween(pointOnPath(foe.distance),z.at)<=z.radius);
+      if (foe.hp <= 0 || remainingDistance(state,foe) <= 0) continue;
+      const zones=state.rootZones.filter(z=>distanceBetween(enemyPosition(state,foe),z.at)<=z.radius);
       if (zones.length) foe.hp -= Math.max(...zones.map(z=>z.damage));
     }
   }
   for (const echo of state.echoes.filter(e => e.due <= state.waveTime + .000001)) {
-    for (const foe of state.enemies) if (foe.hp > 0 && foe.distance < PATH_LENGTH && distanceBetween(pointOnPath(foe.distance), echo.at) <= echo.radius) foe.hp -= echo.damage;
+    for (const foe of state.enemies) if (foe.hp > 0 && remainingDistance(state,foe) > 0 && distanceBetween(enemyPosition(state,foe), echo.at) <= echo.radius) foe.hp -= echo.damage;
     events.push({ type: "echo", at: { ...echo.at }, radius: echo.radius, damage: echo.damage, sourceCoreId: echo.sourceCoreId });
   }
   state.echoes = state.echoes.filter(e => e.due > state.waveTime + .000001);
   for (const tower of state.cores) {
     tower.cooldown = Math.max(0, tower.cooldown - dt);
     if (tower.slot === null || tower.cooldown > .000001) continue;
-    const definition = CORES[tower.kind], origin = SLOTS[tower.slot];
-    const targets = state.enemies.filter(e => e.hp > 0 && e.distance < PATH_LENGTH && distanceBetween(origin, pointOnPath(e.distance)) <= definition.range).sort((a, b) => b.distance - a.distance || a.id - b.id);
+    const definition = CORES[tower.kind], origin = mapFor(state.mapId).slots[tower.slot];
+    const targets = state.enemies.filter(e => e.hp > 0 && remainingDistance(state,e) > 0 && distanceBetween(origin, enemyPosition(state,e)) <= definition.range).sort((a, b) => remainingDistance(state,a) - remainingDistance(state,b) || a.id - b.id);
     const target = targets[0]; if (!target) continue;
     tower.cooldown = definition.interval;
-    const hit = pointOnPath(target.distance);
+    const hit = enemyPosition(state,target);
     const resonance = activeResonance(state, tower);
     events.push({ type: "shot", from: { ...origin }, to: hit, core: tower.kind, coreId: tower.id, enemyId: target.id, resonance: resonance?.mapping.effectId });
     if (resonance?.mapping.effectId === "echo-eruption" && state.echoes.length < ECHO.maxPending) state.echoes.push({
@@ -234,34 +224,39 @@ export function updateBattle(state: BattleState, dt: number): BattleEvent[] {
         at: { ...hit }, born: state.waveTime, expires: state.waveTime+ROOTS.duration, damage: definition.damage*ROOTS.multiplier, radius: ROOTS.radius, slow: ROOTS.slow });
       events.push({type:'roots',at:{...hit},radius:ROOTS.radius,sourceCoreId:tower.id});
     }
+    if(tower.kind==='canopy'||tower.kind==='forest') {
+      const cap=tower.kind==='canopy'?2:resonance?.mapping.effectId==='branching-volley'?4:3;
+      const factor=tower.kind==='canopy'?.6:.65;
+      for(const secondary of targets.slice(1,cap)) { secondary.hp-=definition.damage*factor;events.push({type:'shot',from:{...origin},to:enemyPosition(state,secondary),core:tower.kind,coreId:tower.id,enemyId:secondary.id,resonance:resonance?.mapping.effectId}); }
+    }
     for (const foe of state.enemies) {
-      if (foe.hp <= 0 || foe.distance >= PATH_LENGTH || (foe.id !== target.id && (!definition.splash || distanceBetween(pointOnPath(foe.distance), hit) > definition.splash))) continue;
+      if (foe.hp <= 0 || remainingDistance(state,foe) <= 0 || (foe.id !== target.id && (!definition.splash || distanceBetween(enemyPosition(state,foe), hit) > definition.splash))) continue;
       foe.hp -= definition.damage;
       if (definition.slow) { foe.slow = Math.max(foe.slow, definition.slow); foe.slowUntil = Math.max(foe.slowUntil, state.waveTime + definition.slowDuration); }
     }
   }
   for (const enemy of state.enemies) {
-    const at = pointOnPath(enemy.distance);
+    const at = enemyPosition(state,enemy);
     if (enemy.hp <= 0) {
       state.kills++; state.waveKills++; events.push({ type: "defeat", at, kind: enemy.kind });
       // Five visible automatic drops per wave at reachable kill milestones; inventory has no capacity cap.
-      const milestones = [1, 3, 5, 8, 11];
-      if (state.waveDrops < 5 && state.waveKills >= milestones[state.waveDrops]) {
-        const kind = plannedDrops(state.seed, state.wave)[state.waveDrops++];
+      const milestones = mapFor(state.mapId).drops.milestones;
+      if (state.waveDrops < milestones.length && state.waveKills >= milestones[state.waveDrops]) {
+        const kind = plannedDrops(state.seed, state.wave,state.mapId)[state.waveDrops++];
         state.cores.push({ id: state.nextCoreId++, kind, slot: null, cooldown: 0 });
         events.push({ type: "drop", at, core: kind });
       }
       events.push(...grantEnglish(state, at));
-    } else if (enemy.distance >= PATH_LENGTH) {
+    } else if (remainingDistance(state,enemy) <= 0) {
       state.health = Math.max(0, state.health - ENEMIES[enemy.kind].harm); state.leaks++;
       events.push({ type: "leak", at, harm: ENEMIES[enemy.kind].harm });
     }
   }
-  state.enemies = state.enemies.filter(e => e.hp > 0 && e.distance < PATH_LENGTH);
+  state.enemies = state.enemies.filter(e => e.hp > 0 && remainingDistance(state,e) > 0);
   if (state.health <= 0) { state.phase = "lost"; state.paused = false; state.echoes = []; state.rootZones=[]; state.visuals = []; return events; }
   if (state.spawned === wave.foes.length && !state.enemies.length) {
-    events.push(...grantEnglish(state, PATH[PATH.length - 1], true)); state.echoes = []; state.rootZones=[];
-    state.wave++; state.phase = state.wave >= WAVES.length ? "won" : "ready"; state.paused = false;
+    events.push(...grantEnglish(state, mapFor(state.mapId).paths[0].at(-1)!, true)); state.echoes = []; state.rootZones=[];
+    state.wave++; state.phase = state.wave >= mapFor(state.mapId).waves.length ? "won" : "ready"; state.paused = false;
     state.checkpoint = checkpointOf(state); events.push({ type: "wave-end", won: state.phase === "won" });
   }
   state.visuals = state.phase === 'battle' ? [...state.visuals, ...events.map(event=>({event,age:0}))].slice(-90) : [];

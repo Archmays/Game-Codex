@@ -1,5 +1,5 @@
-export type CoreKind = "fire" | "wood" | "water" | "mountain" | "flame" | "grove" | "wash" | "volcano" | "wildwood";
-export type Structure = "single" | "top-bottom" | "left-right" | "word";
+export type CoreKind = "fire" | "wood" | "water" | "mountain" | "flame" | "grove" | "wash" | "volcano" | "wildwood" | "canopy" | "forest";
+export type Structure = "single" | "top-bottom" | "left-right" | "word" | "pyramid";
 
 export interface CoreDefinition {
   readonly id: CoreKind;
@@ -41,6 +41,9 @@ export const CORES: Readonly<Record<CoreKind, CoreDefinition>> = {
   wash: core({ id: "wash", glyph: "沐", pinyin: "mù", meaning: "洗头发；也有润泽的意思。", familiarWord: "沐浴", role: "整字", structure: "left-right", components: ["氵", "木"], slots: ["左", "右"], familiarity: "supported-new", illustrationBrief: "清蓝水波与叶片扩散；为魔法联想，不是字源", color: 0x5bdee0, attack: "润泽波 · 群体减速", damage: 20, interval: 1, range: 205, splash: 75, slow: .42, slowDuration: 2, recycle: 2 }),
   volcano: core({ id: "volcano", glyph: "火山", pinyin: "huǒ shān", meaning: "岩浆等从地下喷出并堆积形成的高地。", familiarWord: "火山喷发", role: "双字词", structure: "word", components: ["火", "山"], slots: ["第一个字", "第二个字"], familiarity: "familiar", illustrationBrief: "弧形熔岩弹落下后扩散火山冲击", color: 0xffb148, attack: "熔岩炮 · 大范围重击", damage: 63, interval: 2, range: 225, splash: 100, slow: 0, slowDuration: 0, recycle: 2 }),
   wildwood: core({ id: "wildwood", glyph: "山林", pinyin: "shān lín", meaning: "山上的树林。", familiarWord: "走进山林", role: "双字词", structure: "word", components: ["山", "林"], slots: ["第一个字", "第二个字"], familiarity: "familiar", illustrationBrief: "山坡上的树林与可见树根；共鸣后根须从落点蔓延，是游戏法术而非字源", color: 0xa1ce68, attack: "根岩阵 · 重击减速", damage: 49, interval: 1, range: 215, splash: 50, slow: .35, slowDuration: 2.2, recycle: 3 }),
+  canopy: core({ id: "canopy", glyph: "森", pinyin: "sēn", meaning: "树木很多；树木茂密。", familiarWord: "森林", role: "整字", structure: "pyramid", components: ["木", "林"], slots: ["上部木", "下部林（左木、右木）"], familiarity: "familiar", illustrationBrief: "三木塔冠与最多两束叶箭；完整森字保持上木下林品字结构，攻击是游戏魔法而非字源", color: 0x57a64d, attack: "双枝箭 · 最多两目标", damage: 30, interval: .8, range: 205, splash: 0, slow: 0, slowDuration: 0, recycle: 3 }),
+  forest: core({ id: "forest", glyph: "森林", pinyin: "sēn lín", meaning: "大片树木生长的地方。", familiarWord: "森林小路", role: "双字词", structure: "word", components: ["森", "林"], slots: ["第一个字", "第二个字"], familiarity: "familiar", illustrationBrief: "三束分向叶箭，共鸣时增为四束；无地面根区，完整词序森林", color: 0x2c9e68, attack: "林冠齐射 · 最多三目标", damage: 42, interval: .85, range: 215, splash: 0, slow: 0, slowDuration: 0, recycle: 5 }),
+
 };
 
 export interface Recipe { readonly id: string; readonly inputs: readonly [CoreKind, CoreKind]; readonly result: CoreKind; readonly structure: Exclude<Structure, "single">; }
@@ -50,6 +53,8 @@ export const RECIPES: readonly Recipe[] = [
   { id: "water-wood", inputs: ["water", "wood"], result: "wash", structure: "left-right" },
   { id: "fire-mountain", inputs: ["fire", "mountain"], result: "volcano", structure: "word" },
   { id: "mountain-grove", inputs: ["mountain", "grove"], result: "wildwood", structure: "word" },
+  { id: "wood-grove", inputs: ["wood", "grove"], result: "canopy", structure: "pyramid" },
+  { id: "canopy-grove", inputs: ["canopy", "grove"], result: "forest", structure: "word" },
 ];
 export const CORE_ORDER = Object.keys(CORES) as CoreKind[];
 /** Ingredients are an unordered multiset; the registered recipe owns structure and word order. */
@@ -60,3 +65,6 @@ export function recipeFor(a: CoreKind, b: CoreKind, recipeId?: string, recipes: 
   const candidates = recipeCandidates(a, b, recipes);
   return recipeId ? candidates.find(r => r.id === recipeId) : candidates.length === 1 ? candidates[0] : undefined;
 }
+
+export const ORIGINAL_CORE_ORDER=CORE_ORDER.filter(kind=>kind!=="canopy"&&kind!=="forest");
+export const ORIGINAL_RECIPES=RECIPES.slice(0,5);

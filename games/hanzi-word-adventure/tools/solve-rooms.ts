@@ -2,7 +2,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { ROOMS } from '../rooms';
 import { act, carried, validState } from '../model';
 import { solve } from '../solver';
-const directory = 'tmp/tasks/GAME-CODEX-STEP2'; mkdirSync(directory, { recursive: true });
+const directory = process.env.HWAY_EVIDENCE_DIR ?? 'tmp/tasks/GAME-CODEX-STEP4/adventure'; mkdirSync(directory, { recursive: true });
 const records = ROOMS.map(room => {
   if (!validState(room, room.initial)) throw Error(`Invalid initial ${room.id}`);
   const start = performance.now(), search = solve(room, room.initial);

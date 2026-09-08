@@ -49,6 +49,27 @@ async function entry(key: string, value: string): Promise<SaveVaultEntry> {
 }
 
 describe("Parent Save Vault", () => {
+  it('round-trips both STEP4 formats, old raw strings and manual feedback without accepting prefix lookalikes', async () => {
+    const storage = new MemoryStorage();
+    const rows = [
+      ['family-games/hanzi-tower-defense/v3', '{ "version":99,"future":"原样" }'],
+      ['family-games/hanzi-tower-defense/v2', '{broken old raw'],
+      ['family-games/hanzi-word-adventure/v2', '{ "version":2,"preserve":"chapter states" }'],
+      ['family-games/hanzi-word-adventure/v1', '{ "version":1,"preserve":"undo" }'],
+      ['family-games/step4-playtest/feedback-v1', '{ "version":1,"text":"<b>本机手填</b>" }'],
+    ];
+    for (const [key,value] of rows) storage.setItem(key,value);
+    storage.setItem('family-games/hanzi-tower-defense/v3/future', 'unrelated');
+    const backup = await createSaveVaultBackup(storage);
+    expect(backup.entries).toHaveLength(rows.length);
+    const validated = await validateSaveVaultText(serializeSaveVaultBackup(backup));
+    expect(validated.preview.futureKeys).toContain('family-games/hanzi-tower-defense/v3');
+    const destination = new MemoryStorage();
+    destination.setItem('family-games/hanzi-tower-defense/v3/future', 'untouched');
+    restoreSaveVault(destination, validated);
+    for (const [key,value] of rows) expect(destination.getItem(key)).toBe(value);
+    expect(destination.getItem('family-games/hanzi-tower-defense/v3/future')).toBe('untouched');
+  });
   it("exports only exact known keys and preserves raw bytes", async () => {
     const storage = new MemoryStorage();
     const raw = "{  \"version\": 2, \"kept\": \"原样\" }\u0000";

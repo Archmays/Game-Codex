@@ -13,7 +13,7 @@ export default defineConfig({
   timeout: 60_000,
   workers: 1,
   reporter: [["line"]],
-  outputDir: "test-results/portfolio-smoke",
+  outputDir: `${process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'test-results'}/portfolio-smoke`,
   use: { baseURL, trace: "retain-on-failure", screenshot: "only-on-failure", video: "off", reducedMotion: "reduce" },
   projects: [
     { name: "desktop-1440", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } } },

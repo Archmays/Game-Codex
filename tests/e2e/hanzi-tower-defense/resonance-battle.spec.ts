@@ -40,7 +40,7 @@ test('six natural waves collect both whole English cores, equip in both directio
       const oldOwner=Number(await page.locator('[data-english="1"]').getAttribute('data-attached-to')),next=towers.find(c=>c.id!==oldOwner)!;
       await clear();await act('[data-english="1"]');await act(next.selector);await expect(page.locator('[data-td-equip]')).toHaveText('确认转移到这里');await act('[data-td-equip]');
       await expect(page.locator('[data-english="1"]')).toHaveAttribute('data-attached-to',String(next.id));transferred=true;
-      const cp=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!).checkpoint,SAVE_KEY);await page.reload();await expect(page.locator('.td-game')).toHaveAttribute('data-phase','ready');expect(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!).checkpoint,SAVE_KEY)).toEqual(cp);
+      const cp=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!).maps["qinglan-pass"].checkpoint,SAVE_KEY);await page.reload();await expect(page.locator('.td-game')).toHaveAttribute('data-phase','ready');expect(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!).maps["qinglan-pass"].checkpoint,SAVE_KEY)).toEqual(cp);
     }
     await page.locator('[data-td-board]').scrollIntoViewIfNeeded();
     if(wave===0)await act('[data-td-pause]');else await act('[data-td-next]');
@@ -58,7 +58,7 @@ test('six natural waves collect both whole English cores, equip in both directio
     console.log(`resonance ${info.project.name}: ${wave+1}/6`);
   }
   expect(transferred).toBe(true);await expect(page.locator('[data-td-result]')).toBeVisible();
-  const final=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),SAVE_KEY);expect(final.checkpoint.englishCores).toHaveLength(2);expect(final.checkpoint.englishClaims).toHaveLength(2);expect(new Set(final.checkpoint.englishCores.map((e:{id:number})=>e.id)).size).toBe(2);
+  const final=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),SAVE_KEY);expect(final.maps["qinglan-pass"].checkpoint.englishCores).toHaveLength(2);expect(final.maps["qinglan-pass"].checkpoint.englishClaims).toHaveLength(2);expect(new Set(final.maps["qinglan-pass"].checkpoint.englishCores.map((e:{id:number})=>e.id)).size).toBe(2);
   await page.screenshot({path:`${evidence}/natural-${info.project.name}-win.png`,fullPage:true});await act('[data-td-replay]');await expect(page.locator('.td-game')).toHaveAttribute('data-wave','0');await expect(page.locator('[data-english]')).toHaveCount(0);
   expect(errors).toEqual([]);expect(foreign).toEqual([]);writeFileSync(`${evidence}/natural-${info.project.name}.json`,JSON.stringify({stateInjection:false,timeAcceleration:false,transferred,records,final,errors,foreign,seconds:Math.round((Date.now()-began)/1000)},null,2));
 });

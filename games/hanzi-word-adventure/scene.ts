@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
 import { FONT_STACK } from './content';
-import { at, effect } from './model';
-import type { Room, WorldState } from './rooms';
-export interface SceneView { room: Room; state: WorldState; selected: number | null; binding: string | null; preview: number[]; reducedMotion: boolean; }
+import { at, effect, illumination, visible } from './model';
+import { ROOMS, lastInChapter, type Direction, type Room, type WorldState } from './rooms';
+export interface SceneView { room: Room; state: WorldState; selected: number | null; target: number; facing: Direction; binding: string | null; preview: number[]; reducedMotion: boolean; }
 const INK = '#28473f', RUST = '#aa493a', WATER = '#538796';
 const arrows = { up: '↑', right: '→', down: '↓', left: '←' };
 
@@ -28,7 +28,7 @@ export class AdventureScene extends Phaser.Scene {
   }
   sync(view: SceneView, from?: number) {
     this.view = view; if (!this.ready) return;
-    const { room, state } = view, cell = this.scale.width / room.width;
+    const { room, state } = view, light = illumination(room, state), cell = this.scale.width / room.width;
     const center = (pos: number) => ({ x: (pos % room.width + .5) * cell, y: (Math.floor(pos / room.width) + .5) * cell });
     if (this.roomId !== room.id) {
       [...this.glyphs, ...this.objects, ...this.notes].forEach(t => t.destroy());
@@ -38,11 +38,13 @@ export class AdventureScene extends Phaser.Scene {
     const g = this.paper!, ink = this.marks!;
     g.fillStyle(0xf5f0e4, 1).fillRect(0, 0, this.scale.width, this.scale.height);
     for (const [pos, tile] of room.tiles.entries()) {
-      const { x, y } = center(pos), left = x - cell / 2, top = y - cell / 2, item = at(state, pos);
-      const occupied = pos === state.player && (item || tile === 'goal' || tile === 'door' || tile === 'wind');
+      const { x, y } = center(pos), left = x - cell / 2, top = y - cell / 2, item = visible(room,state,pos) ? at(state, pos) : undefined;
+      const occupied = pos === state.player && (item || tile === 'goal' || tile === 'door' || tile === 'wind' || tile === 'shadow');
       let glyph = '', color = INK, size = Math.round(cell * .57), note = '';
       const active = effect(room, state, pos);
-      if (tile === 'wall') {
+      if (light.has(pos)) { g.fillStyle(0xefbd42, .13).fillRect(left+1,top+1,cell-2,cell-2); }
+      if (tile === 'shadow') { glyph = '影'; color = light.has(pos) ? '#725719' : '#626276'; note = light.has(pos) ? `亮 · ${light.get(pos)}步` : '暗 · 不通'; g.fillStyle(light.has(pos) ? 0xf4d889 : 0x8b859d, light.has(pos) ? .25 : .22).fillRoundedRect(left+2,top+2,cell-4,cell-4,4); }
+      else if (tile === 'wall') {
         // The mountain terrain has no pickup outline; tiny distant strokes stay in this mountain cell.
         glyph = '山'; color = '#8c9d88'; size = Math.round(cell * .56);
         g.fillStyle(0xaab29a, .12).fillRoundedRect(left + 1, top + 1, cell - 2, cell - 2, 5);
@@ -52,7 +54,7 @@ export class AdventureScene extends Phaser.Scene {
         g.fillStyle(0x98c7c8, .2).fillRect(left, top, cell, cell); glyph = item ? '' : '水'; color = WATER;
         note = item ? '水' : '';
       } else if (tile === 'goal') {
-        glyph = room.id === 'r5' ? '家' : '路'; color = RUST; note = room.id === 'r5' ? '回家' : '前路';
+        glyph = lastInChapter(ROOMS.indexOf(room)) ? '家' : '路'; color = RUST; note = lastInChapter(ROOMS.indexOf(room)) ? '回家' : '前路';
         g.fillStyle(0xc4774c, .1).fillCircle(x, y, cell * .44); g.lineStyle(1.2, 0xb47d52, .6).strokeCircle(x, y, cell * .43);
       } else if (tile === 'door') {
         glyph = '门'; note = active ? '开' : '关'; color = active ? INK : '#896a5b';
@@ -84,6 +86,7 @@ export class AdventureScene extends Phaser.Scene {
       this.objects[pos].setPosition(x + (occupied ? cell * .29 : 0), y - (tile === 'water' && item ? 3 : 0));
       this.set(this.notes[pos], note, Math.max(11, Math.round(cell * .2)), tile === 'water' ? WATER : INK);
       this.notes[pos].setPosition(x, top + cell - 7);
+      if (pos === view.target) { ink.lineStyle(3, 0x2a7160, 1).strokeRoundedRect(left+4,top+4,cell-8,cell-8,5); this.set(this.notes[pos], '目标', Math.max(11,Math.round(cell*.2)), '#235748'); }
       if (view.preview.includes(pos)) ink.lineStyle(2, 0xb56c31, .9).strokeRoundedRect(left + 2, top + 2, cell - 4, cell - 4, 7);
       if (pos === view.selected) {
         ink.lineStyle(2.5, 0xb34e3d, 1).strokeRoundedRect(left + 1, top + 1, cell - 2, cell - 2, 6);
@@ -101,7 +104,7 @@ export class AdventureScene extends Phaser.Scene {
       }
       binding.cells.forEach(p => { const c = center(p); ink.lineStyle(2, 0x326d69, 1).strokeRect(c.x - cell / 2 + 1, c.y - cell / 2 + 1, cell - 2, cell - 2); });
     }
-    const hasSupportGlyph = (pos: number) => !!at(state, pos) || ['goal', 'door', 'wind'].includes(room.tiles[pos]);
+    const hasSupportGlyph = (pos: number) => !!at(state, pos) || ['goal', 'door', 'wind', 'shadow'].includes(room.tiles[pos]);
     const personPoint = (pos: number) => { const p = center(pos); return { x: p.x - (hasSupportGlyph(pos) ? cell * .19 : 0), y: p.y }; };
     const p = personPoint(state.player), besideSupport = hasSupportGlyph(state.player);
     this.set(this.person!, '人', Math.round(cell * (besideSupport ? .53 : .67)), RUST);

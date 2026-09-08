@@ -1,4 +1,5 @@
 import type { GameDefinition, MountGameContext, MountedGame } from "../../packages/game-core";
+import { bindInputLifecycle, ignoreGameKey } from '../../packages/ui/input';
 import { EQUATION_SLIDER_CONTENT_REVISIONS } from "./content-revisions";
 import {
   createInitialBoardSession,
@@ -123,7 +124,7 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
     return levels;
   };
 
-  const openLevel = (level: PublishedEquationSliderLevel, tutorial = false): void => {
+  const openLevel = (level: PublishedEquationSliderLevel, tutorial = false, focusBoard = root.contains(document.activeElement)): void => {
     if (destroyed) return;
     clearActiveBoard();
     currentLevel = level;
@@ -131,19 +132,21 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
     progress = recordLevelStart(progress, level.id, EQUATION_SLIDER_CONTENT_REVISIONS[level.id]);
     persist();
     disposeActiveBoard = renderBoard(level, tutorial);
+    if (focusBoard) root.querySelector<HTMLElement>('[data-reel-window]')?.focus({ preventScroll: true });
     const stage = root.parentElement;
     if (stage) stage.scrollTop = 0;
   };
 
   const openLevelById = async (chapterId: string, levelId: string, tutorial = false): Promise<void> => {
     const request = ++requestId;
+    const focusBoard = root.contains(document.activeElement);
     renderLoading("正在接通信号……");
     try {
       const levels = await loadChapter(chapterId);
       if (destroyed || request !== requestId) return;
       const level = levels.find((candidate) => candidate.id === levelId);
       if (!level) throw new Error(`找不到关卡 ${levelId}`);
-      openLevel(level, tutorial);
+      openLevel(level, tutorial, focusBoard);
     } catch (error) {
       if (destroyed || request !== requestId) return;
       renderError(error instanceof Error ? error.message : "关卡加载失败");
@@ -177,6 +180,7 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
       routes.append(route);
     }
     root.append(header, routes);
+    root.querySelector<HTMLElement>(`[data-chapter-id="${CSS.escape(currentChapterId)}"]`)?.focus({ preventScroll: true });
   };
 
   const renderChapterMap = async (chapterId: string): Promise<void> => {
@@ -233,6 +237,7 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
         stations.append(card);
       }
       root.append(header, stations);
+      (root.querySelector<HTMLElement>(`button[data-level-id="${CSS.escape(currentLevel?.id ?? '')}"]`) ?? root.querySelector<HTMLElement>('button[data-level-id]'))?.focus({ preventScroll: true });
     } catch (error) {
       if (destroyed || request !== requestId) return;
       renderError(error instanceof Error ? error.message : "线路加载失败");
@@ -253,6 +258,7 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
       button("返回线路地图", renderRouteMap, "ui-button")
     );
     root.replaceChildren(panel);
+    panel.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
   };
 
   const renderBoard = (level: PublishedEquationSliderLevel, startTutorial: boolean): (() => void) => {
@@ -386,6 +392,7 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
       reelDoms.set(slot.reel.id, reelDom);
       installPointerAdapter(reelDom);
       reelWindow.addEventListener("keydown", (event) => {
+        if (ignoreGameKey(event, reelWindow) || event.shiftKey) return;
         if (event.key !== "ArrowUp" && event.key !== "ArrowDown") return;
         event.preventDefault();
         dispatchMove(slot.reel.id, event.key === "ArrowUp" ? "up" : "down");
@@ -446,6 +453,9 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
     liveRegion.setAttribute("aria-live", "polite");
 
     root.append(header, saveNotice, statusStrip, goalLine, board, coverageDock, actions, moveChange, feedbackPanel, hintPanel, tutorialPanel, completionPanel, liveRegion);
+    const inputHelp = element('details', 'equation-slider__input-help');
+    inputHelp.append(element('summary', '', '怎么玩 · 按键'), element('p', '', 'Tab 切换滑轨和按钮；聚焦滑轨后，↑ 选上格、↓ 选下格。按钮用 Enter／空格确认，Esc 取消正在拖动的预览。鼠标或手指可以点上下格或方向按钮，也可以拖动滑轨；按键和点击的方向相同。'));
+    root.append(inputHelp);
     const revision = EQUATION_SLIDER_CONTENT_REVISIONS[level.id];
     if (revision && progress.levels[level.id]?.completed
       && !getLevelRevisionProgress(progress.levels[level.id], revision)?.completed) {
@@ -462,6 +472,7 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
           progress = markUpgradeNoticeSeen(progress);
           persist();
           notice.remove();
+          root.querySelector<HTMLElement>('[data-reel-window]')?.focus({ preventScroll: true });
         }, "ui-button ui-button--secondary", signal)
       );
       root.insertBefore(notice, board);
@@ -626,9 +637,12 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
 
     function cancelPointer(): void {
       if (!pointer) return;
-      pointer.reelRoot.classList.remove("is-dragging");
-      pointer.reelRoot.style.removeProperty("--preview-y");
+      const active = pointer;
       pointer = null;
+      active.reelRoot.classList.remove("is-dragging");
+      active.reelRoot.style.removeProperty("--preview-y");
+      if (active.window.hasPointerCapture(active.gesture.pointerId)) active.window.releasePointerCapture(active.gesture.pointerId);
+      suppressClickUntil = performance.now() + 400;
       session = reduceBoardSession(level, session, { type: "drag-cancel" });
       updateBoard();
     }
@@ -652,6 +666,7 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
     }
 
     function updateBoard(): void {
+      const focused = root.contains(document.activeElement) ? document.activeElement as HTMLElement : null;
       const model = createBoardRenderModel(level, session.present);
       expression.textContent = displayExpression(level, session.present.indexes);
       expression.removeAttribute("data-preview");
@@ -742,6 +757,9 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
       hintPanel.textContent = hint?.text ?? "";
       renderTutorial();
       renderCompletion();
+      if (focused && (!focused.isConnected || focused.matches(':disabled'))) {
+        (session.present.status === 'complete' ? completionPanel.querySelector<HTMLElement>('button') : root.querySelector<HTMLElement>('[data-reel-window]'))?.focus({ preventScroll: true });
+      }
     }
 
     function renderTutorial(): void {
@@ -790,7 +808,13 @@ function mountEquationSlider(context: MountGameContext): MountedGame {
       );
     }
 
+    root.addEventListener('keydown', event => {
+      if (event.key !== 'Escape' || !pointer || ignoreGameKey(event, root)) return;
+      event.preventDefault(); cancelPointer();
+    }, { signal });
+    const stopInputs = bindInputLifecycle(root, cancelPointer);
     return () => {
+      stopInputs();
       abortController.abort();
       if (pointer?.window.hasPointerCapture(pointer.gesture.pointerId)) {
         pointer.window.releasePointerCapture(pointer.gesture.pointerId);

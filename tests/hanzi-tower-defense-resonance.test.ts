@@ -81,21 +81,21 @@ describe('real echo effects and conserved grants',()=>{
   });
 });
 
-describe('v2 copy migration and rollback protection',()=>{
+describe('v3 copy migration and rollback protection',()=>{
   function legacy(wave:number) { const {englishCores,englishClaims,englishSkipped,nextEnglishId,...checkpoint}=newBattle().checkpoint;checkpoint.wave=wave;checkpoint.cores[0].cooldown=.6;return JSON.stringify({version:1,checkpoint,unlocked:['fire-fire'],preferences:prefs,extra:'preserve'}); }
   it('quota failure preserves old bytes and continues its validated checkpoint read-only',()=>{
     const old=legacy(3),store=storage({[LEGACY_SAVE_KEY]:old});store.setItem=()=>{throw new Error('QuotaExceededError');};
     const session=openSave(store,prefs);expect(session.writable).toBe(false);expect(session.hasCheckpoint).toBe(true);expect(session.state.wave).toBe(3);expect(session.preferences).toEqual(prefs);
     expect(session.write(session.state,prefs)).toBe(false);expect(store.getItem(LEGACY_SAVE_KEY)).toBe(old);expect(store.getItem(SAVE_KEY)).toBeNull();
   });
-  it('restored valid v2 takes priority over v1 and freezes a previously mounted writer',()=>{
+  it('restored valid v3 takes priority over v1 and freezes a previously mounted writer',()=>{
     const store=storage({[LEGACY_SAVE_KEY]:legacy(1)}),mounted=openSave(store,prefs),{s,c}=readyVolcano();s.wave=4;equipEnglish(s,previewEquipment(s,1,c.id));
-    const restored=JSON.stringify({version:2,checkpoint:checkpointOf(s),unlocked:[],preferences:prefs});store.setItem(SAVE_KEY,restored);const v1=store.getItem(LEGACY_SAVE_KEY);
+    const restored=JSON.stringify({version:3,activeMapId:"qinglan-pass",maps:{"qinglan-pass":{checkpoint:checkpointOf(s),unlocked:[]}},preferences:prefs});store.setItem(SAVE_KEY,restored);const v1=store.getItem(LEGACY_SAVE_KEY);
     expect(mounted.write(mounted.state,prefs)).toBe(false);const reopened=openSave(store,prefs);expect(reopened.state.wave).toBe(4);expect(reopened.state.englishCores[0].attachedTo).toBe(c.id);expect(reopened.migrated).toBe(false);expect(store.getItem(SAVE_KEY)).toBe(restored);expect(store.getItem(LEGACY_SAVE_KEY)).toBe(v1);
   });
   it.each([0,1,2,6])('copies valid v1 wave %i once with original strings untouched and no reward backfill',(wave)=>{
     const raw=legacy(wave), store=storage({[LEGACY_SAVE_KEY]:raw}), session=openSave(store,prefs);
-    expect(session.migrated).toBe(true);expect(session.state.wave).toBe(wave);expect(session.state.englishCores).toEqual([]);expect(session.state.englishSkipped).toHaveLength(RESONANCES.filter(r=>r.dropWave<wave).length);expect(session.state.cores[0].cooldown).toBe(.6);
+    expect(session.migrated).toBe(true);expect(session.state.wave).toBe(wave);expect(session.state.englishCores).toEqual([]);expect(session.state.englishSkipped).toHaveLength(RESONANCES.filter(r=>r.coreId!=="forest"&&r.dropWave<wave).length);expect(session.state.cores[0].cooldown).toBe(.6);
     expect(store.getItem(LEGACY_SAVE_KEY)).toBe(raw);const once=store.getItem(SAVE_KEY);expect(openSave(store,prefs).migrated).toBe(false);expect(store.getItem(SAVE_KEY)).toBe(once);expect(session.preferences).toEqual(prefs);
   });
   it.each(['{broken','{"version":99}','{"version":2,"checkpoint":{}}'])('existing invalid v2 wins over valid v1 and both bytes remain intact: %s',(raw)=>{

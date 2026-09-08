@@ -1,4 +1,4 @@
-/** Whole simplified glyphs. Only 林 has playable decomposition slots; other glyphs are never split. */
+/** Whole simplified glyphs. 林 and 明 use ordered modern component slots; light magic is not etymology. */
 export interface WordRecord {
   id: string; glyph: string; pinyin: string; structure: string;
   components: { glyph: string; slot: 'left' | 'right'; role: '部件'; name: string }[];
@@ -6,6 +6,10 @@ export interface WordRecord {
   ageFit: 'family-guided-reading'; world: 'chinese'; source: string;
 }
 const words = [
+  ['sun', '日', 'rì', '独体', '太阳。', '日光', '日只作合明材料，不单独照亮影路'],
+  ['moon', '月', 'yuè', '独体', '月亮。', '月亮', '月只作合明材料，不单独照亮影路'],
+  ['bright', '明', 'míng', '左右', '明亮，有光。', '明亮', '完整明字是游戏光源；左日右月为现代字形部件'],
+  ['shadow', '影', 'yǐng', '左右', '物体挡住光线时形成的暗处。', '影子', '影格由明照亮才可走，是明确标出的游戏规则'],
   ['person', '人', 'rén', '独体', '人；这里是你操纵的行路人。', '行人', '完整的人字沿路移动'],
   ['wood', '木', 'mù', '独体', '树木；也指木头。', '木头', '岸上的木挡路，水上的木搭桥；这是游戏规则'],
   ['forest', '林', 'lín', '左右', '长在一处的许多树木。', '树林', '可搬的完整林字；拆合只表现现代字形部件'],
@@ -21,7 +25,7 @@ const words = [
 ] as const;
 export const WORDS: WordRecord[] = words.map(([id, glyph, pinyin, structure, meaning, word, scene]) => ({
   id: `hway-${id}`, glyph, pinyin, structure, meaning, word, scene,
-  components: glyph === '林' ? [{ glyph: '木', slot: 'left', role: '部件', name: '木字部件' }, { glyph: '木', slot: 'right', role: '部件', name: '木字部件' }] : [],
+  components: glyph === '明' ? [{ glyph: '日', slot: 'left', role: '部件', name: '日字部件' }, { glyph: '月', slot: 'right', role: '部件', name: '月字部件' }] : glyph === '林' ? [{ glyph: '木', slot: 'left', role: '部件', name: '木字部件' }, { glyph: '木', slot: 'right', role: '部件', name: '木字部件' }] : [],
   familiarity: 'common-family-word', ageFit: 'family-guided-reading', world: 'chinese', source: `https://www.zdic.net/hans/${glyph}`,
 }));
 export const wordRecord = (glyph: string) => WORDS.find(w => w.glyph === glyph);
@@ -34,5 +38,8 @@ export const WORLD_RULES = [
   '手里一枚木，身旁一枚木，可以合成林。木在左、木在右；先拿哪枚都一样，不增加材料。',
   '墙上只登记门开／门不开、风吹／风不吹。搬走句中的不，马上变回肯定；只有不可以放入空字位。',
   '风吹时，踏入风格就沿箭头到下一格，手里字一起过去；不能逆风走回来。风格不能放字，停风也一样。',
+  '日和月可合成明，明可拆为左日右月；只表现现代部件，不把光魔法当作字源。只有明发光，日和月不照路。',
+  '明从所在格（手持时从人格）沿上下左右通格照三步，可绕角；山崖、短句和关门挡光。标明“亮”的影格才可走，明也占一件携带额度。',
+  '把明放下、拿走或拆开时，若会让人脚下的影格失去光，整步拒绝；没有材料被吞掉。暗影中的字不能远程拿走。',
   '不动就没有规则时间。无效动作不消费；一步撤销同时恢复人、手里字、桥、短句和出口状态。',
 ] as const;

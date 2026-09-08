@@ -17,6 +17,12 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GAME_CODEX_TASK_ID: GAME-CODEX-STEP4
+      GAME_CODEX_EVIDENCE_ROOT: tmp/tasks/GAME-CODEX-STEP4
+      TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP4/tower
+      HWAY_EVIDENCE: tmp/tasks/GAME-CODEX-STEP4/adventure
+      HWAY_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP4/adventure
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -56,7 +62,7 @@ jobs:
       - name: Validate independent memory and tower defense balance
         run: pnpm run test:memory-match && pnpm run validate:hanzi-tower-defense
         env:
-          TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP3/tower
+          TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP4/tower
 
       - name: Build static site
         run: pnpm build
@@ -65,6 +71,9 @@ jobs:
 
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
+
+      - name: Exercise full keyboard, mouse and touch loops across shared surfaces
+        run: pnpm run test:e2e:step4 --project=desktop --project=phone-390 --grep @primary
 
       - name: Exercise the exact production build across the portfolio
         run: pnpm run test:portfolio:smoke
@@ -88,10 +97,13 @@ jobs:
       - name: Validate Hanzi tower defense full battle and controls
         run: pnpm run test:e2e:hanzi-tower-defense
         env:
-          TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP3/tower
+          TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP4/tower
 
-      - name: Validate word adventure solvability and ordinary five-room play
+      - name: Validate all fifteen adventure rooms and ordinary three-chapter play
         run: pnpm run validate:hanzi-word-adventure && pnpm run test:e2e:hanzi-word-adventure
+
+      - name: Validate two builds and placements on both new defense maps
+        run: pnpm exec tsx tools/hanzi-tower-defense/step4-balance.ts --write && pnpm exec tsx tools/hanzi-tower-defense/check-placement.ts
 
       - name: Upload failure evidence only
         if: failure()
@@ -99,13 +111,7 @@ jobs:
         with:
           name: pages-portfolio-failure-${{ github.sha }}
           path: |
-            test-results/portfolio-smoke
-            test-results/math-world
-            test-results/hanzi-tower-defense
-            tmp/tasks/GAME-CODEX-STEP3/tower/browser-failures
-            test-results/play-readiness
-            test-results/interaction-integrity
-            tmp/tasks/GAME-CODEX-STEP2/browser-failures
+            tmp/tasks/GAME-CODEX-STEP4
           if-no-files-found: ignore
           retention-days: 7
 

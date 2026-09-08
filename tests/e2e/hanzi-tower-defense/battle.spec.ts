@@ -86,7 +86,7 @@ test("six waves with ordinary deployment, synthesis, and replay", async ({ page 
   const saved = await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), SAVE_KEY);
   await activate(page.locator("[data-td-replay]"));
   await expect(page.locator(".td-game")).toHaveAttribute("data-wave", "0");
-  expect((await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), SAVE_KEY)).unlocked).toEqual(saved.unlocked);
+  expect((await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), SAVE_KEY)).maps["qinglan-pass"].unlocked).toEqual(saved.maps["qinglan-pass"].unlocked);
   expect(runtime.errors).toEqual([]);
   expect(runtime.requests.filter(url => /hanzi-radical-battle|english-world|english-spell-battle|pinyin-magic-battle/.test(url))).toEqual([]);
   writeFileSync(`${evidence}/battle-${info.project.name}.json`, JSON.stringify({ verdict: "PASS", input: info.project.name === "touch" ? "touch" : "mouse and keyboard", route, records, elapsedWallSeconds: Math.round((Date.now()-started)/1000), errors: runtime.errors, stateInjection: false, timeAcceleration: false }, null, 2));
@@ -118,5 +118,5 @@ test("unprotected gate can lose, recycle has no full-health cost, retry keeps re
   }
   await expect(page.locator(".td-game")).toHaveAttribute("data-phase","lost");
   await page.locator("[data-td-replay]").click(); await expect(page.locator("[data-td-health]")).toHaveText("16");
-  expect((await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),SAVE_KEY)).unlocked).toContain("fire-fire");
+  expect((await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),SAVE_KEY)).maps["qinglan-pass"].unlocked).toContain("fire-fire");
 });

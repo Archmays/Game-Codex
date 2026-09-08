@@ -12,7 +12,7 @@ export default defineConfig({
   expect: { timeout: 15_000 },
   workers: 1,
   reporter: [["line"]],
-  outputDir: "test-results/natural-use-kit",
+  outputDir: `${process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'test-results'}/natural-use-kit`,
   use: { baseURL, trace: "retain-on-failure", screenshot: "only-on-failure", video: "off", reducedMotion: "reduce", acceptDownloads: true },
   projects: [
     { name: "desktop-1440", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } } },

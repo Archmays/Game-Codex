@@ -43,7 +43,12 @@ Routine UX, visual, accessibility, interaction, and regression review belongs to
 
 Use `machine-first-game-review` for lane 3, lane 4, or an explicit readiness/acceptance request. A bounded correction does not enter acceptance merely because it changes game files. Keep evidence proportional to the selected route.
 
-## Git
+## Input contract
+
+- Every active game and shared surface supports complete keyboard, mouse and touch operation through the same semantic actions. Dragging always has a click/tap alternative.
+- Follow `docs/input-contract.md` for regional navigation, native activation, focus restoration, input lifecycle, targets and the required real-input validation. Apply it to future games; keep detailed conventions in that document only.
+
+## Git delivery
 
 Stay on the current branch, preserve unrelated work, and normally make one final commit and one push. Do not rewrite history, force-push, or modify existing tags without explicit authorization.
 

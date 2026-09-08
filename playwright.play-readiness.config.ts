@@ -12,7 +12,7 @@ export default defineConfig({
   expect: { timeout: 15_000, toHaveScreenshot: { animations: "disabled", maxDiffPixelRatio: 0.006 } },
   workers: 1,
   reporter: [["line"]],
-  outputDir: "test-results/play-readiness",
+  outputDir: `${process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'test-results'}/play-readiness`,
   use: { baseURL, trace: "retain-on-failure", screenshot: "only-on-failure", video: "off", reducedMotion: "reduce" },
   projects: [
     { name: "mobile-360", use: { ...devices["Pixel 5"], viewport: { width: 360, height: 800 } } },

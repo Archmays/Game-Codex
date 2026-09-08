@@ -29,6 +29,12 @@ export const RESONANCES = [{
   grantId: "wave-4-mountain-forest",
   dropWave: 3, dropKill: 3,
   sources: ["https://www.zdic.net/hans/山林", "https://www.fao.org/sustainable-forest-management-toolbox/modules/mountain-forests/en"],
+}, {
+  coreId:"forest" as const, senseId:"zh-forest-large-wooded-area", lexemeId:"en-forest", text:"forest", form:"word" as const,
+  meaning:"大片树木生长的地方", recipe:"木 ＋ 木 → 林；木 ＋ 林 → 森；森 ＋ 林 → 森林",
+  effectId:"branching-volley" as const, effectName:"林冠分枝", effectText:"每 0.85 秒主箭 42，次箭各 27.3；最多四个射程内目标，不重复射同一目标，无减速或溅射。",
+  grantId:"wave-3-forest", dropWave:2, dropKill:3,
+  sources:["https://www.zdic.net/hans/森林","https://www.oxfordlearnersdictionaries.com/definition/english/forest"],
 }] as const;
 export type Resonance = typeof RESONANCES[number];
 export type LexemeId = Resonance["lexemeId"];

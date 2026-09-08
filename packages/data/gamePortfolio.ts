@@ -87,12 +87,12 @@ export const PORTFOLIO_TEST_PROFILES: readonly PortfolioTestProfile[] = [
 export const GAME_PORTFOLIO: readonly GamePortfolioRecord[] = [
   {
     id: "hanzi-word-adventure", targetWorld: "chinese", productRole: "independent-puzzle", definitionRole: "active-child-product", activeChildProduct: true, classicCardVisible: true, childProductOrder: 3, qualityTier: "S", lifecycleStatus: "active",
-    canonicalRoute: "?play=hanzi-word-adventure", worldModuleIds: [], compatibilitySurfaceIds: [], sharedEngineIds: [], saveNamespaces: ["family-games/hanzi-word-adventure/v1"],
+    canonicalRoute: "?play=hanzi-word-adventure", worldModuleIds: [], compatibilitySurfaceIds: [], sharedEngineIds: [], saveNamespaces: ["family-games/hanzi-word-adventure/v2", "family-games/hanzi-word-adventure/v1"],
     testProfile: "s-hanzi-release", loadingPolicy: "mixed", contentStatus: "playable", canonicalDocs: ["games/hanzi-word-adventure/README.md"],
   },
   {
     id: "hanzi-tower-defense", targetWorld: "chinese", productRole: "flagship", definitionRole: "active-child-product", activeChildProduct: true, classicCardVisible: true, childProductOrder: 1, qualityTier: "S", lifecycleStatus: "active",
-    canonicalRoute: "?play=hanzi-tower-defense", worldModuleIds: [], compatibilitySurfaceIds: [], sharedEngineIds: [], saveNamespaces: ["family-games/hanzi-tower-defense/v2", "family-games/hanzi-tower-defense/v1"],
+    canonicalRoute: "?play=hanzi-tower-defense", worldModuleIds: [], compatibilitySurfaceIds: [], sharedEngineIds: [], saveNamespaces: ["family-games/hanzi-tower-defense/v3", "family-games/hanzi-tower-defense/v2", "family-games/hanzi-tower-defense/v1"],
     testProfile: "s-hanzi-release", loadingPolicy: "current-eager", contentStatus: "playable", canonicalDocs: ["games/hanzi-tower-defense/README.md"],
   },
   {

@@ -2,11 +2,13 @@ import type { GameDefinition, MountedGame } from "../../packages/game-core";
 import { createLocalStorageStore } from "../../packages/game-core";
 import { currentClassicGameCatalog } from "../../packages/data/gameCatalog";
 import { clearElement, createButton, createPanel } from "../../packages/ui";
+import { rovingGroup } from '../../packages/ui/input';
 import { ALL_SUBJECTS_FILTER, getSubjectFilters } from "./filters";
 
 export function mountHub(root: HTMLElement): MountedGame {
   let mountedGame: MountedGame | null = null;
   let selectedSubject = ALL_SUBJECTS_FILTER;
+  const filtersNavigation = rovingGroup(root, { items: '[data-subject-filter]' });
 
   const renderHub = (): void => {
     mountedGame?.destroy();
@@ -33,10 +35,12 @@ export function mountHub(root: HTMLElement): MountedGame {
       const button = createButton(subject, () => {
         selectedSubject = subject;
         renderHub();
+        [...root.querySelectorAll<HTMLButtonElement>('[data-subject-filter]')].find(control => control.dataset.subjectFilter === subject)?.focus();
       }, {
         className: isActive ? "ui-button learning-game__pill is-active" : "ui-button learning-game__pill"
       });
       button.setAttribute("aria-pressed", String(isActive));
+      button.dataset.subjectFilter = subject;
       filters.append(button);
     }
 
@@ -52,6 +56,7 @@ export function mountHub(root: HTMLElement): MountedGame {
     }
 
     root.append(header, filters, grid);
+    filtersNavigation.refresh();
   };
 
   const openGame = (game: GameDefinition): void => {
@@ -90,6 +95,7 @@ export function mountHub(root: HTMLElement): MountedGame {
     destroy(): void {
       mountedGame?.destroy();
       mountedGame = null;
+      filtersNavigation.destroy();
       clearElement(root);
     }
   };
@@ -101,7 +107,7 @@ function createGameCard(game: GameDefinition, onPlay: () => void): HTMLElement {
 
   if (game.id === "hanzi-word-adventure") {
     card.classList.add("game-card--world", "game-card--word-adventure");
-    const link = document.createElement("a"); link.className = "game-card__adventure-link"; link.href = game.route!;
+    const link = document.createElement("a"); link.tabIndex = 0; link.className = "game-card__adventure-link"; link.href = game.route!;
     const title = document.createElement("h2"); title.textContent = game.title;
     const art = document.createElement("img"); art.className = "game-card__world-art"; art.src = "./assets/hanzi-word-adventure/scene.png"; art.alt = "";
     const description = document.createElement("p"); description.textContent = game.description;

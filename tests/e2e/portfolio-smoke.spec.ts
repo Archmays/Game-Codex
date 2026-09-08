@@ -61,6 +61,8 @@ const GAMES: readonly SmokeGame[] = [
     canonicalRoute: "/?play=hanzi-word-adventure",
     async interact(page) {
       await expect(page.locator('[data-hway-canvas]')).toHaveAttribute('data-ready', 'true');
+      await page.locator('[data-hway-new]').click();
+      await page.locator('[data-hway-chapter="homeward"]').click();
       const move = page.locator('[data-hway-move="right"]'); await expectUsableTarget(move); await move.click();
       await expect(page.locator('.hway')).toHaveAttribute('data-player', '9');
       await page.locator('[data-hway-undo]').click(); await expect(page.locator('.hway')).toHaveAttribute('data-player', '8');
@@ -147,7 +149,7 @@ for (const game of GAMES) {
     } else if (game.id === "math-lab") {
       await page.getByRole("link", { name: "回我的游戏世界" }).click();
       await expect(page.getByTestId("world-treasure-box")).toBeVisible();
-      await page.getByTestId("world-treasure-box").getByRole("link").click();
+      await page.getByTestId("world-treasure-box").locator('[data-world-treasure-link]').click();
     } else {
       const returnButton = page.getByRole("button", { name: "返回大厅", exact: true });
       await expectUsableTarget(returnButton);

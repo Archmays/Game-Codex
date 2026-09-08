@@ -15,6 +15,13 @@ on:
 permissions:
   contents: read
 
+env:
+  GAME_CODEX_TASK_ID: GAME-CODEX-STEP4
+  GAME_CODEX_EVIDENCE_ROOT: tmp/tasks/GAME-CODEX-STEP4
+  TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP4/tower
+  HWAY_EVIDENCE: tmp/tasks/GAME-CODEX-STEP4/adventure
+  HWAY_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP4/adventure
+
 concurrency:
   group: portfolio-ci-${{ github.ref }}
   cancel-in-progress: true
@@ -65,9 +72,9 @@ jobs:
         run: pnpm test
 
       - name: Validate independent memory and tower defense content and balance
-        run: pnpm run test:memory-match && pnpm run validate:hanzi-tower-defense
+        run: pnpm run test:memory-match && pnpm run validate:hanzi-tower-defense && pnpm exec tsx tools/hanzi-tower-defense/check-placement.ts
         env:
-          TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP3/tower
+          TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP4/tower
 
       - name: Typecheck and production build
         run: pnpm build
@@ -115,7 +122,7 @@ jobs:
       - name: Exercise tower defense battles, inputs, saves, and retired-language fallbacks
         run: pnpm run test:e2e:hanzi-tower-defense
         env:
-          TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP3/tower
+          TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP4/tower
 
       - name: Upload failure evidence only
         if: failure()
@@ -123,13 +130,7 @@ jobs:
         with:
           name: portfolio-smoke-failure-${{ github.sha }}
           path: |
-            test-results/portfolio-smoke
-            test-results/math-world
-            test-results/hanzi-tower-defense
-            tmp/tasks/GAME-CODEX-STEP3/tower/browser-failures
-            test-results/play-readiness
-            test-results/interaction-integrity
-            test-results/scroll-reachability
+            tmp/tasks/GAME-CODEX-STEP4
           if-no-files-found: ignore
           retention-days: 7
 
@@ -164,6 +165,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: full-scroll-matrix-failure-${{ github.sha }}
-          path: test-results/scroll-reachability
+          path: tmp/tasks/GAME-CODEX-STEP4/scroll-reachability
           if-no-files-found: ignore
           retention-days: 7

@@ -2,6 +2,7 @@ import { expect, test, type Page, type TestInfo } from "@playwright/test";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { resolve } from "node:path";
+import { keyReach } from "./step4/input-helpers";
 import { TARGET_PUZZLE_MANIFEST, puzzlesForTarget } from "../../games/make-target/puzzles";
 import { KNOWN_SAVE_KEYS, EXPORTABLE_SAVE_KEYS, SAVE_VAULT_PRE_IMPORT_BACKUP_KEY } from "../../packages/data/saveKeyInventory";
 import {
@@ -42,9 +43,8 @@ async function criticalGeometry(page: Page, selector: string): Promise<void> {
 }
 
 async function keyboardActivate(page: Page, selector: string): Promise<void> {
-  for (let i = 0; i < 50 && !await page.locator(selector).evaluate(element => element === document.activeElement); i++) {
-    await page.keyboard.press("Tab");
-  }
+  const region = await page.locator(selector).evaluate(element => element.matches('[data-card-id]') ? '[data-card-id]' : element.closest('.target-operators') ? '.target-operators button' : element.closest('.target-modes') ? '.target-modes button' : undefined);
+  await keyReach(page, selector, region);
   await expect(page.locator(selector)).toBeFocused();
   expect(await page.locator(selector).evaluate(element => element.matches(":focus-visible") && parseFloat(getComputedStyle(element).outlineWidth) >= 2)).toBe(true);
   await page.keyboard.press("Enter");
@@ -429,9 +429,9 @@ for (const denied of ["read", "write"] as const) {
   });
 }
 
-test("@workbench all 40 exact keys survive the public Vault roundtrip and the mounted old page cannot overwrite restored records", async ({ page, context }, info) => {
-  expect(KNOWN_SAVE_KEYS).toHaveLength(40);
-  expect(EXPORTABLE_SAVE_KEYS).toHaveLength(39);
+test("@workbench all 43 exact keys survive the public Vault roundtrip and the mounted old page cannot overwrite restored records", async ({ page, context }, info) => {
+  expect(KNOWN_SAVE_KEYS).toHaveLength(43);
+  expect(EXPORTABLE_SAVE_KEYS).toHaveLength(42);
   await page.goto(origin);
   const fixture: Record<string, string> = Object.fromEntries(KNOWN_SAVE_KEYS.map((record, index) => [
     record.key, JSON.stringify({ version: record.maxVersion ?? 1, syntheticOnly: true, fixture: index }),
@@ -467,7 +467,7 @@ test("@workbench all 40 exact keys survive the public Vault roundtrip and the mo
   await expect(vaultPage.locator("[data-vault-preview-checksum]")).toHaveText("PASS");
   vaultPage.once("dialog", dialog => { void dialog.accept(); });
   await vaultPage.locator("[data-vault-restore]").click();
-  await expect(vaultPage.locator("[data-vault-status]")).toContainText("已恢复 39");
+  await expect(vaultPage.locator("[data-vault-status]")).toContainText("已恢复 42");
   const restored = await vaultPage.evaluate(keys => Object.fromEntries(keys.map(key => [key, localStorage.getItem(key)])), KNOWN_SAVE_KEYS.map(record => record.key));
   for (const record of EXPORTABLE_SAVE_KEYS) expect(restored[record.key]).toBe(fixture[record.key]);
   expect(restored[SAVE_VAULT_PRE_IMPORT_BACKUP_KEY]).toContain("syntheticBeforeRestore");

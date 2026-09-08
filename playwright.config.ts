@@ -11,7 +11,7 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   workers: 1,
   reporter: [["line"]],
-  outputDir: "test-results/equation-slider",
+  outputDir: `${process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'test-results'}/equation-slider`,
   use: {
     baseURL: e2eBaseUrl,
     trace: "retain-on-failure",

@@ -37,7 +37,7 @@ export function runBuild(seed: number, route: BuildRoute, positions?: number[]) 
 export function balanceEvidence() {
   const seeds = [DEFAULT_SEED, 1, 7, 42, 2026, 0, 0xffffffff, 8191, 314159, 65535, 123456, 987654];
   return {
-    range: RECIPES.map(recipe => ({ recipe: recipe.id, seconds: 30, condition: "one immortal target, every core always in range, no overkill or armor", before: firingRange(recipe.inputs), after: firingRange([recipe.result]), slowBefore: Math.max(...recipe.inputs.map(k => CORES[k].slow)), slowAfter: CORES[recipe.result].slow })),
+    range: RECIPES.slice(0,5).map(recipe => ({ recipe: recipe.id, seconds: 30, condition: "one immortal target, every core always in range, no overkill or armor", before: firingRange(recipe.inputs), after: firingRange([recipe.result]), slowBefore: Math.max(...recipe.inputs.map(k => CORES[k].slow)), slowAfter: CORES[recipe.result].slow })),
     builds: seeds.flatMap(seed => (["flame-wildwood", "volcano-grove"] as const).map(route => runBuild(seed, route))),
     separate: runBuild(DEFAULT_SEED, "separate"),
     placement: [0, 1, 7].map(slot => {

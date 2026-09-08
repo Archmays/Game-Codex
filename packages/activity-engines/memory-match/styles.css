@@ -2,7 +2,7 @@
 .memory-match.is-hanzi { color: #f4f0d7; background: radial-gradient(circle at 50% 10%,#31584f,#102f38 48%,#071c2a); }
 .memory-match.is-english { color: #17384c; background: radial-gradient(circle at 30% 5%,#fff8d6,#d7f1ee 48%,#b9dfe1); }
 .memory-match > header, .memory-match > nav, .memory-match__play, .memory-match__done { width: min(940px,100%); margin-inline: auto; }
-.memory-match > header > a { color: inherit; text-decoration: none; }
+.memory-match > header > a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-decoration: none; }
 .memory-match > header > p { margin: 1.2rem 0 .1rem; color: #497864; letter-spacing: .1em; }
 .memory-match.is-hanzi > header > p { color: #a4d6bc; }
 .memory-match h1 { margin: 0; font: 700 clamp(2.2rem,6vw,3.8rem) "STKaiti","KaiTi",serif; }
@@ -33,5 +33,8 @@
 .memory-match__done { box-sizing: border-box; margin-top: 1rem; padding: 1.2rem; border-radius: 20px; color: #26392f; background: #fff2bd; text-align: center; }
 .memory-match__done span { font-size: 3rem; color: #a46c20; }
 .memory-match__done h2 { margin: .2rem; }
+.memory-match__help { margin-top: 1rem; }
+.memory-match__help summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; }
+.memory-match__help p { line-height: 1.7; }
 @media (max-width: 620px) { .memory-match { padding: .8rem; } .memory-match__packs { grid-template-columns: 1fr; } .memory-match__packs button { grid-template-columns: 7rem 1fr; align-items: center; } .memory-match__grid { grid-template-columns: repeat(3,minmax(0,1fr)); } .memory-match__grid button { min-height: 5.2rem; } }
 @media (prefers-reduced-motion: reduce) { .memory-match *, .memory-match *::before, .memory-match *::after { animation-duration:.01ms!important; transition-duration:.01ms!important; } }

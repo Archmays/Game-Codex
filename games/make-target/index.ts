@@ -1,5 +1,6 @@
 import type { GameDefinition, MountGameContext, MountedGame } from "../../packages/game-core";
 import { playFeedbackSound, type FeedbackState } from "../../packages/ui";
+import { bindInputLifecycle, rovingGroup } from '../../packages/ui/input';
 import { readWorldHomeState } from "../../apps/my-game-world/world-state";
 import {
   applyTargetOperation,
@@ -68,6 +69,14 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
   let saveNote = "";
   let renderNumber = 0;
   let destroyed = false;
+  const gridColumns = (selector: string) => () => {
+    const grid = root.querySelector(selector);
+    return grid ? Math.max(1, getComputedStyle(grid).gridTemplateColumns.split(' ').length) : 1;
+  };
+  const cardNavigation = rovingGroup(root, { items: '[data-card-id]', columns: gridColumns('.target-hand') });
+  const operatorNavigation = rovingGroup(root, { items: '[data-target-action^="operator-"]', columns: gridColumns('.target-operators') });
+  const modeNavigation = rovingGroup(root, { items: '[data-target-action^="target-"]' });
+  const stopInputs = bindInputLifecycle(root, () => {});
 
   const complete = (): boolean => cards.length === 1 && cards[0].expr.value === target;
   const sound = (kind: FeedbackState["kind"]): void => {
@@ -116,6 +125,7 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
     });
     // Arrival belongs only to the merge render, not later selection or operator renders.
     latestCombinedCardId = null;
+    cardNavigation.refresh(); operatorNavigation.refresh(); modeNavigation.refresh();
     if (focusKey) {
       queueMicrotask(() => {
         if (destroyed || frame !== renderNumber || !root.isConnected) return;
@@ -290,7 +300,7 @@ function mountMakeTarget(context: MountGameContext): MountedGame {
   };
 
   startPuzzle(false);
-  return { destroy(): void { destroyed = true; renderNumber += 1; root.remove(); } };
+  return { destroy(): void { destroyed = true; renderNumber += 1; stopInputs(); cardNavigation.destroy(); operatorNavigation.destroy(); modeNavigation.destroy(); root.remove(); } };
 }
 
 export function calculate(a: number, b: number, operator: TargetOperator): number | null {

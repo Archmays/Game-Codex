@@ -461,7 +461,7 @@ test.describe("@gate-a equation slider V3 board and tutorial", () => {
     expect(dimensions.stage.overflowY).toBe("visible");
     expect(dimensions.document.scrollHeight).toBeGreaterThan(dimensions.document.clientHeight);
     expect(await reelWindow(page, 0).evaluate((element) => getComputedStyle(element).touchAction))
-      .toBe("pan-x");
+      .toBe("pan-x pinch-zoom");
 
     await touchPreview(page, context, 0, 55);
     expect(await stage.evaluate((element) => element.scrollTop)).toBe(dimensions.stage.scrollTop);

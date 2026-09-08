@@ -5,7 +5,7 @@ export type SaveKeyOwner = "portfolio" | "hanzi" | "math" | "english" | "shared"
 export interface KnownSaveKey {
   readonly key: string;
   readonly owner: SaveKeyOwner;
-  readonly purpose: "progress" | "settings" | "backup" | "recovery" | "migration" | "compatibility" | "vault-internal";
+  readonly purpose: "progress" | "settings" | "feedback" | "backup" | "recovery" | "migration" | "compatibility" | "vault-internal";
   readonly exportable: boolean;
   readonly maxVersion?: number;
 }
@@ -13,6 +13,9 @@ export interface KnownSaveKey {
 export const SAVE_VAULT_PRE_IMPORT_BACKUP_KEY = "save-vault/pre-import-backup/v1";
 
 export const KNOWN_SAVE_KEYS: readonly KnownSaveKey[] = [
+  { key: "family-games/hanzi-word-adventure/v2", owner: "hanzi", purpose: "progress", exportable: true, maxVersion: 2 },
+  { key: "family-games/hanzi-tower-defense/v3", owner: "hanzi", purpose: "progress", exportable: true, maxVersion: 3 },
+  { key: "family-games/step4-playtest/feedback-v1", owner: "portfolio", purpose: "feedback", exportable: true, maxVersion: 1 },
   { key: "family-games/hanzi-word-adventure/v1", owner: "hanzi", purpose: "progress", exportable: true, maxVersion: 1 },
   { key: "family-games/hanzi-tower-defense/v2", owner: "hanzi", purpose: "progress", exportable: true, maxVersion: 2 },
   { key: "family-games/hanzi-tower-defense/v1", owner: "hanzi", purpose: "compatibility", exportable: true, maxVersion: 1 },

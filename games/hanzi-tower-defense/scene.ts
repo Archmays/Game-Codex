@@ -1,6 +1,7 @@
+import {mapFor, pathLength} from "./maps";
 import Phaser from "phaser";
 import { CORES } from "./content";
-import { ENEMIES, MAP, PATH, pointOnPath, SLOTS, updateBattle, type BattleEvent, type BattleState, type Enemy, type Point } from "./model";
+import { ENEMIES, MAP, enemyPosition, pointOnPath, updateBattle, type BattleEvent, type BattleState, type Enemy, type Point } from "./model";
 import type { Preferences } from "./save";
 
 export const ART = "./assets/hanzi-tower-defense/";
@@ -8,6 +9,7 @@ const PARTS = ["body_greenC", "body_redF", "body_blueA", "eye_cute_light", "mout
 interface SceneHooks {
   state(): BattleState;
   preferences(): Preferences;
+  speed(): 1 | 2;
   events(events: BattleEvent[]): void;
   tick(): void;
   ready(): void;
@@ -34,16 +36,17 @@ export class DefenseScene extends Phaser.Scene {
   private point(p: Point): Point { return { x: p.x * this.scale.width / MAP.width, y: p.y * this.scale.height / MAP.height }; }
   private drawTerrain(): void {
     if (!this.terrain) return;
-    this.terrain.setDisplaySize(this.scale.width, this.scale.height); this.road.clear();
+    this.terrain.setDisplaySize(this.scale.width, this.scale.height);this.terrain.setVisible(true); this.road.clear();
+    const paths=mapFor(this.hooks.state().mapId).paths;
     const scale = this.scale.width / MAP.width;
     // A continuous three-layer road reads as terrain, with clipped corners and small inset stones.
-    for (const [width, color] of [[61, 0x756747], [52, 0xb39664], [41, 0xd6bc84]] as const) {
+    for(const PATH of paths) for (const [width, color] of [[61, 0x756747], [52, 0xb39664], [41, 0xd6bc84]] as const) {
       this.road.lineStyle(Math.max(8, width * scale), color, 1); this.road.beginPath();
       PATH.forEach((p, i) => { const q = this.point(p); if (i === 0) this.road.moveTo(q.x, q.y); else this.road.lineTo(q.x, q.y); }); this.road.strokePath();
       for (const p of PATH.slice(1, -1)) { const q = this.point(p); this.road.fillStyle(color); this.road.fillCircle(q.x, q.y, Math.max(4, width * scale / 2)); }
     }
-    for (let n = 40; n < 1700; n += 58) {
-      const p = this.point(pointOnPath(n)); this.road.fillStyle(0xe5cf9d, .7);
+    for(const [lane,path] of paths.entries()) for (let n = 40; n < pathLength(path); n += 58) {
+      const p = this.point(pointOnPath(n,this.hooks.state().mapId,lane)); this.road.fillStyle(0xe5cf9d, .7);
       this.road.fillRoundedRect(p.x - 4 * scale, p.y - 3 * scale, Math.max(3, 9 * scale), Math.max(2, 5 * scale), 2);
     }
   }
@@ -53,12 +56,12 @@ export class DefenseScene extends Phaser.Scene {
     const sprite = (key: string, x: number, y: number, w: number, h: number) => { const item = this.add.image(x, y, key).setDisplaySize(w, h); parts.push(item); return item; };
     const legs = type === "swarm" ? "leg_greenE" : type === "swift" ? "leg_redE" : "leg_blueE";
     sprite(legs, -9, 18, 14, 15); sprite(legs, 9, 18, 14, 15).setFlipX(true);
-    sprite(bodyKey, 0, 0, type === "stone" ? 39 : 31, type === "swift" ? 38 : 33);
+    sprite(bodyKey, 0, 0, (type === "stone"||type === "captain") ? 39 : 31, type === "swift" ? 38 : 33);
     const horn = type === "swarm" ? "detail_green_horn_small" : type === "swift" ? "detail_red_ear" : "detail_white_horn_large";
     sprite(horn, -12, -18, type === "swift" ? 11 : 10, type === "swift" ? 23 : 13); sprite(horn, 12, -18, type === "swift" ? 11 : 10, type === "swift" ? 23 : 13).setFlipX(true);
     sprite("eye_cute_light", -7, -4, 12, 12); sprite("eye_cute_light", 7, -4, 12, 12);
     sprite("mouth_closed_happy", 0, 10, 11, 5);
-    if (type === "stone") {
+    if ((type === "stone"||type === "captain")) {
       const armor = this.add.graphics().lineStyle(3, 0x537f91).strokeRoundedRect(-20, -14, 40, 34, 5);
       armor.fillStyle(0xa2cbd3, .85).fillTriangle(-13, 13, 0, 5, 13, 13); parts.push(armor);
     }
@@ -69,7 +72,7 @@ export class DefenseScene extends Phaser.Scene {
     if (!this.road) return;
     const state = this.hooks.state(), preferences = this.hooks.preferences();
     if (state.phase === "battle" && !state.paused && !document.hidden) {
-      this.accumulator += Math.min(delta / 1000, .1);
+      this.accumulator += Math.min(delta / 1000, .1) * this.hooks.speed();
       while (this.accumulator >= .05) { const events = updateBattle(state, .05); this.accumulator -= .05; this.hooks.events(events); }
     } else this.accumulator = 0;
     this.uiElapsed += delta; if (this.uiElapsed > 150) { this.uiElapsed = 0; this.hooks.tick(); }
@@ -77,11 +80,12 @@ export class DefenseScene extends Phaser.Scene {
     for (const [id, container] of this.monsters) if (!alive.has(id)) { container.destroy(); this.monsters.delete(id); this.lifeBars.get(id)?.destroy(); this.lifeBars.delete(id); }
     const scale = Math.max(.64, Math.min(1.15, this.scale.width / MAP.width));
     for (const enemy of state.enemies) {
-      const container = this.monsters.get(enemy.id) ?? this.createMonster(enemy), p = this.point(pointOnPath(enemy.distance));
+      const container = this.monsters.get(enemy.id) ?? this.createMonster(enemy), p = this.point(enemyPosition(state,enemy));
       const bob = preferences.reducedMotion || state.paused ? 0 : Math.sin(state.elapsed * (enemy.kind === "swift" ? 17 : 8) + enemy.id) * 1.2;
-      container.setPosition(p.x, p.y - 10 * scale + bob).setScale(scale * (enemy.kind === "stone" ? 1.25 : 1)).setDepth(100 + p.y / 10);
+      container.setPosition(p.x, p.y - 10 * scale + bob).setScale(scale * (enemy.kind === "captain" ? 1.65 : enemy.kind === "stone" ? 1.25 : 1)).setDepth(100 + p.y / 10);
       const life = this.lifeBars.get(enemy.id)!; life.clear().fillStyle(0x142e29, .9).fillRoundedRect(p.x - 17 * scale, p.y - 35 * scale, 34 * scale, 4, 2);
       life.fillStyle(enemy.zoneSlow ? 0xd5f58c : enemy.slow ? 0x82f2f4 : 0xf5da80).fillRoundedRect(p.x - 17 * scale, p.y - 35 * scale, Math.max(0, 34 * scale * enemy.hp / enemy.maxHp), 4, 2);
+      if(enemy.kind==='captain') {life.lineStyle(3,enemy.summonAt!==undefined?0xffc153:0xc1e7e1,.95).strokeCircle(p.x,p.y-10*scale,34*scale);if(enemy.summonAt!==undefined)life.lineStyle(4,0xffdf79,.8).strokeCircle(p.x,p.y-10*scale,(36+Math.sin(state.waveTime*6)*4)*scale);}
       if (enemy.slow) life.lineStyle(2, 0x77dfe8, .9).strokeEllipse(p.x, p.y + 9 * scale, 42 * scale, 14 * scale);
     }
     // Attack ranges live in the non-interactive SVG overlay using this same MAP coordinate transform.
@@ -110,7 +114,7 @@ export class DefenseScene extends Phaser.Scene {
         const c = CORES[event.core], from = this.point(event.from), to = this.point(event.to), t = Math.min(1, effect.age / .2);
         const x = from.x + (to.x - from.x) * t, y = from.y + (to.y - from.y) * t;
         if (!preferences.reducedMotion && t < 1) {
-          if (event.core === "wood" || event.core === "grove") {
+          if (event.core === "wood" || event.core === "grove" || event.core === "canopy" || event.core === "forest") {
             this.trails.lineStyle(event.core === "grove" ? 4 : 2, c.color).lineBetween(x, y, x - (to.x - from.x) * .13, y - (to.y - from.y) * .13);
           } else if (event.core === "mountain" || event.core === "volcano" || event.core === "wildwood") {
             this.trails.fillStyle(c.color).fillCircle(x, y - Math.sin(t * Math.PI) * 30, event.core === "volcano" ? 7 : 5);
@@ -131,5 +135,5 @@ export class DefenseScene extends Phaser.Scene {
       }
     }
   }
-  reset(): void { this.accumulator = 0; this.trails?.clear(); }
+  reset(): void { this.accumulator = 0; this.trails?.clear();this.drawTerrain();for(const c of this.monsters.values())c.destroy();this.monsters.clear();for(const c of this.lifeBars.values())c.destroy();this.lifeBars.clear(); }
 }

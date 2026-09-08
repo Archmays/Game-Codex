@@ -1,18 +1,19 @@
 import { describe, expect, it } from 'vitest';
-import { ROOMS } from '../games/hanzi-word-adventure/rooms';
-import { act, carried, clone, effect, newJourney, nextRoom, passable, perform, restart, undo, validState, type Action } from '../games/hanzi-word-adventure/model';
+import { CHAPTERS, ROOMS } from '../games/hanzi-word-adventure/rooms';
+import { act, carried, clone, effect, illumination, visible, combineKind, newJourney, nextRoom, passable, perform, restart, undo, validState, type Action } from '../games/hanzi-word-adventure/model';
 import { solve } from '../games/hanzi-word-adventure/solver';
-import { openSave, SAVE_KEY } from '../games/hanzi-word-adventure/save';
+import { openSave, SAVE_KEY, LEGACY_SAVE_KEY, validSaveV2 } from '../games/hanzi-word-adventure/save';
 import { WORDS } from '../games/hanzi-word-adventure/content';
 
 describe('word adventure pure rules', () => {
-  it('validates every room and whole-glyph record; only 林 splits into left and right 木', () => {
+  it('validates every room and whole-glyph record; 林 and 明 have ordered modern components', () => {
     expect(new Set(WORDS.map(w => w.id)).size).toBe(WORDS.length);
     for (const w of WORDS) { expect(w.source).toBe(`https://www.zdic.net/hans/${w.glyph}`); expect(w.word).toContain(w.glyph); expect(w.pinyin).not.toBe(''); }
-    expect(WORDS.filter(w => w.components.length).map(w => w.glyph)).toEqual(['林']);
+    expect(WORDS.filter(w => w.components.length).map(w => w.glyph)).toEqual(['明', '林']);
     expect(WORDS.find(w => w.glyph === '林')!.components.map(c => [c.glyph, c.slot, c.role])).toEqual([['木', 'left', '部件'], ['木', 'right', '部件']]);
     ROOMS.forEach(r => {
       expect(validState(r, r.initial)).toBe(true);
+      r.sentences.forEach(sentence => expect(sentence.targets.length).toBeGreaterThan(0));
       r.tiles.forEach((tile, pos) => { if (tile === 'wind' || tile === 'door') expect(r.sentences.filter(s => s.targets.includes(pos))).toHaveLength(1); });
     });
   });
@@ -126,7 +127,7 @@ describe('isolated versioned adventure saves', () => {
     expect(save.writable).toBe(false); expect(save.write(newJourney(), save.settings)).toBe(false); expect(store.getItem(SAVE_KEY)).toBe(raw);
   });
   it('preserves unknown envelope fields and never overwrites a competing tab or Vault restore', () => {
-    const store = storage(); store.setItem(SAVE_KEY, JSON.stringify({ version: 1, futureOptional: 'keep', journey: newJourney(), settings: { reducedMotion: false, extra: 17 } }));
+    const store = storage(); store.setItem(SAVE_KEY, JSON.stringify({ version: 2, activeChapterId: 'homeward', chapters: { homeward: newJourney() }, futureOptional: 'keep', settings: { reducedMotion: false, extra: 17 } }));
     const save = openSave(store, { reducedMotion: true }); expect(save.write(newJourney(), save.settings)).toBe(true);
     expect(JSON.parse(store.getItem(SAVE_KEY)!).futureOptional).toBe('keep'); expect(JSON.parse(store.getItem(SAVE_KEY)!).settings.extra).toBe(17);
     store.setItem(SAVE_KEY, 'other tab'); expect(save.write(newJourney(), save.settings)).toBe(false); expect(store.getItem(SAVE_KEY)).toBe('other tab');
@@ -135,4 +136,79 @@ describe('isolated versioned adventure saves', () => {
     const save = openSave({ getItem() { throw Error('blocked'); }, setItem() { throw Error('blocked'); } }, { reducedMotion: true });
     expect(save.journey.room).toBe(0); expect(save.writable).toBe(false);
   });
+});
+
+
+describe('light, chapter continuity and v2 migration', () => {
+  const storage = () => { const values = new Map<string,string>(); return { values, getItem:(k:string)=>values.get(k)??null, setItem:(k:string,v:string)=>{values.set(k,v);} }; };
+  it('keeps five original IDs and fifteen stable chapter-bound room IDs without a final-room constant', () => {
+    expect(ROOMS).toHaveLength(15); expect(ROOMS.slice(0,5).map(r=>r.id)).toEqual(['r1','r2','r3','r4','r5']);
+    for (const chapter of CHAPTERS) { const rooms = ROOMS.filter(r=>r.chapterId === chapter.id); expect(rooms).toHaveLength(5); const last = newJourney(ROOMS.indexOf(rooms[4])); last.state = solve(rooms[4],last.state).actions.reduce((state,a)=>act(rooms[4],state,a).state,last.state); expect(nextRoom(last)).toBe(last); }
+  });
+  it('only 明 emits light; light has exact bounded distances and cannot pass walls or a closed door', () => {
+    const r = ROOMS[5]; expect(illumination(r,r.initial).size).toBe(0);
+    let s = act(r,r.initial,{type:'take',target:9}).state; s = act(r,s,{type:'move',direction:'right'}).state;
+    s = act(r,s,{type:'combine',target:10}).state; expect(carried(s)?.kind).toBe('明');
+    const lit = illumination(r,s); expect(lit.get(s.player)).toBe(0); expect(Math.max(...lit.values())).toBeLessThanOrEqual(3); expect(lit.has(0)).toBe(false);
+    const door = ROOMS[11], before = illumination(door,door.initial); expect(before.has(24)).toBe(false);
+    const opened = clone(door.initial); opened.entities.find(e=>e.kind==='不')!.pos=null; expect(illumination(door,opened).has(24)).toBe(true);
+  });
+  it('modern 明 reconstruction is ordered and conserves the distinct 日/月 atoms regardless of pickup order', () => {
+    const r = ROOMS[5], first = clone(r.initial), sun = first.entities.find(e=>e.kind==='日')!, moon = first.entities.find(e=>e.kind==='月')!;
+    expect(combineKind(sun,moon)).toBe('明'); expect(combineKind(moon,sun)).toBe('明');
+    first.player=9; sun.pos=null; const joined=act(r,first,{type:'combine',target:10}); expect(joined.ok).toBe(true);
+    const ground=act(r,joined.state,{type:'put',target:10}); expect(ground.ok).toBe(true);
+    const right=act(r,ground.state,{type:'split',target:10,side:'right'}); expect(right.ok).toBe(true);
+    expect(right.state.entities.find(e=>e.kind==='日')).toMatchObject({pos:10,atoms:r.sunAtoms}); expect(right.state.entities.find(e=>e.kind==='月')).toMatchObject({pos:11,atoms:r.moonAtoms});
+    const other = {...ground.state, player:11};
+    const left = act(r,other,{type:'split',target:10,side:'left'}); expect(left.ok).toBe(true); expect(left.state.entities.find(e=>e.kind==='日')?.pos).toBe(9); expect(left.state.entities.find(e=>e.kind==='月')?.pos).toBe(10);
+  });
+  it('darkness invalidating the player refuses the whole split; invisible pieces cannot be taken', () => {
+    const r=clone(ROOMS[5]); r.tiles[17]='shadow'; r.tiles[10]='floor'; r.tiles[11]='floor';
+    const s={player:17,won:false,entities:[{kind:'明' as const,atoms:r.sunAtoms|r.moonAtoms,pos:10}]};
+    expect(validState(r,s)).toBe(true); const split=act(r,s,{type:'split',target:10,side:'right'}); expect(split.ok).toBe(false); expect(split.state).toBe(s); expect(split.message).toContain('失去落脚处');
+    const dark=clone(r.initial); dark.player=10; dark.entities[0].pos=17; expect(visible(r,dark,17)).toBe(false); expect(act(r,dark,{type:'take',target:17}).state).toBe(dark);
+  });
+  it.each([12,14])('new room %i has a second strategy that leaves wind active, replayed without authored sequence locks', index => {
+    const r=ROOMS[index], slot=r.sentences.find(s=>s.subject==='风')!.cells[1];
+    const alternate=solve(r,r.initial,{allow:(s,a)=>!(a.type==='put'&&a.target===slot&&carried(s)?.kind==='不')}); expect(alternate.status).toBe('solved');
+    let state=clone(r.initial); for(const a of alternate.actions) {const next=act(r,state,a); expect(next.ok).toBe(true); expect(validState(r,next.state)).toBe(true);state=next.state;} expect(state.won).toBe(true); expect(effect(r,state,r.sentences.find(s=>s.subject==='风')!.targets[0])).toBe(true);
+  });
+  it('copies a valid v1 only into an absent v2, with exact old bytes and usable undo', () => {
+    const store=storage(), moved=perform(newJourney(),{type:'move',direction:'right'}).journey;
+    const {chapterId,roomId,...legacyJourney}=moved; const old=JSON.stringify({version:1,journey:legacyJourney,settings:{reducedMotion:true}});store.setItem(LEGACY_SAVE_KEY,old);
+    const save=openSave(store,{reducedMotion:false});expect(save.restored).toBe(true);expect(save.journey).toEqual(moved);expect(undo(save.journey).state).toEqual(ROOMS[0].initial);expect(store.getItem(LEGACY_SAVE_KEY)).toBe(old);expect(validSaveV2(JSON.parse(store.getItem(SAVE_KEY)!))).toBe(true);
+    for(const raw of ['{broken','{"version":99}']) {store.setItem(SAVE_KEY,raw);const blocked=openSave(store,{reducedMotion:false});expect(blocked.writable).toBe(false);expect(blocked.write(newJourney(),blocked.settings)).toBe(false);expect(store.getItem(SAVE_KEY)).toBe(raw);expect(store.getItem(LEGACY_SAVE_KEY)).toBe(old);}
+  });
+  it('chapter switching preserves all current states and reset affects only the explicitly named chapter', () => {
+    const store=storage();store.setItem(LEGACY_SAVE_KEY,'{untouched old bytes');const save=openSave(store,{reducedMotion:true});
+    const first=perform(newJourney(),{type:'move',direction:'right'}).journey;save.write(first,save.settings);
+    const second=newJourney(5);save.write(second,save.settings);expect(save.select('homeward')).toEqual(first);expect(save.select('lamplight')).toEqual(second);
+    save.reset('homeward',save.settings);const refreshed=openSave(store,save.settings);expect(refreshed.chapters.homeward?.state).toEqual(ROOMS[0].initial);expect(refreshed.chapters.lamplight).toEqual(second);expect(store.getItem(LEGACY_SAVE_KEY)).toBe('{untouched old bytes');
+    store.setItem(SAVE_KEY,'another tab');save.reset('lamplight',save.settings);expect(store.getItem(SAVE_KEY)).toBe('another tab');
+  });
+});
+
+
+describe('v1 migration write failures', () => {
+  const moved=perform(newJourney(),{type:'move',direction:'right'}).journey;
+  const old=JSON.stringify({version:1,journey:moved,settings:{reducedMotion:true}});
+  it('resumes the validated old checkpoint and undo in memory when migration storage is full', () => {
+    const save=openSave({getItem:k=>k===LEGACY_SAVE_KEY?old:null,setItem:()=>{throw Error('quota');}},{reducedMotion:false});
+    expect(save.writable).toBe(false);expect(save.restored).toBe(true);expect(save.journey).toEqual(moved);expect(undo(save.journey).state).toEqual(ROOMS[0].initial);
+  });
+  it('does not migrate a stale v1 read after another page changes the old source', () => {
+    let reads=0,writes=0;const save=openSave({getItem:k=>k===SAVE_KEY?null:++reads===1?old:'changed old source',setItem:()=>{writes++;}},{reducedMotion:false});
+    expect(writes).toBe(0);expect(save.writable).toBe(false);expect(save.journey).toEqual(moved);
+  });
+});
+
+
+it('woven-1 lamp relocation is necessary, with more than one legal lamp placement strategy', () => {
+  const r=ROOMS.find(r=>r.id==='woven-1')!;
+  const noLamp=solve(r,r.initial,{allow:(s,a)=>!((a.type==='take'||a.type==='split')&&s.entities.find(e=>e.pos===a.target)?.kind==='明')});expect(noLamp.status).toBe('unsolvable');
+  const normal=solve(r,r.initial);expect(normal.status).toBe('solved');let state=clone(r.initial),firstDrop=-1;
+  for(const a of normal.actions) {if(a.type==='put'&&carried(state)?.kind==='明'&&firstDrop<0)firstDrop=a.target;state=act(r,state,a).state;}expect(firstDrop).toBeGreaterThanOrEqual(0);expect(state.won).toBe(true);
+  const other=solve(r,r.initial,{allow:(s,a)=>!(a.type==='put'&&carried(s)?.kind==='明'&&a.target===firstDrop)});expect(other.status).toBe('solved');
+  state=clone(r.initial);for(const a of other.actions){const step=act(r,state,a);expect(step.ok).toBe(true);expect(validState(r,step.state)).toBe(true);state=step.state;}expect(state.won).toBe(true);
 });

@@ -62,14 +62,14 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
     </header>
     <section class="world-stage" aria-label="选择游戏世界">
       <section class="world-object world-object--forest" data-testid="world-forest-portal">
-        <a class="world-entry" href="${activeProductRoute("hanzi-tower-defense")}" data-world-forest-link>
+        <a tabindex="0" class="world-entry" href="${activeProductRoute("hanzi-tower-defense")}" data-world-forest-link>
           <img src="./assets/hanzi-tower-defense/meadow.png" width="720" height="420" alt="" decoding="async">
           <div class="world-entry__body"><h2>${WORLD_COPY.forestTitle}</h2><p>摆下字塔，合出更强的字阵，守住城门。</p>
           <span class="world-entry__action">${WORLD_COPY.forestFreshAction}<span aria-hidden="true">↗</span></span></div>
         </a>
       </section>
       <section class="world-object world-object--math" data-testid="world-math-portal">
-        <a class="world-entry" href="${activeProductRoute("math-lab")}" data-world-math-link>
+        <a tabindex="0" class="world-entry" href="${activeProductRoute("math-lab")}" data-world-math-link>
           <img src="./assets/home/math-world.webp" width="720" height="420" alt="" decoding="async">
           <div class="world-entry__body"><h2>${WORLD_COPY.mathTitle}</h2><p>滑动算式格，或用数字牌凑出目标。</p>
           <span class="world-entry__action">${WORLD_COPY.mathAction}<span aria-hidden="true">↗</span></span></div>
@@ -77,12 +77,12 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
       </section>
     </section>
     <section class="world-object world-object--adventure" data-testid="world-adventure-portal">
-      <a class="world-entry" href="${activeProductRoute("hanzi-word-adventure")}" data-world-adventure-link>
+      <a tabindex="0" class="world-entry" href="${activeProductRoute("hanzi-word-adventure")}" data-world-adventure-link>
         <img src="./assets/hanzi-word-adventure/scene.png" width="560" height="560" alt="" decoding="async">
         <div class="world-entry__body"><h2>字间行者</h2><p>挪一枚字，变一段路。借来木与不，走回家。</p><span class="world-entry__action">踏上归途<span aria-hidden="true">↗</span></span></div>
       </a>
     </section>
-    <nav class="world-more" aria-label="游戏列表" data-testid="world-treasure-box"><span>也可以打开游戏列表</span><a href="${CLASSIC_HUB_FROM_WORLD_ROUTE}" data-world-treasure-link>${WORLD_COPY.treasureTitle}<span aria-hidden="true">→</span></a></nav>
+    <nav class="world-more" aria-label="游戏列表" data-testid="world-treasure-box"><span>也可以打开游戏列表</span><a tabindex="0" href="${CLASSIC_HUB_FROM_WORLD_ROUTE}" data-world-treasure-link>${WORLD_COPY.treasureTitle}<span aria-hidden="true">→</span></a><a tabindex="0" href="?playtest=step4" data-world-playtest-link>本次试玩<span aria-hidden="true">→</span></a></nav>
     <div class="world-modal-layer" data-world-modal-layer></div>
   </main>`;
 
@@ -94,7 +94,7 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
   applySettings();
 
   // Navigation-only state belongs to this history entry, never to a save key.
-  const entries = ["forest", "math", "adventure", "treasure"] as const;
+  const entries = ["forest", "math", "adventure", "treasure", "playtest"] as const;
   for (const entry of entries) {
     root.querySelector(`[data-world-${entry}-link]`)?.addEventListener("click", () => {
       window.history.replaceState({ ...window.history.state, worldHomeReturn: { entry, scrollY: window.scrollY } }, "");
@@ -108,7 +108,8 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
       const referrer = new URL(document.referrer);
       if (referrer.origin === window.location.origin && referrer.pathname === window.location.pathname) {
         const query = referrer.searchParams;
-        if (query.get("hub") === "classic") entry = "treasure";
+        if (query.get('playtest') === 'step4') entry = 'playtest';
+        else if (query.get("hub") === "classic") entry = "treasure";
         else if (query.get("world") === "math-world") entry = "math";
         else if (query.get("play") === "hanzi-tower-defense") entry = "forest";
         else if (query.get("play") === "hanzi-word-adventure") entry = "adventure";
@@ -168,7 +169,7 @@ export function mountClassicHubFromWorld(root: HTMLElement): MountedGame {
   addPageClass("classic-hub-from-world-page");
   root.className = "classic-hub-from-world-mount";
   root.innerHTML = `<div class="classic-hub-from-world" data-testid="classic-hub-from-world">
-    <nav class="classic-hub-world-nav" aria-label="游戏百宝箱导航"><a href="${MY_GAME_WORLD_ROUTE}">← 回我的游戏世界</a></nav>
+    <nav class="classic-hub-world-nav" aria-label="游戏百宝箱导航"><a tabindex="0" href="${MY_GAME_WORLD_ROUTE}">← 回我的游戏世界</a></nav>
     <div class="classic-hub-world-inner" data-classic-hub-inner></div>
   </div>`;
   const inner = root.querySelector<HTMLElement>("[data-classic-hub-inner]");

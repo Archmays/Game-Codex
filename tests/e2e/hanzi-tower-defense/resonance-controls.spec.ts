@@ -2,20 +2,22 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { expect, test, type Page } from '@playwright/test';
 import { checkpointOf, newBattle, type Checkpoint } from '../../../games/hanzi-tower-defense/model';
 import { RESONANCES } from '../../../games/hanzi-tower-defense/resonance';
-import { LEGACY_SAVE_KEY, SAVE_KEY } from '../../../games/hanzi-tower-defense/save';
+import { LEGACY_SAVE_KEY, SAVE_KEY, validCheckpoint } from '../../../games/hanzi-tower-defense/save';
 const root=process.env.TD_EVIDENCE_DIR??'tmp/tasks/GAME-CODEX-STEP3';
 const preferences={muted:true,reducedMotion:true};
+const originalResonances=RESONANCES.filter(r=>r.coreId!=='forest');
 function fixture() {
   const s=newBattle();s.wave=4;s.health=12;
   s.cores=[{id:11,kind:'volcano',slot:0,cooldown:.65},{id:12,kind:'volcano',slot:3,cooldown:.35},{id:13,kind:'wildwood',slot:1,cooldown:.5},{id:14,kind:'wildwood',slot:null,cooldown:.4},{id:15,kind:'wood',slot:null,cooldown:0},{id:16,kind:'water',slot:7,cooldown:0}];s.nextCoreId=17;
-  s.englishCores=RESONANCES.map((r,i)=>({id:i+1,lexemeId:r.lexemeId,senseId:r.senseId,grantId:r.grantId,attachedTo:null}));s.englishClaims=RESONANCES.map(r=>r.grantId);s.nextEnglishId=3;return checkpointOf(s);
+  s.englishCores=originalResonances.map((r,i)=>({id:i+1,lexemeId:r.lexemeId,senseId:r.senseId,grantId:r.grantId,attachedTo:null}));s.englishClaims=originalResonances.map(r=>r.grantId);s.nextEnglishId=3;return checkpointOf(s);
 }
 async function setup(page:Page,checkpoint=fixture()) {
-  await page.goto('/');await page.evaluate(({key,checkpoint,preferences})=>localStorage.setItem(key,JSON.stringify({version:2,checkpoint,unlocked:[],preferences})),{key:SAVE_KEY,checkpoint,preferences});
+  expect(validCheckpoint(checkpoint),'Qinglan fixture must contain only its original two English cores').toBe(true);
+  await page.goto('/');await page.evaluate(({key,checkpoint,preferences})=>localStorage.setItem(key,JSON.stringify({version:3,activeMapId:"qinglan-pass",maps:{"qinglan-pass":{checkpoint,unlocked:[]}},preferences})),{key:SAVE_KEY,checkpoint,preferences});
   await page.goto('/?play=hanzi-tower-defense');await expect(page.locator('[data-td-canvas]')).toHaveAttribute('data-ready','true');await expect(page.locator('.td-game')).toHaveAttribute('data-phase','ready');
 }
 const raw=(page:Page)=>page.evaluate(key=>localStorage.getItem(key),SAVE_KEY);
-const saved=async(page:Page)=>JSON.parse((await raw(page))!).checkpoint as Checkpoint;
+const saved=async(page:Page)=>JSON.parse((await raw(page))!).maps["qinglan-pass"].checkpoint as Checkpoint;
 async function act(page:Page,selector:string,input:string) {const n=page.locator(selector);await n.scrollIntoViewIfNeeded();if(input==='touch')await n.tap();else{await n.focus();await page.keyboard.press('Enter');}}
 
 test('equipment selection order, mismatch, range independence, cancel and repeated confirmation keep exact ownership',async({page},info)=>{

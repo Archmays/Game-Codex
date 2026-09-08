@@ -205,7 +205,7 @@ export function renderTargetWorkbench(root: HTMLElement, state: TargetWorkbenchV
   footer.append(node("span", "", "第 " + state.puzzleNumber + " 组 · 目标 " + state.target));
   if (!complete) footer.append(action("换一组牌", "next", state.onNext));
   const rules = node("details", "target-rules");
-  rules.append(node("summary", "", "运算小规则"), node("p", "", "每张原牌都要用上。减法左边不小于右边，0 也可以用；除法要整除，不能除以 0。随时可以撤销。"));
+  rules.append(node("summary", "", "运算小规则 · 按键"), node("p", "", "每张原牌都要用上。减法左边不小于右边，0 也可以用；除法要整除，不能除以 0。随时可以撤销。"), node('p', '', 'Tab 切换数字牌、运算和按钮；方向键选择，Enter／空格确认。先选左边，再选右边，需要时点“交换左右”。鼠标或手指点击同样的牌和按钮。Esc 取消换牌。'));
   root.replaceChildren(header, table, help, history, footer, rules);
   if (state.changePrompt) {
     const dialog = node("dialog", "target-change");

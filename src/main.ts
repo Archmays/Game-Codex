@@ -2,6 +2,7 @@ import "./styles.css";
 import "./page-mode.css";
 import { normalizeRetiredLanguageRoute, normalizeRetiredMathRoute, pageModeForSearch, resolveAppRoute } from "./app-route";
 import { activatePageMode } from "./page-mode";
+import { bindInputLifecycle } from "../packages/ui/input";
 
 const WORLD_THEME_COLOR = "#071c2a";
 const MATH_WORLD_THEME_COLOR = "#dff2eb";
@@ -28,7 +29,7 @@ function renderRouteError(root: HTMLElement): void {
   root.innerHTML = `<main class="route-state route-state--error" aria-labelledby="route-error-title">
     <h1 id="route-error-title">这个地方暂时没有打开</h1>
     <p role="alert">可以再试一次，或安全回到我的游戏世界。游戏进度没有被清除。</p>
-    <div><button type="button" data-route-retry>再试一次</button><a href="?world=my-game-world">回到我的游戏世界</a></div>
+    <div><button type="button" data-route-retry>再试一次</button><a tabindex="0" href="?world=my-game-world">回到我的游戏世界</a></div>
   </main>`;
   root.querySelector<HTMLButtonElement>("[data-route-retry]")?.addEventListener("click", () => window.location.reload());
 }
@@ -42,14 +43,14 @@ async function mountApp(root: HTMLElement): Promise<void> {
   activatePageMode(pageModeForSearch(search));
 
   if (route.kind === "play" && play === "hanzi-word-adventure") {
-    setBrowserIdentity("字间行者 · 借字归途", "#f5f0e4");
+    setBrowserIdentity("字间行者", "#f5f0e4");
     const { mountHanziWordAdventure } = await import("../games/hanzi-word-adventure");
     mountHanziWordAdventure(root);
     return;
   }
 
   if (route.kind === "play" && play === "hanzi-tower-defense") {
-    setBrowserIdentity("字阵守城 · 青岚关", "#102f2d");
+    setBrowserIdentity("字阵守城", "#102f2d");
     const { mountHanziTowerDefense } = await import("../games/hanzi-tower-defense");
     mountHanziTowerDefense(root);
     return;
@@ -59,6 +60,20 @@ async function mountApp(root: HTMLElement): Promise<void> {
     setBrowserIdentity("游戏百宝箱", CLASSIC_THEME_COLOR);
     const { mountClassicHubFromWorld } = await import("../apps/my-game-world");
     mountClassicHubFromWorld(root);
+    return;
+  }
+
+  if (route.kind === 'play' && play === 'memory-card') {
+    setBrowserIdentity('记忆配对', '#f0ead2');
+    const { mountMemoryMatch } = await import('../packages/activity-engines/memory-match');
+    mountMemoryMatch(root, { context: 'classic', packId: 'same-glyph' });
+    return;
+  }
+
+  if (route.kind === 'world' && search.getAll('playtest').length === 1 && search.get('playtest') === 'step4') {
+    setBrowserIdentity('本次试玩 · Game-Codex STEP4', '#f4f0e5');
+    const { mountStep4Playtest } = await import('../apps/step4-playtest');
+    mountStep4Playtest(root);
     return;
   }
 
@@ -77,6 +92,7 @@ async function mountApp(root: HTMLElement): Promise<void> {
 window.addEventListener("load", () => {
   const root = document.getElementById("app");
   if (!root) return;
+  bindInputLifecycle(root, () => {});
   renderRouteLoading(root);
   void mountApp(root).catch(() => renderRouteError(root));
 });

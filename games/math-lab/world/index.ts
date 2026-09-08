@@ -44,7 +44,7 @@ export function mountMathWorld(root: HTMLElement): MountedGame {
     root.innerHTML = `<main class="math-world math-map" data-testid="math-world-map">
       <header class="math-world__header">
         <div><span class="math-world__kicker">数学世界</span><h1>数感实验城</h1><p>去滑轨站移动算式，或到工坊组合数字牌。</p></div>
-        <nav aria-label="数学世界导航"><a href="${HOME_ROUTE}">回我的游戏世界</a></nav>
+        <nav aria-label="数学世界导航"><a tabindex="0" href="${HOME_ROUTE}">回我的游戏世界</a></nav>
       </header>
       ${new URLSearchParams(window.location.search).get("notice") === "retired-game" ? '<p class="math-world__notice" role="status">这个小游戏已收起，可以选择下面的游戏。</p>' : ""}
       <section class="math-world__city" aria-label="数学世界两个开放站点">
@@ -92,7 +92,7 @@ export function mountMathWorld(root: HTMLElement): MountedGame {
       <header class="math-world-station__bar">
         <button type="button" data-return-map>← 回城市地图</button>
         <div><span>${activity.place}</span><h1 tabindex="-1" data-station-heading>${activity.title}</h1></div>
-        <a href="${HOME_ROUTE}">回我的游戏世界</a>
+        <a tabindex="0" href="${HOME_ROUTE}">回我的游戏世界</a>
       </header>
       <main class="math-world-station__stage" data-station-stage aria-live="polite"><p class="math-world-station__loading">正在打开${activity.title}……</p></main>
     </div>`;

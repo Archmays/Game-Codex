@@ -15,12 +15,14 @@ export function homeDiscoveryTests(): void {
     await expect(page.locator(".world-stage .world-entry")).toHaveCount(2);
     await expect(page.locator(".world-entry")).toHaveCount(3);
     await expect(page.locator(".world-stage a a,.world-stage button,canvas")).toHaveCount(0);
-    await expect(page.locator(".world-more a")).toHaveCount(1);
+    await expect(page.locator(".world-more a")).toHaveCount(2);
+    await expect(page.locator('[data-world-treasure-link]')).toBeVisible();
+    await expect(page.locator('[data-world-playtest-link]')).toBeVisible();
     await expect(page.locator(".world-stage")).not.toContainText(/72字|48词|200关|完成率|试点|版本|最新升级/);
     await page.waitForLoadState("networkidle");
     expect(images.filter(url => !url.includes("/assets/home/") && !url.includes("/assets/hanzi-tower-defense/meadow.png") && !url.includes("/assets/hanzi-word-adventure/scene.png"))).toEqual([]);
 
-    for (const [id, surface] of [["forest", '[data-testid="hanzi-tower-defense"]'], ["math", '[data-testid="math-world-map"]'], ["treasure", '[data-testid="classic-hub-from-world"]']]) {
+    for (const [id, surface] of [["forest", '[data-testid="hanzi-tower-defense"]'], ["math", '[data-testid="math-world-map"]'], ["treasure", '[data-testid="classic-hub-from-world"]'], ["playtest", '[data-testid="step4-playtest"]']]) {
       const entry = page.locator(entrySelector(id));
       await entry.scrollIntoViewIfNeeded();
       const scroll = await page.evaluate(() => scrollY);
@@ -37,7 +39,7 @@ export function homeDiscoveryTests(): void {
       await page.goBack(); await expect(page.locator(entrySelector(id))).toBeFocused();
       await expect.poll(() => page.evaluate(() => scrollY)).toBeCloseTo(scroll, 0);
       await page.goForward(); await expect(page.locator(surface)).toBeVisible();
-      await activate(id === "forest" ? "[data-td-home]" : 'a[href="?world=my-game-world"]');
+      await activate(id === "forest" ? "[data-td-home]" : id === 'playtest' ? '.step4-playtest header a' : 'a[href="?world=my-game-world"]');
       await expect(page.locator(entrySelector(id))).toBeFocused();
       expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
     }

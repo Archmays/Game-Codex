@@ -1,4 +1,5 @@
 import type { MountedGame } from "../../game-core";
+import { bindInputLifecycle, rovingGroup } from '../../ui/input';
 import { closeMemoryMismatch, createMemoryState, flipMemoryCard } from "./machine";
 import { CHINESE_MEMORY_PACKS, getMemoryPack, PINYIN_STARTER_CHARACTER_IDS } from "./packs";
 import { readLegacyMemoryPresence, readMemorySave, writeMemorySave, type MemoryMatchSave } from "./save";
@@ -45,22 +46,48 @@ export function mountMemoryMatch(root: HTMLElement, options: MountMemoryMatchOpt
   const isComplete = () => state.matchedRelationIds.length === state.cards.length / 2;
   const persist = () => writeMemorySave({ ...save, selectedPackId: pack.id, contentRevision: pack.revisionHash }, storage);
 
-  const render = () => {
+  const focusKey = (target: Element | null): string | null => {
+    if (!(target instanceof HTMLElement) || !root.contains(target)) return null;
+    return target.dataset.cardId ? `card:${target.dataset.cardId}` : target.dataset.packId ? `pack:${target.dataset.packId}` : target.dataset.action ? `action:${target.dataset.action}` : target.matches('a') ? 'return' : target.matches('.memory-match__help summary') ? 'help' : null;
+  };
+  const focusTarget = (key: string | null): HTMLElement | null => {
+    if (!key) return null;
+    if (key === 'return') return root.querySelector('header a');
+    if (key === 'help') return root.querySelector('.memory-match__help summary');
+    const [kind, ...rest] = key.split(':');
+    const attribute = kind === 'card' ? 'data-card-id' : kind === 'pack' ? 'data-pack-id' : 'data-action';
+    return root.querySelector<HTMLElement>(`[${attribute}="${CSS.escape(rest.join(':'))}"]:not(:disabled)`);
+  };
+  const columns = () => {
+    const grid = root.querySelector('.memory-match__grid');
+    return grid ? getComputedStyle(grid).gridTemplateColumns.split(' ').length : 4;
+  };
+  const cardNavigation = rovingGroup(root, { items: '[data-card-id]', columns });
+  const packNavigation = rovingGroup(root, { items: '[data-pack-id]' });
+  const stopInputs = bindInputLifecycle(root, () => {});
+  const render = (requestedFocus?: string) => {
+    const previousFocus = requestedFocus ?? focusKey(document.activeElement);
+    const helpOpen = root.querySelector<HTMLDetailsElement>('.memory-match__help')?.open ?? false;
     const completed = isComplete();
     root.innerHTML = `<main class="memory-match is-classic" data-testid="memory-match" data-pack="${pack.id}" data-complete="${String(completed)}">
-      <header><a href="${escapeHtml(returnHref)}">← 回到游戏百宝箱</a><p>看一看，想一想，再翻开</p><h1>记忆配对</h1><span>不计时 · 不排名 · 可以慢慢找</span></header>
+      <header><a tabindex="0" href="${escapeHtml(returnHref)}">← 回到游戏百宝箱</a><p>看一看，想一想，再翻开</p><h1>记忆配对</h1><span>不计时 · 不排名 · 可以慢慢找</span></header>
       <nav class="memory-match__packs" aria-label="选择配对内容">${availablePacks.map((item) => `<button type="button" data-pack-id="${item.id}" aria-pressed="${String(item.id === pack.id)}"><b>${item.title}</b><small>${item.id === "same-glyph" ? "找到两张同样的字" : item.id === "glyph-pinyin" ? "把汉字和读音连起来" : "把汉字放回熟悉词语"}</small></button>`).join("")}</nav>
       <section class="memory-match__play"><div class="memory-match__found" role="status">已找到 ${state.matchedRelationIds.length}/${state.cards.length / 2}</div>
-      <div class="memory-match__grid" role="grid" aria-label="${pack.title}，${state.cards.length} 张卡片" style="--card-count:${state.cards.length}">${state.cards.map((card) => {
+      <div class="memory-match__grid" role="group" aria-label="${pack.title}，卡片网格，方向键选卡，Enter或空格翻开" style="--card-count:${state.cards.length}">${state.cards.map((card) => {
         const open = state.openInstanceIds.includes(card.instanceId) || state.matchedRelationIds.includes(card.relationId);
         const matched = state.matchedRelationIds.includes(card.relationId);
-        return `<button type="button" role="gridcell" data-card-id="${escapeHtml(card.instanceId)}" data-relation-id="${escapeHtml(card.relationId)}" data-open="${String(open)}" data-matched="${String(matched)}" ${matched ? "disabled" : ""} aria-label="${open ? escapeHtml(card.face.ariaLabel) : `第 ${card.position + 1} 张，未翻开的卡片`}" aria-rowindex="${Math.floor(card.position / (state.cards.length > 8 ? 4 : 3)) + 1}" aria-colindex="${card.position % (state.cards.length > 8 ? 4 : 3) + 1}"><span class="memory-match__back" aria-hidden="true">光</span><span class="memory-match__face">${card.face.assetUrl ? `<img src="${escapeHtml(card.face.assetUrl)}" alt="" />` : ""}${escapeHtml(card.face.text ?? "")}</span></button>`;
+        return `<button type="button" data-card-id="${escapeHtml(card.instanceId)}" data-relation-id="${escapeHtml(card.relationId)}" data-open="${String(open)}" data-matched="${String(matched)}" ${matched ? "disabled" : ""} aria-label="${open ? escapeHtml(card.face.ariaLabel) : `第 ${card.position + 1} 张，未翻开的卡片`}"><span class="memory-match__back" aria-hidden="true">光</span><span class="memory-match__face">${card.face.assetUrl ? `<img src="${escapeHtml(card.face.assetUrl)}" alt="" />` : ""}${escapeHtml(card.face.text ?? "")}</span></button>`;
       }).join("")}</div>
       <div class="memory-match__announcement" aria-live="polite">${escapeHtml(completed ? "这些关系都找到了。" : announcement)}</div>
-      <div class="memory-match__controls"><button type="button" data-action="restart">重新铺开</button></div></section>
+      <div class="memory-match__controls"><button type="button" data-action="restart">重新铺开</button></div><details class="memory-match__help"><summary>怎么玩 · 按键</summary><p>Tab 切换内容、卡片和按钮；方向键在卡片中移动，Enter／空格翻开。Home／End 到首张／末张，Tab 可以离开卡片区。鼠标或手指点卡片也能翻开。</p></details></section>
       ${completed ? `<section class="memory-match__done" data-testid="memory-complete"><span aria-hidden="true">✦</span><h2>这些关系都找到了。</h2><p>每一对字光都回到了自己的位置。</p><button type="button" data-action="restart">再找一轮</button></section>` : ""}
       </main>`;
-    if (focusInstanceId) root.querySelector<HTMLButtonElement>(`[data-card-id="${CSS.escape(focusInstanceId)}"]`)?.focus({ preventScroll: true });
+    root.querySelector<HTMLDetailsElement>('.memory-match__help')!.open = helpOpen;
+    cardNavigation.refresh(); packNavigation.refresh();
+    if (previousFocus) {
+      const fallback = root.querySelector<HTMLElement>('[data-card-id]:not(:disabled)') ?? root.querySelector<HTMLElement>('[data-action="restart"]');
+      (focusTarget(previousFocus) ?? fallback)?.focus({ preventScroll: true });
+    }
   };
 
   const restart = () => {
@@ -68,13 +95,14 @@ export function mountMemoryMatch(root: HTMLElement, options: MountMemoryMatchOpt
     state = createMemoryState(pack, seed, pairCount, preferredRelationIds(pack));
     announcement = "卡片重新铺好了。";
     focusInstanceId = state.cards[0]?.instanceId ?? null;
-    render();
+    render(`card:${focusInstanceId}`);
   };
   const choosePack = (next: MemoryMatchPack) => {
     pack = next;
     save = { ...save, selectedPackId: pack.id, contentRevision: pack.revisionHash };
     persist();
     restart();
+    focusTarget(`pack:${pack.id}`)?.focus({ preventScroll: true });
   };
   const flip = (instanceId: string) => {
     if (state.locked) return;
@@ -93,7 +121,7 @@ export function mountMemoryMatch(root: HTMLElement, options: MountMemoryMatchOpt
     } else {
       announcement = "第一张已经翻开，再找它的伙伴。";
     }
-    render();
+    render(`card:${focusInstanceId}`);
   };
   const click = (event: MouseEvent) => {
     const target = (event.target as HTMLElement).closest<HTMLButtonElement>("button");
@@ -102,22 +130,8 @@ export function mountMemoryMatch(root: HTMLElement, options: MountMemoryMatchOpt
     if (target.dataset.packId) choosePack(getMemoryPack(target.dataset.packId));
     if (target.dataset.action === "restart") restart();
   };
-  const keydown = (event: KeyboardEvent) => {
-    const target = (event.target as HTMLElement).closest<HTMLButtonElement>("[data-card-id]");
-    if (!target) return;
-    const index = state.cards.findIndex((card) => card.instanceId === target.dataset.cardId);
-    const columns = state.cards.length > 8 ? 4 : 3;
-    const delta = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : event.key === "ArrowDown" ? columns : event.key === "ArrowUp" ? -columns : 0;
-    if (!delta) return;
-    event.preventDefault();
-    const nextIndex = (index + delta + state.cards.length) % state.cards.length;
-    focusInstanceId = state.cards[nextIndex].instanceId;
-    root.querySelector<HTMLButtonElement>(`[data-card-id="${CSS.escape(focusInstanceId)}"]`)?.focus();
-  };
-
   root.addEventListener("click", click);
-  root.addEventListener("keydown", keydown);
   render();
   persist();
-  return { destroy() { destroyed = true; window.clearTimeout(timer); root.removeEventListener("click", click); root.removeEventListener("keydown", keydown); root.replaceChildren(); } };
+  return { destroy() { destroyed = true; window.clearTimeout(timer); stopInputs(); cardNavigation.destroy(); packNavigation.destroy(); root.removeEventListener("click", click); root.replaceChildren(); } };
 }

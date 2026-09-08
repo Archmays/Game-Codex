@@ -13,7 +13,7 @@ export default defineConfig({
   expect: { timeout: 20_000, toHaveScreenshot: { animations: "disabled", maxDiffPixelRatio: 0.006 } },
   workers: 1,
   reporter: [["line"]],
-  outputDir: "test-results/interaction-integrity/artifacts",
+  outputDir: `${process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'test-results'}/interaction-integrity/artifacts`,
   use: { baseURL, trace: "retain-on-failure", screenshot: "only-on-failure", video: "off", reducedMotion: "reduce" },
   projects: [
     { name: "mobile-360", use: { ...devices["Pixel 5"], viewport: { width: 360, height: 800 } } },

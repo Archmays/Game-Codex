@@ -84,3 +84,23 @@
   .hway-help { margin-top: 2px; }
   .hway-sentences { margin: 8px 0; }
 }
+
+.hway-mount { min-height: 100dvh; }
+.hway { padding-bottom: max(32px, env(safe-area-inset-bottom)); padding-left: max(14px, env(safe-area-inset-left)); padding-right: max(14px, env(safe-area-inset-right)); }
+.hway-grid:focus-visible { outline: 3px solid #a94f3c; outline-offset: -3px; }
+.hway-primary, .hway-save-tools { width: 100%; }
+.hway-primary { border: 1px solid #7e9c84; background: #ecf0df; border-radius: 8px; padding: 9px; margin-bottom: 10px; }
+.hway-primary p { margin: 0 0 6px; font-size: 13px; line-height: 1.6; }
+.hway-primary button { width: 100%; min-height: 52px; background: #dce7cb; }
+.hway-save-tools { display:flex; gap:6px; margin-bottom:10px; flex-wrap:wrap; }
+.hway-save-tools button { font-size:12px; }
+.hway-menu { z-index:45; }
+.hway-menu > div { width:min(420px,100%); max-height:calc(100dvh - 32px); overflow:auto; }
+.hway-menu [data-hway-menu-content] { display:grid; gap:10px; }
+.hway-menu [data-hway-menu-content] button { min-height:52px; text-align:left; }
+.hway-menu small { display:block; font-size:12px; margin-top:5px; color:#657663; }
+.hway-direction button { min-height:50px; }
+.hway-modal { overflow:auto; padding-bottom:max(20px,env(safe-area-inset-bottom)); }
+.hway-modal > div { max-height:calc(100dvh - 40px); overflow:auto; }
+
+.hway-primary [data-hway-choose-place] { min-height:44px; margin-top:7px; font-size:13px; background:#fffaf0; }

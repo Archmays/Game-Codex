@@ -66,6 +66,13 @@ button {
   font: inherit;
 }
 
+button:focus-visible, a:focus-visible, summary:focus-visible, [tabindex]:focus-visible,
+input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 3px solid #b26c12;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 2px #fff9e8;
+}
+
 .app-shell {
   min-height: 100%;
   overflow: auto;

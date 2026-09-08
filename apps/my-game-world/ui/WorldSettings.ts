@@ -99,13 +99,14 @@ export function mountWorldSettings(
   root.querySelector<HTMLElement>("[data-world-modal-close]")?.addEventListener("click", onClose);
 
   const keydown = (event: KeyboardEvent): void => {
+    if (event.defaultPrevented || event.isComposing || event.keyCode === 229 || event.ctrlKey || event.altKey || event.metaKey) return;
     if (event.key === "Escape") {
       event.preventDefault();
       onClose();
       return;
     }
     if (event.key !== "Tab") return;
-    const controls = [...root.querySelectorAll<HTMLElement>("button:not([disabled]):not([hidden]), input:not([disabled]):not([hidden]), summary, a[href]")]
+    const controls = [...root.querySelectorAll<HTMLElement>("button:not([disabled]):not([hidden]), input:not([disabled]):not([hidden]), textarea:not([disabled]), select:not([disabled]), summary, a[href]")]
       .filter((control) => control.getClientRects().length > 0);
     if (!controls.length) return;
     const first = controls[0];

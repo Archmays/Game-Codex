@@ -1,6 +1,6 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { expect, test, type Page } from "@playwright/test";
-import { CORES, CORE_ORDER, RECIPES, type CoreKind } from "../../../games/hanzi-tower-defense/content";
+import { CORES, ORIGINAL_CORE_ORDER as CORE_ORDER, ORIGINAL_RECIPES as RECIPES, type CoreKind } from "../../../games/hanzi-tower-defense/content";
 import { MAP, newBattle, SLOTS, type Core } from "../../../games/hanzi-tower-defense/model";
 import { SAVE_KEY } from "../../../games/hanzi-tower-defense/save";
 
@@ -11,7 +11,7 @@ async function setup(page: Page, items: Item[], wave = 0) {
   await page.goto(new URL('.', new URL(gameURL, page.url().startsWith('http') ? page.url() : 'http://127.0.0.1:5299')).href);
   const checkpoint = newBattle().checkpoint;
   checkpoint.cores = items.map(c => ({ ...c, cooldown: 0 })); checkpoint.nextCoreId = Math.max(...items.map(c => c.id)) + 1; checkpoint.wave = wave;
-  await page.evaluate(({ checkpoint, key }) => localStorage.setItem(key, JSON.stringify({ version: 2, checkpoint, unlocked: [], preferences: { muted: true, reducedMotion: true } })), { checkpoint, key: SAVE_KEY });
+  await page.evaluate(({ checkpoint, key }) => localStorage.setItem(key, JSON.stringify({ version: 3, activeMapId:"qinglan-pass", maps:{"qinglan-pass":{checkpoint, unlocked: []}}, preferences: { muted: true, reducedMotion: true } })), { checkpoint, key: SAVE_KEY });
   await page.goto(gameURL); await expect(page.locator('[data-td-canvas]')).toHaveAttribute('data-ready', 'true');
   await expect(page.locator('.td-game')).toHaveAttribute('data-phase', wave === 6 ? 'won' : 'ready');
 }
@@ -22,7 +22,7 @@ async function activate(page: Page, selector: string, input: string) {
   else if (input === 'keyboard') { await item.focus(); await page.keyboard.press('Enter'); }
   else await item.click();
 }
-async function savedCores(page: Page): Promise<Core[]> { return page.evaluate(key => JSON.parse(localStorage.getItem(key)!).checkpoint.cores, SAVE_KEY); }
+async function savedCores(page: Page): Promise<Core[]> { return page.evaluate(key => JSON.parse(localStorage.getItem(key)!).maps["qinglan-pass"].checkpoint.cores, SAVE_KEY); }
 async function screenRange(page: Page, kind: CoreKind, slot: number, mode = 'inspect') {
   const circle = page.locator(`[data-range-mode="${mode}"]`); await expect(circle).toHaveCount(1);
   const geometry = await circle.evaluate((node) => {
@@ -140,7 +140,7 @@ test('range inspection is independent of bag selection and lifecycle, with empty
     await page.locator('[data-slot="3"]').hover(); await screenRange(page,'water',3); await expect(page.locator('[data-td-selection] .has-core')).toHaveCount(1);
     // A parked pointer must not override the later keyboard inspection.
     await page.locator('[data-slot="0"]').focus(); await screenRange(page,'fire',0); await expect(page.locator('[data-td-selection] .has-core')).toHaveCount(1);
-    await page.keyboard.press('Tab'); await expect(page.locator('[data-slot="1"]')).toBeFocused(); await screenRange(page,'wood',1,'preview'); expect(await savedCores(page)).toEqual(before);
+    await page.keyboard.press('ArrowRight'); await expect(page.locator('[data-slot="1"]')).toBeFocused(); await screenRange(page,'wood',1,'preview'); expect(await savedCores(page)).toEqual(before);
     await page.locator('[data-slot="1"]').hover(); await screenRange(page,'wood',1,'preview');
     await page.screenshot({path:`${evidence}/deployment-preview.png`,fullPage:true});
   }
@@ -153,7 +153,7 @@ test('range inspection is independent of bag selection and lifecycle, with empty
   if(input==='desktop') {
     await page.locator('[data-slot="3"]').click(); await page.locator('[data-slot="2"]').hover(); await screenRange(page,'wash',2,'preview');
     await expect(page.locator('[data-range-mode="all"][data-range-slot="3"]')).toHaveCount(1);
-    expect(await savedCores(page)).toEqual(JSON.parse(saveBeforeToggle!).checkpoint.cores);
+    expect(await savedCores(page)).toEqual(JSON.parse(saveBeforeToggle!).maps["qinglan-pass"].checkpoint.cores);
   }
   await activate(page,'[data-td-all-ranges]',input); expect(await page.evaluate(key=>localStorage.getItem(key),SAVE_KEY)).toBe(saveBeforeToggle);
   await activate(page,'[data-td-restart]',input); await activate(page,'[data-td-confirm-restart]',input); await expect(page.locator('[data-range-mode="inspect"]')).toHaveCount(0);

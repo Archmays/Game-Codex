@@ -13,7 +13,7 @@ export default defineConfig({
   expect: { timeout: 15_000, toHaveScreenshot: { animations: "disabled", maxDiffPixelRatio: 0.015 } },
   workers: 1,
   reporter: [["line"]],
-  outputDir: "test-results/math-world",
+  outputDir: `${process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'test-results'}/math-world`,
   use: {
     baseURL: `http://127.0.0.1:${port}`,
     trace: "retain-on-failure",

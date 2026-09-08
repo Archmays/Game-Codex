@@ -35,7 +35,7 @@ function expectClean(runtime: RuntimeObservation): void {
 async function visiblePrimary(page: Page, kind: string): Promise<Locator> {
   if (kind === "my-game-world") return page.locator("[data-world-forest-link]");
   if (kind === "hanzi-tower-defense") return page.locator("[data-td-pause]");
-  if (kind === "hanzi-word-adventure") return page.locator('[data-hway-move="right"]');
+  if (kind === "hanzi-word-adventure") return page.locator('[data-hway-new]');
   if (kind === "math-world") return page.locator('[data-station-id="slider"] button');
   if (kind === "classic-hub") return page.locator(".game-card__button").first();
   return page.locator("[data-card-id]").first();
@@ -106,6 +106,11 @@ test("@save-vault export, preview and restore preserve retired exact keys and un
   const runtime = observe(page);
   await page.goto("/?world=my-game-world", { waitUntil: "domcontentloaded" });
   const fixture = {
+    "family-games/hanzi-tower-defense/v3": '{ "version":3,"syntheticRaw":"三地图检查点" }',
+    "family-games/hanzi-tower-defense/v2": '{ "version":2,"syntheticRaw":"旧存档保留" }',
+    "family-games/hanzi-word-adventure/v2": '{ "version":2,"syntheticRaw":"三章原文" }',
+    "family-games/hanzi-word-adventure/v1": '{ "version":1,"syntheticRaw":"旧房原文" }',
+    "family-games/step4-playtest/feedback-v1": '{ "version":1,"text":"手填本机反馈" }',
     "family-games/math-world/v1": '{ "version":1,"lastStation":"lab","visitedStations":["clock","array","lab"],"reducedMotionOverride":true,"extension":{"kept":7} }',
     "math-battle-web/save-v1": "{synthetic-broken-legacy",
     "family-games/clock-reader/progress": '{"version":99,"future":{"synthetic":true}}',

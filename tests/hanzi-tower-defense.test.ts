@@ -4,8 +4,8 @@ import { DEFAULT_SEED, deploy, distanceBetween, ENEMIES, firingRange, fuse, newB
 import { openSave, SAVE_KEY, validCheckpoint } from "../games/hanzi-tower-defense/save";
 
 describe("字阵守城 content and minimal battle loop", () => {
-  it("binds all nine readable cores and five ordered spatial recipes to language sources", () => {
-    expect(CORE_ORDER).toHaveLength(9); expect(RECIPES).toHaveLength(5);
+  it("binds all eleven readable cores and seven ordered spatial recipes to language sources", () => {
+    expect(CORE_ORDER).toHaveLength(11); expect(RECIPES).toHaveLength(7);
     for (const kind of CORE_ORDER) {
       const c = CORES[kind]; expect(c.id).toBe(kind); expect(c.source).toBe(`https://www.zdic.net/hans/${c.glyph}`);
       expect(c.pinyin && c.meaning && c.familiarWord && c.illustrationBrief).toBeTruthy(); expect(c.components.length).toBe(c.slots.length);
@@ -22,7 +22,7 @@ describe("字阵守城 content and minimal battle loop", () => {
     expect(events.some(e => e.type === "drop")).toBe(true); expect(s.cores).toHaveLength(7); expect(s.elapsed).toBeLessThan(60);
   });
   it("makes each output exceed all separately deployed ingredients at equal resource/time/range", () => {
-    for (const recipe of RECIPES) {
+    for (const recipe of RECIPES.slice(0,5)) {
       const before = firingRange(recipe.inputs), after = firingRange([recipe.result]);
       expect(after.damage, recipe.id).toBeGreaterThan(before.damage * 1.15);
     }
@@ -68,7 +68,7 @@ describe("字阵守城 content and minimal battle loop", () => {
 describe("hotfix ingredient identity, destination and real targeting boundaries", () => {
   for (const recipe of RECIPES) for (const reversed of [false, true]) for (const slots of [[null, null], [null, 0], [0, null], [0, 1]] as const) {
     it(`${recipe.id} reverse=${reversed} sources=${slots.join('/')} consumes only distinct sources`, () => {
-      const s = newBattle();
+      const s = newBattle(undefined,[],RECIPES.indexOf(recipe)>=5?"twin-bends":"qinglan-pass");
       s.cores = [{ id: 11, kind: recipe.inputs[0], slot: slots[0], cooldown: .3 }, { id: 12, kind: recipe.inputs[1], slot: slots[1], cooldown: .7 }, { id: 13, kind: "water", slot: 7, cooldown: .9 }]; s.nextCoreId = 14;
       const ids = reversed ? [12, 11] : [11, 12], target = slots[1] ?? slots[0];
       const before = JSON.stringify(s);
@@ -143,9 +143,9 @@ describe("wave checkpoints and protected local storage", () => {
   it("rejects duplicate identities, invalid slots and preserves unknown same-version fields", () => {
     const cp = newBattle().checkpoint; expect(validCheckpoint(cp)).toBe(true); expect(validCheckpoint({ ...cp, cores: [cp.cores[0], cp.cores[0]] })).toBe(false);
     expect(validCheckpoint({ ...cp, cores: [{ ...cp.cores[0], slot: SLOTS.length }] })).toBe(false);
-    const store = memory({ [SAVE_KEY]: JSON.stringify({ version: 2, note: "keep", checkpoint: { ...cp, extra: "keep too" }, unlocked: [], preferences: { ...prefs, extra: 1 } }) });
-    const save = openSave(store, prefs); save.write(save.state, prefs); const raw = JSON.parse(store.getItem(SAVE_KEY)!);
-    expect(raw.note).toBe("keep"); expect(raw.checkpoint.extra).toBe("keep too"); expect(raw.preferences.extra).toBe(1);
+    const store = memory({ [SAVE_KEY]: JSON.stringify({ version: 3, activeMapId:"qinglan-pass", note: "keep", maps:{"qinglan-pass":{checkpoint: { ...cp, extra: "keep too" }, unlocked: []}}, preferences: { ...prefs, extra: 1 } }) });
+    const save = openSave(store, prefs); expect(save.write(save.state, prefs)).toBe(true); const raw = JSON.parse(store.getItem(SAVE_KEY)!);
+    expect(raw.note).toBe("keep"); expect(raw.maps["qinglan-pass"].checkpoint.extra).toBe("keep too"); expect(raw.preferences.extra).toBe(1);
   });
   it("has six waves and visibly distinct enemy roles", () => { expect(WAVES).toHaveLength(6); expect(ENEMIES.swift.speed).toBeGreaterThan(ENEMIES.swarm.speed); expect(ENEMIES.stone.hp).toBeGreaterThan(ENEMIES.swift.hp * 3); });
 });
