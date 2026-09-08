@@ -19,7 +19,10 @@ async function measureProgress(page: Page, milliseconds: number) {
 }
 
 test('STEP4 real 1x/2x speed, pause, native activation, independent saves and mobile targets', async ({ page }, info) => {
-  test.setTimeout(120_000);
+  // Slow CI passed all speed assertions but exhausted two minutes on the final
+  // real-key return. Allow the complete multi-route flow without relaxing actions.
+  test.setTimeout(300_000);
+  page.setDefaultTimeout(15_000);
   mkdirSync(evidence, { recursive: true });
   const mode: InputMode = info.project.name === 'touch' ? 'touch' : 'keyboard';
   const act = (selector: string, key?: string) => activate(page, selector, mode, undefined, key);
@@ -83,6 +86,7 @@ test('STEP4 real 1x/2x speed, pause, native activation, independent saves and mo
   await expect(game).toHaveAttribute('data-paused', 'true');
   expect((await measureProgress(page, 400)).simulatedSeconds).toBe(0);
   expect(await page.evaluate(key => localStorage.getItem(key), SAVE_KEY)).toBe(pausedSave);
+  console.info(JSON.stringify({ mode, normal, fast, ratio, paused, speedAssertions: 'passed' }));
 
   await act('[data-td-new]'); await act('[data-map-select="beacon-keep"]');
   await expect(game).toHaveAttribute('data-speed', '1'); await expect(game).toHaveAttribute('data-phase', 'ready');
