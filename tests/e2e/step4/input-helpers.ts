@@ -8,9 +8,22 @@ export async function keyReach(page: Page, selector: string, region?: string): P
   for (let tabs=0; tabs<80; tabs++) {
     if (await target.evaluate(element => document.activeElement === element)) return;
     if (region && await page.locator(region).evaluateAll(elements => elements.some(element => element === document.activeElement))) {
-      const count = await page.locator(region).count();
-      for (let arrow=0; arrow<count; arrow++) {
-        await page.keyboard.press('ArrowRight');
+      // Use the region's documented keys like a player; do not circle the whole bag
+      // to reach the previous item. All focus changes still come from real key events.
+      const keys = await target.evaluate((element, selector) => {
+        const list = [...document.querySelectorAll(selector)].filter(e => !e.closest('[hidden], [inert]') && !e.matches(':disabled'));
+        const from = list.indexOf(document.activeElement!), to = list.indexOf(element), count = list.length;
+        if (from < 0 || to < 0) throw new Error('Focused item and target must belong to the enabled region');
+        const choices = [
+          Array<string>((to-from+count)%count).fill('ArrowRight'),
+          Array<string>((from-to+count)%count).fill('ArrowLeft'),
+          ['Home', ...Array<string>(to).fill('ArrowRight')],
+          ['End', ...Array<string>(count-1-to).fill('ArrowLeft')],
+        ];
+        return choices.sort((a,b) => a.length-b.length)[0];
+      }, region);
+      for (const key of keys) {
+        await page.keyboard.press(key);
         if (await target.evaluate(element => document.activeElement === element)) return;
       }
       throw new Error(`Region cannot reach ${selector} by real arrows`);

@@ -10,10 +10,23 @@ interface Item{id:number;kind:CoreKind;slot:number|null;selector:string}
 async function items(page:Page):Promise<Item[]>{const raw=await page.locator('[data-core],.td-slot--occupied').evaluateAll(nodes=>nodes.map(e=>({id:Number(e.getAttribute('data-core')??e.getAttribute('data-tower-id')),slot:e.hasAttribute('data-core')?null:Number(e.getAttribute('data-slot')),glyph:e.querySelector('strong,.td-slot-glyph')?.textContent})));return raw.map(e=>({...e,kind:Object.values(CORES).find(c=>c.glyph===e.glyph)!.id,selector:e.slot===null?`[data-core="${e.id}"]`:`[data-slot="${e.slot}"]`})).sort((a,b)=>a.id-b.id);}
 function region(selector:string){return selector.startsWith('[data-core=')?'[data-core]':selector.startsWith('[data-slot=')?'[data-slot]':selector.startsWith('[data-english=')?'[data-english]':undefined;}
 for(const mapId of ['twin-bends','beacon-keep'] as const)test(`STEP4 natural eight waves ${mapId}, profile owns distinct build and full input`,async({page},info)=>{
- test.setTimeout(8*120000+240000);mkdirSync(evidence,{recursive:true});
+ // The whole-run budget includes ordinary Tab/arrow preparation on slower CI CPUs.
+ // Per-action (15s) and per-wave (120s) guards below remain unchanged; no game clock changes.
+ test.setTimeout(info.project.name==='desktop'?30*60_000:20*60_000);mkdirSync(evidence,{recursive:true});
  const mode:InputMode=info.project.name==='touch'?'touch':'keyboard',route=mode==='keyboard'?'forest-volcano':'flame-wildwood';
  page.setDefaultTimeout(15000);
- const act=async(selector:string)=>{const began=Date.now();await activate(page,selector,mode,region(selector));const elapsed=Date.now()-began;if(elapsed>2000)console.log(`${mapId}/${mode}: ${selector} input ${elapsed}ms`);};
+ const act=async(selector:string)=>{
+  const began=Date.now();
+  if(mode==='keyboard'&&selector==='[data-td-clear]'){
+   // Esc is the advertised cancellation action. Keep focus in its current region
+   // instead of tabbing to the same cancel button between every material pair.
+   await expect(page.locator('.td-game:focus-within')).toHaveCount(1);
+   await page.keyboard.press('Escape');
+   await expect(page.locator('[data-core][aria-pressed="true"], [data-slot][aria-pressed="true"], [data-english][aria-pressed="true"]')).toHaveCount(0);
+   await expect(page.locator('[data-td-fuse]')).toBeDisabled();
+  }else await activate(page,selector,mode,region(selector));
+  const elapsed=Date.now()-began;if(elapsed>2000)console.log(`${mapId}/${mode}: ${selector} input ${elapsed}ms`);
+ };
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',e=>{if(e.type()==='error')errors.push(e.text());});
  await fromHome(page,mode,'forest');await expect(page.locator('[data-td-canvas]')).toHaveAttribute('data-ready','true');
  await act('[data-td-new]');await act(`[data-map-select="${mapId}"]`);await expect(page.locator('.td-game')).toHaveAttribute('data-map-id',mapId);await expect(page.locator('.td-game')).toHaveAttribute('data-phase','ready');
@@ -49,7 +62,12 @@ for(const mapId of ['twin-bends','beacon-keep'] as const)test(`STEP4 natural eig
   const saved=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),SAVE_KEY);
   records.push({wave:wave+1,deployments:deployment.filter(c=>c.slot!==null),checkpoint:saved.maps[mapId].checkpoint,wallSeconds:Math.round((Date.now()-started)/1000)});
   console.log(`${mapId}/${mode}: wave ${wave+1}/8 ${wave===7?'won':'ready'}`);
-  if(wave===3){await page.reload();await expect(page.locator('.td-game')).toHaveAttribute('data-phase','ready');await expect(page.locator('.td-game')).toHaveAttribute('data-map-id',mapId);}
+  if(wave===3){
+   await page.reload();await expect(page.locator('.td-game')).toHaveAttribute('data-phase','ready');await expect(page.locator('.td-game')).toHaveAttribute('data-map-id',mapId);
+   // A refresh starts with browser focus outside the game. Re-enter with Tab
+   // before using its contextual shortcuts; never focus the element by script.
+   if(mode==='keyboard')await keyReach(page,'[data-slot="0"]','[data-slot]');
+  }
  }
  await page.screenshot({path:`${evidence}/${mapId}-${mode}-win.png`,fullPage:true});expect(errors).toEqual([]);
  const completed=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),SAVE_KEY);expect(completed.maps[mapId].checkpoint.wave).toBe(8);
