@@ -5,8 +5,8 @@
 ## 运行方式
 
 - 根入口是 `index.html` 和 `src/main.ts`。
-- `src/main.ts` 只负责挂载 `apps/hub/`。
-- `apps/hub/` 读取 `packages/data/gameCatalog.ts`，展示游戏卡片并把选中的游戏挂载到页面容器中。
+- `src/app-route.ts` 解析并规范化 query 路由；`src/main.ts` 按结果动态加载字间行者、字阵守城、经典大厅、记忆配对兼容入口、STEP4 试玩入口、数学世界或默认的我的游戏世界，并设置页面模式与标题。
+- `apps/my-game-world/` 提供默认世界及经典大厅挂载入口；`apps/hub/` 读取 `packages/data/gameCatalog.ts`，展示经典游戏卡片并把选中的游戏挂载到页面容器中。直接游戏和世界入口不都经过经典大厅。
 - 每个游戏返回一个 `MountedGame`，在退出时销毁自己的计时器、DOM 或 Phaser 实例。
 
 ## 目录职责

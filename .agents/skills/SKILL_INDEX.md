@@ -19,6 +19,6 @@
 | `child-first-learning-game` | `.agents/skills/child-first-learning-game/SKILL.md` | 儿童首屏、核心循环、反馈、难度、可用性、隐私或本地记录变化 | 保护健康体验；真人观察不是日常开发门禁，不得虚构真人结论 |
 | `child-first-use-observation` | `.agents/skills/child-first-use-observation/SKILL.md` | 用户明确授权的真人首次/再次使用准备、观察、隐私与解释 | 本地最小证据；合成工具绝不冒充真人证据 |
 
-按任务还可使用项目内 `vendor/gamedev-skills/` 的 `game-feel`、`audio-design`、`save-systems`、`prototype-fast`、`level-design`、`puzzle`，以及已安装的全局 Skill。仅在其学科确实进入范围时加载。
+按任务还可使用当前已安装的全局 Skill，仅在其能力确实进入范围时加载。旧的 `vendor/gamedev-skills/` 当前未安装，已停用该路由；不要把它作为前置依赖，也不要据此创建第二套 Skill 树。
 
 `machine-first-game-review/references/` 提供 source freeze、lifecycle/evidence 与 retention/cleanup 规则；只读当前阶段需要的 reference。路径缺失时报告准确路径并继续不受影响的工作，不得假称已读。
