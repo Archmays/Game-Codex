@@ -66,7 +66,7 @@
 | 全量单元／内容／存档／输入事务 | 38文件、504项全部通过；塔防133项、冒险47项 | `logs/unit-final.txt` |
 | 十五房搜索与逐动作回放 | 全部可解；最多10,002状态、60动作，未扩大40,000边界；另有替代解与死锁撤销 | `adventure/room-search.json`、`logs/adventure-solver.txt` |
 | 冒险完整浏览器 | 20通过、2设备专用跳过；纯键盘与触控十五房、鼠标新章／替代解、重置／继续 | `logs/adventure-final.txt` |
-| 新地图完整普通战斗 | 4场通过：两图各键盘森林／火山及触控无英文火山／山林；默认1×、无状态／时钟注入，全部16耐久／0漏怪 | `logs/tower-new-natural-final.txt`、`tower/*-natural.json`、`tower/new-natural-final/` |
+| 新地图完整普通战斗 | 4场通过：两图各键盘森林／火山及触控无英文炎／山林；默认1×、无状态／时钟注入，全部16耐久／0漏怪 | `logs/tower-new-natural-final.txt`、`tower/*-natural.json`、`tower/new-natural-final/` |
 | 青岚旧关完整普通战斗 | 4场原六波通过；原断言保留 | `logs/tower-old-natural.txt`、`tower/battle-*.json`、`tower/natural-*.json`、`tower/old-natural/` |
 | 新旧地图模型与新配方 | 旧24组、新8组自然全通；两配方单靶／移动群／真实首波比较及 forest-only 八波对照 | `tower/balance.json`、`tower/forest-isolation/model-balance.json` |
 | 五游戏首页→循环→恢复／返回 | Chromium桌面／手机、Firefox、WebKit合计24主流程通过；纯键盘、纯鼠标、纯触控，生产包验证 | `logs/input-production-final.txt` |
@@ -88,3 +88,13 @@ forest的增益具有敌群条件。仅装备forest的完整合法波次中，�
 提交 `585bd8a` 的 Pages 全部门禁通过并已部署，同SHA的线上键盘／触控光路、撤销、森林独立击败、速度／暂停／切图和受保护入口也通过。该提交的另一条CI有59项守城通过、12适用性跳过，唯一失败是速度综合用例在最后返回首页时耗尽整场120秒；倍率、暂停、刷新及切图恢复断言此前均已通过。修正仅将该综合脚本的整场预算设为有界5分钟，增加15秒操作限制和倍率诊断输出，全部行为与倍率阈值保留。定向桌面／触控两项再次通过，倍率分别约1.975／1.982，暂停推进为零，见 `logs/tower-speed-ci-budget.txt`、`tower/speed-ci-budget/`。该次失败日志和已完成的线上证据保留，最终发布提交继续沿原门禁核验。
 
 机器与模拟设备验证不代表真实儿童好玩、学习有效或留存，也不冒充实体手机验证。本轮未接麦克风、云服务、账号、货币、遥测或空SDK；后续持续语音须另行明确授权。本轮不默认制作ZIP。
+
+## 2026-09-12 接续复核与修订
+
+本次从干净的 `46a8eab9770e6d94aa8180a56cc8d88d5a16596c` 接续；本地与远端一致，三章十五房、三图二十二波及存档迁移均已存在。该提交相对 `5c93cdf` 仅调整三份文档，其 [完整 CI](https://github.com/Archmays/Game-Codex/actions/runs/34452805880) 与 [Pages](https://github.com/Archmays/Game-Codex/actions/runs/34452805792) 已通过。本次读取 Pages 原始日志，核实原有504单测、塔防60项浏览器和冒险20项浏览器结果；这些是该基线提交的运行记录，不冒充新修订的验收。
+
+额外实测发现材料区用宽度除以60估算列数，与桌面的四列、手机的自适应列数不一致，导致上下箭头错列。已按每次操作时的实际 CSS 网格列数导航；新增测试按可见元素坐标独立寻找下一行目标，用真实 Home／Down／Up／Tab 验证旋转后的同列导航、离区、未选料和存档原文不变。冒险影格成为主目标时，现在保留亮暗与光照步数；影格中的完整字与注记分开摆放，放灯时不再叠画“明”和“影”。目标边框、人物和明暗通行规则不变。两处触控构筑名称据实际 `flame-wildwood` 脚本校正为“炎／山林”。
+
+两个游戏的独立只读审查及指定截图复核没有剩余阻断。最终运行代码的本地验证：504单测与生产构建通过；十五房有界搜索／逐动作回放通过；冒险完整浏览器20通过、2适用性跳过；Chromium材料网格专项2通过，Firefox／WebKit同项2通过，覆盖六种尺寸和旋转；两浏览器跨游戏主流程14通过、6适用性跳过。两新图×两构筑×正反塔位的8组模型均自然八波完成，另保留单靶、移动群及合法首波的等材料对照。桌面／手机的目标影格、放灯与站人共六张截图经实看接受，再无更新重拍，PNG原字节全部一致。探索脚本中的查看选择须先用Esc取消；临时兼容配置须明确项目工作目录，这两处验证脚本问题已修正，失败记录保留，未改游戏规则或放宽断言。
+
+旧本机证据目录在本次开始时已不存在。上述新增证据保存在 `tmp/tasks/GAME-CODEX-STEP4/recheck-2026-09-12/`，包括 `navigation-before.json`、`grid-fixed.log`、`unit-accepted.log`、`build-accepted.log`、`solver-final.log`、`adventure-accepted.log`、`compat-fixed.log`、`tower-compat.log`、`tower-final/model-balance.json` 和 `shadow-no-update-comparison.json`。本段之后仅通过既有 CI／Pages 流程发布；准确最终SHA、工作流结果和该SHA的普通键盘／触控、森林实际攻击、影路撤销、材料网格及受保护入口回读，以该目录的发布记录和交付消息为准。源码与测试不在正式验收期间并发修改，未改变数学模型、题库、奖励、进度、锁文件或任何旧存档，也未恢复退役产品。

@@ -75,7 +75,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
   const gameRoot = el<HTMLElement>(".td-game"), board = el<HTMLElement>("[data-td-board]"), bag = el<HTMLElement>("[data-td-bag]"), feedback = el<HTMLElement>("[data-td-feedback]");
   const restartDialog = el<HTMLDialogElement>("[data-td-restart-dialog]"), resultDialog = el<HTMLDialogElement>("[data-td-result]");
   const mapDialog=el<HTMLDialogElement>('[data-td-map-dialog]');
-  const bagKeys=rovingGroup(bag,{items:'[data-core]',columns:()=>Math.max(1,Math.round(bag.clientWidth/60))});
+  const bagKeys=rovingGroup(bag,{items:'[data-core]',columns:()=>Math.max(1,getComputedStyle(bag).gridTemplateColumns.split(' ').length)});
   const slotKeys=rovingGroup(el('.td-slots'),{items:'[data-slot]'});
   const englishKeys=rovingGroup(el('[data-td-english-bag]'),{items:'[data-english]'});
   const lifecycle=bindInputLifecycle(root,(event)=>{

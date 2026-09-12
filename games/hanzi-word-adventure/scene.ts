@@ -43,7 +43,7 @@ export class AdventureScene extends Phaser.Scene {
       let glyph = '', color = INK, size = Math.round(cell * .57), note = '';
       const active = effect(room, state, pos);
       if (light.has(pos)) { g.fillStyle(0xefbd42, .13).fillRect(left+1,top+1,cell-2,cell-2); }
-      if (tile === 'shadow') { glyph = '影'; color = light.has(pos) ? '#725719' : '#626276'; note = light.has(pos) ? `亮 · ${light.get(pos)}步` : '暗 · 不通'; g.fillStyle(light.has(pos) ? 0xf4d889 : 0x8b859d, light.has(pos) ? .25 : .22).fillRoundedRect(left+2,top+2,cell-4,cell-4,4); }
+      if (tile === 'shadow') { glyph = item ? '' : '影'; size = Math.round(cell * .48); color = light.has(pos) ? '#725719' : '#626276'; note = light.has(pos) ? `亮·${light.get(pos)}步` : '暗·不通'; g.fillStyle(light.has(pos) ? 0xf4d889 : 0x8b859d, light.has(pos) ? .25 : .22).fillRoundedRect(left+2,top+2,cell-4,cell-4,4); }
       else if (tile === 'wall') {
         // The mountain terrain has no pickup outline; tiny distant strokes stay in this mountain cell.
         glyph = '山'; color = '#8c9d88'; size = Math.round(cell * .56);
@@ -74,7 +74,7 @@ export class AdventureScene extends Phaser.Scene {
       }
       // The person and its support stay in one logical tile, with separate whole glyphs.
       this.set(this.glyphs[pos], glyph, occupied ? Math.round(cell * .32) : size, color);
-      this.glyphs[pos].setPosition(x + (occupied ? cell * .29 : 0), y).setAlpha(1);
+      this.glyphs[pos].setPosition(x + (occupied ? cell * .29 : 0), tile === 'shadow' ? top + cell * .35 : y).setAlpha(1);
       if (tile === 'water' && !item) this.water.push({ text: this.glyphs[pos], y, phase: pos });
       if (item) {
         const bridge = tile === 'water';
@@ -82,11 +82,11 @@ export class AdventureScene extends Phaser.Scene {
         g.lineStyle(1.8, item.kind === '不' ? 0xaa493a : 0x60755b, .85).strokeRoundedRect(left + 6, top + 4, cell - 12, cell - (bridge ? 14 : 8), 5);
         if (bridge) g.lineStyle(1, 0x97784a, .8).lineBetween(left + 8, top + cell - 9, left + cell - 8, top + cell - 9);
       }
-      this.set(this.objects[pos], item?.kind ?? '', Math.round(cell * (occupied ? .32 : .6)), item?.kind === '不' ? RUST : INK);
-      this.objects[pos].setPosition(x + (occupied ? cell * .29 : 0), y - (tile === 'water' && item ? 3 : 0));
+      this.set(this.objects[pos], item?.kind ?? '', Math.round(cell * (occupied ? .32 : tile === 'shadow' ? .48 : .6)), item?.kind === '不' ? RUST : INK);
+      this.objects[pos].setPosition(x + (occupied ? cell * .29 : 0), tile === 'shadow' ? top + cell * .35 : y - (tile === 'water' && item ? 3 : 0));
       this.set(this.notes[pos], note, Math.max(11, Math.round(cell * .2)), tile === 'water' ? WATER : INK);
-      this.notes[pos].setPosition(x, top + cell - 7);
-      if (pos === view.target) { ink.lineStyle(3, 0x2a7160, 1).strokeRoundedRect(left+4,top+4,cell-8,cell-8,5); this.set(this.notes[pos], '目标', Math.max(11,Math.round(cell*.2)), '#235748'); }
+      this.notes[pos].setPosition(x, top + cell - (tile === 'shadow' ? Math.max(8, Math.round(cell * .14)) : 7));
+      if (pos === view.target) { ink.lineStyle(3, 0x2a7160, 1).strokeRoundedRect(left+4,top+4,cell-8,cell-8,5); this.set(this.notes[pos], tile === 'shadow' ? note : '目标', Math.max(11,Math.round(cell*.2)), '#235748'); }
       if (view.preview.includes(pos)) ink.lineStyle(2, 0xb56c31, .9).strokeRoundedRect(left + 2, top + 2, cell - 4, cell - 4, 7);
       if (pos === view.selected) {
         ink.lineStyle(2.5, 0xb34e3d, 1).strokeRoundedRect(left + 1, top + 1, cell - 2, cell - 2, 6);

@@ -3,6 +3,26 @@ import {test,expect} from '@playwright/test';
 import {activate,fromHome,keyReach,criticalTargets,type InputMode} from '../step4/input-helpers';
 import {SAVE_KEY} from '../../../games/hanzi-tower-defense/save';
 const evidence=process.env.TD_EVIDENCE_DIR??'tmp/tasks/GAME-CODEX-STEP4/tower';
+test('STEP4 material arrows follow rendered rows after viewport rotation',async({page},info)=>{
+ mkdirSync(evidence,{recursive:true});
+ await fromHome(page,'keyboard','forest');await expect(page.locator('[data-td-canvas]')).toHaveAttribute('data-ready','true');
+ await activate(page,'[data-td-new]','keyboard');await activate(page,'[data-map-select="twin-bends"]','keyboard');
+ const originalSave=await page.evaluate(key=>localStorage.getItem(key),SAVE_KEY),rows=[];
+ const sizes=info.project.name==='touch'?[{width:390,height:844},{width:844,height:390},{width:360,height:740}]:[{width:1440,height:1000},{width:768,height:1024},{width:1024,height:768}];
+ for(const viewport of sizes){
+  await page.setViewportSize(viewport);await keyReach(page,'[data-core]','[data-core]');await page.keyboard.press('Home');
+  const items=await page.locator('[data-core]').evaluateAll(elements=>elements.map(e=>({id:e.getAttribute('data-core')!,x:e.getBoundingClientRect().x,y:e.getBoundingClientRect().y})));
+  const first=items[0],below=items.find(e=>e.y>first.y+1&&Math.abs(e.x-first.x)<1);expect(below,'a material in the next visual row').toBeDefined();
+  await page.keyboard.press('ArrowDown');await expect(page.locator(`[data-core="${below!.id}"]`)).toBeFocused();
+  await page.keyboard.press('ArrowUp');await expect(page.locator(`[data-core="${first.id}"]`)).toBeFocused();
+  await page.keyboard.press('Tab');await expect(page.locator('[data-td-bag]:focus-within')).toHaveCount(0);
+  rows.push({viewport,first,below});
+ }
+ expect(await page.evaluate(key=>localStorage.getItem(key),SAVE_KEY)).toBe(originalSave);
+ await expect(page.locator('[data-core][aria-pressed="true"]')).toHaveCount(0);
+ writeFileSync(`${evidence}/material-grid-${info.project.name}.json`,JSON.stringify({rows,actualKeysOnly:true,saveUnchanged:true},null,2));
+});
+
 test('STEP4 regions, native activation, inspect-only, map saves/reset and tablet geometry',async({page},info)=>{
  const mode:InputMode=info.project.name==='touch'?'touch':'keyboard',act=(selector:string,region?:string,key?:string)=>activate(page,selector,mode,region,key);mkdirSync(evidence,{recursive:true});
  await fromHome(page,mode,'forest');await expect(page.locator('[data-td-canvas]')).toHaveAttribute('data-ready','true');
