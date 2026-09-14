@@ -28,11 +28,14 @@ function observe(page: Page): RuntimeObservation {
   return result;
 }
 
-async function visibleEnabled(locator: Locator): Promise<Locator[]> {
+async function visibleEnabled(locator: Locator, limit = Infinity): Promise<Locator[]> {
   const result: Locator[] = [];
   for (let index = 0; index < await locator.count(); index += 1) {
     const candidate = locator.nth(index);
-    if (await candidate.isVisible() && await candidate.isEnabled()) result.push(candidate);
+    if (await candidate.isVisible() && await candidate.isEnabled()) {
+      result.push(candidate);
+      if (result.length >= limit) return result;
+    }
   }
   return result;
 }
@@ -118,7 +121,9 @@ test("@hittest @representative @portfolio all manifest surfaces expose topmost c
       await activateAndExpectStateChange(page, primary, "pointer");
       await expect.poll(async () => {
         const text = await page.locator("body").innerText();
-        return !text.includes("正在打开游戏世界") && (await visibleEnabled(page.locator("a[href], button"))).length > 0;
+        // Readiness needs one usable control; full enumeration is reserved for
+        // the hit-target checks below and must not consume this poll's deadline.
+        return !text.includes("正在打开游戏世界") && (await visibleEnabled(page.locator("a[href], button"), 1)).length > 0;
       }, { message: `${record.id} real action destination must finish loading`, timeout: 30_000 }).toBe(true);
       const modalClosed = await closeIntentionalModal(page);
 

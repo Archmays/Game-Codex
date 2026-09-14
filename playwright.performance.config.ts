@@ -13,7 +13,7 @@ export default defineConfig({
   timeout: 180_000,
   workers: 1,
   reporter: [["line"]],
-  outputDir: "test-results/play-readiness-performance",
+  outputDir: `${process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'test-results'}/play-readiness-performance`,
   use: { baseURL, trace: "off", screenshot: "only-on-failure", video: "off", reducedMotion: "reduce" },
   projects: [
     { name: "mobile-390", use: { ...devices["Pixel 7"], viewport: { width: 390, height: 844 } } },

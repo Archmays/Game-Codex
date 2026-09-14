@@ -226,7 +226,7 @@ test("@performance local production performance sample", async ({ page }, testIn
     const action = route.includes("my-game-world") ? page.getByRole("button", { name: /家长角/ })
       : route.includes("hanzi-tower-defense") ? page.locator("[data-td-pause]")
       : route.includes("station=slider") ? page.getByRole("button", { name: "跳过教程" })
-      : route.includes("station=target") ? page.getByRole("button", { name: "1", exact: true }).first()
+      : route.includes("station=target") ? page.getByRole("button", { name: "1，原牌 1", exact: true })
       : route.includes("math-world") ? page.locator('[data-station-id="slider"] button')
       : page.getByRole("button", { name: "数学", exact: true });
     const interactionStarted = performance.now();
@@ -241,6 +241,10 @@ test("@performance local production performance sample", async ({ page }, testIn
       const vitals = (window as unknown as { __playReadyVitals: { lcp: number; cls: number; inp: number } }).__playReadyVitals;
       return { route, elapsedToStableMs: elapsed, requests: resources.length, jsCssTransferBytes: [...scripts, ...css].reduce((sum, entry) => sum + entry.transferSize, 0), rasterTransferBytes: rasters.reduce((sum, entry) => sum + entry.transferSize, 0), lcpSampleMs: Math.round(vitals.lcp), clsSample: Number(vitals.cls.toFixed(4)), inpEventTimingSampleMs: Math.round(vitals.inp), primaryActionRoundtripSampleMs: interactionLatencySampleMs, evidence: "LAB_SAMPLED_ONLY_NOT_FIELD_75P" };
     }, { route, elapsed: Date.now() - start, interactionLatencySampleMs }));
+    if (route.includes("station=target")) {
+      // Check the same card's actual selection after capturing the timing sample.
+      await expect(page.locator('[data-operand="left"]')).toHaveAttribute("aria-label", "左操作数：1，原牌 1");
+    }
   }
   mkdirSync(REPORTS, { recursive: true });
   writeFileSync(resolve(REPORTS, `PERFORMANCE_SAMPLE.local-${testInfo.project.name}.json`), `${JSON.stringify({ verdict: "PASS", environment: "local-production-preview", project: testInfo.project.name, samples }, null, 2)}\n`);

@@ -71,7 +71,7 @@ async function mountApp(root: HTMLElement): Promise<void> {
   }
 
   if (route.kind === 'world' && search.getAll('playtest').length === 1 && search.get('playtest') === 'step4') {
-    setBrowserIdentity('本次试玩 · Game-Codex STEP4', '#f4f0e5');
+    setBrowserIdentity('本次试玩 · Game-Codex STEP5', '#f4f0e5');
     const { mountStep4Playtest } = await import('../apps/step4-playtest');
     mountStep4Playtest(root);
     return;

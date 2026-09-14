@@ -32,6 +32,7 @@ function observe(page:Page) {
 async function identity(page:Page) { await expect(page.locator('html')).toHaveAttribute('data-build-commit',expected); }
 async function route(page:Page,query:string,selector:string) {
   await page.goto(new URL(query,base).href); await expect(page.locator(selector).first()).toBeVisible(); await identity(page); routes.push(query);
+  if (query === '?playtest=step4') await expect(page).toHaveTitle('本次试玩 · Game-Codex STEP5');
 }
 async function contextFor(mode:InputMode):Promise<BrowserContext> {
   return browser.newContext({baseURL:base.href,viewport:mode==='touch'?{width:390,height:844}:{width:1440,height:1000},hasTouch:mode==='touch',deviceScaleFactor:mode==='touch'?2:1,reducedMotion:'reduce'});
