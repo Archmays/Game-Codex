@@ -14,7 +14,7 @@ export function ignoreGameKey(event: KeyboardEvent, context: HTMLElement, allowR
 export function bindInputLifecycle(root: HTMLElement, reset: (event?: Event) => void): () => void {
   const hidden = () => { if (document.hidden) reset(); };
   const composing = (event: KeyboardEvent) => {
-    if (editableTarget(event.target)) return;
+    if (event.ctrlKey || event.metaKey || event.altKey || editableTarget(event.target)) return;
     if ((event.isComposing || event.keyCode === 229 || event.repeat) && (event.key === ' ' || event.key === 'Enter')) event.preventDefault();
   };
   window.addEventListener('blur', reset);

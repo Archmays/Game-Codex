@@ -14,4 +14,13 @@ describe('manual STEP4 feedback', () => {
     expect(result).toContain('&lt;img src=x&gt;');
     expect(result.split('\n').filter(x => x.startsWith('> '))).toHaveLength(4);
   });
+  it('keeps old feedback readable and binds each new stable content ID to the written version', () => {
+    for (const place of ['companions-1','companions-2','companions-3','companions-4','companions-5','qinglan-intercept','qinglan-last-bend','twin-lanes','twin-relay','beacon-crowd','beacon-captain']) {
+      const record = {version:1,place,input:'mixed',text:'重整后再试。',build:'recorded-sha'};
+      const parsed = parseFeedback(JSON.stringify(record)); expect(parsed).toEqual(record);
+      expect(feedbackMarkdown(parsed!, 'later-page-sha')).toContain('记录版本：recorded\\-sha');
+    }
+    expect(feedbackMarkdown({version:1,place:'homeward',input:'keyboard',text:'旧反馈'},'current')).toContain('旧记录未保存版本');
+    expect(parseFeedback(JSON.stringify({version:1,place:'companions',input:'touch',text:'反馈',build:'<script>'}))).toBeNull();
+  });
 });

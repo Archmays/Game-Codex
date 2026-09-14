@@ -141,8 +141,8 @@ describe('isolated versioned adventure saves', () => {
 
 describe('light, chapter continuity and v2 migration', () => {
   const storage = () => { const values = new Map<string,string>(); return { values, getItem:(k:string)=>values.get(k)??null, setItem:(k:string,v:string)=>{values.set(k,v);} }; };
-  it('keeps five original IDs and fifteen stable chapter-bound room IDs without a final-room constant', () => {
-    expect(ROOMS).toHaveLength(15); expect(ROOMS.slice(0,5).map(r=>r.id)).toEqual(['r1','r2','r3','r4','r5']);
+  it('keeps five original IDs and twenty stable chapter-bound room IDs without a final-room constant', () => {
+    expect(ROOMS).toHaveLength(20); expect(ROOMS.slice(0,5).map(r=>r.id)).toEqual(['r1','r2','r3','r4','r5']);
     for (const chapter of CHAPTERS) { const rooms = ROOMS.filter(r=>r.chapterId === chapter.id); expect(rooms).toHaveLength(5); const last = newJourney(ROOMS.indexOf(rooms[4])); last.state = solve(rooms[4],last.state).actions.reduce((state,a)=>act(rooms[4],state,a).state,last.state); expect(nextRoom(last)).toBe(last); }
   });
   it('only 明 emits light; light has exact bounded distances and cannot pass walls or a closed door', () => {

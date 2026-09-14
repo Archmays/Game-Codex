@@ -110,6 +110,8 @@ test("@save-vault export, preview and restore preserve retired exact keys and un
     "family-games/hanzi-tower-defense/v2": '{ "version":2,"syntheticRaw":"旧存档保留" }',
     "family-games/hanzi-word-adventure/v2": '{ "version":2,"syntheticRaw":"三章原文" }',
     "family-games/hanzi-word-adventure/v1": '{ "version":1,"syntheticRaw":"旧房原文" }',
+    "family-games/hanzi-word-adventure/companions/v1": '{ "version":99,"syntheticRaw":"双角色未来原文" }',
+    "family-games/hanzi-tower-defense/tactics/v1": '{broken tactical synthetic raw',
     "family-games/step4-playtest/feedback-v1": '{ "version":1,"text":"手填本机反馈" }',
     "family-games/math-world/v1": '{ "version":1,"lastStation":"lab","visitedStations":["clock","array","lab"],"reducedMotionOverride":true,"extension":{"kept":7} }',
     "math-battle-web/save-v1": "{synthetic-broken-legacy",
@@ -133,10 +135,20 @@ test("@save-vault export, preview and restore preserve retired exact keys and un
   const entries = JSON.parse(text).entries as { key: string; value: string }[];
   for (const [key, value] of Object.entries(fixture)) expect(entries.find(entry => entry.key === key)?.value).toBe(value);
   expect(text).not.toContain("other-localhost-app/save");
+  // These two isolated fixture slots must actually change back on restore.
+  // Preview alone must leave the replacement bytes intact.
+  const beforeRestore = {
+    ...fixture,
+    "family-games/hanzi-word-adventure/companions/v1": '{ "version":1,"syntheticRaw":"replacement companion bytes" }',
+    "family-games/hanzi-tower-defense/tactics/v1": "replacement tactical synthetic raw",
+  };
+  await page.evaluate(values => {
+    for (const [key, value] of Object.entries(values)) localStorage.setItem(key, value);
+  }, beforeRestore);
   await page.locator("[data-vault-file]").setInputFiles({ name: "backup.json", mimeType: "application/json", buffer: Buffer.from(text) });
   await expect(page.locator("[data-vault-preview]")).toBeVisible();
   await expect(page.locator("[data-vault-preview-checksum]")).toHaveText("PASS");
-  expect(await page.evaluate(keys => Object.fromEntries(keys.map(key => [key, localStorage.getItem(key)])), Object.keys(fixture))).toEqual(fixture);
+  expect(await page.evaluate(keys => Object.fromEntries(keys.map(key => [key, localStorage.getItem(key)])), Object.keys(fixture))).toEqual(beforeRestore);
   page.once("dialog", (dialog) => void dialog.accept());
   await page.getByRole("button", { name: "恢复这些已知进度" }).click();
   await expect(page.locator("[data-vault-status]")).toContainText("已恢复");

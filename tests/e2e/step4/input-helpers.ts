@@ -67,6 +67,8 @@ export async function criticalTargets(page: Page, selector: string, minimum=44):
       return [[.2,.2],[.8,.2],[.5,.5],[.2,.8],[.8,.8]].every(([x,y])=>{const hit=document.elementFromPoint(r.x+r.width*x,r.y+r.height*y);return hit===element || element.contains(hit);});
     })).toBe(true);
   }
-  expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
+  // A mobile browser can widen innerWidth to fit overflow, hiding the defect.
+  // Compare against the requested CSS viewport, not that expanded layout width.
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(page.viewportSize()!.width+1);
   return rects;
 }

@@ -104,3 +104,26 @@
 .hway-modal > div { max-height:calc(100dvh - 40px); overflow:auto; }
 
 .hway-primary [data-hway-choose-place] { min-height:44px; margin-top:7px; font-size:13px; background:#fffaf0; }
+
+.hway-companions { display:grid; grid-template-columns:1fr 1fr; gap:6px; width:100%; margin-bottom:8px; }
+.hway-companions button { font-size:13px; min-height:48px; padding:7px; line-height:1.4; }
+.hway-companions button[aria-pressed=true] { background:#e5edce; border-width:2px; }
+@media (max-width: 700px) {
+  .hway-layout { gap:10px; }
+  .hway-controls { display:grid; grid-template-columns:1fr; gap:0; }
+  .hway-companions { order:0; }
+  .hway-hand { order:1; margin:0 0 5px; padding:0 0 5px; }
+  .hway-direction { order:2; width:100%; margin:4px 0; }
+  .hway-primary { order:3; margin:3px 0 6px; padding:6px; }
+  .hway-primary p { font-size:12px; margin-bottom:3px; }
+  .hway-primary [data-hway-choose-place] { width:auto; min-height:44px; margin-top:4px; }
+  .hway-toolbar { order:4; }
+  .hway-inspect { order:5; }
+  .hway-feedback { order:6; }
+  .hway-hint { order:7; }
+  .hway-ending { order:8; }
+  .hway-sentences { order:9; }
+  .hway-save-tools { order:10; margin-top:8px; }
+  .hway-help { order:11; }
+  .hway-legend { margin:5px 0; font-size:11px; }
+}

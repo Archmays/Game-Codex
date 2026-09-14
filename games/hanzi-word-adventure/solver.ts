@@ -2,7 +2,7 @@ import { act, carried, DIRECTIONS, neighbor, type Action } from './model';
 import type { Room, WorldState } from './rooms';
 export interface SearchResult { status: 'solved' | 'unsolvable' | 'limit'; actions: Action[]; visited: number; expanded: number; limit: number; }
 export interface SearchOptions { limit?: number; allow?: (state: WorldState, action: Action) => boolean; }
-const piecesKey = (s: WorldState) => s.entities.map(e => `${e.kind}${e.pos ?? 'h'}`).sort().join(',');
+const piecesKey = (s: WorldState) => s.entities.map(e => `${e.kind}${e.pos ?? `h${e.holder ?? ''}`}`).sort().join(',');
 type Reach = { state: WorldState; walk: Action[] };
 function reachable(room: Room, state: WorldState): Reach[] {
   const found: Reach[] = [{ state, walk: [] }], seen = new Set([state.player]);
@@ -17,6 +17,7 @@ function reachable(room: Room, state: WorldState): Reach[] {
 }
 export function manipulationActions(room: Room, state: WorldState): Action[] {
   const actions: Action[] = [], hand = carried(state);
+  if (state.companion !== undefined) actions.push({ type: 'switch' });
   for (const direction of DIRECTIONS) {
     const target = neighbor(room, state.player, direction); if (target < 0) continue;
     if (hand) actions.push({ type: 'put', target }, { type: 'combine', target });
@@ -33,7 +34,7 @@ export function solve(room: Room, initial: WorldState, options: SearchOptions = 
   const limit = options.limit ?? 40_000;
   type Node = { state: WorldState; reach: Reach[]; parent: number; edge: Action[] };
   const firstReach = reachable(room, initial), nodes: Node[] = [{ state: initial, reach: firstReach, parent: -1, edge: [] }];
-  const key = (s: WorldState, reach: Reach[]) => `${piecesKey(s)}|${reach.map(r => r.state.player).sort((a, b) => a - b).join('.')}`;
+  const key = (s: WorldState, reach: Reach[]) => `${piecesKey(s)}|${s.active ?? ''}:${s.companion ?? ''}|${reach.map(r => r.state.player).sort((a, b) => a - b).join('.')}`;
   const seen = new Set([key(initial, firstReach)]); let expanded = 0;
   const result = (status: SearchResult['status'], actions: Action[] = []): SearchResult => ({ status, actions, visited: seen.size, expanded, limit });
   for (let i = 0; i < nodes.length; i++) {

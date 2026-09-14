@@ -1,10 +1,13 @@
 export type Glyph = '木' | '林' | '不' | '日' | '月' | '明';
-export const CHAPTERS = [{ id: 'homeward', title: '借字归途', firstRoom: 0 }, { id: 'lamplight', title: '借一盏明', firstRoom: 5 }, { id: 'confluence', title: '光与归途', firstRoom: 10 }] as const;
+export const CHAPTERS = [{ id: 'homeward', title: '借字归途', firstRoom: 0 }, { id: 'lamplight', title: '借一盏明', firstRoom: 5 }, { id: 'confluence', title: '光与归途', firstRoom: 10 }, { id: 'companions', title: '结伴归途', firstRoom: 15 }] as const;
 export type ChapterId = typeof CHAPTERS[number]['id'];
 export type Direction = 'up' | 'right' | 'down' | 'left';
 export type Tile = 'wall' | 'floor' | 'water' | 'goal' | 'door' | 'wind' | 'rule' | 'socket' | 'shadow';
-export interface Entity { kind: Glyph; atoms: number; pos: number | null; }
-export interface WorldState { player: number; entities: Entity[]; won: boolean; }
+export type Actor = 'person' | 'friend';
+export interface Entity { kind: Glyph; atoms: number; pos: number | null; holder?: Actor; }
+/** player is the controlled position. companion is the other position; active identifies
+ * their permanent identity. These optional fields never enter the original chapters. */
+export interface WorldState { player: number; companion?: number; active?: Actor; entities: Entity[]; won: boolean; }
 export interface Sentence { id: string; subject: '门' | '风'; verb: '开' | '吹'; cells: [number, number, number]; targets: number[]; }
 export interface Room {
   id: string; chapterId: ChapterId; title: string; subtitle: string; arrival: string; departure: string;
@@ -16,7 +19,7 @@ const vectors = { '^': 'up', '>': 'right', v: 'down', '<': 'left' } as const;
 
 function room(plan: Plan, index: number): Room {
   const width = plan.rows[0].length, tiles: Tile[] = [], entities: Entity[] = [], wind: Room['wind'] = {};
-  let player = -1, nextAtom = 1, woodAtoms = 0, notAtoms = 0, sunAtoms = 0, moonAtoms = 0;
+  let player = -1, companion: number | undefined, nextAtom = 1, woodAtoms = 0, notAtoms = 0, sunAtoms = 0, moonAtoms = 0;
   for (const [y, row] of plan.rows.entries()) {
     if (row.length !== width) throw new Error(`Unequal row ${index}/${y}`);
     for (const [x, char] of [...row].entries()) {
@@ -24,6 +27,7 @@ function room(plan: Plan, index: number): Room {
       tiles.push(char === '#' ? 'wall' : char === '?' ? 'shadow' : char === '~' ? 'water' : char === 'G' ? 'goal' : char === 'D' ? 'door' : char in vectors ? 'wind' : 'floor');
       if (char in vectors) wind[pos] = vectors[char as keyof typeof vectors];
       if (char === 'P') player = pos;
+      if (char === 'F') companion = pos;
       if (char === 'n') { entities.push({ kind:'不', atoms:nextAtom, pos }); notAtoms |= nextAtom; nextAtom *= 2; }
       if (char === 's' || char === 'm' || char === 'B') {
         const atoms = char === 'B' ? nextAtom | nextAtom * 2 : nextAtom;
@@ -45,7 +49,7 @@ function room(plan: Plan, index: number): Room {
     if (spec.negated) { entities.push({ kind: '不', atoms: nextAtom, pos: cells[1] }); notAtoms |= nextAtom; nextAtom *= 2; }
     return { id: `r${index + 1}-${i}`, subject: spec.subject, verb: spec.subject === '门' ? '开' : '吹', cells, targets };
   });
-  return { ...plan, id: plan.id ?? `r${index + 1}`, chapterId: CHAPTERS[Math.floor(index / 5)].id, width, height: plan.rows.length, tiles, wind, sentences, initial: { player, entities, won: false }, woodAtoms, notAtoms, sunAtoms, moonAtoms, lightRadius: 3 };
+  return { ...plan, id: plan.id ?? `r${index + 1}`, chapterId: CHAPTERS[Math.floor(index / 5)].id, width, height: plan.rows.length, tiles, wind, sentences, initial: { player, ...(companion === undefined ? {} : { companion, active: 'person' as const }), entities, won: false }, woodAtoms, notAtoms, sunAtoms, moonAtoms, lightRadius: 3 };
 }
 
 /** Original blockouts. All objects use the same rules; victory is only arrival at G. */
@@ -88,7 +92,14 @@ const WOVEN_PLANS: Plan[] = [
   { id: 'woven-4', title: '先送谁过岸', subtitle: '灯与林分两趟走，风口要先安静。', arrival: '不放到风句，才可以来回搬灯和林。每一趟都只带一件。', departure: '停风让来回成为可能，林和明各走了一趟。', rows: ['#n#...#', '#P.#.##', '#BL#..#', '##.>.##', '####.##', '####?##', '####~##', '####~##', '####G##', '#######'], sentences: [{ at: [3,0], subject: '风' }] },
   { id: 'woven-5', title: '带光回家', subtitle: '开门、调光、借桥；两条路都可以通向家。', arrival: '最后一间没有固定顺序。门后的风路与水路，都需要安排明和木。', departure: '人带着自己的办法，走回了有光的家。', rows: ['#...###', '#PBL..#', '###D###', '#.....#', '##~#^##', '##~#.##', '#...??G', '#######'], sentences: [{ at: [1,0], subject: '门', negated: true }, { at: [0,2], subject: '风' }] },
 ];
-export const ROOMS: Room[] = [...PLANS, ...LIGHT_PLANS, ...WOVEN_PLANS].map(room);
+const COMPANION_PLANS: Plan[] = [
+  { id: 'companions-1', title: '腾出两只手', subtitle: '人拿木让路，友带灯照路。', arrival: 'Q切换人和友，也可以点角色。每人一只手；两人各站一格家才完成。', departure: '一人让路，一人照路。两个家都有人了。', rows: ['#######', '#PwFB?#', '#####G#', '#####G#', '#######'] },
+  { id: 'companions-2', title: '你举灯，我搬桥', subtitle: '一人带明照路，一人带木架桥。', arrival: '两人可以各带一件。举灯的人先留在近处，别让伙伴脚下变暗。', departure: '灯与桥各有一双手，两人一起过了影路。', rows: ['#######', '#PBwF?#', '#####?#', '#####~#', '####GG#', '#######'] },
+  { id: 'companions-3', title: '轮流腾手', subtitle: '一人带灯，一人拆林；空出的手接着运木。', arrival: '明和林都要过岸。两人可以轮流放下、拿起；没有隔空交换。', departure: '灯有人照，木有人送；空手也有用。', rows: ['#PBFL.#', '###..##', '###?###', '###~###', '###?###', '###~###', '###GG##', '#######'] },
+  { id: 'companions-4', title: '门风两边', subtitle: '你开门，我停风；改的是伙伴那边的路。', arrival: '两边暂时不连通。人旁的门句连着友的门，友旁的风句连着人的风。点短句能看连线。', departure: '人开了友的门，友停了人的风。两边都走通了。', rows: ['...#...', '#P.#.Fn', '#^###D#', '#G###G#', '#######'], sentences: [{ at: [0,0], subject: '门', negated: true }, { at: [4,0], subject: '风' }] },
+  { id: 'companions-5', title: '并肩回家', subtitle: '让风停下，或搭木桥；两人带着光回家。', arrival: '可以用不改风，也可以借木走水路。灯和桥由谁照看，你们来安排。', departure: '人和友，各到一格家。你们一起安排出了自己的归途。', rows: ['##n####', '#PBFw##', '#....##', '##???##', '##~#^##', '##..GG#', '#######'], sentences: [{ at: [1,2], subject: '风' }] },
+];
+export const ROOMS: Room[] = [...PLANS, ...LIGHT_PLANS, ...WOVEN_PLANS, ...COMPANION_PLANS].map(room);
 export const chapterRooms = (chapterId: string) => ROOMS.filter(r => r.chapterId === chapterId);
 export const roomIndexById = (roomId: string) => ROOMS.findIndex(r => r.id === roomId);
 export const chapterForRoom = (index: number) => CHAPTERS.find(c => c.id === ROOMS[index]?.chapterId)!;

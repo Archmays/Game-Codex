@@ -5,6 +5,10 @@ on:
   schedule:
     - cron: "17 20 * * 6"
 
+env:
+  GAME_CODEX_TASK_ID: GAME-CODEX-STEP5
+  GAME_CODEX_EVIDENCE_ROOT: tmp/tasks/GAME-CODEX-STEP5
+
 permissions:
   contents: read
 
@@ -18,6 +22,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # portfolio:evolution:check reads immutable evidence at historical SHAs.
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -52,7 +59,6 @@ jobs:
         with:
           name: full-play-readiness-failure-${{ github.sha }}
           path: |
-            test-results/play-readiness*
-            test-results/interaction-integrity
+            tmp/tasks/GAME-CODEX-STEP5
           if-no-files-found: ignore
           retention-days: 7

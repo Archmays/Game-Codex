@@ -54,7 +54,7 @@ for(const mapId of ['twin-bends','beacon-keep'] as const)test(`STEP4 natural eig
   console.log(`${mapId}/${mode}: wave ${wave+1}/8 preparation ${Math.round((Date.now()-preparedAt)/1000)}s`);await act('[data-td-next]');
   if(mode==='keyboard')await expect(page.locator('[data-td-pause]')).toBeFocused();
   let recording:(()=>Promise<number>)|null=null;
-  if(mapId==='beacon-keep'&&mode==='keyboard'&&wave===7){await expect(page.locator('[data-td-boss-status]')).toContainText('呼援预告',{timeout:90000});recording=await shortClip(page,'tmp/tasks/GAME-CODEX-STEP4/clips/tower');}
+  if(mapId==='beacon-keep'&&mode==='keyboard'&&wave===7){await expect(page.locator('[data-td-boss-status]')).toContainText('呼援预告',{timeout:90000});recording=await shortClip(page,`${evidence}/clips/tower`);}
   await expect.poll(()=>page.locator('.td-game').getAttribute('data-phase'),{timeout:120000,intervals:[1000]}).not.toBe('battle');
   await expect(page.locator('.td-game')).toHaveAttribute('data-phase',wave===7?'won':'ready');
   if(recording)expect(await recording()).toBeGreaterThan(5);

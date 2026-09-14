@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { activate, criticalTargets, fromHome, keyReach, type InputMode } from './input-helpers';
-const evidence='tmp/tasks/GAME-CODEX-STEP4/input';
+const evidence=`${process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'tmp/tasks/GAME-CODEX-STEP4'}/input`;
 test.beforeEach(async ({page}, info)=>{
   const errors:string[]=[]; const external:string[]=[];
   const base = new URL(String(info.project.use.baseURL));
@@ -39,7 +39,16 @@ for (const mode of ['keyboard','mouse','touch'] as const) {
     await expect(page.locator('.hway')).toHaveAttribute('data-busy','false');
     await activate(page,'[data-hway-undo]',mode);await expect(page.locator('[data-hway-hand]')).toHaveText('日');
     await activate(page,'[data-hway-hint]',mode);await expect(page.locator('[data-hway-hint-box]')).toBeVisible();
-    await activate(page,'[data-hway-hint-close]',mode);await expect(page.locator('[data-hway-hint]')).toBeFocused();await activate(page,'[data-hway-exit]',mode);
+    await activate(page,'[data-hway-hint-close]',mode);
+    await expect(page.locator(mode==='keyboard'?'[data-hway-hint]':'[data-hway-grid]')).toBeFocused();
+    if(mode!=='keyboard') {
+      // A pointer interaction leaves the world ready for the very next real key.
+      const before=await page.locator('.hway').getAttribute('data-player');
+      await page.keyboard.press('ArrowLeft');
+      await expect(page.locator('.hway')).not.toHaveAttribute('data-player',before!);
+      await expect(page.locator('[data-hway-grid]')).toBeFocused();
+    }
+    await activate(page,'[data-hway-exit]',mode);
     await expect(page.getByTestId('my-game-world')).toBeVisible();
     await activate(page,'[data-world-forest-link]',mode);await expect(page.locator('[data-td-canvas]')).toHaveAttribute('data-ready','true');
     await activate(page,'[data-td-new]',mode);await activate(page,'[data-map-select="twin-bends"]',mode);
@@ -143,7 +152,7 @@ test('@primary keyboard settings / Vault / feedback never capture text as game i
   await activate(page,'[data-feedback-save]','keyboard');
   expect(JSON.parse((await page.evaluate(key=>localStorage.getItem(key),key))!).text).toContain('<b>普通文字</b>');
   const download=page.waitForEvent('download');await activate(page,'[data-feedback-export]','keyboard');
-  expect((await download).suggestedFilename()).toBe('game-codex-step4-feedback.md');
+  expect((await download).suggestedFilename()).toBe('game-codex-step5-feedback.md');
   await page.reload();await expect(page.locator('[data-feedback-text]')).toHaveValue('wasd xcz 空格 <b>普通文字</b>');
 });
 

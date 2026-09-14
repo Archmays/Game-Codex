@@ -2,26 +2,27 @@
 
 ## 游戏目标
 
-`?play=hanzi-word-adventure` 是三章共十五房的原创文字空间冒险。操纵完整的“人”字，借木、林、不和明改变实际通路，走到出口。没有强制计时、题目判分、战斗、账号或麦克风。适合家庭一起读字、观察和讨论路线；机器证据不证明儿童乐趣、学习效果或留存。
+`?play=hanzi-word-adventure` 是四章共二十房的原创文字空间冒险。操纵完整的“人”字，借木、林、不和明改变实际通路，走到出口。没有强制计时、题目判分、战斗、账号或麦克风。适合家庭一起读字、观察和讨论路线；机器证据不证明儿童乐趣、学习效果或留存。
 
 ## 适合对象
 
 能逐格观察通路、愿意试着搬字的家庭玩家；需要时可与家人一起读字和讨论。章节自由选择，没有强制前置通关。
 
-## 三章
+## 四章
 
 | 章节 | chapterId | 稳定房间ID | 主要发现 |
 | --- | --- | --- | --- |
 | 借字归途 | homeward | r1–r5 | 保留原五房：搬木搭桥、有限不改变门风、林的左右拆合、单向运输与两种回家策略 |
 | 借一盏明 | lamplight | light-1–light-5 | 日月合明、放灯腾手、借光搬桥、收回光源与跨岸调度 |
 | 光与归途 | confluence | woven-1–woven-5 | 只组合光、木桥与林、携带限制、门风及有限不；保留多个灯位和停风／水桥不同策略 |
+| 结伴归途 | companions | companions-1–companions-5 | 单人切人/友，两只手分工，互相开门停风与携灯运桥，两人各到一格家 |
 
-所有章节可直接选择，不必重打前章。入口有“新游戏”“继续游戏”；继续菜单列出本机各章节存档的房名和稳定roomId。每章一份独立继续状态，切章先保存。重置本章或在已有章开始新游戏须明确确认，只重置该章；“本间重开”只回到当前房入口，已到达房间仍保留。URL `chapter=homeward|lamplight|confluence` 选择继续而不重置，切章会同步替换URL参数，不添加历史步骤。
+所有章节可直接选择，不必重打前章。入口有“新游戏”“继续游戏”；继续菜单列出本机各章节存档的房名和稳定roomId。每章一份独立继续状态，切章先保存。重置本章或在已有章开始新游戏须明确确认，只重置该章；“本间重开”只回到当前房入口，已到达房间仍保留。URL `chapter=homeward|lamplight|confluence|companions` 选择继续而不重置，切章会同步替换URL参数，不添加历史步骤。
 
 ## 玩法说明
 
-- Tab切换世界、方向区和普通控件；世界内方向键／WASD逐格移动，Shift＋方向键查看，Space／E主操作，X拆、C合、Z撤销、Esc取消。聚焦原生按钮时Space／Enter只激活该按钮一次，不同时触发世界动作。
-- 相邻选择优先，否则使用明确显示的朝向；绿色框与坐标标明实际动作目标，远处查看不会静默改变操作对象。多种动作可选时打开小选择；拆字先看左右落格预览，再确认。拆分方向用左右键选择，Tab到确认，Esc取消。
+- Tab切换世界、方向区和普通控件；世界内方向键／WASD逐格移动，Shift＋方向键查看，Space／E主操作，X拆、C合、Z撤销、H提示、Q切换新章角色、Esc取消。聚焦原生按钮时Space／Enter只激活该按钮一次，不同时触发世界动作。
+- 相邻选择优先，否则使用明确显示的朝向；绿色框与坐标标明实际动作目标，远处查看不会静默改变操作对象。Space默认拿/放，X/C直接拆/合；拆字先看左右落格预览，再用Enter/Space确认或Esc取消。每次重绘保留稳定动作按钮，操作后能立即移动。
 - 鼠标／触控点邻接空路走一格，点物件先查看。持字时点“选择落字处”，再点相邻格只选位置、不移动，随后按主操作确认放下。也可一直使用方向按钮；没有必需拖动、悬停或长按。
 - blur、hidden、pointercancel清输入生命周期状态；变换不因键盘repeat重复执行。输入详情沿用 [input-contract.md](../../docs/input-contract.md)。
 
@@ -39,7 +40,9 @@
 
 `solver.ts` 继续使用最多40,000合并状态的操作层BFS与精确有向步行可达区域，每条解包含普通逐格动作。Worker按当前状态提供三级主动提示，不自动执行；搜尽无解和达到上限未知分开说明。每次撤销恢复完整一步，包括光照所依赖的材料、人、短句和胜利状态。
 
-新存档键 `family-games/hanzi-word-adventure/v2` 保存稳定chapterId／roomId、每章当前世界、最多256步撤销和减少动态设置。仅在v2不存在且旧v1有效时复制迁移，旧 `family-games/hanzi-word-adventure/v1` 原始字符串始终保留。迁移比较旧源与新键，日常写入比较挂载会话原文；坏／未来记录、其他页面和Vault的改写受保护。存储拒写仍可从已验证的旧检查点在本页继续，不清空旧记录。
+原三章存档键 `family-games/hanzi-word-adventure/v2` 保存稳定chapterId／roomId、每章当前世界、最多256步撤销和减少动态设置。仅在v2不存在且旧v1有效时复制迁移，旧 `family-games/hanzi-word-adventure/v1` 原始字符串始终保留。迁移比较旧源与新键，日常写入比较挂载会话原文；坏／未来记录、其他页面和Vault的改写受保护。存储拒写仍可从已验证的旧检查点在本页继续，不清空旧记录。
+
+结伴章单独使用 `family-games/hanzi-word-adventure/companions/v1`，不把双角色状态写进旧槽；直接新章入口不触发旧v1迁移。双方占格、手持、光照与撤销都由同一纯规则原子处理。坏/未来槽与跨页竞争原文保护适用于新槽。具体五房分工与修订见 [STEP5设计](../../docs/hanzi-word-adventure/step5-design.md)。
 
 ## 设备适配
 
@@ -47,9 +50,9 @@
 
 ## 当前完成度
 
-冒险单测47项通过，十五房均在有界搜索后逐动作回放；浏览器矩阵20项通过，2项为鼠标专用用例在touch项目中跳过。旧新十五房以真实键盘和触控完成，鼠标另外回放新章及两种替代策略；键盘导航不使用locator.focus、click或状态注入替代按键。也检查提示、撤销、重置保留他章、带章节链接换章刷新、原生Space冲突与相邻落字选择。
+原十五房的历史验收记录保存在 [STEP4报告](../../docs/step4-playtest-report.md)，不把历史通过冒充本次验证。STEP5正式结果、同SHA发布与验证边界见 [STEP5报告](../../docs/step5-playtest-report.md)。
 
-命令为 `pnpm exec vitest run tests/hanzi-word-adventure.test.ts`、`pnpm run validate:hanzi-word-adventure`、`pnpm run test:e2e:hanzi-word-adventure`。本轮证据位于 `tmp/tasks/GAME-CODEX-STEP4/adventure/`；运行浏览器须将输出与HWAY_EVIDENCE显式指向本轮目录。完整STEP4发布、同SHA在线交互及验证边界见 [step4-playtest-report.md](../../docs/step4-playtest-report.md)。历史 [step2-report.md](../../docs/hanzi-word-adventure/step2-report.md) 保持原文；不将本地通过直接当作发布成功。
+本轮命令为 `pnpm exec vitest run tests/hanzi-word-adventure.test.ts tests/hanzi-word-adventure-step5.test.ts`、`pnpm exec tsx games/hanzi-word-adventure/tools/solve-step5.ts`、`pnpm run test:e2e:hanzi-word-adventure`。证据统一位于 `tmp/tasks/GAME-CODEX-STEP5/adventure/`；运行浏览器须将输出与HWAY_EVIDENCE显式指向该目录。纯键盘五房helper每动作断言世界原有焦点，不使用focus/click/反复Tab弥补断点。
 
 ## 后续改进建议
 

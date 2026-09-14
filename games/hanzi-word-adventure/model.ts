@@ -1,12 +1,15 @@
 import { ROOMS, chapterForRoom, lastInChapter, type ChapterId, type Direction, type Entity, type Room, type Sentence, type WorldState } from './rooms';
-export type Action = { type: 'move'; direction: Direction } | { type: 'take'; target: number } | { type: 'put'; target: number } | { type: 'combine'; target: number } | { type: 'split'; target: number; side: 'left' | 'right' };
+export type Action = { type: 'switch' } | { type: 'move'; direction: Direction } | { type: 'take'; target: number } | { type: 'put'; target: number } | { type: 'combine'; target: number } | { type: 'split'; target: number; side: 'left' | 'right' };
 export interface Transition { ok: boolean; state: WorldState; message: string; trail: number[]; }
 export interface Journey { chapterId: ChapterId; roomId: string; room: number; unlocked: number; state: WorldState; history: WorldState[]; }
 export const DIRECTIONS: Direction[] = ['up', 'right', 'down', 'left'];
 export const DIR_NAMES: Record<Direction, string> = { up: '上', right: '右', down: '下', left: '左' };
 export const clone = <T>(value: T): T => structuredClone(value);
 export const at = (state: WorldState, pos: number) => state.entities.find(e => e.pos === pos);
-export const carried = (state: WorldState) => state.entities.find(e => e.pos === null);
+export const carried = (state: WorldState) => state.entities.find(e => e.pos === null && (state.companion === undefined || e.holder === state.active));
+export const actorGlyph = (state: WorldState) => state.active === 'friend' ? '友' : '人';
+export const actorPositions = (state: WorldState) => state.companion === undefined ? [state.player] : [state.player, state.companion];
+export const wonState = (room: Room, state: WorldState) => actorPositions(state).every(pos => room.tiles[pos] === 'goal');
 export const distance = (room: Room, a: number, b: number) => Math.abs(a % room.width - b % room.width) + Math.abs(Math.floor(a / room.width) - Math.floor(b / room.width));
 export function neighbor(room: Room, pos: number, direction: Direction): number {
   const next = pos + ({ up: -room.width, right: 1, down: room.width, left: -1 })[direction];
@@ -22,7 +25,7 @@ export function effect(room: Room, state: WorldState, pos: number): boolean {
  * sentence cells and closed doors block propagation. Every lit tile has an exact distance. */
 export function illumination(room: Room, state: WorldState): Map<number, number> {
   const light = new Map<number, number>(), queue: number[] = [];
-  for (const e of state.entities) if (e.kind === '明') { const source = e.pos ?? state.player; light.set(source, 0); queue.push(source); }
+  for (const e of state.entities) if (e.kind === '明') { const source = e.pos ?? (state.companion !== undefined && e.holder !== state.active ? state.companion : state.player); light.set(source, 0); queue.push(source); }
   for (let i = 0; i < queue.length; i++) {
     const pos = queue[i], d = light.get(pos)!; if (d >= room.lightRadius) continue;
     for (const direction of DIRECTIONS) {
@@ -48,7 +51,7 @@ export function passable(room: Room, state: WorldState, pos: number): boolean {
   return !entity;
 }
 export function placementReason(room: Room, state: WorldState, entity: Entity, target: number): string {
-  if (target === state.player) return '人正站在这里，先空出这一格。';
+  if (actorPositions(state).includes(target)) return `${target === state.player ? actorGlyph(state) : state.active === 'person' ? '友' : '人'}正站在这里，先空出这一格。`;
   if (at(state, target)) return '这一格已经有字，先腾出地方。';
   const tile = room.tiles[target];
   if (tile === 'socket') return entity.kind === '不' ? '' : '这是句中的“不”字位，只能放“不”。';
@@ -64,13 +67,18 @@ export function act(room: Room, before: WorldState, input: unknown): Transition 
   const fail = (message: string): Transition => ({ ok: false, state: before, message, trail: [] });
   if (!input || typeof input !== 'object' || Array.isArray(input)) return fail('这个动作没有执行。');
   const action = input as Action;
-  if (!['move', 'take', 'put', 'split', 'combine'].includes(action.type)) return fail('这个动作没有执行。');
+  if (!['switch', 'move', 'take', 'put', 'split', 'combine'].includes(action.type)) return fail('这个动作没有执行。');
   if (before.won) return fail('已到达出口。可以继续旅程，或撤销这一步。');
-  const state: WorldState = { player: before.player, won: before.won, entities: before.entities.map(e => ({ ...e })) }, hand = carried(state);
+  const state: WorldState = { ...before, entities: before.entities.map(e => ({ ...e })) }, hand = carried(state);
   const trail: number[] = []; let message = '';
-  if (action.type === 'move') {
+  if (action.type === 'switch') {
+    if (state.companion === undefined) return fail('这一章只有一位行路人。');
+    [state.player, state.companion] = [state.companion, state.player]; state.active = state.active === 'person' ? 'friend' : 'person';
+    return { ok: true, state, trail, message: `现在走${actorGlyph(state)}，手里${carried(state)?.kind ?? '空着'}。伙伴留在原处。` };
+  } else if (action.type === 'move') {
     if (!DIRECTIONS.includes(action.direction)) return fail('方向没有执行。');
     const next = neighbor(room, state.player, action.direction);
+    if (next === state.companion) return fail('伙伴站在这里。切换角色挪开，不能穿过去。');
     // A carried light moves with the person; check the destination using that resulting light.
     const arrival = carried(state)?.kind === '明' ? { ...state, player: next } : state;
     if (!passable(room, arrival, next)) return fail(room.tiles[next] === 'shadow' ? '影格还未照亮，明只能沿相邻通格照三步。' : room.tiles[next] === 'water' ? '水上还没有木。' : room.tiles[next] === 'door' ? '门还没有开，看看绑定的短句。' : '这里走不通，试试相邻的路。');
@@ -82,16 +90,16 @@ export function act(room: Room, before: WorldState, input: unknown): Transition 
     if (action.type === 'take') {
       if (hand) return fail('手里最多带一个字。先放下，或把两枚木合成林。');
       if (!item) return fail('这里没有可拿的字。');
-      item.pos = null; message = `拿起了${item.kind}。手里只能带一个字。`;
+      item.pos = null; if (state.companion !== undefined) item.holder = state.active; message = `拿起了${item.kind}。手里只能带一个字。`;
     } else if (action.type === 'put') {
       if (!hand) return fail('手里没有字。');
       const reason = placementReason(room, state, hand, action.target); if (reason) return fail(reason);
-      hand.pos = action.target; message = room.tiles[action.target] === 'water' ? '木铺在水上，这一步可以走了。' : `放下了${hand.kind}。`;
+      hand.pos = action.target; delete hand.holder; message = room.tiles[action.target] === 'water' ? '木铺在水上，这一步可以走了。' : `放下了${hand.kind}。`;
     } else if (action.type === 'combine') {
       const kind = combineKind(hand, item);
       if (!kind || !hand || !item) return fail('手里与身旁需要两枚木，或一枚日和一枚月。');
       state.entities = state.entities.filter(e => e !== hand && e !== item);
-      state.entities.push({ kind, atoms: hand.atoms | item.atoms, pos: null });
+      state.entities.push({ kind, atoms: hand.atoms | item.atoms, pos: null, ...(state.companion === undefined ? {} : { holder: state.active }) });
       message = kind === '林' ? '木在左，木在右，合成一个完整的林。手里现在带着林。' : '日在左，月在右，合成完整的明。明是游戏中的光源，不是字源解释。';
     } else {
       if (item?.kind !== '林' && item?.kind !== '明') return fail('林能拆成两枚木；明能拆成日和月。');
@@ -107,20 +115,24 @@ export function act(room: Room, before: WorldState, input: unknown): Transition 
     }
   }
   // Rule changes cannot close a door on a person or remove the water layer's support.
-  if (!passable(room, state, state.player)) return fail('这一步会让人失去落脚处。先离开门格、木桥或将要变暗的影格，再改字。');
+  const stranded = actorPositions(state).find(pos => !passable(room,state,pos));
+  if (stranded !== undefined) { const who = stranded === state.player ? actorGlyph(state) : state.active === 'person' ? '友' : '人'; return fail(`这一步会让${who}失去落脚处。先让${who}离开门格、木桥或将要变暗的影格，再改字。`); }
+  if (state.companion !== undefined && room.tiles[state.companion] === 'wind' && effect(room,state,state.companion)) return fail('这一步会吹动留在原地的伙伴。先切换角色离开风格，再拿走不。');
   const seen = new Set<number>();
   while (room.tiles[state.player] === 'wind' && effect(room, state, state.player)) {
     if (seen.has(state.player)) return fail('风会绕回原处，这一步没有执行。');
     seen.add(state.player);
     const next = neighbor(room, state.player, room.wind[state.player]!);
-    if (!passable(room, carried(state)?.kind === '明' ? { ...state, player: next } : state, next)) return fail('风的落脚处被挡住了。先给人留出落脚处。');
+    if (next === state.companion || !passable(room, carried(state)?.kind === '明' ? { ...state, player: next } : state, next)) return fail('风的落脚处被挡住了。先给人留出落脚处。');
     state.player = next; trail.push(next);
   }
+  const windStranded = actorPositions(state).find(pos => !passable(room,state,pos));
+  if (windStranded !== undefined) { const who = windStranded === state.player ? actorGlyph(state) : state.active === 'person' ? '友' : '人'; return fail(`风后的光会让${who}失去落脚处。先留好${who}的光和路。`); }
   // A wind that returns the player to exactly the same state is an invalid, free attempt.
   if (action.type === 'move' && state.player === before.player) return fail('风把这条路吹向另一边。可以改短句，或找另一条路。');
   const changes = room.sentences.filter(s => enabled(before, s) !== enabled(state, s));
   if (changes.length) message += ` ${changes.map(s => `${sentenceText(state, s)}了`).join('，')}。`;
-  state.won = room.tiles[state.player] === 'goal';
+  state.won = wonState(room, state);
   return { ok: true, state, message: state.won ? room.departure : message || (trail.length > 1 ? '顺着风，到了另一边。' : ''), trail };
 }
 
@@ -138,7 +150,9 @@ export function validState(room: Room, value: unknown): value is WorldState {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
   const s = value as WorldState;
   if (!Number.isSafeInteger(s.player) || s.player < 0 || s.player >= room.tiles.length || typeof s.won !== 'boolean' || !Array.isArray(s.entities) || s.entities.length > 8) return false;
-  let atoms = 0, woods = 0, nots = 0, suns = 0, moons = 0, hands = 0; const positions = new Set<number>();
+  if (room.chapterId === 'companions') { if (!Number.isSafeInteger(s.companion) || s.companion! < 0 || s.companion! >= room.tiles.length || s.player === s.companion || !['person','friend'].includes(s.active ?? '')) return false; }
+  else if (s.companion !== undefined || s.active !== undefined) return false;
+  let atoms = 0, woods = 0, nots = 0, suns = 0, moons = 0, hands = 0; const positions = new Set<number>(), holders = new Set<string>();
   for (const e of s.entities) {
     if (!e || typeof e !== 'object' || !['木', '林', '不', '日', '月', '明'].includes(e.kind) || !Number.isSafeInteger(e.atoms) || e.atoms < 1 || e.atoms > 255 || (atoms & e.atoms)) return false;
     const count = e.atoms.toString(2).replaceAll('0', '').length;
@@ -149,17 +163,19 @@ export function validState(room: Room, value: unknown): value is WorldState {
     else if (e.kind === '日') suns |= e.atoms;
     else if (e.kind === '月') moons |= e.atoms;
     else { if (!(e.atoms & room.sunAtoms) || !(e.atoms & room.moonAtoms)) return false; suns |= e.atoms & room.sunAtoms; moons |= e.atoms & room.moonAtoms; }
-    if (e.pos === null) { hands++; continue; }
+    if (e.pos === null) { hands++; if (s.companion !== undefined) { if (!['person','friend'].includes(e.holder ?? '') || holders.has(e.holder!)) return false; holders.add(e.holder!); } else if (e.holder !== undefined) return false; continue; }
+    if (e.holder !== undefined) return false;
     if (!Number.isSafeInteger(e.pos) || positions.has(e.pos) || e.pos < 0 || e.pos >= room.tiles.length) return false;
     positions.add(e.pos);
     const tile = room.tiles[e.pos];
     if (!(tile === 'floor' || tile === 'shadow' || (tile === 'water' && e.kind === '木') || (tile === 'socket' && e.kind === '不'))) return false;
   }
-  return woods === room.woodAtoms && nots === room.notAtoms && suns === room.sunAtoms && moons === room.moonAtoms && hands <= 1 && passable(room, s, s.player)
-    && s.won === (room.tiles[s.player] === 'goal') && !(room.tiles[s.player] === 'wind' && effect(room, s, s.player));
+  return woods === room.woodAtoms && nots === room.notAtoms && suns === room.sunAtoms && moons === room.moonAtoms && hands <= (s.companion === undefined ? 1 : 2) && actorPositions(s).every(pos => passable(room, s, pos))
+    && s.won === wonState(room,s) && actorPositions(s).every(pos => !(room.tiles[pos] === 'wind' && effect(room, s, pos)));
 }
 
 export function describeAction(room: Room, state: WorldState, action: Action): string {
+  if (action.type === 'switch') return `按Q，换${state.active === 'person' ? '友' : '人'}来走。`;
   if (action.type === 'move') return `向${DIR_NAMES[action.direction]}走一步。`;
   const x = action.target % room.width + 1, y = Math.floor(action.target / room.width) + 1;
   const location = `第${y}行第${x}列`;

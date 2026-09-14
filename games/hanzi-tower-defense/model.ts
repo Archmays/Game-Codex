@@ -2,6 +2,8 @@ import { DEFENSE_MAPS, mapFor, PATH, pathLength, type MapId, type Point, type En
 import { CORES, recipeFor, type CoreKind } from "./content";
 import { ECHO, ROOTS, englishMapping, RESONANCES, type EnglishCore, type GrantId, type EffectId } from "./resonance";
 
+import { SCENARIOS, rulesFor, type ScenarioId } from './tactics';
+
 export type { Point } from "./maps";
 export const MAP = { width: 960, height: 640 } as const;
 export { PATH, SLOTS } from "./maps";
@@ -26,7 +28,7 @@ export interface Core { id: number; kind: CoreKind; slot: number | null; cooldow
 export interface Enemy { id: number; kind: EnemyKind; distance: number; hp: number; maxHp: number; slow: number; slowUntil: number; zoneSlow?: number; lane?: number; summons?: number; summonAt?: number; }
 export type Phase = "ready" | "battle" | "won" | "lost";
 export interface Checkpoint {
-  mapId?: MapId;
+  mapId?: MapId; scenarioId?: ScenarioId;
   seed: number; wave: number; health: number; cores: Core[]; nextCoreId: number; kills: number; leaks: number; elapsed: number;
   englishCores: EnglishCore[]; englishClaims: GrantId[]; englishSkipped: GrantId[]; nextEnglishId: number;
 }
@@ -39,10 +41,34 @@ export interface RootZone {
   at: Point; born: number; expires: number; damage: number; radius: number; slow: number;
 }
 export interface BattleState extends Checkpoint {
+  retryCheckpoint?: Checkpoint; summaries: WaveSummary[]; waveLanes: LaneSummary[];
   phase: Phase; paused: boolean; waveTime: number; spawned: number; enemies: Enemy[]; unlocked: string[];
   checkpoint: Checkpoint; waveKills: number; waveDrops: number; nextEnemyId: number;
   echoes: Echo[]; nextEffectId: number; visuals: { event: BattleEvent; age: number }[];
   rootZones: RootZone[]; rootPulseAt: number;
+}
+export interface LaneSummary { kills:number; leaks:number; damage:number; }
+export interface WaveSummary { wave:number; outcome:'held'|'lost'; kills:number; leaks:number; healthBefore:number; healthAfter:number; seconds:number; coverage:number[]; lanes:LaneSummary[]; }
+/** Coverage is union of actual tower circles along each route, sampled every ten map units. It is descriptive, not damage prediction. */
+export function routeCoverage(state:Checkpoint):number[] {
+ return mapFor(state.mapId).paths.map((path,lane)=>{
+  const length=pathLength(path),steps=Math.ceil(length/10);let covered=0;
+  for(let i=0;i<steps;i++){const p=pointOnPath((i+.5)*length/steps,state.mapId,lane);if(state.cores.some(c=>c.slot!==null&&distanceBetween(mapFor(state.mapId).slots[c.slot],p)<=CORES[c.kind].range))covered++;}
+  return Math.round(covered/steps*100);
+ });
+}
+function recordWave(state:BattleState,outcome:WaveSummary['outcome']):void {
+ if(!state.scenarioId)return;
+ state.retryCheckpoint=checkpointOf(state.checkpoint);
+ state.summaries=[...state.summaries,{wave:state.wave+1,outcome,kills:state.kills-state.checkpoint.kills,leaks:state.leaks-state.checkpoint.leaks,healthBefore:state.checkpoint.health,healthAfter:state.health,seconds:Math.round(state.waveTime*10)/10,coverage:routeCoverage(state.checkpoint),lanes:state.waveLanes.map(l=>({...l}))}].slice(-2);
+}
+export function retryWave(state:BattleState):BattleState|null {
+ if(!state.scenarioId)return null;
+ const checkpoint=state.phase==='battle'||state.phase==='lost'?state.checkpoint:state.retryCheckpoint;
+ if(!checkpoint)return null;
+ const restored=resumeCheckpoint(checkpoint,state.unlocked);
+ restored.summaries=state.summaries.map(s=>({...s,coverage:[...s.coverage],lanes:s.lanes.map(l=>({...l}))}));
+ return restored;
 }
 export type BattleEvent =
   | { type: "shot"; from: Point; to: Point; core: CoreKind; coreId: number; enemyId: number; resonance?: EffectId }
@@ -56,20 +82,24 @@ export type BattleEvent =
 export const DEFAULT_SEED = 20260907;
 export const START_HEALTH = 16;
 export function checkpointOf(state: Checkpoint): Checkpoint {
-  return { mapId: state.mapId ?? "qinglan-pass", seed: state.seed, wave: state.wave, health: state.health, cores: state.cores.map(c => ({ ...c })), nextCoreId: state.nextCoreId, kills: state.kills, leaks: state.leaks, elapsed: state.elapsed,
+  return { mapId: state.mapId ?? "qinglan-pass", ...(state.scenarioId?{scenarioId:state.scenarioId}:{}), seed: state.seed, wave: state.wave, health: state.health, cores: state.cores.map(c => ({ ...c })), nextCoreId: state.nextCoreId, kills: state.kills, leaks: state.leaks, elapsed: state.elapsed,
     englishCores: state.englishCores.map(c => ({ ...c })), englishClaims: [...state.englishClaims], englishSkipped: [...state.englishSkipped], nextEnglishId: state.nextEnglishId };
 }
 export function newBattle(seed = DEFAULT_SEED, unlocked: string[] = [], mapId: MapId = "qinglan-pass"): BattleState {
   const base: Checkpoint = { seed: seed >>> 0, wave: 0, health: START_HEALTH, mapId, cores: mapFor(mapId).starting.map((item,i)=>({id:i+1,...item,cooldown:0})), nextCoreId: mapFor(mapId).starting.length+1, kills: 0, leaks: 0, elapsed: 0, englishCores: [], englishClaims: [], englishSkipped: [], nextEnglishId: 1 };
   return resumeCheckpoint(base, unlocked);
 }
+export function newTactics(scenarioId:ScenarioId,unlocked:string[]=[]):BattleState {
+ const scenario=SCENARIOS[scenarioId],base=newBattle(DEFAULT_SEED,unlocked,scenario.mapId);
+ base.scenarioId=scenarioId;base.cores=scenario.starting.map((c,i)=>({...c,id:i+1,cooldown:0}));base.nextCoreId=base.cores.length+1;base.checkpoint=checkpointOf(base);return base;
+}
 export function resumeCheckpoint(checkpoint: Checkpoint, unlocked: string[]): BattleState {
   const base = checkpointOf(checkpoint);
-  return { ...base, phase: base.wave >= mapFor(base.mapId).waves.length ? "won" : "ready", paused: false, waveTime: 0, spawned: 0, enemies: [], unlocked: [...unlocked], checkpoint: checkpointOf(base), waveKills: 0, waveDrops: 0, nextEnemyId: 1, echoes: [], nextEffectId: 1, visuals: [], rootZones: [], rootPulseAt: ROOTS.tick };
+  return { ...base, summaries: [], waveLanes:mapFor(base.mapId).paths.map(()=>({kills:0,leaks:0,damage:0})), phase: base.wave >= rulesFor(base).waves.length ? "won" : "ready", paused: false, waveTime: 0, spawned: 0, enemies: [], unlocked: [...unlocked], checkpoint: checkpointOf(base), waveKills: 0, waveDrops: 0, nextEnemyId: 1, echoes: [], nextEffectId: 1, visuals: [], rootZones: [], rootPulseAt: ROOTS.tick };
 }
 export function startWave(state: BattleState): boolean {
-  if (state.phase !== "ready" || state.wave >= mapFor(state.mapId).waves.length) return false;
-  state.checkpoint = checkpointOf(state);
+  if (state.phase !== "ready" || state.wave >= rulesFor(state).waves.length) return false;
+  state.checkpoint = checkpointOf(state);state.waveLanes=mapFor(state.mapId).paths.map(()=>({kills:0,leaks:0,damage:0}));
   state.phase = "battle"; state.paused = false; state.waveTime = 0; state.spawned = 0; state.waveKills = 0; state.waveDrops = 0;
   state.echoes = []; state.visuals = []; state.rootZones = []; state.rootPulseAt = ROOTS.tick;
   return true;
@@ -78,13 +108,14 @@ export function deploy(state: BattleState, id: number, slot: number): boolean {
   if (state.phase === "won" || state.phase === "lost" || !Number.isInteger(slot) || !mapFor(state.mapId).slots[slot]) return false;
   const item = state.cores.find(c => c.id === id);
   if (!item || state.cores.some(c => c.slot === slot && c.id !== id)) return false;
+  if(state.scenarioId && state.phase === "battle" && item.slot !== null && item.slot !== slot) return false;
   item.slot = slot;
   return true;
 }
 export function stow(state: BattleState, id: number): boolean {
   if (state.phase === "won" || state.phase === "lost") return false;
   const item = state.cores.find(c => c.id === id);
-  if (!item || item.slot === null) return false;
+  if (!item || item.slot === null || state.scenarioId && state.phase === "battle") return false;
   item.slot = null; return true;
 }
 export function fuse(state: BattleState, first: number, second: number, target: number | null, recipeId?: string): Core | null {
@@ -96,6 +127,7 @@ export function fuse(state: BattleState, first: number, second: number, target: 
   if (!recipe || (!mapFor(state.mapId).expanded && ["wood-grove", "canopy-grove"].includes(recipe.id)) || (sourceSlots.length ? !sourceSlots.includes(target as number) : target !== null)
     || (target !== null && (!Number.isInteger(target) || !mapFor(state.mapId).slots[target]
     || state.cores.some(c => c.slot === target && c.id !== first && c.id !== second)))) return null;
+  if ([a,b].some(c=>attachedEnglish(state,c.id))) return null;
   const result: Core = { id: state.nextCoreId++, kind: recipe.result, slot: target, cooldown: Math.max(a.cooldown, b.cooldown) };
   state.cores = [...state.cores.filter(c => c.id !== first && c.id !== second), result];
   if (!state.unlocked.includes(recipe.id)) state.unlocked.push(recipe.id);
@@ -146,7 +178,7 @@ export function unequipEnglish(state: BattleState, englishId: number, expectedCo
 /** Kill drop and wave-end guarantee share the exact grant identity, independent of Chinese RNG. */
 function grantEnglish(state: BattleState, at: Point, waveEnd = false): BattleEvent[] {
   const events: BattleEvent[] = [];
-  for (const drop of mapFor(state.mapId).drops.english) {
+  for (const drop of rulesFor(state).drops.english) {
     const r=RESONANCES.find(r=>r.grantId===drop.grantId)!;
     if (drop.wave !== state.wave || (!waveEnd && state.waveKills < drop.kill) || state.englishClaims.includes(r.grantId) || state.englishSkipped.includes(r.grantId)) continue;
     const english: EnglishCore = { id: state.nextEnglishId++, lexemeId: r.lexemeId, senseId: r.senseId, grantId: r.grantId, attachedTo: null };
@@ -170,7 +202,7 @@ export function updateBattle(state: BattleState, dt: number): BattleEvent[] {
   dt = Math.min(dt, .1); state.elapsed += dt; state.waveTime += dt;
   state.visuals = state.visuals.map(v => ({ ...v, age: v.age + dt })).filter(v => v.age < .6);
   state.rootZones = state.rootZones.filter(z => z.expires > state.waveTime + .000001);
-  const wave = mapFor(state.mapId).waves[state.wave];
+  const wave = rulesFor(state).waves[state.wave];
   while (state.spawned < wave.foes.length && state.waveTime >= .8 + state.spawned * wave.interval) {
     const index=state.spawned++, kind = wave.foes[index], hp = ENEMIES[kind].hp * wave.strength;
     state.enemies.push({ id: state.nextEnemyId++, kind, hp, maxHp: hp, distance: 0, slow: 0, slowUntil: 0, lane:wave.lanes?.[index]??0, ...(kind==="captain"?{summons:0}:{}) });
@@ -238,25 +270,27 @@ export function updateBattle(state: BattleState, dt: number): BattleEvent[] {
   for (const enemy of state.enemies) {
     const at = enemyPosition(state,enemy);
     if (enemy.hp <= 0) {
-      state.kills++; state.waveKills++; events.push({ type: "defeat", at, kind: enemy.kind });
-      // Five visible automatic drops per wave at reachable kill milestones; inventory has no capacity cap.
-      const milestones = mapFor(state.mapId).drops.milestones;
+      state.waveLanes[enemy.lane??0].kills++;state.kills++; state.waveKills++; events.push({ type: "defeat", at, kind: enemy.kind });
+      // The current mode supplies its configured drops at reachable kill milestones; inventory has no capacity cap.
+      const milestones = rulesFor(state).drops.milestones;
       if (state.waveDrops < milestones.length && state.waveKills >= milestones[state.waveDrops]) {
-        const kind = plannedDrops(state.seed, state.wave,state.mapId)[state.waveDrops++];
+        const kind = state.scenarioId ? SCENARIOS[state.scenarioId].rewards[state.wave][state.waveDrops++] : plannedDrops(state.seed, state.wave,state.mapId)[state.waveDrops++];
         state.cores.push({ id: state.nextCoreId++, kind, slot: null, cooldown: 0 });
         events.push({ type: "drop", at, core: kind });
       }
       events.push(...grantEnglish(state, at));
     } else if (remainingDistance(state,enemy) <= 0) {
+      state.waveLanes[enemy.lane??0].leaks++;state.waveLanes[enemy.lane??0].damage+=Math.min(state.health,ENEMIES[enemy.kind].harm);
       state.health = Math.max(0, state.health - ENEMIES[enemy.kind].harm); state.leaks++;
       events.push({ type: "leak", at, harm: ENEMIES[enemy.kind].harm });
     }
   }
   state.enemies = state.enemies.filter(e => e.hp > 0 && remainingDistance(state,e) > 0);
-  if (state.health <= 0) { state.phase = "lost"; state.paused = false; state.echoes = []; state.rootZones=[]; state.visuals = []; return events; }
+  if (state.health <= 0) { recordWave(state,"lost"); state.phase = "lost"; state.paused = false; state.echoes = []; state.rootZones=[]; state.visuals = []; return events; }
   if (state.spawned === wave.foes.length && !state.enemies.length) {
     events.push(...grantEnglish(state, mapFor(state.mapId).paths[0].at(-1)!, true)); state.echoes = []; state.rootZones=[];
-    state.wave++; state.phase = state.wave >= mapFor(state.mapId).waves.length ? "won" : "ready"; state.paused = false;
+    recordWave(state,"held");
+    state.wave++; state.phase = state.wave >= rulesFor(state).waves.length ? "won" : "ready"; state.paused = false;
     state.checkpoint = checkpointOf(state); events.push({ type: "wave-end", won: state.phase === "won" });
   }
   state.visuals = state.phase === 'battle' ? [...state.visuals, ...events.map(event=>({event,age:0}))].slice(-90) : [];

@@ -2,7 +2,7 @@ import { defineConfig, devices, type Project } from '@playwright/test';
 import { existsSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 const baseURL = process.env.STEP4_URL ?? 'http://127.0.0.1:5315';
-const evidence = 'tmp/tasks/GAME-CODEX-STEP4';
+const evidence = process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'tmp/tasks/GAME-CODEX-STEP4';
 const runtimes = resolve(evidence, 'browser-runtimes');
 const executable = (family: string, relative: string) => {
   if (!existsSync(runtimes)) return undefined;
@@ -28,6 +28,7 @@ export default defineConfig({
   expect:{timeout:10_000}, forbidOnly:!!process.env.CI,
   reporter:[['line'],['json',{outputFile:`${evidence}/input-results.json`}]],
   outputDir:`${evidence}/input-browser-failures`,
+  snapshotPathTemplate:`${process.cwd()}/${evidence}/step5-visual-baseline/{projectName}/{arg}{ext}`,
   use:{baseURL,reducedMotion:'reduce',trace:'off',screenshot:'only-on-failure',video:'off'},
   projects,
   webServer:process.env.STEP4_URL ? undefined : { command:`pnpm exec vite --host 127.0.0.1 --port 5315 --strictPort`,url:baseURL,reuseExistingServer:false },

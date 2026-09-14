@@ -8,7 +8,7 @@ test('@video ordinary light discovery, world movement, undo and hints',async({pa
   await expect(page.locator('[data-hway-canvas]')).toHaveAttribute('data-ready','true');
   await activate(page,'[data-hway-new]','keyboard');await activate(page,'[data-hway-chapter="lamplight"]','keyboard');
   await keyReach(page,'[data-hway-grid]');
-  const finish=await shortClip(page,'tmp/tasks/GAME-CODEX-STEP4/clips/adventure');
+  const finish=await shortClip(page,`${process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'tmp/tasks/GAME-CODEX-STEP4'}/clips/adventure`);
   const settle=()=>expect(page.locator('.hway')).toHaveAttribute('data-busy','false');
   await page.keyboard.press('Shift+ArrowRight');await page.keyboard.press('Space');await settle();await expect(page.locator('[data-hway-hand]')).toHaveText('日');
   await page.keyboard.press('ArrowRight');await settle();await page.keyboard.press('Shift+ArrowRight');await page.keyboard.press('c');await settle();await expect(page.locator('[data-hway-hand]')).toHaveText('明');

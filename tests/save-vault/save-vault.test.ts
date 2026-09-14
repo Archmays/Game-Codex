@@ -56,14 +56,19 @@ describe("Parent Save Vault", () => {
       ['family-games/hanzi-tower-defense/v2', '{broken old raw'],
       ['family-games/hanzi-word-adventure/v2', '{ "version":2,"preserve":"chapter states" }'],
       ['family-games/hanzi-word-adventure/v1', '{ "version":1,"preserve":"undo" }'],
+      ['family-games/hanzi-word-adventure/companions/v1', '{ "version":99,"future":"双角色原文" }'],
+      ['family-games/hanzi-tower-defense/tactics/v1', '{broken tactics raw'],
       ['family-games/step4-playtest/feedback-v1', '{ "version":1,"text":"<b>本机手填</b>" }'],
     ];
     for (const [key,value] of rows) storage.setItem(key,value);
     storage.setItem('family-games/hanzi-tower-defense/v3/future', 'unrelated');
+    storage.setItem('family-games/hanzi-tower-defense/tactics/v1/future', 'unrelated tactics');
+    storage.setItem('family-games/hanzi-word-adventure/companions/v1/future', 'unrelated companions');
     const backup = await createSaveVaultBackup(storage);
     expect(backup.entries).toHaveLength(rows.length);
     const validated = await validateSaveVaultText(serializeSaveVaultBackup(backup));
     expect(validated.preview.futureKeys).toContain('family-games/hanzi-tower-defense/v3');
+    expect(validated.preview.futureKeys).toContain('family-games/hanzi-word-adventure/companions/v1');
     const destination = new MemoryStorage();
     destination.setItem('family-games/hanzi-tower-defense/v3/future', 'untouched');
     restoreSaveVault(destination, validated);

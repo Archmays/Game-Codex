@@ -54,6 +54,19 @@ describe('shared input protection', () => {
     expect(reset).toHaveBeenCalledTimes(3); stop(); expect(reset).toHaveBeenCalledTimes(4);
     window.dispatchEvent(new Event('blur')); expect(reset).toHaveBeenCalledTimes(4);
   });
+  it('blocks repeated native activation while preserving browser combinations and editable text', () => {
+    const { root, target } = setup(); target.native = true;
+    const stop = bindInputLifecycle(root, () => {});
+    const send = (changes: Record<string, unknown>) => {
+      const event = new Event('keydown', {cancelable:true});
+      for (const [name,value] of Object.entries({target,key:' ',repeat:true,...changes})) Object.defineProperty(event,name,{value});
+      root.dispatchEvent(event); return event.defaultPrevented;
+    };
+    expect(send({})).toBe(true);
+    for (const modifier of ['ctrlKey','metaKey','altKey']) expect(send({[modifier]:true})).toBe(false);
+    target.editable = true; expect(send({})).toBe(false);
+    stop();
+  });
   it('keeps one tab stop, skips disabled cards without changing grid columns, and lets Tab leave', () => {
     const { root } = setup(); const all = Array.from({length: 8}, () => new FakeElement());
     (root as unknown as FakeElement).children = all; all[1].disabled = true;

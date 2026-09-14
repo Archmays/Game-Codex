@@ -1,8 +1,11 @@
 import { isMapId, mapFor, type MapId } from "./maps";
 import { CORE_ORDER, ORIGINAL_CORE_ORDER, ORIGINAL_RECIPES, RECIPES } from "./content";
-import { checkpointOf, newBattle, resumeCheckpoint, START_HEALTH, type BattleState, type Checkpoint } from "./model";
+import { checkpointOf, newBattle, resumeCheckpoint, START_HEALTH, type BattleState, type Checkpoint, type WaveSummary, newTactics } from "./model";
 import { englishMapping, RESONANCES, type EnglishCore } from "./resonance";
 
+import { SCENARIOS, SCENARIO_IDS, isScenarioId, type ScenarioId } from './tactics';
+
+export const TACTICS_SAVE_KEY = 'family-games/hanzi-tower-defense/tactics/v1';
 export const LEGACY_SAVE_KEY = "family-games/hanzi-tower-defense/v1";
 export const V2_SAVE_KEY = "family-games/hanzi-tower-defense/v2";
 export const SAVE_KEY = "family-games/hanzi-tower-defense/v3";
@@ -27,6 +30,7 @@ function validLegacyCheckpoint(value: unknown): value is Omit<Checkpoint, "engli
   return true;
 }
 export function validCheckpoint(value: unknown): value is Checkpoint {
+  if (object(value) && value.scenarioId !== undefined) return false;
   if (!validLegacyCheckpoint(value)) return false;
   const v = value as unknown as Record<string, unknown>;
   if (!Array.isArray(v.englishCores) || v.englishCores.length > RESONANCES.length || !integer(v.nextEnglishId, 1, RESONANCES.length + 1)
@@ -96,6 +100,45 @@ export function openSave(storage:StorageLike,defaults:Preferences) {
     const next:Payload={...payload,version:3,activeMapId:mapId,maps:{...payload.maps,[mapId]:{...previous,checkpoint:{...previous?.checkpoint,...checkpoint},unlocked:[...current.unlocked]}},preferences:{...payload.preferences,...settings}};
     const nextRaw=JSON.stringify(next);storage.setItem(SAVE_KEY,nextRaw);raw=nextRaw;payload=next;return true;
    }catch {writable=false;return false;}
+  },
+ };
+}
+
+interface TacticsEntry { checkpoint:Checkpoint; retryCheckpoint?:Checkpoint; unlocked:string[]; summaries:WaveSummary[]; }
+export interface TacticsPayload { version:1; activeScenarioId:ScenarioId; scenarios:Partial<Record<ScenarioId,TacticsEntry>>; preferences:Preferences; }
+export function validTacticsCheckpoint(value:unknown):value is Checkpoint {
+ if(!object(value)||!isScenarioId(value.scenarioId))return false;
+ const scenario=SCENARIOS[value.scenarioId];
+ const {scenarioId,...campaignShape}=value;
+ return value.mapId===scenario.mapId&&integer(value.wave,0,scenario.waves.length)&&validCheckpoint(campaignShape);
+}
+function validSummary(v:unknown,scenarioId:ScenarioId):v is WaveSummary {
+ return object(v)&&integer(v.wave,1,SCENARIOS[scenarioId].waves.length)&&(v.outcome==='held'||v.outcome==='lost')&&integer(v.kills,0)&&integer(v.leaks,0)&&integer(v.healthBefore,1,START_HEALTH)&&integer(v.healthAfter,0,START_HEALTH)&&typeof v.seconds==='number'&&Number.isFinite(v.seconds)&&v.seconds>=0&&Array.isArray(v.coverage)&&v.coverage.length===mapFor(SCENARIOS[scenarioId].mapId).paths.length&&v.coverage.every(n=>integer(n,0,100))&&Array.isArray(v.lanes)&&v.lanes.length===v.coverage.length&&v.lanes.every(l=>object(l)&&integer(l.kills,0)&&integer(l.leaks,0)&&integer(l.damage,0)&&Object.keys(l).every(k=>['kills','leaks','damage'].includes(k)))&&v.lanes.reduce((sum,l)=>sum+l.kills,0)===v.kills&&v.lanes.reduce((sum,l)=>sum+l.leaks,0)===v.leaks&&Object.keys(v).every(k=>['wave','outcome','kills','leaks','healthBefore','healthAfter','seconds','coverage','lanes'].includes(k));
+}
+export function validTacticsPayload(v:unknown):v is TacticsPayload {
+ if(!object(v)||v.version!==1||!isScenarioId(v.activeScenarioId)||!object(v.scenarios)||!object(v.preferences)||typeof v.preferences.muted!=='boolean'||typeof v.preferences.reducedMotion!=='boolean')return false;
+ return Object.entries(v.scenarios).every(([id,e])=>isScenarioId(id)&&object(e)&&validTacticsCheckpoint(e.checkpoint)&&e.checkpoint.scenarioId===id&&(e.retryCheckpoint===undefined||validTacticsCheckpoint(e.retryCheckpoint)&&e.retryCheckpoint.scenarioId===id&&e.retryCheckpoint.wave<SCENARIOS[id].waves.length&&e.retryCheckpoint.wave<=e.checkpoint.wave)&&Array.isArray(e.unlocked)&&e.unlocked.every(r=>(mapFor(SCENARIOS[id].mapId).expanded?RECIPES:ORIGINAL_RECIPES).some(recipe=>recipe.id===r))&&Array.isArray(e.summaries)&&e.summaries.length<=2&&e.summaries.every(summary=>validSummary(summary,id)));
+}
+/** No campaign migration or reads. Unrecognized raw bytes and stale writers remain protected. */
+export function openTacticsSave(storage:StorageLike,defaults:Preferences) {
+ let raw:string|null=null,writable=true;
+ let payload:TacticsPayload={version:1,activeScenarioId:SCENARIO_IDS[0],scenarios:{},preferences:{...defaults}};
+ try {raw=storage.getItem(TACTICS_SAVE_KEY);if(raw!==null){const parsed:unknown=JSON.parse(raw);if(!validTacticsPayload(parsed))throw Error('Unrecognized tactics save');payload=parsed;}}catch{writable=false;}
+ const restore=(id:ScenarioId):BattleState|null=>{const e=payload.scenarios[id];if(!e)return null;const s=resumeCheckpoint(e.checkpoint,e.unlocked);if(e.retryCheckpoint)s.retryCheckpoint=checkpointOf(e.retryCheckpoint);s.summaries=e.summaries.map(summary=>({...summary,coverage:[...summary.coverage],lanes:summary.lanes.map(l=>({...l}))}));return s;};
+ return {
+  state:restore(payload.activeScenarioId)??newTactics(payload.activeScenarioId),preferences:{...payload.preferences},hasCheckpoint:!!payload.scenarios[payload.activeScenarioId],get writable(){return writable;},
+  load:restore,
+  list:()=>Object.entries(payload.scenarios).map(([id,e])=>({scenarioId:id as ScenarioId,wave:e!.checkpoint.wave,won:e!.checkpoint.wave===SCENARIOS[id as ScenarioId].waves.length})),
+  write(current:BattleState,settings:Preferences):boolean {
+   if(!writable||!current.scenarioId)return false;
+   try {
+    if(storage.getItem(TACTICS_SAVE_KEY)!==raw){writable=false;return false;}
+    const checkpoint=checkpointOf(current.phase==='ready'||current.phase==='won'?current:current.checkpoint),scenarioId=current.scenarioId;
+    const entry:TacticsEntry={checkpoint,unlocked:[...current.unlocked],summaries:current.summaries.map(s=>({...s,coverage:[...s.coverage],lanes:s.lanes.map(l=>({...l}))})),...(current.retryCheckpoint?{retryCheckpoint:checkpointOf(current.retryCheckpoint)}:{})};
+    const next:TacticsPayload={...payload,activeScenarioId:scenarioId,scenarios:{...payload.scenarios,[scenarioId]:entry},preferences:{...settings}};
+    if(!validTacticsPayload(next)){writable=false;return false;}
+    const nextRaw=JSON.stringify(next);storage.setItem(TACTICS_SAVE_KEY,nextRaw);raw=nextRaw;payload=next;return true;
+   }catch{writable=false;return false;}
   },
  };
 }

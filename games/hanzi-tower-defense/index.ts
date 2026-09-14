@@ -4,9 +4,10 @@ import Phaser from "phaser";
 import type { GameDefinition, MountedGame } from "../../packages/game-core";
 import { BattleAudio } from "./audio";
 import { CORES, CORE_ORDER, recipeCandidates, recipeFor, RECIPES, type CoreKind, type Recipe } from "./content";
-import { activeResonance, attachedEnglish, DEFAULT_SEED, deploy, equipEnglish, fuse, MAP, newBattle, previewEquipment, recycle, startWave, stow, unequipEnglish, type BattleEvent, type Core, type EquipmentPreview } from "./model";
+import { ENEMIES, retryWave, newTactics, activeResonance, attachedEnglish, DEFAULT_SEED, deploy, equipEnglish, fuse, MAP, newBattle, previewEquipment, recycle, startWave, stow, unequipEnglish, type BattleEvent, type Core, type EquipmentPreview } from "./model";
 import { englishMapping, resonanceFor, RESONANCES } from "./resonance";
-import { openSave, type StorageLike } from "./save";
+import { openSave, openTacticsSave, type StorageLike } from "./save";
+import { SCENARIOS, SCENARIO_IDS, isScenarioId, rulesFor, type ScenarioId } from './tactics';
 import { DefenseScene } from "./scene";
 import "./styles.css";
 
@@ -21,12 +22,18 @@ function browserStorage(): StorageLike { try { return window.localStorage; } cat
 
 export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.location.assign(new URLSearchParams(window.location.search).get("from") === "hub" ? "?hub=classic&from=world" : "?world=my-game-world")): MountedGame {
   const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const save = openSave(browserStorage(), { muted: false, reducedMotion: media.matches });
-  let state = save.state, preferences = save.preferences, selection: number[] = [], destroyed = false, inventorySignature = "", statusSignature = "";
+  const requestedScenario=new URLSearchParams(window.location.search).get('scenario');
+  const storage=browserStorage(),defaults={muted:false,reducedMotion:media.matches};
+  let campaignSave:ReturnType<typeof openSave>|null=isScenarioId(requestedScenario)?null:openSave(storage,defaults);
+  const campaign=()=>campaignSave??(campaignSave=openSave(storage,defaults));
+  const tacticsSave=openTacticsSave(storage,defaults);
+  let state=isScenarioId(requestedScenario)?tacticsSave.load(requestedScenario)??newTactics(requestedScenario):campaign().state;
+  let preferences=isScenarioId(requestedScenario)?tacticsSave.preferences:campaign().preferences, selection:number[]=[],destroyed=false,inventorySignature='',statusSignature='';
   const requestedMap=new URLSearchParams(window.location.search).get('map');
-  if(isMapId(requestedMap)) state=save.load(requestedMap)??newBattle(DEFAULT_SEED,[],requestedMap);
-  let SLOTS=mapFor(state.mapId).slots, WAVES=mapFor(state.mapId).waves, pendingMap:MapId=state.mapId??"qinglan-pass", rangeOnly=false,resultPresented=false,bossAnnouncement="";
-  let battleSpeed: 1 | 2 = 1;
+  if(!isScenarioId(requestedScenario)&&isMapId(requestedMap))state=campaign().load(requestedMap)??newBattle(DEFAULT_SEED,[],requestedMap);
+  const activeSave=()=>state.scenarioId?tacticsSave:campaign();
+  let SLOTS=mapFor(state.mapId).slots,WAVES=rulesFor(state).waves,pendingMap:MapId=state.mapId??'qinglan-pass',pendingScenario:ScenarioId|undefined=state.scenarioId,rangeOnly=false,resultPresented=false,bossAnnouncement='';
+  let battleSpeed: 1 | 2 = 1, resetDiscoveries=true;
   const currentRecipes=()=>mapFor(state.mapId).expanded?RECIPES:RECIPES.slice(0,5);
   // Composition, destination and inspection have independent lifetimes; none is stored in the save.
   let fusionTarget: number | null = null, chosenRecipe: string | undefined, freshResult = false;
@@ -39,7 +46,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
   const timers = new Set<number>();
   root.className = "td-mount";
   root.innerHTML = `<main class="td-game" aria-labelledby="td-title" data-testid="hanzi-tower-defense">
-    <header class="td-header"><div class="td-brand"><span class="td-seal" aria-hidden="true">守</span><div><p data-td-map-title>${mapFor(state.mapId).title} · ${mapFor(state.mapId).description}</p><h1 id="td-title">字阵守城</h1></div></div>
+    <header class="td-header"><div class="td-brand"><span class="td-seal" aria-hidden="true">守</span><div><p data-td-map-title>${rulesFor(state).title} · ${rulesFor(state).description}</p><h1 id="td-title">字阵守城</h1></div><button type="button" data-td-tactics>战术短局</button></div>
       <nav class="td-controls" aria-label="守城操作"><button type="button" data-td-home>返回</button><button type="button" data-td-restart>重置进度</button><button type="button" data-td-new>新游戏</button><button type="button" data-td-continue>继续游戏</button><button type="button" data-td-mute aria-pressed="false">静音</button><button type="button" data-td-motion aria-pressed="false">减少动态</button><button type="button" data-td-speed aria-pressed="false" aria-label="战斗速度1倍，切换为2倍">速度 1×</button><button type="button" data-td-pause class="td-pause" aria-pressed="false">暂停</button></nav>
     </header>
     <div class="td-ribbon"><span data-td-wave></span><span class="td-gate-health">城门 <strong data-td-health>16</strong><span class="td-health-track" aria-hidden="true"><i data-td-health-fill></i></span></span><span data-td-enemies></span></div>
@@ -51,8 +58,10 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
       </div>
       <div class="td-range-tools"><span data-td-range-caption>指向或点选字塔，查看攻击范围</span><button type="button" data-td-inspect aria-pressed="false">只看射程</button><button type="button" data-td-all-ranges aria-pressed="false">显示全部射程</button></div>
       <button type="button" class="td-english-notice" data-td-english-notice hidden></button>
+      <section class="td-tactics-brief" data-td-tactics-brief hidden aria-label="短局出发前"><p data-td-tactics-rules></p><details><summary>看看三波来路与奖励</summary><ol data-td-tactics-waves></ol></details></section>
       <div class="td-wave-action"><p data-td-wave-hint></p><button type="button" class="td-primary" data-td-next>开始这一波</button></div>
-      <p class="td-feedback" role="status" aria-live="polite" data-td-feedback>火塔已就位。点一枚材料，再点空塔位。也可以先暂停。</p>
+      <button type="button" data-td-retry hidden>重整本波</button><section class="td-tactics-summary" data-td-tactics-summary hidden aria-label="最近两次战况"></section>
+      <p class="td-feedback" role="status" aria-live="polite" data-td-feedback>${state.scenarioId?"固定材料已在栏里。先选材料，再点空塔位，也可以先合成。":"火塔已就位。点一枚材料，再点空塔位。也可以先暂停。"}</p>
       <p class="td-boss-status" data-td-boss-status hidden></p><div class="td-enemy-key" aria-label="怪物特点"><span><i class="td-monster-dot td-monster-dot--swarm"></i>团团怪 · 成群</span><span><i class="td-monster-dot td-monster-dot--swift"></i>疾风怪 · 快速</span><span><i class="td-monster-dot td-monster-dot--stone"></i>石甲怪 · 耐打</span></div>
     </section>
     <aside class="td-workbench" aria-label="部署与组合">
@@ -68,7 +77,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     </aside></div>
     <dialog class="td-dialog" data-td-restart-dialog aria-labelledby="td-restart-title"><h2 id="td-restart-title">重置这张地图的进度？</h2><p><span data-td-reset-copy>这张地图将从第一波重新布阵，发现的配方也会重置。其他地图和旧存档原文保留。</span></p><div><button type="button" data-td-cancel-restart>继续这一局</button><button type="button" class="td-primary" data-td-confirm-restart>重新开始</button></div></dialog>
     <dialog class="td-dialog" data-td-map-dialog aria-labelledby="td-map-dialog-title"><h2 id="td-map-dialog-title">选择地图</h2><p data-td-map-note>每张地图独立继续。未结束的波次会回到波前检查点，材料一起回滚。</p><div class="td-map-list" data-td-map-list></div><button type="button" data-td-map-cancel>返回战场</button></dialog>
-    <dialog class="td-dialog td-result" data-td-result aria-labelledby="td-result-title"><span class="td-result-seal" aria-hidden="true">关</span><h2 id="td-result-title"></h2><p data-td-result-copy></p><div><button type="button" class="td-primary" data-td-replay>再守一局</button><button type="button" data-td-result-home>回游戏世界</button></div><p class="td-result-foot">发现的配方已经留下。换条组合路线再试试。</p></dialog>
+    <dialog class="td-dialog td-result" data-td-result aria-labelledby="td-result-title"><span class="td-result-seal" aria-hidden="true">关</span><h2 id="td-result-title"></h2><p data-td-result-copy></p><div><button type="button" data-td-result-retry hidden>重整本波</button><button type="button" class="td-primary" data-td-replay>再守一局</button><button type="button" data-td-result-home>回游戏世界</button></div><p class="td-result-foot">发现的配方已经留下。换条组合路线再试试。</p></dialog>
   </main>`;
   const el = <T extends HTMLElement>(selector: string): T => { const found = root.querySelector<T>(selector); if (!found) throw Error(`Missing ${selector}`); return found; };
   const button = (selector: string) => el<HTMLButtonElement>(selector);
@@ -86,7 +95,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
   });
   function later(action: () => void, delay: number): void { const id = window.setTimeout(() => { timers.delete(id); if (!destroyed) action(); }, delay); timers.add(id); }
   function message(text: string): void { feedback.textContent = text; }
-  function persist(): void { const ok = save.write(state, preferences); el("[data-td-save-note]").textContent = ok ? "按波次自动保存 · 只保存在本机" : "存档暂不可写，本页仍可玩；原有记录未改动。"; }
+  function persist(): void { const ok = activeSave().write(state, preferences); el("[data-td-save-note]").textContent = ok ? "按波次自动保存 · 只保存在本机" : "存档暂不可写，本页仍可玩；原有记录未改动。"; }
   function selectedCores(): Core[] { return selection.map(id => state.cores.find(c => c.id === id)).filter((c): c is Core => !!c); }
   function prepare(ids: number[], target?: number | null, recipeId?: string): void {
     selection = [...new Set(ids)].filter(id => state.cores.some(c => c.id === id));
@@ -207,6 +216,8 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     const confirm = button("[data-td-fuse]"); confirm.disabled = !recipe || state.phase === "won" || state.phase === "lost";
     confirm.textContent = recipe ? (fusionTarget !== null ? "组合并替换字塔" : "组合放入材料栏") : a && b ? candidates.length ? "先选组合结果" : "暂无配方" : "选两枚字核";
     button("[data-td-stow]").hidden = selected.length !== 1 || a.slot === null;
+    button("[data-td-stow]").disabled=!!state.scenarioId&&state.phase==='battle';
+    button("[data-td-stow]").textContent=state.scenarioId&&state.phase==='battle'?'波间才能收回':'收回材料栏';
     button("[data-td-recycle]").hidden = selected.length !== 1 || a.slot !== null;
     const attached = a && attachedEnglish(state,a.id);
     button("[data-td-recycle]").disabled = state.health >= 16 || !!attached && state.phase === 'battle';
@@ -260,6 +271,8 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
   }
   function updateStatus(): void {
     if (destroyed) return;
+    button('[data-td-new]').textContent=state.scenarioId?'新战役':'新游戏';button('[data-td-continue]').textContent=state.scenarioId?'继续战役':'继续游戏';
+    gameRoot.dataset.scenarioId=state.scenarioId??"";
     gameRoot.dataset.mapId=state.mapId??"qinglan-pass";
     gameRoot.dataset.phase = state.phase; gameRoot.dataset.wave = String(state.wave); gameRoot.dataset.paused = String(state.paused);
     gameRoot.dataset.kills = String(state.kills); gameRoot.dataset.leaks = String(state.leaks);
@@ -270,8 +283,14 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     el("[data-td-enemies]").textContent = state.phase === "battle" ? `路上 ${state.enemies.length} · 还有 ${WAVES[state.wave].foes.length - state.spawned} 只` : state.phase === "ready" ? "波间布阵" : "守城结束";
     const focusedControl = document.activeElement;
     const pause = button("[data-td-pause]"); pause.textContent = state.paused ? "继续战斗" : "暂停"; pause.setAttribute("aria-pressed", String(state.paused)); pause.disabled = state.phase !== "battle";
-    const next = button("[data-td-next]"); next.hidden = state.phase !== "ready"; next.textContent = save.hasCheckpoint && state.wave === 0 ? "从检查点继续" : `迎接第 ${state.wave + 1} 波`;
+    const next = button("[data-td-next]"); next.hidden = state.phase !== "ready"; next.textContent = activeSave().hasCheckpoint && state.wave === 0 ? "从检查点继续" : `迎接第 ${state.wave + 1} 波`;
     el("[data-td-wave-hint]").textContent = state.phase === "ready" ? `先布阵，再出发。${WAVES[state.wave]?.hint ?? ""}` : WAVES[Math.min(state.wave, WAVES.length-1)].hint;
+    const retry=button('[data-td-retry]');retry.hidden=!state.scenarioId||state.phase==='lost'||state.phase==='won'||state.phase==='battle'&&!state.paused||state.phase==='ready'&&!state.retryCheckpoint;
+    retry.textContent=state.phase==='ready'?'重整刚才一波':'重整本波';
+    button('[data-td-result-retry]').hidden=!state.scenarioId;
+    const summaries=el('[data-td-tactics-summary]');summaries.hidden=!state.scenarioId||!state.summaries.length;
+    const summaryHtml=state.summaries.map(v=>`<p>第 ${v.wave} 波 · ${v.outcome==='held'?'已守住':'先回城'}：击败 ${v.kills}，漏怪 ${v.leaks}，城门 ${v.healthBefore} → ${v.healthAfter}；波前${v.coverage.length===2?'北／南路':'道路'}覆盖 ${v.coverage.join('／')}%。${v.lanes.map((l,i)=>`${v.lanes.length===2?i===0?'北路':'南路':'本路'}击败 ${l.kills}／漏 ${l.leaks}，城门受损 ${l.damage}。`).join('')}</p>`).join('');
+    if(summaries.innerHTML!==summaryHtml)summaries.innerHTML=summaryHtml;
     const boss=state.enemies.find(e=>e.kind==='captain');
     const bossStatus=el('[data-td-boss-status]');bossStatus.hidden=!boss;
     const bossStage=boss?`${boss.id}:${boss.summons??0}:${boss.summonAt===undefined?'walking':'warning'}`:'';
@@ -288,9 +307,9 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     if (focusedControl === next && next.hidden || focusedControl === pause && pause.disabled) focusWaveControl();
     if ((state.phase === "won" || state.phase === "lost") && !resultDialog.open && !resultPresented) {
       resultPresented=true;
-      el("#td-result-title").textContent = state.phase === "won" ? `${mapFor(state.mapId).title}，守住了！` : "这次先退回城里";
-      el("[data-td-result-copy]").textContent = state.phase === "won" ? `${WAVES.length} 波都已结束。城门还有 ${state.health} 点耐久，你的字阵挡住了 ${state.kills} 只怪物。` : `守到了第 ${state.wave + 1} 波。把范围塔放在弯道，减速塔留在来路，再试一次。`;
-      resultDialog.showModal(); audio.play(state.phase === "won" ? "wave" : "leak"); persist();
+      el("#td-result-title").textContent = state.phase === "won" ? `${rulesFor(state).title}，守住了！` : "这次先退回城里";
+      el("[data-td-result-copy]").textContent = state.phase === "won" ? `${WAVES.length} 波都已结束。城门还有 ${state.health} 点耐久，你的字阵挡住了 ${state.kills} 只怪物。` : `守到了第 ${state.wave + 1} 波。击败 ${state.kills}，漏怪 ${state.leaks}。${state.scenarioId?"重整本波会回到真正波前，可以调整后再出发。":"把范围塔放在弯道，减速塔留在来路，再试一次。"}`;
+      resultDialog.showModal();button(state.scenarioId&&state.phase==='lost'?'[data-td-result-retry]':'[data-td-replay]').focus({preventScroll:true}); audio.play(state.phase === "won" ? "wave" : "leak"); persist();
     }
   }
   function focusWaveControl(): void {
@@ -323,13 +342,13 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
         el("[data-td-drops]").append(drop); later(() => drop.remove(), 950); renderInventory(); renderComposer();
         message(`拾得 ${CORES[event.core].glyph}，已放入材料栏。`);
       }
-      if (event.type === "leak") { audio.play("leak"); message(`有怪物进城，城门减少 ${event.harm} 点耐久。可以暂停调整塔位。`); }
+      if (event.type === "leak") { audio.play("leak"); message(`有怪物进城，城门减少 ${event.harm} 点耐久。${state.scenarioId?"可首次部署材料；暂停后也可重整本波。":"可以暂停调整塔位。"}`); }
       if (event.type === "wave-end") { audio.play("wave"); persist(); message(event.won ? "守住了最后一波！" : "这一波结束了。先组合、调整塔位，准备好再出发。 "); }
     }
   }
   const scene = new DefenseScene({ state: () => state, preferences: () => preferences, speed: () => battleSpeed, events: handleEvents, tick: updateStatus, ready: () => {
     el("[data-td-canvas]").dataset.ready = "true";
-    if (!save.hasCheckpoint && !mapFor(state.mapId).expanded) { startWave(state); persist(); } else message(`已回到第 ${Math.min(state.wave + 1, WAVES.length)} 波的检查点。先布阵，再继续。`);
+    if (!state.scenarioId && !activeSave().hasCheckpoint && !mapFor(state.mapId).expanded) { startWave(state); persist(); } else message(state.scenarioId&&!tacticsSave.load(state.scenarioId)?"固定材料已在栏里。先选材料，再点空塔位，也可以先合成。":`已回到第 ${Math.min(state.wave + 1, WAVES.length)} 波的检查点。先布阵，再继续。`);
     updateStatus();
   } });
   // The canvas only renders. All controls are semantic DOM buttons; let the page own wheel and touch scrolling.
@@ -356,7 +375,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     if (englishSelected!==null) { message('英文核装入完整中文词塔。先点亮起的字塔或背包词核；空位不能单独部署英文。'); return; }
     const selected = selectedCores();
     if (selected.length === 1 && deploy(state, selected[0].id, slot)) { message(`${CORES[selected[0].kind].glyph}已部署到${SLOTS[slot].name}。`); audio.play("deploy"); prepare([]); inspectedId = selected[0].id; persist(); }
-    else message("先选一枚材料，再点这个塔位。选了两枚时，先在组合台确认。");
+    else message(state.scenarioId&&state.phase==='battle'&&selected.length===1&&selected[0].slot!==null?"这一波中不能移动已部署的塔，暂停仍在战中。可首次部署或合成，移动请等波间或重整。":"先选一枚材料，再点这个塔位。选了两枚时，先在组合台确认。");
     updateStatus();
   }
   function beginDrag(event: DragEvent, id: number): void {
@@ -398,32 +417,60 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
   function refreshMap():void {
     battleSpeed = 1;
     const url=new URL(window.location.href);url.searchParams.set('map',state.mapId??'qinglan-pass');
+    if(state.scenarioId)url.searchParams.set('scenario',state.scenarioId);else url.searchParams.delete('scenario');
     window.history.replaceState(window.history.state,'',url);
-    SLOTS=mapFor(state.mapId).slots;WAVES=mapFor(state.mapId).waves;
+    SLOTS=mapFor(state.mapId).slots;WAVES=rulesFor(state).waves;
     inventorySignature="";statusSignature="";englishSignature="";rangeSignature="";
     resultPresented=false;bossAnnouncement="";clearSelection();scene.reset();
     for(const [i,slot] of SLOTS.entries()){const node=button(`[data-slot="${i}"]`);node.style.left=`${slot.x/MAP.width*100}%`;node.style.top=`${slot.y/MAP.height*100}%`;}
     for(const node of root.querySelectorAll<HTMLElement>('[data-recipe]'))node.hidden=!currentRecipes().some(r=>r.id===node.dataset.recipe);
-    el('[data-td-map-title]').textContent=`${mapFor(state.mapId).title} · ${mapFor(state.mapId).description}`;
+    el('[data-td-map-title]').textContent=`${rulesFor(state).title} · ${rulesFor(state).description}`;
+    renderTacticsBrief();
     delete gameRoot.dataset.echoes;delete gameRoot.dataset.rootBursts;updateStatus();slotKeys.refresh();
   }
   function restart(clearDiscoveries=true): void {
-    restartDialog.close();resultDialog.close();state=newBattle(DEFAULT_SEED,clearDiscoveries?[]:state.unlocked,pendingMap);refreshMap();if(!clearDiscoveries)startWave(state);persist();audio.unlock();updateStatus();
-    message(`${mapFor(state.mapId).title} 已重置，固定起始材料已放好。准备好再开波。`);focusWaveControl();
+    restartDialog.close();resultDialog.close();state=pendingScenario?newTactics(pendingScenario,clearDiscoveries?[]:state.unlocked):newBattle(DEFAULT_SEED,clearDiscoveries?[]:state.unlocked,pendingMap);refreshMap();if(!clearDiscoveries&&!state.scenarioId)startWave(state);persist();audio.unlock();updateStatus();
+    message(`${rulesFor(state).title} 已重置，固定起始材料已放好。准备好再开波。`);focusWaveControl();
   }
   function selectMap(id:MapId,fresh:boolean):void {
-    persist();mapDialog.close();
-    if(fresh&&save.load(id)){pendingMap=id;el('[data-td-reset-copy]').textContent=`将重置 ${DEFENSE_MAPS[id].title} 的波次、材料和配方发现。其他地图与旧存档原文保留。`;restartDialog.showModal();return;}
-    state=fresh?newBattle(DEFAULT_SEED,[],id):save.load(id)??newBattle(DEFAULT_SEED,[],id);
+    persist();mapDialog.close();pendingScenario=undefined;resetDiscoveries=true;
+    if(fresh&&campaign().load(id)){pendingMap=id;el('[data-td-reset-copy]').textContent=`将重置 ${DEFENSE_MAPS[id].title} 的波次、材料和配方发现。其他地图与旧存档原文保留。`;restartDialog.showModal();return;}
+    state=fresh?newBattle(DEFAULT_SEED,[],id):campaign().load(id)??newBattle(DEFAULT_SEED,[],id);
     refreshMap();persist();message(`已进入 ${DEFENSE_MAPS[id].title}，第 ${Math.min(state.wave+1,WAVES.length)} 波。各图资源独立；未完成波次已回到波前。`);focusWaveControl();
   }
   function showMaps(fresh:boolean):void {
     if(state.phase==='battle')state.paused=true;persist();updateStatus();draggedId=null;englishDragged=null;
     el('#td-map-dialog-title').textContent=fresh?'新游戏 · 选择地图':'继续游戏 · 选择存档';
-    const entries=save.list();el('[data-td-map-list]').innerHTML=MAP_IDS.map(id=>{const entry=entries.find(e=>e.mapId===id);return `<button type="button" data-map-select="${id}" ${!fresh&&!entry?'disabled':''}><b>${DEFENSE_MAPS[id].title}</b><span>${fresh?DEFENSE_MAPS[id].description:entry?entry.won?'已守住 · 可查看结果':`继续第 ${entry.wave+1} 波`:'还没有存档'}</span></button>`;}).join('');
+    const entries=campaign().list();el('[data-td-map-list]').innerHTML=MAP_IDS.map(id=>{const entry=entries.find(e=>e.mapId===id);return `<button type="button" data-map-select="${id}" ${!fresh&&!entry?'disabled':''}><b>${DEFENSE_MAPS[id].title}</b><span>${fresh?DEFENSE_MAPS[id].description:entry?entry.won?'已守住 · 可查看结果':`继续第 ${entry.wave+1} 波`:'还没有存档'}</span></button>`;}).join('');
     el('[data-td-map-list]').onclick=event=>{const id=(event.target as HTMLElement).closest<HTMLElement>('[data-map-select]')?.dataset.mapSelect;if(isMapId(id))selectMap(id,fresh);};
     mapDialog.showModal();
   }
+  function renderTacticsBrief():void {
+    const scenario=state.scenarioId&&SCENARIOS[state.scenarioId];el('[data-td-tactics-brief]').hidden=!scenario;
+    el('[data-td-tactics-rules]').textContent=scenario?'战中可首次部署、合成和首次装备；已部署塔移动／收回与英文转移等波间。暂停仍在战中。':'';
+    el('[data-td-tactics-waves]').innerHTML=scenario?scenario.waves.map((w,i)=>{
+      const counts=Object.entries(ENEMIES).filter(([kind])=>w.foes.includes(kind as keyof typeof ENEMIES)).map(([kind,e])=>`${e.label}×${w.foes.filter(k=>k===kind).length}`).join('，');
+      const lanes=w.lanes?`北路 ${w.lanes.filter(l=>l===0).length}／南路 ${w.lanes.filter(l=>l===1).length}`:'单路';
+      const rewards=scenario.rewards[i].map(k=>CORES[k].glyph).join('、');
+      const english=scenario.drops.english.filter(d=>d.wave===i).map(d=>RESONANCES.find(r=>r.grantId===d.grantId)!.text).join('、');
+      return `<li><b>${w.label}</b> · ${lanes} · ${counts}<br>第 1／5 次击败依次得 ${rewards}${english?`；英文 ${english}（击败领取，波尾保底）`:''}。</li>`;
+    }).join(''):'';
+  }
+  function selectScenario(id:ScenarioId):void {
+    persist();mapDialog.close();state=tacticsSave.load(id)??newTactics(id);pendingScenario=id;refreshMap();persist();focusWaveControl();
+    message(`已进入 ${SCENARIOS[id].title}，三波短局。固定起始材料；切换会保存，未结束波次回到波前。`);
+  }
+  function showTactics():void {
+    if(state.phase==='battle')state.paused=true;persist();updateStatus();draggedId=null;englishDragged=null;
+    el('#td-map-dialog-title').textContent='战术短局 · 直接选一局';
+    el('[data-td-map-list]').innerHTML=SCENARIO_IDS.map(id=>{const entry=tacticsSave.list().find(e=>e.scenarioId===id),s=SCENARIOS[id];return `<button type="button" data-scenario-select="${id}"><b>${s.title} · ${mapFor(s.mapId).title}</b><span>${s.question} · ${s.waves.length} 波${entry?entry.won?' · 已守住':` · 继续第 ${entry.wave+1} 波`:' · 固定新局'}</span></button>`;}).join('');
+    el('[data-td-map-list]').onclick=event=>{const id=(event.target as HTMLElement).closest<HTMLElement>('[data-scenario-select]')?.dataset.scenarioSelect;if(isScenarioId(id))selectScenario(id);};mapDialog.showModal();
+  }
+  function retryCurrentWave():void {
+    const restored=retryWave(state);if(!restored)return;state=restored;resultDialog.close();refreshMap();persist();updateStatus();message(`已回到第 ${state.wave+1} 波出发前，材料、装备和城门一起恢复。换好布局，再出发。`);focusWaveControl();
+  }
+  button('[data-td-tactics]').addEventListener('click',showTactics);
+  button('[data-td-retry]').addEventListener('click',retryCurrentWave);button('[data-td-result-retry]').addEventListener('click',retryCurrentWave);
   button('[data-td-new]').addEventListener('click',()=>showMaps(true));button('[data-td-continue]').addEventListener('click',()=>showMaps(false));
   button('[data-td-map-cancel]').addEventListener('click',()=>mapDialog.close());
   button('[data-td-inspect]').addEventListener('click',()=>{rangeOnly=!rangeOnly;button('[data-td-inspect]').setAttribute('aria-pressed',String(rangeOnly));message(rangeOnly?'只看射程：点塔查看，不改变已选材料。':'回到部署与选料。');});
@@ -488,10 +535,10 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
   button("[data-td-mute]").addEventListener("click", () => { preferences.muted = !preferences.muted; audio.setMuted(preferences.muted); persist(); updateStatus(); if (!preferences.muted) audio.play("deploy"); });
   button("[data-td-motion]").addEventListener("click", () => { preferences.reducedMotion = !preferences.reducedMotion; persist(); updateStatus(); });
   button("[data-td-speed]").addEventListener("click", () => { battleSpeed = battleSpeed === 1 ? 2 : 1; updateStatus(); message(`已切换为 ${battleSpeed} 倍速度${state.paused ? "，战斗仍暂停" : ""}。`); });
-  button("[data-td-restart]").addEventListener("click", () => { if (state.phase === "battle") state.paused = true; updateStatus();pendingMap=state.mapId??"qinglan-pass";el("[data-td-reset-copy]").textContent=`将重置 ${mapFor(pendingMap).title} 的进度、材料和配方发现。其他地图与旧存档原文保留。`; restartDialog.showModal(); });
+  button("[data-td-restart]").addEventListener("click", () => { if (state.phase === "battle") state.paused = true; updateStatus();pendingMap=state.mapId??"qinglan-pass";pendingScenario=state.scenarioId;resetDiscoveries=true;el("#td-restart-title").textContent=state.scenarioId?"重开这个短局？":"重置这张地图的进度？";el("[data-td-reset-copy]").textContent=`将重置 ${rulesFor(state).title} 的进度、材料和配方发现。其他地图与旧存档原文保留。`; restartDialog.showModal(); });
   button("[data-td-cancel-restart]").addEventListener("click", () => restartDialog.close());
-  button("[data-td-confirm-restart]").addEventListener("click", ()=>restart());
-  button("[data-td-replay]").addEventListener("click", ()=>{pendingMap=state.mapId??"qinglan-pass";restart(false);});
+  button("[data-td-confirm-restart]").addEventListener("click", ()=>restart(resetDiscoveries));
+  button("[data-td-replay]").addEventListener("click", ()=>{pendingMap=state.mapId??"qinglan-pass";pendingScenario=state.scenarioId;if(state.scenarioId){resetDiscoveries=false;el('#td-restart-title').textContent='从第一波重开这个短局？';el('[data-td-reset-copy]').textContent=`${rulesFor(state).title} 将恢复固定起始材料，保留发现的配方。其他短局和战役保留。`;restartDialog.showModal();}else restart(false);});
   for (const selector of ["[data-td-home]", "[data-td-result-home]"]) button(selector).addEventListener("click", () => { persist(); audio.suspend(); onExit(); });
   const keydown = (event: KeyboardEvent): void => {
     if (ignoreGameKey(event,gameRoot) || restartDialog.open || resultDialog.open || mapDialog.open) return;
@@ -502,7 +549,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
   const pagehide = (): void => { if (state.phase === "battle") state.paused = true; persist(); audio.suspend(); };
   root.addEventListener("keydown", keydown); document.addEventListener("visibilitychange", hide); window.addEventListener("pagehide", pagehide);
   for(const node of root.querySelectorAll<HTMLElement>("[data-recipe]"))node.hidden=!currentRecipes().some(r=>r.id===node.dataset.recipe);
-  renderInventory(); renderComposer(); updateStatus();
-  el("[data-td-save-note]").textContent = save.writable ? "按波次自动保存 · 只保存在本机" : "存档暂不可写，本页仍可玩；原有记录未改动。";
+  renderTacticsBrief();renderInventory(); renderComposer(); updateStatus();
+  el("[data-td-save-note]").textContent = activeSave().writable ? "按波次自动保存 · 只保存在本机" : "存档暂不可写，本页仍可玩；原有记录未改动。";
   return { destroy() { if (destroyed) return; destroyed = true; lifecycle();bagKeys.destroy();slotKeys.destroy();englishKeys.destroy();resizeObserver.disconnect(); persist(); timers.forEach(id => window.clearTimeout(id)); root.removeEventListener("keydown", keydown); document.removeEventListener("visibilitychange", hide); window.removeEventListener("pagehide", pagehide); audio.destroy(); game.destroy(true); root.replaceChildren(); } };
 }

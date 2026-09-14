@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import { FONT_STACK } from './content';
-import { at, effect, illumination, visible } from './model';
+import { at, actorGlyph, effect, illumination, visible } from './model';
 import { ROOMS, lastInChapter, type Direction, type Room, type WorldState } from './rooms';
 export interface SceneView { room: Room; state: WorldState; selected: number | null; target: number; facing: Direction; binding: string | null; preview: number[]; reducedMotion: boolean; }
 const INK = '#28473f', RUST = '#aa493a', WATER = '#538796';
@@ -15,11 +15,12 @@ export class AdventureScene extends Phaser.Scene {
   private objects: Phaser.GameObjects.Text[] = [];
   private notes: Phaser.GameObjects.Text[] = [];
   private person?: Phaser.GameObjects.Text;
+  private companion?: Phaser.GameObjects.Text;
   private roomId = '';
   private water: { text: Phaser.GameObjects.Text; y: number; phase: number }[] = [];
   private ready = false;
   constructor(private readonly onReady: () => void) { super('word-adventure'); }
-  create() { this.paper = this.add.graphics(); this.marks = this.add.graphics(); this.person = this.text('人').setDepth(5); this.ready = true; if (this.view) this.sync(this.view); this.onReady(); }
+  create() { this.paper = this.add.graphics(); this.marks = this.add.graphics(); this.person = this.text('人').setDepth(5); this.companion = this.text('友').setDepth(5); this.ready = true; if (this.view) this.sync(this.view); this.onReady(); }
   private text(value = '') { return this.add.text(0, 0, value, { fontFamily: FONT_STACK, fontSize: '32px', color: INK, padding: { x: 3, y: 3 } }).setOrigin(.5); }
   private set(text: Phaser.GameObjects.Text, value: string, size: number, color: string) {
     if (text.text !== value) text.setText(value);
@@ -39,7 +40,7 @@ export class AdventureScene extends Phaser.Scene {
     g.fillStyle(0xf5f0e4, 1).fillRect(0, 0, this.scale.width, this.scale.height);
     for (const [pos, tile] of room.tiles.entries()) {
       const { x, y } = center(pos), left = x - cell / 2, top = y - cell / 2, item = visible(room,state,pos) ? at(state, pos) : undefined;
-      const occupied = pos === state.player && (item || tile === 'goal' || tile === 'door' || tile === 'wind' || tile === 'shadow');
+      const occupied = (pos === state.player || pos === state.companion) && (item || tile === 'goal' || tile === 'door' || tile === 'wind' || tile === 'shadow');
       let glyph = '', color = INK, size = Math.round(cell * .57), note = '';
       const active = effect(room, state, pos);
       if (light.has(pos)) { g.fillStyle(0xefbd42, .13).fillRect(left+1,top+1,cell-2,cell-2); }
@@ -55,6 +56,7 @@ export class AdventureScene extends Phaser.Scene {
         note = item ? '水' : '';
       } else if (tile === 'goal') {
         glyph = lastInChapter(ROOMS.indexOf(room)) ? '家' : '路'; color = RUST; note = lastInChapter(ROOMS.indexOf(room)) ? '回家' : '前路';
+        if (room.chapterId === 'companions') { glyph = '家'; note = `家${room.tiles.slice(0,pos+1).filter(t => t === 'goal').length}`; }
         g.fillStyle(0xc4774c, .1).fillCircle(x, y, cell * .44); g.lineStyle(1.2, 0xb47d52, .6).strokeCircle(x, y, cell * .43);
       } else if (tile === 'door') {
         glyph = '门'; note = active ? '开' : '关'; color = active ? INK : '#896a5b';
@@ -73,7 +75,7 @@ export class AdventureScene extends Phaser.Scene {
         if (slot === 1 && !item) { g.lineStyle(1, 0x759084, .5).strokeRect(left + 9, top + 9, cell - 18, cell - 18); }
       }
       // The person and its support stay in one logical tile, with separate whole glyphs.
-      this.set(this.glyphs[pos], glyph, occupied ? Math.round(cell * .32) : size, color);
+      this.set(this.glyphs[pos], occupied && tile === 'goal' && room.chapterId === 'companions' ? '' : glyph, occupied ? Math.round(cell * .32) : size, color);
       this.glyphs[pos].setPosition(x + (occupied ? cell * .29 : 0), tile === 'shadow' ? top + cell * .35 : y).setAlpha(1);
       if (tile === 'water' && !item) this.water.push({ text: this.glyphs[pos], y, phase: pos });
       if (item) {
@@ -86,7 +88,7 @@ export class AdventureScene extends Phaser.Scene {
       this.objects[pos].setPosition(x + (occupied ? cell * .29 : 0), tile === 'shadow' ? top + cell * .35 : y - (tile === 'water' && item ? 3 : 0));
       this.set(this.notes[pos], note, Math.max(11, Math.round(cell * .2)), tile === 'water' ? WATER : INK);
       this.notes[pos].setPosition(x, top + cell - (tile === 'shadow' ? Math.max(8, Math.round(cell * .14)) : 7));
-      if (pos === view.target) { ink.lineStyle(3, 0x2a7160, 1).strokeRoundedRect(left+4,top+4,cell-8,cell-8,5); this.set(this.notes[pos], tile === 'shadow' ? note : '目标', Math.max(11,Math.round(cell*.2)), '#235748'); }
+      if (pos === view.target) { ink.lineStyle(3, 0x2a7160, 1).strokeRoundedRect(left+4,top+4,cell-8,cell-8,5); this.set(this.notes[pos], tile === 'shadow' || tile === 'goal' ? note : '目标', Math.max(11,Math.round(cell*.2)), '#235748'); }
       if (view.preview.includes(pos)) ink.lineStyle(2, 0xb56c31, .9).strokeRoundedRect(left + 2, top + 2, cell - 4, cell - 4, 7);
       if (pos === view.selected) {
         ink.lineStyle(2.5, 0xb34e3d, 1).strokeRoundedRect(left + 1, top + 1, cell - 2, cell - 2, 6);
@@ -105,10 +107,13 @@ export class AdventureScene extends Phaser.Scene {
       binding.cells.forEach(p => { const c = center(p); ink.lineStyle(2, 0x326d69, 1).strokeRect(c.x - cell / 2 + 1, c.y - cell / 2 + 1, cell - 2, cell - 2); });
     }
     const hasSupportGlyph = (pos: number) => !!at(state, pos) || ['goal', 'door', 'wind', 'shadow'].includes(room.tiles[pos]);
-    const personPoint = (pos: number) => { const p = center(pos); return { x: p.x - (hasSupportGlyph(pos) ? cell * .19 : 0), y: p.y }; };
+    const companionHome = (pos: number) => room.chapterId === 'companions' && room.tiles[pos] === 'goal';
+    const personPoint = (pos: number) => { const p = center(pos); return companionHome(pos) ? { x:p.x, y:p.y-cell*.13 } : { x: p.x - (hasSupportGlyph(pos) ? cell * .19 : 0), y: p.y }; };
     const p = personPoint(state.player), besideSupport = hasSupportGlyph(state.player);
-    this.set(this.person!, '人', Math.round(cell * (besideSupport ? .53 : .67)), RUST);
-    ink.lineStyle(1.5, 0xb34e3d, .55).strokeCircle(p.x, p.y, cell * (besideSupport ? .29 : .4));
+    this.set(this.person!, actorGlyph(state), Math.round(cell * (companionHome(state.player) ? .49 : besideSupport ? .53 : .67)), RUST);
+    ink.lineStyle(1.5, 0xb34e3d, .55).strokeCircle(p.x, p.y, cell * (companionHome(state.player) ? .28 : besideSupport ? .29 : .4));
+    this.companion!.setVisible(state.companion !== undefined);
+    if (state.companion !== undefined) { const other = personPoint(state.companion), support = hasSupportGlyph(state.companion), home = companionHome(state.companion); this.set(this.companion!, state.active === 'person' ? '友' : '人', Math.round(cell*(home ? .49 : support ? .53 : .67)), INK); this.companion!.setPosition(other.x,other.y); ink.lineStyle(1,0x28473f,.6).strokeRoundedRect(other.x-cell*.3,other.y-cell*(home ? .28 : .34),cell*.6,cell*(home ? .56 : .68),4); }
     if (from !== undefined && from !== state.player && !view.reducedMotion) {
       const previous = personPoint(from); this.person!.setPosition(previous.x, previous.y);
       this.tweens.add({ targets: this.person, x: p.x, y: p.y, duration: 150, ease: 'Sine.easeOut' });

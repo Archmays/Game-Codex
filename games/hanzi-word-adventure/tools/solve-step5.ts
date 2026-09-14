@@ -1,0 +1,10 @@
+import {mkdirSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {ROOMS,type Room} from '../rooms';
+import {act,clone,validState,type Action} from '../model';
+import {solve} from '../solver';
+const directory='tmp/tasks/GAME-CODEX-STEP5/adventure';mkdirSync(directory,{recursive:true});
+function replay(room:Room,actions:Action[]){let state=clone(room.initial);const work:{actor:string;action:Action}[]=[];for(const action of actions){if(!['move','switch'].includes(action.type))work.push({actor:state.active??'person',action});const transition=act(room,state,action);if(!transition.ok||!validState(room,transition.state))throw Error(`${room.id} invalid replay ${JSON.stringify(action)}`);state=transition.state;}if(!state.won)throw Error(`${room.id} not won`);return{won:state.won,work,final:state};}
+const records=ROOMS.map(room=>{const result=solve(room,room.initial);if(result.status!=='solved')throw Error(`${room.id}: ${result.status} at ${result.visited}`);const replayed=replay(room,result.actions);if(room.chapterId==='companions'&&new Set(replayed.work.map(w=>w.actor)).size!==2)throw Error(`${room.id}: both actors must do material work`);console.log(room.id,result.status,result.visited,result.actions.length);return{room:room.id,initial:room.initial,search:result,replay:replayed};});
+const room=ROOMS[19],slot=room.sentences[0].cells[1];const alternatives=['wind','water'].map(strategy=>{const result=solve(room,room.initial,{allow:(_,a)=>strategy==='wind'?!(a.type==='put'&&room.tiles[a.target]==='water'):!(a.type==='put'&&a.target===slot)});if(result.status!=='solved')throw Error(`alternative ${strategy}: ${result.status}`);return{strategy,constraint:strategy==='wind'?'no placement on water':'no placement in wind socket',search:result,replay:replay(room,result.actions)};});
+const identity=createHash('sha256').update(JSON.stringify(ROOMS)).digest('hex');writeFileSync(`${directory}/step5-rule-search.json`,JSON.stringify({roomDefinitionsSha256:identity,limit:40000,algorithm:'manipulation BFS, exact directed movement closure, inactive actor and fixed material owner in equivalence key',records,alternatives},null,2));
