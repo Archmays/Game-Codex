@@ -201,6 +201,21 @@ test("@hittest @full 100 transitions leave no stale overlay before primary hit t
     await page.goto(`/${routes[transition % routes.length]}`, { waitUntil: "domcontentloaded" });
     const actions = await expect.poll(async () => (await visibleEnabled(page.locator(record.primaryActionSelector))).length).toBeGreaterThan(0).then(() => visibleEnabled(page.locator(record.primaryActionSelector)));
     const evidence = await expectHitTarget(actions[0], { minimumRatio: 1, minimumSize: 24 });
+    if (record.id === "hanzi-word-adventure") {
+      // This documented entry dialog is the current surface, not an orphan overlay.
+      // Check it, enter through real controls without resetting a slot, then require
+      // the same zero-overlay invariant as every other route in this stress test.
+      const entry = page.getByRole("dialog", { name: "选择新游戏或继续游戏" });
+      await expect(entry).toBeVisible();
+      await expect(page.locator(".world-modal:visible, [aria-modal=true]:visible")).toHaveCount(1);
+      await expect(actions[0]).toHaveAttribute("data-hway-new", "");
+      await entry.locator("[data-hway-continue]").click();
+      const chapter = entry.locator('[data-hway-chapter="homeward"]');
+      if (!await chapter.isEnabled()) await entry.locator("[data-hway-new]").click();
+      await chapter.click();
+      await expect(page.locator("[data-hway-grid]")).toBeFocused();
+      await expectHitTarget(page.locator('[data-hway-move="right"]'), { minimumRatio: 1, minimumSize: 44 });
+    }
     expect(await page.locator("#app > *").count()).toBe(1);
     expect(await page.locator(".world-modal:visible, [aria-modal=true]:visible").count()).toBe(0);
     expect(await page.locator("canvas").count()).toBeLessThanOrEqual(1);
