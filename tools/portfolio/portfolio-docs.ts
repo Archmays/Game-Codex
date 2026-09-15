@@ -49,7 +49,7 @@ export function renderReadmePortfolio(catalog: readonly GameCatalogMetadata[]): 
   });
   return [
     README_PORTFOLIO_START,
-    `\`allGameDefinitions\` 保留 ${GAME_PORTFOLIO.length} 个可挂载定义，但儿童产品组合已明确收敛为 ${ACTIVE_CHILD_PRODUCTS.length} 个活跃产品；经典大厅只投影这 ${classicCount} 个产品。世界模块、兼容入口和共享引擎分别维护，不再拿定义数冒充产品数。`,
+    `\`allGameDefinitions\` 保留 ${GAME_PORTFOLIO.length} 个可挂载定义，但儿童产品组合已明确收敛为 ${ACTIVE_CHILD_PRODUCTS.length} 个活跃产品；经典大厅只投影这 ${classicCount} 个产品。另有 ${GAME_PORTFOLIO.filter(record => record.definitionRole === "independent-tool").length} 个独立工具；世界模块、兼容入口和共享引擎分别维护，不再拿定义数冒充产品数。`,
     "",
     "| 游戏 | 学科 | 目标世界 | 定义角色 | 活跃儿童产品 | 质量等级 | 当前状态 |",
     "| --- | --- | --- | --- | --- | --- | --- |",
@@ -93,6 +93,7 @@ export function renderPortfolioStatus(catalog: readonly GameCatalogMetadata[]): 
     `- 实际起点：\`${PORTFOLIO_FOUNDATION_BASELINE}\``,
     `- 起点 tracked 文件：\`${PORTFOLIO_FOUNDATION_INITIAL_TRACKED_BYTES}\` bytes`,
     `- Mount definitions：\`${GAME_PORTFOLIO.length}\` 保留`,
+    `- Independent tools：\`${GAME_PORTFOLIO.filter(record => record.definitionRole === "independent-tool").length}\``,
     `- Active child products：\`${ACTIVE_CHILD_PRODUCTS.length}\``,
     `- World modules：\`${WORLD_MODULES.length}\``,
     `- Compatibility surfaces：\`${COMPATIBILITY_SURFACES.length}\``,

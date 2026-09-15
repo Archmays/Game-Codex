@@ -54,6 +54,7 @@ export interface AppRouteQueryRegistration {
 }
 
 export const APP_ROUTE_QUERY_MANIFEST = [
+  { kind: "play", queryKey: "play", queryValue: "hanzi-stroke-lab", query: "?play=hanzi-stroke-lab", defaultScrollPolicy: "document" },
   { kind: "play", queryKey: "play", queryValue: "hanzi-word-adventure", query: "?play=hanzi-word-adventure", defaultScrollPolicy: "document" },
   { kind: "play", queryKey: "play", queryValue: "hanzi-tower-defense", query: "?play=hanzi-tower-defense", defaultScrollPolicy: "document" },
   { kind: "play", queryKey: "play", queryValue: "memory-card", query: "?play=memory-card", defaultScrollPolicy: "document" },
@@ -130,6 +131,7 @@ const mathStation = (station: keyof typeof MATH_STATION_CONTRACTS): PlaySurfaceR
 };
 
 export const PLAY_SURFACE_MANIFEST: readonly PlaySurfaceRecord[] = [
+  surface({ id: "hanzi-stroke-lab", title: "汉字书房", route: "?play=hanzi-stroke-lab", productId: "hanzi-stroke-lab", kind: "support-activity", parentSurfaceId: "my-game-world", returnRoute: "?world=my-game-world", primaryActionSelector: "[data-search] button", settingsAvailable: false, destructiveActionAvailable: false, saveNamespaces: ["family-games/hanzi-stroke-lab/v1"], expectedInputs: ALL_INPUTS, qualityProfile: "a-core-world", mountDefinitionId: "hanzi-stroke-lab", runtimeOwnerDefinitionId: "hanzi-stroke-lab", hostWorldId: "chinese" }),
   surface({ id: 'memory-independent', title: '独立记忆配对', route: '?play=memory-card', productId: 'memory-card', kind: 'support-activity', parentSurfaceId: 'classic-hub', returnRoute: '?hub=classic&from=world', primaryActionSelector: '[data-card-id]:not(:disabled)', settingsAvailable: false, destructiveActionAvailable: false, saveNamespaces: ['family-games/memory-match/v1'], expectedInputs: ALL_INPUTS, qualityProfile: 'c-module', mountDefinitionId: 'memory-card', runtimeOwnerDefinitionId: 'memory-card', compatibilitySurfaceId: 'memory-definition-adapter' }),
   surface({ id: "step4-playtest", title: "本次试玩", route: "?playtest=step4", productId: "portfolio", kind: "journal", parentSurfaceId: "my-game-world", returnRoute: "?world=my-game-world", primaryActionSelector: "[data-playtest-entry]", settingsAvailable: false, destructiveActionAvailable: false, saveNamespaces: ["family-games/step4-playtest/feedback-v1"], expectedInputs: ALL_INPUTS, qualityProfile: "portfolio-play-ready" }),
   surface({ id: "hanzi-word-adventure", title: "字间行者 · 借字归途", route: "?play=hanzi-word-adventure", productId: "hanzi-word-adventure", kind: "product-world", parentSurfaceId: "my-game-world", returnRoute: "?world=my-game-world", primaryActionSelector: "[data-hway-new]", settingsAvailable: true, destructiveActionAvailable: true, saveNamespaces: ["family-games/hanzi-word-adventure/companions/v1", "family-games/hanzi-word-adventure/v2", "family-games/hanzi-word-adventure/v1"], expectedInputs: ALL_INPUTS, qualityProfile: "s-hanzi-release", mountDefinitionId: "hanzi-word-adventure", runtimeOwnerDefinitionId: "hanzi-word-adventure", topLevelProductId: "hanzi-word-adventure", hostWorldId: "chinese", primaryEntry: true }),

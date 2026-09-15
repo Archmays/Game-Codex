@@ -1,6 +1,6 @@
 export type WorldId = "chinese" | "math" | "english" | "shared";
-export type ProductRole = "flagship" | "flagship-module" | "core-world" | "independent-puzzle" | "module";
-export type DefinitionRole = "active-child-product" | "world-module-mount" | "compatibility-adapter";
+export type ProductRole = "utility" | "flagship" | "flagship-module" | "core-world" | "independent-puzzle" | "module";
+export type DefinitionRole = "independent-tool" | "active-child-product" | "world-module-mount" | "compatibility-adapter";
 export type QualityTier = "S" | "A" | "B" | "C";
 export type LifecycleStatus = "active" | "active-module" | "active-maintenance" | "compatibility-only";
 export type LoadingPolicy = "current-eager" | "route-lazy" | "mixed";
@@ -86,6 +86,11 @@ export const PORTFOLIO_TEST_PROFILES: readonly PortfolioTestProfile[] = [
 
 export const GAME_PORTFOLIO: readonly GamePortfolioRecord[] = [
   {
+    id: "hanzi-stroke-lab", targetWorld: "chinese", productRole: "utility", definitionRole: "independent-tool", activeChildProduct: false, classicCardVisible: false, qualityTier: "A", lifecycleStatus: "active",
+    canonicalRoute: "?play=hanzi-stroke-lab", worldModuleIds: [], compatibilitySurfaceIds: [], sharedEngineIds: [], saveNamespaces: ["family-games/hanzi-stroke-lab/v1"],
+    testProfile: "a-core-world", loadingPolicy: "route-lazy", contentStatus: "playable", canonicalDocs: ["games/hanzi-stroke-lab/README.md"],
+  },
+  {
     id: "hanzi-word-adventure", targetWorld: "chinese", productRole: "independent-puzzle", definitionRole: "active-child-product", activeChildProduct: true, classicCardVisible: true, childProductOrder: 3, qualityTier: "S", lifecycleStatus: "active",
     canonicalRoute: "?play=hanzi-word-adventure", worldModuleIds: [], compatibilitySurfaceIds: [], sharedEngineIds: [], saveNamespaces: ["family-games/hanzi-word-adventure/companions/v1", "family-games/hanzi-word-adventure/v2", "family-games/hanzi-word-adventure/v1"],
     testProfile: "s-hanzi-release", loadingPolicy: "mixed", contentStatus: "playable", canonicalDocs: ["games/hanzi-word-adventure/README.md"],
@@ -163,5 +168,5 @@ export const CLASSIC_CARD_PRODUCTS = GAME_PORTFOLIO
   .sort((left, right) => (left.childProductOrder ?? Number.MAX_SAFE_INTEGER) - (right.childProductOrder ?? Number.MAX_SAFE_INTEGER));
 
 export const WORLD_LABELS: Readonly<Record<WorldId, string>> = { chinese: "中文世界", math: "数学世界", english: "英语世界", shared: "共享模块" };
-export const PRODUCT_ROLE_LABELS: Readonly<Record<ProductRole, string>> = { flagship: "旗舰", "flagship-module": "旗舰模块", "core-world": "核心世界", "independent-puzzle": "独立谜题", module: "模块" };
-export const DEFINITION_ROLE_LABELS: Readonly<Record<DefinitionRole, string>> = { "active-child-product": "活跃儿童产品", "world-module-mount": "世界模块挂载", "compatibility-adapter": "兼容适配定义" };
+export const PRODUCT_ROLE_LABELS: Readonly<Record<ProductRole, string>> = { utility: "独立工具", flagship: "旗舰", "flagship-module": "旗舰模块", "core-world": "核心世界", "independent-puzzle": "独立谜题", module: "模块" };
+export const DEFINITION_ROLE_LABELS: Readonly<Record<DefinitionRole, string>> = { "independent-tool": "独立查字工具", "active-child-product": "活跃儿童产品", "world-module-mount": "世界模块挂载", "compatibility-adapter": "兼容适配定义" };

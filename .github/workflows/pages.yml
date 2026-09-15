@@ -72,6 +72,9 @@ jobs:
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
 
+      - name: Validate local Hanzi tool data and real input flows
+        run: node tools/hanzi-stroke-lab/verify-data.mjs && pnpm exec playwright test --config playwright.hanzi-stroke-lab.config.ts --project=chromium-desktop --project=chromium-390
+
       - name: Exercise full keyboard, mouse and touch loops across shared surfaces
         run: pnpm run test:e2e:step4 --project=desktop --project=phone-390 --grep "@primary|@step5-entry|@step5-keypath"
 

@@ -1,0 +1,24 @@
+import {test,expect} from '@playwright/test';
+test.beforeEach(async({},info)=>{test.skip(!info.project.name.endsWith('desktop'),'failure matrix on both desktop engines; responsive primary flows are separate');});
+test('late character data, denied storage, missing model and retry are honest',async({page,context})=>{
+ await context.addInitScript(()=>{Object.defineProperty(window,'localStorage',{get(){throw new Error('denied synthetic storage');}});});
+ await page.route('**/chars/6c38.json',async r=>{await new Promise(resolve=>setTimeout(resolve,650));await r.continue();});
+ await page.goto('?play=hanzi-stroke-lab');await page.locator('[data-index-ready=true]').waitFor();
+ await page.locator('#hsl-input').fill('永水');await page.locator('[data-search] button').click();await page.locator('[data-results] button').nth(1).click();await expect(page.locator('[data-step-status]')).toContainText('共 4 笔');await page.waitForTimeout(800);await expect(page.locator('#hsl-character-title')).toHaveText('水');await expect(page.locator('[data-steps] button')).toHaveCount(4);await expect(page.locator('[data-storage-status]')).toContainText('原记录已保留');
+ await page.route('**/recognizer/hanzi_lookup_bg.wasm',r=>r.abort());await page.reload();await expect(page.locator('[data-hand-status]')).toContainText('没有加载成功');await page.locator('summary').filter({hasText:'没有找到'}).click();await page.unroute('**/recognizer/hanzi_lookup_bg.wasm');await page.locator('[data-retry-hand]').click();await expect(page.locator('[data-hand-status]')).toHaveText('写一个字，停笔后选候选。');
+});
+test('pending handwriting clear, cancellation, multiple contacts and teardown invalidate work',async({page})=>{
+ await page.addInitScript(()=>{const Native=Worker;const state={created:0,terminated:0};Object.assign(window,{workerEvidence:state});window.Worker=class extends Native{constructor(url:string|URL,options?:WorkerOptions){super(url,options);state.created++;}terminate(){state.terminated++;super.terminate();}};});
+ await page.goto('?play=hanzi-stroke-lab');await page.locator('[data-index-ready=true]').waitFor();const pad=page.locator('[data-pad]');
+ // Synthetic events cannot acquire browser pointer capture: use the real mouse for the gesture,
+ // dispatch only lifecycle cancellation/secondary contact events as explicitly synthetic evidence.
+ await pad.scrollIntoViewIfNeeded();const r=(await pad.boundingBox())!;
+ await page.mouse.move(r.x+30,r.y+30);await page.mouse.down();await page.mouse.move(r.x+120,r.y+70);await pad.dispatchEvent('pointercancel');await page.mouse.up();await expect(pad).toHaveAttribute('data-stroke-count','0');
+ await page.mouse.move(r.x+40,r.y+40);await page.mouse.down();await page.mouse.move(r.x+120,r.y+80);await pad.dispatchEvent('pointerdown',{pointerId:99,pointerType:'touch',isPrimary:false});await page.mouse.up();await expect(pad).toHaveAttribute('data-stroke-count','0');
+ await page.mouse.move(r.x+40,r.y+40);await page.mouse.down();await page.mouse.move(r.x+190,r.y+40);await page.mouse.up();await page.locator('[data-clear]').click();await page.waitForTimeout(550);await expect(page.locator('[data-candidates] button')).toHaveCount(0);
+ await page.evaluate(()=>window.dispatchEvent(new PageTransitionEvent('pagehide',{persisted:true})));expect(await page.evaluate(()=>(window as unknown as {workerEvidence:{created:number;terminated:number}}).workerEvidence)).toEqual({created:1,terminated:1});
+ await page.evaluate(()=>window.dispatchEvent(new PageTransitionEvent('pageshow',{persisted:true})));await page.locator('[data-index-ready=true]').waitFor();await page.locator('#hsl-input').fill('永');await page.locator('[data-search] button').click();await expect(page.locator('[data-steps] button')).toHaveCount(5);
+});
+test('empty library has a visible failure state; small height and zoom remain navigable',async({page})=>{
+ await page.route('**/hanzi-stroke-lab/index.json',r=>r.fulfill({json:{}}));await page.goto('?play=hanzi-stroke-lab');await page.locator('[data-index-ready=true]').waitFor();await page.locator('#hsl-input').fill('永');await page.locator('[data-search] button').click();await expect(page.locator('#hsl-query-note')).toContainText('尚未载入');await page.unroute('**/hanzi-stroke-lab/index.json');await page.reload();await page.locator('[data-index-ready=true]').waitFor();await page.setViewportSize({width:1024,height:480});await page.evaluate(()=>document.documentElement.style.zoom='1.5');await page.locator('#hsl-input').fill('鱻');await page.locator('[data-search] button').click();await expect(page.locator('[data-steps] button')).toHaveCount(33);await page.locator('[data-steps] button').last().click();await expect(page.locator('[data-step-status]')).toContainText('33 / 33');expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+});

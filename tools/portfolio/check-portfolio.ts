@@ -26,7 +26,7 @@ function duplicates(values: readonly string[]): string[] {
 
 export function validatePortfolio(catalog: readonly GameCatalogMetadata[], currentCatalog: readonly GameCatalogMetadata[], root = resolve(import.meta.dirname, "../..")): string[] {
   const issues: string[] = [];
-  const expectedIds = ["hanzi-word-adventure", "hanzi-tower-defense", "equation-slider", "math-lab", "make-target", "memory-card"].sort();
+  const expectedIds = ["hanzi-stroke-lab", "hanzi-word-adventure", "hanzi-tower-defense", "equation-slider", "math-lab", "make-target", "memory-card"].sort();
   if (JSON.stringify(GAME_PORTFOLIO.map(record => record.id).sort()) !== JSON.stringify(expectedIds)) issues.push("Active and compatibility definition inventory differs from retirement contract");
   for (const id of duplicates(GAME_PORTFOLIO.map((record) => record.id))) issues.push(`Duplicate portfolio id: ${id}`);
   const portfolioIds = new Set(GAME_PORTFOLIO.map((record) => record.id));
@@ -53,7 +53,7 @@ export function validatePortfolio(catalog: readonly GameCatalogMetadata[], curre
     if (record.activeChildProduct && !record.childProductOrder) issues.push(`${record.id} active child product needs an order`);
     if (record.definitionRole === "world-module-mount" && record.worldModuleIds.length === 0) issues.push(`${record.id} world-module mount has no module`);
     if (record.definitionRole === "compatibility-adapter" && record.compatibilitySurfaceIds.length === 0) issues.push(`${record.id} compatibility adapter has no compatibility surface`);
-    if (record.contentStatus !== (["hanzi-tower-defense", "hanzi-word-adventure"].includes(record.id) ? "playable" : "frozen")) issues.push(`${record.id} content status differs from the authorized new-game / protected-math boundary`);
+    if (record.contentStatus !== (["hanzi-stroke-lab", "hanzi-tower-defense", "hanzi-word-adventure"].includes(record.id) ? "playable" : "frozen")) issues.push(`${record.id} content status differs from the authorized new-game / protected-math boundary`);
     for (const moduleId of record.worldModuleIds) if (!WORLD_MODULES.some((module) => module.id === moduleId && module.mountDefinitionId === record.id)) issues.push(`${record.id} references an unknown or foreign world module: ${moduleId}`);
     for (const surfaceId of record.compatibilitySurfaceIds) if (!COMPATIBILITY_SURFACES.some((surface) => surface.id === surfaceId)) issues.push(`${record.id} references an unknown compatibility surface: ${surfaceId}`);
     for (const engineId of record.sharedEngineIds) {
