@@ -6,7 +6,7 @@
 
 ## 当前中文游戏
 
-《字间行者》包含「借字归途」「借一盏明」「光与归途」三章共十五房，用搬字、林木拆合、光与局部否定规则改变通路，入口 `?play=hanzi-word-adventure`；当前玩法与范围见 [游戏说明](games/hanzi-word-adventure/README.md)，初始五房记录见 [step2-report.md](docs/hanzi-word-adventure/step2-report.md)。《字阵守城》保留入口 `?play=hanzi-tower-defense`，报告见 `docs/hanzi-tower-defense/step1-report.md`。墨迹森林全线和词光岛全线已退役，旧链接只回现有首页；历史通过 Git 保留，旧语言存档原值保留，数学玩法与存档不变。
+《字间行者》v1.0.0 包含「借字归途」「借一盏明」「光与归途」「结伴归途」四章共二十房，用搬字、林木拆合、光、局部否定与双角色分工改变通路，入口 `?play=hanzi-word-adventure`，见 [游戏说明](games/hanzi-word-adventure/README.md)。《字阵守城》v1.0.0 保留三图 22 波及六个三波短局，入口 `?play=hanzi-tower-defense`，见 [游戏说明](games/hanzi-tower-defense/README.md)。本轮美术、声音、可靠性与发布验证见 [v1.0 报告](docs/v1.0-release-report.md)。墨迹森林全线和词光岛全线已退役，旧链接只回现有首页；历史通过 Git 保留，旧语言存档原值保留，数学玩法与存档不变。
 
 真人儿童验证由用户明确设为 `NO_BY_USER_DIRECTION_AND_NOT_A_DEVELOPMENT_GATE`；机器通过不代表儿童乐趣、学习效果、偏好或保持度。
 

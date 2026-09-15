@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import { expect, test, type Page } from "@playwright/test";
 import { PLAY_SURFACE_MANIFEST, type PlaySurfaceRecord } from "../../../packages/data/playSurfaceManifest";
 import { sampleHitTarget } from "../helpers/hit-target";
+import { revealControl } from "../step4/input-helpers";
 import {
   expectFullyVisibleInScrollport,
   expectMeaningfullyVisibleInScrollport,
@@ -221,6 +222,7 @@ test("@scroll @representative modal close restores each surface's declared scrol
   const runtime = runtimeObserver(page);
   const familyWorld = PLAY_SURFACE_MANIFEST.find(record => record.id === "my-game-world")!;
   await page.goto("/?play=hanzi-tower-defense");
+  await revealControl(page, "[data-td-restart]", "mouse");
   const restart = page.locator("[data-td-restart]"); await restart.click();
   await expect(page.locator("[data-td-restart-dialog]")).toBeVisible(); await page.keyboard.press("Escape"); await expect(restart).toBeFocused();
   expect(await page.locator("body").evaluate(body => getComputedStyle(body).overflowY)).toBe("auto");

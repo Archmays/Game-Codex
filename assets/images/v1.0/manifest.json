@@ -1,0 +1,619 @@
+{
+  "productVersion": "1.0.0",
+  "date": "2026-09-15",
+  "sourceMastersServed": false,
+  "originalAssetsDeleted": false,
+  "notes": [
+    "Generated masters returned RGB mattes; they are not falsely described as transparent originals. Only processed runtime WebP has checked real alpha.",
+    "11 tower forms + 3 resonance forms; 3 ordinary creatures + 2 captain poses; 1 gate; 3 backgrounds.",
+    "New runtime does not load the old Kenney monster parts; their original CC0 sources and manifests remain intact.",
+    "Music consists of two original 32-second themes and two original 32-second environmental beds, no external samples.",
+    "Font glyphs and all content IDs remain runtime text. Art is imaginative, not an etymology explanation."
+  ],
+  "sources": [
+    {
+      "id": "basic-towers.png",
+      "path": "assets/images/v1.0/source/basic-towers.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGB",
+      "bytes": 2902970,
+      "sha256": "ae86b471391037f6fb3485f13230b00714719a9d73179b5d6c3c537863802a9a",
+      "author": "ChatGPT image, directed and reviewed for this project",
+      "rights": "Project-generated artwork under the image-generation service terms; not third-party game art",
+      "promptFiles": [
+        "docs/v1.0/prompts/basic-towers.md",
+        "docs/v1.0/prompts/basic-towers-alpha.md"
+      ]
+    },
+    {
+      "id": "advanced-towers.png",
+      "path": "assets/images/v1.0/source/advanced-towers.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "bytes": 2524669,
+      "sha256": "513e3094e15fb27bbe995628163cdd77dbbfdf2169ed493f92286c277f4eb37a",
+      "author": "ChatGPT image, directed and reviewed for this project",
+      "rights": "Project-generated artwork under the image-generation service terms; not third-party game art",
+      "promptFiles": [
+        "docs/v1.0/prompts/advanced-towers.md",
+        "docs/v1.0/prompts/forest-crest-fix.md"
+      ]
+    },
+    {
+      "id": "creatures-gate.png",
+      "path": "assets/images/v1.0/source/creatures-gate.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "bytes": 2035452,
+      "sha256": "ffb27b163b0e033af8f3a4b2f98c14f42f3cd51cb21636883580263e8522ba95",
+      "author": "ChatGPT image, directed and reviewed for this project",
+      "rights": "Project-generated artwork under the image-generation service terms; not third-party game art",
+      "promptFiles": [
+        "docs/v1.0/prompts/creatures-and-gate.md",
+        "docs/v1.0/prompts/creatures-ground-fix.md"
+      ]
+    },
+    {
+      "id": "qinglan-pass.png",
+      "path": "assets/images/v1.0/source/qinglan-pass.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "bytes": 2734070,
+      "sha256": "6b4330ecf12c90ffb5a10f2751bb95e9675ee2a733017e4901985a2ceeddbf8d",
+      "author": "ChatGPT image, directed and reviewed for this project",
+      "rights": "Project-generated artwork under the image-generation service terms; not third-party game art",
+      "promptFiles": [
+        "docs/v1.0/prompts/qinglan-environment.md"
+      ]
+    },
+    {
+      "id": "twin-bends.png",
+      "path": "assets/images/v1.0/source/twin-bends.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "bytes": 3080749,
+      "sha256": "19f6a3f5ac3e44a0c7732c5222baeb519e7e378ca7eda772a4b6b4675c2cfd1f",
+      "author": "ChatGPT image, directed and reviewed for this project",
+      "rights": "Project-generated artwork under the image-generation service terms; not third-party game art",
+      "promptFiles": [
+        "docs/v1.0/prompts/twin-bends-environment.md"
+      ]
+    },
+    {
+      "id": "beacon-keep.png",
+      "path": "assets/images/v1.0/source/beacon-keep.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB",
+      "bytes": 2713493,
+      "sha256": "97e6a4ac925370cc9c1b81a3226c5fa9ffe90e6e39361284e806f02469170350",
+      "author": "ChatGPT image, directed and reviewed for this project",
+      "rights": "Project-generated artwork under the image-generation service terms; not third-party game art",
+      "promptFiles": [
+        "docs/v1.0/prompts/beacon-keep-environment.md"
+      ]
+    }
+  ],
+  "runtime": [
+    {
+      "path": "public/assets/v1.0/tower/fire.webp",
+      "source": "basic-towers.png",
+      "bytes": 20454,
+      "sha256": "f1d3974897c33af6e1fa85547204fd351f2387acbed82d5c38f0ee663c532cd4",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 32621,
+      "alpha_partial": 2472,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "assets/images/v1.0/source/basic-towers.png",
+      "adaptation": "Measured atlas cell crop, matte removed, actual RGBA alpha, anchored and resized"
+    },
+    {
+      "path": "public/assets/v1.0/tower/wood.webp",
+      "source": "basic-towers.png",
+      "bytes": 21672,
+      "sha256": "264b1b7b600c22ccf11d15d4d0db079e032c0c6e36bf1b0471d3fd4cca03c911",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 38424,
+      "alpha_partial": 3799,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "assets/images/v1.0/source/basic-towers.png",
+      "adaptation": "Measured atlas cell crop, matte removed, actual RGBA alpha, anchored and resized"
+    },
+    {
+      "path": "public/assets/v1.0/tower/water.webp",
+      "source": "basic-towers.png",
+      "bytes": 22330,
+      "sha256": "44e5b94ca6e7862ed26df6427a9f3a970bb3f20cc142fe85bee02b1e979516d3",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 30878,
+      "alpha_partial": 2744,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "assets/images/v1.0/source/basic-towers.png",
+      "adaptation": "Measured atlas cell crop, matte removed, actual RGBA alpha, anchored and resized"
+    },
+    {
+      "path": "public/assets/v1.0/tower/mountain.webp",
+      "source": "basic-towers.png",
+      "bytes": 20688,
+      "sha256": "f29f1dac4028a35d86cecd71802cf0f5c208baf765dcf68623d2044718eb661f",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 34695,
+      "alpha_partial": 3169,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "assets/images/v1.0/source/basic-towers.png",
+      "adaptation": "Measured atlas cell crop, matte removed, actual RGBA alpha, anchored and resized"
+    },
+    {
+      "path": "public/assets/v1.0/tower/volcano.webp",
+      "source": "../hanzi-tower-defense/volcano-base.png",
+      "bytes": 21632,
+      "sha256": "91064bb2458a2019c5532b44d9c5d384815ae420a512b81474e5d147395ed20b",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 34739,
+      "alpha_partial": 30378,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "public/assets/hanzi-tower-defense/volcano-base.png",
+      "provenance": "assets/images/hanzi-tower-defense/manifest.json",
+      "adaptation": "Approved original preserved byte-for-byte. Runtime copy resized; alpha <=8 edge specks removed."
+    },
+    {
+      "path": "public/assets/v1.0/tower/volcano-resonant.webp",
+      "source": "../hanzi-tower-defense/volcano-resonant.png",
+      "bytes": 18224,
+      "sha256": "68051d005021ceac26097a7510227b65f9753ed76f53a11c1edfc919d6b1a566",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 42603,
+      "alpha_partial": 22296,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "public/assets/hanzi-tower-defense/volcano-resonant.png",
+      "provenance": "assets/images/hanzi-tower-defense/manifest.json",
+      "adaptation": "Approved original preserved byte-for-byte. Runtime copy resized; alpha <=8 edge specks removed."
+    },
+    {
+      "path": "public/assets/v1.0/tower/wildwood.webp",
+      "source": "../hanzi-tower-defense/mountain-forest-base.png",
+      "bytes": 23104,
+      "sha256": "f0b0f8abe56396f3692f0768079379a2bbc6bd80d519a9595c2b3e8d141020a6",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 38141,
+      "alpha_partial": 26673,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "public/assets/hanzi-tower-defense/mountain-forest-base.png",
+      "provenance": "assets/images/hanzi-tower-defense/manifest.json",
+      "adaptation": "Approved original preserved byte-for-byte. Runtime copy resized; alpha <=8 edge specks removed."
+    },
+    {
+      "path": "public/assets/v1.0/tower/wildwood-resonant.webp",
+      "source": "../hanzi-tower-defense/mountain-forest-resonant.png",
+      "bytes": 23642,
+      "sha256": "8c24cebffa9d6cb71c32cf9f9c48517c34753426aed9b7ee30ceb796d6c6328c",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 38996,
+      "alpha_partial": 25856,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "public/assets/hanzi-tower-defense/mountain-forest-resonant.png",
+      "provenance": "assets/images/hanzi-tower-defense/manifest.json",
+      "adaptation": "Approved original preserved byte-for-byte. Runtime copy resized; alpha <=8 edge specks removed."
+    },
+    {
+      "path": "public/assets/v1.0/tower/flame.webp",
+      "source": "advanced-towers.png",
+      "bytes": 20102,
+      "sha256": "727b01f3397e348161b832277f4fcb9bbd6ea8c45f610642d2d77fc31dbb7f20",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 35996,
+      "alpha_partial": 2466,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "assets/images/v1.0/source/advanced-towers.png",
+      "adaptation": "Measured atlas cell crop, matte removed, actual RGBA alpha, anchored and resized"
+    },
+    {
+      "path": "public/assets/v1.0/tower/grove.webp",
+      "source": "advanced-towers.png",
+      "bytes": 24676,
+      "sha256": "1a24828a0747448cdffe140a238dc2c8b27731542efc9bdd941f50d5ab94b28d",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 35211,
+      "alpha_partial": 4037,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "assets/images/v1.0/source/advanced-towers.png",
+      "adaptation": "Measured atlas cell crop, matte removed, actual RGBA alpha, anchored and resized"
+    },
+    {
+      "path": "public/assets/v1.0/tower/wash.webp",
+      "source": "advanced-towers.png",
+      "bytes": 22470,
+      "sha256": "f57afcecafe2d382500cb3a3e5b6acae2fedbdc2d411eeb188d3b33ca5730fe3",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 33466,
+      "alpha_partial": 3011,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "assets/images/v1.0/source/advanced-towers.png",
+      "adaptation": "Measured atlas cell crop, matte removed, actual RGBA alpha, anchored and resized"
+    },
+    {
+      "path": "public/assets/v1.0/tower/canopy.webp",
+      "source": "advanced-towers.png",
+      "bytes": 24792,
+      "sha256": "e79e4313bfa103bd2d7898092d77a10e494d7b96bf919c4d861c9f33ecc8898c",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 35253,
+      "alpha_partial": 4235,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "assets/images/v1.0/source/advanced-towers.png",
+      "adaptation": "Measured atlas cell crop, matte removed, actual RGBA alpha, anchored and resized"
+    },
+    {
+      "path": "public/assets/v1.0/tower/forest.webp",
+      "source": "advanced-towers.png",
+      "bytes": 25246,
+      "sha256": "c85aa7ebfdea94c12740d5a11a8b61c5fb83d35267a17bfed4ce04432612789e",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 34858,
+      "alpha_partial": 4315,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "assets/images/v1.0/source/advanced-towers.png",
+      "adaptation": "Measured atlas cell crop, matte removed, actual RGBA alpha, anchored and resized"
+    },
+    {
+      "path": "public/assets/v1.0/tower/forest-resonant.webp",
+      "source": "advanced-towers.png",
+      "bytes": 24838,
+      "sha256": "cb428adb8220faa479394bcb4e96bf9906a2c9341cb6da6ef20cd025eb17910a",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 35940,
+      "alpha_partial": 4450,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "assets/images/v1.0/source/advanced-towers.png",
+      "adaptation": "Measured atlas cell crop, matte removed, actual RGBA alpha, anchored and resized"
+    },
+    {
+      "path": "public/assets/v1.0/tower/swarm.webp",
+      "source": "creatures-gate.png",
+      "bytes": 17254,
+      "sha256": "f6c47cc7cb01a9a291f9e3713d9bd8c01834b773c95d05bdd60772e5bb68882a",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 40539,
+      "alpha_partial": 3025,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "assets/images/v1.0/source/creatures-gate.png",
+      "adaptation": "Measured atlas cell crop, matte removed, actual RGBA alpha, anchored and resized"
+    },
+    {
+      "path": "public/assets/v1.0/tower/swift.webp",
+      "source": "creatures-gate.png",
+      "bytes": 17140,
+      "sha256": "400814d1db0acb40386b0bfdcb92ba68df52a6e4317ef8d3deb9e34cdfabbc37",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 42373,
+      "alpha_partial": 3810,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "assets/images/v1.0/source/creatures-gate.png",
+      "adaptation": "Measured atlas cell crop, matte removed, actual RGBA alpha, anchored and resized"
+    },
+    {
+      "path": "public/assets/v1.0/tower/stone.webp",
+      "source": "creatures-gate.png",
+      "bytes": 19176,
+      "sha256": "63fe4adef8a6425c8b51844151a020f80fd31b589995a91f403c0dd9159a18d2",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 33916,
+      "alpha_partial": 2601,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "assets/images/v1.0/source/creatures-gate.png",
+      "adaptation": "Measured atlas cell crop, matte removed, actual RGBA alpha, anchored and resized"
+    },
+    {
+      "path": "public/assets/v1.0/tower/captain.webp",
+      "source": "creatures-gate.png",
+      "bytes": 22980,
+      "sha256": "1ed9b9bdbe05de2bcaf50ba4d472df4011b177c5cb5293d0ff579f697e0216be",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 36458,
+      "alpha_partial": 4350,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "assets/images/v1.0/source/creatures-gate.png",
+      "adaptation": "Measured atlas cell crop, matte removed, actual RGBA alpha, anchored and resized"
+    },
+    {
+      "path": "public/assets/v1.0/tower/captain-call.webp",
+      "source": "creatures-gate.png",
+      "bytes": 21870,
+      "sha256": "adfa469dae6c8d356e7363db2573f93af22b3ecd0cccc0f7a02fc69b6ec3ae93",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 36276,
+      "alpha_partial": 4089,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "assets/images/v1.0/source/creatures-gate.png",
+      "adaptation": "Measured atlas cell crop, matte removed, actual RGBA alpha, anchored and resized"
+    },
+    {
+      "path": "public/assets/v1.0/tower/gate.webp",
+      "source": "creatures-gate.png",
+      "bytes": 21322,
+      "sha256": "a668fa323f39c2984147626c1be50bbc7000f5ad01e5fb3f027f97b5093fe3a8",
+      "width": 256,
+      "height": 256,
+      "alpha_zero": 30471,
+      "alpha_partial": 2698,
+      "decodedRGBABytes": 262144,
+      "anchor": [
+        0.5,
+        0.93
+      ],
+      "use": "DOM tower/gate or Phaser creature, shared within this game",
+      "sourcePath": "assets/images/v1.0/source/creatures-gate.png",
+      "adaptation": "Measured atlas cell crop, matte removed, actual RGBA alpha, anchored and resized"
+    },
+    {
+      "path": "public/assets/v1.0/tower/qinglan-pass.webp",
+      "source": "qinglan-pass.png",
+      "bytes": 138276,
+      "width": 1200,
+      "height": 800,
+      "decodedRGBABytes": 3840000,
+      "sha256": "2bacaadc972bc760086fbfa170cea5ba7ac7c51480623de1c7d903511577555b",
+      "use": "Phaser current-map terrain",
+      "sourcePath": "assets/images/v1.0/source/qinglan-pass.png",
+      "adaptation": "Resized opaque terrain; roads/slots/gate remain runtime geometry"
+    },
+    {
+      "path": "public/assets/v1.0/tower/twin-bends.webp",
+      "source": "twin-bends.png",
+      "bytes": 202498,
+      "width": 1200,
+      "height": 800,
+      "decodedRGBABytes": 3840000,
+      "sha256": "519e5f66e56e90686be6774e5d9dd26b87f859e4ac77bb4defe1326dde77487b",
+      "use": "Phaser current-map terrain",
+      "sourcePath": "assets/images/v1.0/source/twin-bends.png",
+      "adaptation": "Resized opaque terrain; roads/slots/gate remain runtime geometry"
+    },
+    {
+      "path": "public/assets/v1.0/tower/beacon-keep.webp",
+      "source": "beacon-keep.png",
+      "bytes": 149840,
+      "width": 1200,
+      "height": 800,
+      "decodedRGBABytes": 3840000,
+      "sha256": "e1f1d329d81379bf70752751d5f46373fa3431eccf72b790b856341787b66ca9",
+      "use": "Phaser current-map terrain",
+      "sourcePath": "assets/images/v1.0/source/beacon-keep.png",
+      "adaptation": "Resized opaque terrain; roads/slots/gate remain runtime geometry"
+    },
+    {
+      "path": "public/assets/v1.0/tower/theme.ogg",
+      "seconds": 32.0,
+      "peak": 0.2434221388506931,
+      "rms": 0.052857729253922806,
+      "bytes": 166165,
+      "sha256": "9217cb527d1ce3cfc81b4d998362b552a4ee7817a65255589f728cf38882612a",
+      "source": "tools/v1.0/build-music.py",
+      "license": "Original project composition; no external samples"
+    },
+    {
+      "path": "public/assets/v1.0/tower/air.ogg",
+      "seconds": 32.0,
+      "peak": 0.03510739318390718,
+      "rms": 0.007220602621728943,
+      "bytes": 237906,
+      "sha256": "a2778a4e30cb943c6471caa30718228dc3f11892d64da148603ab61e1476cb35",
+      "source": "tools/v1.0/build-music.py",
+      "license": "Original project composition; no external samples"
+    },
+    {
+      "path": "public/assets/v1.0/adventure/theme.ogg",
+      "seconds": 32.0,
+      "peak": 0.20940775953660573,
+      "rms": 0.045249283214646656,
+      "bytes": 168058,
+      "sha256": "af73638a2454cf5de96a968191f725ccd63e589e33506e8e601fbc5bd467c64e",
+      "source": "tools/v1.0/build-music.py",
+      "license": "Original project composition; no external samples"
+    },
+    {
+      "path": "public/assets/v1.0/adventure/air.ogg",
+      "seconds": 32.0,
+      "peak": 0.03358339515493911,
+      "rms": 0.006776263240909701,
+      "bytes": 236236,
+      "sha256": "d5815101ae32a914c789c61ba9bf0092b03785429d158da402bdb6c5361c5e1d",
+      "source": "tools/v1.0/build-music.py",
+      "license": "Original project composition; no external samples"
+    },
+    {
+      "path": "public/assets/v1.0/tower/theme.wav",
+      "seconds": 32.0,
+      "peak": 0.2434221388506931,
+      "rms": 0.052857729253922806,
+      "bytes": 1411278,
+      "sha256": "2da65f47d174ff48c2572272163c7135d9c88e8e719dd090db45201784bb4bf6",
+      "source": "tools/v1.0/build-music.py",
+      "license": "Original project composition; no external samples",
+      "use": "Mono 22050 Hz PCM fallback selected by canPlayType; only one format is fetched"
+    },
+    {
+      "path": "public/assets/v1.0/tower/air.wav",
+      "seconds": 32.0,
+      "peak": 0.03510739318390718,
+      "rms": 0.007220602621728943,
+      "bytes": 1411278,
+      "sha256": "fd375db83db69550748881acbf6e36f903260eba6925ff26d1f29005e7eb3c25",
+      "source": "tools/v1.0/build-music.py",
+      "license": "Original project composition; no external samples",
+      "use": "Mono 22050 Hz PCM fallback selected by canPlayType; only one format is fetched"
+    },
+    {
+      "path": "public/assets/v1.0/adventure/theme.wav",
+      "seconds": 32.0,
+      "peak": 0.20940775953660573,
+      "rms": 0.045249283214646656,
+      "bytes": 1411278,
+      "sha256": "01368fde1161cb4dec6b25b41e5bc75ad4ee16e680b7370b3483f22e71494822",
+      "source": "tools/v1.0/build-music.py",
+      "license": "Original project composition; no external samples",
+      "use": "Mono 22050 Hz PCM fallback selected by canPlayType; only one format is fetched"
+    },
+    {
+      "path": "public/assets/v1.0/adventure/air.wav",
+      "seconds": 32.0,
+      "peak": 0.03358339515493911,
+      "rms": 0.006776263240909701,
+      "bytes": 1411278,
+      "sha256": "f59cf895624655ce21a81b26fe9603858415ea8ba4c213ddd90b6262da64cace",
+      "source": "tools/v1.0/build-music.py",
+      "license": "Original project composition; no external samples",
+      "use": "Mono 22050 Hz PCM fallback selected by canPlayType; only one format is fetched"
+    },
+    {
+      "path": "public/assets/hanzi-tower-defense/tower-base.png",
+      "source": "Kenney towerDefense_tile180.png, approved original preserved",
+      "provenance": "assets/images/hanzi-tower-defense/manifest.json",
+      "sourceURL": "https://kenney.nl/assets/tower-defense-top-down",
+      "license": "CC0 1.0; assets/images/hanzi-tower-defense/Kenney-Tower-License.txt",
+      "width": 64,
+      "height": 64,
+      "decodedRGBABytes": 16384,
+      "bytes": 1921,
+      "sha256": "477cca9e002b7eaa107f72d8b59a976cfc492df66f64ba41a181e311a17eb4ca",
+      "use": "Existing CSS tower foundation"
+    },
+    {
+      "path": "public/assets/v1.0/tower/icon.svg",
+      "source": "Project-authored UI SVG; glyph uses a real font",
+      "bytes": 389,
+      "sha256": "1beae798897525672e5dbc57af5ddc9f3c12fa3c2b0f808bf5566abb3798b000",
+      "use": "Browser icon"
+    },
+    {
+      "path": "public/assets/v1.0/adventure/icon.svg",
+      "source": "Project-authored UI SVG; glyph uses a real font",
+      "bytes": 366,
+      "sha256": "4086750d56b05e7d16094cc50d7e9fcad7eea9ac0f37dd93bb5f2184eff4e650",
+      "use": "Browser icon"
+    }
+  ],
+  "totals": {
+    "runtimeBytes": 7380379,
+    "imageDecodedRGBABytes": 16779264
+  }
+}

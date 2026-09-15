@@ -62,14 +62,14 @@ test('@step5-save direct short-run entry protects future bytes and never migrate
  test.skip(info.project.name!=='desktop','Synthetic corrupt-storage fixture, separate from natural play.');
  const future='{"version":99,"keep":"future raw"}',legacy='{"version":2,"keep":"old raw"}';
  await page.addInitScript(({key,v2,future,legacy})=>{localStorage.setItem(key,future);localStorage.setItem(v2,legacy);},{key:TACTICS_SAVE_KEY,v2:V2_SAVE_KEY,future,legacy});
- await page.goto('./?play=hanzi-tower-defense&scenario=twin-lanes');await expect(page.locator('[data-td-save-note]')).toContainText('暂不可写');await page.locator('[data-td-restart]').click();await page.locator('[data-td-confirm-restart]').click();
+ await page.goto('./?play=hanzi-tower-defense&scenario=twin-lanes');await expect(page.locator('[data-td-save-note]')).toContainText('暂不可写');await activate(page,'[data-td-restart]','mouse');await page.locator('[data-td-confirm-restart]').click();
  expect(await page.evaluate(k=>localStorage.getItem(k),TACTICS_SAVE_KEY)).toBe(future);expect(await page.evaluate(k=>localStorage.getItem(k),V2_SAVE_KEY)).toBe(legacy);expect(await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY)).toBeNull();
 });
 
 test('@step5-layout short controls stay reachable at phone and tablet sizes',async({page},info)=>{
  test.skip(info.project.name!=='touch','Geometry in touch emulation.');
  await page.goto('./?play=hanzi-tower-defense&scenario=twin-lanes');await expect(page.locator('[data-td-canvas]')).toHaveAttribute('data-ready','true');
- for(const [width,height] of [[360,740],[390,844],[768,1024],[1024,768],[1024,1366],[1366,1024],[740,360]]){await page.setViewportSize({width,height});await criticalTargets(page,'.td-controls button,[data-td-tactics]',44);await criticalTargets(page,'[data-slot]',44);await criticalTargets(page,'[data-td-next]',48);}
+ for(const [width,height] of [[360,740],[390,844],[768,1024],[1024,768],[1024,1366],[1366,1024],[740,360]]){await page.setViewportSize({width,height});await criticalTargets(page,'.td-controls button, .td-live-controls button,[data-td-tactics]',44);await criticalTargets(page,'[data-slot]',44);await criticalTargets(page,'[data-td-next]',48);}
 });
 
 test('@step5-speed real 1x/2x, paused zero progress and retry returns to preparation',async({page},info)=>{

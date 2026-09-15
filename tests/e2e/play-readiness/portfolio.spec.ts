@@ -2,6 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { expect, test, type Locator, type Page, type TestInfo } from "@playwright/test";
 import { homeDiscoveryTests } from "./home-discovery-cases";
+import { activate } from "../step4/input-helpers";
 
 homeDiscoveryTests();
 
@@ -180,7 +181,7 @@ test("@a11y modal focus, language parts, target sizes and 200% zoom stay operabl
   await expect(page.locator("[data-world-forest-link]")).toBeFocused();
 
   await page.goto("/?play=hanzi-tower-defense");
-  await page.locator("[data-td-restart]").focus(); await page.keyboard.press("Enter");
+  await activate(page, "[data-td-restart]", "keyboard");
   await expect(page.locator("[data-td-restart-dialog]")).toBeVisible(); await page.keyboard.press("Escape");
   await expect(page.locator("[data-td-restart]")).toBeFocused();
   await page.goto("/?world=math-world&station=slider", { waitUntil: "domcontentloaded" });

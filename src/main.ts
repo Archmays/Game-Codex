@@ -1,4 +1,5 @@
 import "./styles.css";
+import { PRODUCT_VERSION } from '../packages/presentation/settings';
 import "./page-mode.css";
 import { normalizeRetiredLanguageRoute, normalizeRetiredMathRoute, pageModeForSearch, resolveAppRoute } from "./app-route";
 import { activatePageMode } from "./page-mode";
@@ -15,6 +16,12 @@ function setBrowserIdentity(title: string, themeColor: string): void {
   document.title = title;
   const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
   if (meta) meta.content = themeColor;
+}
+
+function setProductIcon(product: 'tower' | 'adventure'): void {
+  let icon=document.querySelector<HTMLLinkElement>('link[rel="icon"]');
+  if(!icon){icon=document.createElement('link');icon.rel='icon';document.head.append(icon);}
+  icon.href=`./assets/v1.0/${product}/icon.svg`;icon.type='image/svg+xml';
 }
 
 function renderRouteLoading(root: HTMLElement): void {
@@ -43,14 +50,16 @@ async function mountApp(root: HTMLElement): Promise<void> {
   activatePageMode(pageModeForSearch(search));
 
   if (route.kind === "play" && play === "hanzi-word-adventure") {
-    setBrowserIdentity("字间行者", "#f5f0e4");
+    setBrowserIdentity(`字间行者 · v${PRODUCT_VERSION}`, "#faf5e9");
+    setProductIcon('adventure');
     const { mountHanziWordAdventure } = await import("../games/hanzi-word-adventure");
     mountHanziWordAdventure(root);
     return;
   }
 
   if (route.kind === "play" && play === "hanzi-tower-defense") {
-    setBrowserIdentity("字阵守城", "#102f2d");
+    setBrowserIdentity(`字阵守城 · v${PRODUCT_VERSION}`, "#102f2d");
+    setProductIcon('tower');
     const { mountHanziTowerDefense } = await import("../games/hanzi-tower-defense");
     mountHanziTowerDefense(root);
     return;
@@ -71,7 +80,7 @@ async function mountApp(root: HTMLElement): Promise<void> {
   }
 
   if (route.kind === 'world' && search.getAll('playtest').length === 1 && search.get('playtest') === 'step4') {
-    setBrowserIdentity('本次试玩 · Game-Codex STEP5', '#f4f0e5');
+    setBrowserIdentity(`本次试玩 · Game-Codex v${PRODUCT_VERSION}`, '#f4f0e5');
     const { mountStep4Playtest } = await import('../apps/step4-playtest');
     mountStep4Playtest(root);
     return;

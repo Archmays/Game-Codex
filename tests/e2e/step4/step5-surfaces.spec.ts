@@ -1,6 +1,6 @@
 import {mkdirSync,writeFileSync,readFileSync} from 'node:fs';
 import {expect,test} from '@playwright/test';
-import {activate,criticalTargets,fromHome,type InputMode} from './input-helpers';
+import {activate,criticalTargets,fromHome,keyReach,type InputMode} from './input-helpers';
 import {shortClip} from './short-clip';
 import {companionAction,companionReady,readCompanion} from '../hanzi-word-adventure/step5-helpers';
 import {act} from '../../../games/hanzi-word-adventure/model';
@@ -9,7 +9,7 @@ import {solve} from '../../../games/hanzi-word-adventure/solver';
 import {TACTICS_SAVE_KEY} from '../../../games/hanzi-tower-defense/save';
 import {tacticsRegion} from '../hanzi-tower-defense/step5-input';
 
-const evidence='tmp/tasks/GAME-CODEX-STEP5';
+const evidence=process.env.GAME_CODEX_EVIDENCE_ROOT??'tmp/tasks/GAME-CODEX-V1.0';
 test('@step5-keypath new modes use ordinary inputs, restore and return across browsers',async({page},info)=>{
  test.skip(!['desktop','phone-390','firefox','webkit'].includes(info.project.name));
  const mode:InputMode=['phone-390','webkit'].includes(info.project.name)?'touch':'keyboard';
@@ -38,9 +38,19 @@ test('@step5-keypath new modes use ordinary inputs, restore and return across br
 });
 
 test('@step5-geometry all companion rooms and tactical controls at seven sizes, candidate visual and ARIA',async({page},info)=>{
+ // Five rooms are reached by ordinary play, then every target is scrolled and hit-tested.
+ // Keep the per-action limits; allow the complete sequence on a busy runner.
+ test.setTimeout(240_000);
  test.skip(['firefox','webkit'].includes(info.project.name));mkdirSync(`${evidence}/surfaces`,{recursive:true});const rows:unknown[]=[];
  for(let index=0;index<5;index++){
   await page.goto('?play=hanzi-word-adventure&chapter=companions');await companionReady(page);
+  // Static visual proof uses the product's real setting. Some Chromium runtimes
+  // report no-preference despite the context emulation; never mask moving glyphs.
+  if(await page.locator('.hway').getAttribute('data-reduced-motion')!=='true'){
+   const mode:InputMode=info.project.use.hasTouch?'touch':'keyboard';
+   await activate(page,'[data-hway-motion]',mode);await activate(page,'[data-hway-settings-close]',mode);
+   if(mode==='keyboard')await keyReach(page,'[data-hway-grid]');
+  }
   // Each room's ordinary entry is its previous room completion. Keep one context and use real actions.
   for(let previous=0;previous<index;previous++){
    const journey=await readCompanion(page);if(journey.room>15+previous)continue;
@@ -49,6 +59,7 @@ test('@step5-geometry all companion rooms and tactical controls at seven sizes, 
    await activate(page,'[data-hway-next]',info.project.use.hasTouch?'touch':'keyboard');
   }
   await expect(page.locator('.hway')).toHaveAttribute('data-room',`companions-${index+1}`);
+  await expect(page.locator('.hway')).toHaveAttribute('data-reduced-motion','true');
   rows.push({room:`companions-${index+1}`,targets:await criticalTargets(page,'[data-hway-cell], [data-hway-actor], [data-hway-move], [data-hway-primary], .hway-toolbar button')});
   const group=await page.locator('.hway-controls').evaluate(element=>{
    const selectors=['[data-hway-move]','[data-hway-primary]'];const boxes=selectors.flatMap(s=>[...element.querySelectorAll(s)]).map(e=>e.getBoundingClientRect());return Math.max(...boxes.map(r=>r.bottom))-Math.min(...boxes.map(r=>r.top));
@@ -62,7 +73,7 @@ test('@step5-geometry all companion rooms and tactical controls at seven sizes, 
   }
  }
  await page.goto('?play=hanzi-tower-defense&scenario=twin-lanes');await expect(page.locator('[data-td-canvas]')).toHaveAttribute('data-ready','true');
- rows.push({scenario:'twin-lanes',targets:await criticalTargets(page,'[data-slot], .td-controls button, [data-td-tactics]')});
+ rows.push({scenario:'twin-lanes',targets:await criticalTargets(page,'[data-slot], .td-controls button, .td-live-controls button, [data-td-tactics]')});
  await page.screenshot({path:`${evidence}/surfaces/tactics-${info.project.name}.png`,fullPage:true});
  const tacticsAria=await page.locator('.td-game').ariaSnapshot(),tacticsAriaPath=`${evidence}/surfaces/tactics-${info.project.name}.aria.txt`;
  if(process.env.STEP5_VISUAL==='verify')expect(tacticsAria).toBe(readFileSync(tacticsAriaPath,'utf8'));else writeFileSync(tacticsAriaPath,tacticsAria);

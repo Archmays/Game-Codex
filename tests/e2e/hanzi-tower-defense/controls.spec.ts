@@ -1,3 +1,4 @@
+import { activate } from '../step4/input-helpers';
 import { mkdirSync, writeFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
 import { SAVE_KEY } from "../../../games/hanzi-tower-defense/save";
@@ -22,7 +23,7 @@ test("readable targets, correct structure, click/drag alternatives, mute and red
     expect(targets.every(t=>t.width>=44&&t.height>=44)).toBe(true); geometry.push({size,targets});
   }
   await page.setViewportSize(info.project.name==="touch"?{width:390,height:844}:{width:1440,height:1000});
-  const act=async(selector:string)=>{const node=page.locator(selector);await node.scrollIntoViewIfNeeded();if(info.project.name==="touch")await node.tap();else await node.click();};
+  const act=(selector:string)=>activate(page,selector,info.project.name==='touch'?'touch':'mouse');
   // Invalid selection is reversible and consumes nothing.
   await act('[data-core="2"]');await act('[data-core="3"]');await expect(page.locator('[data-td-fuse]')).toBeDisabled();await expect(page.locator('[data-core]')).toHaveCount(5);await act('[data-td-clear]');
   if(info.project.name==="desktop")await page.locator('[data-core="3"]').dragTo(page.locator('[data-slot="1"]'));
@@ -58,7 +59,7 @@ test("future and corrupt tower saves remain byte-exact while gameplay stays avai
   for(const raw of ['{broken','{"version":99,"future":true}']){
     await page.goto('/');await page.evaluate(([key,value])=>localStorage.setItem(key,value),[SAVE_KEY,raw]);
     await page.goto('/?play=hanzi-tower-defense');await expect(page.locator('[data-td-canvas]')).toHaveAttribute('data-ready','true');
-    await page.locator('[data-td-mute]').click();await expect(page.locator('[data-td-save-note]')).toContainText('原有记录未改动');
+    await activate(page,'[data-td-mute]','mouse');await expect(page.locator('[data-td-save-note]')).toContainText('原有记录未改动');
     expect(await page.evaluate(key=>localStorage.getItem(key),SAVE_KEY)).toBe(raw);
   }
 });

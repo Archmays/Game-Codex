@@ -37,9 +37,27 @@ export async function keyReach(page: Page, selector: string, region?: string): P
   throw new Error(`Tab cannot reach ${selector}; active=${await page.evaluate(()=>document.activeElement?.outerHTML)}`);
 }
 export async function activate(page: Page, selector: string, mode: InputMode, region?: string, key='Enter'): Promise<void> {
+  await revealControl(page,selector,mode);
   if (mode === 'keyboard') { await keyReach(page, selector, region); await page.keyboard.press(key); }
   else if (mode === 'touch') await page.locator(selector).first().tap();
   else await page.locator(selector).first().click();
+}
+/** Traverse the product's visible settings surface with the same real input modality. */
+export async function revealControl(page: Page,selector:string,mode:InputMode):Promise<void>{
+  for(const owner of ['td','hway']){
+    const dialog=page.locator(`[data-${owner}-settings-dialog]`);
+    if(await dialog.isVisible() && await page.locator(selector).first().count() && !await page.locator(selector).first().evaluate(el=>!!el.closest('dialog'))){
+      await activate(page,`[data-${owner}-settings-close]`,mode);
+    }
+  }
+  if (/^\[data-(td|hway)-(mute|motion|reset|restart)\]$/.test(selector) && !await page.locator(selector).first().isVisible()) {
+    const owner=selector.includes('data-td-')?'td':'hway';
+    if(!await page.locator(`[data-${owner}-settings-dialog]`).isVisible()) await activate(page,`[data-${owner}-settings]`,mode);
+    if (selector.includes('reset') || selector==='[data-td-restart]') {
+      const details=page.locator(`[data-${owner}-settings-dialog] details:has(${selector})`);
+      if(!await details.evaluate(el=>(el as HTMLDetailsElement).open))await activate(page,`[data-${owner}-settings-dialog] details:has(${selector}) > summary`,mode);
+    }
+  }
 }
 export async function fromHome(page: Page, mode: InputMode, destination:'math'|'adventure'|'forest'|'playtest'): Promise<void> {
   await page.goto('./?world=my-game-world');

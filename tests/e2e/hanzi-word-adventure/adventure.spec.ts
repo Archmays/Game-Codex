@@ -1,3 +1,4 @@
+import { revealControl } from '../step4/input-helpers';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { expect, test, type Page } from '@playwright/test';
 import { CHAPTERS, ROOMS } from '../../../games/hanzi-word-adventure/rooms';
@@ -16,6 +17,7 @@ async function tabTo(page: Page, selector: string) {
   throw Error(`No real Tab route to ${selector}; active=${await page.locator(':focus').evaluate(e=>e.outerHTML)}`);
 }
 async function activate(page: Page, selector: string, input: Input) {
+  await revealControl(page,selector,input==='keyboard'?'keyboard':input==='touch'?'touch':'mouse');
   const el = page.locator(selector);
   if (input === 'keyboard') { await tabTo(page,selector); await page.keyboard.press('Enter'); }
   else { if(input === 'touch') await el.tap(); else await el.click(); }
@@ -172,7 +174,7 @@ test('compact/tablet/desktop/zoom geometry, font availability, scrolling and sav
   await page.evaluate(() => { document.body.style.zoom = '1.25'; }); await page.setViewportSize({ width: 768, height: 600 });
   await activate(page, '[data-hway-move=right]', info.project.name === 'touch' ? 'touch' : 'pointer'); expect((await saved(page)).state.player).toBe(9);
   await page.evaluate(() => { document.body.style.zoom = ''; });
-  await page.setViewportSize({ width: 390, height: 600 }); await page.locator('.hway-help summary').click();
+  await page.setViewportSize({ width: 390, height: 600 }); await page.locator('.hway-help > summary').click();
   await page.mouse.wheel(0, 400); await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(0);
   writeFileSync(`${evidence}/geometry-${info.project.name}.json`, JSON.stringify(rows, null, 2));
   for (const invalid of ['{broken', '{"version":99}']) {
@@ -196,15 +198,15 @@ test('home and Classic are real single-target entries, with return, history and 
 
 test('refresh during a live animation is one complete action with undo; touch pan never moves a letter', async ({ page }, info) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await open(page); await page.locator('.hway-help summary').click();
+  await open(page); await page.locator('[data-hway-settings]').click();
   await expect(page.locator('[data-hway-motion]')).toHaveAttribute('aria-pressed', 'true');
-  await page.locator('[data-hway-motion]').click(); await page.locator('.hway-help summary').click();
+  await page.locator('[data-hway-motion]').click(); await page.locator('[data-hway-settings-close]').click();
   await page.locator('[data-hway-move=right]').click();
   await expect(page.locator('.hway')).toHaveAttribute('data-busy', 'true');
   await page.reload(); await begin(page, info.project.name === 'touch' ? 'touch' : 'keyboard');
   expect((await saved(page)).state.player).toBe(9); await page.locator('[data-hway-undo]').click(); expect((await saved(page)).state).toEqual(ROOMS[0].initial);
   if (info.project.name === 'touch') {
-    await page.setViewportSize({ width: 390, height: 600 }); await page.locator('.hway-help summary').click(); await page.evaluate(() => scrollTo(0, 0));
+    await page.setViewportSize({ width: 390, height: 600 }); await page.locator('.hway-help > summary').click(); await page.evaluate(() => scrollTo(0, 0));
     const before = await raw(page), session = await page.context().newCDPSession(page);
     await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 160, y: 350 }] });
     for (const y of [325, 300, 270, 230, 190, 140]) await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 160, y }] });
@@ -236,7 +238,7 @@ test('new chapters are completed through real keyboard or touch, with independen
     await page.screenshot({path:`${evidence}/${input}-${chapter.id}-complete.png`,fullPage:true});
   }
   const finished=JSON.parse((await raw(page))!);expect(finished.chapters.lamplight.roomId).toBe('light-5');expect(finished.chapters.confluence.roomId).toBe('woven-5');
-  await activate(page,'[data-hway-saves]',input);await activate(page,'[data-hway-continue]',input);await expect(page.locator('[data-hway-chapter=lamplight]')).toContainText('light-5');await activate(page,'[data-hway-chapter=lamplight]',input);
+  await activate(page,'[data-hway-saves]',input);await activate(page,'[data-hway-continue]',input);await expect(page.locator('[data-hway-chapter=lamplight]')).toContainText(ROOMS[9].title);await activate(page,'[data-hway-chapter=lamplight]',input);
   await activate(page,'[data-hway-undo]',input);expect((await saved(page)).state.won).toBe(false);const beforeReset=await raw(page);
   await activate(page,'[data-hway-reset]',input);await activate(page,'[data-hway-cancel-restart]',input);expect(await raw(page)).toBe(beforeReset);
   await activate(page,'[data-hway-reset]',input);await activate(page,'[data-hway-confirm-restart]',input);expect((await saved(page)).roomId).toBe('light-1');expect((await saved(page)).state).toEqual(ROOMS[5].initial);

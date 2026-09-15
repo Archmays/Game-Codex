@@ -1,0 +1,11 @@
+.presentation-controls {display:grid;gap:10px;min-width:0;margin-top:12px}
+.presentation-controls label {display:grid;grid-template-columns:3em minmax(80px,1fr) 3em;align-items:center;gap:10px;font-size:14px;min-height:44px}
+.presentation-controls input {width:100%;min-width:44px;min-height:44px;accent-color:#bf913a;cursor:pointer}
+.presentation-controls output {font-size:12px;text-align:right}
+.presentation-controls p {font-size:13px;line-height:1.7;margin:0}
+.presentation-controls a {display:inline-flex;min-height:44px;align-items:center;color:inherit}
+.presentation-controls [aria-pressed=true] {outline:2px solid currentColor;outline-offset:-4px}
+.product-version {font:11px/1.5 "Microsoft YaHei",sans-serif;letter-spacing:.04em;opacity:.8;white-space:nowrap}
+.product-guide {display:flex;align-items:center;gap:10px;font-size:13px;line-height:1.6;padding:8px 12px;border:1px solid #aa8a47;border-radius:8px;margin:8px 0}
+.product-guide p {margin:0;flex:1}.product-guide button {flex-shrink:0}
+@media(prefers-reduced-motion:reduce){.product-guide{scroll-behavior:auto}}

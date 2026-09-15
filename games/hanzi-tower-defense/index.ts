@@ -1,3 +1,7 @@
+import { openPresentation, PRODUCT_VERSION } from '../../packages/presentation/settings';
+import { MusicLoops } from '../../packages/presentation/music';
+import { presentationControls, bindPresentationControls } from '../../packages/presentation/controls';
+import '../../packages/presentation/styles.css';
 import { bindInputLifecycle, ignoreGameKey, rovingGroup, preserveRegionFocus } from "../../packages/ui/input";
 import { DEFENSE_MAPS, MAP_IDS, mapFor, isMapId, type MapId } from "./maps";
 import Phaser from "phaser";
@@ -10,6 +14,7 @@ import { openSave, openTacticsSave, type StorageLike } from "./save";
 import { SCENARIOS, SCENARIO_IDS, isScenarioId, rulesFor, type ScenarioId } from './tactics';
 import { DefenseScene } from "./scene";
 import "./styles.css";
+import "./v1.css";
 
 export const hanziTowerDefenseGame: GameDefinition = {
   id: "hanzi-tower-defense", title: "字阵守城", description: "摆下字塔，把部件合成汉字，守住最后一弯。", subject: "识字", recommendedAge: "6 岁起", learningGoal: "在守城中观察部件结构与双字词序。", status: "可玩", playLabel: "开始守城", route: "?play=hanzi-tower-defense&from=hub",
@@ -22,14 +27,16 @@ function browserStorage(): StorageLike { try { return window.localStorage; } cat
 
 export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.location.assign(new URLSearchParams(window.location.search).get("from") === "hub" ? "?hub=classic&from=world" : "?world=my-game-world")): MountedGame {
   const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const requestedScenario=new URLSearchParams(window.location.search).get('scenario');
+  let requestedScenario=new URLSearchParams(window.location.search).get('scenario');
   const storage=browserStorage(),defaults={muted:false,reducedMotion:media.matches};
+  const presentation=openPresentation(storage,'tower'), visual= presentation.value;
+  if(!requestedScenario && !new URLSearchParams(location.search).has('map') && isScenarioId(visual.lastContent)) requestedScenario=visual.lastContent;
   let campaignSave:ReturnType<typeof openSave>|null=isScenarioId(requestedScenario)?null:openSave(storage,defaults);
   const campaign=()=>campaignSave??(campaignSave=openSave(storage,defaults));
   const tacticsSave=openTacticsSave(storage,defaults);
   let state=isScenarioId(requestedScenario)?tacticsSave.load(requestedScenario)??newTactics(requestedScenario):campaign().state;
   let preferences=isScenarioId(requestedScenario)?tacticsSave.preferences:campaign().preferences, selection:number[]=[],destroyed=false,inventorySignature='',statusSignature='';
-  const requestedMap=new URLSearchParams(window.location.search).get('map');
+  const requestedMap=new URLSearchParams(window.location.search).get('map') ?? (isMapId(visual.lastContent) ? visual.lastContent : null);
   if(!isScenarioId(requestedScenario)&&isMapId(requestedMap))state=campaign().load(requestedMap)??newBattle(DEFAULT_SEED,[],requestedMap);
   const activeSave=()=>state.scenarioId?tacticsSave:campaign();
   let SLOTS=mapFor(state.mapId).slots,WAVES=rulesFor(state).waves,pendingMap:MapId=state.mapId??'qinglan-pass',pendingScenario:ScenarioId|undefined=state.scenarioId,rangeOnly=false,resultPresented=false,bossAnnouncement='';
@@ -42,23 +49,26 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
   let draggedId: number | null = null, showAllRanges = false, rangeSignature = "";
   let englishSelected: number | null = null, equipmentTarget: number | null = null, englishDragged: number | null = null;
   let equipmentPreview: EquipmentPreview | null = null, pendingRecycle: number | null = null, englishSignature = "";
-  const audio = new BattleAudio(); audio.muted = preferences.muted;
+  const audio = new BattleAudio(); audio.muted = preferences.muted; audio.setVolume(visual.effects);
+  const music=new MusicLoops('tower',failed=>{ const retry=root.querySelector<HTMLElement>('[data-presentation-retry]'); if(retry)retry.hidden=!failed; });
+  let fusionAnimation=0, sceneAssetsFailed=false, returnToManagement=false;
+  const failedImages=new Set<HTMLImageElement>();
   const timers = new Set<number>();
   root.className = "td-mount";
   root.innerHTML = `<main class="td-game" aria-labelledby="td-title" data-testid="hanzi-tower-defense">
-    <header class="td-header"><div class="td-brand"><span class="td-seal" aria-hidden="true">守</span><div><p data-td-map-title>${rulesFor(state).title} · ${rulesFor(state).description}</p><h1 id="td-title">字阵守城</h1></div><button type="button" data-td-tactics>战术短局</button></div>
-      <nav class="td-controls" aria-label="守城操作"><button type="button" data-td-home>返回</button><button type="button" data-td-restart>重置进度</button><button type="button" data-td-new>新游戏</button><button type="button" data-td-continue>继续游戏</button><button type="button" data-td-mute aria-pressed="false">静音</button><button type="button" data-td-motion aria-pressed="false">减少动态</button><button type="button" data-td-speed aria-pressed="false" aria-label="战斗速度1倍，切换为2倍">速度 1×</button><button type="button" data-td-pause class="td-pause" aria-pressed="false">暂停</button></nav>
+    <header class="td-header"><div class="td-brand"><span class="td-seal" aria-hidden="true">守</span><div><p data-td-map-title>${rulesFor(state).title} · ${rulesFor(state).description}</p><h1 id="td-title">字阵守城 <span class="product-version">v${PRODUCT_VERSION}</span></h1></div><button type="button" data-td-tactics>战术短局</button></div>
+      <nav class="td-controls" aria-label="守城操作"><button type="button" data-td-home>返回</button><button type="button" data-td-settings>设置</button><button type="button" data-td-new>新游戏</button><button type="button" data-td-continue>继续游戏</button></nav>
     </header>
-    <div class="td-ribbon"><span data-td-wave></span><span class="td-gate-health">城门 <strong data-td-health>16</strong><span class="td-health-track" aria-hidden="true"><i data-td-health-fill></i></span></span><span data-td-enemies></span></div>
+    <button type="button" class="td-resume" data-td-resume hidden></button><button type="button" class="td-asset-retry" data-td-art-retry hidden>部分图像未载入，仍可操作 · 重试图像</button><div class="product-guide" data-td-guide ${visual.guideSeen?'hidden':''}><p>点一枚字核，再点空塔位。两枚可搭配的字核，先看去向，再组合。</p><button type="button" data-td-guide-close>知道了</button></div><div class="td-ribbon" role="region" aria-label="战况与暂停速度"><span data-td-wave></span><span class="td-gate-health">城门 <strong data-td-health>16</strong><span class="td-health-track" aria-hidden="true"><i data-td-health-fill></i></span></span><span data-td-enemies></span><div class="td-live-controls"><button type="button" data-td-speed aria-pressed="false" aria-label="战斗速度1倍，切换为2倍">速度 1×</button><button type="button" data-td-pause class="td-pause" aria-pressed="false">暂停</button></div></div>
     <div class="td-layout"><section class="td-battle-column" aria-label="守城战场">
       <div class="td-board" data-td-board><div class="td-canvas" data-td-canvas aria-hidden="true"></div>
         <svg class="td-ranges" data-td-ranges viewBox="0 0 ${MAP.width} ${MAP.height}" preserveAspectRatio="none" aria-hidden="true"></svg>
-        <div class="td-slots" role="group" aria-label="塔位区，方向键选择，Tab 离开">${SLOTS.map((slot, index) => `<button type="button" class="td-slot" data-slot="${index}" style="left:${slot.x / MAP.width * 100}%;top:${slot.y / MAP.height * 100}%" aria-label="塔位${index + 1} ${slot.name}，空位"><img class="td-tower-art" alt="" hidden><span class="td-slot-glyph">＋</span><small>${index + 1}</small></button>`).join("")}</div>
+        <div class="td-gate" data-td-gate aria-hidden="true"><img src="./assets/v1.0/tower/gate.webp" alt=""><span>城</span></div><div class="td-slots" role="group" aria-label="塔位区，方向键选择，Tab 离开">${SLOTS.map((slot, index) => `<button type="button" class="td-slot" data-slot="${index}" style="left:${slot.x / MAP.width * 100}%;top:${slot.y / MAP.height * 100}%" aria-label="塔位${index + 1} ${slot.name}，空位"><img class="td-tower-art" alt="" hidden><span class="td-slot-glyph">＋</span><small>${index + 1}</small></button>`).join("")}</div>
         <span class="td-road-entry" aria-hidden="true">来路 →</span><div class="td-field-message" data-td-field-message hidden></div><div class="td-drops" data-td-drops aria-hidden="true"></div><div class="td-synthesis" data-td-synthesis aria-hidden="true" hidden></div>
       </div>
       <div class="td-range-tools"><span data-td-range-caption>指向或点选字塔，查看攻击范围</span><button type="button" data-td-inspect aria-pressed="false">只看射程</button><button type="button" data-td-all-ranges aria-pressed="false">显示全部射程</button></div>
       <button type="button" class="td-english-notice" data-td-english-notice hidden></button>
-      <section class="td-tactics-brief" data-td-tactics-brief hidden aria-label="短局出发前"><p data-td-tactics-rules></p><details><summary>看看三波来路与奖励</summary><ol data-td-tactics-waves></ol></details></section>
+      <details class="td-tactics-brief" data-td-tactics-brief hidden><summary>本短局规则、三波来路与奖励</summary><p data-td-tactics-rules></p><ol data-td-tactics-waves></ol></details>
       <div class="td-wave-action"><p data-td-wave-hint></p><button type="button" class="td-primary" data-td-next>开始这一波</button></div>
       <button type="button" data-td-retry hidden>重整本波</button><section class="td-tactics-summary" data-td-tactics-summary hidden aria-label="最近两次战况"></section>
       <p class="td-feedback" role="status" aria-live="polite" data-td-feedback>${state.scenarioId?"固定材料已在栏里。先选材料，再点空塔位，也可以先合成。":"火塔已就位。点一枚材料，再点空塔位。也可以先暂停。"}</p>
@@ -75,6 +85,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
       <details class="td-help"><summary>操作小提示</summary><p>点材料或塔上的字，再点空位部署。选两枚字核，先看结构和去向，再确认组合；材料先选谁都可以。点亮的字核能搭配，选满两枚后点另一枚可换搭档。</p><p>英文核是装备，每枚只强化一座同义中文词塔。先点英文再点塔、先点塔再点英文，或把英文拖到塔上，都先预览再确认。材料栏里的完整中文词核也能装备，再部署。还没合出对应词塔，可以先保留英文核。</p><p>战中可以首次装备；卸下、转移和回收带附件的字核，等这一波结束再做。暂停仍在战中。移动或收回字塔，英文会跟随。</p><p>指向或聚焦字塔只查看攻击范围；范围圈表示能选择攻击目标的距离，命中后的爆炸或减速扩散另算。选一枚字核，指向空位可先看覆盖，触屏直接点空位即可部署。</p><p>键盘 Tab 跨区，材料／塔位／英文区内用方向键、Home／End 快选，Enter 或 Space 确认；P 暂停，Esc 取消选择。聚焦塔位即可独立查看射程，触屏可切换“只看射程”。鼠标可拖字核到空位部署，拖到字塔则先预览组合；触屏点两枚字核，再确认即可。</p><p>顶部“速度”可切换 1×／2×，默认 1×。加速会一起加快怪物、攻击和呼援倒计时；暂停时切换速度仍不推进战斗。切图、重置、再守一局或刷新后回到 1×，速度只用于本页。</p><p>刷新回到这一波开始前，已完成波次保留。未完成波次的中英文掉落、装备和材料消耗一起重来。多余材料可回收修补本局城门。</p><p>法术是游戏想象，不是字源。“氵”叫三点水，是非成字部件。</p></details>
       <p class="td-save-note" data-td-save-note></p>
     </aside></div>
+    <dialog class="td-dialog" data-td-settings-dialog aria-label="声音与显示设置"><h2>声音与显示</h2><button type="button" data-td-mute aria-pressed="false">静音</button><button type="button" data-td-motion aria-pressed="false">减少动态</button>${presentationControls(visual)}<details><summary>进度管理</summary><button type="button" data-td-restart>重置进度</button></details><button type="button" data-td-settings-close>返回战场</button></dialog>
     <dialog class="td-dialog" data-td-restart-dialog aria-labelledby="td-restart-title"><h2 id="td-restart-title">重置这张地图的进度？</h2><p><span data-td-reset-copy>这张地图将从第一波重新布阵，发现的配方也会重置。其他地图和旧存档原文保留。</span></p><div><button type="button" data-td-cancel-restart>继续这一局</button><button type="button" class="td-primary" data-td-confirm-restart>重新开始</button></div></dialog>
     <dialog class="td-dialog" data-td-map-dialog aria-labelledby="td-map-dialog-title"><h2 id="td-map-dialog-title">选择地图</h2><p data-td-map-note>每张地图独立继续。未结束的波次会回到波前检查点，材料一起回滚。</p><div class="td-map-list" data-td-map-list></div><button type="button" data-td-map-cancel>返回战场</button></dialog>
     <dialog class="td-dialog td-result" data-td-result aria-labelledby="td-result-title"><span class="td-result-seal" aria-hidden="true">关</span><h2 id="td-result-title"></h2><p data-td-result-copy></p><div><button type="button" data-td-result-retry hidden>重整本波</button><button type="button" class="td-primary" data-td-replay>再守一局</button><button type="button" data-td-result-home>回游戏世界</button></div><p class="td-result-foot">发现的配方已经留下。换条组合路线再试试。</p></dialog>
@@ -84,7 +95,18 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
   const gameRoot = el<HTMLElement>(".td-game"), board = el<HTMLElement>("[data-td-board]"), bag = el<HTMLElement>("[data-td-bag]"), feedback = el<HTMLElement>("[data-td-feedback]");
   const restartDialog = el<HTMLDialogElement>("[data-td-restart-dialog]"), resultDialog = el<HTMLDialogElement>("[data-td-result]");
   const mapDialog=el<HTMLDialogElement>('[data-td-map-dialog]');
-  const bagKeys=rovingGroup(bag,{items:'[data-core]',columns:()=>Math.max(1,getComputedStyle(bag).gridTemplateColumns.split(' ').length)});
+  // Native Tab may center a low composer button and scroll the field away.
+  // Reclaim only available space, without moving focus or a pointer's pressed target.
+  const keepBattleContext = (event: FocusEvent) => {
+    const target=event.target;
+    if(destroyed || innerWidth>900 || innerHeight<=540 || !(target instanceof HTMLElement) || !target.matches(':focus-visible') || !target.closest('.td-composer'))return;
+    const field=board.getBoundingClientRect(),bar=el<HTMLElement>('.td-ribbon').getBoundingClientRect(),control=target.getBoundingClientRect();
+    const needed=bar.bottom+Math.min(field.height,160)-field.bottom,available=innerHeight-16-control.bottom;
+    if(needed>0 && available>0)window.scrollBy({top:-Math.min(needed,available,scrollY),behavior:'instant'});
+  };
+  root.addEventListener('focusin',keepBattleContext);
+
+  const bagKeys=rovingGroup(bag,{items:'[data-core]',columns:()=>Math.max(1,Math.min(bag.querySelectorAll('[data-core]').length,getComputedStyle(bag).gridTemplateColumns.split(' ').length))});
   const slotKeys=rovingGroup(el('.td-slots'),{items:'[data-slot]'});
   const englishKeys=rovingGroup(el('[data-td-english-bag]'),{items:'[data-english]'});
   const lifecycle=bindInputLifecycle(root,(event)=>{
@@ -95,7 +117,8 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
   });
   function later(action: () => void, delay: number): void { const id = window.setTimeout(() => { timers.delete(id); if (!destroyed) action(); }, delay); timers.add(id); }
   function message(text: string): void { feedback.textContent = text; }
-  function persist(): void { const ok = activeSave().write(state, preferences); el("[data-td-save-note]").textContent = ok ? "按波次自动保存 · 只保存在本机" : "存档暂不可写，本页仍可玩；原有记录未改动。"; }
+  function savePresentation():void { el('[data-presentation-status]').textContent=presentation.write()?'':'设置仅在本页生效，原有设置已保护。重新打开页面后可再试。'; }
+  function persist(): void { visual.lastContent=state.scenarioId??state.mapId??'qinglan-pass';savePresentation(); const ok = activeSave().write(state, preferences); el("[data-td-save-note]").textContent = ok ? "按波次自动保存 · 只保存在本机" : "存档暂不可写，本页仍可玩；原有记录未改动。"; }
   function selectedCores(): Core[] { return selection.map(id => state.cores.find(c => c.id === id)).filter((c): c is Core => !!c); }
   function prepare(ids: number[], target?: number | null, recipeId?: string): void {
     selection = [...new Set(ids)].filter(id => state.cores.some(c => c.id === id));
@@ -168,9 +191,9 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
       slot.classList.toggle("td-partner", !!c && isPartner(c)); slot.draggable = !!c;
       slot.dataset.towerId = c ? String(c.id) : "";
       slot.dataset.kind = c?.kind ?? ""; slot.dataset.resonant = String(!!c && !!activeResonance(state,c));
-      const art = slot.querySelector<HTMLImageElement>('.td-tower-art')!, illustrated = c?.kind === 'volcano' || c?.kind==='wildwood';
+      const art = slot.querySelector<HTMLImageElement>('.td-tower-art')!, illustrated = !!c && CORE_ORDER.includes(c.kind);
       slot.classList.toggle('td-slot--illustrated', illustrated); art.hidden = !illustrated;
-      if (illustrated) { const src = `./assets/hanzi-tower-defense/${c?.kind==='wildwood'?'mountain-forest':'volcano'}-${activeResonance(state,c!) ? 'resonant' : 'base'}.png`; if (art.getAttribute('src') !== src) art.setAttribute('src',src); }
+      if (illustrated) { const src = `./assets/v1.0/tower/${c!.kind}${activeResonance(state,c!) ? '-resonant' : ''}.webp`; if (art.getAttribute('src') !== src) art.setAttribute('src',src); }
       slot.classList.toggle("td-slot--available", !c && selection.length === 1);
       slot.style.setProperty("--core-color", c ? color(c.kind) : "#c8ceba");
       slot.querySelector(".td-slot-glyph")!.textContent = c ? CORES[c.kind].glyph : "＋";
@@ -186,9 +209,11 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
       id=>id.startsWith('target:')?composer.querySelector<HTMLElement>(`[data-fusion-target="${id.slice(7)}"]`):composer.querySelector<HTMLElement>(`[data-result-recipe="${id.slice(7)}"]`),
       ()=>button('[data-td-clear]'));
   }
+  function composerIdle(idle:boolean):void { el('.td-composer').setAttribute('data-idle',String(idle)); }
   function renderComposerContent(): void {
     el('.td-composer').hidden = englishSelected !== null || pendingRecycle !== null;
     const selected = selectedCores(), a = selected[0], b = selected[1];
+    composerIdle(selected.length===0);
     const completeWord=selected.length===1 && CORES[a.kind].structure==='word';
     el('.td-composer').dataset.wordDetail=String(completeWord);
     el('.td-composer h2').textContent=completeWord?'字塔详情':'组合台';
@@ -231,6 +256,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     message('点亮的完整中文词核可以共鸣。选好塔位或背包字核，再确认装备。');
   }
   function renderEquipment(): void {
+    el('.td-english').hidden=state.englishCores.length===0 && !pendingRecycle;
     const signature = `${englishSelected}:${equipmentTarget}:${pendingRecycle}:${state.phase}:${state.health}:${state.englishCores.map(e=>`${e.id}:${e.attachedTo}`).join('|')}:${state.cores.map(c=>`${c.id}:${c.slot}`).join('|')}`;
     if (englishSignature === signature) return; englishSignature = signature;
     const list = el('[data-td-english-bag]');
@@ -271,13 +297,14 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
   }
   function updateStatus(): void {
     if (destroyed) return;
-    button('[data-td-new]').textContent=state.scenarioId?'新战役':'新游戏';button('[data-td-continue]').textContent=state.scenarioId?'继续战役':'继续游戏';
+    const end=mapFor(state.mapId).paths[0].at(-1)!;el('[data-td-gate]').style.left=`${end.x/MAP.width*100}%`;el('[data-td-gate]').style.top=`${end.y/MAP.height*100}%`;
+    button('[data-td-new]').textContent='新战役';button('[data-td-continue]').textContent='选择地图';
     gameRoot.dataset.scenarioId=state.scenarioId??"";
     gameRoot.dataset.mapId=state.mapId??"qinglan-pass";
     gameRoot.dataset.phase = state.phase; gameRoot.dataset.wave = String(state.wave); gameRoot.dataset.paused = String(state.paused);
     gameRoot.dataset.kills = String(state.kills); gameRoot.dataset.leaks = String(state.leaks);
     gameRoot.dataset.speed = String(battleSpeed); gameRoot.dataset.elapsed = state.elapsed.toFixed(3);
-    gameRoot.dataset.reducedMotion = String(preferences.reducedMotion);
+    gameRoot.dataset.reducedMotion = String(preferences.reducedMotion);gameRoot.dataset.lowPerformance=String(visual.lowPerformance);music.configure(visual.music,preferences.muted||state.paused||document.hidden);audio.setVolume(visual.effects);
     el("[data-td-wave]").textContent = `第 ${Math.min(state.wave + 1, WAVES.length)} / ${WAVES.length} 波 · ${WAVES[Math.min(state.wave, WAVES.length-1)].label}`;
     el("[data-td-health]").textContent = `${state.health}`; el("[data-td-health-fill]").style.width = `${state.health / 16 * 100}%`;
     el("[data-td-enemies]").textContent = state.phase === "battle" ? `路上 ${state.enemies.length} · 还有 ${WAVES[state.wave].foes.length - state.spawned} 只` : state.phase === "ready" ? "波间布阵" : "守城结束";
@@ -294,7 +321,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     const boss=state.enemies.find(e=>e.kind==='captain');
     const bossStatus=el('[data-td-boss-status]');bossStatus.hidden=!boss;
     const bossStage=boss?`${boss.id}:${boss.summons??0}:${boss.summonAt===undefined?'walking':'warning'}`:'';
-    if(bossStage!==bossAnnouncement){bossAnnouncement=bossStage;if(boss)message(boss.summonAt!==undefined?'首领将在两秒后呼来两只团团怪，注意它身后的道路。':(boss.summons??0)>0?`首领已呼援 ${boss.summons} 次，最多两次。`:'烽台首领出现了。它最多呼援两次，预告期间会亮起金色轮廓。');}
+    if(bossStage!==bossAnnouncement){bossAnnouncement=bossStage;if(boss?.summonAt!==undefined)music.duck();audio.play('wave');if(boss)message(boss.summonAt!==undefined?'首领将在两秒后呼来两只团团怪，注意它身后的道路。':(boss.summons??0)>0?`首领已呼援 ${boss.summons} 次，最多两次。`:'烽台首领出现了。它最多呼援两次，预告期间会亮起金色轮廓。');}
     bossStatus.textContent=boss?`烽台首领 · 耐久 ${Math.ceil(boss.hp)} / ${Math.ceil(boss.maxHp)} · ${boss.summonAt!==undefined?`呼援预告 ${Math.max(0,boss.summonAt-state.waveTime).toFixed(1)} 秒`:`已呼援 ${boss.summons??0} / 2 次`}`:'';
     const field = el("[data-td-field-message]"); field.hidden = !state.paused && state.phase !== "ready";
     field.textContent = state.paused ? "已暂停 · 可以安心组合" : "波间布阵 · 准备好再出发";
@@ -320,7 +347,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     const host = el("[data-td-synthesis]"), c = CORES[recipe.result];
     host.innerHTML = `<div class="td-fusion-orbit td-fusion-orbit--${recipe.structure}">${c.components.map(glyph => `<span>${glyph}</span>`).join("")}<b>${c.glyph}</b></div><small>${c.glyph} · ${c.pinyin}</small>`;
     host.style.left = `${(target === null ? MAP.width / 2 : SLOTS[target].x) / MAP.width * 100}%`; host.style.top = `${(target === null ? MAP.height / 2 : SLOTS[target].y) / MAP.height * 100}%`;
-    host.hidden = false; later(() => host.hidden = true, preferences.reducedMotion ? 650 : 1050);
+    const token=++fusionAnimation;host.hidden = false; later(() => {if(token===fusionAnimation)host.hidden=true;}, preferences.reducedMotion ? 450 : 550);
   }
   function handleEvents(events: BattleEvent[]): void {
     for (const event of events) {
@@ -343,20 +370,35 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
         message(`拾得 ${CORES[event.core].glyph}，已放入材料栏。`);
       }
       if (event.type === "leak") { audio.play("leak"); message(`有怪物进城，城门减少 ${event.harm} 点耐久。${state.scenarioId?"可首次部署材料；暂停后也可重整本波。":"可以暂停调整塔位。"}`); }
-      if (event.type === "wave-end") { audio.play("wave"); persist(); message(event.won ? "守住了最后一波！" : "这一波结束了。先组合、调整塔位，准备好再出发。 "); }
+      if (event.type === "wave-end") { music.duck();audio.play("wave"); persist(); message(event.won ? "守住了最后一波！" : "这一波结束了。先组合、调整塔位，准备好再出发。 "); }
     }
   }
-  const scene = new DefenseScene({ state: () => state, preferences: () => preferences, speed: () => battleSpeed, events: handleEvents, tick: updateStatus, ready: () => {
+  const scene = new DefenseScene({ state: () => state, preferences: () => ({...preferences, lowPerformance:visual.lowPerformance}), assetsFailed: failed => {sceneAssetsFailed=failed;const retry=root.querySelector<HTMLElement>('[data-td-art-retry]');if(retry)retry.hidden=!(sceneAssetsFailed||failedImages.size);}, speed: () => battleSpeed, events: handleEvents, tick: updateStatus, ready: () => {
     el("[data-td-canvas]").dataset.ready = "true";
     if (!state.scenarioId && !activeSave().hasCheckpoint && !mapFor(state.mapId).expanded) { startWave(state); persist(); } else message(state.scenarioId&&!tacticsSave.load(state.scenarioId)?"固定材料已在栏里。先选材料，再点空塔位，也可以先合成。":`已回到第 ${Math.min(state.wave + 1, WAVES.length)} 波的检查点。先布阵，再继续。`);
     updateStatus();
   } });
   // The canvas only renders. All controls are semantic DOM buttons; let the page own wheel and touch scrolling.
-  const game = new Phaser.Game({ type: Phaser.AUTO, parent: el("[data-td-canvas]"), width: Math.max(1, board.clientWidth), height: Math.max(1, board.clientHeight), transparent: false, backgroundColor: "#477d56", scale: { mode: Phaser.Scale.NONE }, scene: [scene], input: { mouse: false, touch: false, keyboard: false, gamepad: false }, audio: { noAudio: true }, render: { antialias: true, pixelArt: false }, fps: { target: 60, forceSetTimeOut: false }, banner: false });
+  for(const img of root.querySelectorAll<HTMLImageElement>('.td-tower-art,.td-gate img')){
+    img.onerror=()=>{failedImages.add(img);img.hidden=true;img.closest('.td-slot')?.classList.remove('td-slot--illustrated');el('[data-td-art-retry]').hidden=false;};
+    img.onload=()=>{failedImages.delete(img);img.hidden=false;if(img.matches('.td-tower-art'))img.closest('.td-slot')?.classList.add('td-slot--illustrated');else img.parentElement!.dataset.loaded='true';el('[data-td-art-retry]').hidden=!(sceneAssetsFailed||failedImages.size);};
+  }
+  button('[data-td-art-retry]').onclick=()=>{scene.retryAssets();for(const img of failedImages){const src=img.getAttribute('src');if(src){img.removeAttribute('src');img.src=src;}}};
+  // Pure 2D art needs no WebGL framebuffer; Canvas also avoids unsupported GPU boot paths.
+  const game = new Phaser.Game({ type: Phaser.CANVAS, parent: el("[data-td-canvas]"), width: Math.max(1, board.clientWidth), height: Math.max(1, board.clientHeight), transparent: false, backgroundColor: "#477d56", scale: { mode: Phaser.Scale.NONE }, scene: [scene], input: { mouse: false, touch: false, keyboard: false, gamepad: false }, audio: { noAudio: true }, render: { antialias: true, pixelArt: false }, fps: { target: 60, forceSetTimeOut: false }, banner: false });
+  function fitTowerArt():void {
+    for(const [i,slot] of SLOTS.entries()){
+      const node=button(`[data-slot="${i}"]`),art=node.querySelector<HTMLElement>('.td-tower-art')!;
+      const bottom=parseFloat(getComputedStyle(art).bottom)||4;
+      const available=slot.y/MAP.height*board.clientHeight+node.offsetHeight/2-bottom-3;
+      node.style.setProperty('--td-art-limit',`${Math.max(32,available)}px`);
+    }
+  }
   function resizeCanvas(): void {
     if (destroyed || !game.isBooted) return;
     const width = board.clientWidth, height = board.clientHeight;
-    // Modal/capture layout can briefly report zero. Never allocate a zero-size WebGL framebuffer.
+    fitTowerArt();
+    // Modal/capture layout can briefly report zero. Never allocate a zero-size render surface.
     // CSS layout dimensions also avoid applying browser zoom twice; SVG and DOM share this board.
     if (width > 0 && height > 0 && (game.scale.width !== width || game.scale.height !== height)) game.scale.resize(width, height);
   }
@@ -412,6 +454,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
   }
   function togglePause(): void {
     if (state.phase !== "battle") return; audio.unlock(); state.paused = !state.paused; updateStatus();
+    if (!state.paused) music.unlock();
     if (state.paused) message("战斗已暂停。部署和组合仍然可用。");
   }
   function refreshMap():void {
@@ -421,7 +464,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     window.history.replaceState(window.history.state,'',url);
     SLOTS=mapFor(state.mapId).slots;WAVES=rulesFor(state).waves;
     inventorySignature="";statusSignature="";englishSignature="";rangeSignature="";
-    resultPresented=false;bossAnnouncement="";clearSelection();scene.reset();
+    resultPresented=false;bossAnnouncement="";clearSelection();scene.reset();fitTowerArt();
     for(const [i,slot] of SLOTS.entries()){const node=button(`[data-slot="${i}"]`);node.style.left=`${slot.x/MAP.width*100}%`;node.style.top=`${slot.y/MAP.height*100}%`;}
     for(const node of root.querySelectorAll<HTMLElement>('[data-recipe]'))node.hidden=!currentRecipes().some(r=>r.id===node.dataset.recipe);
     el('[data-td-map-title]').textContent=`${rulesFor(state).title} · ${rulesFor(state).description}`;
@@ -429,7 +472,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     delete gameRoot.dataset.echoes;delete gameRoot.dataset.rootBursts;updateStatus();slotKeys.refresh();
   }
   function restart(clearDiscoveries=true): void {
-    restartDialog.close();resultDialog.close();state=pendingScenario?newTactics(pendingScenario,clearDiscoveries?[]:state.unlocked):newBattle(DEFAULT_SEED,clearDiscoveries?[]:state.unlocked,pendingMap);refreshMap();if(!clearDiscoveries&&!state.scenarioId)startWave(state);persist();audio.unlock();updateStatus();
+    returnToManagement=false;restartDialog.close();resultDialog.close();state=pendingScenario?newTactics(pendingScenario,clearDiscoveries?[]:state.unlocked):newBattle(DEFAULT_SEED,clearDiscoveries?[]:state.unlocked,pendingMap);refreshMap();if(!clearDiscoveries&&!state.scenarioId)startWave(state);persist();audio.unlock();updateStatus();
     message(`${rulesFor(state).title} 已重置，固定起始材料已放好。准备好再开波。`);focusWaveControl();
   }
   function selectMap(id:MapId,fresh:boolean):void {
@@ -469,6 +512,14 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
   function retryCurrentWave():void {
     const restored=retryWave(state);if(!restored)return;state=restored;resultDialog.close();refreshMap();persist();updateStatus();message(`已回到第 ${state.wave+1} 波出发前，材料、装备和城门一起恢复。换好布局，再出发。`);focusWaveControl();
   }
+  const settingsDialog=el<HTMLDialogElement>('[data-td-settings-dialog]');
+  button('[data-td-settings]').onclick=()=>{if(state.phase==='battle')state.paused=true;updateStatus();settingsDialog.showModal();};
+  button('[data-td-settings-close]').onclick=()=>settingsDialog.close();
+  button('[data-td-guide-close]').onclick=()=>{visual.guideSeen=true;savePresentation();el('[data-td-guide]').hidden=true;focusWaveControl();};
+  const unbindPresentation=bindPresentationControls(root,visual,()=>{savePresentation();updateStatus();audio.unlock();music.unlock();},()=>{el('[data-td-guide]').hidden=false;settingsDialog.close();button('[data-td-guide-close]').focus();},()=>music.retry());
+  const unlockMusic=(event:Event)=>{if(event.isTrusted){music.configure(visual.music,preferences.muted||state.paused);music.unlock();}};root.addEventListener('pointerup',unlockMusic);root.addEventListener('keydown',unlockMusic);
+  const entryParams=new URLSearchParams(location.search);
+  if(!entryParams.has('map')&&!entryParams.has('scenario')&&activeSave().hasCheckpoint){const resume=button('[data-td-resume]');resume.hidden=false;resume.textContent=`继续上次 · ${rulesFor(state).title} · 已守 ${state.wave} / ${WAVES.length} 波`;resume.onclick=()=>{resume.hidden=true;focusWaveControl();};}
   button('[data-td-tactics]').addEventListener('click',showTactics);
   button('[data-td-retry]').addEventListener('click',retryCurrentWave);button('[data-td-result-retry]').addEventListener('click',retryCurrentWave);
   button('[data-td-new]').addEventListener('click',()=>showMaps(true));button('[data-td-continue]').addEventListener('click',()=>showMaps(false));
@@ -478,7 +529,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     const [a, b] = selectedCores(); if (!a || !b) return;
     const recipe = recipeFor(a.kind, b.kind, chosenRecipe,currentRecipes()); if (!recipe) return;
     const target = fusionTarget; const result = fuse(state, a.id, b.id, target, recipe.id); if (!result) { message("材料或目标已变化，请重新选择；没有消耗材料。"); return; }
-    audio.unlock(); audio.play("fusion"); animateFusion(recipe, target); prepare([result.id]); freshResult = true;
+    audio.unlock(); music.duck();audio.play("fusion"); animateFusion(recipe, target); prepare([result.id]); freshResult = true;
     inspectedId = target === null ? null : result.id; hoveredSlot = null; focusedSlot = null;
     persist(); updateStatus();
     message(`${CORES[result.kind].glyph} · ${CORES[result.kind].pinyin}。${CORES[result.kind].attack}！${target === null ? "已选中新字核，点空塔位即可部署。" : "字塔已升级，正在显示新的攻击范围。"}`);
@@ -504,7 +555,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
   } });
   button('[data-td-equip]').addEventListener('click',()=>{
     if (!equipmentPreview || !equipEnglish(state,equipmentPreview)) return;
-    const c=state.cores.find(c=>c.id===equipmentPreview!.targetId)!; audio.unlock(); audio.play('equip');
+    const c=state.cores.find(c=>c.id===equipmentPreview!.targetId)!; audio.unlock(); music.duck();audio.play('equip');
     message(`${CORES[c.kind].glyph}已装备 ${englishMapping(attachedEnglish(state,c.id)!)!.text}，共鸣开始。`);
     englishSelected=null; equipmentTarget=null; equipmentPreview=null; prepare([c.id]); inspectedId=c.slot!==null?c.id:null;
     persist(); renderEquipment(); updateStatus();
@@ -531,25 +582,27 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     prepare([first.id, second.id], undefined, recipe.id); button("[data-td-fuse]").focus({ preventScroll: true });
   });
   button("[data-td-pause]").addEventListener("click", togglePause);
-  button("[data-td-next]").addEventListener("click", () => { audio.unlock(); if (startWave(state)) { persist(); updateStatus(); message("怪物出发了。需要组合时，随时暂停。"); } });
-  button("[data-td-mute]").addEventListener("click", () => { preferences.muted = !preferences.muted; audio.setMuted(preferences.muted); persist(); updateStatus(); if (!preferences.muted) audio.play("deploy"); });
+  button("[data-td-next]").addEventListener("click", () => { audio.unlock(); if (startWave(state)) { persist(); updateStatus(); music.unlock(); message("怪物出发了。需要组合时，随时暂停。"); } });
+  button("[data-td-mute]").addEventListener("click", () => { preferences.muted = !preferences.muted; audio.setMuted(preferences.muted); persist(); updateStatus(); if (!preferences.muted) {music.unlock();audio.play("deploy");} });
   button("[data-td-motion]").addEventListener("click", () => { preferences.reducedMotion = !preferences.reducedMotion; persist(); updateStatus(); });
   button("[data-td-speed]").addEventListener("click", () => { battleSpeed = battleSpeed === 1 ? 2 : 1; updateStatus(); message(`已切换为 ${battleSpeed} 倍速度${state.paused ? "，战斗仍暂停" : ""}。`); });
-  button("[data-td-restart]").addEventListener("click", () => { if (state.phase === "battle") state.paused = true; updateStatus();pendingMap=state.mapId??"qinglan-pass";pendingScenario=state.scenarioId;resetDiscoveries=true;el("#td-restart-title").textContent=state.scenarioId?"重开这个短局？":"重置这张地图的进度？";el("[data-td-reset-copy]").textContent=`将重置 ${rulesFor(state).title} 的进度、材料和配方发现。其他地图与旧存档原文保留。`; restartDialog.showModal(); });
-  button("[data-td-cancel-restart]").addEventListener("click", () => restartDialog.close());
+  button("[data-td-restart]").addEventListener("click", () => { returnToManagement=true;settingsDialog.close(); if (state.phase === "battle") state.paused = true; updateStatus();pendingMap=state.mapId??"qinglan-pass";pendingScenario=state.scenarioId;resetDiscoveries=true;el("#td-restart-title").textContent=state.scenarioId?"重开这个短局？":"重置这张地图的进度？";el("[data-td-reset-copy]").textContent=`将重置 ${rulesFor(state).title} 的进度、材料和配方发现。其他地图与旧存档原文保留。`; restartDialog.showModal(); });
+  const cancelRestart=()=>{const restore=returnToManagement;returnToManagement=false;restartDialog.close();if(restore){settingsDialog.showModal();button('[data-td-restart]').focus();}};
+  restartDialog.addEventListener('cancel',event=>{event.preventDefault();cancelRestart();});
+  button("[data-td-cancel-restart]").addEventListener("click", cancelRestart);
   button("[data-td-confirm-restart]").addEventListener("click", ()=>restart(resetDiscoveries));
   button("[data-td-replay]").addEventListener("click", ()=>{pendingMap=state.mapId??"qinglan-pass";pendingScenario=state.scenarioId;if(state.scenarioId){resetDiscoveries=false;el('#td-restart-title').textContent='从第一波重开这个短局？';el('[data-td-reset-copy]').textContent=`${rulesFor(state).title} 将恢复固定起始材料，保留发现的配方。其他短局和战役保留。`;restartDialog.showModal();}else restart(false);});
-  for (const selector of ["[data-td-home]", "[data-td-result-home]"]) button(selector).addEventListener("click", () => { persist(); audio.suspend(); onExit(); });
+  for (const selector of ["[data-td-home]", "[data-td-result-home]"]) button(selector).addEventListener("click", () => { persist(); audio.suspend(); music.suspend(); onExit(); });
   const keydown = (event: KeyboardEvent): void => {
-    if (ignoreGameKey(event,gameRoot) || restartDialog.open || resultDialog.open || mapDialog.open) return;
+    if (ignoreGameKey(event,gameRoot) || restartDialog.open || resultDialog.open || mapDialog.open || settingsDialog.open) return;
     if (event.key.toLowerCase() === "p") { event.preventDefault(); togglePause(); }
     if (event.key === "Escape") { clearSelection(); message("已放回选择，材料还在。"); }
   };
-  const hide = (): void => { if (document.hidden) { if (state.phase === "battle") state.paused = true; audio.suspend(); persist(); updateStatus(); } };
-  const pagehide = (): void => { if (state.phase === "battle") state.paused = true; persist(); audio.suspend(); };
+  const hide = (): void => { if (document.hidden) { if (state.phase === "battle") state.paused = true; audio.suspend(); music.suspend(); persist(); updateStatus(); } };
+  const pagehide = (): void => { if (state.phase === "battle") state.paused = true; persist(); audio.suspend(); music.suspend(); };
   root.addEventListener("keydown", keydown); document.addEventListener("visibilitychange", hide); window.addEventListener("pagehide", pagehide);
   for(const node of root.querySelectorAll<HTMLElement>("[data-recipe]"))node.hidden=!currentRecipes().some(r=>r.id===node.dataset.recipe);
   renderTacticsBrief();renderInventory(); renderComposer(); updateStatus();
   el("[data-td-save-note]").textContent = activeSave().writable ? "按波次自动保存 · 只保存在本机" : "存档暂不可写，本页仍可玩；原有记录未改动。";
-  return { destroy() { if (destroyed) return; destroyed = true; lifecycle();bagKeys.destroy();slotKeys.destroy();englishKeys.destroy();resizeObserver.disconnect(); persist(); timers.forEach(id => window.clearTimeout(id)); root.removeEventListener("keydown", keydown); document.removeEventListener("visibilitychange", hide); window.removeEventListener("pagehide", pagehide); audio.destroy(); game.destroy(true); root.replaceChildren(); } };
+  return { destroy() { if (destroyed) return; destroyed = true;root.removeEventListener('focusin',keepBattleContext); lifecycle();bagKeys.destroy();slotKeys.destroy();englishKeys.destroy();resizeObserver.disconnect(); persist(); timers.forEach(id => window.clearTimeout(id)); root.removeEventListener("keydown", keydown); document.removeEventListener("visibilitychange", hide); window.removeEventListener("pagehide", pagehide); unbindPresentation();root.removeEventListener('pointerup',unlockMusic);root.removeEventListener('keydown',unlockMusic);music.destroy();audio.destroy(); game.destroy(true); root.replaceChildren(); } };
 }

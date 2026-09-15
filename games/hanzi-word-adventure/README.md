@@ -1,5 +1,14 @@
 # 字间行者
 
+## v1.0.0
+
+产品版本统一来自 `packages/presentation/settings.ts`，与原存档版本分开。原入口和深链接继续有效，核心规则、关卡、数值与进度保留。正式发布与本轮实际验证见 [v1.0 发布报告](../../docs/v1.0-release-report.md)，素材原图、生成提示、许可和运行引用见 [统一素材清单](../../assets/images/v1.0/manifest.json)。旧 STEP 报告为历史记录。
+
+声音与显示在“设置”中：音乐／音效独立音量、静音、减少动态、低性能模式、重看可跳过的短引导。真实按键／点击解锁声音；退出或隐藏停止声音，播放失败可静默操作并主动重试。显示偏好单独使用 `family-games/presentation/v1`，保护坏值、未来值和跨页竞争；不改游戏进度键，不清存档。
+
+四章保持暖白墨纸、浓墨字形和朱红角色；轻微纸色区分章节。搬放、左右拆合、日月合明、规则与光路变化都在原子交易后表现；快速连续输入和撤销会安全更新旧动画。人／友以圆环、方框和“正在走”共同标明控制权。
+
+
 ## 游戏目标
 
 `?play=hanzi-word-adventure` 是四章共二十房的原创文字空间冒险。操纵完整的“人”字，借木、林、不和明改变实际通路，走到出口。没有强制计时、题目判分、战斗、账号或麦克风。适合家庭一起读字、观察和讨论路线；机器证据不证明儿童乐趣、学习效果或留存。
@@ -17,7 +26,7 @@
 | 光与归途 | confluence | woven-1–woven-5 | 只组合光、木桥与林、携带限制、门风及有限不；保留多个灯位和停风／水桥不同策略 |
 | 结伴归途 | companions | companions-1–companions-5 | 单人切人/友，两只手分工，互相开门停风与携灯运桥，两人各到一格家 |
 
-所有章节可直接选择，不必重打前章。入口有“新游戏”“继续游戏”；继续菜单列出本机各章节存档的房名和稳定roomId。每章一份独立继续状态，切章先保存。重置本章或在已有章开始新游戏须明确确认，只重置该章；“本间重开”只回到当前房入口，已到达房间仍保留。URL `chapter=homeward|lamplight|confluence|companions` 选择继续而不重置，切章会同步替换URL参数，不添加历史步骤。
+所有章节可直接选择，不必重打前章。入口优先显示“继续上次”与章节／房名，另有新游戏和选择章节；每章显示独立继续状态，稳定roomId放在主动打开的详情。每章一份独立继续状态，切章先保存。重置本章或在已有章开始新游戏须明确确认，只重置该章；“本间重开”只回到当前房入口，已到达房间仍保留。URL `chapter=homeward|lamplight|confluence|companions` 选择继续而不重置，切章会同步替换URL参数，不添加历史步骤。
 
 ## 玩法说明
 
@@ -52,7 +61,7 @@
 
 原十五房的历史验收记录保存在 [STEP4报告](../../docs/step4-playtest-report.md)，不把历史通过冒充本次验证。STEP5正式结果、同SHA发布与验证边界见 [STEP5报告](../../docs/step5-playtest-report.md)。
 
-本轮命令为 `pnpm exec vitest run tests/hanzi-word-adventure.test.ts tests/hanzi-word-adventure-step5.test.ts`、`pnpm exec tsx games/hanzi-word-adventure/tools/solve-step5.ts`、`pnpm run test:e2e:hanzi-word-adventure`。证据统一位于 `tmp/tasks/GAME-CODEX-STEP5/adventure/`；运行浏览器须将输出与HWAY_EVIDENCE显式指向该目录。纯键盘五房helper每动作断言世界原有焦点，不使用focus/click/反复Tab弥补断点。
+本轮命令为 `pnpm exec vitest run tests/hanzi-word-adventure.test.ts tests/hanzi-word-adventure-step5.test.ts`、`pnpm exec tsx games/hanzi-word-adventure/tools/solve-step5.ts`、`pnpm run test:e2e:hanzi-word-adventure`。v1.0证据统一位于 `tmp/tasks/GAME-CODEX-V1.0/adventure/`；运行浏览器须将输出与HWAY_EVIDENCE显式指向该目录。纯键盘五房helper每动作断言世界原有焦点，不使用focus/click/反复Tab弥补断点。
 
 ## 后续改进建议
 

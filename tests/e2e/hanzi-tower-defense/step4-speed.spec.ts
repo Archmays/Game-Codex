@@ -61,9 +61,14 @@ test('STEP4 real 1x/2x speed, pause, native activation, independent saves and mo
   const initialViewport = page.viewportSize()!, geometry = [];
   for (const width of [360, 390]) {
     await page.setViewportSize({ width, height: 844 });
-    await expect(page.locator('.td-controls button')).toHaveCount(8);
-    geometry.push({ width, targets: await criticalTargets(page, '.td-controls button', 48) });
-    expect(await page.locator('.td-controls button').evaluateAll(buttons => new Set(buttons.map(button => Math.round(button.getBoundingClientRect().y))).size)).toBe(2);
+    await expect(page.locator('.td-controls button')).toHaveCount(4);
+    geometry.push({ width, targets: await criticalTargets(page, '.td-controls button, .td-live-controls button', 48) });
+    expect(await page.locator('.td-controls button').evaluateAll(buttons => new Set(buttons.map(button => Math.round(button.getBoundingClientRect().y))).size)).toBe(1);
+    await act('[data-td-settings]');
+    await expect(page.locator('[data-td-settings-dialog]')).toBeVisible();
+    geometry.push({ width, settingsTargets: await criticalTargets(page, '[data-td-mute], [data-td-motion], [data-td-settings-close]') });
+    await act('[data-td-settings-close]');
+    await expect(page.locator('[data-td-settings]')).toBeFocused();
   }
   await page.screenshot({ path: `${evidence}/step4-speed-${mode}-mobile.png`, fullPage: true });
   await page.setViewportSize(initialViewport);

@@ -1,3 +1,4 @@
+import { activate } from '../step4/input-helpers';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { expect, test, type Page } from '@playwright/test';
 import { checkpointOf, newBattle, type Checkpoint } from '../../../games/hanzi-tower-defense/model';
@@ -79,6 +80,6 @@ test('v1 migration, existing bad/future v2 precedence and cross-page write prote
   await page.goto('/');await page.evaluate(({old,key,v2})=>{localStorage.setItem(key,old);localStorage.removeItem(v2);},{old,key:LEGACY_SAVE_KEY,v2:SAVE_KEY});await page.goto('/?play=hanzi-tower-defense');
   await expect(page.locator('.td-game')).toHaveAttribute('data-wave','4');expect(await page.evaluate(key=>localStorage.getItem(key),LEGACY_SAVE_KEY)).toBe(old);expect((await saved(page)).englishSkipped).toHaveLength(2);expect((await saved(page)).englishCores).toEqual([]);
   const once=await raw(page);await page.reload();expect(await raw(page)).toBe(once);
-  for(const invalid of ['{broken','{"version":99,"future":true}']){await page.goto('/');await page.evaluate(({key,value})=>localStorage.setItem(key,value),{key:SAVE_KEY,value:invalid});await page.goto('/?play=hanzi-tower-defense');await page.locator('[data-td-mute]').click();await expect(page.locator('[data-td-save-note]')).toContainText('原有记录未改动');expect(await raw(page)).toBe(invalid);expect(await page.evaluate(key=>localStorage.getItem(key),LEGACY_SAVE_KEY)).toBe(old);}
-  await setup(page);const other=await context.newPage();await other.goto('/');const restored=JSON.stringify({version:99,restored:'anonymous'});await other.evaluate(({key,value})=>localStorage.setItem(key,value),{key:SAVE_KEY,value:restored});await page.locator('[data-td-mute]').click();expect(await raw(page)).toBe(restored);await expect(page.locator('[data-td-save-note]')).toContainText('原有记录未改动');await other.close();
+  for(const invalid of ['{broken','{"version":99,"future":true}']){await page.goto('/');await page.evaluate(({key,value})=>localStorage.setItem(key,value),{key:SAVE_KEY,value:invalid});await page.goto('/?play=hanzi-tower-defense');await activate(page,'[data-td-mute]','mouse');await expect(page.locator('[data-td-save-note]')).toContainText('原有记录未改动');expect(await raw(page)).toBe(invalid);expect(await page.evaluate(key=>localStorage.getItem(key),LEGACY_SAVE_KEY)).toBe(old);}
+  await setup(page);const other=await context.newPage();await other.goto('/');const restored=JSON.stringify({version:99,restored:'anonymous'});await other.evaluate(({key,value})=>localStorage.setItem(key,value),{key:SAVE_KEY,value:restored});await activate(page,'[data-td-mute]','mouse');expect(await raw(page)).toBe(restored);await expect(page.locator('[data-td-save-note]')).toContainText('原有记录未改动');await other.close();
 });

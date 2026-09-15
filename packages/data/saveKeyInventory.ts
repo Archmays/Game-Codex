@@ -13,6 +13,7 @@ export interface KnownSaveKey {
 export const SAVE_VAULT_PRE_IMPORT_BACKUP_KEY = "save-vault/pre-import-backup/v1";
 
 export const KNOWN_SAVE_KEYS: readonly KnownSaveKey[] = [
+  { key: "family-games/presentation/v1", owner: "shared", purpose: "settings", exportable: true, maxVersion: 1 },
   { key: "family-games/hanzi-word-adventure/companions/v1", owner: "hanzi", purpose: "progress", exportable: true, maxVersion: 1 },
   { key: "family-games/hanzi-tower-defense/tactics/v1", owner: "hanzi", purpose: "progress", exportable: true, maxVersion: 1 },
   { key: "family-games/hanzi-word-adventure/v2", owner: "hanzi", purpose: "progress", exportable: true, maxVersion: 2 },

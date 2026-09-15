@@ -1,0 +1,127 @@
+/* Finished miniature battlefield skin. Rules/positions remain in the model. */
+.td-game {max-width:1440px;padding:14px 18px 26px}
+.td-header {gap:16px;margin-bottom:12px}.td-brand h1{font-size:30px;letter-spacing:2px}.td-brand h1 .product-version{letter-spacing:0}
+.td-brand p{letter-spacing:.06em}.td-controls{gap:6px}.td-controls button{min-height:48px}
+.td-controls [data-td-continue]{background:#d9bd76;color:#183b30;border-color:#f4dea0}
+.td-layout{grid-template-columns:minmax(0,1fr) 310px;gap:18px}.td-ribbon{background:#183c35;border-color:#668374}
+.td-board{background:#264d42;aspect-ratio:1.7;border-color:#78937b}
+.td-workbench{padding:12px 0 0}.td-section-head{margin-bottom:8px}.td-bag{max-height:214px}
+.td-composer{margin-top:12px;padding:12px;border:1px solid #637b5e;border-radius:12px;background:#193b32}
+.td-composer[data-idle=true] .td-selection,.td-composer[data-idle=true] .td-compose-actions{display:none}
+.td-composer[data-idle=true] .td-recipe-preview{min-height:0;padding:0;text-align:left}
+.td-composer[data-idle=true] .td-recipe-preview p{margin:0;font-size:13px}
+.td-composer .td-recipe-preview{min-height:0}.td-composer .td-section-head h2{font-size:16px}
+.td-composer .td-partners p{margin:4px 0}.td-selection{gap:8px}.td-selected-core{height:52px;width:76px}
+.td-english{margin-top:10px;padding-top:8px}.td-english-core{min-height:48px}.td-english-core strong{font-size:16px}
+.td-wave-action{padding-top:8px}.td-wave-action .td-primary{min-height:50px}
+.td-range-tools{margin-top:6px;gap:6px}.td-range-tools>span{font-size:12px;line-height:1.4}
+.td-range-tools button{padding:5px 8px}.td-feedback{margin:8px 0;padding:8px 12px;font-size:13px}
+.td-slot{width:58px;height:58px!important;filter:none}
+.td-slot--illustrated .td-tower-art{width:88px;height:94px;bottom:8px;filter:drop-shadow(2px 4px 2px #06251d80)}
+.td-slot--illustrated .td-slot-glyph{font-size:23px;padding:3px 7px;background:#142f29f5;border:1px solid #efd49a;box-shadow:0 2px 3px #061a15}
+.td-slot--word.td-slot--illustrated .td-slot-glyph{font-size:20px;white-space:nowrap;flex-shrink:0}
+.td-slot--illustrated[data-resonant=true] .td-tower-art{width:94px;height:100px}
+.td-slot[data-kind=wildwood][data-resonant=true] .td-tower-art{width:94px;height:100px}
+.td-slot small{font-size:11px;bottom:-12px;line-height:1.3}
+.td-slot--illustrated.td-firing .td-tower-art{animation:td-apparatus .18s ease-out}
+.td-slot--illustrated.td-firing[data-resonant=true] .td-tower-art{animation:td-apparatus .18s ease-out}
+@keyframes td-apparatus{0%{translate:0 0}35%{translate:0 3px}100%{translate:0 0}}
+.td-game[data-low-performance=true] .td-tower-art,.td-game[data-reduced-motion=true] .td-tower-art{animation:none!important;filter:none}
+.td-game[data-reduced-motion=true] .td-synthesis{box-shadow:none}
+.td-fusion-orbit>*{animation-duration:.45s!important}.td-synthesis{box-shadow:0 4px 14px #061e16a0}
+.td-gate{position:absolute;left:96.67%;top:72.5%;transform:translate(-50%,-78%);width:60px;height:72px;border:5px solid #92a68b;border-bottom:0;border-radius:24px 24px 2px 2px;background:linear-gradient(90deg,#294336 0 14%,#111e18 14% 86%,#456049 86%);box-shadow:inset 0 3px #d2cc9e,3px 4px 2px #08261c70;pointer-events:none;z-index:1;display:grid;place-items:start center}
+.td-gate span{background:#17362b;color:#ffe2a3;border:1px solid #d4b87b;padding:1px 9px;font-size:17px;margin-top:8px}
+.td-gate img{position:absolute;width:100%;height:100%;max-width:none;left:50%;bottom:-4px;transform:translateX(-50%);object-fit:contain}
+.td-gate[data-loaded=true]{background:none;border:0;box-shadow:none}.td-gate[data-loaded=true] span{position:relative;margin-top:17px;font-size:12px}
+.td-game .td-asset-retry{width:100%;margin-bottom:8px;font-size:13px;text-align:left}
+.td-game[data-map-id=beacon-keep] .td-gate{border-color:#9c9a88}.td-game[data-map-id=twin-bends] .td-gate{border-color:#7fa7a0}
+.td-dialog{max-height:calc(100dvh - 28px);overflow:auto}.td-dialog [data-td-settings-close]{margin-top:16px;width:100%;min-height:48px}
+.td-dialog details{width:100%}.td-dialog summary{font-size:14px}.td-dialog>button{margin:3px}
+.td-product-footer{font-size:12px;color:#b7cabe}
+@media(max-width:1100px){.td-layout{grid-template-columns:minmax(0,1fr) 278px}.td-header{flex-wrap:wrap}.td-brand{flex:1}.td-controls{flex:1 1 420px}.td-board{aspect-ratio:1.5}}
+@media(max-width:740px){
+ .td-game{padding:8px 10px 24px}.td-brand{width:100%;gap:8px}.td-brand h1{font-size:24px}.td-brand p{font-size:10px}.td-seal{width:34px;height:40px}
+ .td-header{gap:7px;margin-bottom:8px}.td-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;flex:auto;gap:4px}
+ .td-controls button{font-size:11px;min-height:48px;padding:4px 2px}.td-controls [data-td-continue]{grid-column:span 1}
+ .td-layout{display:flex;flex-direction:column;gap:0}.td-board{aspect-ratio:1.35;overflow:hidden}
+ .td-ribbon{flex-wrap:nowrap;padding:7px 9px;font-size:11px;gap:6px}.td-ribbon>span:last-child{width:auto;font-size:10px}.td-health-track{display:none}
+ .td-slot{width:44px;height:48px!important}.td-slot--illustrated .td-tower-art,.td-slot--illustrated[data-resonant=true] .td-tower-art,.td-slot[data-kind=wildwood][data-resonant=true] .td-tower-art{width:64px;height:72px;bottom:4px}
+ .td-slot--illustrated .td-slot-glyph{font-size:20px;padding:2px 5px}.td-slot--word.td-slot--illustrated .td-slot-glyph{font-size:17px}.td-slot small{bottom:-9px;font-size:10px}
+ .td-workbench{padding-top:8px;display:grid;grid-template-columns:1fr;gap:8px}.td-bag{grid-template-columns:repeat(auto-fit,minmax(44px,1fr));max-height:126px;gap:5px;padding:3px}
+ .td-game .td-core{height:54px;min-height:48px}.td-section-head{margin-bottom:4px}.td-section-head h2{font-size:15px}
+ .td-composer{margin:0;padding:8px;grid-template-columns:1fr 1fr;column-gap:8px}.td-composer[data-idle=true]{display:block}.td-composer .td-recipe-preview p{font-size:12px;line-height:1.5}
+ .td-selected-core{width:61px;height:50px;font-size:25px}.td-selection{padding-top:0}.td-compose-actions{margin-top:4px}.td-partners{font-size:11px}.td-item-actions{margin-top:4px}
+ .td-range-tools>span{font-size:10px}.td-range-tools button{font-size:10px;padding:4px;min-width:44px}.td-range-tools{gap:4px}
+ .td-wave-action p{font-size:11px;line-height:1.4}.td-wave-action .td-primary{font-size:12px;min-height:48px}.td-feedback{font-size:12px;line-height:1.5;min-height:0;padding:6px 8px}
+ .td-enemy-key{font-size:10px;gap:6px}.td-tactics-brief{font-size:12px}.td-tactics-brief p{margin:4px 0}
+ .td-english{margin:0;padding-top:4px}.td-english-core{margin:4px 0}.td-recipes,.td-help{margin-top:0}.td-gate{width:38px;height:48px;border-width:3px}.td-gate span{font-size:12px;padding:0 5px}
+ .product-guide{font-size:11px;padding:5px 7px}.product-guide button{font-size:11px;padding:4px}
+ .td-gate img{width:100%;height:100%;bottom:-3px}.td-gate[data-loaded=true] span{font-size:10px;margin-top:12px}
+}
+@media(max-height:540px) and (min-width:741px){.td-board{aspect-ratio:1.8}.td-game{padding-top:8px}.td-header{margin-bottom:6px}}
+.td-gate{width:6.4%;height:auto;aspect-ratio:1;transform:translate(-50%,-93%)}
+.td-gate[data-loaded=true] span{margin-top:25%;padding:0 2px}
+.td-gate[data-loaded=true] span{position:absolute;left:100%;top:45%;bottom:auto;margin:0}
+.td-slot:last-child small{left:-14px;bottom:4px;transform:translateX(-100%)}
+.td-gate img{bottom:0}
+.td-slot{--td-art-size:88px}.td-slot[data-resonant=true]{--td-art-size:94px}
+.td-game .td-slot.td-slot--illustrated .td-tower-art{width:min(var(--td-art-size),var(--td-art-limit,94px));height:min(var(--td-art-size),var(--td-art-limit,94px))}
+.td-resume{width:100%;min-height:52px;margin:0 0 8px;background:#dec482!important;color:#16372d!important;text-align:left}
+@media(max-width:1100px){
+ .td-brand{flex:1 0 100%;min-width:0}.td-brand>div{min-width:0}
+ .td-brand h1,.td-brand>[data-td-tactics]{white-space:nowrap}
+ .td-brand p{max-width:calc(100vw - 230px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .td-brand>[data-td-tactics]{margin-left:auto;flex-shrink:0}.td-seal{flex-shrink:0}
+ .td-controls{flex:1 0 100%}
+}
+/* The field and current transaction stay adjacent; reference information follows. */
+@media(max-width:900px){
+ .td-layout{display:flex;flex-direction:column;gap:8px}
+ .td-battle-column,.td-workbench{display:contents}
+ .td-board{order:0;aspect-ratio:1.6}.td-range-tools{order:1;margin:0}
+ .td-feedback{order:2;margin:0}.td-inventory{order:3}.td-composer{order:4;margin:0}
+ .td-english{order:5}.td-english-notice{order:6}.td-wave-action{order:7;padding:0}
+ [data-td-retry]{order:8}.td-boss-status{order:9}.td-tactics-summary{order:10}
+ .td-tactics-brief{order:11;padding:0 8px;margin:0}.td-enemy-key{order:12}
+ .td-recipes{order:13}.td-help{order:14}.td-save-note{order:15}
+ .td-bag{grid-template-columns:repeat(auto-fill,minmax(48px,1fr));max-height:118px}
+ .td-game .td-core{height:52px;min-height:48px}
+ .td-composer{display:grid;grid-template-columns:1fr 1fr;gap:4px 8px;padding:8px}
+ .td-composer>.td-section-head,.td-composer>.td-fusion-target,.td-composer>.td-item-actions{grid-column:1/-1}
+ .td-composer>.td-partners{grid-column:1/-1;order:5}
+ .td-composer>.td-compose-actions{grid-column:2;grid-row:3;margin:0}
+ .td-composer>.td-selection{grid-column:1;grid-row:3}
+ .td-composer>.td-recipe-preview{grid-column:1/-1;grid-row:2;padding:0}
+ .td-composer[data-word-detail=true]{display:block}
+ .td-composer[data-idle=true]{display:block}
+}
+@media(max-width:740px){
+ .td-slot,.td-slot[data-resonant=true]{--td-art-size:64px}
+ .td-brand p{display:block;max-width:calc(100vw - 180px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.td-brand h1{font-size:21px}.td-brand>[data-td-tactics]{margin-left:auto;font-size:12px;min-height:44px;padding:4px 8px}
+ .td-board{aspect-ratio:1.35}.td-layout{gap:6px}.td-range-tools>span{max-width:52%;font-size:10px}
+ .td-section-head h2{font-size:13px}.td-section-head span{font-size:10px}
+ .td-composer .td-section-head{margin:0}.td-composer .td-section-head button{font-size:12px}
+ .td-composer .td-recipe-preview h3{margin:3px 0;font-size:17px}.td-composer .td-recipe-preview p{margin:3px 0}
+ .td-tactics-brief summary{font-size:12px;min-height:44px;display:flex;align-items:center}
+}
+
+/* One copy of the native battle controls stays with the live model status. */
+.td-ribbon{position:sticky;top:0;z-index:20;gap:10px;padding:8px 12px;box-shadow:0 3px 10px #071e2440}
+.td-live-controls{display:flex;gap:6px;flex-shrink:0}.td-live-controls button{min-width:56px;min-height:48px;padding:6px 9px;font-size:13px;white-space:nowrap}
+.td-live-controls .td-pause{background:#e3c575;color:#213c30;border-color:#f2da93}
+html:has(.td-game){scroll-padding-top:104px}
+@media(max-width:740px){
+ .td-ribbon{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:3px 7px;padding:6px 8px}
+ .td-ribbon>[data-td-wave]{grid-column:1;font-size:11px;white-space:normal;line-height:1.45}
+ .td-ribbon>.td-gate-health{grid-column:2;gap:4px;font-size:11px}.td-ribbon .td-health-track{display:none}
+ .td-ribbon>[data-td-enemies]{grid-row:2;grid-column:1/-1;width:auto;font-size:11px}
+ .td-live-controls{grid-row:1;grid-column:3;gap:4px}.td-live-controls button{min-width:52px;padding:4px 6px;font-size:12px}
+}
+@media(max-height:540px){.td-ribbon{position:static}html:has(.td-game){scroll-padding-top:0}}
+
+@media(max-width:900px){
+ .td-composer:not([data-idle=true]):not([data-word-detail=true]) .td-recipe-preview{display:flex;align-items:center;justify-content:center;gap:10px;text-align:left}
+ .td-composer .td-structure{width:60px;height:54px;flex-shrink:0;padding:3px}.td-composer .td-structure b{font-size:22px;line-height:1}.td-composer .td-structure small{font-size:10px}
+ .td-composer .td-structure--word{width:74px}.td-composer .td-preview-result{margin:0;flex-shrink:0}.td-composer .td-preview-result strong{font-size:28px}.td-composer .td-preview-result span{font-size:12px}
+ .td-composer .td-recipe-preview p{font-size:12px;line-height:1.5}.td-composer:not([data-idle=true]):not([data-word-detail=true]) .td-recipe-preview p{max-width:145px}
+}

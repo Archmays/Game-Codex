@@ -152,14 +152,14 @@ test('@primary keyboard settings / Vault / feedback never capture text as game i
   await activate(page,'[data-feedback-save]','keyboard');
   expect(JSON.parse((await page.evaluate(key=>localStorage.getItem(key),key))!).text).toContain('<b>普通文字</b>');
   const download=page.waitForEvent('download');await activate(page,'[data-feedback-export]','keyboard');
-  expect((await download).suggestedFilename()).toBe('game-codex-step5-feedback.md');
+  expect((await download).suggestedFilename()).toBe('game-codex-v1-feedback.md');
   await page.reload();await expect(page.locator('[data-feedback-text]')).toHaveValue('wasd xcz 空格 <b>普通文字</b>');
 });
 
 test('@geometry phones/tablets/desktop critical targets and rotated low-height layout',async({page},info)=>{
   test.skip(['firefox','webkit'].includes(info.project.name));
   mkdirSync(evidence,{recursive:true});const rows:unknown[]=[];
-  for(const [route,selector] of [['?world=my-game-world','.world-icon-button, .world-more a'],['?playtest=step4','.step4-feedback-actions button'],['?world=math-world&station=target','.target-operators button, .target-actions button'],['?play=hanzi-word-adventure&chapter=lamplight','[data-hway-move], [data-hway-primary], .hway-toolbar button'],['?play=hanzi-tower-defense&map=twin-bends','[data-slot], .td-controls button'],['?play=memory-card','[data-card-id]']]) {
+  for(const [route,selector] of [['?world=my-game-world','.world-icon-button, .world-more a'],['?playtest=step4','.step4-feedback-actions button'],['?world=math-world&station=target','.target-operators button, .target-actions button'],['?play=hanzi-word-adventure&chapter=lamplight','[data-hway-move], [data-hway-primary], .hway-toolbar button'],['?play=hanzi-tower-defense&map=twin-bends','[data-slot], .td-controls button, .td-live-controls button'],['?play=memory-card','[data-card-id]']]) {
     await page.goto('./'+route);await expect(page.locator(selector).first()).toBeVisible();rows.push({route,geometry:await criticalTargets(page,selector)});
   }
   if(['phone-390','tablet-1024-landscape','desktop'].includes(info.project.name)) await page.screenshot({path:`${evidence}/${info.project.name}-pairing.png`});

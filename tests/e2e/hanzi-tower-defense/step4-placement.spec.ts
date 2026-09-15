@@ -24,7 +24,7 @@ test('STEP4 Qinglan moved posts keep true ranges, ordinary relocation and all-wi
  const rows=[];
  for(const width of [360,390,741,768,1000,1024,1025,1366,1440]){
   await page.setViewportSize({width,height:width<741?844:1000});
-  rows.push({width,targets:await criticalTargets(page,'[data-slot], .td-controls button')});
+  rows.push({width,targets:await criticalTargets(page,'[data-slot], .td-controls button, .td-live-controls button')});
  }
  writeFileSync(`${evidence}/qinglan-placement-${mode}.json`,JSON.stringify({mode,trueModelRadii:true,rows},null,2));
 });

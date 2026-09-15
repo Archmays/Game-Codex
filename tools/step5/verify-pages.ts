@@ -15,9 +15,9 @@ const base = new URL(process.argv[2] ?? 'https://archmays.github.io/Game-Codex/'
 const expected = process.argv[3];
 const local = process.env.STEP5_LOCAL_PREFLIGHT === '1';
 if (!expected || !(local ? /^local-[a-z0-9-]+$/.test(expected) && base.hostname === '127.0.0.1' : /^[a-f0-9]{40}$/.test(expected) && base.protocol === 'https:')) throw Error('Provide the exact deployed SHA, or an explicitly labelled local preflight.');
-const task = resolve('tmp/tasks/GAME-CODEX-STEP5');
+const task = resolve(process.env.GAME_CODEX_EVIDENCE_ROOT??'tmp/tasks/GAME-CODEX-V1.0');
 const output = resolve(process.env.STEP5_RELEASE_EVIDENCE ?? `${task}/${local?'release-preflight':'online'}`);
-if (!output.startsWith(task + sep)) throw Error('Evidence must stay in the STEP5 task folder.');
+if (!output.startsWith(task + sep)) throw Error('Evidence must stay in the selected task folder.');
 mkdirSync(output,{recursive:true});
 const errors:string[] = [], external:string[] = [], routes:string[] = [], flows:unknown[] = [];
 const browser = await chromium.launch({headless:true});
@@ -32,7 +32,7 @@ function observe(page:Page) {
 async function identity(page:Page) { await expect(page.locator('html')).toHaveAttribute('data-build-commit',expected); }
 async function route(page:Page,query:string,selector:string) {
   await page.goto(new URL(query,base).href); await expect(page.locator(selector).first()).toBeVisible(); await identity(page); routes.push(query);
-  if (query === '?playtest=step4') await expect(page).toHaveTitle('本次试玩 · Game-Codex STEP5');
+  if (query === '?playtest=step4') await expect(page).toHaveTitle('本次试玩 · Game-Codex v1.0.0');
 }
 async function contextFor(mode:InputMode):Promise<BrowserContext> {
   return browser.newContext({baseURL:base.href,viewport:mode==='touch'?{width:390,height:844}:{width:1440,height:1000},hasTouch:mode==='touch',deviceScaleFactor:mode==='touch'?2:1,reducedMotion:'reduce'});

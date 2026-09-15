@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import { expect, test, type Locator, type Page } from "@playwright/test";
 import { PLAY_SURFACE_MANIFEST, type PlaySurfaceRecord } from "../../../packages/data/playSurfaceManifest";
 import { activateAndExpectStateChange, expectHitTarget } from "../helpers/hit-target";
+import { revealControl } from "../step4/input-helpers";
 
 const REPORTS = resolve(process.env.GAME_CODEX_EVIDENCE_ROOT ?? "test-results", "interaction-integrity/reports");
 const RETURN_WORDS = /^(?:←\s*)?(?:回|返回|退出)|回到|回我的|回游戏|回城市|回地图|返回/;
@@ -182,6 +183,7 @@ test("@hittest @representative modal close, fixed-layer, and destructive cancel 
   await expect(settings).toBeFocused();
 
   await page.goto("/?play=hanzi-tower-defense");
+  await revealControl(page, "[data-td-restart]", "mouse");
   const restart = page.locator("[data-td-restart]"); await expectHitTarget(restart, { minimumRatio: 1, minimumSize: 44 }); await restart.click();
   const cancel = page.locator("[data-td-cancel-restart]"); await expectHitTarget(cancel, { minimumRatio: 1, minimumSize: 44 }); await cancel.click();
   await expect(page.locator("[data-td-restart-dialog]")).not.toBeVisible();

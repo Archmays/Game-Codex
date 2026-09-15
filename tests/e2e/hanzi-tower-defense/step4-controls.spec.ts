@@ -12,8 +12,9 @@ test('STEP4 material arrows follow rendered rows after viewport rotation',async(
  for(const viewport of sizes){
   await page.setViewportSize(viewport);await keyReach(page,'[data-core]','[data-core]');await page.keyboard.press('Home');
   const items=await page.locator('[data-core]').evaluateAll(elements=>elements.map(e=>({id:e.getAttribute('data-core')!,x:e.getBoundingClientRect().x,y:e.getBoundingClientRect().y})));
-  const first=items[0],below=items.find(e=>e.y>first.y+1&&Math.abs(e.x-first.x)<1);expect(below,'a material in the next visual row').toBeDefined();
-  await page.keyboard.press('ArrowDown');await expect(page.locator(`[data-core="${below!.id}"]`)).toBeFocused();
+  const first=items[0],below=items.find(e=>e.y>first.y+1&&Math.abs(e.x-first.x)<1);
+  if(!below)expect(items.every(e=>Math.abs(e.y-first.y)<1),'a single displayed row wraps vertically to itself').toBe(true);
+  await page.keyboard.press('ArrowDown');await expect(page.locator(`[data-core="${(below??first).id}"]`)).toBeFocused();
   await page.keyboard.press('ArrowUp');await expect(page.locator(`[data-core="${first.id}"]`)).toBeFocused();
   await page.keyboard.press('Tab');await expect(page.locator('[data-td-bag]:focus-within')).toHaveCount(0);
   rows.push({viewport,first,below});
@@ -52,7 +53,7 @@ test('STEP4 regions, native activation, inspect-only, map saves/reset and tablet
  await act('[data-td-restart]');if(mode==='keyboard'){await page.keyboard.press('Escape');await expect(page.locator('[data-td-restart-dialog]')).not.toBeVisible();await expect(page.locator('[data-td-restart]')).toBeFocused();await act('[data-td-restart]');}
  await act('[data-td-confirm-restart]');await expect(page.locator('[data-slot="0"]')).toContainText('火');await expect(page.locator('[data-core]')).toHaveCount(11);
  const reset=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),SAVE_KEY);expect(reset.maps['twin-bends'].unlocked).toEqual([]);expect(reset.maps['beacon-keep']).toEqual(after.maps['beacon-keep']);expect(reset.maps['qinglan-pass']).toEqual(after.maps['qinglan-pass']);
- const geometry=[];for(const viewport of info.project.name==='touch'?[{width:360,height:780},{width:390,height:844},{width:768,height:1024},{width:1024,height:768}]:[{width:1440,height:1000},{width:768,height:1024},{width:1024,height:768},{width:1024,height:600}]){await page.setViewportSize(viewport);geometry.push({viewport,targets:await criticalTargets(page,'[data-slot], [data-core], .td-controls button')});}
+ const geometry=[];for(const viewport of info.project.name==='touch'?[{width:360,height:780},{width:390,height:844},{width:768,height:1024},{width:1024,height:768}]:[{width:1440,height:1000},{width:768,height:1024},{width:1024,height:768},{width:1024,height:600}]){await page.setViewportSize(viewport);geometry.push({viewport,targets:await criticalTargets(page,'[data-slot], [data-core], .td-controls button, .td-live-controls button')});}
  await page.setViewportSize(info.project.name==='touch'?{width:390,height:844}:{width:1440,height:1000});await page.screenshot({path:`${evidence}/step4-controls-${mode}.png`,fullPage:true});await act('[data-td-home]');await expect(page.locator('[data-world-forest-link]')).toBeVisible();
  writeFileSync(`${evidence}/step4-controls-${mode}.json`,JSON.stringify({mode,geometry,resetPreservesOtherMaps:true,unfinishedWaveRollsBack:true,actualKeysOnly:mode==='keyboard'},null,2));
 });

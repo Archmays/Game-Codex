@@ -1,3 +1,4 @@
+import { PRODUCT_VERSION } from '../../packages/presentation/settings';
 import { FEEDBACK_KEY, INPUT_MODES, PLAYTEST_PLACES, feedbackMarkdown, parseFeedback, type PlaytestFeedback } from './feedback';
 import { SCENARIOS } from '../../games/hanzi-tower-defense/tactics';
 import { DEFENSE_MAPS } from '../../games/hanzi-tower-defense/maps';
@@ -25,8 +26,8 @@ const modeLabels = ['键盘', '鼠标', '触控', '混合使用'];
 export function mountStep4Playtest(root: HTMLElement): void {
   root.className = 'step4-playtest-mount';
   root.innerHTML = `<main class="step4-playtest" data-testid="step4-playtest">
-    <header><div><p class="step4-kicker">GAME-CODEX · STEP5</p><h1>本次试玩</h1><p>结伴走回家，再试一局战术守城。随时继续，也可以明确重开。</p></div><a tabindex="0" class="step4-button" href="?world=my-game-world">返回游戏世界</a></header>
-    <p class="step4-version">当前版本 <code data-step4-sha></code></p>
+    <header><div><p class="step4-kicker">GAME-CODEX · v${PRODUCT_VERSION}</p><h1>本次试玩</h1><p>字阵守城与字间行者 · 正式版。四章二十房、三图二十二波和六个短局，熟悉的玩法继续。</p></div><a tabindex="0" class="step4-button" href="?world=my-game-world">返回游戏世界</a></header>
+    <details class="step4-version"><summary>v${PRODUCT_VERSION} 更新与制作说明</summary><p>成套手绘字塔与怪物、三种环境、暖纸文字世界；更紧凑的操作区、原创配乐、独立音量与低性能模式。核心规则、内容 ID、平衡与进度保留。</p><p>设计制作：Archmays / Codex。新插画：ChatGPT image；原有素材含 Kenney CC0。配乐为项目原创合成，无外部采样。此页面只接受手动填写的本机反馈，没有自动上传。</p><p>构建 <code data-step4-sha></code></p></details>
     <section aria-labelledby="step4-adventure-title"><div class="step4-section-heading"><h2 id="step4-adventure-title">字间行者</h2><span>四章 · 二十房</span></div>
       <p>方向键／WASD 移动；Space／E 拿放或确认，X 直接拆、C 直接合、Z 撤销、H 提示。预览内方向键选位置，Enter／Space 确认，Esc 取消或关闭提示后继续走。结伴归途用 Q 或点角色切换“人／友”；每人最多拿一件，交换先放下再拿起。</p>
       <div class="step4-cards">${chapters.map((chapter, i) => `<article><p class="step4-index">第${i + 1}章</p><h3>${chapter.title}</h3><p>${chapter.text}</p><a tabindex="0" data-playtest-entry class="step4-button" href="?play=hanzi-word-adventure&chapter=${chapter.id}&from=world">选择这一章 <span aria-hidden="true">→</span></a><details><summary>关卡 ID</summary><code>${chapter.id}</code><p>${chapter.rooms}</p></details></article>`).join('')}</div>
@@ -60,13 +61,14 @@ export function mountStep4Playtest(root: HTMLElement): void {
   if (raw !== null && !saved) { writable = false; status.textContent = '已有记录暂不能读取，原文已保护；仍可填写并导出这次反馈。'; }
   if (saved) { place.value = saved.place; input.value = saved.input; textarea.value = saved.text; status.textContent = '已载入上次主动保存的文字。'; }
   let draftBuild = saved ? saved.build : build;
-  const value = (): PlaytestFeedback | null => parseFeedback(JSON.stringify({ version: 1, place: place.value, input: input.value, text: textarea.value.trim(), ...(draftBuild ? { build: draftBuild } : {}) }));
+  let draftVersion = saved ? saved.productVersion : PRODUCT_VERSION;
+  const value = (): PlaytestFeedback | null => parseFeedback(JSON.stringify({ version: 1, place: place.value, input: input.value, text: textarea.value.trim(), ...(draftBuild ? { build: draftBuild } : {}), ...(draftVersion ? {productVersion:draftVersion} : {}) }));
   const refresh = () => {
     element<HTMLButtonElement>('[data-feedback-save]').disabled = !value() || !writable;
     element<HTMLButtonElement>('[data-feedback-export]').disabled = !value();
     element('[data-feedback-preview]').textContent = textarea.value;
   };
-  const edited = () => { draftBuild = build; refresh(); };
+  const edited = () => { draftBuild = build;draftVersion=PRODUCT_VERSION; refresh(); };
   textarea.addEventListener('input', edited);
   place.addEventListener('change', edited); input.addEventListener('change', edited);
   element('[data-feedback-save]').addEventListener('click', () => {
@@ -81,7 +83,7 @@ export function mountStep4Playtest(root: HTMLElement): void {
   element('[data-feedback-export]').addEventListener('click', () => {
     const feedback = value(); if (!feedback) return;
     const url = URL.createObjectURL(new Blob([feedbackMarkdown(feedback, build)], { type: 'text/markdown;charset=utf-8' }));
-    const link = document.createElement('a'); link.href = url; link.download = 'game-codex-step5-feedback.md'; link.click();
+    const link = document.createElement('a'); link.href = url; link.download = 'game-codex-v1-feedback.md'; link.click();
     window.setTimeout(() => URL.revokeObjectURL(url), 1000); status.textContent = '已导出文字；没有上传。';
   });
   refresh();

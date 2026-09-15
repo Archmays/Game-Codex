@@ -1,3 +1,4 @@
+import { revealControl } from '../step4/input-helpers';
 import { mkdirSync, writeFileSync } from "node:fs";
 import { expect, test, type Page } from "@playwright/test";
 import { CORES, ORIGINAL_CORE_ORDER as CORE_ORDER, ORIGINAL_RECIPES as RECIPES, type CoreKind } from "../../../games/hanzi-tower-defense/content";
@@ -17,6 +18,7 @@ async function setup(page: Page, items: Item[], wave = 0) {
 }
 const selector = (c: Item) => c.slot === null ? `[data-core="${c.id}"]` : `[data-slot="${c.slot}"]`;
 async function activate(page: Page, selector: string, input: string) {
+  await revealControl(page,selector,input==='keyboard'?'keyboard':input==='touch'?'touch':'mouse');
   const item = page.locator(selector); await item.scrollIntoViewIfNeeded();
   if (input === 'touch') await item.tap();
   else if (input === 'keyboard') { await item.focus(); await page.keyboard.press('Enter'); }
@@ -163,7 +165,7 @@ test('range inspection is independent of bag selection and lifecycle, with empty
 test('unpaused battle keeps synthesis, live drops and ranges together without state injection or acceleration',async({page},info)=>{
   test.skip(info.project.name!=='desktop'); mkdirSync(evidence,{recursive:true}); const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(gameURL);await expect(page.locator('[data-td-canvas]')).toHaveAttribute('data-ready','true');
-  await page.locator('[data-td-mute]').click(); await page.locator('[data-td-motion]').click();
+  await activate(page,'[data-td-mute]','desktop'); await activate(page,'[data-td-motion]','desktop');await activate(page,'[data-td-settings-close]','desktop');await activate(page,'[data-td-pause]','desktop');
   await page.locator('[data-core="3"]').click(); await page.locator('[data-slot="0"]').hover(); await screenRange(page,'fire',0);
   await page.locator('[data-td-all-ranges]').click(); await expect(page.locator('[data-td-selection] .has-core')).toHaveCount(1);
   await expect.poll(()=>page.locator('.td-game').getAttribute('data-kills'),{timeout:60000,intervals:[100]}).not.toBe('0');

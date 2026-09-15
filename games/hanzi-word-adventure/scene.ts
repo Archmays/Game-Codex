@@ -19,8 +19,10 @@ export class AdventureScene extends Phaser.Scene {
   private roomId = '';
   private water: { text: Phaser.GameObjects.Text; y: number; phase: number }[] = [];
   private ready = false;
+  private transitions: Phaser.GameObjects.Text[] = [];
+  private changeMarks?: Phaser.GameObjects.Graphics;
   constructor(private readonly onReady: () => void) { super('word-adventure'); }
-  create() { this.paper = this.add.graphics(); this.marks = this.add.graphics(); this.person = this.text('人').setDepth(5); this.companion = this.text('友').setDepth(5); this.ready = true; if (this.view) this.sync(this.view); this.onReady(); }
+  create() { this.paper = this.add.graphics(); this.marks = this.add.graphics(); this.changeMarks=this.add.graphics().setDepth(2); this.person = this.text('人').setDepth(5); this.companion = this.text('友').setDepth(5); this.ready = true; if (this.view) this.sync(this.view); this.onReady(); }
   private text(value = '') { return this.add.text(0, 0, value, { fontFamily: FONT_STACK, fontSize: '32px', color: INK, padding: { x: 3, y: 3 } }).setOrigin(.5); }
   private set(text: Phaser.GameObjects.Text, value: string, size: number, color: string) {
     if (text.text !== value) text.setText(value);
@@ -28,7 +30,10 @@ export class AdventureScene extends Phaser.Scene {
     if (text.style.color !== color) text.setColor(color);
   }
   sync(view: SceneView, from?: number) {
+    const previous=this.view;
     this.view = view; if (!this.ready) return;
+    for(const ghost of this.transitions){this.tweens.killTweensOf(ghost);ghost.destroy();}this.transitions=[];
+    this.tweens.killTweensOf(this.changeMarks!);this.changeMarks!.clear().setAlpha(1);
     const { room, state } = view, light = illumination(room, state), cell = this.scale.width / room.width;
     const center = (pos: number) => ({ x: (pos % room.width + .5) * cell, y: (Math.floor(pos / room.width) + .5) * cell });
     if (this.roomId !== room.id) {
@@ -37,7 +42,8 @@ export class AdventureScene extends Phaser.Scene {
     }
     this.tweens.killTweensOf(this.person!); this.paper!.clear(); this.marks!.clear(); this.water = [];
     const g = this.paper!, ink = this.marks!;
-    g.fillStyle(0xf5f0e4, 1).fillRect(0, 0, this.scale.width, this.scale.height);
+    const paperColors={homeward:0xfaf5e9,lamplight:0xfaf1dc,confluence:0xf0f2e6,companions:0xfaf0e8};
+    g.fillStyle(paperColors[room.chapterId], 1).fillRect(0, 0, this.scale.width, this.scale.height);
     for (const [pos, tile] of room.tiles.entries()) {
       const { x, y } = center(pos), left = x - cell / 2, top = y - cell / 2, item = visible(room,state,pos) ? at(state, pos) : undefined;
       const occupied = (pos === state.player || pos === state.companion) && (item || tile === 'goal' || tile === 'door' || tile === 'wind' || tile === 'shadow');
@@ -47,8 +53,9 @@ export class AdventureScene extends Phaser.Scene {
       if (tile === 'shadow') { glyph = item ? '' : '影'; size = Math.round(cell * .48); color = light.has(pos) ? '#725719' : '#626276'; note = light.has(pos) ? `亮·${light.get(pos)}步` : '暗·不通'; g.fillStyle(light.has(pos) ? 0xf4d889 : 0x8b859d, light.has(pos) ? .25 : .22).fillRoundedRect(left+2,top+2,cell-4,cell-4,4); }
       else if (tile === 'wall') {
         // The mountain terrain has no pickup outline; tiny distant strokes stay in this mountain cell.
-        glyph = '山'; color = '#8c9d88'; size = Math.round(cell * .56);
-        g.fillStyle(0xaab29a, .12).fillRoundedRect(left + 1, top + 1, cell - 2, cell - 2, 5);
+        glyph = '山'; color = '#85917f'; size = Math.round(cell * .54);
+        // Quiet terrain ink, not a wall of heavy cards.
+        g.lineStyle(Math.max(1,cell*.012),0xa7ad96,.25).lineBetween(left+cell*.2,top+cell*.81,left+cell*.8,top+cell*.81);
       } else if (tile === 'floor') {
         g.fillStyle(0xc8bda7, .6).fillCircle(x, y, 1.1);
       } else if (tile === 'water') {
@@ -80,8 +87,8 @@ export class AdventureScene extends Phaser.Scene {
       if (tile === 'water' && !item) this.water.push({ text: this.glyphs[pos], y, phase: pos });
       if (item) {
         const bridge = tile === 'water';
-        g.fillStyle(0xfdf9ed, .98).fillRoundedRect(left + 6, top + 4, cell - 12, cell - (bridge ? 14 : 8), 5);
-        g.lineStyle(1.8, item.kind === '不' ? 0xaa493a : 0x60755b, .85).strokeRoundedRect(left + 6, top + 4, cell - 12, cell - (bridge ? 14 : 8), 5);
+        g.fillStyle(0xfffcf4, .95).fillRoundedRect(left + 6, top + 4, cell - 12, cell - (bridge ? 14 : 8), 3);
+        g.lineStyle(Math.max(1.4,cell*.018), item.kind === '不' ? 0xaa493a : 0x60755b, .85).strokeRoundedRect(left + 6, top + 4, cell - 12, cell - (bridge ? 14 : 8), 3);
         if (bridge) g.lineStyle(1, 0x97784a, .8).lineBetween(left + 8, top + cell - 9, left + cell - 8, top + cell - 9);
       }
       this.set(this.objects[pos], item?.kind ?? '', Math.round(cell * (occupied ? .32 : tile === 'shadow' ? .48 : .6)), item?.kind === '不' ? RUST : INK);
@@ -118,6 +125,25 @@ export class AdventureScene extends Phaser.Scene {
       const previous = personPoint(from); this.person!.setPosition(previous.x, previous.y);
       this.tweens.add({ targets: this.person, x: p.x, y: p.y, duration: 150, ease: 'Sine.easeOut' });
     } else this.person!.setPosition(p.x, p.y);
+    // Transient presentation is always derived AFTER the atomic model transition.
+    // A later input discards its ghosts and paints the new authoritative state immediately.
+    if(previous && previous.room.id===room.id && previous.state!==state){
+      const oldLight=illumination(room,previous.state), changedLight=[...new Set([...oldLight.keys(),...light.keys()])].filter(pos=>oldLight.get(pos)!==light.get(pos));
+      for(const pos of changedLight){const c=center(pos);this.changeMarks!.lineStyle(Math.max(2,cell*.025),light.has(pos)?0xc69235:0x69617d,.8).strokeRect(c.x-cell*.46,c.y-cell*.46,cell*.92,cell*.92);}
+      for(const entity of state.entities){
+        const old=previous.state.entities.find(e=>e.atoms===entity.atoms);
+        if(entity.pos===null || (old && old.pos===entity.pos && old.kind===entity.kind))continue;
+        const end=center(entity.pos);this.changeMarks!.lineStyle(Math.max(2,cell*.025),0xaa493a,.75).strokeCircle(end.x,end.y,cell*.43);
+        if(!view.reducedMotion){
+          // Split pieces originate at their ground parent; undo follows the same conserved atoms.
+          const source=old??previous.state.entities.find(e=>(e.atoms&entity.atoms)!==0);
+          const origin=center(source?.pos??previous.state.player),ghost=this.text(entity.kind).setFontSize(Math.round(cell*.52)).setColor('#aa493a').setDepth(6).setPosition(origin.x,origin.y);
+          this.transitions.push(ghost);this.tweens.add({targets:ghost,x:end.x,y:end.y,alpha:0,duration:170,ease:'Sine.easeOut'});
+        }
+      }
+      if(previous.state.active!==state.active){this.changeMarks!.lineStyle(Math.max(2,cell*.035),0xaa493a,.85).strokeCircle(p.x,p.y,cell*.43);}
+      if(!view.reducedMotion)this.tweens.add({targets:this.changeMarks,alpha:0,duration:220});
+    }
   }
   update(time: number) {
     if (!this.view || this.view.reducedMotion) return;

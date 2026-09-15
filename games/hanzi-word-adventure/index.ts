@@ -1,3 +1,8 @@
+import { openPresentation, PRODUCT_VERSION } from '../../packages/presentation/settings';
+import { MusicLoops } from '../../packages/presentation/music';
+import { presentationControls, bindPresentationControls } from '../../packages/presentation/controls';
+import { AdventureAudio } from './audio';
+import '../../packages/presentation/styles.css';
 import Phaser from 'phaser';
 import type { GameDefinition, MountedGame } from '../../packages/game-core';
 import { FONT_STACK, wordRecord, WORLD_RULES } from './content';
@@ -8,6 +13,7 @@ import { AdventureScene } from './scene';
 import type { SearchResult } from './solver';
 import { bindInputLifecycle, ignoreGameKey, preserveRegionFocus, rovingGroup } from '../../packages/ui/input';
 import './styles.css';
+import './v1.css';
 
 export const hanziWordAdventureGame: GameDefinition = {
   id: 'hanzi-word-adventure', title: '字间行者', description: '挪一枚字，变一段路。借来木与不，走回家。', subject: '识字', recommendedAge: '6 岁起', learningGoal: '在文字空间中观察左右结构、否定和材料守恒。', status: '可玩', playLabel: '踏上归途', route: '?play=hanzi-word-adventure&from=hub', mount: context => mountHanziWordAdventure(context.container, context.onExit),
@@ -17,9 +23,12 @@ const escape = (s: string) => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '
 const arrows: Record<Direction, string> = { up: '↑', right: '→', down: '↓', left: '←' };
 
 export function mountHanziWordAdventure(root: HTMLElement, onExit = () => window.location.assign(new URLSearchParams(location.search).get('from') === 'hub' ? '?hub=classic&from=world' : '?world=my-game-world')): MountedGame {
+  const presentation=openPresentation(browserStorage(),'adventure'), visual=presentation.value;
+  const audio=new AdventureAudio();audio.volume=visual.muted?0:visual.effects;
+  const music=new MusicLoops('adventure',failed=>{const retry=root.querySelector<HTMLElement>('[data-presentation-retry]');if(retry)retry.hidden=!failed;});
   const save = openSave(browserStorage(), { reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches }, new URLSearchParams(location.search).get('chapter') === 'companions' ? 'companions' : 'homeward');
   let journey = save.journey, settings = save.settings, selected: number | null = null, facing: Direction = 'right';
-  let placementMode = false;
+  let placementMode = false, resetFromSettings = false;
   let binding: string | null = null, splitMode = false, splitSide: 'left' | 'right' = 'right', destroyed = false, busy = false, busyTimer = 0;
   let hintLevel = 0, hintResult: SearchResult | null = null, hintWorker: Worker | null = null, hintId = 0;
   let menuOpen = true, menuMode: 'entry' | 'new' | 'continue' = 'entry', hasEntered = false, resetChapter: ChapterId | null = null;
@@ -28,13 +37,13 @@ export function mountHanziWordAdventure(root: HTMLElement, onExit = () => window
   const room = () => ROOMS[journey.room];
   root.className = 'hway-mount';
   root.innerHTML = `<main class="hway" data-testid="hanzi-word-adventure" aria-labelledby="hway-title">
-    <header class="hway-header"><div><p>字间行者 <span data-hway-chapter-title>· 借字归途</span></p><h1 id="hway-title" data-hway-title></h1></div><button type="button" data-hway-exit aria-label="返回游戏世界">返回</button></header>
-    <section class="hway-menu hway-modal" data-hway-menu role="dialog" aria-modal="true" aria-label="选择新游戏或继续游戏"><div><h2>从哪段路出发？</h2><p>每章各有一份本机存档，可以随时换章。</p><div data-hway-menu-content></div><button type="button" data-hway-menu-close>返回</button></div></section><div class="hway-layout"><section class="hway-land" aria-label="文字场景">
-      <p class="hway-subtitle" data-hway-subtitle></p>
+    <header class="hway-header"><div><p><span class="hway-logo" aria-hidden="true">人</span> 字间行者 <span class="product-version">v${PRODUCT_VERSION}</span> <span data-hway-chapter-title>· 借字归途</span></p><h1 id="hway-title" data-hway-title></h1></div><button type="button" data-hway-exit aria-label="返回游戏世界">返回</button></header>
+    <section class="hway-menu hway-modal" data-hway-menu role="dialog" aria-modal="true" aria-label="选择新游戏或继续游戏"><div><div class="hway-menu-mark" aria-hidden="true">人<span>友</span></div><h2>从哪段路出发？</h2><p>每章各有一份本机存档，可以随时换章。</p><div data-hway-menu-content></div><button type="button" data-hway-menu-close>返回</button></div></section><div class="hway-layout"><section class="hway-land" aria-label="文字场景">
+      <p class="hway-subtitle" data-hway-subtitle></p><button type="button" data-hway-retry hidden>重新载入场景</button>
       <div class="hway-board" data-hway-board><div class="hway-canvas" data-hway-canvas aria-hidden="true"></div><div class="hway-grid" role="group" aria-label="文字世界。方向键移动；Shift加方向键查看相邻格；空格主操作；Tab离开世界" data-hway-grid tabindex="0"></div></div>
-      <p class="hway-legend"><span>山 · 山崖</span><span>框中的字 · 可搬</span><span>双线短句 · 改规则</span></p>
+      <div class="product-guide" data-hway-guide ${visual.guideSeen?'hidden':''}><p>朝向选目标，Space 拿放。试过以后，随时 Z 撤销。</p><button type="button" data-hway-guide-close>知道了</button></div><p class="hway-legend"><span>山 · 山崖</span><span>框中的字 · 可搬</span><span>双线短句 · 改规则</span></p>
     </section><aside class="hway-controls" aria-label="走路与改字">
-      <div class="hway-save-tools"><button type="button" data-hway-saves>章节／存档</button><button type="button" data-hway-reset>重置本章进度</button></div><div class="hway-companions" data-hway-companions hidden><button type="button" data-hway-actor="person"></button><button type="button" data-hway-actor="friend"></button></div><div class="hway-hand"><span>手里 <strong data-hway-hand>空</strong></span><span>最多带一个字<br> · 林也算一个</span></div>
+      <div class="hway-save-tools"><button type="button" data-hway-saves>章节／存档</button><button type="button" data-hway-settings>设置</button></div><div class="hway-companions" data-hway-companions hidden><button type="button" data-hway-actor="person"></button><button type="button" data-hway-actor="friend"></button></div><div class="hway-hand"><span>手里 <strong data-hway-hand>空</strong></span><span>最多带一个字<br> · 林也算一个</span></div>
       <div class="hway-direction" aria-label="移动方向">${(['left', 'up', 'down', 'right'] as Direction[]).map(d => `<button type="button" data-hway-move="${d}" aria-label="向${DIR_NAMES[d]}走">${arrows[d]}</button>`).join('')}</div>
       <div class="hway-primary"><p data-hway-target></p><button type="button" data-hway-primary>主操作 · Space</button><button type="button" data-hway-choose-place hidden aria-pressed="false">选择落字处</button></div><div class="hway-toolbar"><button type="button" data-hway-undo>撤销一步</button><button type="button" data-hway-restart>本间重开</button><button type="button" data-hway-hint>想一想</button></div>
       <section class="hway-inspect" aria-label="字的状态和动作"><p data-hway-inspect>点一个字，先看它能做什么。</p><div class="hway-actions" data-hway-actions></div></section>
@@ -42,14 +51,16 @@ export function mountHanziWordAdventure(root: HTMLElement, onExit = () => window
       <div class="hway-hint" data-hway-hint-box hidden><p data-hway-hint-text></p><button type="button" data-hway-hint-more>再提示一点</button><button type="button" data-hway-hint-close>收起提示</button></div>
       <div class="hway-sentences" data-hway-sentences></div>
       <div class="hway-ending" data-hway-ending hidden><p data-hway-ending-text></p><button type="button" data-hway-next>往前走</button><button type="button" data-hway-replay hidden>再走一次归途</button></div>
-      <details class="hway-help"><summary>怎么玩 · 字与规则</summary><p>方向键／WASD：移动　Shift＋方向键：查看<br>Space／E：拿／放／明确确认　X：拆　C：合　Z：撤销　H：提示　Q：换角色　Esc：取消</p><p>点击相邻空路走一格；点击物件先查看，再按主操作。持字时点“选择落字处”，再点相邻格，只选位置不走路。远格不移动。Tab切换区域；在方向区用方向键选按钮。</p><ol>${WORLD_RULES.map(r => `<li>${r}</li>`).join('')}</ol><button type="button" data-hway-motion aria-pressed="false">减少动态</button><p data-hway-save-status></p></details>
+      <details class="hway-help"><summary>怎么玩 · 字与规则</summary><p>方向键／WASD：移动　Shift＋方向键：查看<br>Space／E：拿／放／明确确认　X：拆　C：合　Z：撤销　H：提示　Q：换角色　Esc：取消</p><p>点击相邻空路走一格；点击物件先查看，再按主操作。持字时点“选择落字处”，再点相邻格，只选位置不走路。远格不移动。Tab切换区域；在方向区用方向键选按钮。</p><ol>${WORLD_RULES.map(r => `<li>${r}</li>`).join('')}</ol><details><summary>内容定位</summary><p data-hway-content-id></p></details><p data-hway-save-status></p></details>
     </aside></div>
+    <dialog class="hway-settings" data-hway-settings-dialog aria-label="声音与显示设置"><h2>声音与显示</h2><button type="button" data-hway-mute aria-pressed="false">静音</button><button type="button" data-hway-motion aria-pressed="false">减少动态</button>${presentationControls(visual)}<details><summary>进度管理</summary><button type="button" data-hway-reset>重置本章进度</button></details><button type="button" data-hway-settings-close>返回字间</button></dialog>
     <div class="hway-modal" data-hway-modal hidden role="dialog" aria-modal="true" aria-labelledby="hway-restart-title"><div><h2 id="hway-restart-title" data-hway-modal-title>重新走这一间？</h2><p data-hway-modal-text>本间回到入口，已经走到的房间仍保留。</p><button type="button" data-hway-confirm-restart>重开这一间</button><button type="button" data-hway-cancel-restart>取消</button></div></div>
   </main>`;
   const el = <T extends HTMLElement = HTMLElement>(selector: string) => root.querySelector<T>(selector)!;
   const shell = el('.hway'), board = el('[data-hway-board]'), grid = el('[data-hway-grid]'), feedback = el('[data-hway-feedback]');
   const say = (message: string) => { if (message) feedback.textContent = message; };
-  function persist() { if (!hasEntered) return; save.write(journey, settings); el('[data-hway-save-status]').textContent = save.writable ? '进度和撤销只保存在本机。' : '原有记录已保护；本页仍可玩，新的动作暂不写入存档。'; }
+  function savePresentation():void { el('[data-presentation-status]').textContent=presentation.write()?'':'设置仅在本页生效，原有设置已保护。重新打开页面后可再试。'; }
+  function persist() { if (!hasEntered) return;visual.lastContent=journey.chapterId;savePresentation(); save.write(journey, settings); el('[data-hway-save-status]').textContent = save.writable ? '进度和撤销只保存在本机。' : '原有记录已保护；本页仍可玩，新的动作暂不写入存档。'; }
   function cancelHint() { hintWorker?.terminate(); hintWorker = null; hintResult = null; hintLevel = 0; hintId++; el('[data-hway-hint-box]').hidden = true; }
   function cellGlyph(pos: number) {
     if (pos === journey.state.player) return actorGlyph(journey.state);
@@ -70,7 +81,8 @@ export function mountHanziWordAdventure(root: HTMLElement, onExit = () => window
   }
   function renderMenu(focus = true) {
     const content = el('[data-hway-menu-content]');
-    content.innerHTML = menuMode === 'entry' ? '<button type="button" data-hway-new>新游戏</button><button type="button" data-hway-continue>继续游戏</button>' : `<p>${menuMode === 'new' ? '选择新游戏章节。已有存档的章节会先确认重置。' : '选择要继续的章节存档。其他章节会保留。'}</p>${CHAPTERS.map(c => { const j = save.chapters[c.id]; return `<button type="button" data-hway-chapter="${c.id}" ${menuMode === 'continue' && !j ? 'disabled' : ''}>${escape(c.title)}<small>${j ? `${escape(ROOMS[j.room].title)} · ${j.roomId}${j.state.won ? ' · 已到出口' : ''}` : '尚未开始'}</small></button>`; }).join('')}<button type="button" data-hway-${menuMode === 'new' ? 'continue' : 'new'}>${menuMode === 'new' ? '查看继续存档' : '选择新游戏'}</button>`;
+    const recent=CHAPTERS.find(c=>c.id===visual.lastContent && save.chapters[c.id])??CHAPTERS.find(c=>save.chapters[c.id]);
+    content.innerHTML = menuMode === 'entry' ? `${recent?`<button type="button" class="hway-resume" data-hway-resume="${recent.id}">继续上次<small>${recent.title} · ${ROOMS[save.chapters[recent.id]!.room].title}</small></button>`:''}<button type="button" data-hway-new>新游戏</button><button type="button" data-hway-continue>继续游戏 · 选择章节</button>` : `<p>${menuMode === 'new' ? '选择新游戏章节。已有存档的章节会先确认重置。' : '选择要继续的章节存档。其他章节会保留。'}</p>${CHAPTERS.map(c => { const j = save.chapters[c.id]; return `<button type="button" data-hway-chapter="${c.id}" ${menuMode === 'continue' && !j ? 'disabled' : ''}>${escape(c.title)}<small>${j ? `${escape(ROOMS[j.room].title)}${j.state.won ? ' · 已到出口' : ''}` : '尚未开始'}</small></button>`; }).join('')}<button type="button" data-hway-${menuMode === 'new' ? 'continue' : 'new'}>${menuMode === 'new' ? '查看继续存档' : '选择新游戏'}</button>`;
     el('[data-hway-menu]').hidden = !menuOpen; el('.hway-layout').inert = menuOpen; el('.hway-header').inert = menuOpen;
     if (focus) content.querySelector<HTMLButtonElement>('button:not(:disabled)')?.focus();
   }
@@ -78,16 +90,16 @@ export function mountHanziWordAdventure(root: HTMLElement, onExit = () => window
   function closeMenu() { menuOpen = false; renderMenu(false); grid.focus({preventScroll:true}); }
   function enterChapter(id: ChapterId, reset = false) { if (hasEntered) persist(); hasEntered = true; journey = reset ? save.reset(id,settings) : save.select(id); settings = save.settingsFor(id); const url = new URL(location.href); url.searchParams.set('chapter',id); history.replaceState(history.state,'',url); closeMenu(); freshRoom(room().arrival); grid.focus({preventScroll:true}); }
   function openModal(title: string, message: string, confirm: string) { placementMode=false; resetInput(); modalOpener = document.activeElement as HTMLElement; el('[data-hway-modal-title]').textContent = title; el('[data-hway-modal-text]').textContent = message; el('[data-hway-confirm-restart]').textContent = confirm; el('[data-hway-modal]').hidden = false; el('[data-hway-menu]').inert = true; el('.hway-layout').inert = true; el('[data-hway-cancel-restart]').focus(); }
-  function closeModal() { el('[data-hway-modal]').hidden = true; el('[data-hway-menu]').inert = false; el('.hway-layout').inert = menuOpen; (modalOpener?.isConnected ? modalOpener : grid).focus(); }
-  function openReset(id: ChapterId) { resetChapter = id; openModal(`重置“${CHAPTERS.find(c=>c.id === id)!.title}”进度？`, '这一章回到第一间，撤销和本章进度将重新开始。其他章节与旧版原始存档保留。', '确认重置本章'); }
+  function closeModal(restoreSettings = true) { el('[data-hway-modal]').hidden = true; el('[data-hway-menu]').inert = false; el('.hway-layout').inert = menuOpen; const back=resetFromSettings;resetFromSettings=false;if(back&&restoreSettings){settingsDialog.showModal();el('[data-hway-reset]').focus();}else (modalOpener?.isConnected ? modalOpener : grid).focus(); }
+  function openReset(id: ChapterId, fromSettings = false) { resetFromSettings=fromSettings;resetChapter = id; openModal(`重置“${CHAPTERS.find(c=>c.id === id)!.title}”进度？`, '这一章回到第一间，撤销和本章进度将重新开始。其他章节与旧版原始存档保留。', '确认重置本章'); }
   function sceneSync(from?: number) {
     const preview = splitMode && selected !== null ? [selected, neighbor(room(), selected, splitSide)].filter(p => p >= 0) : [];
-    scene?.sync({ room: room(), state: journey.state, selected, target: journey.state.won ? -1 : operationTarget(), facing, binding, preview, reducedMotion: settings.reducedMotion }, from);
+    scene?.sync({ room: room(), state: journey.state, selected, target: journey.state.won ? -1 : operationTarget(), facing, binding, preview, reducedMotion: settings.reducedMotion || visual.lowPerformance }, from);
   }
   function draw(from?: number) {
     const r = room(), state = journey.state, hand = carried(state);
     shell.dataset.chapter = r.chapterId; shell.dataset.room = r.id; shell.dataset.won = String(state.won); shell.dataset.player = String(state.player); shell.dataset.busy = String(busy);
-    shell.dataset.reducedMotion = String(settings.reducedMotion); shell.dataset.active = state.active ?? 'person'; shell.dataset.companion = state.companion === undefined ? '' : String(state.companion);
+    shell.dataset.reducedMotion = String(settings.reducedMotion);shell.dataset.lowPerformance=String(visual.lowPerformance);el('[data-hway-content-id]').textContent=`${r.chapterId} / ${r.id} · v${PRODUCT_VERSION}`; shell.dataset.active = state.active ?? 'person'; shell.dataset.companion = state.companion === undefined ? '' : String(state.companion);
     el('[data-hway-companions]').hidden = state.companion === undefined;
     for (const actor of ['person','friend'] as const) { const b = el(`[data-hway-actor=${actor}]`), pos = state.active === actor ? state.player : state.companion; b.textContent = `${actor === 'person' ? '人' : '友'} · ${state.active === actor ? '正在走' : '等在原地'} · 手里${state.entities.find(e => e.pos === null && e.holder === actor)?.kind ?? '空'}${pos !== undefined && r.tiles[pos] === 'goal' ? ' · 到家' : ''}`; b.setAttribute('aria-pressed',String(state.active === actor)); }
     el('[data-hway-chapter-title]').textContent = `· ${CHAPTERS.find(c=>c.id === r.chapterId)!.title}`;
@@ -100,6 +112,7 @@ export function mountHanziWordAdventure(root: HTMLElement, onExit = () => window
     }
     grid.querySelectorAll<HTMLButtonElement>('[data-hway-cell]').forEach(button => {
       const pos = Number(button.dataset.hwayCell), glyph = cellGlyph(pos);
+      button.dataset.fallback=pos===state.player?actorGlyph(state):pos===state.companion?(state.active==='person'?'友':'人'):!visible(r,state,pos)?'影':at(state,pos)?.kind??({wall:'山',water:'水',goal:'家',door:'门',wind:'风',shadow:'影'} as Record<string,string>)[r.tiles[pos]]??'·';
       button.setAttribute('aria-label', `第${Math.floor(pos / r.width) + 1}行第${pos % r.width + 1}列，${glyph}${r.tiles[pos] === 'water' && at(state, pos) ? '，木桥下是水' : ''}`);
       button.setAttribute('aria-pressed', String(pos === selected)); button.tabIndex = -1; button.dataset.lit = String(illumination(r, state).has(pos)); button.dataset.target = String(!state.won && pos === operationTarget());
     });
@@ -108,6 +121,7 @@ export function mountHanziWordAdventure(root: HTMLElement, onExit = () => window
     el('[data-hway-ending-text]').textContent = r.departure;
     el('[data-hway-next]').textContent = lastInChapter(journey.room) ? '选择另一章' : '往前走';
     el('[data-hway-replay]').hidden = !lastInChapter(journey.room) || !state.won;
+    el('[data-hway-mute]').setAttribute('aria-pressed',String(visual.muted));
     el('[data-hway-motion]').setAttribute('aria-pressed', String(settings.reducedMotion));
     preserveRegionFocus(el('[data-hway-sentences]'), () => { el('[data-hway-sentences]').innerHTML = r.sentences.map(s => `<button type="button" data-hway-rule="${s.id}" aria-pressed="${binding === s.id}">${sentenceText(state, s)} <small>查看这段路</small></button>`).join(''); }, e => e.dataset.hwayRule ?? null, id => root.querySelector(`[data-hway-rule="${id}"]`), () => grid);
     inspect();
@@ -150,10 +164,13 @@ export function mountHanziWordAdventure(root: HTMLElement, onExit = () => window
   }
   function unlock() { window.clearTimeout(busyTimer); busy = false; shell.dataset.busy = 'false'; }
   function run(action: Action) {
-    if (destroyed || menuOpen || !el('[data-hway-modal]').hidden) return;
+    if (destroyed || menuOpen || !el('[data-hway-modal]').hidden || settingsDialog.open) return;
+    audio.unlock();
     const previous = journey.state.player, update = perform(journey, action);
     if (action.type === 'move') facing = action.direction;
     if (!update.result.ok) { say(update.result.message); if (action.type === 'move') select(neighbor(room(), previous, action.direction)); grid.focus({preventScroll:true}); return; }
+    if(update.journey.state.won||action.type==='combine')music.duck();
+    audio.play(update.journey.state.won?'won':action.type);
     journey = update.journey; placementMode = false; splitMode = false; selected = null; cancelHint();
     if (action.type === 'move') { facing = action.direction; selected = neighbor(room(), journey.state.player, facing); if (selected < 0) selected = null; }
     else if (action.type !== 'switch') selected = action.target;
@@ -211,31 +228,38 @@ export function mountHanziWordAdventure(root: HTMLElement, onExit = () => window
     else if (target.dataset.hwayActor) { if (journey.state.active !== target.dataset.hwayActor) run({type:'switch'}); else grid.focus({preventScroll:true}); }
     else if (target.matches('[data-hway-primary]')) primaryAction();
     else if (target.matches('[data-hway-choose-place]')) { placementMode=!placementMode; draw(); say(placementMode ? '点人旁边一格选落字处，再按主操作放下。' : '取消选落字处，点击空路仍会走一格。'); }
+    else if (target.dataset.hwayResume) enterChapter(target.dataset.hwayResume as ChapterId);
     else if (target.matches('[data-hway-new]')) { menuMode = 'new'; renderMenu(); }
     else if (target.matches('[data-hway-continue]')) { menuMode = 'continue'; renderMenu(); }
     else if (target.dataset.hwayChapter) { const id = target.dataset.hwayChapter as ChapterId; if (menuMode === 'new' && save.chapters[id]) openReset(id); else enterChapter(id, menuMode === 'new'); }
     else if (target.matches('[data-hway-saves]')) openMenu();
-    else if (target.matches('[data-hway-reset]')) openReset(journey.chapterId);
+    else if (target.matches('[data-hway-reset]')) {settingsDialog.close();openReset(journey.chapterId,true);}
     else if (target.matches('[data-hway-menu-close]')) { if (hasEntered) closeMenu(); else onExit(); }
     else if (target.dataset.hwayMove) { facing = target.dataset.hwayMove as Direction; run({ type: 'move', direction: facing }); }
     else if (target.dataset.hwayAction) selectedAction(target.dataset.hwayAction);
     else if (target.dataset.hwaySide) { splitSide = target.dataset.hwaySide as 'left' | 'right'; draw(); el(`[data-hway-side="${splitSide}"]`).focus({ preventScroll: true }); }
     else if (target.dataset.hwayRule) { binding = binding === target.dataset.hwayRule ? null : target.dataset.hwayRule; draw(); }
-    else if (target.matches('[data-hway-undo]')) { journey = undo(journey); freshRoom('退回上一步，所有字都回到了原处。'); if (event.detail === 0 && !(target as HTMLButtonElement).disabled) target.focus({preventScroll:true}); }
+    else if (target.matches('[data-hway-undo]')) { audio.unlock();audio.play('undo');journey = undo(journey); freshRoom('退回上一步，所有字都回到了原处。'); if (event.detail === 0 && !(target as HTMLButtonElement).disabled) target.focus({preventScroll:true}); }
     else if (target.matches('[data-hway-restart]')) { resetChapter = null; openModal('重新走这一间？', '本间回到入口，已经走到的房间仍保留。', '重开这一间'); }
     else if (target.matches('[data-hway-cancel-restart]')) closeModal();
-    else if (target.matches('[data-hway-confirm-restart]')) { const id = resetChapter; closeModal(); if (id) enterChapter(id, true); else { journey = restart(journey); freshRoom(room().arrival); } }
+    else if (target.matches('[data-hway-confirm-restart]')) { const id = resetChapter; closeModal(false); if (id) enterChapter(id, true); else { journey = restart(journey); freshRoom(room().arrival); } }
     else if (target.matches('[data-hway-exit]')) onExit();
     else if (target.matches('[data-hway-next]')) { if (lastInChapter(journey.room)) openMenu(); else { journey = nextRoom(journey); freshRoom(room().arrival); window.scrollTo({ top: 0, behavior: 'instant' }); } }
     else if (target.matches('[data-hway-replay]') && lastInChapter(journey.room) && journey.state.won) { journey = newJourney(CHAPTERS.find(c => c.id === journey.chapterId)!.firstRoom, journey.unlocked); freshRoom(room().arrival); window.scrollTo({ top: 0, behavior: 'instant' }); }
     else if (target.matches('[data-hway-hint], [data-hway-hint-more]')) requestHint(event.detail === 0 ? el('[data-hway-hint]') : grid);
     else if (target.matches('[data-hway-hint-close]')) { cancelHint(); (event.detail === 0 && hintOpener?.isConnected ? hintOpener : grid).focus({preventScroll:true}); }
+    else if (target.matches('[data-hway-mute]')) {visual.muted=!visual.muted;audio.volume=visual.muted?0:visual.effects;music.configure(visual.music,visual.muted);if(visual.muted)audio.suspend();else{audio.unlock();music.unlock();}savePresentation();draw();}
     else if (target.matches('[data-hway-motion]')) { settings.reducedMotion = !settings.reducedMotion; persist(); draw(); }
   };
+  const settingsDialog=el<HTMLDialogElement>('[data-hway-settings-dialog]');
+  el('[data-hway-settings]').onclick=()=>settingsDialog.showModal();el('[data-hway-settings-close]').onclick=()=>settingsDialog.close();
+  el('[data-hway-guide-close]').onclick=()=>{visual.guideSeen=true;savePresentation();el('[data-hway-guide]').hidden=true;grid.focus({preventScroll:true});};
+  const unbindPresentation=bindPresentationControls(root,visual,()=>{savePresentation();audio.volume=visual.muted?0:visual.effects;music.configure(visual.music,visual.muted);audio.unlock();music.unlock();draw();},()=>{el('[data-hway-guide]').hidden=false;settingsDialog.close();el('[data-hway-guide-close]').focus();},()=>music.retry());
+  const unlockMusic=(event:Event)=>{if(event.isTrusted){audio.unlock();music.configure(visual.music,visual.muted);music.unlock();}};root.addEventListener('pointerup',unlockMusic);root.addEventListener('keydown',unlockMusic);
   root.addEventListener('click', click);
   const directionRoving = rovingGroup(el('.hway-direction'), { items: 'button', columns: () => 4 });
   const keys = (event: KeyboardEvent) => {
-    if (destroyed) return;
+    if (destroyed || settingsDialog.open) return;
     const modal = !el('[data-hway-modal]').hidden ? el('[data-hway-modal]') : menuOpen ? el('[data-hway-menu]') : null;
     if (modal) {
       if (event.defaultPrevented || event.isComposing || event.keyCode === 229 || event.ctrlKey || event.metaKey || event.altKey) return;
@@ -260,27 +284,29 @@ export function mountHanziWordAdventure(root: HTMLElement, onExit = () => window
     else if (key === 'q') { event.preventDefault(); run({type:'switch'}); }
     else if (key === 'x') { event.preventDefault(); selectedAction('preview-split'); }
     else if (key === 'c') { event.preventDefault(); selectedAction('combine'); }
-    else if (key === 'z') { event.preventDefault(); journey = undo(journey); freshRoom('退回上一步，所有字和光都回到了原处。'); }
+    else if (key === 'z') { event.preventDefault(); audio.unlock();audio.play('undo');journey = undo(journey); freshRoom('退回上一步，所有字和光都回到了原处。'); }
   };
   window.addEventListener('keydown', keys);
   const resetInput = () => { moveStamp = 0; unlock(); };
   const unbindInput = bindInputLifecycle(root, resetInput);
-  const visibility = () => { resetInput(); if (!destroyed) sceneSync(); };
+  const visibility = () => { if(document.hidden){audio.suspend();music.suspend();} resetInput(); if (!destroyed) sceneSync(); };
   document.addEventListener('visibilitychange', visibility);
-  const pagehide = (event: PageTransitionEvent) => { persist(); if (!event.persisted) destroy(); else { unlock(); hintWorker?.terminate(); hintWorker = null; } };
+  const pagehide = (event: PageTransitionEvent) => {audio.suspend();music.suspend(); persist(); if (!event.persisted) destroy(); else { unlock(); hintWorker?.terminate(); hintWorker = null; } };
   window.addEventListener('pagehide', pagehide);
   window.addEventListener('resize', resize);
   draw(); renderMenu(false); const linkedChapter = new URLSearchParams(location.search).get('chapter'); if (CHAPTERS.some(c => c.id === linkedChapter)) enterChapter(linkedChapter as ChapterId);
   say(save.restored ? '接着上次的路走。撤销也一起恢复了。' : room().arrival); persist();
+  const renderingFailed=()=>{if(destroyed)return;shell.dataset.renderFailed='true';el('[data-hway-retry]').hidden=false;say('图像暂不可用，文字格仍可操作；可重新载入继续。');};
+  el('[data-hway-retry]').onclick=()=>{persist();location.reload();};
   void (async () => {
     await document.fonts.ready; await document.fonts.load(`32px ${FONT_STACK}`, '人友木林不家门风水开吹山路日月明影');
     if (destroyed) return;
     const ratio = Math.min(devicePixelRatio || 1, 3);
-    const width = Math.round(board.clientWidth * ratio), height = Math.round(board.clientHeight * ratio); if (width < 1 || height < 1) { say('场景暂时没有可用尺寸。请展开窗口后刷新。'); return; }
+    const width = Math.round(board.clientWidth * ratio), height = Math.round(board.clientHeight * ratio); if (width < 1 || height < 1) {renderingFailed();return;}
     scene = new AdventureScene(() => { if (destroyed) return; el('[data-hway-canvas]').dataset.ready = 'true'; sceneSync(); });
     game = new Phaser.Game({ type: Phaser.CANVAS, parent: el('[data-hway-canvas]'), width, height, transparent: true, scene, banner: false, audio: { noAudio: true }, input: { keyboard: false, mouse: false, touch: false }, scale: { mode: Phaser.Scale.NONE, autoCenter: Phaser.Scale.NO_CENTER } });
     resize();
-  })();
-  function destroy() { if (destroyed) return; destroyed = true; unbindInput(); directionRoving.destroy(); unlock(); hintWorker?.terminate(); resizeObserver.disconnect(); window.removeEventListener('resize', resize); window.removeEventListener('keydown', keys); window.removeEventListener('pagehide', pagehide); document.removeEventListener('visibilitychange', visibility); root.removeEventListener('click', click); game?.destroy(true); }
+  })().catch(renderingFailed);
+  function destroy() { if (destroyed) return; destroyed = true; unbindInput(); directionRoving.destroy(); unlock(); hintWorker?.terminate(); resizeObserver.disconnect(); window.removeEventListener('resize', resize); window.removeEventListener('keydown', keys); window.removeEventListener('pagehide', pagehide); document.removeEventListener('visibilitychange', visibility); unbindPresentation();root.removeEventListener('pointerup',unlockMusic);root.removeEventListener('keydown',unlockMusic);music.destroy();audio.destroy();root.removeEventListener('click', click); game?.destroy(true); }
   return { destroy };
 }

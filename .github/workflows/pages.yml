@@ -18,11 +18,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      GAME_CODEX_TASK_ID: GAME-CODEX-STEP5
-      GAME_CODEX_EVIDENCE_ROOT: tmp/tasks/GAME-CODEX-STEP5
-      TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP5/tower
-      HWAY_EVIDENCE: tmp/tasks/GAME-CODEX-STEP5/adventure
-      HWAY_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP5/adventure
+      GAME_CODEX_TASK_ID: GAME-CODEX-V1.0
+      GAME_CODEX_EVIDENCE_ROOT: tmp/tasks/GAME-CODEX-V1.0
+      TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-V1.0/tower
+      HWAY_EVIDENCE: tmp/tasks/GAME-CODEX-V1.0/adventure
+      HWAY_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-V1.0/adventure
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -62,7 +62,7 @@ jobs:
       - name: Validate independent memory and tower defense balance
         run: pnpm run test:memory-match && pnpm run validate:hanzi-tower-defense
         env:
-          TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP5/tower
+          TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-V1.0/tower
 
       - name: Build static site
         run: pnpm build
@@ -97,7 +97,7 @@ jobs:
       - name: Validate Hanzi tower defense full battle and controls
         run: pnpm run test:e2e:hanzi-tower-defense
         env:
-          TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-STEP5/tower
+          TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-V1.0/tower
 
       - name: Validate twenty adventure rooms and ordinary four-chapter play
         run: pnpm run validate:hanzi-word-adventure && pnpm exec tsx games/hanzi-word-adventure/tools/solve-step5.ts && pnpm run test:e2e:hanzi-word-adventure
@@ -108,13 +108,16 @@ jobs:
       - name: Validate two builds, weak layouts, and resonance in six tactical scenarios
         run: pnpm exec tsx tools/hanzi-tower-defense/step5-balance.ts --write
 
+      - name: Verify v1.0 presentation, media, and recovery
+        run: pnpm exec playwright test --config playwright.v1.config.ts --project=desktop --project=phone-390
+
       - name: Upload failure evidence only
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: pages-portfolio-failure-${{ github.sha }}
           path: |
-            tmp/tasks/GAME-CODEX-STEP5
+            tmp/tasks/GAME-CODEX-V1.0
           if-no-files-found: ignore
           retention-days: 7
 

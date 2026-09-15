@@ -11,12 +11,14 @@ export class BattleAudio {
   private lastShot = -10;
   private serial = 0;
   muted = false;
+  volume = .65;
+  setVolume(volume: number): void { this.volume = volume; if (this.master && this.context) this.master.gain.setValueAtTime(this.muted ? 0 : db(-15)*volume, this.context.currentTime); }
   unlock(): void {
     if (this.muted || document.hidden) return;
     try {
       if (!this.context) {
         this.context = new AudioContext(); this.master = this.context.createGain();
-        this.master.gain.value = db(-15); this.master.connect(this.context.destination);
+        this.master.gain.value = db(-15)*this.volume; this.master.connect(this.context.destination);
         this.combat = this.context.createGain(); this.combat.gain.value = db(-7); this.combat.connect(this.master);
         this.ui = this.context.createGain(); this.ui.gain.value = db(-3); this.ui.connect(this.master);
       }
@@ -25,13 +27,13 @@ export class BattleAudio {
   }
   setMuted(muted: boolean): void {
     this.muted = muted;
-    if (this.master && this.context) this.master.gain.setValueAtTime(muted ? 0 : db(-15), this.context.currentTime);
+    if (this.master && this.context) this.master.gain.setValueAtTime(muted ? 0 : db(-15)*this.volume, this.context.currentTime);
     if (muted) this.suspend(); else this.unlock();
   }
   suspend(): void { if (this.context?.state === "running") void this.context.suspend().catch(() => {}); }
   play(sound: Sound): void {
     const ctx = this.context;
-    if (!ctx || this.muted || document.hidden || ctx.state !== "running" || this.voices >= 8) return;
+    if (!ctx || this.muted || document.hidden || ctx.state !== "running" || this.voices >= ((sound === 'shot' || sound === 'heavy' || sound === 'defeat') ? 5 : 8)) return;
     const time = ctx.currentTime;
     if ((sound === "shot" || sound === "heavy") && time - this.lastShot < .11) return;
     if (sound === "shot" || sound === "heavy") this.lastShot = time;

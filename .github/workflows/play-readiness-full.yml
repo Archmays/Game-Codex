@@ -6,8 +6,8 @@ on:
     - cron: "17 20 * * 6"
 
 env:
-  GAME_CODEX_TASK_ID: GAME-CODEX-STEP5
-  GAME_CODEX_EVIDENCE_ROOT: tmp/tasks/GAME-CODEX-STEP5
+  GAME_CODEX_TASK_ID: GAME-CODEX-V1.0
+  GAME_CODEX_EVIDENCE_ROOT: tmp/tasks/GAME-CODEX-V1.0
 
 permissions:
   contents: read
@@ -59,6 +59,6 @@ jobs:
         with:
           name: full-play-readiness-failure-${{ github.sha }}
           path: |
-            tmp/tasks/GAME-CODEX-STEP5
+            tmp/tasks/GAME-CODEX-V1.0
           if-no-files-found: ignore
           retention-days: 7
