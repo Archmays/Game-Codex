@@ -109,6 +109,7 @@
 .td-ribbon{position:sticky;top:0;z-index:20;gap:10px;padding:8px 12px;box-shadow:0 3px 10px #071e2440}
 .td-live-controls{display:flex;gap:6px;flex-shrink:0}.td-live-controls button{min-width:56px;min-height:48px;padding:6px 9px;font-size:13px;white-space:nowrap}
 .td-live-controls .td-pause{background:#e3c575;color:#213c30;border-color:#f2da93}
+.td-controls [data-td-continue]:hover:not(:disabled),.td-live-controls .td-pause:hover:not(:disabled){background:#f6dda0;color:#213c30}
 html:has(.td-game){scroll-padding-top:104px}
 @media(max-width:740px){
  .td-ribbon{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:3px 7px;padding:6px 8px}

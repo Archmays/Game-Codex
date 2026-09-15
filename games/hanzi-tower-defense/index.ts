@@ -64,7 +64,7 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
       <div class="td-board" data-td-board><div class="td-canvas" data-td-canvas aria-hidden="true"></div>
         <svg class="td-ranges" data-td-ranges viewBox="0 0 ${MAP.width} ${MAP.height}" preserveAspectRatio="none" aria-hidden="true"></svg>
         <div class="td-gate" data-td-gate aria-hidden="true"><img src="./assets/v1.0/tower/gate.webp" alt=""><span>城</span></div><div class="td-slots" role="group" aria-label="塔位区，方向键选择，Tab 离开">${SLOTS.map((slot, index) => `<button type="button" class="td-slot" data-slot="${index}" style="left:${slot.x / MAP.width * 100}%;top:${slot.y / MAP.height * 100}%" aria-label="塔位${index + 1} ${slot.name}，空位"><img class="td-tower-art" alt="" hidden><span class="td-slot-glyph">＋</span><small>${index + 1}</small></button>`).join("")}</div>
-        <span class="td-road-entry" aria-hidden="true">来路 →</span><div class="td-field-message" data-td-field-message hidden></div><div class="td-drops" data-td-drops aria-hidden="true"></div><div class="td-synthesis" data-td-synthesis aria-hidden="true" hidden></div>
+        <span class="td-road-entry" aria-hidden="true">来路 →</span><div class="td-drops" data-td-drops aria-hidden="true"></div><div class="td-synthesis" data-td-synthesis aria-hidden="true" hidden></div>
       </div>
       <div class="td-range-tools"><span data-td-range-caption>指向或点选字塔，查看攻击范围</span><button type="button" data-td-inspect aria-pressed="false">只看射程</button><button type="button" data-td-all-ranges aria-pressed="false">显示全部射程</button></div>
       <button type="button" class="td-english-notice" data-td-english-notice hidden></button>
@@ -307,7 +307,8 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     gameRoot.dataset.reducedMotion = String(preferences.reducedMotion);gameRoot.dataset.lowPerformance=String(visual.lowPerformance);music.configure(visual.music,preferences.muted||state.paused||document.hidden);audio.setVolume(visual.effects);
     el("[data-td-wave]").textContent = `第 ${Math.min(state.wave + 1, WAVES.length)} / ${WAVES.length} 波 · ${WAVES[Math.min(state.wave, WAVES.length-1)].label}`;
     el("[data-td-health]").textContent = `${state.health}`; el("[data-td-health-fill]").style.width = `${state.health / 16 * 100}%`;
-    el("[data-td-enemies]").textContent = state.phase === "battle" ? `路上 ${state.enemies.length} · 还有 ${WAVES[state.wave].foes.length - state.spawned} 只` : state.phase === "ready" ? "波间布阵" : "守城结束";
+    const fieldStatus = state.phase === "battle" ? `路上 ${state.enemies.length} · 还有 ${WAVES[state.wave].foes.length - state.spawned} 只` : state.phase === "ready" ? "波间布阵 · 准备好再出发" : "守城结束";
+    el("[data-td-enemies]").textContent = state.paused ? `已暂停 · ${fieldStatus} · 可以安心组合` : fieldStatus;
     const focusedControl = document.activeElement;
     const pause = button("[data-td-pause]"); pause.textContent = state.paused ? "继续战斗" : "暂停"; pause.setAttribute("aria-pressed", String(state.paused)); pause.disabled = state.phase !== "battle";
     const next = button("[data-td-next]"); next.hidden = state.phase !== "ready"; next.textContent = activeSave().hasCheckpoint && state.wave === 0 ? "从检查点继续" : `迎接第 ${state.wave + 1} 波`;
@@ -323,8 +324,6 @@ export function mountHanziTowerDefense(root: HTMLElement, onExit = () => window.
     const bossStage=boss?`${boss.id}:${boss.summons??0}:${boss.summonAt===undefined?'walking':'warning'}`:'';
     if(bossStage!==bossAnnouncement){bossAnnouncement=bossStage;if(boss?.summonAt!==undefined)music.duck();audio.play('wave');if(boss)message(boss.summonAt!==undefined?'首领将在两秒后呼来两只团团怪，注意它身后的道路。':(boss.summons??0)>0?`首领已呼援 ${boss.summons} 次，最多两次。`:'烽台首领出现了。它最多呼援两次，预告期间会亮起金色轮廓。');}
     bossStatus.textContent=boss?`烽台首领 · 耐久 ${Math.ceil(boss.hp)} / ${Math.ceil(boss.maxHp)} · ${boss.summonAt!==undefined?`呼援预告 ${Math.max(0,boss.summonAt-state.waveTime).toFixed(1)} 秒`:`已呼援 ${boss.summons??0} / 2 次`}`:'';
-    const field = el("[data-td-field-message]"); field.hidden = !state.paused && state.phase !== "ready";
-    field.textContent = state.paused ? "已暂停 · 可以安心组合" : "波间布阵 · 准备好再出发";
     button("[data-td-mute]").setAttribute("aria-pressed", String(preferences.muted)); button("[data-td-mute]").textContent = preferences.muted ? "开启声音" : "静音";
     button("[data-td-motion]").setAttribute("aria-pressed", String(preferences.reducedMotion));
     const speed = button("[data-td-speed]"); speed.textContent = `速度 ${battleSpeed}×`; speed.setAttribute("aria-pressed", String(battleSpeed === 2)); speed.setAttribute("aria-label", `战斗速度${battleSpeed}倍，切换为${battleSpeed === 1 ? 2 : 1}倍`);

@@ -99,9 +99,11 @@ function validateKnownContracts(entries: readonly RiskEntry[]): string[] {
   if (JSON.stringify(PLAY_SURFACE_MANIFEST.filter(surface => surface.kind === "station").map(surface => surface.id)) !== JSON.stringify(["math-slider", "math-target"])) issues.push("Math station retirement contract");
   if (entries.some((entry) => !entry.testedSurfaceIds.length)) issues.push("Every risk entry must map to at least one browser-tested surface");
   const css = readFileSync(resolve(ROOT, "games/hanzi-tower-defense/styles.css"), "utf8");
-  for (const selector of [".td-slots", ".td-drops", ".td-synthesis", ".td-field-message"]) {
+  for (const selector of [".td-slots", ".td-drops", ".td-synthesis"]) {
     if (!/pointer-events\s*:\s*none\b/.test(blockFor(css, selector))) issues.push(selector + " must not intercept controls");
   }
+  const defense = readFileSync(resolve(ROOT, "games/hanzi-tower-defense/index.ts"), "utf8");
+  if (defense.includes('data-td-field-message') || css.includes('.td-field-message')) issues.push("Tower phase status must stay in the HUD instead of covering field glyphs");
   if (!/pointer-events\s*:\s*auto\b/.test(exactBlockFor(css, ".td-slot"))) issues.push("Tower controls must accept pointer input");
   const mathCss = readFileSync(resolve(ROOT, "games/math-lab/world/math-map.css"), "utf8");
   if (!/min-height\s*:\s*48px\b/.test(exactBlockFor(mathCss, ".math-map .math-world-card button"))) issues.push("Math World station entrances must retain the 48px minimum target");

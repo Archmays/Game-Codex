@@ -9,6 +9,36 @@ import {DEFENSE_MAPS,MAP_IDS} from '../../../games/hanzi-tower-defense/maps';
 import {MAP} from '../../../games/hanzi-tower-defense/model';
 const evidence=process.env.GAME_CODEX_EVIDENCE_ROOT??'tmp/tasks/GAME-CODEX-V1.0';
 
+test('@v1-phase-clear ready and paused status leave every tower glyph and number clear',async({page},info)=>{
+ test.skip(!['desktop','phone-360','phone-390','firefox','webkit'].includes(info.project.name));
+ const mode:InputMode=info.project.name==='desktop'?'keyboard':info.project.use.hasTouch?'touch':'mouse';
+ const act=(s:string)=>activate(page,s,mode,tacticsRegion(s));
+ await page.goto('?play=hanzi-tower-defense&scenario=beacon-crowd');
+ await expect(page.locator('[data-td-canvas]')).toHaveAttribute('data-ready','true');
+ await act('[data-td-guide-close]');await arrangeTacticsUI(page,mode,'beacon-crowd','volcano-grove');
+ const contrast=async(selector:string)=>page.locator(selector).evaluate(el=>{
+  const style=getComputedStyle(el),luminance=(color:string)=>{const rgb=color.match(/[\d.]+/g)!.slice(0,3).map(Number).map(v=>{const s=v/255;return s<=.04045?s/12.92:((s+.055)/1.055)**2.4;});return rgb[0]*.2126+rgb[1]*.7152+rgb[2]*.0722;};
+  const a=luminance(style.color),b=luminance(style.backgroundColor);return (Math.max(a,b)+.05)/(Math.min(a,b)+.05);
+ });
+ if(mode!=='touch'){
+  await page.locator('[data-td-continue]').hover();expect(await contrast('[data-td-continue]'),'gold menu action remains readable while hovered').toBeGreaterThanOrEqual(4.5);await page.mouse.move(0,0);
+ }
+ for(const phase of ['ready','paused']){
+  if(phase==='paused'){await act('[data-td-next]');await act('[data-td-pause]');await expect(page.locator('.td-game')).toHaveAttribute('data-paused','true');}
+  const overlaps=await page.locator('[data-td-board]').evaluate(board=>{
+   const notes=[...board.querySelectorAll<HTMLElement>('.td-road-entry,.td-field-message')].filter(e=>!e.hidden).map(e=>({text:e.textContent,rect:e.getBoundingClientRect()}));
+   return [...board.querySelectorAll('.td-slot-glyph,.td-slot small')].flatMap(label=>{
+    const r=label.getBoundingClientRect();return notes.filter(({rect:n})=>r.left<n.right&&r.right>n.left&&r.top<n.bottom&&r.bottom>n.top).map(note=>({glyph:label.textContent,note:note.text}));
+   });
+  });
+  expect(overlaps,'phase decoration must not cover a real tower glyph or slot number').toEqual([]);
+  if(phase==='paused')expect(await contrast('[data-td-pause]'),'pause text remains readable after real activation').toBeGreaterThanOrEqual(4.5);
+  await expect(page.locator('[data-td-enemies]')).toContainText(phase==='ready'?'波间布阵':'已暂停');
+  await page.locator('[data-td-board]').scrollIntoViewIfNeeded();
+  mkdirSync(`${evidence}/phase-clear`,{recursive:true});await page.screenshot({path:`${evidence}/phase-clear/${info.project.name}-${phase}.png`,fullPage:true});
+ }
+});
+
 test('@v1-hud live status and native speed/pause remain reachable after scrolling',async({page},info)=>{
  const mode:InputMode=info.project.name==='desktop'?'keyboard':info.project.use.hasTouch?'touch':'mouse';
  const act=(s:string)=>activate(page,s,mode,tacticsRegion(s));
