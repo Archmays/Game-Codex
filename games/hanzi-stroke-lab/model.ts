@@ -20,9 +20,11 @@ export class Shelf {
   state = emptyShelf();
   notice = '';
   writable = true;
+  private storedRaw:string|null=null;
   constructor(private storage:StoragePort) {
     try {
       const raw = storage.getItem(STORAGE_KEY);
+      this.storedRaw=raw;
       if (!raw) return;
       const value:unknown = JSON.parse(raw);
       const v = value as ShelfState;
@@ -35,7 +37,10 @@ export class Shelf {
   }
   save():void {
     if (!this.writable) return;
-    try {this.storage.setItem(STORAGE_KEY,JSON.stringify(this.state));}
+    try {
+      if(this.storage.getItem(STORAGE_KEY)!==this.storedRaw){this.writable=false;this.notice='本地记录已被其他页面或保险箱更新。请刷新查看新记录；本页不会覆盖它。';return;}
+      const raw=JSON.stringify(this.state);this.storage.setItem(STORAGE_KEY,raw);this.storedRaw=raw;
+    }
     catch {this.writable=false;this.notice='无法保存本地记录，本次更改只在当前页面有效。';}
   }
   visit(char:string):void {this.state.recent=[char,...this.state.recent.filter(c=>c!==char)].slice(0,24);this.save();}

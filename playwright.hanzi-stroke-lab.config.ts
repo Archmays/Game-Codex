@@ -1,7 +1,7 @@
 import {defineConfig} from '@playwright/test';
 export default defineConfig({
- testDir:'tests/e2e/hanzi-stroke-lab',outputDir:'tmp/tasks/HANZI-STROKE-LAB/test-results',timeout:45000,fullyParallel:false,workers:2,
- reporter:[['list'],['json',{outputFile:'tmp/tasks/HANZI-STROKE-LAB/browser-results.json'}]],
+ testDir:'tests/e2e/hanzi-stroke-lab',outputDir:'tmp/tasks/HSL-MULTICARD/test-results',timeout:45000,fullyParallel:false,workers:2,
+ reporter:[['list'],['json',{outputFile:'tmp/tasks/HSL-MULTICARD/browser-results.json'}]],
  use:{baseURL:process.env.HSL_BASE||'http://127.0.0.1:5175/',screenshot:'only-on-failure',trace:'retain-on-failure'},
  projects:[
   {name:'chromium-desktop',use:{browserName:'chromium',viewport:{width:1366,height:900}}},

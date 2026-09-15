@@ -15,6 +15,13 @@ describe('Hanzi study tool contracts',()=>{
  it('only writes its own bounded, versioned anonymous state',()=>{
    const store=new Map<string,string>([['legacy','raw']]);const s=new Shelf({getItem:k=>store.get(k)??null,setItem:(k,v)=>store.set(k,v)});s.visit('永');s.visit('水');s.visit('永');s.favorite('永');expect(s.state.recent).toEqual(['永','水']);expect(s.state.favorites).toEqual(['永']);s.favorite('永');expect(s.state.favorites).toEqual([]);expect([...store.keys()].sort()).toEqual([STORAGE_KEY,'legacy'].sort());expect(store.get(STORAGE_KEY)).not.toContain('strokes');
  });
+ it('does not overwrite a Vault restore made after this shelf was mounted',()=>{
+   const original=JSON.stringify({version:1,recent:['永'],favorites:['水'],grid:true});
+   const restored='{ "version":1,"recent":["向"],"favorites":["天"],"grid":false }';
+   const store=new Map([[STORAGE_KEY,original]]);const shelf=new Shelf({getItem:k=>store.get(k)??null,setItem:(k,v)=>store.set(k,v)});
+   store.set(STORAGE_KEY,restored);shelf.favorite('永');shelf.visit('你');
+   expect(store.get(STORAGE_KEY)).toBe(restored);expect(shelf.writable).toBe(false);expect(shelf.notice).toContain('刷新');
+ });
  it('is a lazy independent tool without inflating active game counts',()=>{
    expect(GAME_PORTFOLIO.find(r=>r.id==='hanzi-stroke-lab')).toMatchObject({definitionRole:'independent-tool',activeChildProduct:false,classicCardVisible:false,loadingPolicy:'route-lazy'});expect(ACTIVE_CHILD_PRODUCTS).toHaveLength(3);expect(CLASSIC_CARD_PRODUCTS).toHaveLength(3);
    expect(resolveAppRoute(new URLSearchParams('play=hanzi-stroke-lab&world=math-world')).kind).toBe('play');expect(pageModeForSearch(new URLSearchParams('play=hanzi-stroke-lab'))).toBe('game-scrollable');

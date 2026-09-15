@@ -20,39 +20,43 @@ export function makeGlyph(data:StrokeData, step:number, grid:boolean, animated=f
   }
   return svg;
 }
-/** One scheduler and one active glyph. No timers or rendering work survives destroy. */
+/** One occurrence. A paused reveal is independent of whether a frame is scheduled. */
 export class StrokeView {
   step=0; playing=false; speed=1; grid=true; complete=true;
-  private frame=0;private elapsed=0;private previous=0;private data:StrokeData|null=null;
-  constructor(private host:HTMLElement,private change:()=>void){}
+  private frame=0;private elapsed=0;private previous=0;private data:StrokeData|null=null;private revealing=false;
+  constructor(private host:HTMLElement,private change:()=>void,private finished:()=>void=()=>{}){}
   setData(data:StrokeData|null):void {this.stop();this.data=data;this.step=0;this.complete=true;this.render();this.change();}
-  private render(animated=false):void {this.host.replaceChildren();if(this.data)this.host.append(makeGlyph(this.data,this.complete?this.data.strokes.length:this.step,this.grid,animated));}
+  private render():void {this.host.replaceChildren();if(this.data)this.host.append(makeGlyph(this.data,this.complete?this.data.strokes.length:this.step,this.grid,this.revealing&&!this.complete));this.paintProgress();}
+  private paintProgress():void {
+    if(!this.data)return;
+    const progress=Math.min(1,this.elapsed/(650+this.data.medians[this.step].length*35));
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.host.querySelector('[data-reveal]')?.setAttribute('stroke-dashoffset',String(reduced?1-Math.floor(progress):1-progress));
+  }
   stop():void {cancelAnimationFrame(this.frame);this.playing=false;this.previous=0;}
-  go(step:number):void {this.stop();this.complete=false;this.step=Math.max(0,Math.min((this.data?.strokes.length??1)-1,step));this.elapsed=0;this.render();this.change();}
-  showAll():void {this.stop();this.complete=true;this.elapsed=0;this.render();this.change();}
+  go(step:number):void {this.stop();this.complete=false;this.revealing=false;this.step=Math.max(0,Math.min((this.data?.strokes.length??1)-1,step));this.elapsed=0;this.render();this.change();}
+  showAll():void {this.stop();this.complete=true;this.revealing=false;this.elapsed=0;this.render();this.change();}
   restart():void {this.go(0);this.play();}
   toggle():void {if(this.playing){this.stop();this.change();}else this.play();}
   play():void {
-    if(!this.data)return;
+    if(!this.data||this.playing)return;
     if(this.complete){this.step=0;this.elapsed=0;this.complete=false;}
-    this.playing=true;this.previous=0;this.render(true);this.change();
+    this.playing=true;this.revealing=true;this.previous=0;this.render();this.change();
     const tick=(now:number)=>{
       if(!this.playing||!this.data)return;
       if(this.previous)this.elapsed+=(now-this.previous)*this.speed;
       this.previous=now;
       const duration=650+this.data.medians[this.step].length*35;
-      const progress=Math.min(1,this.elapsed/duration);
-      const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-      this.host.querySelector('[data-reveal]')?.setAttribute('stroke-dashoffset',String(reduced?1-Math.floor(progress):1-progress));
+      this.paintProgress();
       if(this.elapsed>=duration+220){
         this.elapsed=0;this.step++;
-        if(this.step>=this.data.strokes.length){this.step=this.data.strokes.length-1;this.showAll();return;}
-        this.render(true);this.change();
+        if(this.step>=this.data.strokes.length){this.step=this.data.strokes.length-1;this.showAll();this.finished();return;}
+        this.render();this.change();
       }
       this.frame=requestAnimationFrame(tick);
     };
     this.frame=requestAnimationFrame(tick);
   }
-  setGrid(grid:boolean):void {this.grid=grid;this.render(this.playing);}
+  setGrid(grid:boolean):void {this.grid=grid;this.render();}
   destroy():void {this.stop();this.data=null;this.host.replaceChildren();}
 }
