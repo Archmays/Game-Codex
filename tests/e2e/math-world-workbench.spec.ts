@@ -429,9 +429,9 @@ for (const denied of ["read", "write"] as const) {
   });
 }
 
-test("@workbench all 46 exact keys survive the public Vault roundtrip and the mounted old page cannot overwrite restored records", async ({ page, context }, info) => {
-  expect(KNOWN_SAVE_KEYS).toHaveLength(46);
-  expect(EXPORTABLE_SAVE_KEYS).toHaveLength(45);
+test("@workbench all 47 exact keys survive the public Vault roundtrip and the mounted old page cannot overwrite restored records", async ({ page, context }, info) => {
+  expect(KNOWN_SAVE_KEYS).toHaveLength(47);
+  expect(EXPORTABLE_SAVE_KEYS).toHaveLength(46);
   await page.goto(origin);
   const fixture: Record<string, string> = Object.fromEntries(KNOWN_SAVE_KEYS.map((record, index) => [
     record.key, JSON.stringify({ version: record.maxVersion ?? 1, syntheticOnly: true, fixture: index }),
@@ -467,7 +467,7 @@ test("@workbench all 46 exact keys survive the public Vault roundtrip and the mo
   await expect(vaultPage.locator("[data-vault-preview-checksum]")).toHaveText("PASS");
   vaultPage.once("dialog", dialog => { void dialog.accept(); });
   await vaultPage.locator("[data-vault-restore]").click();
-  await expect(vaultPage.locator("[data-vault-status]")).toHaveText("已恢复 45 个已知存档；0 个未知键已跳过。请刷新页面查看。");
+  await expect(vaultPage.locator("[data-vault-status]")).toHaveText("已恢复 46 个已知存档；0 个未知键已跳过。请刷新页面查看。");
   const restored = await vaultPage.evaluate(keys => Object.fromEntries(keys.map(key => [key, localStorage.getItem(key)])), KNOWN_SAVE_KEYS.map(record => record.key));
   for (const record of EXPORTABLE_SAVE_KEYS) expect(restored[record.key]).toBe(fixture[record.key]);
   expect(restored[SAVE_VAULT_PRE_IMPORT_BACKUP_KEY]).toContain("syntheticBeforeRestore");
