@@ -123,7 +123,7 @@ export function mountHanziStrokeLab(root:HTMLElement,onExit?:()=>void):MountedGa
   function exitQueue():void {queueRevision++;queue='idle';updateQueue();}
   function pauseAll():void {stopCards();if(queue==='running'){queue='paused';queueRevision++;updateQueue();}}
   function singlePlay(card:Card):void {
-    const r=renderer(card);if(!r)return;exitQueue();stopCards(card);if(card.position>=0)selected=card.position;selectCard();r.toggle();
+    const r=renderer(card);if(!r)return;exitQueue();stopCards(card);if(card.position>=0)selected=card.position;selectCard();historyWrite(false);r.toggle();
     text('[data-group-status]',`单字播放：「${card.char}」。组队列已退出。`);
   }
   function updateQueue():void {

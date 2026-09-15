@@ -1,6 +1,13 @@
 import {test,expect} from '@playwright/test';
 import {route,ready,query,details,pane,mouseDraw,one} from './helpers';
 
+test('single-card playback persists the occurrence selection through reload without autoplay',async({page})=>{
+ await page.goto(route+'&q=天天向上');await ready(page);await page.locator('[data-play]').nth(2).click();
+ expect(new URL(page.url()).searchParams.get('i')).toBe('2');await page.reload();await ready(page);
+ await expect(page.locator('[data-occurrence]').nth(2)).toHaveAttribute('data-selected','true');await expect(page.locator('[data-occurrence][data-playing=true]')).toHaveCount(0);
+ await expect(page.locator('[data-glyph] [data-state=written]')).toHaveCount(17);
+});
+
 test('duplicate progress and SVG masks are independent across grid, speed and focus loss',async({page})=>{
  await page.goto(route+'&q=天天');await ready(page);
  await page.clock.install({time:new Date('2030-01-01T00:00:00Z')});await page.clock.pauseAt(new Date('2030-01-01T00:00:01Z'));
