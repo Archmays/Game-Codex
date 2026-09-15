@@ -56,12 +56,13 @@ try {
     let state=journey.state;
     for(const action of result.actions){await companionAction(page,action,mode);const next=act(room,state,action);expect(next.ok).toBe(true);state=next.state;expect((await readCompanion(page)).state).toEqual(state);}
     await expect(page.locator('.hway')).toHaveAttribute('data-won','true');
-    if(mode==='keyboard'){await page.keyboard.press('z');await expect(page.locator('[data-hway-grid]')).toBeFocused();await page.keyboard.press('h');await expect(page.locator('[data-hway-hint-box]')).toBeVisible();await page.keyboard.press('Escape');await expect(page.locator('[data-hway-grid]')).toBeFocused();}
-    else {await activate(page,'[data-hway-undo]',mode);await activate(page,'[data-hway-hint]',mode);await activate(page,'[data-hway-hint-close]',mode);await expect(page.locator('[data-hway-grid]')).toBeFocused();}
+    // A visible hint box can still be its loading shell. Confirm the real worker answer before closing and reloading.
+    if(mode==='keyboard'){await page.keyboard.press('z');await expect(page.locator('[data-hway-grid]')).toBeFocused();await page.keyboard.press('h');await expect(page.locator('[data-hway-hint-box]')).toBeVisible();await expect(page.locator('[data-hway-hint-text]')).toHaveText('看看发光的出口，以及你脚边连着的路。');await page.keyboard.press('Escape');await expect(page.locator('[data-hway-grid]')).toBeFocused();}
+    else {await activate(page,'[data-hway-undo]',mode);await activate(page,'[data-hway-hint]',mode);await expect(page.locator('[data-hway-hint-text]')).toHaveText('看看发光的出口，以及你脚边连着的路。');await activate(page,'[data-hway-hint-close]',mode);await expect(page.locator('[data-hway-grid]')).toBeFocused();}
     journey=await readCompanion(page);await page.reload();await companionReady(page);expect(await readCompanion(page)).toEqual(journey);await identity(page);
     await page.screenshot({path:`${output}/companions-${mode}.png`,fullPage:true});
     await activate(page,'[data-hway-exit]',mode);await expect(page.getByTestId('my-game-world')).toBeVisible();
-    flows.push({game:'companions',mode,roomId:room.id,actions:result.actions.length,won:true,undoHintReload:true});
+    flows.push({game:'companions',mode,roomId:room.id,actions:result.actions.length,won:true,undoHintReload:true,hintResultConfirmed:true});
 
     await activate(page,'[data-world-forest-link]',mode);await expect(page.locator('[data-td-canvas]')).toHaveAttribute('data-ready','true');await identity(page);
     const old=await page.evaluate(key=>localStorage.getItem(key),CAMPAIGN_KEY);
