@@ -51,8 +51,8 @@ describe("portfolio play-readiness contracts", () => {
   });
 
   it("keeps Save Vault exact-key-only and excludes its rollback key from exports", () => {
-    expect(KNOWN_SAVE_KEYS).toHaveLength(48);
-    expect(EXPORTABLE_SAVE_KEYS).toHaveLength(47);
+    expect(KNOWN_SAVE_KEYS).toHaveLength(49);
+    expect(EXPORTABLE_SAVE_KEYS).toHaveLength(48);
     expect(KNOWN_SAVE_KEYS.filter((record) => !record.exportable).map((record) => record.key)).toEqual(["save-vault/pre-import-backup/v1"]);
     const source = readFileSync("packages/save-vault/index.ts", "utf8");
     expect(source).not.toContain("localStorage.clear(");

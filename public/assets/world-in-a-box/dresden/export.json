@@ -1,0 +1,103 @@
+{
+  "version": "0.2.0",
+  "coordinateSystem": "Blender east/north/up; glTF x/z east/south, y up",
+  "pieces": [
+    {
+      "id": "augustus_bridge",
+      "label": "奥古斯都桥",
+      "group": "river"
+    },
+    {
+      "id": "paddle_steamer",
+      "label": "轮桨船",
+      "group": "river"
+    },
+    {
+      "id": "yellow_tram",
+      "label": "黄色电车",
+      "group": "river"
+    },
+    {
+      "id": "river_pier",
+      "label": "码头",
+      "group": "river"
+    },
+    {
+      "id": "riverside_trees",
+      "label": "河岸树组",
+      "group": "river"
+    },
+    {
+      "id": "frauenkirche_body",
+      "label": "圣母教堂主体",
+      "group": "oldtown"
+    },
+    {
+      "id": "frauenkirche_dome",
+      "label": "圣母教堂圆顶",
+      "group": "oldtown"
+    },
+    {
+      "id": "semperoper",
+      "label": "森帕歌剧院",
+      "group": "oldtown"
+    },
+    {
+      "id": "zwinger_galleries",
+      "label": "茨温格庭院长廊",
+      "group": "oldtown"
+    },
+    {
+      "id": "zwinger_crown_gate",
+      "label": "冠门",
+      "group": "oldtown"
+    },
+    {
+      "id": "beyer_body",
+      "label": "贝耶尔楼主体",
+      "group": "campus"
+    },
+    {
+      "id": "beyer_tower",
+      "label": "贝耶尔楼观测塔",
+      "group": "campus"
+    },
+    {
+      "id": "slub_surface",
+      "label": "SLUB地面建筑组",
+      "group": "campus"
+    },
+    {
+      "id": "slub_skylight",
+      "label": "中央采光顶",
+      "group": "campus"
+    },
+    {
+      "id": "campus_bikes",
+      "label": "校园自行车架",
+      "group": "campus"
+    },
+    {
+      "id": "street_houses",
+      "label": "街屋组",
+      "group": "street"
+    },
+    {
+      "id": "bakery_front",
+      "label": "面包店门面",
+      "group": "street"
+    },
+    {
+      "id": "bench_scene",
+      "label": "长椅小景",
+      "group": "street"
+    }
+  ],
+  "geography": "城市位置经过简化，距离不按比例。",
+  "routeNote": "盒中游览线，为游戏简化，不是真实公交线路。",
+  "generatorSha256": "0bfe954b3e0b6f4351acc11e41341b45ffccb51529e67390a13aa6cfd4c6ab9b",
+  "blender": "4.5.14 LTS",
+  "bytes": 4540700,
+  "glbSha256": "8a7f2186a1adfa52eab48a91871e519c9ee778d47c1717b0e3cea81ab0153693",
+  "blendSha256": "5fc202565e2b7ca667637a5e760a32f2ab126f12234d609d609136b4b3957108"
+}

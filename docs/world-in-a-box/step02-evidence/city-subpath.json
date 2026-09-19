@@ -1,0 +1,63 @@
+{
+  "result": "PASS_MACHINE",
+  "profiles": [
+    {
+      "profile": "mouse-desktop",
+      "result": "PASS",
+      "steps": [
+        "scene picker updates direct route",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "wrong match retains selection",
+        "same bank tram works before bridge",
+        "missing bridge blocks cross-bank path",
+        "boat actually moves without bridge or pier",
+        "moving boat anchor follows rendered model",
+        "bridge undone while tram crossing",
+        "tram safe reset before removing bridge",
+        "all 18 pieces via real input, upper pieces before bodies",
+        "empty tray collapses",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "section does not consume pieces",
+        "library closes from keyboard/pointer/touch",
+        "photo bridge loads local image and restores focus",
+        "photo church loads local image and restores focus",
+        "photo opera loads local image and restores focus",
+        "photo zwinger loads local image and restores focus",
+        "photo beyer loads local image and restores focus",
+        "photo slub loads local image and restores focus",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "accessible analog clock",
+        "boat docks alongside real installed pier",
+        "pause preserves rendered transform",
+        "refresh restores progress, transport starts safely paused",
+        "city reset clears only city",
+        "old v1 save byte-identical after city reset",
+        "old box resumes its real progress",
+        "returned to hub",
+        "zero page/console errors and forbidden requests"
+      ],
+      "metrics": {
+        "calls": 205,
+        "triangles": 190706
+      },
+      "timing": {
+        "medianMs": 13.399999999999864,
+        "p95Ms": 13.600000000000136
+      },
+      "loading": {
+        "readyMilliseconds": 351,
+        "asset": [
+          {
+            "duration": 53.79999999701977,
+            "bytes": 4540700
+          }
+        ]
+      },
+      "visualRepeat": null,
+      "errors": [],
+      "foreign": [],
+      "input": "mouse",
+      "offline": "request layer blocks non-local requests; fresh context/empty cache"
+    }
+  ]
+}

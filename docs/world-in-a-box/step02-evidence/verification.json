@@ -1,0 +1,247 @@
+{
+  "result": "PASS_MACHINE",
+  "version": "0.2.0",
+  "startCommit": "fdfcf5aa4a2859fd78b9a25283d04b87f5479b11",
+  "source": {
+    "algorithm": "sha256(sorted lines: file_sha256 two-spaces repo-relative-path newline)",
+    "scope": "all runtime, authored game sources, QA tools/tests, package/build config, input contract; excludes report/screenshot outputs",
+    "fileCount": 9985,
+    "sha256": "8fe116d458f1594ce4f6ef5b373624302551d5016ddf10e3f91d3158ecf82747",
+    "glbSha256": "f6a8acfa5bb041e7ae0f2b047be5ebf4383a235f2a1dcaf483a7ad46f175d308"
+  },
+  "charterSha256": "3bcff54b85479dc63dec850487b25fe2dd2d7ae807f3d1e7f9bcfd9be68984c5",
+  "tests": {
+    "unitFiles": 45,
+    "unitTests": 569,
+    "fullCityProfiles": 7,
+    "citySubpathProfiles": 1,
+    "oldBoxProfiles": 7,
+    "cityEdgeChecks": 25,
+    "recoveryChecks": 12,
+    "oldEdgeChecks": 15,
+    "winterSummerDSTMidnightDefaultTimezone": "Asia/Shanghai browser plus Pacific/Honolulu Node suite passed",
+    "productionBuild": "PASS",
+    "portfolioAndAffectedContracts": "PASS",
+    "sharedRepresentativeHitTestsChrome": 4,
+    "sharedPortfolioSmoke": 14,
+    "finalProductionBuild": "PASS"
+  },
+  "environment": {
+    "os": "Windows x64",
+    "browser": "Google Chrome",
+    "browserVersion": "153.0.8010.52",
+    "node": "v24.16.0",
+    "input": "actual browser keyboard/mouse and emulated touch",
+    "humanUse": "NOT_TESTED"
+  },
+  "asset": {
+    "version": "0.2.0",
+    "coordinateSystem": "Blender east/north/up; glTF x/z east/south, y up",
+    "pieces": [
+      {
+        "id": "augustus_bridge",
+        "label": "奥古斯都桥",
+        "group": "river"
+      },
+      {
+        "id": "paddle_steamer",
+        "label": "轮桨船",
+        "group": "river"
+      },
+      {
+        "id": "yellow_tram",
+        "label": "黄色电车",
+        "group": "river"
+      },
+      {
+        "id": "river_pier",
+        "label": "码头",
+        "group": "river"
+      },
+      {
+        "id": "riverside_trees",
+        "label": "河岸树组",
+        "group": "river"
+      },
+      {
+        "id": "frauenkirche_body",
+        "label": "圣母教堂主体",
+        "group": "oldtown"
+      },
+      {
+        "id": "frauenkirche_dome",
+        "label": "圣母教堂圆顶",
+        "group": "oldtown"
+      },
+      {
+        "id": "semperoper",
+        "label": "森帕歌剧院",
+        "group": "oldtown"
+      },
+      {
+        "id": "zwinger_galleries",
+        "label": "茨温格庭院长廊",
+        "group": "oldtown"
+      },
+      {
+        "id": "zwinger_crown_gate",
+        "label": "冠门",
+        "group": "oldtown"
+      },
+      {
+        "id": "beyer_body",
+        "label": "贝耶尔楼主体",
+        "group": "campus"
+      },
+      {
+        "id": "beyer_tower",
+        "label": "贝耶尔楼观测塔",
+        "group": "campus"
+      },
+      {
+        "id": "slub_surface",
+        "label": "SLUB地面建筑组",
+        "group": "campus"
+      },
+      {
+        "id": "slub_skylight",
+        "label": "中央采光顶",
+        "group": "campus"
+      },
+      {
+        "id": "campus_bikes",
+        "label": "校园自行车架",
+        "group": "campus"
+      },
+      {
+        "id": "street_houses",
+        "label": "街屋组",
+        "group": "street"
+      },
+      {
+        "id": "bakery_front",
+        "label": "面包店门面",
+        "group": "street"
+      },
+      {
+        "id": "bench_scene",
+        "label": "长椅小景",
+        "group": "street"
+      }
+    ],
+    "geography": "城市位置经过简化，距离不按比例。",
+    "routeNote": "盒中游览线，为游戏简化，不是真实公交线路。",
+    "generatorSha256": "0bfe954b3e0b6f4351acc11e41341b45ffccb51529e67390a13aa6cfd4c6ab9b",
+    "blender": "4.5.14 LTS",
+    "bytes": 4540700,
+    "glbSha256": "8a7f2186a1adfa52eab48a91871e519c9ee778d47c1717b0e3cea81ab0153693",
+    "blendSha256": "5fc202565e2b7ca667637a5e760a32f2ab126f12234d609d609136b4b3957108"
+  },
+  "photos": {
+    "files": 7,
+    "groups": 6,
+    "bytes": 1017620,
+    "allSha256Match": true
+  },
+  "package": {
+    "zip": "world-in-a-box-v0.2.0-offline.zip",
+    "bytes": 37202760,
+    "sha256": "7055ca63b1aab977cc3f51e6bba9819e69615d9b1148384e98ba5704555fb126",
+    "sourceSha256": "8fe116d458f1594ce4f6ef5b373624302551d5016ddf10e3f91d3158ecf82747",
+    "files": 9697
+  },
+  "offline": {
+    "origin": "http://127.0.0.1:5175",
+    "subpath": "/Game-Codex/",
+    "server": "final ZIP extracted to a relocated task directory; all ZIP members verified against extracted files before final runtime update, changed members reverified afterwards",
+    "method": "fresh isolated contexts; request-layer blocks foreign requests before first navigation",
+    "osNetworkDisconnected": false,
+    "fileProtocolSupported": false
+  },
+  "performance": {
+    "scene": "complete city after reload, transport paused; requestAnimationFrame intervals, not GPU execution time",
+    "target": "Keep an interactive toy without postprocessing; measure on this host, no physical-device threshold claim",
+    "drawCalls": [
+      205,
+      205,
+      205,
+      205,
+      205,
+      205,
+      205
+    ],
+    "triangles": [
+      190706,
+      190706,
+      190706,
+      190706,
+      190706,
+      190706,
+      190706
+    ],
+    "p95FrameMs": [
+      13.600000000000136,
+      13.600000000000364,
+      13.5,
+      13.600000000000136,
+      13.600000000000136,
+      13.600000000000136,
+      13.600000000000136
+    ],
+    "readyMilliseconds": [
+      392,
+      467,
+      590,
+      621,
+      580,
+      554,
+      598
+    ]
+  },
+  "semanticReview": {
+    "contentGeography": "PASS: recognizable landmark silhouettes, campus south of old town, official source/photograph distinctions",
+    "childUsabilityVisual": "PASS: arbitrary order, regional tray, visible nonoccluded targets, nearby controls, original toy remains operable",
+    "adversarialLifecycle": "PASS: cancel/repeat/undo, separate saves, motion interlocks, section, load failure, late resources and GPU/audio/RAF teardown"
+  },
+  "protection": {
+    "oldGlbUnchanged": true,
+    "oldModelRuntimeAudioAndEvidenceUnchanged": true,
+    "newBlendNoAbsoluteWindowsPathStrings": true,
+    "newBlendReopenedInBlender": true,
+    "familyBrowserStorageTouched": false
+  },
+  "limitations": [
+    "emulated touch; no physical-device conclusion",
+    "machine validation only; no child enjoyment, learning efficacy or retention claim",
+    "city distances, transport lines and library interior are toy simplifications"
+  ],
+  "evidence": {
+    "baseline-all.png": "8a224719acea00600f373d22a7fcb5306bf8a8f9a78093c6359be11ce7f1996c",
+    "campus.png": "fa0e863a23fdd819bb1d02634c05333c52f0b8fd3079d5e8004a14dde7526a54",
+    "city-browser.json": "a0d31c1a5b33c4ae7bd8853d59fdc71033b9be9da92cb1c5d4d922a300f2399e",
+    "city-edges.json": "6781d6ba98e6e6f7cf569723ddb1942900061bc4b2869cdd1d29417369316509",
+    "city-recovery.json": "07b10805f36b16ddf4acd99e6c82c8af7bcb5d341ed42a1f30d9fbe0d7716de1",
+    "city-subpath.json": "05884f4f9238791e48f519df15f72bb48243cfe8f68c87008d7b05e879a4f667",
+    "geometry.json": "be9591e00d973025fc7c663b433c79ed7c0473fa207e32a9b22706c41bc59091",
+    "keyboard-desktop-city.png": "71c22fd88ccfe56f75d013138256d3a86711b9f03e24d1215f63a7bc7376b3ee",
+    "library.png": "8c56298ab282622220b33378f0189768beff7add82d20693e429b72dd00a2319",
+    "night.png": "7a79e946b4710bb5215c3cf2dd4a5a0a3e3e8feee272f3a65d7efa0190abc2ce",
+    "old-browser.json": "c46112e3e8a5b15151aeaf3e420df977518289df80cbde150edbdd45351e1306",
+    "old-edges.json": "e31cce37b1242621d9de92f452d2d22ccd04605542630c7aa4f585b1481ca7e5",
+    "old-package.json": "ddf9e8a37347e53e1b603a63db66b8158bbe3902c922d789dc494b5d2f4180ca",
+    "river.png": "7600139c7d6f5022d274cef5dfc81f3d86cbfa18a61182f4b3a103167a8d7480",
+    "runtime-freeze.json": "d0763ca2b0fc21bf08a66abbb9cf3e6dfb8a51aa3c41661d735dcebb60cd9c52",
+    "shared-PLAY_SURFACE_HITTEST_MATRIX.desktop-1366.json": "20652978dd6768c78b8bff6dc5540f79bb239412158280caa20791b7340dfbf0",
+    "shared-PLAY_SURFACE_HITTEST_MATRIX.mobile-390.json": "a6d3e62ca9db8a86ed36cd3ac81966580277ece9c6f07e2e7800df12e7c0d499",
+    "source-binding.json": "bc064cf0c8f1425abf44bac24fffe29647b4fb7cbfafac7ed3e430784d2b3aec",
+    "source-freeze.json": "cc835f8814c232c8eaf60259930f3173787506287ad8ff7aaa29fed0c8d5d305",
+    "touch-390-city.png": "a661349574298fc0b34bc1ca340c7836e9b70364a7d28a3ce4305686d544e3a9"
+  },
+  "fullRuntimeMatrixSource": {
+    "algorithm": "sha256(sorted lines: file_sha256 two-spaces repo-relative-path newline)",
+    "scope": "all runtime, authored game sources, QA tools/tests, package/build config, input contract; excludes report/screenshot outputs",
+    "fileCount": 9985,
+    "sha256": "288861cfe92c96e2bc7bc6d8d9a5c8a3fe4f7bedcb736668aed216c4daeb566e",
+    "glbSha256": "f6a8acfa5bb041e7ae0f2b047be5ebf4383a235f2a1dcaf483a7ad46f175d308"
+  }
+}

@@ -167,13 +167,15 @@ export async function expectHitTarget(locator: Locator, options: { minimumRatio?
 }
 
 async function stateSignature(page: Page, locator: Locator): Promise<string> {
-  const url = page.url();
-  const app = await page.locator("#app").evaluate((element) => `${element.childElementCount}:${element.innerHTML.length}:${element.textContent?.length ?? 0}`);
-  const control = await locator.count() ? await locator.evaluate((element) => {
-    const node = element as HTMLElement;
-    return `${node.outerHTML}:${node.getAttribute("aria-pressed")}:${node.getAttribute("aria-expanded")}:${node.getAttribute("data-open")}:${node.getAttribute("data-phase")}`;
-  }).catch(() => "detached") : "detached";
-  return `${url}\n${app}\n${control}`;
+  // One read preserves the same signature without spending the polling deadline
+  // on serial protocol round trips while a software-rendered WebGL scene runs.
+  return locator.evaluateAll((elements) => {
+    const app = document.querySelector("#app");
+    const node = elements[0] as HTMLElement | undefined;
+    const appState = app ? `${app.childElementCount}:${app.innerHTML.length}:${app.textContent?.length ?? 0}` : "detached";
+    const control = node ? `${node.outerHTML}:${node.getAttribute("aria-pressed")}:${node.getAttribute("aria-expanded")}:${node.getAttribute("data-open")}:${node.getAttribute("data-phase")}` : "detached";
+    return `${location.href}\n${appState}\n${control}`;
+  });
 }
 
 export async function activateAndExpectStateChange(page: Page, locator: Locator, input: ActivationInput): Promise<void> {

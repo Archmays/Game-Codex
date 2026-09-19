@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "fullRuntimeMatrixSource": "288861cfe92c96e2bc7bc6d8d9a5c8a3fe4f7bedcb736668aed216c4daeb566e",
+  "finalSource": "8fe116d458f1594ce4f6ef5b373624302551d5016ddf10e3f91d3158ecf82747",
+  "onlyPostMatrixChanges": [
+    {
+      "path": "tests/e2e/helpers/hit-target.ts",
+      "beforeSha256": "5ecf0d4f68ee24f6ffd2e68dc8f42b67fa30902254058845f6b52880da1be428",
+      "afterSha256": "dd6a4040876fb21597f255f3a35c6d8479a0b427d89023ce2ecb63c109533c07"
+    },
+    {
+      "path": "games/world-in-a-box/index.ts",
+      "beforeSha256": "1e4ebd8fce441d8092ffbb7901a73f3fe1eee6b97d9aab9f65b30cc3043cbfbd",
+      "afterSha256": "f433d4abc0bb26bd55bd405e3d05c875b94618c8f614bb0503bb17f959988c59"
+    }
+  ],
+  "reconstructedPriorSourceHashMatches": true,
+  "unchanged": "All game rules, scene code, assets, browser matrix scripts and save logic",
+  "affectedChecks": {
+    "productionBuild": "PASS",
+    "representativeHitTestChrome": 4,
+    "portfolioSmoke": 14,
+    "finalRelocatedPackageCityCompleteSubpath": "PASS",
+    "finalRelocatedPackageOldBoxCompleteAndAudio": "PASS"
+  },
+  "allZipMembersMatchRelocatedCopy": true,
+  "runtimeMatrixRepeated": false,
+  "reasonNotRepeated": "Only Classic entry provenance and a shared test helper changed. Complete affected navigation, city subpath and old-box package flows were rerun; unrelated full viewport matrices retain their verified prior source identity."
+}

@@ -1,0 +1,31 @@
+{
+  "result": "PASS",
+  "checks": [
+    "moving off pressed target does not place",
+    "native touchCancel does not place",
+    "multi-touch does not place",
+    "wheel cancels pressed target",
+    "real window focus loss cancels gesture",
+    "double click places one logical piece",
+    "undo during landing prevents resurrection",
+    "drag supplement uses same placement operation",
+    "removing moving boat cancels motion",
+    "removed boat remains stopped",
+    "remove occupied pier",
+    "boat returns to safe waiting water",
+    "undo during section safely closes and retains skylight",
+    "rapid reversible section operation",
+    "background/focus loss pauses traffic",
+    "return has no large dt jump",
+    "six switches leave one canvas",
+    "six switches release every obsolete GPU context",
+    "switching does not mutate city save",
+    "six switches leave exactly one application RAF",
+    "six switches leave at most one live audio context",
+    "late old GLB cannot attach to new scene",
+    "unknown scene clearly falls back",
+    "fallback message visible",
+    "no uncaught browser errors"
+  ],
+  "errors": []
+}

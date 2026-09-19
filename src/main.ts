@@ -51,8 +51,8 @@ async function mountApp(root: HTMLElement): Promise<void> {
 
   if (route.kind === "play" && play === "world-in-a-box") {
     setBrowserIdentity("世界盒子 · 窗边有风", "#f2edde");
-    const [{ mountWorldBox }, { createLocalStorageStore }] = await Promise.all([import("../games/world-in-a-box/runtime"), import("../packages/game-core")]);
-    mountWorldBox({ container: root, storage: createLocalStorageStore("world-in-a-box"), onExit: () => window.location.assign(search.get('from') === 'hub' ? '?hub=classic&from=world' : '?world=my-game-world') });
+    const [{ mountBoxes }, { createLocalStorageStore }] = await Promise.all([import("../games/world-in-a-box/boxes"), import("../packages/game-core")]);
+    mountBoxes({ container: root, storage: createLocalStorageStore("world-in-a-box"), onExit: () => window.location.assign(search.get('from') === 'hub' ? '?hub=classic&from=world' : '?world=my-game-world') });
     return;
   }
 

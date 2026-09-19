@@ -1,4 +1,5 @@
 import * as T from 'three';
+import { disposeToy, toyThumbnail } from './toy-view';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { IDS, type Piece, type BoxState, windy } from './model';
 
@@ -78,13 +79,8 @@ export class BoxScene {
   }
   pick(x:number,y:number):Piece|null{const rect=this.host.getBoundingClientRect();this.ray.setFromCamera(new T.Vector2((x-rect.left)/rect.width*2-1,1-(y-rect.top)/rect.height*2),this.camera);const meshes:T.Object3D[]=[];this.asset?.traverseVisible(o=>{if(o instanceof T.Mesh)meshes.push(o);});let o:T.Object3D|null=this.ray.intersectObjects(meshes,false)[0]?.object??null;while(o){const match=IDS.find(id=>o!.name==='piece_'+id||o!.name==='slot_'+id);if(match)return match;o=o.parent;}return null;}
   thumbnail(id:Piece,angle=.35):string{
-    const original=this.pieces.get(id);if(!original)return '';
-    const scene=new T.Scene();const o=original.clone(true);o.position.set(0,0,0);o.visible=true;scene.add(o);o.updateMatrixWorld(true);
-    const box=new T.Box3().setFromObject(o),center=box.getCenter(new T.Vector3()),size=box.getSize(new T.Vector3());
-    o.position.sub(center);scene.add(new T.HemisphereLight(0xfff5e7,0x978369,3));const light=new T.DirectionalLight(0xffffff,3);light.position.set(-3,5,7);scene.add(light);
-    const r=Math.max(size.x,size.y,size.z)*.68;const c=new T.OrthographicCamera(-r,r,r,-r,.1,40);c.position.set(Math.sin(angle)*7,4,Math.cos(angle)*7);c.lookAt(0,0,0);
-    this.renderer.setSize(220,220,false);this.renderer.render(scene,c);const src=this.renderer.domElement.toDataURL('image/png');this.renderer.setSize(this.size.w,this.size.h);return src;
+    return toyThumbnail(this.renderer,this.pieces.get(id),this.size,angle);
   }
-  private disposeTree(root:T.Object3D){const maps=new Set<T.Texture>();root.traverse(o=>{if(o instanceof T.Mesh){o.geometry.dispose();for(const m of Array.isArray(o.material)?o.material:[o.material]){for(const value of Object.values(m))if(value instanceof T.Texture)maps.add(value);m.dispose();}}});maps.forEach(m=>m.dispose());}
+  private disposeTree(root:T.Object3D){disposeToy(root);}
   destroy(){this.dead=true;this.disposeTree(this.scene);this.steam.forEach(p=>{p.material.map?.dispose();p.material.dispose();});this.renderer.dispose();this.renderer.forceContextLoss();this.renderer.domElement.remove();}
 }
