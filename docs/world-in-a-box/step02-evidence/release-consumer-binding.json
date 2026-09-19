@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "validatedRuntimeSource": "8fe116d458f1594ce4f6ef5b373624302551d5016ddf10e3f91d3158ecf82747",
+  "finalSource": "1c791dcf69dba9ec03d57800b0f39b2a7167078c75f39abdd049d5fa70c22dcd",
+  "onlyChange": {
+    "path": "tools/math-world/validate-math-world.ts",
+    "beforeSha256": "ac4858fde89f046a0fc250df18cb1d16ed8cb55fe6f456d174f9b484953a5b7c",
+    "afterSha256": "5d66bf0e495f38952d522a5e791bd7828213688d99aa466b9b4db72bc17d6cf3"
+  },
+  "reconstructedPreviousSourceHashMatches": true,
+  "allPackageMembersExceptReadmeIdentical": true,
+  "check": "pnpm run validate:math-world",
+  "verdict": "PASS_MACHINE",
+  "reason": "Repair stale three-product inventory consumer; runtime, assets and all game/browser tests unchanged."
+}

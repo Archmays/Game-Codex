@@ -6,7 +6,7 @@
     "algorithm": "sha256(sorted lines: file_sha256 two-spaces repo-relative-path newline)",
     "scope": "all runtime, authored game sources, QA tools/tests, package/build config, input contract; excludes report/screenshot outputs",
     "fileCount": 9985,
-    "sha256": "8fe116d458f1594ce4f6ef5b373624302551d5016ddf10e3f91d3158ecf82747",
+    "sha256": "1c791dcf69dba9ec03d57800b0f39b2a7167078c75f39abdd049d5fa70c22dcd",
     "glbSha256": "f6a8acfa5bb041e7ae0f2b047be5ebf4383a235f2a1dcaf483a7ad46f175d308"
   },
   "charterSha256": "3bcff54b85479dc63dec850487b25fe2dd2d7ae807f3d1e7f9bcfd9be68984c5",
@@ -24,7 +24,8 @@
     "portfolioAndAffectedContracts": "PASS",
     "sharedRepresentativeHitTestsChrome": 4,
     "sharedPortfolioSmoke": 14,
-    "finalProductionBuild": "PASS"
+    "finalProductionBuild": "PASS",
+    "mathWorldCatalogValidator": "PASS_MACHINE: exact four product IDs"
   },
   "environment": {
     "os": "Windows x64",
@@ -145,9 +146,9 @@
   },
   "package": {
     "zip": "world-in-a-box-v0.2.0-offline.zip",
-    "bytes": 37202760,
-    "sha256": "7055ca63b1aab977cc3f51e6bba9819e69615d9b1148384e98ba5704555fb126",
-    "sourceSha256": "8fe116d458f1594ce4f6ef5b373624302551d5016ddf10e3f91d3158ecf82747",
+    "bytes": 36843360,
+    "sha256": "8480dcb430f13ac2c91cf988e9e2de00653d6908af02d18b90f215d3220cb034",
+    "sourceSha256": "1c791dcf69dba9ec03d57800b0f39b2a7167078c75f39abdd049d5fa70c22dcd",
     "files": 9697
   },
   "offline": {
@@ -229,12 +230,13 @@
     "old-browser.json": "c46112e3e8a5b15151aeaf3e420df977518289df80cbde150edbdd45351e1306",
     "old-edges.json": "e31cce37b1242621d9de92f452d2d22ccd04605542630c7aa4f585b1481ca7e5",
     "old-package.json": "ddf9e8a37347e53e1b603a63db66b8158bbe3902c922d789dc494b5d2f4180ca",
+    "release-consumer-binding.json": "f8f90de227a7b04f0886aef50d3742dfc76a1608d01845ca2ff46d856022a3d5",
     "river.png": "7600139c7d6f5022d274cef5dfc81f3d86cbfa18a61182f4b3a103167a8d7480",
     "runtime-freeze.json": "d0763ca2b0fc21bf08a66abbb9cf3e6dfb8a51aa3c41661d735dcebb60cd9c52",
     "shared-PLAY_SURFACE_HITTEST_MATRIX.desktop-1366.json": "20652978dd6768c78b8bff6dc5540f79bb239412158280caa20791b7340dfbf0",
     "shared-PLAY_SURFACE_HITTEST_MATRIX.mobile-390.json": "a6d3e62ca9db8a86ed36cd3ac81966580277ece9c6f07e2e7800df12e7c0d499",
     "source-binding.json": "bc064cf0c8f1425abf44bac24fffe29647b4fb7cbfafac7ed3e430784d2b3aec",
-    "source-freeze.json": "cc835f8814c232c8eaf60259930f3173787506287ad8ff7aaa29fed0c8d5d305",
+    "source-freeze.json": "41fb9602dc359a493f0c1ed04f9090653a4a1288e3b806b4546ba095da7c5846",
     "touch-390-city.png": "a661349574298fc0b34bc1ca340c7836e9b70364a7d28a3ce4305686d544e3a9"
   },
   "fullRuntimeMatrixSource": {
