@@ -23,7 +23,7 @@ describe('Hanzi study tool contracts',()=>{
    expect(store.get(STORAGE_KEY)).toBe(restored);expect(shelf.writable).toBe(false);expect(shelf.notice).toContain('刷新');
  });
  it('is a lazy independent tool without inflating active game counts',()=>{
-   expect(GAME_PORTFOLIO.find(r=>r.id==='hanzi-stroke-lab')).toMatchObject({definitionRole:'independent-tool',activeChildProduct:false,classicCardVisible:false,loadingPolicy:'route-lazy'});expect(ACTIVE_CHILD_PRODUCTS).toHaveLength(3);expect(CLASSIC_CARD_PRODUCTS).toHaveLength(3);
+   expect(GAME_PORTFOLIO.find(r=>r.id==='hanzi-stroke-lab')).toMatchObject({definitionRole:'independent-tool',activeChildProduct:false,classicCardVisible:false,loadingPolicy:'route-lazy'});expect(ACTIVE_CHILD_PRODUCTS).toHaveLength(4);expect(CLASSIC_CARD_PRODUCTS).toHaveLength(4);
    expect(resolveAppRoute(new URLSearchParams('play=hanzi-stroke-lab&world=math-world')).kind).toBe('play');expect(pageModeForSearch(new URLSearchParams('play=hanzi-stroke-lab'))).toBe('game-scrollable');
  });
  it('keeps trajectory packets answer-free and explicitly local',()=>{

@@ -1,0 +1,11 @@
+{
+  "algorithm": "sha256(sorted lines: file_sha256 two-spaces repo-relative-path newline)",
+  "scope": "all runtime, authored game sources, QA tools/tests, package/build config, input contract; excludes report/screenshot outputs",
+  "fileCount": 9961,
+  "sha256": "cbf87f449b114fa67e1a5cc5aff36d05cfa41d7fd56d46119aa50a98b8ab75f2",
+  "glbSha256": "f6a8acfa5bb041e7ae0f2b047be5ebf4383a235f2a1dcaf483a7ad46f175d308",
+  "beforeSha256": "cbf87f449b114fa67e1a5cc5aff36d05cfa41d7fd56d46119aa50a98b8ab75f2",
+  "afterSha256": "cbf87f449b114fa67e1a5cc5aff36d05cfa41d7fd56d46119aa50a98b8ab75f2",
+  "sameTree": true,
+  "baseCommit": "cc0516133ec4d9e7ea69648274280012a9b86e02"
+}

@@ -86,6 +86,11 @@ export const PORTFOLIO_TEST_PROFILES: readonly PortfolioTestProfile[] = [
 
 export const GAME_PORTFOLIO: readonly GamePortfolioRecord[] = [
   {
+    id: "world-in-a-box", targetWorld: "shared", productRole: "independent-puzzle", definitionRole: "active-child-product", activeChildProduct: true, classicCardVisible: true, childProductOrder: 4, qualityTier: "B", lifecycleStatus: "active",
+    canonicalRoute: "?play=world-in-a-box", worldModuleIds: [], compatibilitySurfaceIds: [], sharedEngineIds: ["game-core-local-storage"], saveNamespaces: ["family-games/world-in-a-box/v1"],
+    testProfile: "b-independent-puzzle", loadingPolicy: "route-lazy", contentStatus: "playable", canonicalDocs: ["games/world-in-a-box/README.md"],
+  },
+  {
     id: "hanzi-stroke-lab", targetWorld: "chinese", productRole: "utility", definitionRole: "independent-tool", activeChildProduct: false, classicCardVisible: false, qualityTier: "A", lifecycleStatus: "active",
     canonicalRoute: "?play=hanzi-stroke-lab", worldModuleIds: [], compatibilitySurfaceIds: [], sharedEngineIds: [], saveNamespaces: ["family-games/hanzi-stroke-lab/v1"],
     testProfile: "a-core-world", loadingPolicy: "route-lazy", contentStatus: "playable", canonicalDocs: ["games/hanzi-stroke-lab/README.md"],

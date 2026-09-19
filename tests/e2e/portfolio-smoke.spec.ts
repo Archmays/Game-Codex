@@ -129,7 +129,7 @@ for (const game of GAMES) {
     const runtime = observeRuntime(page);
     await page.goto(game.canonicalRoute ?? "/?hub=classic", { waitUntil: "domcontentloaded" });
     if (!game.canonicalRoute) {
-      await expect(page.locator(".game-card")).toHaveCount(3);
+      await expect(page.locator(".game-card")).toHaveCount(4);
       const card = page.locator(`.game-card[data-game-id="${game.id}"]`);
       await expect(card.getByRole("heading", { name: game.title, exact: true })).toBeVisible();
       const entry = card.getByRole("button");
@@ -156,7 +156,7 @@ for (const game of GAMES) {
       await returnButton.focus();
       await page.keyboard.press("Enter");
     }
-    await expect(page.locator(".game-card")).toHaveCount(3);
+    await expect(page.locator(".game-card")).toHaveCount(4);
     await expectRuntimeClean(runtime);
   });
 }

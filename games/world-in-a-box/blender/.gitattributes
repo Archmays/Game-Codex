@@ -1,0 +1,3 @@
+# The generated blend/GLB records this generator's exact bytes as provenance.
+# Preserve them across Windows/Linux checkouts rather than changing its SHA.
+build_scene.py -text

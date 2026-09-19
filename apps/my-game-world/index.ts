@@ -82,6 +82,7 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
         <div class="world-entry__body"><h2>字间行者</h2><p>挪一枚字，变一段路。借来木与不，走回家。</p><span class="world-entry__action">踏上归途<span aria-hidden="true">↗</span></span></div>
       </a>
     </section>
+    <section class="world-hanzi-tool" aria-label="拼装小世界"><a tabindex="0" href="?play=world-in-a-box" data-world-box-link><span class="world-hanzi-tool__glyph" aria-hidden="true">窗</span><span><strong>世界盒子 · 窗边有风</strong><span>选一件，把它放回小世界</span></span><span aria-hidden="true">↗</span></a></section>
     <section class="world-hanzi-tool" aria-label="中文工具"><a tabindex="0" href="?play=hanzi-stroke-lab" data-world-stroke-link><span class="world-hanzi-tool__glyph" aria-hidden="true">永</span><span><strong>汉字书房</strong><span>查字与笔顺 · 不会读也能手写找字</span></span><span aria-hidden="true">↗</span></a></section>
     <nav class="world-more" aria-label="游戏列表" data-testid="world-treasure-box"><span>也可以打开游戏列表</span><a tabindex="0" href="${CLASSIC_HUB_FROM_WORLD_ROUTE}" data-world-treasure-link>${WORLD_COPY.treasureTitle}<span aria-hidden="true">→</span></a><a tabindex="0" href="?playtest=step4" data-world-playtest-link>本次试玩<span aria-hidden="true">→</span></a></nav>
     <div class="world-modal-layer" data-world-modal-layer></div>

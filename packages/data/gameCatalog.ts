@@ -1,4 +1,5 @@
 import { hanziStrokeLab } from "../../games/hanzi-stroke-lab";
+import { worldInABoxGame } from "../../games/world-in-a-box";
 import type { GameDefinition } from "../game-core";
 import { equationSliderGame } from "../../games/equation-slider";
 import { hanziTowerDefenseGame } from "../../games/hanzi-tower-defense";
@@ -9,6 +10,7 @@ import { memoryCardGame } from "../../games/memory-card";
 import { GAME_PORTFOLIO_BY_ID } from "./gamePortfolio";
 
 export const allGameDefinitions: GameDefinition[] = [
+  worldInABoxGame,
   hanziStrokeLab,
   memoryCardGame,
   mathLabGame,

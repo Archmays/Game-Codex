@@ -1,0 +1,117 @@
+{
+  "verdict": "PASS_MACHINE",
+  "sourceSha256": "cbf87f449b114fa67e1a5cc5aff36d05cfa41d7fd56d46119aa50a98b8ab75f2",
+  "environment": {
+    "os": "Windows x64",
+    "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+    "touch": "Chromium device emulation, not physical devices"
+  },
+  "commands": [
+    {
+      "command": "pnpm test",
+      "result": "PASS",
+      "summary": [
+        "Tests  555 passed (555)"
+      ],
+      "rawLogSha256": "5234e48c56240e5b4adceac5827c6d0314af1e5ab18317485b88d151d3f63d62"
+    },
+    {
+      "command": "pnpm build",
+      "result": "PASS",
+      "summary": [
+        "✓ built in 14.16s"
+      ],
+      "rawLogSha256": "a328a80f37e97db865fe5b3bc1344a4a9ed9c8d0a2a79c3904971aaeefb1e41a"
+    },
+    {
+      "command": "pnpm run portfolio:check",
+      "result": "PASS",
+      "summary": [
+        "Portfolio consistency, 4 active products / 8 mount definitions, 15 play surfaces, 48 save keys, and generated-doc drift: PASS."
+      ],
+      "rawLogSha256": "4224ae876cbbee2fb52344d69bb0df96f135bf852123ad7af1d6be5109c34737"
+    },
+    {
+      "command": "pnpm run portfolio:evolution:check",
+      "result": "PASS",
+      "summary": [
+        "Historical Portfolio Evolution evidence: PASS (13 cases, 8 research sources, 9 definitions, 40 historical surfaces)."
+      ],
+      "rawLogSha256": "f199e946036f8ac3bb2d68ed2bd4eea5c4873d27e165ccd51532e1e3e82d5776"
+    },
+    {
+      "command": "pnpm run validate:play-readiness",
+      "result": "PASS",
+      "summary": [
+        "Play-readiness static validation: PASS (15 surfaces, 48 known save keys, 105 runtime files scanned)."
+      ],
+      "rawLogSha256": "675a0735b4c064405c0435296f8ea811303f7974a3e771d17b1c61fc4ebff6ed"
+    },
+    {
+      "command": "pnpm run validate:interaction-integrity",
+      "result": "PASS",
+      "summary": [
+        "Interaction integrity inventory and known blocker contracts: PASS (15 surfaces, 147 CSS risk entries)."
+      ],
+      "rawLogSha256": "ec57f6269f3512ef9af780f9e11753f59988bd6179274cb92a5f101b47f89fa7"
+    },
+    {
+      "command": "pnpm run test:portfolio:smoke (production preview)",
+      "result": "PASS",
+      "summary": [
+        "14 passed (36.2s)"
+      ],
+      "rawLogSha256": "dcec180a98b2c70de51a2f8c44aaf568c0b795937038906ce1484332f070a822"
+    },
+    {
+      "command": "pnpm run test:e2e:play-readiness:smoke",
+      "result": "PASS",
+      "summary": [
+        "24 passed (1.5m)"
+      ],
+      "rawLogSha256": "d16b5c7b8ec0d6cc0d1dbdd923b101228e197a9bed438d628c936bec69c29603"
+    }
+  ],
+  "browserProfiles": 7,
+  "adversarialChecks": 15,
+  "archive": {
+    "archive": "world-in-a-box-v0.1.0-offline.zip",
+    "sha256": "31a0f04135b09b7dfb78cace97d95e77d5c88f526e2a6480372aa63eac33315d",
+    "bytes": 34676385,
+    "files": 9683,
+    "allEntriesMatchServedStaticBytes": true,
+    "crc": "PASS",
+    "noBlendOrProgram": true
+  },
+  "latestBuildMatchesEveryServedArchiveEntry": true,
+  "exportProvenanceMatched": true,
+  "screenshots": [
+    {
+      "path": "fresh-scene.png",
+      "sha256": "5e5a9f00190def7784f8b31e9c1ced5eefc805c562f1b13e3995d6ee540f9df8"
+    },
+    {
+      "path": "keyboard-desktop.png",
+      "sha256": "cbde600ad959c7852441aa38410b017a20459ec46e424e2d5987053b7265a83c"
+    },
+    {
+      "path": "outside-scene.png",
+      "sha256": "9142908c949ec03309733b472d80b1a4534541f636f2ee2b8fa4bec901cd0357"
+    },
+    {
+      "path": "tablet-landscape.png",
+      "sha256": "88571472877e4632cfa6e713244f10f69855d4d20ee85da25ec439651754217b"
+    },
+    {
+      "path": "touch-390.png",
+      "sha256": "f0c5e840077461466264e7c56c46658e366a5207e8dda6c65537e3d5f87c1b55"
+    }
+  ],
+  "scopeLimits": [
+    "No physical-phone test",
+    "No child-use, learning or retention claim",
+    "External networking blocked in browser requests; local HTTP remains available",
+    "No file:// support claim",
+    "No publication claim before remote readback"
+  ]
+}

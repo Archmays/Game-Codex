@@ -1,0 +1,205 @@
+[
+  {
+    "profile": "keyboard-desktop",
+    "input": "keyboard only",
+    "result": "PASS",
+    "eightPieces": true,
+    "wrongHintUndoReload": true,
+    "windVisualMotionAndSettling": true,
+    "motionPixels": {
+      "pixels": 538480,
+      "changed": 11483,
+      "significant": 9999,
+      "maxDelta": 132
+    },
+    "settledPixels": {
+      "pixels": 538480,
+      "changed": 1,
+      "significant": 0,
+      "maxDelta": 1
+    },
+    "oldSaveProtected": true,
+    "targets44pxNoOverlap": true,
+    "externalRequests": 0,
+    "errors": [],
+    "cleanup": [
+      "WB_QA:raf-cancelled",
+      "WB_QA:audio-closed",
+      "WB_QA:webgl-released"
+    ]
+  },
+  {
+    "profile": "mouse-desktop",
+    "input": "mouse",
+    "result": "PASS",
+    "eightPieces": true,
+    "wrongHintUndoReload": true,
+    "windVisualMotionAndSettling": true,
+    "motionPixels": {
+      "pixels": 484632,
+      "changed": 10199,
+      "significant": 9350,
+      "maxDelta": 182
+    },
+    "settledPixels": {
+      "pixels": 484632,
+      "changed": 4,
+      "significant": 0,
+      "maxDelta": 1
+    },
+    "oldSaveProtected": true,
+    "targets44pxNoOverlap": true,
+    "externalRequests": 0,
+    "errors": [],
+    "cleanup": [
+      "WB_QA:raf-cancelled",
+      "WB_QA:audio-closed",
+      "WB_QA:webgl-released"
+    ]
+  },
+  {
+    "profile": "touch-390",
+    "input": "emulated touch + pointer cancellation",
+    "result": "PASS",
+    "eightPieces": true,
+    "wrongHintUndoReload": true,
+    "windVisualMotionAndSettling": true,
+    "motionPixels": {
+      "pixels": 142740,
+      "changed": 3043,
+      "significant": 1730,
+      "maxDelta": 172
+    },
+    "settledPixels": {
+      "pixels": 142740,
+      "changed": 0,
+      "significant": 0,
+      "maxDelta": 0
+    },
+    "oldSaveProtected": true,
+    "targets44pxNoOverlap": true,
+    "externalRequests": 0,
+    "errors": [],
+    "cleanup": [
+      "WB_QA:raf-cancelled",
+      "WB_QA:audio-closed",
+      "WB_QA:webgl-released"
+    ]
+  },
+  {
+    "profile": "touch-360",
+    "input": "emulated touch + pointer cancellation",
+    "result": "PASS",
+    "eightPieces": true,
+    "wrongHintUndoReload": true,
+    "windVisualMotionAndSettling": true,
+    "motionPixels": {
+      "pixels": 131040,
+      "changed": 3034,
+      "significant": 2227,
+      "maxDelta": 157
+    },
+    "settledPixels": {
+      "pixels": 131040,
+      "changed": 0,
+      "significant": 0,
+      "maxDelta": 0
+    },
+    "oldSaveProtected": true,
+    "targets44pxNoOverlap": true,
+    "externalRequests": 0,
+    "errors": [],
+    "cleanup": [
+      "WB_QA:raf-cancelled",
+      "WB_QA:audio-closed",
+      "WB_QA:webgl-released"
+    ]
+  },
+  {
+    "profile": "phone-landscape",
+    "input": "emulated touch + pointer cancellation",
+    "result": "PASS",
+    "eightPieces": true,
+    "wrongHintUndoReload": true,
+    "windVisualMotionAndSettling": true,
+    "motionPixels": {
+      "pixels": 265200,
+      "changed": 4586,
+      "significant": 3500,
+      "maxDelta": 178
+    },
+    "settledPixels": {
+      "pixels": 265200,
+      "changed": 0,
+      "significant": 0,
+      "maxDelta": 0
+    },
+    "oldSaveProtected": true,
+    "targets44pxNoOverlap": true,
+    "externalRequests": 0,
+    "errors": [],
+    "cleanup": [
+      "WB_QA:raf-cancelled",
+      "WB_QA:audio-closed",
+      "WB_QA:webgl-released"
+    ]
+  },
+  {
+    "profile": "tablet-portrait",
+    "input": "emulated touch + pointer cancellation",
+    "result": "PASS",
+    "eightPieces": true,
+    "wrongHintUndoReload": true,
+    "windVisualMotionAndSettling": true,
+    "motionPixels": {
+      "pixels": 382272,
+      "changed": 12343,
+      "significant": 11276,
+      "maxDelta": 183
+    },
+    "settledPixels": {
+      "pixels": 382272,
+      "changed": 1,
+      "significant": 0,
+      "maxDelta": 1
+    },
+    "oldSaveProtected": true,
+    "targets44pxNoOverlap": true,
+    "externalRequests": 0,
+    "errors": [],
+    "cleanup": [
+      "WB_QA:raf-cancelled",
+      "WB_QA:audio-closed",
+      "WB_QA:webgl-released"
+    ]
+  },
+  {
+    "profile": "tablet-landscape",
+    "input": "emulated touch + pointer cancellation",
+    "result": "PASS",
+    "eightPieces": true,
+    "wrongHintUndoReload": true,
+    "windVisualMotionAndSettling": true,
+    "motionPixels": {
+      "pixels": 403200,
+      "changed": 7310,
+      "significant": 6217,
+      "maxDelta": 181
+    },
+    "settledPixels": {
+      "pixels": 403200,
+      "changed": 0,
+      "significant": 0,
+      "maxDelta": 0
+    },
+    "oldSaveProtected": true,
+    "targets44pxNoOverlap": true,
+    "externalRequests": 0,
+    "errors": [],
+    "cleanup": [
+      "WB_QA:raf-cancelled",
+      "WB_QA:audio-closed",
+      "WB_QA:webgl-released"
+    ]
+  }
+]

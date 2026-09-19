@@ -49,6 +49,13 @@ async function mountApp(root: HTMLElement): Promise<void> {
   const play = search.get("play");
   activatePageMode(pageModeForSearch(search));
 
+  if (route.kind === "play" && play === "world-in-a-box") {
+    setBrowserIdentity("世界盒子 · 窗边有风", "#f2edde");
+    const [{ mountWorldBox }, { createLocalStorageStore }] = await Promise.all([import("../games/world-in-a-box/runtime"), import("../packages/game-core")]);
+    mountWorldBox({ container: root, storage: createLocalStorageStore("world-in-a-box"), onExit: () => window.location.assign(search.get('from') === 'hub' ? '?hub=classic&from=world' : '?world=my-game-world') });
+    return;
+  }
+
   if (route.kind === "play" && play === "hanzi-stroke-lab") {
     setBrowserIdentity("汉字书房 · 查字与笔顺", "#f6f3eb");
     const { mountHanziStrokeLab } = await import("../games/hanzi-stroke-lab/workbench");
