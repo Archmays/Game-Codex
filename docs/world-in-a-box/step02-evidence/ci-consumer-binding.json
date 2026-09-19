@@ -1,0 +1,31 @@
+{
+  "result": "PASS",
+  "validatedRuntimeSource": "1c791dcf69dba9ec03d57800b0f39b2a7167078c75f39abdd049d5fa70c22dcd",
+  "finalSource": "a4a0cc54211ca7347b10b6032d65d809e74ee72aa1da2196860938246b00b34b",
+  "onlyChanges": [
+    {
+      "path": "tests/e2e/helpers/hit-target.ts",
+      "beforeSha256": "dd6a4040876fb21597f255f3a35c6d8479a0b427d89023ce2ecb63c109533c07",
+      "afterSha256": "d82746c2ce4bf82681640e7413add7279e9121b8554e6167572ad36eb8ae7538"
+    },
+    {
+      "path": "tests/e2e/math-world-workbench.spec.ts",
+      "beforeSha256": "dd841cbe353f9abefc22e7f3ebf93a50fa13801d148e86b33a713b4b3067d862",
+      "afterSha256": "cdf1ffc8f35a825f64d0fc2498eac4b54ee406ab2c03e1caa5975d20619654c3"
+    }
+  ],
+  "reconstructedPreviousSourceHashMatches": true,
+  "allPackageMembersExceptReadmeIdentical": true,
+  "checks": {
+    "completeRepresentativeMatrixChrome": 4,
+    "bundledChromiumSwiftShaderMobileDevServer": 1,
+    "vaultExactKeyRoundtripDesktopMobileTablet": 3,
+    "typecheck": "PASS"
+  },
+  "rawLogHashes": {
+    "hittest-final.log": "13ebbf4e3056424138a6f2a0d0ae83a793a1a0012ff73f386f38542702119144",
+    "software-final.log": "11f244ba140b249a18b535db924372ea1032c1a3de72063dc545a0918b180481",
+    "vault-final.log": "966e66a415f3dbae4082133de4c3cfd1bed6b19b6c16f4f4bd9e92132596ea45"
+  },
+  "reason": "Atomic viewport predicate keeps single-target, bounds and 3-second deadline. Vault status uses the registered exportable key count while exact 49/48 inventory assertions remain."
+}

@@ -6,7 +6,7 @@
     "algorithm": "sha256(sorted lines: file_sha256 two-spaces repo-relative-path newline)",
     "scope": "all runtime, authored game sources, QA tools/tests, package/build config, input contract; excludes report/screenshot outputs",
     "fileCount": 9985,
-    "sha256": "1c791dcf69dba9ec03d57800b0f39b2a7167078c75f39abdd049d5fa70c22dcd",
+    "sha256": "a4a0cc54211ca7347b10b6032d65d809e74ee72aa1da2196860938246b00b34b",
     "glbSha256": "f6a8acfa5bb041e7ae0f2b047be5ebf4383a235f2a1dcaf483a7ad46f175d308"
   },
   "charterSha256": "3bcff54b85479dc63dec850487b25fe2dd2d7ae807f3d1e7f9bcfd9be68984c5",
@@ -25,7 +25,10 @@
     "sharedRepresentativeHitTestsChrome": 4,
     "sharedPortfolioSmoke": 14,
     "finalProductionBuild": "PASS",
-    "mathWorldCatalogValidator": "PASS_MACHINE: exact four product IDs"
+    "mathWorldCatalogValidator": "PASS_MACHINE: exact four product IDs",
+    "finalRepresentativeMatrixChrome": 4,
+    "softwareChromiumMobileDevServer": 1,
+    "vaultExactKeyRoundtripProfiles": 3
   },
   "environment": {
     "os": "Windows x64",
@@ -147,8 +150,8 @@
   "package": {
     "zip": "world-in-a-box-v0.2.0-offline.zip",
     "bytes": 36843360,
-    "sha256": "8480dcb430f13ac2c91cf988e9e2de00653d6908af02d18b90f215d3220cb034",
-    "sourceSha256": "1c791dcf69dba9ec03d57800b0f39b2a7167078c75f39abdd049d5fa70c22dcd",
+    "sha256": "fd509211246d5140eebc3b4b3633c7c93f55ca7d7f9e4ac454bbf0c33d5daed0",
+    "sourceSha256": "a4a0cc54211ca7347b10b6032d65d809e74ee72aa1da2196860938246b00b34b",
     "files": 9697
   },
   "offline": {
@@ -219,6 +222,7 @@
   "evidence": {
     "baseline-all.png": "8a224719acea00600f373d22a7fcb5306bf8a8f9a78093c6359be11ce7f1996c",
     "campus.png": "fa0e863a23fdd819bb1d02634c05333c52f0b8fd3079d5e8004a14dde7526a54",
+    "ci-consumer-binding.json": "c7e3f88460ec7a1313f6a957a6f513c87b395c6ae2f229131109434f62250e71",
     "city-browser.json": "a0d31c1a5b33c4ae7bd8853d59fdc71033b9be9da92cb1c5d4d922a300f2399e",
     "city-edges.json": "6781d6ba98e6e6f7cf569723ddb1942900061bc4b2869cdd1d29417369316509",
     "city-recovery.json": "07b10805f36b16ddf4acd99e6c82c8af7bcb5d341ed42a1f30d9fbe0d7716de1",
@@ -233,10 +237,11 @@
     "release-consumer-binding.json": "f8f90de227a7b04f0886aef50d3742dfc76a1608d01845ca2ff46d856022a3d5",
     "river.png": "7600139c7d6f5022d274cef5dfc81f3d86cbfa18a61182f4b3a103167a8d7480",
     "runtime-freeze.json": "d0763ca2b0fc21bf08a66abbb9cf3e6dfb8a51aa3c41661d735dcebb60cd9c52",
-    "shared-PLAY_SURFACE_HITTEST_MATRIX.desktop-1366.json": "20652978dd6768c78b8bff6dc5540f79bb239412158280caa20791b7340dfbf0",
+    "shared-PLAY_SURFACE_HITTEST_MATRIX.desktop-1366.json": "9b6c565c8f4a718973c9a9a1ad312198892a2d38016c8369bc851265d3c72e08",
     "shared-PLAY_SURFACE_HITTEST_MATRIX.mobile-390.json": "a6d3e62ca9db8a86ed36cd3ac81966580277ece9c6f07e2e7800df12e7c0d499",
+    "software-PLAY_SURFACE_HITTEST_MATRIX.mobile-390.json": "7a30df7d504d6cabfc239cafb11ec277fb8c186ef9ab64e927afe161a9db279d",
     "source-binding.json": "bc064cf0c8f1425abf44bac24fffe29647b4fb7cbfafac7ed3e430784d2b3aec",
-    "source-freeze.json": "41fb9602dc359a493f0c1ed04f9090653a4a1288e3b806b4546ba095da7c5846",
+    "source-freeze.json": "53706cd5c5b92d89b107f6aff612d58d965a7958cc1b3a9d6003fb44b302190d",
     "touch-390-city.png": "a661349574298fc0b34bc1ca340c7836e9b70364a7d28a3ce4305686d544e3a9"
   },
   "fullRuntimeMatrixSource": {

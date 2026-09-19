@@ -153,8 +153,11 @@ export async function expectHitTarget(locator: Locator, options: { minimumRatio?
   await expect(locator).toBeVisible();
   await expect(locator).toBeEnabled();
   await locator.evaluate((element) => element.scrollIntoView({ block: "center", inline: "center", behavior: "auto" }));
-  await expect.poll(async () => locator.evaluate((element) => {
-    const rect = element.getBoundingClientRect();
+  await expect.poll(async () => locator.evaluateAll((elements) => {
+    // Keep the strict single-target contract in one protocol read. Waiting for
+    // an ElementHandle first can consume this deadline under software WebGL.
+    if (elements.length !== 1) return false;
+    const rect = elements[0].getBoundingClientRect();
     return rect.left >= -1 && rect.top >= -1 && rect.right <= window.innerWidth + 1 && rect.bottom <= window.innerHeight + 1;
   }), { message: "critical control must settle fully inside the viewport", timeout: 3_000 }).toBe(true);
   const evidence = await sampleHitTarget(locator);

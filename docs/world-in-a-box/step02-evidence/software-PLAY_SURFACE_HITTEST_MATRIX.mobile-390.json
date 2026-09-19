@@ -1,0 +1,69 @@
+{
+  "verdict": "PASS",
+  "project": "mobile-390",
+  "manifestSurfaceCount": 15,
+  "testedSurfaceCount": 1,
+  "startAt": "world-in-a-box",
+  "endAt": "world-in-a-box",
+  "rows": [
+    {
+      "surfaceId": "world-in-a-box",
+      "route": "?play=world-in-a-box",
+      "productId": "world-in-a-box",
+      "kind": "product-world",
+      "project": "mobile-390",
+      "criticalControls": 3,
+      "actionEvidence": [
+        {
+          "label": "选择窗扇一",
+          "selector": "button.wb-piece",
+          "rect": {
+            "x": 63,
+            "y": 593,
+            "width": 83.328125,
+            "height": 112,
+            "right": 146.328125,
+            "bottom": 705
+          },
+          "hitSuccessRatio": 1
+        },
+        {
+          "label": "选择窗扇二",
+          "selector": "button.wb-piece",
+          "rect": {
+            "x": 153.328125,
+            "y": 593,
+            "width": 83.328125,
+            "height": 112,
+            "right": 236.65625,
+            "bottom": 705
+          },
+          "hitSuccessRatio": 1
+        },
+        {
+          "label": "选择窗帘",
+          "selector": "button.wb-piece",
+          "rect": {
+            "x": 243.65625,
+            "y": 593,
+            "width": 83.34375,
+            "height": 112,
+            "right": 327,
+            "bottom": 705
+          },
+          "hitSuccessRatio": 1
+        }
+      ],
+      "realPrimaryClick": "PASS",
+      "modalClosed": false,
+      "return": "PASS"
+    }
+  ],
+  "runtime": {
+    "pageErrors": [],
+    "consoleErrors": [],
+    "failedResponses": [],
+    "failedRequests": [],
+    "externalRequests": []
+  }
+}

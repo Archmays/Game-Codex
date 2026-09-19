@@ -474,11 +474,11 @@
           "selector": "a.world-entry",
           "rect": {
             "x": 59,
-            "y": 103.33674621582031,
+            "y": 103.84611511230469,
             "width": 612,
             "height": 563.34375,
             "right": 671,
-            "bottom": 666.6804962158203
+            "bottom": 667.1898651123047
           },
           "hitSuccessRatio": 1
         },
@@ -500,11 +500,11 @@
           "selector": "a.world-entry",
           "rect": {
             "x": 59,
-            "y": 244.18087768554688,
+            "y": 243.0850830078125,
             "width": 1248,
-            "height": 284.0000305175781,
+            "height": 284,
             "right": 1307,
-            "bottom": 528.180908203125
+            "bottom": 527.0850830078125
           },
           "hitSuccessRatio": 1
         }
