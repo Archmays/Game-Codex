@@ -1,0 +1,97 @@
+{
+  "verdict": "PASS_MACHINE",
+  "source": {
+    "algorithm": "sha256(sorted lines: file_sha256 two-spaces repo-relative-path newline)",
+    "scope": "runtime, authored models, QA tools/tests, package/build config, input contract, root hub launcher; excludes evidence outputs",
+    "fileCount": 10065,
+    "sha256": "788ec52f2f0488f5d77faca9aab9ea0617e3c22edcde6f868430ddc887b7a3bb",
+    "charterSha256": "2323b45783d820dc6a73505775a47b40773f5f29f39699420778e79d7af0101e"
+  },
+  "environment": "Windows Chrome; relocated bundled-Node production on 127.0.0.1:5175, external requests blocked",
+  "profiles": 8,
+  "lifecycleChecks": 14,
+  "nativeZoom": {
+    "result": "PASS",
+    "method": "Chrome appearance Page zoom select 200%; real browser zoom, no CSS zoom or gameplay state injection",
+    "geometry": {
+      "width": 720,
+      "dpr": 2.0000000298023224,
+      "overflow": false,
+      "cssZoom": "1"
+    },
+    "level1Complete": true,
+    "hint": true,
+    "undo": true,
+    "reset": true,
+    "returnHome": true
+  },
+  "maxMeasured": {
+    "triangles": 88872,
+    "calls": 89,
+    "dpr": 1.5
+  },
+  "commands": [
+    {
+      "command": "pnpm test",
+      "result": "PASS",
+      "logSha256": "fa9f49c692741f9d14a370d5c14224c34a7793ef214870dca19b95d8d9ab7487",
+      "summary": "      Tests  590 passed (590)"
+    },
+    {
+      "command": "pnpm build",
+      "result": "PASS",
+      "logSha256": "222ecca95ae09bb958393dc1ae92c080f0077d44bb1a2bed0ab1059f37e812cd",
+      "summary": "✓ built in 14.22s"
+    },
+    {
+      "command": "production portfolio smoke",
+      "result": "PASS",
+      "logSha256": "b256862e055ad763b46668727dbea3d187a251a5c9aaf44b8cbf3620204398f0",
+      "summary": "  16 passed (39.9s)"
+    },
+    {
+      "command": "production Oddity representative hittest",
+      "result": "PASS",
+      "logSha256": "00b4e18bfdb82738fda6e77e96b966ff5560fde95ef27a40548b85ae3474f3ad",
+      "summary": "  2 passed (60.0s)"
+    }
+  ],
+  "semanticReviews": [
+    {
+      "rubric": "child-first",
+      "result": "PASS",
+      "evidence": "One goal, two abilities, model thumbnails, optional demos, neutral targets, requested progressive hints, specific rejection, no penalty/time/score; four retained browser images and all eight real input loops reviewed."
+    },
+    {
+      "rubric": "visual-accessibility",
+      "result": "PASS",
+      "evidence": "Four final browser images inspected; L-shaped occlusion, framed glass, isolated slot, distinct clothing and actual door destination visible. Six responsive layouts, native 200% Chrome zoom, target hit geometry, focus restoration and same-source visual readback passed."
+    },
+    {
+      "rubric": "adversarial-rules",
+      "result": "PASS",
+      "evidence": "Same-layout swept volumes/LOS, ability omission cuts, original door ID, empty-photo return, reversed roles, blocked release, held ownership, ceiling/floor bypass and single-switch rejection; real browser invalid actions did not advance."
+    }
+  ],
+  "reviewerBoundary": "One Codex agent applied three separate rubrics; no independent human/child panel or delegated reviewer claimed.",
+  "boundaries": [
+    "No physical phone/tablet or iOS/Safari/Android browser testing",
+    "No child fun/learning/retention study",
+    "Performance values are sampled renderer counters, not hardware FPS guarantees"
+  ],
+  "evidenceHashes": {
+    "assets.json": "682a3eab8497bc316d5d29cb63f2f7899454be2ff64c258ad7b907d16b27d6cf",
+    "baseline.png": "b2b1ff82c82f289e659d3c454a03ca7931da9ccac6343c29673bd734543f2239",
+    "browser-results.json": "001f1705db0bdf15f61e3b778dafe533e00cee14abe1d6c7bb3580dc50d6ddea",
+    "desktop-mouse-l1.png": "b2b1ff82c82f289e659d3c454a03ca7931da9ccac6343c29673bd734543f2239",
+    "desktop-mouse-l2-portal.png": "7cda0a6a76e4a6636482f782c6a9b8ec4d7db95ca156f437161cc04ceb3318e3",
+    "desktop-mouse-l3-open.png": "88aaebf83760dd3b6c551a56c28bfc665ea5c067b0563aab0fbd1fa2243fcf78",
+    "lifecycle-results.json": "882a91c0a387c46760819dcc54501e7ca4ff40508873449083ef0bf93a7d2320",
+    "native-zoom.json": "510f66bc734813d3bf32c7c2e076ac9d4d8bbd76b77e0cb7d3746d5ebf2154a9",
+    "native-zoom.mjs": "71fea4134978c0a5fe1bf9910f68b61a2c3c161197fb3b7f3f8e2520c16666f0",
+    "phone-390-l3.png": "b94b51c4465bb042c1dbe3e0135d646ad3e607307cc03935c75d6c7d6fd5dda1",
+    "readback.png": "b2b1ff82c82f289e659d3c454a03ca7931da9ccac6343c29673bd734543f2239",
+    "source-before.json": "ff60bfbbe610a3813f6777c4a9747ef316e71a255a07c7cce27ee7865e2a9ffb",
+    "visual-results.json": "1247296bf774fc09c3ffb0be49ff1f336961517b012c737bf038018424f250bf"
+  }
+}

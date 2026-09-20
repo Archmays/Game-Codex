@@ -48,6 +48,10 @@ async function visibleActions(page: Page, surface: PlaySurfaceRecord): Promise<n
 
 async function openSurface(page: Page, surface: PlaySurfaceRecord): Promise<void> {
   await page.goto(`/${surface.route}`, { waitUntil: "domcontentloaded" });
+  if (surface.id === 'oddity-puzzles') {
+    await expect(page.locator('.odd-stage')).toHaveAttribute('data-ready','true');
+    while (await page.locator('[data-cmd=skipDemo]').isVisible()) await page.locator('[data-cmd=skipDemo]').click();
+  }
   await expect(page.locator("#app > *")).toHaveCount(1);
   await expect.poll(() => visibleActions(page, surface), { message: `${surface.id} must expose a primary action`, timeout: 20_000 }).toBeGreaterThan(0);
 }

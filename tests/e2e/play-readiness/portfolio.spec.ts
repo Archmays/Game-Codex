@@ -97,7 +97,7 @@ test("@play-ready world, support, Classic, back, reload and resume routes stay c
   await expect(page.getByTestId("my-game-world")).toBeVisible();
   await page.reload(); await expect(page.getByTestId("my-game-world")).toBeVisible();
   await page.goto("/?hub=classic&from=world", { waitUntil: "domcontentloaded" });
-  await expect(page.locator(".game-card")).toHaveCount(4);
+  await expect(page.locator(".game-card")).toHaveCount(5);
   await expect(page.locator('.game-card[data-game-id="memory-card"], .game-card[data-game-id="make-target"]')).toHaveCount(0);
   expectClean(runtime);
 });
@@ -175,7 +175,7 @@ test("@a11y modal focus, language parts, target sizes and 200% zoom stay operabl
   await expect(page.locator("[data-world-forest-link]")).toBeVisible();
   await expect(page.getByTestId("my-game-world")).toHaveAttribute(
     "data-active-child-products",
-    "hanzi-tower-defense math-lab hanzi-word-adventure world-in-a-box"
+    "hanzi-tower-defense math-lab hanzi-word-adventure world-in-a-box oddity-puzzles"
   );
   await page.locator("[data-world-forest-link]").focus();
   await expect(page.locator("[data-world-forest-link]")).toBeFocused();

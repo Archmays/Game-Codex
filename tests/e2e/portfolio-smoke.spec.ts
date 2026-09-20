@@ -57,6 +57,21 @@ async function expectUsableTarget(locator: Locator): Promise<void> {
 
 const GAMES: readonly SmokeGame[] = [
   {
+    id: "oddity-puzzles", title: "奇物事务所", surface: ".oddity-mount",
+    canonicalRoute: "/?play=oddity-puzzles",
+    async interact(page) {
+      await expect(page.locator('.odd-stage')).toHaveAttribute('data-ready', 'true');
+      for (let i=0;i<2;i++) await page.locator('[data-cmd=skipDemo]').click();
+      await page.locator('.odd-commands').getByRole('button', {name:'观察窗前',exact:true}).click();
+      await expect(page.locator('.oddity-mount')).toHaveAttribute('data-history','1');
+      await page.locator('[data-cmd=undo]').click();
+      await expect(page.locator('.oddity-mount')).toHaveAttribute('data-history','0');
+      await page.locator('.odd-home').click();
+      await expect(page.locator('[data-world-oddity-link]')).toBeVisible();
+      return null;
+    },
+  },
+  {
     id: "hanzi-word-adventure", title: "字间行者", surface: '[data-testid="hanzi-word-adventure"]',
     canonicalRoute: "/?play=hanzi-word-adventure",
     async interact(page) {
@@ -129,7 +144,7 @@ for (const game of GAMES) {
     const runtime = observeRuntime(page);
     await page.goto(game.canonicalRoute ?? "/?hub=classic", { waitUntil: "domcontentloaded" });
     if (!game.canonicalRoute) {
-      await expect(page.locator(".game-card")).toHaveCount(4);
+      await expect(page.locator(".game-card")).toHaveCount(5);
       const card = page.locator(`.game-card[data-game-id="${game.id}"]`);
       await expect(card.getByRole("heading", { name: game.title, exact: true })).toBeVisible();
       const entry = card.getByRole("button");
@@ -156,7 +171,7 @@ for (const game of GAMES) {
       await returnButton.focus();
       await page.keyboard.press("Enter");
     }
-    await expect(page.locator(".game-card")).toHaveCount(4);
+    await expect(page.locator(".game-card")).toHaveCount(5);
     await expectRuntimeClean(runtime);
   });
 }

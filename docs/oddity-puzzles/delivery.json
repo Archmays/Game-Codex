@@ -1,0 +1,16 @@
+{
+  "zip": "handoffs\\oddity-puzzles-v0.1.0-offline.zip",
+  "sha256": "be8055c0e4138826309c34682e443f38fedc6d161d1ed13eccaca2b0120a1c17",
+  "bytes": 91967337,
+  "files": 9754,
+  "runtimeComparedFiles": 9753,
+  "runtimeTreeSha256": "9090b51b6f945f4500fd8031604b21489dee26fe452550d7186d61d5a7e7c5dc",
+  "source": "788ec52f2f0488f5d77faca9aab9ea0617e3c22edcde6f868430ddc887b7a3bb",
+  "crc": "PASS",
+  "sameBytesAsRelocatedTestedRuntime": true,
+  "sourceBlendExcluded": true,
+  "bundledNode": true,
+  "entry": "http://127.0.0.1:5175/?play=oddity-puzzles",
+  "network": "all non-local requests blocked in full browser matrix",
+  "packageCmdNoBrowser": "PASS"
+}

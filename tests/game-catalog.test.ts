@@ -59,8 +59,8 @@ describe("game catalog", () => {
     expect(equationSliderReadme).toContain("42个手工关与158个生成关");
     const rootReadme = readFileSync("README.md", "utf8");
     expect(rootReadme).toContain(`保留 ${GAME_PORTFOLIO.length} 个可挂载定义`);
-    expect(rootReadme).toContain("收敛为 4 个活跃产品");
-    expect(rootReadme).toContain("经典大厅只投影这 4 个产品");
+    expect(rootReadme).toContain("收敛为 5 个活跃产品");
+    expect(rootReadme).toContain("经典大厅只投影这 5 个产品");
     expect(rootReadme).not.toContain("| 汉字大转盘 |");
     expect(rootReadme.match(/\| 算式滑轨 \|/g)).toHaveLength(1);
   });

@@ -1,0 +1,8 @@
+{
+  "rows": [
+    {
+      "check": "same-source no-update visual readback",
+      "result": "PASS"
+    }
+  ]
+}

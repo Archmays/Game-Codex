@@ -1,0 +1,192 @@
+{
+  "operation": "plan",
+  "authority": "User requested task cleanup and standing AGENTS authorization: exact paths to Windows Recycle Bin only",
+  "targets": [
+    {
+      "path": "D:\\ChatGPT-Codex-Projects\\Game-Codex\\tmp\\tasks\\oddity-v010",
+      "type": "directory",
+      "files": 29592,
+      "bytes": 600332523,
+      "inventorySha256": "f6ed60d31cb6a599da28b15e0f4740d92334f40c5c74e39dcabd992a9badd58f",
+      "sha256": null,
+      "reason": "T3: task scratch, superseded candidate or duplicate screenshot; final source-bound report, four screenshots and verified ZIP retained",
+      "lineage": "Old portrait failure was development hot reload; final immutable production all eight profiles pass. Baseline/readback equal desktop-mouse-l1.png."
+    },
+    {
+      "path": "D:\\ChatGPT-Codex-Projects\\Game-Codex\\docs\\oddity-puzzles\\evidence\\baseline.png",
+      "type": "file",
+      "files": 1,
+      "bytes": 239665,
+      "inventorySha256": "712a37e3e07ee39ab9f7952066750f92df228a92c4444aaf033ad4ea8f4ad152",
+      "sha256": "b2b1ff82c82f289e659d3c454a03ca7931da9ccac6343c29673bd734543f2239",
+      "reason": "T3: task scratch, superseded candidate or duplicate screenshot; final source-bound report, four screenshots and verified ZIP retained",
+      "lineage": "Old portrait failure was development hot reload; final immutable production all eight profiles pass. Baseline/readback equal desktop-mouse-l1.png."
+    },
+    {
+      "path": "D:\\ChatGPT-Codex-Projects\\Game-Codex\\docs\\oddity-puzzles\\evidence\\readback.png",
+      "type": "file",
+      "files": 1,
+      "bytes": 239665,
+      "inventorySha256": "10af4007fd95eae73637badd32c401eaa7f1e6b0ef4f60266dff01419b01dcc3",
+      "sha256": "b2b1ff82c82f289e659d3c454a03ca7931da9ccac6343c29673bd734543f2239",
+      "reason": "T3: task scratch, superseded candidate or duplicate screenshot; final source-bound report, four screenshots and verified ZIP retained",
+      "lineage": "Old portrait failure was development hot reload; final immutable production all eight profiles pass. Baseline/readback equal desktop-mouse-l1.png."
+    },
+    {
+      "path": "D:\\ChatGPT-Codex-Projects\\Game-Codex\\docs\\oddity-puzzles\\evidence\\tablet-portrait-failure.png",
+      "type": "file",
+      "files": 1,
+      "bytes": 219382,
+      "inventorySha256": "32eca34b615f7e6bd5fdd11241ce39527afbfdc0dfa05ee899e8445b10395f3b",
+      "sha256": "dfb2d8ff2dfad61517212259fe90e4ab38fd46337c1bb83d6f3186a30f01b9c2",
+      "reason": "T3: task scratch, superseded candidate or duplicate screenshot; final source-bound report, four screenshots and verified ZIP retained",
+      "lineage": "Old portrait failure was development hot reload; final immutable production all eight profiles pass. Baseline/readback equal desktop-mouse-l1.png."
+    },
+    {
+      "path": "D:\\ChatGPT-Codex-Projects\\Game-Codex\\docs\\oddity-puzzles\\evidence\\tablet-portrait-failure.txt",
+      "type": "file",
+      "files": 1,
+      "bytes": 901,
+      "inventorySha256": "77a94c8f7a84e928bffbf81393f07034473f50fb6184595fba00bf76c32bb38f",
+      "sha256": "4f380cac16e0d1609064f8e01ca061b2c89f586c45b8d7fb97acd926740cf528",
+      "reason": "T3: task scratch, superseded candidate or duplicate screenshot; final source-bound report, four screenshots and verified ZIP retained",
+      "lineage": "Old portrait failure was development hot reload; final immutable production all eight profiles pass. Baseline/readback equal desktop-mouse-l1.png."
+    }
+  ],
+  "rawFileLineage": [
+    {
+      "path": "tmp/tasks/oddity-v010/all-tests.txt",
+      "sha256": "1d77dda3fafea81464b17fd28caa70a74c6a85e5c46f12f0d45931cd70dfcd94",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/assets.json",
+      "sha256": "3fbbd05c5cbe75190960f2b97e2a436468c4c45caabf9396e9619fe8810ca909",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/blender.log",
+      "sha256": "3543368a6e1ca34ea6ec33c48140b62ce02ff23b46bedc8aca154491d00c5df1",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/closeout.py",
+      "sha256": "194cd2ccf852105464fd0c9133ed4924b68be8413d74ed6958073cfc798fc891",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/final-browser.txt",
+      "sha256": "9f7bac478cf3bbce11582f389c69015dcefafb462395a944a6a81981be8104e0",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/final-build.txt",
+      "sha256": "222ecca95ae09bb958393dc1ae92c080f0077d44bb1a2bed0ab1059f37e812cd",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/final-lifecycle.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/final-tests.txt",
+      "sha256": "fa9f49c692741f9d14a370d5c14224c34a7793ef214870dca19b95d8d9ab7487",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/final-visual.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/first.png",
+      "sha256": "f73b8703abc4f97ab6d7736ac86454c29f10783644fb9e52cb476800f8459766",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/hittest.txt",
+      "sha256": "00b4e18bfdb82738fda6e77e96b966ff5560fde95ef27a40548b85ae3474f3ad",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/native-zoom.mjs",
+      "sha256": "71fea4134978c0a5fe1bf9910f68b61a2c3c161197fb3b7f3f8e2520c16666f0",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/native-zoom.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/node-LICENSE",
+      "sha256": "4573185d56580da2b890ba34a85a409257640f1c5632eade4300137266194d18",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/package-draft.json",
+      "sha256": "f90c507e010edf3ef5496f5f6bf1400ac14f0e25d86d38f236870fabd50f873e",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/package-production.json",
+      "sha256": "e80916888d93d7273e2b77cb75fd7919201b21b629f21d5e6525c456d828c954",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/picking.png",
+      "sha256": "30869ca9daab0f5f810546f2fcdeaf7bd12a420f7efdb61a486aed2b30cf2053",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/plan-cleanup.py",
+      "sha256": "ab3e021f5b04b1681f112051b4e9db7b2de81a9e533937cd7bc9e7c4e554f2ad",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/portfolio-smoke.txt",
+      "sha256": "b256862e055ad763b46668727dbea3d187a251a5c9aaf44b8cbf3620204398f0",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/pre-head.txt",
+      "sha256": "1f9ef9f636d9c95729a8e1a211b0f889b9c111bf5e49ce6ab76fae01777679b0",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/pre-source.json",
+      "sha256": "ea81489a5998d002b22e509ec92274ef21831f4a37d21d6d84998d1f0fb47638",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/previous-validation-source.json",
+      "sha256": "1ab280da241165776b9bf823899dd93f459737a117655edea1b6133860032f7a",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/seal-package.py",
+      "sha256": "fac64a95cef2246905e05bbc7f325396f04cd15eda5064e2dd6463615ffa1d19",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    },
+    {
+      "path": "tmp/tasks/oddity-v010/zoom-probe.mjs",
+      "sha256": "d4bcb02d37d0a094acebed2d88f517213f7ac942fee76dc78454aa9da157bfae",
+      "reason": "Command outcome/hash extracted to acceptance or candidate superseded"
+    }
+  ],
+  "protected": {
+    "handoffs/oddity-puzzles-v0.1.0-offline.zip": "be8055c0e4138826309c34682e443f38fedc6d161d1ed13eccaca2b0120a1c17",
+    "handoffs/oddity-puzzles-v0.1.0-offline.zip.sha256": "d8e15e9f5f2333cdd4dc14e56e00030e80e554986c5308e383442a1acaf86e67",
+    "docs/oddity-puzzles/report.md": "4398d9f43e5a60244bb8eb22096463bdbaa7234a1a8008b5b235446fe9e537db",
+    "docs/oddity-puzzles/evidence/acceptance.json": "0df0fdbce6688a879e71f8223bfbe65e22384cd46afeb5aa1d06ee42ba50314b",
+    "docs/oddity-puzzles/evidence/source-before.json": "ff60bfbbe610a3813f6777c4a9747ef316e71a255a07c7cce27ee7865e2a9ffb",
+    "docs/oddity-puzzles/evidence/source-after.json": "ff60bfbbe610a3813f6777c4a9747ef316e71a255a07c7cce27ee7865e2a9ffb",
+    "docs/oddity-puzzles/evidence/desktop-mouse-l1.png": "b2b1ff82c82f289e659d3c454a03ca7931da9ccac6343c29673bd734543f2239",
+    "docs/oddity-puzzles/evidence/desktop-mouse-l2-portal.png": "7cda0a6a76e4a6636482f782c6a9b8ec4d7db95ca156f437161cc04ceb3318e3",
+    "docs/oddity-puzzles/evidence/desktop-mouse-l3-open.png": "88aaebf83760dd3b6c551a56c28bfc665ea5c067b0563aab0fbd1fa2243fcf78",
+    "docs/oddity-puzzles/evidence/phone-390-l3.png": "b94b51c4465bb042c1dbe3e0135d646ad3e607307cc03935c75d6c7d6fd5dda1"
+  },
+  "protectedHumanEvidence": "none collected; no family browser profile is targeted",
+  "runtimeServer": "relocated bundled server stopped by exact identity; root family Vite restored outside cleanup root"
+}

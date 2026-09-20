@@ -1,0 +1,90 @@
+{
+  "rows": [
+    {
+      "check": "mixed input and animation-interrupt undo/reset",
+      "result": "PASS"
+    },
+    {
+      "check": "real tab blur pauses pose/audio, explicit resume",
+      "result": "PASS"
+    },
+    {
+      "check": "responsive target geometry",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "result": "PASS"
+    },
+    {
+      "check": "responsive target geometry",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "result": "PASS"
+    },
+    {
+      "check": "responsive target geometry",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "result": "PASS"
+    },
+    {
+      "check": "responsive target geometry",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "result": "PASS"
+    },
+    {
+      "check": "responsive target geometry",
+      "viewport": {
+        "width": 1024,
+        "height": 1366
+      },
+      "result": "PASS"
+    },
+    {
+      "check": "responsive target geometry",
+      "viewport": {
+        "width": 1366,
+        "height": 1024
+      },
+      "result": "PASS"
+    },
+    {
+      "check": "200 percent CSS reflow with real controls",
+      "result": "PASS",
+      "boundary": "CSS 200% layout zoom, not OS magnifier"
+    },
+    {
+      "check": "actual local PCM music and independently enabled effect",
+      "audible": 0.03407281766133116,
+      "silent": 0,
+      "cue": 0.020584832467884357,
+      "result": "PASS"
+    },
+    {
+      "check": "World Box default and Dresden entry/reload plus isolated save/reset",
+      "result": "PASS"
+    },
+    {
+      "check": "console and same-origin-only resources",
+      "errors": [],
+      "external": [],
+      "result": "PASS"
+    },
+    {
+      "check": "isolated quota feedback",
+      "result": "PASS"
+    },
+    {
+      "check": "isolated corrupt feedback",
+      "result": "PASS"
+    }
+  ]
+}

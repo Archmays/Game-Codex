@@ -102,7 +102,7 @@ export function homeDiscoveryTests(): void {
     await expect(page.locator('[data-world-muted]')).not.toBeChecked();
     await expect(page.locator('[data-world-settings-status]')).toContainText("这次没有保存设置");
     await page.keyboard.press("Escape"); await page.locator(entrySelector("treasure")).click();
-    await expect(page.locator('.game-card')).toHaveCount(4);
+    await expect(page.locator('.game-card')).toHaveCount(5);
   });
 
   test("@play-ready @home-discovery cross-page and same-page Vault replacement stop stale writes", async ({ page, context }) => {

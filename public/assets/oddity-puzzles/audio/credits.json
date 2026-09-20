@@ -1,0 +1,6 @@
+{
+  "composition": "Original 32-second pentatonic miniature and five synthesized cues",
+  "source": "tools/oddity-puzzles/audio.py",
+  "license": "Original project audio; no third-party recordings",
+  "format": "22050 Hz mono PCM16 WAV"
+}

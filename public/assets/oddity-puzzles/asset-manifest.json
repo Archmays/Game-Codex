@@ -1,0 +1,12 @@
+{
+  "version": "0.1.0",
+  "authoring": "Blender 4.5.14 LTS",
+  "source": "games/oddity-puzzles/blender/build.py",
+  "coordinates": "layout Y-up -> Blender (x,-z,y) -> standard glTF Y-up",
+  "rooms": [
+    "room-1.glb",
+    "room-2.glb",
+    "room-3.glb"
+  ],
+  "license": "Original project artwork; no adapted characters, plot, images or music"
+}

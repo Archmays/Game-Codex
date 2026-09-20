@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "method": "Chrome appearance Page zoom select 200%; real browser zoom, no CSS zoom or gameplay state injection",
+  "geometry": {
+    "width": 720,
+    "dpr": 2.0000000298023224,
+    "overflow": false,
+    "cssZoom": "1"
+  },
+  "level1Complete": true,
+  "hint": true,
+  "undo": true,
+  "reset": true,
+  "returnHome": true
+}

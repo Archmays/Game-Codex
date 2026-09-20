@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "method": "Microsoft.VisualBasic FileIO SendToRecycleBin, exact allowlist and hash preflight",
+  "targetsRecycled": 5,
+  "bytesRecycled": 601032136,
+  "protectedHashesUnchanged": true,
+  "sourceUnchanged": "788ec52f2f0488f5d77faca9aab9ea0617e3c22edcde6f868430ddc887b7a3bb",
+  "packageSha256": "be8055c0e4138826309c34682e443f38fedc6d161d1ed13eccaca2b0120a1c17",
+  "taskScratchAbsent": true,
+  "familySaves": "untouched",
+  "verifiedAt": "2026-09-20T04:15:35.432716+00:00"
+}

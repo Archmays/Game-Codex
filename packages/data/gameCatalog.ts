@@ -1,3 +1,4 @@
+import { oddityPuzzlesGame } from '../../games/oddity-puzzles';
 import { hanziStrokeLab } from "../../games/hanzi-stroke-lab";
 import { worldInABoxGame } from "../../games/world-in-a-box";
 import type { GameDefinition } from "../game-core";
@@ -10,6 +11,7 @@ import { memoryCardGame } from "../../games/memory-card";
 import { GAME_PORTFOLIO_BY_ID } from "./gamePortfolio";
 
 export const allGameDefinitions: GameDefinition[] = [
+  oddityPuzzlesGame,
   worldInABoxGame,
   hanziStrokeLab,
   memoryCardGame,
