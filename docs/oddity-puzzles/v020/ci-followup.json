@@ -1,0 +1,27 @@
+{
+  "result": "PASS",
+  "acceptedProductCommit": "2c6c17dc0e394b9fe145b9d87d8972f268a99afd",
+  "acceptedProductSource": "39a5bd3a9500837bc3d95650eed3e034a70aed985a1f0bd4a1d9eb2a7c2d6710",
+  "followUpSource": "3ff83cd5a5f361d42b3a158de8565016302a1b2e3096da25ec68a8eb90605219",
+  "changedConsumer": "tests/e2e/portfolio-smoke.spec.ts",
+  "runtimeBuildInputsUnchanged": true,
+  "checkedPathScopes": [
+    "apps",
+    "games",
+    "packages",
+    "src",
+    "public",
+    "tools",
+    ".github",
+    "package.json",
+    "pnpm-lock.yaml",
+    "vite.config.ts",
+    "tsconfig.json",
+    "docs/input-contract.md"
+  ],
+  "command": "PORTFOLIO_SMOKE_PREVIEW=1 pnpm run test:portfolio:smoke",
+  "testsPassed": 16,
+  "logSha256": "18efd3bdbcbae06fe4ebe60921f9105397bcfec0007f114051b3caa40f39cb9b",
+  "stdoutTail": "[11/16] [mobile-390] › tests\\e2e\\portfolio-smoke.spec.ts:146:3 › @game:math-lab enters, completes one primary interaction, and returns\n[12/16] [mobile-390] › tests\\e2e\\portfolio-smoke.spec.ts:146:3 › @game:hanzi-tower-defense enters, completes one primary interaction, and returns\n[13/16] [mobile-390] › tests\\e2e\\portfolio-smoke.spec.ts:146:3 › @game:make-target enters, completes one primary interaction, and returns\n[14/16] [mobile-390] › tests\\e2e\\portfolio-smoke.spec.ts:146:3 › @game:equation-slider enters, completes one primary interaction, and returns\n[15/16] [mobile-390] › tests\\e2e\\portfolio-smoke.spec.ts:182:1 › @portfolio public route registry preserves current routes and retires old language links\n[16/16] [mobile-390] › tests\\e2e\\portfolio-smoke.spec.ts:213:1 › @portfolio bare public URL has the same document-scroll geometry as the explicit world route\n  16 passed (56.1s)",
+  "failedRun": "https://github.com/Archmays/Game-Codex/actions/runs/35506486478"
+}

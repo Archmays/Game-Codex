@@ -62,10 +62,13 @@ const GAMES: readonly SmokeGame[] = [
     async interact(page) {
       await expect(page.locator('.odd-stage')).toHaveAttribute('data-ready', 'true');
       for (let i=0;i<2;i++) await page.locator('[data-cmd=skipDemo]').click();
-      await page.locator('.odd-commands').getByRole('button', {name:'观察窗前',exact:true}).click();
+      await page.locator('[data-landmark="node:window"]').click();
+      await expect(page.locator('.oddity-mount')).toHaveAttribute('data-intent','none');
+      expect(JSON.parse(await page.locator('.oddity-mount').getAttribute('data-state') ?? '{}').actors[0].node).toBe('window');
       await expect(page.locator('.oddity-mount')).toHaveAttribute('data-history','1');
       await page.locator('[data-cmd=undo]').click();
       await expect(page.locator('.oddity-mount')).toHaveAttribute('data-history','0');
+      expect(JSON.parse(await page.locator('.oddity-mount').getAttribute('data-state') ?? '{}').actors[0].node).toBe('exit');
       await page.locator('.odd-home').click();
       await expect(page.locator('[data-world-oddity-link]')).toBeVisible();
       return null;
