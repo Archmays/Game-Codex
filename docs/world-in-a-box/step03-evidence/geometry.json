@@ -1,0 +1,52 @@
+{
+  "result": "PASS",
+  "upperSupportGaps": {
+    "frauenkirche_dome": -0.040000281871536814,
+    "beyer_tower": -0.005000174045562744
+  },
+  "boatBounds": {
+    "min": [
+      -7.440000295639038,
+      0.19999998807907104,
+      -4.405000150203705
+    ],
+    "max": [
+      -5.7599998116493225,
+      1.0099999830126762,
+      -3.5950000882148743
+    ],
+    "size": [
+      1.6800004839897156,
+      0.8099999949336052,
+      0.8100000619888306
+    ]
+  },
+  "tramBounds": {
+    "min": [
+      -1.2940000593662262,
+      1.4950000047683716,
+      -1.072500079870224
+    ],
+    "max": [
+      -0.705999881029129,
+      2.3599999137222767,
+      0.27250002045184374
+    ]
+  },
+  "deckTop": 1.4599999934434886,
+  "railSamples": [
+    {
+      "x": -1.23,
+      "height": 1.5080000064337487
+    },
+    {
+      "x": -0.77,
+      "height": 1.5080000049104507
+    }
+  ],
+  "archEnvelopeGridStep": 0.025,
+  "archCollisionSamples": 0,
+  "dockHullToPierGap": 0.06500001668930055,
+  "tramBuildingCollisions": [],
+  "coordinateCheck": "actual glTF Y up, negative Z north; Blender exported route extras explicitly converted"
+}

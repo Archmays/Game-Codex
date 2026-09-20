@@ -1,0 +1,57 @@
+{
+  "result": "PASS_MACHINE",
+  "checks": [
+    "music channel produces actual PCM",
+    "music-only excludes environment and object loops",
+    "environment channel produces actual PCM",
+    "zero music removes music source",
+    "sound-effects-only wind has actual PCM",
+    "closing shutters removes wind loop without global mute",
+    "only-SFX closed window becomes silent",
+    "reset retains same music source and phase",
+    "reset removes all old object loops",
+    "master mute silences real PCM",
+    "switch fades into new music without a second unlock click",
+    "resume does not repeat departure horn",
+    "completed lateral mooring stops drive sound",
+    "mooring emits one contact event",
+    "actual mix remains below clipping",
+    "five round trips and repeated resets leave one context and only music/environment sources",
+    "exit stops every source and closes last context"
+  ],
+  "metrics": {
+    "music": {
+      "peak": 0.35098475217819214,
+      "rms": 0.1022680329362168
+    },
+    "ambient": {
+      "peak": 0.24939879775047302,
+      "rms": 0.02197645766339553
+    },
+    "wind": {
+      "peak": 0.27355116605758667,
+      "rms": 0.029432909607936913
+    },
+    "closed": {
+      "peak": 0,
+      "rms": 0
+    },
+    "mute": {
+      "peak": 0.0000658976350678131,
+      "rms": 1.744352955694294e-7
+    },
+    "cityMix": {
+      "peak": 0.38135290145874023,
+      "rms": 0.09420482574577259
+    }
+  },
+  "resources": {
+    "created": 1,
+    "closed": 0,
+    "active": 2,
+    "starts": 47,
+    "maxActive": 6
+  },
+  "recording": "Web Audio output branch captured as Opus/WebM; actual runtime PCM, no microphone or system speaker capture",
+  "listening": "NOT_TESTED: no perceptual listening capability"
+}

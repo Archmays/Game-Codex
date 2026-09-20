@@ -1,0 +1,145 @@
+{
+  "finding": "Earlier viewport movement can deliver its scroll notification during a later stationary pointer sequence. Source previously cancelled any active gesture on any scroll notification.",
+  "failedScenario": "late-photo",
+  "failure": "TimeoutError: locator.click: Timeout 9000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-action=close-photo]')\u001b[22m\n\u001b[2m    - locator resolved to <button data-action=\"close-photo\">返回城市</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    17 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+  "observedTimingSamples": [
+    [
+      {
+        "type": "pointerup",
+        "t": 1533.1000000005588,
+        "y": 0,
+        "detail": 0
+      },
+      {
+        "type": "click",
+        "t": 1533.2000000001863,
+        "y": 0,
+        "detail": 1
+      },
+      {
+        "type": "blur",
+        "t": 1537.2000000001863,
+        "y": 0,
+        "detail": 0
+      },
+      {
+        "type": "pointerdown",
+        "t": 1621.5,
+        "y": 530,
+        "detail": 0
+      },
+      {
+        "type": "blur",
+        "t": 1622.1000000005588,
+        "y": 530,
+        "detail": 0
+      },
+      {
+        "type": "pointerup",
+        "t": 1623.7999999998137,
+        "y": 530,
+        "detail": 0
+      },
+      {
+        "type": "click",
+        "t": 1624,
+        "y": 530,
+        "detail": 1
+      },
+      {
+        "type": "blur",
+        "t": 1670,
+        "y": 530,
+        "detail": 0
+      },
+      {
+        "type": "scroll",
+        "t": 1674.2999999998137,
+        "y": 530
+      },
+      {
+        "type": "pointerdown",
+        "t": 1747.6000000005588,
+        "y": 530,
+        "detail": 0
+      },
+      {
+        "type": "pointerup",
+        "t": 1748.2000000001863,
+        "y": 530,
+        "detail": 0
+      }
+    ],
+    [
+      {
+        "type": "pointerup",
+        "t": 1639.8999999994412,
+        "y": 122,
+        "detail": 0
+      },
+      {
+        "type": "click",
+        "t": 1639.8999999994412,
+        "y": 122,
+        "detail": 1
+      },
+      {
+        "type": "blur",
+        "t": 1645.7999999998137,
+        "y": 122,
+        "detail": 0
+      },
+      {
+        "type": "pointerdown",
+        "t": 1702.5,
+        "y": 530,
+        "detail": 0
+      },
+      {
+        "type": "blur",
+        "t": 1702.699999999255,
+        "y": 530,
+        "detail": 0
+      },
+      {
+        "type": "pointerup",
+        "t": 1702.7999999998137,
+        "y": 530,
+        "detail": 0
+      },
+      {
+        "type": "click",
+        "t": 1702.8999999994412,
+        "y": 530,
+        "detail": 1
+      },
+      {
+        "type": "blur",
+        "t": 1730,
+        "y": 530,
+        "detail": 0
+      },
+      {
+        "type": "scroll",
+        "t": 1735.3999999994412,
+        "y": 530
+      },
+      {
+        "type": "pointerdown",
+        "t": 1787.8999999994412,
+        "y": 530,
+        "detail": 0
+      },
+      {
+        "type": "pointerup",
+        "t": 1788.699999999255,
+        "y": 530,
+        "detail": 0
+      }
+    ]
+  ],
+  "inferenceBoundary": "The failure itself was not instrumented. Subsequent native traces establish delayed notification timing; the offset-based guard removes that cancellation race without ignoring real scroll.",
+  "repair": "Capture viewport and ancestor scroll offsets at pointerdown; on scroll cancel only if actual offsets changed. Wheel/blur/multitouch remain cancellation events.",
+  "unchangedFaultHarnessAfterRepair": "PASS_MACHINE",
+  "unchangedWindowEdgeHarnessAfterRepair": "PASS"
+}

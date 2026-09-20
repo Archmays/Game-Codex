@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "method": "Windows Recycle Bin; no permanent deletion",
+  "recycledTargets": 14,
+  "archivedFiles": 48733,
+  "bytes": 430534995,
+  "protectedArtifactsUnchanged": 40,
+  "sourceUnchanged": "0c6355ad30d26973b1bfb948d12b2a31f8b79125d6a12e79edf301987e6ea51b",
+  "zipSha256": "7e4c89c98b2ba8fc8c5e2b22d2ecfdc4df103c4ab926966fd6bebcd0959513a6",
+  "archive": "world-in-a-box-v0.3.0-archive-index.jsonl.gz",
+  "archiveSha256": "a7ad4369c460d3a3c6dfc9ab502f6d9f41dbabd0219c13bb289fbbe3574781f5",
+  "retainedTemporaryExceptions": []
+}

@@ -1,0 +1,174 @@
+{
+  "result": "PASS_MACHINE",
+  "rows": [
+    {
+      "browser": "chrome",
+      "results": [
+        {
+          "id": "window-breeze",
+          "duration": 75.78945833333333,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "river-campus",
+          "duration": 91.42858333333334,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "pick",
+          "duration": 0.18,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "place-light",
+          "duration": 0.27,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "place-medium",
+          "duration": 0.38,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "place-heavy",
+          "duration": 0.52,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "undo",
+          "duration": 0.32,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "mismatch",
+          "duration": 0.4,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "complete",
+          "duration": 1.3,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "shutter",
+          "duration": 0.55,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "page",
+          "duration": 0.42,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "cat",
+          "duration": 1.3,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "cup",
+          "duration": 0.55,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "steam",
+          "duration": 1.7,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "chime",
+          "duration": 1.5,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "boat-start",
+          "duration": 0.6,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "boat-contact",
+          "duration": 0.45,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "tram-start",
+          "duration": 0.4,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "tram-stop",
+          "duration": 0.48,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "blocked",
+          "duration": 0.28,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "section",
+          "duration": 0.85,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "wind",
+          "duration": 4,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "room",
+          "duration": 4,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "river",
+          "duration": 4,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "boat",
+          "duration": 4,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "id": "tram",
+          "duration": 4,
+          "channels": 2,
+          "sampleRate": 48000
+        }
+      ]
+    },
+    {
+      "browser": "webkit-decoder",
+      "results": {
+        "available": false,
+        "reason": "This desktop WebKit build has no OfflineAudioContext"
+      }
+    }
+  ],
+  "scope": "native decoding only; WebKit desktop is not physical iPhone playback"
+}

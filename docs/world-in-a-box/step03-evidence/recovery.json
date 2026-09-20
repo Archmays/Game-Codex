@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "checks": [
+    "future-schema: unsupported schema does not fabricate progress",
+    "future-schema: old bytes preserved",
+    "future-schema: no uncaught browser errors",
+    "denied-storage: unsupported schema does not fabricate progress",
+    "quota failure still permits real placement",
+    "quota failure visibly reports unsaved session",
+    "denied-storage: old bytes preserved",
+    "denied-storage: no uncaught browser errors",
+    "failed-loading controls and Escape do not dereference absent mechanisms",
+    "failed city load can switch back",
+    "asset-failure: old bytes preserved",
+    "asset-failure: no uncaught browser errors"
+  ],
+  "fixtures": "synthetic recovery only; no completion claims"
+}

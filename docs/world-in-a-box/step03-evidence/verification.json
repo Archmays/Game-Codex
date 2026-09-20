@@ -1,0 +1,180 @@
+{
+  "verdict": "PASS_MACHINE",
+  "source": {
+    "algorithm": "sha256(sorted lines: file_sha256 two-spaces repo-relative-path newline)",
+    "scope": "all runtime, authored game sources, QA tools/tests, package/build config, input contract; excludes report/screenshot outputs",
+    "fileCount": 10023,
+    "sha256": "0c6355ad30d26973b1bfb948d12b2a31f8b79125d6a12e79edf301987e6ea51b",
+    "glbSha256": "f6a8acfa5bb041e7ae0f2b047be5ebf4383a235f2a1dcaf483a7ad46f175d308"
+  },
+  "checks": [
+    {
+      "name": "window-browser",
+      "result": "PASS",
+      "sha256": "7e02e350bc27c76edfeb6264c0189ebc10cd9656793f3641feb2be5d42ff9795"
+    },
+    {
+      "name": "city-browser",
+      "result": "PASS",
+      "sha256": "e7b70ae844303703e8c772aa8e196c3aaf130308de1e9fb341f12afc71a763c0"
+    },
+    {
+      "name": "window-edges",
+      "result": "PASS",
+      "sha256": "590a13ac39f33a688528ec99ceead00a6f38a3e4dcd54e8b16573cd85d525563"
+    },
+    {
+      "name": "city-edges",
+      "result": "PASS",
+      "sha256": "31c685decfe74a659f54ac59b0c4fdf300b721606f4a85a802220cb54e66afb9"
+    },
+    {
+      "name": "interactions",
+      "result": "PASS",
+      "sha256": "69e36b9bc3c8a17308b494ad5150e4a46b98425905c6a9e5dc7d6bcef36888ca"
+    },
+    {
+      "name": "exploration",
+      "result": "PASS",
+      "sha256": "6a5125be8fefca559112f87a3f886a146030587d8ed7d98294a8c62f0f8d4ae5"
+    },
+    {
+      "name": "faults",
+      "result": "PASS",
+      "sha256": "7e1f535fe718910504d0b796a805b43f0673a89f1cff45066272bb8d03f64af0"
+    },
+    {
+      "name": "recovery",
+      "result": "PASS",
+      "sha256": "539262e0958b3f8e2850c815277b9cf463cf8298e38857ba8c6bd065b96a1a2d"
+    },
+    {
+      "name": "audio",
+      "result": "PASS",
+      "sha256": "687016cad00c70733cf61feea7e17547bf65c37b380f74cbbd5c4e5f0296f75b"
+    },
+    {
+      "name": "loops",
+      "result": "PASS",
+      "sha256": "c6b6c65ec2904dcb96a1f70d104a498b70748b311aaac288475d6579a94c0cbd"
+    },
+    {
+      "name": "surface",
+      "result": "PASS",
+      "sha256": "cac67b362daa272242cc9ecc8d402bd58530d126966fc513dd65784ea5e1521a"
+    },
+    {
+      "name": "geometry",
+      "result": "PASS",
+      "sha256": "e2f6f1ff734143cd8e6e3fcaba669201dc83ce734aa565ab2d8565401aaf062c"
+    },
+    {
+      "name": "decoders",
+      "result": "PASS",
+      "sha256": "02f091fff39c5ddbdc572358b6866ac40aa0db34a8a305ed8752a6bb13067f45"
+    },
+    {
+      "name": "package-runtime",
+      "result": "PASS",
+      "sha256": "d42e26b2ccc309566185f08484a2072a775266e5f659c2dfa66ce329fabfcd45"
+    },
+    {
+      "name": "package-audio",
+      "result": "PASS",
+      "sha256": "fd60c8987962122fcf7fd97ce81efaa961af51765cf9566a6329398efe12e07e"
+    },
+    {
+      "name": "package-city",
+      "result": "PASS",
+      "sha256": "b6cb11caef0d878b7b2c426d4b7ea0482c35fd2002f53b80c746dae779989cf0"
+    },
+    {
+      "name": "shared-checks",
+      "result": "PASS",
+      "sha256": "99360025c38af0354e1388551b76e257183d0ca8088d23cfe85e76e3e8e71c36"
+    }
+  ],
+  "coverage": {
+    "windowProfiles": 7,
+    "cityProfiles": 7,
+    "independentExplorationPieces": 26,
+    "resetRotationProfiles": 5,
+    "unitTests": 573,
+    "unitExecution": "Full suite: 572 passed; one unchanged older-game solver timed out at 5 s under concurrent load, then the exact case passed unchanged in 2.291 s. After the final local input-only fix, all 27 directly affected input/model tests passed. No assertion or timeout altered.",
+    "sharedPortfolioSmoke": 14,
+    "vaultProfiles": 3,
+    "sharedHittest": 4,
+    "precedingWindowHittest": 2,
+    "finalInputAndModelChecks": 27
+  },
+  "sharedLineage": "Full 15-surface hittest, shared smoke and Vault ran before final local input fixes. Desktop/mobile world-box hittest then passed after the de-duplication fix. The final delayed-scroll-notification correction changes only world-box gesture code and is covered by the final 14-profile real-input matrix and adversarial checks. Shared application and save-registration source remained unchanged throughout this lineage; these earlier shared tests are not labelled as new final-tree runs.",
+  "logs": {
+    "unit-final.log": {
+      "sha256": "6f5c7487566f3d40034efc39ab1ff6ac81faff7f3eeb71622a8a1e52caa15322",
+      "matched": "572 passed"
+    },
+    "unit-timeout-recheck.log": {
+      "sha256": "24242179b05e6dd6f8d8741b280d1202a805be25dbfcafafe5ab65b5c6731aa9",
+      "matched": "1 passed"
+    },
+    "input-model-final.log": {
+      "sha256": "dcb2b49d58cf3aeff7834835f144fceb8bae0c689fb16d815a602893f433050d",
+      "matched": "27 passed"
+    },
+    "shared-smoke.log": {
+      "sha256": "d61ecc9a348677db780405cdb8ea4727ee57288223f8987055aefe47925af3e3",
+      "matched": "14 passed"
+    },
+    "vault.log": {
+      "sha256": "4460429b6acc03e4d3c29650f9bd555b9c0878bbf559a2b4d5b355da348e721f",
+      "matched": "3 passed"
+    },
+    "shared-hittest.log": {
+      "sha256": "88cbfc4e05fafc038079a2fff3685e2a2c3a089fc93ad76d43156a46f389bc34",
+      "matched": "4 passed"
+    },
+    "shared-final-hittest.log": {
+      "sha256": "db933709095969a3927c3badc36031262fb12e58f90475402c05e1b03cce42b7",
+      "matched": "2 passed"
+    },
+    "validators-final.log": {
+      "sha256": "2e23b256baa3f06b4ba6b3a3d373a9cc406b6774ff7d2ff30008700843485468",
+      "matched": "Interaction integrity inventory and known blocker contracts: PASS"
+    },
+    "build-final.log": {
+      "sha256": "f51337d31641ea331c225aa76c04c802067ed298790ce01d0867ebe7abecd5a1",
+      "matched": "built in"
+    }
+  },
+  "preserved": {
+    "oldWindowGlb": "f6a8acfa5bb041e7ae0f2b047be5ebf4383a235f2a1dcaf483a7ad46f175d308",
+    "photosAndOriginalLauncher": "git diff empty",
+    "otherGameRuntime": "no changed path",
+    "realFamilyStorage": "not accessed; isolated contexts only"
+  },
+  "assets": {
+    "audioFiles": 26,
+    "blenderSourceAndExportHashesMatch": true
+  },
+  "package": {
+    "result": "PASS",
+    "source": {
+      "algorithm": "sha256(sorted lines: file_sha256 two-spaces repo-relative-path newline)",
+      "scope": "all runtime, authored game sources, QA tools/tests, package/build config, input contract; excludes report/screenshot outputs",
+      "fileCount": 10023,
+      "sha256": "0c6355ad30d26973b1bfb948d12b2a31f8b79125d6a12e79edf301987e6ea51b",
+      "glbSha256": "f6a8acfa5bb041e7ae0f2b047be5ebf4383a235f2a1dcaf483a7ad46f175d308"
+    },
+    "zip": "world-in-a-box-v0.3.0-offline.zip",
+    "sha256": "7e4c89c98b2ba8fc8c5e2b22d2ecfdc4df103c4ab926966fd6bebcd0959513a6",
+    "bytes": 54918480,
+    "entries": 9724,
+    "extractedAllBytesEqual": true
+  },
+  "scopeLimits": [
+    "Actual perceptual listening NOT_TESTED; browser PCM recordings provided.",
+    "Physical phone/tablet speakers, mute switch and OS audio interruption NOT_TESTED.",
+    "Windows WebKit OfflineAudioContext unavailable; actual decoding is Chrome-only.",
+    "No child fun, learning effectiveness or retention claim."
+  ]
+}

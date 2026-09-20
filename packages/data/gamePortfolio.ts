@@ -87,7 +87,7 @@ export const PORTFOLIO_TEST_PROFILES: readonly PortfolioTestProfile[] = [
 export const GAME_PORTFOLIO: readonly GamePortfolioRecord[] = [
   {
     id: "world-in-a-box", targetWorld: "shared", productRole: "independent-puzzle", definitionRole: "active-child-product", activeChildProduct: true, classicCardVisible: true, childProductOrder: 4, qualityTier: "B", lifecycleStatus: "active",
-    canonicalRoute: "?play=world-in-a-box", worldModuleIds: [], compatibilitySurfaceIds: [], sharedEngineIds: ["game-core-local-storage"], saveNamespaces: ["family-games/world-in-a-box/v1", "family-games/world-in-a-box/dresden-river-campus-v2"],
+    canonicalRoute: "?play=world-in-a-box", worldModuleIds: [], compatibilitySurfaceIds: [], sharedEngineIds: ["game-core-local-storage"], saveNamespaces: ["family-games/world-in-a-box/v1", "family-games/world-in-a-box/dresden-river-campus-v2", "family-games/world-in-a-box/audio-v1"],
     testProfile: "b-independent-puzzle", loadingPolicy: "route-lazy", contentStatus: "playable", canonicalDocs: ["games/world-in-a-box/README.md"],
   },
   {

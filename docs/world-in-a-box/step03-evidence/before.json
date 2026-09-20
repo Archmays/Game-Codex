@@ -1,0 +1,120 @@
+{
+  "result": "REPRODUCED",
+  "source": "7f76ff024c9a6cd21ca9076321b7d1e5ddd624b8",
+  "rows": [
+    {
+      "name": "help off",
+      "url": "http://127.0.0.1:5175/?play=world-in-a-box&scene=dresden-river-campus",
+      "state": {
+        "ready": "true",
+        "placed": "",
+        "selected": "river_pier",
+        "night": "false",
+        "tramRunning": "false",
+        "boatRunning": "false",
+        "bridgeBlocked": "false",
+        "section": "false"
+      },
+      "help": "帮助：关",
+      "message": "观察形状，再点一个可见接口。",
+      "target": {
+        "hidden": true,
+        "style": "left: 554.935px; top: 441.44px;"
+      },
+      "viewport": [
+        1366,
+        900
+      ]
+    },
+    {
+      "name": "help enabled after selection",
+      "url": "http://127.0.0.1:5175/?play=world-in-a-box&scene=dresden-river-campus",
+      "state": {
+        "ready": "true",
+        "placed": "",
+        "selected": "river_pier",
+        "night": "false",
+        "tramRunning": "false",
+        "boatRunning": "false",
+        "bridgeBlocked": "false",
+        "section": "false"
+      },
+      "help": "帮助：开",
+      "message": "观察形状，再点一个可见接口。",
+      "target": {
+        "hidden": true,
+        "style": "left: 554.935px; top: 441.44px;"
+      },
+      "viewport": [
+        1366,
+        900
+      ]
+    },
+    {
+      "name": "explicit hint",
+      "url": "http://127.0.0.1:5175/?play=world-in-a-box&scene=dresden-river-campus",
+      "state": {
+        "ready": "true",
+        "placed": "",
+        "selected": "river_pier",
+        "night": "false",
+        "tramRunning": "false",
+        "boatRunning": "false",
+        "bridgeBlocked": "false",
+        "section": "false"
+      },
+      "help": "帮助：开",
+      "message": "看看河边的亮起接口。",
+      "target": {
+        "hidden": false,
+        "style": "left: 513.5px; top: 310.69px;"
+      },
+      "viewport": [
+        1366,
+        900
+      ]
+    }
+  ],
+  "geometry": {
+    "normal": {
+      "target": {
+        "x": 484.529208158089,
+        "y": 367.86637878459936,
+        "visible": false
+      },
+      "angle": 1.05,
+      "pitch": 0.68,
+      "zoom": 1,
+      "slot": [
+        5.800000190734863,
+        0.3199999928474426,
+        -2
+      ],
+      "anchor": [
+        0,
+        0.09999999403953552,
+        0
+      ]
+    },
+    "hint": {
+      "target": {
+        "x": 450.0000000000001,
+        "y": 258.9087259325749,
+        "visible": true
+      },
+      "angle": 3.2615926535897932,
+      "pitch": 1.18,
+      "zoom": 1,
+      "slot": [
+        5.800000190734863,
+        0.3199999928474426,
+        -2
+      ],
+      "anchor": [
+        0,
+        0.09999999403953552,
+        0
+      ]
+    }
+  }
+}

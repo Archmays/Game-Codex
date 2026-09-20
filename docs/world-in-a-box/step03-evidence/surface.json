@@ -1,0 +1,103 @@
+{
+  "result": "PASS_MACHINE",
+  "checks": [
+    "river_pier has an exposed tangible mesh sample outside floating labels",
+    "river_pier placed by real mesh click",
+    "paddle_steamer has an exposed tangible mesh sample outside floating labels",
+    "paddle_steamer placed by real mesh click",
+    "yellow_tram has an exposed tangible mesh sample outside floating labels",
+    "yellow_tram placed by real mesh click",
+    "augustus_bridge has an exposed tangible mesh sample outside floating labels",
+    "augustus_bridge placed by real mesh click",
+    "installed ship exposes geometry",
+    "installed ship geometry opens same transport actions",
+    "undo leaves ship intact",
+    "drag releases on real geometry rather than label"
+  ],
+  "samples": [
+    {
+      "x": 563.7989897772123,
+      "y": 454.1435867444059,
+      "local": [
+        545.7989897772123,
+        279.1435867444059
+      ],
+      "id": "river_pier",
+      "view": {
+        "angle": 3.2615926535897932,
+        "pitch": 1.18,
+        "zoom": 1,
+        "view": "river",
+        "center": [
+          5.800000190734863,
+          0.4399999976158142,
+          -2.6999998092651367
+        ],
+        "half": 6.2
+      }
+    },
+    {
+      "x": 544.7804565034756,
+      "y": 499.18954375541966,
+      "local": [
+        526.7804565034756,
+        324.18954375541966
+      ],
+      "id": "paddle_steamer",
+      "view": {
+        "angle": 3.2615926535897932,
+        "pitch": 1.18,
+        "zoom": 1,
+        "view": "river",
+        "center": [
+          -6.599999904632568,
+          0.8500000238418579,
+          -4
+        ],
+        "half": 6.2
+      }
+    },
+    {
+      "x": 544.7804565034756,
+      "y": 497.346358681937,
+      "local": [
+        526.7804565034756,
+        322.346358681937
+      ],
+      "id": "yellow_tram",
+      "view": {
+        "angle": 3.2615926535897932,
+        "pitch": 1.18,
+        "zoom": 1,
+        "view": "river",
+        "center": [
+          -1,
+          2.009999990463257,
+          -0.4000000059604645
+        ],
+        "half": 6.2
+      }
+    },
+    {
+      "x": 575.9632977560263,
+      "y": 361.60460044689137,
+      "local": [
+        557.9632977560263,
+        186.6046004468914
+      ],
+      "id": "augustus_bridge",
+      "view": {
+        "angle": 3.2615926535897932,
+        "pitch": 1.18,
+        "zoom": 1,
+        "view": "river",
+        "center": [
+          -1,
+          1.600000023841858,
+          -4
+        ],
+        "half": 6.2
+      }
+    }
+  ]
+}

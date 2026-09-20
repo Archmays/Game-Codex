@@ -13,25 +13,34 @@ export function restoreCity(raw:unknown):CityState{
 }
 export function placeCity(s:CityState,piece:CityPiece,slot:CityPiece):CityState{return piece!==slot||s.placed.includes(slot)?s:{...s,placed:[...s.placed,slot]};}
 export const canSection=(s:CityState)=>s.placed.includes('slub_surface')&&s.placed.includes('slub_skylight');
-export interface Ride{position:number;destination:number;running:boolean;blocked:boolean}
-export interface CityMotion{tram:Ride;boat:Ride;dock:boolean;section:boolean;follow:'tram'|'boat'|null}
+export interface Ride{position:number;destination:number;running:boolean;blocked:boolean;direction:number;speed:number}
+export interface CityMotion{tram:Ride;boat:Ride;boatNorth:number;boatSpeed:number;dock:boolean;section:boolean;follow:'tram'|'boat'|null}
 export interface Routes{tramStart:number;tramStops:Record<'north'|'oldtown'|'campus',number>;bridge:[number,number];boatStart:number;boatEnd:number;berth:{x:number;north:number}}
-export const freshMotion=(r:Routes):CityMotion=>({tram:{position:r.tramStart,destination:r.tramStart,running:false,blocked:false},boat:{position:r.boatStart,destination:r.boatEnd,running:false,blocked:false},dock:false,section:false,follow:null});
+export const freshMotion=(r:Routes):CityMotion=>({tram:{position:r.tramStart,destination:r.tramStart,running:false,blocked:false,direction:1,speed:0},boat:{position:r.boatStart,destination:r.boatEnd,running:false,blocked:false,direction:1,speed:0},boatNorth:4,boatSpeed:0,dock:false,section:false,follow:null});
 export function moveRide(ride:Ride,dt:number,speed:number,barrier?:[number,number]):Ride{
-  if(!ride.running)return ride;
+  if(!ride.running)return ride.speed?{...ride,speed:0}:ride;
   const delta=ride.destination-ride.position,dir=Math.sign(delta),next=ride.position+dir*Math.min(Math.abs(delta),Math.min(.05,Math.max(0,dt))*speed);
-  if(barrier){const [low,high]=barrier;if(dir>0&&ride.position<=low&&next>=low)return{...ride,position:low,running:false,blocked:true};if(dir<0&&ride.position>=high&&next<=high)return{...ride,position:high,running:false,blocked:true};}
-  return{...ride,position:next,running:next!==ride.destination,blocked:false};
+  if(barrier){const [low,high]=barrier;if(dir>0&&ride.position<=low&&next>=low)return{...ride,position:low,running:false,blocked:true,speed:0,direction:dir};if(dir<0&&ride.position>=high&&next<=high)return{...ride,position:high,running:false,blocked:true,speed:0,direction:dir};}
+  return{...ride,position:next,running:next!==ride.destination,blocked:false,direction:dir||ride.direction,speed:dt>0?Math.abs(next-ride.position)/Math.min(.05,dt):0};
 }
 export function stepMotion(m:CityMotion,s:CityState,r:Routes,dt:number):CityMotion{
-  return{...m,tram:s.placed.includes('yellow_tram')?moveRide(m.tram,dt,1.7,s.placed.includes('augustus_bridge')?undefined:r.bridge):{...m.tram,running:false},boat:s.placed.includes('paddle_steamer')?moveRide(m.boat,dt,1.5):{...m.boat,running:false}};
+  dt=Math.min(.05,Math.max(0,dt));
+  const tram=s.placed.includes('yellow_tram')?moveRide(m.tram,dt,1.7,s.placed.includes('augustus_bridge')?undefined:r.bridge):{...m.tram,running:false,speed:0};
+  let boat={...m.boat,speed:0},north=m.boatNorth;
+  if(s.placed.includes('paddle_steamer')&&boat.running&&dt>0){
+    // Leave the bank sideways first; approach it only after longitudinal alignment.
+    if(!m.dock&&north!==4)north+=Math.sign(4-north)*Math.min(Math.abs(4-north),dt*.55);
+    else if(m.dock&&Math.abs(boat.position-r.berth.x)<.001){north+=Math.sign(r.berth.north-north)*Math.min(Math.abs(r.berth.north-north),dt*.45);boat.running=north!==r.berth.north;}
+    else{boat=moveRide(boat,dt,Math.min(1.8,.3+Math.abs(boat.destination-boat.position)*1.7));if(m.dock&&boat.position===boat.destination)boat.running=true;}
+  }else if(!s.placed.includes('paddle_steamer'))boat.running=false;
+  return{...m,tram,boat,boatNorth:north,boatSpeed:dt>0?Math.hypot(boat.position-m.boat.position,north-m.boatNorth)/dt:0};
 }
 export function removeCity(s:CityState,m:CityMotion,id:CityPiece,r:Routes){
   const next={...s,placed:s.placed.filter(p=>p!==id)},motion={...m,tram:{...m.tram},boat:{...m.boat}};let bridgeReset=false;
   if(id==='augustus_bridge'&&motion.tram.position>r.bridge[0]&&motion.tram.position<r.bridge[1]){motion.tram={...freshMotion(r).tram};bridgeReset=true;}
   if(id==='yellow_tram')motion.tram={...freshMotion(r).tram};
-  if(id==='paddle_steamer'){motion.boat={...freshMotion(r).boat};motion.dock=false;}
-  if(id==='river_pier'){if(motion.dock)motion.boat={...freshMotion(r).boat};motion.dock=false;}
+  if(id==='paddle_steamer'){motion.boat={...freshMotion(r).boat};motion.boatNorth=4;motion.boatSpeed=0;motion.dock=false;}
+  if(id==='river_pier'){if(motion.dock){motion.boat={...freshMotion(r).boat};motion.boatNorth=4;motion.boatSpeed=0;}motion.dock=false;}
   if(!canSection(next))motion.section=false;
   if((id==='yellow_tram'&&motion.follow==='tram')||(id==='paddle_steamer'&&motion.follow==='boat'))motion.follow=null;
   return{state:next,motion,bridgeReset};

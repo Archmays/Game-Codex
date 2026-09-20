@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "server": "relocated static package",
+  "origin": "http://127.0.0.1:5175",
+  "subpath": "/Game-Codex/",
+  "externalNetwork": "blocked before first navigation",
+  "homeLazyLoading": true,
+  "eightPieces": true,
+  "unchangedFreshVisualBaseline": true,
+  "liveAudioRMS": {
+    "audible": 0.019267953573568686,
+    "stopped": 0,
+    "muted": 0
+  },
+  "errors": []
+}

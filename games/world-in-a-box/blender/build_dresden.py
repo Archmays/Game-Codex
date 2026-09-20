@@ -63,17 +63,17 @@ spec=[
  ('augustus_bridge','奥古斯都桥','river',(-1,4,0),(0,0,1.6)),
  ('paddle_steamer','轮桨船','river',(-6.6,4,.25),(0,0,.6)),
  ('yellow_tram','黄色电车','river',(-1,.4,G+.05),(0,0,.5)),
- ('river_pier','码头','river',(5.8,2,.32),(0,0,.10)),
+ ('river_pier','码头','river',(5.8,2.35,.32),(0,.35,.12)),
  ('riverside_trees','河岸树组','river',(4,6.8,G),(0,0,.8)),
  ('frauenkirche_body','圣母教堂主体','oldtown',(3.3,-.5,G),(0,-.55,1.0)),
- ('frauenkirche_dome','圣母教堂圆顶','oldtown',(3.3,-.5,G+1.4),(0,0,1.3)),
+ ('frauenkirche_dome','圣母教堂圆顶','oldtown',(3.3,-.5,G+1.4),(0,0,.08)),
  ('semperoper','森帕歌剧院','oldtown',(-4.6,.4,G),(0,-.6,.8)),
  ('zwinger_galleries','茨温格庭院长廊','oldtown',(-4.6,-2.2,G),(0,0,.12)),
  ('zwinger_crown_gate','冠门','oldtown',(-4.6,-3.35,G),(0,0,1.1)),
  ('beyer_body','贝耶尔楼主体','campus',(-3.4,-7,G),(0,-.65,.6)),
- ('beyer_tower','贝耶尔楼观测塔','campus',(-2.55,-6.8,G+1.3),(0,0,1.1)),
+ ('beyer_tower','贝耶尔楼观测塔','campus',(-2.55,-6.8,G+1.3),(0,0,.57)),
  ('slub_surface','SLUB地面建筑组','campus',(3.4,-7,G),(1.25,0,.8)),
- ('slub_skylight','中央采光顶','campus',(3.4,-7,G+.08),(0,0,.03)),
+ ('slub_skylight','中央采光顶','campus',(3.4,-7,G+.08),(0,0,.11)),
  ('campus_bikes','校园自行车架','campus',(.4,-8.7,G),(0,0,.35)),
  ('street_houses','街屋组','street',(2,-4.1,G),(0,-.4,.65)),
  ('bakery_front','面包店门面','street',(5.5,-4.8,G),(0,-.15,.6)),
@@ -91,6 +91,16 @@ for id,label,group,loc,anchor in spec:
   for x in [-1.4,1.4]:box('Pale library support',(x,0,.4),(.7,2.3,.8),wood,s)
  elif id=='augustus_bridge':
   for y in [-2.6,2.6]:box('Bridge abutment socket',(0,y,G), (1.25,.25,.08),wood,s)
+ elif id=='frauenkirche_dome':
+  cyl('Dome receiving stone ring',(0,0,.02),.75,.05,ivory,s,40)
+ elif id=='beyer_tower':
+  cyl('Octagonal tower collar',(0,0,.52),.44,.06,ivory,s,8)
+ elif id=='slub_skylight':
+  for x in [-.87,.87]:box('Glass roof socket rail',(x,0,.06),(.08,2.05,.06),wood,s)
+  for y in [-1,1]:box('Glass roof socket crossrail',(0,y,.06),(1.82,.08,.06),wood,s)
+ elif id=='river_pier':
+  box('Deck shaped receiving socket',(0,.2,.02),(1.28,.98,.08),ivory,s,.045)
+  for x in [-.48,.48]:box('Mooring socket mark',(x,.55,.07),(.12,.18,.03),dark,s,.01)
  elif id not in ['beyer_tower','frauenkirche_dome','slub_skylight','bakery_front']:
   box('Tangible socket',(0,0,.015),(.65,.55,.035),wood,s)
  elif id=='bakery_front':box('Bakery supporting wall',(0,.1,.6),(.95,.20,1.2),wood,s)
@@ -195,9 +205,12 @@ if not SAMPLE:
   for x in [-.24,.24]:o=cyl('Steel wheel',(x,y,.07),.085,.065,dark,p,16);o.rotation_euler.y=math.pi/2
  for x in [-.12,.12]:beam('Pantograph leg',(x,-.2,.56),(x,.1,.82),.016,dark,p);beam('Pantograph return',(x,.1,.82),(x,.25,.65),.016,dark,p)
  beam('Contact shoe',(-.22,.1,.83),(.22,.1,.83),.02,dark,p)
- p=roots['river_pier'];box('Wooden floating pier',(0,.45,0),(1.3,1.2,.14),wood,p)
- for x in [-.57,.57]:cyl('Mooring bollard',(x,.9,.16),.065,.25,dark,p)
- for y in [0,.3,.6,.9]:box('Pier deck seam',(0,y,.08),(1.25,.02,.01),dark,p,.003)
+ p=roots['river_pier'];box('Wooden floating pier',(0,.2,0),(1.3,1.0,.14),wood,p)
+ # Fixed bank-to-floating-deck stairway, outside the river navigation corridor.
+ for i in range(6):
+  box('Bank connection step',(5.8,1.55+i*.095,G-(i+1)*.18),(1.05,.20,.14),wood,fixed,.02)
+ for x in [-.57,.57]:cyl('Mooring bollard',(x,.58,.16),.065,.25,dark,p)
+ for y in [-.2,.05,.3,.55]:box('Pier deck seam',(0,y,.08),(1.25,.02,.01),dark,p,.003)
  p=roots['riverside_trees']
  for x in [-.75,0,.75]:tree(x,0,0,p,.8)
  # Semperoper: curved front arcade, distinct stage roof and central sculptural group.
@@ -268,7 +281,7 @@ if SAMPLE:
  for id in roots:
   if id not in allowed:
    for o in list(roots[id].children_recursive)+[roots[id]]:bpy.data.objects.remove(o,do_unlink=True)
-metadata={'version':'0.2.0','coordinateSystem':'Blender east/north/up; glTF x/z east/south, y up','pieces':[{'id':id,'label':label,'group':group} for id,label,group,loc,anchor in spec],'geography':'城市位置经过简化，距离不按比例。','routeNote':'盒中游览线，为游戏简化，不是真实公交线路。','generatorSha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'blender':bpy.app.version_string}
+metadata={'version':'0.3.0','coordinateSystem':'Blender east/north/up; glTF x/z east/south, y up','pieces':[{'id':id,'label':label,'group':group} for id,label,group,loc,anchor in spec],'geography':'城市位置经过简化，距离不按比例。','routeNote':'盒中游览线，为游戏简化，不是真实公交线路。','generatorSha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'blender':bpy.app.version_string}
 blend=OUT/'samples.blend' if SAMPLE else Path(__file__).parent/'dresden-river-campus.blend'
 for image in bpy.data.images:
  if image.packed_file:image.filepath='//ash-grain.png'

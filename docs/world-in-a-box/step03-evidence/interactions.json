@@ -1,0 +1,327 @@
+{
+  "result": "PASS_MACHINE",
+  "rows": [
+    {
+      "profile": "desktop",
+      "checks": [
+        "reset defaults to continue",
+        "cancel preserves progress selection and camera",
+        "hold rotation advances continuously and release stops",
+        "keyboard hold rotates and keyup stops",
+        "window reset clears opened shutters and wind",
+        "reset clears undo history",
+        "window reset removes object loops",
+        "window reset persists",
+        "audio preferences survive reset/reload",
+        "pier available in normal river view without help",
+        "help before and after selection retain clickable pier",
+        "selection releases follow without stopping boat",
+        "reset confirmation temporarily freezes motion",
+        "cancel resumes previous valid motion intent",
+        "cancel never restarts manual pause",
+        "hold rotation advances continuously and release stops",
+        "keyboard hold rotates and keyup stops",
+        "Z undoes city placement",
+        "reset clears section follow and night",
+        "reset clears transport panel",
+        "missing vehicles cannot start via nearby panel",
+        "city reset persists",
+        "city resets preserve other box bytes",
+        "city resets preserve sound preferences",
+        "no uncaught errors"
+      ],
+      "diagnostics": [
+        {
+          "case": "help-off",
+          "state": {
+            "ready": "true",
+            "placed": "",
+            "selected": "river_pier",
+            "night": "false",
+            "audio": "{\"context\":\"running\",\"loops\":[{\"key\":\"environment\",\"name\":\"river\",\"offset\":0,\"started\":0.5413333333333333},{\"key\":\"music\",\"name\":\"river-campus\",\"offset\":0,\"started\":1.7813333333333334}],\"voices\":0,\"pending\":0,\"buffers\":24,\"epoch\":0,\"pauses\":[],\"preferences\":{\"version\":1,\"muted\":false,\"music\":0.01,\"sfx\":0.55,\"ambient\":1},\"events\":[]}",
+            "tramRunning": "false",
+            "boatRunning": "false",
+            "bridgeBlocked": "false",
+            "section": "false",
+            "follow": ""
+          },
+          "camera": "{\"angle\":1.05,\"pitch\":0.68,\"zoom\":1,\"view\":\"river\",\"center\":[0,0.6000000238418579,-4],\"half\":8.334000277519225}",
+          "target": {
+            "slot": "river_pier",
+            "target": "{\"x\":576.7923598058533,\"y\":432.99617585400455,\"visible\":true,\"world\":[5.800000190734863,0.4399999976158142,-2.6999998092651367],\"first\":\"Deck_shaped_receiving_socket\",\"reason\":\"visible\"}",
+            "label": "retained",
+            "hidden": false,
+            "style": "left: 576.792px; top: 432.996px;"
+          }
+        },
+        {
+          "case": "help-after-selection",
+          "camera": "{\"angle\":3.2615926535897932,\"pitch\":1.18,\"zoom\":1,\"view\":\"river\",\"center\":[5.800000190734863,0.4399999976158142,-2.6999998092651367],\"half\":6.2}",
+          "target": {
+            "slot": "river_pier",
+            "target": "{\"x\":513.5,\"y\":299.99999999999955,\"visible\":true,\"world\":[5.800000190734863,0.4399999976158142,-2.6999998092651367],\"first\":\"Deck_shaped_receiving_socket\",\"reason\":\"visible\"}",
+            "label": "retained",
+            "hidden": false
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "profile": "360",
+      "checks": [
+        "reset defaults to continue",
+        "cancel preserves progress selection and camera",
+        "hold rotation advances continuously and release stops",
+        "window reset clears opened shutters and wind",
+        "reset clears undo history",
+        "window reset removes object loops",
+        "window reset persists",
+        "audio preferences survive reset/reload",
+        "pier available in normal river view without help",
+        "help before and after selection retain clickable pier",
+        "selection releases follow without stopping boat",
+        "reset confirmation temporarily freezes motion",
+        "cancel resumes previous valid motion intent",
+        "cancel never restarts manual pause",
+        "hold rotation advances continuously and release stops",
+        "Z undoes city placement",
+        "reset clears section follow and night",
+        "reset clears transport panel",
+        "missing vehicles cannot start via nearby panel",
+        "city reset persists",
+        "city resets preserve other box bytes",
+        "city resets preserve sound preferences",
+        "no uncaught errors"
+      ],
+      "diagnostics": [
+        {
+          "case": "help-off",
+          "state": {
+            "ready": "true",
+            "placed": "",
+            "selected": "river_pier",
+            "night": "false",
+            "audio": "{\"context\":\"running\",\"loops\":[{\"key\":\"environment\",\"name\":\"river\",\"offset\":0,\"started\":0.7813333333333333},{\"key\":\"music\",\"name\":\"river-campus\",\"offset\":0,\"started\":1.3706666666666667}],\"voices\":1,\"pending\":0,\"buffers\":24,\"epoch\":0,\"pauses\":[],\"preferences\":{\"version\":1,\"muted\":false,\"music\":0.01,\"sfx\":0.55,\"ambient\":1},\"events\":[{\"name\":\"pick\",\"time\":1.6906666666666668}]}",
+            "tramRunning": "false",
+            "boatRunning": "false",
+            "bridgeBlocked": "false",
+            "section": "false",
+            "follow": ""
+          },
+          "camera": "{\"angle\":1.05,\"pitch\":0.68,\"zoom\":1,\"view\":\"river\",\"center\":[0,0.6000000238418579,-4],\"half\":8.334000277519225}",
+          "target": {
+            "slot": "river_pier",
+            "target": "{\"x\":205.86567055665014,\"y\":275.36449965060257,\"visible\":true,\"world\":[5.800000190734863,0.4399999976158142,-2.6999998092651367],\"first\":\"Deck_shaped_receiving_socket\",\"reason\":\"visible\"}",
+            "label": "retained",
+            "hidden": false,
+            "style": "left: 205.866px; top: 275.364px;"
+          }
+        },
+        {
+          "case": "help-after-selection",
+          "camera": "{\"angle\":3.2615926535897932,\"pitch\":1.18,\"zoom\":1,\"view\":\"river\",\"center\":[5.800000190734863,0.4399999976158142,-2.6999998092651367],\"half\":6.2}",
+          "target": {
+            "slot": "river_pier",
+            "target": "{\"x\":170.00000000000003,\"y\":199.99999999999974,\"visible\":true,\"world\":[5.800000190734863,0.4399999976158142,-2.6999998092651367],\"first\":\"Deck_shaped_receiving_socket\",\"reason\":\"visible\"}",
+            "label": "retained",
+            "hidden": false
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "profile": "390",
+      "checks": [
+        "reset defaults to continue",
+        "cancel preserves progress selection and camera",
+        "hold rotation advances continuously and release stops",
+        "window reset clears opened shutters and wind",
+        "reset clears undo history",
+        "window reset removes object loops",
+        "window reset persists",
+        "audio preferences survive reset/reload",
+        "pier available in normal river view without help",
+        "help before and after selection retain clickable pier",
+        "selection releases follow without stopping boat",
+        "reset confirmation temporarily freezes motion",
+        "cancel resumes previous valid motion intent",
+        "cancel never restarts manual pause",
+        "hold rotation advances continuously and release stops",
+        "Z undoes city placement",
+        "reset clears section follow and night",
+        "reset clears transport panel",
+        "missing vehicles cannot start via nearby panel",
+        "city reset persists",
+        "city resets preserve other box bytes",
+        "city resets preserve sound preferences",
+        "no uncaught errors"
+      ],
+      "diagnostics": [
+        {
+          "case": "help-off",
+          "state": {
+            "ready": "true",
+            "placed": "",
+            "selected": "river_pier",
+            "night": "false",
+            "audio": "{\"context\":\"running\",\"loops\":[{\"key\":\"environment\",\"name\":\"river\",\"offset\":0,\"started\":0.76},{\"key\":\"music\",\"name\":\"river-campus\",\"offset\":0,\"started\":1.4106666666666667}],\"voices\":1,\"pending\":0,\"buffers\":24,\"epoch\":0,\"pauses\":[],\"preferences\":{\"version\":1,\"muted\":false,\"music\":0.01,\"sfx\":0.55,\"ambient\":1},\"events\":[{\"name\":\"pick\",\"time\":1.7306666666666666}]}",
+            "tramRunning": "false",
+            "boatRunning": "false",
+            "bridgeBlocked": "false",
+            "section": "false",
+            "follow": ""
+          },
+          "camera": "{\"angle\":1.05,\"pitch\":0.68,\"zoom\":1,\"view\":\"river\",\"center\":[0,0.6000000238418579,-4],\"half\":8.334000277519225}",
+          "target": {
+            "slot": "river_pier",
+            "target": "{\"x\":224.0302885469428,\"y\":282.01430844330287,\"visible\":true,\"world\":[5.800000190734863,0.4399999976158142,-2.6999998092651367],\"first\":\"Deck_shaped_receiving_socket\",\"reason\":\"visible\"}",
+            "label": "retained",
+            "hidden": false,
+            "style": "left: 224.03px; top: 282.014px;"
+          }
+        },
+        {
+          "case": "help-after-selection",
+          "camera": "{\"angle\":3.2615926535897932,\"pitch\":1.18,\"zoom\":1,\"view\":\"river\",\"center\":[5.800000190734863,0.4399999976158142,-2.6999998092651367],\"half\":6.2}",
+          "target": {
+            "slot": "river_pier",
+            "target": "{\"x\":185.00000000000003,\"y\":199.99999999999974,\"visible\":true,\"world\":[5.800000190734863,0.4399999976158142,-2.6999998092651367],\"first\":\"Deck_shaped_receiving_socket\",\"reason\":\"visible\"}",
+            "label": "retained",
+            "hidden": false
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "profile": "landscape",
+      "checks": [
+        "reset defaults to continue",
+        "cancel preserves progress selection and camera",
+        "hold rotation advances continuously and release stops",
+        "window reset clears opened shutters and wind",
+        "reset clears undo history",
+        "window reset removes object loops",
+        "window reset persists",
+        "audio preferences survive reset/reload",
+        "pier available in normal river view without help",
+        "help before and after selection retain clickable pier",
+        "selection releases follow without stopping boat",
+        "reset confirmation temporarily freezes motion",
+        "cancel resumes previous valid motion intent",
+        "cancel never restarts manual pause",
+        "hold rotation advances continuously and release stops",
+        "Z undoes city placement",
+        "reset clears section follow and night",
+        "reset clears transport panel",
+        "missing vehicles cannot start via nearby panel",
+        "city reset persists",
+        "city resets preserve other box bytes",
+        "city resets preserve sound preferences",
+        "no uncaught errors"
+      ],
+      "diagnostics": [
+        {
+          "case": "help-off",
+          "state": {
+            "ready": "true",
+            "placed": "",
+            "selected": "river_pier",
+            "night": "false",
+            "audio": "{\"context\":\"running\",\"loops\":[{\"key\":\"environment\",\"name\":\"river\",\"offset\":0,\"started\":0.752},{\"key\":\"music\",\"name\":\"river-campus\",\"offset\":0,\"started\":1.4}],\"voices\":1,\"pending\":0,\"buffers\":24,\"epoch\":0,\"pauses\":[],\"preferences\":{\"version\":1,\"muted\":false,\"music\":0.01,\"sfx\":0.55,\"ambient\":1},\"events\":[{\"name\":\"pick\",\"time\":1.7306666666666666}]}",
+            "tramRunning": "false",
+            "boatRunning": "false",
+            "bridgeBlocked": "false",
+            "section": "false",
+            "follow": ""
+          },
+          "camera": "{\"angle\":1.05,\"pitch\":0.68,\"zoom\":1,\"view\":\"river\",\"center\":[0,0.6000000238418579,-4],\"half\":8.334000277519225}",
+          "target": {
+            "slot": "river_pier",
+            "target": "{\"x\":315.0851612103737,\"y\":274.2309113742029,\"visible\":true,\"world\":[5.800000190734863,0.4399999976158142,-2.6999998092651367],\"first\":\"Deck_shaped_receiving_socket\",\"reason\":\"visible\"}",
+            "label": "retained",
+            "hidden": false,
+            "style": "left: 315.085px; top: 274.231px;"
+          }
+        },
+        {
+          "case": "help-after-selection",
+          "camera": "{\"angle\":3.2615926535897932,\"pitch\":1.18,\"zoom\":1,\"view\":\"river\",\"center\":[5.800000190734863,0.4399999976158142,-2.6999998092651367],\"half\":6.2}",
+          "target": {
+            "slot": "river_pier",
+            "target": "{\"x\":275,\"y\":189.99999999999972,\"visible\":true,\"world\":[5.800000190734863,0.4399999976158142,-2.6999998092651367],\"first\":\"Deck_shaped_receiving_socket\",\"reason\":\"visible\"}",
+            "label": "retained",
+            "hidden": false
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "profile": "tablet",
+      "checks": [
+        "reset defaults to continue",
+        "cancel preserves progress selection and camera",
+        "hold rotation advances continuously and release stops",
+        "window reset clears opened shutters and wind",
+        "reset clears undo history",
+        "window reset removes object loops",
+        "window reset persists",
+        "audio preferences survive reset/reload",
+        "pier available in normal river view without help",
+        "help before and after selection retain clickable pier",
+        "selection releases follow without stopping boat",
+        "reset confirmation temporarily freezes motion",
+        "cancel resumes previous valid motion intent",
+        "cancel never restarts manual pause",
+        "hold rotation advances continuously and release stops",
+        "Z undoes city placement",
+        "reset clears section follow and night",
+        "reset clears transport panel",
+        "missing vehicles cannot start via nearby panel",
+        "city reset persists",
+        "city resets preserve other box bytes",
+        "city resets preserve sound preferences",
+        "no uncaught errors"
+      ],
+      "diagnostics": [
+        {
+          "case": "help-off",
+          "state": {
+            "ready": "true",
+            "placed": "",
+            "selected": "river_pier",
+            "night": "false",
+            "audio": "{\"context\":\"running\",\"loops\":[{\"key\":\"environment\",\"name\":\"river\",\"offset\":0,\"started\":0.872},{\"key\":\"music\",\"name\":\"river-campus\",\"offset\":0,\"started\":1.5413333333333334}],\"voices\":1,\"pending\":0,\"buffers\":24,\"epoch\":0,\"pauses\":[],\"preferences\":{\"version\":1,\"muted\":false,\"music\":0.01,\"sfx\":0.55,\"ambient\":1},\"events\":[{\"name\":\"pick\",\"time\":1.872}]}",
+            "tramRunning": "false",
+            "boatRunning": "false",
+            "bridgeBlocked": "false",
+            "section": "false",
+            "follow": ""
+          },
+          "camera": "{\"angle\":1.05,\"pitch\":0.68,\"zoom\":1,\"view\":\"river\",\"center\":[0,0.6000000238418579,-4],\"half\":8.334000277519225}",
+          "target": {
+            "slot": "river_pier",
+            "target": "{\"x\":287.00096424662405,\"y\":365.0669789246636,\"visible\":true,\"world\":[5.800000190734863,0.4399999976158142,-2.6999998092651367],\"first\":\"Deck_shaped_receiving_socket\",\"reason\":\"visible\"}",
+            "label": "retained",
+            "hidden": false,
+            "style": "left: 287.001px; top: 365.067px;"
+          }
+        },
+        {
+          "case": "help-after-selection",
+          "camera": "{\"angle\":3.2615926535897932,\"pitch\":1.18,\"zoom\":1,\"view\":\"river\",\"center\":[5.800000190734863,0.4399999976158142,-2.6999998092651367],\"half\":6.2}",
+          "target": {
+            "slot": "river_pier",
+            "target": "{\"x\":237.00000000000006,\"y\":259.99999999999966,\"visible\":true,\"world\":[5.800000190734863,0.4399999976158142,-2.6999998092651367],\"first\":\"Deck_shaped_receiving_socket\",\"reason\":\"visible\"}",
+            "label": "retained",
+            "hidden": false
+          }
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

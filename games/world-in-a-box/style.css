@@ -5,3 +5,5 @@
 
 .wb-complete .wb-tray-line,.wb-complete .wb-tray-top button,.wb-complete .wb-page{display:none}.wb-complete .wb-tray{padding:14px 18px;text-align:center}.wb-complete .wb-tray-top{justify-content:center}
 .wb-leader{position:absolute;height:1px;background:#7d6949;transform-origin:0 50%;pointer-events:none}.wb-leader::before{content:"";position:absolute;left:-3px;top:-3px;width:7px;height:7px;border-radius:50%;background:#7d6949}
+
+.wb-tools [data-action=reset]{margin-left:20px;border-style:dashed}.wb-sound label{display:block;margin:15px 0}.wb-sound output{float:right}.wb-sound input{display:block;width:100%;height:44px;accent-color:#527562}.wb-camera [data-action=left],.wb-camera [data-action=right]{touch-action:none;user-select:none}

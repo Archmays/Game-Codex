@@ -28,19 +28,32 @@ export class DresdenScene{
     this.resize();this.go('all');
   }
   resize(){this.size={w:this.host.clientWidth,h:this.host.clientHeight};this.renderer.setSize(this.size.w,this.size.h);this.updateCamera();}
-  updateCamera(){fitCamera(this.camera,this.center,this.half,this.size.w/this.size.h,this.angle,this.pitch,this.zoom);}
+  updateCamera(){fitCamera(this.camera,this.center,this.half,this.size.w/this.size.h,this.angle,this.pitch,this.zoom);this.host.dataset.camera=JSON.stringify({angle:this.angle,pitch:this.pitch,zoom:this.zoom,view:this.view,center:this.center.toArray(),half:this.half});}
   go(view:string){this.view=view;this.angle=view==='river'?1.05:.18;this.pitch=view==='river'?.68:view==='all'?.92:1.05;this.zoom=1;const p=this.asset?.getObjectByName('camera_'+view);if(p)p.getWorldPosition(this.center);this.half=this.viewHalves.get(view)??10.8;this.updateCamera();}
   turn(n:number){this.angle+=n;this.updateCamera();}tilt(n:number){this.pitch=T.MathUtils.clamp(this.pitch+n,.35,1.42);this.updateCamera();}setZoom(n:number){this.zoom=T.MathUtils.clamp(this.zoom+n,.75,1.8);this.updateCamera();}
-  showTarget(id:CityPiece){this.go(regionOf(id));if(regionOf(id)==='river')this.angle=Math.PI+.12;const anchor=this.asset?.getObjectByName('anchor_'+id);if(anchor){anchor.getWorldPosition(this.center);this.center.y=Math.max(1,this.center.y-.4);}this.half=regionOf(id)==='river'?6.2:4.7;this.pitch=1.18;this.updateCamera();if(!this.target(id).visible){outer:for(const pitch of [.8,.5,1.4])for(const angle of [.18,Math.PI+.12,Math.PI/2,-Math.PI/2]){this.pitch=pitch;this.angle=angle;this.updateCamera();if(this.target(id).visible)break outer;}}}
+  showTarget(id:CityPiece,usable:()=>boolean=()=>this.target(id).visible){
+    this.go(regionOf(id));const anchor=this.asset?.getObjectByName('anchor_'+id);if(anchor)anchor.getWorldPosition(this.center);this.half=regionOf(id)==='river'?6.2:4.7;
+    for(const pitch of [1.18,.85,.5,1.4])for(const angle of [Math.PI+.12,.18,Math.PI/2,-Math.PI/2]){this.pitch=pitch;this.angle=angle;this.updateCamera();this.asset?.updateMatrixWorld(true);this.renderer.render(this.scene,this.camera);if(this.target(id).visible&&usable())return true;}
+    return false;
+  }
+  resetMotion(){this.pausedAt=null;this.land.clear();this.sectionAmount=0;this.paddle=0;this.boatNorth=4;for(const id of CITY_IDS)this.cancelLanding(id);}
+  pick(x:number,y:number):CityPiece|null{
+    const rect=this.host.getBoundingClientRect();if(x<rect.left||x>rect.right||y<rect.top||y>rect.bottom)return null;
+    this.asset?.updateMatrixWorld(true);this.ray.setFromCamera(new T.Vector2((x-rect.left)/rect.width*2-1,1-(y-rect.top)/rect.height*2),this.camera);
+    const meshes:T.Object3D[]=[];this.asset?.traverseVisible(o=>{if(o instanceof T.Mesh)meshes.push(o);});let o:T.Object3D|null=this.ray.intersectObjects(meshes,false)[0]?.object??null;
+    while(o){const id=CITY_IDS.find(id=>o!.name==='slot_'+id||o!.name==='piece_'+id);if(id)return id;o=o.parent;}return null;
+  }
   snapshot(){return{center:this.center.clone(),half:this.half,angle:this.angle,pitch:this.pitch,zoom:this.zoom,view:this.view};}
   restore(s:ReturnType<DresdenScene['snapshot']>){this.center.copy(s.center);this.half=s.half;this.angle=s.angle;this.pitch=s.pitch;this.zoom=s.zoom;this.view=s.view;this.updateCamera();}
   landPiece(id:CityPiece){this.land.set(id,performance.now()-(this.reducedMotion?320:0));}cancelLanding(id:CityPiece){this.land.delete(id);const p=this.pieces.get(id);if(p)p.position.copy(this.homes.get(p)!);}
-  frame(s:CityState,m:CityMotion,now:number,dt:number){
+  private pausedAt:number|null=null;
+  frame(s:CityState,m:CityMotion,now:number,dt:number,paused=false){
     if(!this.asset)return;
+    if(paused){this.pausedAt??=now;now=this.pausedAt;dt=0;}else{if(this.pausedAt!==null){const elapsed=now-this.pausedAt;for(const [id,start] of this.land)this.land.set(id,start+elapsed);this.pausedAt=null;}}
     for(const id of CITY_IDS){const p=this.pieces.get(id),slot=this.slots.get(id),placed=s.placed.includes(id);if(p){p.visible=placed;const start=this.land.get(id);if(start!==undefined){const t=Math.min(1,(now-start)/320);p.position.copy(this.homes.get(p)!);p.position.y+=(1-t)**3*.7;if(t===1)this.land.delete(id);}}if(slot)slot.visible=!placed;}
     const tram=this.pieces.get('yellow_tram'),boat=this.pieces.get('paddle_steamer');
-    if(tram&&!this.land.has('yellow_tram')){tram.position.z=-m.tram.position;tram.rotation.y=m.tram.destination>=m.tram.position?0:Math.PI;}
-    if(boat&&!this.land.has('paddle_steamer')){boat.position.x=m.boat.position;const north=m.dock&&!m.boat.running&&Math.abs(m.boat.position-this.routes.berth.x)<.01?this.routes.berth.north:4;this.boatNorth+=(north-this.boatNorth)*(1-Math.exp(-dt*7));boat.position.z=-this.boatNorth;boat.rotation.y=m.boat.destination>=m.boat.position?0:Math.PI;if(m.boat.running)this.paddle-=dt*7;}
+    if(tram&&!this.land.has('yellow_tram')){tram.position.z=-m.tram.position;tram.rotation.y=m.tram.direction>=0?0:Math.PI;}
+    if(boat&&!this.land.has('paddle_steamer')){boat.position.x=m.boat.position;this.boatNorth=m.boatNorth;boat.position.z=-m.boatNorth;boat.rotation.y=m.boat.direction>=0?0:Math.PI;this.paddle-=dt*m.boatSpeed*4.6;}
     for(const side of ['port','starboard']){const p=this.asset.getObjectByName('pivot_paddle_'+side);if(p)p.rotation.z=this.paddle;}
     const amount=Number(m.section);this.sectionAmount+=(amount-this.sectionAmount)*(this.reducedMotion?1:1-Math.exp(-Math.min(.05,dt)*12));if(Math.abs(amount-this.sectionAmount)<.002)this.sectionAmount=amount;
     const cover=this.asset.getObjectByName('pivot_library_cover')!,sky=this.pieces.get('slub_skylight');cover.position.copy(this.homes.get(cover)!).add(new T.Vector3(-2.7*this.sectionAmount,1.4*this.sectionAmount,0));cover.visible=this.sectionAmount<.98;
@@ -48,7 +61,7 @@ export class DresdenScene{
     this.ambient.intensity=s.night?1.1:1.8;this.sun.intensity=s.night?.6:2.3;this.fill.intensity=s.night?1.8:.8;this.renderer.setClearColor(s.night?0x182e3a:0xf1eadb,1);
     if(this.lightingNight!==s.night){this.lightingNight=s.night;for(const mat of this.windowMaterials){mat.emissive.set(s.night?0xf6b64e:0x000000);mat.emissiveIntensity=s.night?.45:0;}}
     if(m.follow){const p=m.follow==='tram'?tram:boat;if(p){p.getWorldPosition(this.center);this.half=4.6;this.updateCamera();}}
-    this.asset.updateMatrixWorld(true);this.renderer.render(this.scene,this.camera);this.host.dataset.motion=this.land.size||m.tram.running||m.boat.running||this.sectionAmount!==amount?'moving':'still';
+    this.asset.updateMatrixWorld(true);this.renderer.render(this.scene,this.camera);this.host.dataset.camera=JSON.stringify({angle:this.angle,pitch:this.pitch,zoom:this.zoom,view:this.view,center:this.center.toArray(),half:this.half});this.host.dataset.motion=this.land.size||m.tram.running||m.boat.running||this.sectionAmount!==amount?'moving':'still';
     this.host.dataset.tram=tram?.position.toArray().join(',');this.host.dataset.boat=boat?.position.toArray().join(',');this.host.dataset.section=String(this.sectionAmount);this.host.dataset.calls=String(this.renderer.info.render.calls);this.host.dataset.triangles=String(this.renderer.info.render.triangles);
   }
   target(id:CityPiece){
@@ -56,7 +69,8 @@ export class DresdenScene{
     const p=anchor.getWorldPosition(new T.Vector3()),ndc=p.clone().project(this.camera);this.ray.setFromCamera(new T.Vector2(ndc.x,ndc.y),this.camera);
     const distance=this.ray.ray.origin.distanceTo(p),meshes:T.Object3D[]=[];this.asset!.traverseVisible(o=>{if(o instanceof T.Mesh)meshes.push(o);});const first=this.ray.intersectObjects(meshes,false)[0];
     const owns=(o:T.Object3D|null):boolean=>!!o&&(o.name==='piece_'+id||o.name==='slot_'+id||owns(o.parent));
-    return{x:(ndc.x+1)*this.size.w/2,y:(1-ndc.y)*this.size.h/2,visible:Math.abs(ndc.x)<.9&&Math.abs(ndc.y)<.84&&(!first||first.distance>=distance-.09||owns(first.object))};
+    const inFrame=Math.abs(ndc.x)<.9&&Math.abs(ndc.y)<.84,clear=!first||first.distance>=distance-.09||owns(first.object);
+    return{x:(ndc.x+1)*this.size.w/2,y:(1-ndc.y)*this.size.h/2,visible:inFrame&&clear,world:p.toArray(),first:first?.object.name??null,reason:!inFrame?'offscreen':!clear?'occluded':'visible'};
   }
   thumbnail(id:CityPiece,angle=.35){return toyThumbnail(this.renderer,this.pieces.get(id),this.size,angle);}
   comparison(ids:CityPiece[]){const group=new T.Group();for(const id of ids){const original=this.pieces.get(id);if(original){const clone=original.clone(true);clone.position.copy(this.homes.get(original)!);clone.visible=true;group.add(clone);}}return toyThumbnail(this.renderer,group,this.size,.25);}

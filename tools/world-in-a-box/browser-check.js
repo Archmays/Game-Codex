@@ -8,6 +8,7 @@ async (driver) => {
   function check(value,message){if(!value)throw Error(message);}
   const profiles=[{name:'keyboard-desktop',w:1440,h:1000,keyboard:true},{name:'mouse-desktop',w:1366,h:900},{name:'touch-390',w:390,h:844,touch:true},{name:'touch-360',w:360,h:800,touch:true},{name:'phone-landscape',w:844,h:390,touch:true},{name:'tablet-portrait',w:768,h:1024,touch:true},{name:'tablet-landscape',w:1024,h:768,touch:true}];
   for(const profile of profiles){
+    if(driver.qaProfiles&&!driver.qaProfiles.includes(profile.name))continue;
     const ctx=await browser.newContext({viewport:{width:profile.w,height:profile.h},hasTouch:!!profile.touch,deviceScaleFactor:1});
     const page=await ctx.newPage();try { const errors=[],foreign=[],cleanup=[];
     page.on('pageerror',e=>errors.push(String(e)));
@@ -98,6 +99,8 @@ async (driver) => {
     }
     await page.keyboard.press('Escape');await place('cup');
     await press('[data-action=exit]');await page.locator('[data-world-box-link]').waitFor();
+    await page.waitForFunction(()=>!document.querySelector('.wb-mount canvas'));
+    await new Promise((resolve,reject)=>{const end=Date.now()+1000;const poll=()=>cleanup.some(x=>x.includes('audio-closed'))?resolve():Date.now()>end?reject(Error('audio context did not close')):setTimeout(poll,20);poll();});
     check(cleanup.some(x=>x.includes('audio-closed'))&&cleanup.some(x=>x.includes('webgl-released'))&&cleanup.some(x=>x.includes('raf-cancelled')),'exit releases audio/render/frame');
     check(!errors.length&&!foreign.length,profile.name+' console/network '+JSON.stringify({errors,foreign}));
     results.push({profile:profile.name,input:profile.keyboard?'keyboard only':profile.touch?'emulated touch + pointer cancellation':'mouse',result:'PASS',eightPieces:true,wrongHintUndoReload:true,windVisualMotionAndSettling:true,motionPixels,settledPixels,oldSaveProtected:true,targets44pxNoOverlap:true,externalRequests:foreign.length,errors,cleanup:[...new Set(cleanup)]});

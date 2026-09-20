@@ -1,0 +1,48 @@
+{
+  "result": "PASS_MACHINE",
+  "rows": [
+    {
+      "fault": "save-failure",
+      "checks": [
+        "storage failure still resets current session",
+        "reset failure has exact honest saving feedback",
+        "old save exact bytes protected under quota",
+        "no uncaught errors"
+      ]
+    },
+    {
+      "fault": "blocked-audio",
+      "checks": [
+        "audio failure does not block assembly",
+        "audio failure does not block toy simulation",
+        "no uncaught errors"
+      ]
+    },
+    {
+      "fault": "resume-failure",
+      "checks": [
+        "audio failure does not block assembly",
+        "audio failure does not block toy simulation",
+        "no uncaught errors"
+      ]
+    },
+    {
+      "fault": "late-photo",
+      "checks": [
+        "late photo response cannot repopulate closed reset scene",
+        "late response cannot restore progress",
+        "no uncaught errors"
+      ]
+    },
+    {
+      "fault": "background-modal",
+      "checks": [
+        "cancel after real background interrupt stays safely paused",
+        "held confirmation performs one reset",
+        "held Enter does not reopen reset dialog",
+        "no uncaught errors"
+      ]
+    }
+  ],
+  "limits": "Injected storage/autoplay/network faults are synthetic; actual tab background transition uses browser focus, not a dispatched blur."
+}

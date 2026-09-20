@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "origin": "http://127.0.0.1:5175/",
+  "launcher": "tools/my-game-world/START_MY_GAME_WORLD.ps1 -NoBrowser",
+  "originalLauncherSource": "unchanged",
+  "server": "exact project Vite server, started by original launcher",
+  "browserOpened": false,
+  "realFamilyStorage": "not accessed or rewritten",
+  "staleOperationalRecord": "old non-live PID record archived in task scratch; original launcher generated a fresh validated record"
+}

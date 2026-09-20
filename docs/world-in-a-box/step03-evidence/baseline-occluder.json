@@ -1,0 +1,41 @@
+{
+  "source": "7f76ff024c9a6cd21ca9076321b7d1e5ddd624b8",
+  "method": "Read original GLB from git; reconstruct unmodified position/index geometry and authored hierarchy; same camera fit and nearest visible ray",
+  "placed": [],
+  "help": false,
+  "viewport": [
+    1366,
+    900
+  ],
+  "stage": [
+    1027,
+    600
+  ],
+  "camera": {
+    "angle": 1.05,
+    "pitch": 0.68,
+    "center": [
+      0,
+      0.6000000238418579,
+      -4
+    ],
+    "half": 8.334000277519225
+  },
+  "targetWorld": [
+    5.800000190734863,
+    0.41999998688697815,
+    -2
+  ],
+  "targetScreen": [
+    554.9350497897068,
+    441.43965454151925
+  ],
+  "firstObject": "fixed_world_Ash / fine original grain",
+  "firstPoint": [
+    6.915572388331647,
+    1.4599999785423314,
+    -1.3600858139612395
+  ],
+  "firstDistance": 43.77341404978088,
+  "targetDistance": 45.42737640612025
+}

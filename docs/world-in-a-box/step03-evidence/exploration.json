@@ -1,0 +1,351 @@
+{
+  "result": "PASS_MACHINE",
+  "rows": [
+    {
+      "scene": "window",
+      "id": "shutter_left",
+      "method": "normal view"
+    },
+    {
+      "scene": "window",
+      "id": "shutter_right",
+      "method": "normal view"
+    },
+    {
+      "scene": "window",
+      "id": "curtain",
+      "method": "normal view"
+    },
+    {
+      "scene": "window",
+      "id": "wind_chime",
+      "method": "continuous rotation / raised view 0"
+    },
+    {
+      "scene": "window",
+      "id": "plant",
+      "method": "normal view"
+    },
+    {
+      "scene": "window",
+      "id": "cup",
+      "method": "normal view"
+    },
+    {
+      "scene": "window",
+      "id": "book",
+      "method": "normal view"
+    },
+    {
+      "scene": "window",
+      "id": "cat",
+      "method": "normal view"
+    },
+    {
+      "scene": "city",
+      "id": "river_pier",
+      "method": "normal view",
+      "before": {
+        "slot": "river_pier",
+        "target": "{\"x\":576.7923598058533,\"y\":432.99617585400455,\"visible\":true,\"world\":[5.800000190734863,0.4399999976158142,-2.6999998092651367],\"first\":\"Deck_shaped_receiving_socket\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      },
+      "after": {
+        "slot": "river_pier",
+        "target": "{\"x\":576.7923598058533,\"y\":432.99617585400455,\"visible\":true,\"world\":[5.800000190734863,0.4399999976158142,-2.6999998092651367],\"first\":\"Deck_shaped_receiving_socket\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      }
+    },
+    {
+      "scene": "city",
+      "id": "paddle_steamer",
+      "method": "normal view",
+      "before": {
+        "slot": "paddle_steamer",
+        "target": "{\"x\":395.28658173944086,\"y\":163.41868812272097,\"visible\":true,\"world\":[-6.599999904632568,0.8500000238418579,-4],\"first\":\"Blue_river_inlay\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      },
+      "after": {
+        "slot": "paddle_steamer",
+        "target": "{\"x\":395.28658173944086,\"y\":163.41868812272097,\"visible\":true,\"world\":[-6.599999904632568,0.8500000238418579,-4],\"first\":\"Blue_river_inlay\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      }
+    },
+    {
+      "scene": "city",
+      "id": "yellow_tram",
+      "method": "normal view",
+      "before": {
+        "slot": "yellow_tram",
+        "target": "{\"x\":383.17982237921444,\"y\":281.44427532811756,\"visible\":true,\"world\":[-1,2.009999990463257,-0.4000000059604645],\"first\":\"fixed_world_Ash__fine_original_grain\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      },
+      "after": {
+        "slot": "yellow_tram",
+        "target": "{\"x\":383.17982237921444,\"y\":281.44427532811756,\"visible\":true,\"world\":[-1,2.009999990463257,-0.4000000059604645],\"first\":\"fixed_world_Ash__fine_original_grain\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      }
+    },
+    {
+      "scene": "city",
+      "id": "augustus_bridge",
+      "method": "normal view",
+      "before": {
+        "slot": "augustus_bridge",
+        "target": "{\"x\":495.58887576231876,\"y\":252.3757254204268,\"visible\":true,\"world\":[-1,1.600000023841858,-4],\"first\":\"Blue_river_inlay\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      },
+      "after": {
+        "slot": "augustus_bridge",
+        "target": "{\"x\":495.58887576231876,\"y\":252.3757254204268,\"visible\":true,\"world\":[-1,1.600000023841858,-4],\"first\":\"Blue_river_inlay\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      }
+    },
+    {
+      "scene": "city",
+      "id": "riverside_trees",
+      "method": "normal view",
+      "before": {
+        "slot": "riverside_trees",
+        "target": "{\"x\":672.5737667935414,\"y\":300.5368673263662,\"visible\":true,\"world\":[4,2.259999990463257,-6.800000190734863],\"first\":\"fixed_world_Pale_meadow\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      },
+      "after": {
+        "slot": "riverside_trees",
+        "target": "{\"x\":672.5737667935414,\"y\":300.5368673263662,\"visible\":true,\"world\":[4,2.259999990463257,-6.800000190734863],\"first\":\"fixed_world_Pale_meadow\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      }
+    },
+    {
+      "scene": "city",
+      "id": "frauenkirche_body",
+      "method": "normal view",
+      "before": {
+        "slot": "frauenkirche_body",
+        "target": "{\"x\":669.3626083257831,\"y\":304.59525995041037,\"visible\":true,\"world\":[3.299999952316284,2.4600000381469727,1.0499999523162842],\"first\":\"Unpainted_structural_support\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      },
+      "after": {
+        "slot": "frauenkirche_body",
+        "target": "{\"x\":669.3626083257831,\"y\":304.59525995041037,\"visible\":true,\"world\":[3.299999952316284,2.4600000381469727,1.0499999523162842],\"first\":\"Unpainted_structural_support\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      }
+    },
+    {
+      "scene": "city",
+      "id": "frauenkirche_dome",
+      "method": "normal view",
+      "before": {
+        "slot": "frauenkirche_dome",
+        "target": "{\"x\":673.7067078925805,\"y\":273.3507526841845,\"visible\":true,\"world\":[3.299999952316284,2.93999981880188,0.5],\"first\":\"piece_frauenkirche_body_Carved_pale_stone\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      },
+      "after": {
+        "slot": "frauenkirche_dome",
+        "target": "{\"x\":673.7067078925805,\"y\":273.3507526841845,\"visible\":true,\"world\":[3.299999952316284,2.93999981880188,0.5],\"first\":\"Dome_receiving_stone_ring\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      }
+    },
+    {
+      "scene": "city",
+      "id": "semperoper",
+      "method": "normal view",
+      "before": {
+        "slot": "semperoper",
+        "target": "{\"x\":333.1777595046508,\"y\":222.85809522806807,\"visible\":true,\"world\":[-4.599999904632568,2.259999990463257,0.20000001788139343],\"first\":\"Tangible_socket003\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      },
+      "after": {
+        "slot": "semperoper",
+        "target": "{\"x\":333.1777595046508,\"y\":222.85809522806807,\"visible\":true,\"world\":[-4.599999904632568,2.259999990463257,0.20000001788139343],\"first\":\"Tangible_socket003\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      }
+    },
+    {
+      "scene": "city",
+      "id": "zwinger_galleries",
+      "method": "normal view",
+      "before": {
+        "slot": "zwinger_galleries",
+        "target": "{\"x\":317.38103220227674,\"y\":313.0860092365314,\"visible\":true,\"world\":[-4.599999904632568,1.5800000429153442,2.200000047683716],\"first\":\"Tangible_socket004\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      },
+      "after": {
+        "slot": "zwinger_galleries",
+        "target": "{\"x\":317.38103220227674,\"y\":313.0860092365314,\"visible\":true,\"world\":[-4.599999904632568,1.5800000429153442,2.200000047683716],\"first\":\"Tangible_socket004\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      }
+    },
+    {
+      "scene": "city",
+      "id": "zwinger_crown_gate",
+      "method": "normal view",
+      "before": {
+        "slot": "zwinger_crown_gate",
+        "target": "{\"x\":308.29791526863056,\"y\":334.871325444328,\"visible\":true,\"world\":[-4.599999904632568,2.559999942779541,3.3499999046325684],\"first\":\"Open_courtyard\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      },
+      "after": {
+        "slot": "zwinger_crown_gate",
+        "target": "{\"x\":308.29791526863056,\"y\":334.871325444328,\"visible\":true,\"world\":[-4.599999904632568,2.559999942779541,3.3499999046325684],\"first\":\"Open_courtyard\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      }
+    },
+    {
+      "scene": "city",
+      "id": "beyer_body",
+      "method": "normal view",
+      "before": {
+        "slot": "beyer_body",
+        "target": "{\"x\":360.78950489235433,\"y\":288.0075995408455,\"visible\":true,\"world\":[-3.4000000953674316,2.059999942779541,7.650000095367432],\"first\":\"slot_beyer_body_Ash__fine_original_grain\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      },
+      "after": {
+        "slot": "beyer_body",
+        "target": "{\"x\":360.78950489235433,\"y\":288.0075995408455,\"visible\":true,\"world\":[-3.4000000953674316,2.059999942779541,7.650000095367432],\"first\":\"slot_beyer_body_Ash__fine_original_grain\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      }
+    },
+    {
+      "scene": "city",
+      "id": "beyer_tower",
+      "method": "normal view",
+      "before": {
+        "slot": "beyer_tower",
+        "target": "{\"x\":404.397257831247,\"y\":233.94969917743316,\"visible\":true,\"world\":[-2.549999952316284,3.3299999237060547,6.800000190734863],\"first\":\"Octagonal_tower_collar\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      },
+      "after": {
+        "slot": "beyer_tower",
+        "target": "{\"x\":404.397257831247,\"y\":233.94969917743316,\"visible\":true,\"world\":[-2.549999952316284,3.3299999237060547,6.800000190734863],\"first\":\"Octagonal_tower_collar\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      }
+    },
+    {
+      "scene": "city",
+      "id": "slub_surface",
+      "method": "normal view",
+      "before": {
+        "slot": "slub_surface",
+        "target": "{\"x\":715.332644056974,\"y\":314.2968620731421,\"visible\":true,\"world\":[4.650000095367432,2.259999990463257,7],\"first\":\"slot_slub_surface_Ash__fine_original_grain\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      },
+      "after": {
+        "slot": "slub_surface",
+        "target": "{\"x\":715.332644056974,\"y\":314.2968620731421,\"visible\":true,\"world\":[4.650000095367432,2.259999990463257,7],\"first\":\"slot_slub_surface_Ash__fine_original_grain\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      }
+    },
+    {
+      "scene": "city",
+      "id": "slub_skylight",
+      "method": "normal view",
+      "before": {
+        "slot": "slub_skylight",
+        "target": "{\"x\":661.0765580576291,\"y\":319.12334738606467,\"visible\":true,\"world\":[3.4000000953674316,1.649999976158142,7],\"first\":\"Removable_toy_ground_section\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      },
+      "after": {
+        "slot": "slub_skylight",
+        "target": "{\"x\":661.0765580576291,\"y\":319.12334738606467,\"visible\":true,\"world\":[3.4000000953674316,1.649999976158142,7],\"first\":\"Removable_toy_ground_section\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      }
+    },
+    {
+      "scene": "city",
+      "id": "campus_bikes",
+      "method": "normal view",
+      "before": {
+        "slot": "campus_bikes",
+        "target": "{\"x\":517.4347312780601,\"y\":359.06306477922374,\"visible\":true,\"world\":[0.4000000059604645,1.8100000619888306,8.699999809265137],\"first\":\"Tangible_socket006\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      },
+      "after": {
+        "slot": "campus_bikes",
+        "target": "{\"x\":517.4347312780601,\"y\":359.06306477922374,\"visible\":true,\"world\":[0.4000000059604645,1.8100000619888306,8.699999809265137],\"first\":\"Tangible_socket006\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      }
+    },
+    {
+      "scene": "city",
+      "id": "street_houses",
+      "method": "normal view",
+      "before": {
+        "slot": "street_houses",
+        "target": "{\"x\":550.7523299607184,\"y\":373.07516675463927,\"visible\":true,\"world\":[2,2.1100001335144043,4.5],\"first\":\"Tangible_socket007\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      },
+      "after": {
+        "slot": "street_houses",
+        "target": "{\"x\":550.7523299607184,\"y\":373.07516675463927,\"visible\":true,\"world\":[2,2.1100001335144043,4.5],\"first\":\"Tangible_socket007\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      }
+    },
+    {
+      "scene": "city",
+      "id": "bakery_front",
+      "method": "normal view",
+      "before": {
+        "slot": "bakery_front",
+        "target": "{\"x\":644.1659290022749,\"y\":397.54890421967445,\"visible\":true,\"world\":[5.5,2.059999942779541,4.950000286102295],\"first\":\"Plaster_body006\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      },
+      "after": {
+        "slot": "bakery_front",
+        "target": "{\"x\":644.1659290022749,\"y\":397.54890421967445,\"visible\":true,\"world\":[5.5,2.059999942779541,4.950000286102295],\"first\":\"Plaster_body006\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      }
+    },
+    {
+      "scene": "city",
+      "id": "bench_scene",
+      "method": "normal view",
+      "before": {
+        "slot": "bench_scene",
+        "target": "{\"x\":434.2322757513401,\"y\":357.6032787047796,\"visible\":true,\"world\":[-2.299999952316284,1.7599999904632568,4.300000190734863],\"first\":\"Tangible_socket008\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      },
+      "after": {
+        "slot": "bench_scene",
+        "target": "{\"x\":434.2322757513401,\"y\":357.6032787047796,\"visible\":true,\"world\":[-2.299999952316284,1.7599999904632568,4.300000190734863],\"first\":\"Tangible_socket008\",\"reason\":\"visible\"}",
+        "label": "retained",
+        "hidden": false
+      }
+    }
+  ]
+}

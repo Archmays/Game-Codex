@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "coordinateSystem": "Blender east/north/up; glTF x/z east/south, y up",
   "pieces": [
     {
@@ -95,9 +95,9 @@
   ],
   "geography": "城市位置经过简化，距离不按比例。",
   "routeNote": "盒中游览线，为游戏简化，不是真实公交线路。",
-  "generatorSha256": "0bfe954b3e0b6f4351acc11e41341b45ffccb51529e67390a13aa6cfd4c6ab9b",
+  "generatorSha256": "2cba13b49def14d12986dc9c97acfa4bfab544798ffdd7e76fd2abfb0d8f491d",
   "blender": "4.5.14 LTS",
-  "bytes": 4540700,
-  "glbSha256": "8a7f2186a1adfa52eab48a91871e519c9ee778d47c1717b0e3cea81ab0153693",
-  "blendSha256": "5fc202565e2b7ca667637a5e760a32f2ab126f12234d609d609136b4b3957108"
+  "bytes": 4629452,
+  "glbSha256": "9a6a30d25a0351be32f5be627893535e3cb5ede4e32c3b96b4e176c784ce4cc4",
+  "blendSha256": "6a00a28f67962645333d18858e3de5a23aa5377c024e2d1daba0a3f665ed0b0e"
 }

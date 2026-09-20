@@ -1,0 +1,20 @@
+{
+  "result": "PASS",
+  "checks": [
+    "native window blur during press never places",
+    "multiple touches never place",
+    "double click submits one placement",
+    "undo during landing prevents late resurrection",
+    "double click toggles window only once",
+    "held repeated Enter toggles once",
+    "supplemental drag uses same placement",
+    "shutters interchange with mirrored slot geometry",
+    "both interchangeable shutters remain available",
+    "help off does not turn camera or reveal answer",
+    "Classic contains four registered products",
+    "existing math world entrance",
+    "existing tower entrance",
+    "existing adventure entrance",
+    "retired route still returns home"
+  ]
+}

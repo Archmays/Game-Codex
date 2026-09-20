@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "source": {
+    "algorithm": "sha256(sorted lines: file_sha256 two-spaces repo-relative-path newline)",
+    "scope": "all runtime, authored game sources, QA tools/tests, package/build config, input contract; excludes report/screenshot outputs",
+    "fileCount": 10023,
+    "sha256": "0c6355ad30d26973b1bfb948d12b2a31f8b79125d6a12e79edf301987e6ea51b",
+    "glbSha256": "f6a8acfa5bb041e7ae0f2b047be5ebf4383a235f2a1dcaf483a7ad46f175d308"
+  },
+  "zip": "world-in-a-box-v0.3.0-offline.zip",
+  "sha256": "7e4c89c98b2ba8fc8c5e2b22d2ecfdc4df103c4ab926966fd6bebcd0959513a6",
+  "bytes": 54918480,
+  "entries": 9724,
+  "extractedAllBytesEqual": true
+}

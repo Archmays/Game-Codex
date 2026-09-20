@@ -1,0 +1,2904 @@
+{
+  "result": "PASS_MACHINE",
+  "lineage": "These checks precede the final game-local scroll-notification fix. Shared source stayed unchanged; final direct game browser matrices cover the changed input.",
+  "hittest": [
+    {
+      "phase": "shared-candidate",
+      "evidence": {
+        "verdict": "PASS",
+        "project": "desktop-1366",
+        "manifestSurfaceCount": 15,
+        "testedSurfaceCount": 15,
+        "startAt": null,
+        "endAt": null,
+        "rows": [
+          {
+            "surfaceId": "world-in-a-box",
+            "route": "?play=world-in-a-box",
+            "productId": "world-in-a-box",
+            "kind": "product-world",
+            "project": "desktop-1366",
+            "criticalControls": 3,
+            "actionEvidence": [
+              {
+                "label": "选择窗扇一",
+                "selector": "button.wb-piece",
+                "rect": {
+                  "x": 242,
+                  "y": 502,
+                  "width": 286,
+                  "height": 122,
+                  "right": 528,
+                  "bottom": 624
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择窗扇二",
+                "selector": "button.wb-piece",
+                "rect": {
+                  "x": 540,
+                  "y": 502,
+                  "width": 286,
+                  "height": 122,
+                  "right": 826,
+                  "bottom": 624
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择窗帘",
+                "selector": "button.wb-piece",
+                "rect": {
+                  "x": 838,
+                  "y": 502,
+                  "width": 286,
+                  "height": 122,
+                  "right": 1124,
+                  "bottom": 624
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "hanzi-stroke-lab",
+            "route": "?play=hanzi-stroke-lab",
+            "productId": "hanzi-stroke-lab",
+            "kind": "support-activity",
+            "project": "desktop-1366",
+            "criticalControls": 1,
+            "actionEvidence": [
+              {
+                "label": "查询",
+                "selector": "button.hsl-primary",
+                "rect": {
+                  "x": 1221,
+                  "y": 136.578125,
+                  "width": 58,
+                  "height": 52,
+                  "right": 1279,
+                  "bottom": 188.578125
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "memory-independent",
+            "route": "?play=memory-card",
+            "productId": "memory-card",
+            "kind": "support-activity",
+            "project": "desktop-1366",
+            "criticalControls": 12,
+            "actionEvidence": [
+              {
+                "label": "第 1 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 237,
+                  "y": 319.9375,
+                  "width": 212.796875,
+                  "height": 128,
+                  "right": 449.796875,
+                  "bottom": 447.9375
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 2 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 463.390625,
+                  "y": 319.9375,
+                  "width": 212.8125,
+                  "height": 128,
+                  "right": 676.203125,
+                  "bottom": 447.9375
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 3 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 689.796875,
+                  "y": 319.9375,
+                  "width": 212.796875,
+                  "height": 128,
+                  "right": 902.59375,
+                  "bottom": 447.9375
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 4 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 916.1875,
+                  "y": 319.9375,
+                  "width": 212.8125,
+                  "height": 128,
+                  "right": 1129,
+                  "bottom": 447.9375
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 5 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 237,
+                  "y": 319.53125,
+                  "width": 212.796875,
+                  "height": 128,
+                  "right": 449.796875,
+                  "bottom": 447.53125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 6 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 463.390625,
+                  "y": 319.53125,
+                  "width": 212.8125,
+                  "height": 128,
+                  "right": 676.203125,
+                  "bottom": 447.53125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 7 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 689.796875,
+                  "y": 319.53125,
+                  "width": 212.796875,
+                  "height": 128,
+                  "right": 902.59375,
+                  "bottom": 447.53125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 8 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 916.1875,
+                  "y": 319.53125,
+                  "width": 212.8125,
+                  "height": 128,
+                  "right": 1129,
+                  "bottom": 447.53125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 9 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 237,
+                  "y": 399.125,
+                  "width": 212.796875,
+                  "height": 128,
+                  "right": 449.796875,
+                  "bottom": 527.125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 10 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 463.390625,
+                  "y": 399.125,
+                  "width": 212.8125,
+                  "height": 128,
+                  "right": 676.203125,
+                  "bottom": 527.125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 11 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 689.796875,
+                  "y": 399.125,
+                  "width": 212.796875,
+                  "height": 128,
+                  "right": 902.59375,
+                  "bottom": 527.125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 12 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 916.1875,
+                  "y": 399.125,
+                  "width": 212.8125,
+                  "height": 128,
+                  "right": 1129,
+                  "bottom": 527.125
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "step4-playtest",
+            "route": "?playtest=step4",
+            "productId": "portfolio",
+            "kind": "journal",
+            "project": "desktop-1366",
+            "criticalControls": 13,
+            "actionEvidence": [
+              {
+                "label": "选择这一章 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 146,
+                  "y": 359.25,
+                  "width": 316.65625,
+                  "height": 50,
+                  "right": 462.65625,
+                  "bottom": 409.25
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这一章 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 524.65625,
+                  "y": 359.25,
+                  "width": 316.671875,
+                  "height": 50,
+                  "right": 841.328125,
+                  "bottom": 409.25
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这一章 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 903.328125,
+                  "y": 359.25,
+                  "width": 316.65625,
+                  "height": 50,
+                  "right": 1219.984375,
+                  "bottom": 409.25
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这一章 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 146,
+                  "y": 359,
+                  "width": 316.65625,
+                  "height": 50,
+                  "right": 462.65625,
+                  "bottom": 409
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这张地图 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 146,
+                  "y": 358.5,
+                  "width": 316.65625,
+                  "height": 50,
+                  "right": 462.65625,
+                  "bottom": 408.5
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这张地图 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 524.65625,
+                  "y": 358.5,
+                  "width": 316.671875,
+                  "height": 50,
+                  "right": 841.328125,
+                  "bottom": 408.5
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这张地图 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 903.328125,
+                  "y": 358.5,
+                  "width": 316.65625,
+                  "height": 50,
+                  "right": 1219.984375,
+                  "bottom": 408.5
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这一局 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 146,
+                  "y": 359,
+                  "width": 316.65625,
+                  "height": 50,
+                  "right": 462.65625,
+                  "bottom": 409
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这一局 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 524.65625,
+                  "y": 359,
+                  "width": 316.671875,
+                  "height": 50,
+                  "right": 841.328125,
+                  "bottom": 409
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这一局 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 903.328125,
+                  "y": 359,
+                  "width": 316.65625,
+                  "height": 50,
+                  "right": 1219.984375,
+                  "bottom": 409
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这一局 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 146,
+                  "y": 358.75,
+                  "width": 316.65625,
+                  "height": 50,
+                  "right": 462.65625,
+                  "bottom": 408.75
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这一局 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 524.65625,
+                  "y": 358.75,
+                  "width": 316.671875,
+                  "height": 50,
+                  "right": 841.328125,
+                  "bottom": 408.75
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这一局 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 903.328125,
+                  "y": 358.75,
+                  "width": 316.65625,
+                  "height": 50,
+                  "right": 1219.984375,
+                  "bottom": 408.75
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "hanzi-word-adventure",
+            "route": "?play=hanzi-word-adventure",
+            "productId": "hanzi-word-adventure",
+            "kind": "product-world",
+            "project": "desktop-1366",
+            "criticalControls": 1,
+            "actionEvidence": [
+              {
+                "label": "新游戏",
+                "selector": "button",
+                "rect": {
+                  "x": 485,
+                  "y": 430.109375,
+                  "width": 396,
+                  "height": 52,
+                  "right": 881,
+                  "bottom": 482.109375
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": true,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "my-game-world",
+            "route": "?world=my-game-world",
+            "productId": "portfolio",
+            "kind": "portfolio-world",
+            "project": "desktop-1366",
+            "criticalControls": 3,
+            "actionEvidence": [
+              {
+                "label": "字阵守城摆下字塔，合出更强的字阵，守住城门。\n          开始守城↗",
+                "selector": "a.world-entry",
+                "rect": {
+                  "x": 59,
+                  "y": 103.7297592163086,
+                  "width": 612,
+                  "height": 563.34375,
+                  "right": 671,
+                  "bottom": 667.0735092163086
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "数学世界滑动算式格，或用数字牌凑出目标。\n          走进数学世界↗",
+                "selector": "a.world-entry",
+                "rect": {
+                  "x": 695,
+                  "y": 102,
+                  "width": 612,
+                  "height": 563.34375,
+                  "right": 1307,
+                  "bottom": 665.34375
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "字间行者挪一枚字，变一段路。借来木与不，走回家。踏上归途↗",
+                "selector": "a.world-entry",
+                "rect": {
+                  "x": 59,
+                  "y": 244.07394409179688,
+                  "width": 1248,
+                  "height": 284.0000305175781,
+                  "right": 1307,
+                  "bottom": 528.073974609375
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "classic-hub",
+            "route": "?hub=classic&from=world",
+            "productId": "portfolio",
+            "kind": "classic-hub",
+            "project": "desktop-1366",
+            "criticalControls": 4,
+            "actionEvidence": [
+              {
+                "label": "开始守城",
+                "selector": "button.ui-button.game-card__button",
+                "rect": {
+                  "x": 72,
+                  "y": 370.921875,
+                  "width": 370,
+                  "height": 48,
+                  "right": 442,
+                  "bottom": 418.921875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "进入数学世界",
+                "selector": "button.ui-button.game-card__button",
+                "rect": {
+                  "x": 498,
+                  "y": 370.921875,
+                  "width": 370,
+                  "height": 48,
+                  "right": 868,
+                  "bottom": 418.921875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "踏上归途",
+                "selector": "span.ui-button.game-card__button",
+                "rect": {
+                  "x": 930,
+                  "y": 364.921875,
+                  "width": 358,
+                  "height": 48,
+                  "right": 1288,
+                  "bottom": 412.921875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "打开小世界",
+                "selector": "button.ui-button.game-card__button",
+                "rect": {
+                  "x": 78,
+                  "y": 591.796875,
+                  "width": 358,
+                  "height": 48,
+                  "right": 436,
+                  "bottom": 639.796875
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "hanzi-tower-defense",
+            "route": "?play=hanzi-tower-defense",
+            "productId": "hanzi-tower-defense",
+            "kind": "product-world",
+            "project": "desktop-1366",
+            "criticalControls": 13,
+            "actionEvidence": [
+              {
+                "label": "塔位1 入口弯内，火 火球 · 单体",
+                "selector": "button.td-slot.td-slot--occupied.td-slot--illustrated",
+                "rect": {
+                  "x": 146.25,
+                  "y": 407.25,
+                  "width": 58,
+                  "height": 58,
+                  "right": 204.25,
+                  "bottom": 465.25
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "塔位2 双弯中心，空位",
+                "selector": "button.td-slot",
+                "rect": {
+                  "x": 370.203125,
+                  "y": 406.84375,
+                  "width": 58,
+                  "height": 58,
+                  "right": 428.203125,
+                  "bottom": 464.84375
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "塔位3 下弯回射，空位",
+                "selector": "button.td-slot",
+                "rect": {
+                  "x": 396.25,
+                  "y": 407.3125,
+                  "width": 58,
+                  "height": 58,
+                  "right": 454.25,
+                  "bottom": 465.3125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "塔位4 三路交汇，空位",
+                "selector": "button.td-slot",
+                "rect": {
+                  "x": 635.828125,
+                  "y": 406.8125,
+                  "width": 58,
+                  "height": 58,
+                  "right": 693.828125,
+                  "bottom": 464.8125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "塔位5 上路远射，空位",
+                "selector": "button.td-slot",
+                "rect": {
+                  "x": 646.25,
+                  "y": 319.546875,
+                  "width": 58,
+                  "height": 58,
+                  "right": 704.25,
+                  "bottom": 377.546875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "塔位6 后路侧翼，空位",
+                "selector": "button.td-slot",
+                "rect": {
+                  "x": 849.375,
+                  "y": 407.46875,
+                  "width": 58,
+                  "height": 58,
+                  "right": 907.375,
+                  "bottom": 465.46875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "塔位7 末弯内侧，空位",
+                "selector": "button.td-slot",
+                "rect": {
+                  "x": 656.65625,
+                  "y": 407.328125,
+                  "width": 58,
+                  "height": 58,
+                  "right": 714.65625,
+                  "bottom": 465.328125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "塔位8 城门守卫，空位",
+                "selector": "button.td-slot",
+                "rect": {
+                  "x": 896.25,
+                  "y": 407.375,
+                  "width": 58,
+                  "height": 58,
+                  "right": 954.25,
+                  "bottom": 465.375
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "材料 火 huǒ，火球 · 单体",
+                "selector": "button.td-core",
+                "rect": {
+                  "x": 1042,
+                  "y": 321,
+                  "width": 70.25,
+                  "height": 64,
+                  "right": 1112.25,
+                  "bottom": 385
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "材料 木 mù，叶箭 · 快射",
+                "selector": "button.td-core",
+                "rect": {
+                  "x": 1119.25,
+                  "y": 321,
+                  "width": 70.25,
+                  "height": 64,
+                  "right": 1189.5,
+                  "bottom": 385
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "材料 木 mù，叶箭 · 快射",
+                "selector": "button.td-core",
+                "rect": {
+                  "x": 1196.5,
+                  "y": 321,
+                  "width": 70.25,
+                  "height": 64,
+                  "right": 1266.75,
+                  "bottom": 385
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "材料 氵 三点水，水珠 · 减速",
+                "selector": "button.td-core",
+                "rect": {
+                  "x": 1273.75,
+                  "y": 321,
+                  "width": 70.25,
+                  "height": 64,
+                  "right": 1344,
+                  "bottom": 385
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "材料 山 shān，岩弹 · 重击",
+                "selector": "button.td-core",
+                "rect": {
+                  "x": 1042,
+                  "y": 392,
+                  "width": 70.25,
+                  "height": 64,
+                  "right": 1112.25,
+                  "bottom": 456
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "math-world",
+            "route": "?world=math-world&from=world",
+            "productId": "math-lab",
+            "kind": "product-world",
+            "project": "desktop-1366",
+            "criticalControls": 2,
+            "actionEvidence": [
+              {
+                "label": "进入算式滑轨站",
+                "selector": "button",
+                "rect": {
+                  "x": 125,
+                  "y": 38.1875,
+                  "width": 558,
+                  "height": 691,
+                  "right": 683,
+                  "bottom": 729.1875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "进入目标工坊",
+                "selector": "button",
+                "rect": {
+                  "x": 683,
+                  "y": 38.1875,
+                  "width": 558,
+                  "height": 691,
+                  "right": 1241,
+                  "bottom": 729.1875
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "math-slider",
+            "route": "?world=math-world&station=slider",
+            "productId": "math-lab",
+            "kind": "station",
+            "project": "desktop-1366",
+            "criticalControls": 18,
+            "actionEvidence": [
+              {
+                "label": "← 回城市地图",
+                "selector": "button",
+                "rect": {
+                  "x": 34,
+                  "y": 13,
+                  "width": 136.828125,
+                  "height": 45,
+                  "right": 170.828125,
+                  "bottom": 58
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "回我的游戏世界",
+                "selector": "a",
+                "rect": {
+                  "x": 1184,
+                  "y": 13,
+                  "width": 148,
+                  "height": 45,
+                  "right": 1332,
+                  "bottom": 58
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "关卡列表",
+                "selector": "button.ui-button.ui-button--secondary",
+                "rect": {
+                  "x": 995,
+                  "y": 86.6875,
+                  "width": 76,
+                  "height": 44,
+                  "right": 1071,
+                  "bottom": 130.6875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "重新教程",
+                "selector": "button.ui-button.ui-button--ghost",
+                "rect": {
+                  "x": 1077,
+                  "y": 86.6875,
+                  "width": 76,
+                  "height": 44,
+                  "right": 1153,
+                  "bottom": 130.6875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "关闭声音",
+                "selector": "button.ui-button.ui-button--ghost",
+                "rect": {
+                  "x": 1159,
+                  "y": 86.6875,
+                  "width": 44,
+                  "height": 44,
+                  "right": 1203,
+                  "bottom": 130.6875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 1 列选上方格",
+                "selector": "button.equation-slider__reel-control",
+                "rect": {
+                  "x": 587,
+                  "y": 265.390625,
+                  "width": 78,
+                  "height": 44,
+                  "right": 665,
+                  "bottom": 309.390625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "下方1，未点亮",
+                "selector": "button.equation-slider__tile",
+                "rect": {
+                  "x": 591,
+                  "y": 408.390625,
+                  "width": 70,
+                  "height": 48,
+                  "right": 661,
+                  "bottom": 456.390625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "上方2，未点亮",
+                "selector": "button.equation-slider__tile",
+                "rect": {
+                  "x": 591,
+                  "y": 317.390625,
+                  "width": 70,
+                  "height": 48,
+                  "right": 661,
+                  "bottom": 365.390625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "中央4，未点亮",
+                "selector": "button.equation-slider__tile.is-current",
+                "rect": {
+                  "x": 591,
+                  "y": 360.390625,
+                  "width": 70,
+                  "height": 48,
+                  "right": 661,
+                  "bottom": 408.390625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 1 列选下方格",
+                "selector": "button.equation-slider__reel-control",
+                "rect": {
+                  "x": 587,
+                  "y": 462.390625,
+                  "width": 78,
+                  "height": 44,
+                  "right": 665,
+                  "bottom": 506.390625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 2 列选上方格",
+                "selector": "button.equation-slider__reel-control",
+                "rect": {
+                  "x": 701,
+                  "y": 265.390625,
+                  "width": 78,
+                  "height": 44,
+                  "right": 779,
+                  "bottom": 309.390625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "中央5，未点亮",
+                "selector": "button.equation-slider__tile.is-current",
+                "rect": {
+                  "x": 705,
+                  "y": 360.390625,
+                  "width": 70,
+                  "height": 48,
+                  "right": 775,
+                  "bottom": 408.390625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "下方4，未点亮",
+                "selector": "button.equation-slider__tile",
+                "rect": {
+                  "x": 705,
+                  "y": 408.390625,
+                  "width": 70,
+                  "height": 48,
+                  "right": 775,
+                  "bottom": 456.390625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "上方2，未点亮",
+                "selector": "button.equation-slider__tile",
+                "rect": {
+                  "x": 705,
+                  "y": 317.390625,
+                  "width": 70,
+                  "height": 48,
+                  "right": 775,
+                  "bottom": 365.390625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 2 列选下方格",
+                "selector": "button.equation-slider__reel-control",
+                "rect": {
+                  "x": 701,
+                  "y": 462.390625,
+                  "width": 78,
+                  "height": 44,
+                  "right": 779,
+                  "bottom": 506.390625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "提示",
+                "selector": "button.ui-button.ui-button--secondary",
+                "rect": {
+                  "x": 598.65625,
+                  "y": 556.390625,
+                  "width": 168.671875,
+                  "height": 48,
+                  "right": 767.328125,
+                  "bottom": 604.390625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "重置",
+                "selector": "button.ui-button.ui-button--secondary",
+                "rect": {
+                  "x": 774.328125,
+                  "y": 556.390625,
+                  "width": 168.671875,
+                  "height": 48,
+                  "right": 943,
+                  "bottom": 604.390625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "跳过教程",
+                "selector": "button.ui-button.ui-button--secondary",
+                "rect": {
+                  "x": 1264,
+                  "y": 700,
+                  "width": 78,
+                  "height": 44,
+                  "right": 1342,
+                  "bottom": 744
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "math-target",
+            "route": "?world=math-world&station=target",
+            "productId": "math-lab",
+            "kind": "station",
+            "project": "desktop-1366",
+            "criticalControls": 15,
+            "actionEvidence": [
+              {
+                "label": "← 回城市地图",
+                "selector": "button",
+                "rect": {
+                  "x": 34,
+                  "y": 11.5,
+                  "width": 136.828125,
+                  "height": 48,
+                  "right": 170.828125,
+                  "bottom": 59.5
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "回我的游戏世界",
+                "selector": "a",
+                "rect": {
+                  "x": 1184,
+                  "y": 11.5,
+                  "width": 148,
+                  "height": 48,
+                  "right": 1332,
+                  "bottom": 59.5
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "目标 10",
+                "selector": "button.target-action",
+                "rect": {
+                  "x": 797.5,
+                  "y": 94,
+                  "width": 88.5,
+                  "height": 48,
+                  "right": 886,
+                  "bottom": 142
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "目标 12",
+                "selector": "button.target-action",
+                "rect": {
+                  "x": 894,
+                  "y": 94,
+                  "width": 88.5,
+                  "height": 48,
+                  "right": 982.5,
+                  "bottom": 142
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "目标 24",
+                "selector": "button.target-action",
+                "rect": {
+                  "x": 990.5,
+                  "y": 94,
+                  "width": 88.5,
+                  "height": 48,
+                  "right": 1079,
+                  "bottom": 142
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "1，原牌 1",
+                "selector": "button.target-card",
+                "rect": {
+                  "x": 307,
+                  "y": 246.5,
+                  "width": 179,
+                  "height": 100.296875,
+                  "right": 486,
+                  "bottom": 346.796875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "2，原牌 2",
+                "selector": "button.target-card",
+                "rect": {
+                  "x": 498,
+                  "y": 246.5,
+                  "width": 179,
+                  "height": 100.296875,
+                  "right": 677,
+                  "bottom": 346.796875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "3，原牌 3",
+                "selector": "button.target-card",
+                "rect": {
+                  "x": 689,
+                  "y": 246.5,
+                  "width": 179,
+                  "height": 100.296875,
+                  "right": 868,
+                  "bottom": 346.796875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "4，原牌 4",
+                "selector": "button.target-card",
+                "rect": {
+                  "x": 880,
+                  "y": 246.5,
+                  "width": 179,
+                  "height": 100.296875,
+                  "right": 1059,
+                  "bottom": 346.796875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "+",
+                "selector": "button.target-action",
+                "rect": {
+                  "x": 632,
+                  "y": 412.296875,
+                  "width": 48,
+                  "height": 48,
+                  "right": 680,
+                  "bottom": 460.296875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "-",
+                "selector": "button.target-action",
+                "rect": {
+                  "x": 686,
+                  "y": 412.296875,
+                  "width": 48,
+                  "height": 48,
+                  "right": 734,
+                  "bottom": 460.296875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "×",
+                "selector": "button.target-action",
+                "rect": {
+                  "x": 632,
+                  "y": 420.296875,
+                  "width": 48,
+                  "height": 48,
+                  "right": 680,
+                  "bottom": 468.296875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "÷",
+                "selector": "button.target-action",
+                "rect": {
+                  "x": 686,
+                  "y": 420.296875,
+                  "width": 48,
+                  "height": 48,
+                  "right": 734,
+                  "bottom": 468.296875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "给我一点提示",
+                "selector": "button.target-action",
+                "rect": {
+                  "x": 287,
+                  "y": 491.296875,
+                  "width": 128,
+                  "height": 48,
+                  "right": 415,
+                  "bottom": 539.296875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "换一组牌",
+                "selector": "button.target-action",
+                "rect": {
+                  "x": 991,
+                  "y": 636.296875,
+                  "width": 88,
+                  "height": 48,
+                  "right": 1079,
+                  "bottom": 684.296875
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "classic-defense",
+            "route": "?hub=classic&from=world",
+            "productId": "hanzi-tower-defense",
+            "kind": "classic-entry",
+            "project": "desktop-1366",
+            "criticalControls": 1,
+            "actionEvidence": [
+              {
+                "label": "开始守城",
+                "selector": "button.ui-button.game-card__button",
+                "rect": {
+                  "x": 72,
+                  "y": 370.921875,
+                  "width": 370,
+                  "height": 48,
+                  "right": 442,
+                  "bottom": 418.921875
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "classic-adventure",
+            "route": "?hub=classic&from=world",
+            "productId": "hanzi-word-adventure",
+            "kind": "classic-entry",
+            "project": "desktop-1366",
+            "criticalControls": 1,
+            "actionEvidence": [
+              {
+                "label": "踏上归途",
+                "selector": "span.ui-button.game-card__button",
+                "rect": {
+                  "x": 930,
+                  "y": 364.921875,
+                  "width": 358,
+                  "height": 48,
+                  "right": 1288,
+                  "bottom": 412.921875
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": true,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "classic-math",
+            "route": "?hub=classic&from=world",
+            "productId": "math-lab",
+            "kind": "classic-entry",
+            "project": "desktop-1366",
+            "criticalControls": 1,
+            "actionEvidence": [
+              {
+                "label": "进入数学世界",
+                "selector": "button.ui-button.game-card__button",
+                "rect": {
+                  "x": 498,
+                  "y": 370.921875,
+                  "width": 370,
+                  "height": 48,
+                  "right": 868,
+                  "bottom": 418.921875
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "classic-world-box",
+            "route": "?hub=classic&from=world",
+            "productId": "world-in-a-box",
+            "kind": "classic-entry",
+            "project": "desktop-1366",
+            "criticalControls": 1,
+            "actionEvidence": [
+              {
+                "label": "打开小世界",
+                "selector": "button.ui-button.game-card__button",
+                "rect": {
+                  "x": 78,
+                  "y": 591.796875,
+                  "width": 358,
+                  "height": 48,
+                  "right": 436,
+                  "bottom": 639.796875
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          }
+        ],
+        "runtime": {
+          "pageErrors": [],
+          "consoleErrors": [],
+          "failedResponses": [],
+          "failedRequests": [],
+          "externalRequests": []
+        }
+      }
+    },
+    {
+      "phase": "shared-candidate",
+      "evidence": {
+        "verdict": "PASS",
+        "project": "mobile-390",
+        "manifestSurfaceCount": 15,
+        "testedSurfaceCount": 15,
+        "startAt": null,
+        "endAt": null,
+        "rows": [
+          {
+            "surfaceId": "world-in-a-box",
+            "route": "?play=world-in-a-box",
+            "productId": "world-in-a-box",
+            "kind": "product-world",
+            "project": "mobile-390",
+            "criticalControls": 3,
+            "actionEvidence": [
+              {
+                "label": "选择窗扇一",
+                "selector": "button.wb-piece",
+                "rect": {
+                  "x": 63,
+                  "y": 539,
+                  "width": 83.328125,
+                  "height": 112,
+                  "right": 146.328125,
+                  "bottom": 651
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择窗扇二",
+                "selector": "button.wb-piece",
+                "rect": {
+                  "x": 153.328125,
+                  "y": 539,
+                  "width": 83.328125,
+                  "height": 112,
+                  "right": 236.65625,
+                  "bottom": 651
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择窗帘",
+                "selector": "button.wb-piece",
+                "rect": {
+                  "x": 243.65625,
+                  "y": 539,
+                  "width": 83.34375,
+                  "height": 112,
+                  "right": 327,
+                  "bottom": 651
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "hanzi-stroke-lab",
+            "route": "?play=hanzi-stroke-lab",
+            "productId": "hanzi-stroke-lab",
+            "kind": "support-activity",
+            "project": "mobile-390",
+            "criticalControls": 1,
+            "actionEvidence": [
+              {
+                "label": "查询",
+                "selector": "button.hsl-primary",
+                "rect": {
+                  "x": 318,
+                  "y": 114.578125,
+                  "width": 60,
+                  "height": 52,
+                  "right": 378,
+                  "bottom": 166.578125
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "memory-independent",
+            "route": "?play=memory-card",
+            "productId": "memory-card",
+            "kind": "support-activity",
+            "project": "mobile-390",
+            "criticalControls": 12,
+            "actionEvidence": [
+              {
+                "label": "第 1 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 25.59375,
+                  "y": 379.90625,
+                  "width": 107.734375,
+                  "height": 83.1875,
+                  "right": 133.328125,
+                  "bottom": 463.09375
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 2 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 141.125,
+                  "y": 379.90625,
+                  "width": 107.734375,
+                  "height": 83.1875,
+                  "right": 248.859375,
+                  "bottom": 463.09375
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 3 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 256.65625,
+                  "y": 379.90625,
+                  "width": 107.75,
+                  "height": 83.1875,
+                  "right": 364.40625,
+                  "bottom": 463.09375
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 4 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 25.59375,
+                  "y": 380.890625,
+                  "width": 107.734375,
+                  "height": 83.1875,
+                  "right": 133.328125,
+                  "bottom": 464.078125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 5 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 141.125,
+                  "y": 380.890625,
+                  "width": 107.734375,
+                  "height": 83.1875,
+                  "right": 248.859375,
+                  "bottom": 464.078125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 6 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 256.65625,
+                  "y": 380.890625,
+                  "width": 107.75,
+                  "height": 83.1875,
+                  "right": 364.40625,
+                  "bottom": 464.078125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 7 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 25.59375,
+                  "y": 467.875,
+                  "width": 107.734375,
+                  "height": 83.1875,
+                  "right": 133.328125,
+                  "bottom": 551.0625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 8 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 141.125,
+                  "y": 467.875,
+                  "width": 107.734375,
+                  "height": 83.1875,
+                  "right": 248.859375,
+                  "bottom": 551.0625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 9 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 256.65625,
+                  "y": 467.875,
+                  "width": 107.75,
+                  "height": 83.1875,
+                  "right": 364.40625,
+                  "bottom": 551.0625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 10 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 25.59375,
+                  "y": 558.859375,
+                  "width": 107.734375,
+                  "height": 83.1875,
+                  "right": 133.328125,
+                  "bottom": 642.046875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 11 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 141.125,
+                  "y": 558.859375,
+                  "width": 107.734375,
+                  "height": 83.1875,
+                  "right": 248.859375,
+                  "bottom": 642.046875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 12 张，未翻开的卡片",
+                "selector": "button",
+                "rect": {
+                  "x": 256.65625,
+                  "y": 558.859375,
+                  "width": 107.75,
+                  "height": 83.1875,
+                  "right": 364.40625,
+                  "bottom": 642.046875
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "step4-playtest",
+            "route": "?playtest=step4",
+            "productId": "portfolio",
+            "kind": "journal",
+            "project": "mobile-390",
+            "criticalControls": 13,
+            "actionEvidence": [
+              {
+                "label": "选择这一章 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 39,
+                  "y": 396.75,
+                  "width": 312,
+                  "height": 50,
+                  "right": 351,
+                  "bottom": 446.75
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这一章 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 39,
+                  "y": 396.5,
+                  "width": 312,
+                  "height": 50,
+                  "right": 351,
+                  "bottom": 446.5
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这一章 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 39,
+                  "y": 397.25,
+                  "width": 312,
+                  "height": 50,
+                  "right": 351,
+                  "bottom": 447.25
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这一章 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 39,
+                  "y": 397,
+                  "width": 312,
+                  "height": 50,
+                  "right": 351,
+                  "bottom": 447
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这张地图 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 39,
+                  "y": 396.5,
+                  "width": 312,
+                  "height": 50,
+                  "right": 351,
+                  "bottom": 446.5
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这张地图 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 39,
+                  "y": 397.25,
+                  "width": 312,
+                  "height": 50,
+                  "right": 351,
+                  "bottom": 447.25
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这张地图 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 39,
+                  "y": 397,
+                  "width": 312,
+                  "height": 50,
+                  "right": 351,
+                  "bottom": 447
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这一局 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 39,
+                  "y": 396.5,
+                  "width": 312,
+                  "height": 50,
+                  "right": 351,
+                  "bottom": 446.5
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这一局 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 39,
+                  "y": 397.25,
+                  "width": 312,
+                  "height": 50,
+                  "right": 351,
+                  "bottom": 447.25
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这一局 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 39,
+                  "y": 397,
+                  "width": 312,
+                  "height": 50,
+                  "right": 351,
+                  "bottom": 447
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这一局 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 39,
+                  "y": 396.75,
+                  "width": 312,
+                  "height": 50,
+                  "right": 351,
+                  "bottom": 446.75
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这一局 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 39,
+                  "y": 396.5,
+                  "width": 312,
+                  "height": 50,
+                  "right": 351,
+                  "bottom": 446.5
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择这一局 →",
+                "selector": "a.step4-button",
+                "rect": {
+                  "x": 39,
+                  "y": 397.25,
+                  "width": 312,
+                  "height": 50,
+                  "right": 351,
+                  "bottom": 447.25
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "hanzi-word-adventure",
+            "route": "?play=hanzi-word-adventure",
+            "productId": "hanzi-word-adventure",
+            "kind": "product-world",
+            "project": "mobile-390",
+            "criticalControls": 1,
+            "actionEvidence": [
+              {
+                "label": "新游戏",
+                "selector": "button",
+                "rect": {
+                  "x": 52,
+                  "y": 468.109375,
+                  "width": 286,
+                  "height": 52,
+                  "right": 338,
+                  "bottom": 520.109375
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": true,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "my-game-world",
+            "route": "?world=my-game-world",
+            "productId": "portfolio",
+            "kind": "portfolio-world",
+            "project": "mobile-390",
+            "criticalControls": 3,
+            "actionEvidence": [
+              {
+                "label": "字阵守城摆下字塔，合出更强的字阵，守住城门。\n          开始守城↗",
+                "selector": "a.world-entry",
+                "rect": {
+                  "x": 16,
+                  "y": 209,
+                  "width": 358,
+                  "height": 345.140625,
+                  "right": 374,
+                  "bottom": 554.140625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "数学世界滑动算式格，或用数字牌凑出目标。\n          走进数学世界↗",
+                "selector": "a.world-entry",
+                "rect": {
+                  "x": 16,
+                  "y": 249.140625,
+                  "width": 358,
+                  "height": 345.140625,
+                  "right": 374,
+                  "bottom": 594.28125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "字间行者挪一枚字，变一段路。借来木与不，走回家。踏上归途↗",
+                "selector": "a.world-entry",
+                "rect": {
+                  "x": 16,
+                  "y": 217.28125,
+                  "width": 358,
+                  "height": 409.6875,
+                  "right": 374,
+                  "bottom": 626.96875
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "classic-hub",
+            "route": "?hub=classic&from=world",
+            "productId": "portfolio",
+            "kind": "classic-hub",
+            "project": "mobile-390",
+            "criticalControls": 4,
+            "actionEvidence": [
+              {
+                "label": "开始守城",
+                "selector": "button.ui-button.game-card__button",
+                "rect": {
+                  "x": 37,
+                  "y": 398.46875,
+                  "width": 316,
+                  "height": 48,
+                  "right": 353,
+                  "bottom": 446.46875
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "进入数学世界",
+                "selector": "button.ui-button.game-card__button",
+                "rect": {
+                  "x": 37,
+                  "y": 398.15625,
+                  "width": 316,
+                  "height": 48,
+                  "right": 353,
+                  "bottom": 446.15625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "踏上归途",
+                "selector": "span.ui-button.game-card__button",
+                "rect": {
+                  "x": 43,
+                  "y": 495.03125,
+                  "width": 304,
+                  "height": 48,
+                  "right": 347,
+                  "bottom": 543.03125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "打开小世界",
+                "selector": "button.ui-button.game-card__button",
+                "rect": {
+                  "x": 43,
+                  "y": 721.90625,
+                  "width": 304,
+                  "height": 48,
+                  "right": 347,
+                  "bottom": 769.90625
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "hanzi-tower-defense",
+            "route": "?play=hanzi-tower-defense",
+            "productId": "hanzi-tower-defense",
+            "kind": "product-world",
+            "project": "mobile-390",
+            "criticalControls": 13,
+            "actionEvidence": [
+              {
+                "label": "塔位1 入口弯内，火 火球 · 单体",
+                "selector": "button.td-slot.td-slot--occupied.td-slot--illustrated",
+                "rect": {
+                  "x": 46.5,
+                  "y": 388.859375,
+                  "width": 44,
+                  "height": 48,
+                  "right": 90.5,
+                  "bottom": 436.859375
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "塔位2 双弯中心，空位",
+                "selector": "button.td-slot",
+                "rect": {
+                  "x": 128.90625,
+                  "y": 401.65625,
+                  "width": 44,
+                  "height": 48,
+                  "right": 172.90625,
+                  "bottom": 449.65625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "塔位3 下弯回射，空位",
+                "selector": "button.td-slot",
+                "rect": {
+                  "x": 138.5,
+                  "y": 450.125,
+                  "width": 44,
+                  "height": 48,
+                  "right": 182.5,
+                  "bottom": 498.125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "塔位4 三路交汇，空位",
+                "selector": "button.td-slot",
+                "rect": {
+                  "x": 226.65625,
+                  "y": 422.984375,
+                  "width": 44,
+                  "height": 48,
+                  "right": 270.65625,
+                  "bottom": 470.984375
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "塔位5 上路远射，空位",
+                "selector": "button.td-slot",
+                "rect": {
+                  "x": 230.5,
+                  "y": 329.125,
+                  "width": 44,
+                  "height": 48,
+                  "right": 274.5,
+                  "bottom": 377.125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "塔位6 后路侧翼，空位",
+                "selector": "button.td-slot",
+                "rect": {
+                  "x": 305.25,
+                  "y": 382.453125,
+                  "width": 44,
+                  "height": 48,
+                  "right": 349.25,
+                  "bottom": 430.453125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "塔位7 末弯内侧，空位",
+                "selector": "button.td-slot",
+                "rect": {
+                  "x": 234.328125,
+                  "y": 450.453125,
+                  "width": 44,
+                  "height": 48,
+                  "right": 278.328125,
+                  "bottom": 498.453125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "塔位8 城门守卫，空位",
+                "selector": "button.td-slot",
+                "rect": {
+                  "x": 322.5,
+                  "y": 446.453125,
+                  "width": 44,
+                  "height": 48,
+                  "right": 366.5,
+                  "bottom": 494.453125
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "材料 火 huǒ，火球 · 单体",
+                "selector": "button.td-core",
+                "rect": {
+                  "x": 13,
+                  "y": 448.0625,
+                  "width": 56.5,
+                  "height": 52,
+                  "right": 69.5,
+                  "bottom": 500.0625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "材料 木 mù，叶箭 · 快射",
+                "selector": "button.td-core",
+                "rect": {
+                  "x": 74.5,
+                  "y": 448.0625,
+                  "width": 56.5,
+                  "height": 52,
+                  "right": 131,
+                  "bottom": 500.0625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "材料 木 mù，叶箭 · 快射",
+                "selector": "button.td-core",
+                "rect": {
+                  "x": 136,
+                  "y": 448.0625,
+                  "width": 56.5,
+                  "height": 52,
+                  "right": 192.5,
+                  "bottom": 500.0625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "材料 氵 三点水，水珠 · 减速",
+                "selector": "button.td-core",
+                "rect": {
+                  "x": 197.5,
+                  "y": 448.0625,
+                  "width": 56.5,
+                  "height": 52,
+                  "right": 254,
+                  "bottom": 500.0625
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "材料 山 shān，岩弹 · 重击",
+                "selector": "button.td-core",
+                "rect": {
+                  "x": 259,
+                  "y": 448.0625,
+                  "width": 56.5,
+                  "height": 52,
+                  "right": 315.5,
+                  "bottom": 500.0625
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "math-world",
+            "route": "?world=math-world&from=world",
+            "productId": "math-lab",
+            "kind": "product-world",
+            "project": "mobile-390",
+            "criticalControls": 2,
+            "actionEvidence": [
+              {
+                "label": "进入算式滑轨站",
+                "selector": "button",
+                "rect": {
+                  "x": 16,
+                  "y": 182,
+                  "width": 358,
+                  "height": 175.25,
+                  "right": 374,
+                  "bottom": 357.25
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "进入目标工坊",
+                "selector": "button",
+                "rect": {
+                  "x": 16,
+                  "y": 375.25,
+                  "width": 358,
+                  "height": 175.25,
+                  "right": 374,
+                  "bottom": 550.5
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "math-slider",
+            "route": "?world=math-world&station=slider",
+            "productId": "math-lab",
+            "kind": "station",
+            "project": "mobile-390",
+            "criticalControls": 18,
+            "actionEvidence": [
+              {
+                "label": "← 回城市地图",
+                "selector": "button",
+                "rect": {
+                  "x": 12,
+                  "y": 68,
+                  "width": 174,
+                  "height": 45,
+                  "right": 186,
+                  "bottom": 113
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "回我的游戏世界",
+                "selector": "a",
+                "rect": {
+                  "x": 204,
+                  "y": 68,
+                  "width": 174,
+                  "height": 45,
+                  "right": 378,
+                  "bottom": 113
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "关卡列表",
+                "selector": "button.ui-button.ui-button--secondary",
+                "rect": {
+                  "x": 199,
+                  "y": 134,
+                  "width": 66,
+                  "height": 44,
+                  "right": 265,
+                  "bottom": 178
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "重新教程",
+                "selector": "button.ui-button.ui-button--ghost",
+                "rect": {
+                  "x": 269,
+                  "y": 134,
+                  "width": 66,
+                  "height": 44,
+                  "right": 335,
+                  "bottom": 178
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "关闭声音",
+                "selector": "button.ui-button.ui-button--ghost",
+                "rect": {
+                  "x": 339,
+                  "y": 134,
+                  "width": 44,
+                  "height": 44,
+                  "right": 383,
+                  "bottom": 178
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 1 列选上方格",
+                "selector": "button.equation-slider__reel-control",
+                "rect": {
+                  "x": 135,
+                  "y": 302,
+                  "width": 50,
+                  "height": 44,
+                  "right": 185,
+                  "bottom": 346
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "下方1，未点亮",
+                "selector": "button.equation-slider__tile",
+                "rect": {
+                  "x": 138,
+                  "y": 435,
+                  "width": 44,
+                  "height": 44,
+                  "right": 182,
+                  "bottom": 479
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "上方2，未点亮",
+                "selector": "button.equation-slider__tile",
+                "rect": {
+                  "x": 138,
+                  "y": 353,
+                  "width": 44,
+                  "height": 44,
+                  "right": 182,
+                  "bottom": 397
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "中央4，未点亮",
+                "selector": "button.equation-slider__tile.is-current",
+                "rect": {
+                  "x": 138,
+                  "y": 397,
+                  "width": 44,
+                  "height": 44,
+                  "right": 182,
+                  "bottom": 441
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 1 列选下方格",
+                "selector": "button.equation-slider__reel-control",
+                "rect": {
+                  "x": 135,
+                  "y": 484,
+                  "width": 50,
+                  "height": 44,
+                  "right": 185,
+                  "bottom": 528
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 2 列选上方格",
+                "selector": "button.equation-slider__reel-control",
+                "rect": {
+                  "x": 205,
+                  "y": 302,
+                  "width": 50,
+                  "height": 44,
+                  "right": 255,
+                  "bottom": 346
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "中央5，未点亮",
+                "selector": "button.equation-slider__tile.is-current",
+                "rect": {
+                  "x": 208,
+                  "y": 397,
+                  "width": 44,
+                  "height": 44,
+                  "right": 252,
+                  "bottom": 441
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "下方4，未点亮",
+                "selector": "button.equation-slider__tile",
+                "rect": {
+                  "x": 208,
+                  "y": 435,
+                  "width": 44,
+                  "height": 44,
+                  "right": 252,
+                  "bottom": 479
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "上方2，未点亮",
+                "selector": "button.equation-slider__tile",
+                "rect": {
+                  "x": 208,
+                  "y": 353,
+                  "width": 44,
+                  "height": 44,
+                  "right": 252,
+                  "bottom": 397
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "第 2 列选下方格",
+                "selector": "button.equation-slider__reel-control",
+                "rect": {
+                  "x": 205,
+                  "y": 484,
+                  "width": 50,
+                  "height": 44,
+                  "right": 255,
+                  "bottom": 528
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "提示",
+                "selector": "button.ui-button.ui-button--secondary",
+                "rect": {
+                  "x": 134,
+                  "y": 569,
+                  "width": 122,
+                  "height": 46,
+                  "right": 256,
+                  "bottom": 615
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "重置",
+                "selector": "button.ui-button.ui-button--secondary",
+                "rect": {
+                  "x": 261,
+                  "y": 569,
+                  "width": 122,
+                  "height": 46,
+                  "right": 383,
+                  "bottom": 615
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "跳过教程",
+                "selector": "button.ui-button.ui-button--secondary",
+                "rect": {
+                  "x": 295,
+                  "y": 783,
+                  "width": 78,
+                  "height": 44,
+                  "right": 373,
+                  "bottom": 827
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "math-target",
+            "route": "?world=math-world&station=target",
+            "productId": "math-lab",
+            "kind": "station",
+            "project": "mobile-390",
+            "criticalControls": 15,
+            "actionEvidence": [
+              {
+                "label": "← 回城市地图",
+                "selector": "button",
+                "rect": {
+                  "x": 12,
+                  "y": 68,
+                  "width": 174,
+                  "height": 48,
+                  "right": 186,
+                  "bottom": 116
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "回我的游戏世界",
+                "selector": "a",
+                "rect": {
+                  "x": 204,
+                  "y": 68,
+                  "width": 174,
+                  "height": 48,
+                  "right": 378,
+                  "bottom": 116
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "目标 10",
+                "selector": "button.target-action",
+                "rect": {
+                  "x": 159.6875,
+                  "y": 147,
+                  "width": 69.4375,
+                  "height": 48,
+                  "right": 229.125,
+                  "bottom": 195
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "目标 12",
+                "selector": "button.target-action",
+                "rect": {
+                  "x": 234.125,
+                  "y": 147,
+                  "width": 69.4375,
+                  "height": 48,
+                  "right": 303.5625,
+                  "bottom": 195
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "目标 24",
+                "selector": "button.target-action",
+                "rect": {
+                  "x": 308.5625,
+                  "y": 147,
+                  "width": 69.4375,
+                  "height": 48,
+                  "right": 378,
+                  "bottom": 195
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "1，原牌 1",
+                "selector": "button.target-card",
+                "rect": {
+                  "x": 24,
+                  "y": 294,
+                  "width": 80.25,
+                  "height": 112,
+                  "right": 104.25,
+                  "bottom": 406
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "2，原牌 2",
+                "selector": "button.target-card",
+                "rect": {
+                  "x": 111.25,
+                  "y": 294,
+                  "width": 80.25,
+                  "height": 112,
+                  "right": 191.5,
+                  "bottom": 406
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "3，原牌 3",
+                "selector": "button.target-card",
+                "rect": {
+                  "x": 198.5,
+                  "y": 294,
+                  "width": 80.25,
+                  "height": 112,
+                  "right": 278.75,
+                  "bottom": 406
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "4，原牌 4",
+                "selector": "button.target-card",
+                "rect": {
+                  "x": 285.75,
+                  "y": 294,
+                  "width": 80.25,
+                  "height": 112,
+                  "right": 366,
+                  "bottom": 406
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "+",
+                "selector": "button.target-action",
+                "rect": {
+                  "x": 145,
+                  "y": 458,
+                  "width": 48,
+                  "height": 48,
+                  "right": 193,
+                  "bottom": 506
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "-",
+                "selector": "button.target-action",
+                "rect": {
+                  "x": 197,
+                  "y": 458,
+                  "width": 48,
+                  "height": 48,
+                  "right": 245,
+                  "bottom": 506
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "×",
+                "selector": "button.target-action",
+                "rect": {
+                  "x": 145,
+                  "y": 458,
+                  "width": 48,
+                  "height": 48,
+                  "right": 193,
+                  "bottom": 506
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "÷",
+                "selector": "button.target-action",
+                "rect": {
+                  "x": 197,
+                  "y": 458,
+                  "width": 48,
+                  "height": 48,
+                  "right": 245,
+                  "bottom": 506
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "给我一点提示",
+                "selector": "button.target-action",
+                "rect": {
+                  "x": 12,
+                  "y": 567,
+                  "width": 128,
+                  "height": 48,
+                  "right": 140,
+                  "bottom": 615
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "换一组牌",
+                "selector": "button.target-action",
+                "rect": {
+                  "x": 290,
+                  "y": 712,
+                  "width": 88,
+                  "height": 48,
+                  "right": 378,
+                  "bottom": 760
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "classic-defense",
+            "route": "?hub=classic&from=world",
+            "productId": "hanzi-tower-defense",
+            "kind": "classic-entry",
+            "project": "mobile-390",
+            "criticalControls": 1,
+            "actionEvidence": [
+              {
+                "label": "开始守城",
+                "selector": "button.ui-button.game-card__button",
+                "rect": {
+                  "x": 37,
+                  "y": 398.46875,
+                  "width": 316,
+                  "height": 48,
+                  "right": 353,
+                  "bottom": 446.46875
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "classic-adventure",
+            "route": "?hub=classic&from=world",
+            "productId": "hanzi-word-adventure",
+            "kind": "classic-entry",
+            "project": "mobile-390",
+            "criticalControls": 1,
+            "actionEvidence": [
+              {
+                "label": "踏上归途",
+                "selector": "span.ui-button.game-card__button",
+                "rect": {
+                  "x": 43,
+                  "y": 495.03125,
+                  "width": 304,
+                  "height": 48,
+                  "right": 347,
+                  "bottom": 543.03125
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": true,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "classic-math",
+            "route": "?hub=classic&from=world",
+            "productId": "math-lab",
+            "kind": "classic-entry",
+            "project": "mobile-390",
+            "criticalControls": 1,
+            "actionEvidence": [
+              {
+                "label": "进入数学世界",
+                "selector": "button.ui-button.game-card__button",
+                "rect": {
+                  "x": 37,
+                  "y": 398.15625,
+                  "width": 316,
+                  "height": 48,
+                  "right": 353,
+                  "bottom": 446.15625
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          },
+          {
+            "surfaceId": "classic-world-box",
+            "route": "?hub=classic&from=world",
+            "productId": "world-in-a-box",
+            "kind": "classic-entry",
+            "project": "mobile-390",
+            "criticalControls": 1,
+            "actionEvidence": [
+              {
+                "label": "打开小世界",
+                "selector": "button.ui-button.game-card__button",
+                "rect": {
+                  "x": 43,
+                  "y": 721.90625,
+                  "width": 304,
+                  "height": 48,
+                  "right": 347,
+                  "bottom": 769.90625
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          }
+        ],
+        "runtime": {
+          "pageErrors": [],
+          "consoleErrors": [],
+          "failedResponses": [],
+          "failedRequests": [],
+          "externalRequests": []
+        }
+      }
+    },
+    {
+      "phase": "deduplication-candidate",
+      "evidence": {
+        "verdict": "PASS",
+        "project": "desktop-1366",
+        "manifestSurfaceCount": 15,
+        "testedSurfaceCount": 1,
+        "startAt": "world-in-a-box",
+        "endAt": "world-in-a-box",
+        "rows": [
+          {
+            "surfaceId": "world-in-a-box",
+            "route": "?play=world-in-a-box",
+            "productId": "world-in-a-box",
+            "kind": "product-world",
+            "project": "desktop-1366",
+            "criticalControls": 3,
+            "actionEvidence": [
+              {
+                "label": "选择窗扇一",
+                "selector": "button.wb-piece",
+                "rect": {
+                  "x": 242,
+                  "y": 502,
+                  "width": 286,
+                  "height": 122,
+                  "right": 528,
+                  "bottom": 624
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择窗扇二",
+                "selector": "button.wb-piece",
+                "rect": {
+                  "x": 540,
+                  "y": 502,
+                  "width": 286,
+                  "height": 122,
+                  "right": 826,
+                  "bottom": 624
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择窗帘",
+                "selector": "button.wb-piece",
+                "rect": {
+                  "x": 838,
+                  "y": 502,
+                  "width": 286,
+                  "height": 122,
+                  "right": 1124,
+                  "bottom": 624
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          }
+        ],
+        "runtime": {
+          "pageErrors": [],
+          "consoleErrors": [],
+          "failedResponses": [],
+          "failedRequests": [],
+          "externalRequests": []
+        }
+      }
+    },
+    {
+      "phase": "deduplication-candidate",
+      "evidence": {
+        "verdict": "PASS",
+        "project": "mobile-390",
+        "manifestSurfaceCount": 15,
+        "testedSurfaceCount": 1,
+        "startAt": "world-in-a-box",
+        "endAt": "world-in-a-box",
+        "rows": [
+          {
+            "surfaceId": "world-in-a-box",
+            "route": "?play=world-in-a-box",
+            "productId": "world-in-a-box",
+            "kind": "product-world",
+            "project": "mobile-390",
+            "criticalControls": 3,
+            "actionEvidence": [
+              {
+                "label": "选择窗扇一",
+                "selector": "button.wb-piece",
+                "rect": {
+                  "x": 63,
+                  "y": 539,
+                  "width": 83.328125,
+                  "height": 112,
+                  "right": 146.328125,
+                  "bottom": 651
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择窗扇二",
+                "selector": "button.wb-piece",
+                "rect": {
+                  "x": 153.328125,
+                  "y": 539,
+                  "width": 83.328125,
+                  "height": 112,
+                  "right": 236.65625,
+                  "bottom": 651
+                },
+                "hitSuccessRatio": 1
+              },
+              {
+                "label": "选择窗帘",
+                "selector": "button.wb-piece",
+                "rect": {
+                  "x": 243.65625,
+                  "y": 539,
+                  "width": 83.34375,
+                  "height": 112,
+                  "right": 327,
+                  "bottom": 651
+                },
+                "hitSuccessRatio": 1
+              }
+            ],
+            "realPrimaryClick": "PASS",
+            "modalClosed": false,
+            "return": "PASS"
+          }
+        ],
+        "runtime": {
+          "pageErrors": [],
+          "consoleErrors": [],
+          "failedResponses": [],
+          "failedRequests": [],
+          "externalRequests": []
+        }
+      }
+    }
+  ],
+  "smoke": {
+    "passed": 14,
+    "command": "pnpm run test:portfolio:smoke with PORTFOLIO_SMOKE_PREVIEW=1"
+  },
+  "vault": {
+    "profiles": 3,
+    "knownKeys": 50,
+    "exportableKeys": 49,
+    "test": "all registered exact keys survive the public Vault roundtrip and mounted old page cannot overwrite restored records"
+  }
+}

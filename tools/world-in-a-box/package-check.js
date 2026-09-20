@@ -13,6 +13,7 @@ async driver=>{
   await p.reload();await p.locator('[data-ready=true]').waitFor();await p.waitForTimeout(400);assert(baseline.equals(await p.screenshot({fullPage:true})),'no-update fresh screenshot changed after reload');
   async function place(id){while(await p.locator('[data-action=prev]').isEnabled())await click('[data-action=prev]');for(let i=0;i<3&&!await p.locator(`[data-piece=${id}]`).isVisible();i++)await click('[data-action=next]');await click(`[data-piece=${id}]`);await click('[data-action=hint]');await click(`[data-slot=${id}]`);await p.waitForTimeout(370);}
   await place('shutter_left');await click('[data-slot=shutter_left]');await place('wind_chime');await click('[data-action=view]');
+  await click('[data-sound-settings]');await p.locator('[data-channel=music]').press('Home');await p.locator('[data-channel=ambient]').press('Home');await click('[data-sound-close]');
   const audible=await amplitude(3600);assert(audible>.00001,'live wind chime PCM missing');
   await click('[data-slot=shutter_left]');await p.waitForTimeout(1300);const stopped=await amplitude(2700);assert(stopped<.00001,'wind chime persists after closing window');
   await click('[data-slot=shutter_left]');await click('[data-action=mute]');await p.waitForTimeout(1000);const muted=await amplitude(2700);assert(muted<.00001,'mute leaves audio');

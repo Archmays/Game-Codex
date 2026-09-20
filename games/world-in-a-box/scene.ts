@@ -39,32 +39,36 @@ export class BoxScene {
   }
   resize(){this.size={w:this.host.clientWidth,h:this.host.clientHeight};this.renderer.setSize(this.size.w,this.size.h);this.updateCamera();}
   updateCamera(){const aspect=this.size.w/this.size.h;const h=Math.max(3.05,3.65/aspect)/this.zoom;this.camera.left=-h*aspect;this.camera.right=h*aspect;this.camera.top=h;this.camera.bottom=-h;this.camera.near=.1;this.camera.far=80;
-    this.camera.position.set(Math.sin(this.angle)*10*Math.cos(this.pitch),1.55+Math.sin(this.pitch)*10,Math.cos(this.angle)*10*Math.cos(this.pitch));this.camera.lookAt(0,1.55,0);this.camera.updateProjectionMatrix();this.camera.updateMatrixWorld();}
+    this.camera.position.set(Math.sin(this.angle)*10*Math.cos(this.pitch),1.55+Math.sin(this.pitch)*10,Math.cos(this.angle)*10*Math.cos(this.pitch));this.camera.lookAt(0,1.55,0);this.camera.updateProjectionMatrix();this.camera.updateMatrixWorld();this.host.dataset.camera=JSON.stringify({angle:this.angle,pitch:this.pitch,zoom:this.zoom});}
   turn(delta:number){this.angle+=delta;this.updateCamera();}
   tilt(delta:number){this.pitch=T.MathUtils.clamp(this.pitch+delta,.25,.7);this.updateCamera();}
   reset(){this.angle=.48;this.pitch=.42;this.zoom=1;this.updateCamera();}
   setZoom(delta:number){this.zoom=T.MathUtils.clamp(this.zoom+delta,.8,1.35);this.updateCamera();}
-  showTarget(id:Piece){this.angle=id==='wind_chime'?Math.PI+.40:.22;this.updateCamera();}
+  showTarget(id:Piece,usable:()=>boolean=()=>this.target(id).visible){this.zoom=1;for(const pitch of [.42,.65,.28])for(const angle of id==='wind_chime'?[Math.PI+.40,Math.PI-.4]:[.22,-.45,.8]){this.angle=angle;this.pitch=pitch;this.updateCamera();this.asset?.updateMatrixWorld(true);this.renderer.render(this.scene,this.camera);if(this.target(id).visible&&usable())return true;}return false;}
   landPiece(id:Piece){this.land.set(id,performance.now());}
   cancelLanding(id:Piece){this.land.delete(id);const p=this.pieces.get(id),s=this.slots.get(id);if(p&&s)p.position.copy(s.position);}
+  resetMotion(){this.pausedAt=null;this.land.clear();this.catUntil=0;this.steamUntil=0;this.wind=0;for(const [o,q] of this.original){o.quaternion.copy(q);o.userData.angle=0;}this.steam.forEach(p=>{p.visible=false;p.material.opacity=0;});this.reset();}
   react(id:Piece){if(id==='cat')this.catUntil=performance.now()+1800;if(id==='cup')this.steamUntil=performance.now()+2200;}
-  frame(s:BoxState,now:number,dt:number){
+  private pausedAt:number|null=null;
+  frame(s:BoxState,now:number,dt:number,paused=false){
     if(!this.asset)return;
+    if(paused){this.pausedAt??=now;now=this.pausedAt;dt=0;}else{if(this.pausedAt!==null){const elapsed=now-this.pausedAt;for(const [id,start] of this.land)this.land.set(id,start+elapsed);this.catUntil+=elapsed;this.steamUntil+=elapsed;this.pausedAt=null;}}
     const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const windTarget=Number(windy(s)&&!document.hidden);this.wind+=(windTarget-this.wind)*(1-Math.exp(-dt*5));if(Math.abs(this.wind-windTarget)<.003)this.wind=windTarget;
+    const windTarget=(paused?0:s.open.length/2);this.wind+=(windTarget-this.wind)*(1-Math.exp(-dt*5));if(Math.abs(this.wind-windTarget)<.003)this.wind=windTarget;
     for(const id of IDS){const p=this.pieces.get(id),slot=this.slots.get(id);if(p){p.visible=s.placed.includes(id);if(slot)p.position.copy(slot.position);const start=this.land.get(id);if(start!==undefined){const t=Math.min(1,(now-start)/320);p.position.y+=(1-t)**3*.35;if(t===1)this.land.delete(id);}}if(slot)slot.visible=!s.placed.includes(id);}
     let shuttersMoving=false;
     for(const [o,q] of this.original){o.quaternion.copy(q);let a=0;
       if(o.name.startsWith('pivot_shutter')){const id=o.name.slice(6) as Piece;const target=s.open.includes(id)?(id==='shutter_left'?1:-1)*1.62:0;const current=Number(o.userData.angle??0);a=current+(target-current)*(1-Math.exp(-dt*12));if(Math.abs(a-target)<.002)a=target;shuttersMoving ||= a!==target;o.userData.angle=a;o.rotateY(a);continue;}
-      if(o.name==='pivot_tail')a=now<this.catUntil?Math.sin(now*.009)*.4:0;
+      if(o.name==='pivot_tail')a=now<this.catUntil?Math.sin(now*.009)*.26*Math.sin(Math.PI*(1-(this.catUntil-now)/1800)):0;
       else if(!reduce)a=Math.sin(now*.002+(o.name==='pivot_leaves'?1:0))*this.wind*(o.name==='pivot_pages'?.15:.045);
       o.rotateZ(a);
     }
+    const cat=this.pieces.get('cat');if(cat){const t=Math.max(0,Math.min(1,1-(this.catUntil-now)/1800));cat.rotation.z=Math.sin(t*Math.PI)*-.06;cat.scale.set(1+Math.sin(t*Math.PI)*.025,1+Math.sin(t*Math.PI)*.045,1);}
     const cup=this.pieces.get('cup');
     this.steam.forEach((p,i)=>{const t=(now*.0005+i/6)%1;p.visible=!!cup?.visible&&now<this.steamUntil;if(cup)p.position.copy(cup.position).add(new T.Vector3(Math.sin(t*5+i)*.05,.5+t*.75,0));p.material.opacity=p.visible?Math.sin(t*Math.PI)*.40:0;});
     this.asset.updateMatrixWorld(true);this.renderer.render(this.scene,this.camera);
     // Observable render completion, separate from the logical open/closed state.
-    this.host.dataset.motion=(this.wind===0||reduce)&&!shuttersMoving&&!this.land.size&&now>=this.catUntil&&now>=this.steamUntil?'still':'moving';
+    this.host.dataset.camera=JSON.stringify({angle:this.angle,pitch:this.pitch,zoom:this.zoom});this.host.dataset.motion=(this.wind===0||reduce)&&!shuttersMoving&&!this.land.size&&now>=this.catUntil&&now>=this.steamUntil?'still':'moving';
   }
   target(id:Piece):{x:number;y:number;visible:boolean}{
     const anchor=this.pieces.get(id)?.visible?this.asset?.getObjectByName('interaction_'+id)??this.asset?.getObjectByName('anchor_'+id):this.asset?.getObjectByName('anchor_'+id);if(!anchor)return{x:0,y:0,visible:false};
