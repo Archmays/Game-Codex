@@ -1,0 +1,41 @@
+- main "奇物事务所":
+  - link "← 返回大厅":
+    - /url: "?world=my-game-world"
+  - paragraph: ODDITY OFFICE · 0.2
+  - heading "奇物事务所" [level=1]
+  - button "声音"
+  - navigation "三个案件":
+    - button "隔墙的灯"
+    - button "坍塌之门" [disabled]
+    - button "照片接力" [disabled]
+  - heading "01 / 隔墙的灯" [level=2]
+  - paragraph: 把档案盒带回走廊出口。
+  - region "微缩房间":
+    - button "● 调查员 · 当前" [pressed]
+    - button "调查员": ● 调查员
+    - button "台灯"
+    - button "档案盒"
+    - button "走到出口": 👣 出口
+    - button "走到观察窗": 👣 观察窗
+    - button "走到台灯旁": 👣 台灯旁
+    - button "走到档案架": 👣 档案架
+    - paragraph: 脚印是人物终点；方框是搬运落点；人形是释放空位。
+    - button "主视角"
+    - button "另一侧"
+    - button "俯看"
+    - button "查看全部站位"
+    - paragraph: 地标引线连着实物 · 墙仍会挡住行动
+    - button "扳指 调查员持有":
+      - strong: 扳指
+      - text: 调查员持有
+    - button "台灯 固定灯座":
+      - strong: 台灯
+      - text: 固定灯座
+  - region "调查操作":
+    - status: 看地标认位置；点物件看动作，点脚印走过去。
+    - heading "先看看房间" [level=3]
+    - paragraph: 选择地标或物件。人物头像和脚下符号相同。
+    - button "提示"
+    - button "撤回一步 · Z" [disabled]
+    - button "重置本关"
+    - paragraph: Tab 换区域 · 方向键选地标 · Enter / 空格操作 Esc 取消 · Z 撤回 · Q 换调查员

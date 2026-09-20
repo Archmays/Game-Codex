@@ -1,0 +1,230 @@
+[
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/desktop-mouse-box-after.png",
+    "sha256": "6b4a596feccb53983edb85dff41082e355fbb274ebd767462a47af162e56aa1d",
+    "bytes": 203448,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/desktop-mouse-box-before.png",
+    "sha256": "cd04ae1e11b571a1201c0e7a6f32e436326531c978315d98d9032cc5968c1a1b",
+    "bytes": 204541,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/desktop-mouse-door-after.png",
+    "sha256": "244af3683453781dda7661db40962314d92ea71b49f73d35f7422a6d7eb33566",
+    "bytes": 195733,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/desktop-mouse-door-preview.png",
+    "sha256": "662735068f3b94ba2812a0dc4e27b3e6e5b3ffd2be160a80dcc9d37a6cec5b39",
+    "bytes": 191331,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/desktop-mouse-l1-before.png",
+    "sha256": "94543ba34b712966badedce9aaae9e30e3db1f5417abade68c20ccdf32bfd780",
+    "bytes": 207745,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/desktop-mouse-l2-before.png",
+    "sha256": "cd91053ff67e90ac26b8e8576136afd77ad583b8cbe8bfba8921074c5aa766c9",
+    "bytes": 192316,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/desktop-mouse-l3-before.png",
+    "sha256": "e3e4cf51f0529b5d46454f475e07d531bb75da9d23e6013593d5c7d01d7a00be",
+    "bytes": 228722,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/desktop-mouse-lamp-before.png",
+    "sha256": "fbe1c8b26abd83f3d99e75361bb3ca643fa35a94cc2622763f96f1003d964682",
+    "bytes": 207615,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/desktop-mouse-photo-carry-after.png",
+    "sha256": "c5afa7429487c4ce5217a363859165b0c427cd074b812f33c3099fbf94a0b77a",
+    "bytes": 225550,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/desktop-mouse-photo-carry-before.png",
+    "sha256": "14dfc9ac669557837e34977f6e5916caae579f612784306d7adbfd84467c80bc",
+    "bytes": 270476,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/desktop-mouse-release-after.png",
+    "sha256": "f15958dfbef4f583d34864cc0cd7c51f1fd5424192facc729f9f28a46e191d6b",
+    "bytes": 226539,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/desktop-mouse-release-before.png",
+    "sha256": "ce661cc84f9fc81615e55de51449ac39eeca8c693dfd4f8de5e8eef4e211cb3f",
+    "bytes": 216924,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/desktop-mouse-switches-after.png",
+    "sha256": "30d20d5d932084521b040861fbbbdf55e3c085100db5aad49e4366306bddad67",
+    "bytes": 225736,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/desktop-mouse-together-after.png",
+    "sha256": "443ebd307ff642bc115120e70c2214b179e12bef81a1615f4fc41b5abefafd55",
+    "bytes": 223724,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/interaction-before.png",
+    "sha256": "22aed1caab05d0d61c983d0a981e350b3c3d074e134d75d578ef8430d8800f98",
+    "bytes": 214365,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/native-200-fullpage.png",
+    "sha256": "762a95f2e03d2ccd41d190ca9a65e4edeba32e9da169609e14c795ed2b2f2eae",
+    "bytes": 254672,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/native-200-scene.png",
+    "sha256": "b032ff2aa97c7f80906d506e1020ea8a59b616c753721f385fa5047c386f4a60",
+    "bytes": 730121,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/phone-390-box-after.png",
+    "sha256": "d69fb1fb6ba8f826d4c35365a0054d0b4f74fbe6209f2c889fccfca0fc4c117c",
+    "bytes": 380003,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/phone-390-box-before.png",
+    "sha256": "fcc3cb7317fd6fd03c35cdb7beee5da6c6281a72b03c331fc9048a736a8cdacd",
+    "bytes": 383482,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/phone-390-door-after.png",
+    "sha256": "c8c6c472e61d8d8aec939d62c5245e13e655d0c2b8dd46c86114a74c4e7ff632",
+    "bytes": 349501,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/phone-390-door-preview.png",
+    "sha256": "ab40ee6306d8f55cc65c50f9d7a3c54e3a003ac04111e793dc2654c41e296bee",
+    "bytes": 354837,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/phone-390-l1-before-view1.png",
+    "sha256": "f4af34bc903b27386a4748ee2ff93dff94323ad9f6f801b823c92f700ff4ff77",
+    "bytes": 373008,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/phone-390-l1-before.png",
+    "sha256": "aa7a13fb609bf2c5cbcc03560171acf1373f6a2047cb069d81d749cb6ff2efd8",
+    "bytes": 378919,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/phone-390-l2-before.png",
+    "sha256": "d433973a9aebf25014971b399281d36fd0b31c1f8de4dfb6f7d37a1e4d30af41",
+    "bytes": 336527,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/phone-390-l3-before-view1.png",
+    "sha256": "75c830b197320004551dfe94dd753f820a769ffc275cfbf02e50374749355993",
+    "bytes": 433808,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/phone-390-l3-before.png",
+    "sha256": "78eb070f55b40af98d406319d21406499cc3003b27f02af090d019661739b62b",
+    "bytes": 430672,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/phone-390-lamp-before.png",
+    "sha256": "d42af038fa55a25568ffacadfb75118e35ba2b9684d7406a51f90b7d8adf4ae4",
+    "bytes": 415084,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/phone-390-photo-carry-after.png",
+    "sha256": "03dcf976416eb79e89fe6fb184d2b97f616a06cc3d9a4f8e46e27f0563286d0f",
+    "bytes": 393599,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/phone-390-photo-carry-before.png",
+    "sha256": "c9d6adaa716fabc04f0f29309f6a246ade7313bad1bc1cbf1866f69b3745ccba",
+    "bytes": 522604,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/phone-390-release-after.png",
+    "sha256": "a1764daa42ce62fa5275f0e9506e884c223326cee6a5b125bb644d3a66ca08ee",
+    "bytes": 448389,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/phone-390-release-before-view2.png",
+    "sha256": "349409cb454a42b72e96f26d3ad5757240bb30aec877fc881ab27754d91f9215",
+    "bytes": 321156,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/phone-390-release-before.png",
+    "sha256": "11a1d1aa4c126bc99cf0d205229b6ee4fa1dc99d81c9d02f33ff5a7ac643a682",
+    "bytes": 380389,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/phone-390-switches-after.png",
+    "sha256": "fdea51ace7e1cdbb607596f75479097de7ac3f944837327c6ba6aa2db4095ddf",
+    "bytes": 454940,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/phone-390-together-after.png",
+    "sha256": "8f7a9e54fb83f8055ab466e3e4caed907f4d987632f07c95244df697cf544af6",
+    "bytes": 443597,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/route-before.png",
+    "sha256": "b28ce4af3288a02b4b092c464a093a69d5cd97927a20dfb19965e509095e9f95",
+    "bytes": 211717,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/v010-desktop-room1.png",
+    "sha256": "b2b1ff82c82f289e659d3c454a03ca7931da9ccac6343c29673bd734543f2239",
+    "bytes": 239665,
+    "role": "v010-reference"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/visual-baseline.png",
+    "sha256": "d3f3c64bc3f45cac90a679f18902f0c140f53ffb792502fb647ab2b276bd8e61",
+    "bytes": 251880,
+    "role": "v020-final"
+  },
+  {
+    "path": "docs/oddity-puzzles/v020/evidence/visual-readback.png",
+    "sha256": "d3f3c64bc3f45cac90a679f18902f0c140f53ffb792502fb647ab2b276bd8e61",
+    "bytes": 251880,
+    "role": "v020-final"
+  }
+]

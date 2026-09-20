@@ -1,0 +1,7 @@
+{
+  "algorithm": "sha256(sorted lines: file_sha256 two-spaces repo-relative-path newline)",
+  "scope": "runtime, authored models, QA tools/tests, package/build config, input contract, root hub launcher; excludes evidence outputs",
+  "fileCount": 10070,
+  "sha256": "42def19da0524488fe14a0be08790c2d5647ff221381421295948ecff35d7040",
+  "charterSha256": "c1b7fff9a105d31251f67750b465c667d214ca10fbea5c5a18cab975ac174290"
+}

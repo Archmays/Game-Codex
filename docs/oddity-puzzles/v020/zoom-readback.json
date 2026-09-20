@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "dimensions": {
+    "innerWidth": 720,
+    "scrollWidth": 712,
+    "dpr": 2.0000000298023224,
+    "zoom": "1"
+  },
+  "note": "Unclipped compositor viewport screenshots replace Playwright native-zoom clip artifacts; no state injection."
+}

@@ -1,0 +1,12 @@
+{
+  "rows": [
+    {
+      "check": "native Space exactly once with reduced motion",
+      "result": "PASS"
+    },
+    {
+      "check": "leave during composite then return does not execute stale take",
+      "result": "PASS"
+    }
+  ]
+}

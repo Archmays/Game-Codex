@@ -1,0 +1,56 @@
+{
+  "result": "PASS",
+  "rooms": [
+    {
+      "level": 1,
+      "glbBytes": 1679628,
+      "sha256": "2751a4e5bf1cdc9f4dacc6883a7788e84b5ac3f170c713190a4c87a9d1018f1a",
+      "blendBytes": 2970559,
+      "meshes": 26,
+      "anchors": [
+        "eye_a",
+        "hand_a",
+        "pivot_lamp",
+        "beam_origin"
+      ],
+      "layoutCollidersMatch": true,
+      "navigationMatch": true
+    },
+    {
+      "level": 2,
+      "glbBytes": 1524628,
+      "sha256": "f820d02e78d8d9fdf0ffef62f9477642282891d790d988afd368300367ac1947",
+      "blendBytes": 2978044,
+      "meshes": 23,
+      "anchors": [
+        "eye_a",
+        "hand_a",
+        "hinge_door",
+        "lock_anchor"
+      ],
+      "layoutCollidersMatch": true,
+      "navigationMatch": true
+    },
+    {
+      "level": 3,
+      "glbBytes": 2327032,
+      "sha256": "d2d4f22755f916e3ed5e53187b8d31018040152e2f75b3b6f08e89ab5f518c32",
+      "blendBytes": 4679349,
+      "meshes": 45,
+      "anchors": [
+        "eye_a",
+        "hand_a",
+        "eye_b",
+        "hand_b",
+        "eye_npc",
+        "hand_npc",
+        "tray_anchor",
+        "photo_entry",
+        "photo_exit",
+        "hinge_door"
+      ],
+      "layoutCollidersMatch": true,
+      "navigationMatch": true
+    }
+  ]
+}

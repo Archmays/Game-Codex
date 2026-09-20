@@ -30,7 +30,7 @@ function observe(page: Page): RuntimeObservation {
 }
 
 async function enterOddityIfNeeded(page: Page, record: PlaySurfaceRecord): Promise<void> {
-  if (record.id !== "oddity-puzzles") return;
+  if (new URL(page.url()).searchParams.get("play") !== "oddity-puzzles") return;
   await expect(page.locator('.odd-stage')).toHaveAttribute('data-ready','true');
   // The five new abilities have explicit, skippable first-use demonstrations.
   // Enter through their public controls before testing the room's background controls.
@@ -135,6 +135,7 @@ test("@hittest @representative @portfolio all manifest surfaces expose topmost c
         // the hit-target checks below and must not consume this poll's deadline.
         return !text.includes("正在打开游戏世界") && (await visibleEnabled(page.locator("a[href], button"), 1)).length > 0;
       }, { message: `${record.id} real action destination must finish loading`, timeout: 30_000 }).toBe(true);
+      await enterOddityIfNeeded(page, record);
       const modalClosed = await closeIntentionalModal(page);
 
       const returnResult = RETURN_WORDS.test(primaryLabel) ? "PRIMARY_ACTION_WAS_RETURN" : "PASS";

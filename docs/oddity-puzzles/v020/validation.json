@@ -1,0 +1,44 @@
+{
+  "source": "39a5bd3a9500837bc3d95650eed3e034a70aed985a1f0bd4a1d9eb2a7c2d6710",
+  "commands": [
+    {
+      "command": "pnpm test",
+      "result": "PASS",
+      "logSha256": "31a9faa3cc4ab08640d30aac2fc4d3fdd795b4f67ceff881fd275b920a91ba51",
+      "stdoutTail": " ✓ tests/presentation.test.ts (6 tests) 2ms\n ✓ tests/learning-game-optimizations.test.ts (2 tests) 2ms\n ✓ tests/memory-match-save.test.ts (2 tests) 2ms\n\n Test Files  48 passed (48)\n      Tests  600 passed (600)\n   Start at  18:46:07\n   Duration  61.58s (transform 2.34s, setup 0ms, collect 10.25s, tests 43.01s, environment 5ms, prepare 2.81s)\n"
+    },
+    {
+      "command": "pnpm build",
+      "result": "PASS",
+      "logSha256": "24af04aece64903fee48a9a1938da2d937e68322d39d02f2d619ae8609ea9dc6",
+      "stdoutTail": "dist/assets/chapter-4-reasoning-DIyQqwpM.js    265.14 kB │ gzip:  28.51 kB\ndist/assets/GLTFLoader-BduTM27e.js             653.27 kB │ gzip: 166.76 kB\ndist/assets/phaser-DVRpB1nu.js               1,486.35 kB │ gzip: 341.71 kB\n\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n✓ built in 18.09s"
+    },
+    {
+      "command": "production Classic hit-test desktop-1366 and mobile-390",
+      "result": "PASS",
+      "logSha256": "ea37ced865a019f002d44c21eae85c6a265c4ebe504e10c212c44ea9a021a68a",
+      "stdoutTail": "(node:17256) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n[1/2] [mobile-390] › tests\\e2e\\interaction-integrity\\portfolio-hittest.spec.ts:100:1 › @hittest @representative @portfolio all manifest surfaces expose topmost critical controls and real actions\n(node:34412) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\n\n[2/2] [desktop-1366] › tests\\e2e\\interaction-integrity\\portfolio-hittest.spec.ts:100:1 › @hittest @representative @portfolio all manifest surfaces expose topmost critical controls and real actions\n  2 passed (2.0m)"
+    }
+  ],
+  "browserProfiles": 8,
+  "lifecycle": [
+    {
+      "check": "isolated quota failure feedback",
+      "result": "PASS"
+    },
+    {
+      "check": "isolated corrupt failure feedback",
+      "result": "PASS"
+    },
+    {
+      "check": "actual v0.1 serialized progress loads unchanged in v0.2",
+      "result": "PASS",
+      "boundary": "isolated storage compatibility fixture, not playthrough advancement"
+    }
+  ],
+  "staticContracts": [
+    "portfolio:check",
+    "validate:interaction-integrity",
+    "validate:play-readiness"
+  ]
+}

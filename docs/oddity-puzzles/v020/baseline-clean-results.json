@@ -1,0 +1,208 @@
+{
+  "profiles": [
+    {
+      "name": "desktop-keyboard",
+      "input": "keyboard",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "result": "PASS",
+      "threeRooms": true,
+      "fromHome": true,
+      "hints": 3,
+      "undo": true,
+      "scopedReset": true,
+      "saveReload": true,
+      "emptyPhotoRecovery": true,
+      "errors": [],
+      "external": [],
+      "metrics": [
+        {
+          "level": "l1",
+          "triangles": 66808,
+          "calls": 58,
+          "dpr": 1
+        },
+        {
+          "level": "l1-complete",
+          "triangles": 66436,
+          "calls": 59,
+          "dpr": 1
+        },
+        {
+          "level": "l2",
+          "triangles": 55568,
+          "calls": 36,
+          "dpr": 1
+        },
+        {
+          "level": "l2-portal",
+          "triangles": 58994,
+          "calls": 45,
+          "dpr": 1
+        },
+        {
+          "level": "l3",
+          "triangles": 88872,
+          "calls": 89,
+          "dpr": 1
+        },
+        {
+          "level": "l3-photo",
+          "triangles": 80306,
+          "calls": 81,
+          "dpr": 1
+        },
+        {
+          "level": "l3-open",
+          "triangles": 88872,
+          "calls": 89,
+          "dpr": 1
+        },
+        {
+          "level": "l3-complete",
+          "triangles": 88872,
+          "calls": 89,
+          "dpr": 1
+        }
+      ]
+    },
+    {
+      "name": "desktop-mouse",
+      "input": "mouse",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "result": "PASS",
+      "threeRooms": true,
+      "fromHome": true,
+      "hints": 3,
+      "undo": true,
+      "scopedReset": true,
+      "saveReload": true,
+      "emptyPhotoRecovery": true,
+      "errors": [],
+      "external": [],
+      "metrics": [
+        {
+          "level": "l1",
+          "triangles": 66808,
+          "calls": 58,
+          "dpr": 1
+        },
+        {
+          "level": "l1-complete",
+          "triangles": 66436,
+          "calls": 59,
+          "dpr": 1
+        },
+        {
+          "level": "l2",
+          "triangles": 55568,
+          "calls": 36,
+          "dpr": 1
+        },
+        {
+          "level": "l2-portal",
+          "triangles": 58994,
+          "calls": 45,
+          "dpr": 1
+        },
+        {
+          "level": "l3",
+          "triangles": 88872,
+          "calls": 89,
+          "dpr": 1
+        },
+        {
+          "level": "l3-photo",
+          "triangles": 80306,
+          "calls": 81,
+          "dpr": 1
+        },
+        {
+          "level": "l3-open",
+          "triangles": 88872,
+          "calls": 89,
+          "dpr": 1
+        },
+        {
+          "level": "l3-complete",
+          "triangles": 88872,
+          "calls": 89,
+          "dpr": 1
+        }
+      ]
+    },
+    {
+      "name": "phone-390",
+      "input": "touch",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "result": "PASS",
+      "threeRooms": true,
+      "fromHome": true,
+      "hints": 3,
+      "undo": true,
+      "scopedReset": true,
+      "saveReload": true,
+      "emptyPhotoRecovery": true,
+      "errors": [],
+      "external": [],
+      "metrics": [
+        {
+          "level": "l1",
+          "triangles": 66808,
+          "calls": 58,
+          "dpr": 1.5
+        },
+        {
+          "level": "l1-complete",
+          "triangles": 66436,
+          "calls": 59,
+          "dpr": 1.5
+        },
+        {
+          "level": "l2",
+          "triangles": 55568,
+          "calls": 36,
+          "dpr": 1.5
+        },
+        {
+          "level": "l2-portal",
+          "triangles": 58994,
+          "calls": 45,
+          "dpr": 1.5
+        },
+        {
+          "level": "l3",
+          "triangles": 88872,
+          "calls": 89,
+          "dpr": 1.5
+        },
+        {
+          "level": "l3-photo",
+          "triangles": 80306,
+          "calls": 81,
+          "dpr": 1.5
+        },
+        {
+          "level": "l3-open",
+          "triangles": 88872,
+          "calls": 89,
+          "dpr": 1.5
+        },
+        {
+          "level": "l3-complete",
+          "triangles": 88872,
+          "calls": 89,
+          "dpr": 1.5
+        }
+      ]
+    }
+  ]
+}

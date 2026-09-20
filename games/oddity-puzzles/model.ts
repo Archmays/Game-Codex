@@ -29,6 +29,14 @@ export function sight(s:State,to:Vec,id=s.active):string|null {const from=eye(s,
 export function space(s:State,a:Vec,b:Vec,half:Vec):string|null {const w=walls(s).find(w=>intersects(a,b,w,half));return w?`${w.label}挡住了路径，物件不能穿过去。`:null;}
 export function route(s:State,from:string,to:string,person=true):Vec[]|null {const queue=[from],prev=new Map<string,string>();prev.set(from,'');while(queue.length){const n=queue.shift()!;if(n===to){const ids=[to];while(ids[0]!==from)ids.unshift(prev.get(ids[0])!);return ids.map(id=>point(s,id));}for(const edge of layout(s).edges){if(!edge.includes(n))continue;const next=edge.find(id=>id!==n)!;if(prev.has(next))continue;const a=point(s,n),b=point(s,next);if(space(s,add(a,[0,.85,0]),add(b,[0,.85,0]),person?[.26,.84,.26]:[.15,.15,.15]))continue;prev.set(next,n);queue.push(next);}}return null;}
 function occupied(s:State,node:string,except?:ActorId){return s.actors.some(a=>a.id!==except&&!a.inside&&distance(feet(s,a.id),point(s,node))<.53);}
+/** Explain an actual blocked frontier of the existing route graph, without inventing a route. */
+export function routeObstacle(s:State,from:string,to:string):{label:string;p:Vec}|null {
+ if(route(s,from,to))return null;
+ const reachable=new Set(layout(s).nodes.filter(n=>route(s,from,n.id)).map(n=>n.id));
+ const edges=layout(s).edges.flatMap(edge=>{const a=edge.find(n=>reachable.has(n)),b=edge.find(n=>!reachable.has(n));return a&&b?[{a,b}]:[];}).sort((a,b)=>distance(point(s,a.b),point(s,to))-distance(point(s,b.b),point(s,to)));
+ for(const {a,b}of edges){const obstacle=walls(s).find(w=>intersects(add(point(s,a),[0,.85,0]),add(point(s,b),[0,.85,0]),w,[.26,.84,.26]));if(obstacle)return {label:obstacle.label,p:clone(obstacle.center)};}
+ return s.level===2?{label:'断开的走廊',p:[0,0,-2.6]}:null;
+}
 function near(s:State,p:Vec,id=s.active){const f=feet(s,id);return Math.hypot(f[0]-p[0],f[2]-p[2])<=1.15&&Math.abs(p[1]-1)<1.4&&!space(s,add(f,[0,1,0]),p,[.04,.04,.04]);}
 export function apply(source:State,action:Action,disabled:Ability[]=[]):Outcome {
  const s=clone(source),motions:Motion[]=[];let sound='place';const fail=(error:string):Outcome=>({state:source,error,motions:[]});
@@ -38,7 +46,7 @@ export function apply(source:State,action:Action,disabled:Ability[]=[]):Outcome 
  s.won=s.level===1?actor(s,'a').node==='exit'&&item(s,'box').holder==='a':s.level===2?actor(s,'a').node==='safe':s.latched&&s.actors.every(a=>!a.inside&&a.node==='exit');return {state:s,motions,sound};};
  if(action.type==='switch'){if(action.actor==='npc')return fail('接应员按你的请求帮忙，不需要切换控制。');if(s.active===id)return fail('已经在控制这位调查员。');s.active=id;return finish();}
  if(action.type==='move'){
-  if(!layout(s).nodes.some(n=>n.id===action.node))return fail('那里没有落脚点。');if(who.node===action.node)return fail('已经在这里了。');const path=route(s,who.node,action.node);if(!path)return fail(s.level===1?'墙挡住了路。观察一下灯光照在哪里。':s.level===3?'玻璃门还锁着，身体也穿不过高处的窄投递口。':'走廊已经断开，无法从这里走过去。');
+  if(!layout(s).nodes.some(n=>n.id===action.node))return fail('那里没有落脚点。');if(who.node===action.node)return fail('已经在这里了。');const path=route(s,who.node,action.node);if(!path){const obstacle=routeObstacle(s,who.node,action.node);return fail(`${obstacle?.label??'墙'}挡住了道路。${s.level===1?'观察灯光照在哪里。':s.level===3?'人物身体穿不过高处的窄投递口。':'需要另一条安全通道。'}`);}
   if(action.node!=='exit'&&occupied(s,action.node,id))return fail('那里有同伴，请换一块空地。');who.node=action.node;who.holding=null;motions.push({id,path,kind:'walk'});return finish();
  }
  if(action.type==='lamp'||action.type==='ring'&&action.target==='lamp'){
