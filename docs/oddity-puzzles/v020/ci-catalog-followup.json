@@ -1,0 +1,20 @@
+{
+  "result": "PASS",
+  "acceptedProductCommit": "2c6c17dc0e394b9fe145b9d87d8972f268a99afd",
+  "acceptedProductSource": "39a5bd3a9500837bc3d95650eed3e034a70aed985a1f0bd4a1d9eb2a7c2d6710",
+  "followUpSource": "0142fbfa6c9adbc8f68cdac3f001776bf0c5856c5d57b924b7331d9111ea3bd3",
+  "changedConsumer": "tools/math-world/validate-math-world.ts:23",
+  "runtimeBuildInputsUnchanged": true,
+  "nonDocumentationChangesSinceAcceptedProduct": [
+    "tests/e2e/portfolio-smoke.spec.ts",
+    "tools/math-world/validate-math-world.ts"
+  ],
+  "validationCommand": "pnpm run validate:math-world",
+  "validationStdout": "Already up to date\nDone in 51ms using pnpm v11.5.2\n$ tsx tools/math-world/validate-math-world.ts\n{\n  \"verdict\": \"PASS_MACHINE\",\n  \"portfolioRecords\": 9,\n  \"allGameDefinitions\": 9,\n  \"classicGameCatalog\": 5,\n  \"stations\": [\n    \"slider\",\n    \"target\"\n  ],\n  \"targetPuzzles\": 12,\n  \"equationSameVisiblePolicy\": \"REJECT_NO_VISIBLE_CHANGE_WITH_EXPLANATION\",\n  \"equationSameVisibleAudit\": {\n    \"transitionLevels\": 81,\n    \"initialLevels\": 45,\n    \"shortestPathBenefitLevels\": 38,\n    \"requiredLevels\": 0\n  },\n  \"runtimeAssets\": [\n    \"math-world-city-background.webp\",\n    \"two-station-city.webp\"\n  ],\n  \"runtimeAssetBytes\": 514636\n}\n",
+  "browserCommand": "playwright math-world.spec.ts --grep final classic catalog; desktop-1440, mobile-390, tablet-768",
+  "browserPassed": 2,
+  "browserSkipped": 1,
+  "skipReason": "Existing test skips tablet; no assertion changed",
+  "stdoutTail": "\n[2/3] [mobile-390] › tests\\e2e\\math-world.spec.ts:173:1 › @e2e direct station refresh, motion setting, keyboard order, and final classic catalog stay coherent\n\n(node:2896) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\n[3/3] [tablet-768] › tests\\e2e\\math-world.spec.ts:173:1 › @e2e direct station refresh, motion setting, keyboard order, and final classic catalog stay coherent\n  1 skipped\n  2 passed (9.4s)",
+  "failedRun": "https://github.com/Archmays/Game-Codex/actions/runs/35507012666"
+}
