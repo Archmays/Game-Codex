@@ -1,0 +1,148 @@
+{
+  "failedRun": "https://github.com/Archmays/Game-Codex/actions/runs/35508381227",
+  "failedCommit": "0d0567368c488b735697b8ae8e260d8da740ab1d",
+  "traceSha256": "7a2792da0e52e1b7746ad9e97935fecc17fb954611a7d290e1780af0de852257",
+  "methodTiming": {
+    "queryCount": {
+      "calls": 827,
+      "seconds": 98.05
+    },
+    "isVisible": {
+      "calls": 757,
+      "seconds": 90.05
+    },
+    "isEnabled": {
+      "calls": 529,
+      "seconds": 63.56
+    },
+    "waitForSelector": {
+      "calls": 466,
+      "seconds": 55.36
+    },
+    "click": {
+      "calls": 66,
+      "seconds": 39.86
+    },
+    "getAttribute": {
+      "calls": 299,
+      "seconds": 36.26
+    },
+    "evalOnSelectorAll": {
+      "calls": 188,
+      "seconds": 17.47
+    },
+    "expect": {
+      "calls": 255,
+      "seconds": 13.61
+    },
+    "innerText": {
+      "calls": 20,
+      "seconds": 2.6
+    },
+    "goto": {
+      "calls": 17,
+      "seconds": 0.56
+    },
+    "newPage": {
+      "calls": 1,
+      "seconds": 0.04
+    }
+  },
+  "steps": [
+    {
+      "title": "oddity-puzzles: hit test, real action, public return",
+      "seconds": 103.13
+    },
+    {
+      "title": "world-in-a-box: hit test, real action, public return",
+      "seconds": 275.34
+    },
+    {
+      "title": "hanzi-stroke-lab: hit test, real action, public return",
+      "seconds": 1.24
+    },
+    {
+      "title": "memory-independent: hit test, real action, public return",
+      "seconds": 1.47
+    },
+    {
+      "title": "step4-playtest: hit test, real action, public return",
+      "seconds": 4.08
+    },
+    {
+      "title": "hanzi-word-adventure: hit test, real action, public return",
+      "seconds": 1.09
+    },
+    {
+      "title": "my-game-world: hit test, real action, public return",
+      "seconds": 2.14
+    },
+    {
+      "title": "classic-hub: hit test, real action, public return",
+      "seconds": 2.87
+    },
+    {
+      "title": "hanzi-tower-defense: hit test, real action, public return",
+      "seconds": 3.29
+    },
+    {
+      "title": "math-world: hit test, real action, public return",
+      "seconds": 0.94
+    },
+    {
+      "title": "math-slider: hit test, real action, public return",
+      "seconds": 1.43
+    },
+    {
+      "title": "math-target: hit test, real action, public return",
+      "seconds": 1.22
+    },
+    {
+      "title": "classic-defense: hit test, real action, public return",
+      "seconds": 2.16
+    },
+    {
+      "title": "classic-adventure: hit test, real action, public return",
+      "seconds": 1.16
+    },
+    {
+      "title": "classic-math: hit test, real action, public return",
+      "seconds": 0.95
+    },
+    {
+      "title": "classic-oddity: hit test, real action, public return",
+      "seconds": 62.83
+    },
+    {
+      "title": "classic-world-box: hit test, real action, public return",
+      "seconds": 148.34
+    }
+  ],
+  "result": "PASS",
+  "acceptedProductCommit": "2c6c17dc0e394b9fe145b9d87d8972f268a99afd",
+  "acceptedProductSource": "39a5bd3a9500837bc3d95650eed3e034a70aed985a1f0bd4a1d9eb2a7c2d6710",
+  "followUpSource": "782b7e01c382eb2b47055d158563bcc271b07a48da06e8f052e764d7c911d976",
+  "validationCommand": "INTERACTION_INTEGRITY_PREVIEW=1 pnpm run test:e2e:hittest:representative",
+  "timeoutMsUnchanged": 600000,
+  "surfacesPerProfile": 17,
+  "profiles": [
+    "mobile-390",
+    "desktop-1366"
+  ],
+  "runtimeBuildInputsUnchanged": true,
+  "zipSha256": "7e6113ac62bc11027358a8248a8e097b5a15b2fc68fb01d16e1ae841c332673a",
+  "testsPassed": 4,
+  "elapsed": "7.2 minutes for four tests",
+  "reports": [
+    {
+      "project": "desktop-1366",
+      "surfaceCount": 17,
+      "sha256": "7f98cbb480f07d2d466b6f6e1bef2c35c263b433791783022f9ff4bbd99f394b"
+    },
+    {
+      "project": "mobile-390",
+      "surfaceCount": 17,
+      "sha256": "467c6f4604ad3870e4e5fd752c883743f2abb0c238c81328960423c1906d6058"
+    }
+  ]
+}

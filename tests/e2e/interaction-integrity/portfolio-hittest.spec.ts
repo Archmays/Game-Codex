@@ -39,7 +39,8 @@ async function enterOddityIfNeeded(page: Page, record: PlaySurfaceRecord): Promi
 
 async function visibleEnabled(locator: Locator, limit = Infinity): Promise<Locator[]> {
   const result: Locator[] = [];
-  for (let index = 0; index < await locator.count(); index += 1) {
+  const count = await locator.count();
+  for (let index = 0; index < count; index += 1) {
     const candidate = locator.nth(index);
     if (await candidate.isVisible() && await candidate.isEnabled()) {
       result.push(candidate);
@@ -70,13 +71,24 @@ function routeMatches(url: string, expectedQuery: string): boolean {
 }
 
 async function findReturnControl(page: Page, record: PlaySurfaceRecord): Promise<Locator | null> {
-  const controls = await visibleEnabled(page.locator("a[href], button"));
-  for (const control of controls) {
-    const href = await control.getAttribute("href");
-    if (href && routeMatches(new URL(href, page.url()).href, record.returnRoute)) return control;
+  const controls = page.locator("a[href], button");
+  // Read metadata once; retain Playwright's visibility/enabled semantics for
+  // candidates instead of serially probing every unrelated WebGL overlay control.
+  const metadata = await controls.evaluateAll((elements) => elements.map((element, index) => ({
+    index,
+    href: element.getAttribute("href"),
+    label: (element.getAttribute("aria-label") ?? element.textContent ?? "").trim(),
+  })));
+  for (const entry of metadata) {
+    if (!entry.href) continue;
+    const control = controls.nth(entry.index);
+    if (await control.isVisible() && await control.isEnabled()
+      && routeMatches(new URL(entry.href, page.url()).href, record.returnRoute)) return control;
   }
-  for (const control of controls) {
-    if (RETURN_WORDS.test(await label(control))) return control;
+  for (const entry of metadata) {
+    if (!RETURN_WORDS.test(entry.label)) continue;
+    const control = controls.nth(entry.index);
+    if (await control.isVisible() && await control.isEnabled()) return control;
   }
   return null;
 }
