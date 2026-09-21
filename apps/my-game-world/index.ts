@@ -83,7 +83,7 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
       </a>
     </section>
     <section class="world-hanzi-tool" aria-label="观察与解谜"><a tabindex="0" href="?play=oddity-puzzles" data-world-oddity-link><span class="world-hanzi-tool__glyph" aria-hidden="true">奇</span><span><strong>奇物事务所 · 三个案件</strong><span>观察房间，把两种奇物的本领连起来</span></span><span aria-hidden="true">↗</span></a></section>
-    <section class="world-hanzi-tool" aria-label="拼装小世界"><a tabindex="0" href="?play=world-in-a-box" data-world-box-link><span class="world-hanzi-tool__glyph" aria-hidden="true">窗</span><span><strong>世界盒子 · 两个小世界</strong><span>窗边有风 / 德累斯顿</span></span><span aria-hidden="true">↗</span></a></section>
+    <section class="world-hanzi-tool" aria-label="拼装小世界"><a tabindex="0" href="?play=world-in-a-box" data-world-box-link><span class="world-hanzi-tool__glyph" aria-hidden="true">窗</span><span><strong>世界盒子 · 三个小世界</strong><span>窗边有风 / 德累斯顿 / 冰雪游乐日</span></span><span aria-hidden="true">↗</span></a></section>
     <section class="world-hanzi-tool" aria-label="中文工具"><a tabindex="0" href="?play=hanzi-stroke-lab" data-world-stroke-link><span class="world-hanzi-tool__glyph" aria-hidden="true">永</span><span><strong>汉字书房</strong><span>查字与笔顺 · 不会读也能手写找字</span></span><span aria-hidden="true">↗</span></a></section>
     <nav class="world-more" aria-label="游戏列表" data-testid="world-treasure-box"><span>也可以打开游戏列表</span><a tabindex="0" href="${CLASSIC_HUB_FROM_WORLD_ROUTE}" data-world-treasure-link>${WORLD_COPY.treasureTitle}<span aria-hidden="true">→</span></a><a tabindex="0" href="?playtest=step4" data-world-playtest-link>本次试玩<span aria-hidden="true">→</span></a></nav>
     <div class="world-modal-layer" data-world-modal-layer></div>

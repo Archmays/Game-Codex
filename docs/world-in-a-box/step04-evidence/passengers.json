@@ -1,0 +1,66 @@
+{
+  "result": "PASS_MACHINE",
+  "rows": [
+    {
+      "removed": "anna",
+      "placed": [
+        "sven",
+        "sleigh",
+        "kristoff"
+      ],
+      "ride": {
+        "route": "lake",
+        "t": 0,
+        "destination": 0,
+        "running": false,
+        "blocked": false,
+        "speed": 0,
+        "anna": false,
+        "direction": 1
+      }
+    },
+    {
+      "removed": "sven",
+      "placed": [
+        "anna",
+        "sleigh",
+        "kristoff"
+      ],
+      "ride": {
+        "route": "lake",
+        "t": 0,
+        "destination": 0,
+        "running": false,
+        "blocked": false,
+        "speed": 0,
+        "anna": false,
+        "direction": 1
+      }
+    },
+    {
+      "removed": "sleigh",
+      "placed": [
+        "anna",
+        "sven",
+        "kristoff"
+      ],
+      "ride": {
+        "route": "lake",
+        "t": 0,
+        "destination": 0,
+        "running": false,
+        "blocked": false,
+        "speed": 0,
+        "anna": false,
+        "direction": 1
+      }
+    }
+  ],
+  "checks": [
+    "undo Anna on sleigh",
+    "undo Sven with other actors retained",
+    "undo sleigh with other actors retained",
+    "ride without Anna",
+    "reset during motion"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "algorithm": "sha256(sorted lines: file_sha256 two-spaces repo-relative-path newline)",
+  "scope": "all runtime, authored game sources, QA tools/tests, package/build config, input contract; excludes report/screenshot outputs",
+  "fileCount": 10101,
+  "sha256": "ecdaf32db9cf811d519703708920e6c22133f46a7b746e5386d4b70ea1ac042d",
+  "glbSha256": "f6a8acfa5bb041e7ae0f2b047be5ebf4383a235f2a1dcaf483a7ad46f175d308"
+}

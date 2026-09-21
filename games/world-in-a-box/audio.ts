@@ -1,4 +1,5 @@
 /** Scene-owned local audio. One context, bounded voices, no queued one-shots. */
+import {AUDIO_SCENES,type AudioScene} from './scene-config';
 export type Channel='music'|'sfx'|'ambient';
 export interface SoundPreferences {version:1;muted:boolean;music:number;sfx:number;ambient:number}
 export const AUDIO_KEY='audio-v1';
@@ -16,7 +17,7 @@ export class BoxAudio {
  private buffers=new Map<string,AudioBuffer>();private pending=new Map<string,Promise<void>>();private loops=new Map<string,Voice>();private desired=new Map<string,{name:string;channel:Channel;level:number}>();private offsets=new Map<string,number>();
  private voices:Voice[]=[];private abort=new AbortController();private epoch=0;private dead=false;private pauses=new Set<string>();private nextChime=0;private nextPage=0;private chime=false;private breeze=false;private quiet=false;
  readonly events:{name:string;time:number}[]=[];
- constructor(readonly scene:'window-breeze'|'river-campus'='window-breeze',public preferences:SoundPreferences=soundPreferences(null),private status:(text:string)=>void=()=>{},private interruptedState:(paused:boolean)=>void=()=>{}){if(context?.state==='running')void this.unlock();}
+ constructor(readonly scene:AudioScene='window-breeze',public preferences:SoundPreferences=soundPreferences(null),private status:(text:string)=>void=()=>{},private interruptedState:(paused:boolean)=>void=()=>{}){if(context?.state==='running')void this.unlock();}
  async unlock(){
   if(this.dead)return;
   try{
@@ -26,8 +27,8 @@ export class BoxAudio {
     c.addEventListener('statechange',()=>{if(!this.dead){if(c.state!=='running')this.status('声音暂时暂停；点声音按钮可重试。');this.interruptedState(c.state!=='running');}},{signal:this.abort.signal});
    }
    if(c.state!=='running')await c.resume();if(this.dead)return;
-   this.mix();this.want('music',this.scene,'music',.7);this.want('environment',this.scene==='window-breeze'?'room':'river','ambient',.12);
-   for(const name of [...shortNames,'wind','boat','tram'])void this.load(name);
+   this.mix();this.want('music',this.scene,'music',.7);this.want('environment',AUDIO_SCENES[this.scene].environment,'ambient',.12);
+   for(const name of [...shortNames,...AUDIO_SCENES[this.scene].extra])void this.load(name);
    this.sync();
   }catch{if(!this.dead)this.status('声音暂时未开启；可以继续拼，打开声音设置可重试。');}
  }

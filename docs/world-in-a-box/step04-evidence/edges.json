@@ -1,0 +1,33 @@
+{
+  "result": "PASS_MACHINE",
+  "checks": [
+    "window entry does not load frozen model/audio",
+    "subpath retained",
+    "reset during casting cancels late bridge growth",
+    "old first-box bytes preserved",
+    "representative Olaf bridge crossing safely returns before clear",
+    "undo removes only manually placed Olaf",
+    "modal pauses real rendered GLB animation",
+    "unknown scene fallback title",
+    "edge flows no uncaught error",
+    "storage fault accurately reported without blocking play",
+    "late GLB cannot revive disposed scene"
+  ],
+  "rows": [
+    {
+      "case": "subpath-old-save-reset-bridge-animation",
+      "checks": [
+        "window entry does not load frozen model/audio",
+        "subpath retained",
+        "reset during casting cancels late bridge growth",
+        "old first-box bytes preserved",
+        "representative Olaf bridge crossing safely returns before clear",
+        "undo removes only manually placed Olaf",
+        "modal pauses real rendered GLB animation",
+        "unknown scene fallback title",
+        "edge flows no uncaught error"
+      ]
+    }
+  ],
+  "scope": "synthetic isolated storage/load faults; true input; no family saves"
+}

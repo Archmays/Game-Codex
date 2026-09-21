@@ -1,0 +1,799 @@
+{
+  "result": "PASS_MACHINE",
+  "date": "2026-09-21",
+  "sourceSha256": "ecdaf32db9cf811d519703708920e6c22133f46a7b746e5386d4b70ea1ac042d",
+  "runtimeUnchangedSince": "final unit/edge/passenger/audio/loop runs; final QA change only scrolls each target into view before identical hit checks",
+  "unit": {
+    "files": 49,
+    "tests": 612,
+    "result": "PASS"
+  },
+  "typecheck": "PASS",
+  "build": "PASS",
+  "staticContracts": [
+    "portfolio",
+    "portfolio evolution",
+    "play readiness",
+    "interaction integrity"
+  ],
+  "profiles": [
+    "keyboard",
+    "mouse",
+    "360",
+    "390",
+    "landscape360",
+    "landscape390",
+    "tablet768",
+    "tablet1024"
+  ],
+  "web": {
+    "files": 9762,
+    "bytes": 107031049,
+    "sameBytesAsDist": true,
+    "forbiddenFiles": [],
+    "buildMarker": "step04-ecdaf32db9cf"
+  },
+  "performance": [
+    {
+      "profile": "keyboard",
+      "load": {
+        "ms": 991.5,
+        "resources": [
+          {
+            "url": "frozen-runtime-VNqUOc1U.js",
+            "bytes": 34390,
+            "duration": 5.299999997019768
+          },
+          {
+            "url": "frozen-runtime-DubtOAaW.css",
+            "bytes": 3273,
+            "duration": 6.5
+          },
+          {
+            "url": "frozen-elsa-playground.glb",
+            "bytes": 3032772,
+            "duration": 25.5
+          }
+        ]
+      },
+      "emptyFrames": {
+        "p50": 16.700000000000045,
+        "p95": 16.899999999999864,
+        "max": 16.90000000000009,
+        "samples": 60
+      },
+      "completeFrames": {
+        "p50": 16.699999999999818,
+        "p95": 16.899999999999636,
+        "max": 17,
+        "samples": 60
+      },
+      "completeScene": {
+        "calls": 316,
+        "triangles": 185000,
+        "memory": {
+          "geometries": 176,
+          "textures": 7
+        },
+        "clips": [
+          "elsa_wave",
+          "elsa_cast",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      },
+      "emptyScene": {
+        "calls": 86,
+        "triangles": 66304,
+        "memory": {
+          "geometries": 148,
+          "textures": 7
+        },
+        "clips": [
+          "elsa_wave",
+          "elsa_cast",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      }
+    },
+    {
+      "profile": "mouse",
+      "load": {
+        "ms": 744.7000000029802,
+        "resources": [
+          {
+            "url": "frozen-runtime-VNqUOc1U.js",
+            "bytes": 34390,
+            "duration": 7.299999997019768
+          },
+          {
+            "url": "frozen-runtime-DubtOAaW.css",
+            "bytes": 3273,
+            "duration": 24.69999998807907
+          },
+          {
+            "url": "frozen-elsa-playground.glb",
+            "bytes": 3032772,
+            "duration": 40.30000001192093
+          }
+        ]
+      },
+      "emptyFrames": {
+        "p50": 16.699999999999818,
+        "p95": 16.90000000000009,
+        "max": 17,
+        "samples": 60
+      },
+      "completeFrames": {
+        "p50": 16.699999999999818,
+        "p95": 16.900000000000546,
+        "max": 17,
+        "samples": 60
+      },
+      "completeScene": {
+        "calls": 224,
+        "triangles": 148658,
+        "memory": {
+          "geometries": 176,
+          "textures": 7
+        },
+        "clips": [
+          "elsa_wave",
+          "elsa_cast",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      },
+      "emptyScene": {
+        "calls": 86,
+        "triangles": 66304,
+        "memory": {
+          "geometries": 148,
+          "textures": 7
+        },
+        "clips": [
+          "elsa_wave",
+          "elsa_cast",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      }
+    },
+    {
+      "profile": "360",
+      "load": {
+        "ms": 708,
+        "resources": [
+          {
+            "url": "frozen-runtime-VNqUOc1U.js",
+            "bytes": 34390,
+            "duration": 5.299999997019768
+          },
+          {
+            "url": "frozen-runtime-DubtOAaW.css",
+            "bytes": 3273,
+            "duration": 13
+          },
+          {
+            "url": "frozen-elsa-playground.glb",
+            "bytes": 3032772,
+            "duration": 45.5
+          }
+        ]
+      },
+      "emptyFrames": {
+        "p50": 16.700000000000045,
+        "p95": 16.90000000000009,
+        "max": 16.90000000000009,
+        "samples": 60
+      },
+      "completeFrames": {
+        "p50": 16.69999999999891,
+        "p95": 17.30000000000109,
+        "max": 17.399999999999636,
+        "samples": 60
+      },
+      "completeScene": {
+        "calls": 316,
+        "triangles": 185000,
+        "memory": {
+          "geometries": 176,
+          "textures": 7
+        },
+        "clips": [
+          "elsa_wave",
+          "elsa_cast",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      },
+      "emptyScene": {
+        "calls": 86,
+        "triangles": 66304,
+        "memory": {
+          "geometries": 148,
+          "textures": 7
+        },
+        "clips": [
+          "elsa_wave",
+          "elsa_cast",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      }
+    },
+    {
+      "profile": "390",
+      "load": {
+        "ms": 722.2000000029802,
+        "resources": [
+          {
+            "url": "frozen-runtime-VNqUOc1U.js",
+            "bytes": 34390,
+            "duration": 5.799999997019768
+          },
+          {
+            "url": "frozen-runtime-DubtOAaW.css",
+            "bytes": 3273,
+            "duration": 15
+          },
+          {
+            "url": "frozen-elsa-playground.glb",
+            "bytes": 3032772,
+            "duration": 40.599999994039536
+          }
+        ]
+      },
+      "emptyFrames": {
+        "p50": 16.699999999999818,
+        "p95": 16.899999999999864,
+        "max": 16.90000000000009,
+        "samples": 60
+      },
+      "completeFrames": {
+        "p50": 16.69999999999891,
+        "p95": 16.899999999999636,
+        "max": 17.600000000000364,
+        "samples": 60
+      },
+      "completeScene": {
+        "calls": 316,
+        "triangles": 185000,
+        "memory": {
+          "geometries": 176,
+          "textures": 7
+        },
+        "clips": [
+          "elsa_wave",
+          "elsa_cast",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      },
+      "emptyScene": {
+        "calls": 86,
+        "triangles": 66304,
+        "memory": {
+          "geometries": 148,
+          "textures": 7
+        },
+        "clips": [
+          "elsa_wave",
+          "elsa_cast",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      }
+    },
+    {
+      "profile": "landscape360",
+      "load": {
+        "ms": 748.7999999970198,
+        "resources": [
+          {
+            "url": "frozen-runtime-VNqUOc1U.js",
+            "bytes": 34390,
+            "duration": 9.399999991059303
+          },
+          {
+            "url": "frozen-runtime-DubtOAaW.css",
+            "bytes": 3273,
+            "duration": 17.700000002980232
+          },
+          {
+            "url": "frozen-elsa-playground.glb",
+            "bytes": 3032772,
+            "duration": 39.099999994039536
+          }
+        ]
+      },
+      "emptyFrames": {
+        "p50": 16.700000000000045,
+        "p95": 16.90000000000009,
+        "max": 17.5,
+        "samples": 60
+      },
+      "completeFrames": {
+        "p50": 16.69999999999891,
+        "p95": 16.900000000001455,
+        "max": 17.299999999999272,
+        "samples": 60
+      },
+      "completeScene": {
+        "calls": 316,
+        "triangles": 185000,
+        "memory": {
+          "geometries": 176,
+          "textures": 7
+        },
+        "clips": [
+          "elsa_wave",
+          "elsa_cast",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      },
+      "emptyScene": {
+        "calls": 86,
+        "triangles": 66304,
+        "memory": {
+          "geometries": 148,
+          "textures": 7
+        },
+        "clips": [
+          "elsa_wave",
+          "elsa_cast",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      }
+    },
+    {
+      "profile": "landscape390",
+      "load": {
+        "ms": 694.9000000059605,
+        "resources": [
+          {
+            "url": "frozen-runtime-VNqUOc1U.js",
+            "bytes": 34390,
+            "duration": 12.900000005960464
+          },
+          {
+            "url": "frozen-runtime-DubtOAaW.css",
+            "bytes": 3273,
+            "duration": 13.899999991059303
+          },
+          {
+            "url": "frozen-elsa-playground.glb",
+            "bytes": 3032772,
+            "duration": 38.70000000298023
+          }
+        ]
+      },
+      "emptyFrames": {
+        "p50": 16.699999999999818,
+        "p95": 16.800000000000182,
+        "max": 17.100000000000136,
+        "samples": 60
+      },
+      "completeFrames": {
+        "p50": 16.600000000000364,
+        "p95": 16.899999999999636,
+        "max": 17,
+        "samples": 60
+      },
+      "completeScene": {
+        "calls": 316,
+        "triangles": 185000,
+        "memory": {
+          "geometries": 176,
+          "textures": 7
+        },
+        "clips": [
+          "elsa_wave",
+          "elsa_cast",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      },
+      "emptyScene": {
+        "calls": 86,
+        "triangles": 66304,
+        "memory": {
+          "geometries": 148,
+          "textures": 7
+        },
+        "clips": [
+          "elsa_wave",
+          "elsa_cast",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      }
+    },
+    {
+      "profile": "tablet768",
+      "load": {
+        "ms": 759.5999999940395,
+        "resources": [
+          {
+            "url": "frozen-runtime-VNqUOc1U.js",
+            "bytes": 34390,
+            "duration": 14.099999994039536
+          },
+          {
+            "url": "frozen-runtime-DubtOAaW.css",
+            "bytes": 3273,
+            "duration": 24.200000002980232
+          },
+          {
+            "url": "frozen-elsa-playground.glb",
+            "bytes": 3032772,
+            "duration": 44.5
+          }
+        ]
+      },
+      "emptyFrames": {
+        "p50": 16.700000000000045,
+        "p95": 16.90000000000009,
+        "max": 17.40000000000009,
+        "samples": 60
+      },
+      "completeFrames": {
+        "p50": 16.69999999999891,
+        "p95": 16.899999999999636,
+        "max": 17.5,
+        "samples": 60
+      },
+      "completeScene": {
+        "calls": 316,
+        "triangles": 185000,
+        "memory": {
+          "geometries": 176,
+          "textures": 7
+        },
+        "clips": [
+          "elsa_wave",
+          "elsa_cast",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      },
+      "emptyScene": {
+        "calls": 86,
+        "triangles": 66304,
+        "memory": {
+          "geometries": 148,
+          "textures": 7
+        },
+        "clips": [
+          "elsa_wave",
+          "elsa_cast",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      }
+    },
+    {
+      "profile": "tablet1024",
+      "load": {
+        "ms": 728.5999999940395,
+        "resources": [
+          {
+            "url": "frozen-runtime-VNqUOc1U.js",
+            "bytes": 34390,
+            "duration": 9.5
+          },
+          {
+            "url": "frozen-runtime-DubtOAaW.css",
+            "bytes": 3273,
+            "duration": 20.30000001192093
+          },
+          {
+            "url": "frozen-elsa-playground.glb",
+            "bytes": 3032772,
+            "duration": 41
+          }
+        ]
+      },
+      "emptyFrames": {
+        "p50": 16.699999999999818,
+        "p95": 16.90000000000009,
+        "max": 17,
+        "samples": 60
+      },
+      "completeFrames": {
+        "p50": 16.69999999999891,
+        "p95": 16.899999999999636,
+        "max": 17.399999999999636,
+        "samples": 60
+      },
+      "completeScene": {
+        "calls": 316,
+        "triangles": 185000,
+        "memory": {
+          "geometries": 176,
+          "textures": 7
+        },
+        "clips": [
+          "elsa_wave",
+          "elsa_cast",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      },
+      "emptyScene": {
+        "calls": 86,
+        "triangles": 66304,
+        "memory": {
+          "geometries": 148,
+          "textures": 7
+        },
+        "clips": [
+          "elsa_wave",
+          "elsa_cast",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      }
+    }
+  ],
+  "audioTrend": {
+    "active": 2,
+    "max": 5
+  },
+  "limits": [
+    "Perceptual listening NOT_TESTED",
+    "Physical touch device NOT_TESTED",
+    "Actual child use/learning/retention NOT_TESTED",
+    "True VRAM byte measurement NOT_TESTED; Three resource counts only"
+  ],
+  "visualBaseline": "baseline.png established; baseline-replay.png exact bytes unchanged",
+  "semanticReview": {
+    "childFirst": "PASS within machine-observable contract",
+    "visualAccess": "PASS within recorded views and inputs",
+    "adversarialLifecycle": "PASS; isolated synthetic storage/load faults",
+    "reviewers": "Codex independent rubric passes; no Pro/human review claimed"
+  }
+}

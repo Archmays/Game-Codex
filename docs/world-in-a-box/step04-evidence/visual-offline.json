@@ -1,0 +1,262 @@
+{
+  "result": "PASS_MACHINE",
+  "checks": [
+    "Exact no-update reduced-motion opening screenshot replay",
+    "Help off, upper spire first, physical visibility hint",
+    "Held rotation release settles without continued movement"
+  ],
+  "external": [],
+  "errors": [],
+  "resources": [
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/frozen/frozen-elsa-playground.glb",
+      "bytes": 3032772
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/frozen-air.wav",
+      "bytes": 384344
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/music/frozen-elsa-playground.wav",
+      "bytes": 10017736
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/place-light.wav",
+      "bytes": 26264
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/pick.wav",
+      "bytes": 17624
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/place-medium.wav",
+      "bytes": 36824
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/place-heavy.wav",
+      "bytes": 50264
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/undo.wav",
+      "bytes": 31064
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/mismatch.wav",
+      "bytes": 38744
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/complete.wav",
+      "bytes": 125144
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/page.wav",
+      "bytes": 40664
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/shutter.wav",
+      "bytes": 53144
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/cat.wav",
+      "bytes": 125144
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/cup.wav",
+      "bytes": 53144
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/steam.wav",
+      "bytes": 163544
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/boat-start.wav",
+      "bytes": 57944
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/chime.wav",
+      "bytes": 144344
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/boat-contact.wav",
+      "bytes": 43544
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/tram-start.wav",
+      "bytes": 38744
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/tram-stop.wav",
+      "bytes": 46424
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/blocked.wav",
+      "bytes": 27224
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/section.wav",
+      "bytes": 81944
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/frozen-gather.wav",
+      "bytes": 105944
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/frozen-crystal.wav",
+      "bytes": 34904
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/frozen-slide.wav",
+      "bytes": 288344
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/frozen-skate.wav",
+      "bytes": 288344
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/frozen-hooves.wav",
+      "bytes": 288344
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/frozen-snow.wav",
+      "bytes": 384344
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/frozen-frost.wav",
+      "bytes": 288344
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/frozen-start.wav",
+      "bytes": 57944
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/frozen-stop.wav",
+      "bytes": 48344
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/frozen-door.wav",
+      "bytes": 77144
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/frozen-reform.wav",
+      "bytes": 115544
+    },
+    {
+      "path": "/Game-Codex/assets/world-in-a-box/audio/sfx/frozen-chandelier.wav",
+      "bytes": 134744
+    }
+  ],
+  "diagnostics": {
+    "scene": {
+      "calls": 86,
+      "triangles": 66304,
+      "memory": {
+        "geometries": 173,
+        "textures": 7
+      },
+      "clips": [
+        "elsa_wave",
+        "elsa_cast",
+        "elsa_walk_-1",
+        "elsa_walk_1",
+        "anna_wave",
+        "anna_cast",
+        "anna_walk_-1",
+        "anna_walk_1",
+        "olaf_wave_-1",
+        "olaf_wave_1",
+        "kristoff_wave",
+        "kristoff_cast",
+        "kristoff_walk_-1",
+        "kristoff_walk_1",
+        "sven_walk_-1_-1",
+        "sven_walk_-1_1",
+        "sven_walk_1_-1",
+        "sven_walk_1_1"
+      ],
+      "playing": []
+    },
+    "audio": {
+      "context": "running",
+      "loops": [
+        {
+          "key": "environment",
+          "name": "frozen-air",
+          "offset": 0,
+          "started": 0
+        },
+        {
+          "key": "music",
+          "name": "frozen-elsa-playground",
+          "offset": 0,
+          "started": 0
+        }
+      ],
+      "voices": 0,
+      "pending": 0,
+      "buffers": 33,
+      "epoch": 2,
+      "pauses": [],
+      "preferences": {
+        "version": 1,
+        "muted": false,
+        "music": 0.25,
+        "sfx": 0.55,
+        "ambient": 0.15
+      },
+      "events": [
+        {
+          "name": "frozen-crystal",
+          "time": 0.010666666666666666
+        },
+        {
+          "name": "frozen-crystal",
+          "time": 0.18133333333333335
+        },
+        {
+          "name": "frozen-crystal",
+          "time": 0.3413333333333333
+        },
+        {
+          "name": "frozen-crystal",
+          "time": 0.5013333333333333
+        },
+        {
+          "name": "frozen-crystal",
+          "time": 0.6613333333333333
+        },
+        {
+          "name": "frozen-crystal",
+          "time": 0.832
+        },
+        {
+          "name": "frozen-crystal",
+          "time": 1.0106666666666666
+        },
+        {
+          "name": "frozen-crystal",
+          "time": 1.1813333333333333
+        },
+        {
+          "name": "frozen-crystal",
+          "time": 1.352
+        },
+        {
+          "name": "frozen-crystal",
+          "time": 1.5013333333333334
+        },
+        {
+          "name": "pick",
+          "time": 1.7013333333333334
+        },
+        {
+          "name": "place-heavy",
+          "time": 1.7706666666666666
+        }
+      ]
+    },
+    "revision": 1
+  },
+  "build": "step04-ecdaf32db9cf",
+  "subpath": true,
+  "freshContext": true
+}

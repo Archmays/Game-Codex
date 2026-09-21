@@ -1,6 +1,6 @@
-# 世界盒子 v0.4.0 · 两个小世界
+# 世界盒子 v0.5.0 · 三个小世界
 
-固定家庭地址为 `http://127.0.0.1:5175/`，沿用家庭启动器 `tools/my-game-world/START_MY_GAME_WORLD.cmd`。默认进入原有《窗边有风》，右上角“换盒子”可切换；两个盒子分别保存进度。
+固定家庭地址为 `http://127.0.0.1:5175/`，沿用家庭启动器 `tools/my-game-world/START_MY_GAME_WORLD.cmd`。默认进入原有《窗边有风》，右上角“换盒子”可切换；三个盒子分别保存进度。
 
 - 窗边有风：`?play=world-in-a-box&scene=window-breeze`
 - 德累斯顿·河流、桥与大学：`?play=world-in-a-box&scene=dresden-river-campus`
@@ -51,7 +51,7 @@ Blender 4.5 LTS：`blender --background --factory-startup --python-exit-code 1 -
 
 ## 当前完成度
 
-v0.4.0 两个完整盒子；具体机器验证及实际设备边界以各轮报告为准。
+v0.5.0 三个盒子；具体机器验证及实际设备边界以各轮报告为准。
 
 ## 后续改进建议
 
@@ -70,3 +70,11 @@ v0.4.0 两个完整盒子；具体机器验证及实际设备边界以各轮报�
 音乐、音效、环境可分别调至0，原静音偏好兼容。两首原创循环曲分别为76 BPM三拍子约76秒的窗边曲、84 BPM四拍子约91秒的城市曲。生成脚本：`tools/world-in-a-box/render-audio.py`；本地文件和许可：`public/assets/world-in-a-box/audio/manifest.json`。无需乐器库、在线AI或音乐服务。使用 Python、NumPy、SciPy 可重建全部26个音频文件。
 
 实际运行音轨与技术检查见 STEP03 报告。机器PCM检查不等于实际听感确认，也不代表真人儿童喜欢或学习有效。
+
+## STEP04：艾莎的冰雪游乐日
+
+入口 `?play=world-in-a-box&scene=frozen-elsa-playground`。自制同人玩具场景，非电影剧情或官方作品。开场艾莎可以施放冰桥、冰场和飘雪；16件可自由顺序拼装。朋友玩法包含雪橇绕湖/去冰宫、安娜乘坐、雪宝圆圈/八字、冰宫门和吊灯。收桥/收冰场先安全退场；撤销仅收回最近拼件。
+
+独立匿名存档 `frozen-elsa-playground-v1` / schemaVersion 1；只保存装配、帮助与稳定桥/冰场状态，刷新后角色回安全站位，不恢复运动队列。重置仅影响本盒，保留音量和另外两盒。新配乐104.35秒，制作期原创程序编配合成；未完成实际听感确认。
+
+Blender源 `blender/frozen-elsa-playground.blend` 与脚本 `blender/build_frozen.py`；音乐脚本 `tools/world-in-a-box/render-frozen-audio.py`。运行时本地GLB/PCM，无Blender依赖。角色设计元素归迪士尼，自制几何不代表取得原作全部权利。来源与边界见 `docs/world-in-a-box/step04-sources.md`，验证状态见STEP04报告。

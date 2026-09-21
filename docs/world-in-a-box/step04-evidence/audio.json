@@ -1,0 +1,37 @@
+{
+  "result": "PASS_MACHINE",
+  "checks": [
+    "music alone has actual output",
+    "music isolated",
+    "snow air ambient alone",
+    "no river environment",
+    "effects alone output",
+    "master mute stops PCM",
+    "reset preserves same music source phase",
+    "reset clears object voices",
+    "five three-box rounds retain exactly two stable sources",
+    "exit stops all sources"
+  ],
+  "music": {
+    "peak": 0.3522070646286011,
+    "rms": 0.09118566835915973
+  },
+  "ambient": {
+    "peak": 0.28823381662368774,
+    "rms": 0.021859714363012518
+  },
+  "effects": {
+    "peak": 0.21294406056404114,
+    "rms": 0.0661029665409773
+  },
+  "muted": {
+    "peak": 0,
+    "rms": 0
+  },
+  "trend": {
+    "active": 2,
+    "max": 5
+  },
+  "recording": "Canvas 15fps plus actual Web Audio output branch; no microphone/speaker capture; outside-canvas controls not recorded",
+  "listening": "NOT_TESTED"
+}

@@ -1,0 +1,32 @@
+{
+  "source": "games/world-in-a-box/blender/build_frozen.py",
+  "blender": "4.5.14 LTS",
+  "sha256": "fdbe46b0e8aba5749eb79f3c1bd4a4c4d4dbd49628b446fb00ae85e17cc8837d",
+  "bytes": 3032472,
+  "characters": [
+    "elsa",
+    "anna",
+    "olaf",
+    "kristoff",
+    "sven"
+  ],
+  "pieces": [
+    "anna",
+    "olaf",
+    "kristoff",
+    "sven",
+    "arendelle_castle",
+    "town_houses",
+    "town_lanterns",
+    "snow_pines",
+    "sleigh",
+    "forest_lantern",
+    "palace_steps",
+    "palace_column_left",
+    "palace_column_right",
+    "palace_gate",
+    "palace_spire",
+    "palace_chandelier"
+  ],
+  "rights": "Self-authored fan geometry; Frozen characters and designs Disney. Not official; not CC0 character IP. No extracted assets."
+}

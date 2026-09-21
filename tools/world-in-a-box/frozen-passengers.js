@@ -1,0 +1,10 @@
+async driver=>{
+ const c=await driver.context().browser().newContext({viewport:{width:1280,height:900}}),p=await c.newPage(),rows=[];
+ const press=s=>p.locator(s).click(),a=x=>press('[data-action='+x+']');p.setDefaultTimeout(9000);
+ try{await c.route('**/*',r=>r.request().url().startsWith('http://127.0.0.1:5175/')?r.continue():r.abort());await p.goto('http://127.0.0.1:5175/?play=world-in-a-box&scene=frozen-elsa-playground');await p.locator('[data-ready=true]').waitFor();await a('help');
+ async function place(id){await press('[data-group="'+(id==='sleigh'?2:0)+'"]');if(id==='sven')await a('next');await press('[data-piece='+id+']');await press('[data-slot='+id+']');}
+ for(const removed of ['anna','sven','sleigh']){const ids=['anna','sven','sleigh','kristoff'].filter(x=>x!==removed).concat(removed);for(const id of ids)await place(id);await a('friends');if(removed==='anna')await a('anna');await a('lake-ride');await p.waitForFunction(()=>JSON.parse(document.querySelector('.frozen-mount').dataset.ride).t>.11);await a('undo');await p.waitForFunction(()=>document.querySelector('.frozen-mount').dataset.pending==='');const saved=await p.evaluate(()=>JSON.parse(localStorage.getItem('family-games/world-in-a-box/frozen-elsa-playground-v1')));if(saved.placed.includes(removed)||ids.filter(x=>x!==removed).some(x=>!saved.placed.includes(x)))throw Error('Undo altered unrelated actor '+removed);rows.push({removed,placed:saved.placed,ride:JSON.parse(await p.locator('.frozen-mount').getAttribute('data-ride'))});await a('reset');await a('confirm-reset');}
+ for(const id of ['sven','sleigh','kristoff'])await place(id);await a('friends');await a('lake-ride');await p.waitForFunction(()=>JSON.parse(document.querySelector('.frozen-mount').dataset.ride).t>.1);await a('reset');await a('confirm-reset');await p.waitForTimeout(1000);if(await p.locator('.frozen-mount').getAttribute('data-progress')!=='0')throw Error('Moving reset revived pieces');
+ return{result:'PASS_MACHINE',rows,checks:['undo Anna on sleigh','undo Sven with other actors retained','undo sleigh with other actors retained','ride without Anna','reset during motion']};
+ }finally{await c.close();}
+}

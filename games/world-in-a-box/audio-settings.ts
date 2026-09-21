@@ -1,6 +1,7 @@
 import type {MountGameContext} from '../../packages/game-core';
 import {AUDIO_KEY,BoxAudio,soundPreferences,type Channel} from './audio';
-export function boxSound(root:HTMLElement,storage:MountGameContext['storage'],scene:'window-breeze'|'river-campus',legacyMuted:boolean,changed:(muted:boolean)=>void){
+import type {AudioScene} from './scene-config';
+export function boxSound(root:HTMLElement,storage:MountGameContext['storage'],scene:AudioScene,legacyMuted:boolean,changed:(muted:boolean)=>void){
  const preferences=soundPreferences(storage.get(AUDIO_KEY,null),legacyMuted);
  const dialog=document.createElement('dialog');dialog.className='wb-dialog wb-sound';dialog.setAttribute('aria-label','声音设置');
  dialog.innerHTML='<h2>声音设置</h2><p data-sound-status>按你的喜好，调小或关掉任一种声音。</p>'+(['music','sfx','ambient'] as Channel[]).map((key,i)=>`<label>${['音乐','音效','环境'][i]} <output data-volume="${key}"></output><input aria-label="${['音乐','音效','环境'][i]}音量" data-channel="${key}" type="range" min="0" max="100" step="1"></label>`).join('')+'<button data-sound-close>继续玩</button>';

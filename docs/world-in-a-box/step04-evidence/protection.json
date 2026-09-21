@@ -1,0 +1,282 @@
+{
+  "protectedCount": 55,
+  "allUnchanged": true,
+  "method": "Git clean-filter blob identity against starting HEAD plus current exact-byte SHA-256",
+  "files": [
+    {
+      "path": "games/world-in-a-box/blender/.gitattributes",
+      "unchanged": true,
+      "sha256": "cd4b4804918024f41b7d7b20727861c6aab0f91fa9612a716f3a61a6958915f3"
+    },
+    {
+      "path": "games/world-in-a-box/blender/build_dresden.py",
+      "unchanged": true,
+      "sha256": "2cba13b49def14d12986dc9c97acfa4bfab544798ffdd7e76fd2abfb0d8f491d"
+    },
+    {
+      "path": "games/world-in-a-box/blender/build_scene.py",
+      "unchanged": true,
+      "sha256": "5c5318206366302e5940afb7e01c1914ae9481318a80048493c6cab8bd8bda89"
+    },
+    {
+      "path": "games/world-in-a-box/blender/dresden-river-campus.blend",
+      "unchanged": true,
+      "sha256": "6a00a28f67962645333d18858e3de5a23aa5377c024e2d1daba0a3f665ed0b0e"
+    },
+    {
+      "path": "games/world-in-a-box/blender/window-breeze.blend",
+      "unchanged": true,
+      "sha256": "ffba62381e79c742bc71622b77e66b3cdfae5bc3f4b06bf761ac2c5c1e7e3a3f"
+    },
+    {
+      "path": "games/world-in-a-box/continuous-turn.ts",
+      "unchanged": true,
+      "sha256": "668d93d39279f330a9f26001611cf955794121fc3c8595119ccbfd2ca9784bee"
+    },
+    {
+      "path": "games/world-in-a-box/dresden-model.ts",
+      "unchanged": true,
+      "sha256": "6cd10427f9d4bf4de2f4d4d9f73b6c6ca9fcf9dc037210b5a342f7cc97e71268"
+    },
+    {
+      "path": "games/world-in-a-box/dresden-runtime.ts",
+      "unchanged": true,
+      "sha256": "4fb2c952508088a88da3dc27fe9aea16e4bcd4b2fce73d8053a5ecb5fde65988"
+    },
+    {
+      "path": "games/world-in-a-box/dresden-scene.ts",
+      "unchanged": true,
+      "sha256": "d5e75855b6550966b73482e8774f27aa507fe6aeb9785ab43bcd3d443dfe5377"
+    },
+    {
+      "path": "games/world-in-a-box/dresden.css",
+      "unchanged": true,
+      "sha256": "f43d18b9af87fcf24932e9303f934e5bed0ca79f4b4bfee29347618a7f588287"
+    },
+    {
+      "path": "games/world-in-a-box/model.ts",
+      "unchanged": true,
+      "sha256": "0ec6d3dc064cc42d36a2ec4c2ea4030c0b58c7689af3cc20fe9064ad69518bfb"
+    },
+    {
+      "path": "games/world-in-a-box/runtime.ts",
+      "unchanged": true,
+      "sha256": "b008872f9e00d0a5009cee6ae33b66f9462adea96e948b5742ffef7274907813"
+    },
+    {
+      "path": "games/world-in-a-box/scene.ts",
+      "unchanged": true,
+      "sha256": "34ae95c9e9cb764090b3d973e8280176a789d50c788a96c0756003ecef4b4820"
+    },
+    {
+      "path": "games/world-in-a-box/style.css",
+      "unchanged": true,
+      "sha256": "ac5f9e233b32db7d0768b9bec2e51e1a8aaf58c5548fade5d61f54658ee2832a"
+    },
+    {
+      "path": "games/world-in-a-box/toy-view.ts",
+      "unchanged": true,
+      "sha256": "0c2de6619f6772956ca1f3b5a718e98acf6ebcbff465cd947ab57b1a50eab236"
+    },
+    {
+      "path": "public/assets/world-in-a-box/ash-grain.png",
+      "unchanged": true,
+      "sha256": "4e956995e12bfe9799e4d33337c0ba77f9eec0032353b49a02c9ac4632fc32c7"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/manifest.json",
+      "unchanged": true,
+      "sha256": "d3f5bada859b5ac366d9d53065534c6da764c235dcf0cb8d3341649d5055732c"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/music/river-campus.wav",
+      "unchanged": true,
+      "sha256": "33d9908a61bc2894adc43528fe85e968da62df8a412c1b602af5c5e3ffde3843"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/music/window-breeze.wav",
+      "unchanged": true,
+      "sha256": "76016aa7467ec58cff75edf8954073060e2112d2c141faa262e85edba5e260b6"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/blocked.wav",
+      "unchanged": true,
+      "sha256": "addeba5bba5cd3c2d7268ace4370ea36e43b9f1b63f3cc2fa8cc4f53341f543d"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/boat-contact.wav",
+      "unchanged": true,
+      "sha256": "d01ec34363db300888835143b53699e70047a365ce5812a7c4f5b35d13c82417"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/boat-start.wav",
+      "unchanged": true,
+      "sha256": "6f307d89f858e53408bdbceb639178232acf8db5916bac39901400ead20ccb26"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/boat.wav",
+      "unchanged": true,
+      "sha256": "eebc14e2fdf6f4b54521f79c3f997492db3e183b84a3731e1d71c7f5df3e8106"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/cat.wav",
+      "unchanged": true,
+      "sha256": "e3681496839c340cb998248f69eb234c6cc1550bfee02d9b5e6691003c1c81af"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/chime.wav",
+      "unchanged": true,
+      "sha256": "7172b253899f7a90812baae3b04defed6e9ab6057bf3061025b1a8289a401c5c"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/complete.wav",
+      "unchanged": true,
+      "sha256": "ef148169b5952add906b7af706ddf1fb1440f622b65f6a8cea4a3af5adfb4c71"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/cup.wav",
+      "unchanged": true,
+      "sha256": "33215f7c35926de2d099875cfd41576481f6ec139966d4a3c14582ff059737de"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/mismatch.wav",
+      "unchanged": true,
+      "sha256": "bfe3f30212cc07a1929d3025374d39837a28ef192f7813a349c08d627803a560"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/page.wav",
+      "unchanged": true,
+      "sha256": "b4b78c9a302fca1d95cac8284b47731da07c579d20b7a710c8d974668ab23676"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/pick.wav",
+      "unchanged": true,
+      "sha256": "524b8cde563462e86623ab7395af675df51939c6408e7c828192bb09647f453f"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/place-heavy.wav",
+      "unchanged": true,
+      "sha256": "e66efc048d93f813059d747af1016238f78511a9c28b36aeaaa8c6ee609dc43e"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/place-light.wav",
+      "unchanged": true,
+      "sha256": "80bafb342d7a16e4ddf07fe0bf0bb9da3dfb9ef86c4e9a5105aaa6927172a526"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/place-medium.wav",
+      "unchanged": true,
+      "sha256": "d107a98a44bd108a8bcea81f56d29381eb67bc4e84a97801c14bf7a1a672921d"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/river.wav",
+      "unchanged": true,
+      "sha256": "e667764f99b42c5a3753780b705f1f9a9b0a668bfb08d2090a3f1acbfb5b4079"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/room.wav",
+      "unchanged": true,
+      "sha256": "1419075ffb7c72fe14fd7eb0edd02f227e4fb6e6128e74e1c420f0e05f78fd53"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/section.wav",
+      "unchanged": true,
+      "sha256": "02974949008dabbbcc59635b32e3cefc3e13b6e97a615df8bf7781e0a0d30aa5"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/shutter.wav",
+      "unchanged": true,
+      "sha256": "5ecba499c3587a6b27288bf482e4667e2d42e777654f5fd4926dcfe0c4a5ded3"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/steam.wav",
+      "unchanged": true,
+      "sha256": "6496866b2d38e8b0991617f1822abdf6e1d26d725a9f8c049c0f80047cf227c6"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/tram-start.wav",
+      "unchanged": true,
+      "sha256": "5d65e8ba35a5dc1e8d13bdbee3f8a8d09627c65256a5032c99e7a17c66b5b4d6"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/tram-stop.wav",
+      "unchanged": true,
+      "sha256": "ca454b21e27792ec338fa8d01d918453b51725af521459078c9f04a43dee8919"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/tram.wav",
+      "unchanged": true,
+      "sha256": "0389bc32706d23f3fea2ac2495bde39687fdf08ffdee72083120295b9f43943d"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/undo.wav",
+      "unchanged": true,
+      "sha256": "d012f67d73bcae10c7cceb42e45f8f8969acdc21744430b1e981e75b12f4c121"
+    },
+    {
+      "path": "public/assets/world-in-a-box/audio/sfx/wind.wav",
+      "unchanged": true,
+      "sha256": "52b8bc6136b96d5a8d936b71a77f0d7a546a7c6a7751fd826f4a1d0f0b857910"
+    },
+    {
+      "path": "public/assets/world-in-a-box/dresden/dresden-river-campus.glb",
+      "unchanged": true,
+      "sha256": "9a6a30d25a0351be32f5be627893535e3cb5ede4e32c3b96b4e176c784ce4cc4"
+    },
+    {
+      "path": "public/assets/world-in-a-box/dresden/export.json",
+      "unchanged": true,
+      "sha256": "ea757dd2b45289cbdc55952a3bf0067aa33f5b4b4bbc4eb0faad6e0d01a3e053"
+    },
+    {
+      "path": "public/assets/world-in-a-box/dresden/photos/beyer.webp",
+      "unchanged": true,
+      "sha256": "56d9b5c33c51f7f9dfe75f8c9311b0376d493309ed25e61cdef9d6ff1b790740"
+    },
+    {
+      "path": "public/assets/world-in-a-box/dresden/photos/bridge.webp",
+      "unchanged": true,
+      "sha256": "49ad31df62a7efa77da312500af815c898bd08a7604ff6f5127f5feac10c5e4c"
+    },
+    {
+      "path": "public/assets/world-in-a-box/dresden/photos/church.webp",
+      "unchanged": true,
+      "sha256": "5cdd2dcd2649838aaf31c50055c7ea15c411eec68893267e7454b24f0e532b3c"
+    },
+    {
+      "path": "public/assets/world-in-a-box/dresden/photos/credits.json",
+      "unchanged": true,
+      "sha256": "d6211d76ff8674b238d6abc3b9b1fa41807400a87d85b67f4fba81282e89c21c"
+    },
+    {
+      "path": "public/assets/world-in-a-box/dresden/photos/opera.webp",
+      "unchanged": true,
+      "sha256": "feef68cfc3faa5d67fc904236e920fd926fcddbc75da9554da7fe7bffd7a12be"
+    },
+    {
+      "path": "public/assets/world-in-a-box/dresden/photos/slub-inside.webp",
+      "unchanged": true,
+      "sha256": "cdb67303f0ad658bfe200842cb4b3c691d8879110ed89c569d6f1b402337fa40"
+    },
+    {
+      "path": "public/assets/world-in-a-box/dresden/photos/slub.webp",
+      "unchanged": true,
+      "sha256": "2cdf6a23f2f52dfe3a981e7e2cdc55c97da77952d0e96ac5d033657bec61385c"
+    },
+    {
+      "path": "public/assets/world-in-a-box/dresden/photos/zwinger.webp",
+      "unchanged": true,
+      "sha256": "d9d352e8458c93ed63fc60daa73d5bb31a363977517b484dfef5a81bc5ac10c1"
+    },
+    {
+      "path": "public/assets/world-in-a-box/export.json",
+      "unchanged": true,
+      "sha256": "6be08deb10d3e8cb1562923a751fd36cf5ed2d2455464363959057efba342e50"
+    },
+    {
+      "path": "public/assets/world-in-a-box/window-breeze.glb",
+      "unchanged": true,
+      "sha256": "f6a8acfa5bb041e7ae0f2b047be5ebf4383a235f2a1dcaf483a7ad46f175d308"
+    }
+  ]
+}
