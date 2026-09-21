@@ -1,26 +1,9 @@
-# 世界盒子 v0.4.0 · 三个小世界
+# 世界盒子 v0.4.0 · 两个小世界
 
-固定家庭地址为 `http://127.0.0.1:5175/`，沿用家庭启动器 `tools/my-game-world/START_MY_GAME_WORLD.cmd`。默认进入原有《窗边有风》，右上角“换盒子”可切换；三个盒子分别保存进度。
+固定家庭地址为 `http://127.0.0.1:5175/`，沿用家庭启动器 `tools/my-game-world/START_MY_GAME_WORLD.cmd`。默认进入原有《窗边有风》，右上角“换盒子”可切换；两个盒子分别保存进度。
 
 - 窗边有风：`?play=world-in-a-box&scene=window-breeze`
 - 德累斯顿·河流、桥与大学：`?play=world-in-a-box&scene=dresden-river-campus`
-- 宰相的议事桌：`?play=world-in-a-box&scene=chancellor-desk`
-
-## 宰相的议事桌
-
-原创架空的一次粮运事务；不是朝代官署复原或全国地图。宰相读 zǎi xiàng，是帮助皇帝处理大事、参与商议和协调官员的重要官员。帮助内有通用解释，匿名内容版本与逐项史料链接在 `public/assets/world-in-a-box/chancellor/content.json`。不依赖任何私人教材目录。
-
-两村各需6袋，初始车内6袋、粮仓6袋，车载6、船载3；山村只能经修好的桥走陆路。工程队与运输队可并行，同一运输队一次只能开一种车船。任务按装粮、去程、卸粮、返程演示；目的地收到粮才计入目标。修桥材料就在现场。
-
-点地点听消息，在两个区域安排。可以观察下一步或连续试运行、暂停改队列、提前或移走未执行任务。撤销恢复安排前的完整暂停快照；刷新恢复暂停状态。重试和重置均确认，默认继续玩；不清其他盒子或声音偏好。可直接进入完整桌面；自由拼装可收起／放回三个建筑组，再直接回到事件。
-
-已验证两种路径：修桥后车送河村6袋、山村6袋；修桥同时船送河村3袋两次，再车送山村6袋。目标是比较可见先后与分工，无倒计时竞赛或人物评价。
-
-新存档槽 `chancellor-desk-v1`，旁白设置 `chancellor-voice-v1`；已有 `audio-v1` 音乐与音效偏好复用。旁白降低配乐，失焦暂停，退出关闭音频。三路可独立关闭，河水环境声在此盒归入音效。
-
-重建模型：`blender --background --factory-startup --python-exit-code 1 --python games/world-in-a-box/blender/build_chancellor.py -- --render`。源 `.blend` 同目录，运行GLB及四幕图在 `public/assets/world-in-a-box/chancellor/`。旁白由 `tools/world-in-a-box/render-chancellor-voice.ps1` 使用已安装 Microsoft Huihui 本地合成；配乐／动作音效复用现有原创 World Box 音轨。普通构建不调用模型服务、TTS或Blender。
-
-检查入口：`tests/chancellor-desk.test.ts`、`tools/world-in-a-box/verify-chancellor*.mjs`。具体证据及无法核听的工具边界见 `docs/world-in-a-box/chancellor-review.md`；不把机器通关当作儿童理解或学习效果。
 
 ## 德累斯顿
 
@@ -68,7 +51,7 @@ Blender 4.5 LTS：`blender --background --factory-startup --python-exit-code 1 -
 
 ## 当前完成度
 
-v0.4.0 三个完整盒子；具体机器验证及实际设备边界以各轮报告为准。
+v0.4.0 两个完整盒子；具体机器验证及实际设备边界以各轮报告为准。
 
 ## 后续改进建议
 

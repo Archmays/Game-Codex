@@ -15,8 +15,6 @@ export const SAVE_VAULT_PRE_IMPORT_BACKUP_KEY = "save-vault/pre-import-backup/v1
 export const KNOWN_SAVE_KEYS: readonly KnownSaveKey[] = [
   { key: "family-games/oddity-puzzles/v1", owner: "shared", purpose: "progress", exportable: true, maxVersion: 1 },
   { key: "family-games/world-in-a-box/audio-v1", owner: "shared", purpose: "settings", exportable: true, maxVersion: 1 },
-  { key: "family-games/world-in-a-box/chancellor-desk-v1", owner: "shared", purpose: "progress", exportable: true, maxVersion: 1 },
-  { key: "family-games/world-in-a-box/chancellor-voice-v1", owner: "shared", purpose: "settings", exportable: true },
   { key: "family-games/world-in-a-box/dresden-river-campus-v2", owner: "shared", purpose: "progress", exportable: true, maxVersion: 2 },
   { key: "family-games/world-in-a-box/v1", owner: "shared", purpose: "progress", exportable: true, maxVersion: 1 },
   { key: "family-games/presentation/v1", owner: "shared", purpose: "settings", exportable: true, maxVersion: 1 },
