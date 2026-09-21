@@ -8,7 +8,7 @@
     "sha256": "77da9ff27fae7b09c424e62583ed586d6965d93640bd12b07bbcd41f0b9c631a",
     "glbSha256": "f6a8acfa5bb041e7ae0f2b047be5ebf4383a235f2a1dcaf483a7ad46f175d308"
   },
-  "sourceUnchangedAfterFinalPlay": true,
+  "sourceUnchangedAfterFinalPlay": false,
   "unit": {
     "files": 49,
     "passed": 606,
@@ -814,5 +814,18 @@
       "sha256": "0f7f710d6af59e160dbcb8333ff75cb07a65695f9b975995a2dd22809a55fd9a",
       "bytes": 1804862
     }
-  ]
+  ],
+  "postReviewChange": {
+    "path": "tools/portfolio/check-portfolio-evolution.ts",
+    "reason": "CI retained51 save keys; authorized two isolated keys require53. Runtime, assets, input and saved-state implementations unchanged.",
+    "validation": "pnpm portfolio:evolution:check PASS",
+    "sourceFreezeAfterCiRepair": {
+      "algorithm": "sha256(sorted lines: file_sha256 two-spaces repo-relative-path newline)",
+      "scope": "all runtime, authored game sources, QA tools/tests, package/build config, input contract; excludes report/screenshot outputs",
+      "fileCount": 10104,
+      "sha256": "3a77b7ea7054ce6ffef3d8c9b0eb785cbbc0712e1dfce7b86792f5bef593bd86",
+      "glbSha256": "f6a8acfa5bb041e7ae0f2b047be5ebf4383a235f2a1dcaf483a7ad46f175d308"
+    }
+  },
+  "gameRuntimeAndAssetBytesUnchangedAfterFinalPlay": true
 }
