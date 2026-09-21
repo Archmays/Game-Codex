@@ -1,0 +1,118 @@
+{
+  "result": "PASS_MACHINE",
+  "reviewer": "Codex, one agent; not human/child acceptance",
+  "baseline": "58cd16b7",
+  "sourceFreeze": {
+    "algorithm": "sha256(sorted lines: file_sha256 two-spaces repo-relative-path newline)",
+    "scope": "all runtime, authored game sources, QA tools/tests, package/build config, input contract; excludes report/screenshot outputs",
+    "fileCount": 10108,
+    "sha256": "e01df8bade0389c07a232552b8e0380f5c91bc001bbf3ac23403511026b5cb43",
+    "glbSha256": "f6a8acfa5bb041e7ae0f2b047be5ebf4383a235f2a1dcaf483a7ad46f175d308"
+  },
+  "checks": {
+    "assets": "PASS",
+    "geometry": "PASS",
+    "actions": "PASS_MACHINE",
+    "dresden-input": "PASS_MACHINE",
+    "frozen-input": "PASS_MACHINE",
+    "old-box": "PASS_MACHINE",
+    "production-edges": "PASS_MACHINE",
+    "production-offline": "PASS_MACHINE"
+  },
+  "unitTests": {
+    "files": 5,
+    "passed": 41
+  },
+  "build": "tsc --noEmit and Vite PASS; existing large vendor chunk warning",
+  "inputProfiles": {
+    "dresden": 7,
+    "frozen": 8,
+    "physicalMobile": "NOT_TESTED"
+  },
+  "visual": {
+    "result": "PASS_WITH_STATED_STYLIZATION_LIMITS",
+    "fixedCameraPairs": 14,
+    "inspection": [
+      "normal distance silhouettes and proportions",
+      "maximum reachable zoom surface transitions",
+      "side and rear structural continuity",
+      "neutral material with fixed light",
+      "cast walk wave, palace hinges, chandelier and transport states"
+    ],
+    "actualRevisions": [
+      "scalp flow and braid continuity",
+      "cape shoulder intersection and slipper placement",
+      "faceted ice normals and hierarchical spire",
+      "reversed glass faces blocking recessed windows",
+      "forward cast on arm opposite braid",
+      "removed duplicate vault, aligned chandelier support"
+    ],
+    "newObstructionOrInterfaceFailure": "none identified in the exercised views and flows",
+    "humanPreference": "NOT_TESTED"
+  },
+  "reviewLenses": {
+    "scopeAndLearning": "No objective, progression, content or mechanic additions",
+    "contentAndReferences": "Source record distinguishes factual buildings, 2013 Elsa, reference-only copyrighted images and original geometry",
+    "visual": "Actual GLB game inspection and repaired failures; no Blender-render substitution",
+    "interaction": "15 input/viewport profiles plus old-box and action checks",
+    "technical": "GLB identity, unaffected geometry, clearance, production subpath/offline, tests/build",
+    "lifecycle": "isolated synthetic saves; publication checked separately after push"
+  },
+  "protected": {
+    "public/assets/world-in-a-box/window-breeze.glb": {
+      "gitBlob": "0a3356000098e1f7f015ed031fd6e9f4cc4c6fb5",
+      "baselineSha256": "f6a8acfa5bb041e7ae0f2b047be5ebf4383a235f2a1dcaf483a7ad46f175d308",
+      "unchanged": true
+    },
+    "games/world-in-a-box/scene.ts": {
+      "gitBlob": "7c8498ed2f058181ca72c38d9d19bdb0881021e1",
+      "baselineSha256": "d6f9c4f311e1cebd43db283402d11208e138f0f7b08a126c23c5f9b5022c228c",
+      "unchanged": true
+    },
+    "games/world-in-a-box/model.ts": {
+      "gitBlob": "92756f8a97b3f0c78b4d133d22a395fcad3777be",
+      "baselineSha256": "0ec6d3dc064cc42d36a2ec4c2ea4030c0b58c7689af3cc20fe9064ad69518bfb",
+      "unchanged": true
+    },
+    "games/world-in-a-box/boxes.ts": {
+      "gitBlob": "a387387ed6ac38c166071102ef52ea06c0a9376c",
+      "baselineSha256": "b8742149d1396cf73afed1811ea236c6f4926651ae435e09702acd067150e781",
+      "unchanged": true
+    },
+    "src/main.ts": {
+      "gitBlob": "1d5834f4d6a910fa71dda9c4789895f3333f1965",
+      "baselineSha256": "4f9ca47e509a829405b23cf26b8a127ae970f9f25c7fa9ff040f2a2c180e3bd5",
+      "unchanged": true
+    },
+    "apps/my-game-world/index.ts": {
+      "gitBlob": "94aa55fd8af95ca3e278369d656b4a9d5b0412de",
+      "baselineSha256": "b6eb8f3e7a3755746d4e41d8a64f94e64d09f755b767be7b2cc004e1679d038b",
+      "unchanged": true
+    }
+  },
+  "trackedChanges": [
+    "games/world-in-a-box/README.md",
+    "games/world-in-a-box/blender/build_dresden.py",
+    "games/world-in-a-box/blender/build_frozen.py",
+    "games/world-in-a-box/blender/dresden-river-campus.blend",
+    "games/world-in-a-box/blender/frozen-elsa-playground.blend",
+    "games/world-in-a-box/dresden-model.ts",
+    "games/world-in-a-box/frozen-scene.ts",
+    "public/assets/world-in-a-box/dresden/dresden-river-campus.glb",
+    "public/assets/world-in-a-box/dresden/export.json",
+    "public/assets/world-in-a-box/frozen/asset-manifest.json",
+    "public/assets/world-in-a-box/frozen/frozen-elsa-playground.glb",
+    "tests/world-in-a-box-dresden.test.ts",
+    "tools/world-in-a-box/dresden-browser.js",
+    "tools/world-in-a-box/dresden-geometry.js",
+    "tools/world-in-a-box/run-browser.mjs"
+  ],
+  "knownLimits": [
+    "Stylized miniature, not surveyed architecture or film-level character fidelity",
+    "Closest palace framing crops crown; wider rear and open-door frames supplement it",
+    "Dresden draw calls rise 205 to 299; same-host p95 18.2 to 18.4 ms; no physical-device claim",
+    "Single local load sample per scene, affected by cache and development transforms",
+    "Only Codex visual review; no real-child or parent acceptance claimed"
+  ],
+  "publication": "Pending at this pre-commit evidence snapshot; final receipt records independent CI, deployed SHA, asset hashes and fresh browser verification."
+}

@@ -1,7 +1,7 @@
 """Self-authored fan miniature. Character designs belong to Disney; no extracted assets.
 Blender 4.5 LTS; deterministic geometry, anchors and imported object animation.
 """
-import bpy, math, json, hashlib
+import bpy, math, json, hashlib, sys
 from pathlib import Path
 from mathutils import Vector
 ROOT=Path(__file__).resolve().parents[3]
@@ -142,7 +142,7 @@ rink=empty('magic_rink',(.35,-2,.27));ell('Frozen lake',(0,0,0),(2.55,1.75,.06),
 for i in range(18):
  a=i*math.tau/18;line('Frost vein',[(0,0,.045),(math.cos(a)*1.2,math.sin(a)*.8,.047),(math.cos(a)*2.4,math.sin(a)*1.55,.05)],.014,white,rink)
 cone('Elsa snowflake dais',(-1.6,-4.4,.2),.8,.8,.2,ice,fixed,12)
-human('elsa',(-1.6,-4.4,.31),'elsa')
+empty('elsa',(-1.6,-4.4,.31))
 placements={'anna':(-3,-3.3,.17),'olaf':(2.7,-3.65,.2),'kristoff':(5.8,-3.2,.17),'sven':(5,-1,.17),'arendelle_castle':(-5.7,-.6,.17),'town_houses':(-5.5,-3.6,.17),'town_lanterns':(-3.55,-1.6,.17),'snow_pines':(6,2,.17),'sleigh':(4.9,-3,.17),'forest_lantern':(6.8,-.6,.17),'palace_steps':(-.3,2.2,1.53),'palace_column_left':(-2.4,3.65,1.53),'palace_column_right':(1.8,3.65,1.53),'palace_gate':(-.3,4.6,1.53),'palace_spire':(-.3,5,4.45),'palace_chandelier':(-.3,3.75,4.35)}
 for id,pos in placements.items():
  if id in ['anna','kristoff']:p=human('piece_'+id,pos,id)
@@ -157,12 +157,6 @@ for id,pos in placements.items():
  elif id in ['arendelle_castle','town_houses','sleigh','palace_steps','palace_gate']:box('Shaped foundation',(0,0,.025),(1.75 if id!='sleigh' else .9,.65 if id!='sleigh' else 1.2,.05),frost,slot,.08)
  else:cone('Crystal or garden interface',(0,0,.018),.38,.38,.036,frost,slot,6 if 'palace' in id else 8)
  empty('anchor_'+id,(0,0,.065),slot)
- if id in ['palace_spire','palace_chandelier']:
-  # Actual permanent pedestal/hanging frame supports arbitrary order.
-  if id=='palace_spire':box('Spire load-bearing mast',(-.3,5,2.85),(.30,.30,3.2),frost)
-  else:
-   for x in [-2.65,2.05]:box('Chandelier fixed post',(x,4.05,2.90),(.16,.16,2.9),frost)
-   box('Chandelier hanging beam',(-.3,4.05,4.41),(4.9,.16,.16),frost);line('Suspension',[(-.3,4.05,4.41),(-.3,3.75,4.37)],.025,gold,fixed)
  if id=='arendelle_castle':
   box('Castle keep',(0,0,.65),(1.8,1.2,1.3),cream,p)
   for x in [-.85,.85]:
@@ -186,32 +180,15 @@ for id,pos in placements.items():
   box('Sleigh floor',(0,0,.3),(.9,1.25,.12),wood,p);box('Bench',(0,.20,.50),(.8,.36,.13),red,p);box('Bench back',(0,.43,.73),(.88,.1,.50),red,p)
   for x in [-.48,.48]:box('Sleigh side',(x,0,.54),(.10,1.15,.4),red,p)
   empty('seat_kristoff',(-.20,-.20,.47),p);empty('seat_anna',(.20,.18,.47),p)
- if id=='palace_steps':
-  for j in range(4):box('Crystal stair',(0,j*.22,.05+j*.075),(1.65,.8-j*.12,.12+j*.15),ice,p)
- if id.startswith('palace_column_'):
-  cone('Octagonal ice column',(0,0,1.05),.23,.18,2.1,ice,p,8);cone('Crystal capital',(0,0,2.16),.40,.1,.32,violet,p,8)
-  for j in range(4):box('Frost ring',(0,0,.2+j*.47),(.43,.43,.065),frost,p,.01)
-  side=-1 if id.endswith('left') else 1
-  for j in range(3):cone('Side ice fin',(side*.22,j*.40+.35,1+j*.23),.11,.025,2+j*.46,ice,p,6)
-  line('Open crystal arch',[(0,0,2.1),(-side*.35,.2,2.5),(-side*.70,.4,2.7)],.07,violet,p)
- if id=='palace_gate':
-  for side in [-1,1]:
-   leaf=empty('gate_leaf_'+str(side),(side*.85,0,0),p);box('Door leaf',(-side*.42,0,1),(.82,.13,2),ice,leaf)
-   for j in range(3):line('Door frost',[(0,-.08,j*.5+.2),(-side*.70,-.08,j*.5+.55)],.018,white,leaf)
-  cone('Gate crown',(0,0,2.2),1.05,0,.7,violet,p,4)
- if id=='palace_spire':
-  cone('Spire foot',(0,0,.25),.68,.5,.5,ice,p,8);cone('Long faceted spire',(0,0,1),.50,0,1.3,violet,p,8)
-  for x in [-.6,.6]:cone('Spire satellite',(x,0,.35),.18,0,.9,ice,p,6)
- if id=='palace_chandelier':
-  pivot=empty('chandelier_pivot',parent=p)
-  for i in range(6):
-   a=i*math.tau/6;x=.5*math.cos(a);y=.5*math.sin(a);line('Ice chandelier arm',[(0,0,0),(x,y,-.25)],.028,ice,pivot);cone('Hanging crystal',(x,y,-.4),.11,0,.4,violet,pivot,6)
 for name,loc in [('magic_bridge',(1.8,.8,.22)),('magic_rink',(.35,-2,.4)),('magic_snow',(-2.6,-4.8,.22))]:
  a=empty('touch_'+name,loc);cone('Snowflake touch disc',(0,0,0),.25,.25,.05,ice,a,6)
 for name,loc in [('all',(0,0,1.4)),('town',(-4,-1.9,1)),('lake',(.3,-2.8,.8)),('palace',(0,3.6,3))]:empty('camera_'+name,loc)
 meta=empty('frozen_routes');meta['palace']=[[4.9,-3,.17],[4.5,-.5,.17],[3,.8,.43],[3,.95,.43],[3,3.35,1.38],[3,4,1.53],[0,3.1,1.53]];meta['lake']=[[4.9,-3,.17],[4,-4.8,.17],[0,-5.2,.17],[-2.8,-3.5,.17],[-2.5,-.2,.17],[1.2,.5,.17],[4.5,-.5,.17],[4.9,-3,.17]]
 # Merge only static sibling meshes with the same material. All pivots, hand/seat
 # anchors, animated nodes, piece roots and physical picking ownership survive.
+sys.path.insert(0,str(Path(__file__).parent))
+from refined_library import install
+refined=install({'refine_elsa':'elsa','refine_palace_support':None,**{'refine_'+id:'piece_'+id for id in placements if id.startswith('palace_')}})
 groups={}
 for o in list(bpy.context.scene.objects):
  if o.type=='MESH' and not o.animation_data and not o.get('decorative') and not o.data.shape_keys and o.name!='olaf_head':groups.setdefault((o.parent,o.active_material),[]).append(o)
@@ -224,5 +201,5 @@ bpy.context.scene.frame_set(1)
 bpy.ops.wm.save_as_mainfile(filepath=str(Path(__file__).parent/'frozen-elsa-playground.blend'))
 bpy.ops.export_scene.gltf(filepath=str(OUT/'frozen-elsa-playground.glb'),export_format='GLB',export_animations=True,export_animation_mode='NLA_TRACKS',export_extras=True,export_yup=True)
 path=OUT/'frozen-elsa-playground.glb'
-(OUT/'asset-manifest.json').write_text(json.dumps({'source':'games/world-in-a-box/blender/build_frozen.py','blender':bpy.app.version_string,'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'bytes':path.stat().st_size,'characters':['elsa','anna','olaf','kristoff','sven'],'pieces':list(placements),'rights':'Self-authored fan geometry; Frozen characters and designs Disney. Not official; not CC0 character IP. No extracted assets.'},ensure_ascii=False,indent=2),encoding='utf-8')
+(OUT/'asset-manifest.json').write_text(json.dumps({'source':'games/world-in-a-box/blender/build_frozen.py','refinedSource':'games/world-in-a-box/blender/refined-models.blend','refinedSha256':hashlib.sha256(refined.read_bytes()).hexdigest(),'blender':bpy.app.version_string,'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'bytes':path.stat().st_size,'characters':['elsa','anna','olaf','kristoff','sven'],'pieces':list(placements),'rights':'Self-authored fan geometry; Frozen characters and designs Disney. Not official; not CC0 character IP. No extracted assets.'},ensure_ascii=False,indent=2),encoding='utf-8')
 print('FROZEN_EXPORTED',path.stat().st_size)

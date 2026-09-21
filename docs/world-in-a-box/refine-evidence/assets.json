@@ -1,0 +1,80 @@
+{
+  "baseline": "58cd16b7",
+  "scenes": {
+    "dresden": {
+      "bytes": 5696540,
+      "beforeBytes": 4629452,
+      "sha256": "7b4681521e966cba0172ff3ac38d7eb7500118dd53c49737c8fc620bcf901f3d",
+      "exportGeometryTriangles": 125120,
+      "beforeExportGeometryTriangles": 99288,
+      "pieceCount": 18,
+      "protectedPieceGeometryUnchanged": [
+        "piece_paddle_steamer",
+        "piece_yellow_tram",
+        "piece_river_pier",
+        "piece_riverside_trees",
+        "piece_semperoper",
+        "piece_zwinger_galleries",
+        "piece_zwinger_crown_gate",
+        "piece_beyer_body",
+        "piece_beyer_tower",
+        "piece_slub_surface",
+        "piece_slub_skylight",
+        "piece_campus_bikes",
+        "piece_street_houses",
+        "piece_bakery_front",
+        "piece_bench_scene"
+      ],
+      "animations": [],
+      "meshCount": 168
+    },
+    "frozen": {
+      "bytes": 3956000,
+      "beforeBytes": 3032472,
+      "sha256": "81ac356e6fc0a46400038bb5192d4240d2aa0754cc327869b82a7443be15bfec",
+      "exportGeometryTriangles": 156196,
+      "beforeExportGeometryTriangles": 97756,
+      "pieceCount": 16,
+      "protectedPieceGeometryUnchanged": [
+        "piece_anna",
+        "piece_olaf",
+        "piece_kristoff",
+        "piece_sven",
+        "piece_arendelle_castle",
+        "piece_town_houses",
+        "piece_town_lanterns",
+        "piece_snow_pines",
+        "piece_sleigh",
+        "piece_forest_lantern"
+      ],
+      "animations": [
+        "elsa_cast",
+        "elsa_wave",
+        "elsa_walk_-1",
+        "elsa_walk_1",
+        "anna_wave",
+        "anna_cast",
+        "anna_walk_-1",
+        "anna_walk_1",
+        "olaf_wave_-1",
+        "olaf_wave_1",
+        "kristoff_wave",
+        "kristoff_cast",
+        "kristoff_walk_-1",
+        "kristoff_walk_1",
+        "sven_walk_-1_-1",
+        "sven_walk_-1_1",
+        "sven_walk_1_-1",
+        "sven_walk_1_1"
+      ],
+      "meshCount": 178
+    }
+  },
+  "checks": [
+    "18/16 unique piece roots and matching slot/anchor identities",
+    "hand, seats, door and chandelier pivots, Elsa animation targets",
+    "all unaffected individual pieces equal transformed triangles at 0.0001 scene-unit precision (independent of exporter vertex order)",
+    "embedded buffers/textures, no external asset URI"
+  ],
+  "result": "PASS"
+}

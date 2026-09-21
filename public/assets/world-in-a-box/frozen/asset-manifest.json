@@ -1,8 +1,10 @@
 {
   "source": "games/world-in-a-box/blender/build_frozen.py",
+  "refinedSource": "games/world-in-a-box/blender/refined-models.blend",
+  "refinedSha256": "65f40e95ea967b29f344eaaceba738d13e733998b49489108e956598474bb398",
   "blender": "4.5.14 LTS",
-  "sha256": "fdbe46b0e8aba5749eb79f3c1bd4a4c4d4dbd49628b446fb00ae85e17cc8837d",
-  "bytes": 3032472,
+  "sha256": "81ac356e6fc0a46400038bb5192d4240d2aa0754cc327869b82a7443be15bfec",
+  "bytes": 3956000,
   "characters": [
     "elsa",
     "anna",

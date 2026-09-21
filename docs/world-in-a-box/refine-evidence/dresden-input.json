@@ -1,0 +1,416 @@
+{
+  "result": "PASS_MACHINE",
+  "profiles": [
+    {
+      "profile": "phone-landscape",
+      "result": "PASS",
+      "steps": [
+        "scene picker updates direct route",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "wrong match retains selection",
+        "same bank tram works before bridge",
+        "missing bridge blocks cross-bank path",
+        "boat actually moves without bridge or pier",
+        "moving boat anchor follows rendered model",
+        "bridge undone while tram crossing",
+        "tram safe reset before removing bridge",
+        "all 18 pieces via real input, upper pieces before bodies",
+        "empty tray collapses",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "section does not consume pieces",
+        "library closes from keyboard/pointer/touch",
+        "photo bridge loads local image and restores focus",
+        "photo church loads local image and restores focus",
+        "photo opera loads local image and restores focus",
+        "photo zwinger loads local image and restores focus",
+        "photo beyer loads local image and restores focus",
+        "photo slub loads local image and restores focus",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "accessible analog clock",
+        "boat docks alongside real installed pier",
+        "pause preserves rendered transform",
+        "refresh restores progress, transport starts safely paused",
+        "city reset clears only city",
+        "old v1 save byte-identical after city reset",
+        "old box resumes its real progress",
+        "returned to hub",
+        "zero page/console errors and forbidden requests"
+      ],
+      "metrics": {
+        "calls": 299,
+        "triangles": 243666
+      },
+      "timing": {
+        "medianMs": 18,
+        "p95Ms": 18.40000000000009
+      },
+      "loading": {
+        "readyMilliseconds": 1431,
+        "asset": [
+          {
+            "duration": 135,
+            "bytes": 5696540
+          }
+        ]
+      },
+      "visualRepeat": null,
+      "errors": [],
+      "foreign": [],
+      "input": "emulated touch",
+      "offline": "request layer blocks non-local requests; fresh context/empty cache"
+    },
+    {
+      "profile": "keyboard-desktop",
+      "result": "PASS",
+      "steps": [
+        "scene picker updates direct route",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "wrong match retains selection",
+        "same bank tram works before bridge",
+        "missing bridge blocks cross-bank path",
+        "boat actually moves without bridge or pier",
+        "moving boat anchor follows rendered model",
+        "bridge undone while tram crossing",
+        "tram safe reset before removing bridge",
+        "all 18 pieces via real input, upper pieces before bodies",
+        "empty tray collapses",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "section does not consume pieces",
+        "library closes from keyboard/pointer/touch",
+        "photo bridge loads local image and restores focus",
+        "photo church loads local image and restores focus",
+        "photo opera loads local image and restores focus",
+        "photo zwinger loads local image and restores focus",
+        "photo beyer loads local image and restores focus",
+        "photo slub loads local image and restores focus",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "accessible analog clock",
+        "boat docks alongside real installed pier",
+        "pause preserves rendered transform",
+        "refresh restores progress, transport starts safely paused",
+        "no-update restored full canvas baseline {\"significant\":0,\"maxDelta\":0,\"pixels\":830400}",
+        "city reset clears only city",
+        "old v1 save byte-identical after city reset",
+        "old box resumes its real progress",
+        "returned to hub",
+        "zero page/console errors and forbidden requests"
+      ],
+      "metrics": {
+        "calls": 299,
+        "triangles": 243666
+      },
+      "timing": {
+        "medianMs": 17.90000000000009,
+        "p95Ms": 18.600000000000364
+      },
+      "loading": {
+        "readyMilliseconds": 861,
+        "asset": [
+          {
+            "duration": 184.5,
+            "bytes": 5696540
+          }
+        ]
+      },
+      "visualRepeat": {
+        "significant": 0,
+        "maxDelta": 0,
+        "pixels": 830400
+      },
+      "errors": [],
+      "foreign": [],
+      "input": "keyboard only",
+      "offline": "request layer blocks non-local requests; fresh context/empty cache"
+    },
+    {
+      "profile": "mouse-desktop",
+      "result": "PASS",
+      "steps": [
+        "scene picker updates direct route",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "wrong match retains selection",
+        "same bank tram works before bridge",
+        "missing bridge blocks cross-bank path",
+        "boat actually moves without bridge or pier",
+        "moving boat anchor follows rendered model",
+        "bridge undone while tram crossing",
+        "tram safe reset before removing bridge",
+        "all 18 pieces via real input, upper pieces before bodies",
+        "empty tray collapses",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "section does not consume pieces",
+        "library closes from keyboard/pointer/touch",
+        "photo bridge loads local image and restores focus",
+        "photo church loads local image and restores focus",
+        "photo opera loads local image and restores focus",
+        "photo zwinger loads local image and restores focus",
+        "photo beyer loads local image and restores focus",
+        "photo slub loads local image and restores focus",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "accessible analog clock",
+        "boat docks alongside real installed pier",
+        "pause preserves rendered transform",
+        "refresh restores progress, transport starts safely paused",
+        "city reset clears only city",
+        "old v1 save byte-identical after city reset",
+        "old box resumes its real progress",
+        "returned to hub",
+        "zero page/console errors and forbidden requests"
+      ],
+      "metrics": {
+        "calls": 299,
+        "triangles": 243666
+      },
+      "timing": {
+        "medianMs": 18,
+        "p95Ms": 18.40000000000009
+      },
+      "loading": {
+        "readyMilliseconds": 922,
+        "asset": [
+          {
+            "duration": 171.7000000178814,
+            "bytes": 5696540
+          }
+        ]
+      },
+      "visualRepeat": null,
+      "errors": [],
+      "foreign": [],
+      "input": "mouse",
+      "offline": "request layer blocks non-local requests; fresh context/empty cache"
+    },
+    {
+      "profile": "touch-390",
+      "result": "PASS",
+      "steps": [
+        "scene picker updates direct route",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "wrong match retains selection",
+        "same bank tram works before bridge",
+        "missing bridge blocks cross-bank path",
+        "boat actually moves without bridge or pier",
+        "moving boat anchor follows rendered model",
+        "bridge undone while tram crossing",
+        "tram safe reset before removing bridge",
+        "all 18 pieces via real input, upper pieces before bodies",
+        "empty tray collapses",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "section does not consume pieces",
+        "library closes from keyboard/pointer/touch",
+        "photo bridge loads local image and restores focus",
+        "photo church loads local image and restores focus",
+        "photo opera loads local image and restores focus",
+        "photo zwinger loads local image and restores focus",
+        "photo beyer loads local image and restores focus",
+        "photo slub loads local image and restores focus",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "accessible analog clock",
+        "boat docks alongside real installed pier",
+        "pause preserves rendered transform",
+        "refresh restores progress, transport starts safely paused",
+        "city reset clears only city",
+        "old v1 save byte-identical after city reset",
+        "old box resumes its real progress",
+        "returned to hub",
+        "zero page/console errors and forbidden requests"
+      ],
+      "metrics": {
+        "calls": 299,
+        "triangles": 243666
+      },
+      "timing": {
+        "medianMs": 18,
+        "p95Ms": 18.700000000000273
+      },
+      "loading": {
+        "readyMilliseconds": 896,
+        "asset": [
+          {
+            "duration": 189.09999999403954,
+            "bytes": 5696540
+          }
+        ]
+      },
+      "visualRepeat": null,
+      "errors": [],
+      "foreign": [],
+      "input": "emulated touch",
+      "offline": "request layer blocks non-local requests; fresh context/empty cache"
+    },
+    {
+      "profile": "touch-360",
+      "result": "PASS",
+      "steps": [
+        "scene picker updates direct route",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "wrong match retains selection",
+        "same bank tram works before bridge",
+        "missing bridge blocks cross-bank path",
+        "boat actually moves without bridge or pier",
+        "moving boat anchor follows rendered model",
+        "bridge undone while tram crossing",
+        "tram safe reset before removing bridge",
+        "all 18 pieces via real input, upper pieces before bodies",
+        "empty tray collapses",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "section does not consume pieces",
+        "library closes from keyboard/pointer/touch",
+        "photo bridge loads local image and restores focus",
+        "photo church loads local image and restores focus",
+        "photo opera loads local image and restores focus",
+        "photo zwinger loads local image and restores focus",
+        "photo beyer loads local image and restores focus",
+        "photo slub loads local image and restores focus",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "accessible analog clock",
+        "boat docks alongside real installed pier",
+        "pause preserves rendered transform",
+        "refresh restores progress, transport starts safely paused",
+        "city reset clears only city",
+        "old v1 save byte-identical after city reset",
+        "old box resumes its real progress",
+        "returned to hub",
+        "zero page/console errors and forbidden requests"
+      ],
+      "metrics": {
+        "calls": 299,
+        "triangles": 243666
+      },
+      "timing": {
+        "medianMs": 17.90000000000009,
+        "p95Ms": 18.199999999999818
+      },
+      "loading": {
+        "readyMilliseconds": 841,
+        "asset": [
+          {
+            "duration": 178.80000001192093,
+            "bytes": 5696540
+          }
+        ]
+      },
+      "visualRepeat": null,
+      "errors": [],
+      "foreign": [],
+      "input": "emulated touch",
+      "offline": "request layer blocks non-local requests; fresh context/empty cache"
+    },
+    {
+      "profile": "tablet-portrait",
+      "result": "PASS",
+      "steps": [
+        "scene picker updates direct route",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "wrong match retains selection",
+        "same bank tram works before bridge",
+        "missing bridge blocks cross-bank path",
+        "boat actually moves without bridge or pier",
+        "moving boat anchor follows rendered model",
+        "bridge undone while tram crossing",
+        "tram safe reset before removing bridge",
+        "all 18 pieces via real input, upper pieces before bodies",
+        "empty tray collapses",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "section does not consume pieces",
+        "library closes from keyboard/pointer/touch",
+        "photo bridge loads local image and restores focus",
+        "photo church loads local image and restores focus",
+        "photo opera loads local image and restores focus",
+        "photo zwinger loads local image and restores focus",
+        "photo beyer loads local image and restores focus",
+        "photo slub loads local image and restores focus",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "accessible analog clock",
+        "boat docks alongside real installed pier",
+        "pause preserves rendered transform",
+        "refresh restores progress, transport starts safely paused",
+        "city reset clears only city",
+        "old v1 save byte-identical after city reset",
+        "old box resumes its real progress",
+        "returned to hub",
+        "zero page/console errors and forbidden requests"
+      ],
+      "metrics": {
+        "calls": 299,
+        "triangles": 243666
+      },
+      "timing": {
+        "medianMs": 18,
+        "p95Ms": 18.40000000000009
+      },
+      "loading": {
+        "readyMilliseconds": 857,
+        "asset": [
+          {
+            "duration": 163.40000000596046,
+            "bytes": 5696540
+          }
+        ]
+      },
+      "visualRepeat": null,
+      "errors": [],
+      "foreign": [],
+      "input": "emulated touch",
+      "offline": "request layer blocks non-local requests; fresh context/empty cache"
+    },
+    {
+      "profile": "tablet-landscape",
+      "result": "PASS",
+      "steps": [
+        "scene picker updates direct route",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "wrong match retains selection",
+        "same bank tram works before bridge",
+        "missing bridge blocks cross-bank path",
+        "boat actually moves without bridge or pier",
+        "moving boat anchor follows rendered model",
+        "bridge undone while tram crossing",
+        "tram safe reset before removing bridge",
+        "all 18 pieces via real input, upper pieces before bodies",
+        "empty tray collapses",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "section does not consume pieces",
+        "library closes from keyboard/pointer/touch",
+        "photo bridge loads local image and restores focus",
+        "photo church loads local image and restores focus",
+        "photo opera loads local image and restores focus",
+        "photo zwinger loads local image and restores focus",
+        "photo beyer loads local image and restores focus",
+        "photo slub loads local image and restores focus",
+        "44px targets, nonoverlap, hit points, no horizontal overflow {\"small\":[],\"overlaps\":[],\"hits\":[],\"overflow\":false}",
+        "accessible analog clock",
+        "boat docks alongside real installed pier",
+        "pause preserves rendered transform",
+        "refresh restores progress, transport starts safely paused",
+        "city reset clears only city",
+        "old v1 save byte-identical after city reset",
+        "old box resumes its real progress",
+        "returned to hub",
+        "zero page/console errors and forbidden requests"
+      ],
+      "metrics": {
+        "calls": 299,
+        "triangles": 243666
+      },
+      "timing": {
+        "medianMs": 17.90000000000009,
+        "p95Ms": 18.399999999999636
+      },
+      "loading": {
+        "readyMilliseconds": 1031,
+        "asset": [
+          {
+            "duration": 187.40000000596046,
+            "bytes": 5696540
+          }
+        ]
+      },
+      "visualRepeat": null,
+      "errors": [],
+      "foreign": [],
+      "input": "emulated touch",
+      "offline": "request layer blocks non-local requests; fresh context/empty cache"
+    }
+  ]
+}

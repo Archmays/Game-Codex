@@ -85,14 +85,15 @@ for id,label,group,loc,anchor in spec:
  empty('anchor_'+id,anchor,s);empty('interaction_'+id,anchor,p)
  # Sculpted support for arbitrary-order upper pieces; no complete bridge cover.
  if id in ['frauenkirche_body','beyer_body']:
-  box('Unpainted structural support',(0,0,.65),(1.45,1.35,1.3),wood,s,.08)
+  box('Unpainted structural support',(0,0,.975 if id=='frauenkirche_body' else .65),(1.45,1.35,1.95 if id=='frauenkirche_body' else 1.3),wood,s,.08)
   if id=='beyer_body':box('Observatory support for tower-first',(.85,.2,.65),(.83,.85,1.3),wood,s)
  elif id=='slub_surface':
   for x in [-1.4,1.4]:box('Pale library support',(x,0,.4),(.7,2.3,.8),wood,s)
  elif id=='augustus_bridge':
   for y in [-2.6,2.6]:box('Bridge abutment socket',(0,y,G), (1.25,.25,.08),wood,s)
  elif id=='frauenkirche_dome':
-  cyl('Dome receiving stone ring',(0,0,.02),.75,.05,ivory,s,40)
+  cyl('Dome receiving stone ring',(0,0,.53),.88,.05,ivory,s,40)
+  bpy.data.objects['anchor_'+id].location.z=.57
  elif id=='beyer_tower':
   cyl('Octagonal tower collar',(0,0,.52),.44,.06,ivory,s,8)
  elif id=='slub_skylight':
@@ -132,37 +133,6 @@ for x,y in [(-7,-5),(7,-5),(-6.8,-7),(6.8,-8.8),(-3.3,-4.3),(7.6,7)]:tree(x,y,G,
 for x,y,w,d in [(-4,-5.2,5,.7),(4.5,-5.4,5,.4),(-3.5,-8.6,3,.7),(4,7,4,.8)]:box('Green space',(x,y,G+.015),(w,d,.04),grass)
 for x in [-6.6,-4.2,2,5.4]:house(fixed,(x,7.45,G),1.15,.85,.65)
 
-def bridge():
- p=roots['augustus_bridge'];box('Continuous fixed bridge deck',(0,0,G-.08),(1.22,5.25,.16),stone,p)
- for y in [-2.4,-.8,.8,2.4]:box('Stone bridge pier',(0,y,.63),(1.30,.22,1.02),stone,p,.05)
- # Wedge rings leave genuinely open holes along east-west boat passage.
- for cy in [-1.6,0,1.6]:
-  for j in range(14):
-   a=math.pi*j/14;b=math.pi*(j+1)/14;inner=.69;outer=.87
-   v=[(x,cy+r*math.cos(t),.57+r*math.sin(t)) for x in [-.59,.59] for r,t in [(inner,a),(inner,b),(outer,b),(outer,a)]]
-   m=bpy.data.meshes.new('Arch');m.from_pydata(v,[],[(0,1,2,3),(4,7,6,5),(0,4,5,1),(3,2,6,7),(1,5,6,2),(0,3,7,4)]);m.update();o=bpy.data.objects.new('Open stone arch voussoir',m);bpy.context.collection.objects.link(o);finish(o,o.name,ivory if j%3==0 else stone,p)
- for x in [-.58,.58]:
-  box('Bridge parapet',(x,0,1.60),(.075,5.25,.27),stone,p)
-  for y in [-2.4,-.8,.8,2.4]:box('Parapet post',(x,y,1.64),(.15,.17,.36),ivory,p)
- for dx in [-.23,.23]:beam('Bridge rail',(dx,-2.65,1.49),(dx,2.65,1.49),.018,dark,p)
-def church():
- p=roots['frauenkirche_body'];cyl('Octagonal central church',(0,0,.63),.99,1.26,stone,p,8);windows(p,1.45,1.52,1.35,rows=2)
- for x in [-.72,.72]:
-  for y in [-.72,.72]:
-   box('Corner stair tower',(x,y,.67),(.32,.32,1.34),ivory,p)
-   sphere('Corner turret',(x,y,1.4),(.2,.2,.23),stone,p)
- for i in range(24):
-  a=random.choice([-.5,.5])*math.pi;x=random.uniform(-.6,.6);z=random.uniform(.15,1.15)
-  box('Preserved old stone',(x,math.sin(a)*.773,z),(.14,.027,.10),old,p,.01)
- cyl('Sandstone cornice',(0,0,1.30),1.02,.13,ivory,p,8)
- p=roots['frauenkirche_dome'];lathe('Bell-shaped stone dome',[(.75,0),(.78,.14),(.65,.26),(.61,.42),(.65,.62),(.70,.80),(.66,1.03),(.52,1.23),(.30,1.37),(.22,1.39)],stone,p)
- cyl('Dome supporting collar',(0,0,-.06),.77,.16,ivory,p,32)
- for i in range(8):
-  a=i*math.tau/8;beam('Dome rib',(.66*math.cos(a),.66*math.sin(a),.75),(.27*math.cos(a),.27*math.sin(a),1.38),.023,ivory,p)
- cyl('Lantern foot',(0,0,1.43),.28,.09,ivory,p)
- for i in range(8):a=i*math.tau/8;cyl('Lantern column',(.19*math.cos(a),.19*math.sin(a),1.64),.025,.37,ivory,p,12)
- lathe('Lantern crown',[(.29,1.82),(.25,1.92),(.12,2.02),(.06,2.13)],stone,p)
- beam('Cross upright',(0,0,2.08),(0,0,2.39),.022,gold,p);beam('Cross arms',(-.10,0,2.28),(.10,0,2.28),.02,gold,p)
 def library():
  p=roots['slub_surface']
  for x in [-1.43,1.43]:
@@ -187,7 +157,7 @@ def library():
  p=roots['slub_skylight'];box('Central glass roof',(0,0,0),(1.82,2.08,.075),glass,p)
  for x in [-.91,-.455,0,.455,.91]:box('Glass roof mullion',(x,0,.05),(.025,2.11,.045),ivory,p,.005)
  for y in [-1.04,-.52,0,.52,1.04]:box('Glass roof crossbar',(0,y,.05),(1.85,.025,.045),ivory,p,.005)
-bridge();church();library()
+library()
 if not SAMPLE:
  p=roots['paddle_steamer'];sphere('Long wooden hull',(0,0,.10),(.84,.29,.15),ivory,p);box('Passenger deck',(0,0,.22),(1.45,.48,.10),wood,p)
  box('Long cabin',(0,0,.37),(1.02,.36,.23),ivory,p);box('Cabin canopy',(0,0,.51),(1.14,.48,.06),ivory,p)
@@ -267,6 +237,9 @@ if not SAMPLE:
  sphere('Toy backpack',(.52,0,.2),(.14,.10,.17),red,p)
 
 # Batch static meshes by immediate semantic parent + material. Pivots remain separate.
+sys.path.insert(0,str(Path(__file__).parent))
+from refined_library import install
+refined=install({'refine_church_body':'piece_frauenkirche_body','refine_church_dome':'piece_frauenkirche_dome','refine_bridge':'piece_augustus_bridge'})
 for parent in [o for o in bpy.data.objects if o.type=='EMPTY']:
  groups={}
  for o in list(parent.children):
@@ -296,6 +269,8 @@ for absolute in set(re.findall(rb'[A-Za-z]:[\\/][\x20-\x7e]{3,512}(?=\x00)',payl
 blend.write_bytes(payload)
 glb=OUT/('samples.glb' if SAMPLE else 'dresden-river-campus.glb')
 bpy.ops.export_scene.gltf(filepath=str(glb),export_format='GLB',export_yup=True,export_apply=True,export_extras=True,export_cameras=False,export_lights=False)
+metadata['refinedSource']='games/world-in-a-box/blender/refined-models.blend'
+metadata['refinedSha256']=hashlib.sha256(refined.read_bytes()).hexdigest()
 metadata.update(bytes=glb.stat().st_size,glbSha256=hashlib.sha256(glb.read_bytes()).hexdigest(),blendSha256=hashlib.sha256(blend.read_bytes()).hexdigest())
 (OUT/'export.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2),encoding='utf-8')
 print('DRESDEN_EXPORT',json.dumps(metadata,ensure_ascii=True))

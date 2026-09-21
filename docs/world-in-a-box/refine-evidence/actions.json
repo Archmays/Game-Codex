@@ -1,0 +1,145 @@
+{
+  "result": "PASS_MACHINE",
+  "rows": [
+    {
+      "state": "cast",
+      "hand": [
+        -2.174461944095451,
+        1.7880478241615911,
+        4.315739135292066
+      ],
+      "effect": [
+        -2.174461944095451,
+        1.7880478241615911,
+        4.315739135292066
+      ],
+      "error": 0,
+      "handForwardOfShoulder": 0.5020807318458627,
+      "clips": [
+        "elsa_cast"
+      ]
+    },
+    {
+      "state": "walk",
+      "diagnostics": {
+        "scene": {
+          "calls": 278,
+          "triangles": 288228,
+          "memory": {
+            "geometries": 179,
+            "textures": 5
+          },
+          "clips": [
+            "elsa_cast",
+            "elsa_wave",
+            "elsa_walk_-1",
+            "elsa_walk_1",
+            "anna_wave",
+            "anna_cast",
+            "anna_walk_-1",
+            "anna_walk_1",
+            "olaf_wave_-1",
+            "olaf_wave_1",
+            "kristoff_wave",
+            "kristoff_cast",
+            "kristoff_walk_-1",
+            "kristoff_walk_1",
+            "sven_walk_-1_-1",
+            "sven_walk_-1_1",
+            "sven_walk_1_-1",
+            "sven_walk_1_1"
+          ],
+          "playing": [
+            "elsa_walk_-1",
+            "elsa_walk_1"
+          ]
+        },
+        "audio": {
+          "context": "running",
+          "loops": [
+            {
+              "key": "environment",
+              "name": "frozen-air",
+              "offset": 0,
+              "started": 0.021333333333333333
+            },
+            {
+              "key": "music",
+              "name": "frozen-elsa-playground",
+              "offset": 0,
+              "started": 0.4
+            }
+          ],
+          "voices": 0,
+          "pending": 0,
+          "buffers": 33,
+          "epoch": 1,
+          "pauses": [],
+          "preferences": {
+            "version": 1,
+            "muted": false,
+            "music": 0.25,
+            "sfx": 0.55,
+            "ambient": 0.15
+          },
+          "events": [
+            {
+              "name": "frozen-crystal",
+              "time": 8.672
+            },
+            {
+              "name": "frozen-crystal",
+              "time": 8.832
+            },
+            {
+              "name": "frozen-crystal",
+              "time": 9
+            },
+            {
+              "name": "frozen-crystal",
+              "time": 9.170666666666667
+            },
+            {
+              "name": "frozen-crystal",
+              "time": 9.341333333333333
+            },
+            {
+              "name": "frozen-crystal",
+              "time": 9.501333333333333
+            },
+            {
+              "name": "frozen-crystal",
+              "time": 9.672
+            },
+            {
+              "name": "frozen-crystal",
+              "time": 9.832
+            },
+            {
+              "name": "frozen-crystal",
+              "time": 10.010666666666667
+            },
+            {
+              "name": "frozen-start",
+              "time": 10.541333333333334
+            },
+            {
+              "name": "frozen-stop",
+              "time": 16.970666666666666
+            },
+            {
+              "name": "frozen-stop",
+              "time": 25.530666666666665
+            }
+          ]
+        },
+        "revision": 0
+      }
+    },
+    {
+      "state": "safe retraction",
+      "pending": ""
+    }
+  ],
+  "errors": []
+}

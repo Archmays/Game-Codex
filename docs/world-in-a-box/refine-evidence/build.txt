@@ -1,0 +1,52 @@
+Already up to date
+Done in 50ms using pnpm v11.5.2
+vite v6.4.3 building for production...
+transforming...
+✓ 144 modules transformed.
+rendering chunks...
+[plugin reject-retired-runtime] Retirement contract: no retired math or language runtime in the production module graph.
+computing gzip size...
+dist/index.html                                  0.52 kB │ gzip:   0.34 kB
+dist/assets/solver.worker-B_39gekk.js           17.66 kB
+dist/assets/phaser-CC-zc-eL.css                  1.06 kB │ gzip:   0.51 kB
+dist/assets/index-DDnh2Gin.css                   2.96 kB │ gzip:   1.04 kB
+dist/assets/frozen-runtime-DubtOAaW.css          2.97 kB │ gzip:   1.14 kB
+dist/assets/index-BUZsrk33.css                   4.31 kB │ gzip:   1.49 kB
+dist/assets/style-TSJTFcTt.css                   5.36 kB │ gzip:   1.90 kB
+dist/assets/dresden-runtime-zi2nPIrr.css         5.65 kB │ gzip:   1.73 kB
+dist/assets/workbench-Aoqao3NJ.css               7.17 kB │ gzip:   2.20 kB
+dist/assets/index-C2L46_ZE.css                   7.93 kB │ gzip:   2.17 kB
+dist/assets/index-DV3gt2Kh.css                  10.80 kB │ gzip:   2.77 kB
+dist/assets/runtime-CT3sB3fV.css                11.37 kB │ gzip:   3.30 kB
+dist/assets/index-DxCBvOE-.css                  11.66 kB │ gzip:   3.14 kB
+dist/assets/index-C7DG0LjO.css                  13.25 kB │ gzip:   3.35 kB
+dist/assets/index-CScm0IkP.css                  13.50 kB │ gzip:   3.42 kB
+dist/assets/index-DSzfCSbL.css                  19.89 kB │ gzip:   4.49 kB
+dist/assets/index-D3Ki85Gn.css                  35.44 kB │ gzip:   8.22 kB
+dist/assets/index-xy1G-xid.js                    0.83 kB │ gzip:   0.43 kB
+dist/assets/style-tW1AfYB3.js                    4.87 kB │ gzip:   2.32 kB
+dist/assets/index-w74IcSD0.js                    7.29 kB │ gzip:   3.06 kB
+dist/assets/tactics-DoOxHTnQ.js                  8.11 kB │ gzip:   3.54 kB
+dist/assets/index-B79ImcBM.js                   11.36 kB │ gzip:   5.32 kB
+dist/assets/boxes-Gq87HTCb.js                   11.40 kB │ gzip:   4.62 kB
+dist/assets/SaveVaultPanel-CTaHSql0.js          16.86 kB │ gzip:   5.31 kB
+dist/assets/index-k5JdaIY_.js                   19.64 kB │ gzip:   8.14 kB
+dist/assets/ObservationNotebook-FnZAvzwJ.js     20.02 kB │ gzip:   7.59 kB
+dist/assets/index-DA8rkLns.js                   20.21 kB │ gzip:   7.03 kB
+dist/assets/runtime-BCqlhG_W.js                 24.15 kB │ gzip:   9.82 kB
+dist/assets/index-DeQ7vhE7.js                   28.67 kB │ gzip:   8.18 kB
+dist/assets/frozen-runtime-B0Cfdkn1.js          34.09 kB │ gzip:  13.48 kB
+dist/assets/workbench-G9IWG5e6.js               35.91 kB │ gzip:  12.95 kB
+dist/assets/dresden-runtime-BmbicR4I.js         42.47 kB │ gzip:  15.97 kB
+dist/assets/index-DinKqEkL.js                   65.35 kB │ gzip:  25.71 kB
+dist/assets/index-DEbl9eIk.js                   65.39 kB │ gzip:  21.94 kB
+dist/assets/runtime-C2evsvT7.js                 74.74 kB │ gzip:  26.44 kB
+dist/assets/index-DlI7ialh.js                   86.76 kB │ gzip:  30.89 kB
+dist/assets/index-CRuB4-8J.js                  171.93 kB │ gzip:  15.33 kB
+dist/assets/chapter-1-addition-B7TO94Rc.js     211.95 kB │ gzip:  21.39 kB
+dist/assets/chapter-2-add-sub-CHTM53z1.js      227.78 kB │ gzip:  23.62 kB
+dist/assets/chapter-3-mul-div-B7STcG3J.js      240.42 kB │ gzip:  24.91 kB
+dist/assets/chapter-4-reasoning-DIyQqwpM.js    265.14 kB │ gzip:  28.51 kB
+dist/assets/GLTFLoader-DuTL06GU.js             670.09 kB │ gzip: 171.58 kB
+dist/assets/phaser-BWjo3hEK.js               1,486.35 kB │ gzip: 341.71 kB
+✓ built in 21.82s

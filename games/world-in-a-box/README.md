@@ -1,5 +1,19 @@
 # 世界盒子 v0.5.0 · 三个小世界
 
+## 四项模型精修
+
+艾莎、圣母教堂主体/圆顶、冰宫六件与固定承托、奥古斯都桥已接入独立精修库。18/16件、原拼件ID、存档键与玩法保持不变。[交付与验证](../../docs/world-in-a-box/refine-report.md) · [前后对照](../../docs/world-in-a-box/refine-comparison.html) · [来源](../../docs/world-in-a-box/refine-sources.md)。
+
+`blender/refined-models.blend` 是可直接编辑的正式造型来源：`refine_elsa`、`refine_church_body`、`refine_church_dome`、`refine_bridge`、`refine_palace_*` 根各自拥有网格、材质及兼容枢轴。场景生成器只通过 `refined_library.py` 读取这些资产，缺失时失败，不降级回粗模。`author_refined.py` 是显式重建造型的配方，**普通导出不执行它**，避免覆盖手工精修。其余场景仍由原脚本装配。
+
+从项目根目录同时重新导出两盒（Blender 4.5 LTS，仅制作期需要）：
+
+```powershell
+pwsh -File games/world-in-a-box/blender/export-refined.ps1 -BlenderPath <blender.exe的完整路径>
+```
+
+导出写回两盒的组装 `.blend`、正式GLB及带精修源哈希的manifest。验证命令：`python tools/world-in-a-box/refine-assets.py`（Python + NumPy）和原浏览器脚本；普通游戏与构建仍只读取本地GLB，不依赖Blender或在线资源。
+
 固定家庭地址为 `http://127.0.0.1:5175/`，沿用家庭启动器 `tools/my-game-world/START_MY_GAME_WORLD.cmd`。默认进入原有《窗边有风》，右上角“换盒子”可切换；三个盒子分别保存进度。
 
 - 窗边有风：`?play=world-in-a-box&scene=window-breeze`

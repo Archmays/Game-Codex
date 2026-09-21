@@ -1,0 +1,123 @@
+{
+  "phase": "after",
+  "rows": [
+    {
+      "name": "frozen-all",
+      "camera": "{\"view\":\"all\",\"angle\":0.18,\"pitch\":0.87,\"zoom\":1}"
+    },
+    {
+      "name": "elsa-near",
+      "camera": "{\"view\":\"lake\",\"angle\":0.18,\"pitch\":0.48,\"zoom\":2.1}"
+    },
+    {
+      "name": "elsa-rear",
+      "camera": "{\"view\":\"lake\",\"angle\":2.3800000000000003,\"pitch\":0.48,\"zoom\":2.1}"
+    },
+    {
+      "name": "elsa-rear-context",
+      "camera": "{\"view\":\"lake\",\"angle\":2.3800000000000003,\"pitch\":0.48,\"zoom\":0.7}"
+    },
+    {
+      "name": "elsa-neutral",
+      "camera": "{\"view\":\"lake\",\"angle\":0.18000000000000016,\"pitch\":0.48,\"zoom\":2.1}"
+    },
+    {
+      "name": "palace-near",
+      "camera": "{\"view\":\"palace\",\"angle\":0.18,\"pitch\":0.3,\"zoom\":2.1}"
+    },
+    {
+      "name": "palace-rear",
+      "camera": "{\"view\":\"palace\",\"angle\":2.3800000000000003,\"pitch\":0.3,\"zoom\":2.1}"
+    },
+    {
+      "name": "palace-rear-context",
+      "camera": "{\"view\":\"palace\",\"angle\":2.3800000000000003,\"pitch\":0.3,\"zoom\":0.7}"
+    },
+    {
+      "name": "palace-neutral",
+      "camera": "{\"view\":\"palace\",\"angle\":0.18000000000000016,\"pitch\":0.3,\"zoom\":2.1}"
+    },
+    {
+      "kind": "frozen",
+      "loadMs": 470,
+      "performanceData": {
+        "medianMs": 17.80000000000109,
+        "p95Ms": 18.399999999999636,
+        "calls": 272,
+        "renderTriangles": 290536,
+        "resources": [
+          {
+            "path": "/assets/world-in-a-box/window-breeze.glb",
+            "bytes": 3475652,
+            "duration": 43.69999998807907
+          },
+          {
+            "path": "/assets/world-in-a-box/frozen/frozen-elsa-playground.glb",
+            "bytes": 3956000,
+            "duration": 28.5
+          }
+        ]
+      }
+    },
+    {
+      "name": "dresden-all",
+      "camera": "{\"angle\":0.18,\"pitch\":0.92,\"zoom\":1,\"view\":\"all\",\"center\":[0,1.4600000381469727,1],\"half\":10.8}"
+    },
+    {
+      "name": "church-near",
+      "camera": "{\"angle\":0.18,\"pitch\":0.6,\"zoom\":1.8,\"view\":\"oldtown\",\"center\":[-0.30000001192092896,1.4600000381469727,1],\"half\":6.8}"
+    },
+    {
+      "name": "church-rear",
+      "camera": "{\"angle\":2.3800000000000003,\"pitch\":0.6,\"zoom\":1.8,\"view\":\"oldtown\",\"center\":[-0.30000001192092896,1.4600000381469727,1],\"half\":6.8}"
+    },
+    {
+      "name": "church-rear-context",
+      "camera": "{\"angle\":2.3800000000000003,\"pitch\":0.6,\"zoom\":0.75,\"view\":\"oldtown\",\"center\":[-0.30000001192092896,1.4600000381469727,1],\"half\":6.8}"
+    },
+    {
+      "name": "church-neutral",
+      "camera": "{\"angle\":0.18000000000000016,\"pitch\":0.6,\"zoom\":1.8,\"view\":\"oldtown\",\"center\":[-0.30000001192092896,1.4600000381469727,1],\"half\":6.8}"
+    },
+    {
+      "name": "bridge-near",
+      "camera": "{\"angle\":1.05,\"pitch\":0.35,\"zoom\":1.8,\"view\":\"river\",\"center\":[0,0.6000000238418579,-4],\"half\":8.334000277519225}"
+    },
+    {
+      "name": "bridge-rear",
+      "camera": "{\"angle\":3.25,\"pitch\":0.35,\"zoom\":1.8,\"view\":\"river\",\"center\":[0,0.6000000238418579,-4],\"half\":8.334000277519225}"
+    },
+    {
+      "name": "bridge-rear-context",
+      "camera": "{\"angle\":3.25,\"pitch\":0.35,\"zoom\":0.75,\"view\":\"river\",\"center\":[0,0.6000000238418579,-4],\"half\":8.334000277519225}"
+    },
+    {
+      "name": "bridge-neutral",
+      "camera": "{\"angle\":1.0499999999999998,\"pitch\":0.35,\"zoom\":1.8,\"view\":\"river\",\"center\":[0,0.6000000238418579,-4],\"half\":8.334000277519225}"
+    },
+    {
+      "kind": "dresden",
+      "loadMs": 1813,
+      "performanceData": {
+        "medianMs": 17.799999999999272,
+        "p95Ms": 18.400000000001455,
+        "calls": 299,
+        "renderTriangles": 243666,
+        "resources": [
+          {
+            "path": "/assets/world-in-a-box/window-breeze.glb",
+            "bytes": 3475652,
+            "duration": 47.30000001192093
+          },
+          {
+            "path": "/assets/world-in-a-box/dresden/dresden-river-campus.glb",
+            "bytes": 5696540,
+            "duration": 241.30000001192093
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "result": "CAPTURED"
+}

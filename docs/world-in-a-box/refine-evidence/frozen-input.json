@@ -1,0 +1,1294 @@
+{
+  "result": "PASS_MACHINE",
+  "scope": "new scene real input matrix only",
+  "rows": [
+    {
+      "name": "keyboard",
+      "checks": [
+        "all three spells at zero pieces",
+        "16 manual pieces complete without extra goals",
+        "circle, eight, safe rink clearing via real input",
+        "pause freezes trip",
+        "sleigh evacuated before bridge retraction",
+        "reset default is continue",
+        "reset cancel keeps assembly",
+        "reset clears spell facts",
+        "reset clears undo",
+        "reset readback persists",
+        "magic target dimensions",
+        "no horizontal overflow",
+        "no page errors",
+        "zero external requests",
+        "return route works"
+      ],
+      "load": {
+        "ms": 1355.9000000059605,
+        "resources": [
+          {
+            "url": "frozen-runtime.ts?t=1790004656612",
+            "bytes": 75776,
+            "duration": 9.599999994039536
+          },
+          {
+            "url": "frozen-model.ts?t=1789971728990",
+            "bytes": 28371,
+            "duration": 6.399999976158142
+          },
+          {
+            "url": "frozen-scene.ts?t=1790004656612",
+            "bytes": 57157,
+            "duration": 7.5
+          },
+          {
+            "url": "frozen.css?t=1789970522937",
+            "bytes": 3796,
+            "duration": 8.300000011920929
+          },
+          {
+            "url": "frozen-elsa-playground.glb",
+            "bytes": 3956300,
+            "duration": 37.19999998807907
+          }
+        ]
+      },
+      "geometry": [
+        {
+          "text": "❄ 长出冰桥",
+          "w": 89.40625,
+          "h": 44,
+          "hit": true
+        },
+        {
+          "text": "◇ 冻结冰场",
+          "w": 85.65625,
+          "h": 44,
+          "hit": true
+        },
+        {
+          "text": "✧ 飘雪",
+          "w": 62.46875,
+          "h": 44,
+          "hit": true
+        }
+      ],
+      "frameTimes": {
+        "p50": 17.899999999999636,
+        "p95": 18.300000000000182,
+        "max": 18.399999999999864,
+        "samples": 60
+      },
+      "completeScene": {
+        "calls": 324,
+        "triangles": 301880,
+        "memory": {
+          "geometries": 180,
+          "textures": 5
+        },
+        "clips": [
+          "elsa_cast",
+          "elsa_wave",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      },
+      "completeFrames": {
+        "p50": 17.799999999999272,
+        "p95": 18.600000000000364,
+        "max": 19.099999999998545,
+        "samples": 60
+      },
+      "diagnostics": {
+        "scene": {
+          "calls": 98,
+          "triangles": 185472,
+          "memory": {
+            "geometries": 152,
+            "textures": 5
+          },
+          "clips": [
+            "elsa_cast",
+            "elsa_wave",
+            "elsa_walk_-1",
+            "elsa_walk_1",
+            "anna_wave",
+            "anna_cast",
+            "anna_walk_-1",
+            "anna_walk_1",
+            "olaf_wave_-1",
+            "olaf_wave_1",
+            "kristoff_wave",
+            "kristoff_cast",
+            "kristoff_walk_-1",
+            "kristoff_walk_1",
+            "sven_walk_-1_-1",
+            "sven_walk_-1_1",
+            "sven_walk_1_-1",
+            "sven_walk_1_1"
+          ],
+          "playing": []
+        },
+        "audio": {
+          "context": "locked",
+          "loops": [],
+          "voices": 0,
+          "pending": 0,
+          "buffers": 0,
+          "epoch": 0,
+          "pauses": [],
+          "preferences": {
+            "version": 1,
+            "muted": false,
+            "music": 0.25,
+            "sfx": 0.55,
+            "ambient": 0.15
+          },
+          "events": []
+        },
+        "revision": 0
+      },
+      "errors": []
+    },
+    {
+      "name": "mouse",
+      "checks": [
+        "all three spells at zero pieces",
+        "16 manual pieces complete without extra goals",
+        "circle, eight, safe rink clearing via real input",
+        "pause freezes trip",
+        "sleigh evacuated before bridge retraction",
+        "reset default is continue",
+        "reset cancel keeps assembly",
+        "reset clears spell facts",
+        "reset clears undo",
+        "reset readback persists",
+        "magic target dimensions",
+        "no horizontal overflow",
+        "no page errors",
+        "zero external requests",
+        "return route works"
+      ],
+      "load": {
+        "ms": 1212.0999999940395,
+        "resources": [
+          {
+            "url": "frozen-runtime.ts?t=1790004656612",
+            "bytes": 75776,
+            "duration": 12.799999982118607
+          },
+          {
+            "url": "frozen-model.ts?t=1789971728990",
+            "bytes": 28371,
+            "duration": 22.30000001192093
+          },
+          {
+            "url": "frozen-scene.ts?t=1790004656612",
+            "bytes": 57157,
+            "duration": 23.5
+          },
+          {
+            "url": "frozen.css?t=1789970522937",
+            "bytes": 3796,
+            "duration": 27.599999994039536
+          },
+          {
+            "url": "frozen-elsa-playground.glb",
+            "bytes": 3956300,
+            "duration": 66.80000001192093
+          }
+        ]
+      },
+      "geometry": [
+        {
+          "text": "❄ 长出冰桥",
+          "w": 89.40625,
+          "h": 44,
+          "hit": true
+        },
+        {
+          "text": "◇ 冻结冰场",
+          "w": 85.65625,
+          "h": 44,
+          "hit": true
+        },
+        {
+          "text": "✧ 飘雪",
+          "w": 62.46875,
+          "h": 44,
+          "hit": true
+        }
+      ],
+      "frameTimes": {
+        "p50": 17.90000000000009,
+        "p95": 18.59999999999991,
+        "max": 18.90000000000009,
+        "samples": 60
+      },
+      "completeScene": {
+        "calls": 324,
+        "triangles": 301880,
+        "memory": {
+          "geometries": 180,
+          "textures": 5
+        },
+        "clips": [
+          "elsa_cast",
+          "elsa_wave",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      },
+      "completeFrames": {
+        "p50": 17.69999999999891,
+        "p95": 18.5,
+        "max": 18.899999999999636,
+        "samples": 60
+      },
+      "diagnostics": {
+        "scene": {
+          "calls": 98,
+          "triangles": 185472,
+          "memory": {
+            "geometries": 152,
+            "textures": 5
+          },
+          "clips": [
+            "elsa_cast",
+            "elsa_wave",
+            "elsa_walk_-1",
+            "elsa_walk_1",
+            "anna_wave",
+            "anna_cast",
+            "anna_walk_-1",
+            "anna_walk_1",
+            "olaf_wave_-1",
+            "olaf_wave_1",
+            "kristoff_wave",
+            "kristoff_cast",
+            "kristoff_walk_-1",
+            "kristoff_walk_1",
+            "sven_walk_-1_-1",
+            "sven_walk_-1_1",
+            "sven_walk_1_-1",
+            "sven_walk_1_1"
+          ],
+          "playing": []
+        },
+        "audio": {
+          "context": "locked",
+          "loops": [],
+          "voices": 0,
+          "pending": 0,
+          "buffers": 0,
+          "epoch": 0,
+          "pauses": [],
+          "preferences": {
+            "version": 1,
+            "muted": false,
+            "music": 0.25,
+            "sfx": 0.55,
+            "ambient": 0.15
+          },
+          "events": []
+        },
+        "revision": 0
+      },
+      "errors": []
+    },
+    {
+      "name": "360",
+      "checks": [
+        "all three spells at zero pieces",
+        "16 manual pieces complete without extra goals",
+        "circle, eight, safe rink clearing via real input",
+        "pause freezes trip",
+        "sleigh evacuated before bridge retraction",
+        "reset default is continue",
+        "reset cancel keeps assembly",
+        "reset clears spell facts",
+        "reset clears undo",
+        "reset readback persists",
+        "magic target dimensions",
+        "no horizontal overflow",
+        "no page errors",
+        "zero external requests",
+        "return route works"
+      ],
+      "load": {
+        "ms": 1285,
+        "resources": [
+          {
+            "url": "frozen-runtime.ts?t=1790004656612",
+            "bytes": 75776,
+            "duration": 13.699999988079071
+          },
+          {
+            "url": "frozen-model.ts?t=1789971728990",
+            "bytes": 28371,
+            "duration": 25
+          },
+          {
+            "url": "frozen-scene.ts?t=1790004656612",
+            "bytes": 57157,
+            "duration": 26
+          },
+          {
+            "url": "frozen.css?t=1789970522937",
+            "bytes": 3796,
+            "duration": 32.599999994039536
+          },
+          {
+            "url": "frozen-elsa-playground.glb",
+            "bytes": 3956300,
+            "duration": 65.19999998807907
+          }
+        ]
+      },
+      "geometry": [
+        {
+          "text": "❄ 长出冰桥",
+          "w": 89.40625,
+          "h": 44,
+          "hit": true
+        },
+        {
+          "text": "◇ 冻结冰场",
+          "w": 85.65625,
+          "h": 44,
+          "hit": true
+        },
+        {
+          "text": "✧ 飘雪",
+          "w": 62.46875,
+          "h": 44,
+          "hit": true
+        }
+      ],
+      "frameTimes": {
+        "p50": 17.800000000000182,
+        "p95": 18.5,
+        "max": 18.600000000000136,
+        "samples": 60
+      },
+      "completeScene": {
+        "calls": 324,
+        "triangles": 301880,
+        "memory": {
+          "geometries": 180,
+          "textures": 5
+        },
+        "clips": [
+          "elsa_cast",
+          "elsa_wave",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      },
+      "completeFrames": {
+        "p50": 17.700000000000728,
+        "p95": 18.5,
+        "max": 18.69999999999891,
+        "samples": 60
+      },
+      "diagnostics": {
+        "scene": {
+          "calls": 98,
+          "triangles": 185472,
+          "memory": {
+            "geometries": 152,
+            "textures": 5
+          },
+          "clips": [
+            "elsa_cast",
+            "elsa_wave",
+            "elsa_walk_-1",
+            "elsa_walk_1",
+            "anna_wave",
+            "anna_cast",
+            "anna_walk_-1",
+            "anna_walk_1",
+            "olaf_wave_-1",
+            "olaf_wave_1",
+            "kristoff_wave",
+            "kristoff_cast",
+            "kristoff_walk_-1",
+            "kristoff_walk_1",
+            "sven_walk_-1_-1",
+            "sven_walk_-1_1",
+            "sven_walk_1_-1",
+            "sven_walk_1_1"
+          ],
+          "playing": []
+        },
+        "audio": {
+          "context": "locked",
+          "loops": [],
+          "voices": 0,
+          "pending": 0,
+          "buffers": 0,
+          "epoch": 0,
+          "pauses": [],
+          "preferences": {
+            "version": 1,
+            "muted": false,
+            "music": 0.25,
+            "sfx": 0.55,
+            "ambient": 0.15
+          },
+          "events": []
+        },
+        "revision": 0
+      },
+      "errors": []
+    },
+    {
+      "name": "390",
+      "checks": [
+        "all three spells at zero pieces",
+        "16 manual pieces complete without extra goals",
+        "circle, eight, safe rink clearing via real input",
+        "pause freezes trip",
+        "sleigh evacuated before bridge retraction",
+        "reset default is continue",
+        "reset cancel keeps assembly",
+        "reset clears spell facts",
+        "reset clears undo",
+        "reset readback persists",
+        "magic target dimensions",
+        "no horizontal overflow",
+        "no page errors",
+        "zero external requests",
+        "return route works"
+      ],
+      "load": {
+        "ms": 1099,
+        "resources": [
+          {
+            "url": "frozen-runtime.ts?t=1790004656612",
+            "bytes": 75776,
+            "duration": 8.700000017881393
+          },
+          {
+            "url": "frozen-model.ts?t=1789971728990",
+            "bytes": 28371,
+            "duration": 17.80000001192093
+          },
+          {
+            "url": "frozen-scene.ts?t=1790004656612",
+            "bytes": 57157,
+            "duration": 22.299999982118607
+          },
+          {
+            "url": "frozen.css?t=1789970522937",
+            "bytes": 3796,
+            "duration": 23.5
+          },
+          {
+            "url": "frozen-elsa-playground.glb",
+            "bytes": 3956300,
+            "duration": 63.60000002384186
+          }
+        ]
+      },
+      "geometry": [
+        {
+          "text": "❄ 长出冰桥",
+          "w": 89.40625,
+          "h": 44,
+          "hit": true
+        },
+        {
+          "text": "◇ 冻结冰场",
+          "w": 85.65625,
+          "h": 44,
+          "hit": true
+        },
+        {
+          "text": "✧ 飘雪",
+          "w": 62.46875,
+          "h": 44,
+          "hit": true
+        }
+      ],
+      "frameTimes": {
+        "p50": 17.700000000000273,
+        "p95": 18.700000000000045,
+        "max": 18.90000000000009,
+        "samples": 60
+      },
+      "completeScene": {
+        "calls": 324,
+        "triangles": 301880,
+        "memory": {
+          "geometries": 180,
+          "textures": 5
+        },
+        "clips": [
+          "elsa_cast",
+          "elsa_wave",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      },
+      "completeFrames": {
+        "p50": 18,
+        "p95": 18.700000000000728,
+        "max": 19.100000000000364,
+        "samples": 60
+      },
+      "diagnostics": {
+        "scene": {
+          "calls": 98,
+          "triangles": 185472,
+          "memory": {
+            "geometries": 152,
+            "textures": 5
+          },
+          "clips": [
+            "elsa_cast",
+            "elsa_wave",
+            "elsa_walk_-1",
+            "elsa_walk_1",
+            "anna_wave",
+            "anna_cast",
+            "anna_walk_-1",
+            "anna_walk_1",
+            "olaf_wave_-1",
+            "olaf_wave_1",
+            "kristoff_wave",
+            "kristoff_cast",
+            "kristoff_walk_-1",
+            "kristoff_walk_1",
+            "sven_walk_-1_-1",
+            "sven_walk_-1_1",
+            "sven_walk_1_-1",
+            "sven_walk_1_1"
+          ],
+          "playing": []
+        },
+        "audio": {
+          "context": "locked",
+          "loops": [],
+          "voices": 0,
+          "pending": 0,
+          "buffers": 0,
+          "epoch": 0,
+          "pauses": [],
+          "preferences": {
+            "version": 1,
+            "muted": false,
+            "music": 0.25,
+            "sfx": 0.55,
+            "ambient": 0.15
+          },
+          "events": []
+        },
+        "revision": 0
+      },
+      "errors": []
+    },
+    {
+      "name": "landscape360",
+      "checks": [
+        "all three spells at zero pieces",
+        "16 manual pieces complete without extra goals",
+        "circle, eight, safe rink clearing via real input",
+        "pause freezes trip",
+        "sleigh evacuated before bridge retraction",
+        "reset default is continue",
+        "reset cancel keeps assembly",
+        "reset clears spell facts",
+        "reset clears undo",
+        "reset readback persists",
+        "magic target dimensions",
+        "no horizontal overflow",
+        "no page errors",
+        "zero external requests",
+        "return route works"
+      ],
+      "load": {
+        "ms": 1071.8999999761581,
+        "resources": [
+          {
+            "url": "frozen-runtime.ts?t=1790004656612",
+            "bytes": 75776,
+            "duration": 8.300000011920929
+          },
+          {
+            "url": "frozen-model.ts?t=1789971728990",
+            "bytes": 28371,
+            "duration": 15.199999988079071
+          },
+          {
+            "url": "frozen-scene.ts?t=1790004656612",
+            "bytes": 57157,
+            "duration": 19.400000005960464
+          },
+          {
+            "url": "frozen.css?t=1789970522937",
+            "bytes": 3796,
+            "duration": 22.799999982118607
+          },
+          {
+            "url": "frozen-elsa-playground.glb",
+            "bytes": 3956300,
+            "duration": 61.30000001192093
+          }
+        ]
+      },
+      "geometry": [
+        {
+          "text": "❄ 长出冰桥",
+          "w": 89.40625,
+          "h": 44,
+          "hit": true
+        },
+        {
+          "text": "◇ 冻结冰场",
+          "w": 85.65625,
+          "h": 44,
+          "hit": true
+        },
+        {
+          "text": "✧ 飘雪",
+          "w": 62.46875,
+          "h": 44,
+          "hit": true
+        }
+      ],
+      "frameTimes": {
+        "p50": 17.799999999999955,
+        "p95": 18.799999999999955,
+        "max": 19,
+        "samples": 60
+      },
+      "completeScene": {
+        "calls": 324,
+        "triangles": 301880,
+        "memory": {
+          "geometries": 180,
+          "textures": 5
+        },
+        "clips": [
+          "elsa_cast",
+          "elsa_wave",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      },
+      "completeFrames": {
+        "p50": 17.799999999999272,
+        "p95": 18.5,
+        "max": 18.69999999999891,
+        "samples": 60
+      },
+      "diagnostics": {
+        "scene": {
+          "calls": 98,
+          "triangles": 185472,
+          "memory": {
+            "geometries": 152,
+            "textures": 5
+          },
+          "clips": [
+            "elsa_cast",
+            "elsa_wave",
+            "elsa_walk_-1",
+            "elsa_walk_1",
+            "anna_wave",
+            "anna_cast",
+            "anna_walk_-1",
+            "anna_walk_1",
+            "olaf_wave_-1",
+            "olaf_wave_1",
+            "kristoff_wave",
+            "kristoff_cast",
+            "kristoff_walk_-1",
+            "kristoff_walk_1",
+            "sven_walk_-1_-1",
+            "sven_walk_-1_1",
+            "sven_walk_1_-1",
+            "sven_walk_1_1"
+          ],
+          "playing": []
+        },
+        "audio": {
+          "context": "locked",
+          "loops": [],
+          "voices": 0,
+          "pending": 0,
+          "buffers": 0,
+          "epoch": 0,
+          "pauses": [],
+          "preferences": {
+            "version": 1,
+            "muted": false,
+            "music": 0.25,
+            "sfx": 0.55,
+            "ambient": 0.15
+          },
+          "events": []
+        },
+        "revision": 0
+      },
+      "errors": []
+    },
+    {
+      "name": "landscape390",
+      "checks": [
+        "all three spells at zero pieces",
+        "16 manual pieces complete without extra goals",
+        "circle, eight, safe rink clearing via real input",
+        "pause freezes trip",
+        "sleigh evacuated before bridge retraction",
+        "reset default is continue",
+        "reset cancel keeps assembly",
+        "reset clears spell facts",
+        "reset clears undo",
+        "reset readback persists",
+        "magic target dimensions",
+        "no horizontal overflow",
+        "no page errors",
+        "zero external requests",
+        "return route works"
+      ],
+      "load": {
+        "ms": 1112.2999999821186,
+        "resources": [
+          {
+            "url": "frozen-runtime.ts?t=1790004656612",
+            "bytes": 75776,
+            "duration": 9.900000005960464
+          },
+          {
+            "url": "frozen-model.ts?t=1789971728990",
+            "bytes": 28371,
+            "duration": 17.400000005960464
+          },
+          {
+            "url": "frozen-scene.ts?t=1790004656612",
+            "bytes": 57157,
+            "duration": 18.400000005960464
+          },
+          {
+            "url": "frozen.css?t=1789970522937",
+            "bytes": 3796,
+            "duration": 23.5
+          },
+          {
+            "url": "frozen-elsa-playground.glb",
+            "bytes": 3956300,
+            "duration": 58.30000001192093
+          }
+        ]
+      },
+      "geometry": [
+        {
+          "text": "❄ 长出冰桥",
+          "w": 89.40625,
+          "h": 44,
+          "hit": true
+        },
+        {
+          "text": "◇ 冻结冰场",
+          "w": 85.65625,
+          "h": 44,
+          "hit": true
+        },
+        {
+          "text": "✧ 飘雪",
+          "w": 62.46875,
+          "h": 44,
+          "hit": true
+        }
+      ],
+      "frameTimes": {
+        "p50": 17.899999999999864,
+        "p95": 18.299999999999727,
+        "max": 18.59999999999991,
+        "samples": 60
+      },
+      "completeScene": {
+        "calls": 324,
+        "triangles": 301880,
+        "memory": {
+          "geometries": 180,
+          "textures": 5
+        },
+        "clips": [
+          "elsa_cast",
+          "elsa_wave",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      },
+      "completeFrames": {
+        "p50": 17.899999999999636,
+        "p95": 18.5,
+        "max": 18.700000000000728,
+        "samples": 60
+      },
+      "diagnostics": {
+        "scene": {
+          "calls": 98,
+          "triangles": 185472,
+          "memory": {
+            "geometries": 152,
+            "textures": 5
+          },
+          "clips": [
+            "elsa_cast",
+            "elsa_wave",
+            "elsa_walk_-1",
+            "elsa_walk_1",
+            "anna_wave",
+            "anna_cast",
+            "anna_walk_-1",
+            "anna_walk_1",
+            "olaf_wave_-1",
+            "olaf_wave_1",
+            "kristoff_wave",
+            "kristoff_cast",
+            "kristoff_walk_-1",
+            "kristoff_walk_1",
+            "sven_walk_-1_-1",
+            "sven_walk_-1_1",
+            "sven_walk_1_-1",
+            "sven_walk_1_1"
+          ],
+          "playing": []
+        },
+        "audio": {
+          "context": "locked",
+          "loops": [],
+          "voices": 0,
+          "pending": 0,
+          "buffers": 0,
+          "epoch": 0,
+          "pauses": [],
+          "preferences": {
+            "version": 1,
+            "muted": false,
+            "music": 0.25,
+            "sfx": 0.55,
+            "ambient": 0.15
+          },
+          "events": []
+        },
+        "revision": 0
+      },
+      "errors": []
+    },
+    {
+      "name": "tablet768",
+      "checks": [
+        "all three spells at zero pieces",
+        "16 manual pieces complete without extra goals",
+        "circle, eight, safe rink clearing via real input",
+        "pause freezes trip",
+        "sleigh evacuated before bridge retraction",
+        "reset default is continue",
+        "reset cancel keeps assembly",
+        "reset clears spell facts",
+        "reset clears undo",
+        "reset readback persists",
+        "magic target dimensions",
+        "no horizontal overflow",
+        "no page errors",
+        "zero external requests",
+        "return route works"
+      ],
+      "load": {
+        "ms": 1076.2999999821186,
+        "resources": [
+          {
+            "url": "frozen-runtime.ts?t=1790004656612",
+            "bytes": 75776,
+            "duration": 12.799999982118607
+          },
+          {
+            "url": "frozen-model.ts?t=1789971728990",
+            "bytes": 28371,
+            "duration": 18.899999976158142
+          },
+          {
+            "url": "frozen-scene.ts?t=1790004656612",
+            "bytes": 57157,
+            "duration": 20
+          },
+          {
+            "url": "frozen.css?t=1789970522937",
+            "bytes": 3796,
+            "duration": 23
+          },
+          {
+            "url": "frozen-elsa-playground.glb",
+            "bytes": 3956300,
+            "duration": 60.400000005960464
+          }
+        ]
+      },
+      "geometry": [
+        {
+          "text": "❄ 长出冰桥",
+          "w": 89.40625,
+          "h": 44,
+          "hit": true
+        },
+        {
+          "text": "◇ 冻结冰场",
+          "w": 85.65625,
+          "h": 44,
+          "hit": true
+        },
+        {
+          "text": "✧ 飘雪",
+          "w": 62.46875,
+          "h": 44,
+          "hit": true
+        }
+      ],
+      "frameTimes": {
+        "p50": 17.699999999999818,
+        "p95": 18.200000000000273,
+        "max": 18.5,
+        "samples": 60
+      },
+      "completeScene": {
+        "calls": 324,
+        "triangles": 301880,
+        "memory": {
+          "geometries": 180,
+          "textures": 5
+        },
+        "clips": [
+          "elsa_cast",
+          "elsa_wave",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      },
+      "completeFrames": {
+        "p50": 17.700000000000728,
+        "p95": 18.5,
+        "max": 19.100000000000364,
+        "samples": 60
+      },
+      "diagnostics": {
+        "scene": {
+          "calls": 98,
+          "triangles": 185472,
+          "memory": {
+            "geometries": 152,
+            "textures": 5
+          },
+          "clips": [
+            "elsa_cast",
+            "elsa_wave",
+            "elsa_walk_-1",
+            "elsa_walk_1",
+            "anna_wave",
+            "anna_cast",
+            "anna_walk_-1",
+            "anna_walk_1",
+            "olaf_wave_-1",
+            "olaf_wave_1",
+            "kristoff_wave",
+            "kristoff_cast",
+            "kristoff_walk_-1",
+            "kristoff_walk_1",
+            "sven_walk_-1_-1",
+            "sven_walk_-1_1",
+            "sven_walk_1_-1",
+            "sven_walk_1_1"
+          ],
+          "playing": []
+        },
+        "audio": {
+          "context": "locked",
+          "loops": [],
+          "voices": 0,
+          "pending": 0,
+          "buffers": 0,
+          "epoch": 0,
+          "pauses": [],
+          "preferences": {
+            "version": 1,
+            "muted": false,
+            "music": 0.25,
+            "sfx": 0.55,
+            "ambient": 0.15
+          },
+          "events": []
+        },
+        "revision": 0
+      },
+      "errors": []
+    },
+    {
+      "name": "tablet1024",
+      "checks": [
+        "all three spells at zero pieces",
+        "16 manual pieces complete without extra goals",
+        "circle, eight, safe rink clearing via real input",
+        "pause freezes trip",
+        "sleigh evacuated before bridge retraction",
+        "reset default is continue",
+        "reset cancel keeps assembly",
+        "reset clears spell facts",
+        "reset clears undo",
+        "reset readback persists",
+        "magic target dimensions",
+        "no horizontal overflow",
+        "no page errors",
+        "zero external requests",
+        "return route works"
+      ],
+      "load": {
+        "ms": 1022.2000000178814,
+        "resources": [
+          {
+            "url": "frozen-runtime.ts?t=1790004656612",
+            "bytes": 75776,
+            "duration": 11.799999982118607
+          },
+          {
+            "url": "frozen-model.ts?t=1789971728990",
+            "bytes": 28371,
+            "duration": 17.5
+          },
+          {
+            "url": "frozen-scene.ts?t=1790004656612",
+            "bytes": 57157,
+            "duration": 18.80000001192093
+          },
+          {
+            "url": "frozen.css?t=1789970522937",
+            "bytes": 3796,
+            "duration": 21.900000005960464
+          },
+          {
+            "url": "frozen-elsa-playground.glb",
+            "bytes": 3956300,
+            "duration": 56.39999997615814
+          }
+        ]
+      },
+      "geometry": [
+        {
+          "text": "❄ 长出冰桥",
+          "w": 89.40625,
+          "h": 44,
+          "hit": true
+        },
+        {
+          "text": "◇ 冻结冰场",
+          "w": 85.65625,
+          "h": 44,
+          "hit": true
+        },
+        {
+          "text": "✧ 飘雪",
+          "w": 62.46875,
+          "h": 44,
+          "hit": true
+        }
+      ],
+      "frameTimes": {
+        "p50": 17.90000000000009,
+        "p95": 18.5,
+        "max": 18.600000000000136,
+        "samples": 60
+      },
+      "completeScene": {
+        "calls": 324,
+        "triangles": 301880,
+        "memory": {
+          "geometries": 180,
+          "textures": 5
+        },
+        "clips": [
+          "elsa_cast",
+          "elsa_wave",
+          "elsa_walk_-1",
+          "elsa_walk_1",
+          "anna_wave",
+          "anna_cast",
+          "anna_walk_-1",
+          "anna_walk_1",
+          "olaf_wave_-1",
+          "olaf_wave_1",
+          "kristoff_wave",
+          "kristoff_cast",
+          "kristoff_walk_-1",
+          "kristoff_walk_1",
+          "sven_walk_-1_-1",
+          "sven_walk_-1_1",
+          "sven_walk_1_-1",
+          "sven_walk_1_1"
+        ],
+        "playing": []
+      },
+      "completeFrames": {
+        "p50": 17.799999999999272,
+        "p95": 18.600000000000364,
+        "max": 19,
+        "samples": 60
+      },
+      "diagnostics": {
+        "scene": {
+          "calls": 98,
+          "triangles": 185472,
+          "memory": {
+            "geometries": 152,
+            "textures": 5
+          },
+          "clips": [
+            "elsa_cast",
+            "elsa_wave",
+            "elsa_walk_-1",
+            "elsa_walk_1",
+            "anna_wave",
+            "anna_cast",
+            "anna_walk_-1",
+            "anna_walk_1",
+            "olaf_wave_-1",
+            "olaf_wave_1",
+            "kristoff_wave",
+            "kristoff_cast",
+            "kristoff_walk_-1",
+            "kristoff_walk_1",
+            "sven_walk_-1_-1",
+            "sven_walk_-1_1",
+            "sven_walk_1_-1",
+            "sven_walk_1_1"
+          ],
+          "playing": []
+        },
+        "audio": {
+          "context": "locked",
+          "loops": [],
+          "voices": 0,
+          "pending": 0,
+          "buffers": 0,
+          "epoch": 0,
+          "pauses": [],
+          "preferences": {
+            "version": 1,
+            "muted": false,
+            "music": 0.25,
+            "sfx": 0.55,
+            "ambient": 0.15
+          },
+          "events": []
+        },
+        "revision": 0
+      },
+      "errors": []
+    }
+  ]
+}

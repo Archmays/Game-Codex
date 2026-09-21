@@ -30,7 +30,7 @@ export function stepMotion(m:CityMotion,s:CityState,r:Routes,dt:number):CityMoti
   if(s.placed.includes('paddle_steamer')&&boat.running&&dt>0){
     // Leave the bank sideways first; approach it only after longitudinal alignment.
     if(!m.dock&&north!==4)north+=Math.sign(4-north)*Math.min(Math.abs(4-north),dt*.55);
-    else if(m.dock&&Math.abs(boat.position-r.berth.x)<.001){north+=Math.sign(r.berth.north-north)*Math.min(Math.abs(r.berth.north-north),dt*.45);boat.running=north!==r.berth.north;}
+    else if(m.dock&&Math.abs(boat.position-r.berth.x)<.001){boat.position=r.berth.x;north+=Math.sign(r.berth.north-north)*Math.min(Math.abs(r.berth.north-north),dt*.45);boat.running=north!==r.berth.north;}
     else{boat=moveRide(boat,dt,Math.min(1.8,.3+Math.abs(boat.destination-boat.position)*1.7));if(m.dock&&boat.position===boat.destination)boat.running=true;}
   }else if(!s.placed.includes('paddle_steamer'))boat.running=false;
   return{...m,tram,boat,boatNorth:north,boatSpeed:dt>0?Math.hypot(boat.position-m.boat.position,north-m.boatNorth)/dt:0};

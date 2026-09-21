@@ -1,0 +1,16 @@
+Already up to date
+Done in 48ms using pnpm v11.5.2
+
+ RUN  v3.2.6 <repository>
+
+ ✓ tests/world-in-a-box.test.ts (4 tests) 337ms
+   ✓ window breeze model and Blender export > accepts every order without dependencies and preserves unrelated wrong choices  331ms
+ ✓ tests/save-vault/save-vault.test.ts (6 tests) 24ms
+ ✓ tests/world-in-a-box-dresden.test.ts (15 tests) 25ms
+ ✓ tests/world-box-frozen.test.ts (12 tests) 12ms
+ ✓ tests/world-in-a-box-step03.test.ts (4 tests) 4ms
+
+ Test Files  5 passed (5)
+      Tests  41 passed (41)
+   Start at  23:47:57
+   Duration  1.86s (transform 138ms, setup 0ms, collect 228ms, tests 403ms, environment 1ms, prepare 450ms)

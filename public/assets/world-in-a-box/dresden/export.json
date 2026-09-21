@@ -95,9 +95,11 @@
   ],
   "geography": "城市位置经过简化，距离不按比例。",
   "routeNote": "盒中游览线，为游戏简化，不是真实公交线路。",
-  "generatorSha256": "2cba13b49def14d12986dc9c97acfa4bfab544798ffdd7e76fd2abfb0d8f491d",
+  "generatorSha256": "62bb926bfdbc42afbf0095dd4ab05b3728ce12dce0ebb73069aff061f79ac5a0",
   "blender": "4.5.14 LTS",
-  "bytes": 4629452,
-  "glbSha256": "9a6a30d25a0351be32f5be627893535e3cb5ede4e32c3b96b4e176c784ce4cc4",
-  "blendSha256": "6a00a28f67962645333d18858e3de5a23aa5377c024e2d1daba0a3f665ed0b0e"
+  "refinedSource": "games/world-in-a-box/blender/refined-models.blend",
+  "refinedSha256": "65f40e95ea967b29f344eaaceba738d13e733998b49489108e956598474bb398",
+  "bytes": 5696540,
+  "glbSha256": "7b4681521e966cba0172ff3ac38d7eb7500118dd53c49737c8fc620bcf901f3d",
+  "blendSha256": "a5c896fb03b26a9f414d0874c1e82f200947ebe6999dd42c684f0faac42c502c"
 }
