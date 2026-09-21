@@ -25,7 +25,7 @@
 | 游戏 | 稳定 ID | 目标世界 | 定义角色 | 产品角色 | 等级 | 生命周期 | 活跃儿童产品 | Classic 卡片 | 规范 route | save namespace |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 奇物事务所 | `oddity-puzzles` | 共享模块 | 活跃儿童产品 | 独立谜题 | B | `active` | 是 | 是 | ?play=oddity-puzzles | `family-games/oddity-puzzles/v1` |
-| 世界盒子 | `world-in-a-box` | 共享模块 | 活跃儿童产品 | 独立谜题 | B | `active` | 是 | 是 | ?play=world-in-a-box | `family-games/world-in-a-box/v1`<br>`family-games/world-in-a-box/dresden-river-campus-v2`<br>`family-games/world-in-a-box/audio-v1` |
+| 世界盒子 | `world-in-a-box` | 共享模块 | 活跃儿童产品 | 独立谜题 | B | `active` | 是 | 是 | ?play=world-in-a-box | `family-games/world-in-a-box/v1`<br>`family-games/world-in-a-box/dresden-river-campus-v2`<br>`family-games/world-in-a-box/audio-v1`<br>`family-games/world-in-a-box/chancellor-desk-v1`<br>`family-games/world-in-a-box/chancellor-voice-v1` |
 | 汉字书房 | `hanzi-stroke-lab` | 中文世界 | 独立查字工具 | 独立工具 | A | `active` | 否 | 否 | ?play=hanzi-stroke-lab | `family-games/hanzi-stroke-lab/v1` |
 | 字间行者 | `hanzi-word-adventure` | 中文世界 | 活跃儿童产品 | 独立谜题 | S | `active` | 是 | 是 | ?play=hanzi-word-adventure | `family-games/hanzi-word-adventure/companions/v1`<br>`family-games/hanzi-word-adventure/v2`<br>`family-games/hanzi-word-adventure/v1` |
 | 字阵守城 | `hanzi-tower-defense` | 中文世界 | 活跃儿童产品 | 旗舰 | S | `active` | 是 | 是 | ?play=hanzi-tower-defense | `family-games/hanzi-tower-defense/tactics/v1`<br>`family-games/hanzi-tower-defense/v3`<br>`family-games/hanzi-tower-defense/v2`<br>`family-games/hanzi-tower-defense/v1` |

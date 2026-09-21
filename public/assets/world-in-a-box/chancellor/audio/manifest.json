@@ -1,0 +1,104 @@
+{
+  "voice": "Microsoft Huihui Desktop - Chinese (Simplified)",
+  "production": "Installed Windows SAPI voice; local generated speech, no voice cloning",
+  "rate": 0,
+  "files": [
+    {
+      "text": "宰相不是一个人的名字。在中国古代，宰相是帮助皇帝处理国家大事的重要官员。他会参与商量事情，也会安排不同的官员配合办事。",
+      "sha256": "9133df9a67522ea632a45c7ef69619231b6c8adc41971e96588d4d5c032fdd89",
+      "file": "definition.wav",
+      "id": "definition"
+    },
+    {
+      "text": "这是一个原创架空故事。皇帝是国家的统治者，朝廷要处理许多大事；宰相帮助商议、协调。这张桌面只放大一件粮运事务，不是全国地图，也不是古代官署的复原。",
+      "sha256": "0b08586e291a8f17ea66232e367c7eda1fa4d270648752eae7a704e84e73901f",
+      "file": "opening.wav",
+      "id": "opening"
+    },
+    {
+      "text": "管粮的人说：一共有十二袋粮。开始时车里六袋，粮仓六袋。我们会核对数量，再装粮。",
+      "sha256": "071eae2f3e329805958978ae24e7f4cf2579835162d649fbeea19ae97f1e976f",
+      "file": "granary.wav",
+      "id": "granary"
+    },
+    {
+      "text": "工程队说：桥坏了。修桥材料已经放在桥边。我们修桥的时候，运输队可以走水路。",
+      "sha256": "51a8ea70f6d71947d7c2fadebc0e725fd3ba76329669e895f71b0158a979fd80",
+      "file": "bridge.wav",
+      "id": "bridge"
+    },
+    {
+      "text": "船工说：船最多装三袋，能到河村。开车和开船，是同一支运输队。",
+      "sha256": "317ceae87ac4694ededbbd034523747c81669ae39c3500fe9ec0638f71c2a828",
+      "file": "pier.wav",
+      "id": "pier"
+    },
+    {
+      "text": "河村需要六袋粮。船能到，车也能到。船每次三袋，车每次六袋。",
+      "sha256": "a3370fadeb1f01722576b28291754f81821ccf0ecff21ffe7c6d447e831a8f0c",
+      "file": "river.wav",
+      "id": "river"
+    },
+    {
+      "text": "山村需要六袋粮。这里不通船。车必须经过修好的桥。",
+      "sha256": "0873c1e56282aa363176bd9f15c11f5d3c3e02bc8aab4a8208544b24b2b8579a",
+      "file": "mountain.wav",
+      "id": "mountain"
+    },
+    {
+      "text": "宰相先听大家的消息。哪些事情能一起做？哪些要等一等？安排以后，还要看实际结果。",
+      "sha256": "7c108e8b3aef2b98206efee58f5e87a40481aed5fc9dce19c79e03defd2ff0e4",
+      "file": "council.wav",
+      "id": "council"
+    },
+    {
+      "text": "工程队收到安排，准备修桥。运输队可以同时运粮。",
+      "sha256": "389d4bac02451bee711234ea0ee09c6573bc2d3f20a028c99fbcb31e769908ad",
+      "file": "repair.wav",
+      "id": "repair"
+    },
+    {
+      "text": "工程队回报：桥修好了。现在车可以过桥。",
+      "sha256": "44a5fe3bf7fc5060b7184253197ff0d1db3a4d911949b2d5e14ff2d7f807f4b6",
+      "file": "bridge-done.wav",
+      "id": "bridge-done"
+    },
+    {
+      "text": "村里收到了粮食。运输队还要回到起点，才能接下一项任务。",
+      "sha256": "c321cb61781318439210af2fe364af4bb86e94382c023dc620b355afa846a396",
+      "file": "arrived.wav",
+      "id": "arrived"
+    },
+    {
+      "text": "两个村子都收到了六袋粮。管粮的人核对数量，工程队修桥，运输队开车、开船并回报。宰相把这些事情联系起来。大家一起做成了。",
+      "sha256": "76243f5e361ae3d6d2c63959e6861c8bb4dda10e7230a4bc372b513effa37429",
+      "file": "success.wav",
+      "id": "success"
+    },
+    {
+      "text": "粮仓有粮，两个村子却还在等。 桥坏了，粮车停在河边。",
+      "sha256": "62b786783bb345ed739a68271cb78652cb9c5ce47af90d4f83d841b4e0d335d5",
+      "file": "story-1.wav",
+      "id": "story-1"
+    },
+    {
+      "text": "管粮的人说：粮够了。 工程队说：材料在桥边；船工说：船能到河村。 宰相听完，再把消息放在一起。",
+      "sha256": "e1310d79ded223d4fad5aa0b920a08db0e1052d92810c3fdaad8c6483ab4da2c",
+      "file": "story-2.wav",
+      "id": "story-2"
+    },
+    {
+      "text": "修桥时，船可以先送河村。 桥修好后，车就能去山村。 也可以等桥修好，再用车送两村。",
+      "sha256": "b25b06a789b29f9b4fca5ed04a32054d3d45592f3de1fe43b4fc2e54e94c4d9a",
+      "file": "story-3.wav",
+      "id": "story-3"
+    },
+    {
+      "text": "两个村子都收到粮食了！ 管粮、修桥、运粮的人回报结果。 宰相把事情接起来，大家一起做成。",
+      "sha256": "bfc7aae12294e1846abda7c709a8d8d6c89c36b5b0b87477db360a027f6dfde5",
+      "file": "story-4.wav",
+      "id": "story-4"
+    }
+  ],
+  "version": "chancellor-desk-2026-09-21-v1"
+}

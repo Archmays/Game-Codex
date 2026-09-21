@@ -1,0 +1,21 @@
+{
+  "version": "chancellor-desk-2026-09-21-v1",
+  "title": "宰相到底忙什么？",
+  "pronunciation": "zǎi xiàng",
+  "definition": "宰相不是一个人的名字。在中国古代，宰相是帮助皇帝处理国家大事的重要官员。他会参与商量事情，也会安排不同的官员配合办事。",
+  "opening": "这是一个原创架空故事。皇帝是国家的统治者，朝廷要处理许多大事；宰相帮助商议、协调。这张桌面只放大一件粮运事务，不是全国地图，也不是古代官署的复原。",
+  "storyTitle": "粮仓有粮，为什么还送不到？",
+  "scenes": [
+    {"title":"一 · 粮车停下了","lines":["粮仓有粮，两个村子却还在等。","桥坏了，粮车停在河边。"],"english":"Look at the bridge.","audio":"story-1.wav"},
+    {"title":"二 · 先听消息","lines":["管粮的人说：粮够了。","工程队说：材料在桥边；船工说：船能到河村。","宰相听完，再把消息放在一起。"],"english":"Look at the boat.","audio":"story-2.wav"},
+    {"title":"三 · 商量怎样接上","lines":["修桥时，船可以先送河村。","桥修好后，车就能去山村。","也可以等桥修好，再用车送两村。"],"english":"We can help.","audio":"story-3.wav"},
+    {"title":"四 · 粮食真的到了","lines":["两个村子都收到粮食了！","管粮、修桥、运粮的人回报结果。","宰相把事情接起来，大家一起做成。"],"english":"The food is here.","audio":"story-4.wav"}
+  ],
+  "questions": ["只知道粮够了，就能送到吗？你还想听谁的消息？", "哪两件事能一起做？哪件事必须等一等？", "安排过任务，就一定做成了吗？怎样知道？"],
+  "gameUrl": "http://127.0.0.1:5175/?play=world-in-a-box&scene=chancellor-desk",
+  "sources": [
+    {"id":"moe-zai-xiang","title":"教育部《重编国语辞典修订本》：宰相","url":"https://dict.revised.moe.edu.tw/dictView.jsp?ID=138331","locator":"词条汉语拼音及释义；zǎi xiàng；历代名称不同","checked":"2026-09-21","boundary":"用于读音与辅助君主的基本词义；不把辞典的概括当作每一时期完全相同的制度。"},
+    {"id":"acs-4142","title":"施仲谋：中国文化研究院《君权独大—宰相在政治体制中消失？》","url":"https://chiculture.org.hk/sc/china-five-thousand-years/4142","locator":"2022-04-19；正文唐代三省分理相职及宋、元、明变化各段","checked":"2026-09-21","boundary":"官制概述，支持名称、人数和职权有变化；不采用一人之下万人之上作为通用精确定义。"},
+    {"id":"shiji-56","title":"司马迁《史记》卷五十六《陈丞相世家》","url":"https://zh.wikisource.org/zh-hans/史記/卷056","locator":"居顷之，孝文皇帝既益明习国家事段；有主者至使卿大夫各得任其职焉；页面修订1961615","checked":"2026-09-21","boundary":"原典的维基文库电子转录；可选拓展仅现代转述汉文帝、陈平这段叙事，不当作所有朝代制度或必然正确的证明。"}
+  ]
+}
