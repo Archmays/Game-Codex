@@ -22,7 +22,7 @@ describe("game portfolio governance", () => {
 
   it("represents the live catalog one-to-one with valid governance identities", () => {
     expect(validatePortfolio(gameCatalog, currentClassicGameCatalog)).toEqual([]);
-    expect(GAME_PORTFOLIO.map(record => record.id)).toEqual(["oddity-puzzles", "world-in-a-box", "hanzi-stroke-lab", "hanzi-word-adventure", "hanzi-tower-defense", "equation-slider", "math-lab", "make-target", "memory-card"]);
+    expect(GAME_PORTFOLIO.map(record => record.id)).toEqual(["oddity-puzzles", "world-in-a-box", "hanzi-stroke-lab", "english-study", "hanzi-word-adventure", "hanzi-tower-defense", "equation-slider", "math-lab", "make-target", "memory-card"]);
     expect(new Set(GAME_PORTFOLIO.map((record) => record.id)).size).toBe(GAME_PORTFOLIO.length);
     expect(new Set(GAME_PORTFOLIO.flatMap((record) => record.saveNamespaces)).size).toBe(
       GAME_PORTFOLIO.flatMap((record) => record.saveNamespaces).length,
@@ -39,6 +39,7 @@ describe("game portfolio governance", () => {
     expect(SHARED_ENGINES).toHaveLength(2);
     expect(currentClassicGameCatalog).toHaveLength(5);
     expect(GAME_PORTFOLIO.filter((record) => !record.classicCardVisible).map((record) => record.id).sort()).toEqual([
+      "english-study",
       "equation-slider",
       "hanzi-stroke-lab",
       "make-target",

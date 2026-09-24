@@ -59,10 +59,10 @@ if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.familyStableBaselineTag !== "game-codex-fam
 if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.realEvidencePatchCount !== 2) issues.push("evidence patch count");
 if (PROJECT_LIFECYCLE_TERMINAL_TRUTH.interactionIntegrity !== "HITTEST_AND_REACHABILITY_GUARD_ACTIVE") issues.push("interaction-integrity boundary");
 if (AUTHORIZED_DEVELOPMENT_CYCLES.length !== 2 || AUTHORIZED_DEVELOPMENT_CYCLES.at(-1)?.id !== "gameplay-coherence-02" || AUTHORIZED_DEVELOPMENT_CYCLES.some((cycle) => cycle.naturalUseObservationImpact !== "ONGOING_NOT_CLOSED")) issues.push("bounded development cycle boundary");
-if (JSON.stringify(GAME_PORTFOLIO.map(record => record.id).sort()) !== JSON.stringify(["oddity-puzzles", "world-in-a-box", "hanzi-stroke-lab", "hanzi-word-adventure", "hanzi-tower-defense", "equation-slider", "math-lab", "make-target", "memory-card"].sort())) issues.push("portfolio retirement inventory");
+if (JSON.stringify(GAME_PORTFOLIO.map(record => record.id).sort()) !== JSON.stringify(["oddity-puzzles", "world-in-a-box", "hanzi-stroke-lab", "english-study", "hanzi-word-adventure", "hanzi-tower-defense", "equation-slider", "math-lab", "make-target", "memory-card"].sort())) issues.push("portfolio retirement inventory");
 if (JSON.stringify(PLAY_SURFACE_MANIFEST.filter(surface => surface.kind === "station").map(surface => surface.id)) !== JSON.stringify(["math-slider", "math-target"]) || PRIMARY_PLAY_SURFACES.length !== 7) issues.push("play surface inventory");
 if (PLAY_SURFACE_MANIFEST.filter((surface) => surface.kind === "classic-entry").length !== 5) issues.push("Classic count");
-if (KNOWN_SAVE_KEYS.length !== 52 || EXPORTABLE_SAVE_KEYS.length !== 51 || portfolioNamespacesWithoutKnownKey().length) issues.push("save key inventory");
+if (KNOWN_SAVE_KEYS.length !== 53 || EXPORTABLE_SAVE_KEYS.length !== 52 || portfolioNamespacesWithoutKnownKey().length) issues.push("save key inventory");
 if (prohibitedRuntimeTransmission.length) issues.push("prohibited runtime transmission");
 if (duplicateTrackedLargeBinaryGroups.length) issues.push("duplicate tracked large binaries");
 if (issues.length) throw new Error(`Play-readiness validation failed: ${issues.join(", ")}`);

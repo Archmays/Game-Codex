@@ -101,6 +101,11 @@ export const GAME_PORTFOLIO: readonly GamePortfolioRecord[] = [
     testProfile: "a-core-world", loadingPolicy: "route-lazy", contentStatus: "playable", canonicalDocs: ["games/hanzi-stroke-lab/README.md"],
   },
   {
+    id: "english-study", targetWorld: "english", productRole: "utility", definitionRole: "independent-tool", activeChildProduct: false, classicCardVisible: false, qualityTier: "A", lifecycleStatus: "active",
+    canonicalRoute: "?play=english-study", worldModuleIds: [], compatibilitySurfaceIds: [], sharedEngineIds: [], saveNamespaces: ["family-games/english-study/v1"],
+    testProfile: "a-core-world", loadingPolicy: "route-lazy", contentStatus: "playable", canonicalDocs: ["games/english-study/README.md"],
+  },
+  {
     id: "hanzi-word-adventure", targetWorld: "chinese", productRole: "independent-puzzle", definitionRole: "active-child-product", activeChildProduct: true, classicCardVisible: true, childProductOrder: 3, qualityTier: "S", lifecycleStatus: "active",
     canonicalRoute: "?play=hanzi-word-adventure", worldModuleIds: [], compatibilitySurfaceIds: [], sharedEngineIds: [], saveNamespaces: ["family-games/hanzi-word-adventure/companions/v1", "family-games/hanzi-word-adventure/v2", "family-games/hanzi-word-adventure/v1"],
     testProfile: "s-hanzi-release", loadingPolicy: "mixed", contentStatus: "playable", canonicalDocs: ["games/hanzi-word-adventure/README.md"],
@@ -179,4 +184,4 @@ export const CLASSIC_CARD_PRODUCTS = GAME_PORTFOLIO
 
 export const WORLD_LABELS: Readonly<Record<WorldId, string>> = { chinese: "中文世界", math: "数学世界", english: "英语世界", shared: "共享模块" };
 export const PRODUCT_ROLE_LABELS: Readonly<Record<ProductRole, string>> = { utility: "独立工具", flagship: "旗舰", "flagship-module": "旗舰模块", "core-world": "核心世界", "independent-puzzle": "独立谜题", module: "模块" };
-export const DEFINITION_ROLE_LABELS: Readonly<Record<DefinitionRole, string>> = { "independent-tool": "独立查字工具", "active-child-product": "活跃儿童产品", "world-module-mount": "世界模块挂载", "compatibility-adapter": "兼容适配定义" };
+export const DEFINITION_ROLE_LABELS: Readonly<Record<DefinitionRole, string>> = { "independent-tool": "独立查阅工具", "active-child-product": "活跃儿童产品", "world-module-mount": "世界模块挂载", "compatibility-adapter": "兼容适配定义" };

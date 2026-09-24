@@ -8,8 +8,8 @@
 
 - 实际起点：`12c86dc22b7219a23baeb26efbe7eab9fb0a2da2`
 - 起点 tracked 文件：`708232522` bytes
-- Mount definitions：`9` 保留
-- Independent tools：`1`
+- Mount definitions：`10` 保留
+- Independent tools：`2`
 - Active child products：`5`
 - World modules：`2`
 - Compatibility surfaces：`2`
@@ -26,7 +26,8 @@
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 奇物事务所 | `oddity-puzzles` | 共享模块 | 活跃儿童产品 | 独立谜题 | B | `active` | 是 | 是 | ?play=oddity-puzzles | `family-games/oddity-puzzles/v1` |
 | 世界盒子 | `world-in-a-box` | 共享模块 | 活跃儿童产品 | 独立谜题 | B | `active` | 是 | 是 | ?play=world-in-a-box | `family-games/world-in-a-box/v1`<br>`family-games/world-in-a-box/dresden-river-campus-v2`<br>`family-games/world-in-a-box/audio-v1`<br>`family-games/world-in-a-box/frozen-elsa-playground-v1` |
-| 汉字书房 | `hanzi-stroke-lab` | 中文世界 | 独立查字工具 | 独立工具 | A | `active` | 否 | 否 | ?play=hanzi-stroke-lab | `family-games/hanzi-stroke-lab/v1` |
+| 汉字书房 | `hanzi-stroke-lab` | 中文世界 | 独立查阅工具 | 独立工具 | A | `active` | 否 | 否 | ?play=hanzi-stroke-lab | `family-games/hanzi-stroke-lab/v1` |
+| 英语书房 | `english-study` | 英语世界 | 独立查阅工具 | 独立工具 | A | `active` | 否 | 否 | ?play=english-study | `family-games/english-study/v1` |
 | 字间行者 | `hanzi-word-adventure` | 中文世界 | 活跃儿童产品 | 独立谜题 | S | `active` | 是 | 是 | ?play=hanzi-word-adventure | `family-games/hanzi-word-adventure/companions/v1`<br>`family-games/hanzi-word-adventure/v2`<br>`family-games/hanzi-word-adventure/v1` |
 | 字阵守城 | `hanzi-tower-defense` | 中文世界 | 活跃儿童产品 | 旗舰 | S | `active` | 是 | 是 | ?play=hanzi-tower-defense | `family-games/hanzi-tower-defense/tactics/v1`<br>`family-games/hanzi-tower-defense/v3`<br>`family-games/hanzi-tower-defense/v2`<br>`family-games/hanzi-tower-defense/v1` |
 | 算式滑轨 | `equation-slider` | 数学世界 | 世界模块挂载 | 旗舰模块 | S | `active-module` | 否 | 否 | ?world=math-world&station=slider | `family-games/equation-slider` |

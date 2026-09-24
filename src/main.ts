@@ -70,6 +70,13 @@ async function mountApp(root: HTMLElement): Promise<void> {
     return;
   }
 
+  if (route.kind === "play" && play === "english-study") {
+    setBrowserIdentity("英语书房 · 查词与字母笔顺", "#f3f0e8");
+    const { mountEnglishStudy } = await import("../games/english-study/workbench");
+    mountEnglishStudy(root);
+    return;
+  }
+
   if (route.kind === "play" && play === "hanzi-word-adventure") {
     setBrowserIdentity(`字间行者 · v${PRODUCT_VERSION}`, "#faf5e9");
     setProductIcon('adventure');

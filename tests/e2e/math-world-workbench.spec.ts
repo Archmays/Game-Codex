@@ -430,8 +430,8 @@ for (const denied of ["read", "write"] as const) {
 }
 
 test("@workbench all registered exact keys survive the public Vault roundtrip and the mounted old page cannot overwrite restored records", async ({ page, context }, info) => {
-  expect(KNOWN_SAVE_KEYS).toHaveLength(52);
-  expect(EXPORTABLE_SAVE_KEYS).toHaveLength(51);
+  expect(KNOWN_SAVE_KEYS).toHaveLength(53);
+  expect(EXPORTABLE_SAVE_KEYS).toHaveLength(52);
   await page.goto(origin);
   const fixture: Record<string, string> = Object.fromEntries(KNOWN_SAVE_KEYS.map((record, index) => [
     record.key, JSON.stringify({ version: record.maxVersion ?? 1, syntheticOnly: true, fixture: index }),

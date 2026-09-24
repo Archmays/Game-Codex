@@ -41,7 +41,9 @@ describe("game catalog", () => {
         expect(source, `${gameDir} ${field}`).toContain(`${field}:`);
       }
 
-      const headings = gameDir === "hanzi-stroke-lab"
+      const headings = gameDir === "english-study"
+        ? ["# 英语书房", "## 使用"]
+        : gameDir === "hanzi-stroke-lab"
         ? ["## 工具目标", "## 适合对象", "## 使用说明", "## 数据与边界", "## 设备适配", "## 当前完成度", "## 接入方式", "## 验证命令"]
         : gameDir === "math-lab"
         ? ["# 数学世界", "导航壳", "station=slider", "station=target", "Save Vault", "损坏、未来版本"]
