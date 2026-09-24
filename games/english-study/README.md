@@ -21,7 +21,7 @@
 ## 本轮验证
 
 - `pnpm exec vitest run tests/english-study.test.ts tests/portfolio-governance.test.ts`：数据、排版、状态、存储和入口检查。
-- `pnpm exec playwright test --config playwright.english-study.config.ts`：Chromium/WebKit 的桌面、360/390 手机、768/1024 平板及横竖屏配置；真实指针、触摸、键盘，SVG 笔迹增长、暂停两秒、两个 `p`、完整保留、焦点、缩放、切词和外部请求检查。后台事件在无界面的自动化环境中用 `visibilitychange` 模拟。
+- `pnpm exec playwright test --config playwright.english-study.config.ts`：Chromium/WebKit 的桌面、360/390 手机、768/1024 平板及横竖屏配置；真实指针、触摸、键盘，SVG 笔迹增长、暂停两秒、两个 `p`、完整保留、焦点、缩放、切词和外部请求检查。后台事件在无界面的矩阵中用 `visibilitychange` 模拟；另用可见 Chromium 窗口实际最小化验证：该环境的 `document.hidden` 仍为 `false`，降频帧间隔触发暂停，恢复窗口后仍停在同一半笔，主动继续才前进。结果见证据目录的 `background-minimize.json`。
 - `pnpm run portfolio:check` 与 `pnpm build`。
 - 标准速度下实际播放 `cat`、`book`、`apple`、`yellow`、`playing` 至完成；全部 52 个大小写字母有静态总览检查。关键截图、短录屏和手机长词截图位于 [`docs/english-study/evidence-20260924`](../../docs/english-study/evidence-20260924)。
 

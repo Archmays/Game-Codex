@@ -217,6 +217,11 @@ export function mountEnglishStudy(root: HTMLElement): MountedGame {
     frame = 0;
     const player = activePlayer();
     if (!player || player.status !== 'playing' || document.hidden) return;
+    if (lastFrame !== null && timestamp - lastFrame > 500) {
+      // Some desktop browsers keep document.hidden=false when their window is
+      // minimized, but throttle animation frames to roughly one per second.
+      player.pause(); lastFrame = null; syncUi(); return;
+    }
     if (lastFrame !== null) player.advance(Math.min(100, timestamp - lastFrame));
     lastFrame = timestamp;
     syncUi();

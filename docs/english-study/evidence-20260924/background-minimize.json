@@ -1,0 +1,23 @@
+{
+  "browser": "visible Chromium on Windows",
+  "windowState": "minimized",
+  "one": {
+    "hidden": false,
+    "status": "正在写：第 1 个字符 c，第 1 笔。",
+    "offset": 100.478
+  },
+  "two": {
+    "hidden": false,
+    "status": "已暂停：第 1 个字符 c，第 1 笔。",
+    "offset": 100.478
+  },
+  "three": {
+    "hidden": false,
+    "status": "已暂停：第 1 个字符 c，第 1 笔。",
+    "offset": 100.478
+  },
+  "resumed": {
+    "status": "正在写：第 1 个字符 c，第 1 笔。",
+    "offset": 59.9477
+  }
+}

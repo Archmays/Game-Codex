@@ -1,37 +1,27 @@
 [
   {
     "word": "cat",
-    "elapsedMs": 6485,
-    "strokes": 5,
-    "allComplete": true,
-    "longest": 142.53427124023438
+    "elapsedMs": 6479,
+    "complete": true
   },
   {
     "word": "book",
-    "elapsedMs": 10008,
-    "strokes": 7,
-    "allComplete": true,
-    "longest": 167.65533447265625
+    "elapsedMs": 10017,
+    "complete": true
   },
   {
     "word": "apple",
-    "elapsedMs": 12068,
-    "strokes": 8,
-    "allComplete": true,
-    "longest": 206.6414794921875
+    "elapsedMs": 12030,
+    "complete": true
   },
   {
     "word": "yellow",
-    "elapsedMs": 11533,
-    "strokes": 7,
-    "allComplete": true,
-    "longest": 206.6414794921875
+    "elapsedMs": 11591,
+    "complete": true
   },
   {
     "word": "playing",
-    "elapsedMs": 15130,
-    "strokes": 13,
-    "allComplete": true,
-    "longest": 142.53427124023438
+    "elapsedMs": 15133,
+    "complete": true
   }
 ]
