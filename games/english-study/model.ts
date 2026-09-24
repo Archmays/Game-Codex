@@ -17,7 +17,8 @@ export const WORD_BY_KEY = new Map(WORDS.map(row => [row.word, row]));
 export const STORAGE_KEY = 'family-games/english-study/v1';
 export const STARTER_WORDS = ['cat', 'dog', 'book', 'apple', 'run', 'red', 'one', 'water'];
 export const displayWord = (word: string): string => word === 'i' ? 'I' : word;
-export const spellingLetters = (word: string): string[] => [...displayWord(word)].filter(letter => /^[a-z]$/i.test(letter));
+export const lookupKey = (word: string): string => word.replace(/\u2019/g, "'").toLowerCase();
+export const spellingLetters = (word: string): string[] => [...displayWord(word)];
 
 export interface LookupResult { words: string[]; message: string; valid: boolean; }
 
@@ -29,10 +30,12 @@ export function parseLookup(raw: string): LookupResult {
     const matches = WORDS.filter(row => row.zh.includes(input) || row.exampleZh.includes(input)).map(row => row.word).slice(0, 24);
     return { words: matches, message: matches.length ? `找到 ${matches.length} 个相关词；中文查找只覆盖本地词库。` : '本地词库里暂时没有这个中文意思。', valid: matches.length > 0 };
   }
-  const tokens = input.match(/[A-Za-z]+(?:['-][A-Za-z]+)*/g)?.map(word => word.toLowerCase()) ?? [];
-  if (!tokens.length) return { words: [], message: '请输入英语字母或中文意思。', valid: false };
+  if (/[^A-Za-z'\u2019\-\s]/u.test(input)) return { words: [], message: '仅支持英文字母、撇号和连字符；请检查输入中的其他字符。', valid: false };
+  const tokens = input.split(/\s+/).map(displayWord);
+  if (tokens.some(word => !/^[A-Za-z]+(?:['\u2019-][A-Za-z]+)*$/.test(word)))
+    return { words: [], message: '撇号或连字符需放在字母之间，请检查拼写。', valid: false };
   if (tokens.length > 12) return { words: [], message: '一次最多查 12 个英语词，请分次查找。', valid: false };
-  if (tokens.some(word => word.length > 32)) return { words: [], message: '一个词最多输入 32 个字母，请检查拼写。', valid: false };
+  if (tokens.some(word => word.length > 32)) return { words: [], message: '一个词最多输入 32 个字符，请检查拼写。', valid: false };
   return { words: tokens, message: `${tokens.length} 个词，按输入顺序排列；重复词保留。未收录的词仍可看字母写法。`, valid: true };
 }
 

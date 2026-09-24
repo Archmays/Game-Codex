@@ -9,7 +9,7 @@ export const LETTER_STROKES: Readonly<Record<string, readonly string[]>> = {
   G: ['M81 33 C66 15 38 16 24 37 C7 63 23 94 51 94 C68 94 80 85 80 67 L54 67'],
   H: ['M22 20 L22 94', 'M78 20 L78 94', 'M22 57 L78 57'],
   I: ['M27 20 L73 20', 'M50 20 L50 94', 'M27 94 L73 94'],
-  J: ['M23 20 L80 20', 'M68 20 L68 73 C68 103 31 103 24 78'],
+  J: ['M23 20 L80 20', 'M68 20 L68 72 C68 96 31 96 24 78'],
   K: ['M22 20 L22 94', 'M78 20 L22 61', 'M44 51 L81 94'],
   L: ['M23 20 L23 94 L79 94'],
   M: ['M17 94 L17 20 L50 63 L83 20 L83 94'],
@@ -62,4 +62,44 @@ export function strokeStart(path: string): readonly [number, number] {
   const match = /^M(\d+) (\d+)/.exec(path);
   if (!match) throw new Error(`Stroke path needs a starting point: ${path}`);
   return [Number(match[1]), Number(match[2])];
+}
+
+/** One shared manuscript coordinate system: cap, x-height, baseline, descender. */
+export const GUIDE_LINES = [20, 48, 94, 112] as const;
+export const GLYPH_STROKES: Readonly<Record<string, readonly string[]>> = {
+  ...LETTER_STROKES,
+  "'": ['M53 31 C53 38 50 43 46 46'],
+  '\u2019': ['M53 31 C53 38 50 43 46 46'],
+  '-': ['M35 70 L64 70'],
+};
+
+export interface GlyphMetrics { inkLeft: number; inkRight: number; advance: number; }
+export interface GlyphInstance {
+  char: string; index: number; x: number; metrics: GlyphMetrics; strokes: readonly string[];
+}
+export interface WordLayout { instances: GlyphInstance[]; width: number; }
+
+/** Path coordinates are authored in this one grid. Bézier control points give a stable
+ * layout bound before playback; no browser or viewport measurement moves the letters. */
+export function glyphMetrics(char: string): GlyphMetrics {
+  const paths = GLYPH_STROKES[char];
+  if (!paths) throw new Error(`Unsupported writing character: ${char}`);
+  const xs = paths.flatMap(path => {
+    const numbers = (path.match(/-?\d+(?:\.\d+)?/g) ?? []).map(Number);
+    return numbers.filter((_, index) => index % 2 === 0);
+  });
+  const inkLeft = Math.min(...xs);
+  const inkRight = Math.max(...xs);
+  return { inkLeft, inkRight, advance: Math.max(18, inkRight - inkLeft + 14) };
+}
+
+export function layoutWord(word: string): WordLayout {
+  let cursor = 8;
+  const instances = [...word].map((char, index) => {
+    const metrics = glyphMetrics(char);
+    const instance = { char, index, x: cursor + 7 - metrics.inkLeft, metrics, strokes: GLYPH_STROKES[char] };
+    cursor += metrics.advance;
+    return instance;
+  });
+  return { instances, width: cursor + 8 };
 }
