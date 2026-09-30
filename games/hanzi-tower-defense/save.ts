@@ -30,7 +30,7 @@ function validLegacyCheckpoint(value: unknown): value is Omit<Checkpoint, "engli
   return true;
 }
 export function validCheckpoint(value: unknown): value is Checkpoint {
-  if (object(value) && value.scenarioId !== undefined) return false;
+  if (object(value) && (value.scenarioId !== undefined || value.challenge !== undefined)) return false;
   if (!validLegacyCheckpoint(value)) return false;
   const v = value as unknown as Record<string, unknown>;
   if (!Array.isArray(v.englishCores) || v.englishCores.length > RESONANCES.length || !integer(v.nextEnglishId, 1, RESONANCES.length + 1)
@@ -109,15 +109,26 @@ export interface TacticsPayload { version:1; activeScenarioId:ScenarioId; scenar
 export function validTacticsCheckpoint(value:unknown):value is Checkpoint {
  if(!object(value)||!isScenarioId(value.scenarioId))return false;
  const scenario=SCENARIOS[value.scenarioId];
- const {scenarioId,...campaignShape}=value;
+ const {scenarioId,challenge,...campaignShape}=value;
+ if(scenario.challengeRule){
+  if(!object(challenge))return false;
+  const keys=Object.keys(challenge);
+  if(scenarioId==='qinglan-elite'&&(keys.some(k=>!['packId','confirmed'].includes(k))||!scenario.materialPacks!.some(p=>p.id===challenge.packId)||typeof challenge.confirmed!=='boolean'||Array.isArray(value.cores)&&value.cores.filter(c=>object(c)&&c.slot!==null).length>3))return false;
+  if(scenarioId==='qinglan-packs'&&(keys.some(k=>!['goalId','confirmed'].includes(k))||!scenario.packGoals!.some(g=>g.id===challenge.goalId)||typeof challenge.confirmed!=='boolean'))return false;
+  if(scenarioId==='qinglan-repair'&&(keys.some(k=>k!=='variant')||!integer(challenge.variant,0,1)))return false;
+  if(scenarioId!=='qinglan-repair'&&value.wave!==0&&!challenge.confirmed)return false;
+ }else if(challenge!==undefined)return false;
  return value.mapId===scenario.mapId&&integer(value.wave,0,scenario.waves.length)&&validCheckpoint(campaignShape);
 }
 function validSummary(v:unknown,scenarioId:ScenarioId):v is WaveSummary {
  return object(v)&&integer(v.wave,1,SCENARIOS[scenarioId].waves.length)&&(v.outcome==='held'||v.outcome==='lost')&&integer(v.kills,0)&&integer(v.leaks,0)&&integer(v.healthBefore,1,START_HEALTH)&&integer(v.healthAfter,0,START_HEALTH)&&typeof v.seconds==='number'&&Number.isFinite(v.seconds)&&v.seconds>=0&&Array.isArray(v.coverage)&&v.coverage.length===mapFor(SCENARIOS[scenarioId].mapId).paths.length&&v.coverage.every(n=>integer(n,0,100))&&Array.isArray(v.lanes)&&v.lanes.length===v.coverage.length&&v.lanes.every(l=>object(l)&&integer(l.kills,0)&&integer(l.leaks,0)&&integer(l.damage,0)&&Object.keys(l).every(k=>['kills','leaks','damage'].includes(k)))&&v.lanes.reduce((sum,l)=>sum+l.kills,0)===v.kills&&v.lanes.reduce((sum,l)=>sum+l.leaks,0)===v.leaks&&Object.keys(v).every(k=>['wave','outcome','kills','leaks','healthBefore','healthAfter','seconds','coverage','lanes'].includes(k));
 }
+function sameChallenge(a:Checkpoint,b:Checkpoint):boolean {
+ return (['packId','goalId','variant','confirmed'] as const).every(k=>a.challenge?.[k]===b.challenge?.[k]);
+}
 export function validTacticsPayload(v:unknown):v is TacticsPayload {
  if(!object(v)||v.version!==1||!isScenarioId(v.activeScenarioId)||!object(v.scenarios)||!object(v.preferences)||typeof v.preferences.muted!=='boolean'||typeof v.preferences.reducedMotion!=='boolean')return false;
- return Object.entries(v.scenarios).every(([id,e])=>isScenarioId(id)&&object(e)&&validTacticsCheckpoint(e.checkpoint)&&e.checkpoint.scenarioId===id&&(e.retryCheckpoint===undefined||validTacticsCheckpoint(e.retryCheckpoint)&&e.retryCheckpoint.scenarioId===id&&e.retryCheckpoint.wave<SCENARIOS[id].waves.length&&e.retryCheckpoint.wave<=e.checkpoint.wave)&&Array.isArray(e.unlocked)&&e.unlocked.every(r=>(mapFor(SCENARIOS[id].mapId).expanded?RECIPES:ORIGINAL_RECIPES).some(recipe=>recipe.id===r))&&Array.isArray(e.summaries)&&e.summaries.length<=2&&e.summaries.every(summary=>validSummary(summary,id)));
+ return Object.entries(v.scenarios).every(([id,e])=>isScenarioId(id)&&object(e)&&validTacticsCheckpoint(e.checkpoint)&&e.checkpoint.scenarioId===id&&(e.retryCheckpoint===undefined||validTacticsCheckpoint(e.retryCheckpoint)&&e.retryCheckpoint.scenarioId===id&&e.retryCheckpoint.wave<SCENARIOS[id].waves.length&&e.retryCheckpoint.wave<=e.checkpoint.wave&&sameChallenge(e.retryCheckpoint,e.checkpoint))&&Array.isArray(e.unlocked)&&e.unlocked.every(r=>(mapFor(SCENARIOS[id].mapId).expanded?RECIPES:ORIGINAL_RECIPES).some(recipe=>recipe.id===r))&&Array.isArray(e.summaries)&&e.summaries.length<=2&&e.summaries.every(summary=>validSummary(summary,id)));
 }
 /** No campaign migration or reads. Unrecognized raw bytes and stale writers remain protected. */
 export function openTacticsSave(storage:StorageLike,defaults:Preferences) {

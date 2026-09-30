@@ -3,7 +3,7 @@ import {test,expect,type Page} from '@playwright/test';
 import {activate,fromHome,keyReach,type InputMode} from '../step4/input-helpers';
 import {shortClip} from '../step4/short-clip';
 import {CORES,RECIPES,type CoreKind} from '../../../games/hanzi-tower-defense/content';
-import {SCENARIOS,SCENARIO_IDS,type ScenarioId} from '../../../games/hanzi-tower-defense/tactics';
+import {SCENARIOS,LEGACY_SCENARIO_IDS as SCENARIO_IDS,type ScenarioId} from '../../../games/hanzi-tower-defense/tactics';
 import {TACTICS_SAVE_KEY,SAVE_KEY} from '../../../games/hanzi-tower-defense/save';
 import {prioritiesFor,orderFor,positionsFor,type TacticsBuild} from '../../../tools/hanzi-tower-defense/step5-balance';
 import {newTactics} from '../../../games/hanzi-tower-defense/model';

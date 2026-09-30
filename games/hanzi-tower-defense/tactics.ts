@@ -1,10 +1,14 @@
 import { mapFor, type MapId, type Wave, type EnemyKind, type MapDrops } from './maps';
 import type { CoreKind } from './content';
 
-export type ScenarioId = 'qinglan-intercept' | 'qinglan-last-bend' | 'twin-lanes' | 'twin-relay' | 'beacon-crowd' | 'beacon-captain';
+export type ScenarioId = 'qinglan-intercept' | 'qinglan-last-bend' | 'twin-lanes' | 'twin-relay' | 'beacon-crowd' | 'beacon-captain' | 'qinglan-elite' | 'qinglan-repair' | 'qinglan-packs';
+export interface ChallengeParameters { packId?: 'ember'|'leaf'; goalId?: 'fire-mountain'|'wood-water'; variant?: 0|1; confirmed?: boolean; }
+export interface MaterialPack { id:'ember'|'leaf'; title:string; starting:readonly {kind:CoreKind;slot:number|null}[]; }
+export interface PackGoal { id:'fire-mountain'|'wood-water'; title:string; items:readonly {kind:CoreKind;required:number}[]; }
 export interface Scenario {
  id: ScenarioId; mapId: MapId; title: string; question: string; waves: readonly Wave[];
  starting: readonly {kind:CoreKind;slot:number|null}[]; rewards: readonly (readonly CoreKind[])[]; drops: MapDrops;
+ challengeRule?:string; materialPacks?:readonly MaterialPack[]; packGoals?:readonly PackGoal[]; variationHint?:string;
 }
 const starting = (expanded:boolean) => (['fire','fire','fire',...Array(expanded?5:3).fill('wood'),'water','water','mountain','mountain'] as CoreKind[]).map(kind=>({kind,slot:null}));
 const wave = (label:string,hint:string,count:number,interval:number,strength:number,kind:(n:number)=>EnemyKind,lanes?:(n:number)=>number):Wave => ({label,hint,foes:Array.from({length:count},(_,n)=>kind(n)),interval,strength,...(lanes?{lanes:Array.from({length:count},(_,n)=>lanes(n))}:{})});
@@ -15,6 +19,38 @@ function scenario(id:ScenarioId,mapId:MapId,title:string,question:string,waves:W
  return {id,mapId,title,question,waves,starting:starting(mapFor(mapId).expanded),rewards:waves.map((_,i)=>i===1?['mountain','water']:['wood','fire']),drops:drops(mapFor(mapId).expanded)};
 }
 export const SCENARIOS:Readonly<Record<ScenarioId,Scenario>> = {
+ 'qinglan-elite':{
+  ...scenario('qinglan-elite','qinglan-pass','少塔精兵','只带三座塔上场：分开守，还是合成省名额？',[
+   wave('入口成群','团团怪从入口结伴而来，前弯适合清群。',18,.9,2.2,swarm),
+   wave('疾风过弯','团团与疾风交替；慢住快怪再接力。',20,1.1,2.4,n=>n%2?'swift':'swarm'),
+   wave('快慢接力','石甲耐打，疾风跑快；三座塔要分工。',22,1.2,2.6,mixed),
+  ]),
+  challengeRule:'最多上场三座塔；合成能把两份材料放进一个名额。',
+  materialPacks:[
+   {id:'ember',title:'熔岩包',starting:(['fire','fire','fire','wood','wood','wood','water','water','mountain','mountain'] as CoreKind[]).map(kind=>({kind,slot:null}))},
+   {id:'leaf',title:'林间包',starting:(['fire','fire','wood','wood','wood','wood','wood','water','water','mountain'] as CoreKind[]).map(kind=>({kind,slot:null}))},
+  ],
+ },
+ 'qinglan-repair':{
+  ...scenario('qinglan-repair','qinglan-pass','接手残局','林留在城门边：把空白长弯补起来。',[
+   wave('慢步探路','团团怪慢慢探路；第一波可以先试布位。',12,1.6,2.2,swarm),
+   wave('快步补漏','疾风穿过长弯，后段还要有人接住。',18,1.2,2.6,n=>n%3?'swarm':'swift'),
+   wave('石甲与疾风','石甲与疾风交错；清群、重击和减速各有作用。',22,1.2,3.0,mixed),
+  ]),
+  starting:[{kind:'volcano',slot:0},{kind:'grove',slot:7},{kind:'water',slot:6},{kind:'wood',slot:null},{kind:'wood',slot:null},{kind:'water',slot:null},{kind:'mountain',slot:null},{kind:'fire',slot:null}],
+  challengeRule:'林守在后路，长弯还空着；移动整塔或用补料改变阵容。',
+  variationHint:'变化：林从城门守卫移到后路侧翼；其他条件相同。',
+ },
+ 'qinglan-packs':{
+  ...scenario('qinglan-packs','qinglan-pass','带着行囊出发','守住城门，也试着留下你选的行囊。',[
+   wave('结伴出发','先看入口群怪，再决定哪些材料上场。',18,1.1,2.4,swarm),
+   wave('疾风同行','团团与疾风交替，减速或后排接力都能帮忙。',20,1.2,2.8,n=>n%2?'swift':'swarm'),
+   wave('长路归来','石甲带着疾风过弯；最后补给也会进入背包。',22,1.3,3.2,mixed),
+  ]),
+  rewards:[['wood','fire'],['mountain','water'],['wood','water']],
+  challengeRule:'行囊只数背包里的基础字核；部署、合成或修门都会用掉它。',
+  packGoals:[{id:'fire-mountain',title:'火＋山各留两枚',items:[{kind:'fire',required:2},{kind:'mountain',required:2}]},{id:'wood-water',title:'木＋氵各留三枚',items:[{kind:'wood',required:3},{kind:'water',required:3}]}],
+ },
  'qinglan-intercept':scenario('qinglan-intercept','qinglan-pass','入口接力','前段先拦，后段接住漏网的快怪。',[
   wave('结伴入关','团团怪密集进入；前弯可以连续覆盖。',22,.9,3.4,swarm),
   wave('疾步追来','快怪穿过前排；留出后路覆盖。',22,1.2,3.4,n=>n%2?'swift':'swarm'),
@@ -46,9 +82,12 @@ export const SCENARIOS:Readonly<Record<ScenarioId,Scenario>> = {
   wave('首领呼援','首领最多呼援两次，每次先预告两秒。',24,.95,2.7,n=>n===0?'captain':n%6===0?'stone':n%3===0?'swift':'swarm'),
  ]),
 };
-export const SCENARIO_IDS=Object.keys(SCENARIOS) as ScenarioId[];
+export const SCENARIO_IDS=(Object.keys(SCENARIOS) as ScenarioId[]).sort((a,b)=>Number(!!SCENARIOS[a].challengeRule)-Number(!!SCENARIOS[b].challengeRule));
+export const LEGACY_SCENARIO_IDS=SCENARIO_IDS.filter(id=>!SCENARIOS[id].challengeRule);
 export const isScenarioId=(value:unknown):value is ScenarioId=>typeof value==='string'&&SCENARIO_IDS.includes(value as ScenarioId);
-export const rulesFor=(state:{mapId?:MapId;scenarioId?:ScenarioId})=>{
+export const rulesFor=(state:{mapId?:MapId;scenarioId?:ScenarioId;challenge?:ChallengeParameters})=>{
  const base=mapFor(state.mapId),s=state.scenarioId&&SCENARIOS[state.scenarioId];
- return s?{...base,title:s.title,description:s.question,waves:s.waves,starting:s.starting,drops:s.drops}:base;
+ const starting=s?.materialPacks?.find(p=>p.id===(state.challenge?.packId??'ember'))?.starting??s?.starting;
+ const varied=state.scenarioId==='qinglan-repair'&&state.challenge?.variant===1?starting?.map(c=>c.kind==='grove'?{...c,slot:5}:c):starting;
+ return s?{...base,title:s.title,description:s.question,waves:s.waves,starting:varied!,drops:s.drops}:base;
 };

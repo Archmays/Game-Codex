@@ -1,6 +1,6 @@
 import {mkdirSync,writeFileSync} from 'node:fs';
 import {CORES,type CoreKind} from '../../games/hanzi-tower-defense/content';
-import {SCENARIOS,SCENARIO_IDS,type ScenarioId} from '../../games/hanzi-tower-defense/tactics';
+import {SCENARIOS,LEGACY_SCENARIO_IDS,type ScenarioId} from '../../games/hanzi-tower-defense/tactics';
 import {newTactics,deploy,stow,fuse,startWave,updateBattle,routeCoverage,previewEquipment,equipEnglish,type BattleState} from '../../games/hanzi-tower-defense/model';
 export type TacticsBuild='volcano-grove'|'flame-wildwood';
 export type Placement='distributed'|'late-only'|'one-side';
@@ -37,10 +37,10 @@ export function runTactics(id:ScenarioId,build:TacticsBuild,placement:Placement=
  }
  return {scenarioId:id,build,placement,english,result:s.phase,kills:s.kills,leaks:s.leaks,health:s.health,seconds:+s.elapsed.toFixed(2),shots,fourthTargetHits,echoes,roots,waves};
 }
-export function tacticsEvidence(){return {forestOnly:(['twin-lanes','beacon-crowd'] as const).map(id=>runTactics(id,'volcano-grove','distributed','forest-only')),builds:SCENARIO_IDS.flatMap(id=>(['volcano-grove','flame-wildwood'] as const).map(build=>runTactics(id,build))),comparisons:SCENARIO_IDS.map(id=>runTactics(id,'volcano-grove',SCENARIOS[id].mapId==='twin-bends'?'one-side':'late-only')),resonance:SCENARIO_IDS.flatMap(id=>(['volcano-grove','flame-wildwood'] as const).map(build=>runTactics(id,build,'distributed',true)))};}
+export function tacticsEvidence(){return {forestOnly:(['twin-lanes','beacon-crowd'] as const).map(id=>runTactics(id,'volcano-grove','distributed','forest-only')),builds:LEGACY_SCENARIO_IDS.flatMap(id=>(['volcano-grove','flame-wildwood'] as const).map(build=>runTactics(id,build))),comparisons:LEGACY_SCENARIO_IDS.map(id=>runTactics(id,'volcano-grove',SCENARIOS[id].mapId==='twin-bends'?'one-side':'late-only')),resonance:LEGACY_SCENARIO_IDS.flatMap(id=>(['volcano-grove','flame-wildwood'] as const).map(build=>runTactics(id,build,'distributed',true)))};}
 export function assertTacticsEvidence(evidence:ReturnType<typeof tacticsEvidence>):void {
  const failures:string[]=[];
- if(SCENARIO_IDS.length!==6||evidence.builds.length!==12)failures.push('Expected six scenarios and two no-English builds each');
+ if(LEGACY_SCENARIO_IDS.length!==6||evidence.builds.length!==12)failures.push('Expected six scenarios and two no-English builds each');
  for(const r of evidence.builds)if(r.result!=='won'||r.waves.length!==3||r.health<=0||r.english)failures.push(`${r.scenarioId}/${r.build}: no-English three-wave victory missing`);
  for(const r of evidence.comparisons){const base=evidence.builds.find(b=>b.scenarioId===r.scenarioId&&b.build===r.build);if(!base||r.leaks<=base.leaks||r.health>=base.health||r.kills>=base.kills)failures.push(`${r.scenarioId}: actual poor-placement kill/leak/gate contrast missing`);}
  for(const r of evidence.forestOnly)if(r.result!=='won'||r.fourthTargetHits<=0||r.echoes!==0||r.roots!==0)failures.push(`${r.scenarioId}: isolated fourth-target evidence missing`);

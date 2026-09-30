@@ -1,5 +1,5 @@
 import {describe,it,expect} from 'vitest';
-import {SCENARIOS,SCENARIO_IDS,rulesFor} from '../games/hanzi-tower-defense/tactics';
+import {SCENARIOS,LEGACY_SCENARIO_IDS,rulesFor} from '../games/hanzi-tower-defense/tactics';
 import {MAP_IDS,mapFor} from '../games/hanzi-tower-defense/maps';
 import {newBattle,newTactics,startWave,updateBattle,deploy,stow,fuse,retryWave,checkpointOf,equipEnglish,previewEquipment,type BattleState} from '../games/hanzi-tower-defense/model';
 import {openTacticsSave,TACTICS_SAVE_KEY,SAVE_KEY,V2_SAVE_KEY,validTacticsPayload,validTacticsCheckpoint,validCheckpoint} from '../games/hanzi-tower-defense/save';
@@ -9,8 +9,8 @@ const storage=(initial:Record<string,string>={})=>{const data=new Map(Object.ent
 function finishWave(s:BattleState){let steps=0;while(s.phase==='battle'&&steps++<5000)updateBattle(s,.05);expect(s.phase).not.toBe('battle');}
 describe('STEP5 six independent tactical scenarios',()=>{
  it('retains three campaign maps and 22 waves; six short runs inherit only their map content pool',()=>{
-  expect(MAP_IDS.map(id=>mapFor(id).waves.length)).toEqual([6,8,8]);expect(SCENARIO_IDS).toHaveLength(6);
-  for(const id of SCENARIO_IDS){const s=newTactics(id);expect(rulesFor(s).waves).toHaveLength(3);expect(validTacticsCheckpoint(checkpointOf(s))).toBe(true);expect(validCheckpoint(checkpointOf(s))).toBe(false);expect(rulesFor(s).expanded).toBe(s.mapId!=='qinglan-pass');expect(s.cores).toEqual(newTactics(id).cores);expect(SCENARIOS[id].rewards.every(r=>r.length===2)).toBe(true);expect(rulesFor(s).drops.english).toHaveLength(s.mapId==='qinglan-pass'?2:3);}
+  expect(MAP_IDS.map(id=>mapFor(id).waves.length)).toEqual([6,8,8]);expect(LEGACY_SCENARIO_IDS).toHaveLength(6);
+  for(const id of LEGACY_SCENARIO_IDS){const s=newTactics(id);expect(rulesFor(s).waves).toHaveLength(3);expect(validTacticsCheckpoint(checkpointOf(s))).toBe(true);expect(validCheckpoint(checkpointOf(s))).toBe(false);expect(rulesFor(s).expanded).toBe(s.mapId!=='qinglan-pass');expect(s.cores).toEqual(newTactics(id).cores);expect(SCENARIOS[id].rewards.every(r=>r.length===2)).toBe(true);expect(rulesFor(s).drops.english).toHaveLength(s.mapId==='qinglan-pass'?2:3);}
   expect(checkpointOf(newBattle())).not.toHaveProperty('scenarioId');
  });
  it('permits first deployment and synthesis in battle, atomically rejects movement/stow even paused, and leaves campaign behavior alone',()=>{
@@ -49,8 +49,8 @@ describe('STEP5 six independent tactical scenarios',()=>{
 describe('STEP5 separate raw-byte guarded slot',()=>{
  it('does not read/migrate/write any campaign key and preserves all scenario slots',()=>{
   const store=storage({[SAVE_KEY]:'campaign raw',[V2_SAVE_KEY]:'v2 raw'}),save=openTacticsSave(store,prefs);expect(store.reads).toEqual([TACTICS_SAVE_KEY]);
-  for(const id of SCENARIO_IDS){const s=newTactics(id);deploy(s,1,2);expect(save.write(s,prefs)).toBe(true);}
-  expect(save.list()).toHaveLength(6);for(const id of SCENARIO_IDS)expect(save.load(id)?.cores[0].slot).toBe(2);expect(store.data.get(SAVE_KEY)).toBe('campaign raw');expect(store.data.get(V2_SAVE_KEY)).toBe('v2 raw');
+  for(const id of LEGACY_SCENARIO_IDS){const s=newTactics(id);deploy(s,1,2);expect(save.write(s,prefs)).toBe(true);}
+  expect(save.list()).toHaveLength(6);for(const id of LEGACY_SCENARIO_IDS)expect(save.load(id)?.cores[0].slot).toBe(2);expect(store.data.get(SAVE_KEY)).toBe('campaign raw');expect(store.data.get(V2_SAVE_KEY)).toBe('v2 raw');
  });
  it.each(['{bad','{"version":99}','{"version":1,"scenarios":{}}'])('protects unrecognized raw %s through reset attempts',raw=>{const store=storage({[TACTICS_SAVE_KEY]:raw}),save=openTacticsSave(store,prefs);expect(save.writable).toBe(false);expect(save.write(newTactics('qinglan-intercept'),prefs)).toBe(false);expect(store.getItem(TACTICS_SAVE_KEY)).toBe(raw);});
  it('locks stale cross-page writers and rejects mismatched IDs, future shapes and summary extras',()=>{

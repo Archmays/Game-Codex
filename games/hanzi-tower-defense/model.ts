@@ -2,7 +2,7 @@ import { DEFENSE_MAPS, mapFor, PATH, pathLength, type MapId, type Point, type En
 import { CORES, recipeFor, type CoreKind } from "./content";
 import { ECHO, ROOTS, englishMapping, RESONANCES, type EnglishCore, type GrantId, type EffectId } from "./resonance";
 
-import { SCENARIOS, rulesFor, type ScenarioId } from './tactics';
+import { SCENARIOS, rulesFor, type ScenarioId, type ChallengeParameters } from './tactics';
 
 export type { Point } from "./maps";
 export const MAP = { width: 960, height: 640 } as const;
@@ -28,7 +28,7 @@ export interface Core { id: number; kind: CoreKind; slot: number | null; cooldow
 export interface Enemy { id: number; kind: EnemyKind; distance: number; hp: number; maxHp: number; slow: number; slowUntil: number; zoneSlow?: number; lane?: number; summons?: number; summonAt?: number; }
 export type Phase = "ready" | "battle" | "won" | "lost";
 export interface Checkpoint {
-  mapId?: MapId; scenarioId?: ScenarioId;
+  mapId?: MapId; scenarioId?: ScenarioId; challenge?:ChallengeParameters;
   seed: number; wave: number; health: number; cores: Core[]; nextCoreId: number; kills: number; leaks: number; elapsed: number;
   englishCores: EnglishCore[]; englishClaims: GrantId[]; englishSkipped: GrantId[]; nextEnglishId: number;
 }
@@ -82,16 +82,42 @@ export type BattleEvent =
 export const DEFAULT_SEED = 20260907;
 export const START_HEALTH = 16;
 export function checkpointOf(state: Checkpoint): Checkpoint {
-  return { mapId: state.mapId ?? "qinglan-pass", ...(state.scenarioId?{scenarioId:state.scenarioId}:{}), seed: state.seed, wave: state.wave, health: state.health, cores: state.cores.map(c => ({ ...c })), nextCoreId: state.nextCoreId, kills: state.kills, leaks: state.leaks, elapsed: state.elapsed,
+  return { mapId: state.mapId ?? "qinglan-pass", ...(state.scenarioId?{scenarioId:state.scenarioId}:{}), ...(state.challenge?{challenge:{...state.challenge}}:{}), seed: state.seed, wave: state.wave, health: state.health, cores: state.cores.map(c => ({ ...c })), nextCoreId: state.nextCoreId, kills: state.kills, leaks: state.leaks, elapsed: state.elapsed,
     englishCores: state.englishCores.map(c => ({ ...c })), englishClaims: [...state.englishClaims], englishSkipped: [...state.englishSkipped], nextEnglishId: state.nextEnglishId };
 }
 export function newBattle(seed = DEFAULT_SEED, unlocked: string[] = [], mapId: MapId = "qinglan-pass"): BattleState {
   const base: Checkpoint = { seed: seed >>> 0, wave: 0, health: START_HEALTH, mapId, cores: mapFor(mapId).starting.map((item,i)=>({id:i+1,...item,cooldown:0})), nextCoreId: mapFor(mapId).starting.length+1, kills: 0, leaks: 0, elapsed: 0, englishCores: [], englishClaims: [], englishSkipped: [], nextEnglishId: 1 };
   return resumeCheckpoint(base, unlocked);
 }
-export function newTactics(scenarioId:ScenarioId,unlocked:string[]=[]):BattleState {
+export function newTactics(scenarioId:ScenarioId,unlocked:string[]=[],challenge?:ChallengeParameters):BattleState {
  const scenario=SCENARIOS[scenarioId],base=newBattle(DEFAULT_SEED,unlocked,scenario.mapId);
- base.scenarioId=scenarioId;base.cores=scenario.starting.map((c,i)=>({...c,id:i+1,cooldown:0}));base.nextCoreId=base.cores.length+1;base.checkpoint=checkpointOf(base);return base;
+ base.scenarioId=scenarioId;
+ if(scenarioId==='qinglan-elite')base.challenge={packId:'ember',confirmed:false,...challenge};
+ if(scenarioId==='qinglan-repair')base.challenge={variant:0,...challenge};
+ if(scenarioId==='qinglan-packs')base.challenge={goalId:'fire-mountain',confirmed:false,...challenge};
+ base.cores=rulesFor(base).starting.map((c,i)=>({...c,id:i+1,cooldown:0}));base.nextCoreId=base.cores.length+1;base.checkpoint=checkpointOf(base);return base;
+}
+/** Preparation choices replace the whole run atomically, never add a second material grant. */
+export function choosePreparation(state:BattleState,patch:ChallengeParameters):BattleState|null {
+ if(state.phase!=='ready'||state.wave!==0)return null;
+ if(state.scenarioId==='qinglan-elite'&&SCENARIOS[state.scenarioId].materialPacks!.some(p=>p.id===patch.packId))return newTactics(state.scenarioId,state.unlocked,{packId:patch.packId,confirmed:true});
+ if(state.scenarioId==='qinglan-packs'&&SCENARIOS[state.scenarioId].packGoals!.some(g=>g.id===patch.goalId))return newTactics(state.scenarioId,state.unlocked,{goalId:patch.goalId,confirmed:true});
+ return null;
+}
+export function changeVariation(state:BattleState):BattleState|null {
+ return state.scenarioId==='qinglan-repair'?newTactics(state.scenarioId,state.unlocked,{variant:state.challenge?.variant===1?0:1}):null;
+}
+export const deploymentLimit=(state:Checkpoint):number|null=>state.scenarioId==='qinglan-elite'?3:null;
+export function packProgress(state:Checkpoint){
+ if(state.scenarioId!=='qinglan-packs')return null;
+ const goal=SCENARIOS[state.scenarioId].packGoals!.find(g=>g.id===(state.challenge?.goalId??'fire-mountain'))!;
+ const items=goal.items.map(item=>({...item,count:state.cores.filter(c=>c.slot===null&&c.kind===item.kind).length}));
+ return {goalId:goal.id,title:goal.title,items,complete:items.every(i=>i.count>=i.required)};
+}
+export function packConsequence(state:Checkpoint,ids:number[]):string {
+ const progress=packProgress(state);if(!progress)return '';
+ const affected=progress.items.map(item=>({...item,used:state.cores.filter(c=>ids.includes(c.id)&&c.slot===null&&c.kind===item.kind).length})).filter(i=>i.used);
+ return affected.length?`行囊变化：${affected.map(i=>`${CORES[i.kind].glyph} ${i.count}→${i.count-i.used}（要留${i.required}）`).join('，')}。只数背包基础字核。`:'';
 }
 export function resumeCheckpoint(checkpoint: Checkpoint, unlocked: string[]): BattleState {
   const base = checkpointOf(checkpoint);
@@ -99,6 +125,7 @@ export function resumeCheckpoint(checkpoint: Checkpoint, unlocked: string[]): Ba
 }
 export function startWave(state: BattleState): boolean {
   if (state.phase !== "ready" || state.wave >= rulesFor(state).waves.length) return false;
+  if((state.scenarioId==='qinglan-elite'||state.scenarioId==='qinglan-packs')&&!state.challenge?.confirmed)return false;
   state.checkpoint = checkpointOf(state);state.waveLanes=mapFor(state.mapId).paths.map(()=>({kills:0,leaks:0,damage:0}));
   state.phase = "battle"; state.paused = false; state.waveTime = 0; state.spawned = 0; state.waveKills = 0; state.waveDrops = 0;
   state.echoes = []; state.visuals = []; state.rootZones = []; state.rootPulseAt = ROOTS.tick;
@@ -108,6 +135,8 @@ export function deploy(state: BattleState, id: number, slot: number): boolean {
   if (state.phase === "won" || state.phase === "lost" || !Number.isInteger(slot) || !mapFor(state.mapId).slots[slot]) return false;
   const item = state.cores.find(c => c.id === id);
   if (!item || state.cores.some(c => c.slot === slot && c.id !== id)) return false;
+  const limit=deploymentLimit(state);
+  if(item.slot===null&&limit!==null&&state.cores.filter(c=>c.slot!==null).length>=limit)return false;
   if(state.scenarioId && state.phase === "battle" && item.slot !== null && item.slot !== slot) return false;
   item.slot = slot;
   return true;
