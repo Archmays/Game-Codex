@@ -51,7 +51,10 @@ async function expectMinimumHitTargets(locator: Locator): Promise<void> {
       .filter((node) => {
         const element = node as HTMLElement;
         const style = getComputedStyle(element);
-        return !element.hidden && style.display !== "none" && style.visibility !== "hidden";
+        // Stable panel controls can remain mounted beneath a hidden ancestor.
+        // Their own computed display is unchanged, but they are not hit targets.
+        return !element.closest('[hidden]') && element.checkVisibility()
+          && style.display !== "none" && style.visibility !== "hidden";
       })
       .map((node) => {
         const box = node.getBoundingClientRect();

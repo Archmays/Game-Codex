@@ -1,10 +1,11 @@
+import {disposeOddityTree} from './scene-resources';
 import * as T from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {actor,feet,layout,position,type State,type Vec,type Motion} from './model';
 import type {Landmark} from './landmarks';
 const v=(p:Vec)=>new T.Vector3(...p);
 export class OddityScene {
- private guide=new T.Group();private markers=new Map<string,T.Mesh>();private level=1;private nodeKind='';
+ private replacedMaterials=new Set<T.Material>();private guide=new T.Group();private markers=new Map<string,T.Mesh>();private level=1;private nodeKind='';
  readonly renderer:T.WebGLRenderer;readonly scene=new T.Scene();readonly camera=new T.OrthographicCamera();
  asset?:T.Group;private dead=false;private elapsed=0;private duration=0;private motions:Motion[]=[];private preset=0;private size={w:1,h:1};private targets:T.Mesh[]=[];private ray=new T.Raycaster();private beam?:T.Mesh;private gate?:T.Mesh;private preview?:T.Box3Helper;private portraits=new Map<string,T.Texture>();private portrait?:T.Mesh;private selected?:T.BoxHelper;private previousLamp=0;private previousDoor=0;private portal?:T.Mesh;private portalTexture?:T.WebGLRenderTarget;
  constructor(readonly host:HTMLElement){
@@ -12,7 +13,7 @@ export class OddityScene {
   this.scene.add(new T.HemisphereLight(0xfff0d5,0x6d898a,2.7));const sun=new T.DirectionalLight(0xffebcb,3);sun.position.set(-6,15,8);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.camera.left=-9;sun.shadow.camera.right=9;sun.shadow.camera.top=9;sun.shadow.camera.bottom=-9;sun.shadow.normalBias=.045;this.scene.add(sun);
  }
  async load(s:State){this.level=s.level;const loaded=await new GLTFLoader().loadAsync(`./assets/oddity-puzzles/room-${s.level}.glb`);if(this.dead){this.disposeTree(loaded.scene);return;}this.asset=loaded.scene;this.scene.add(this.asset);
-  this.asset.traverse(o=>{if(o instanceof T.Mesh){o.castShadow=true;o.receiveShadow=true;const cut=o.parent?.userData.cutaway;if(cut){const m=(o.material as T.MeshStandardMaterial).clone();m.transparent=true;m.opacity=o.parent?.name==='wall_ceiling'?.025:.10;m.depthWrite=false;o.material=m;o.castShadow=false;o.userData.pickThrough=true;}for(const m of Array.isArray(o.material)?o.material:[o.material]){m.forceSinglePass=true;if(m.opacity<.5)o.castShadow=false;}}});
+  this.asset.traverse(o=>{if(o instanceof T.Mesh){o.castShadow=true;o.receiveShadow=true;const cut=o.parent?.userData.cutaway;if(cut){this.replacedMaterials.add(o.material as T.Material);const m=(o.material as T.MeshStandardMaterial).clone();m.transparent=true;m.opacity=o.parent?.name==='wall_ceiling'?.025:.10;m.depthWrite=false;o.material=m;o.castShadow=false;o.userData.pickThrough=true;}for(const m of Array.isArray(o.material)?o.material:[o.material]){m.forceSinglePass=true;if(m.opacity<.5)o.castShadow=false;}}});
   for(const n of layout(s).nodes){const marker=new T.Mesh(new T.RingGeometry(.14,.22,4),new T.MeshBasicMaterial({color:0x41696b,side:T.DoubleSide}));marker.rotation.x=-Math.PI/2;marker.position.copy(v(n.p)).y=.04;marker.name='nav_'+n.id;marker.userData.node=n.id;marker.visible=false;this.scene.add(marker);this.targets.push(marker);}
   this.scene.add(this.guide);
   for(const a of s.actors){const marker=new T.Mesh(new T.RingGeometry(.32,.41,a.id==='a'?32:a.id==='b'?3:4,1,a.id==='npc'?Math.PI/4:0),new T.MeshBasicMaterial({color:a.id==='a'?0x285d83:a.id==='b'?0x955320:0x346144,side:T.DoubleSide}));marker.rotation.x=-Math.PI/2;this.scene.add(marker);this.markers.set(a.id,marker);marker.userData.actor=a.id;}
@@ -77,7 +78,7 @@ export class OddityScene {
  }
  pick(x:number,y:number):{node?:string;target?:string;wall?:number}|null {const r=this.host.getBoundingClientRect();this.ray.setFromCamera(new T.Vector2((x-r.left)/r.width*2-1,1-(y-r.top)/r.height*2),this.camera);const meshes:T.Object3D[]=[];this.scene.traverseVisible(o=>{if(o instanceof T.Mesh&&!o.userData.pickThrough&&o.parent!==this.guide&&o!==this.beam&&o!==this.gate&&o!==this.portrait&&(o.material as T.Material).opacity>=.3)meshes.push(o);});const hit=this.ray.intersectObjects(meshes,false)[0];let obj:T.Object3D|null=hit?.object??null;while(obj){if(obj.userData.actor)return {target:obj.userData.actor};if(this.level===1){if(obj.name==='wall_window')return {node:'window'};const wall=({'wall_back':0,'wall_light-wall':1,'wall_west':2} as Record<string,number>)[obj.name];if(wall!==undefined)return {wall};}if(obj.userData.node)return {node:obj.userData.node};if(obj.name.startsWith('item_'))return {target:obj.name.slice(5)};if(obj.name.startsWith('actor_'))return {target:obj.name.slice(6)};obj=obj.parent;}return null;}
  thumbnail(name:string){return `./assets/oddity-puzzles/thumb-${name}.png`;}
- private disposeTree(root:T.Object3D){root.traverse(o=>{if(o instanceof T.Mesh){o.geometry.dispose();for(const m of Array.isArray(o.material)?o.material:[o.material]){for(const value of Object.values(m))if(value instanceof T.Texture)value.dispose();m.dispose();}}});}
- destroy(){this.dead=true;this.cancel();this.disposeTree(this.scene);this.portraits.forEach(t=>t.dispose());this.portalTexture?.dispose();this.renderer.dispose();this.renderer.forceContextLoss();this.renderer.domElement.remove();}
+ private disposeTree(root:T.Object3D){disposeOddityTree(root);}
+ destroy(){if(this.dead)return;this.dead=true;this.cancel();disposeOddityTree(this.scene,this.replacedMaterials,this.portraits.values(),this.portalTexture?[this.portalTexture]:[]);this.portraits.clear();this.replacedMaterials.clear();this.renderer.dispose();this.renderer.forceContextLoss();this.renderer.domElement.remove();}
 }
 function distance3(a:Vec,b:Vec){return Math.hypot(a[0]-b[0],a[1]-b[1],a[2]-b[2]);}

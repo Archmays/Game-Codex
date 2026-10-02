@@ -29,7 +29,7 @@ export default defineConfig({
   reporter:[['line'],['json',{outputFile:`${evidence}/input-results.json`}]],
   outputDir:`${evidence}/input-browser-failures`,
   snapshotPathTemplate:`${process.cwd()}/${evidence}/step5-visual-baseline/{projectName}/{arg}{ext}`,
-  use:{baseURL,reducedMotion:'reduce',trace:'off',screenshot:'only-on-failure',video:'off'},
+  use:{baseURL,contextOptions: { reducedMotion: 'reduce' },trace:'off',screenshot:'only-on-failure',video:'off'},
   projects,
   webServer:process.env.STEP4_URL ? undefined : { command:`pnpm exec vite --host 127.0.0.1 --port 5315 --strictPort`,url:baseURL,reuseExistingServer:false },
 });

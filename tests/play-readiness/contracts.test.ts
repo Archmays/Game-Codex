@@ -71,11 +71,12 @@ describe("portfolio play-readiness contracts", () => {
 
   it("uses semantic loading recovery and language/focus affordances", () => {
     const main = readFileSync("src/main.ts", "utf8");
-    const defense = readFileSync("games/hanzi-tower-defense/index.ts", "utf8");
+    const defense = readFileSync("games/hanzi-tower-defense/ui/template.ts", "utf8");
+    const defenseInput = readFileSync("games/hanzi-tower-defense/ui/input.ts", "utf8");
     expect(main).toContain("renderRouteLoading");
     expect(main).toContain("renderRouteError");
     expect(main).not.toContain("error.message");
     expect(defense).toContain("data-td-pause");
-    expect(defense).toContain('event.key === "Escape"');
+    expect(defenseInput).toContain('event.key === "Escape"');
   });
 });

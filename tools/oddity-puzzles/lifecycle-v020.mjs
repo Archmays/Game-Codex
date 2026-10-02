@@ -1,4 +1,4 @@
-import {chromium} from '@playwright/test';import assert from 'node:assert/strict';import {mkdir,writeFile,readFile} from 'node:fs/promises';
+import {chromium} from '@playwright/test';import assert from 'node:assert/strict';import {mkdir,writeFile} from 'node:fs/promises';
 const out=process.env.ODDITY_OUTPUT||'tmp/tasks/oddity-v020/lifecycle',origin=process.env.ODDITY_ORIGIN||'http://127.0.0.1:5180';await mkdir(out,{recursive:true});const rows=[];
 const browser=await chromium.launch({channel:'chrome',headless:false});
 try{
@@ -32,6 +32,27 @@ try{
  const amp=async()=>p.evaluate(()=>Math.max(0,...window.oddityAnalysers.map(a=>{const f=new Float32Array(a.fftSize);a.getFloatTimeDomainData(f);return Math.sqrt(f.reduce((s,v)=>s+v*v,0)/f.length);})));await p.locator('[data-top=sound]').click();await p.waitForFunction(()=>window.oddityAnalysers.some(a=>{const f=new Float32Array(a.fftSize);a.getFloatTimeDomainData(f);return f.some(v=>Math.abs(v)>.00001);}));const audible=await amp();await cmd('toggleMusic').click();await cmd('toggleSfx').click();await cmd('close').click();await p.waitForTimeout(200);const silent=await amp();assert(silent<.00001);await p.locator('[data-top=sound]').click();await cmd('toggleSfx').click();await cmd('close').click();await mark('node:window').click();await p.waitForTimeout(70);const effect=await amp();assert(effect>.00001);await p.keyboard.press('Escape');await p.waitForTimeout(150);assert((await amp())<.00001);rows.push({check:'music and effects produce local PCM, cancel stops old audio',result:'PASS',audible,silent,effect});
  assert.deepEqual(errors,[]);await c.close();
  for(const fault of ['quota','corrupt']){const c=await browser.newContext(),p=await c.newPage();if(fault==='quota')await c.addInitScript(()=>{const set=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(k.startsWith('family-games/oddity-puzzles/'))throw new DOMException('Quota','QuotaExceededError');return set.call(this,k,v);};});else await c.addInitScript(()=>localStorage.setItem('family-games/oddity-puzzles/v1','{"version":1,"levels":null}'));await p.goto(origin+'/?play=oddity-puzzles');await p.locator('[data-ready=true]').waitFor();while(await p.locator('[data-cmd=skipDemo]').isVisible())await p.locator('[data-cmd=skipDemo]').click();assert.match(await p.locator('.odd-save').textContent(),fault==='quota'?/没有保存成功/:/无法读取/);rows.push({check:'isolated '+fault+' failure feedback',result:'PASS'});await c.close();}
- // Actual v0.1 save captured by playing the preserved package; importing is compatibility evidence only.
- const old=await browser.newContext(),oldPage=await old.newPage();await oldPage.goto('http://127.0.0.1:5177/?play=oddity-puzzles');await oldPage.locator('[data-ready=true]').waitFor();while(await oldPage.locator('[data-cmd=skipDemo]').isVisible())await oldPage.locator('[data-cmd=skipDemo]').click();await oldPage.locator('.odd-commands').getByRole('button',{name:'观察窗前',exact:true}).click();await oldPage.locator('[data-motion=still]').waitFor();const raw=await oldPage.evaluate(()=>localStorage.getItem('family-games/oddity-puzzles/v1'));await old.close();assert(raw);const compat=await browser.newContext();await compat.addInitScript(raw=>localStorage.setItem('family-games/oddity-puzzles/v1',raw),raw);const imported=await compat.newPage();await imported.goto(origin+'/?play=oddity-puzzles');await imported.locator('[data-ready=true]').waitFor();assert.equal(JSON.parse(await imported.locator('.oddity-mount').getAttribute('data-state')).actors[0].node,'window');assert.equal(await imported.evaluate(()=>localStorage.getItem('family-games/oddity-puzzles/v1')),raw);rows.push({check:'actual v0.1 serialized progress loads unchanged in v0.2',result:'PASS',boundary:'isolated storage compatibility fixture, not playthrough advancement'});await writeFile(out+'/v010-save.json',raw);await compat.close();
-} catch(e){rows.push({check:'failure',result:'FAIL',error:String(e)});throw e;}finally{await browser.close();await writeFile(out+'/lifecycle-results.json',JSON.stringify({rows},null,2));}
+
+ // Constructor failure must reach the same visible recovery path as an asset failure.
+ const denied=await browser.newContext();
+ await denied.addInitScript(()=>{
+  const getContext=HTMLCanvasElement.prototype.getContext;
+  HTMLCanvasElement.prototype.getContext=function(kind,...args){
+   if(['webgl','webgl2','experimental-webgl'].includes(kind))return null;
+   return getContext.call(this,kind,...args);
+  };
+ });
+ const deniedPage=await denied.newPage(),deniedErrors=[],rendererMessages=[];
+ deniedPage.on('pageerror',error=>deniedErrors.push(String(error)));
+ deniedPage.on('console',message=>{if(message.type()==='error')rendererMessages.push(message.text());});
+ await deniedPage.goto(origin+'/?play=oddity-puzzles');
+ await deniedPage.getByText('房间模型没有载入，请检查本地文件后刷新。',{exact:true}).waitFor();
+ assert.equal(await deniedPage.locator('.odd-stage').getAttribute('data-ready'),'false');
+ await deniedPage.locator('[data-cmd=view1]').click();
+ await deniedPage.locator('.odd-home').click();
+ await deniedPage.waitForURL(url=>url.searchParams.get('world')==='my-game-world');
+ assert.deepEqual(deniedErrors,[]);
+ assert(rendererMessages.every(message=>message.includes('Error creating WebGL context.')));
+ rows.push({check:'isolated WebGL constructor denial reaches original feedback and real return',result:'PASS',unhandledErrors:deniedErrors,expectedRendererConsole:rendererMessages});
+ await denied.close();
+} catch(e){rows.push({check:'failure',result:'FAIL',error:String(e)});throw e;}finally{await browser.close();await writeFile(out+'/lifecycle-results.json',JSON.stringify({scope:'current-runtime lifecycle; preserved v0.1 compatibility is the separate explicit legacy-compat.mjs command',rows},null,2));}

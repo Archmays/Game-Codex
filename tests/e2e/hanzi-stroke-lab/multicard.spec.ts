@@ -86,7 +86,7 @@ test('query → third detail → reload/back/forward/close restores group, occur
  await page.keyboard.press('Escape');await expect(page.locator('[data-occurrence]').nth(2)).toBeFocused();await expect(page.locator('#hsl-input')).toBeVisible();
  await page.goto(route+'&q=天天向上&i=2');await ready(page);await expect(page.locator('[data-detail]')).not.toBeVisible();await expect(page.locator('[data-occurrence]').nth(2)).toBeFocused();
  if(['chromium-390','chromium-desktop'].includes(info.project.name)){
-  await page.screenshot({path:`tmp/tasks/HSL-MULTICARD/results-${info.project.name}.png`,fullPage:true});await details(page,2);await page.screenshot({path:`tmp/tasks/HSL-MULTICARD/detail-${info.project.name}.png`});
+  await page.screenshot({path:`${process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'test-results'}/hanzi-stroke-lab-results-${info.project.name}.png`,fullPage:true});await details(page,2);await page.screenshot({path:`${process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'test-results'}/hanzi-stroke-lab-detail-${info.project.name}.png`});
  }
 });
 
@@ -104,7 +104,7 @@ test('handwriting delayed real results, clear, re-recognize, reload and continue
  await page.locator('[data-candidates] button').first().click();await page.locator('[data-hand-query]').click();await expect(page.locator('#hsl-character-title')).toContainText('一');expect(new URL(page.url()).searchParams.get('q')).toBe('天天向上');
  await page.locator('[data-continue-hand]').click();await expect(page.locator('[data-pad]')).toHaveAttribute('data-stroke-count','0');await expect(page.locator('[data-candidates] button')).toHaveCount(0);await expect(page.locator('[data-occurrence]')).toHaveCount(4);
  await mouseDraw(page,one);await expect(page.locator('[data-candidates] button').first()).toHaveText('一');await pane(page,'query');await pane(page,'hand');await expect(page.locator('[data-candidates] button').first()).toHaveText('一');
- if(info.project.name==='chromium-390')await page.screenshot({path:'tmp/tasks/HSL-MULTICARD/hand-return-mobile.png',fullPage:true});
+ if(info.project.name==='chromium-390')await page.screenshot({path:`${process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'test-results'}/hanzi-stroke-lab-hand-return-mobile.png`,fullPage:true});
 });
 
 test('favorite/recent clear require confirmation; valid v1 storage remains byte-compatible',async({page})=>{

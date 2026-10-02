@@ -5,7 +5,7 @@ export default defineConfig({
   testDir: './tests/e2e/hanzi-word-adventure', fullyParallel: false, forbidOnly: !!process.env.CI,
   retries: 0, workers: 1, timeout: 120_000, expect: { timeout: 10_000 },
   reporter: [['line']], outputDir: `${process.env.HWAY_EVIDENCE ?? 'tmp/tasks/GAME-CODEX-STEP2'}/browser-failures`,
-  use: { baseURL, trace: 'retain-on-failure', screenshot: 'only-on-failure', reducedMotion: 'reduce' },
+  use: { baseURL, trace: 'retain-on-failure', screenshot: 'only-on-failure', contextOptions: { reducedMotion: 'reduce' } },
   projects: [
     { name: 'desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 1000 } } },
     { name: 'touch', use: { ...devices['Pixel 7'], viewport: { width: 390, height: 844 } } },

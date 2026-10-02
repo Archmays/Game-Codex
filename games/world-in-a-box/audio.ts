@@ -70,5 +70,7 @@ export class BoxAudio {
  clearObjects(){this.epoch++;for(const v of this.voices)this.stop(v);this.voices=[];for(const [key,v] of this.loops)if(key!=='music'&&key!=='environment'){this.stop(v);this.loops.delete(key);}for(const key of this.desired.keys())if(key!=='music'&&key!=='environment')this.desired.delete(key);this.nextChime=0;this.nextPage=0;}
  suspend(){this.pause('background',true);}
  diagnostics(){return{context:this.ctx?.state??'locked',loops:[...this.loops].map(([key,v])=>({key,name:v.name,offset:v.offset,started:v.started})),voices:this.voices.length,pending:this.pending.size,buffers:this.buffers.size,epoch:this.epoch,pauses:[...this.pauses],preferences:{...this.preferences},events:this.events.slice(-12)};}
+ /** The optional 180ms release owns only captured audio nodes, never mounted UI.
+  * The shared context closes only after all box/transition owners release it. */
  destroy(immediate=false){if(this.dead)return;this.dead=true;owners.delete(this);this.abort.abort();this.clearObjects();for(const v of this.loops.values())this.stop(v);this.loops.clear();this.desired.clear();this.buffers.clear();const output=this.output,buses=this.buses,limiter=this.limiter;if(output&&this.ctx){this.ramp(output.gain,0,.03);const release=()=>{Object.values(buses!).forEach(b=>b.disconnect());output.disconnect();limiter?.disconnect();if(!transitions&&!owners.size&&context===this.ctx){const c=context;context=undefined;void c?.close();}};if(immediate)release();else window.setTimeout(release,180);}}
 }

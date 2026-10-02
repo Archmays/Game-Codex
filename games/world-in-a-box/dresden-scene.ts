@@ -74,5 +74,5 @@ export class DresdenScene{
   }
   thumbnail(id:CityPiece,angle=.35){return toyThumbnail(this.renderer,this.pieces.get(id),this.size,angle);}
   comparison(ids:CityPiece[]){const group=new T.Group();for(const id of ids){const original=this.pieces.get(id);if(original){const clone=original.clone(true);clone.position.copy(this.homes.get(original)!);clone.visible=true;group.add(clone);}}return toyThumbnail(this.renderer,group,this.size,.25);}
-  destroy(){this.dead=true;disposeToy(this.scene);this.renderer.dispose();this.renderer.forceContextLoss();this.renderer.domElement.remove();}
+  destroy(){if(this.dead)return;this.dead=true;disposeToy(this.scene);this.renderer.dispose();this.renderer.forceContextLoss();this.renderer.domElement.remove();}
 }

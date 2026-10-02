@@ -3,20 +3,15 @@ import { GAME_PORTFOLIO } from "../packages/data/gamePortfolio";
 import { LEGACY_WHEEL_SOURCE } from "../packages/data/hanzi-reference/legacy-wheel-source";
 import { englishWords, pinyinCards } from "../packages/data/hanzi-reference/legacy-learning-data";
 import { MEMORY_CARD_PAIR_COUNT, memoryCardSets, pickMemoryCardPairs } from "../packages/data/memoryCards";
+import { loadGameCatalogMetadata } from '../tools/portfolio/load-game-catalog-metadata';
 
 describe("game catalog", () => {
   it("registers the first batch of migrated single-file games", () => {
-    const source = readFileSync("packages/data/gameCatalog.ts", "utf8");
-
-    expect(source).not.toContain("multiplicationAdventureGame");
-    expect(source).not.toContain("englishSpellBattleGame");
-    expect(source).not.toContain("clockReaderGame");
-    expect(source).toContain("makeTargetGame");
-    expect(source).not.toContain("pinyinMagicBattleGame");
-    expect(source).toContain("hanziTowerDefenseGame");
-    expect(source).toContain('import { equationSliderGame } from "../../games/equation-slider"');
-    expect(source).toMatch(/\[[\s\S]*equationSliderGame[\s\S]*\]/);
-    expect(source.match(/\bequationSliderGame\b/g)).toHaveLength(2);
+    const ids = loadGameCatalogMetadata().map(game => game.id);
+    for (const retired of ['multiplication-adventure', 'english-spell-battle', 'clock-reader', 'pinyin-magic-battle']) expect(ids).not.toContain(retired);
+    expect(ids).toContain('make-target');
+    expect(ids).toContain('hanzi-tower-defense');
+    expect(ids.filter(id => id === 'equation-slider')).toHaveLength(1);
   });
 
   it("has shared learning data for the migrated games", () => {
@@ -34,11 +29,11 @@ describe("game catalog", () => {
     expect(gameDirs.sort()).toEqual(GAME_PORTFOLIO.map(record => record.id).sort());
 
     for (const gameDir of gameDirs) {
-      const source = readFileSync(`games/${gameDir}/index.ts`, "utf8");
+      const metadata = loadGameCatalogMetadata().find(game => game.id === gameDir)!;
       const readme = readFileSync(`games/${gameDir}/README.md`, "utf8");
 
       for (const field of ["id", "title", "description", "subject", "recommendedAge", "learningGoal", "status"]) {
-        expect(source, `${gameDir} ${field}`).toContain(`${field}:`);
+        expect(metadata[field as keyof typeof metadata], `${gameDir} ${field}`).toEqual(expect.stringMatching(/\S/));
       }
 
       const headings = gameDir === "english-study"

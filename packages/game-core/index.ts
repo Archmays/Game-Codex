@@ -37,60 +37,35 @@ export function pickRoundItems<T>(
   return shuffleItems(items, random).slice(0, Math.min(count, items.length));
 }
 
+/** Namespace adapter only: game-specific schema validation stays with each game.
+ * No destructive capability probe; failures are contained at the actual operation.
+ */
 export function createLocalStorageStore(namespace: string): LocalStorageStore {
   const prefix = `family-games/${namespace}/`;
-
   return {
     get<T>(key: string, fallback: T): T {
-      if (!canUseLocalStorage()) {
-        return fallback;
-      }
-
-      const raw = localStorage.getItem(`${prefix}${key}`);
-      if (!raw) {
-        return fallback;
-      }
-
       try {
-        return JSON.parse(raw) as T;
-      } catch {
-        return fallback;
-      }
+        const raw = localStorage.getItem(`${prefix}${key}`);
+        return raw === null ? fallback : JSON.parse(raw) as T;
+      } catch { return fallback; }
     },
     set<T>(key: string, value: T): void {
-      if (canUseLocalStorage()) {
-        localStorage.setItem(`${prefix}${key}`, JSON.stringify(value));
-      }
+      try { localStorage.setItem(`${prefix}${key}`, JSON.stringify(value)); }
+      catch { /* Optional persistence must not interrupt play. */ }
     },
     remove(key: string): void {
-      if (canUseLocalStorage()) {
-        localStorage.removeItem(`${prefix}${key}`);
-      }
+      try { localStorage.removeItem(`${prefix}${key}`); }
+      catch { /* Leave inaccessible bytes untouched. */ }
     },
     clear(): void {
-      if (!canUseLocalStorage()) {
-        return;
-      }
-
-      for (let index = localStorage.length - 1; index >= 0; index -= 1) {
-        const key = localStorage.key(index);
-        if (key?.startsWith(prefix)) {
-          localStorage.removeItem(key);
+      try {
+        for (let index = localStorage.length - 1; index >= 0; index -= 1) {
+          const key = localStorage.key(index);
+          if (key?.startsWith(prefix)) localStorage.removeItem(key);
         }
-      }
+      } catch { /* A failed removal ends this namespace-only operation. */ }
     }
   };
-}
-
-function canUseLocalStorage(): boolean {
-  try {
-    const key = "family-games/storage-test";
-    localStorage.setItem(key, "1");
-    localStorage.removeItem(key);
-    return true;
-  } catch {
-    return false;
-  }
 }
 
 function shuffleItems<T>(items: readonly T[], random: () => number): T[] {

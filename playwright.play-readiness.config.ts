@@ -13,7 +13,7 @@ export default defineConfig({
   workers: 1,
   reporter: [["line"]],
   outputDir: `${process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'test-results'}/play-readiness`,
-  use: { baseURL, trace: "retain-on-failure", screenshot: "only-on-failure", video: "off", reducedMotion: "reduce" },
+  use: { baseURL, trace: "retain-on-failure", screenshot: "only-on-failure", video: "off", contextOptions: { reducedMotion: 'reduce' } },
   projects: [
     { name: "mobile-360", use: { ...devices["Pixel 5"], viewport: { width: 360, height: 800 } } },
     { name: "mobile-390", use: { ...devices["Pixel 7"], viewport: { width: 390, height: 844 } } },

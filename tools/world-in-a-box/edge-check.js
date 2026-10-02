@@ -27,7 +27,8 @@ async (driver)=>{
     await reset();await select('cup');await press('[data-action=help]');for(let i=0;i<6;i++)await press('[data-action=right]');const view=await p.locator('.wb-view').innerText();await p.keyboard.press('Escape');await press('[data-piece=cup]');check(await p.locator('.wb-view').innerText()===view,'help off does not turn camera or reveal answer');
     await press('[data-action=exit]');await p.locator('[data-world-box-link]').waitFor();
     // Real existing entrances, no retired runtime is restored.
-    await press('[data-world-treasure-link]');await p.locator('[data-game-id=world-in-a-box]').waitFor();check(await p.locator('[data-game-id]').count()===4,'Classic contains four registered products');
+    // The current catalog includes Oddity; verify exact public products rather than the old four-card count.
+    await press('[data-world-treasure-link]');await p.locator('[data-game-id=world-in-a-box]').waitFor();const classicIds=await p.locator('[data-game-id]').evaluateAll(cards=>cards.map(card=>card.dataset.gameId).sort());check(JSON.stringify(classicIds)===JSON.stringify(['hanzi-tower-defense','hanzi-word-adventure','math-lab','oddity-puzzles','world-in-a-box'].sort()),'Classic contains the five current registered products');
     await p.goto('http://127.0.0.1:5175/?world=math-world');await p.locator('[data-station-id]').first().waitFor();check((await p.locator('[data-station-id]').count())>=2,'existing math world entrance');
     await p.goto('http://127.0.0.1:5175/?play=hanzi-tower-defense');await p.locator('[data-td-pause]').waitFor();check(true,'existing tower entrance');
     await p.goto('http://127.0.0.1:5175/?play=hanzi-word-adventure');await p.locator('[data-hway-new]').waitFor();check(true,'existing adventure entrance');

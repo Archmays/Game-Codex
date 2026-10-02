@@ -1,7 +1,7 @@
 import type { GameDefinition, MountGameContext, MountedGame } from "../../packages/game-core";
 import { playFeedbackSound, type FeedbackState } from "../../packages/ui";
 import { bindInputLifecycle, rovingGroup } from '../../packages/ui/input';
-import { readWorldHomeState } from "../../apps/my-game-world/world-state";
+import { readWorldHomeState } from "../../packages/preferences/world-home";
 import {
   applyTargetOperation,
   cloneExpr,

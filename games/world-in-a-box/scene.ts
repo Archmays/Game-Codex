@@ -13,7 +13,7 @@ export class BoxScene {
   private ray=new T.Raycaster(); private size={w:1,h:1}; private wind=0;
   private original=new Map<T.Object3D,T.Quaternion>();
   private land=new Map<Piece,number>(); private catUntil=0; private steamUntil=0;
-  private steam:T.Sprite[]=[]; private dead=false;
+  private replacedMaterials=new Set<T.Material>(); private steam:T.Sprite[]=[]; private dead=false;
   constructor(readonly host:HTMLElement){
     this.renderer=new T.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});
     this.renderer.setPixelRatio(Math.min(devicePixelRatio,2));this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=T.VSMShadowMap;
@@ -33,7 +33,7 @@ export class BoxScene {
     const gltf=await new GLTFLoader().loadAsync(url);
     if(this.dead){this.disposeTree(gltf.scene);return;}
     this.asset=gltf.scene;this.scene.add(this.asset);
-    this.asset.traverse(o=>{if(o instanceof T.Mesh){o.castShadow=true;o.receiveShadow=true;o.material=Array.isArray(o.material)?o.material.map(m=>m.clone()):o.material.clone();}if(o.name.startsWith('pivot_'))this.original.set(o,o.quaternion.clone());});
+    this.asset.traverse(o=>{if(o instanceof T.Mesh){o.castShadow=true;o.receiveShadow=true;for(const m of Array.isArray(o.material)?o.material:[o.material])this.replacedMaterials.add(m);o.material=Array.isArray(o.material)?o.material.map(m=>m.clone()):o.material.clone();}if(o.name.startsWith('pivot_'))this.original.set(o,o.quaternion.clone());});
     for(const id of IDS){const p=this.asset.getObjectByName('piece_'+id),s=this.asset.getObjectByName('slot_'+id);if(p)this.pieces.set(id,p);if(s)this.slots.set(id,s);}
     this.resize();
   }
@@ -86,5 +86,5 @@ export class BoxScene {
     return toyThumbnail(this.renderer,this.pieces.get(id),this.size,angle);
   }
   private disposeTree(root:T.Object3D){disposeToy(root);}
-  destroy(){this.dead=true;this.disposeTree(this.scene);this.steam.forEach(p=>{p.material.map?.dispose();p.material.dispose();});this.renderer.dispose();this.renderer.forceContextLoss();this.renderer.domElement.remove();}
+  destroy(){if(this.dead)return;this.dead=true;disposeToy(this.scene,this.replacedMaterials);this.replacedMaterials.clear();this.renderer.dispose();this.renderer.forceContextLoss();this.renderer.domElement.remove();}
 }

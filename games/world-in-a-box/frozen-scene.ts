@@ -66,5 +66,5 @@ export class FrozenScene{
   this.asset.updateMatrixWorld(true);this.spark.visible=!!m.cast;if(m.cast)this.node('elsa_hand')?.getWorldPosition(this.spark.position);this.renderer.render(this.scene,this.camera);
  }
  diagnostics(){return{calls:this.renderer.info.render.calls,triangles:this.renderer.info.render.triangles,memory:this.renderer.info.memory,clips:[...this.actions.keys()],playing:[...this.current]};}
- destroy(){this.dead=true;this.mixer?.stopAllAction();disposeToy(this.scene);this.snow.geometry.dispose();(this.snow.material as T.Material).dispose();this.trail.geometry.dispose();(this.trail.material as T.Material).dispose();this.renderer.dispose();this.renderer.forceContextLoss();this.renderer.domElement.remove();}
+ destroy(){if(this.dead)return;this.dead=true;this.mixer?.stopAllAction();if(this.asset)this.mixer?.uncacheRoot(this.asset);disposeToy(this.scene);this.actions.clear();this.current.clear();this.renderer.dispose();this.renderer.forceContextLoss();this.renderer.domElement.remove();}
 }

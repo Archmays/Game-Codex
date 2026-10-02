@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta name="viewport" content="width=device-width, initial-scale=1"><base href="/"></head><body>
+<button type="button" data-test-mount>打开书房</button><button type="button" data-test-unmount>离开书房</button><div data-test-host></div>
+<script type="module">
+import { mountEnglishStudy } from '/games/english-study/workbench';
+const host=document.querySelector('[data-test-host]');let mounted;
+document.querySelector('[data-test-mount]').onclick=()=>{mounted?.destroy();mounted=mountEnglishStudy(host);};
+const unmount=()=>{mounted?.destroy();mounted?.destroy();mounted=undefined;};
+document.querySelector('[data-test-unmount]').onclick=unmount;
+document.addEventListener('keydown',event=>{if(event.key==='F8'){event.preventDefault();unmount();}});
+</script></body></html>

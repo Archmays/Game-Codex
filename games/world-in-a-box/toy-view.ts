@@ -1,9 +1,11 @@
 import * as T from 'three';
 
-/** Both boxes own their resources; late loads are disposed by their scene owner. */
-export function disposeToy(root:T.Object3D){
-  const textures=new Set<T.Texture>(),materials=new Set<T.Material>(),geometries=new Set<T.BufferGeometry>();
-  root.traverse(o=>{if(o instanceof T.Mesh){geometries.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:[o.material]){materials.add(m);for(const v of Object.values(m))if(v instanceof T.Texture)textures.add(v);}}});
+/** The scene owns drawable resources, replaced GLTF materials and light shadow targets.
+ * Thumbnail clones borrow their originals and must never call this disposer. */
+export function disposeToy(root:T.Object3D,replacedMaterials:Iterable<T.Material>=[]){
+  const textures=new Set<T.Texture>(),materials=new Set<T.Material>(replacedMaterials),geometries=new Set<T.BufferGeometry>();
+  root.traverse(o=>{if(o instanceof T.Mesh||o instanceof T.Line||o instanceof T.Points||o instanceof T.Sprite){if(!(o instanceof T.Sprite))geometries.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:[o.material])materials.add(m);}if(o instanceof T.DirectionalLight||o instanceof T.SpotLight||o instanceof T.PointLight)o.shadow.dispose();});
+  for(const m of materials)for(const v of Object.values(m))if(v instanceof T.Texture)textures.add(v);
   textures.forEach(t=>t.dispose());materials.forEach(m=>m.dispose());geometries.forEach(g=>g.dispose());
 }
 export function toyThumbnail(renderer:T.WebGLRenderer,original:T.Object3D|undefined,size:{w:number;h:number},angle=.35){

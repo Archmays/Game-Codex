@@ -10,5 +10,5 @@ export default defineConfig({
     { name: "desktop", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 1000 } } },
     { name: "touch", use: { ...devices["Pixel 7"], viewport: { width: 390, height: 844 } } },
   ],
-  webServer: { command: "pnpm exec vite --host 127.0.0.1 --port 5299 --strictPort", url: "http://127.0.0.1:5299", reuseExistingServer: false },
+  webServer: { command: `pnpm exec vite ${process.env.TD_PREVIEW === '1' ? 'preview ' : ''}--host 127.0.0.1 --port 5299 --strictPort`, url: "http://127.0.0.1:5299", reuseExistingServer: false },
 });

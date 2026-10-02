@@ -25,7 +25,7 @@ export default defineConfig({
     }
   ],
   webServer: {
-    command: `pnpm exec vite --host 127.0.0.1 --port ${e2ePort} --strictPort`,
+    command: `pnpm exec vite ${process.env.PLAYWRIGHT_PREVIEW === '1' ? 'preview ' : ''}--host 127.0.0.1 --port ${e2ePort} --strictPort`,
     url: e2eBaseUrl,
     reuseExistingServer: false,
     timeout: 120_000

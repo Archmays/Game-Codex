@@ -9,7 +9,7 @@ test('public Vault exports/imports the actual shelf, and an older open shelf can
  const exported=await page.evaluate(k=>localStorage.getItem(k),key);expect(JSON.parse(exported!)).toEqual({version:1,recent:['天'],favorites:['天'],grid:false});
  await page.locator('[data-hsl-return]').click();await page.getByRole('button',{name:/家长角/}).click();await page.getByRole('button',{name:'打开游戏进度保险箱'}).click();
  const downloadPromise=page.waitForEvent('download');await page.getByRole('button',{name:'备份游戏进度'}).click();const download=await downloadPromise;
- const destination=`tmp/tasks/HSL-MULTICARD/vault-${info.project.name}.json`;await download.saveAs(destination);const backup=await readFile(destination,'utf8');
+ const destination=`${process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'test-results'}/hanzi-stroke-lab-vault-${info.project.name}.json`;await download.saveAs(destination);const backup=await readFile(destination,'utf8');
  const entry=JSON.parse(backup).entries.find((e:{key:string})=>e.key===key);expect(entry.value).toBe(exported);
  const stale=await context.newPage();await stale.goto(new URL(route+'&q=天天',page.url()).href);await ready(stale);await stale.locator('[data-favorite]').first().click();
  const replaced=await stale.evaluate(k=>localStorage.getItem(k),key);expect(replaced).not.toBe(exported);

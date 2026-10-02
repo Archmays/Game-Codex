@@ -140,6 +140,20 @@ async function scrollPageOutsideReel(page: Page, context: BrowserContext): Promi
 }
 
 test.describe("@gate-a equation slider V3 board and tutorial", () => {
+  test("coach repaint keeps its action node and skipping restores the formal reel focus", async ({ page }) => {
+    await openFreshSlider(page);
+    const skip = page.getByRole('button', { name: '跳过教程' });
+    const node = await skip.elementHandle();
+    await reelWindow(page, 0).press('ArrowUp');
+    expect(await skip.evaluate((current, previous) => current === previous, node)).toBe(true);
+    await skip.click();
+    await expect(reelWindow(page, 0)).toBeFocused();
+    await expect(page.locator('.equation-slider__coach')).toBeHidden();
+    const before = Number(await page.locator(MOVE_COUNT_SELECTOR).textContent());
+    await page.keyboard.press('ArrowDown');
+    await expectMoveCount(page, before + 1);
+  });
+
   test("fresh storage opens the one formal first-level flow with live coaching", async ({ page }) => {
     await openFreshSlider(page);
 

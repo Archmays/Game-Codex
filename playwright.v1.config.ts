@@ -8,7 +8,7 @@ const firefox=executable('firefox','firefox/firefox.exe'),webkit=executable('web
 export default defineConfig({testDir:'tests/e2e/v1.0',workers:1,retries:0,timeout:300000,expect:{timeout:15000},
  reporter:[['line'],['json',{outputFile:`${evidence}/v1-results.json`}]],outputDir:`${evidence}/v1-failures`,
  snapshotPathTemplate:`${process.cwd()}/${evidence}/v1-visual-baseline/{projectName}/{arg}{ext}`,
- use:{baseURL:process.env.V1_URL??'http://127.0.0.1:5315',screenshot:'only-on-failure',trace:'retain-on-failure',reducedMotion:'reduce'},
+ use:{baseURL:process.env.V1_URL??'http://127.0.0.1:5315',screenshot:'only-on-failure',trace:'retain-on-failure',contextOptions: { reducedMotion: 'reduce' }},
  webServer:process.env.V1_URL?undefined:{command:`pnpm exec vite ${process.env.V1_PREVIEW?'preview ':''}--host 127.0.0.1 --port 5315 --strictPort`,url:'http://127.0.0.1:5315',reuseExistingServer:false},
  projects:[
  {name:'desktop',use:{...devices['Desktop Chrome'],viewport:{width:1440,height:1000}}},

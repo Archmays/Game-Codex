@@ -4,7 +4,7 @@ import {activate,criticalTargets,fromHome,type InputMode} from '../step4/input-h
 import {tacticsItems,tacticsRegion} from './step5-input';
 import {TACTICS_SAVE_KEY,SAVE_KEY} from '../../../games/hanzi-tower-defense/save';
 import type {CoreKind} from '../../../games/hanzi-tower-defense/content';
-const evidence='tmp/tasks/SHORT-MISSIONS/evidence';
+const evidence=process.env.TD_EVIDENCE_DIR??'tmp/tasks/SHORT-MISSIONS/evidence';
 const modes=(touch:boolean,id:string):InputMode=>touch?'touch':id==='qinglan-repair'?'mouse':'keyboard';
 function actions(page:Page,mode:InputMode){
  const act=(selector:string)=>activate(page,selector,mode,selector.startsWith('[data-td-pack=')?'[data-td-pack]':selector.startsWith('[data-td-goal=')?'[data-td-goal]':tacticsRegion(selector));

@@ -11,7 +11,7 @@ const EQUATION_RELEASE: GateCommand = { program: "pnpm", args: ["run", "test:e2e
 const EQUATION_VISUAL: GateCommand = { program: "pnpm", args: ["run", "test:e2e:equation-slider:visual"], label: "Equation Slider visual and geometry profile" };
 const EQUATION_PLAYTEST: GateCommand = { program: "pnpm", args: ["run", "test:e2e:equation-slider:playtest"], label: "Equation Slider bounded agent playtest" };
 const UNIT: GateCommand = { program: "pnpm", args: ["test"], label: "unit and content tests" };
-const TYPECHECK: GateCommand = { program: "pnpm", args: ["exec", "tsc", "--noEmit"], label: "typecheck" };
+const TYPECHECK: GateCommand = { program: "pnpm", args: ["run", "typecheck"], label: "typecheck" };
 const BUILD: GateCommand = { program: "pnpm", args: ["build"], label: "production build" };
 const SMOKE: GateCommand = { program: "pnpm", args: ["run", "test:portfolio:smoke"], label: "all-game portfolio smoke" };
 const INTERACTION_STATIC: GateCommand = { program: "pnpm", args: ["run", "validate:interaction-integrity"], label: "UI occlusion inventory and interaction-integrity contracts" };
@@ -27,6 +27,11 @@ const DEFENSE_E2E: GateCommand = { program: "pnpm", args: ["run", "test:e2e:hanz
 const ADVENTURE: GateCommand = { program: "pnpm", args: ["run", "validate:hanzi-word-adventure"], label: "Word adventure bounded state search and replay" };
 const ADVENTURE_E2E: GateCommand = { program: "pnpm", args: ["run", "test:e2e:hanzi-word-adventure"], label: "Word adventure five-room keyboard and touch play" };
 const MEMORY: GateCommand = { program: "pnpm", args: ["run", "test:memory-match"], label: "Independent memory-match content and save contracts" };
+const BOX_E2E: GateCommand = { program: 'pnpm', args: ['run', 'test:e2e:world-in-a-box'], label: 'World Box three-scene deep browser checks' };
+const ODDITY_E2E: GateCommand = { program: 'pnpm', args: ['run', 'test:e2e:oddity-puzzles'], label: 'Oddity intentions, geometry and lifecycle browser checks' };
+const ENGLISH_E2E: GateCommand = { program: 'pnpm', args: ['run', 'test:e2e:english-study'], label: 'English Study Chromium/WebKit device matrix' };
+const HANZI_STUDY_E2E: GateCommand = { program: 'pnpm', args: ['run', 'test:e2e:hanzi-stroke-lab'], label: 'Hanzi Study Chromium/WebKit device matrix' };
+const MEMORY_E2E: GateCommand = { program: 'pnpm', args: ['run', 'test:e2e:storage'], label: 'Memory protected bytes and public Vault recovery' };
 function gameSmoke(id: string): GateCommand {
   return { program: "pnpm", args: ["run", "test:portfolio:smoke", "--", "--grep", `@game:${id}`], label: `${id} entry/interaction/return smoke` };
 }
@@ -39,19 +44,23 @@ function unique(commands: readonly GateCommand[]): GateCommand[] {
 export function affectedGateCommands(changedFiles: readonly string[]): GateCommand[] {
   const files = changedFiles.map((file) => file.replaceAll("\\", "/").replace(/^\.\//, ""));
   if (!files.length) return [PORTFOLIO_CHECK];
-  const full = files.some((file) => /^(src\/main\.ts|src\/app-route\.ts|package\.json|pnpm-lock\.yaml|tsconfig\.json|vite\.config\.ts|vitest\.config\.ts|playwright.*\.config\.ts)$/.test(file)
-    || file.startsWith("packages/game-core/") || file.startsWith("apps/my-game-world/") || file === "<unknown>");
+  const full = files.some((file) => /^(src\/main\.ts|src\/app-route\.ts|package\.json|pnpm-lock\.yaml|tsconfig(?:\.[\w-]+)?\.json|vite\.config\.ts|vitest\.config\.ts|playwright.*\.config\.ts)$/.test(file)
+    || file.startsWith("packages/game-core/") || file.startsWith("packages/preferences/") || file.startsWith("apps/my-game-world/") || file === "<unknown>");
   const equationAffected = files.some((file) => file.startsWith("games/equation-slider/") || file.startsWith("tests/equation-slider-") || file.startsWith("tests/e2e/equation-slider"));
   const equationCommands = equationAffected ? [EQUATION_LEVELS, EQUATION_E2E, EQUATION_RELEASE, EQUATION_VISUAL, EQUATION_PLAYTEST] : [];
   const hanziCommands = files.some(file => file.includes("hanzi-tower-defense")) ? [DEFENSE, DEFENSE_E2E] : [];
-  if (full) return unique([PORTFOLIO_CHECK, PORTFOLIO_EVOLUTION_CHECK, ...equationCommands, ...hanziCommands, INTERACTION_STATIC, SCROLL_STATIC, UNIT, MATH_WORLD_VALIDATE, MEMORY, TYPECHECK, BUILD, MATH_WORLD_E2E, DEFENSE_E2E, ADVENTURE, ADVENTURE_E2E, INTERACTION_HITTEST, SCROLL_REACHABILITY, SMOKE]);
+  if (full) return unique([PORTFOLIO_CHECK, PORTFOLIO_EVOLUTION_CHECK, ...equationCommands, ...hanziCommands, INTERACTION_STATIC, SCROLL_STATIC, UNIT, MATH_WORLD_VALIDATE, MEMORY, TYPECHECK, BUILD, MATH_WORLD_E2E, DEFENSE_E2E, ADVENTURE, ADVENTURE_E2E, BOX_E2E, ODDITY_E2E, ENGLISH_E2E, HANZI_STUDY_E2E, MEMORY_E2E, INTERACTION_HITTEST, SCROLL_REACHABILITY, SMOKE]);
   const commands: GateCommand[] = [PORTFOLIO_CHECK, PORTFOLIO_EVOLUTION_CHECK];
   for (const file of files) {
     const game = /^games\/([^/]+)\//.exec(file)?.[1];
     if (/^(?:apps|games|packages|src)\/.+\.css$/.test(file)) commands.push(INTERACTION_STATIC, SCROLL_STATIC, INTERACTION_HITTEST, SCROLL_REACHABILITY);
-    if (file.startsWith("packages/activity-engines/memory-match/")) commands.push(MEMORY, SMOKE);
+    if (file.startsWith("packages/activity-engines/memory-match/")) commands.push(MEMORY, MEMORY_E2E, SMOKE);
     else if (game && ["math-lab", "clock-reader", "multiplication-adventure", "make-target"].includes(game)) commands.push(MATH_WORLD_UNIT, MATH_WORLD_VALIDATE, MATH_WORLD_E2E);
-    else if (game === "memory-card") commands.push(MEMORY);
+    else if (game === "memory-card") commands.push(MEMORY, MEMORY_E2E);
+    else if (game === 'world-in-a-box') commands.push(UNIT, BOX_E2E, gameSmoke(game));
+    else if (game === 'oddity-puzzles') commands.push(UNIT, ODDITY_E2E, gameSmoke(game));
+    else if (game === 'english-study') commands.push(UNIT, ENGLISH_E2E);
+    else if (game === 'hanzi-stroke-lab') commands.push(UNIT, HANZI_STUDY_E2E);
     else if (game === "equation-slider") commands.push(UNIT, ...equationCommands, gameSmoke(game));
     else if (game === "hanzi-word-adventure") commands.push(UNIT, ADVENTURE, ADVENTURE_E2E, gameSmoke(game));
     else if (game) commands.push(UNIT, gameSmoke(game));

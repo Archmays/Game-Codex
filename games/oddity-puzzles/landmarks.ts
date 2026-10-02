@@ -1,4 +1,5 @@
-import {layout,position,point,type State,type Vec} from './model';
+import type {Pick} from './selection';
+import {actor,layout,position,point,type State,type Vec} from './model';
 export interface Landmark {id:string;label:string;icon:string;kind:'item'|'actor'|'node'|'wall'|'info';p:Vec;entity?:string;node?:string;direction?:number}
 /** Small UI pictograms; illustrated abilities reuse their shipped model thumbnails. */
 export function landmarkIcon(mark:Landmark):string {
@@ -19,4 +20,10 @@ export function landmarks(s:State,endpoints=false,walls=false,carry=false,expand
  if(s.level===2)list.push({id:'info:gap',kind:'info',label:'断路',icon:'⌁',p:[1.2,0,-2.6]});
  if(walls)for(const [direction,label,p]of [[0,'房间后墙',[-3,1.2,-5.75]],[1,'通道墙',[0,1.2,1]],[2,'左侧墙',[-5.5,1.2,-2]]] as [number,string,Vec][])list.push({id:'wall:'+direction,kind:'wall',label,icon:'☀',direction,p});
  return list;
+}
+
+/** Temporary endpoint selection never changes the rules or world positions. */
+export function selectionLandmarks(s:State,picking:Pick|null,selected:string,expandedLandmarks:boolean){
+ const endpoints=!!picking&&['ring-place','release','npc-move'].includes(picking.kind);const walls=picking?.kind==='lamp-wall';let currentMarks=landmarks(s,endpoints,walls,picking?.kind==='ring-place',expandedLandmarks);if(selected&&!currentMarks.some(m=>m.entity===selected)){const o=s.items.find(o=>o.id===selected);if(o)currentMarks.push({id:'item:'+o.id,kind:'item',entity:o.id,label:entityName(s,o.id),icon:'',p:position(s,o.id)});}if(picking?.kind==='release'){const from=layout(s).nodes.find(n=>n.id===actor(s,picking!.who).node)!.p;currentMarks=currentMarks.filter(m=>!m.node||Math.hypot(m.p[0]-from[0],m.p[2]-from[2])<=1.6);}
+ return currentMarks;
 }

@@ -1,3 +1,6 @@
+import {beginBoxGesture,boxGestureScrolled,type BoxGesture} from './box-gesture';
+import {BoxLifetime} from './box-lifecycle';
+import {BoxPauses} from './box-pause';
 import type { MountGameContext,MountedGame } from '../../packages/game-core';
 import { bindInputLifecycle,rovingGroup,ignoreGameKey } from '../../packages/ui/input';
 import { IDS,LABELS,fresh,restore,reduce,fits,windy,shutter,type Piece,type Action } from './model';
@@ -7,9 +10,9 @@ import {continuousTurn} from './continuous-turn';
 import './style.css';
 
 export function mountWorldBox({container:root,storage,onExit}:MountGameContext):MountedGame{
-  let state=restore(storage.get('v1',fresh())),selected:Piece|null=null,page=0,ready=false,dead=false,saveWarning=false,busyUntil=0,frame=0,last=performance.now();
+  let state=restore(storage.get('v1',fresh())),selected:Piece|null=null,page=0,ready=false,dead=false,saveWarning=false,busyUntil=0,last=performance.now();
   const history:Piece[]=[];const thumbs=new Map<Piece,string>();
-  const abort=new AbortController();const signal=abort.signal;
+  const lifetime=new BoxLifetime();const signal=lifetime.signal;
   root.className='wb-mount';root.innerHTML=`<main class="wb" aria-labelledby="wb-title">
     <header class="wb-header"><div><p>世界盒子 <span>01 / 窗边</span></p><h1 id="wb-title">窗边有风</h1></div><button data-action="exit" aria-label="返回游戏世界">返回 ↗</button></header>
     <div class="wb-intro"><p data-message role="status">选一件，把它放回小世界。</p><span data-progress>0 / 8</span></div>
@@ -31,9 +34,9 @@ export function mountWorldBox({container:root,storage,onExit}:MountGameContext):
   const say=(text:string)=>{q('[data-message]').textContent=text;};
   const save=()=>{try{storage.set('v1',state);saveWarning=JSON.stringify(storage.get('v1',null))!==JSON.stringify(state);}catch{saveWarning=true;}};
   const sounds=boxSound(root,storage,'window-breeze',state.muted,muted=>{state.muted=muted;save();update();}),audio=sounds.audio;state.muted=sounds.muted;
-  const modalReasons=new Set<string>();let background=false,revision=0;
+  const modalReasons=new BoxPauses((reason,open)=>audio.pause(reason,open));let background=false,revision=0;
   const stopTurn=continuousTurn(root,delta=>{if(!ready||modalReasons.size)return;scene.turn(delta);refreshTargets();},signal);
-  function modal(reason:string,open:boolean){cancelGesture();stopTurn();if(reason==='settings')return;if(open)modalReasons.add(reason);else modalReasons.delete(reason);audio.pause(reason,open);if(!open)sound();}
+  function modal(reason:string,open:boolean){cancelGesture();stopTurn();if(reason==='settings')return;modalReasons.set(reason,open);if(!open)sound();}
   root.addEventListener('box-modal',e=>{const d=(e as CustomEvent).detail;modal(d.reason,d.open);},{signal});
   const sound=()=>audio.set(windy(state),state.muted,state.placed.includes('wind_chime'));
   function update(){
@@ -112,10 +115,10 @@ export function mountWorldBox({container:root,storage,onExit}:MountGameContext):
     }
     refreshTargets();
   }
-  let gesture:{id:number;x:number;y:number;lastX:number;start:HTMLElement;scrollX:number;scrollY:number;scrollers:{node:HTMLElement;x:number;y:number}[];piece?:Piece;moved:boolean;blocked:boolean}|null=null;
+  let gesture:BoxGesture<Piece>|null=null;
   let suppressedUntil=0,validClick=false;
   function cancelGesture(){stopTurn();gesture=null;validClick=false;suppressedUntil=performance.now()+180;stage.classList.remove('wb-dragging');}
-  root.addEventListener('pointerdown',e=>{validClick=false;if(gesture||!e.isPrimary){cancelGesture();return;}suppressedUntil=0;const target=e.target as HTMLElement;const scrollers:{node:HTMLElement;x:number;y:number}[]=[];for(let node:HTMLElement|null=target;node;node=node.parentElement)scrollers.push({node,x:node.scrollLeft,y:node.scrollTop});gesture={id:e.pointerId,x:e.clientX,y:e.clientY,lastX:e.clientX,start:target,scrollX,scrollY,scrollers,piece:target.closest<HTMLElement>('[data-piece]')?.dataset.piece as Piece|undefined,moved:false,blocked:false};},{signal});
+  root.addEventListener('pointerdown',e=>{validClick=false;if(gesture||!e.isPrimary){cancelGesture();return;}suppressedUntil=0;gesture=beginBoxGesture<Piece>(e);},{signal});
   root.addEventListener('pointermove',e=>{if(!gesture||gesture.id!==e.pointerId)return;const g=gesture;const distance=Math.hypot(e.clientX-g.x,e.clientY-g.y);if(distance>9)g.moved=true;
     if(g.moved&&g.piece){if(selected!==g.piece)choose(g.piece);stage.classList.add('wb-dragging');}
     else if(g.moved&&g.start.closest('.wb-stage')&&!g.start.closest('button')&&Math.abs(e.clientX-g.x)>Math.abs(e.clientY-g.y)*1.4){scene.turn(-(e.clientX-g.lastX)*.008);refreshTargets();}
@@ -126,13 +129,14 @@ export function mountWorldBox({container:root,storage,onExit}:MountGameContext):
   root.addEventListener('keydown',e=>{if(!ready||ignoreGameKey(e,root))return;if(e.key.toLowerCase()==='z'&&!root.querySelector('dialog[open]')){e.preventDefault();perform('undo');return;}if(e.key==='Escape'&&!root.querySelector('dialog[open]')){selected=null;cancelGesture();say('选一件，把它放回小世界。');update();tray.querySelector<HTMLButtonElement>('button:not([hidden])')?.focus();}},{signal});
   dialog.addEventListener('cancel',e=>{e.preventDefault();perform('cancel-reset');},{signal});dialog.addEventListener('close',()=>{modal('reset',false);controls('reset').focus({preventScroll:true});},{signal});
   const unbind=bindInputLifecycle(root,e=>{cancelGesture();stopTurn();if(e?.type!=='pointercancel'){background=true;audio.pause('background',true);}});
-  window.addEventListener('scroll',()=>{if(gesture&&(scrollX!==gesture.scrollX||scrollY!==gesture.scrollY||gesture.scrollers.some(p=>p.node.scrollLeft!==p.x||p.node.scrollTop!==p.y)))cancelGesture();},{signal,passive:true,capture:true});root.addEventListener('wheel',cancelGesture,{signal,passive:true});
+  window.addEventListener('scroll',()=>{if(gesture&&(boxGestureScrolled(gesture)))cancelGesture();},{signal,passive:true,capture:true});root.addEventListener('wheel',cancelGesture,{signal,passive:true});
   root.addEventListener('box-audio-interrupted',e=>{background=!!(e as CustomEvent).detail;audio.pause('background',background);if(!background)sound();},{signal});
   window.addEventListener('focus',()=>{if(!dead&&!document.hidden){background=false;audio.pause('background',false);sound();}},{signal});document.addEventListener('visibilitychange',()=>{if(!document.hidden&&document.hasFocus()){background=false;audio.pause('background',false);sound();}},{signal});
   const resize=new ResizeObserver(()=>{scene.resize();refreshTargets();});resize.observe(canvas);
-  const tick=(now:number)=>{if(dead)return;const dt=Math.max(0,(now-last)/1000);last=now;if(ready){const paused=background||document.hidden||modalReasons.size>0;scene.frame(state,now,Math.min(.05,dt),paused);audio.tick(now,state.placed.includes('book')||state.placed.includes('plant'));root.dataset.audio=JSON.stringify(audio.diagnostics());refreshTargets();}frame=requestAnimationFrame(tick);};frame=requestAnimationFrame(tick);
+  const tick=(now:number)=>{if(dead)return;const dt=Math.max(0,(now-last)/1000);last=now;if(ready){const paused=background||document.hidden||modalReasons.size>0;scene.frame(state,now,Math.min(.05,dt),paused);audio.tick(now,state.placed.includes('book')||state.placed.includes('plant'));root.dataset.audio=JSON.stringify(audio.diagnostics());refreshTargets();}};lifetime.animate(tick);
   void scene.load().then(()=>{if(dead)return;for(const id of IDS)thumbs.set(id,scene.thumbnail(id));ready=true;root.dataset.ready='true';q('.wb-loading').hidden=true;update();if(state.placed.length)say(state.placed.length===8?'小世界醒来了':'接着上次的小世界，继续拼吧。');}).catch(()=>{if(!dead){q('.wb-loading').textContent='小世界暂时没装好，请刷新再试。已存进度保留。';}});
   window.addEventListener('pagehide',()=>destroy(true),{signal});
-  function destroy(immediate=false){if(dead)return;dead=true;cancelAnimationFrame(frame);abort.abort();unbind();resize.disconnect();trayNav.destroy();targetNav.destroy();audio.destroy(immediate);scene.destroy();root.replaceChildren();}
+  lifetime.own(unbind);lifetime.own(()=>resize.disconnect());lifetime.own(()=>trayNav.destroy());lifetime.own(()=>targetNav.destroy());
+ function destroy(immediate=false){if(dead)return;dead=true;lifetime.destroy();sounds.destroy(immediate);scene.destroy();root.replaceChildren();}
   return{destroy};
 }

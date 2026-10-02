@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import ts from "typescript";
 
@@ -54,13 +54,14 @@ function readDefinition(path: string, exportName: string): GameCatalogMetadata {
 export function loadGameCatalogMetadata(root = resolve(import.meta.dirname, "../..")): GameCatalogMetadata[] {
   const catalogPath = resolve(root, "packages/data/gameCatalog.ts");
   const source = sourceFile(catalogPath);
-  const imports = new Map<string, string>();
+  const imports = new Map<string, { path: string; exportName: string }>();
   for (const statement of source.statements) {
     if (!ts.isImportDeclaration(statement) || !statement.importClause?.namedBindings || !ts.isNamedImports(statement.importClause.namedBindings) || !ts.isStringLiteral(statement.moduleSpecifier)) continue;
     for (const element of statement.importClause.namedBindings.elements) {
       const localName = element.name.text;
-      const modulePath = resolve(dirname(catalogPath), statement.moduleSpecifier.text, "index.ts");
-      imports.set(localName, modulePath);
+      const base = resolve(dirname(catalogPath), statement.moduleSpecifier.text);
+      const modulePath = existsSync(`${base}.ts`) ? `${base}.ts` : resolve(base, "index.ts");
+      imports.set(localName, { path: modulePath, exportName: element.propertyName?.text ?? localName });
     }
   }
   for (const statement of source.statements) {
@@ -69,9 +70,9 @@ export function loadGameCatalogMetadata(root = resolve(import.meta.dirname, "../
       if (!ts.isIdentifier(declaration.name) || declaration.name.text !== "allGameDefinitions" || !declaration.initializer || !ts.isArrayLiteralExpression(declaration.initializer)) continue;
       return declaration.initializer.elements.map((element) => {
         if (!ts.isIdentifier(element)) throw new Error("allGameDefinitions entries must be imported identifiers");
-        const definitionPath = imports.get(element.text);
-        if (!definitionPath) throw new Error(`Missing import path for catalog entry ${element.text}`);
-        return readDefinition(definitionPath, element.text);
+        const definition = imports.get(element.text);
+        if (!definition) throw new Error(`Missing import path for catalog entry ${element.text}`);
+        return readDefinition(definition.path, definition.exportName);
       });
     }
   }

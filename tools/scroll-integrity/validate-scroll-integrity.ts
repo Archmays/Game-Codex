@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
 import { dirname, relative, resolve } from "node:path";
-import { APP_ROUTE_QUERY_MANIFEST, PLAY_SURFACE_MANIFEST } from "../../packages/data/playSurfaceManifest";
+import { APP_ROUTE_QUERY_MANIFEST, PLAY_SURFACE_MANIFEST, type AppRouteQueryRegistration } from "../../packages/data/playSurfaceManifest";
 
 type RiskKind =
   | "overflow-hidden"
@@ -86,8 +86,9 @@ for (const surface of PLAY_SURFACE_MANIFEST) {
   if (surface.scrollPolicy === "locked" && !surface.lockedReason) issues.push(`${surface.id}: locked policy requires machine-readable justification`);
   if (surface.scrollPolicy !== "locked" && surface.lockedReason) issues.push(`${surface.id}: only locked policy may declare lockedReason`);
 }
-if (APP_ROUTE_QUERY_MANIFEST.every((route) => route.defaultScrollPolicy === "locked")) issues.push("Route registry still locks every route family");
-const lockedRouteDefaults = APP_ROUTE_QUERY_MANIFEST.filter((route) => route.defaultScrollPolicy === "locked").map((route) => route.queryValue).sort();
+const routeDefaults: readonly AppRouteQueryRegistration[] = APP_ROUTE_QUERY_MANIFEST;
+if (routeDefaults.every((route) => route.defaultScrollPolicy === "locked")) issues.push("Route registry still locks every route family");
+const lockedRouteDefaults = routeDefaults.filter((route) => route.defaultScrollPolicy === "locked").map((route) => route.queryValue).sort();
 if (JSON.stringify(lockedRouteDefaults) !== JSON.stringify([])) issues.push("Current public routes must retain document scrolling");
 const appRoute = readFileSync(resolve(ROOT, "src/app-route.ts"), "utf8");
 const pageMode = readFileSync(resolve(ROOT, "src/page-mode.css"), "utf8");

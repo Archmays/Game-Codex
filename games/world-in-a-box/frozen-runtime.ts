@@ -1,3 +1,6 @@
+import {beginBoxGesture,boxGestureScrolled,type BoxGesture} from './box-gesture';
+import {BoxLifetime} from './box-lifecycle';
+import {BoxPauses} from './box-pause';
 import type {MountGameContext,MountedGame} from '../../packages/game-core';
 import {rovingGroup,bindInputLifecycle,ignoreGameKey} from '../../packages/ui/input';
 import {FROZEN_IDS,FROZEN_LABELS,GROUPS,FROZEN_KEY,frozenGroup,freshFrozen,restoreFrozen,freshFrozenMotion,assemble,magic,startRide,startSkate,undoFrozen,stepFrozen,rideMissing,type FrozenPiece,type Magic} from './frozen-model';
@@ -6,8 +9,8 @@ import {continuousTurn} from './continuous-turn';
 import {boxSound} from './audio-settings';
 import './style.css';import './frozen.css';
 export function mountFrozen({container:root,storage,onExit}:MountGameContext):MountedGame{
- let state=restoreFrozen(storage.get(FROZEN_KEY,null)),motion=freshFrozenMotion(state),selected:FrozenPiece|null=null,group=0,page=0,ready=false,dead=false,raf=0,last=performance.now(),background=false,warning=false;
- const history:FrozenPiece[]=[],abort=new AbortController(),signal=abort.signal,pauses=new Set<string>();
+ let state=restoreFrozen(storage.get(FROZEN_KEY,null)),motion=freshFrozenMotion(state),selected:FrozenPiece|null=null,group=0,page=0,ready=false,dead=false,last=performance.now(),background=false,warning=false;
+ const history:FrozenPiece[]=[],lifetime=new BoxLifetime(),signal=lifetime.signal,pauses=new BoxPauses((reason,open)=>audio.pause(reason,open));
  const button=(action:string,text:string)=>`<button data-action="${action}">${text}</button>`;
  root.className='wb-mount frozen-mount';root.innerHTML=`<main class="wb frozen" aria-labelledby="wb-title"><header class="wb-header"><div><p>世界盒子 <span>03 / SNOW DAY</span></p><h1 id="wb-title">艾莎的冰雪游乐日</h1></div>${button('exit','返回 ↗')}</header><div class="wb-intro"><p role="status" data-message>点雪花，让艾莎试试魔法。</p><span data-progress>0 / 16</span></div><nav class="fr-views" aria-label="观察小世界">${[['all','看全城'],['town','看城镇'],['lake','看雪湖'],['palace','看冰宫']].map(([id,label])=>`<button data-view="${id}">${label}</button>`).join('')}</nav><div class="fr-workbench"><div><section class="wb-stage" aria-label="艾莎的三维冰雪世界"><div class="wb-canvas"></div><div class="wb-targets" role="group" aria-label="场景里的动作与位置"></div><p class="wb-loading">正在打开冰雪盒子……</p></section><nav class="wb-camera" aria-label="转动与近看">${button('left','↶ 按住左转')}${button('right','按住右转 ↷')}${button('up','抬高')}${button('down','放低')}${button('in','放大')}${button('out','缩小')}</nav><section class="fr-near" data-near hidden aria-label="朋友的玩法"><div class="fr-actions">${button("sleigh-play","雪橇游览")}${button("olaf-play","和雪宝玩")}</div><div data-play="sleigh" hidden><strong>雪橇游览</strong><p data-ride-status></p><div data-missing></div><div class="fr-actions">${button('lake-ride','雪湖兜一圈')}${button('palace-ride','去冰宫')}${button('ride-pause','暂停')}${button('ride-continue','继续')}${button('ride-return','返回停车位')}${button('anna','带上安娜')}${button('follow','跟随 / 退出跟随')}</div></div><div data-play="olaf" hidden><strong>和雪宝一起玩</strong><p data-skate-status></p><div class="fr-actions">${button('wave','招手 / 重新组合')}${button('circle','滑圆圈')}${button('eight','滑八字')}${button('skate-stop','到场边停下')}${button('bridge-walk','走过冰桥')}${button('bridge-back','走回平台')}</div></div><div data-play="palace" hidden><strong>冰宫里的光</strong><div class="fr-actions">${button('door','开 / 合冰门')}${button('chandelier','轻摆吊灯')}</div></div>${button('close-near','收起操作')}</section></div><section class="wb-tray" aria-label="待拼物件"><nav class="fr-groups" aria-label="托盘分组">${GROUPS.map((name,i)=>`<button data-group="${i}">${name}</button>`).join('')}</nav><div class="wb-tray-top"><span data-selection>选一件，也可以先玩魔法</span>${button('cancel','放回托盘')}</div><div class="wb-tray-line">${button('prev','上一页')}<div class="wb-pieces" role="group" aria-label="物件托盘"></div>${button('next','下一页')}</div><p data-page></p><p class="fr-tip">点选一件，再点它的形状站位。<br>四组自由选择，不必按顺序。</p></section></div><footer class="wb-tools">${button('resume-world','继续玩')}${button('help','帮助：关')}${button('hint','找找位置')}${button('undo','撤销 (Z)')}${button('friends','朋友玩法')}${button('palace','冰宫玩法')}${button('mute','声音：开')}${button('reset','重置本关')}</footer><p class="wb-subtitle" data-subtitle>自制同人玩具场景 · 非官方作品。魔法是幻想表现。</p><dialog class="wb-dialog" data-reset aria-label="重置冰雪盒子"><h2>重新拼冰雪盒子吗？</h2><p>只收回本盒16件和魔法；艾莎、固定背景、其他盒子的进度及声音设置保留。</p>${button('cancel-reset','继续玩')}${button('confirm-reset','确认重置')}</dialog></main>`;
  const q=<E extends HTMLElement=HTMLElement>(s:string)=>root.querySelector<E>(s)!,control=(a:string)=>q<HTMLButtonElement>(`[data-action="${a}"]`),say=(text:string)=>{q('[data-message]').textContent=text;};
@@ -44,7 +47,7 @@ export function mountFrozen({container:root,storage,onExit}:MountGameContext):Mo
  function choose(id:FrozenPiece){if(!ready||state.placed.includes(id)||motion.pending)return;selected=id;motion.follow=false;audio.event('pick');update();if(state.help)reveal();}
  function place(id:FrozenPiece){if(!ready||!selected)return;const previous=selected;if(!assemble(state,selected,id)){say('这里的形状不太合适，再看看。');return;}history.push(id);selected=null;scene.land(id);save();audio.place(frozenGroup(id)===3?1.4:.7);say(state.placed.length===16?'拼好了！还可以施法、游览和滑冰。':FROZEN_LABELS[id]+'归位啦。');if(state.placed.length===16)audio.event('complete');scene.frame(state,motion,0);update();const next=tray.querySelector<HTMLButtonElement>('button:not([hidden]):not(:disabled)');(next??q<HTMLButtonElement>(`[data-group="${frozenGroup(previous)}"]`)).focus({preventScroll:true});}
  function cast(kind:Magic){if(selected){say('正在拿拼件，先放好或放回托盘。');return;}const before=motion.cast;say(magic(state,motion,kind));if(motion.cast&&!before)audio.event('frozen-gather');update();}
- function modal(reason:string,open:boolean){cancelGesture();if(open)pauses.add(reason);else pauses.delete(reason);audio.pause(reason,open);}
+ function modal(reason:string,open:boolean){cancelGesture();pauses.set(reason,open);}
  root.addEventListener('box-modal',e=>{const d=(e as CustomEvent).detail;modal(d.reason,d.open);},{signal});
  function perform(a:string){if(a==='exit'){destroy();onExit();return;}if(!ready)return;
   if(['up','down','in','out'].includes(a))motion.follow=false;
@@ -73,11 +76,11 @@ export function mountFrozen({container:root,storage,onExit}:MountGameContext):Mo
   }update();
  }
  reset.addEventListener('close',()=>{modal('reset',false);control('reset').focus({preventScroll:true});},{signal});
- let gesture:{x:number;y:number;id:number;target:HTMLElement;scroll:number;piece?:FrozenPiece;moved:boolean}|null=null,suppressed=false;
+ let gesture:BoxGesture<FrozenPiece>|null=null,suppressed=false;
  function cancelGesture(){gesture=null;suppressed=true;stopTurn();}
- root.addEventListener('pointerdown',e=>{if(!e.isPrimary||gesture){cancelGesture();return;}suppressed=false;gesture={x:e.clientX,y:e.clientY,id:e.pointerId,target:e.target as HTMLElement,scroll:scrollY,piece:(e.target as HTMLElement).closest<HTMLElement>('[data-piece]')?.dataset.piece as FrozenPiece|undefined,moved:false};void audio.unlock();},{signal});
+ root.addEventListener('pointerdown',e=>{if(!e.isPrimary||gesture){cancelGesture();return;}suppressed=false;gesture=beginBoxGesture<FrozenPiece>(e);void audio.unlock();},{signal});
  root.addEventListener('pointermove',e=>{if(!gesture||gesture.id!==e.pointerId)return;if(Math.hypot(e.clientX-gesture.x,e.clientY-gesture.y)>9)gesture.moved=true;},{signal});
- window.addEventListener('pointerup',e=>{if(!gesture)return;const g=gesture;gesture=null;suppressed=g.moved||g.scroll!==scrollY;if(g.moved&&g.piece&&g.scroll===scrollY){choose(g.piece);const hit=scene.pick(e.clientX,e.clientY);if(FROZEN_IDS.includes(hit as FrozenPiece))place(hit as FrozenPiece);}},{signal});
+ window.addEventListener('pointerup',e=>{if(!gesture)return;const g=gesture;gesture=null;suppressed=g.moved||boxGestureScrolled(g);if(g.moved&&g.piece&&!boxGestureScrolled(g)){choose(g.piece);const hit=scene.pick(e.clientX,e.clientY);if(FROZEN_IDS.includes(hit as FrozenPiece))place(hit as FrozenPiece);}},{signal});
  root.addEventListener('pointercancel',cancelGesture,{signal});window.addEventListener('wheel',cancelGesture,{signal,passive:true});
  root.addEventListener('click',e=>{if(e.detail>0&&suppressed)return;if(e.detail===0)void audio.unlock();const t=e.target as HTMLElement;if(t.closest('dialog')&&!t.closest('[data-reset]'))return;const b=t.closest<HTMLButtonElement>('button');if(b?.disabled)return;
   if(b?.dataset.action)perform(b.dataset.action);else if(b?.dataset.group){group=Number(b.dataset.group);page=0;update();}else if(b?.dataset.view){motion.follow=false;scene.go(b.dataset.view);layout();}else if(b?.dataset.piece)choose(b.dataset.piece as FrozenPiece);else if(b?.dataset.slot)place(b.dataset.slot as FrozenPiece);else if(b?.dataset.magic)cast(b.dataset.magic as Magic);else if(b?.dataset.locate){const id=b.dataset.locate as FrozenPiece;group=frozenGroup(id);page=Math.floor(FROZEN_IDS.filter(p=>frozenGroup(p)===group).indexOf(id)/3);choose(id);reveal();}else if(t===scene.renderer.domElement){const hit=scene.pick(e.clientX,e.clientY);if(!hit)return;if(hit.startsWith('magic_'))cast(hit.slice(6) as Magic);else if(selected)place(hit as FrozenPiece);else if(hit==='olaf')show('olaf');else if(['sleigh','sven','kristoff','anna'].includes(hit))show('sleigh');else if(hit.startsWith('palace_'))show('palace');}
@@ -93,10 +96,11 @@ export function mountFrozen({container:root,storage,onExit}:MountGameContext):Mo
    const seg=Math.floor(motion.bridgeAmount*12);if(seg!==previousBridge&&dt)audio.event('frozen-crystal',.5);previousBridge=seg;
    audio.want('sleigh','frozen-slide','sfx',motion.ride.speed>0&&dt?.11:0);audio.want('hooves','frozen-hooves','sfx',motion.ride.speed>0&&dt?.10:0);audio.want('skate','frozen-skate','sfx',motion.skate.pattern&&dt&&!motion.skate.exiting?.09:0);audio.want('snow','frozen-snow','sfx',motion.snow&&dt?.06:0);audio.want('frost','frozen-frost','sfx',motion.rink==='growing'&&dt?.09:0);
    if(now-lastUI>100){update();lastUI=now;}root.dataset.diagnostics=JSON.stringify({scene:scene.diagnostics(),audio:audio.diagnostics(),revision:motion.revision});
-  }raf=requestAnimationFrame(tick);
+  }
  }
  void scene.load().then(()=>{if(dead)return;ready=true;scene.frame(state,motion,0);for(const id of FROZEN_IDS)q<HTMLImageElement>(`[data-piece="${id}"] img`).src=scene.thumbnail(id);q('.wb-loading').hidden=true;scene.frame(state,motion,0);update();root.dataset.ready='true';}).catch(()=>{if(!dead)q('.wb-loading').textContent='模型暂时没有加载成功，请返回再试；存档保留。';});
- raf=requestAnimationFrame(tick);
- function destroy(){if(dead)return;dead=true;motion.revision++;abort.abort();unbind();resize.disconnect();navs.forEach(n=>n.destroy());cancelAnimationFrame(raf);audio.destroy();scene.destroy();root.replaceChildren();}
+ lifetime.animate(tick);
+ lifetime.own(unbind);lifetime.own(()=>resize.disconnect());lifetime.own(()=>navs.forEach(n=>n.destroy()));
+ function destroy(){if(dead)return;dead=true;motion.revision++;lifetime.destroy();sounds.destroy();scene.destroy();root.replaceChildren();}
  return{destroy};
 }

@@ -78,7 +78,16 @@
     "test:hanzi-tower-defense": "vitest run tests/hanzi-tower-defense.test.ts --no-file-parallelism",
     "validate:hanzi-tower-defense": "tsx tools/hanzi-tower-defense/validate-balance.ts",
     "test:e2e:hanzi-tower-defense": "playwright test --config playwright.hanzi-tower-defense.config.ts",
-    "test:memory-match": "vitest run tests/memory-match.test.ts tests/memory-match-save.test.ts --no-file-parallelism"
+    "test:memory-match": "vitest run tests/memory-match.test.ts tests/memory-match-save.test.ts --no-file-parallelism",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.tools.json --noEmit",
+    "test:world-in-a-box": "vitest run tests/world-in-a-box.test.ts tests/world-in-a-box-step03.test.ts tests/world-in-a-box-dresden.test.ts tests/world-box-frozen.test.ts tests/world-box-lifecycle.test.ts --no-file-parallelism",
+    "test:oddity-puzzles": "vitest run tests/oddity-puzzles.test.ts tests/oddity-puzzles-intent.test.ts tests/oddity-action-coordinator.test.ts --no-file-parallelism",
+    "test:e2e:world-in-a-box": "tsx tools/maintenance/run-scene-checks.ts world-in-a-box",
+    "test:e2e:oddity-puzzles": "tsx tools/maintenance/run-scene-checks.ts oddity-puzzles",
+    "test:e2e:oddity-legacy": "node tools/oddity-puzzles/legacy-compat.mjs",
+    "test:e2e:english-study": "playwright test --config playwright.english-study.config.ts",
+    "test:e2e:hanzi-stroke-lab": "playwright test --config playwright.hanzi-stroke-lab.config.ts",
+    "test:e2e:storage": "playwright test tests/e2e/maintenance-storage.spec.ts"
   },
   "dependencies": {
     "phaser": "^3.90.0",

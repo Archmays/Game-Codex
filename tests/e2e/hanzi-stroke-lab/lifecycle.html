@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta name="viewport" content="width=device-width, initial-scale=1"><base href="/"></head><body>
+<button type="button" data-test-mount>打开书房</button><div data-test-host></div>
+<script type="module">
+import { mountHanziStrokeLab } from '/games/hanzi-stroke-lab/workbench';
+const host=document.querySelector('[data-test-host]');let mounted;
+document.querySelector('[data-test-mount]').onclick=()=>{mounted?.destroy();mounted=mountHanziStrokeLab(host);};
+document.addEventListener('keydown',event=>{if(event.key==='F8'){event.preventDefault();mounted?.destroy();mounted?.destroy();mounted=undefined;host.replaceChildren();}});
+</script></body></html>

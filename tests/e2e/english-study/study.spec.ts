@@ -17,7 +17,7 @@ test('one apple sheet writes continuously, pauses in place, preserves both p ins
   const errors: string[] = [];
   const external: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
-  page.on('request', request => { if (new URL(request.url()).origin !== 'http://127.0.0.1:5175') external.push(request.url()); });
+  page.on('request', request => { if (new URL(request.url()).origin !== new URL(info.project.use.baseURL!).origin) external.push(request.url()); });
   await page.goto('?world=my-game-world');
   const entrance = page.locator('[data-world-english-link]');
   if (info.project.name.includes('touch')) await entrance.tap(); else await entrance.click();
@@ -36,7 +36,7 @@ test('one apple sheet writes continuously, pauses in place, preserves both p ins
   const firstP = board.locator('.es-stroke-ink[data-char-index="1"]');
   const secondP = board.locator('.es-stroke-ink[data-char-index="2"]');
   expect(await firstP.first().getAttribute('transform')).not.toBe(await secondP.first().getAttribute('transform'));
-  if (info.project.name === 'chromium-desktop') await board.screenshot({ path: 'tmp/tasks/ENGLISH-STUDY/apple-before.png' });
+  if (info.project.name === 'chromium-desktop') await board.screenshot({ path: `${process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'test-results'}/english-apple-before.png` });
   const play = page.locator('[data-es-word-pane] [data-es-control="play"]');
   await page.locator('[data-es-word-pane] [data-es-speed]').selectOption('slow');
   if (info.project.name.includes('touch')) await play.tap(); else await play.click();
@@ -45,7 +45,7 @@ test('one apple sheet writes continuously, pauses in place, preserves both p ins
   const quarter = await ratio(page, first);
   await expect.poll(() => ratio(page, first), { timeout: 4000 }).toBeGreaterThan(0.48);
   const half = await ratio(page, first);
-  if (info.project.name === 'chromium-desktop') await board.screenshot({ path: 'tmp/tasks/ENGLISH-STUDY/apple-half-stroke.png' });
+  if (info.project.name === 'chromium-desktop') await board.screenshot({ path: `${process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'test-results'}/english-apple-half-stroke.png` });
   await play.click();
   const frozen = await ratio(page, first);
   expect(frozen).toBeLessThan(1);
@@ -61,11 +61,11 @@ test('one apple sheet writes continuously, pauses in place, preserves both p ins
   await expect.poll(() => ratio(page, '[data-es-word-board] .es-stroke-ink[data-char-index="1"]'), { timeout: 20000 }).toBeCloseTo(1, 3);
   await expect.poll(() => ratio(page, '[data-es-word-board] .es-stroke-ink[data-char-index="2"]'), { timeout: 12000 }).toBeGreaterThan(0.01);
   expect(await ratio(page, '[data-es-word-board] .es-stroke-ink[data-char-index="1"]')).toBe(1);
-  if (info.project.name === 'chromium-desktop') await board.screenshot({ path: 'tmp/tasks/ENGLISH-STUDY/apple-partial.png' });
+  if (info.project.name === 'chromium-desktop') await board.screenshot({ path: `${process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'test-results'}/english-apple-partial.png` });
   await expect(page.locator('[data-es-word-status]')).toContainText('完成', { timeout: 30000 });
   await expect(board.locator('.es-stroke-ink')).toHaveCount(await board.locator('.es-stroke-ghost').count());
   expect(await board.locator('.es-stroke-ink').evaluateAll(paths => paths.every(path => parseFloat((path as SVGPathElement).style.strokeDashoffset) === 0))).toBe(true);
-  if (info.project.name === 'chromium-desktop') await board.screenshot({ path: 'tmp/tasks/ENGLISH-STUDY/apple-complete.png' });
+  if (info.project.name === 'chromium-desktop') await board.screenshot({ path: `${process.env.GAME_CODEX_EVIDENCE_ROOT ?? 'test-results'}/english-apple-complete.png` });
   const dialog = await page.locator('[data-es-word-dialog]').boundingBox();
   const boardBox = await board.boundingBox();
   expect(dialog && boardBox && boardBox.x >= dialog.x && boardBox.x + boardBox.width <= dialog.x + dialog.width + 1).toBeTruthy();
