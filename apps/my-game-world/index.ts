@@ -1,5 +1,4 @@
 import "./styles.css";
-import { mountHub } from "../hub";
 import type { MountedGame } from "../../packages/game-core";
 import { ACTIVE_CHILD_PRODUCTS } from "../../packages/data/gamePortfolio";
 import { mountWorldSettings, type WorldSettingsHandle } from "./ui/WorldSettings";
@@ -63,7 +62,7 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
     <section class="world-stage" aria-label="选择游戏世界">
       <section class="world-object world-object--forest" data-testid="world-forest-portal">
         <a tabindex="0" class="world-entry" href="${activeProductRoute("hanzi-tower-defense")}" data-world-forest-link>
-          <img src="./assets/hanzi-tower-defense/meadow.png" width="720" height="420" alt="" decoding="async">
+          <img src="./assets/home/tower-meadow.webp" width="720" height="420" alt="" decoding="async">
           <div class="world-entry__body"><h2>${WORLD_COPY.forestTitle}</h2><p>摆下字塔，合出更强的字阵，守住城门。</p>
           <span class="world-entry__action">${WORLD_COPY.forestFreshAction}<span aria-hidden="true">↗</span></span></div>
         </a>
@@ -168,25 +167,6 @@ export function mountMyGameWorld(root: HTMLElement, options: MyGameWorldOptions 
       settings?.destroy();
       window.removeEventListener("pageshow", restoreAfterLayout);
       removePageClass("my-game-world-page");
-      root.replaceChildren();
-    },
-  };
-}
-
-export function mountClassicHubFromWorld(root: HTMLElement): MountedGame {
-  addPageClass("classic-hub-from-world-page");
-  root.className = "classic-hub-from-world-mount";
-  root.innerHTML = `<div class="classic-hub-from-world" data-testid="classic-hub-from-world">
-    <nav class="classic-hub-world-nav" aria-label="游戏百宝箱导航"><a tabindex="0" href="${MY_GAME_WORLD_ROUTE}">← 回我的游戏世界</a></nav>
-    <div class="classic-hub-world-inner" data-classic-hub-inner></div>
-  </div>`;
-  const inner = root.querySelector<HTMLElement>("[data-classic-hub-inner]");
-  if (!inner) throw new Error("Classic hub inner mount is missing");
-  const hub = mountHub(inner);
-  return {
-    destroy(): void {
-      hub.destroy();
-      removePageClass("classic-hub-from-world-page");
       root.replaceChildren();
     },
   };

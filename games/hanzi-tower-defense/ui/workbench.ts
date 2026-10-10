@@ -78,7 +78,9 @@ function renderInventory(): void {
       slot.classList.toggle('td-slot--repair',ctx.state.scenarioId==='qinglan-repair'&&c?.id===2);
       slot.classList.toggle("td-partner", !!c && ctx.isPartner(c)); slot.draggable = !!c;
       slot.dataset.towerId = c ? String(c.id) : "";
-      slot.dataset.kind = c?.kind ?? ""; slot.dataset.resonant = String(!!c && !!activeResonance(ctx.state,c));
+      const resonance = c && activeResonance(ctx.state,c);
+      slot.dataset.kind = c?.kind ?? ""; slot.dataset.resonant = String(!!resonance);
+      slot.querySelector('small')!.textContent = `${index + 1}${resonance ? ' · 共鸣' : ''}`;
       const art = slot.querySelector<HTMLImageElement>('.td-tower-art')!, illustrated = !!c && CORE_ORDER.includes(c.kind);
       slot.classList.toggle('td-slot--illustrated', illustrated); art.hidden = !illustrated;
       if (illustrated) { const src = `./assets/v1.0/tower/${c!.kind}${activeResonance(ctx.state,c!) ? '-resonant' : ''}.webp`; if (art.getAttribute('src') !== src) art.setAttribute('src',src); }
@@ -86,7 +88,7 @@ function renderInventory(): void {
       slot.style.setProperty("--core-color", c ? color(c.kind) : "#c8ceba");
       slot.querySelector(".td-slot-glyph")!.textContent = c ? CORES[c.kind].glyph : "＋";
       slot.classList.toggle("td-slot--word", !!c && CORES[c.kind].glyph.length > 1);
-      slot.setAttribute("aria-label", `塔位${index + 1} ${ctx.SLOTS[index].name}，${c ? `${CORES[c.kind].glyph} ${CORES[c.kind].attack}${ctx.isPartner(c) ? "，可搭配" : ""}` : "空位"}${slot.classList.contains('td-slot--repair')?'，接手布阵的林塔位置':''}`);
+      slot.setAttribute("aria-label", `塔位${index + 1} ${ctx.SLOTS[index].name}，${c ? `${CORES[c.kind].glyph} ${CORES[c.kind].attack}${resonance ? `，已共鸣：${resonance.mapping.effectName}` : ''}${ctx.isPartner(c) ? "，可搭配" : ""}` : "空位"}${slot.classList.contains('td-slot--repair')?'，接手布阵的林塔位置':''}`);
       slot.setAttribute("aria-pressed", String(!!c && ctx.selection.includes(c.id)));
     }
   }

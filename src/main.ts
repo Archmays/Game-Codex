@@ -95,7 +95,7 @@ async function mountApp(root: HTMLElement): Promise<void> {
 
   if (route.kind === "classic-hub") {
     setBrowserIdentity("游戏百宝箱", CLASSIC_THEME_COLOR);
-    const { mountClassicHubFromWorld } = await import("../apps/my-game-world");
+    const { mountClassicHubFromWorld } = await import("../apps/hub/world-entry");
     mountClassicHubFromWorld(root);
     return;
   }

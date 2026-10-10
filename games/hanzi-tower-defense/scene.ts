@@ -79,6 +79,9 @@ export class DefenseScene extends Phaser.Scene {
       body.lineStyle(2,0xe8dbb4).strokeRoundedRect(-17,-29,34,36,6);parts.push(body);
       parts.push(this.add.text(0,-13,enemy.kind==='captain'?'令':enemy.kind==='stone'?'甲':enemy.kind==='swift'?'快':'团',{fontFamily:'Microsoft YaHei',fontSize:'17px',color:'#17382f'}).setOrigin(.5));
     }
+    // A word remains readable when color perception or reduced motion hides a status effect.
+    const status = this.add.text(22, -38, '', {fontFamily:'Microsoft YaHei',fontSize:'12px',fontStyle:'bold',color:'#17382f',backgroundColor:'#b8eef0',padding:{left:3,right:3,top:2,bottom:2}}).setName('enemy-status').setOrigin(.5,1).setVisible(false);
+    parts.push(status);
     const container = this.add.container(0, 0, parts); this.monsters.set(enemy.id, container);
     this.lifeBars.set(enemy.id, this.add.graphics().setDepth(400)); return container;
   }
@@ -93,6 +96,9 @@ export class DefenseScene extends Phaser.Scene {
     const alive = new Set(state.enemies.map(e => e.id));
     for (const [id, container] of this.monsters) if (!alive.has(id)) { container.destroy(); this.monsters.delete(id); this.lifeBars.get(id)?.destroy(); this.lifeBars.delete(id); }
     const scale = Math.max(.64, Math.min(1.15, this.scale.width / MAP.width));
+    // Resolve recent hits once, instead of scanning the visual queue for every enemy.
+    const hitIds = new Set<number>();
+    for (const visual of state.visuals) if (visual.event.type === 'shot' && visual.age < .12) hitIds.add(visual.event.enemyId);
     for (const enemy of state.enemies) {
       const container = this.monsters.get(enemy.id) ?? this.createMonster(enemy), p = this.point(enemyPosition(state,enemy));
       const bob = preferences.reducedMotion || preferences.lowPerformance || state.paused ? 0 : Math.sin(state.elapsed * (enemy.kind === "swift" ? 17 : 8) + enemy.id) * 1.2;
@@ -103,12 +109,23 @@ export class DefenseScene extends Phaser.Scene {
         if(this.textures.exists(key) && picture.texture.key!==key)picture.setTexture(key);
         const before=this.point(pointOnPath(Math.max(0,enemy.distance-1),state.mapId,enemy.lane??0));
         if(Math.abs(p.x-before.x)>.01)picture.setFlipX(p.x<before.x);
-        const hit=state.visuals.some(v=>v.event.type==='shot' && v.event.enemyId===enemy.id && v.age<.09);
-        picture.setAlpha(hit?.82:1);
+        picture.setAlpha(hitIds.has(enemy.id)?.82:1);
       }
       const barHeight=enemy.kind==='captain'?80:enemy.kind==='stone'?63:57;
-      const life = this.lifeBars.get(enemy.id)!; life.clear().fillStyle(0x142e29, .9).fillRoundedRect(p.x - 17 * scale, p.y - barHeight * scale, 34 * scale, 4, 2);
-      life.fillStyle(enemy.zoneSlow ? 0xd5f58c : enemy.slow ? 0x82f2f4 : 0xf5da80).fillRoundedRect(p.x - 17 * scale, p.y - barHeight * scale, Math.max(0, 34 * scale * enemy.hp / enemy.maxHp), 4, 2);
+      const life = this.lifeBars.get(enemy.id)!;
+      const barY = p.y - barHeight * scale, barWidth = 34 * scale, barHeightPx = 5;
+      life.clear().fillStyle(0x291e22, .96).fillRoundedRect(p.x - barWidth / 2 - 1, barY - 1, barWidth + 2, barHeightPx + 2, 3);
+      life.lineStyle(1,0xffe7d4,.9).strokeRoundedRect(p.x - barWidth / 2 - 1, barY - 1, barWidth + 2, barHeightPx + 2, 3);
+      life.fillStyle(0xef8f79).fillRoundedRect(p.x - barWidth / 2, barY, Math.max(0, barWidth * enemy.hp / enemy.maxHp), barHeightPx, 2);
+      // The pointed pennant marks moving foes; friendly towers have round plinths.
+      life.fillStyle(0xffdfcc,.95).fillTriangle(p.x - 3, barY + 9, p.x + 3, barY + 9, p.x, barY + 12);
+      const status = container.getByName('enemy-status') as Phaser.GameObjects.Text;
+      const slowed = !!(enemy.zoneSlow || enemy.slow);
+      status.setText(enemy.summonAt !== undefined ? '援' : slowed ? '慢' : '').setVisible(enemy.summonAt !== undefined || slowed);
+      status.setPosition(22, -(barHeight - 8));
+      const statusColor = enemy.summonAt !== undefined ? '#ffe3a0' : '#b8eef0';
+      if (status.style.backgroundColor !== statusColor) status.setBackgroundColor(statusColor);
+      if (hitIds.has(enemy.id)) life.lineStyle(2,0xfff6c7,.9).strokeEllipse(p.x,p.y-19*scale,39*scale,49*scale);
       if(enemy.kind==='captain') {life.lineStyle(3,enemy.summonAt!==undefined?0xffc153:0xc1e7e1,.95).strokeCircle(p.x,p.y-10*scale,34*scale);if(enemy.summonAt!==undefined)life.lineStyle(4,0xffdf79,.8).strokeCircle(p.x,p.y-10*scale,(preferences.reducedMotion?36:36+Math.sin(state.waveTime*3)*2)*scale);}
       if (enemy.slow) life.lineStyle(2, 0x77dfe8, .9).strokeEllipse(p.x, p.y + 9 * scale, 42 * scale, 14 * scale);
     }
@@ -138,7 +155,9 @@ export class DefenseScene extends Phaser.Scene {
         const c = CORES[event.core], from = this.point(event.from), to = this.point(event.to), t = Math.min(1, effect.age / .2);
         // Damage has already settled in the model. Mark that hit immediately;
         // the short tracer is only a directional after-image.
-        this.trails.lineStyle(2,c.color,Math.max(0,1-effect.age/.25)).strokeCircle(to.x,to.y,preferences.reducedMotion?6:5+effect.age*24);
+        const hitAlpha = Math.max(0,1-effect.age/.25), hitRadius = preferences.reducedMotion?6:5+effect.age*24;
+        this.trails.lineStyle(4,0x17352d,hitAlpha).strokeCircle(to.x,to.y,hitRadius);
+        this.trails.lineStyle(2,c.color,hitAlpha).strokeCircle(to.x,to.y,hitRadius);
         const x = from.x + (to.x - from.x) * t, y = from.y + (to.y - from.y) * t;
         if (!preferences.reducedMotion && !preferences.lowPerformance && t < 1) {
           if (event.core === "wood" || event.core === "grove" || event.core === "canopy" || event.core === "forest") {

@@ -8,9 +8,12 @@ const raw = (page: Page) => page.evaluate(key => localStorage.getItem(key), KEY)
 export function homeDiscoveryTests(): void {
   test("@play-ready @home-discovery unified entries preserve history, explicit return and focus", async ({ page }, info) => {
     const activate = async (selector: string) => info.project.use.hasTouch ? page.locator(selector).tap() : page.locator(selector).click();
-    const errors: string[] = [], images: string[] = [];
+    const errors: string[] = [], images: string[] = [], scripts: string[] = [];
     page.on("pageerror", error => errors.push(error.message));
-    page.on("request", request => { if (request.resourceType() === "image") images.push(request.url()); });
+    page.on("request", request => {
+      if (request.resourceType() === "image") images.push(request.url());
+      if (request.resourceType() === "script") scripts.push(new URL(request.url()).pathname);
+    });
     await page.goto("/");
     await expect(page.locator(".world-stage .world-entry")).toHaveCount(2);
     await expect(page.locator(".world-entry")).toHaveCount(3);
@@ -20,7 +23,12 @@ export function homeDiscoveryTests(): void {
     await expect(page.locator('[data-world-playtest-link]')).toBeVisible();
     await expect(page.locator(".world-stage")).not.toContainText(/72字|48词|200关|完成率|试点|版本|最新升级/);
     await page.waitForLoadState("networkidle");
-    expect(images.filter(url => !url.includes("/assets/home/") && !url.includes("/assets/hanzi-tower-defense/meadow.png") && !url.includes("/assets/hanzi-word-adventure/scene.png"))).toEqual([]);
+    expect(images.filter(url => !url.includes("/assets/home/") && !url.includes("/assets/hanzi-word-adventure/scene.png"))).toEqual([]);
+    // Route normalization shares historical station IDs with this lightweight
+    // save module. No game implementation or activity engine belongs on home.
+    expect(scripts.filter(path => /\/games\/|\/activity-engines\//.test(path)
+      && path !== '/games/math-lab/world/world-save.ts')).toEqual([]);
+    expect(await page.locator('[data-world-forest-link] img').evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth === 1536)).toBe(true);
 
     for (const [id, surface] of [["forest", '[data-testid="hanzi-tower-defense"]'], ["math", '[data-testid="math-world-map"]'], ["treasure", '[data-testid="classic-hub-from-world"]'], ["playtest", '[data-testid="step4-playtest"]']]) {
       const entry = page.locator(entrySelector(id));

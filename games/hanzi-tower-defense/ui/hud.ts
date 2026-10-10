@@ -6,6 +6,7 @@ import { SCENARIOS, rulesFor } from '../tactics';
 import type { DefenseContext } from '../context';
 const escape = (value: string): string => value.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 export function createHud(ctx: DefenseContext) {
+let gatePulse = 0;
 function updateStatus(): void {
     if (ctx.destroyed) return;
     const end=mapFor(ctx.state.mapId).paths[0].at(-1)!;ctx.el('[data-td-gate]').style.left=`${end.x/MAP.width*100}%`;ctx.el('[data-td-gate]').style.top=`${end.y/MAP.height*100}%`;
@@ -17,6 +18,11 @@ function updateStatus(): void {
     ctx.gameRoot.dataset.speed = String(ctx.battleSpeed); ctx.gameRoot.dataset.elapsed = ctx.state.elapsed.toFixed(3);
     ctx.gameRoot.dataset.reducedMotion = String(ctx.preferences.reducedMotion);ctx.gameRoot.dataset.lowPerformance=String(ctx.visual.lowPerformance);ctx.music.configure(ctx.visual.music,ctx.preferences.muted||ctx.state.paused||document.hidden);ctx.audio.setVolume(ctx.visual.effects);
     ctx.el("[data-td-wave]").textContent = `第 ${Math.min(ctx.state.wave + 1, ctx.WAVES.length)} / ${ctx.WAVES.length} 波 · ${ctx.WAVES[Math.min(ctx.state.wave, ctx.WAVES.length-1)].label}`;
+    ctx.el('[data-td-phase]').textContent = ctx.state.phase === 'battle' ? ctx.state.paused ? '已暂停' : '守城中' : ctx.state.phase === 'ready' ? '布阵' : ctx.state.phase === 'won' ? '已守住' : '先回城';
+    const waveBanner = ctx.el('[data-td-wave-banner]');
+    waveBanner.hidden = ctx.state.phase !== 'ready' || ctx.state.wave === 0;
+    waveBanner.textContent = `第 ${ctx.state.wave} 波结束 · 调整好再出发`;
+    ctx.el('[data-td-gate]').dataset.hurt = String(ctx.state.health <= 6);
     ctx.el("[data-td-health]").textContent = `${ctx.state.health}`; ctx.el("[data-td-health-fill]").style.width = `${ctx.state.health / 16 * 100}%`;
     const fieldStatus = ctx.state.phase === "battle" ? `路上 ${ctx.state.enemies.length} · 还有 ${ctx.WAVES[ctx.state.wave].foes.length - ctx.state.spawned} 只` : ctx.state.phase === "ready" ? "波间布阵 · 准备好再出发" : "守城结束";
     ctx.el("[data-td-enemies]").textContent = ctx.state.paused ? `已暂停 · ${fieldStatus} · 可以安心组合` : fieldStatus;
@@ -68,7 +74,7 @@ function handleEvents(events: BattleEvent[]): void {
       if (event.type === "shot") ctx.audio.play(["volcano", "mountain", "wildwood"].includes(event.core) ? "heavy" : "shot");
       if (event.type === "shot") {
         const tower = ctx.root.querySelector<HTMLElement>(`[data-tower-id="${event.coreId}"]`);
-        if (tower && !ctx.preferences.reducedMotion) { tower.classList.remove('td-firing'); void tower.offsetWidth; tower.classList.add('td-firing'); }
+        if (tower && !ctx.preferences.reducedMotion && !ctx.visual.lowPerformance) { tower.classList.remove('td-firing'); void tower.offsetWidth; tower.classList.add('td-firing'); }
       }
       if (event.type === "echo") { ctx.audio.play('echo'); ctx.gameRoot.dataset.echoes = String(Number(ctx.gameRoot.dataset.echoes ?? 0)+1); }
       if (event.type === 'roots') { ctx.audio.play('roots'); ctx.gameRoot.dataset.rootBursts=String(Number(ctx.gameRoot.dataset.rootBursts??0)+1); }
@@ -83,7 +89,7 @@ function handleEvents(events: BattleEvent[]): void {
         ctx.el("[data-td-drops]").append(drop); ctx.later(() => drop.remove(), 950); ctx.renderInventory(); ctx.renderComposer();
         ctx.message(`拾得 ${CORES[event.core].glyph}，已放入材料栏。`);
       }
-      if (event.type === "leak") { ctx.audio.play("leak"); ctx.message(`有怪物进城，城门减少 ${event.harm} 点耐久。${ctx.state.scenarioId?"可首次部署材料；暂停后也可重整本波。":"可以暂停调整塔位。"}`); }
+      if (event.type === "leak") { ctx.audio.play("leak"); const gate = ctx.el('[data-td-gate]'), token = ++gatePulse; gate.classList.add('td-gate--hit'); ctx.later(() => { if (token === gatePulse) gate.classList.remove('td-gate--hit'); }, 450); ctx.message(`有怪物进城，城门减少 ${event.harm} 点耐久。${ctx.state.scenarioId?"可首次部署材料；暂停后也可重整本波。":"可以暂停调整塔位。"}`); }
       if (event.type === "wave-end") { ctx.music.duck();ctx.audio.play("wave"); ctx.persist(); ctx.message(event.won ? "守住了最后一波！" : "这一波结束了。先组合、调整塔位，准备好再出发。 "); }
     }
   }

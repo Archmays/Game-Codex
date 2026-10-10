@@ -62,6 +62,22 @@
       "height": 420,
       "bytes": 17818,
       "sha256": "56b68ee5e25a32c635624cbe4d05563923bf4ad436cf70bddefc7db59e26de71"
+    },
+    {
+      "id": "tower-meadow",
+      "source": "public/assets/hanzi-tower-defense/meadow.png",
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "sourceSha256": "a4a03cf89378211867dc9a6ff1cee2fb496c65ee1261791db55caf881fe754a9",
+      "path": "public/assets/home/tower-meadow.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 239828,
+      "sha256": "15721fb93cde161137b7d79621e6b79d82b42db3a1ba6de042468d2975cabcbd",
+      "process": "2026-10-11 local quality optimization: Pillow WebP quality 88 method 6, original dimensions and framing retained. Home and Classic cards reuse this derivative. Original accepted PNG and its provenance are unchanged.",
+      "sourceManifest": "assets/images/hanzi-tower-defense/manifest.json"
     }
   ]
 }

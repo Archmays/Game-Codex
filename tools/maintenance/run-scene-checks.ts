@@ -46,22 +46,22 @@ try {
       const server = await preview({ plugins: [subpathAlias], preview: { host: '127.0.0.1', port, strictPort: true } });
       closeServer = () => new Promise<void>((done, fail) => server.httpServer.close(error => error ? fail(error) : done()));
     } else {
-      const server = await createServer({ plugins: [subpathAlias], server: { host: '127.0.0.1', port, strictPort: true } });
+      const server = await createServer({ cacheDir: resolve(output, `.vite-${port}`), plugins: [subpathAlias], server: { host: '127.0.0.1', port, strictPort: true } });
       await server.listen(); closeServer = () => server.close();
     }
   }
   if (game === 'world-in-a-box') {
-    const scripts = ['browser-check', 'edge-check', 'dresden-browser', 'dresden-edges', 'dresden-geometry', 'dresden-recovery', 'step03-exploration', 'step03-interactions', 'step03-surface', 'step03-faults', 'frozen-matrix', 'frozen-edges', 'frozen-passengers', 'refine-actions'];
+    const scripts = ['browser-check', 'edge-check', 'dresden-browser', 'dresden-edges', 'dresden-geometry', 'dresden-recovery', 'step03-exploration', 'step03-interactions', 'step03-surface', 'step03-faults', 'frozen-matrix', 'frozen-edges', 'frozen-passengers', 'refine-actions', 'quality-check'];
     const selected = process.env.SCENE_CHECKS?.split(',') ?? scripts;
     // These existing harnesses inspect exported meshes or install source hooks.
     // Keep them distinct from gameplay evidence against the production build.
-    const sourceChecks = new Set(['dresden-geometry', 'step03-surface', 'refine-actions']);
+    const sourceChecks = new Set(['dresden-geometry', 'step03-surface', 'refine-actions', 'quality-check']);
     if (external && selected.some(script => sourceChecks.has(script))) throw new Error('Source inspection requires an owned local Vite server; omit SCENE_BASE_URL or select only production checks.');
     let sourceOrigin = origin;
     if (process.argv.includes('--preview') && selected.some(script => sourceChecks.has(script))) {
       const sourcePort = 4197;
       if (port === sourcePort) throw new Error('The source inspection port 4197 must differ from the preview port.');
-      const sourceServer = await createServer({ plugins: [subpathAlias], server: { host: '127.0.0.1', port: sourcePort, strictPort: true } });
+      const sourceServer = await createServer({ cacheDir: resolve(output, `.vite-source-${sourcePort}`), plugins: [subpathAlias], server: { host: '127.0.0.1', port: sourcePort, strictPort: true } });
       closeSourceServer = () => sourceServer.close(); await sourceServer.listen();
       sourceOrigin = `http://127.0.0.1:${sourcePort}`;
     }
