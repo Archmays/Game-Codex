@@ -1,5 +1,7 @@
 # Recovery and source freeze
 
+Read this reference for discovery/recovery and source identity. Formal charter/hash, source-tree freeze and baseline-promotion procedures apply when the selected acceptance/release route requires those artifacts. Ordinary local work still establishes scope, reviews relevant findings and validates the final changed source; it does not create a formal freeze by default. Root `AGENTS.md` controls task lanes and authorization.
+
 ## Discovery preflight and acceptance
 
 Discovery preflight is diagnostic. If an expected file, report, or source shape is absent, inventory the actual repository and preserve the discrepancy before deciding whether work can continue. Do not erase a dirty workspace or fail before safe reconnaissance has distinguished moved evidence, newly added files, and conflicting user code.
@@ -8,11 +10,11 @@ Acceptance is different: missing canonical evidence, a stale identity, an unboun
 
 ## Reconnaissance before mutation
 
-Read every current semantic finding and its cited evidence before the first mutation. Classify root cause, affected evidence, exact allowed files, child-visible impact, gameplay/save/privacy impact, and disposition. Freeze these in a closure charter and hash the charter. Do not silently add pre-existing findings later; only close a regression directly caused by an authorized mutation within the same dependency boundary.
+Read current semantic findings relevant to the affected scope and their cited evidence before the first mutation. Classify root cause, affected evidence, exact allowed files, child-visible impact, gameplay/save/privacy impact, and disposition. When a formal closure charter is required, freeze and hash it. Do not silently add pre-existing findings later; only close a regression directly caused by an authorized mutation within the same dependency boundary.
 
 ## Source identity
 
-Use the repository's canonical source-tree algorithm. Preserve pre-change Git status, diff, changed-file inventory, and computed identity. Recompute after the last tracked mutation and reject any formal evidence whose before/after identity differs.
+For formal source-bound acceptance, use the repository's canonical source-tree algorithm. Preserve pre-change Git status, diff, changed-file inventory, and computed identity. Recompute after the last tracked mutation and reject any formal evidence whose before/after identity differs. For ordinary local work, review the final diff and validate the changed source and affected dependencies without adding a freeze artifact.
 
 Avoid source-shape assertions such as “this directory must contain exactly the old filenames” unless that shape is itself a product contract. Prefer public behavior, schema, catalog, and source-identity assertions. Source-shape checks often mistake harmless refactoring or generated output for a product defect.
 

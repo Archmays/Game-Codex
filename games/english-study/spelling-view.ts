@@ -6,8 +6,17 @@ function stopSpelling(): void {
     ctx.setText('[data-es-spell-play]', '▶ 看拼写');
   }
 function updateSpelling(): void {
-    const buttons = [...ctx.el('[data-es-word-letters]').querySelectorAll<HTMLButtonElement>('button')];
+    const host = ctx.el('[data-es-word-letters]');
+    const buttons = [...host.querySelectorAll<HTMLButtonElement>('button')];
     buttons.forEach((button, index) => { button.classList.toggle('es-current-letter', index === ctx.spellStep); button.classList.toggle('es-done-letter', index < ctx.spellStep); });
+    const current = buttons[ctx.spellStep];
+    if (current && host.clientWidth > 0) {
+      // Move only this strip: scrollIntoView would also move the dialog/page.
+      const bounds = host.getBoundingClientRect();
+      const letter = current.getBoundingClientRect();
+      if (letter.left < bounds.left) host.scrollLeft += letter.left - bounds.left;
+      else if (letter.right > bounds.right) host.scrollLeft += letter.right - bounds.right;
+    }
     ctx.setText('[data-es-spell-status]', `${ctx.spellStep + 1} / ${buttons.length}`);
     ctx.el<HTMLButtonElement>('[data-es-spell-prev]').disabled = ctx.spellStep === 0;
     ctx.el<HTMLButtonElement>('[data-es-spell-next]').disabled = ctx.spellStep >= buttons.length - 1;

@@ -12,6 +12,51 @@ async function ratio(page: Page, selector: string): Promise<number> {
   });
 }
 
+test('long-word spelling keeps the current letter visible without moving focus or the dialog', async ({ page }, info) => {
+  await page.goto('?play=english-study');
+  await lookup(page, 'unrecognizablylongword', info.project.name.includes('touch'));
+  const next = page.locator('[data-es-spell-next]');
+  const previous = page.locator('[data-es-spell-prev]');
+  const play = page.locator('[data-es-spell-play]');
+  const letters = page.locator('[data-es-word-letters]');
+  const touch = info.project.name.includes('touch');
+  const tabTo = async (selector: string) => {
+    for (let i = 0; i < 80; i++) {
+      if (await page.evaluate(sel => document.activeElement?.matches(sel), selector)) break;
+      await page.keyboard.press('Tab');
+    }
+    await expect(page.locator(selector)).toBeFocused();
+  };
+  const currentVisible = () => letters.evaluate(host => {
+    const current = host.querySelector('.es-current-letter')!.getBoundingClientRect();
+    const bounds = host.getBoundingClientRect();
+    return current.left >= bounds.left - 1 && current.right <= bounds.right + 1;
+  });
+  if (!touch) await tabTo('[data-es-spell-next]');
+  for (let i = 0; i < 17; i++) {
+    if (touch) await next.tap(); else await page.keyboard.press('Enter');
+  }
+  await expect(page.locator('[data-es-spell-status]')).toHaveText('18 / 22');
+  await expect.poll(currentVisible).toBe(true);
+  if (!touch) await expect(next).toBeFocused();
+  for (let i = 0; i < 17; i++) await previous.click();
+  await expect.poll(currentVisible).toBe(true);
+  if (touch) await play.tap();
+  else { await tabTo('[data-es-spell-play]'); await page.keyboard.press('Enter'); }
+  const scroll = await page.locator('[data-es-word-dialog]').evaluate(el => el.scrollTop);
+  await expect(page.locator('[data-es-spell-status]')).toHaveText('18 / 22', { timeout: 22000 });
+  await expect.poll(() => letters.evaluate(el => el.scrollLeft), { timeout: 22000 }).toBeGreaterThan(0);
+  await expect.poll(currentVisible).toBe(true);
+  if (!touch) await expect(play).toBeFocused();
+  expect(await page.locator('[data-es-word-dialog]').evaluate(el => el.scrollTop)).toBe(scroll);
+  await play.click(); // pause, then restart from the first character
+  await play.click();
+  await expect(page.locator('[data-es-spell-status]')).toHaveText('1 / 22');
+  await expect.poll(currentVisible).toBe(true);
+  await page.keyboard.press('Escape');
+  await expect(page.locator('[data-es-word-dialog]')).not.toBeVisible();
+});
+
 test('one apple sheet writes continuously, pauses in place, preserves both p instances and completes', async ({ page }, info) => {
   test.setTimeout(90000);
   const errors: string[] = [];

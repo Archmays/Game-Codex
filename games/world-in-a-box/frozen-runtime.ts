@@ -76,13 +76,14 @@ export function mountFrozen({container:root,storage,onExit}:MountGameContext):Mo
   }update();
  }
  reset.addEventListener('close',()=>{modal('reset',false);control('reset').focus({preventScroll:true});},{signal});
- let gesture:BoxGesture<FrozenPiece>|null=null,suppressed=false;
+ let gesture:BoxGesture<FrozenPiece>|null=null,suppressed=false,lastPointerControl:HTMLButtonElement|null=null;
  function cancelGesture(){gesture=null;suppressed=true;stopTurn();}
  root.addEventListener('pointerdown',e=>{if(!e.isPrimary||gesture){cancelGesture();return;}suppressed=false;gesture=beginBoxGesture<FrozenPiece>(e);void audio.unlock();},{signal});
  root.addEventListener('pointermove',e=>{if(!gesture||gesture.id!==e.pointerId)return;if(Math.hypot(e.clientX-gesture.x,e.clientY-gesture.y)>9)gesture.moved=true;},{signal});
  window.addEventListener('pointerup',e=>{if(!gesture)return;const g=gesture;gesture=null;suppressed=g.moved||boxGestureScrolled(g);if(g.moved&&g.piece&&!boxGestureScrolled(g)){choose(g.piece);const hit=scene.pick(e.clientX,e.clientY);if(FROZEN_IDS.includes(hit as FrozenPiece))place(hit as FrozenPiece);}},{signal});
  root.addEventListener('pointercancel',cancelGesture,{signal});window.addEventListener('wheel',cancelGesture,{signal,passive:true});
  root.addEventListener('click',e=>{if(e.detail>0&&suppressed)return;if(e.detail===0)void audio.unlock();const t=e.target as HTMLElement;if(t.closest('dialog')&&!t.closest('[data-reset]'))return;const b=t.closest<HTMLButtonElement>('button');if(b?.disabled)return;
+  const duplicate=e.detail>1&&b===lastPointerControl;lastPointerControl=e.detail===0?null:b;if(duplicate&&b?.dataset.action==='undo')return;
   if(b?.dataset.action)perform(b.dataset.action);else if(b?.dataset.group){group=Number(b.dataset.group);page=0;update();}else if(b?.dataset.view){motion.follow=false;scene.go(b.dataset.view);layout();}else if(b?.dataset.piece)choose(b.dataset.piece as FrozenPiece);else if(b?.dataset.slot)place(b.dataset.slot as FrozenPiece);else if(b?.dataset.magic)cast(b.dataset.magic as Magic);else if(b?.dataset.locate){const id=b.dataset.locate as FrozenPiece;group=frozenGroup(id);page=Math.floor(FROZEN_IDS.filter(p=>frozenGroup(p)===group).indexOf(id)/3);choose(id);reveal();}else if(t===scene.renderer.domElement){const hit=scene.pick(e.clientX,e.clientY);if(!hit)return;if(hit.startsWith('magic_'))cast(hit.slice(6) as Magic);else if(selected)place(hit as FrozenPiece);else if(hit==='olaf')show('olaf');else if(['sleigh','sven','kristoff','anna'].includes(hit))show('sleigh');else if(hit.startsWith('palace_'))show('palace');}
  },{signal});
  root.addEventListener('keydown',e=>{if(ignoreGameKey(e,root))return;if(e.key==='Escape'&&!root.querySelector('dialog[open]')){selected=null;motion.follow=false;update();}if(e.key.toLowerCase()==='z'&&!root.querySelector('dialog[open]')){e.preventDefault();perform('undo');}},{signal});

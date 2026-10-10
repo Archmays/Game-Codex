@@ -1,5 +1,7 @@
 # Lifecycle and evidence
 
+Read the sections that match the changed contract. Observer/session matrices apply to observer or grant/channel changes; critical-control spatial checks apply to affected controls and their required profiles. Preserve the full relevant lifecycle and negative controls, while keeping unrelated tools outside the task. Formal report identities and source-bound evidence bundles apply only where the selected route requires them. Root `AGENTS.md` and `docs/input-contract.md` remain authoritative for scope and real-input validation.
+
 ## Keep identities separate
 
 - Scenario identity says which product situation is being exercised.

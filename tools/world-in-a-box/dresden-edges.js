@@ -8,6 +8,7 @@ async driver=>{
  async function reset(){await press('[data-action=reset]');await press('[data-action=confirm-reset]');}
  try{
  await p.goto('http://127.0.0.1:5175/?play=world-in-a-box&scene=dresden-river-campus');await ready();
+ await place('river','yellow_tram');await place('river','paddle_steamer');await p.locator('[data-action=undo]').dblclick();check((await state()).placed==='yellow_tram','double click undo removes only the most recent piece');await p.waitForTimeout(550);await press('[data-action=undo]');check(!(await state()).placed,'a separate intentional undo still removes the preceding piece');
  await choose('river','paddle_steamer');let box=await p.locator('[data-slot=paddle_steamer]').boundingBox();
  await p.mouse.move(box.x+22,box.y+22);await p.mouse.down();await p.mouse.move(box.x+80,box.y+80,{steps:5});await p.mouse.up();check(!(await state()).placed,'moving off pressed target does not place');
  await p.locator('[data-slot=paddle_steamer]').scrollIntoViewIfNeeded();box=await p.locator('[data-slot=paddle_steamer]').boundingBox();const cdp=await ctx.newCDPSession(p);

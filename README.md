@@ -4,7 +4,7 @@
 
 项目保持为静态网页形式：本地使用 Vite 开发，发布时生成 `dist/`，可以部署到 GitHub Pages 或类似静态网站服务。
 
-《世界盒子》v0.1.0 首个八件拼装样板《窗边有风》已接入大厅，入口 `?play=world-in-a-box`；[玩法与制作](games/world-in-a-box/README.md)，[本轮验证报告](docs/world-in-a-box/step01-r2-report.md)。
+《世界盒子》v0.5.0 包含三个可切换、分别保存进度的小世界，入口 `?play=world-in-a-box`；玩法、制作和各轮验证边界见 [游戏说明](games/world-in-a-box/README.md)。
 
 ## 当前中文游戏
 
@@ -72,9 +72,10 @@ pnpm run play:my-game-world
 路由约定：
 
 - `/` 或 `?world=my-game-world`：我的游戏世界；
-- `?hub=classic`：3 个正式世界的备用入口；算式滑轨、目标工坊归入数学世界，记忆配对归入中文/英语世界；
+- `?hub=classic`：游戏百宝箱，展示当前 5 个活跃儿童产品；算式滑轨、目标工坊通过数学世界进入，记忆配对保留兼容入口；
+- `?play=hanzi-stroke-lab` / `?play=english-study`：汉字书房 / 英语书房两个独立查阅工具；
 - `?world=math-world`：数学世界 · 数感实验城；支持 `station=slider|target` 直接进入并刷新恢复；`station=lab|clock|array` 只显示收起说明并回到地图，保留旧存档；
-- 世界、森林与经典大厅之间使用 query-only 返回链接，兼容 GitHub Pages 项目子路径。
+- 现有世界、游戏与经典大厅之间使用 query-only 返回链接，兼容 GitHub Pages 项目子路径。旧语言产品链接回到首页，不恢复已退役玩法。
 
 ## 测试和构建
 
@@ -98,7 +99,9 @@ pnpm build
 
 本项目包含 GitHub Pages workflow：`.github/workflows/pages.yml`。
 
-推荐流程：
+仅在已授权发布时使用此流程；普通修改和本地验证不要求部署或 Pages 读回。当前 workflow 会由推送到 `main` 或手动触发启动，推送前须按 [AGENTS.md](AGENTS.md) 判断发布授权。
+
+发布配置与行为：
 
 1. 把仓库推送到 GitHub。
 2. 在仓库设置中启用 GitHub Pages，并选择 GitHub Actions 作为来源。
@@ -114,8 +117,8 @@ pnpm build
 3. `index.ts` 导出一个 `GameDefinition`，包含 `id`、`title`、`description`、`subject`、`recommendedAge`、`learningGoal`、`status` 和 `mount()`。
 4. 在 `packages/data/gameCatalog.ts` 中导入并加入 `allGameDefinitions`，再由 Portfolio 可见性确定是否进入 `classicGameCatalog`。
 5. 如果是共享题库或词库，放到 `packages/data/`；如果是单个游戏专用数据，优先放在该游戏目录内。
-6. 运行 `pnpm test` 和 `pnpm build`。
-7. 手动检查大厅能看到新游戏，能进入并返回大厅。
+6. 按 [AGENTS.md](AGENTS.md) 的新建/实质变更车道及 [Skill 索引](.agents/skills/SKILL_INDEX.md) 完成适用的内容、玩法、输入、存档与真实浏览器验证，并检查注册后的入口和返回流程。
+7. 完成同一最终源码树上的必要测试和构建；发布另需既有授权及相应发布门禁。
 
 更详细的模板见 `docs/game-template.md`。
 
@@ -123,9 +126,10 @@ pnpm build
 
 - 每个游戏优先只改自己的 `games/游戏名/` 目录。
 - 共享 UI、存档、类型和工具放在 `packages/`，不要在多个游戏之间复制公共逻辑。
-- 数学实验室当前由 `games/math-lab/` 适配大厅，真实 Phaser 实现仍在 `src/game/`。不要在同一次小改动里大规模迁移它。
-- 改动后至少检查大厅、被修改的游戏、返回大厅流程、测试和构建。
-- 涉及拖动、触控、教程遮罩或响应式交互的游戏，必须增加真实浏览器测试，不能只依赖 Node 单元测试。
+- 当前数学世界由 `games/math-lab/world/` 实现，`games/math-lab/index.ts` 保留注册定义；旧实验室已退役，不恢复旧运行时。
+- 按 [AGENTS.md](AGENTS.md) 的实际影响选择车道：局部修正检查直接受影响的内容与测试，游戏页面或交互变化在代表性浏览器中实际操作；导航可能受影响时才检查大厅、入口与返回。
+- 新游戏、实质变更、共享或高风险修改及明确验收请求，按 [Skill 索引](.agents/skills/SKILL_INDEX.md) 进入适用的机器验收。拖动、触控、键盘、教程、响应式或导航行为变化须验证真实输入；输入细则见 [输入合同](docs/input-contract.md)。
+- 源码冻结、返还 ZIP、发布读回和清理留档仅在所选路线或用户交付要求适用时执行；普通修改不默认生成这些材料。
 
 ## 目录说明
 
