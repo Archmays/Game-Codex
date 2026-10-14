@@ -1,6 +1,6 @@
 import { test as base, expect, type Page, type Locator } from '@playwright/test';
 
-type DemoState = { mode: number; open: number; pos: number; auto: boolean; marks: number[]; crumbs: number };
+type DemoState = { mode: number; open: number; pos: number; auto: boolean; marks: number[]; crumbs: number; pressure: number; grade: string; zoom: number; view: string; part: string; processStep: number };
 const directory = '/?play=structure-explorer';
 const pencil = `${directory}&exhibit=pencil`;
 const frame = (page: Page) => page.frameLocator('[data-pencil-frame]');
@@ -82,14 +82,21 @@ test('keyboard: home → directory → pencil, native controls, return and reloa
   await expect(modes.nth(1)).toHaveAttribute('tabindex', '0');
   await expect(modes.nth(0)).toHaveAttribute('tabindex', '-1');
   await page.keyboard.press('Tab');
+  await expect(frame(page).locator('#expand-view')).toBeFocused();
+  await page.keyboard.press('Tab');
   await expect(stage(page)).toBeFocused();
   await page.keyboard.press('End');
   await expect.poll(async () => ink(await state(page))).toBeGreaterThan(10);
+  await page.keyboard.press('Shift+Tab');
+  await expect(frame(page).locator('#expand-view')).toBeFocused();
   await page.keyboard.press('Shift+Tab');
   await expect(modes.nth(1)).toBeFocused();
   await page.keyboard.press('End');
   await expect(modes.nth(2)).toBeFocused();
   await page.keyboard.press('Tab');
+  await expect(frame(page).locator('#expand-view')).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(stage(page)).toBeFocused();
   await page.keyboard.press('End');
   await expect.poll(async () => (await state(page)).crumbs).toBeGreaterThan(0);
   await tabTo(page, frame(page).locator('#reset'));
@@ -209,4 +216,183 @@ test('responsive layout and iframe height accommodate every mode', async ({ page
   await page.reload();
   await expect(stage(page)).toBeVisible();
   expect(ink(await state(page))).toBe(0);
+});
+
+test('structure views, part inspection and zoom remain usable in the enlarged dialog', async ({ page }) => {
+  await page.goto(pencil);
+  for (const view of ['assembled', 'exploded', 'longitudinal', 'cross']) {
+    await frame(page).locator('#view').selectOption(view);
+    expect((await state(page)).view).toBe(view);
+    const active = view === 'cross' ? '#model-cross' : view === 'longitudinal' ? '#model-longitudinal' : '#model-structure';
+    await expect(stage(page).locator(active)).toBeVisible();
+    await expect(stage(page).locator('#structure > svg:visible')).toHaveCount(1);
+  }
+  for (const part of ['paint', 'wood', 'core', 'tip', 'all']) {
+    await frame(page).locator('#part').selectOption(part);
+    expect((await state(page)).part).toBe(part);
+  }
+  const initialZoom = (await state(page)).zoom;
+  await frame(page).locator('#zoom-in').click();
+  expect((await state(page)).zoom).toBeGreaterThan(initialZoom);
+  await frame(page).locator('#zoom-out').click();
+  expect((await state(page)).zoom).toBeCloseTo(initialZoom, 8);
+  await frame(page).locator('#view-reset').click();
+  expect((await state(page)).zoom).toBe(1);
+  const opener = frame(page).locator('#expand-view');
+  await opener.click();
+  const dialog = frame(page).locator('#inspector-dialog');
+  await expect(dialog).toBeVisible();
+  await expect(dialog.locator('#stage')).toHaveCount(1);
+  await expect(frame(page).locator('#stage')).toHaveCount(1);
+  expect((await state(page)).auto).toBe(false);
+  // Actual keys exercise both modal boundaries; focus must never escape to the iframe or parent page.
+  for (const key of ['Tab', 'Shift+Tab']) {
+    for (let i = 0; i < 20; i++) {
+      await page.keyboard.press(key);
+      expect(await dialog.evaluate(el => el.contains(el.ownerDocument.activeElement))).toBe(true);
+    }
+  }
+  await page.keyboard.press('Escape');
+  await expect(dialog).not.toBeVisible();
+  await expect(opener).toBeFocused();
+  await expect(stage(page)).toBeVisible();
+  await opener.click();
+  await frame(page).locator('#close-inspector').click();
+  await expect(dialog).not.toBeVisible();
+  await expect(opener).toBeFocused();
+});
+
+test('controlled comparisons keep three real traces and survive ordinary paper and setting changes', async ({ page }, testInfo) => {
+  await page.goto(pencil);
+  const activate = async (target: Locator) => testInfo.project.use.hasTouch ? target.tap() : target.click();
+  await activate(frame(page).locator('[data-mode="1"]'));
+  const rows = frame(page).locator('[data-comparison-row]');
+  for (const kind of ['grade', 'pressure', 'paper', 'passes']) {
+    await frame(page).locator('#compare-kind').selectOption(kind);
+    await activate(frame(page).locator('#compare-run'));
+    await expect(rows).toHaveCount(3);
+    const conditions = await rows.evaluateAll(els => els.map(el => {
+      const svg = el.querySelector('svg');
+      return { density: Number(svg?.getAttribute('data-density')), grade: svg?.getAttribute('data-grade'), pressure: svg?.getAttribute('data-pressure'), paper: svg?.getAttribute('data-paper'), passes: svg?.getAttribute('data-passes') };
+    }));
+    expect(conditions.every(row => Number.isFinite(row.density) && row.density > 0 && row.density < 1)).toBe(true);
+    expect(conditions[0].density).toBeLessThan(conditions[1].density);
+    expect(conditions[1].density).toBeLessThan(conditions[2].density);
+    for (const fixed of ['grade', 'pressure', 'paper', 'passes'] as const) {
+      expect(new Set(conditions.map(row => row[fixed])).size).toBe(fixed === kind ? 3 : 1);
+    }
+    for (let i = 0; i < 3; i++) await expect(rows.nth(i).locator('svg')).toBeVisible();
+    await expect(frame(page).locator('#compare-result')).not.toHaveText('');
+  }
+  const snapshot = await frame(page).locator('#comparison-results').innerHTML();
+  const p = await point(page);
+  if (testInfo.project.use.hasTouch) await page.touchscreen.tap(p.x, p.y);
+  else await page.mouse.click(p.x, p.y);
+  await expect.poll(async () => ink(await state(page))).toBeGreaterThan(0);
+  const existingMarks = (await state(page)).marks;
+  await frame(page).locator('#grade').selectOption('2B');
+  await frame(page).locator('#pressure').selectOption('2');
+  await frame(page).locator('#paper').selectOption('rough');
+  expect((await state(page)).marks, 'Changing a writing condition preserves the marks already on the paper').toEqual(existingMarks);
+  await activate(frame(page).locator('#reset'));
+  expect(await frame(page).locator('#comparison-results').innerHTML()).toBe(snapshot);
+  expect(ink(await state(page))).toBe(0);
+});
+
+test('micro process advances and reverses explicitly in writing and erasing modes', async ({ page }, testInfo) => {
+  await page.goto(pencil);
+  const activate = async (target: Locator) => testInfo.project.use.hasTouch ? target.tap() : target.click();
+  for (const mode of [1, 2]) {
+    await activate(frame(page).locator(`[data-mode="${mode}"]`));
+    const slider = frame(page).locator('#process-step');
+    await tabTo(page, slider);
+    await page.keyboard.press('Home');
+    await expect(slider).toHaveValue('0');
+    await expect(frame(page).locator('#micro-process')).toBeVisible();
+    const descriptions = new Set<string>();
+    for (let step = 0; step <= 3; step++) {
+      expect((await state(page)).processStep).toBe(step);
+      const description = (await frame(page).locator('#process-description').textContent())?.trim() ?? '';
+      expect(description).not.toBe('');
+      descriptions.add(description);
+      if (step < 3) await activate(frame(page).locator('#process-next'));
+    }
+    expect(descriptions.size).toBe(4);
+    for (let step = 2; step >= 0; step--) {
+      await activate(frame(page).locator('#process-prev'));
+      expect((await state(page)).processStep).toBe(step);
+    }
+  }
+  await activate(frame(page).locator('#reset'));
+  const p = await point(page);
+  if (testInfo.project.use.hasTouch) await page.touchscreen.tap(p.x, p.y);
+  else await page.mouse.click(p.x, p.y);
+  expect(ink(await state(page))).toBe(0);
+  expect((await state(page)).crumbs).toBe(0);
+  await expect(frame(page).locator('#picked > *')).toHaveCount(0);
+});
+
+test('automatic erasing never draws on blank paper or replaces a faint line', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(pencil);
+  await frame(page).locator('[data-mode="2"]').click();
+  await frame(page).locator('#auto').click();
+  await expect.poll(async () => (await state(page)).pos).toBe(1);
+  expect(ink(await state(page)), 'An automatic eraser cannot deposit ink on blank paper').toBe(0);
+  expect((await state(page)).crumbs).toBe(0);
+  await expect(frame(page).locator('#picked > *')).toHaveCount(0);
+  await frame(page).locator('#seed').click();
+  await tabTo(page, stage(page));
+  for (let i = 0; i < 4; i++) {
+    await page.keyboard.press('End');
+    await expect.poll(async () => (await state(page)).pos).toBe(1);
+    await page.keyboard.press('Home');
+    await expect.poll(async () => (await state(page)).pos).toBe(0);
+  }
+  const faint = await state(page);
+  expect(faint.marks.every(value => value < .1)).toBe(true);
+  expect(ink(faint)).toBeGreaterThan(0);
+  await frame(page).locator('#auto').click();
+  await expect.poll(async () => (await state(page)).pos).toBe(1);
+  const erased = await state(page);
+  expect(ink(erased)).toBeLessThan(ink(faint));
+  expect(erased.marks.every((value, i) => value <= faint.marks[i])).toBe(true);
+});
+
+test('enlarged dialog controls fit the parent viewport and accept real pointer input', async ({ page }, testInfo) => {
+  await page.goto(pencil);
+  const iframe = page.locator('[data-pencil-frame]');
+  await expect(stage(page)).toBeVisible();
+  await expect.poll(async () => frame(page).locator('.page').evaluate(el => el.getBoundingClientRect().bottom <= innerHeight + 1)).toBe(true);
+  const naturalHeight = (await iframe.boundingBox())!.height;
+  const activateVisible = async (target: Locator) => {
+    await target.scrollIntoViewIfNeeded();
+    const box = await target.boundingBox();
+    expect(box).not.toBeNull();
+    const viewport = page.viewportSize()!;
+    expect(box!.x).toBeGreaterThanOrEqual(0);
+    expect(box!.y).toBeGreaterThanOrEqual(0);
+    expect(box!.x + box!.width).toBeLessThanOrEqual(viewport.width + 1);
+    expect(box!.y + box!.height).toBeLessThanOrEqual(viewport.height + 1);
+    expect(await target.evaluate(el => {
+      const rect = el.getBoundingClientRect();
+      const hit = el.ownerDocument.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2);
+      return hit === el || el.contains(hit);
+    }), 'A visible target must receive input at its center').toBe(true);
+    if (testInfo.project.use.hasTouch) await target.tap();
+    else await target.click();
+  };
+  await activateVisible(frame(page).locator('#expand-view'));
+  const dialog = frame(page).locator('#inspector-dialog');
+  await expect(dialog).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+  expect(await dialog.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+  await activateVisible(frame(page).locator('#zoom-in'));
+  expect((await state(page)).zoom).toBeGreaterThan(1);
+  await activateVisible(frame(page).locator('#view-reset'));
+  expect((await state(page)).zoom).toBe(1);
+  await activateVisible(frame(page).locator('#close-inspector'));
+  await expect(dialog).not.toBeVisible();
+  await expect(frame(page).locator('#expand-view')).toBeFocused();
+  await expect.poll(async () => Math.abs((await iframe.boundingBox())!.height - naturalHeight)).toBeLessThanOrEqual(2);
 });

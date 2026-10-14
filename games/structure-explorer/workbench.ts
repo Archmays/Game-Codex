@@ -22,17 +22,30 @@ export function mountStructureExplorer(root: HTMLElement): { destroy(): void } {
   </main>`;
 
   const frame = root.querySelector<HTMLIFrameElement>('[data-pencil-frame]');
+  let documentHeight = 1300;
+  let inspecting = false;
+  const fitInspector = (): void => {
+    if (frame && inspecting) frame.style.height = `${window.innerHeight}px`;
+  };
   const resize = (event: MessageEvent): void => {
     if (!frame || event.source !== frame.contentWindow || event.origin !== window.location.origin) return;
+    if (event.data?.type === 'pencil-inspector' && typeof event.data.open === 'boolean') {
+      inspecting = event.data.open;
+      if (inspecting) { fitInspector(); frame.scrollIntoView({ block: 'start' }); }
+      else frame.style.height = `${documentHeight}px`;
+      return;
+    }
     if (event.data?.type !== 'pencil-height' || !Number.isFinite(event.data.height)) return;
-    frame.style.height = `${Math.max(500, Math.min(20000, event.data.height))}px`;
+    documentHeight = Math.max(500, Math.min(20000, event.data.height));
+    if (!inspecting) frame.style.height = `${documentHeight}px`;
   };
   window.addEventListener('message', resize);
+  window.addEventListener('resize', fitInspector);
   const cancelInput = (): void => { frame?.contentWindow?.postMessage({ type: 'pencil-cancel-input' }, window.location.origin); };
   window.addEventListener('scroll', cancelInput, { passive: true });
   if (!pencil && document.referrer) {
     const from = new URL(document.referrer);
     if (from.origin === location.origin && from.searchParams.get('exhibit') === 'pencil') root.querySelector<HTMLAnchorElement>('[data-structure-pencil]')?.focus();
   }
-  return { destroy() { window.removeEventListener('message', resize); window.removeEventListener('scroll', cancelInput); if (frame) frame.remove(); root.replaceChildren(); } };
+  return { destroy() { window.removeEventListener('message', resize); window.removeEventListener('resize', fitInspector); window.removeEventListener('scroll', cancelInput); if (frame) frame.remove(); root.replaceChildren(); } };
 }
