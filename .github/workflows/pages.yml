@@ -72,6 +72,11 @@ jobs:
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
 
+      - name: Validate Structure Explorer production input and lifecycle
+        run: pnpm run test:e2e:structure-explorer
+        env:
+          STRUCTURE_PREVIEW: "1"
+
       - name: Validate local Hanzi tool data and real input flows
         run: node tools/hanzi-stroke-lab/verify-data.mjs && pnpm exec playwright test --config playwright.hanzi-stroke-lab.config.ts --project=chromium-desktop --project=chromium-390
 

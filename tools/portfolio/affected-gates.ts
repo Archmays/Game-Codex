@@ -31,6 +31,7 @@ const BOX_E2E: GateCommand = { program: 'pnpm', args: ['run', 'test:e2e:world-in
 const ODDITY_E2E: GateCommand = { program: 'pnpm', args: ['run', 'test:e2e:oddity-puzzles'], label: 'Oddity intentions, geometry and lifecycle browser checks' };
 const ENGLISH_E2E: GateCommand = { program: 'pnpm', args: ['run', 'test:e2e:english-study'], label: 'English Study Chromium/WebKit device matrix' };
 const HANZI_STUDY_E2E: GateCommand = { program: 'pnpm', args: ['run', 'test:e2e:hanzi-stroke-lab'], label: 'Hanzi Study Chromium/WebKit device matrix' };
+const STRUCTURE_E2E: GateCommand = { program: 'pnpm', args: ['run', 'test:e2e:structure-explorer'], label: 'Structure Explorer input and lifecycle device matrix' };
 const MEMORY_E2E: GateCommand = { program: 'pnpm', args: ['run', 'test:e2e:storage'], label: 'Memory protected bytes and public Vault recovery' };
 function gameSmoke(id: string): GateCommand {
   return { program: "pnpm", args: ["run", "test:portfolio:smoke", "--", "--grep", `@game:${id}`], label: `${id} entry/interaction/return smoke` };
@@ -49,7 +50,7 @@ export function affectedGateCommands(changedFiles: readonly string[]): GateComma
   const equationAffected = files.some((file) => file.startsWith("games/equation-slider/") || file.startsWith("tests/equation-slider-") || file.startsWith("tests/e2e/equation-slider"));
   const equationCommands = equationAffected ? [EQUATION_LEVELS, EQUATION_E2E, EQUATION_RELEASE, EQUATION_VISUAL, EQUATION_PLAYTEST] : [];
   const hanziCommands = files.some(file => file.includes("hanzi-tower-defense")) ? [DEFENSE, DEFENSE_E2E] : [];
-  if (full) return unique([PORTFOLIO_CHECK, PORTFOLIO_EVOLUTION_CHECK, ...equationCommands, ...hanziCommands, INTERACTION_STATIC, SCROLL_STATIC, UNIT, MATH_WORLD_VALIDATE, MEMORY, TYPECHECK, BUILD, MATH_WORLD_E2E, DEFENSE_E2E, ADVENTURE, ADVENTURE_E2E, BOX_E2E, ODDITY_E2E, ENGLISH_E2E, HANZI_STUDY_E2E, MEMORY_E2E, INTERACTION_HITTEST, SCROLL_REACHABILITY, SMOKE]);
+  if (full) return unique([PORTFOLIO_CHECK, PORTFOLIO_EVOLUTION_CHECK, ...equationCommands, ...hanziCommands, INTERACTION_STATIC, SCROLL_STATIC, UNIT, MATH_WORLD_VALIDATE, MEMORY, TYPECHECK, BUILD, MATH_WORLD_E2E, DEFENSE_E2E, ADVENTURE, ADVENTURE_E2E, BOX_E2E, ODDITY_E2E, ENGLISH_E2E, HANZI_STUDY_E2E, STRUCTURE_E2E, MEMORY_E2E, INTERACTION_HITTEST, SCROLL_REACHABILITY, SMOKE]);
   const commands: GateCommand[] = [PORTFOLIO_CHECK, PORTFOLIO_EVOLUTION_CHECK];
   for (const file of files) {
     const game = /^games\/([^/]+)\//.exec(file)?.[1];
@@ -61,6 +62,7 @@ export function affectedGateCommands(changedFiles: readonly string[]): GateComma
     else if (game === 'oddity-puzzles') commands.push(UNIT, ODDITY_E2E, gameSmoke(game));
     else if (game === 'english-study') commands.push(UNIT, ENGLISH_E2E);
     else if (game === 'hanzi-stroke-lab') commands.push(UNIT, HANZI_STUDY_E2E);
+    else if (game === 'structure-explorer' || file.startsWith('public/structure-explorer/')) commands.push(UNIT, STRUCTURE_E2E);
     else if (game === "equation-slider") commands.push(UNIT, ...equationCommands, gameSmoke(game));
     else if (game === "hanzi-word-adventure") commands.push(UNIT, ADVENTURE, ADVENTURE_E2E, gameSmoke(game));
     else if (game) commands.push(UNIT, gameSmoke(game));

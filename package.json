@@ -86,6 +86,7 @@
     "test:e2e:oddity-puzzles": "tsx tools/maintenance/run-scene-checks.ts oddity-puzzles",
     "test:e2e:oddity-legacy": "node tools/oddity-puzzles/legacy-compat.mjs",
     "test:e2e:english-study": "playwright test --config playwright.english-study.config.ts",
+    "test:e2e:structure-explorer": "playwright test --config playwright.structure-explorer.config.ts",
     "test:e2e:hanzi-stroke-lab": "playwright test --config playwright.hanzi-stroke-lab.config.ts",
     "test:e2e:storage": "playwright test tests/e2e/maintenance-storage.spec.ts"
   },

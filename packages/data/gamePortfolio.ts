@@ -86,6 +86,11 @@ export const PORTFOLIO_TEST_PROFILES: readonly PortfolioTestProfile[] = [
 
 export const GAME_PORTFOLIO: readonly GamePortfolioRecord[] = [
   {
+    id: "structure-explorer", targetWorld: "shared", productRole: "utility", definitionRole: "independent-tool", activeChildProduct: false, classicCardVisible: false, qualityTier: "A", lifecycleStatus: "active",
+    canonicalRoute: "?play=structure-explorer", worldModuleIds: [], compatibilitySurfaceIds: [], sharedEngineIds: [], saveNamespaces: [],
+    testProfile: "a-core-world", loadingPolicy: "route-lazy", contentStatus: "playable", canonicalDocs: ["games/structure-explorer/README.md"],
+  },
+  {
     id: "oddity-puzzles", targetWorld: "shared", productRole: "independent-puzzle", definitionRole: "active-child-product", activeChildProduct: true, classicCardVisible: true, childProductOrder: 5, qualityTier: "B", lifecycleStatus: "active",
     canonicalRoute: "?play=oddity-puzzles", worldModuleIds: [], compatibilitySurfaceIds: [], sharedEngineIds: ["game-core-local-storage"], saveNamespaces: ["family-games/oddity-puzzles/v1"],
     testProfile: "b-independent-puzzle", loadingPolicy: "route-lazy", contentStatus: "playable", canonicalDocs: ["games/oddity-puzzles/README.md"],

@@ -77,6 +77,13 @@ async function mountApp(root: HTMLElement): Promise<void> {
     return;
   }
 
+  if (route.kind === "play" && play === "structure-explorer") {
+    setBrowserIdentity("结构探索馆 · 结构与工作原理", "#ffffff");
+    const { mountStructureExplorer } = await import("../games/structure-explorer/workbench");
+    mountStructureExplorer(root);
+    return;
+  }
+
   if (route.kind === "play" && play === "hanzi-word-adventure") {
     setBrowserIdentity(`字间行者 · v${PRODUCT_VERSION}`, "#faf5e9");
     setProductIcon('adventure');

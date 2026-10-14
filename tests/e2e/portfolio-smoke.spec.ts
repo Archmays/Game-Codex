@@ -57,6 +57,21 @@ async function expectUsableTarget(locator: Locator): Promise<void> {
 
 const GAMES: readonly SmokeGame[] = [
   {
+    id: "structure-explorer", title: "结构探索馆", surface: ".structure-explorer",
+    canonicalRoute: "/?play=structure-explorer",
+    async interact(page) {
+      await page.locator('[data-structure-pencil]').click();
+      const demo = page.frameLocator('[data-pencil-frame]');
+      await demo.locator('#toggle-open').click();
+      await expect(demo.locator('#readout')).toContainText('木壳打开');
+      await page.locator('[data-structure-directory]').click();
+      await expect(page.locator('[data-structure-pencil]')).toBeVisible();
+      await page.locator('[data-structure-home]').click();
+      await expect(page.locator('[data-world-structure-link]')).toBeFocused();
+      return null;
+    },
+  },
+  {
     id: "oddity-puzzles", title: "奇物事务所", surface: ".oddity-mount",
     canonicalRoute: "/?play=oddity-puzzles",
     async interact(page) {

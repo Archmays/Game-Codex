@@ -1,6 +1,7 @@
 import { oddityPuzzlesGame } from '../../games/oddity-puzzles';
 import { hanziStrokeLab } from "../../games/hanzi-stroke-lab";
 import { englishStudy } from "../../games/english-study";
+import { structureExplorer } from "../../games/structure-explorer";
 import { worldInABoxGame } from "../../games/world-in-a-box";
 import type { GameDefinition } from "../game-core";
 import { equationSliderGame } from "../../games/equation-slider";
@@ -16,6 +17,7 @@ export const allGameDefinitions: GameDefinition[] = [
   worldInABoxGame,
   hanziStrokeLab,
   englishStudy,
+  structureExplorer,
   memoryCardGame,
   mathLabGame,
   hanziTowerDefenseGame,

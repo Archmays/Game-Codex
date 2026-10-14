@@ -36,8 +36,8 @@ describe("game catalog", () => {
         expect(metadata[field as keyof typeof metadata], `${gameDir} ${field}`).toEqual(expect.stringMatching(/\S/));
       }
 
-      const headings = gameDir === "english-study"
-        ? ["# 英语书房", "## 使用"]
+      const headings = gameDir === "english-study" || gameDir === "structure-explorer"
+        ? [`# ${metadata.title}`, "## 使用"]
         : gameDir === "hanzi-stroke-lab"
         ? ["## 工具目标", "## 适合对象", "## 使用说明", "## 数据与边界", "## 设备适配", "## 当前完成度", "## 接入方式", "## 验证命令"]
         : gameDir === "math-lab"

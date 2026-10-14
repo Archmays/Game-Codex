@@ -8,8 +8,8 @@
 
 - 实际起点：`12c86dc22b7219a23baeb26efbe7eab9fb0a2da2`
 - 起点 tracked 文件：`708232522` bytes
-- Mount definitions：`10` 保留
-- Independent tools：`2`
+- Mount definitions：`11` 保留
+- Independent tools：`3`
 - Active child products：`5`
 - World modules：`2`
 - Compatibility surfaces：`2`
@@ -24,6 +24,7 @@
 
 | 游戏 | 稳定 ID | 目标世界 | 定义角色 | 产品角色 | 等级 | 生命周期 | 活跃儿童产品 | Classic 卡片 | 规范 route | save namespace |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 结构探索馆 | `structure-explorer` | 共享模块 | 独立查阅工具 | 独立工具 | A | `active` | 否 | 否 | ?play=structure-explorer |  |
 | 奇物事务所 | `oddity-puzzles` | 共享模块 | 活跃儿童产品 | 独立谜题 | B | `active` | 是 | 是 | ?play=oddity-puzzles | `family-games/oddity-puzzles/v1` |
 | 世界盒子 | `world-in-a-box` | 共享模块 | 活跃儿童产品 | 独立谜题 | B | `active` | 是 | 是 | ?play=world-in-a-box | `family-games/world-in-a-box/v1`<br>`family-games/world-in-a-box/dresden-river-campus-v2`<br>`family-games/world-in-a-box/audio-v1`<br>`family-games/world-in-a-box/frozen-elsa-playground-v1` |
 | 汉字书房 | `hanzi-stroke-lab` | 中文世界 | 独立查阅工具 | 独立工具 | A | `active` | 否 | 否 | ?play=hanzi-stroke-lab | `family-games/hanzi-stroke-lab/v1` |
