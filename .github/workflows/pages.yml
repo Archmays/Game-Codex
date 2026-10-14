@@ -4,6 +4,15 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      validation_scope:
+        description: Publish scope (use Structure Explorer only for its isolated content and navigation changes)
+        required: true
+        default: full
+        type: choice
+        options:
+          - full
+          - structure-explorer
 
 permissions:
   contents: read
@@ -54,12 +63,15 @@ jobs:
         run: pnpm run validate:interaction-integrity
 
       - name: Prove natural-use observation privacy defaults and storage isolation
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'structure-explorer'
         run: pnpm run test:privacy:natural-use-kit
 
       - name: Run unit, content, and maintenance safety tests
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'structure-explorer'
         run: pnpm test
 
       - name: Validate independent memory and tower defense balance
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'structure-explorer'
         run: pnpm run test:memory-match && pnpm run validate:hanzi-tower-defense
         env:
           TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-V1.0/tower
@@ -78,45 +90,57 @@ jobs:
           STRUCTURE_PREVIEW: "1"
 
       - name: Validate local Hanzi tool data and real input flows
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'structure-explorer'
         run: node tools/hanzi-stroke-lab/verify-data.mjs && pnpm exec playwright test --config playwright.hanzi-stroke-lab.config.ts --project=chromium-desktop --project=chromium-390
 
       - name: Exercise full keyboard, mouse and touch loops across shared surfaces
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'structure-explorer'
         run: pnpm run test:e2e:step4 --project=desktop --project=phone-390 --grep "@primary|@step5-entry|@step5-keypath"
 
       - name: Exercise the exact production build across the portfolio
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'structure-explorer'
         run: pnpm run test:portfolio:smoke
         env:
           PORTFOLIO_SMOKE_PREVIEW: "1"
 
       - name: Exercise portfolio first-use, return, reload, and resume smoke
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'structure-explorer'
         run: pnpm run test:e2e:play-readiness:smoke
 
       - name: Exercise representative registered-surface hit-test matrix
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'structure-explorer'
         run: pnpm run test:e2e:hittest:representative
         env:
           INTERACTION_INTEGRITY_PREVIEW: "1"
 
       - name: Exercise parent-only natural-use observation flow
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'structure-explorer'
         run: pnpm run test:e2e:natural-use-kit
 
       - name: Validate Math World models, catalog replacement, and browser lifecycle
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'structure-explorer'
         run: pnpm run validate:math-world && pnpm run test:e2e:math-world
 
       - name: Validate Hanzi tower defense full battle and controls
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'structure-explorer'
         run: pnpm run test:e2e:hanzi-tower-defense
         env:
           TD_EVIDENCE_DIR: tmp/tasks/GAME-CODEX-V1.0/tower
 
       - name: Validate twenty adventure rooms and ordinary four-chapter play
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'structure-explorer'
         run: pnpm run validate:hanzi-word-adventure && pnpm exec tsx games/hanzi-word-adventure/tools/solve-step5.ts && pnpm run test:e2e:hanzi-word-adventure
 
       - name: Validate two builds and placements on both new defense maps
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'structure-explorer'
         run: pnpm exec tsx tools/hanzi-tower-defense/step4-balance.ts --write && pnpm exec tsx tools/hanzi-tower-defense/check-placement.ts
 
       - name: Validate two builds, weak layouts, and resonance in six tactical scenarios
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'structure-explorer'
         run: pnpm exec tsx tools/hanzi-tower-defense/step5-balance.ts --write
 
       - name: Verify v1.0 presentation, media, and recovery
+        if: github.event_name != 'workflow_dispatch' || inputs.validation_scope != 'structure-explorer'
         run: pnpm exec playwright test --config playwright.v1.config.ts --project=desktop --project=phone-390
 
       - name: Upload failure evidence only
