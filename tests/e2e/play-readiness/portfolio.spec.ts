@@ -3,6 +3,163 @@ import { resolve } from "node:path";
 import { expect, test, type Locator, type Page, type TestInfo } from "@playwright/test";
 import { homeDiscoveryTests } from "./home-discovery-cases";
 import { activate } from "../step4/input-helpers";
+import { createSaveVaultBackup, serializeSaveVaultBackup } from "../../../packages/save-vault";
+
+interface VaultRaceHarness {
+  release(reject?: boolean): void;
+  blocked: boolean;
+  tasks: Promise<void>[];
+  detached?: { status: HTMLElement; restore: HTMLButtonElement; preview: HTMLElement; text: string };
+}
+type VaultRaceWindow = typeof window & { vaultRace: VaultRaceHarness };
+
+// Delay real browser I/O and await the actual async change handler, avoiding timing sleeps.
+async function prepareVaultRace(page: Page, phase: "read" | "checksum"): Promise<void> {
+  await page.addInitScript(({ phase }) => {
+    const harness: VaultRaceHarness = { release: () => {}, blocked: false, tasks: [] };
+    (window as VaultRaceWindow).vaultRace = harness;
+    const gate = new Promise<void>((resolve, reject) => {
+      harness.release = (fail = false) => fail ? reject(new Error("synthetic old read failure")) : resolve();
+    });
+    const originalText = File.prototype.text;
+    File.prototype.text = async function () {
+      if (phase === "read" && this.name === "slow.json") {
+        harness.blocked = true;
+        await gate;
+      }
+      return originalText.call(this);
+    };
+    const originalDigest = crypto.subtle.digest.bind(crypto.subtle);
+    let firstDigest = true;
+    crypto.subtle.digest = async (algorithm, data) => {
+      if (phase === "checksum" && firstDigest) {
+        firstDigest = false;
+        harness.blocked = true;
+        await gate;
+      }
+      return originalDigest(algorithm, data);
+    };
+    const originalAddListener = EventTarget.prototype.addEventListener;
+    EventTarget.prototype.addEventListener = function (type, listener, options) {
+      if (this instanceof HTMLInputElement && this.matches("[data-vault-file]") && type === "change" && typeof listener === "function") {
+        const callback = listener;
+        listener = function (this: EventTarget, event) {
+          harness.tasks.push(Promise.resolve(callback.call(this, event)));
+        };
+      }
+      return originalAddListener.call(this, type, listener, options);
+    };
+  }, { phase });
+  await page.goto("/?world=my-game-world");
+  await page.getByRole("button", { name: /家长角/ }).click();
+  await page.getByRole("button", { name: "打开游戏进度保险箱" }).click();
+  await expect(page.getByTestId("save-vault")).toBeVisible();
+}
+
+async function vaultRaceText(value: string): Promise<string> {
+  return serializeSaveVaultBackup(await createSaveVaultBackup({
+    getItem: key => key === "family-games/english-world/v2" ? value : null,
+    setItem: () => {}, removeItem: () => {},
+  }, { originHint: "synthetic-race-test" }));
+}
+
+async function settleVaultSelection(page: Page, index: number): Promise<void> {
+  await page.evaluate(async index => {
+    await (window as VaultRaceWindow).vaultRace.tasks[index];
+  }, index);
+}
+
+for (const scenario of ["last-valid", "last-invalid", "old-rejection", "empty-selection", "slow-checksum", "slow-checksum-last-invalid", "slow-checksum-rejection"] as const) {
+  test(`@save-vault rapid selection ${scenario} only admits the last file`, async ({ page }, testInfo) => {
+    const runtime = observe(page);
+    const slowChecksum = scenario.startsWith("slow-checksum");
+    const invalidLast = scenario.endsWith("last-invalid");
+    await prepareVaultRace(page, slowChecksum ? "checksum" : "read");
+    const oldText = await vaultRaceText("older raw bytes");
+    const newValue = '{ "version":99,"synthetic":"最后选择的原文" }';
+    const newText = await vaultRaceText(newValue);
+    await page.evaluate(() => {
+      localStorage.setItem("family-games/english-world/v2", "before-restore");
+      localStorage.setItem("other-localhost-app/save", "untouched");
+    });
+    const before = await page.evaluate(() => ({ ...localStorage }));
+    const input = page.locator("[data-vault-file]");
+    const restore = page.locator("[data-vault-restore]");
+    // First admit a file, so beginning another read must revoke an existing preview immediately.
+    if (!slowChecksum) {
+      await input.setInputFiles({ name: "initial.json", mimeType: "application/json", buffer: Buffer.from(oldText) });
+      await settleVaultSelection(page, 0);
+      await expect(restore).toBeEnabled();
+    }
+    const oldIndex = slowChecksum ? 0 : 1;
+    await input.setInputFiles({ name: "slow.json", mimeType: "application/json", buffer: Buffer.from(oldText) });
+    await expect.poll(() => page.evaluate(() => (window as VaultRaceWindow).vaultRace.blocked)).toBe(true);
+    await expect(restore).toBeDisabled();
+    await expect(page.locator("[data-vault-preview]")).toBeHidden();
+    if (scenario === "empty-selection") await input.setInputFiles([]);
+    else await input.setInputFiles({ name: "last.json", mimeType: "application/json", buffer: Buffer.from(invalidLast ? "invalid JSON" : newText) });
+    await settleVaultSelection(page, oldIndex + 1);
+    const lastStatus = await page.locator("[data-vault-status]").textContent();
+    const lastPreview = await page.locator("[data-vault-preview]").textContent();
+    await page.evaluate(reject => (window as VaultRaceWindow).vaultRace.release(reject), scenario.endsWith("rejection"));
+    await settleVaultSelection(page, oldIndex);
+    await expect(page.locator("[data-vault-status]")).toHaveText(lastStatus!);
+    await expect(page.locator("[data-vault-preview]")).toHaveText(lastPreview!);
+    expect(await page.evaluate(() => ({ ...localStorage }))).toEqual(before);
+    if (invalidLast || scenario === "empty-selection") {
+      await expect(restore).toBeDisabled();
+      await expect(page.locator("[data-vault-preview]")).toBeHidden();
+      if (invalidLast) await expect(page.locator("[data-vault-status]")).toContainText("不是有效的 JSON");
+    } else {
+      await expect(restore).toBeEnabled();
+      await expect(page.locator("[data-vault-preview]")).toBeVisible();
+      await expect(page.locator("[data-vault-preview-bytes]")).toHaveText(String(Buffer.byteLength(newValue)));
+      page.once("dialog", dialog => void dialog.accept());
+      await activate(page, "[data-vault-restore]", testInfo.project.use.hasTouch ? "touch" : "keyboard");
+      await expect(page.locator("[data-vault-status]")).toContainText("已恢复 1");
+      expect(await page.evaluate(() => localStorage.getItem("family-games/english-world/v2"))).toBe(newValue);
+      expect(await page.evaluate(() => localStorage.getItem("other-localhost-app/save"))).toBe("untouched");
+    }
+    expectClean(runtime);
+  });
+}
+
+for (const phase of ["read", "checksum"] as const) {
+  test(`@save-vault closing during ${phase} cancels results across reopen`, async ({ page }) => {
+    const runtime = observe(page);
+    await prepareVaultRace(page, phase);
+    const before = await page.evaluate(() => ({ ...localStorage }));
+    await page.locator("[data-vault-file]").setInputFiles({ name: "slow.json", mimeType: "application/json", buffer: Buffer.from(await vaultRaceText("closed old bytes")) });
+    await expect.poll(() => page.evaluate(() => (window as VaultRaceWindow).vaultRace.blocked)).toBe(true);
+    await page.evaluate(() => {
+      const status = document.querySelector<HTMLElement>("[data-vault-status]")!;
+      (window as VaultRaceWindow).vaultRace.detached = {
+        status, text: status.textContent!,
+        restore: document.querySelector<HTMLButtonElement>("[data-vault-restore]")!,
+        preview: document.querySelector<HTMLElement>("[data-vault-preview]")!,
+      };
+    });
+    if (phase === "read") await page.keyboard.press("Escape");
+    else await page.getByRole("button", { name: "回到游戏世界" }).click();
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    await expect(page.getByRole("button", { name: /家长角/ })).toBeFocused();
+    await page.getByRole("button", { name: /家长角/ }).click();
+    await page.getByRole("button", { name: "打开游戏进度保险箱" }).click();
+    await page.locator("[data-vault-file]").setInputFiles({ name: "invalid.json", mimeType: "application/json", buffer: Buffer.from("invalid JSON") });
+    await settleVaultSelection(page, 1);
+    await page.evaluate(() => (window as VaultRaceWindow).vaultRace.release());
+    await settleVaultSelection(page, 0);
+    expect(await page.evaluate(() => {
+      const old = (window as VaultRaceWindow).vaultRace.detached!;
+      return { sameStatus: old.status.textContent === old.text, disabled: old.restore.disabled, hidden: old.preview.hidden };
+    })).toEqual({ sameStatus: true, disabled: true, hidden: true });
+    await expect(page.locator("[data-vault-status]")).toContainText("不是有效的 JSON");
+    await expect(page.locator("[data-vault-restore]")).toBeDisabled();
+    await expect(page.locator("[data-vault-preview]")).toBeHidden();
+    expect(await page.evaluate(() => ({ ...localStorage }))).toEqual(before);
+    expectClean(runtime);
+  });
+}
 
 homeDiscoveryTests();
 

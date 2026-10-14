@@ -13,6 +13,7 @@ Parent Save Vault is a local, parent-facing recovery tool for Game-Codex progres
 ## Preview and restore
 
 - Parsing, format checks, size checks, key-safety checks, entry checksums, and the manifest checksum happen before any write.
+- Each file selection immediately revokes the previous preview and restore permission. Only the latest selection may publish a validation result; an invalid or empty selection and closing the panel prevent older reads or checksum results from enabling restore.
 - Unknown keys are displayed and skipped. They cannot be imported in this version.
 - A known future-version game save may be restored byte-for-byte. The owning game remains responsible for its own future-read-only behavior.
 - Before restore, the exact current values that may be overwritten are written to `save-vault/pre-import-backup/v1` and read back.

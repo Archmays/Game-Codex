@@ -44,6 +44,7 @@ export function mountSaveVaultPanel(root: HTMLElement, storage: Storage = window
   let validated: ValidatedSaveVault | null = null;
   let exportedThisSession = false;
   let destroyed = false;
+  let selectionId = 0;
 
   root.innerHTML = `<section class="save-vault" aria-labelledby="save-vault-title" data-testid="save-vault">
     <header><p>家长角 · 只在这台浏览器里工作</p><h3 id="save-vault-title">游戏进度保险箱</h3></header>
@@ -100,15 +101,21 @@ export function mountSaveVaultPanel(root: HTMLElement, storage: Storage = window
 
   const fileInput = root.querySelector<HTMLInputElement>("[data-vault-file]");
   fileInput?.addEventListener("change", async () => {
+    if (destroyed) return;
+    const currentSelection = ++selectionId;
     const file = fileInput.files?.[0];
     validated = null;
     if (restoreButton) restoreButton.disabled = true;
     if (preview) preview.hidden = true;
-    if (!file || !status || destroyed) return;
+    if (!file || !status) return;
     status.textContent = "正在本机校验备份；此时不会写入任何进度……";
     try {
-      validated = await validateSaveVaultText(await file.text());
-      const info = validated.preview;
+      const text = await file.text();
+      if (destroyed || currentSelection !== selectionId) return;
+      const result = await validateSaveVaultText(text);
+      if (destroyed || currentSelection !== selectionId) return;
+      validated = result;
+      const info = result.preview;
       setText(root, "[data-vault-preview-format]", `${info.format} / v${info.version}`);
       setText(root, "[data-vault-preview-count]", String(info.entriesCount));
       setText(root, "[data-vault-preview-keys]", `${info.knownKeys.length} / ${info.unknownKeys.length} / ${info.futureKeys.length}`);
@@ -121,6 +128,7 @@ export function mountSaveVaultPanel(root: HTMLElement, storage: Storage = window
         ? `预览完成：${info.unknownKeys.length} 个未知键会跳过，不会写入。`
         : "预览完成；尚未写入任何进度。";
     } catch (error) {
+      if (destroyed || currentSelection !== selectionId) return;
       status.textContent = error instanceof Error ? error.message : "这个备份无法安全预览。";
     }
   });
@@ -153,6 +161,9 @@ export function mountSaveVaultPanel(root: HTMLElement, storage: Storage = window
   return {
     destroy(): void {
       destroyed = true;
+      selectionId++;
+      validated = null;
+      if (restoreButton) restoreButton.disabled = true;
       root.replaceChildren();
     },
   };

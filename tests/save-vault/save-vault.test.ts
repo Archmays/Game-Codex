@@ -11,6 +11,7 @@ import {
   type SaveVaultStorage,
 } from "../../packages/save-vault";
 import { SAVE_VAULT_PRE_IMPORT_BACKUP_KEY } from "../../packages/data/saveKeyInventory";
+import { vi } from "vitest";
 
 class MemoryStorage implements SaveVaultStorage {
   readonly values = new Map<string, string>();
@@ -134,6 +135,138 @@ describe("Parent Save Vault", () => {
     expect(storage.getItem("family-games/math-world/v1")).toBe("before-math");
     expect(storage.getItem("family-games/english-world/v2")).toBe("before-english");
   });
+
+  it.each(["write", "readback mismatch", "readback exception"] as const)(
+    "restores existing raw values and removes newly created keys after a partial restore %s failure",
+    async (failure) => {
+      const storage = new MemoryStorage();
+      const existingKey = "family-games/english-world/v2";
+      const absentKey = "family-games/hanzi-tower-defense/v3";
+      const lastKey = "family-games/math-world/v1";
+      const originalRaw = '{  "version": 99, "原样": "保留" }\u0000';
+      storage.setItem(existingKey, originalRaw);
+      storage.setItem(lastKey, "before-math");
+      storage.setItem("other-localhost-app/save", "untouched");
+      const validated = await validateSaveVaultText(await backupWithEntries([
+        await entry(existingKey, "after-english"),
+        await entry(absentKey, "after-hanzi"),
+        await entry(lastKey, "after-math"),
+      ]));
+      let injected = false;
+      const writes = vi.spyOn(storage, "setItem").mockImplementation((key, value) => {
+        if (failure === "write" && key === lastKey && value === "after-math" && !injected) {
+          injected = true;
+          throw new Error("injected partial write failure");
+        }
+        storage.values.set(key, value);
+      });
+      vi.spyOn(storage, "getItem").mockImplementation((key) => {
+        const value = storage.values.get(key) ?? null;
+        if (failure !== "write" && key === lastKey && value === "after-math" && !injected) {
+          injected = true;
+          if (failure === "readback exception") throw new Error("injected readback failure");
+          return "incorrect readback";
+        }
+        return value;
+      });
+      const removals = vi.spyOn(storage, "removeItem");
+
+      expect(() => restoreSaveVault(storage, validated, new Date("2026-08-22T00:01:00Z")))
+        .toThrow("已自动回到恢复前的本机记录");
+
+      expect(injected).toBe(true);
+      expect(writes).toHaveBeenCalledWith(existingKey, "after-english");
+      expect(writes).toHaveBeenCalledWith(absentKey, "after-hanzi");
+      expect(removals).toHaveBeenCalledWith(absentKey);
+      expect(storage.getItem(existingKey)).toBe(originalRaw);
+      expect(storage.getItem(absentKey)).toBeNull();
+      expect(storage.getItem(lastKey)).toBe("before-math");
+      expect(storage.getItem("other-localhost-app/save")).toBe("untouched");
+      expect(JSON.parse(storage.getItem(SAVE_VAULT_PRE_IMPORT_BACKUP_KEY)!)).toEqual({
+        format: "game-codex-pre-import-backup",
+        version: 1,
+        createdAt: "2026-08-22T00:01:00.000Z",
+        entries: [
+          { key: existingKey, value: originalRaw },
+          { key: absentKey, value: null },
+          { key: lastKey, value: "before-math" },
+        ],
+      });
+    },
+  );
+
+  it.each(["write refusal", "readback mismatch"] as const)(
+    "does not write game records when the pre-import backup has a %s",
+    async (failure) => {
+      const storage = new MemoryStorage();
+      const existingKey = "family-games/english-world/v2";
+      const absentKey = "family-games/math-world/v1";
+      storage.setItem(existingKey, "before-english");
+      storage.setItem("other-localhost-app/save", "untouched");
+      const validated = await validateSaveVaultText(await backupWithEntries([
+        await entry(existingKey, "after-english"),
+        await entry(absentKey, "after-math"),
+      ]));
+      const writes = vi.spyOn(storage, "setItem").mockImplementation((key, value) => {
+        if (key === SAVE_VAULT_PRE_IMPORT_BACKUP_KEY && failure === "write refusal") {
+          throw new Error("injected snapshot write refusal");
+        }
+        storage.values.set(key, value);
+      });
+      vi.spyOn(storage, "getItem").mockImplementation((key) => {
+        if (key === SAVE_VAULT_PRE_IMPORT_BACKUP_KEY && failure === "readback mismatch") return null;
+        return storage.values.get(key) ?? null;
+      });
+      const removals = vi.spyOn(storage, "removeItem");
+
+      expect(() => restoreSaveVault(storage, validated)).toThrow(
+        failure === "write refusal" ? "snapshot write refusal" : "没有改动任何游戏进度",
+      );
+
+      expect(writes).toHaveBeenCalledTimes(1);
+      expect(writes.mock.calls[0][0]).toBe(SAVE_VAULT_PRE_IMPORT_BACKUP_KEY);
+      expect(removals).not.toHaveBeenCalled();
+      expect(storage.getItem(existingKey)).toBe("before-english");
+      expect(storage.getItem(absentKey)).toBeNull();
+      expect(storage.getItem("other-localhost-app/save")).toBe("untouched");
+    },
+  );
+
+  it.each(["removal exception", "removal ignored"] as const)(
+    "reports incomplete rollback truthfully when a newly created key has a %s",
+    async (failure) => {
+      const storage = new FailOnceStorage();
+      const existingKey = "family-games/english-world/v2";
+      const absentKey = "family-games/hanzi-tower-defense/v3";
+      const lastKey = "family-games/math-world/v1";
+      storage.setItem(existingKey, "before-english");
+      storage.setItem(lastKey, "before-math");
+      const validated = await validateSaveVaultText(await backupWithEntries([
+        await entry(existingKey, "after-english"),
+        await entry(absentKey, "after-hanzi"),
+        await entry(lastKey, "after-math"),
+      ]));
+      storage.failKey = lastKey;
+      vi.spyOn(storage, "removeItem").mockImplementation((key) => {
+        if (key === absentKey) {
+          if (failure === "removal exception") throw new Error("injected rollback removal failure");
+          return;
+        }
+        storage.values.delete(key);
+      });
+
+      let restoreError: unknown;
+      try { restoreSaveVault(storage, validated); } catch (error) { restoreError = error; }
+
+      expect(restoreError).toBeInstanceOf(Error);
+      expect((restoreError as Error).message).toBe("恢复失败，而且自动回滚未能完整验证。请保留当前浏览器页面。");
+      expect((restoreError as Error).cause).toEqual(new Error("injected write failure"));
+      expect(storage.getItem(existingKey)).toBe("before-english");
+      expect(storage.getItem(absentKey)).toBe("after-hanzi");
+      expect(storage.getItem(lastKey)).toBe("before-math");
+      expect(storage.getItem(SAVE_VAULT_PRE_IMPORT_BACKUP_KEY)).not.toBeNull();
+    },
+  );
 
   it("clears only present exact known keys after export confirmation", () => {
     const storage = new MemoryStorage();
