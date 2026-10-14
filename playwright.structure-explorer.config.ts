@@ -1,6 +1,14 @@
 import { defineConfig } from '@playwright/test';
 
-const baseURL = 'http://127.0.0.1:4196';
+// Remote checks are opt-in; the default still starts the existing local Vite server.
+const remoteBaseURL = process.env.STRUCTURE_BASE_URL;
+const baseURL = remoteBaseURL || 'http://127.0.0.1:4196';
+if (remoteBaseURL && !/^https?:$/.test(new URL(remoteBaseURL).protocol)) {
+  throw new Error('STRUCTURE_BASE_URL must be an absolute HTTP or HTTPS URL');
+}
+if (process.env.STRUCTURE_EXPECTED_COMMIT && !/^[0-9a-f]{40}$/i.test(process.env.STRUCTURE_EXPECTED_COMMIT)) {
+  throw new Error('STRUCTURE_EXPECTED_COMMIT must be a full 40-character commit SHA');
+}
 export default defineConfig({
   testDir: './tests/e2e',
   testMatch: 'structure-explorer.spec.ts',
@@ -19,7 +27,7 @@ export default defineConfig({
     { name: 'tablet-768', use: { browserName: 'chromium', viewport: { width: 768, height: 1024 }, hasTouch: true, deviceScaleFactor: 2 } },
     { name: 'tablet-1024', use: { browserName: 'chromium', viewport: { width: 1024, height: 768 }, hasTouch: true, deviceScaleFactor: 2 } },
   ],
-  webServer: {
+  webServer: remoteBaseURL ? undefined : {
     command: `pnpm exec vite ${process.env.STRUCTURE_PREVIEW === '1' ? 'preview ' : ''}--host 127.0.0.1 --port 4196 --strictPort`,
     url: baseURL,
     reuseExistingServer: false,

@@ -7,3 +7,5 @@
 @media(max-height:520px){dialog #three-host{height:42dvh}dialog{max-height:calc(100dvh - 12px)}dialog .small{font-size:13px}}
 
 dialog header button{flex-shrink:0;white-space:nowrap;font-size:16px}
+
+.drag-mode-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0;font-size:15px}.drag-mode-controls button{font-size:16px;min-height:44px;min-width:72px;padding:7px 13px}.drag-mode-controls button[aria-pressed=true]{background:#315c5a;color:#fff;border-color:#315c5a}

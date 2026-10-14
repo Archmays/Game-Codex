@@ -62,8 +62,10 @@ const GAMES: readonly SmokeGame[] = [
     async interact(page) {
       await page.locator('[data-structure-pencil]').click();
       const demo = page.frameLocator('[data-pencil-frame]');
-      await demo.locator('#toggle-open').click();
-      await expect(demo.locator('#readout')).toContainText('木壳打开');
+      await expect(demo.locator('canvas#pencil-3d')).toBeVisible();
+      await demo.locator('#boom').click();
+      await expect(demo.locator('#three-host')).toHaveAttribute('data-exploded', 'true');
+      await expect(demo.locator('#readout')).toContainText('五个观察对象');
       await page.locator('[data-structure-directory]').click();
       await expect(page.locator('[data-structure-pencil]')).toBeVisible();
       await page.locator('[data-structure-home]').click();

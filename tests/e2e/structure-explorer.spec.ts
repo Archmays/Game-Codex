@@ -1,8 +1,11 @@
 import { test as base, expect, type Page, type Locator } from '@playwright/test';
 
-type StructureState = { rotation: [number, number]; scale: number; selected: string | null; gesturing: boolean; ready: boolean; view: string; exploded: boolean; contextLost: boolean };
+type StructureState = { rotation: [number, number]; pan: [number, number]; dragMode: 'rotate' | 'pan'; scale: number; selected: string | null; gesturing: boolean; ready: boolean; view: string; exploded: boolean; contextLost: boolean };
 type DemoState = { mode: number; open: number; pos: number; auto: boolean; marks: number[]; crumbs: number; pressure: number; grade: string; zoom: number; view: string; part: string; processStep: number; structure: StructureState };
-const directory = '/?play=structure-explorer';
+// Preserve a Pages subdirectory when an explicitly requested remote base is used.
+const basePath = process.env.STRUCTURE_BASE_URL ? new URL(process.env.STRUCTURE_BASE_URL).pathname.replace(/\/?$/, '/') : '/';
+const expectedCommit = process.env.STRUCTURE_EXPECTED_COMMIT?.toLowerCase();
+const directory = `${basePath}?play=structure-explorer`;
 const pencil = `${directory}&exhibit=pencil`;
 const frame = (page: Page) => page.frameLocator('[data-pencil-frame]');
 const stage = (page: Page) => frame(page).locator('#stage');
@@ -15,6 +18,10 @@ async function ready3d(page: Page) {
   await expect(frame(page).locator('canvas#pencil-3d')).toBeVisible();
   await expect.poll(async () => (await state(page)).structure.ready).toBe(true);
   expect((await state(page)).structure.contextLost).toBe(false);
+  if (expectedCommit) {
+    await expect(page.locator('html'), 'Parent page must serve the expected commit').toHaveAttribute('data-build-commit', expectedCommit);
+    await expect(frame(page).locator('html'), 'Pencil iframe must serve the same expected commit').toHaveAttribute('data-build-commit', expectedCommit);
+  }
 }
 async function revealControl(target: Locator) {
   const details = target.locator('xpath=ancestor::details').last();
@@ -69,9 +76,10 @@ test('BOOM stops after opening and closing; writing motion starts explicitly, pa
   await expect(frame(page).locator('#auto')).not.toBeVisible();
   const canvas = frame(page).locator('canvas#pencil-3d');
   // Keep the crop at the same document position. Button auto-scroll otherwise places the
-  // canvas top at -0.296875px and clips a row, even when restored geometry is identical.
+  // canvas top just outside the viewport and clips a row, even when restored geometry is identical.
   const capture = async () => {
-    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    const documentTop = (await canvas.boundingBox())!.y + await page.evaluate(() => window.scrollY);
+    await page.evaluate(top => window.scrollTo({ top: Math.max(0, Math.floor(top) - 32), behavior: 'instant' }), documentTop);
     const box = (await canvas.boundingBox())!;
     expect(box.y).toBeGreaterThanOrEqual(0);
     expect(box.y + box.height).toBeLessThanOrEqual(page.viewportSize()!.height);
@@ -109,7 +117,7 @@ test('BOOM stops after opening and closing; writing motion starts explicitly, pa
 
 test('keyboard: home → directory → pencil, native controls, return and reload', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-1440', 'Full actual keyboard playthrough on desktop');
-  await page.goto('/?world=my-game-world');
+  await page.goto(`${basePath}?world=my-game-world`);
   const entrance = page.getByRole('button', { name: /结构探索馆/ }).or(page.getByRole('link', { name: /结构探索馆/ }));
   await expect(entrance).toBeVisible();
   await tabTo(page, entrance);
@@ -134,6 +142,18 @@ test('keyboard: home → directory → pencil, native controls, return and reloa
   await page.keyboard.press('Home');
   expect((await state(page)).structure.rotation).toEqual(initialRotation);
   expect((await state(page)).structure.scale).toBe(1);
+  await tabTo(page, frame(page).locator('#drag-pan'));
+  await page.keyboard.press('Space');
+  await expect(frame(page).locator('#drag-pan')).toHaveAttribute('aria-pressed', 'true');
+  await expect(frame(page).locator('#drag-rotate')).toHaveAttribute('aria-pressed', 'false');
+  expect((await state(page)).structure.dragMode).toBe('pan');
+  expect((await state(page)).structure.rotation).toEqual(initialRotation);
+  expect((await state(page)).structure.pan).toEqual([0, 0]);
+  expect((await state(page)).structure.exploded, 'Native mode button does not also activate the stage').toBe(false);
+  await tabTo(page, frame(page).locator('#drag-rotate'));
+  await page.keyboard.press('Enter');
+  await expect(frame(page).locator('#drag-rotate')).toHaveAttribute('aria-pressed', 'true');
+  expect((await state(page)).structure.dragMode).toBe('rotate');
   await tabTo(page, frame(page).locator('#boom'));
   await page.keyboard.press('Space');
   expect((await state(page)).structure.exploded, 'Native Space activates BOOM exactly once').toBe(true);
@@ -408,6 +428,88 @@ test('mouse rotates the 3D pencil without selecting, zooms and inspects each exp
   }
 });
 
+test('left mouse pans by mode or Shift, cancels safely and preserves the exploded view on return', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop-1440', 'Representative actual left-button pan input on desktop');
+  await page.goto(pencil);
+  await ready3d(page);
+  const canvas = frame(page).locator('canvas#pencil-3d');
+  const panButton = frame(page).locator('#drag-pan');
+  const rotateButton = frame(page).locator('#drag-rotate');
+  const drag = async (release = true) => {
+    const p = await canvasPoint(page);
+    await page.mouse.move(p.x, p.y);
+    await page.mouse.down({ button: 'left' });
+    await page.mouse.move(p.x + 36, p.y + 14, { steps: 5 });
+    if (release) await page.mouse.up({ button: 'left' });
+  };
+  expect((await state(page)).structure.dragMode).toBe('rotate');
+  await expect(rotateButton).toHaveAttribute('aria-pressed', 'true');
+  await panButton.click();
+  await expect(panButton).toHaveAttribute('aria-pressed', 'true');
+  const start = (await state(page)).structure;
+  await drag();
+  const panned = (await state(page)).structure;
+  expect(panned.pan).not.toEqual(start.pan);
+  expect(panned.rotation).toEqual(start.rotation);
+  expect(panned.selected).toBeNull();
+  expect(panned.gesturing).toBe(false);
+  await drag(false);
+  expect((await state(page)).structure.pan).not.toEqual(panned.pan);
+  // Diagnose pointercancel on an actual held left-button pan, then release the real mouse.
+  await canvas.dispatchEvent('pointercancel', { pointerId: 1 });
+  await page.mouse.up({ button: 'left' });
+  expect((await state(page)).structure.pan).toEqual(panned.pan);
+  expect((await state(page)).structure.rotation).toEqual(panned.rotation);
+  expect((await state(page)).structure.gesturing).toBe(false);
+  await drag(false);
+  expect((await state(page)).structure.pan).not.toEqual(panned.pan);
+  await stage(page).evaluate(() => window.dispatchEvent(new Event('blur')));
+  await page.mouse.up({ button: 'left' });
+  expect((await state(page)).structure.pan).toEqual(panned.pan);
+  expect((await state(page)).structure.gesturing).toBe(false);
+  await rotateButton.click();
+  const beforeRotate = (await state(page)).structure;
+  await drag();
+  const rotated = (await state(page)).structure;
+  expect(rotated.rotation).not.toEqual(beforeRotate.rotation);
+  expect(rotated.pan).toEqual(beforeRotate.pan);
+  expect(rotated.selected).toBeNull();
+  await page.keyboard.down('Shift');
+  try { await drag(); } finally { await page.keyboard.up('Shift'); }
+  const shifted = (await state(page)).structure;
+  expect(shifted.pan).not.toEqual(rotated.pan);
+  expect(shifted.rotation).toEqual(rotated.rotation);
+  expect(shifted.dragMode, 'Shift only temporarily changes the gesture').toBe('rotate');
+  expect(shifted.selected).toBeNull();
+  await frame(page).locator('#boom').click();
+  await panButton.click();
+  const box = (await canvasPoint(page)).box;
+  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2, { button: 'left' });
+  expect((await state(page)).structure.selected, 'A light click still picks geometry in pan mode').toBe('core');
+  await frame(page).locator('#return-parts').click();
+  await drag();
+  const exploded = (await state(page)).structure;
+  expect(exploded.exploded).toBe(true);
+  expect(exploded.pan).not.toEqual([0, 0]);
+  await frame(page).locator('[data-inspect-part="core"]').click();
+  await expect(frame(page).locator('#inspector-dialog')).toBeVisible();
+  await expect(panButton).toBeVisible();
+  await panButton.click();
+  const single = (await state(page)).structure;
+  await drag();
+  const singlePanned = (await state(page)).structure;
+  expect(singlePanned.pan).not.toEqual(single.pan);
+  expect(singlePanned.rotation).toEqual(single.rotation);
+  expect(singlePanned.selected).toBe('core');
+  await frame(page).locator('#return-parts').click();
+  const restored = (await state(page)).structure;
+  expect(restored.selected).toBeNull();
+  expect(restored.pan).toEqual(exploded.pan);
+  expect(restored.rotation).toEqual(exploded.rotation);
+  expect(restored.scale).toBe(exploded.scale);
+  expect(restored.view).toBe(exploded.view);
+});
+
 test('3D gestures clear on cancellation, focus loss, dialog entry and route re-entry', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-1440', 'Representative mouse lifecycle on desktop');
   await page.goto(pencil);
@@ -458,6 +560,15 @@ test('device-emulated touch taps parts, rotates with one finger and pinches with
   test.skip(testInfo.project.name !== 'mobile-390', 'Representative Chromium CDP device emulation; not physical-device evidence');
   await page.goto(pencil);
   await ready3d(page);
+  await frame(page).locator('#drag-pan').tap();
+  await expect(frame(page).locator('#drag-pan')).toHaveAttribute('aria-pressed', 'true');
+  expect((await state(page)).structure.dragMode).toBe('pan');
+  expect((await state(page)).structure.selected).toBeNull();
+  expect((await state(page)).structure.gesturing).toBe(false);
+  // Mouse and touch remain interchangeable on the same emulated touch device.
+  await frame(page).locator('#drag-rotate').click();
+  await expect(frame(page).locator('#drag-rotate')).toHaveAttribute('aria-pressed', 'true');
+  expect((await state(page)).structure.dragMode).toBe('rotate');
   await frame(page).locator('#boom').tap();
   await frame(page).locator('[data-inspect-part="wood-upper"]').tap();
   expect((await state(page)).structure.selected).toBe('wood-upper');
@@ -531,6 +642,10 @@ test('3D controls and exploded part targets are at least 44px, unobstructed and 
     if (testInfo.project.use.hasTouch) await target.tap();
     else await target.click();
   };
+  await activate(frame(page).locator('#drag-pan'));
+  await expect(frame(page).locator('#drag-pan')).toHaveAttribute('aria-pressed', 'true');
+  await activate(frame(page).locator('#drag-rotate'));
+  await expect(frame(page).locator('#drag-rotate')).toHaveAttribute('aria-pressed', 'true');
   await activate(frame(page).locator('#boom'));
   for (const part of parts) {
     await activate(frame(page).locator(`[data-inspect-part="${part}"]`));

@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { createPencilGeometry, createCrossSection, createLongitudinalSection } from './pencil-geometry';
 
 export type StructureView = 'assembled' | 'exploded' | 'cross' | 'longitudinal';
-export type StructureState = { rotation: [number, number]; scale: number; selected: string | null; gesturing: boolean; ready: boolean; view: StructureView; exploded: boolean; contextLost: boolean };
+export type StructureState = { rotation: [number, number]; pan: [number, number]; dragMode: 'rotate' | 'pan'; scale: number; selected: string | null; gesturing: boolean; ready: boolean; view: StructureView; exploded: boolean; contextLost: boolean };
 const names: Record<string, string> = { 'wood-upper': '上半木材', 'wood-lower': '下半木材', core: '笔芯', 'paint-upper': '上半涂层', 'paint-lower': '下半涂层', tip: '笔尖区域' };
 const offsets: Record<string, number> = { 'paint-upper': 3.3, 'wood-upper': 1.65, core: 0, 'wood-lower': -1.65, 'paint-lower': -3.3 };
 
@@ -17,7 +17,7 @@ export function createPencil3D(host: HTMLElement, notify: (state: StructureState
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.setClearColor('#f4f7f3');
   const canvas = renderer.domElement;
-  canvas.id = 'pencil-3d'; canvas.setAttribute('aria-label', '三维铅笔。拖动旋转，滚轮或双指缩放；点击部件单独观察。');
+  canvas.id = 'pencil-3d'; canvas.setAttribute('aria-label', '三维铅笔。选择旋转或平移后拖动，滚轮或双指缩放；点击部件单独观察。');
   host.prepend(canvas);
   scene.add(new THREE.HemisphereLight(0xffffff, 0x8b8172, 2.6));
   const light = new THREE.DirectionalLight(0xffffff, 3.2); light.position.set(-3, 6, 12); scene.add(light);
@@ -41,11 +41,12 @@ export function createPencil3D(host: HTMLElement, notify: (state: StructureState
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   let view: StructureView = 'assembled', selected: string | null = null, scale = 1, rotation: [number, number] = [.55, -.22];
   let pan = [0, 0], amount = 0, desired = 0, raf = 0, active = true, disposed = false, contextLost = false;
+  let dragMode: 'rotate' | 'pan' = 'rotate', dragAction: 'rotate' | 'pan' = 'rotate';
   let saved: { view: StructureView; rotation: [number, number]; scale: number; pan: number[] } | null = null;
   const pointers = new Map<number, { x: number; y: number }>();
   let initial: { rotation: [number, number]; scale: number; pan: number[] } | null = null;
   let down: { x: number; y: number } | null = null, moved = false, multi = false;
-  const state = (): StructureState => ({ rotation: [...rotation], scale, selected, gesturing: pointers.size > 0, ready: !disposed && !contextLost, view, exploded: view === 'exploded', contextLost });
+  const state = (): StructureState => ({ rotation: [...rotation], pan: [pan[0], pan[1]], dragMode, scale, selected, gesturing: pointers.size > 0, ready: !disposed && !contextLost, view, exploded: view === 'exploded', contextLost });
   function publish() { host.dataset.view = view; host.dataset.selected = selected ?? ''; host.dataset.exploded = String(view === 'exploded'); notify(state()); }
   function layout() {
     const section = view === 'cross' || view === 'longitudinal';
@@ -104,6 +105,11 @@ export function createPencil3D(host: HTMLElement, notify: (state: StructureState
   }
   function zoom(factor: number) { scale = THREE.MathUtils.clamp(scale * factor, .6, 8); draw(); }
   function turn(x: number, y: number) { rotation[0] += y; rotation[1] += x; draw(); }
+  function moveByPixels(dx: number, dy: number) {
+    pan[0] += dx * (camera.right - camera.left) / canvas.clientWidth;
+    pan[1] -= dy * (camera.top - camera.bottom) / canvas.clientHeight;
+    draw();
+  }
   function hit(x: number, y: number) {
     if (selected || view === 'cross' || view === 'longitudinal') return;
     const rect = canvas.getBoundingClientRect(); ray.setFromCamera(new THREE.Vector2((x - rect.left) / rect.width * 2 - 1, -(y - rect.top) / rect.height * 2 + 1), camera);
@@ -115,7 +121,7 @@ export function createPencil3D(host: HTMLElement, notify: (state: StructureState
   canvas.addEventListener('pointerdown', e => {
     if (!active || contextLost || e.button !== 0) return;
     host.closest<HTMLElement>('#stage')?.focus({ preventScroll: true });
-    settle(); if (!pointers.size) { initial = { rotation: [...rotation], scale, pan: [...pan] }; down = { x: e.clientX, y: e.clientY }; moved = false; multi = false; }
+    settle(); if (!pointers.size) { initial = { rotation: [...rotation], scale, pan: [...pan] }; down = { x: e.clientX, y: e.clientY }; moved = false; multi = false; dragAction = e.shiftKey ? 'pan' : dragMode; }
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY }); multi ||= pointers.size > 1;
     canvas.setPointerCapture(e.pointerId); draw();
   });
@@ -123,12 +129,15 @@ export function createPencil3D(host: HTMLElement, notify: (state: StructureState
     const previous = pointers.get(e.pointerId); if (!previous) return;
     const before = [...pointers.values()]; pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (down && Math.hypot(e.clientX - down.x, e.clientY - down.y) > 5) moved = true;
-    if (pointers.size === 1 && moved) turn((e.clientX - previous.x) * .012, (e.clientY - previous.y) * .012);
+    if (pointers.size === 1 && moved) {
+      if (dragAction === 'pan') moveByPixels(e.clientX - previous.x, e.clientY - previous.y);
+      else turn((e.clientX - previous.x) * .012, (e.clientY - previous.y) * .012);
+    }
     else if (pointers.size === 2) {
       const after = [...pointers.values()]; const distance = (ps: { x: number; y: number }[]) => Math.hypot(ps[0].x - ps[1].x, ps[0].y - ps[1].y);
       const old = distance(before); if (old > 2) zoom(distance(after) / old);
       const dx = (after[0].x + after[1].x - before[0].x - before[1].x) / 2, dy = (after[0].y + after[1].y - before[0].y - before[1].y) / 2;
-      pan[0] += dx * (camera.right - camera.left) / canvas.clientWidth; pan[1] -= dy * (camera.top - camera.bottom) / canvas.clientHeight; draw();
+      moveByPixels(dx, dy);
     }
   });
   canvas.addEventListener('pointerup', e => {
@@ -158,5 +167,5 @@ export function createPencil3D(host: HTMLElement, notify: (state: StructureState
     geometries.forEach(g => g.dispose()); materials.forEach(m => m.dispose()); textures.forEach(t => t.dispose()); renderer.dispose(); canvas.remove();
   }
   resize();
-  return { state, setView, inspect, returnParts, reset, zoom, turn, pan(x: number, y: number) { pan[0] += x; pan[1] += y; draw(); }, cancel, suspend: stop, setActive(value: boolean) { stop(); active = value; if (active) resize(); }, destroy, names };
+  return { state, setView, inspect, returnParts, reset, zoom, turn, setDragMode(next: 'rotate' | 'pan') { cancel(); dragMode = next; draw(); }, pan(x: number, y: number) { pan[0] += x; pan[1] += y; draw(); }, cancel, suspend: stop, setActive(value: boolean) { stop(); active = value; if (active) resize(); }, destroy, names };
 }
