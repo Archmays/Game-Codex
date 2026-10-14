@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { activate, fromHome, keyReach } from './input-helpers';
 
 const feedbackKey = 'family-games/step4-playtest/feedback-v1';
-const scenarios = ['qinglan-intercept','qinglan-last-bend','twin-lanes','twin-relay','beacon-crowd','beacon-captain'];
+const scenarios = ['qinglan-elite','qinglan-repair','qinglan-packs','qinglan-intercept','qinglan-last-bend','twin-lanes','twin-relay','beacon-crowd','beacon-captain'];
 
 test('@step5-entry existing trial page exposes exact new modes and keeps feedback local', async ({page}, info) => {
   test.skip(!['desktop','phone-390','firefox','webkit'].includes(info.project.name));
@@ -14,7 +14,7 @@ test('@step5-entry existing trial page exposes exact new modes and keeps feedbac
   await fromHome(page, mode, 'playtest');
   await expect(page.getByRole('heading', {name:'本次试玩', exact:true})).toBeVisible();
   await expect(page.locator('.step4-kicker')).toHaveText('GAME-CODEX · v1.0.0');
-  await expect(page.locator('[data-playtest-entry]')).toHaveCount(13);
+  await expect(page.locator('[data-playtest-entry]')).toHaveCount(16);
   await expect(page.locator('[data-playtest-entry][href*="chapter=companions"]')).toHaveCount(1);
   for (const id of scenarios) await expect(page.locator(`[data-playtest-scenario="${id}"]`)).toHaveAttribute('href', `?play=hanzi-tower-defense&scenario=${id}&from=world`);
   for (let room=1; room<=5; room++) await expect(page.locator(`option[value="companions-${room}"]`)).toHaveCount(1);
