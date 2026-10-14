@@ -14,6 +14,8 @@ export default defineConfig({
     { name: 'desktop-1440', use: { browserName: 'chromium', viewport: { width: 1440, height: 900 } } },
     { name: 'mobile-360', use: { browserName: 'chromium', viewport: { width: 360, height: 800 }, hasTouch: true, deviceScaleFactor: 2 } },
     { name: 'mobile-390', use: { browserName: 'chromium', viewport: { width: 390, height: 844 }, hasTouch: true, deviceScaleFactor: 3 } },
+    { name: 'mobile-360-landscape', use: { browserName: 'chromium', viewport: { width: 800, height: 360 }, hasTouch: true, deviceScaleFactor: 2 } },
+    { name: 'mobile-390-landscape', use: { browserName: 'chromium', viewport: { width: 844, height: 390 }, hasTouch: true, deviceScaleFactor: 3 } },
     { name: 'tablet-768', use: { browserName: 'chromium', viewport: { width: 768, height: 1024 }, hasTouch: true, deviceScaleFactor: 2 } },
     { name: 'tablet-1024', use: { browserName: 'chromium', viewport: { width: 1024, height: 768 }, hasTouch: true, deviceScaleFactor: 2 } },
   ],

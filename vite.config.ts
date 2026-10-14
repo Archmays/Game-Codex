@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   base: "./",
+  build: { rollupOptions: { input: ["index.html", "structure-explorer/pencil.html"] } },
   plugins: [{
     name: "reject-retired-runtime",
     apply: "build",

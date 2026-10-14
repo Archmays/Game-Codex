@@ -1,6 +1,7 @@
 import { test as base, expect, type Page, type Locator } from '@playwright/test';
 
-type DemoState = { mode: number; open: number; pos: number; auto: boolean; marks: number[]; crumbs: number; pressure: number; grade: string; zoom: number; view: string; part: string; processStep: number };
+type StructureState = { rotation: [number, number]; scale: number; selected: string | null; gesturing: boolean; ready: boolean; view: string; exploded: boolean; contextLost: boolean };
+type DemoState = { mode: number; open: number; pos: number; auto: boolean; marks: number[]; crumbs: number; pressure: number; grade: string; zoom: number; view: string; part: string; processStep: number; structure: StructureState };
 const directory = '/?play=structure-explorer';
 const pencil = `${directory}&exhibit=pencil`;
 const frame = (page: Page) => page.frameLocator('[data-pencil-frame]');
@@ -9,6 +10,24 @@ async function state(page: Page): Promise<DemoState> {
   return stage(page).evaluate(() => (window as unknown as { pencilDemo: { state(): DemoState } }).pencilDemo.state());
 }
 const ink = (s: DemoState) => s.marks.reduce((sum, value) => sum + value, 0);
+const parts = ['wood-upper', 'wood-lower', 'core', 'paint-upper', 'paint-lower', 'tip'];
+async function ready3d(page: Page) {
+  await expect(frame(page).locator('canvas#pencil-3d')).toBeVisible();
+  await expect.poll(async () => (await state(page)).structure.ready).toBe(true);
+  expect((await state(page)).structure.contextLost).toBe(false);
+}
+async function revealControl(target: Locator) {
+  const details = target.locator('xpath=ancestor::details').last();
+  if (await details.count() && await details.getAttribute('open') === null) await details.locator('summary').first().click();
+  await expect(target).toBeVisible();
+}
+async function canvasPoint(page: Page) {
+  const canvas = frame(page).locator('canvas#pencil-3d');
+  await canvas.scrollIntoViewIfNeeded();
+  const box = await canvas.boundingBox();
+  if (!box) throw new Error('Visible 3D canvas missing');
+  return { x: box.x + box.width * .55, y: box.y + box.height * .55, box };
+}
 async function tabTo(page: Page, target: Locator) {
   for (let i = 0; i < 80; i++) {
     if (await target.evaluate(el => el === el.ownerDocument.activeElement)) return;
@@ -41,23 +60,47 @@ const test = base.extend<{ runtimeGuard: void }>({
   }, { auto: true }],
 });
 
-test('normal motion starts explicitly, pauses, switches modes and resets', async ({ page }, testInfo) => {
+test('BOOM stops after opening and closing; writing motion starts explicitly, pauses and resets', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-1440', 'Normal motion on representative desktop');
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto(pencil);
+  await ready3d(page);
   expect((await state(page)).auto).toBe(false);
-  await frame(page).locator('#auto').click();
-  await expect.poll(async () => (await state(page)).open).toBeGreaterThan(.1);
-  await frame(page).locator('#auto').click();
-  expect((await state(page)).auto).toBe(false);
-  // Pausing stops automatic targets; allow its existing eased motion to settle.
-  await page.waitForTimeout(1800);
-  const paused = await state(page);
-  await page.waitForTimeout(250);
-  expect(await state(page)).toEqual(paused);
+  await expect(frame(page).locator('#auto')).not.toBeVisible();
+  const canvas = frame(page).locator('canvas#pencil-3d');
+  // Keep the crop at the same document position. Button auto-scroll otherwise places the
+  // canvas top at -0.296875px and clips a row, even when restored geometry is identical.
+  const capture = async () => {
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    const box = (await canvas.boundingBox())!;
+    expect(box.y).toBeGreaterThanOrEqual(0);
+    expect(box.y + box.height).toBeLessThanOrEqual(page.viewportSize()!.height);
+    return canvas.screenshot();
+  };
+  const assembled = await capture();
+  for (const exploded of [true, false]) {
+    await frame(page).locator('#boom').click();
+    await expect.poll(async () => (await state(page)).structure.exploded).toBe(exploded);
+    expect((await state(page)).open).toBe(exploded ? 1 : 0);
+    expect((await state(page)).auto).toBe(false);
+    // open is an immediate semantic value. Compare rendered canvas pixels after the bounded
+    // transition so this verifies a stable visual result, rather than an automatic oscillation.
+    await page.waitForTimeout(800);
+    const settled = await capture();
+    await page.waitForTimeout(200);
+    expect((await capture()).equals(settled), 'BOOM stays at its completed visual position').toBe(true);
+    expect(settled.equals(assembled), 'Opening changes the rendered geometry; closing restores it').toBe(!exploded);
+  }
   await frame(page).locator('[data-mode="1"]').click();
   await frame(page).locator('#auto').click();
   await expect.poll(async () => ink(await state(page))).toBeGreaterThan(5);
+  await frame(page).locator('#auto').click();
+  expect((await state(page)).auto).toBe(false);
+  const paused = await state(page);
+  await page.waitForTimeout(250);
+  expect(await state(page)).toEqual(paused);
+  await frame(page).locator('#auto').click();
+  expect((await state(page)).auto).toBe(true);
   await frame(page).locator('[data-mode="2"]').click();
   expect((await state(page)).auto).toBe(false);
   await frame(page).locator('#reset').click();
@@ -75,6 +118,50 @@ test('keyboard: home → directory → pencil, native controls, return and reloa
   await tabTo(page, page.locator('[data-structure-pencil]'));
   await page.keyboard.press('Enter');
   await expect(stage(page)).toBeVisible();
+  await ready3d(page);
+  const initialRotation = (await state(page)).structure.rotation;
+  await tabTo(page, stage(page));
+  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('ArrowUp');
+  expect((await state(page)).structure.rotation).not.toEqual(initialRotation);
+  await page.keyboard.press('+');
+  expect((await state(page)).structure.scale).toBeGreaterThan(1);
+  await page.keyboard.press('-');
+  await page.keyboard.press('End');
+  await expect.poll(async () => (await state(page)).structure.exploded).toBe(true);
+  await page.keyboard.press('Enter');
+  await expect.poll(async () => (await state(page)).structure.exploded).toBe(false);
+  await page.keyboard.press('Home');
+  expect((await state(page)).structure.rotation).toEqual(initialRotation);
+  expect((await state(page)).structure.scale).toBe(1);
+  await tabTo(page, frame(page).locator('#boom'));
+  await page.keyboard.press('Space');
+  expect((await state(page)).structure.exploded, 'Native Space activates BOOM exactly once').toBe(true);
+  const upperWoodLabel = frame(page).locator('[data-inspect-part="wood-upper"]');
+  await tabTo(page, frame(page).locator('[data-inspect-part="paint-upper"]'));
+  await page.keyboard.press('ArrowRight');
+  await expect(upperWoodLabel).toBeFocused();
+  await page.keyboard.press('Enter');
+  expect((await state(page)).structure.selected, 'A part button activates independently of stage shortcuts').toBe('wood-upper');
+  const partDialog = frame(page).locator('#inspector-dialog');
+  for (let i = 0; i < 12; i++) {
+    await page.keyboard.press('Tab');
+    expect(await partDialog.evaluate(el => el.contains(el.ownerDocument.activeElement))).toBe(true);
+  }
+  await page.keyboard.press('Escape');
+  await expect(upperWoodLabel).toBeFocused();
+  expect((await state(page)).structure.selected).toBeNull();
+  await tabTo(page, frame(page).locator('#part'));
+  // Open the native popup before navigating: on Chromium a closed select changes immediately
+  // on ArrowDown, which opens inspection and moves focus before Enter can commit the option.
+  await page.keyboard.press('Alt+ArrowDown');
+  await page.keyboard.press('Home');
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('Enter');
+  await expect.poll(async () => (await state(page)).structure.selected).toBe('wood-upper');
+  await tabTo(page, stage(page));
+  await page.keyboard.press('Escape');
+  expect((await state(page)).structure.selected).toBeNull();
   const modes = frame(page).locator('[data-mode]');
   await tabTo(page, modes.nth(0));
   await page.keyboard.press('ArrowRight');
@@ -220,18 +307,26 @@ test('responsive layout and iframe height accommodate every mode', async ({ page
 
 test('structure views, part inspection and zoom remain usable in the enlarged dialog', async ({ page }) => {
   await page.goto(pencil);
+  await ready3d(page);
+  await revealControl(frame(page).locator('#view'));
   for (const view of ['assembled', 'exploded', 'longitudinal', 'cross']) {
     await frame(page).locator('#view').selectOption(view);
     expect((await state(page)).view).toBe(view);
-    const active = view === 'cross' ? '#model-cross' : view === 'longitudinal' ? '#model-longitudinal' : '#model-structure';
-    await expect(stage(page).locator(active)).toBeVisible();
-    await expect(stage(page).locator('#structure > svg:visible')).toHaveCount(1);
+    expect((await state(page)).structure.view).toBe(view);
+    await ready3d(page);
   }
-  for (const part of ['paint', 'wood', 'core', 'tip', 'all']) {
+  for (const part of [...parts, 'all']) {
     await frame(page).locator('#part').selectOption(part);
     expect((await state(page)).part).toBe(part);
+    expect((await state(page)).structure.selected).toBe(part === 'all' ? null : part);
+    if (part !== 'all') {
+      await expect(frame(page).locator('#inspector-dialog')).toBeVisible();
+      await frame(page).locator('#return-parts').click();
+      expect((await state(page)).structure.selected).toBeNull();
+    }
   }
   const initialZoom = (await state(page)).zoom;
+  await revealControl(frame(page).locator('#zoom-in'));
   await frame(page).locator('#zoom-in').click();
   expect((await state(page)).zoom).toBeGreaterThan(initialZoom);
   await frame(page).locator('#zoom-out').click();
@@ -239,11 +334,20 @@ test('structure views, part inspection and zoom remain usable in the enlarged di
   await frame(page).locator('#view-reset').click();
   expect((await state(page)).zoom).toBe(1);
   const opener = frame(page).locator('#expand-view');
+  await frame(page).locator('#boom').click();
   await opener.click();
   const dialog = frame(page).locator('#inspector-dialog');
   await expect(dialog).toBeVisible();
   await expect(dialog.locator('#stage')).toHaveCount(1);
   await expect(frame(page).locator('#stage')).toHaveCount(1);
+  await ready3d(page);
+  await frame(page).locator('[data-inspect-part="core"]').click();
+  expect((await state(page)).structure.selected).toBe('core');
+  await frame(page).locator('#return-parts').click();
+  expect((await state(page)).structure.selected).toBeNull();
+  // Leaving a single-part inspection closes its dialog; reopen the general enlarged view.
+  await opener.click();
+  await expect(dialog).toBeVisible();
   expect((await state(page)).auto).toBe(false);
   // Actual keys exercise both modal boundaries; focus must never escape to the iframe or parent page.
   for (const key of ['Tab', 'Shift+Tab']) {
@@ -260,6 +364,189 @@ test('structure views, part inspection and zoom remain usable in the enlarged di
   await frame(page).locator('#close-inspector').click();
   await expect(dialog).not.toBeVisible();
   await expect(opener).toBeFocused();
+});
+
+test('mouse rotates the 3D pencil without selecting, zooms and inspects each exploded part', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop-1440', 'Representative mouse gestures on desktop');
+  await page.goto(pencil);
+  await ready3d(page);
+  await frame(page).locator('#boom').click();
+  expect((await state(page)).structure.exploded).toBe(true);
+  const canvasBox = (await canvasPoint(page)).box;
+  // BOOM lays the exposed core through the actual canvas center. This exercises geometry picking,
+  // independently of HTML label buttons and the native select alternative.
+  await page.mouse.move(canvasBox.x + canvasBox.width / 2, canvasBox.y + canvasBox.height / 2);
+  await page.mouse.down();
+  expect((await state(page)).structure.selected).toBeNull();
+  await page.mouse.up();
+  await expect.poll(async () => (await state(page)).structure.selected).toBe('core');
+  await expect(frame(page).locator('#inspector-dialog')).toBeVisible();
+  await frame(page).locator('#return-parts').click();
+  await expect(frame(page).locator('#inspector-dialog')).not.toBeVisible();
+  const before = (await state(page)).structure;
+  const p = await canvasPoint(page);
+  await page.mouse.move(p.x, p.y);
+  await page.mouse.down();
+  expect((await state(page)).structure.selected, 'Selection completes only on release').toBeNull();
+  await page.mouse.move(p.x + 55, p.y + 25, { steps: 6 });
+  await expect.poll(async () => (await state(page)).structure.rotation).not.toEqual(before.rotation);
+  await page.mouse.up();
+  expect((await state(page)).structure.selected, 'Rotation drag cannot become a part click').toBeNull();
+  expect((await state(page)).structure.gesturing).toBe(false);
+  const scale = (await state(page)).structure.scale;
+  await page.mouse.wheel(0, -120);
+  await expect.poll(async () => (await state(page)).structure.scale).toBeGreaterThan(scale);
+  await page.mouse.wheel(0, 120);
+  await expect.poll(async () => (await state(page)).structure.scale).toBeLessThan(scale * 1.01);
+  for (const part of parts) {
+    await frame(page).locator(`[data-inspect-part="${part}"]`).click();
+    expect((await state(page)).structure.selected).toBe(part);
+    expect((await state(page)).part).toBe(part);
+    await frame(page).locator('#return-parts').click();
+    expect((await state(page)).structure.selected).toBeNull();
+    expect((await state(page)).structure.exploded).toBe(true);
+  }
+});
+
+test('3D gestures clear on cancellation, focus loss, dialog entry and route re-entry', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop-1440', 'Representative mouse lifecycle on desktop');
+  await page.goto(pencil);
+  await ready3d(page);
+  const beginDrag = async () => {
+    const p = await canvasPoint(page);
+    await page.mouse.move(p.x, p.y);
+    await page.mouse.down();
+    await page.mouse.move(p.x + 35, p.y + 15, { steps: 4 });
+    expect((await state(page)).structure.gesturing).toBe(true);
+  };
+  await beginDrag();
+  // Diagnostic cancellation of an actual held mouse gesture, not synthetic gesture coverage.
+  await stage(page).dispatchEvent('pointercancel', { pointerId: 1 });
+  await page.mouse.up();
+  expect((await state(page)).structure.gesturing).toBe(false);
+  expect((await state(page)).structure.selected).toBeNull();
+  await beginDrag();
+  await stage(page).evaluate(() => window.dispatchEvent(new Event('blur')));
+  await page.mouse.up();
+  expect((await state(page)).structure.gesturing).toBe(false);
+  const stopped = (await state(page)).structure.rotation;
+  const p = await canvasPoint(page);
+  await page.mouse.move(p.x - 30, p.y - 20);
+  expect((await state(page)).structure.rotation).toEqual(stopped);
+  await beginDrag();
+  await tabTo(page, frame(page).locator('#expand-view'));
+  await page.keyboard.press('Enter');
+  await page.mouse.up();
+  await expect(frame(page).locator('#inspector-dialog')).toBeVisible();
+  expect((await state(page)).structure.gesturing).toBe(false);
+  await page.keyboard.press('Escape');
+  await beginDrag();
+  await tabTo(page, page.locator('[data-structure-directory]'));
+  await page.keyboard.press('Enter');
+  await page.mouse.up();
+  await page.locator('[data-structure-pencil]').click();
+  await ready3d(page);
+  expect((await state(page)).structure.gesturing).toBe(false);
+  expect((await state(page)).structure.selected).toBeNull();
+  const reentered = (await state(page)).structure.rotation;
+  const q = await canvasPoint(page);
+  await page.mouse.move(q.x + 25, q.y + 10);
+  expect((await state(page)).structure.rotation).toEqual(reentered);
+});
+
+test('device-emulated touch taps parts, rotates with one finger and pinches with two', async ({ page, context }, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile-390', 'Representative Chromium CDP device emulation; not physical-device evidence');
+  await page.goto(pencil);
+  await ready3d(page);
+  await frame(page).locator('#boom').tap();
+  await frame(page).locator('[data-inspect-part="wood-upper"]').tap();
+  expect((await state(page)).structure.selected).toBe('wood-upper');
+  await frame(page).locator('#return-parts').tap();
+  expect((await state(page)).structure.selected).toBeNull();
+  const cdp = await context.newCDPSession(page);
+  const touch = (id: number, x: number, y: number) => ({ id, x, y, radiusX: 4, radiusY: 4, force: 1 });
+  try {
+    const p = await canvasPoint(page);
+    const rotation = (await state(page)).structure.rotation;
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [touch(1, p.x, p.y)] });
+    for (let step = 1; step <= 4; step++) {
+      await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [touch(1, p.x + step * 8, p.y + step * 3)] });
+    }
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    await expect.poll(async () => (await state(page)).structure.rotation).not.toEqual(rotation);
+    expect((await state(page)).structure.selected).toBeNull();
+    expect((await state(page)).structure.gesturing).toBe(false);
+    const q = await canvasPoint(page);
+    const scale = (await state(page)).structure.scale;
+    const separation = Math.min(28, q.box.width * .1);
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [touch(1, q.x - separation, q.y), touch(2, q.x + separation, q.y)] });
+    for (let step = 1; step <= 4; step++) {
+      const distance = separation + step * 7;
+      await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [touch(1, q.x - distance, q.y), touch(2, q.x + distance, q.y)] });
+    }
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    await expect.poll(async () => (await state(page)).structure.scale).toBeGreaterThan(scale);
+    expect((await state(page)).structure.gesturing).toBe(false);
+    expect((await state(page)).structure.selected).toBeNull();
+    const r = await canvasPoint(page);
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [touch(1, r.x, r.y)] });
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [touch(1, r.x + 20, r.y + 10)] });
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchCancel', touchPoints: [] });
+    expect((await state(page)).structure.gesturing).toBe(false);
+    expect((await state(page)).structure.selected).toBeNull();
+    await revealControl(frame(page).locator('#view-reset'));
+    await frame(page).locator('#view-reset').tap();
+    expect((await state(page)).structure.scale).toBe(1);
+    await page.locator('[data-structure-directory]').tap();
+    await page.locator('[data-structure-pencil]').tap();
+    await ready3d(page);
+    expect((await state(page)).structure.gesturing).toBe(false);
+  } finally {
+    await cdp.detach();
+  }
+});
+
+test('3D controls and exploded part targets are at least 44px, unobstructed and reachable', async ({ page }, testInfo) => {
+  await page.goto(pencil);
+  await ready3d(page);
+  const checkTarget = async (target: Locator) => {
+    await target.scrollIntoViewIfNeeded();
+    const box = await target.boundingBox();
+    expect(box).not.toBeNull();
+    expect(box!.width, 'Interactive target width').toBeGreaterThanOrEqual(44);
+    expect(box!.height, 'Interactive target height').toBeGreaterThanOrEqual(44);
+    const viewport = page.viewportSize()!;
+    expect(box!.x).toBeGreaterThanOrEqual(0);
+    expect(box!.y).toBeGreaterThanOrEqual(0);
+    expect(box!.x + box!.width).toBeLessThanOrEqual(viewport.width + 1);
+    expect(box!.y + box!.height).toBeLessThanOrEqual(viewport.height + 1);
+    expect(await target.evaluate(el => {
+      const rect = el.getBoundingClientRect();
+      const hit = el.ownerDocument.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2);
+      return hit === el || el.contains(hit);
+    }), 'Interactive target center must receive input').toBe(true);
+  };
+  const activate = async (target: Locator) => {
+    await checkTarget(target);
+    if (testInfo.project.use.hasTouch) await target.tap();
+    else await target.click();
+  };
+  await activate(frame(page).locator('#boom'));
+  for (const part of parts) {
+    await activate(frame(page).locator(`[data-inspect-part="${part}"]`));
+    expect((await state(page)).structure.selected).toBe(part);
+    await activate(frame(page).locator('#return-parts'));
+    expect((await state(page)).structure.selected).toBeNull();
+  }
+  await checkTarget(frame(page).locator('#part'));
+  await revealControl(frame(page).locator('#view'));
+  await checkTarget(frame(page).locator('#view'));
+  await revealControl(frame(page).locator('#zoom-in'));
+  for (const id of ['zoom-in', 'zoom-out', 'pan-left', 'pan-right', 'pan-up', 'pan-down', 'view-reset']) {
+    await activate(frame(page).locator(`#${id}`));
+  }
+  expect((await state(page)).structure.scale).toBe(1);
+  expect((await state(page)).structure.gesturing).toBe(false);
 });
 
 test('controlled comparisons keep three real traces and survive ordinary paper and setting changes', async ({ page }, testInfo) => {
@@ -387,6 +674,7 @@ test('enlarged dialog controls fit the parent viewport and accept real pointer i
   await expect(dialog).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
   expect(await dialog.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+  await revealControl(frame(page).locator('#zoom-in'));
   await activateVisible(frame(page).locator('#zoom-in'));
   expect((await state(page)).zoom).toBeGreaterThan(1);
   await activateVisible(frame(page).locator('#view-reset'));
