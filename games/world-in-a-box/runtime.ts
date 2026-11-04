@@ -1,7 +1,8 @@
 import {beginBoxGesture,boxGestureScrolled,type BoxGesture} from './box-gesture';
 import {BoxLifetime} from './box-lifecycle';
 import {BoxPauses} from './box-pause';
-import type { MountGameContext,MountedGame } from '../../packages/game-core';
+import type { MountGameContext } from '../../packages/game-core';
+import type { MountedBox } from './scene-config';
 import { bindInputLifecycle,rovingGroup,ignoreGameKey } from '../../packages/ui/input';
 import { IDS,LABELS,fresh,restore,reduce,fits,windy,shutter,type Piece,type Action } from './model';
 import { BoxScene } from './scene';
@@ -9,7 +10,7 @@ import {boxSound} from './audio-settings';
 import {continuousTurn} from './continuous-turn';
 import './style.css';
 
-export function mountWorldBox({container:root,storage,onExit}:MountGameContext):MountedGame{
+export function mountWorldBox({container:root,storage,onExit}:MountGameContext):MountedBox{
   let state=restore(storage.get('v1',fresh())),selected:Piece|null=null,page=0,ready=false,dead=false,saveWarning=false,busyUntil=0,last=performance.now();
   const history:Piece[]=[];const thumbs=new Map<Piece,string>();
   const lifetime=new BoxLifetime();const signal=lifetime.signal;
@@ -99,7 +100,7 @@ export function mountWorldBox({container:root,storage,onExit}:MountGameContext):
     if(!state.help)act({type:'help'});stage.scrollIntoView({block:'center'});scene.frame(state,performance.now(),0);const id=selected;const ok=scene.showTarget(id,()=>{refreshTargets();const b=slotButton(id),r=b.getBoundingClientRect();return !b.hidden&&document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.closest('button')===b;});say(ok?(id==='wind_chime'?'转到窗外，找墙上的挂钩。':'看看亮起的素木接口。'):'这个角度暂时被挡住；按住左转、右转或复位视角再看看。');refreshTargets();}
   function perform(action:string){
     if(dead)return;
-    if(action==='exit'){destroy(true);onExit();return;}
+    if(action==='exit'){onExit();return;}
     if(!ready)return;
     switch(action){
       case 'left':case 'right':break;
@@ -135,7 +136,6 @@ export function mountWorldBox({container:root,storage,onExit}:MountGameContext):
   const resize=new ResizeObserver(()=>{scene.resize();refreshTargets();});resize.observe(canvas);
   const tick=(now:number)=>{if(dead)return;const dt=Math.max(0,(now-last)/1000);last=now;if(ready){const paused=background||document.hidden||modalReasons.size>0;scene.frame(state,now,Math.min(.05,dt),paused);audio.tick(now,state.placed.includes('book')||state.placed.includes('plant'));root.dataset.audio=JSON.stringify(audio.diagnostics());refreshTargets();}};lifetime.animate(tick);
   void scene.load().then(()=>{if(dead)return;for(const id of IDS)thumbs.set(id,scene.thumbnail(id));ready=true;root.dataset.ready='true';q('.wb-loading').hidden=true;update();if(state.placed.length)say(state.placed.length===8?'小世界醒来了':'接着上次的小世界，继续拼吧。');}).catch(()=>{if(!dead){q('.wb-loading').textContent='小世界暂时没装好，请刷新再试。已存进度保留。';}});
-  window.addEventListener('pagehide',()=>destroy(true),{signal});
   lifetime.own(unbind);lifetime.own(()=>resize.disconnect());lifetime.own(()=>trayNav.destroy());lifetime.own(()=>targetNav.destroy());
  function destroy(immediate=false){if(dead)return;dead=true;lifetime.destroy();sounds.destroy(immediate);scene.destroy();root.replaceChildren();}
   return{destroy};

@@ -1,4 +1,4 @@
-import { expect, test, type Locator, type Page } from "@playwright/test";
+import { expect, test, type Locator, type Page, type Route } from "@playwright/test";
 
 interface RuntimeObservation {
   readonly pageErrors: string[];
@@ -266,4 +266,178 @@ test("@portfolio bare public URL has the same document-scroll geometry as the ex
   expect(firstLoad.stageHeight).toBeCloseTo(explicitRoute.stageHeight, 0);
   expect(firstLoad.worldHeight).toBeCloseTo(explicitRoute.worldHeight, 0);
   await expectRuntimeClean(runtime);
+});
+
+const BOX_ENTRY_MODULE = /\/(?:games\/world-in-a-box\/boxes\.ts|assets\/boxes-[^/]+\.js)(?:\?.*)?$/;
+const DRESDEN_MODULE = /\/(?:games\/world-in-a-box\/dresden-runtime\.ts|assets\/dresden-runtime-[^/]+\.js)(?:\?.*)?$/;
+const BOX_CARD = '.game-card[data-game-id="world-in-a-box"] button';
+const SWITCH_BOX = '[data-action="boxes"]';
+
+async function pressTabTo(page: Page, control: Locator): Promise<void> {
+  for (let step = 0; step < 24; step++) {
+    await page.keyboard.press("Tab");
+    if (await control.evaluate(element => element === document.activeElement)) return;
+  }
+  await expect(control).toBeFocused();
+}
+
+async function holdRequest(page: Page, matcher: Parameters<Page["route"]>[0]) {
+  let release!: () => void;
+  const gate = new Promise<void>(resolve => { release = resolve; });
+  let started!: (url: string) => void;
+  const requested = new Promise<string>(resolve => { started = resolve; });
+  const handle = async (route: Route) => {
+    started(route.request().url());
+    await gate;
+    await route.continue().catch(() => { /* Leaving can cancel the held browser request. */ });
+  };
+  await page.route(matcher, handle);
+  return { requested, release, unroute: () => page.unroute(matcher, handle) };
+}
+
+test("@recovery a failed game entry can retry and return to its Classic card", async ({ page, context }, testInfo) => {
+  const errors: string[] = [];
+  page.on("pageerror", error => errors.push(error.message));
+  const keyboard = testInfo.project.name === "desktop-1440";
+  await page.goto("/?hub=classic");
+  const card = page.locator(BOX_CARD);
+  await expect(card).toBeVisible();
+  await page.evaluate(() => localStorage.setItem("family-games/world-in-a-box/v1", '{"synthetic":"keep these bytes"}'));
+  const originalStorage = await page.evaluate(() => ({ ...localStorage }));
+  await context.route(BOX_ENTRY_MODULE, route => route.abort());
+  if (keyboard) {
+    await pressTabTo(page, card);
+    await page.keyboard.press("Enter");
+  } else await card.tap();
+  const heading = page.getByRole("heading", { name: "这个地方暂时没有打开" });
+  await expect(heading).toBeFocused();
+  const retry = page.getByRole("button", { name: "再试一次" });
+  if (keyboard) {
+    await page.keyboard.press("Tab");
+    await expect(retry).toBeFocused();
+  }
+  await expect(page.getByRole("link", { name: "回游戏百宝箱" })).toHaveAttribute("href", "?hub=classic&from=world");
+  expect(await page.evaluate(() => ({ ...localStorage }))).toEqual(originalStorage);
+  await context.unroute(BOX_ENTRY_MODULE);
+  await (keyboard ? page.keyboard.press("Enter") : retry.tap());
+  await expect(page.locator(SWITCH_BOX)).toBeVisible();
+  const exit = page.locator('[data-action="exit"]');
+  if (keyboard) {
+    await pressTabTo(page, exit);
+    await page.keyboard.press("Enter");
+  } else await exit.tap();
+  await expect(card).toBeFocused();
+  expect(await page.evaluate(() => ({ ...localStorage }))).toEqual(originalStorage);
+  expect(errors).toEqual([]);
+});
+
+test("@recovery a pending route and a pending box switch can both be exited", async ({ page }, testInfo) => {
+  const mobile = testInfo.project.name === "mobile-390";
+  const activateControl = (control: Locator) => mobile ? control.tap() : control.click();
+  await page.goto("/");
+  const homeEntry = page.locator("[data-world-box-link]");
+  for (const target of [BOX_ENTRY_MODULE, DRESDEN_MODULE]) {
+    const held = await holdRequest(page, target);
+    try {
+      await activateControl(homeEntry);
+      if (target === DRESDEN_MODULE) {
+        await activateControl(page.locator(SWITCH_BOX));
+        await activateControl(page.locator('[data-box="dresden-river-campus"]'));
+      }
+      await held.requested;
+      const back = target === BOX_ENTRY_MODULE
+        ? page.locator(".route-state").getByRole("link", { name: "回我的游戏世界" })
+        : page.locator(".box-entry").getByRole("button", { name: "返回", exact: true });
+      await activateControl(back);
+      await expect(homeEntry).toBeFocused();
+    } finally {
+      held.release();
+      await held.unroute();
+    }
+    await expect(page.locator("canvas, .box-entry")).toHaveCount(0);
+  }
+  await activateControl(homeEntry);
+  await expect(page.locator(SWITCH_BOX)).toBeVisible();
+  await expect(page.locator("canvas")).toHaveCount(1);
+});
+
+test("@recovery a failed box switch keeps its retry URL and updates it on fallback", async ({ page }, testInfo) => {
+  const mobile = testInfo.project.name === "mobile-390";
+  const activateControl = (control: Locator) => mobile ? control.tap() : control.click();
+  await page.route(DRESDEN_MODULE, route => route.abort());
+  await page.goto("/?play=world-in-a-box");
+  await activateControl(page.locator(SWITCH_BOX));
+  await activateControl(page.locator('[data-box="dresden-river-campus"]'));
+  await expect(page.getByRole("heading", { name: "盒子暂时打不开" })).toBeFocused();
+  await expect(page).toHaveURL(/scene=dresden-river-campus/);
+  await activateControl(page.getByRole("button", { name: "返回窗边有风" }));
+  await expect(page.locator(SWITCH_BOX)).toBeFocused();
+  await expect(page).toHaveURL(/scene=window-breeze/);
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "窗边有风" })).toBeVisible();
+
+  await activateControl(page.locator(SWITCH_BOX));
+  await activateControl(page.locator('[data-box="dresden-river-campus"]'));
+  await expect(page.getByRole("heading", { name: "盒子暂时打不开" })).toBeFocused();
+  await page.unroute(DRESDEN_MODULE);
+  await activateControl(page.getByRole("button", { name: "再试一次" }));
+  await expect(page.getByRole("heading", { name: "河流、桥与大学" })).toBeVisible();
+  await expect(page.locator("canvas")).toHaveCount(1);
+});
+
+test("@recovery a restored document ignores a stale scene import in the same document", async ({ page }) => {
+  const held = await holdRequest(page, DRESDEN_MODULE);
+  const frozen = page.getByRole("heading", { name: "艾莎的冰雪游乐日" });
+  try {
+    await page.goto("/?play=world-in-a-box");
+    await page.locator(SWITCH_BOX).click();
+    await page.locator('[data-box="dresden-river-campus"]').click();
+    const oldModule = await held.requested;
+    // While a switch is pending the UI only offers exit. Simulate a persisted
+    // restore with a newer scene selection so both imports run in one document.
+    await page.evaluate(() => {
+      window.dispatchEvent(new PageTransitionEvent("pagehide", { persisted: true }));
+      const url = new URL(location.href);
+      url.searchParams.set("scene", "frozen-elsa-playground");
+      history.replaceState(history.state, "", url);
+      window.dispatchEvent(new PageTransitionEvent("pageshow", { persisted: true }));
+    });
+    await expect(frozen).toBeVisible();
+    await expect(page.locator(SWITCH_BOX)).toBeFocused();
+    held.release();
+    await page.evaluate(async url => {
+      await import(url);
+      await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
+    }, oldModule);
+    await expect(frozen).toBeVisible();
+    await expect(page.locator("canvas")).toHaveCount(1);
+    await expect(page.locator(SWITCH_BOX)).toHaveCount(1);
+    await expect(page).toHaveURL(/scene=frozen-elsa-playground/);
+  } finally {
+    held.release();
+    await held.unroute();
+  }
+});
+
+test("@recovery a pending home entry can be refreshed", async ({ page }) => {
+  const shell = await page.request.get("/");
+  const entry = (await shell.text()).match(/<script type="module"[^>]+src="([^"]+)"/)?.[1];
+  expect(entry).toBeTruthy();
+  const bootstrap = new URL(entry!, shell.url()).pathname;
+  let holdHome = true;
+  const held = await holdRequest(page, url => holdHome && (url.pathname === "/apps/my-game-world/index.ts"
+    || (url.pathname !== bootstrap && /^\/assets\/index-.*\.js$/.test(url.pathname))));
+  try {
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+    await held.requested;
+    const refresh = page.getByRole("button", { name: "刷新" });
+    await expect(refresh).toBeVisible();
+    // Keep the original request held while allowing the new document's request.
+    holdHome = false;
+    await Promise.all([page.waitForEvent("framenavigated"), refresh.click()]);
+    await expect(page.getByTestId("my-game-world")).toBeVisible();
+  } finally {
+    held.release();
+    await held.unroute();
+  }
 });

@@ -1,6 +1,6 @@
 import type { GameDefinition, MountedGame } from "../../packages/game-core";
 import { createLocalStorageStore } from "../../packages/game-core";
-import { currentClassicGameCatalog } from "../../packages/data/gameCatalog";
+import { classicGameCatalog } from "../../packages/data/classicGameCatalog";
 import { clearElement, createButton, createPanel } from "../../packages/ui";
 import { rovingGroup } from '../../packages/ui/input';
 import { ALL_SUBJECTS_FILTER, getSubjectFilters } from "./filters";
@@ -30,7 +30,7 @@ export function mountHub(root: HTMLElement): MountedGame {
     const filters = document.createElement("nav");
     filters.className = "hub-filters";
     filters.setAttribute("aria-label", "按学科筛选游戏");
-    for (const subject of getSubjectFilters(currentClassicGameCatalog)) {
+    for (const subject of getSubjectFilters(classicGameCatalog)) {
       const isActive = subject === selectedSubject;
       const button = createButton(subject, () => {
         selectedSubject = subject;
@@ -48,8 +48,8 @@ export function mountHub(root: HTMLElement): MountedGame {
     grid.className = "hub-grid";
 
     const visibleGames = selectedSubject === ALL_SUBJECTS_FILTER
-      ? currentClassicGameCatalog
-      : currentClassicGameCatalog.filter((game) => game.subject === selectedSubject);
+      ? classicGameCatalog
+      : classicGameCatalog.filter((game) => game.subject === selectedSubject);
 
     for (const game of visibleGames) {
       grid.append(createGameCard(game, () => openGame(game)));
@@ -90,6 +90,14 @@ export function mountHub(root: HTMLElement): MountedGame {
   };
 
   renderHub();
+  if (document.referrer) {
+    const referrer = new URL(document.referrer);
+    if (referrer.origin === location.origin && referrer.pathname === location.pathname && referrer.searchParams.get("from") === "hub") {
+      const id = referrer.searchParams.get("play") ?? (referrer.searchParams.get("world") === "math-world" ? "math-lab" : null);
+      const card = classicGameCatalog.find(game => game.id === id);
+      if (card) root.querySelector<HTMLElement>(`[data-game-id="${card.id}"] :is(a, button)`)?.focus();
+    }
+  }
 
   return {
     destroy(): void {

@@ -1,3 +1,7 @@
+export interface MountedBox {
+  destroy(immediate?: boolean): void;
+}
+
 export const BOX_SCENES={
  'window-breeze':{title:'窗边有风',load:()=>import('./runtime').then(m=>m.mountWorldBox)},
  'dresden-river-campus':{title:'德累斯顿',load:()=>import('./dresden-runtime').then(m=>m.mountDresden)},

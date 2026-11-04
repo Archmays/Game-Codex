@@ -10,6 +10,7 @@ import {
   WORLD_MODULES
 } from "../packages/data/gamePortfolio";
 import { PLAY_SURFACE_MANIFEST, PRIMARY_PLAY_SURFACES } from "../packages/data/playSurfaceManifest";
+import { classicGameCatalog } from "../packages/data/classicGameCatalog";
 import { ACTIVE_PROJECT_PHASE, NEXT_PROJECT_PHASE, PROJECT_LIFECYCLE_TERMINAL_TRUTH, PROJECT_PHASES } from "../packages/data/projectLifecycle";
 import { KNOWN_SAVE_KEYS, portfolioNamespacesWithoutKnownKey } from "../packages/data/saveKeyInventory";
 import { affectedGateCommands } from "../tools/portfolio/affected-gates";
@@ -38,6 +39,7 @@ describe("game portfolio governance", () => {
     expect(COMPATIBILITY_SURFACES).toHaveLength(2);
     expect(SHARED_ENGINES).toHaveLength(2);
     expect(currentClassicGameCatalog).toHaveLength(5);
+    expect(classicGameCatalog.map(game => game.id)).toEqual(CLASSIC_CARD_PRODUCTS.map(record => record.id));
     expect(GAME_PORTFOLIO.filter((record) => !record.classicCardVisible).map((record) => record.id).sort()).toEqual([
       "english-study",
       "equation-slider",

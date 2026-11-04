@@ -1,9 +1,10 @@
 import "./styles.css";
 import { PRODUCT_VERSION } from '../packages/presentation/settings';
 import "./page-mode.css";
-import { normalizeRetiredLanguageRoute, normalizeRetiredMathRoute, pageModeForSearch, resolveAppRoute } from "./app-route";
+import { normalizeRetiredLanguageRoute, normalizeRetiredMathRoute, pageModeForSearch, resolveAppRoute, type AppRouteKind } from "./app-route";
 import { activatePageMode } from "./page-mode";
 import { bindInputLifecycle } from "../packages/ui/input";
+import { CLASSIC_HUB_FROM_WORLD_ROUTE, MY_GAME_WORLD_ROUTE } from "../apps/my-game-world/world-routes";
 
 const WORLD_THEME_COLOR = "#071c2a";
 const MATH_WORLD_THEME_COLOR = "#dff2eb";
@@ -24,67 +25,71 @@ function setProductIcon(product: 'tower' | 'adventure'): void {
   icon.href=`./assets/v1.0/${product}/icon.svg`;icon.type='image/svg+xml';
 }
 
-function renderRouteLoading(root: HTMLElement): void {
-  root.innerHTML = `<main class="route-state" aria-busy="true" aria-labelledby="route-loading-title">
+function renderRouteLoading(root: HTMLElement, returnHref?: string): void {
+  root.innerHTML = `<main class="route-state" aria-labelledby="route-loading-title">
     <span class="route-state__glow" aria-hidden="true"></span>
     <h1 id="route-loading-title">正在打开游戏世界……</h1>
     <p role="status">请稍等一下，已经保存的进度不会改变。</p>
-  </main>`;
-}
-
-function renderRouteError(root: HTMLElement): void {
-  root.innerHTML = `<main class="route-state route-state--error" aria-labelledby="route-error-title">
-    <h1 id="route-error-title">这个地方暂时没有打开</h1>
-    <p role="alert">可以再试一次，或安全回到我的游戏世界。游戏进度没有被清除。</p>
-    <div><button type="button" data-route-retry>再试一次</button><a tabindex="0" href="?world=my-game-world">回到我的游戏世界</a></div>
+    <div>${returnHref ? returnLink(returnHref) : '<button type="button" data-route-retry>刷新</button>'}</div>
   </main>`;
   root.querySelector<HTMLButtonElement>("[data-route-retry]")?.addEventListener("click", () => window.location.reload());
 }
 
-async function mountApp(root: HTMLElement): Promise<void> {
-  const url = new URL(window.location.href);
-  if (normalizeRetiredLanguageRoute(url) || normalizeRetiredMathRoute(url)) window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);
-  const search = new URLSearchParams(window.location.search);
-  const route = resolveAppRoute(search);
+function returnLink(href: string): string {
+  const label = href === CLASSIC_HUB_FROM_WORLD_ROUTE ? "回游戏百宝箱" : "回我的游戏世界";
+  return `<a tabindex="0" href="${href}">${label}</a>`;
+}
+
+function renderRouteError(root: HTMLElement, returnHref: string): void {
+  root.innerHTML = `<main class="route-state route-state--error" aria-labelledby="route-error-title">
+    <h1 id="route-error-title" tabindex="-1">这个地方暂时没有打开</h1>
+    <p>可以再试一次，或回去选别的游戏。已保存的进度还在。</p>
+    <div><button type="button" data-route-retry>再试一次</button>${returnLink(returnHref)}</div>
+  </main>`;
+  root.querySelector<HTMLButtonElement>("[data-route-retry]")?.addEventListener("click", () => window.location.reload());
+  root.querySelector<HTMLElement>("#route-error-title")?.focus();
+}
+
+async function mountApp(root: HTMLElement, search: URLSearchParams, kind: AppRouteKind): Promise<void> {
   const play = search.get("play");
   activatePageMode(pageModeForSearch(search));
 
-  if (route.kind === "play" && play === "oddity-puzzles") {
+  if (kind === "play" && play === "oddity-puzzles") {
     setBrowserIdentity("奇物事务所 · 三关试用版", "#ede8da");
     const [{ mountOddity }, { createLocalStorageStore }] = await Promise.all([import("../games/oddity-puzzles/runtime"), import("../packages/game-core")]);
     mountOddity({ container: root, storage: createLocalStorageStore("oddity-puzzles"), onExit: () => window.location.assign('?world=my-game-world') });
     return;
   }
 
-  if (route.kind === "play" && play === "world-in-a-box") {
+  if (kind === "play" && play === "world-in-a-box") {
     setBrowserIdentity("世界盒子 · 窗边有风", "#f2edde");
     const [{ mountBoxes }, { createLocalStorageStore }] = await Promise.all([import("../games/world-in-a-box/boxes"), import("../packages/game-core")]);
     mountBoxes({ container: root, storage: createLocalStorageStore("world-in-a-box"), onExit: () => window.location.assign(search.get('from') === 'hub' ? '?hub=classic&from=world' : '?world=my-game-world') });
     return;
   }
 
-  if (route.kind === "play" && play === "hanzi-stroke-lab") {
+  if (kind === "play" && play === "hanzi-stroke-lab") {
     setBrowserIdentity("汉字书房 · 查字与笔顺", "#f6f3eb");
     const { mountHanziStrokeLab } = await import("../games/hanzi-stroke-lab/workbench");
     mountHanziStrokeLab(root);
     return;
   }
 
-  if (route.kind === "play" && play === "english-study") {
+  if (kind === "play" && play === "english-study") {
     setBrowserIdentity("英语书房 · 查词与字母笔顺", "#f3f0e8");
     const { mountEnglishStudy } = await import("../games/english-study/workbench");
     mountEnglishStudy(root);
     return;
   }
 
-  if (route.kind === "play" && play === "structure-explorer") {
+  if (kind === "play" && play === "structure-explorer") {
     setBrowserIdentity("结构探索馆 · 结构与工作原理", "#ffffff");
     const { mountStructureExplorer } = await import("../games/structure-explorer/workbench");
     mountStructureExplorer(root);
     return;
   }
 
-  if (route.kind === "play" && play === "hanzi-word-adventure") {
+  if (kind === "play" && play === "hanzi-word-adventure") {
     setBrowserIdentity(`字间行者 · v${PRODUCT_VERSION}`, "#faf5e9");
     setProductIcon('adventure');
     const { mountHanziWordAdventure } = await import("../games/hanzi-word-adventure");
@@ -92,7 +97,7 @@ async function mountApp(root: HTMLElement): Promise<void> {
     return;
   }
 
-  if (route.kind === "play" && play === "hanzi-tower-defense") {
+  if (kind === "play" && play === "hanzi-tower-defense") {
     setBrowserIdentity(`字阵守城 · v${PRODUCT_VERSION}`, "#102f2d");
     setProductIcon('tower');
     const { mountHanziTowerDefense } = await import("../games/hanzi-tower-defense");
@@ -100,28 +105,28 @@ async function mountApp(root: HTMLElement): Promise<void> {
     return;
   }
 
-  if (route.kind === "classic-hub") {
+  if (kind === "classic-hub") {
     setBrowserIdentity("游戏百宝箱", CLASSIC_THEME_COLOR);
     const { mountClassicHubFromWorld } = await import("../apps/hub/world-entry");
     mountClassicHubFromWorld(root);
     return;
   }
 
-  if (route.kind === 'play' && play === 'memory-card') {
+  if (kind === 'play' && play === 'memory-card') {
     setBrowserIdentity('记忆配对', '#f0ead2');
     const { mountMemoryMatch } = await import('../packages/activity-engines/memory-match');
     mountMemoryMatch(root, { context: 'classic', packId: 'same-glyph' });
     return;
   }
 
-  if (route.kind === 'world' && search.getAll('playtest').length === 1 && search.get('playtest') === 'step4') {
+  if (kind === 'world' && search.getAll('playtest').length === 1 && search.get('playtest') === 'step4') {
     setBrowserIdentity(`本次试玩 · Game-Codex v${PRODUCT_VERSION}`, '#f4f0e5');
     const { mountStep4Playtest } = await import('../apps/step4-playtest');
     mountStep4Playtest(root);
     return;
   }
 
-  if (route.kind === "world" && search.get("world") === "math-world") {
+  if (kind === "world" && search.get("world") === "math-world") {
     setBrowserIdentity("数学世界 · 数感实验城", MATH_WORLD_THEME_COLOR);
     const { mountMathWorld } = await import("../games/math-lab/world");
     mountMathWorld(root);
@@ -133,10 +138,20 @@ async function mountApp(root: HTMLElement): Promise<void> {
   mountMyGameWorld(root);
 }
 
-window.addEventListener("load", () => {
+function startApp(): void {
   const root = document.getElementById("app");
   if (!root) return;
+  const url = new URL(window.location.href);
+  if (normalizeRetiredLanguageRoute(url) || normalizeRetiredMathRoute(url)) window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);
+  const search = url.searchParams;
+  const { kind } = resolveAppRoute(search);
+  const isDestination = kind !== "world" || search.get("world") === "math-world"
+    || (search.getAll("playtest").length === 1 && search.get("playtest") === "step4");
+  const fromClassic = search.get("from") === "hub" && (kind === "play" || (kind === "world" && search.get("world") === "math-world"));
+  const returnHref = fromClassic ? CLASSIC_HUB_FROM_WORLD_ROUTE : MY_GAME_WORLD_ROUTE;
   bindInputLifecycle(root, () => {});
-  renderRouteLoading(root);
-  void mountApp(root).catch(() => renderRouteError(root));
-});
+  renderRouteLoading(root, isDestination ? returnHref : undefined);
+  void mountApp(root, search, kind).catch(() => renderRouteError(root, returnHref));
+}
+
+startApp();

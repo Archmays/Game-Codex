@@ -34,6 +34,8 @@ body {
   background: radial-gradient(circle at 50% 32%, #fff7c7 0 7%, transparent 28%), linear-gradient(160deg, #e8fbf4, #e8f0ff 62%, #fff1d2);
 }
 
+body.game-fullscreen-page:has(#app > .route-state) { overflow-y: auto; }
+
 .route-state__glow {
   width: 72px;
   height: 72px;

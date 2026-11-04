@@ -1,7 +1,8 @@
 import {beginBoxGesture,boxGestureScrolled,type BoxGesture} from './box-gesture';
 import {BoxLifetime} from './box-lifecycle';
 import {BoxPauses} from './box-pause';
-import type {MountGameContext,MountedGame} from '../../packages/game-core';
+import type {MountGameContext} from '../../packages/game-core';
+import type {MountedBox} from './scene-config';
 import {bindInputLifecycle,rovingGroup,ignoreGameKey} from '../../packages/ui/input';
 import {CITY_IDS,CITY_LABELS,REGIONS,CITY_KEY,freshCity,restoreCity,placeCity,removeCity,canSection,regionOf,freshMotion,stepMotion,clockParts,type CityPiece,type Region,type CityMotion} from './dresden-model';
 import {DresdenScene} from './dresden-scene';
@@ -19,7 +20,7 @@ const comparisons=[
 ] as const;
 interface Credit{id:string;author:string;attribution:string;source:string;license:string;licenseUrl:string;date:string;local:string;modifications:string}
 
-export function mountDresden({container:root,storage,onExit}:MountGameContext):MountedGame{
+export function mountDresden({container:root,storage,onExit}:MountGameContext):MountedBox{
  let state=restoreCity(storage.get(CITY_KEY,freshCity())),motion:CityMotion,selected:CityPiece|null=null,group:Region='river',page=0,ready=false,dead=false,last=performance.now(),busy=0,saveWarning=false,photoToken=0,lastClock=-1;
  const history:CityPiece[]=[],thumbs=new Map<CityPiece,string>(),lifetime=new BoxLifetime(),signal=lifetime.signal;
  let sectionCamera:ReturnType<DresdenScene['snapshot']>|null=null,photoCamera:ReturnType<DresdenScene['snapshot']>|null=null,photoOpener:HTMLElement|null=null;
@@ -108,7 +109,7 @@ export function mountDresden({container:root,storage,onExit}:MountGameContext):M
  let boatDeparted=false;let destination:'north'|'oldtown'|'campus'='oldtown';let ridePanel:'tram'|'boat'|null=null;
  function showRide(type:'tram'|'boat'){if(!state.placed.includes(type==='tram'?'yellow_tram':'paddle_steamer'))return;ridePanel=type;update();q('[data-ride-panel]').scrollIntoView({block:'nearest'});control('near-start').focus({preventScroll:true});}
  function perform(a:string){
-  if(dead)return;if(a.startsWith('near-')&&['near-start','near-pause','near-follow','near-dock','near-return'].includes(a)&&ridePanel)a=ridePanel+'-'+a.slice(5);if(a==='exit'){destroy(true);onExit();return;}if(!ready)return;
+  if(dead)return;if(a.startsWith('near-')&&['near-start','near-pause','near-follow','near-dock','near-return'].includes(a)&&ridePanel)a=ridePanel+'-'+a.slice(5);if(a==='exit'){onExit();return;}if(!ready)return;
   if(['tram-start','boat-start','boat-return','boat-dock'].includes(a))showRide(a.startsWith('tram')?'tram':'boat');
   if(['left','right','up','down','in','out'].includes(a))releaseFollow();
   switch(a){
@@ -156,7 +157,6 @@ export function mountDresden({container:root,storage,onExit}:MountGameContext):M
  if(ridePanel)q('[data-near-status]').textContent=ridePanel==='tram'?`前往${{north:'河对岸',oldtown:'老城',campus:'大学附近'}[destination]} · ${motion.tram.blocked?'前面缺桥，装桥后继续':motion.tram.running?'正在前进':'已暂停，可继续或换目的地'}`:motion.boat.running?(motion.dock?'正在对位靠岸':'沿河前进'):motion.dock?'已停靠码头':'已暂停，可以继续或返回';
  q('[data-tram-status]').textContent=!state.placed.includes('yellow_tram')?'先把黄色电车放上轨道。':motion.tram.blocked?'前面少一座桥。装好桥，再按继续。':motion.tram.running?'电车沿轨道前进。':'电车已停稳，可以换个目的地。';q('[data-boat-status]').textContent=!state.placed.includes('paddle_steamer')?'先把轮桨船放进水里。':motion.boat.running?'轮桨转起来，沿河看看。':motion.dock?'船停靠在码头旁。':state.placed.includes('river_pier')?'可以靠近码头，也可以再游一次。':'船在固定候船水域等待。';}};lifetime.animate(tick);
  void scene.load().then(()=>{if(dead)return;motion=freshMotion(scene.routes);for(const id of CITY_IDS)thumbs.set(id,scene.thumbnail(id));ready=true;root.dataset.ready='true';q('.wb-loading').hidden=true;scene.frame(state,motion,performance.now(),.016);update();if(state.placed.length)say('接着上次拼好的城市，继续探索。');}).catch(()=>{if(!dead)q('.wb-loading').textContent='城市资源暂时没装好，进度保留。可以换盒子或返回。';});
- window.addEventListener('pagehide',()=>destroy(true),{signal});
  lifetime.own(unbind);lifetime.own(()=>resize.disconnect());lifetime.own(()=>trayNav.destroy());lifetime.own(()=>targetNav.destroy());lifetime.own(()=>groupNav.destroy());
  function destroy(immediate=false){if(dead)return;dead=true;photoToken++;lifetime.destroy();sounds.destroy(immediate);scene.destroy();root.replaceChildren();}
  return{destroy};

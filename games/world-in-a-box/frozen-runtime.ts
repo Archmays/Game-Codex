@@ -1,14 +1,15 @@
 import {beginBoxGesture,boxGestureScrolled,type BoxGesture} from './box-gesture';
 import {BoxLifetime} from './box-lifecycle';
 import {BoxPauses} from './box-pause';
-import type {MountGameContext,MountedGame} from '../../packages/game-core';
+import type {MountGameContext} from '../../packages/game-core';
+import type {MountedBox} from './scene-config';
 import {rovingGroup,bindInputLifecycle,ignoreGameKey} from '../../packages/ui/input';
 import {FROZEN_IDS,FROZEN_LABELS,GROUPS,FROZEN_KEY,frozenGroup,freshFrozen,restoreFrozen,freshFrozenMotion,assemble,magic,startRide,startSkate,undoFrozen,stepFrozen,rideMissing,type FrozenPiece,type Magic} from './frozen-model';
 import {FrozenScene} from './frozen-scene';
 import {continuousTurn} from './continuous-turn';
 import {boxSound} from './audio-settings';
 import './style.css';import './frozen.css';
-export function mountFrozen({container:root,storage,onExit}:MountGameContext):MountedGame{
+export function mountFrozen({container:root,storage,onExit}:MountGameContext):MountedBox{
  let state=restoreFrozen(storage.get(FROZEN_KEY,null)),motion=freshFrozenMotion(state),selected:FrozenPiece|null=null,group=0,page=0,ready=false,dead=false,last=performance.now(),background=false,warning=false;
  const history:FrozenPiece[]=[],lifetime=new BoxLifetime(),signal=lifetime.signal,pauses=new BoxPauses((reason,open)=>audio.pause(reason,open));
  const button=(action:string,text:string)=>`<button data-action="${action}">${text}</button>`;
@@ -49,7 +50,7 @@ export function mountFrozen({container:root,storage,onExit}:MountGameContext):Mo
  function cast(kind:Magic){if(selected){say('正在拿拼件，先放好或放回托盘。');return;}const before=motion.cast;say(magic(state,motion,kind));if(motion.cast&&!before)audio.event('frozen-gather');update();}
  function modal(reason:string,open:boolean){cancelGesture();pauses.set(reason,open);}
  root.addEventListener('box-modal',e=>{const d=(e as CustomEvent).detail;modal(d.reason,d.open);},{signal});
- function perform(a:string){if(a==='exit'){destroy();onExit();return;}if(!ready)return;
+ function perform(a:string){if(a==='exit'){onExit();return;}if(!ready)return;
   if(['up','down','in','out'].includes(a))motion.follow=false;
   switch(a){
    case 'resume-world':motion.paused=false;break;case 'cancel':selected=null;break;case 'prev':page--;break;case 'next':page++;break;
@@ -102,6 +103,6 @@ export function mountFrozen({container:root,storage,onExit}:MountGameContext):Mo
  void scene.load().then(()=>{if(dead)return;ready=true;scene.frame(state,motion,0);for(const id of FROZEN_IDS)q<HTMLImageElement>(`[data-piece="${id}"] img`).src=scene.thumbnail(id);q('.wb-loading').hidden=true;scene.frame(state,motion,0);update();root.dataset.ready='true';}).catch(()=>{if(!dead)q('.wb-loading').textContent='模型暂时没有加载成功，请返回再试；存档保留。';});
  lifetime.animate(tick);
  lifetime.own(unbind);lifetime.own(()=>resize.disconnect());lifetime.own(()=>navs.forEach(n=>n.destroy()));
- function destroy(){if(dead)return;dead=true;motion.revision++;lifetime.destroy();sounds.destroy();scene.destroy();root.replaceChildren();}
+ function destroy(immediate=false){if(dead)return;dead=true;motion.revision++;lifetime.destroy();sounds.destroy(immediate);scene.destroy();root.replaceChildren();}
  return{destroy};
 }
