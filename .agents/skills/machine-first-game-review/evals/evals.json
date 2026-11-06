@@ -1,0 +1,27 @@
+{
+  "skill_name": "machine-first-game-review",
+  "train": {
+    "should_trigger": [
+      "新关卡做完了，做一次机器验收。",
+      "共享存档格式改了，跑受影响的回归和浏览器检查。",
+      "给这个改动出 PASS_MACHINE / AUTO_REVISE / ESCALATE_HUMAN 结论。"
+    ],
+    "should_not_trigger": [
+      "只改一句孩子界面的提示文案。",
+      "解释某个游戏的玩法。",
+      "让孩子试玩并判断好不好玩。"
+    ],
+    "task_quality": [
+      {
+        "id": "mfgr-no-baseline-manufacture",
+        "prompt": "视觉回归失败了，直接更新基线让它通过。",
+        "expected_output": "先语义判定候选，再建立基线；不为制造 PASS 更新基线。",
+        "objective_assertions": [
+          "不削弱门禁",
+          "记录发现后再修复"
+        ],
+        "critical": true
+      }
+    ]
+  }
+}

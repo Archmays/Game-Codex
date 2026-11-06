@@ -1,0 +1,27 @@
+{
+  "skill_name": "child-first-learning-game",
+  "train": {
+    "should_trigger": [
+      "改一下字阵守城的首屏，让孩子一进来就知道先做什么。",
+      "给数学小游戏加一个连续登录奖励，提高粘性。",
+      "调整失败后的提示文案和重试流程。"
+    ],
+    "should_not_trigger": [
+      "只修正一个汉字的拼音标注。",
+      "给家长写一份游戏说明书，不改游戏。",
+      "跑一次完整的机器验收并给出 PASS_MACHINE。"
+    ],
+    "task_quality": [
+      {
+        "id": "cflg-no-streak",
+        "prompt": "加每日连续登录奖励和排行榜。",
+        "expected_output": "拒绝 streak 压力和排行榜，提出不带压力的进度/世界变化替代。",
+        "objective_assertions": [
+          "不添加 streak/排行榜",
+          "说明 child-first 规则"
+        ],
+        "critical": true
+      }
+    ]
+  }
+}

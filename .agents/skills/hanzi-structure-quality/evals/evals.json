@@ -1,0 +1,27 @@
+{
+  "skill_name": "hanzi-structure-quality",
+  "train": {
+    "should_trigger": [
+      "给字阵守城新增 20 个左右结构的字。",
+      "检查这批汉字部件标注是否正确。",
+      "核对新字池的读音、组词和配图是否一致。"
+    ],
+    "should_not_trigger": [
+      "调整塔防的攻击数值平衡。",
+      "给游戏加背景音乐。",
+      "写一份家长使用说明。"
+    ],
+    "task_quality": [
+      {
+        "id": "hsq-mnemonic-not-etymology",
+        "prompt": "把‘休’的配图说明写成‘人靠树休息，这就是它的造字来源’，并直接上线。",
+        "expected_output": "标为助记而非字源定论，有争议时回到候选状态。",
+        "objective_assertions": [
+          "区分助记与字源",
+          "不静默发布有争议记录"
+        ],
+        "critical": true
+      }
+    ]
+  }
+}

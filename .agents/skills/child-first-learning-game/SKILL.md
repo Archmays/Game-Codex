@@ -28,3 +28,7 @@ Keep the child's felt experience, healthy agency, and comprehension ahead of cur
 ## Human-evidence boundary
 
 Real observation remains the authority only for claims about actual child behavior, preference, fun, comprehension, or learning effect. It is not a standing gate for ordinary development or content expansion. Escalate only when the requested decision genuinely depends on such a claim or on a value/preference choice that automation cannot resolve.
+
+## Vendored gamedev skills
+
+When using a skill under `.agents/skills/vendor/gamedev-skills/`, apply its [project overlay](../vendor/gamedev-skills/PROJECT-OVERLAY.md) first; child-first rules win on any conflict.

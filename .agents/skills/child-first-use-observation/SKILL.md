@@ -25,7 +25,7 @@ Preserve the child's genuine first encounter. Treat technical events, observed b
 - Let the child decline the two optional closing questions.
 - Observe behavior; do not score errors or label intelligence, ability, confusion, success, or failure.
 - Let the parent provide technical help only. Never reveal the correct card, component, slot, or next answer.
-- Use `POINT_TO_REGION_ONLY` only for the world, board, or hand region—not an item inside it.
+- Use `POINT_TO_REGION_ONLY` only for a declared coarse region—not an item inside it.
 - Mark `ADULT_ANSWER_REQUIRED` as a core usability risk; do not conceal it as technical assistance.
 - Permit immediate stopping without completion. Use neutral recovery copy and preserve already found local progress.
 - Allow at most one extra run in the formal package. Separate spontaneous replay from parent-prompted replay.
@@ -39,7 +39,7 @@ For a first-use package, use only these stop codes: `CHILD_REQUEST`, `DISTRESS`,
 - Keep first-use and second-use evidence separate. A first encounter asks whether the child can enter the accepted experience; a later re-entry asks whether the child recognizes the world, chooses a destination, and can complete a destination-to-world return loop.
 - Run re-entry only in a natural, separate session and record a coarse interval bucket. Never join it to the first session or infer long-term retention from one revisit.
 - Require the canonical local origin, the same browser profile, an identity-bound short-lived grant, and an existing canonical completed save. Fail closed on a wrong origin, missing or partial save, unavailable storage, or corruption; never reconstruct progress from earlier evidence.
-- Give no correct destination. Use the neutral prompt `你想去哪里都可以。` and allow region-only pointing to `WORLD`, `WORLD_OBJECTS`, `FOREST_PLAYFIELD`, `BOARD`, or `HAND`, never to a particular world object, card, slot, or answer.
+- Give no correct destination. Use the neutral prompt `你想去哪里都可以。` and allow region-only pointing to the coarse regions the active game's observation contract declares, never to a particular world object, card, slot, or answer. The region list is per game; the retired 墨迹森林 list is archived in [references/retired-ink-forest-regions.md](references/retired-ink-forest-regions.md) as an example only.
 - Derive first action, first destination, route entry, and return-loop facts only from ordered technical events. Keep stated intent and parent observation separate from actual action.
 - Use the second-use contract's declared stop set. It may distinguish `PROGRESS_CONTINUITY` and `NATURAL_END` from the first-use identity and interruption boundary, but must never turn a stop into child-visible failure.
 - End the formal observation before any requested free play continues. Exclude later free play from the evidence and do not infer long-term engagement, learning effectiveness, retention, or broader content readiness.
@@ -59,7 +59,7 @@ Offer picture cards, Again-Again choices, a region-only prompt, a same-origin ob
 
 ## Interpretation boundary
 
-Report route loading, ordered events, errors, relative time, hints, invalid placements, chosen ability, camp/spellbook activity, completion, and replay as technical facts. Report observer enums and intervention codes as human observations. Preserve parent notes only after privacy validation. Explicitly withhold conclusions about learning effectiveness, generalized usability, child acceptance, promotion, comparative preference, and long-term retention.
+Report route loading, ordered events, errors, relative time, hints, invalid placements, game-specific state events declared by the active game, completion, and replay as technical facts. Report observer enums and intervention codes as human observations. Preserve parent notes only after privacy validation. Explicitly withhold conclusions about learning effectiveness, generalized usability, child acceptance, promotion, comparative preference, and long-term retention.
 
 For post-session reconciliation:
 
